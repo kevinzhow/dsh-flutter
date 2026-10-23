@@ -3,5 +3,6 @@
 library;
 
 export 'src/declarations.dart';
+export 'src/owners.dart';
 export 'src/registry.dart';
 export 'src/slot.dart';

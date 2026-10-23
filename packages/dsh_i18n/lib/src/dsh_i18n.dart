@@ -1,3 +1,4 @@
+import 'app_catalog.dart';
 import 'catalog.g.dart';
 
 /// One catalog entry: English text and the Chinese text (null only for a gap
@@ -26,6 +27,9 @@ enum DshLocale {
   }
 }
 
+/// The generated dsh catalog plus this client's own `app` namespace.
+const DshCatalog _defaultCatalog = {...dshCatalog, appNamespace: appCatalog};
+
 /// Looks up dsh UI copy the way `LocaleService.translate` does
 /// (packages/client/locale/src/client/index.ts):
 ///
@@ -41,7 +45,7 @@ enum DshLocale {
 /// implement `{n, plural, ...}` either.
 class DshI18n {
   const DshI18n(this.locale, {DshCatalog? catalog})
-    : _catalog = catalog ?? dshCatalog;
+    : _catalog = catalog ?? _defaultCatalog;
 
   final DshLocale locale;
   final DshCatalog _catalog;

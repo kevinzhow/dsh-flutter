@@ -41,7 +41,9 @@ OUT_DIR = ROOT / '.local' / 'preflight'
 PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/dsh_conversation',
                       'packages/dsh_slots', 'packages/dsh_i18n']
 FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
-                    'apps/dsh_flutter']
+                    'features/dsh_feature_chat', 'features/dsh_feature_conversation',
+                    'features/dsh_feature_session', 'features/dsh_feature_tool',
+                    'features/dsh_feature_user_questions', 'apps/dsh_flutter']
 
 
 def flutter_bin_dir():
@@ -108,12 +110,24 @@ def c_i18n():
     return run([sys.executable, '-I', 'tool/i18n/gen_catalog.py', '--check'])
 
 
+VECTOR_FIXTURES = [
+    'packages/dsh_models/test/fixtures/session_window_vector.json',
+    'packages/dsh_conversation/test/fixtures/conversation_edge_vector.json',
+    'packages/dsh_conversation/test/fixtures/tool_turn_vector.json',
+]
+
+
 def c_vector():
-    fixture = 'packages/dsh_models/test/fixtures/session_window_vector.json'
-    code, out, secs = run([sys.executable, '-I', 'tool/vectors/gen_expected.py', '--check', fixture])
-    if code == 2:
-        return 'skip', out, secs
-    return code, out, secs
+    start = time.time()
+    log = []
+    for fixture in VECTOR_FIXTURES:
+        code, out, _ = run([sys.executable, '-I', 'tool/vectors/gen_expected.py', '--check', fixture])
+        if code == 2:
+            return 'skip', out, time.time() - start
+        log.append(out.strip())
+        if code != 0:
+            return code, '\n'.join(log), time.time() - start
+    return 0, '\n'.join(log), time.time() - start
 
 
 def c_format():
