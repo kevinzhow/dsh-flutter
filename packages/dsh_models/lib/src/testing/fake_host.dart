@@ -39,10 +39,14 @@ class FakeHost implements RemoteCaller {
       if ('${c.ns}/${c.method}' == key) c,
   ];
 
+  /// The generation `currentGeneration` reports; set it before publishing it.
+  ConnectionGeneration? generation;
+
   HostRemotes get remotes => HostRemotes(
     caller: this,
     hostEvents: events.stream,
     generations: gens.stream,
+    currentGeneration: () => generation,
   );
 
   void emit(String event, [List<Object?> args = const []]) =>

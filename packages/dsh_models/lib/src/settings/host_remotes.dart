@@ -15,7 +15,9 @@ class HostRemotes {
     required RemoteCaller caller,
     required this.hostEvents,
     required this.generations,
-  }) : session = session_ns.SessionRemote(caller),
+    ConnectionGeneration? Function()? currentGeneration,
+  }) : currentGeneration = currentGeneration ?? (() => null),
+       session = session_ns.SessionRemote(caller),
        settings = settings_ns.SettingsRemote(caller),
        permissionPresets = permission_ns.PermissionPresetsRemote(caller),
        commands = commands_ns.CommandsRemote(caller);
@@ -35,9 +37,12 @@ class HostRemotes {
   /// Every forwarded host event (`settings/document-updated`, ...).
   final Stream<HostEvent> hostEvents;
 
-  /// The live connection generation; null while none is live. A new id is a
-  /// Host reconnect (`connection/reset` in dsh).
+  /// The live connection generation; null while none is live. A new object is
+  /// a Host reconnect (`connection/reset` in dsh).
   final Stream<ConnectionGeneration?> generations;
+
+  /// The generation live now (dsh's `connection.generation.getSnapshot()`).
+  final ConnectionGeneration? Function() currentGeneration;
 
   /// The forwarded `emit` events named [event].
   Stream<EmitEvent> emitted(String event) => hostEvents
