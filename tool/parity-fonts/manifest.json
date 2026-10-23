@@ -1,9 +1,9 @@
 {
   "schema": "dsh-parity-fonts/1",
-  "note": "dsh's web client bundles only the Montserrat brand font; its text stack (-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', ...) resolves to whatever the machine has. Both parity providers therefore pin the same Latin face under the stack's leading names that no Linux machine has (`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`): the React provider serves the files through @font-face, the Flutter provider registers them with FontLoader (flutter_test ignores a font fallback list when the primary family is unknown, so the leading names must exist). Weights 500/600 resolve to the nearest face (Regular below 500, Bold from 600) on both sides. The code stack (--ds-font-family-code: 'SF Mono', 'JetBrains Mono', ...) is pinned the same way: Noto Sans Mono is registered under the leading name `SF Mono`.",
+  "note": "dsh's web client bundles only the Montserrat brand font; its text stack (-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', ...) resolves to whatever the machine has. Both parity providers therefore pin the same Latin face under the stack's leading names that no Linux machine has (`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`): the React provider serves the files through @font-face, the Flutter provider registers them with FontLoader (flutter_test ignores a font fallback list when the primary family is unknown, so the leading names must exist). Weights 500/600 resolve to the nearest face (Regular below 500, Bold from 600) on both sides. The code stack (--ds-font-family-code: 'SF Mono', 'JetBrains Mono', ...) is pinned the same way: Noto Sans Mono is registered under the leading name `SF Mono`. The CJK entries of the same stacks ('PingFang SC' is the first CJK name of both) are pinned with a Noto Sans CJK SC subset (Regular and Bold; charset in cjk-charset.txt) registered under 'PingFang SC': Latin text never reaches it (the Noto Sans names come first), and a glyph outside the charset is a case error, not a silent system-font fallback (the cases assert their text is covered).",
   "license": "OFL-1.1",
   "licenseFile": "OFL.txt",
-  "source": "https://github.com/googlei18n/noto-fonts (Debian fonts-noto-core and fonts-noto-mono 20201225-2build1)",
+  "source": "https://github.com/googlei18n/noto-fonts (Debian fonts-noto-core and fonts-noto-mono 20201225-2build1); Noto Sans CJK SC subset from Debian/Ubuntu fonts-noto-cjk 1:20240730+repack1-1build1 (upstream Noto Sans CJK 2.004, https://github.com/notofonts/noto-cjk)",
   "families": [
     {
       "role": "text",
@@ -46,10 +46,33 @@
       "names": [
         "SF Mono"
       ]
+    },
+    {
+      "role": "cjk",
+      "license": "OFL-1.1",
+      "licenseFile": "OFL-NotoSansCJK.txt",
+      "charset": "cjk-charset.txt",
+      "faces": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "file": "files/NotoSansCJKsc-Regular.subset.otf",
+          "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "file": "files/NotoSansCJKsc-Bold.subset.otf",
+          "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+        }
+      ],
+      "names": [
+        "PingFang SC"
+      ]
     }
   ],
   "notVendored": [
     "Montserrat (dsh brand wordmark, OFL, woff2 in ui-theme/src/styles): Flutter cannot load woff2; needed only once a case shows the wordmark.",
-    "CJK (PingFang SC / Microsoft YaHei stack entries): needed when the first zh-CN case is added."
+    "CJK faces other than Noto Sans CJK SC (the 'Hiragino Sans GB' and 'Microsoft YaHei' stack entries come after 'PingFang SC' and are never reached for glyphs in the subset)."
   ]
 }

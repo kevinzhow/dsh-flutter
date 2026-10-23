@@ -50,6 +50,15 @@ faces. Noto Sans and Noto Sans Mono are copyright
 2010, 2012-2020 Google Inc. and 2015-2020 Google LLC, licensed under the SIL Open Font License 1.1
 (`tool/parity-fonts/OFL.txt`). They are not part of the app.
 
+## Noto Sans CJK SC subset (visual parity tool)
+
+`tool/parity-fonts/files/NotoSansCJKsc-Regular.subset.otf` and `NotoSansCJKsc-Bold.subset.otf` are used only by the visual
+parity tool (`docs/parity.md`) so that the React and Flutter captures draw Chinese text with the same face. They are
+subsets (about 3200 glyphs, no hinting or layout tables, made by `tool/parity-fonts/subset-cjk.py`) of the SC face of Noto
+Sans CJK 2.004 from the Ubuntu/Debian package `fonts-noto-cjk` 1:20240730+repack1-1build1 (upstream
+https://github.com/notofonts/noto-cjk). Copyright 2014-2021 Adobe (http://www.adobe.com/), licensed under the SIL Open Font
+License 1.1 (`tool/parity-fonts/OFL-NotoSansCJK.txt`). They are not part of the app.
+
 ## path_drawing
 
 `packages/dsh_ui` parses the SVG path data of dsh's product icons with the `path_drawing` package (BSD 3-Clause, Dart
