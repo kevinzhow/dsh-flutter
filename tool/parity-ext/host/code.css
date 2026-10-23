@@ -1,0 +1,5 @@
+/* The code cards of dsh carry a 16px vertical margin that the markdown column normally owns (CodeBlock.module.css .block,
+   CodeCard.module.css .card). The parity frame places the component itself, so the margin is removed for both kinds. */
+.parity-flat-code {
+  margin: 0 !important;
+}

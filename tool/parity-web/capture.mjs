@@ -39,11 +39,11 @@ for (const family of fonts.families) {
   }
 }
 const fontCss = faces
-  .map((f) => `@font-face{font-family:'${f.family}';font-weight:${f.weight};font-style:${f.style};src:url('${f.url}') format('truetype');font-display:block}`)
+  .map((f) => `@font-face{font-family:'${f.family}';font-weight:${f.weight};font-style:${f.style};src:url('${f.url}') format('${f.url.endsWith('.otf') ? 'opentype' : 'truetype'}');font-display:block}`)
   .join('\n')
 
 // ---- static server for the host ------------------------------------------------------------------
-const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.ttf': 'font/ttf', '.json': 'application/json' }
+const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.ttf': 'font/ttf', '.otf': 'font/otf', '.json': 'application/json' }
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x')
   let file
@@ -157,6 +157,9 @@ for (const entry of plan.entries) {
     const failure = await page.evaluate(() => document.body.dataset.parityError)
     if (failure) throw new Error(failure)
     await page.evaluate(() => document.fonts.ready)
+    // A kind whose content settles asynchronously (images decoding, a lazy highlight grammar) publishes a promise as
+    // window.__parityReady; the capture waits for it (rejects after the kind's own timeout).
+    await page.evaluate(() => window.__parityReady)
     await applyInteractions(page, variant.interactions)
     const selector = c.capture?.selector ?? '[data-parity-target]'
     const target = page.locator(selector)

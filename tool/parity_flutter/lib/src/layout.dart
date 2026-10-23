@@ -49,11 +49,10 @@ class ParityStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vertical = layout.direction == Axis.vertical;
-    final stretch = layout.align == CrossAxisAlignment.stretch;
     return SizedBox(
-      // A web flex container is a block: it fills the frame's content width.
-      width: (!vertical || stretch) ? double.infinity : null,
+      // A web flex container is a block: it fills the frame's content width (a column aligned to the end
+      // puts its items at the right edge of that width).
+      width: double.infinity,
       child: Flex(
         direction: layout.direction,
         spacing: layout.gap,
