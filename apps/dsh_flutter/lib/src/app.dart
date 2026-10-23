@@ -35,6 +35,7 @@ class WhaleeApp extends StatelessWidget {
           platform,
         );
         return MaterialApp(
+          navigatorKey: controller.navigatorKey,
           title: appDisplayName,
           debugShowCheckedModeBanner: false,
           locale: Locale(controller.locale.name),

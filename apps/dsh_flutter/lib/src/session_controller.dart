@@ -6,17 +6,27 @@ import 'package:dsh_slots/dsh_slots.dart';
 /// operations features may call. The app keeps one per session id while it is
 /// resident, like dsh's `SessionManager` keeps its sessions.
 class SessionController implements SessionActions {
-  SessionController(this.session, {FlushScheduler? scheduler})
-    : conversation = ConversationBinding.chat(
-        session.eventSource,
-        scheduler: scheduler,
-      ) {
+  SessionController(
+    this.session, {
+    FlushScheduler? scheduler,
+    String? Function()? cwdReader,
+    String hostHome = '',
+    this.readOnly = false,
+  }) : conversation = ConversationBinding.chat(
+         session.eventSource,
+         scheduler: scheduler,
+       ) {
     owner = SessionOwner(
       session: session,
       conversation: conversation,
       actions: this,
+      cwdReader: cwdReader,
+      hostHome: hostHome,
     );
   }
+
+  /// A subagent transcript: nothing can be sent or cancelled.
+  final bool readOnly;
 
   final Session session;
   final ConversationBinding conversation;
@@ -28,10 +38,11 @@ class SessionController implements SessionActions {
   Future<void> open() => session.open();
 
   @override
-  Future<void> send(String text) => session.prompt(text.trim());
+  Future<void> send(String text) =>
+      readOnly ? Future.value() : session.prompt(text.trim());
 
   @override
-  Future<void> cancel() => session.cancel();
+  Future<void> cancel() => readOnly ? Future.value() : session.cancel();
 
   @override
   Future<void> loadOlder() => session.loadOlder();

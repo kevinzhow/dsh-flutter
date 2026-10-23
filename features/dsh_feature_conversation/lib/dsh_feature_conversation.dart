@@ -6,3 +6,4 @@ export 'src/composer.dart';
 export 'src/register.dart';
 export 'src/session_header.dart';
 export 'src/shell.dart';
+export 'src/todo_panel.dart';

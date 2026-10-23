@@ -24,11 +24,22 @@ class SessionOwner {
     required this.session,
     required this.conversation,
     required this.actions,
+    this.cwdReader,
+    this.hostHome = '',
   });
 
   final Session session;
   final ConversationBinding conversation;
   final SessionActions actions;
+
+  /// Reads the session workspace root (known once the session list carries it).
+  final String? Function()? cwdReader;
+
+  /// The host account home, used only to abbreviate displayed paths.
+  final String hostHome;
+
+  /// The session workspace root, when known.
+  String? get cwd => cwdReader?.call();
 
   String get sessionId => session.sessionId;
 }
@@ -54,4 +65,37 @@ class ToolViewOwner {
   const ToolViewOwner({required this.session, required this.call});
   final SessionOwner session;
   final ToolCall call;
+}
+
+/// What the host platform lets a tool view open. Both are optional: a
+/// composition without a file preview shows paths as plain text, one without a
+/// browser launcher shows URLs unlinked.
+class ToolHostActions {
+  const ToolHostActions({this.openUrl, this.openFile, this.openSubagent});
+
+  /// Open one direct subagent child's read-only transcript. [parent] is the
+  /// session the tool row belongs to; the receiver resolves the child's mode
+  /// from the parent's subagent catalog.
+  final void Function(SessionOwner parent, String childId)? openSubagent;
+
+  /// Open an http(s) URL in the system browser.
+  final void Function(Uri url)? openUrl;
+
+  /// Open a workspace file at an optional 1-based line.
+  final void Function(String path, {int? line})? openFile;
+}
+
+/// Owner props of `conversation.chat.turnTail`: one finished or running turn's
+/// closing area (submitted plans, file deliveries). Entries read what they
+/// need from the chat snapshot.
+class TurnTailOwner {
+  const TurnTailOwner({
+    required this.session,
+    required this.turn,
+    required this.snapshot,
+  });
+
+  final SessionOwner session;
+  final int turn;
+  final ChatSnapshot snapshot;
 }

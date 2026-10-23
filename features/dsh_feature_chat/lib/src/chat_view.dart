@@ -24,12 +24,17 @@ class ChatView extends StatefulWidget {
     required this.slots,
     required this.i18n,
     required this.nodeSlot,
+    this.turnTailSlot,
   });
 
   final SessionOwner owner;
   final SlotRegistry slots;
   final DshI18n i18n;
   final Slot<ChatNodeOwner, Widget> nodeSlot;
+
+  /// `conversation.chat.turnTail`: additive entries after a turn's closing row
+  /// (submitted plans, file deliveries). An entry returns null to show nothing.
+  final Slot<TurnTailOwner, Widget?>? turnTailSlot;
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -154,6 +159,28 @@ class _ChatViewState extends State<ChatView> {
               const SizedBox.shrink(),
         ),
       );
+      final tailSlot = widget.turnTailSlot;
+      if (tailSlot != null && node.kind == 'turn-tail') {
+        final tail = widget.slots
+            .renderList(
+              tailSlot,
+              TurnTailOwner(
+                session: owner,
+                turn: (node.data as TurnTailData).turn,
+                snapshot: chat,
+              ),
+            )
+            .nonNulls
+            .toList();
+        for (var i = 0; i < tail.length; i++) {
+          items.add(
+            () => KeyedSubtree(
+              key: ValueKey('${node.key}-tail-$i'),
+              child: tail[i],
+            ),
+          );
+        }
+      }
     }
     for (final p in session.pendingSubmissions) {
       items.add(

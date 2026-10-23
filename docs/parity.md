@@ -100,7 +100,7 @@ contract can be diffed: a future third provider (Android, iOS) only has to produ
 
 dsh bundles one font, Montserrat (brand wordmark, OFL); its text stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI',
 'PingFang SC', ...`) is system fonts, so unpinned captures would depend on the machine. Both providers therefore draw
-Latin text with the same Noto Sans files (SIL OFL 1.1, from Debian `fonts-noto-core` 20201225), committed under
+Latin text with the same Noto Sans files (SIL OFL 1.1, from Debian `fonts-noto-core` 20201225) and code text with Noto Sans Mono (`fonts-noto-mono`, registered under the code stack's leading name `SF Mono`), committed under
 `tool/parity-fonts/` with sha256 pins and the license: React serves them through `@font-face` for the stack's leading names,
 Flutter registers them with `FontLoader` (flutter_test ignores a fallback list when the primary family is unknown, so the
 leading names must exist). Only Regular and Bold exist, so 500/600 resolve to Regular/Bold on both sides. Not vendored yet:

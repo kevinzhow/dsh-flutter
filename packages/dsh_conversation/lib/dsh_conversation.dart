@@ -11,6 +11,8 @@ export 'src/chat/nodes.dart';
 export 'src/chat/partial_arguments.dart';
 export 'src/chat/snapshot.dart';
 export 'src/contract.dart';
+export 'src/plan/submitted_plan.dart';
+export 'src/tool/todo_history.dart';
 export 'src/event.dart' show ConvEvent, seqText;
 export 'src/location_index.dart' show ConversationLocationIndex;
 export 'src/registry.dart';

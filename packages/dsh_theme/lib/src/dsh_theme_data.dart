@@ -9,7 +9,7 @@ import 'dart:ui'
 
 import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/painting.dart'
-    show BoxShadow, LinearGradient, TextStyle;
+    show BoxShadow, LinearGradient, TextDecoration, TextStyle;
 import 'package:flutter/material.dart' show ThemeExtension;
 
 import 'gradient_value.dart';
@@ -142,7 +142,7 @@ class DshThemeData extends ThemeExtension<DshThemeData> {
       leadingDistribution: TextLeadingDistribution.even,
       fontWeight: FontWeight.values[weight ~/ 100 - 1],
       fontStyle: italic ? FontStyle.italic : FontStyle.normal,
-      decoration: null,
+      decoration: TextDecoration.none,
     );
   }
 

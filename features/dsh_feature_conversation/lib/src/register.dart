@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'session_header.dart';
 import 'shell.dart';
+import 'todo_panel.dart';
 
 /// `conversation.session` as this feature uses it.
 final Slot<SessionOwner, Widget> sessionSlot = DshSlots.conversationSession
@@ -33,7 +34,14 @@ void registerConversationFeature(
       i18n: i18n(),
       viewSlot: _viewSlot,
       composerSlot: _composerSlot,
+      dockSlot: DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
     ),
+  );
+  slots.register<SessionOwner, Widget>(
+    DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
+    (owner) => TodoDock(owner: owner, i18n: i18n()),
+    id: 'todo',
+    order: 0,
   );
   slots.register<SessionOwner, Widget>(
     headerSlot,

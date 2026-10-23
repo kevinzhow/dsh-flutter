@@ -105,6 +105,32 @@ class SessionManager {
     return session;
   });
 
+  /// The resident read-only [Session] of one direct subagent child, addressed
+  /// as dsh addresses it (`kind: subagent` with the exact parent and mode).
+  /// Never opened implicitly.
+  Session getSubagent({
+    required String parentSessionId,
+    required String childSessionId,
+    required String mode,
+  }) => _sessions.putIfAbsent(
+    'subagent:$parentSessionId:$childSessionId:$mode',
+    () => Session(
+      childSessionId,
+      _transport,
+      projections: _store(childSessionId),
+      address: {
+        'kind': 'subagent',
+        'parentSessionId': parentSessionId,
+        'childSessionId': childSessionId,
+        'mode': mode,
+      },
+    ),
+  );
+
+  /// The current list summary of [sessionId], if the host listed it.
+  SessionSummary? summaryOf(String sessionId) =>
+      _summaries.where((s) => s.sessionId == sessionId).firstOrNull;
+
   /// Values cached for [sessionId] (control baseline, list blocks, follow).
   Map<String, Object?> projectionValues(String sessionId) =>
       _stores[sessionId]?.values ?? const {};

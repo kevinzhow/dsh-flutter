@@ -29,9 +29,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Noto Sans (visual parity tool)
+## Noto Sans and Noto Sans Mono (visual parity tool)
 
-`tool/parity-fonts/files/NotoSans-Regular.ttf` and `NotoSans-Bold.ttf` are used only by the visual parity tool
-(`docs/parity.md`) so that the React and Flutter captures draw text with the same face. Noto Sans is copyright
+`tool/parity-fonts/files/NotoSans-Regular.ttf`, `NotoSans-Bold.ttf`, `NotoSansMono-Regular.ttf` and `NotoSansMono-Bold.ttf`
+are used only by the visual parity tool (`docs/parity.md`) so that the React and Flutter captures draw text with the same
+faces. Noto Sans and Noto Sans Mono are copyright
 2010, 2012-2020 Google Inc. and 2015-2020 Google LLC, licensed under the SIL Open Font License 1.1
 (`tool/parity-fonts/OFL.txt`). They are not part of the app.
+
+## path_drawing
+
+`packages/dsh_ui` parses the SVG path data of dsh's product icons with the `path_drawing` package (BSD 3-Clause, Dart
+project authors / Flutter community), a Dart dependency resolved through pub.

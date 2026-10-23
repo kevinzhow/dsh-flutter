@@ -60,6 +60,8 @@ IMPORT = re.compile(r'''^\s*(?:import|export)\s+['"]package:(dsh_[a-z0-9_]+)/'''
 RELATIVE = re.compile(r'''^\s*(?:import|export)\s+['"]((?:\.\./)+[^'"]*)['"]''')
 DEP = re.compile(r'^  (dsh_[a-z0-9_]+):')
 NAME = re.compile(r'^name:\s*([a-z0-9_]+)\s*$')
+# Dev tooling under tool/ (the parity capture harness): packages may depend on it from test/parity only.
+TOOL_PACKAGES = {'dsh_parity'}
 SKIP_DIRS = {'.dart_tool', 'build', '.git', 'node_modules', '.local'}
 
 
@@ -145,7 +147,7 @@ def check(root):
         found, problems = import_edges(pkg, root)
         violations += problems
         for target_name, where, number in pubspec_edges(pkg) + found:
-            if target_name == pkg.name:
+            if target_name == pkg.name or target_name in TOOL_PACKAGES:
                 continue
             target = packages.get(target_name)
             if target is None:

@@ -45,3 +45,7 @@ abstract final class DshSpace {
   /// Widest readable column of the conversation on tablets and desktops.
   static const double readableWidth = 760;
 }
+
+/// Width of dsh's `0.5px` hairlines (card borders, dividers) as Chromium paints
+/// them: whole device pixels, two at the 2x density of the parity captures.
+const double dshHairline = 1.0;

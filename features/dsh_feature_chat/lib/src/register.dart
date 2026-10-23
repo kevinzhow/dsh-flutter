@@ -28,6 +28,8 @@ void registerChatFeature(
       slots: slots,
       i18n: i18n(),
       nodeSlot: chatNodeSlot,
+      turnTailSlot: DshSlots.conversationChatTurnTail
+          .typed<TurnTailOwner, Widget?>(),
     ),
     id: 'chat',
   );
