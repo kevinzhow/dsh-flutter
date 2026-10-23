@@ -60,8 +60,8 @@ class UploadCall {
   void fail(Object e) => done.completeError(e);
 }
 
-PickedFile file(String name, int size, {String? type, Uint8List? bytes}) =>
-    PickedFile(
+LocalFile file(String name, int size, {String? type, Uint8List? bytes}) =>
+    LocalFile(
       name: name,
       size: size,
       mediaType: type,

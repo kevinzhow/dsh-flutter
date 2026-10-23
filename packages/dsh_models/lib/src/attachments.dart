@@ -245,8 +245,8 @@ class SessionImages {
 
 /// A file the platform picker, camera, drop target or clipboard produced. The
 /// platform adapters (the app) build these; nothing here touches `dart:io`.
-class PickedFile {
-  PickedFile({
+class LocalFile {
+  LocalFile({
     required this.name,
     required this.size,
     this.mediaType,
@@ -311,7 +311,7 @@ final class DraftImage extends DraftAttachment {
 /// A generic file draft: uploaded in the background as soon as it is picked.
 final class DraftFile extends DraftAttachment {
   const DraftFile(super.id, super.name, super.size, this.source);
-  final PickedFile source;
+  final LocalFile source;
 }
 
 /// Where one file draft's upload is (dsh `DraftFileUpload`).
@@ -416,7 +416,7 @@ class DraftAttachments {
   /// read now); every other file becomes a file draft and starts uploading.
   /// The whole batch is checked first against the projected image limits: one
   /// violation refuses all of it (dsh `intakeFiles`).
-  Future<IntakeResult> add(List<PickedFile> files) async {
+  Future<IntakeResult> add(List<LocalFile> files) async {
     if (_disposed || files.isEmpty) return const IntakeResult.accepted([]);
     final limits = _limits();
     if (limits != null) {

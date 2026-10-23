@@ -7,6 +7,7 @@ import 'package:dsh_flutter/src/backend.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
+import 'package:dsh_slots/testing.dart';
 
 /// A [HostBackend] over a scriptable [FakeTransport]; no sockets.
 class FakeBackend implements HostBackend {
@@ -14,6 +15,10 @@ class FakeBackend implements HostBackend {
     : transport = transport ?? FakeTransport();
 
   final FakeTransport transport;
+  @override
+  final FakeUploadClient uploader = FakeUploadClient();
+  @override
+  final FakeWorkspaceFiles files = FakeWorkspaceFiles();
   final StreamController<ConnectionState> stateController =
       StreamController<ConnectionState>.broadcast();
   final List<(Uri, String)> connects = [];

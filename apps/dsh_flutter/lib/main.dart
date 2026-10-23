@@ -6,6 +6,7 @@ import 'src/app.dart';
 import 'src/app_controller.dart';
 import 'src/backend.dart';
 import 'src/connection_store.dart';
+import 'src/platform/platform_services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() {
   final controller = AppController(
     backend: LiveBackend(),
     store: secure ? SecureConnectionStore() : MemoryConnectionStore(),
+    platform: PlatformServices.current(),
   );
   runApp(WhaleeApp(controller: controller));
   controller.restore();

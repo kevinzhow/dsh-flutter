@@ -131,7 +131,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
   final TextEditingController _text = TextEditingController();
   StreamSubscription<SessionSnapshot>? _sub;
   StreamSubscription<DraftSnapshot>? _draftSub;
-  StreamSubscription<List<PickedFile>>? _dropSub;
+  StreamSubscription<List<LocalFile>>? _dropSub;
   bool _sending = false;
   String? _error;
 
@@ -202,7 +202,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
   }
 
   /// Add [files] to the drafts (the picker result, or a desktop drop).
-  Future<void> _add(List<PickedFile> files) async {
+  Future<void> _add(List<LocalFile> files) async {
     final drafts = _drafts;
     if (drafts == null || files.isEmpty) return;
     final result = await drafts.add(files);

@@ -123,13 +123,13 @@ class TurnTailOwner {
 enum AttachSource { photos, camera, files }
 
 /// Platform picking, implemented by the composition root with the platform
-/// plugins; features see only picked [PickedFile]s.
+/// plugins; features see only picked [LocalFile]s.
 abstract interface class AttachmentPicker {
   /// The sources this platform offers, in menu order.
   List<AttachSource> get sources;
 
   /// Let the person pick from [source]. An empty list means cancelled.
-  Future<List<PickedFile>> pick(AttachSource source);
+  Future<List<LocalFile>> pick(AttachSource source);
 }
 
 /// What the attachment surfaces need from a session (dsh `ui-conversation`'s
@@ -145,7 +145,7 @@ abstract interface class AttachmentServices {
   bool get acceptsDrops;
 
   /// Files dropped on the window; the composer adds them like picked ones.
-  Stream<List<PickedFile>> get dropped;
+  Stream<List<LocalFile>> get dropped;
 }
 
 /// One image of a gallery: a durable reference, or the local preview of a

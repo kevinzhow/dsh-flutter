@@ -66,11 +66,11 @@ SessionOwner testSessionOwner(
 class FakeAttachmentServices implements AttachmentServices {
   FakeAttachmentServices(this.drafts, {this.picker, this.acceptsDrops = true});
 
-  final StreamController<List<PickedFile>> dropController =
-      StreamController<List<PickedFile>>.broadcast();
+  final StreamController<List<LocalFile>> dropController =
+      StreamController<List<LocalFile>>.broadcast();
 
   @override
-  Stream<List<PickedFile>> get dropped => dropController.stream;
+  Stream<List<LocalFile>> get dropped => dropController.stream;
 
   @override
   final DraftAttachments drafts;
@@ -89,11 +89,11 @@ class FakePicker implements AttachmentPicker {
 
   @override
   final List<AttachSource> sources;
-  List<PickedFile> result;
+  List<LocalFile> result;
   final List<AttachSource> picked = [];
 
   @override
-  Future<List<PickedFile>> pick(AttachSource source) async {
+  Future<List<LocalFile>> pick(AttachSource source) async {
     picked.add(source);
     return result;
   }
@@ -154,9 +154,9 @@ class FakeUpload {
   void fail(Object error) => done.completeError(error);
 }
 
-/// A [PickedFile] over in-memory bytes.
-PickedFile pickedBytes(String name, Uint8List bytes, {String? type}) =>
-    PickedFile(
+/// A [LocalFile] over in-memory bytes.
+LocalFile pickedBytes(String name, Uint8List bytes, {String? type}) =>
+    LocalFile(
       name: name,
       size: bytes.length,
       mediaType: type,
