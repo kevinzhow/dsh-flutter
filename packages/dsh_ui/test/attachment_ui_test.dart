@@ -189,7 +189,16 @@ void main() {
           ),
         ),
       );
-      expect(find.text('const a = 1', findRichText: true), findsOneWidget);
+      // (a wrapped block carries zero-width break markers in its text)
+      expect(
+        find.byWidgetPredicate(
+          (w) =>
+              w is RichText &&
+              w.text.toPlainText().replaceAll(RegExp('[\\u200B\\u2060]'), '') ==
+                  'const a = 1',
+        ),
+        findsOneWidget,
+      );
     });
 
     testWidgets('wrap toggles between wrapped text and a sideways scroller', (

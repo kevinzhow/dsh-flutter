@@ -6,9 +6,14 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/gestures.dart' show PointerDeviceKind;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_corners.dart';
+import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_file_types.dart';
 import 'dsh_icon.dart';
+import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_image_size.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -173,21 +178,30 @@ class _DshFileCardState extends State<DshFileCard> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            w.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          DshChromeBaseline(
             style: nameStyle,
+            child: Text(
+              w.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: nameStyle,
+              strutStyle: dshStrut(nameStyle),
+            ),
           ),
-          Text(
-            meta,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          DshChromeBaseline(
             style: metaStyle,
+            child: Text(
+              meta,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: metaStyle,
+              strutStyle: dshStrut(metaStyle),
+            ),
           ),
         ],
       ),
     );
+    final cardFill = theme.color('--dsw-specific-input-major');
     return MouseRegion(
       onEnter: (e) {
         if (e.kind == PointerDeviceKind.mouse) setState(() => _hover = true);
@@ -201,69 +215,80 @@ class _DshFileCardState extends State<DshFileCard> {
           width: 240,
           height: 64,
           child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: theme.color('--dsw-specific-input-major'),
-              borderRadius: BorderRadius.circular(theme.radiusLg),
-              border: Border.all(
-                color: failed
-                    ? theme.color('--dsw-alias-state-error-primary')
-                    : theme.color('--dsw-alias-border-l2'),
-                width: dshHairline,
-              ),
+            decoration: theme.cornerDecoration(
+              theme.radiusLg,
+              color: cardFill,
+              borderColor: failed
+                  ? theme.color('--dsw-alias-state-error-primary')
+                  : blendLikeChromium(
+                      theme.color('--dsw-alias-border-l2'),
+                      cardFill,
+                    ),
+              borderWidth: dshHairline,
             ),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 28,
-                        height: 28,
-                        child: Center(
-                          child: w.state == DshFileCardState.uploading
-                              ? DshSpinner(size: 20, color: theme.labelPrimary)
-                              : DshFileTypeIcon(path: w.name),
+            // CSS lays the content out inside the border (and positions the
+            // badge and the progress bar from the padding edge).
+            child: Padding(
+              padding: const EdgeInsets.all(dshHairline),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 28,
+                          height: 28,
+                          child: Center(
+                            child: w.state == DshFileCardState.uploading
+                                // CSS draws the 2px border outside the
+                                // 20px content box: a 24px ring.
+                                ? DshSpinner(
+                                    size: 24,
+                                    color: theme.labelPrimary,
+                                  )
+                                : DshFileTypeIcon(path: w.name),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: failed
-                            ? Semantics(
-                                button: true,
-                                label: w.labels.retry,
-                                child: GestureDetector(
-                                  key: const ValueKey('file-card-retry'),
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: w.onRetry,
-                                  child: ExcludeSemantics(child: body),
-                                ),
-                              )
-                            : Semantics(label: w.labels.label, child: body),
-                      ),
-                    ],
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: failed
+                              ? Semantics(
+                                  button: true,
+                                  label: w.labels.retry,
+                                  child: GestureDetector(
+                                    key: const ValueKey('file-card-retry'),
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: w.onRetry,
+                                    child: ExcludeSemantics(child: body),
+                                  ),
+                                )
+                              : Semantics(label: w.labels.label, child: body),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                if (w.state == DshFileCardState.uploading)
+                  if (w.state == DshFileCardState.uploading)
+                    Positioned(
+                      left: 12,
+                      right: 12,
+                      bottom: 5,
+                      height: 2,
+                      child: DshProgressTrack(progress: w.progress),
+                    ),
                   Positioned(
-                    left: 12,
-                    right: 12,
-                    bottom: 5,
-                    height: 2,
-                    child: DshProgressTrack(progress: w.progress),
+                    top: 6,
+                    right: 6,
+                    child: DshRemoveBadge(
+                      key: const ValueKey('file-card-remove'),
+                      label: w.labels.remove,
+                      onPressed: w.onRemove,
+                      visible: removeVisible,
+                      error: failed,
+                    ),
                   ),
-                Positioned(
-                  top: 6,
-                  right: 6,
-                  child: DshRemoveBadge(
-                    key: const ValueKey('file-card-remove'),
-                    label: w.labels.remove,
-                    onPressed: w.onRemove,
-                    visible: removeVisible,
-                    error: failed,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -320,9 +345,9 @@ class _DshProgressTrackState extends State<DshProgressTrack>
         .color('--dsw-static-neutral-1000')
         .withValues(alpha: 0.08);
     final bar = theme.color('--dsw-alias-brand-primary');
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(1),
-      child: ColoredBox(
+    return theme.clipCorners(
+      1,
+      ColoredBox(
         color: track,
         child: LayoutBuilder(
           builder: (context, c) {
@@ -332,7 +357,10 @@ class _DshProgressTrackState extends State<DshProgressTrack>
                 alignment: Alignment.centerLeft,
                 child: FractionallySizedBox(
                   widthFactor: fraction.clamp(0.0, 1.0),
-                  child: ColoredBox(color: bar, child: const SizedBox.expand()),
+                  child: theme.clipCorners(
+                    1,
+                    ColoredBox(color: bar, child: const SizedBox.expand()),
+                  ),
                 ),
               );
             }
@@ -347,7 +375,7 @@ class _DshProgressTrackState extends State<DshProgressTrack>
                   width: width,
                   top: 0,
                   bottom: 0,
-                  child: ColoredBox(color: bar),
+                  child: theme.clipCorners(1, ColoredBox(color: bar)),
                 ),
               ],
             );
@@ -453,18 +481,28 @@ class DshMessageFileCard extends StatelessWidget {
       extension.length > 8 ? extension.substring(0, 8) : extension,
       dshFileSizeText(bytes),
     ].where((p) => p.isNotEmpty).join(' ');
+    final fill = theme.color('--dsw-specific-input-major');
+    final nameStyle = theme
+        .textStyle('--dsw-font-s-14')
+        .sized(14, line: 22)
+        .copyWith(color: theme.labelPrimary, fontWeight: FontWeight.w500);
+    final metaStyle = theme
+        .textStyle('--dsw-font-xxs-12')
+        .sized(12, line: 15)
+        .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
     return Container(
       key: const ValueKey('message-file-card'),
       width: 240,
       constraints: const BoxConstraints(minHeight: 64),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-specific-input-major'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        border: Border.all(
-          color: theme.color('--dsw-alias-border-l2'),
-          width: dshHairline,
+      decoration: theme.cornerDecoration(
+        theme.radiusLg,
+        color: fill,
+        borderColor: blendLikeChromium(
+          theme.color('--dsw-alias-border-l2'),
+          fill,
         ),
+        borderWidth: dshHairline,
       ),
       child: Semantics(
         label: name,
@@ -477,28 +515,25 @@ class DshMessageFileCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle('--dsw-font-s-14')
-                        .sized(14, line: 22)
-                        .copyWith(
-                          color: theme.labelPrimary,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  DshChromeBaseline(
+                    style: nameStyle,
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: nameStyle,
+                      strutStyle: dshStrut(nameStyle),
+                    ),
                   ),
-                  Text(
-                    meta,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle('--dsw-font-xxs-12')
-                        .sized(12, line: 15)
-                        .copyWith(
-                          color: theme.color('--dsw-alias-label-tertiary'),
-                        ),
+                  DshChromeBaseline(
+                    style: metaStyle,
+                    child: Text(
+                      meta,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: metaStyle,
+                      strutStyle: dshStrut(metaStyle),
+                    ),
                   ),
                 ],
               ),
@@ -603,19 +638,20 @@ class DshImageFrame extends StatelessWidget {
       DshImageVariant.tile => 64.0,
       DshImageVariant.thumbnail => 48.0,
     };
-    final radius = BorderRadius.circular(
-      variant == DshImageVariant.thumbnail ? theme.radiusLg : theme.radiusXl,
-    );
-    final border = Border.all(
-      color: theme.color('--dsw-alias-border-l2-darkmode-thin'),
-      width: dshHairline,
-    );
+    final radius = variant == DshImageVariant.thumbnail
+        ? theme.radiusLg
+        : theme.radiusXl;
     final tertiary = theme
         .textStyle('--dsw-font-xxs-12')
         .sized(12, line: 18)
         .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
     if (failed) {
       final thumb = variant == DshImageVariant.thumbnail;
+      final surface = DshSurface.of(context);
+      final fill = blendLikeChromium(
+        theme.color('--dsw-alias-interactive-bg-hover-danger'),
+        surface,
+      );
       return Semantics(
         button: true,
         label: labels.loadFailed,
@@ -624,7 +660,7 @@ class DshImageFrame extends StatelessWidget {
           behavior: HitTestBehavior.opaque,
           onTap: onRetry,
           child: Container(
-            width: side ?? 240,
+            width: side,
             height: side,
             constraints: side == null
                 ? const BoxConstraints(maxWidth: 240)
@@ -634,25 +670,41 @@ class DshImageFrame extends StatelessWidget {
                 : variant == DshImageVariant.tile
                 ? const EdgeInsets.all(4)
                 : const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              color: theme.color('--dsw-alias-interactive-bg-hover-danger'),
-              borderRadius: variant == DshImageVariant.single
-                  ? BorderRadius.circular(theme.radiusMd)
-                  : radius,
-              border: border,
+            decoration: theme.cornerDecoration(
+              variant == DshImageVariant.single ? theme.radiusMd : radius,
+              color: fill,
+              borderColor: blendLikeChromium(
+                theme.color('--dsw-alias-border-l2-darkmode-thin'),
+                fill,
+              ),
+              borderWidth: dshHairline,
             ),
-            alignment: Alignment.center,
             child: thumb
-                ? DshIcon(
-                    DshIcons.refresh,
-                    size: 16,
-                    color: theme.color('--dsw-alias-label-tertiary'),
+                ? Center(
+                    child: DshIcon(
+                      DshIcons.refresh,
+                      size: 16,
+                      color: theme.color('--dsw-alias-label-tertiary'),
+                    ),
                   )
-                : Text(
+                : variant == DshImageVariant.single
+                ? Text(
                     labels.loadFailed,
-                    maxLines: variant == DshImageVariant.tile ? 3 : null,
-                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                     style: tertiary,
+                  )
+                : theme.clipCorners(
+                    math.max(0, radius - dshHairline),
+                    // A button centres its text, but never above its top edge
+                    // when the text is taller than the button.
+                    CustomSingleChildLayout(
+                      delegate: const _SafeCenterLayout(),
+                      child: Text(
+                        labels.loadFailed,
+                        textAlign: TextAlign.center,
+                        style: tertiary,
+                      ),
+                    ),
                   ),
           ),
         ),
@@ -674,26 +726,63 @@ class DshImageFrame extends StatelessWidget {
       }
     }
     final loaded = bytes;
+    final inset =
+        2 * dshHairline + (variant == DshImageVariant.thumbnail ? 4 : 0);
+    final source = loaded == null ? null : dshImageSize(loaded);
+    final inner = Size(boxW! - inset, boxH! - inset);
+    // dsh quirk: the picture sits in a one-cell grid whose row grows to the
+    // picture's height at the frame's width, so a picture taller than the
+    // frame is not centred: it is laid out at the frame's width and cut off at
+    // the bottom (a tile shows the top of a portrait photo, a thumbnail the
+    // top of the whole picture).
+    final tall =
+        variant != DshImageVariant.single &&
+        source != null &&
+        inner.width * source.height / source.width > inner.height + 0.01;
+    final contain = variant == DshImageVariant.thumbnail && !tall;
+    final fit = contain ? DshImageFit.contain : DshImageFit.cover;
+    final target = loaded == null
+        ? (width: null, height: null)
+        : dshDecodeTarget(
+            source,
+            inner * MediaQuery.devicePixelRatioOf(context),
+            fit,
+          );
     final Widget content = loaded == null
         ? Center(
             child: variant == DshImageVariant.thumbnail
-                ? DshSpinner(
+                ? _SpinningIcon(
+                    DshIcons.loading,
                     size: 16,
                     color: theme.color('--dsw-alias-label-tertiary'),
                   )
-                : Text(labels.loading, style: tertiary),
+                : Text(
+                    labels.loading,
+                    textAlign: TextAlign.center,
+                    textWidthBasis: TextWidthBasis.longestLine,
+                    style: tertiary,
+                  ),
           )
-        : Image.memory(
-            loaded,
-            fit: variant == DshImageVariant.thumbnail
-                ? BoxFit.contain
-                : BoxFit.cover,
-            alignment: alignment,
-            gaplessPlayback: true,
-            semanticLabel: label,
-            // Decoding at the frame's size keeps a 20 image gallery light.
-            cacheWidth: (boxW! * MediaQuery.devicePixelRatioOf(context)).ceil(),
-            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+        : _Bleed(
+            // The picture is clipped at the padding edge, so a cut-off one
+            // shows through the thumbnail's bottom padding as well.
+            extra: tall && variant == DshImageVariant.thumbnail ? 2 : 0,
+            child: Image.memory(
+              loaded,
+              fit: contain ? BoxFit.contain : BoxFit.cover,
+              alignment: dshSnappedAlignment(
+                box: inner,
+                source: source,
+                fit: fit,
+                base: tall ? Alignment.topCenter : alignment,
+              ),
+              gaplessPlayback: true,
+              semanticLabel: label,
+              // Decoding at the frame's size keeps a 20 image gallery light.
+              cacheWidth: target.width,
+              cacheHeight: target.height,
+              errorBuilder: (_, _, _) => const SizedBox.shrink(),
+            ),
           );
     return Semantics(
       button: true,
@@ -702,21 +791,149 @@ class DshImageFrame extends StatelessWidget {
         key: const ValueKey('image-open'),
         behavior: HitTestBehavior.opaque,
         onTap: loaded == null ? null : onOpen,
-        child: Container(
+        child: _ImageBox(
           width: boxW,
           height: boxH,
-          constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
-          padding: variant == DshImageVariant.thumbnail
-              ? const EdgeInsets.all(2)
-              : EdgeInsets.zero,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            color: theme.interactiveBgHover,
-            borderRadius: radius,
-            border: border,
-          ),
+          radius: radius,
+          padding: variant == DshImageVariant.thumbnail ? 2 : 0,
+          minSize: 44,
           child: ExcludeSemantics(child: content),
         ),
+      ),
+    );
+  }
+}
+
+/// Lays [child] out [extra] taller than the box it sits in, top aligned (the
+/// overflow is clipped by an ancestor).
+class _Bleed extends StatelessWidget {
+  const _Bleed({required this.extra, required this.child});
+
+  final double extra;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (extra == 0) return child;
+    return LayoutBuilder(
+      builder: (context, c) => OverflowBox(
+        alignment: Alignment.topCenter,
+        minHeight: c.maxHeight + extra,
+        maxHeight: c.maxHeight + extra,
+        child: child,
+      ),
+    );
+  }
+}
+
+/// Centres its child like a button does: horizontally always, vertically only
+/// while it fits (a taller child starts at the top and is cut off below).
+class _SafeCenterLayout extends SingleChildLayoutDelegate {
+  const _SafeCenterLayout();
+
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      BoxConstraints(maxWidth: constraints.maxWidth);
+
+  @override
+  Offset getPositionForChild(Size size, Size childSize) => Offset(
+    (size.width - childSize.width) / 2,
+    math.max(0, (size.height - childSize.height) / 2),
+  );
+
+  @override
+  bool shouldRelayout(_SafeCenterLayout old) => false;
+}
+
+/// An icon turning once per 0.9 s (dsh's `spinner-rotate`), still when the
+/// platform asks for reduced motion.
+class _SpinningIcon extends StatefulWidget {
+  const _SpinningIcon(this.icon, {required this.size, required this.color});
+
+  final DshIconData icon;
+  final double size;
+  final Color color;
+
+  @override
+  State<_SpinningIcon> createState() => _SpinningIconState();
+}
+
+class _SpinningIconState extends State<_SpinningIcon>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _controller;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final animate = !MediaQuery.disableAnimationsOf(context);
+    if (animate && _controller == null) {
+      _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 900),
+      )..repeat();
+    } else if (!animate && _controller != null) {
+      _controller!.dispose();
+      _controller = null;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final icon = DshIcon(widget.icon, size: widget.size, color: widget.color);
+    final c = _controller;
+    return c == null ? icon : RotationTransition(turns: c, child: icon);
+  }
+}
+
+/// The bordered box of a gallery or draft image: a hover-tinted fill and a
+/// `0.5px` hairline in dsh's corner shape, the picture clipped to the inside of
+/// the border like CSS `overflow: hidden`.
+class _ImageBox extends StatelessWidget {
+  const _ImageBox({
+    required this.width,
+    required this.height,
+    required this.radius,
+    required this.child,
+    this.padding = 0,
+    this.minSize = 0,
+  });
+
+  final double? width;
+  final double? height;
+  final double radius;
+  final double padding;
+  final double minSize;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final fill = blendLikeChromium(
+      theme.color('--dsw-alias-interactive-bg-hover'),
+      DshSurface.of(context),
+    );
+    return Container(
+      width: width,
+      height: height,
+      constraints: BoxConstraints(minWidth: minSize, minHeight: minSize),
+      decoration: theme.cornerDecoration(
+        radius,
+        color: fill,
+        borderColor: blendLikeChromium(
+          theme.color('--dsw-alias-border-l2-darkmode-thin'),
+          fill,
+        ),
+        borderWidth: dshHairline,
+      ),
+      child: theme.clipCorners(
+        math.max(0, radius - dshHairline),
+        Padding(padding: EdgeInsets.all(padding), child: child),
       ),
     );
   }
@@ -780,6 +997,12 @@ class _DshDraftImageState extends State<DshDraftImage> {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final visible = widget.forceRemoveVisible ?? (_touchPlatform || _hover);
+    final draftTarget = dshDecodeTarget(
+      dshImageSize(widget.bytes),
+      Size.square(64 - 2 * dshHairline) *
+          MediaQuery.devicePixelRatioOf(context),
+      DshImageFit.cover,
+    );
     return MouseRegion(
       onEnter: (e) {
         if (e.kind == PointerDeviceKind.mouse) setState(() => _hover = true);
@@ -797,24 +1020,21 @@ class _DshDraftImageState extends State<DshDraftImage> {
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: widget.onOpen,
-                child: Container(
+                child: _ImageBox(
                   width: 64,
                   height: 64,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: theme.interactiveBgHover,
-                    borderRadius: BorderRadius.circular(theme.radiusXl),
-                    border: Border.all(
-                      color: theme.color('--dsw-alias-border-l2-darkmode-thin'),
-                      width: dshHairline,
-                    ),
-                  ),
+                  radius: theme.radiusXl,
                   child: ExcludeSemantics(
                     child: Image.memory(
                       widget.bytes,
                       fit: BoxFit.cover,
-                      cacheWidth: (64 * MediaQuery.devicePixelRatioOf(context))
-                          .ceil(),
+                      alignment: dshSnappedAlignment(
+                        box: const Size.square(64 - 2 * dshHairline),
+                        source: dshImageSize(widget.bytes),
+                        fit: DshImageFit.cover,
+                      ),
+                      cacheWidth: draftTarget.width,
+                      cacheHeight: draftTarget.height,
                       gaplessPlayback: true,
                       errorBuilder: (_, _, _) => const SizedBox.shrink(),
                     ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 
+import 'dsh_code_breaks.g.dart';
 import 'theme_access.dart';
 
 /// The colour classes of dsh's syntax highlighter (shiki's css-variables
@@ -90,24 +91,75 @@ class DshCodeHighlighting extends InheritedWidget {
       old.highlighter != highlighter;
 }
 
-/// Spans coloured for the ambient theme.
+/// Marks the line-break opportunities of dsh's wrapped code the way Chromium
+/// has them (CSS `white-space: pre-wrap`): a zero-width space between two
+/// printable ASCII characters where Chromium may break, a word joiner where it
+/// may not ([dshCodeBreakTable], measured by tool/linebreak/gen-code-breaks.mjs).
+/// Flutter's breaker follows other rules in the details that matter for source
+/// code (it keeps `{ name` together, it may break between `}` and a backtick).
+/// Other characters keep the engine's own rules (ideographs break anywhere in
+/// both).
+bool _printable(int c) => c >= 0x20 && c <= 0x7e;
+
+bool _word(int c) =>
+    (c >= 0x30 && c <= 0x39) ||
+    (c >= 0x41 && c <= 0x5a) ||
+    (c >= 0x61 && c <= 0x7a);
+
+String dshWrapBreaks(String text, {String? next}) {
+  if (text.isEmpty) return text;
+  final out = StringBuffer();
+  for (var i = 0; i < text.length; i++) {
+    final a = text.codeUnitAt(i);
+    out.writeCharCode(a);
+    // The last character looks at the first of the following run (if any).
+    final int b;
+    if (i + 1 < text.length) {
+      b = text.codeUnitAt(i + 1);
+    } else if (next != null && next.isNotEmpty) {
+      b = next.codeUnitAt(0);
+    } else {
+      break;
+    }
+    // Only the pairs the two breakers can disagree on get a marker: after a
+    // space, and between two punctuation marks (letters, digits and the
+    // spaces after them are the same for both).
+    if (_printable(a) && _printable(b) && b != 0x20 && !_word(a)) {
+      final allowed = dshCodeBreakTable[a - 0x20].codeUnitAt(b - 0x20) == 0x31;
+      out.writeCharCode(allowed ? 0x200B : 0x2060);
+    }
+  }
+  return out.toString();
+}
+
+/// Spans coloured for the ambient theme. [wrap] adds the `pre-wrap` break
+/// opportunities of [dshWrapBreaks].
 List<InlineSpan> dshStyledSpans(
   BuildContext context,
   List<DshCodeSpan> spans,
-  TextStyle base,
-) {
+  TextStyle base, {
+  bool wrap = false,
+}) {
   final theme = context.dsh;
+  Color color(DshCodeSpan s) => s.token == null
+      ? theme.color('--shiki-foreground')
+      : theme.color(s.token!.tokenName);
   return [
-    for (final s in spans)
+    for (var i = 0; i < spans.length; i++)
       TextSpan(
-        text: s.text,
+        text: wrap
+            ? dshWrapBreaks(
+                spans[i].text,
+                next: i + 1 < spans.length ? spans[i + 1].text : null,
+              )
+            : spans[i].text,
         style: base.copyWith(
-          color: s.token == null
-              ? theme.color('--shiki-foreground')
-              : theme.color(s.token!.tokenName),
-          fontStyle: s.italic ? FontStyle.italic : null,
-          fontWeight: s.bold ? FontWeight.bold : null,
-          decoration: s.underline ? TextDecoration.underline : null,
+          color: color(spans[i]),
+          fontStyle: spans[i].italic ? FontStyle.italic : null,
+          fontWeight: spans[i].bold ? FontWeight.bold : null,
+          decoration: spans[i].underline ? TextDecoration.underline : null,
+          // CSS draws the underline in the colour of its span.
+          decorationColor: spans[i].underline ? color(spans[i]) : null,
         ),
       ),
   ];
@@ -152,5 +204,35 @@ mixin DshHighlightListener<T extends StatefulWidget> on State<T> {
   void dispose() {
     _sub?.cancel();
     super.dispose();
+  }
+}
+
+/// The body of a code card: the source inside dsh's `6 22 20` padding, wrapped
+/// to the card or, unwrapped, scrolling sideways. The scroller spans the whole
+/// card and the padding scrolls with the source (CSS `overflow-x: auto` on the
+/// padded `pre`), so unwrapped text runs through the side padding up to the
+/// card's edge.
+class DshCodeBody extends StatelessWidget {
+  const DshCodeBody({super.key, required this.wrapped, required this.child});
+
+  final bool wrapped;
+  final Widget child;
+
+  static const EdgeInsets padding = EdgeInsets.fromLTRB(22, 6, 22, 20);
+
+  @override
+  Widget build(BuildContext context) {
+    if (wrapped) return Padding(padding: padding, child: child);
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minWidth: constraints.maxWidth),
+          child: IntrinsicWidth(
+            child: Padding(padding: padding, child: child),
+          ),
+        ),
+      ),
+    );
   }
 }

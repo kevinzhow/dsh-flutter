@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'dsh_code_highlight.dart';
+import 'dsh_corners.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'dsh_diff_block.dart' show DshFoldLabels;
@@ -92,13 +94,27 @@ class _DshReadBlockState extends State<DshReadBlock>
           : null;
       if (spans == null) {
         return _wrapped
-            ? Expanded(child: Text(l.text, style: foreground))
-            : Text(l.text, softWrap: false, style: foreground);
+            ? Expanded(
+                child: Text(
+                  dshWrapBreaks(l.text),
+                  style: foreground,
+                  strutStyle: dshStrut(foreground),
+                ),
+              )
+            : Text(
+                l.text,
+                softWrap: false,
+                style: foreground,
+                strutStyle: dshStrut(foreground),
+              );
       }
       final text = Text.rich(
-        TextSpan(children: dshStyledSpans(context, spans, foreground)),
+        TextSpan(
+          children: dshStyledSpans(context, spans, foreground, wrap: _wrapped),
+        ),
         softWrap: _wrapped,
         style: foreground,
+        strutStyle: dshStrut(foreground),
       );
       return _wrapped ? Expanded(child: text) : text;
     }
@@ -154,13 +170,13 @@ class _DshReadBlockState extends State<DshReadBlock>
 
     return DecoratedBox(
       key: const ValueKey('read-block'),
-      decoration: BoxDecoration(
+      decoration: theme.cornerDecoration(
+        theme.radiusLg,
         color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: Column(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -176,22 +192,7 @@ class _DshReadBlockState extends State<DshReadBlock>
               onCopy: w.lines.isEmpty ? null : () => copyText(raw),
               onWrap: () => setState(() => _wrapped = !_wrapped),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(22, 6, 22, 20),
-              child: _wrapped
-                  ? body
-                  : LayoutBuilder(
-                      builder: (context, constraints) => SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minWidth: constraints.maxWidth,
-                          ),
-                          child: IntrinsicWidth(child: body),
-                        ),
-                      ),
-                    ),
-            ),
+            DshCodeBody(wrapped: _wrapped, child: body),
           ],
         ),
       ),

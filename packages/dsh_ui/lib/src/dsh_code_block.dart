@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'dsh_code_highlight.dart';
+import 'dsh_corners.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'theme_access.dart';
@@ -81,13 +83,13 @@ class _DshCodeBlockState extends State<DshCodeBlock>
     );
     return DecoratedBox(
       key: const ValueKey('code-block'),
-      decoration: BoxDecoration(
+      decoration: theme.cornerDecoration(
+        theme.radiusLg,
         color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: Column(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -102,22 +104,7 @@ class _DshCodeBlockState extends State<DshCodeBlock>
                     ? () => setState(() => _wrapped = !_wrapped)
                     : null,
               ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(22, 6, 22, 20),
-              child: wrapped
-                  ? body
-                  : LayoutBuilder(
-                      builder: (context, constraints) => SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minWidth: constraints.maxWidth,
-                          ),
-                          child: IntrinsicWidth(child: body),
-                        ),
-                      ),
-                    ),
-            ),
+            DshCodeBody(wrapped: wrapped, child: body),
           ],
         ),
       ),
@@ -158,12 +145,13 @@ class DshCodeLines extends StatelessWidget {
           children: [
             for (var i = 0; i < lines.length; i++) ...[
               if (i > 0) TextSpan(text: '\n', style: foreground),
-              ...dshStyledSpans(context, lines[i], foreground),
+              ...dshStyledSpans(context, lines[i], foreground, wrap: wrap),
             ],
           ],
         ),
         softWrap: wrap,
         style: foreground,
+        strutStyle: dshStrut(foreground),
       );
     }
     final last = firstLine + lines.length - 1;
@@ -224,9 +212,10 @@ class DshCodeLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final text = Text.rich(
-      TextSpan(children: dshStyledSpans(context, spans, textStyle)),
+      TextSpan(children: dshStyledSpans(context, spans, textStyle, wrap: wrap)),
       softWrap: wrap,
       style: textStyle,
+      strutStyle: dshStrut(textStyle),
     );
     final row = Row(
       crossAxisAlignment: CrossAxisAlignment.start,

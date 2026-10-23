@@ -55,6 +55,9 @@ void main() {
       r'fontSize\s*:|fontFamily\s*:|TextStyle\(\s*\n?\s*(fontSize|fontFamily)',
     );
     for (final f in files) {
+      // dsh_text_baseline.dart measures a style's own face (it copies the
+      // style's size and family; it names none).
+      if (f.path.endsWith('dsh_text_baseline.dart')) continue;
       expect(
         bad.hasMatch(strip(f.readAsStringSync())),
         isFalse,
