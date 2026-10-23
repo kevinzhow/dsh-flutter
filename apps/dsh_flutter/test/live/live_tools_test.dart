@@ -29,6 +29,11 @@ final resultFile = Platform.environment['DSH_LIVE_RESULT'];
 
 final results = <Map<String, Object?>>[];
 
+/// `DSH_LIVE_STEPS=plan,todo` runs only those checks (default: all), so a
+/// single check can be re-run with a couple of prompts.
+final _only = Platform.environment['DSH_LIVE_STEPS']?.split(',');
+bool want(String name) => _only == null || _only!.contains(name);
+
 Future<T> step<T>(
   String name,
   Future<T> Function() body, {
@@ -134,205 +139,230 @@ void main() {
             });
 
         // ---- 1. bash: a terminal card ---------------------------------------
-        await step('bash: a clean command settles into a terminal card', () async {
-          await ask(
-            "Use the bash tool to run exactly: printf 'alpha\\nbeta\\n' . Then say what it printed in one short sentence.",
-          );
-          final call = roots('bash').last as ToolResult;
-          final card = terminalCardModel(call, sessionCwd: sc.owner.cwd);
-          expect(card, isNotNull, reason: 'bash result is not a terminal card');
-          expect(card!.output, contains('alpha'));
-          expect(card.exitCode, 0);
-          expect(toolRowModel('bash', call).state, ToolRowState.ok);
-          return '${card.output!.trim().replaceAll('\n', ' | ')}, cwd label ${card.cwd}';
-        }, detail: (d) => d);
+        if (want('bash')) {
+          await step('bash: a clean command settles into a terminal card', () async {
+            await ask(
+              "Use the bash tool to run exactly: printf 'alpha\\nbeta\\n' . Then say what it printed in one short sentence.",
+            );
+            final call = roots('bash').last as ToolResult;
+            final card = terminalCardModel(call, sessionCwd: sc.owner.cwd);
+            expect(
+              card,
+              isNotNull,
+              reason: 'bash result is not a terminal card',
+            );
+            expect(card!.output, contains('alpha'));
+            expect(card.exitCode, 0);
+            expect(toolRowModel('bash', call).state, ToolRowState.ok);
+            return '${card.output!.trim().replaceAll('\n', ' | ')}, cwd label ${card.cwd}';
+          }, detail: (d) => d);
+        }
 
         // ---- 2. bash: a failing exit ----------------------------------------
-        await step('bash: a failing command carries its exit code', () async {
-          await ask(
-            'Use the bash tool to run exactly: ls /whalee-no-such-directory . It will fail; report the error in one sentence.',
-          );
-          final call = roots('bash').last as ToolResult;
-          final card = terminalCardModel(call, sessionCwd: sc.owner.cwd)!;
-          expect(card.failed, isTrue);
-          expect(card.exitCode, isNot(0));
-          expect(terminalExitLabel(card, t), isNotNull);
-          return 'exit label "${terminalExitLabel(card, t)}"';
-        }, detail: (d) => d);
+        if (want('fail')) {
+          await step('bash: a failing command carries its exit code', () async {
+            await ask(
+              'Use the bash tool to run exactly: ls /whalee-no-such-directory . It will fail; report the error in one sentence.',
+            );
+            final call = roots('bash').last as ToolResult;
+            final card = terminalCardModel(call, sessionCwd: sc.owner.cwd)!;
+            expect(card.failed, isTrue);
+            expect(card.exitCode, isNot(0));
+            expect(terminalExitLabel(card, t), isNotNull);
+            return 'exit label "${terminalExitLabel(card, t)}"';
+          }, detail: (d) => d);
+        }
 
         // ---- 3. write: a diff card ------------------------------------------
-        await step('write: a new file shows an all-added diff', () async {
-          await command('/permission workspace-write');
-          await until(
-            'permissions projection',
-            () =>
-                (session.projections.get('permissions')
-                    as Map?)?['currentValue'] ==
-                'workspace-write',
-            timeout: const Duration(seconds: 30),
-          );
-          await ask(
-            'Use the write tool to create notes.txt in the working directory containing exactly three lines: red, green, blue. Then reply done.',
-          );
-          final call = roots('write').last as ToolResult;
-          final diff = diffCardModel(call)!;
-          final totals = diffTotals(diff);
-          expect(totals.added, 3);
-          expect(totals.removed, 0);
-          return 'diff +${totals.added} -${totals.removed}, path ${diff.single.path}';
-        }, detail: (d) => d);
+        if (want('write')) {
+          await step('write: a new file shows an all-added diff', () async {
+            await command('/permission workspace-write');
+            await until(
+              'permissions projection',
+              () =>
+                  (session.projections.get('permissions')
+                      as Map?)?['currentValue'] ==
+                  'workspace-write',
+              timeout: const Duration(seconds: 30),
+            );
+            await ask(
+              'Use the write tool to create notes.txt in the working directory containing exactly three lines: red, green, blue. Then reply done.',
+            );
+            final call = roots('write').last as ToolResult;
+            final diff = diffCardModel(call)!;
+            final totals = diffTotals(diff);
+            expect(totals.added, 3);
+            expect(totals.removed, 0);
+            return 'diff +${totals.added} -${totals.removed}, path ${diff.single.path}';
+          }, detail: (d) => d);
+        }
 
         // ---- 4. edit: a diff with context ----------------------------------
-        await step('edit: a replacement shows +1 -1 with context', () async {
-          await ask(
-            'Use the edit tool to replace the line "green" with "emerald" in notes.txt (read the file first if needed). Then reply done.',
-          );
-          final call = roots('edit').last as ToolResult;
-          expect(call.isError, isFalse);
-          final diff = diffCardModel(call)!;
-          final totals = diffTotals(diff);
-          expect(totals.added, 1);
-          expect(totals.removed, 1);
-          final rows = buildDiffRows(diff);
-          expect(rows.any((r) => r.kind == DshDiffRowKind.context), isTrue);
-          return 'diff +${totals.added} -${totals.removed}, ${rows.length} rows';
-        }, detail: (d) => d);
+        if (want('edit')) {
+          await step('edit: a replacement shows +1 -1 with context', () async {
+            await ask(
+              'Use the edit tool to replace the line "green" with "emerald" in notes.txt (read the file first if needed). Then reply done.',
+            );
+            final call = roots('edit').last as ToolResult;
+            expect(call.isError, isFalse);
+            final diff = diffCardModel(call)!;
+            final totals = diffTotals(diff);
+            expect(totals.added, 1);
+            expect(totals.removed, 1);
+            final rows = buildDiffRows(diff);
+            expect(rows.any((r) => r.kind == DshDiffRowKind.context), isTrue);
+            return 'diff +${totals.added} -${totals.removed}, ${rows.length} rows';
+          }, detail: (d) => d);
+        }
 
         // ---- 5. search: grep and glob cards --------------------------------
-        await step('grep: matches group by file', () async {
-          await ask(
-            'Use the grep tool to find the pattern "emerald" in the working directory, then tell me its line number.',
-          );
-          final call = roots('grep').last as ToolResult;
-          final search = searchCardModel(call);
-          expect(search, isNotNull, reason: 'grep metadata is not a card');
-          expect(
-            search!.files!.single.matches.single.line,
-            contains('emerald'),
-          );
-          return '${search.total} match in ${search.files!.single.path}';
-        }, detail: (d) => d);
-
-        await step(
-          'glob: a path list',
-          () async {
+        if (want('grep')) {
+          await step('grep: matches group by file', () async {
             await ask(
-              'Use the glob tool with the pattern "*.txt" and tell me how many files it found.',
+              'Use the grep tool to find the pattern "emerald" in the working directory, then tell me its line number.',
             );
-            final call = roots('glob').last as ToolResult;
+            final call = roots('grep').last as ToolResult;
             final search = searchCardModel(call);
-            expect(search, isNotNull);
-            expect(search!.paths, isNotEmpty);
-            return '${search.paths!.length} path(s), truncated=${search.truncated}';
-          },
-          detail: (d) => d,
-          bestEffort: true,
-        ).catchError((Object _) => '');
+            expect(search, isNotNull, reason: 'grep metadata is not a card');
+            expect(
+              search!.files!.single.matches.single.line,
+              contains('emerald'),
+            );
+            return '${search.total} match in ${search.files!.single.path}';
+          }, detail: (d) => d);
+        }
+
+        if (want('glob')) {
+          await step(
+            'glob: a path list',
+            () async {
+              await ask(
+                'Use the glob tool with the pattern "*.txt" and tell me how many files it found.',
+              );
+              final call = roots('glob').last as ToolResult;
+              final search = searchCardModel(call);
+              expect(search, isNotNull);
+              expect(search!.paths, isNotEmpty);
+              return '${search.paths!.length} path(s), truncated=${search.truncated}';
+            },
+            detail: (d) => d,
+            bestEffort: true,
+          ).catchError((Object _) => '');
+        }
 
         // ---- 6. todo: the projection, the row and the history ---------------
-        await step('todo: the todos projection and the list diff', () async {
-          await ask(
-            'Use the todo_write tool once to record exactly three to-do items: "Collect notes" (completed), "Write summary" (in_progress), "Share it" (pending). Then reply done.',
-          );
-          final todos = session.projections.get('todos');
-          expect(todos, isA<List<Object?>>());
-          expect((todos! as List).length, 3);
-          final call = roots('todo_write').last as ToolResult;
-          final baseline = sc.conversation.todoHistory.value.get(call.callId);
-          expect(baseline, isNotNull);
-          final diff = todoDiffModel(
-            call,
-            baseline,
-            session.snapshot.value.hasMore,
-            t,
-          );
-          expect(diff, isNotNull);
-          return 'projection has 3 items; list diff: ${diff!.details.caption}';
-        }, detail: (d) => d);
+        if (want('todo')) {
+          await step('todo: the todos projection and the list diff', () async {
+            await ask(
+              'Use the todo_write tool once to record exactly three to-do items: "Collect notes" (completed), "Write summary" (in_progress), "Share it" (pending). Then reply done.',
+            );
+            final todos = session.projections.get('todos');
+            expect(todos, isA<List<Object?>>());
+            expect((todos! as List).length, 3);
+            final call = roots('todo_write').last as ToolResult;
+            final baseline = sc.conversation.todoHistory.value.get(call.callId);
+            expect(baseline, isNotNull);
+            final diff = todoDiffModel(
+              call,
+              baseline,
+              session.snapshot.value.hasMore,
+              t,
+            );
+            expect(diff, isNotNull);
+            return 'projection has 3 items; list diff: ${diff!.details.caption}';
+          }, detail: (d) => d);
+        }
 
         // ---- 7. plan: plan mode, submitted plan ------------------------------
-        await step('plan: a submitted plan becomes turn data', () async {
-          await command('/plan');
-          await until(
-            'plan projection',
-            () => (session.projections.get('plan') as Map?)?['active'] == true,
-            timeout: const Duration(seconds: 30),
-          );
-          final base = lastSeq();
-          await sc.send(
-            'Plan a two-step change that adds a README to this folder. Submit the plan with the exit_plan_mode tool; it must start with a "# " heading.',
-          );
-          await until(
-            'a submitted plan',
-            () =>
-                chat.value.nodes.values.any((n) => n.kind == submittedPlanKind),
-            timeout: const Duration(seconds: 150),
-          );
-          final plan =
-              chat.value.nodes.values
-                      .firstWhere((n) => n.kind == submittedPlanKind)
-                      .data!
-                  as SubmittedPlan;
-          expect(plan.title, isNotEmpty);
-          // The review waits on the user: approve it (the first option) so the
-          // turn can end; a plan that is kept open would ask again.
-          final deadline = DateTime.now().add(const Duration(seconds: 150));
-          while (!closedAfter(base) && DateTime.now().isBefore(deadline)) {
-            final q = controller.questions.forSession(sc.sessionId);
-            if (q != null) {
-              final first = q.questions.first;
-              await q.submit([
-                QuestionAnswer(first.id, [
-                  if (first.options.isNotEmpty) first.options.first.label,
-                ]),
-              ]);
-            }
-            await Future<void>.delayed(const Duration(milliseconds: 200));
-          }
-          expect(closedAfter(base), isTrue, reason: 'the turn did not end');
-          final turn = locationTurn(
-            chat.value.nodes.values
-                .firstWhere((n) => n.kind == submittedPlanKind)
-                .location,
-          )!;
-          expect(chat.value.plansOfTurn(turn), isNotEmpty);
-          await command('/plan off');
-          return 'plan "${plan.title}" (${plan.markdown.length} chars) in turn $turn';
-        }, detail: (d) => d);
-
-        // ---- 8. subagent: catalog and the child's own transcript ------------
-        await step(
-          'subagent: the child is listed and its transcript follows by address',
-          () async {
-            await ask(
-              'Use the subagent tool in one-shot mode with the task "Reply with the single word ready". Then tell me what it replied.',
-              timeout: const Duration(seconds: 200),
+        if (want('plan')) {
+          await step('plan: a submitted plan becomes turn data', () async {
+            await command('/plan');
+            await until(
+              'plan projection',
+              () =>
+                  (session.projections.get('plan') as Map?)?['active'] == true,
+              timeout: const Duration(seconds: 30),
+            );
+            final base = lastSeq();
+            await sc.send(
+              'Plan a two-step change that adds a README to this folder. Submit the plan with the exit_plan_mode tool; it must start with a "# " heading.',
             );
             await until(
-              'subagent catalog',
-              () =>
-                  catalogOf(session.projections.get('subagentCatalog'))
-                      .isNotEmpty,
-              timeout: const Duration(seconds: 60),
+              'a submitted plan',
+              () => chat.value.nodes.values.any(
+                (n) => n.kind == submittedPlanKind,
+              ),
+              timeout: const Duration(seconds: 150),
             );
-            final entry = catalogOf(session.projections.get('subagentCatalog'))
-                .first;
-            final child = controller.manager!.getSubagent(
-              parentSessionId: sc.sessionId,
-              childSessionId: entry.id,
-              mode: entry.mode,
-            );
-            await child.open().timeout(const Duration(seconds: 60));
-            expect(child.snapshot.value.openState, OpenState.open);
-            final events = child.eventSource.window.entries
-                .where((e) => !e.transient)
-                .length;
-            expect(events, greaterThan(0));
-            return 'mode ${entry.mode}, $events events in the child transcript';
-          },
-          detail: (d) => d,
-          bestEffort: true,
-        ).catchError((Object _) => '');
+            final plan =
+                chat.value.nodes.values
+                        .firstWhere((n) => n.kind == submittedPlanKind)
+                        .data!
+                    as SubmittedPlan;
+            expect(plan.title, isNotEmpty);
+            // The review waits on the user: approve it (the first option) so the
+            // turn can end; a plan that is kept open would ask again.
+            final deadline = DateTime.now().add(const Duration(seconds: 150));
+            while (!closedAfter(base) && DateTime.now().isBefore(deadline)) {
+              final q = controller.questions.forSession(sc.sessionId);
+              if (q != null) {
+                final first = q.questions.first;
+                await q.submit([
+                  QuestionAnswer(first.id, [
+                    if (first.options.isNotEmpty) first.options.first.label,
+                  ]),
+                ]);
+              }
+              await Future<void>.delayed(const Duration(milliseconds: 200));
+            }
+            expect(closedAfter(base), isTrue, reason: 'the turn did not end');
+            final turn = locationTurn(
+              chat.value.nodes.values
+                  .firstWhere((n) => n.kind == submittedPlanKind)
+                  .location,
+            )!;
+            expect(chat.value.plansOfTurn(turn), isNotEmpty);
+            await command('/plan off');
+            return 'plan "${plan.title}" (${plan.markdown.length} chars) in turn $turn';
+          }, detail: (d) => d);
+        }
+
+        // ---- 8. subagent: catalog and the child's own transcript ------------
+        if (want('subagent')) {
+          await step(
+            'subagent: the child is listed and its transcript follows by address',
+            () async {
+              await ask(
+                'Use the subagent tool in one-shot mode with the task "Reply with the single word ready". Then tell me what it replied.',
+                timeout: const Duration(seconds: 200),
+              );
+              await until(
+                'subagent catalog',
+                () =>
+                    catalogOf(session.projections.get('subagentCatalog'))
+                        .isNotEmpty,
+                timeout: const Duration(seconds: 60),
+              );
+              final entry = catalogOf(
+                session.projections.get('subagentCatalog'),
+              ).first;
+              final child = controller.manager!.getSubagent(
+                parentSessionId: sc.sessionId,
+                childSessionId: entry.id,
+                mode: entry.mode,
+              );
+              await child.open().timeout(const Duration(seconds: 60));
+              expect(child.snapshot.value.openState, OpenState.open);
+              final events = child.eventSource.window.entries
+                  .where((e) => !e.transient)
+                  .length;
+              expect(events, greaterThan(0));
+              return 'mode ${entry.mode}, $events events in the child transcript';
+            },
+            detail: (d) => d,
+            bestEffort: true,
+          ).catchError((Object _) => '');
+        }
       } finally {
         await admin?.stop();
         controller.dispose();

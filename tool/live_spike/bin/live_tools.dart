@@ -59,7 +59,12 @@ Future<void> main(List<String> args) async {
         'test/live/live_tools_test.dart',
       ],
       workingDirectory: appDir,
-      environment: {'DSH_LIVE_LAUNCH_FILE': launchFile, 'DSH_LIVE_RESULT': out},
+      environment: {
+        'DSH_LIVE_LAUNCH_FILE': launchFile,
+        'DSH_LIVE_RESULT': out,
+        if (Platform.environment['DSH_LIVE_STEPS'] != null)
+          'DSH_LIVE_STEPS': Platform.environment['DSH_LIVE_STEPS']!,
+      },
     );
     final log = File('/tmp/cindy/dsh-p1b1/live-tools.log').openWrite();
     String redact(String s) =>
