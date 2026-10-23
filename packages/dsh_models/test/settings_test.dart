@@ -379,10 +379,7 @@ void main() {
         SettingsSchema.rehydrate({}).validate({}),
         contains('unsupported'),
       );
-      expect(
-        SettingsSchema.rehydrate(5).validate(1),
-        contains('unsupported'),
-      );
+      expect(SettingsSchema.rehydrate(5).validate(1), contains('unsupported'));
     });
 
     test('nodeAtPath, getPath and hasPath', () {

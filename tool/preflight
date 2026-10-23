@@ -46,11 +46,14 @@ OUT_DIR = ROOT / '.local' / 'preflight'
 PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/dsh_conversation',
                       'packages/dsh_slots', 'packages/dsh_i18n']
 FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
-                    'features/dsh_feature_chat', 'features/dsh_feature_conversation',
-                    'features/dsh_feature_plan', 'features/dsh_feature_session',
-                    'features/dsh_feature_subagent', 'features/dsh_feature_tool',
-                    'features/dsh_feature_user_questions', 'apps/dsh_flutter',
-                    'tool/parity_flutter']
+                    'features/dsh_feature_attachment', 'features/dsh_feature_chat',
+                    'features/dsh_feature_conversation', 'features/dsh_feature_documentpreview',
+                    'features/dsh_feature_files', 'features/dsh_feature_model_selection',
+                    'features/dsh_feature_permission_presets', 'features/dsh_feature_plan',
+                    'features/dsh_feature_session', 'features/dsh_feature_settings',
+                    'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
+                    'features/dsh_feature_theme', 'features/dsh_feature_tool',
+                    'features/dsh_feature_user_questions', 'apps/dsh_flutter', 'tool/parity_flutter']
 
 
 def flutter_bin_dir():

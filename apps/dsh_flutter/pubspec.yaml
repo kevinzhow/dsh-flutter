@@ -23,10 +23,14 @@ dependencies:
   dsh_feature_conversation: ^0.0.1
   dsh_feature_documentpreview: ^0.0.1
   dsh_feature_files: ^0.0.1
+  dsh_feature_model_selection: ^0.0.1
+  dsh_feature_permission_presets: ^0.0.1
   dsh_feature_plan: ^0.0.1
+  dsh_feature_settings: ^0.0.1
   dsh_feature_session: ^0.0.1
   dsh_feature_sidebar_right: ^0.0.1
   dsh_feature_subagent: ^0.0.1
+  dsh_feature_theme: ^0.0.1
   dsh_feature_tool: ^0.0.1
   dsh_feature_user_questions: ^0.0.1
   flutter_secure_storage: ^10.3.2
@@ -36,6 +40,9 @@ dependencies:
   desktop_drop: ^0.8.4
   open_filex: ^5.0.0
   path_provider: ^2.1.6
+  shared_preferences: ^2.5.3
+  app_settings: ^9.0.1
+  flutter_local_notifications: ^22.3.2
 flutter:
   uses-material-design: true
 

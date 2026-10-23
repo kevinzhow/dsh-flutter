@@ -13,6 +13,7 @@ class PlatformServices {
     this.picker,
     this.fileActions,
     this.acceptsDrops = false,
+    this.touchInput = false,
   });
 
   /// The real services of the running platform.
@@ -21,6 +22,7 @@ class PlatformServices {
     fileActions: PlatformFileActions(),
     acceptsDrops:
         !kIsWeb && (Platform.isLinux || Platform.isMacOS || Platform.isWindows),
+    touchInput: !kIsWeb && (Platform.isAndroid || Platform.isIOS),
   );
 
   final AttachmentPicker? picker;
@@ -28,4 +30,7 @@ class PlatformServices {
 
   /// A desktop window takes dropped files.
   final bool acceptsDrops;
+
+  /// Input is by touch (no hover): controls that reveal on hover stay visible.
+  final bool touchInput;
 }

@@ -4,7 +4,6 @@ import 'package:dsh_flutter/src/app_controller.dart';
 import 'package:dsh_flutter/src/backend.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/testing.dart';
-import 'package:dsh_theme/dsh_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -183,17 +182,22 @@ void main() {
       expect(find.textContaining('abc'), findsNothing);
     });
 
-    testWidgets('settings switch the language', (t) async {
+    testWidgets('settings open as a page and switch the language', (t) async {
       await start(t);
       await connectWith(t, []);
       await t.tap(find.byKey(const ValueKey('sessions-settings')));
       await t.pumpAndSettle();
-      await t.tap(find.byKey(const ValueKey('locale-zh')));
-      await t.pump();
+      expect(find.byKey(const ValueKey('settings-page')), findsOneWidget);
+      // On a phone the section list comes first.
+      await t.tap(find.byKey(const ValueKey('settings-nav-general')));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('general-section')), findsOneWidget);
+      await t.tap(find.byKey(const ValueKey('language-selector')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('option-zh')));
+      await t.pumpAndSettle();
       expect(controller.locale, DshLocale.zh);
-      await t.tap(find.byKey(const ValueKey('theme-dark')));
-      await t.pump();
-      expect(controller.themePreference, ThemePreference.dark);
+      expect(find.text('语言'), findsOneWidget);
     });
 
     testWidgets('disconnect returns to pairing and forgets the host', (
@@ -203,6 +207,9 @@ void main() {
       await connectWith(t, []);
       await t.tap(find.byKey(const ValueKey('sessions-settings')));
       await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('settings-nav-general')));
+      await t.pumpAndSettle();
+      await t.ensureVisible(find.byKey(const ValueKey('settings-disconnect')));
       await t.tap(find.byKey(const ValueKey('settings-disconnect')));
       await settle(t);
       await t.pumpAndSettle();
