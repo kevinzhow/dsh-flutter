@@ -2,7 +2,8 @@
 """Generate the dsh protocol Dart code from the pinned dsh checkout.
 
   gen.py [--write]          regenerate IRs (when the dsh checkout / node install exist),
-                            Dart outputs, docs/upstream-sync.json
+                            Dart outputs (the Remote namespaces in REMOTES plus the session events),
+                            docs/upstream-sync.json
   gen.py --check            offline staleness check from the committed IRs (fast)
   gen.py --check --full     also re-run the TypeScript extractor and compare the IR
 
@@ -38,10 +39,19 @@ import events_ir  # noqa: E402
 
 SYNC = REPO / "docs" / "upstream-sync.json"
 IR_DIR = HERE / "ir"
-SESSION_IR = IR_DIR / "session.ir.json"
 EVENTS_IR = IR_DIR / "events.ir.json"
-OUT_REMOTE = "packages/dsh_client/lib/src/generated/session_remote.g.dart"
 OUT_EVENTS = "packages/dsh_models/lib/src/generated/session_events.g.dart"
+# The Remote namespaces generated into packages/dsh_client (one IR and one Dart library each). `entry` is the source file
+# of the Host class that carries the @Remote methods, `cls` that class (tool/codegen/extract/extract_remote.mjs).
+REMOTES = [
+    {"ns": "session", "cls": "SessionController", "entry": "packages/api/session-controller/src/index.ts"},
+    {"ns": "settings", "cls": "SettingsController", "entry": "packages/api/settings-controller/src/index.ts"},
+    {"ns": "permissionPresets", "cls": "PermissionPresetService", "entry": "packages/interaction/permission-presets/src/index.ts"},
+    {"ns": "commands", "cls": "CommandRuntime", "entry": "packages/interaction/commands/src/index.ts"},
+]
+for _r in REMOTES:
+    _r["ir"] = IR_DIR / (_r["ns"] + ".ir.json")
+    _r["out"] = "packages/dsh_client/lib/src/generated/%s_remote.g.dart" % re.sub(r"(?<!^)(?=[A-Z])", "_", _r["ns"]).lower()
 DEFAULT_SRC = str(REPO / ".local" / "dsh-src")
 DEFAULT_NODE_DIR = str(REPO / ".local" / "node")
 REPO_NAME = "deepseek-ai/deepseek-harness"
@@ -111,13 +121,14 @@ def git_pin(src: Path) -> dict:
 # ----------------------------------------------------------------------------
 
 
-def run_extractor(src: Path, out: Path) -> None:
+def run_extractor(src: Path, out: Path, remote: dict) -> None:
     node = os.environ.get("DSH_CODEGEN_NODE", str(Path.home() / ".local/opt/node24/bin/node"))
     nd = node_dir()
     if not (nd / "node_modules" / "typescript").exists():
         raise SystemExit(f"typescript not installed under {nd}; see tool/codegen/extract/package.json (pnpm install --ignore-workspace there)")
     r = subprocess.run(
-        [node, str(HERE / "extract" / "extract_session.mjs"), "--dsh", str(src), "--node-dir", str(nd), "--out", str(out)],
+        [node, str(HERE / "extract" / "extract_remote.mjs"), "--dsh", str(src), "--node-dir", str(nd), "--out", str(out),
+         "--namespace", remote["ns"], "--class", remote["cls"], "--entry", remote["entry"]],
         capture_output=True, text=True)
     if r.returncode != 0:
         raise SystemExit("extractor failed:\n" + r.stdout + r.stderr)
@@ -153,11 +164,10 @@ def dump(ir: dict) -> str:
 # ----------------------------------------------------------------------------
 
 
-def render_raw(meta: dict, session_ir: dict, events_ir_: dict) -> dict[str, str]:
-    return {
-        OUT_REMOTE: dart_emit.emit_remote(session_ir, meta, SKIPPED_METHODS),
-        OUT_EVENTS: dart_emit.emit_events(events_ir_, meta),
-    }
+def render_raw(meta: dict, remote_irs: dict[str, dict], events_ir_: dict) -> dict[str, str]:
+    raw = {r["out"]: dart_emit.emit_remote(remote_irs[r["ns"]], meta, SKIPPED_METHODS) for r in REMOTES}
+    raw[OUT_EVENTS] = dart_emit.emit_events(events_ir_, meta)
+    return raw
 
 
 def format_all(raw: dict[str, str], dart: str) -> dict[str, str]:
@@ -177,17 +187,16 @@ def input_entries(src: Path, rels: list[str]) -> list[dict]:
     return [{"path": r, "sha256": sha_file(src / r)} for r in sorted(rels)]
 
 
-def build_sync(pin: dict, session_ir: dict, events_ir_: dict, src: Path | None, old: dict | None,
+def build_sync(pin: dict, remote_irs: dict[str, dict], events_ir_: dict, src: Path | None, old: dict | None,
                raw: dict[str, str], formatted: dict[str, str]) -> dict:
-    def entry(out: str, irfile: Path, ir: dict, rels: list[str]) -> dict:
+    def entry(out: str, irfile: Path, ir: dict, rels: list[str], generator: str) -> dict:
         if src is not None:
             inputs = input_entries(src, rels)
         else:
             inputs = next((g["inputs"] for g in (old or {}).get("generated", []) if g["output"] == out), [])
         return {
             "output": out,
-            "generator": f"{GENERATOR} (tool/codegen/extract/extract_session.mjs + dart_emit.py)" if out == OUT_REMOTE
-            else f"{GENERATOR} (tool/codegen/events_ir.py + dart_emit.py)",
+            "generator": generator,
             "ir": str(irfile.relative_to(REPO)),
             "irSha256": sha_file(irfile),
             "inputs": inputs,
@@ -195,17 +204,16 @@ def build_sync(pin: dict, session_ir: dict, events_ir_: dict, src: Path | None, 
             "outputSha256": sha(formatted[out].encode()),
         }
 
-    session_inputs = session_ir["inputs"]
-    mine = {OUT_REMOTE, OUT_EVENTS}
+    mine = {r["out"] for r in REMOTES} | {OUT_EVENTS}
     others = [g for g in (old or {}).get("generated", []) if g["output"] not in mine]
+    remote_gen = f"{GENERATOR} (tool/codegen/extract/extract_remote.mjs + dart_emit.py)"
+    generated = [entry(r["out"], r["ir"], remote_irs[r["ns"]], remote_irs[r["ns"]]["inputs"], remote_gen) for r in REMOTES]
+    generated.append(entry(OUT_EVENTS, EVENTS_IR, events_ir_, [SCHEMA_PATH, KNOWN_TYPES_PATH],
+                           f"{GENERATOR} (tool/codegen/events_ir.py + dart_emit.py)"))
     return {
         "schemaVersion": 1,
         "dsh": pin,
-        "generated": [
-            entry(OUT_REMOTE, SESSION_IR, session_ir, session_inputs),
-            entry(OUT_EVENTS, EVENTS_IR, events_ir_, [SCHEMA_PATH, KNOWN_TYPES_PATH]),
-            *others,
-        ],
+        "generated": [*generated, *others],
     }
 
 
@@ -220,38 +228,43 @@ def cmd_write(args: argparse.Namespace) -> int:
     if dart is None:
         raise SystemExit("pinned dart not found; set DART or install the SDK from .fvmrc")
     old = load_sync()
+    remote_irs: dict[str, dict] = {}
     if src is not None:
         pin = git_pin(src)
         if old and old["dsh"]["commit"] == pin["commit"]:
             pin["pinnedAt"] = old["dsh"].get("pinnedAt", pin["pinnedAt"])
         tmp = Path(tempfile.mkdtemp(prefix="dsh-gen-", dir=scratch_parent()))
         try:
-            extracted = tmp / "session.ir.json"
-            run_extractor(src, extracted)
-            session_ir = json.loads(extracted.read_text())
+            for r in REMOTES:
+                extracted = tmp / (r["ns"] + ".ir.json")
+                run_extractor(src, extracted, r)
+                remote_irs[r["ns"]] = json.loads(extracted.read_text())
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
         events, _ = build_events_ir(src)
         IR_DIR.mkdir(parents=True, exist_ok=True)
-        SESSION_IR.write_text(dump(session_ir))
+        for r in REMOTES:
+            r["ir"].write_text(dump(remote_irs[r["ns"]]))
         EVENTS_IR.write_text(dump(events))
     else:
         if old is None:
             raise SystemExit(f"dsh checkout not found (DSH_SRC) and no committed pin")
         print("dsh checkout not found: regenerating Dart from the committed IR only", file=sys.stderr)
         pin = old["dsh"]
-        session_ir = json.loads(SESSION_IR.read_text())
+        for r in REMOTES:
+            remote_irs[r["ns"]] = json.loads(r["ir"].read_text())
         events = json.loads(EVENTS_IR.read_text())
-    raw = render_raw(pin, session_ir, events)
+    raw = render_raw(pin, remote_irs, events)
     formatted = format_all(raw, dart)
     for out, text in formatted.items():
         p = REPO / out
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(text)
     SYNC.parent.mkdir(parents=True, exist_ok=True)
-    SYNC.write_text(dump(build_sync(pin, session_ir, events, src, old, raw, formatted)))
+    SYNC.write_text(dump(build_sync(pin, remote_irs, events, src, old, raw, formatted)))
+    methods = sum(len(ir["methods"]) for ir in remote_irs.values())
     print(f"gen: wrote {len(formatted)} files from dsh {pin['commit'][:9]} "
-          f"({len(session_ir['methods'])} session methods, {len(events['events'])} event types)")
+          f"({methods} Remote methods in {len(REMOTES)} namespaces, {len(events['events'])} event types)")
     return 0
 
 
@@ -272,18 +285,23 @@ def cmd_check(args: argparse.Namespace) -> int:
         return 1
     pin = sync["dsh"]
     try:
-        session_ir = json.loads(SESSION_IR.read_text())
+        remote_irs = {r["ns"]: json.loads(r["ir"].read_text()) for r in REMOTES}
         events = json.loads(EVENTS_IR.read_text())
     except OSError as e:
         print(f"gen --check: STALE missing IR ({e})")
         return 1
     by_out = {g["output"]: g for g in sync["generated"]}
+    outputs = [r["out"] for r in REMOTES] + [OUT_EVENTS]
+    missing = [o for o in outputs if o not in by_out]
+    if missing:
+        print("gen --check: STALE docs/upstream-sync.json has no entry for " + ", ".join(missing))
+        return 1
     # 1. IR files match the recorded sha
-    for out, irfile in ((OUT_REMOTE, SESSION_IR), (OUT_EVENTS, EVENTS_IR)):
+    for out, irfile in [(r["out"], r["ir"]) for r in REMOTES] + [(OUT_EVENTS, EVENTS_IR)]:
         if sha_file(irfile) != by_out[out]["irSha256"]:
             stale.append(str(irfile.relative_to(REPO)) + " (IR sha differs from docs/upstream-sync.json)")
     # 2. Dart regenerated from the committed IR equals the committed files
-    raw = render_raw(pin, session_ir, events)
+    raw = render_raw(pin, remote_irs, events)
     dart = dart_bin()
     if dart is not None and not args.no_format:
         formatted = format_all(raw, dart)
@@ -306,8 +324,8 @@ def cmd_check(args: argparse.Namespace) -> int:
     if src is not None:
         head = subprocess.run(["git", "-C", str(src), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
         if head == pin["commit"]:
-            for g in (by_out[OUT_REMOTE], by_out[OUT_EVENTS]):
-                for i in g["inputs"]:
+            for out in outputs:
+                for i in by_out[out]["inputs"]:
                     f = src / i["path"]
                     if not f.exists() or sha_file(f) != i["sha256"]:
                         stale.append(f"{i['path']} (input changed, rerun gen.py --write)")
@@ -322,10 +340,11 @@ def cmd_check(args: argparse.Namespace) -> int:
             return 2
         tmp = Path(tempfile.mkdtemp(prefix="dsh-full-", dir=scratch_parent()))
         try:
-            ex = tmp / "session.ir.json"
-            run_extractor(src, ex)
-            if ex.read_text() != SESSION_IR.read_text():
-                stale.append("tool/codegen/ir/session.ir.json (re-extraction differs)")
+            for r in REMOTES:
+                ex = tmp / (r["ns"] + ".ir.json")
+                run_extractor(src, ex, r)
+                if ex.read_text() != r["ir"].read_text():
+                    stale.append(str(r["ir"].relative_to(REPO)) + " (re-extraction differs)")
             ev, _ = build_events_ir(src)
             if dump(ev) != EVENTS_IR.read_text():
                 stale.append("tool/codegen/ir/events.ir.json (rebuild differs)")
@@ -335,7 +354,7 @@ def cmd_check(args: argparse.Namespace) -> int:
         print("gen --check: STALE " + str(len(stale)) + " item(s): " + "; ".join(stale))
         return 1
     mode = "full" if args.full else ("offline" if dart is None or args.no_format else "offline+format")
-    print(f"gen --check: OK ({mode}) 2 files match dsh {pin['commit'][:9]}{notes}")
+    print(f"gen --check: OK ({mode}) {len(outputs)} files match dsh {pin['commit'][:9]}{notes}")
     return 0
 
 

@@ -1,0 +1,307 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "commands",
+  "package": "packages/interaction/commands",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/attachment/attachment/src/types.ts",
+    "packages/interaction/commands/src/index.ts",
+    "packages/interaction/commands/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "CommandDescriptor"
+        }
+      },
+      "doc": "List the effective immutable command descriptors for one agent."
+    },
+    {
+      "name": "execute",
+      "hostName": "execute",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "line",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "submittedAttachments",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "CommandSubmitAttachment"
+            }
+          }
+        }
+      ],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "ref",
+          "name": "CommandExecution"
+        }
+      },
+      "doc": "Parse and execute a known command without sending it to the model. A resolved command's lifecycle is logged: `command/run` is appended before the handler is invoked and `command/done` after settlement (a thrown or aborted handler settles as `kind: 'error'`). Both are direct log-only appends — no turn wraps them, and persistence drains them at ordinary checkpoints. Admission misses (syntax or unknown name) log nothing — they never entered a handler. A `command/run` append failure fails the execution loud; a `command/done` append failure on the handler-failure path is contained so the handler's own error stays the reported failure. Attachment admission is enforced here, not in the composer: attachments sent to a command that does not declare `input.attachments`, an absent attachment store, and an exceeded image limit each settle as an error result before the handler runs. Validation rejection starts no attachment writes; a storage failure can leave only unreachable content-addressed objects for deferred collection."
+    }
+  ],
+  "decls": {
+    "CommandDescriptor": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "definitionId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Stable plugin-owned identity; absent for definitions without identity-based client behavior."
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Lowercase command name without the leading slash."
+        },
+        {
+          "name": "description",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Human-readable summary used in discovery UI."
+        },
+        {
+          "name": "input",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "CommandInputDescriptor"
+          },
+          "doc": "Optional free-form input hint advertised to capable clients."
+        }
+      ],
+      "source": "packages/interaction/commands/src/types.ts",
+      "doc": "Handler-free immutable command view returned to UI adapters."
+    },
+    "CommandExecution": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "commandId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Pairing id carried by this execution's lifecycle events."
+        },
+        {
+          "name": "result",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "CommandResult"
+          },
+          "doc": "The handler's normalized outcome."
+        }
+      ],
+      "source": "packages/interaction/commands/src/types.ts",
+      "doc": "One settled command execution: the handler's normalized result plus the lifecycle pairing id minted for its `command/run`/`command/done` records, so a dispatching surface can correlate the Remote acknowledgment with the flow node those events produce."
+    },
+    "CommandInputDescriptor": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "hint",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Placeholder shown before the user supplies free-form input."
+        },
+        {
+          "name": "attachments",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether composer attachments may accompany an invocation. Absent or false = the executor rejects an invocation carrying attachments and capable composers refuse the submission before dispatch. A declaring command's handler receives the admitted durable blocks and owns every further grammar decision, including rejecting sub-commands that cannot use them."
+        }
+      ],
+      "source": "packages/interaction/commands/src/types.ts",
+      "doc": "Immutable metadata for a command's optional unstructured input."
+    },
+    "CommandResult": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "success"
+              }
+            },
+            {
+              "name": "text",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "sourceEventSeq",
+              "optional": true,
+              "type": {
+                "k": "num",
+                "brand": true
+              },
+              "doc": "Earlier authoritative domain event that owns a richer presentation."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "error"
+              }
+            },
+            {
+              "name": "text",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/interaction/commands/src/types.ts",
+      "doc": "Expected command outcome rendered directly by the dispatching UI."
+    },
+    "CommandSubmitAttachment": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "image"
+              }
+            },
+            {
+              "name": "mediaType",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "ImageMediaType"
+              },
+              "doc": "Declared media type, verified against the decoded bytes during admission."
+            },
+            {
+              "name": "data",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Canonical base64 encoding of the image bytes."
+            },
+            {
+              "name": "name",
+              "optional": true,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Optional display name; it is never interpreted as a path."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "file"
+              }
+            },
+            {
+              "name": "receiptId",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/interaction/commands/src/types.ts",
+      "doc": "One browser-submitted command attachment: encoded image input or a staged file receipt."
+    },
+    "ImageMediaType": {
+      "k": "enum",
+      "values": [
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ],
+      "source": "packages/attachment/attachment/src/types.ts",
+      "doc": "Raster image formats accepted by the version-one attachment path."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

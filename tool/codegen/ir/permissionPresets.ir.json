@@ -1,0 +1,99 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "permissionPresets",
+  "package": "packages/interaction/permission-presets",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/interaction/permission-presets/src/index.ts",
+    "packages/interaction/permission-presets/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "catalog",
+      "hostName": "catalog",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "PermissionCatalog"
+      },
+      "doc": "Read the complete process-level catalog exposed to current-session UI."
+    }
+  ],
+  "decls": {
+    "PermissionCatalog": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "options",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "PresetOption"
+            }
+          },
+          "doc": "Every currently selectable preset, in contribution order."
+        },
+        {
+          "name": "defaultOptions",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "PresetOption"
+            }
+          },
+          "doc": "Configured presets eligible as defaults for future sessions."
+        },
+        {
+          "name": "defaultPreset",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Effective default when the Config field is omitted."
+        }
+      ],
+      "source": "packages/interaction/permission-presets/src/types.ts",
+      "doc": "Process-level permission catalog. It changes with live contributions and is deliberately separate from Session history."
+    },
+    "PresetOption": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "value",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Stable option value: a configured preset key, live `auto`, or derived `custom`."
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The display label."
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "One user-facing sentence on what the value means; omitted when not configured."
+        }
+      ],
+      "source": "packages/interaction/permission-presets/src/types.ts",
+      "doc": "Presentation for an available preset or the derived `custom` current value."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

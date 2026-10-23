@@ -10,7 +10,7 @@
   "generated": [
     {
       "output": "packages/dsh_client/lib/src/generated/session_remote.g.dart",
-      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_session.mjs + dart_emit.py)",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
       "ir": "tool/codegen/ir/session.ir.json",
       "irSha256": "b238a9ceebb74c0e59add1758e71dfd25b0097776c1bb7bb089a27d41d7a314d",
       "inputs": [
@@ -63,8 +63,70 @@
           "sha256": "54d8b9ce4a69353ee43b85a4d47504628fbc94688eb3983b6cf3273afc1d9097"
         }
       ],
-      "rawSha256": "5ab50981c026bceb7bf0d1ecd772743d853984134fe17bad9ef010b88a26300d",
-      "outputSha256": "996f390aa524bbb51fc963d19bdf69f65cb825aacb41ba26f98624de24389e67"
+      "rawSha256": "febfa8181ebe50b7617baf01f37737843f024e55da83f181281440de708e7e7c",
+      "outputSha256": "5ad8913f2ba3f67acb01ae0eb02b015191629816aca5edabe421487abb76af79"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/settings_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/settings.ir.json",
+      "irSha256": "0dca9c91347fbc5b34441eed0d0e4cff0014eb8ec21f0d628d97dd025831a3f2",
+      "inputs": [
+        {
+          "path": "packages/api/settings-controller/src/index.ts",
+          "sha256": "73d05b8340fbcc93a814a19aaecb53b81a777b0af08f10271f4ff6dd415d3a53"
+        },
+        {
+          "path": "packages/api/settings-controller/src/types.ts",
+          "sha256": "3882ac40ca7a5217ee3ee6033323870288d8e374b44f2dced00503e302b5a724"
+        },
+        {
+          "path": "packages/settings/settings/src/types.ts",
+          "sha256": "fde8e28bde0fc1ffe390b53a2975832e1501e55b74b862e1e6c9be7824f97833"
+        }
+      ],
+      "rawSha256": "b09dd63f77133e3904d79929400494fe7e1b3ceabf01a73678acd89d081e1abc",
+      "outputSha256": "34fe982f1704a3b44e3515d7ae25ed5debc619b2208b5545edf8ec8306d2878c"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/permission_presets_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/permissionPresets.ir.json",
+      "irSha256": "db454e7440d6382d4f867936488ff9e7b59067c57dcf3788d2a83afa1d2c50d3",
+      "inputs": [
+        {
+          "path": "packages/interaction/permission-presets/src/index.ts",
+          "sha256": "74cde09ca3f6cd08283ba66c384e1c06dae164f1b92ec90dd3884ab94e177c38"
+        },
+        {
+          "path": "packages/interaction/permission-presets/src/types.ts",
+          "sha256": "02174070d0c9703e1df7b4f814267c44714cc996d79465ba248db58cf1f2d23b"
+        }
+      ],
+      "rawSha256": "2b78114e28269d8921fed5692856a82ef87e66a5d4917a5960451b7f0cb0524d",
+      "outputSha256": "bcaa76b2467b06af7d1d6a25af5269ce08b5fb04faa5542726f147a069ef3d0e"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/commands_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/commands.ir.json",
+      "irSha256": "ad367c03e5d9abe8052564f68cf80b6c0e5fd48ae5653ad479bcd5fbdbf06d7c",
+      "inputs": [
+        {
+          "path": "packages/attachment/attachment/src/types.ts",
+          "sha256": "893a8d2501251873d7a885ac9d7249f9a79c3e71e18ef921c260bf56e2c6c354"
+        },
+        {
+          "path": "packages/interaction/commands/src/index.ts",
+          "sha256": "c9416db54cc48ab5b72adaa22d8534596e87bc8795d88ac5d807fdcccb4e6066"
+        },
+        {
+          "path": "packages/interaction/commands/src/types.ts",
+          "sha256": "0a1721623007f1b34a3b8ca1e1559b0257db7de0940ae9714ec54c6d30fff335"
+        }
+      ],
+      "rawSha256": "824fa1922f2fe28975d7abe3120a2a7cbc46dc3d26b8e03e0f31ecce09b105ce",
+      "outputSha256": "ad91f8f3cc19ba734bf27196d9ae795d8e8c0fa0b36f9cefae08ffa71dbeb176"
     },
     {
       "output": "packages/dsh_models/lib/src/generated/session_events.g.dart",
