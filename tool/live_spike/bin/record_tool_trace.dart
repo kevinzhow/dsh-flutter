@@ -34,11 +34,11 @@ Future<void> main(List<String> args) async {
     stderr.writeln('refusing to use port $port');
     exit(2);
   }
-  final wsArg = arg(args, 'ws', '/mnt/data/tmp/cindy/dsh-p1a/ws');
+  final wsArg = arg(args, 'ws', '${Directory.systemTemp.path}/whalee-live/ws');
   final rawFile = arg(
     args,
     'raw',
-    '/mnt/data/tmp/cindy/dsh-p1a/raw/tool_trace.json',
+    '${Directory.systemTemp.path}/whalee-live/raw/tool_trace.json',
   );
   final tokenFile = arg(args, 'token-file', '/tmp/cindy/dsh-p1a/launch-token');
   final prompt = arg(

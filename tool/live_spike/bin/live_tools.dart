@@ -19,7 +19,7 @@ Future<void> main(List<String> args) async {
     stderr.writeln('refusing to use port $port');
     exit(2);
   }
-  final wsArg = arg(args, 'ws', '/mnt/data/tmp/cindy/dsh-p1b1/ws');
+  final wsArg = arg(args, 'ws', '${Directory.systemTemp.path}/whalee-live/ws');
   final out = arg(args, 'out', '/tmp/cindy/dsh-p1b1/live-tools-result.json');
   final launchFile = '/tmp/cindy/dsh-p1b1/live-launch-url';
   final flutter =
