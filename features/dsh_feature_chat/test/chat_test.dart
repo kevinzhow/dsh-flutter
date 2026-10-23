@@ -7,6 +7,7 @@ import 'package:dsh_theme/testing.dart';
 
 import 'dart:typed_data';
 
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -403,4 +404,61 @@ void main() {
       expect(find.text('assistant gallery 1'), findsOneWidget);
     });
   });
+
+  testWidgets(
+    'a fenced block is a code card, coloured by the ambient highlighter',
+    (t) async {
+      owner.session.eventSource.replace([
+        ev(1, 'turn/start', {'turn': 1}),
+        ev(2, 'step/start', {'turn': 1, 'step': 1}),
+        ev(3, 'assistant/message', {
+          'turn': 1,
+          'step': 1,
+          'message': {
+            'role': 'assistant',
+            'id': 'a1',
+            'content': [
+              {'type': 'text', 'text': 'Run:\n\n```ts\nconst x = 1\n```\n'},
+            ],
+            'source': {'kind': 'model'},
+          },
+        }, surface: 'append'),
+      ], false);
+      await t.pumpWidget(
+        DshCodeHighlighting(highlighter: _KeywordHighlighter(), child: view()),
+      );
+      await t.pump();
+      expect(find.byKey(const ValueKey('code-block')), findsOneWidget);
+      expect(find.byKey(const ValueKey('code-copy')), findsOneWidget);
+      final rich = find.descendant(
+        of: find.byKey(const ValueKey('code-block')),
+        matching: find.byType(RichText),
+      );
+      final colours = <Color?>{};
+      for (final w in t.widgetList<RichText>(rich)) {
+        w.text.visitChildren((s) {
+          if (s is TextSpan && s.text == 'const') colours.add(s.style?.color);
+          return true;
+        });
+      }
+      expect(colours, hasLength(1));
+    },
+  );
+}
+
+class _KeywordHighlighter implements DshCodeHighlighter {
+  @override
+  List<List<DshCodeSpan>>? highlight(String code, String? lang) => [
+    for (final line in code.split('\n'))
+      line.startsWith('const')
+          ? [
+              const DshCodeSpan('const', DshCodeToken.keyword),
+              DshCodeSpan(line.substring(5)),
+            ]
+          : [DshCodeSpan(line)],
+  ];
+  @override
+  void prepare(String? lang) {}
+  @override
+  Stream<void> get loaded => const Stream.empty();
 }

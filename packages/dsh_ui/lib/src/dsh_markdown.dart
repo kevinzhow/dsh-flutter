@@ -1,5 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:markdown/markdown.dart' as md;
+
+import 'dsh_code_block.dart';
+import 'dsh_code_toolbar.dart';
 
 import 'theme_access.dart';
 
@@ -7,10 +11,20 @@ import 'theme_access.dart';
 /// (`--dsw-font-markdown-*`, `--dsw-alias-markdown-*`, `--dsw-alias-link`).
 /// Safe for partial text while it streams.
 class DshMarkdown extends StatelessWidget {
-  const DshMarkdown(this.data, {super.key, this.selectable = false});
+  const DshMarkdown(
+    this.data, {
+    super.key,
+    this.selectable = false,
+    this.codeLabels,
+  });
 
   final String data;
   final bool selectable;
+
+  /// Strings of the code card toolbar. With them a fenced block is dsh's code
+  /// card (language, wrap and copy, coloured by the ambient highlighter);
+  /// without, a plain padded block.
+  final DshCodeToolbarLabels? codeLabels;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +85,48 @@ class DshMarkdown extends StatelessWidget {
       ),
       blockSpacing: DshSpace.sm,
     );
-    return MarkdownBody(data: data, selectable: selectable, styleSheet: sheet);
+    return MarkdownBody(
+      data: data,
+      selectable: selectable,
+      styleSheet: sheet,
+      builders: {if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!)},
+    );
+  }
+}
+
+/// Draws a fenced block as a [DshCodeBlock] (dsh's `CodeBlock` for markdown).
+class _FenceBuilder extends MarkdownElementBuilder {
+  _FenceBuilder(this.labels);
+
+  final DshCodeToolbarLabels labels;
+
+  @override
+  bool isBlockElement() => true;
+
+  @override
+  Widget? visitElementAfterWithContext(
+    BuildContext context,
+    md.Element element,
+    TextStyle? preferredStyle,
+    TextStyle? parentStyle,
+  ) {
+    String? lang;
+    final first = element.children?.isNotEmpty ?? false
+        ? element.children!.first
+        : null;
+    if (first is md.Element) {
+      final cls = first.attributes['class'];
+      if (cls != null && cls.startsWith('language-')) {
+        lang = cls.substring('language-'.length);
+      }
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: DshSpace.sm),
+      child: DshCodeBlock(
+        code: element.textContent,
+        lang: lang,
+        labels: labels,
+      ),
+    );
   }
 }

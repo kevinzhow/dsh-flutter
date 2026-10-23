@@ -20,6 +20,15 @@ TextStyle _caption(BuildContext context) {
       .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
 }
 
+/// The code card toolbar strings of dsh's `conversation` dictionary.
+DshCodeToolbarLabels codeLabels(DshI18n i18n) => DshCodeToolbarLabels(
+  codeLabel: i18n.t('conversation', 'codeBlock.title'),
+  wrapLabel: i18n.t('conversation', 'codeBlock.wrap'),
+  unwrapLabel: i18n.t('conversation', 'codeBlock.unwrap'),
+  copy: i18n.t('conversation', 'copy'),
+  copied: i18n.t('conversation', 'copied'),
+);
+
 /// One attachment of a user message as the chat shows it: an image (durable,
 /// or the local preview of a message still being admitted) or a file.
 sealed class UserAttachmentView {
@@ -224,7 +233,13 @@ class AssistantStepView extends StatelessWidget {
             ),
           );
         case TextBlock(:final text) when text.trim().isNotEmpty:
-          children.add(DshMarkdown(text, key: ValueKey('text-$nodeKey-$i')));
+          children.add(
+            DshMarkdown(
+              text,
+              key: ValueKey('text-$nodeKey-$i'),
+              codeLabels: codeLabels(i18n),
+            ),
+          );
         case ImageBlock(:final attachment):
           final ref = ImageRef.tryParse(attachment);
           final gallery = ref == null || owner == null || slots == null

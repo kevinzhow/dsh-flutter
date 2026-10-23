@@ -34,7 +34,11 @@ class DocumentBody extends StatelessWidget {
       i18n: i18n,
       name: name,
     ),
-    markdownRendererId => MarkdownBody(controller: controller, footer: footer),
+    markdownRendererId => MarkdownBody(
+      controller: controller,
+      i18n: i18n,
+      footer: footer,
+    ),
     codeRendererId => SourceBody(
       controller: controller,
       i18n: i18n,
@@ -266,9 +270,15 @@ class _SourceBodyState extends State<SourceBody> with DshHighlightListener {
 /// scrolls. A leading YAML frontmatter block is shown verbatim in a bordered
 /// box above the body (dsh's fallback for it; its field list is not ported).
 class MarkdownBody extends StatefulWidget {
-  const MarkdownBody({super.key, required this.controller, this.footer});
+  const MarkdownBody({
+    super.key,
+    required this.controller,
+    required this.i18n,
+    this.footer,
+  });
 
   final DocumentController controller;
+  final DshI18n i18n;
   final Widget? footer;
 
   @override
@@ -341,7 +351,17 @@ class _MarkdownBodyState extends State<MarkdownBody> {
                     .copyWith(color: theme.labelPrimary),
               ),
             ),
-          DshMarkdown(split?.body ?? text, selectable: true),
+          DshMarkdown(
+            split?.body ?? text,
+            selectable: true,
+            codeLabels: DshCodeToolbarLabels(
+              codeLabel: widget.i18n.t('conversation', 'codeBlock.title'),
+              wrapLabel: widget.i18n.t('conversation', 'codeBlock.wrap'),
+              unwrapLabel: widget.i18n.t('conversation', 'codeBlock.unwrap'),
+              copy: widget.i18n.t('documentMarkdown', 'code.copy'),
+              copied: widget.i18n.t('documentMarkdown', 'code.copied'),
+            ),
+          ),
           ?widget.footer,
         ],
       ),
