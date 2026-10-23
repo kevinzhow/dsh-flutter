@@ -3,11 +3,14 @@
 /// WebSocket, and unary `POST /api/<ns>/<method>`.
 library;
 
+export 'src/binary_response.dart' show decodeBinaryResponse, multipartBoundary;
 export 'src/connection.dart';
 export 'src/events.dart';
+export 'src/file_upload.dart';
 export 'src/host_info.dart';
 export 'src/ids.dart' show randomUuid;
 export 'src/mux.dart';
 export 'src/pairing.dart';
 export 'src/remote_caller.dart';
 export 'src/unary.dart';
+export 'src/workspace_files.dart';

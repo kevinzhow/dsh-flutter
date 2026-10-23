@@ -4,6 +4,7 @@
 library;
 
 export 'src/assistant_stream.dart';
+export 'src/attachments.dart';
 export 'src/client_sessions.dart';
 export 'src/event_window.dart';
 export 'src/journal.dart';

@@ -16,6 +16,12 @@ abstract interface class SessionTransport {
   /// `session/cancel`.
   Future<void> cancel(String sessionId);
 
+  /// `session/attachment` -> `{attachment, data}` (`data` is base64).
+  Future<Map<String, Object?>> attachment(
+    String sessionId,
+    String attachmentId,
+  );
+
   /// `session/page`.
   Future<Map<String, Object?>> page(Map<String, Object?> request);
 
@@ -70,6 +76,14 @@ class DshSessionTransport implements SessionTransport {
       'request': {'sessionId': sessionId},
     });
   }
+
+  @override
+  Future<Map<String, Object?>> attachment(
+    String sessionId,
+    String attachmentId,
+  ) => _map('attachment', {
+    'request': {'sessionId': sessionId, 'attachmentId': attachmentId},
+  });
 
   @override
   Future<Map<String, Object?>> page(Map<String, Object?> request) =>

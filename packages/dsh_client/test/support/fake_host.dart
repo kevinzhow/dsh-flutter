@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 /// A minimal in-process stand-in for a dsh host: `/connect` pairing with
 /// per-socket Peers, unary `POST /api/<ns>/<method>`, and the
@@ -32,6 +33,11 @@ class FakeHost {
   /// [FakeRemoteError]).
   final Map<String, FutureOr<Object?> Function(Map<String, Object?> args)>
   unary = {};
+
+  /// `METHOD /path` -> raw handler for routes outside the RPC envelope (the
+  /// upload route). Reached only with a valid peer cookie, like dsh's Fetch
+  /// routes.
+  final Map<String, Future<void> Function(HttpRequest request)> raw = {};
 
   /// endpoint -> stream handler.
   final Map<String, void Function(FakeStream stream)> streams = {};
@@ -117,6 +123,11 @@ class FakeHost {
       );
       return;
     }
+    final rawHandler = raw['${req.method} $path'];
+    if (rawHandler != null) {
+      await rawHandler(req);
+      return;
+    }
     if (req.method == 'POST' && path.startsWith('/api/')) {
       final body =
           jsonDecode(await utf8.decodeStream(req)) as Map<String, Object?>;
@@ -149,14 +160,57 @@ class FakeHost {
           }
         }
       }
+      final envelope = {
+        'type': 'server-response',
+        'rpcId': body['rpcId'],
+        'result': result,
+      };
+      final value = result['value'];
+      if (value is FakeBinaryResult) {
+        // dsh's Connection framing: FormData with `metadata` + `bytes-N` parts.
+        const boundary = '----formdata-fake-0001';
+        final out = BytesBuilder();
+        void part(String name, List<int> data, {String? type}) {
+          out.add(ascii.encode('--$boundary\r\n'));
+          out.add(
+            ascii.encode(
+              'Content-Disposition: form-data; name="$name"'
+              '${type == null ? '' : '; filename="blob"'}\r\n',
+            ),
+          );
+          if (type != null) out.add(ascii.encode('Content-Type: $type\r\n'));
+          out.add(ascii.encode('\r\n'));
+          out.add(data);
+          out.add(ascii.encode('\r\n'));
+        }
+
+        final table = <Map<String, Object?>>[];
+        for (var i = 0; i < value.attachments.length; i++) {
+          final a = value.attachments[i];
+          table.add({'path': a.path, 'codec': 'bytes', 'part': 'bytes-$i'});
+          part('bytes-$i', a.bytes, type: 'application/octet-stream');
+        }
+        part(
+          'metadata',
+          utf8.encode(
+            jsonEncode({
+              ...envelope,
+              'result': {'ok': true, 'value': value.value},
+              'attachments': table,
+            }),
+          ),
+        );
+        out.add(ascii.encode('--$boundary--\r\n'));
+        req.response.headers.set(
+          HttpHeaders.contentTypeHeader,
+          'multipart/form-data; boundary=$boundary',
+        );
+        req.response.add(out.takeBytes());
+        await req.response.close();
+        return;
+      }
       req.response.headers.contentType = ContentType.json;
-      req.response.write(
-        jsonEncode({
-          'type': 'server-response',
-          'rpcId': body['rpcId'],
-          'result': result,
-        }),
-      );
+      req.response.write(jsonEncode(envelope));
       await req.response.close();
       return;
     }
@@ -223,6 +277,14 @@ class FakeRemoteError implements Exception {
   FakeRemoteError(this.code, this.message);
   final String code;
   final String message;
+}
+
+/// A unary result whose [value] holds `null` placeholders that [attachments]
+/// fill (path into the value, raw bytes), answered as multipart.
+class FakeBinaryResult {
+  FakeBinaryResult(this.value, this.attachments);
+  final Object? value;
+  final List<({List<Object> path, List<int> bytes})> attachments;
 }
 
 class FakeStream {

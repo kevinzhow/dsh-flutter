@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'binary_response.dart';
 import 'ids.dart';
 import 'pairing.dart';
 import 'remote_caller.dart';
@@ -43,7 +45,11 @@ class HttpRemoteCaller implements RemoteCaller {
       ),
     );
     final response = await request.close();
-    final body = await utf8.decodeStream(response);
+    final builder = BytesBuilder(copy: false);
+    await for (final chunk in response) {
+      builder.add(chunk);
+    }
+    final bytes = builder.takeBytes();
     if (response.statusCode == HttpStatus.unauthorized) {
       throw UnauthorizedException('$namespace/$method');
     }
@@ -53,15 +59,19 @@ class HttpRemoteCaller implements RemoteCaller {
         'transport failure for $namespace/$method: HTTP ${response.statusCode}',
       );
     }
-    final contentType = response.headers.contentType?.mimeType;
-    if (contentType == 'multipart/form-data') {
-      // Phase 0 scope: binary results (session/attachment bytes) are not decoded.
-      throw RemoteException(
-        'transport/multipart-unsupported',
-        '$namespace/$method answered a multipart result',
+    final mime = response.headers.contentType?.mimeType;
+    final Object? decoded;
+    if (mime == 'multipart/form-data') {
+      // A binary result (docs: connection README, binary Remote transfer):
+      // JSON metadata plus raw byte parts; `Uint8Array` fields come back as
+      // [Uint8List] values inside `value`.
+      decoded = decodeBinaryResponse(
+        response.headers.value(HttpHeaders.contentTypeHeader) ?? '',
+        bytes,
       );
+    } else {
+      decoded = jsonDecode(utf8.decode(bytes));
     }
-    final decoded = jsonDecode(body);
     if (decoded is! Map<String, Object?> || decoded['rpcId'] != rpcId) {
       throw RemoteException(
         'transport/bad-envelope',
