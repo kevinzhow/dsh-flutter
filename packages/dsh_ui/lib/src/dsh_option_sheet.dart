@@ -109,7 +109,7 @@ class DshOptionSheet extends StatelessWidget {
                   for (final option in options)
                     Semantics(
                       button: true,
-                      selected: option.id == selectedId,
+                      selected: selectedId == option.id,
                       enabled: option.enabled,
                       label: option.badge == null
                           ? option.label
@@ -173,7 +173,7 @@ class DshOptionSheet extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (option.id == selectedId)
+                                if (selectedId == option.id)
                                   DshIcon(
                                     DshIcons.check,
                                     size: 16,
@@ -374,8 +374,10 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                  child: Wrap(
+                    alignment: WrapAlignment.end,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       DshButton(
                         key: const ValueKey('risk-cancel'),
@@ -389,7 +391,6 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
                       DshButton(
                         key: const ValueKey('risk-confirm'),
                         variant: DshButtonVariant.primary,

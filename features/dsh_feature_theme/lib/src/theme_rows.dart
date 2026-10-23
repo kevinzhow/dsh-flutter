@@ -59,13 +59,14 @@ class AppearanceRow extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 _Cubes(
-                  children: [
+                  cubes: (compact) => [
                     for (final (pref, key, icon) in _cubes)
                       _Cube(
                         key: ValueKey<String>('cube-${pref.name}'),
                         icon: icon,
                         label: _t(i18n, key),
                         selected: preference == pref,
+                        compact: compact,
                         onPressed: service.writable || !service.available
                             ? () => service.setPreference(pref)
                             : null,
@@ -84,11 +85,10 @@ class AppearanceRow extends StatelessWidget {
 /// dsh's `.cubeRow`: `display: flex; flex-wrap: wrap; gap: 8px` over cubes of
 /// `flex: 1 1 180px`: as many per line as fit, each line shared equally.
 class _Cubes extends StatelessWidget {
-  const _Cubes({required this.children});
+  const _Cubes({required this.cubes});
 
-  final List<Widget> children;
+  final List<Widget> Function(bool compact) cubes;
 
-  static const double _basis = 180;
   static const double _gap = 8;
 
   @override
@@ -96,7 +96,10 @@ class _Cubes extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final perLine = math.max(1, ((width + _gap) / (_basis + _gap)).floor());
+        final children = cubes(width < dshSettingsRowWide);
+        // dsh's basis is 180px; on a phone the three cubes share one line.
+        final basis = width < dshSettingsRowWide ? 96.0 : 180.0;
+        final perLine = math.max(1, ((width + _gap) / (basis + _gap)).floor());
         final lines = <List<Widget>>[
           for (var i = 0; i < children.length; i += perLine)
             children.sublist(i, math.min(i + perLine, children.length)),
@@ -131,7 +134,11 @@ class _Cube extends StatefulWidget {
     required this.label,
     required this.selected,
     required this.onPressed,
+    this.compact = false,
   });
+
+  /// Phone width: less side padding so three cubes share a line.
+  final bool compact;
 
   final DshIconData icon;
   final String label;
@@ -164,7 +171,10 @@ class _CubeState extends State<_Cube> {
           behavior: HitTestBehavior.opaque,
           onTap: widget.onPressed,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.compact ? 8 : 32,
+              vertical: 20,
+            ),
             decoration: theme.cornerDecoration(
               theme.radiusXl,
               color: fill,
@@ -284,27 +294,23 @@ class _FontSettingsGroupState extends State<FontSettingsGroup> {
     final title = _t(i18n, 'fontFamily.${role.name}.title');
     return LayoutBuilder(
       builder: (context, constraints) {
-        // `flex: 0 1 240px` beside a text column that keeps its 48px padding.
-        final field = math.max(
-          96.0,
-          math.min(240.0, constraints.maxWidth - 8 - 56),
+        final wide = constraints.maxWidth >= dshSettingsRowWide;
+        final input = DshFieldInput(
+          key: ValueKey<String>('font-${role.name}-family'),
+          value: service.current.fontFamilies[role],
+          placeholder: _t(i18n, 'fontFamily.placeholder'),
+          semanticLabel: title,
+          maxLength: 200,
+          enabled: service.writable || !service.available,
+          onCommit: (text) => service.setFontFamily(role, text),
         );
         return DshSettingsRow(
           separator: separator,
+          stackedControl: true,
           title: title,
           description: _t(i18n, 'fontFamily.${role.name}.description'),
-          control: SizedBox(
-            width: field,
-            child: DshFieldInput(
-              key: ValueKey<String>('font-${role.name}-family'),
-              value: service.current.fontFamilies[role],
-              placeholder: _t(i18n, 'fontFamily.placeholder'),
-              semanticLabel: title,
-              maxLength: 200,
-              enabled: service.writable || !service.available,
-              onCommit: (text) => service.setFontFamily(role, text),
-            ),
-          ),
+          // `flex: 0 1 240px` beside the text column.
+          control: wide ? SizedBox(width: 240, child: input) : input,
         );
       },
     );

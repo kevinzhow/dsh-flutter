@@ -315,15 +315,19 @@ class _ChipState extends State<_Chip> {
                     DshIcon(widget.glyph!, size: 14, color: color),
                     const SizedBox(width: 4),
                   ],
-                  Flexible(
-                    child: Text(
-                      widget.label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: style,
+                  if (widget.glyph == null ||
+                      !DshComposerRow.compactOf(context))
+                    Flexible(
+                      child: Text(
+                        widget.label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: style,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 4),
+                  if (widget.glyph == null ||
+                      !DshComposerRow.compactOf(context))
+                    const SizedBox(width: 4),
                   DshIcon(
                     DshIcons.chevronDown,
                     color: theme.color('--dsw-alias-label-caption'),

@@ -244,6 +244,42 @@ class _DefaultComposerState extends State<DefaultComposer> {
     }
   }
 
+  /// The controls above the field (dsh's composer tool row): the
+  /// current-session permission and the model, each only when a feature
+  /// occupies its slot.
+  List<Widget> _toolRow() {
+    final slots = widget.slots;
+    if (slots == null) return const [];
+    final permission = slots.renderSingle(
+      DshSlots.conversationInputPermission.typed<SessionOwner, Widget>(),
+      widget.owner,
+    );
+    final model = slots.renderSingle(
+      DshSlots.conversationInputModel.typed<SessionOwner, Widget>(),
+      widget.owner,
+    );
+    if (permission == null && model == null) return const [];
+    return [
+      LayoutBuilder(
+        builder: (context, constraints) => DshComposerRow(
+          compact: constraints.maxWidth < 460,
+          child: Padding(
+            key: const ValueKey('composer-tools'),
+            padding: const EdgeInsets.only(bottom: DshSpace.xs),
+            child: Row(
+              children: [
+                ?permission,
+                if (permission != null && model != null)
+                  const SizedBox(width: DshSpace.xs),
+                if (model != null) Flexible(child: model),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
@@ -279,6 +315,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
                   widget.owner,
                 ) ??
                 const SizedBox.shrink(),
+          ..._toolRow(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

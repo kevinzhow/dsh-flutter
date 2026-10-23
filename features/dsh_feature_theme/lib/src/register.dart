@@ -11,22 +11,31 @@ final Slot<SettingsOwner, Widget> _generalItem = DshSlots.settingsGeneralItem
 /// Register the Appearance row (order 10) and the font settings group (order
 /// 11) into `settings.general.item`, as dsh's `ui-theme` does. The `touch`
 /// flag keeps the font stepper arrows visible where there is no hover.
-void registerThemeFeature(
+/// Returns the disposer that withdraws both rows.
+void Function() registerThemeFeature(
   SlotRegistry slots, {
   required ThemeSettingsService service,
   required DshI18n Function() i18n,
   bool touch = false,
 }) {
-  slots.register<SettingsOwner, Widget>(
-    _generalItem,
-    (owner) => AppearanceRow(service: service, i18n: i18n()),
-    id: 'appearance',
-    order: 10,
-  );
-  slots.register<SettingsOwner, Widget>(
-    _generalItem,
-    (owner) => FontSettingsGroup(service: service, i18n: i18n(), touch: touch),
-    id: 'font-size',
-    order: 11,
-  );
+  final offs = [
+    slots.register<SettingsOwner, Widget>(
+      _generalItem,
+      (owner) => AppearanceRow(service: service, i18n: i18n()),
+      id: 'appearance',
+      order: 10,
+    ),
+    slots.register<SettingsOwner, Widget>(
+      _generalItem,
+      (owner) =>
+          FontSettingsGroup(service: service, i18n: i18n(), touch: touch),
+      id: 'font-size',
+      order: 11,
+    ),
+  ];
+  return () {
+    for (final off in offs) {
+      off();
+    }
+  };
 }

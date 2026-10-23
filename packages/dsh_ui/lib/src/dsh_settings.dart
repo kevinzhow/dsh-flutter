@@ -59,11 +59,18 @@ class DshLineText extends StatelessWidget {
   }
 }
 
+/// Width from which a settings row keeps dsh's horizontal layout (text left,
+/// control right). dsh's rows are drawn for the 564px content column of its
+/// 800px settings panel; at phone widths its own CSS leaves the text column a
+/// few dozen pixels wide, so a narrower row stacks its control under the text.
+const double dshSettingsRowWide = 480;
+
 /// A preference row of the settings General section: a title and a
 /// description on the left, the control on the right, a hairline below (dsh
 /// `FontSizeRow.module.css` `.row`, `PermissionRow.module.css` `.row`). The
 /// column that stacks the rows drops the separator of the last one
-/// ([separator]).
+/// ([separator]). Below [dshSettingsRowWide] the control moves under the text
+/// ([stackedControl] widens it to the full width).
 class DshSettingsRow extends StatelessWidget {
   const DshSettingsRow({
     super.key,
@@ -72,6 +79,7 @@ class DshSettingsRow extends StatelessWidget {
     required this.control,
     this.alert = false,
     this.separator,
+    this.stackedControl = false,
   });
 
   final String title;
@@ -85,10 +93,43 @@ class DshSettingsRow extends StatelessWidget {
   /// ends its column ([DshColumnEnd]).
   final bool? separator;
 
+  /// Whether the control takes the full width when the row stacks (a text
+  /// field), instead of keeping its own width at the start.
+  final bool stackedControl;
+
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final line = separator ?? !DshColumnEnd.of(context);
+    Widget text(EdgeInsetsGeometry padding) => Padding(
+      padding: padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DshLineText(
+            title,
+            style: theme
+                .textStyle('--dsw-font-s-14')
+                .copyWith(color: theme.labelPrimary),
+          ),
+          const SizedBox(height: 4),
+          Semantics(
+            liveRegion: alert,
+            child: DshLineText(
+              description,
+              style: theme
+                  .textStyle('--dsw-font-xxs-12')
+                  .copyWith(
+                    color: alert
+                        ? theme.color('--dsw-alias-state-error-primary')
+                        : theme.color('--dsw-alias-label-tertiary'),
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
     return DecoratedBox(
       decoration: BoxDecoration(
         border: line
@@ -102,45 +143,29 @@ class DshSettingsRow extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 48),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    DshLineText(
-                      title,
-                      style: theme
-                          .textStyle('--dsw-font-s-14')
-                          .copyWith(color: theme.labelPrimary),
-                    ),
-                    const SizedBox(height: 4),
-                    Semantics(
-                      liveRegion: alert,
-                      child: DshLineText(
-                        description,
-                        style: theme
-                            .textStyle('--dsw-font-xxs-12')
-                            .copyWith(
-                              color: alert
-                                  ? theme.color(
-                                      '--dsw-alias-state-error-primary',
-                                    )
-                                  : theme.color('--dsw-alias-label-tertiary'),
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            control,
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth < dshSettingsRowWide) {
+              return Column(
+                crossAxisAlignment: stackedControl
+                    ? CrossAxisAlignment.stretch
+                    : CrossAxisAlignment.start,
+                children: [
+                  text(EdgeInsets.zero),
+                  const SizedBox(height: 12),
+                  control,
+                ],
+              );
+            }
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: text(const EdgeInsets.only(right: 48))),
+                const SizedBox(width: 8),
+                control,
+              ],
+            );
+          },
         ),
       ),
     );
@@ -640,4 +665,25 @@ class DshWatch extends StatelessWidget {
     stream: changes,
     builder: (context, _) => builder(context),
   );
+}
+
+/// Whether the composer's tool row is narrow (dsh's `@container (max-width:
+/// 460px)` rule): a control that carries a glyph then drops its text label.
+class DshComposerRow extends InheritedWidget {
+  const DshComposerRow({
+    super.key,
+    required this.compact,
+    required super.child,
+  });
+
+  final bool compact;
+
+  /// The composer row's compactness at [context] (false outside a composer).
+  static bool compactOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DshComposerRow>()?.compact ??
+      false;
+
+  @override
+  bool updateShouldNotify(DshComposerRow oldWidget) =>
+      oldWidget.compact != compact;
 }
