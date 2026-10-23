@@ -27,10 +27,7 @@ features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet
 features/dsh_feature_session           ui-session: the session list
 features/dsh_feature_model_selection   ui-model-selection: model/effort seat in the composer tool row, model sheet
 features/dsh_feature_permission_presets ui-permission-presets: new-session default row, composer permission seat
-features/dsh_feature_settings          ui-settings: settings page (rail on wide windows, list then section on phones), General column, plugins section
-features/dsh_feature_settings_agent_loop  ui-settings-agent-loop: the agent loop plugin's config card
-features/dsh_feature_settings_shell    ui-settings-shell: the shell plugin's config card
-features/dsh_feature_settings_subagent ui-settings-subagent: the subagent plugin's config card
+features/dsh_feature_settings          ui-settings: settings page (rail on wide windows, list then section on phones), General column
 features/dsh_feature_theme             ui-theme: light/dark/system appearance, font families and sizes (shared with dsh web through the host)
 features/dsh_feature_sidebar_right     ui-sidebar-right: files/preview panel (sheet on phones, inline column on wide windows)
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)

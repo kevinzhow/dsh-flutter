@@ -150,10 +150,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "3b9c15d4851f3013e535cb1c2f70a4747a8738caada45d8f884219ce2836f2fb",
+      "irSha256": "09f76ea9772d504316968661e6ec1da4620c7ca9614b6621c76636fcc68097fd",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "916b258a53471176ccfa21ee0949854f439795ea1cca8ae3da4372badd23da49"
+        "sha256": "1b9e28856f00067c585f942eb772e1fb4bd3d3fffe58b601f50745266a9748d0"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -225,28 +225,12 @@
           "sha256": "94be0e865cf0403b6c01beb51cf702d45ed26d27194d74643f1d3f7333f53160"
         },
         {
-          "path": "packages/client/ui-plugin-manager/src/client/locales.ts",
-          "sha256": "739949355102f5c9dad9cb728ea0b08ec7f11a4cf054cc4552480a6c448f2a5a"
-        },
-        {
           "path": "packages/client/ui-reference/src/client/locales.ts",
           "sha256": "b438b5657173a97434f8fe91df7266013d1ac045155a96f90acd56b58e7b082b"
         },
         {
-          "path": "packages/client/ui-settings-agent-loop/src/client/locales.ts",
-          "sha256": "0df2aff418a0f40980ba5e9c2541d56a201844beb432b9847d3188a826183e65"
-        },
-        {
           "path": "packages/client/ui-settings-general/src/client/locales.ts",
           "sha256": "9174829c38582386113fc654fea3e3ba83ac9aafdde6955d68018f4cfd6ff678"
-        },
-        {
-          "path": "packages/client/ui-settings-shell/src/client/locales.ts",
-          "sha256": "46d56e4881b8d06f7b699c43ae70fee8cb1c8505c81d7082e247ffccb63bfd21"
-        },
-        {
-          "path": "packages/client/ui-settings-subagent/src/client/locales.ts",
-          "sha256": "685dcf4cdf21ca9c358bc17b8870c26237003f1cd06baaf434e5cd86182f54e2"
         },
         {
           "path": "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
@@ -309,8 +293,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "f215d40085c40f39848a2641916e4e163c884a6f1f6bf988f113c158b055def5",
-      "outputSha256": "29e6613dedda02898a26dd19281499754feb96819ad0aa557b756fd2164a54d3"
+      "rawSha256": "3f8f504abd4b630318533ec2c574c3dfb42de1463ce20c1c2170cd36cce0f06e",
+      "outputSha256": "621d04b5a671c4ce96fbc06d90fc46c56cabd613959b6cd2c79e09817f6b03da"
     }
   ]
 }
