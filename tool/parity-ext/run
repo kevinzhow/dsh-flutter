@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""dsh-flutter visual parity: the EXTENSION suite (cases generated at run time).
+
+  tool/parity-ext/run run [--cases <key|glob>[,...]] [--refresh-react] [--skip-react] [--skip-flutter]
+  tool/parity-ext/run list [--cases ...]     print the capture keys of the (sampled) manifest
+  tool/parity-ext/run summary
+  tool/parity-ext/run publish [--no-verify]
+
+Same pipeline as tool/parity, pointed at a manifest that is NOT committed: every `run` builds
+<out>/cases.json by running the discovered tool/parity-ext/build-*.py (tool/parity_lib/builders.py), then
+derives cases.sampled.json (theme sampling: light complete, dark 1-2 cases per surface,
+tool/parity_lib/sampling.py; PARITY_EXT_ALL_THEMES=1 keeps everything). Differences from tool/parity:
+extension render host files in tool/parity-ext/host/*.tsx, fixtures in tool/parity-ext/fixtures/, output in
+build/parity-ext/ (or $PARITY_EXT_OUT). Quickstart: docs/parity-ext-quickstart.md.
+"""
+import argparse
+import json
+import pathlib
+import sys
+
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+from parity_lib import builders, env, manifest as mf, sampling, suite as suite_mod  # noqa: E402
+
+
+def load_extension(out):
+    path = builders.build_manifest(out, env.EXT)
+    full = mf.load_manifest(path)
+    sampled = sampling.sample_themes(full)
+    (out / 'cases.sampled.json').write_text(json.dumps(sampled, indent=1) + '\n')
+    return sampled
+
+
+SUITE = suite_mod.Suite('parity-ext', env.ROOT / 'build' / 'parity-ext', [env.EXT / 'fixtures'], [env.EXT / 'host'],
+                        load_extension, 'dsh_flutter_parity_ext')
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest='cmd', required=True)
+    suite_mod.add_run_arguments(sub.add_parser('run'))
+    lst = sub.add_parser('list')
+    lst.add_argument('--cases', default='')
+    sub.add_parser('summary')
+    pub = sub.add_parser('publish')
+    pub.add_argument('--no-verify', action='store_true')
+    args = ap.parse_args(argv)
+    if args.cmd == 'run':
+        return suite_mod.cmd_run(SUITE, args, 'PARITY_EXT_OUT')
+    if args.cmd == 'summary':
+        return suite_mod.cmd_summary(SUITE, args, 'PARITY_EXT_OUT')
+    if args.cmd == 'publish':
+        return suite_mod.cmd_publish(SUITE, args, 'PARITY_EXT_OUT')
+    out = SUITE.out('PARITY_EXT_OUT')
+    out.mkdir(parents=True, exist_ok=True)
+    for e in mf.select(mf.entries(load_extension(out)), args.cases):
+        print(e['key'])
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

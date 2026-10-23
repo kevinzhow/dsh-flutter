@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""dsh-flutter visual parity: the core suite (committed manifest tool/parity-shared/cases.json).
+
+  tool/parity run [--cases <key|glob>[,...]] [--refresh-react] [--skip-react] [--skip-flutter]
+  tool/parity summary
+  tool/parity publish [--no-verify]
+  tool/parity validate [--manifest FILE]     schema-check a manifest (default: the core one)
+  tool/parity fonts                          verify the pinned parity fonts
+  tool/parity setup                          install the React provider's pinned npm dependencies
+  tool/parity selftest                       fast offline checks (preflight runs this)
+
+`run` captures the React side (dsh's real components in Chromium; cached across worktrees unless
+--refresh-react), captures the Flutter side (tool/parity_flutter, flutter_test), diffs the two with
+tool/parity_lib/diffmetrics.py, composes side-by-side images and writes everything under build/parity/
+(or $PARITY_OUT): summary.json, summary.md, site/index.html. The dsh checkout is only read.
+Machine specific settings are environment variables, see tool/parity_lib/env.py. Background:
+docs/parity.md.
+"""
+import argparse
+import pathlib
+import sys
+
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from parity_lib import env, fonts, manifest as mf, react, selftest, suite as suite_mod  # noqa: E402
+
+
+def load_core(out):
+    return mf.load_manifest(env.SHARED / 'cases.json')
+
+
+SUITE = suite_mod.Suite('parity', env.ROOT / 'build' / 'parity', [env.SHARED / 'fixtures'], [env.SHARED], load_core,
+                        'dsh_flutter_parity')
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest='cmd', required=True)
+    suite_mod.add_run_arguments(sub.add_parser('run'))
+    sub.add_parser('summary')
+    pub = sub.add_parser('publish')
+    pub.add_argument('--no-verify', action='store_true')
+    val = sub.add_parser('validate')
+    val.add_argument('--manifest', default=str(env.SHARED / 'cases.json'))
+    sub.add_parser('fonts')
+    sub.add_parser('setup')
+    sub.add_parser('selftest')
+    args = ap.parse_args(argv)
+    if args.cmd == 'run':
+        return suite_mod.cmd_run(SUITE, args, 'PARITY_OUT')
+    if args.cmd == 'summary':
+        return suite_mod.cmd_summary(SUITE, args, 'PARITY_OUT')
+    if args.cmd == 'publish':
+        return suite_mod.cmd_publish(SUITE, args, 'PARITY_OUT')
+    if args.cmd == 'validate':
+        try:
+            man = mf.load_manifest(args.manifest)
+        except mf.ManifestError as exc:
+            print('\n'.join(exc.errors))
+            return 1
+        print('%s: %d cases, %d captures: ok' % (args.manifest, len(man['cases']), len(mf.entries(man))))
+        return 0
+    if args.cmd == 'fonts':
+        problems = fonts.check()
+        print('\n'.join(problems) or 'parity fonts: ok')
+        return 1 if problems else 0
+    if args.cmd == 'setup':
+        react.setup(env.ROOT / 'build' / 'parity-setup.log')
+        print('React provider dependencies installed under %s' % env.web_deps())
+        return 0
+    return selftest.run()
+
+
+if __name__ == '__main__':
+    sys.exit(main())

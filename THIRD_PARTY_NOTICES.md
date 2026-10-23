@@ -28,3 +28,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Noto Sans (visual parity tool)
+
+`tool/parity-fonts/files/NotoSans-Regular.ttf` and `NotoSans-Bold.ttf` are used only by the visual parity tool
+(`docs/parity.md`) so that the React and Flutter captures draw text with the same face. Noto Sans is copyright
+2010, 2012-2020 Google Inc. and 2015-2020 Google LLC, licensed under the SIL Open Font License 1.1
+(`tool/parity-fonts/OFL.txt`). They are not part of the app.

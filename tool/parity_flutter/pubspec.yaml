@@ -1,0 +1,16 @@
+name: dsh_parity
+description: Flutter provider of the dsh-flutter visual parity tool (flutter_test capture harness). Dev tooling, not shipped.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  dsh_theme: ^0.0.1
+  dsh_ui: ^0.0.1
+dev_dependencies:
+  lints: ^6.0.0
