@@ -4,6 +4,10 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+
+import 'dart:typed_data';
+
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -242,4 +246,162 @@ void main() {
       expect(find.text('tail of turn 1'), findsOneWidget);
     },
   );
+
+  group('attachments', () {
+    const image = {
+      'attachmentId': 'sha256:img',
+      'mediaType': 'image/png',
+      'bytes': 1658,
+      'width': 320,
+      'height': 200,
+      'name': 'shot.png',
+    };
+    const file = {
+      'attachmentId': 'sha256:f',
+      'name': 'notes.txt',
+      'bytes': 2048,
+    };
+
+    List<List<GalleryImage>> calls = [];
+    List<(int, bool, int)> layout = [];
+
+    setUp(() {
+      calls = [];
+      layout = [];
+      slots.register<ImageGalleryOwner, Widget>(
+        DshSlots.conversationChatUserImages.typed<ImageGalleryOwner, Widget>(),
+        (o) {
+          calls.add(o.images);
+          layout.add((o.group?.length ?? 0, o.compact, o.groupIndex));
+          return Text('gallery ${o.images.length}');
+        },
+      );
+      slots.register<ImageGalleryOwner, Widget>(
+        DshSlots.conversationChatMessageImages
+            .typed<ImageGalleryOwner, Widget>(),
+        (o) => Text('assistant gallery ${o.images.length}'),
+      );
+    });
+
+    List<EventEntry> turn(List<Object?> content) => [
+      ev(1, 'turn/start', {'turn': 1}),
+      ev(2, 'step/start', {'turn': 1, 'step': 1}),
+      ev(3, 'user/message', {
+        'content': content,
+        'source': {'kind': 'user', 'rpcId': 'r1'},
+        'role': 'user',
+        'id': 'u1',
+      }, surface: 'append'),
+    ];
+
+    testWidgets('a lone image has no bubble and goes through the slot', (
+      t,
+    ) async {
+      await open(
+        t,
+        turn([
+          {'type': 'image', 'attachment': image},
+        ]),
+      );
+      expect(find.text('gallery 1'), findsOneWidget);
+      expect(layout.single, (1, false, 0));
+    });
+
+    testWidgets(
+      'images, a file and text keep their order and share the group',
+      (t) async {
+        await open(
+          t,
+          turn([
+            {'type': 'image', 'attachment': image},
+            {'type': 'file', 'attachment': file},
+            {'type': 'image', 'attachment': image},
+            {'type': 'text', 'text': 'compare these'},
+          ]),
+        );
+        expect(find.text('gallery 1'), findsNWidgets(2));
+        expect(find.byKey(const ValueKey('message-file-card')), findsOneWidget);
+        expect(find.text('notes.txt'), findsOneWidget);
+        expect(find.text('TXT 2.0KB'), findsOneWidget);
+        expect(find.text('compare these'), findsOneWidget);
+        // more than one attachment: compact tiles, each knowing its place in the group
+        expect(layout, [(2, true, 0), (2, true, 1)]);
+      },
+    );
+
+    testWidgets('a malformed attachment block is not drawn as an image', (
+      t,
+    ) async {
+      await open(
+        t,
+        turn([
+          {
+            'type': 'image',
+            'attachment': {'attachmentId': 'x'},
+          },
+          {'type': 'text', 'text': 'hi'},
+        ]),
+      );
+      expect(find.textContaining('gallery'), findsNothing);
+      expect(find.text('hi'), findsOneWidget);
+    });
+
+    testWidgets('the local echo shows its previews and file card', (t) async {
+      final transport = FakeTransport();
+      owner = testSessionOwner('s1', session: Session('s1', transport));
+      slots = SlotRegistry();
+      for (final s in DshSlots.all) {
+        slots.declare(s);
+      }
+      registerChatFeature(slots, i18n: () => i18n);
+      slots.register<ImageGalleryOwner, Widget>(
+        DshSlots.conversationChatUserImages.typed<ImageGalleryOwner, Widget>(),
+        (o) => Text(
+          'preview ${o.images.map((i) => i is PreviewGalleryImage).join()}',
+        ),
+      );
+      await open(t, []);
+      await owner.session.prompt(
+        'see',
+        attachments: [
+          OutgoingImage(
+            name: 'p.png',
+            bytes: Uint8List(3),
+            mediaType: 'image/png',
+            width: 4,
+            height: 2,
+          ),
+          const OutgoingFile(name: 'n.csv', size: 12, receiptId: 'r'),
+        ],
+      );
+      await t.pump();
+      expect(find.text('preview true'), findsOneWidget);
+      expect(find.text('n.csv'), findsOneWidget);
+      expect(find.text('see'), findsOneWidget);
+    });
+
+    testWidgets('an assistant image block goes through the message slot', (
+      t,
+    ) async {
+      await open(t, [
+        ...turn([
+          {'type': 'text', 'text': 'draw'},
+        ]),
+        ev(4, 'assistant/message', {
+          'turn': 1,
+          'step': 1,
+          'message': {
+            'role': 'assistant',
+            'id': 'a1',
+            'content': [
+              {'type': 'image', 'attachment': image},
+              {'type': 'text', 'text': 'done'},
+            ],
+            'source': {'kind': 'model'},
+          },
+        }, surface: 'append'),
+      ]);
+      expect(find.text('assistant gallery 1'), findsOneWidget);
+    });
+  });
 }

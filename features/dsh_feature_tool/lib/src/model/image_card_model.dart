@@ -1,5 +1,5 @@
 import 'package:dsh_conversation/dsh_conversation.dart';
-import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_models/dsh_models.dart' show ImageRef;
 
 import 'raw_call.dart';
 
