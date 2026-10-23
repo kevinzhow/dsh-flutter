@@ -119,6 +119,10 @@ mixin DshHighlightListener<T extends StatefulWidget> on State<T> {
   DshCodeHighlighter? _bound;
   StreamSubscription<void>? _sub;
 
+  /// Counts grammar loads seen; a cache of highlighted text is stale when it
+  /// changes.
+  int highlightRevision = 0;
+
   /// The language this surface highlights; read on every dependency change.
   String? get highlightLang;
 
@@ -130,7 +134,9 @@ mixin DshHighlightListener<T extends StatefulWidget> on State<T> {
       _sub?.cancel();
       _bound = h;
       _sub = h?.loaded.listen((_) {
-        if (mounted) setState(() {});
+        if (!mounted) return;
+        highlightRevision++;
+        setState(() {});
       });
     }
     h?.prepare(highlightLang);

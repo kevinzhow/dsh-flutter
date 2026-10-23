@@ -19,3 +19,8 @@ String? dshLanguageForPath(String path) {
 /// then; otherwise it reads the generic "Code" label.
 bool dshSupportsHighlighting(String? lang) =>
     lang != null && dshGrammarByHint.containsKey(lang.toLowerCase());
+
+/// Every file extension dsh gives a highlighting language
+/// (`CODE_HIGHLIGHT_EXTENSIONS`): the suffixes its code viewer claims.
+List<String> get dshCodeLanguageExtensions =>
+    dshLanguageByExtension.keys.toList(growable: false);

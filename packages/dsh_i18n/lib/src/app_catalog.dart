@@ -89,6 +89,17 @@ const Map<String, DshText> appCatalog = {
     en: 'Wait for the files to finish uploading',
     zh: '请等待文件上传完成',
   ),
+  'file.open': (en: 'Open', zh: '打开'),
+  'file.save': (en: 'Save a copy', zh: '保存副本'),
+  'file.downloading': (en: 'Downloading… {percent}%', zh: '正在下载… {percent}%'),
+  'file.downloadFailed': (
+    en: 'Could not download the file: {message}',
+    zh: '无法下载文件：{message}',
+  ),
+  'file.cannotOpen': (
+    en: 'No app on this device can open the file',
+    zh: '此设备上没有可以打开该文件的应用',
+  ),
   'attachment.position': (en: '{index} / {total}', zh: '{index} / {total}'),
   'session.cancel': (en: 'Stop', zh: '停止'),
   'session.model.unknown': (en: 'Model not set', zh: '未选择模型'),
