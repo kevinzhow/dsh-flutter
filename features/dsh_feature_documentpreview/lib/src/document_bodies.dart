@@ -207,6 +207,7 @@ class _SourceBodyState extends State<SourceBody> with DshHighlightListener {
               child: Text(
                 '${i + 1}',
                 textAlign: TextAlign.right,
+                softWrap: false,
                 style: number,
               ),
             ),

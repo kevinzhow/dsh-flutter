@@ -1,4 +1,4 @@
-// Usage (from tool/live_spike): dart run bin/live_app.dart [--port 18741] [--ws DIR] [--out FILE]
+// Usage (from tool/live_spike): dart run bin/live_app.dart [--port 18741] [--ws DIR] [--out FILE] [--test FILE] [--keep-ws]
 // Runs the app-layer live integration test (apps/dsh_flutter/test/live) against a dsh host this harness starts:
 // a separate `dsh web` on 127.0.0.1 sharing ~/.dsh (never Kevin's instance on 18686/8686). The launch URL (with its
 // token) goes to a mode-600 file the test reads and is never printed; the host is stopped by the PID started here.
@@ -20,14 +20,19 @@ Future<void> main(List<String> args) async {
     exit(2);
   }
   final wsArg = arg(args, 'ws', '${Directory.systemTemp.path}/whalee-live/ws');
-  final out = arg(args, 'out', '/tmp/cindy/dsh-p1a/live-app-result.json');
-  final launchFile = '/tmp/cindy/dsh-p1a/live-launch-url';
+  final scratch = '${Directory.systemTemp.path}/whalee-live';
+  final out = arg(args, 'out', '$scratch/live-app-result.json');
+  final launchFile = arg(args, 'launch-file', '$scratch/live-launch-url');
+  final testFile = arg(args, 'test', 'test/live/live_app_test.dart');
+  final logFile = arg(args, 'log', '$scratch/live-app.log');
   final flutter =
       Platform.environment['FLUTTER_BIN'] ??
       '${Platform.environment['HOME']}/flutter-sdks/versions/3.47.6/bin/flutter';
   Directory(wsArg).createSync(recursive: true);
   final ws = Directory(wsArg).resolveSymbolicLinksSync();
   Directory(File(launchFile).parent.path).createSync(recursive: true);
+  Directory(File(logFile).parent.path).createSync(recursive: true);
+  Directory(File(out).parent.path).createSync(recursive: true);
   final appDir = Directory.fromUri(
     Platform.script.resolve('../../../apps/dsh_flutter'),
   ).path;
@@ -56,12 +61,16 @@ Future<void> main(List<String> args) async {
         'live',
         '-r',
         'expanded',
-        'test/live/live_app_test.dart',
+        testFile,
       ],
       workingDirectory: appDir,
-      environment: {'DSH_LIVE_LAUNCH_FILE': launchFile, 'DSH_LIVE_RESULT': out},
+      environment: {
+        'DSH_LIVE_LAUNCH_FILE': launchFile,
+        'DSH_LIVE_RESULT': out,
+        'DSH_LIVE_WORKSPACE': ws,
+      },
     );
-    final log = File('/tmp/cindy/dsh-p1a/live-app.log').openWrite();
+    final log = File(logFile).openWrite();
     String redact(String s) =>
         s.replaceAll(RegExp(r'token=[^\s&"]+'), 'token=<redacted>');
     final done = Future.wait([

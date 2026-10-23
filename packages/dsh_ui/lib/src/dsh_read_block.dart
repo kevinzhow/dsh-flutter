@@ -113,6 +113,7 @@ class _DshReadBlockState extends State<DshReadBlock>
             child: Text(
               '${l.number}',
               textAlign: TextAlign.right,
+              softWrap: false,
               style: style.copyWith(
                 color: theme.color('--dsw-alias-label-tertiary'),
               ),

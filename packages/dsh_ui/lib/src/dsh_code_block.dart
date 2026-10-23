@@ -236,6 +236,7 @@ class DshCodeLine extends StatelessWidget {
           child: Text(
             '$number',
             textAlign: TextAlign.right,
+            softWrap: false,
             style: numberStyle,
           ),
         ),
