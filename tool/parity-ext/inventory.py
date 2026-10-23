@@ -55,6 +55,7 @@ ROWS = [
     ('Tool call cards', 'packages/client/ui-tool', 'components.tool.*', 'P1', None),
     ('Approval cards', 'packages/client/ui-approval', 'components.approval.*', 'P1', None),
     ('Settings', 'packages/client/ui-settings', 'screens.settings.*', 'P3', None),
+    ('Settings General rows', 'packages/client/ui-settings-general', 'components.settings.*', 'P2', None),
     ('Sidebar terminal', 'packages/client/ui-sidebar-terminal', 'components.terminal.*', None, 'no terminal surface planned'),
 ]
 STATUSES = ('ok', 'web-only', 'untested', 'MISSING', 'excluded')

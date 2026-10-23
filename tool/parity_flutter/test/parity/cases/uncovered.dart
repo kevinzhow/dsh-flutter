@@ -14,3 +14,17 @@ final Map<String, ParityUncovered> uncoveredBase = {
       'dsh_ui has no widget for this atom yet (phase 0 ships DshButton only).',
     ),
 };
+
+/// Settings rows (build-settings.py): React-only until the Flutter widgets register their cases.
+final Map<String, ParityUncovered> uncoveredSettings = {
+  for (final kind in const [
+    'settings.appearance',
+    'settings.font',
+    'settings.permission',
+    'settings.general',
+  ])
+    kind: const ParityUncovered(
+      ParityGap.noFlutterSurface,
+      'The Flutter settings rows have no parity case yet.',
+    ),
+};
