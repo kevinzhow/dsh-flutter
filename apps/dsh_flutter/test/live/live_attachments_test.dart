@@ -608,6 +608,9 @@ void main() {
         );
       }
     },
+    skip: launchFile == null
+        ? 'needs tool/live_spike/bin/live_app.dart (a live host)'
+        : null,
     timeout: const Timeout(Duration(minutes: 12)),
     tags: ['live'],
   );

@@ -28,7 +28,7 @@ class DshSyntaxHighlighter implements DshCodeHighlighter {
   final HighlightEngine engine;
   final StreamController<void> _loaded = StreamController<void>.broadcast();
   final Set<String> _loading = {};
-  ({String id, String code, List<List<DshCodeSpan>> lines})? _memo;
+  ({String grammar, String code, List<List<DshCodeSpan>> lines})? _memo;
 
   /// The grammar id a language hint resolves to (dsh `grammarForHint`), or null.
   static String? grammarOf(String? lang) =>
@@ -58,7 +58,9 @@ class DshSyntaxHighlighter implements DshCodeHighlighter {
     final id = grammarOf(lang);
     if (id == null || !engine.isLoaded(id)) return null;
     final memo = _memo;
-    if (memo != null && memo.id == id && memo.code == code) return memo.lines;
+    if (memo != null && memo.grammar == id && memo.code == code) {
+      return memo.lines;
+    }
     final raw = engine.highlightLines(code, id);
     if (raw == null) return null;
     final lines = [
@@ -80,7 +82,7 @@ class DshSyntaxHighlighter implements DshCodeHighlighter {
     while (lines.length < expected) {
       lines.add(const [DshCodeSpan('')]);
     }
-    _memo = (id: id, code: code, lines: lines);
+    _memo = (grammar: id, code: code, lines: lines);
     return lines;
   }
 }
