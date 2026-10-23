@@ -24,7 +24,28 @@ class SettingsSchemaException implements Exception {
 
 /// One node of a schema graph.
 final class SettingsSchema {
-  SettingsSchema._(this.type, this.meta);
+  SettingsSchema._(this.type, this.meta)
+    : rejectsAll = false,
+      isMissing = false;
+
+  /// A reference the envelope names but does not define (a dangling uid inside
+  /// a `dict` or `list`). schemastery's own validation walk fails on it.
+  SettingsSchema._missing()
+    : type = null,
+      meta = const <String, Object?>{},
+      rejectsAll = false,
+      isMissing = true;
+
+  /// The schema of an envelope that rehydrates to nothing callable (its root
+  /// uid is not among its refs): every value fails, the null one too.
+  SettingsSchema._rejecting()
+    : type = null,
+      meta = const <String, Object?>{},
+      rejectsAll = true,
+      isMissing = false;
+
+  final bool rejectsAll;
+  final bool isMissing;
 
   /// Schemastery type name: `object`, `dict`, `array`, `tuple`, `union`,
   /// `intersect`, `string`, `number`, `boolean`, `const`, `any`, ...
@@ -62,14 +83,34 @@ final class SettingsSchema {
   /// have produced: a malformed envelope yields a schema that rejects
   /// everything, as the TypeScript client's does.
   factory SettingsSchema.rehydrate(Object? serialized) {
-    if (serialized is! Map || serialized['refs'] is! Map) {
-      return SettingsSchema._(null, <String, Object?>{});
+    if (serialized == null) return SettingsSchema._rejecting();
+    final envelope = serialized is Map ? serialized : null;
+    final rawRefs = envelope?['refs'];
+    if (rawRefs is! Map) {
+      // Without refs schemastery uses the envelope itself as the node; a truthy
+      // refs that is no object has no entry for the uid.
+      final truthy =
+          rawRefs != null && rawRefs != 0 && rawRefs != '' && rawRefs != false;
+      return truthy
+          ? SettingsSchema._rejecting()
+          : SettingsSchema._(null, <String, Object?>{});
     }
-    final refs = (serialized['refs'] as Map).cast<Object?, Object?>();
+    final refs = rawRefs.cast<Object?, Object?>();
     final built = <String, SettingsSchema>{};
     for (final entry in refs.entries) {
       final node = entry.value;
+      // `new Schema(null)` throws, whether or not the entry is ever used.
+      if (node == null) return SettingsSchema._rejecting();
       final map = node is Map ? node.cast<String, Object?>() : const {};
+      // A list that is not an array throws in `options.list.map`.
+      final list = map['list'];
+      if (list != null &&
+          list is! List &&
+          list != 0 &&
+          list != '' &&
+          list != false) {
+        return SettingsSchema._rejecting();
+      }
       final meta = map['meta'];
       final schema = SettingsSchema._(
         map['type'] is String ? map['type'] as String : null,
@@ -99,20 +140,18 @@ final class SettingsSchema {
       final list = node['list'];
       if (list is List) {
         schema.list = [
-          for (final uid in list)
-            ref(uid) ?? SettingsSchema._('never', <String, Object?>{}),
+          for (final uid in list) ref(uid) ?? SettingsSchema._missing(),
         ];
       }
       final dict = node['dict'];
       if (dict is Map) {
         schema.dict = {
           for (final f in dict.entries)
-            '${f.key}': ref(f.value) ?? SettingsSchema._(null, {}),
+            '${f.key}': ref(f.value) ?? SettingsSchema._missing(),
         };
       }
     }
-    return built['${serialized['uid']}'] ??
-        SettingsSchema._(null, <String, Object?>{});
+    return built['${envelope!['uid']}'] ?? SettingsSchema._rejecting();
   }
 
   /// Whether `preserve` was set on a transform.
@@ -121,6 +160,7 @@ final class SettingsSchema {
   /// The failure text of [data] against this schema, or null when it passes
   /// (`SettingsSchemaService.validate`). Never throws.
   String? validate(Object? data) {
+    if (rejectsAll) return 'schema is not a function';
     try {
       _resolve(data, this, const <Object>[], false, <bool>[false]);
       return null;
@@ -233,11 +273,15 @@ Object? _clone(Object? v) {
 }
 
 String _display(Object? v) {
-  // JS template interpolation of a JSON value (`${data}`).
+  // JS template interpolation of a JSON value (`${data}`): an array joins its
+  // elements with commas and renders null as the empty string.
   if (v == null) return 'null';
   if (v is num) return _jsNumber(v);
-  if (v is List) return v.map(_display).join(',');
+  if (v is List) return v.map((e) => e == null ? '' : _display(e)).join(',');
   if (v is Map) return '[object Object]';
+  if (v is _InheritedMember) {
+    return 'function ${v.name == 'constructor' ? 'Object' : v.name}() { [native code] }';
+  }
   return '$v';
 }
 
@@ -254,14 +298,29 @@ SettingsSchemaException _fail(String message, List<Object> path) {
   return SettingsSchemaException((prefix == r'$' ? '' : '$prefix ') + message);
 }
 
-/// JS `Number#toString` for the finite values JSON carries.
+/// JS `Number#toString`: shortest round-trip digits, positional notation for
+/// exponents in [-7, 21), `e+N` otherwise, and `0` for -0. An integer beyond
+/// 2^53 prints as the double JavaScript would have parsed.
 String _jsNumber(num n) {
-  if (n is int) return '$n';
+  if (n is int && n.abs() < 9007199254740992) return '$n';
   final d = n.toDouble();
   if (d.isNaN) return 'NaN';
   if (d.isInfinite) return d.isNegative ? '-Infinity' : 'Infinity';
-  if (d == d.truncateToDouble() && d.abs() < 1e21) return d.toStringAsFixed(0);
-  return '$d';
+  if (d == 0) return '0';
+  final sign = d < 0 ? '-' : '';
+  // `1.2345e+5`: Dart prints the digits JavaScript does (shortest round trip).
+  final parts = d.abs().toStringAsExponential().split('e');
+  final digits = parts[0].replaceAll('.', '');
+  final point = int.parse(parts[1]) + 1; // position of the decimal point
+  final k = digits.length;
+  if (k <= point && point <= 21) return '$sign$digits${'0' * (point - k)}';
+  if (0 < point && point <= 21) {
+    return '$sign${digits.substring(0, point)}.${digits.substring(point)}';
+  }
+  if (-6 < point && point <= 0) return '${sign}0.${'0' * -point}$digits';
+  final exponent = point - 1;
+  final mantissa = k == 1 ? digits : '${digits[0]}.${digits.substring(1)}';
+  return '$sign${mantissa}e${exponent < 0 ? '-' : '+'}${exponent.abs()}';
 }
 
 Object? _resolve(
@@ -300,12 +359,13 @@ Object? _resolve(
     var current = schema;
     var fallback = schema.meta['default'];
     while (current.type == 'intersect' && _isNullable(fallback)) {
-      final first = current.list?.firstOrNull;
-      if (first == null) {
+      final members = current.list;
+      if (members == null) throw _undefinedAccess('0');
+      if (members.isEmpty) {
         fallback = null;
         break;
       }
-      current = first;
+      current = members.first;
       fallback = current.meta['default'];
     }
     if (_isNullable(fallback)) return data;
@@ -313,11 +373,17 @@ Object? _resolve(
   }
   try {
     return _resolveType(data, schema, path, strict, volatileChecked);
-  } on SettingsSchemaException {
+  } on Object {
+    // schemastery's `loose` swallows every error, TypeErrors included.
     if (schema.meta['loose'] != true) rethrow;
     return schema.meta['default'];
   }
 }
+
+/// The TypeError JavaScript raises reading [property] of an undefined schema
+/// member (a dangling reference, or a node without its `list` / `inner`).
+StateError _undefinedAccess(String property) =>
+    StateError("Cannot read properties of undefined (reading '$property')");
 
 void _validateVolatile(
   SettingsSchema schema,
@@ -325,6 +391,7 @@ void _validateVolatile(
   bool blocked,
   Map<SettingsSchema, Set<bool>> seen,
 ) {
+  if (schema.isMissing) throw _undefinedAccess('meta');
   final states = seen.putIfAbsent(schema, () => <bool>{});
   if (!states.add(blocked)) return;
   if (schema.meta['volatile'] == true && blocked) {
@@ -354,16 +421,46 @@ void _validateVolatile(
   }
 }
 
+/// What `data[key]` reads on a JavaScript object that lacks the own key:
+/// the member every object inherits, a function that is not nullable.
+final class _InheritedMember {
+  const _InheritedMember(this.name);
+  final String name;
+}
+
+const _objectPrototypeFunctions = {
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf',
+  '__defineGetter__',
+  '__defineSetter__',
+  '__lookupGetter__',
+  '__lookupSetter__',
+};
+
 Object? _property(
   Object? container,
   Object key,
-  SettingsSchema schema,
+  SettingsSchema? schema,
   List<Object> path,
   List<bool> volatileChecked,
 ) {
-  final Object? value = container is List
-      ? ((key as int) < container.length ? container[key] : null)
-      : (container as Map)[key];
+  Object? value;
+  if (container is List) {
+    value = (key as int) < container.length ? container[key] : null;
+  } else {
+    final map = container as Map;
+    value = map[key];
+    if (value == null &&
+        !map.containsKey(key) &&
+        _objectPrototypeFunctions.contains(key)) {
+      value = _InheritedMember('$key');
+    }
+  }
   return _resolve(value, schema, [...path, key], false, volatileChecked);
 }
 
@@ -416,7 +513,7 @@ double _pow10(int digits) {
 bool _isMultipleOf(num data, num min, num step) {
   step = step.abs();
   if (!RegExp(r'^\d+\.\d+$').hasMatch(_jsNumber(step))) {
-    return (data - min).toDouble().remainder(step.toDouble()) == 0;
+    return (data.toDouble() - min.toDouble()).remainder(step.toDouble()) == 0;
   }
   final text = _jsNumber(step);
   final digits = text.substring(text.indexOf('.') + 1).length;
@@ -451,17 +548,12 @@ Object? _resolveType(
       }
       final pattern = meta['pattern'];
       if (pattern is Map) {
-        final source = '${pattern['source']}';
-        final flags = '${pattern['flags'] ?? ''}';
-        final regexp = RegExp(
-          source,
-          caseSensitive: !flags.contains('i'),
-          multiLine: flags.contains('m'),
-          dotAll: flags.contains('s'),
-          unicode: flags.contains('u'),
-        );
-        if (!regexp.hasMatch(data)) {
-          throw _fail('expect string to match regexp /$source/$flags', path);
+        final compiled = _compilePattern(pattern);
+        final matched = compiled.sticky
+            ? compiled.regexp.matchAsPrefix(data) != null
+            : compiled.regexp.hasMatch(data);
+        if (!matched) {
+          throw _fail('expect string to match regexp ${compiled.text}', path);
         }
       }
       _within(data.length, meta, 'string length', path);
@@ -489,7 +581,7 @@ Object? _resolveType(
       if (data is bool) return data;
       throw _fail('expected boolean but got ${_display(data)}', path);
     case 'bitset':
-      final bits = schema.bits ?? const {};
+      final bits = schema.bits;
       var value = 0;
       if (data is num) {
         return data;
@@ -498,12 +590,15 @@ Object? _resolveType(
           if (key is! String) {
             throw _fail('expected string but got ${_display(key)}', path);
           }
+          // `key in bits` on an envelope that carries no bits.
+          if (bits == null) throw StateError("Cannot use 'in' operator");
           if (bits.containsKey(key)) value |= bits[key]!.toInt();
         }
         return value;
       }
       throw _fail('expected number or array but got ${_display(data)}', path);
     case 'function':
+      if (data is _InheritedMember) return data;
       throw _fail('expected function but got ${_display(data)}', path);
     case 'is':
       final name = schema.constructorName;
@@ -515,6 +610,7 @@ Object? _resolveType(
         num() => const ['Number', 'Object'],
         bool() => const ['Boolean', 'Object'],
         List() => const ['Array', 'Object'],
+        _InheritedMember() => const ['Function', 'Object'],
         _ => const ['Object'],
       };
       if (chain.contains(name)) return data;
@@ -524,44 +620,40 @@ Object? _resolveType(
         throw _fail('expected array but got ${_display(data)}', path);
       }
       final inner = schema.inner;
+      if (inner == null) throw _undefinedAccess('meta');
       _within(
         data.length,
         meta,
         'array length',
         path,
-        skipMin: !_isNullable(inner?.meta['default']),
+        skipMin: !_isNullable(inner.meta['default']),
       );
       return [
         for (var i = 0; i < data.length; i++)
-          _property(data, i, inner!, path, checked),
+          _property(data, i, inner, path, checked),
       ];
     case 'dict':
       if (!_isPlainObject(data)) {
         throw _fail('expected object but got ${_display(data)}', path);
       }
       final result = <String, Object?>{};
-      for (final key in (data as Map).keys.toList()) {
+      for (final key in _jsKeyOrder((data as Map).keys)) {
         String rKey;
         try {
           rKey = '${_resolve(key, schema.sKey, path, false, checked)}';
-        } on SettingsSchemaException {
+        } on Object {
           if (strict) continue;
           rethrow;
         }
-        result[rKey] = _property(
-          data,
-          key as Object,
-          schema.inner!,
-          path,
-          checked,
-        );
+        result[rKey] = _property(data, key, schema.inner, path, checked);
       }
       return result;
     case 'tuple':
       if (data is! List) {
         throw _fail('expected array but got ${_display(data)}', path);
       }
-      final members = schema.list ?? const <SettingsSchema>[];
+      final members = schema.list;
+      if (members == null) throw _undefinedAccess('map');
       final result = [
         for (var i = 0; i < members.length; i++)
           _property(data, i, members[i], path, checked),
@@ -577,26 +669,30 @@ Object? _resolveType(
       }
       final map = data as Map;
       final result = <String, Object?>{};
-      for (final e
-          in (schema.dict ?? const <String, SettingsSchema>{}).entries) {
-        final value = _property(map, e.key, e.value, path, checked);
-        if (!_isNullable(value) || map.containsKey(e.key)) {
-          result[e.key] = value;
+      final fields = schema.dict ?? const <String, SettingsSchema>{};
+      for (final key in _jsKeyOrder(fields.keys)) {
+        final value = _property(map, key, fields[key], path, checked);
+        if (!_isNullable(value) || map.containsKey(key)) {
+          result[key] = value;
         }
       }
       if (!strict) _merge(result, map);
       return result;
     case 'union':
-      for (final inner in schema.list ?? const <SettingsSchema>[]) {
+      final members = schema.list;
+      if (members == null) throw StateError('list is not iterable');
+      for (final inner in members) {
         try {
           return _resolve(data, inner, path, strict, checked);
-        } on SettingsSchemaException {
+        } on Object {
+          // Every failure of a member, TypeErrors included, tries the next.
           continue;
         }
       }
       throw _fail('expected ${_describe(schema)} but got ${_json(data)}', path);
     case 'intersect':
-      final members = schema.list ?? const <SettingsSchema>[];
+      final members = schema.list;
+      if (members == null) throw _undefinedAccess('length');
       if (members.isEmpty) return data;
       Object? result;
       for (final inner in members) {
@@ -628,7 +724,106 @@ Object? _resolveType(
       // The callback is source text on the wire; accept what the inner accepts.
       return _resolve(data, schema.inner, path, true, checked);
   }
-  throw _fail('unsupported type "${schema.type}"', path);
+  throw _fail('unsupported type "${schema.type ?? 'undefined'}"', path);
+}
+
+/// Own keys in the order a JavaScript `for...in` visits them: integer-like keys
+/// ascending, then the others in insertion order.
+List<String> _jsKeyOrder(Iterable<Object?> keys) {
+  final integers = <int, String>{};
+  final others = <String>[];
+  for (final key in keys) {
+    final text = '$key';
+    final index = _arrayIndex(text);
+    if (index == null) {
+      others.add(text);
+    } else {
+      integers[index] = text;
+    }
+  }
+  final ordered = integers.keys.toList()..sort();
+  return [for (final i in ordered) integers[i]!, ...others];
+}
+
+const _flagOrder = 'dgimsuvy';
+
+/// `new RegExp(source, flags)` as the schema's `pattern` meta builds it, with
+/// the text JavaScript prints for it (`/source/flags`, flags normalised).
+({RegExp regexp, String text, bool sticky}) _compilePattern(
+  Map<Object?, Object?> pattern,
+) {
+  final source = pattern['source'] == null ? '' : '${pattern['source']}';
+  final flags = pattern['flags'] == null ? '' : '${pattern['flags']}';
+  final seen = <String>{};
+  for (final flag in flags.split('')) {
+    if (!_flagOrder.contains(flag) || !seen.add(flag)) {
+      throw SettingsSchemaException(
+        "Invalid flags supplied to RegExp constructor '$flags'",
+      );
+    }
+  }
+  if (seen.contains('u') && seen.contains('v')) {
+    throw SettingsSchemaException(
+      "Invalid flags supplied to RegExp constructor '$flags'",
+    );
+  }
+  final regexp = RegExp(
+    source,
+    caseSensitive: !seen.contains('i'),
+    multiLine: seen.contains('m'),
+    dotAll: seen.contains('s'),
+    unicode: seen.contains('u') || seen.contains('v'),
+  );
+  final normalised = [
+    for (final flag in _flagOrder.split(''))
+      if (seen.contains(flag)) flag,
+  ].join();
+  return (
+    regexp: regexp,
+    text: '/${_escapeRegExpSource(source)}/$normalised',
+    sticky: seen.contains('y'),
+  );
+}
+
+/// `RegExp.prototype.source`: an empty pattern prints `(?:)`, a `/` outside a
+/// class and line terminators are escaped.
+String _escapeRegExpSource(String source) {
+  if (source.isEmpty) return '(?:)';
+  final out = StringBuffer();
+  var inClass = false;
+  var escaped = false;
+  for (final unit in source.codeUnits) {
+    final char = String.fromCharCode(unit);
+    if (escaped) {
+      escaped = false;
+      out.write(char);
+      continue;
+    }
+    switch (char) {
+      case r'\':
+        escaped = true;
+        out.write(char);
+      case '[':
+        inClass = true;
+        out.write(char);
+      case ']':
+        inClass = false;
+        out.write(char);
+      case '/':
+        out.write(inClass ? char : r'\/');
+      case '\n':
+        out.write(r'\n');
+      case '\r':
+        out.write(r'\r');
+      case '\u2028':
+        out.write(r'\u2028');
+      case '\u2029':
+        out.write(r'\u2029');
+      default:
+        out.write(char);
+    }
+  }
+  return out.toString();
 }
 
 void _merge(Map<Object?, Object?> result, Map<Object?, Object?> data) {
@@ -646,16 +841,80 @@ String _jsType(Object? v) => switch (v) {
   _ => 'object',
 };
 
+/// `JSON.stringify` of a JSON value: integer-like keys first in ascending
+/// order, then the others in insertion order, as a JavaScript object iterates.
 String _json(Object? v) {
   if (v == null) return 'null';
-  if (v is String) return '"$v"';
+  if (v is String) return _jsonString(v);
   if (v is num) return _jsNumber(v);
   if (v is bool) return '$v';
+  if (v is _InheritedMember) return 'undefined';
   if (v is List) return '[${v.map(_json).join(',')}]';
   if (v is Map) {
-    return '{${v.entries.map((e) => '"${e.key}":${_json(e.value)}').join(',')}}';
+    final integers = <MapEntry<int, Object?>>[];
+    final others = <MapEntry<Object?, Object?>>[];
+    for (final e in v.entries) {
+      final index = _arrayIndex('${e.key}');
+      if (index != null) {
+        integers.add(MapEntry(index, e.key));
+      } else {
+        others.add(e);
+      }
+    }
+    integers.sort((a, b) => a.key.compareTo(b.key));
+    final ordered = [
+      for (final e in integers) MapEntry<Object?, Object?>(e.value, v[e.value]),
+      ...others,
+    ];
+    return '{${ordered.map((e) => '${_jsonString('${e.key}')}:${_json(e.value)}').join(',')}}';
   }
   return '$v';
+}
+
+int? _arrayIndex(String key) {
+  if (!RegExp(r'^(0|[1-9][0-9]*)$').hasMatch(key)) return null;
+  final value = int.tryParse(key);
+  return value != null && value < 4294967295 ? value : null;
+}
+
+String _jsonString(String s) {
+  final out = StringBuffer('"');
+  final units = s.codeUnits;
+  for (var i = 0; i < units.length; i++) {
+    final c = units[i];
+    switch (c) {
+      case 0x22:
+        out.write(r'\"');
+      case 0x5c:
+        out.write(r'\\');
+      case 0x08:
+        out.write(r'\b');
+      case 0x0c:
+        out.write(r'\f');
+      case 0x0a:
+        out.write(r'\n');
+      case 0x0d:
+        out.write(r'\r');
+      case 0x09:
+        out.write(r'\t');
+      default:
+        final highSurrogate = c >= 0xd800 && c <= 0xdbff;
+        final lowSurrogate = c >= 0xdc00 && c <= 0xdfff;
+        if (highSurrogate &&
+            i + 1 < units.length &&
+            units[i + 1] >= 0xdc00 &&
+            units[i + 1] <= 0xdfff) {
+          out
+            ..writeCharCode(c)
+            ..writeCharCode(units[++i]);
+        } else if (c < 0x20 || highSurrogate || lowSurrogate) {
+          out.write('\\u${c.toRadixString(16).padLeft(4, '0')}');
+        } else {
+          out.writeCharCode(c);
+        }
+    }
+  }
+  return (out..write('"')).toString();
 }
 
 /// `schema.toString()` (a compact TypeScript-like type string), enough for the
@@ -696,5 +955,5 @@ String _describe(SettingsSchema schema, [bool inline = false]) {
     case 'transform':
       return _describe(schema.inner!, inline);
   }
-  return 'Schema<${schema.type}>';
+  return 'Schema<${schema.type ?? 'undefined'}>';
 }
