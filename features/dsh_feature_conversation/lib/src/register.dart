@@ -45,6 +45,6 @@ void registerConversationFeature(
   );
   slots.register<SessionOwner, Widget>(
     headerSlot,
-    (owner) => SessionHeader(owner: owner, i18n: i18n()),
+    (owner) => SessionHeader(owner: owner, i18n: i18n(), slots: slots),
   );
 }

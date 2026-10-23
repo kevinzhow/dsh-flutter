@@ -245,6 +245,7 @@ class SidebarTabOwner {
     required this.contentId,
     required this.actions,
     this.line,
+    this.revision = 0,
   });
 
   final SessionOwner session;
@@ -256,8 +257,11 @@ class SidebarTabOwner {
   /// file tab).
   final String contentId;
 
-  /// The 1-based line a navigation asked for, if any.
+  /// The 1-based line a navigation asked for, if any, and the navigation's
+  /// revision: it changes each time the same tab is navigated to again, so a
+  /// body can answer a new request for the same line.
   final int? line;
+  final int revision;
 
   final SidebarTabActions actions;
 }
@@ -267,3 +271,10 @@ abstract interface class SidebarTabActions {
   /// Open another resource in the sidebar; a file address opens a preview tab.
   void openResource(String address, {int? line});
 }
+
+/// The window width from which a session shows its right sidebar beside the
+/// conversation; narrower windows present it as a sheet (phones).
+const double sidebarInlineMinWindowWidth = 1100;
+
+/// Width of the inline right sidebar.
+const double sidebarInlineWidth = 400;
