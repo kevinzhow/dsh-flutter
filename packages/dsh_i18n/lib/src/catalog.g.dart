@@ -26,11 +26,15 @@ const Map<String, String> dshCatalogPackages = {
   'open-in-app': 'client/ui-open-in-app',
   'permission.access': 'client/ui-permission-presets',
   'plan': 'client/ui-plan',
+  'pluginManager': 'client/ui-plugin-manager',
   'question': 'client/ui-user-questions',
   'reference': 'client/ui-reference',
   'settings': 'client/ui-settings-general',
+  'settings.agentLoop': 'client/ui-settings-agent-loop',
   'settings.locale': 'client/locale',
   'settings.permission': 'client/ui-permission-presets',
+  'settings.shell': 'client/ui-settings-shell',
+  'settings.subagent': 'client/ui-settings-subagent',
   'settings.theme': 'client/ui-theme',
   'sidebar': 'client/ui-sidebar',
   'sidebarCodePreview': 'client/ui-sidebar-documentpreview',
@@ -1508,6 +1512,520 @@ const Map<String, Map<String, ({String en, String? zh})>> dshCatalog = {
     'preview.title': (en: 'Plan', zh: '计划'),
     'preview.unavailable': (en: 'Plan preview is unavailable', zh: '计划预览不可用'),
   },
+  'pluginManager': {
+    'addPlugin': (en: 'Add plugin', zh: '添加插件'),
+    'backToList': (en: 'Back to plugins', zh: '返回插件'),
+    'backToPackage': (en: 'Back to {name}', zh: '返回 {name}'),
+    'basicTitle': (en: 'Built-in plugin settings', zh: '内置插件配置'),
+    'bundlesTitle': (en: 'Installed plugins', zh: '已安装插件'),
+    'cancel': (en: 'Cancel', zh: '取消'),
+    'chooseAddMethod': (en: 'Choose how to add a plugin', zh: '选择添加插件方式'),
+    'close': (en: 'Close', zh: '关闭'),
+    'configureRow': (en: 'Configure {name}', zh: '配置 {name}'),
+    'confirmUninstall': (en: 'Uninstall', zh: '卸载'),
+    'confirmUninstallDescription': (
+      en: 'What it provides goes away once it is uninstalled.',
+      zh: '卸载后它提供的功能会消失。',
+    ),
+    'confirmUninstallTitle': (en: 'Uninstall "{name}"?', zh: '卸载「{name}」？'),
+    'crumbRoot': (en: 'Plugins', zh: '插件'),
+    'empty': (en: 'No plugins are installed yet.', zh: '还没有安装任何插件。'),
+    'enableToggle': (en: 'Enable {name}', zh: '启用 {name}'),
+    'error': (
+      en: 'Could not read all plugins, possibly due to a network problem',
+      zh: '可能由于网络问题，无法读取全部插件',
+    ),
+    'extensionsTitle': (en: 'Experimental plugins', zh: '实验性插件'),
+    'failedDisable': (en: 'Could not disable: {reason}', zh: '停用失败：{reason}'),
+    'failedEnable': (en: 'Could not enable: {reason}', zh: '启用失败：{reason}'),
+    'failedRowDisable': (
+      en: 'Could not disable the component: {reason}',
+      zh: '组件停用失败：{reason}',
+    ),
+    'failedRowEnable': (
+      en: 'Could not enable the component: {reason}',
+      zh: '组件启用失败：{reason}',
+    ),
+    'failedUninstall': (
+      en: 'Could not uninstall: {reason}',
+      zh: '卸载失败：{reason}',
+    ),
+    'infoDescription': (
+      en: 'Configure official plugins and install or manage other plugins here. View the built-in plugin list and runtime status in Settings → Built-in plugins.',
+      zh: '在这里配置官方插件，安装和管理其他插件。内置插件列表及运行状态可在「设置 → 内置插件」中查看',
+    ),
+    'infoLabel': (en: 'About plugins', zh: '插件说明'),
+    'installApplying': (
+      en: 'Applying configuration, please wait…',
+      zh: '正在应用配置，请稍候…',
+    ),
+    'installApplyingCancellationError': (
+      en: 'Cancellation was not confirmed. Installation is being applied; wait for its result. {reason}',
+      zh: '取消请求未得到确认；安装已进入收尾阶段，请等待结果。{reason}',
+    ),
+    'installApprovalCaution': (
+      en: 'Allow only packages you trust.',
+      zh: '只在信任这些包时允许。',
+    ),
+    'installApprovalConsequence': (
+      en: 'Once allowed, the scripts run here with your permissions, and the permission is saved in this profile.',
+      zh: '允许后，脚本会以你的权限在本机运行，授权保存在当前 profile，之后不再询问。',
+    ),
+    'installApprovalDescription': (
+      en: 'These packages have install scripts that pnpm did not run.',
+      zh: '以下包声明了安装脚本，pnpm 默认不运行。',
+    ),
+    'installApprovalTitle': (
+      en: 'Install scripts need permission',
+      zh: '需要允许安装脚本',
+    ),
+    'installApproveAndRetry': (
+      en: 'Allow these scripts and retry',
+      zh: '允许这些脚本并重试',
+    ),
+    'installAttempt': (
+      en: '{previous} could not serve the package; retrying through {registry} (registry {index} of {total})',
+      zh: '{previous} 不可用，正在改用 {registry} 重试（第 {index} 个源，共 {total} 个）',
+    ),
+    'installAttemptBadge': (
+      en: 'Attempt {index} · {registry}',
+      zh: '第 {index} 次 · {registry}',
+    ),
+    'installAwaitingAcceptance': (
+      en: 'Waiting for the Host to accept installation. Cancellation will retry automatically after confirmation.',
+      zh: '正在等待后端接收安装任务，收到确认后会自动重试取消。',
+    ),
+    'installBackgroundApplying': (
+      en: 'Installation is being applied and cannot be cancelled. View installation progress.',
+      zh: '安装已进入收尾阶段，无法取消，可查看安装进度。',
+    ),
+    'installBackgroundDone': (
+      en: 'Installation finished. View installation details.',
+      zh: '插件安装已完成，可查看安装结果。',
+    ),
+    'installBackgroundFailed': (
+      en: 'Installation failed. View installation details.',
+      zh: '插件安装失败，可查看安装详情。',
+    ),
+    'installBackgroundUnconfirmed': (
+      en: 'Installation status is unconfirmed. View the installation for details.',
+      zh: '安装状态暂未确认，请查看安装任务了解详情。',
+    ),
+    'installBackgroundUnknown': (
+      en: 'Installation result unavailable. Check the plugin list.',
+      zh: '未能获取安装结果，请检查插件列表。',
+    ),
+    'installCancel': (en: 'Cancel install', zh: '取消安装'),
+    'installCancelAndEdit': (
+      en: 'Cancel installation and return to editing',
+      zh: '取消安装并返回编辑',
+    ),
+    'installCancelUnconfirmed': (
+      en: 'Installation has not been confirmed stopped. Retry cancellation or wait for the installation result. {reason}',
+      zh: '尚未确认安装已停止，请重试取消或等待安装结果。{reason}',
+    ),
+    'installCancelled': (
+      en: 'Installation cancelled; the plugin is not enabled, and downloaded files may remain',
+      zh: '已取消安装，插件未启用，下载的文件可能保留',
+    ),
+    'installCancelledShort': (en: 'Cancelled', zh: '已取消'),
+    'installCancelling': (en: 'Stopping installation…', zh: '正在停止安装…'),
+    'installChangeRegistry': (en: 'Change registry', zh: '更换安装源'),
+    'installChecking': (en: 'Checking…', zh: '正在检查…'),
+    'installClose': (en: 'Done', zh: '完成'),
+    'installCloseCancels': (en: 'Cancel install and close', zh: '取消安装并关闭'),
+    'installConfirmedRefused': (
+      en: 'This plugin cannot be installed',
+      zh: '无法安装此插件',
+    ),
+    'installConfirmedTitle': (en: 'Install plugin', zh: '安装插件'),
+    'installDescription': (
+      en: 'Enter the plugin\'s package name, GitHub repository address, or local directory path.',
+      zh: '输入插件的包名、GitHub 仓库地址或本地目录路径。',
+    ),
+    'installDetailsHide': (en: 'Hide install details', zh: '收起安装详情'),
+    'installDetailsShow': (en: 'Show install details', zh: '查看安装详情'),
+    'installDoneApproved': (
+      en: 'Install scripts allowed for {names}',
+      zh: '已允许运行安装脚本：{names}',
+    ),
+    'installDoneNothing': (
+      en: 'Install finished with no new dependency.',
+      zh: '安装完成，没有新增依赖。',
+    ),
+    'installDoneOtherVersion': (
+      en: 'Under pnpm\'s supply-chain security policy (minimumReleaseAge), versions published more recently than the required age are not installed automatically, so this installation used {installed} instead of the latest version {version}. A newly published version has not completed this waiting period and may contain undetected malicious code or defects. If you need {version}, uninstall the current version and then install {exact} to request that version.',
+      zh: '根据 pnpm 供应链安全策略（minimumReleaseAge），发布时间未满规定时长的版本不会被自动安装，因此本次安装的是 {installed}，而非最新版本 {version}。新发布的版本尚未经过该观察期，可能存在未被发现的恶意代码或缺陷。如确需使用 {version}，请先卸载当前版本，再安装 {exact} 以指定该版本。',
+    ),
+    'installDoneRestart': (
+      en: 'Installed; restart DSH to load it. {reason}',
+      zh: '已安装，请重启 DSH 加载它。{reason}',
+    ),
+    'installEdit': (en: 'Edit', zh: '编辑'),
+    'installEditAria': (en: 'Back to editing', zh: '返回编辑'),
+    'installEnableNow': (en: 'Enable now', zh: '立即启用'),
+    'installExisting': (en: 'Install a third-party plugin', zh: '安装第三方插件'),
+    'installExistingDescription': (
+      en: 'Supports npm packages, Git repositories, and local directories',
+      zh: '支持 npm 包、Git 仓库和本地目录',
+    ),
+    'installFailedTitle': (
+      en: 'The plugin could not be installed',
+      zh: '插件安装失败',
+    ),
+    'installFailureBuildBlocked': (
+      en: 'A dependency\'s install scripts need your permission before the install can continue',
+      zh: '有依赖的安装脚本需要你允许后才能继续',
+    ),
+    'installFailureBuildBlockedManual': (
+      en: 'pnpm blocked install scripts; allow them under allowBuilds in pnpm-workspace.yaml and retry',
+      zh: '有依赖的安装脚本被 pnpm 拦下，请在 profile 的 pnpm-workspace.yaml 的 allowBuilds 中放行后重试',
+    ),
+    'installFailureDiskFull': (
+      en: 'The disk is full; the install stopped',
+      zh: '磁盘空间不足，安装已停止',
+    ),
+    'installFailureGeneric': (
+      en: 'Something went wrong during the install; the details say what',
+      zh: '安装过程中出错，原因见安装详情',
+    ),
+    'installFailureIntegrity': (
+      en: 'The downloaded package failed its integrity check',
+      zh: '下载的安装包校验失败',
+    ),
+    'installFailureNetwork': (
+      en: 'The network connection failed',
+      zh: '网络连接失败',
+    ),
+    'installFailureNetworkAll': (
+      en: 'No registry could be reached (tried: {registries}). Check the network or proxy settings, or change the registry and retry.',
+      zh: '所有安装源都无法连接（已尝试：{registries}）。请检查网络或代理设置，或更换安装源后重试。',
+    ),
+    'installFailureNetworkHost': (
+      en: '{host} could not be reached. A GitHub address or a .tgz link is not fetched through the registry: this machine must reach it directly or through a proxy. If the plugin is also published to npm, enter its package name instead.',
+      zh: '无法连接 {host}。GitHub 地址和 .tgz 直链不经过安装源，需要本机能直接访问它或配置代理；如果这个插件也发布到了 npm，请改填包名。',
+    ),
+    'installFailureNoMatchingVersion': (
+      en: 'No version matches the request',
+      zh: '没有匹配的版本',
+    ),
+    'installFailureNotFound': (en: 'No such plugin was found', zh: '未找到相关插件'),
+    'installFailurePermission': (
+      en: 'No write permission; the plugin cannot be installed',
+      zh: '没有写入权限，无法安装',
+    ),
+    'installFailurePnpmMissing': (
+      en: 'pnpm was not found, so nothing can be installed',
+      zh: '没有找到 pnpm，无法安装',
+    ),
+    'installFailureTimeout': (en: 'The install timed out', zh: '安装超时'),
+    'installGitTemplateHint': (
+      en: 'Replace this with the actual Git repository address.',
+      zh: '请替换为实际的 Git 仓库地址',
+    ),
+    'installGithubFailedDescription': (
+      en: 'Try another installation source.',
+      zh: '请尝试其他安装来源。',
+    ),
+    'installGithubFailedTitle': (en: 'Cannot access GitHub', zh: '无法访问 GitHub'),
+    'installGithubTimeoutTitle': (
+      en: 'GitHub connection timed out',
+      zh: '连接 GitHub 超时',
+    ),
+    'installGuideExampleLabel': (en: 'Example: ', zh: '示例：'),
+    'installGuideFill': (en: 'Use example', zh: '填入示例'),
+    'installGuideFillAria': (
+      en: 'Use the example {example}',
+      zh: '填入示例 {example}',
+    ),
+    'installGuideHide': (en: 'Hide the guide', zh: '收起引导'),
+    'installGuideIdExample': (
+      en: 'dsh-plugin-whale-pet',
+      zh: 'dsh-plugin-whale-pet',
+    ),
+    'installGuideIdHint': (
+      en: 'The plugin package name is the npm package name (like dsh-xxx or @author/plugin): the part after dsh plugin add or pnpm add in a community plugin\'s README install command.',
+      zh: '插件包名即 npm 包名（如 dsh-xxx 或 @作者/插件名），社区插件的 README 安装命令中 dsh plugin add 或 pnpm add 之后的部分。',
+    ),
+    'installGuideIdTitle': (
+      en: 'Enter the plugin\'s npm package name',
+      zh: '填入插件 npm 包名',
+    ),
+    'installGuideSafety': (
+      en: 'Install only plugins you trust: they run with your permissions and can damage DeepSeek Harness or leak your data.',
+      zh: '请确认插件来源可信。插件在本机以你的权限运行，来源不明的插件可能损坏 DeepSeek Harness，或读取和泄露你的数据。',
+    ),
+    'installGuideToggle': (en: 'Install guide and examples', zh: '插件安装引导和示例'),
+    'installLocation': (en: 'Installs into {dir}', zh: '安装位置：{dir}'),
+    'installPackageLabel': (en: 'Plugin package name', zh: '插件包名'),
+    'installPathTemplateHint': (
+      en: 'Replace this with the actual path to your local plugin directory.',
+      zh: '请替换为本机插件目录的实际路径',
+    ),
+    'installProblemInstalled': (
+      en: 'This plugin is already installed. To upgrade it, uninstall it and install it again',
+      zh: '该插件已安装。如需升级，请卸载后重新安装',
+    ),
+    'installProblemInvalid': (
+      en: 'This is not a package name or address that can be installed: {reason}',
+      zh: '无法识别这个包名或地址：{reason}',
+    ),
+    'installProblemNetwork': (
+      en: 'The plugin registry could not be reached; check the network and try again',
+      zh: '无法连接插件源，请检查网络后重试',
+    ),
+    'installProblemNetworkAll': (
+      en: 'No registry could be reached (tried: {registries}); check the network or proxy settings, or change the registry',
+      zh: '所有安装源都无法连接（已尝试：{registries}），请检查网络或代理设置，或更换安装源',
+    ),
+    'installProblemNotBundle': (
+      en: 'This package declares no bundle, so it cannot be installed as a plugin: {reason}',
+      zh: '这个包没有声明组合包，无法作为插件安装：{reason}',
+    ),
+    'installProblemNotFound': (en: 'No such plugin was found', zh: '未找到相关插件'),
+    'installProblemNotPackage': (
+      en: 'The path does not exist or is not a valid plugin package',
+      zh: '该路径不存在或不是有效的插件包',
+    ),
+    'installProblemShipped': (
+      en: 'This plugin ships with DSH; upgrading DSH updates it',
+      zh: '该插件随 DSH 提供，升级 DSH 即可获得新版本',
+    ),
+    'installProblemUnknown': (
+      en: 'The plugin could not be looked up: {reason}',
+      zh: '无法获取插件信息：{reason}',
+    ),
+    'installReconcile': (en: 'Check installation status', zh: '核对安装状态'),
+    'installResultUnconfirmed': (
+      en: 'The installation result was not received. Check installation status. {reason}',
+      zh: '未收到安装结果，请核对安装状态。{reason}',
+    ),
+    'installRetry': (en: 'Retry', zh: '重试'),
+    'installRun': (en: 'Install', zh: '安装'),
+    'installSpecLabel': (en: 'Package name or address', zh: '包名或地址'),
+    'installSpecPlaceholder': (
+      en: 'for example dsh-plugin-whale-pet',
+      zh: '例如 dsh-plugin-whale-pet',
+    ),
+    'installStarting': (en: 'Preparing installation…', zh: '正在准备安装…'),
+    'installSubjectGit': (en: 'Git repository', zh: 'Git 仓库'),
+    'installSubjectPath': (en: 'Local directory', zh: '本地目录'),
+    'installSubjectTarball': (en: 'Tarball', zh: '压缩包'),
+    'installTitle': (en: 'Add plugin', zh: '添加插件'),
+    'installTryAnotherWay': (en: 'Try another way', zh: '试试其他方式'),
+    'installUnconfirmedTitle': (
+      en: 'Installation status unconfirmed',
+      zh: '安装状态尚未确认',
+    ),
+    'installUnknownDescription': (
+      en: 'The Host has no active installation with this request id. Check the plugin list before trying again.',
+      zh: '后端当前没有此安装任务。请检查插件列表后再尝试安装。',
+    ),
+    'installUnknownTitle': (
+      en: 'Installation result unavailable',
+      zh: '未能获取安装结果',
+    ),
+    'installUpgradeNotice': (
+      en: 'On-demand Official plugins offer Update when their version differs from DSH. To update other plugins, uninstall and reinstall them.',
+      zh: '按需安装的官方插件会在版本与 DSH 不同时提供“更新”。其他插件请先卸载再安装新版。',
+    ),
+    'installUseGithubMirror': (en: 'Use mainland China mirror', zh: '改用国内镜像'),
+    'installVersion': (en: 'Version {version}', zh: '版本 {version}'),
+    'installViewTask': (en: 'View installation', zh: '查看安装任务'),
+    'installedTab': (en: 'Installed', zh: '已安装'),
+    'installedTitle': (en: 'Installed', zh: '已安装'),
+    'installingTitle': (en: 'Installing the plugin…', zh: '插件安装中…'),
+    'intro': (en: 'Install, enable, and configure plugins', zh: '安装、启用和配置插件'),
+    'loading': (en: 'Reading plugins…', zh: '正在读取插件…'),
+    'metadataError': (
+      en: 'Package metadata error: {error}',
+      zh: '包元信息错误：{error}',
+    ),
+    'moreAction': (en: 'More', zh: '更多'),
+    'moreTitle': (en: 'Experimental plugins', zh: '实验性插件'),
+    'openDetail': (en: 'View {name}', zh: '查看 {name}'),
+    'overriddenNotice': (
+      en: '{name} was saved, but a higher-priority configuration overrides it, so it is not in effect',
+      zh: '{name} 已保存，但被更高优先级的配置覆盖，当前未生效',
+    ),
+    'panel': (en: 'Plugins', zh: '插件'),
+    'partOff': (en: 'Off', zh: '已关闭'),
+    'partToggle': (en: 'Enable component {name}', zh: '启用组件 {name}'),
+    'partsCountFailed': (en: '{count} failed', zh: '{count} 异常'),
+    'partsCountOff': (en: '{count} off', zh: '{count} 已停用'),
+    'partsCountRunning': (en: '{count} running', zh: '{count} 运行中'),
+    'partsCountTotal': (en: '{count} total', zh: '共 {count} 个'),
+    'partsEmpty': (
+      en: 'This plugin pack contains no components.',
+      zh: '这个插件包不包含任何组件。',
+    ),
+    'partsFilter': (en: 'Filter components', zh: '筛选组件'),
+    'partsFilterEmpty': (en: 'No component matches.', zh: '没有匹配的组件。'),
+    'partsLabel': (en: 'Components', zh: '包含的组件'),
+    'previewAlt': (en: '{name} feature preview', zh: '{name}功能预览'),
+    'previewUnavailable': (
+      en: 'Could not display feature preview',
+      zh: '无法显示功能配图',
+    ),
+    'reasonAlreadyInstalled': (
+      en: 'This package is already installed; uninstall it before installing another version.',
+      zh: '这个包已经安装；要安装其他版本，请先卸载它',
+    ),
+    'reasonAmbiguousInstall': (
+      en: 'Which package was installed cannot be told from the dependency change.',
+      zh: '无法从依赖变更中确定安装了哪一个包',
+    ),
+    'reasonBundleInUse': (
+      en: 'Other configuration still uses this bundle\'s components; switch them off first.',
+      zh: '其他配置仍在使用这个组合包的组件，请先停用它们',
+    ),
+    'reasonIncompatibleInstall': (
+      en: 'Install a plugin version compatible with this DSH.',
+      zh: '请安装与当前 DSH 兼容的插件版本。',
+    ),
+    'reasonIncompatibleInstalled': (
+      en: 'Uninstall it and install a version compatible with this DSH.',
+      zh: '请卸载后重新安装与当前 DSH 兼容的版本。',
+    ),
+    'reasonIncompatibleVersion': (
+      en: '{plugin} is incompatible with DSH {runtime} (requires {requirements}); running it may cause crashes or data loss.',
+      zh: '{plugin} 与 DSH {runtime} 不兼容（要求 {requirements}），运行它可能导致崩溃或数据丢失。',
+    ),
+    'reasonIncompatibleVersionUnnamed': (
+      en: 'This plugin is incompatible with the running DSH version; running it may cause crashes or data loss.',
+      zh: '这个插件与当前 DSH 版本不兼容，运行它可能导致崩溃或数据丢失。',
+    ),
+    'reasonInvalidSpec': (
+      en: 'Enter a valid package name or address.',
+      zh: '请输入有效的包名或地址',
+    ),
+    'reasonLabel': (en: 'Reason', zh: '原因'),
+    'reasonManagementRequired': (
+      en: 'Plugin management needs it; it cannot be switched off or uninstalled.',
+      zh: '插件管理所需，不能停用或卸载',
+    ),
+    'reasonNotBundle': (
+      en: 'This package declares no bundle, so it cannot be managed as a plugin.',
+      zh: '这个包没有声明组合包，不能作为插件管理',
+    ),
+    'reasonNotRemovable': (
+      en: 'This package is not owned by the profile, or plugin management needs it.',
+      zh: '这个包不属于当前 profile，或者是插件管理所需的组件',
+    ),
+    'reasonOperationError': (
+      en: 'The Host reported an error.',
+      zh: 'Host 报告了一个错误',
+    ),
+    'reasonStaleApproval': (
+      en: 'The pending script approvals changed; install again to refresh them.',
+      zh: '待允许的安装脚本列表已变化，请重新安装以刷新',
+    ),
+    'reasonStopProfile': (
+      en: 'This profile runs without HMR; stop it and uninstall the package with dsh plugin.',
+      zh: '这个 profile 没有启用 HMR，正在使用的包要停止后用 dsh plugin 卸载',
+    ),
+    'reasonUnaddressable': (
+      en: 'The profile patch cannot address this one uniquely.',
+      zh: '当前 profile 的 patch 无法唯一定位这一项',
+    ),
+    'reasonUnknownPlugin': (en: 'No such plugin.', zh: '找不到该插件'),
+    'refresh': (en: 'Refresh', zh: '刷新'),
+    'refreshError': (en: 'Refresh failed. Please try again.', zh: '刷新失败，请重试'),
+    'registryCustom': (en: 'Custom address', zh: '自定义地址'),
+    'registryCustomHint': (
+      en: 'Enter an internal or private npm registry address starting with http:// or https://. If it requires a login, store the credentials in ~/.npmrc on this machine.',
+      zh: '填写内网或私有 npm 源地址，以 http:// 或 https:// 开头。若为需要登录的源，请把凭据放在本机的 ~/.npmrc 里。',
+    ),
+    'registryCustomInvalid': (
+      en: 'Enter an address starting with http:// or https://',
+      zh: '请输入以 http:// 或 https:// 开头的地址',
+    ),
+    'registryCustomPlaceholder': (
+      en: 'https://npm.example.com/',
+      zh: 'https://npm.example.com/',
+    ),
+    'registryDefault': (en: 'Default registry', zh: '默认安装源'),
+    'registryLegend': (
+      en: 'The npm registry the plugin is downloaded from',
+      zh: '从哪个 npm 源下载插件',
+    ),
+    'registryListSeparator': (en: ', ', zh: '、'),
+    'registryNpmmirror': (en: 'Mainland China mirror', zh: '中国大陆镜像源'),
+    'registryOfficial': (en: 'Official npm registry', zh: 'npm 官方源'),
+    'registryToggle': (en: 'Registry', zh: '安装源'),
+    'restartNotice': (
+      en: 'Restart DSH to apply the change. {reason}',
+      zh: '请重启 DSH 使更改生效。{reason}',
+    ),
+    'restartReasonHostModule': (
+      en: 'The change reaches modules DSH itself loaded.',
+      zh: '更改涉及 DSH 自身已加载的模块。',
+    ),
+    'restartReasonModuleComparison': (
+      en: 'DSH could not compare the loaded plugins with their files.',
+      zh: 'DSH 无法将已加载的插件与磁盘上的文件进行比较。',
+    ),
+    'restartReasonNoHmr': (
+      en: 'This profile applies changes only at startup.',
+      zh: '这个 profile 只在启动时应用更改。',
+    ),
+    'restartReasonPackageMoved': (
+      en: 'An installed package now resolves to another directory, or the change replaces a package the DSH installation provides. Uninstall a package before installing it from another location.',
+      zh: '已安装的插件包解析到了另一个目录，或者更改替换了 DSH 安装自带的包。从其他位置安装前请先卸载。',
+    ),
+    'restartReasonUnmanagedPlugin': (
+      en: 'The change reaches a plugin running outside the plugin list.',
+      zh: '更改涉及一个不受插件列表管理的插件。',
+    ),
+    'retry': (en: 'Retry', zh: '重试'),
+    'rowPhaseActive': (en: 'Running', zh: '运行中'),
+    'rowPhaseFailed': (en: 'Problem', zh: '异常'),
+    'rowPhaseLoading': (en: 'Loading', zh: '加载中'),
+    'rowPhasePending': (en: 'Waiting for dependencies', zh: '等待依赖'),
+    'rowPhaseUnloading': (en: 'Unloading', zh: '卸载中'),
+    'rowStateIdle': (en: 'Not running', zh: '未运行'),
+    'sentenceSeparator': (en: ' ', zh: ''),
+    'sourceBuiltIn': (en: 'Built in', zh: '内置'),
+    'sourceNotInstalled': (en: 'Not installed', zh: '未安装'),
+    'sourceSpec': (en: 'Code source', zh: '代码来源'),
+    'sourceTargetSpec': (en: 'Source for this DSH', zh: '当前 DSH 对应来源'),
+    'sourceTargetVersion': (en: 'Version for this DSH', zh: '当前 DSH 对应版本'),
+    'sourceTitle': (en: 'Source', zh: '来源信息'),
+    'sourceVersion': (en: 'Current version', zh: '当前版本'),
+    'statusBeta': (en: 'Experimental', zh: '实验性'),
+    'statusMissingFiles': (en: 'Package unavailable', zh: '包不可用'),
+    'statusNotInstalled': (en: 'Not installed', zh: '未安装'),
+    'statusProblem': (en: 'Problem', zh: '异常'),
+    'statusUpdateAvailable': (en: 'Update available', zh: '可更新'),
+    'tabsLabel': (en: 'Plugin views', zh: '插件视图'),
+    'terminalCollapse': (en: 'Collapse', zh: '收起'),
+    'terminalCollapseAria': (en: 'Collapse output', zh: '收起输出'),
+    'terminalCommandLine': (en: 'Command line {n}', zh: '命令第 {n} 行'),
+    'terminalCopied': (en: 'Copied', zh: '复制成功'),
+    'terminalCopy': (en: 'Copy', zh: '复制'),
+    'terminalDone': (en: 'Done', zh: '已完成'),
+    'terminalExitCode': (en: 'exit code {code}', zh: '退出码 {code}'),
+    'terminalExpand': (en: '… {n} more lines', zh: '… 其余 {n} 行'),
+    'terminalExpandAria': (
+      en: 'Expand the remaining {n} output lines',
+      zh: '展开其余 {n} 行输出',
+    ),
+    'terminalFailed': (en: 'Failed', zh: '失败'),
+    'terminalNoExitCode': (en: 'no exit code', zh: '未正常退出'),
+    'terminalNoOutput': (en: 'No output', zh: '无输出'),
+    'terminalRunning': (en: 'Running', zh: '运行中'),
+    'terminalSignal': (en: 'signal {signal}', zh: '信号 {signal}'),
+    'title': (en: 'Plugins', zh: '插件'),
+    'unavailable': (
+      en: 'This deployment runs without a manageable profile, so plugins cannot be installed or switched here.',
+      zh: '本部署没有可管理的 profile，无法安装或启停插件。',
+    ),
+    'uninstall': (en: 'Uninstall', zh: '卸载'),
+    'uninstallLabel': (en: 'Uninstall {name}', zh: '卸载 {name}'),
+    'update': (en: 'Update', zh: '更新'),
+    'updateLabel': (en: 'Update {name}', zh: '更新 {name}'),
+    'versionTag': (en: 'v{version}', zh: 'v{version}'),
+  },
   'question': {
     'action.next': (en: 'Next', zh: '下一题'),
     'action.skip': (en: 'Skip', zh: '跳过'),
@@ -1688,6 +2206,38 @@ const Map<String, Map<String, ({String en, String? zh})>> dshCatalog = {
     'title': (en: 'Settings', zh: '设置'),
     'trigger': (en: 'Settings', zh: '设置'),
   },
+  'settings.agentLoop': {
+    'description': (
+      en: 'Control how the Agent dispatches tool calls.',
+      zh: '控制 Agent 派发工具调用的方式。',
+    ),
+    'invalidNumber': (
+      en: 'Enter a number, or leave blank to use the default.',
+      zh: '请填数字；留空表示使用默认值。',
+    ),
+    'maxParallel': (en: 'Parallel tool calls', zh: '并行工具调用数'),
+    'maxParallelHint': (
+      en: 'Upper bound on parallel-safe calls running at once within one step.',
+      zh: '同一步内最多同时运行多少个可并行的调用。',
+    ),
+    'overridden': (en: 'Overridden', zh: '已覆盖'),
+    'readOnly': (
+      en: 'This deployment stores settings read-only.',
+      zh: '本部署的设置为只读。',
+    ),
+    'reset': (en: 'Reset to default', zh: '恢复默认'),
+    'save': (en: 'Save', zh: '保存'),
+    'saveFailed': (
+      en: 'The deployment did not accept these values; they were left for you to correct.',
+      zh: '本部署没有接受这些值，已保留供你修改。',
+    ),
+    'saving': (en: 'Saving…', zh: '保存中…'),
+    'title': (en: 'Agent loop', zh: 'Agent 循环'),
+    'unavailable': (
+      en: 'This plugin is not loaded, so it cannot be configured right now.',
+      zh: '该插件当前未加载，暂时无法配置。',
+    ),
+  },
   'settings.locale': {'language.title': (en: 'Language', zh: '语言')},
   'settings.permission': {
     'confirm.acknowledge': (
@@ -1711,6 +2261,149 @@ const Map<String, Map<String, ({String en, String? zh})>> dshCatalog = {
     'preset.workspaceWrite': (en: 'Workspace Write', zh: '工作区内修改'),
     'title': (en: 'Permission', zh: '权限'),
     'unavailable': (en: 'Unavailable', zh: '不可用'),
+  },
+  'settings.shell': {
+    'description': (
+      en: 'Limit how long each command may run and how much it may output.',
+      zh: '限制每条命令最多能跑多久、最多输出多少内容。',
+    ),
+    'invalidNumber': (
+      en: 'Enter a number, or leave blank to use the default.',
+      zh: '请填数字；留空表示使用默认值。',
+    ),
+    'maxOutputBytes': (en: 'Output cap per stream (bytes)', zh: '单流输出上限（字节）'),
+    'maxOutputBytesHint': (
+      en: 'Output beyond this spills to a temporary file rather than being lost.',
+      zh: '超出部分会转存到临时文件，而不是被丢弃。',
+    ),
+    'overridden': (en: 'Overridden', zh: '已覆盖'),
+    'readOnly': (
+      en: 'This deployment stores settings read-only.',
+      zh: '本部署的设置为只读。',
+    ),
+    'reset': (en: 'Reset to default', zh: '恢复默认'),
+    'save': (en: 'Save', zh: '保存'),
+    'saveFailed': (
+      en: 'The deployment did not accept these values; they were left for you to correct.',
+      zh: '本部署没有接受这些值，已保留供你修改。',
+    ),
+    'saving': (en: 'Saving…', zh: '保存中…'),
+    'timeoutMs': (en: 'Command timeout (ms)', zh: '命令超时（毫秒）'),
+    'timeoutMsHint': (
+      en: 'How long one command may run before it is terminated.',
+      zh: '单条命令允许运行多久，超时即终止。',
+    ),
+    'title': (en: 'Shell', zh: '终端'),
+    'unavailable': (
+      en: 'This plugin is not loaded, so it cannot be configured right now.',
+      zh: '该插件当前未加载，暂时无法配置。',
+    ),
+  },
+  'settings.subagent': {
+    'overridden': (en: 'Overridden', zh: '已覆盖'),
+    'readOnly': (
+      en: 'This deployment stores settings read-only.',
+      zh: '本部署的设置为只读。',
+    ),
+    'reset': (en: 'Reset to default', zh: '恢复默认'),
+    'save': (en: 'Save', zh: '保存'),
+    'saveFailed': (
+      en: 'The deployment did not accept these values; they were left for you to correct.',
+      zh: '本部署没有接受这些值，已保留供你修改。',
+    ),
+    'saving': (en: 'Saving…', zh: '保存中…'),
+    'subagentCapacityHelp': (
+      en: 'Total live Subagents under the same main Agent, across all recursion levels. The main Agent is excluded. New start requests are rejected when the limit is reached.',
+      zh: '同一主 Agent 下，所有递归层级同时存活的子智能体总数，主 Agent 不计入。达到上限时，新的启动请求会被拒绝。',
+    ),
+    'subagentCapacityHelpLabel': (
+      en: 'About the Subagent parallelism limit',
+      zh: '子智能体并行数量上限说明',
+    ),
+    'subagentCapacityInvalid': (
+      en: 'Enter a whole number of 1 or more.',
+      zh: '请输入不小于 1 的整数。',
+    ),
+    'subagentDepthHelp': (
+      en: 'Limits how many levels of Subagents an Agent can create.',
+      zh: '限制 Agent 创建子智能体的递归层级。',
+    ),
+    'subagentDepthHelpLabel': (
+      en: 'About maximum recursion depth',
+      zh: '最大递归深度说明',
+    ),
+    'subagentDepthInvalid': (
+      en: 'Enter a whole number of 0 or more.',
+      zh: '请输入不小于 0 的整数。',
+    ),
+    'subagentDepthOne': (
+      en: 'Only the main Agent can create Subagents',
+      zh: '仅允许主 Agent 创建子智能体',
+    ),
+    'subagentDepthOverride': (
+      en: 'If a tool defines its own maximum recursion depth, that setting takes precedence.',
+      zh: '如果某个工具单独设置了最大递归深度，以该工具的设置为准。',
+    ),
+    'subagentDepthZero': (en: 'Disable Subagents', zh: '禁用子智能体'),
+    'subagentDescription': (
+      en: 'Set Subagent recursion depth, count, and models.',
+      zh: '设置子智能体的递归层级、数量和模型。',
+    ),
+    'subagentLimitsTitle': (en: 'Limits', zh: '运行限制'),
+    'subagentMaxActive': (en: 'Subagent parallelism limit', zh: '子智能体并行数量上限'),
+    'subagentMaxDepth': (en: 'Maximum recursion depth', zh: '最大递归深度'),
+    'subagentModelSelectionAllowed': (
+      en: 'Models agents may choose',
+      zh: 'Agent 可选择的模型',
+    ),
+    'subagentModelSelectionChoose': (
+      en: 'When enabled, agents can choose a provider, model, and reasoning effort for each Subagent from the authorized models below. Applies only to new sessions.',
+      zh: '开启后，Agent 可以从下方授权模型中，为每个子智能体选择提供方、模型和推理强度。仅影响新会话。',
+    ),
+    'subagentModelSelectionConflict': (
+      en: 'Settings changed elsewhere. Discard your draft and try again.',
+      zh: '设置已在其他位置更新。请放弃修改后重试。',
+    ),
+    'subagentModelSelectionEmpty': (
+      en: 'No model provider currently advertises a model.',
+      zh: '当前没有模型提供方公布模型。',
+    ),
+    'subagentModelSelectionLoadFailed': (
+      en: 'Models could not be loaded.',
+      zh: '无法加载模型。',
+    ),
+    'subagentModelSelectionLoading': (en: 'Loading models…', zh: '正在加载模型…'),
+    'subagentModelSelectionOff': (
+      en: 'Subagents use configured defaults or inherit the parent agent\'s model. Saved model choices are retained.',
+      zh: '关闭后，子智能体使用配置的默认模型或继承父 Agent 的模型；已选模型会保留。',
+    ),
+    'subagentModelSelectionPartial': (
+      en: 'Some model providers could not be loaded; saved choices remain removable.',
+      zh: '部分模型提供方暂时无法加载；已保存的选择仍可移除。',
+    ),
+    'subagentModelSelectionRequired': (
+      en: 'Select at least one model before saving.',
+      zh: '保存前请至少选择一个模型。',
+    ),
+    'subagentModelSelectionRetry': (en: 'Retry', zh: '重试'),
+    'subagentModelSelectionTitle': (en: 'Model selection', zh: '模型选择'),
+    'subagentModelSelectionToggle': (
+      en: 'Allow agents to choose models for Subagents',
+      zh: '允许 Agent 为子智能体选择模型',
+    ),
+    'subagentModelSelectionUnavailable': (
+      en: 'Currently unavailable',
+      zh: '当前不可用',
+    ),
+    'subagentModelSelectionUnavailableGroup': (
+      en: 'Saved but currently unavailable',
+      zh: '已保存但当前不可用',
+    ),
+    'subagentTitle': (en: 'Subagent', zh: '子智能体'),
+    'unavailable': (
+      en: 'This plugin is not loaded, so it cannot be configured right now.',
+      zh: '该插件当前未加载，暂时无法配置。',
+    ),
   },
   'settings.theme': {
     'appearance.dark': (en: 'Dark', zh: '深色'),
