@@ -30,7 +30,7 @@ class PermissionRow extends StatefulWidget {
     required this.i18n,
   });
 
-  final PermissionDefaultController controller;
+  final PermissionDefaults controller;
   final DshI18n i18n;
 
   @override

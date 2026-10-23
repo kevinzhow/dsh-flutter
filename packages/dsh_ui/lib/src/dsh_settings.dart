@@ -4,6 +4,7 @@ import 'package:flutter/services.dart'
 import 'package:flutter/widgets.dart';
 
 import 'dsh_corners.dart';
+import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
@@ -130,7 +131,9 @@ class DshSettingsRow extends StatelessWidget {
         ],
       ),
     );
-    return DecoratedBox(
+    // A Container: the border takes room below the padding, as CSS's does.
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         border: line
             ? Border(
@@ -141,32 +144,29 @@ class DshSettingsRow extends StatelessWidget {
               )
             : null,
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            if (constraints.maxWidth < dshSettingsRowWide) {
-              return Column(
-                crossAxisAlignment: stackedControl
-                    ? CrossAxisAlignment.stretch
-                    : CrossAxisAlignment.start,
-                children: [
-                  text(EdgeInsets.zero),
-                  const SizedBox(height: 12),
-                  control,
-                ],
-              );
-            }
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < dshSettingsRowWide) {
+            return Column(
+              crossAxisAlignment: stackedControl
+                  ? CrossAxisAlignment.stretch
+                  : CrossAxisAlignment.start,
               children: [
-                Expanded(child: text(const EdgeInsets.only(right: 48))),
-                const SizedBox(width: 8),
+                text(EdgeInsets.zero),
+                const SizedBox(height: 12),
                 control,
               ],
             );
-          },
-        ),
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: text(const EdgeInsets.only(right: 48))),
+              const SizedBox(width: 8),
+              control,
+            ],
+          );
+        },
       ),
     );
   }
@@ -220,7 +220,10 @@ class _DshSelectorPillState extends State<DshSelectorPill> {
             decoration: theme.cornerDecoration(
               theme.radiusMd,
               color: _hovered && enabled
-                  ? theme.interactiveBgHover
+                  ? blendLikeChromium(
+                      theme.interactiveBgHover,
+                      DshSurface.of(context),
+                    )
                   : theme.color('--dsw-alias-bg-module-platform'),
             ),
             child: Row(
@@ -533,7 +536,8 @@ class _DshFieldInputState extends State<DshFieldInput> {
       label: widget.semanticLabel,
       textField: true,
       child: Container(
-        height: 32,
+        // dsh's input is content-box: 32px of content inside a 1px border.
+        height: 34,
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: theme.cornerDecoration(
           theme.radiusMd,
@@ -546,22 +550,44 @@ class _DshFieldInputState extends State<DshFieldInput> {
         alignment: Alignment.center,
         child: Material(
           type: MaterialType.transparency,
-          child: EditableText(
-            controller: _controller,
-            focusNode: _focus,
-            readOnly: !widget.enabled,
-            maxLines: 1,
-            style: style,
-            cursorColor: theme.focusRingColor,
-            backgroundCursorColor: theme.labelSecondary,
-            selectionColor: theme.focusRingColor.withValues(alpha: 0.3),
-            textInputAction: TextInputAction.done,
-            autocorrect: false,
-            enableSuggestions: false,
-            inputFormatters: widget.maxLength == null
-                ? null
-                : [_MaxLength(widget.maxLength!)],
-            onSubmitted: (_) => _focus.unfocus(),
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              // The placeholder shows while the field is empty (dsh `::placeholder`).
+              ValueListenableBuilder<TextEditingValue>(
+                valueListenable: _controller,
+                builder: (context, value, _) =>
+                    value.text.isEmpty && widget.placeholder != null
+                    ? IgnorePointer(
+                        child: Text(
+                          widget.placeholder!,
+                          maxLines: 1,
+                          overflow: TextOverflow.clip,
+                          style: style.copyWith(
+                            color: theme.color('--dsw-alias-label-dimmed'),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+              ),
+              EditableText(
+                controller: _controller,
+                focusNode: _focus,
+                readOnly: !widget.enabled,
+                maxLines: 1,
+                style: style,
+                cursorColor: theme.focusRingColor,
+                backgroundCursorColor: theme.labelSecondary,
+                selectionColor: theme.focusRingColor.withValues(alpha: 0.3),
+                textInputAction: TextInputAction.done,
+                autocorrect: false,
+                enableSuggestions: false,
+                inputFormatters: widget.maxLength == null
+                    ? null
+                    : [_MaxLength(widget.maxLength!)],
+                onSubmitted: (_) => _focus.unfocus(),
+              ),
+            ],
           ),
         ),
       ),

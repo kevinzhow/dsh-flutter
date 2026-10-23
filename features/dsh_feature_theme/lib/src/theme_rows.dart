@@ -34,8 +34,10 @@ class AppearanceRow extends StatelessWidget {
       builder: (context) {
         final preference = service.current.preference;
         final separator = !DshColumnEnd.of(context);
-        return DecoratedBox(
+        // A Container: the border takes room below the padding, as CSS's does.
+        return Container(
           key: const ValueKey('appearance-row'),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
             border: separator
                 ? Border(
@@ -46,35 +48,32 @@ class AppearanceRow extends StatelessWidget {
                   )
                 : null,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DshLineText(
-                  _t(i18n, 'appearance.title'),
-                  style: theme
-                      .textStyle('--dsw-font-s-14')
-                      .copyWith(color: theme.labelPrimary),
-                ),
-                const SizedBox(height: 8),
-                _Cubes(
-                  cubes: (compact) => [
-                    for (final (pref, key, icon) in _cubes)
-                      _Cube(
-                        key: ValueKey<String>('cube-${pref.name}'),
-                        icon: icon,
-                        label: _t(i18n, key),
-                        selected: preference == pref,
-                        compact: compact,
-                        onPressed: service.writable || !service.available
-                            ? () => service.setPreference(pref)
-                            : null,
-                      ),
-                  ],
-                ),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DshLineText(
+                _t(i18n, 'appearance.title'),
+                style: theme
+                    .textStyle('--dsw-font-s-14')
+                    .copyWith(color: theme.labelPrimary),
+              ),
+              const SizedBox(height: 8),
+              _Cubes(
+                cubes: (compact) => [
+                  for (final (pref, key, icon) in _cubes)
+                    _Cube(
+                      key: ValueKey<String>('cube-${pref.name}'),
+                      icon: icon,
+                      label: _t(i18n, key),
+                      selected: preference == pref,
+                      compact: compact,
+                      onPressed: service.writable || !service.available
+                          ? () => service.setPreference(pref)
+                          : null,
+                    ),
+                ],
+              ),
+            ],
           ),
         );
       },
@@ -155,9 +154,12 @@ class _CubeState extends State<_Cube> {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
+    final under = DshSurface.of(context);
     final fill = widget.selected
         ? theme.color('--dsw-alias-bg-module-platform')
-        : (_hovered ? theme.interactiveBgHover : null);
+        : (_hovered
+              ? blendLikeChromium(theme.interactiveBgHover, under)
+              : null);
     return Semantics(
       button: true,
       selected: widget.selected,
@@ -180,7 +182,10 @@ class _CubeState extends State<_Cube> {
               color: fill,
               borderColor: widget.selected
                   ? theme.color('--dsw-static-neutral-bluish-400')
-                  : theme.color('--dsw-alias-border-l4'),
+                  : blendLikeChromium(
+                      theme.color('--dsw-alias-border-l4'),
+                      fill ?? under,
+                    ),
               borderWidth: dshHairline,
             ),
             child: Column(
@@ -310,30 +315,71 @@ class _FontSettingsGroupState extends State<FontSettingsGroup> {
           title: title,
           description: _t(i18n, 'fontFamily.${role.name}.description'),
           // `flex: 0 1 240px` beside the text column.
-          control: wide ? SizedBox(width: 240, child: input) : input,
+          // The 240px basis is the content box: 258 with padding and border.
+          control: wide ? SizedBox(width: 258, child: input) : input,
         );
       },
     );
   }
 
   Widget _expander(DshI18n i18n) {
-    final theme = context.dsh;
     final label = _t(i18n, 'fontSize.more');
+    return _Expander(
+      label: label,
+      open: _open,
+      onTap: () => setState(() => _open = !_open),
+    );
+  }
+}
+
+class _Expander extends StatefulWidget {
+  const _Expander({
+    required this.label,
+    required this.open,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool open;
+  final VoidCallback onTap;
+
+  @override
+  State<_Expander> createState() => _ExpanderState();
+}
+
+class _ExpanderState extends State<_Expander> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
     return Semantics(
       button: true,
-      expanded: _open,
-      label: label,
+      expanded: widget.open,
+      label: widget.label,
       excludeSemantics: true,
-      child: GestureDetector(
-        key: const ValueKey<String>('font-expander'),
-        behavior: HitTestBehavior.opaque,
-        onTap: () => setState(() => _open = !_open),
-        child: SizedBox(
-          width: 24,
-          height: 24,
-          child: Center(
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: GestureDetector(
+          key: const ValueKey<String>('font-expander'),
+          behavior: HitTestBehavior.opaque,
+          onTap: widget.onTap,
+          child: Container(
+            width: 24,
+            height: 24,
+            alignment: Alignment.center,
+            decoration: theme.cornerDecoration(
+              theme.number('--dsw-radius-xs'),
+              color: _hovered
+                  ? blendLikeChromium(
+                      theme.interactiveBgHover,
+                      DshSurface.of(context),
+                    )
+                  : null,
+            ),
             child: Transform.rotate(
-              angle: _open ? math.pi : 0,
+              angle: widget.open ? math.pi : 0,
               child: DshIcon(
                 DshIcons.chevronDown,
                 size: 12,

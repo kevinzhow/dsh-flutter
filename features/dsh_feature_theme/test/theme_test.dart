@@ -379,7 +379,12 @@ void main() {
       expect(
         (t
                     .widget<DecoratedBox>(
-                      find.byKey(const ValueKey('appearance-row')),
+                      find
+                          .descendant(
+                            of: find.byKey(const ValueKey('appearance-row')),
+                            matching: find.byType(DecoratedBox),
+                          )
+                          .first,
                     )
                     .decoration
                 as BoxDecoration)

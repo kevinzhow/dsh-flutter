@@ -83,11 +83,25 @@ permissionDefaultOf(
   return (currentValue: currentValue, options: options);
 }
 
+/// What the Settings row needs of the default: its state and its two verbs.
+/// [PermissionDefaultController] is the implementation; the parity tool and
+/// tests supply fixed ones.
+abstract interface class PermissionDefaults {
+  /// Row snapshot.
+  Observable<PermissionSettingsState> get state;
+
+  /// Begin following the host and reflect its answer.
+  Future<void> load();
+
+  /// Persist one preset as the default of new sessions.
+  Future<void> select(String preset);
+}
+
 /// Controller deriving the General row from the shared mirror and the
 /// permission catalog and writing the default through the mirror (dsh
 /// `PermissionPresetSettingsController`). Writes target only `defaultPreset`,
 /// carry the descriptor revision, and fold their answer back into the mirror.
-class PermissionDefaultController {
+class PermissionDefaultController implements PermissionDefaults {
   PermissionDefaultController({
     required SettingsDescribeMirror mirror,
     required HostRemotes remotes,
@@ -100,7 +114,7 @@ class PermissionDefaultController {
   final HostRemotes _remotes;
   final PermissionCatalogDirectory _catalog;
 
-  /// Row snapshot.
+  @override
   final Observable<PermissionSettingsState> state = Observable(
     const PermissionSettingsState(),
   );
@@ -112,6 +126,7 @@ class PermissionDefaultController {
 
   /// Begin following the mirror and the catalog (idempotent) and reflect
   /// their current answers.
+  @override
   Future<void> load() async {
     if (_disposed) return;
     _following ??= _mirror.subscribe(_derive);
@@ -132,6 +147,7 @@ class PermissionDefaultController {
   /// Persist one preset as the default for subsequently created sessions. A
   /// selection while one is saving is ignored (the control is disabled
   /// meanwhile, so this only drops programmatic double-submits).
+  @override
   Future<void> select(String preset) async {
     final view = _mirror.namespace(permissionSettingsNs);
     if (view == null || !state.value.writable || _saving) return;
