@@ -6,9 +6,29 @@ import 'package:flutter/widgets.dart';
 final Slot<SettingsOwner, Widget> _itemSlot = DshSlots.settingsGeneralItem
     .typed<SettingsOwner, Widget>();
 
-/// The General section (dsh `GeneralSection`): one scrolling column that
-/// stacks the rows features contribute to `settings.general.item`, in order.
-/// The last row is marked as the end of the column, so it draws no separator.
+/// The rows features contribute to `settings.general.item`, stacked in order
+/// (dsh `GeneralSection`'s `.section` column). The last row is marked as the end
+/// of the column, so it draws no separator.
+class GeneralColumn extends StatelessWidget {
+  const GeneralColumn({super.key, required this.slots});
+
+  final SlotRegistry slots;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = slots.renderList(_itemSlot, const SettingsOwner());
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < rows.length; i++)
+          i == rows.length - 1 ? DshColumnEnd(child: rows[i]) : rows[i],
+      ],
+    );
+  }
+}
+
+/// The General section (dsh `GeneralSection`): the [GeneralColumn] in one
+/// scrolling page.
 class GeneralSection extends StatelessWidget {
   const GeneralSection({super.key, required this.slots});
 
@@ -16,7 +36,6 @@ class GeneralSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rows = slots.renderList(_itemSlot, const SettingsOwner());
     return SingleChildScrollView(
       key: const ValueKey('general-section'),
       padding: const EdgeInsets.fromLTRB(
@@ -25,13 +44,7 @@ class GeneralSection extends StatelessWidget {
         DshSpace.lg + 8,
         DshSpace.xl,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (var i = 0; i < rows.length; i++)
-            i == rows.length - 1 ? DshColumnEnd(child: rows[i]) : rows[i],
-        ],
-      ),
+      child: GeneralColumn(slots: slots),
     );
   }
 }
