@@ -1,0 +1,88 @@
+import 'package:dsh_conversation/dsh_conversation.dart';
+import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_slots/dsh_slots.dart';
+import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/widgets.dart';
+
+import 'chat_nodes.dart';
+import 'chat_view.dart';
+
+/// `conversation.view` as this feature uses it (owner: the open session).
+final Slot<SessionOwner, Widget> viewSlot = DshSlots.conversationView
+    .typed<SessionOwner, Widget>();
+
+/// `conversation.chat.node` as this feature uses it.
+final Slot<ChatNodeOwner, Widget> chatNodeSlot = DshSlots.conversationChatNode
+    .typed<ChatNodeOwner, Widget>();
+
+/// Occupy `conversation.view` with the chat and `conversation.chat.node` with
+/// the node renderers this feature owns. `tool-call` is the tool feature's.
+void registerChatFeature(
+  SlotRegistry slots, {
+  required DshI18n Function() i18n,
+}) {
+  slots.register<SessionOwner, Widget>(
+    viewSlot,
+    (owner) => ChatView(
+      owner: owner,
+      slots: slots,
+      i18n: i18n(),
+      nodeSlot: chatNodeSlot,
+    ),
+    id: 'chat',
+  );
+
+  void node(
+    String kind,
+    Widget Function(ChatNodeOwner owner, DshI18n i18n) build,
+  ) => slots.register<ChatNodeOwner, Widget>(
+    chatNodeSlot,
+    (owner) => build(owner, i18n()),
+    key: kind,
+  );
+
+  node('user', (o, t) {
+    final d = o.node.data as MessageData;
+    return UserBubble(text: d.text, i18n: t);
+  });
+  node('steering', (o, t) {
+    final d = o.node.data as MessageData;
+    return UserBubble(text: d.text, i18n: t, steering: true);
+  });
+  node('turn-trigger', (o, t) {
+    final d = o.node.data as MessageData;
+    final kind = d.source?['kind'] as String?;
+    final key = kind == null ? null : 'message.trigger.$kind';
+    final text = key != null && t.has('chat', key)
+        ? t.t('chat', key)
+        : (d.producerLabel ?? t.t('chat', 'message.contextInjection'));
+    return NoticeRow(text: text);
+  });
+  node(
+    'assistant-step',
+    (o, t) => AssistantStepView(
+      data: o.node.data as AssistantData,
+      nodeKey: o.node.key,
+      i18n: t,
+    ),
+  );
+  node(
+    'turn-tail',
+    (o, t) => TurnTailView(data: o.node.data as TurnTailData, i18n: t),
+  );
+  node(
+    'turn-error',
+    (o, t) => TurnErrorView(data: o.node.data as TurnErrorData, i18n: t),
+  );
+  node(
+    'turn-max-tokens',
+    (o, t) => NoticeRow(
+      text: t.t(appNamespace, 'session.turn.maxTokens'),
+      status: DshStatus.warn,
+    ),
+  );
+  node('unknown', (o, t) {
+    final d = o.node.data as UnknownData;
+    return NoticeRow(text: '${t.t('common', 'unknown')}: ${d.type}');
+  });
+}

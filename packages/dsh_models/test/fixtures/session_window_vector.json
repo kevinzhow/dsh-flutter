@@ -3465,7 +3465,7 @@
   }
  ],
  "expectedBy": {
-  "model": "dsh TypeScript client (session-controller client + gateway journal)",
+  "model": "dsh TypeScript client (session-controller client + gateway journal) and conversation engine (ui-conversation + ui-chat)",
   "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
   "runner": "tool/vectors/ts/run_vector.mjs",
   "realClasses": [
@@ -3476,11 +3476,14 @@
    "RemoteStreamCarrierError (gateway/client/stream-client.ts)",
    "ClientAssistantStream (session-controller/client/sessions/assistant-stream.ts)",
    "MutableSessionEventSource (session-controller/client/contract/events.ts)",
-   "expandAssistantStream (llm/assistant-stream.ts)"
+   "expandAssistantStream (llm/assistant-stream.ts)",
+   "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
+   "inbox, message, developer-message, system-message, assistant, tool, turn-error, turn-max-tokens, turn-tail Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
   ],
   "glue": [
    "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
    "step driver, settle loop and snapshot encoder",
+   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process, request-prompt, command, compaction, model-retry and process groups are not registered",
    "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
   ]
  },
@@ -6529,6 +6532,6286 @@
      "turn/end"
     ]
    ]
+  }
+ ],
+ "expectedChat": [
+  {
+   "step": 1,
+   "nodes": [],
+   "timeline": [],
+   "nodeCount": 0,
+   "openTurn": null
+  },
+  {
+   "step": 2,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": null
+  },
+  {
+   "step": 4,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": null
+  },
+  {
+   "step": 5,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": []
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": 12
+  },
+  {
+   "step": 6,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": []
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": 12
+  },
+  {
+   "step": 7,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": 12
+  },
+  {
+   "step": 8,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 12
+  },
+  {
+   "step": 9,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 12
+  },
+  {
+   "step": 10,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 12
+  },
+  {
+   "step": 11,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "running",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267359,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": null,
+      "final": null
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 12,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "running",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267359,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": null,
+      "final": null
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 13,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "running",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267359,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": null,
+      "final": null
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 14,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "running",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267359,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": null,
+      "final": null
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 15,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "running",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267359,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": null,
+      "final": null
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 16,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 171.66666666666666,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": 1792763267359,
+       "completedTime": 1792763267362
+      }
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 170,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 17,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "open",
+     "startSeq": 168,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 12
+  },
+  {
+   "step": 18,
+   "nodes": [
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 7,
+   "openTurn": null
+  },
+  {
+   "step": 19,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "input",
+     "location": "session",
+     "turn": null,
+     "step": null,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": null,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 10,
+   "openTurn": null
+  },
+  {
+   "step": 21,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "id-13",
+     "anchorSeq": 139,
+     "groupTree": "input",
+     "location": "session",
+     "turn": null,
+     "step": null,
+     "data": {
+      "kind": "user",
+      "seq": 139,
+      "time": 1792763175278,
+      "content": [
+       {
+        "type": "text",
+        "text": "s67"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-3"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "10:1",
+     "anchorSeq": 140,
+     "groupTree": null,
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "status": "interrupted",
+      "turn": 10,
+      "step": 1,
+      "time": 1792763194222,
+      "blocks": [
+       [
+        "text",
+        "s299"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 140,
+       "messageId": "id-14",
+       "time": 1792763194222,
+       "turn": 10,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s299"
+        ]
+       ],
+       "usage": null,
+       "interrupted": true,
+       "stepStartTime": null,
+       "firstTokenTime": null,
+       "completedTime": 1792763194222
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "10",
+     "anchorSeq": 142.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "turn": 10,
+      "seq": 142,
+      "time": 1792763194223,
+      "closingSeq": 140,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763194306,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 10,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 142,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 141
+      }
+     ]
+    },
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": 144,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 146,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 13,
+   "openTurn": null
+  },
+  {
+   "step": 23,
+   "nodes": [
+    {
+     "kind": "assistant-step",
+     "id": "9:1",
+     "anchorSeq": 132,
+     "groupTree": null,
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 9,
+      "step": 1,
+      "time": 1792763175176,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 197,
+       "outputTokens": 2,
+       "totalTokens": 260935,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 132,
+       "messageId": "id-16",
+       "time": 1792763175176,
+       "turn": 9,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 197,
+        "outputTokens": 2,
+        "totalTokens": 260935,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": null,
+       "firstTokenTime": null,
+       "completedTime": 1792763175176
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "9",
+     "anchorSeq": 134.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "turn": 9,
+      "seq": 134,
+      "time": 1792763175178,
+      "closingSeq": 132,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-13",
+     "anchorSeq": 139,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 139,
+      "time": 1792763175278,
+      "content": [
+       {
+        "type": "text",
+        "text": "s67"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-3"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "10:1",
+     "anchorSeq": 140,
+     "groupTree": null,
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "status": "interrupted",
+      "turn": 10,
+      "step": 1,
+      "time": 1792763194222,
+      "blocks": [
+       [
+        "text",
+        "s299"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 140,
+       "messageId": "id-14",
+       "time": 1792763194222,
+       "turn": 10,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s299"
+        ]
+       ],
+       "usage": null,
+       "interrupted": true,
+       "stepStartTime": 1792763175264,
+       "firstTokenTime": null,
+       "completedTime": 1792763194222
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "10",
+     "anchorSeq": 142.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "seq": 142,
+      "time": 1792763194223,
+      "closingSeq": 140,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763194306,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 9,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 134,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 133
+      }
+     ]
+    },
+    {
+     "turn": 10,
+     "status": "closed",
+     "startSeq": 136,
+     "endSeq": 142,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 138,
+       "endSeq": 141
+      }
+     ]
+    },
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": 144,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 146,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 16,
+   "openTurn": null
+  },
+  {
+   "step": 25,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "id-17",
+     "anchorSeq": 129,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 129,
+      "time": 1792763156805,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-4"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "9:1",
+     "anchorSeq": 132,
+     "groupTree": null,
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 9,
+      "step": 1,
+      "time": 1792763175176,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 197,
+       "outputTokens": 2,
+       "totalTokens": 260935,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 132,
+       "messageId": "id-16",
+       "time": 1792763175176,
+       "turn": 9,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 197,
+        "outputTokens": 2,
+        "totalTokens": 260935,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763156792,
+       "firstTokenTime": null,
+       "completedTime": 1792763175176
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "9",
+     "anchorSeq": 134.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "seq": 134,
+      "time": 1792763175178,
+      "closingSeq": 132,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-13",
+     "anchorSeq": 139,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 139,
+      "time": 1792763175278,
+      "content": [
+       {
+        "type": "text",
+        "text": "s67"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-3"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "10:1",
+     "anchorSeq": 140,
+     "groupTree": null,
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "status": "interrupted",
+      "turn": 10,
+      "step": 1,
+      "time": 1792763194222,
+      "blocks": [
+       [
+        "text",
+        "s299"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 140,
+       "messageId": "id-14",
+       "time": 1792763194222,
+       "turn": 10,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s299"
+        ]
+       ],
+       "usage": null,
+       "interrupted": true,
+       "stepStartTime": 1792763175264,
+       "firstTokenTime": null,
+       "completedTime": 1792763194222
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "10",
+     "anchorSeq": 142.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "seq": 142,
+      "time": 1792763194223,
+      "closingSeq": 140,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763194306,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 9,
+     "status": "closed",
+     "startSeq": 126,
+     "endSeq": 134,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 128,
+       "endSeq": 133
+      }
+     ]
+    },
+    {
+     "turn": 10,
+     "status": "closed",
+     "startSeq": 136,
+     "endSeq": 142,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 138,
+       "endSeq": 141
+      }
+     ]
+    },
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": 144,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 146,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 17,
+   "openTurn": null
+  },
+  {
+   "step": 27,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "id-18",
+     "anchorSeq": 120,
+     "groupTree": "input",
+     "location": "session",
+     "turn": null,
+     "step": null,
+     "data": {
+      "kind": "user",
+      "seq": 120,
+      "time": 1792762893681,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-5"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "8:1",
+     "anchorSeq": 121,
+     "groupTree": null,
+     "location": "step",
+     "turn": 8,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 8,
+      "step": 1,
+      "time": 1792762910260,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 112,
+       "outputTokens": 2,
+       "totalTokens": 260850,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 121,
+       "messageId": "id-19",
+       "time": 1792762910260,
+       "turn": 8,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 112,
+        "outputTokens": 2,
+        "totalTokens": 260850,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": null,
+       "firstTokenTime": null,
+       "completedTime": 1792762910260
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "8",
+     "anchorSeq": 123.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 8,
+     "step": 1,
+     "data": {
+      "turn": 8,
+      "seq": 123,
+      "time": 1792762910262,
+      "closingSeq": 121,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-17",
+     "anchorSeq": 129,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 129,
+      "time": 1792763156805,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-4"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "9:1",
+     "anchorSeq": 132,
+     "groupTree": null,
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 9,
+      "step": 1,
+      "time": 1792763175176,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 197,
+       "outputTokens": 2,
+       "totalTokens": 260935,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 132,
+       "messageId": "id-16",
+       "time": 1792763175176,
+       "turn": 9,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 197,
+        "outputTokens": 2,
+        "totalTokens": 260935,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763156792,
+       "firstTokenTime": null,
+       "completedTime": 1792763175176
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "9",
+     "anchorSeq": 134.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "seq": 134,
+      "time": 1792763175178,
+      "closingSeq": 132,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-13",
+     "anchorSeq": 139,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 139,
+      "time": 1792763175278,
+      "content": [
+       {
+        "type": "text",
+        "text": "s67"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-3"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "10:1",
+     "anchorSeq": 140,
+     "groupTree": null,
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "status": "interrupted",
+      "turn": 10,
+      "step": 1,
+      "time": 1792763194222,
+      "blocks": [
+       [
+        "text",
+        "s299"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 140,
+       "messageId": "id-14",
+       "time": 1792763194222,
+       "turn": 10,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s299"
+        ]
+       ],
+       "usage": null,
+       "interrupted": true,
+       "stepStartTime": 1792763175264,
+       "firstTokenTime": null,
+       "completedTime": 1792763194222
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "10",
+     "anchorSeq": 142.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "seq": 142,
+      "time": 1792763194223,
+      "closingSeq": 140,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763194306,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 8,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 123,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 122
+      }
+     ]
+    },
+    {
+     "turn": 9,
+     "status": "closed",
+     "startSeq": 126,
+     "endSeq": 134,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 128,
+       "endSeq": 133
+      }
+     ]
+    },
+    {
+     "turn": 10,
+     "status": "closed",
+     "startSeq": 136,
+     "endSeq": 142,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 138,
+       "endSeq": 141
+      }
+     ]
+    },
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": 144,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 146,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 20,
+   "openTurn": null
+  },
+  {
+   "step": 29,
+   "nodes": [
+    {
+     "kind": "assistant-step",
+     "id": "7:2",
+     "anchorSeq": 104,
+     "groupTree": null,
+     "location": "step",
+     "turn": 7,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 7,
+      "step": 2,
+      "time": 1792762875850,
+      "blocks": [
+       [
+        "reasoning",
+        "s320"
+       ],
+       [
+        "tool-call",
+        "id-20",
+        "bash",
+        "s373"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 369,
+       "outputTokens": 230,
+       "totalTokens": 260823,
+       "cacheReadTokens": 260224
+      },
+      "final": {
+       "seq": 104,
+       "messageId": "id-21",
+       "time": 1792762875850,
+       "turn": 7,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "s320"
+        ],
+        [
+         "tool-call",
+         "id-20",
+         "bash",
+         "s373"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 369,
+        "outputTokens": 230,
+        "totalTokens": 260823,
+        "cacheReadTokens": 260224
+       },
+       "interrupted": false,
+       "stepStartTime": null,
+       "firstTokenTime": null,
+       "completedTime": 1792762875850
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-3",
+     "anchorSeq": 105,
+     "groupTree": null,
+     "location": "step",
+     "turn": 7,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-3",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s373",
+      "callArgsRaw": "s373",
+      "callTime": 1792762875853,
+      "seq": 110,
+      "time": 1792762876482,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "7:3",
+     "anchorSeq": 113,
+     "groupTree": null,
+     "location": "step",
+     "turn": 7,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 7,
+      "step": 3,
+      "time": 1792762893187,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 357,
+       "outputTokens": 2,
+       "totalTokens": 260839,
+       "cacheReadTokens": 260480
+      },
+      "final": {
+       "seq": 113,
+       "messageId": "id-24",
+       "time": 1792762893187,
+       "turn": 7,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 357,
+        "outputTokens": 2,
+        "totalTokens": 260839,
+        "cacheReadTokens": 260480
+       },
+       "interrupted": false,
+       "stepStartTime": 1792762876668,
+       "firstTokenTime": null,
+       "completedTime": 1792762893187
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "7",
+     "anchorSeq": 115.1,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 7,
+     "step": 2,
+     "data": {
+      "turn": 7,
+      "seq": 115,
+      "time": 1792762893189,
+      "closingSeq": 113,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-18",
+     "anchorSeq": 120,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 8,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 120,
+      "time": 1792762893681,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-5"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "8:1",
+     "anchorSeq": 121,
+     "groupTree": null,
+     "location": "step",
+     "turn": 8,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 8,
+      "step": 1,
+      "time": 1792762910260,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 112,
+       "outputTokens": 2,
+       "totalTokens": 260850,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 121,
+       "messageId": "id-19",
+       "time": 1792762910260,
+       "turn": 8,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 112,
+        "outputTokens": 2,
+        "totalTokens": 260850,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": 1792762893631,
+       "firstTokenTime": null,
+       "completedTime": 1792762910260
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "8",
+     "anchorSeq": 123.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 8,
+     "step": null,
+     "data": {
+      "turn": 8,
+      "seq": 123,
+      "time": 1792762910262,
+      "closingSeq": 121,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-17",
+     "anchorSeq": 129,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 129,
+      "time": 1792763156805,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-4"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "9:1",
+     "anchorSeq": 132,
+     "groupTree": null,
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 9,
+      "step": 1,
+      "time": 1792763175176,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 197,
+       "outputTokens": 2,
+       "totalTokens": 260935,
+       "cacheReadTokens": 260736
+      },
+      "final": {
+       "seq": 132,
+       "messageId": "id-16",
+       "time": 1792763175176,
+       "turn": 9,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 197,
+        "outputTokens": 2,
+        "totalTokens": 260935,
+        "cacheReadTokens": 260736
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763156792,
+       "firstTokenTime": null,
+       "completedTime": 1792763175176
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "9",
+     "anchorSeq": 134.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "seq": 134,
+      "time": 1792763175178,
+      "closingSeq": 132,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-13",
+     "anchorSeq": 139,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 139,
+      "time": 1792763175278,
+      "content": [
+       {
+        "type": "text",
+        "text": "s67"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-3"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "10:1",
+     "anchorSeq": 140,
+     "groupTree": null,
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "status": "interrupted",
+      "turn": 10,
+      "step": 1,
+      "time": 1792763194222,
+      "blocks": [
+       [
+        "text",
+        "s299"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 140,
+       "messageId": "id-14",
+       "time": 1792763194222,
+       "turn": 10,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s299"
+        ]
+       ],
+       "usage": null,
+       "interrupted": true,
+       "stepStartTime": 1792763175264,
+       "firstTokenTime": null,
+       "completedTime": 1792763194222
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "10",
+     "anchorSeq": 142.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "seq": 142,
+      "time": 1792763194223,
+      "closingSeq": 140,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-9",
+     "anchorSeq": 147,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 147,
+      "time": 1792763194321,
+      "content": [
+       {
+        "type": "text",
+        "text": "s309"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-2"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:1",
+     "anchorSeq": 148,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 1,
+      "time": 1792763213951,
+      "blocks": [
+       [
+        "reasoning",
+        "s324"
+       ],
+       [
+        "tool-call",
+        "id-10",
+        "bash",
+        "s126"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 379,
+       "outputTokens": 150,
+       "totalTokens": 261393,
+       "cacheReadTokens": 260864
+      },
+      "final": {
+       "seq": 148,
+       "messageId": "id-11",
+       "time": 1792763213951,
+       "turn": 11,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "s324"
+        ],
+        [
+         "tool-call",
+         "id-10",
+         "bash",
+         "s126"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 379,
+        "outputTokens": 150,
+        "totalTokens": 261393,
+        "cacheReadTokens": 260864
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763194306,
+       "firstTokenTime": null,
+       "completedTime": 1792763213951
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-2",
+     "anchorSeq": 149,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "call-2",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s126",
+      "callArgsRaw": "s126",
+      "callTime": 1792763213953,
+      "seq": 152,
+      "time": 1792763214075,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s350"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "call-1",
+     "anchorSeq": 156,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "state": "settled",
+      "callId": "call-1",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "s378",
+      "callArgsRaw": "s378",
+      "callTime": 1792763232689,
+      "seq": 161,
+      "time": 1792763233106,
+      "isError": false,
+      "error": null,
+      "content": [
+       {
+        "type": "text",
+        "text": "s11"
+       }
+      ],
+      "meta": {
+       "cwd": "s29"
+      },
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "11:3",
+     "anchorSeq": 164,
+     "groupTree": null,
+     "location": "step",
+     "turn": 11,
+     "step": 3,
+     "data": {
+      "status": "settled",
+      "turn": 11,
+      "step": 3,
+      "time": 1792763250372,
+      "blocks": [
+       [
+        "text",
+        "s4"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 300,
+       "outputTokens": 2,
+       "totalTokens": 261678,
+       "cacheReadTokens": 261376
+      },
+      "final": {
+       "seq": 164,
+       "messageId": "id-6",
+       "time": 1792763250372,
+       "turn": 11,
+       "step": 3,
+       "blocks": [
+        [
+         "text",
+         "s4"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 300,
+        "outputTokens": 2,
+        "totalTokens": 261678,
+        "cacheReadTokens": 261376
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763233165,
+       "firstTokenTime": null,
+       "completedTime": 1792763250372
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "11",
+     "anchorSeq": 166.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "seq": 166,
+      "time": 1792763250373,
+      "closingSeq": 164,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "user",
+     "id": "id-7",
+     "anchorSeq": 171,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 171,
+      "time": 1792763250479,
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "12:1",
+     "anchorSeq": 172,
+     "groupTree": null,
+     "location": "step",
+     "turn": 12,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 12,
+      "step": 1,
+      "time": 1792763267362,
+      "blocks": [
+       [
+        "text",
+        "s2"
+       ]
+      ],
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "final": {
+       "seq": 172,
+       "messageId": "id-8",
+       "time": 1792763267362,
+       "turn": 12,
+       "step": 1,
+       "blocks": [
+        [
+         "text",
+         "s2"
+        ]
+       ],
+       "usage": {
+        "inputTokens": 55,
+        "outputTokens": 2,
+        "totalTokens": 261689,
+        "cacheReadTokens": 261632
+       },
+       "interrupted": false,
+       "stepStartTime": 1792763250464,
+       "firstTokenTime": null,
+       "completedTime": 1792763267362
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "12",
+     "anchorSeq": 174.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "seq": 174,
+      "time": 1792763267365,
+      "closingSeq": 172,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "timeline": [
+    {
+     "turn": 7,
+     "status": "closed",
+     "startSeq": null,
+     "endSeq": 115,
+     "steps": [
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": null,
+       "endSeq": 111
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 112,
+       "endSeq": 114
+      }
+     ]
+    },
+    {
+     "turn": 8,
+     "status": "closed",
+     "startSeq": 117,
+     "endSeq": 123,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 119,
+       "endSeq": 122
+      }
+     ]
+    },
+    {
+     "turn": 9,
+     "status": "closed",
+     "startSeq": 126,
+     "endSeq": 134,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 128,
+       "endSeq": 133
+      }
+     ]
+    },
+    {
+     "turn": 10,
+     "status": "closed",
+     "startSeq": 136,
+     "endSeq": 142,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 138,
+       "endSeq": 141
+      }
+     ]
+    },
+    {
+     "turn": 11,
+     "status": "closed",
+     "startSeq": 144,
+     "endSeq": 166,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 146,
+       "endSeq": 153
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 154,
+       "endSeq": 162
+      },
+      {
+       "step": 3,
+       "status": "closed",
+       "startSeq": 163,
+       "endSeq": 165
+      }
+     ]
+    },
+    {
+     "turn": 12,
+     "status": "closed",
+     "startSeq": 168,
+     "endSeq": 174,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 170,
+       "endSeq": 173
+      }
+     ]
+    }
+   ],
+   "nodeCount": 24,
+   "openTurn": null
   }
  ]
 }

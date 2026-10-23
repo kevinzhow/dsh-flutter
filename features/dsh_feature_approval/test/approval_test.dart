@@ -4,6 +4,7 @@ import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_feature_approval/dsh_feature_approval.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
+import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
@@ -120,17 +121,14 @@ void main() {
           tracker: tracker,
           i18n: () => const DshI18n(DshLocale.en),
         );
-        expect(
-          slots.renderChain(composerSlot, const ComposerOwner('s1')),
-          isNull,
-        );
+        expect(slots.renderChain(composerSlot, testSessionOwner('s1')), isNull);
         events.add(approvalEvent('e1'));
         expect(
-          slots.renderChain(composerSlot, const ComposerOwner('s1')),
+          slots.renderChain(composerSlot, testSessionOwner('s1')),
           isA<ApprovalPanel>(),
         );
         expect(
-          slots.renderChain(composerSlot, const ComposerOwner('other')),
+          slots.renderChain(composerSlot, testSessionOwner('other')),
           isNull,
         );
       },

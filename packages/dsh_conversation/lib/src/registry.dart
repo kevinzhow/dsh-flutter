@@ -1,6 +1,4 @@
-import 'package:dsh_models/dsh_models.dart';
-
-import 'types.dart';
+import 'contract.dart';
 
 /// Raised on registry misuse (dsh fails these at plugin activation).
 class ConversationRegistryError extends Error {
@@ -10,64 +8,92 @@ class ConversationRegistryError extends Error {
   String toString() => 'ConversationRegistryError: $message';
 }
 
-/// Declares that [target] understands session events of [eventType].
-///
-/// dsh's `ui-conversation` event registry correlates durable events and
-/// client-only `assistant/live-chunk` rows into business contexts; each target
-/// (`ui-chat`, `ui-trajectory`) registers its own definitions. The skeleton
-/// keeps only the declaration; builders are the full-port work of phase 1.
-class EventDefinition {
-  const EventDefinition({
-    required this.target,
-    required this.eventType,
-    required this.nodeKey,
-  });
-  final ConversationTarget target;
-  final String eventType;
+/// Registry of business Definitions (dsh `ConversationEventRegistry`): ordinary
+/// Definitions in registration order plus one unmatched-event fallback.
+class ConversationEventRegistry {
+  final Map<String, ConversationDefinition> _definitions = {};
+  ConversationDefinition? _fallback;
 
-  /// The node key this event contributes to (a `conversation.<target>.node` key).
-  final String nodeKey;
-}
-
-/// Builds one target's snapshot from the event window.
-typedef TargetBuilder = ConversationSnapshot Function(EventWindow window);
-
-/// The single registry of the skeleton: event definitions per target plus one
-/// builder per target.
-class ConversationRegistry {
-  final List<EventDefinition> _definitions = [];
-  final Map<ConversationTarget, TargetBuilder> _builders = {};
-
-  /// Register an event definition. The same `(target, eventType)` twice fails.
-  void defineEvent(EventDefinition definition) {
-    final clash = _definitions.any(
-      (d) =>
-          d.target == definition.target && d.eventType == definition.eventType,
-    );
-    if (clash) {
+  /// Register a uniquely named Definition.
+  void register(ConversationDefinition definition) {
+    _assertTarget(definition);
+    if (_definitions.containsKey(definition.kind)) {
       throw ConversationRegistryError(
-        '${definition.target} already defines ${definition.eventType}',
+        'conversation Definition "${definition.kind}" is already registered',
       );
     }
-    _definitions.add(definition);
+    _definitions[definition.kind] = definition;
   }
 
-  void registerTarget(ConversationTarget target, TargetBuilder builder) {
-    if (_builders.containsKey(target)) {
-      throw ConversationRegistryError('target $target is already registered');
+  /// Register the sole fallback used only when no ordinary Definition of its
+  /// target matched.
+  void registerFallback(ConversationDefinition definition) {
+    _assertTarget(definition);
+    if (definition.target == null) {
+      throw ConversationRegistryError(
+        'conversation fallback Definition must declare a target',
+      );
     }
-    _builders[target] = builder;
-  }
-
-  Iterable<EventDefinition> definitionsFor(ConversationTarget target) =>
-      _definitions.where((d) => d.target == target);
-
-  /// Materialize [target] for [window]; throws for an unregistered target.
-  ConversationSnapshot snapshot(ConversationTarget target, EventWindow window) {
-    final builder = _builders[target];
-    if (builder == null) {
-      throw ConversationRegistryError('target $target is not registered');
+    if (_fallback != null) {
+      throw ConversationRegistryError(
+        'conversation fallback Definition is already registered',
+      );
     }
-    return builder(window);
+    _fallback = definition;
   }
+
+  Iterable<ConversationDefinition> get entries => _definitions.values;
+  ConversationDefinition? get fallback => _fallback;
+
+  /// Definitions that may match an event of [type], in registration order.
+  List<ConversationDefinition> forEvent(String type) => [
+    for (final d in _definitions.values)
+      if (d.eventTypes == null || d.eventTypes!.contains(type)) d,
+  ];
+
+  static void _assertTarget(ConversationDefinition d) {
+    // dsh: `target` and `buildViewNode` must be declared together. Dart cannot
+    // introspect an override, so a Definition states it through `target`.
+  }
+}
+
+/// One incremental builder per Session and target (dsh `ConversationViewBuilder`).
+abstract class ConversationViewBuilder {
+  /// Replace the complete materialized node set.
+  Object replace(List<ViewNode> nodes, ConversationTimeline timeline);
+
+  /// Apply only nodes whose materialized values changed in this transaction.
+  Object apply(List<ViewNode> upserts, ConversationTimeline timeline);
+}
+
+/// Registry contribution that creates a builder when a Session first uses the
+/// target (dsh `ConversationViewDefinition`).
+abstract class ConversationViewDefinition {
+  String get target;
+  ConversationViewBuilder create();
+  bool isActive(Object snapshot) => true;
+}
+
+class ConversationViewRegistry {
+  final Map<String, ConversationViewDefinition> _views = {};
+
+  void register(ConversationViewDefinition definition) {
+    if (_views.containsKey(definition.target)) {
+      throw ConversationRegistryError(
+        'conversation view target "${definition.target}" is already registered',
+      );
+    }
+    _views[definition.target] = definition;
+  }
+
+  Iterable<ConversationViewDefinition> get entries => _views.values;
+}
+
+/// Reference-stable Turn/Step facts published beside view nodes (dsh
+/// `ConversationTimelineSnapshot`).
+class ConversationTimeline {
+  const ConversationTimeline(this.turnOrder, this.turns);
+  static const empty = ConversationTimeline([], {});
+  final List<int> turnOrder;
+  final Map<int, TurnLocation> turns;
 }

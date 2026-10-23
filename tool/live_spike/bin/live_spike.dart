@@ -44,11 +44,20 @@ bool hasLiveText(Session s) => s.eventSource.window.entries.any(
       e.transient && ((e.data as Map)['chunk'] as Map)['type'] == 'text-delta',
 );
 
-String assistantText(Session s) =>
-    buildChatSnapshot(s.eventSource.window).nodes
-        .where((n) => n.key == 'assistant-step')
-        .map((n) => n.data['text'])
-        .join();
+String assistantText(Session s) {
+  final binding = ConversationBinding.chat(
+    s.eventSource,
+    scheduler: FlushScheduler.immediate(),
+  );
+  final text = binding.chat.value.visibleNodes
+      .where((n) => n.kind == 'assistant-step')
+      .expand((n) => (n.data! as AssistantData).blocks)
+      .whereType<TextBlock>()
+      .map((b) => b.text)
+      .join();
+  unawaited(binding.dispose());
+  return text;
+}
 
 /// Decode real host data with the generated codecs (tool/codegen output).
 Future<String> decodeWithGenerated(List<Map<String, Object?>> steps) async {

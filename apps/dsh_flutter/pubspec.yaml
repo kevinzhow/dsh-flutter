@@ -1,5 +1,5 @@
 name: dsh_flutter
-description: Unofficial native client for DSH. Composition root plus a phase-0 debug screen.
+description: Whalee, an unofficial native client for DeepSeek Harness. Composition root.
 publish_to: none
 version: 0.0.1
 environment:
@@ -7,6 +7,8 @@ environment:
 resolution: workspace
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   dsh_client: ^0.0.1
   dsh_models: ^0.0.1
@@ -16,6 +18,15 @@ dependencies:
   dsh_theme: ^0.0.1
   dsh_ui: ^0.0.1
   dsh_feature_approval: ^0.0.1
+  dsh_feature_chat: ^0.0.1
+  dsh_feature_conversation: ^0.0.1
+  dsh_feature_session: ^0.0.1
+  dsh_feature_tool: ^0.0.1
+  dsh_feature_user_questions: ^0.0.1
+  flutter_secure_storage: ^10.3.2
+flutter:
+  uses-material-design: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

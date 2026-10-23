@@ -84,12 +84,15 @@ class WaterfallResult extends WaterfallOutcome {
 
 /// Reject the waterfall with an error.
 class WaterfallRejected extends WaterfallOutcome {
-  const WaterfallRejected(this.name, this.message);
+  const WaterfallRejected(this.name, this.message, {this.code});
   final String name;
   final String message;
+
+  /// Wire-preserved error code (`ASK_CANCELLED` for a dismissed question).
+  final String? code;
   @override
   Map<String, Object?> toJson() => {
     'kind': 'rejected',
-    'error': {'name': name, 'message': message},
+    'error': {'name': name, 'message': message, 'code': ?code},
   };
 }

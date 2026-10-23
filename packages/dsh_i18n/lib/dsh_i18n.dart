@@ -3,3 +3,4 @@ library;
 
 export 'src/catalog.g.dart' show dshCatalog, dshCatalogPackages;
 export 'src/dsh_i18n.dart';
+export 'src/app_catalog.dart' show appCatalog, appNamespace;

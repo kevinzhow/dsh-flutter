@@ -12,6 +12,11 @@ contiguity, cursors, revisions, every enum-like field) and replaces content:
     stable pseudonyms (`attempt-1`, ...), consistent across the whole trace;
   * every other string becomes `s<length>` (so text deltas still fold to a
     string of the same length, but carry no words);
+  * a tool call's complete `arguments` text (tool/call, assistant/message and
+    block-end tool-call blocks) is parsed as JSON and scrubbed structurally:
+    the keys stay, every string leaf becomes `s<length>` (`{"command":"s17"}`);
+    text that does not parse as a JSON object becomes `s<length>`. Streamed
+    `argumentsDelta` fragments stay `s<length>`;
   * long arrays inside event data (tool lists, skill catalogs) keep 2 members;
   * timestamps of the recording are dropped.
 
@@ -50,6 +55,24 @@ class Scrubber:
             self.ids[key] = '%s-%d' % (prefix, 1 + sum(1 for k in self.ids if k[0] == prefix))
         return self.ids[key]
 
+    def scrub_arguments(self, text):
+        try:
+            parsed = json.loads(text)
+        except ValueError:
+            parsed = None
+        if not isinstance(parsed, dict):
+            return 's%d' % len(text)
+        return json.dumps(self.scrub_leaves(parsed), separators=(',', ':'))
+
+    def scrub_leaves(self, value):
+        if isinstance(value, dict):
+            return {k: self.scrub_leaves(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [self.scrub_leaves(v) for v in value]
+        if isinstance(value, str):
+            return 's%d' % len(value)
+        return value
+
     def scrub(self, value, key=None, in_data=False):
         if isinstance(value, dict):
             out = {}
@@ -66,6 +89,8 @@ class Scrubber:
                 return self.pseudonym(ID_KEYS[key], value)
             if key in KEEP_KEYS:
                 return value
+            if key == 'arguments':
+                return self.scrub_arguments(value)
             return 's%d' % len(value)
         return value  # numbers, bools, null
 

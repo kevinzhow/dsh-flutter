@@ -5,17 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'approval_panel.dart';
 import 'approval_tracker.dart';
 
-/// Owner props of `conversation.composer` (a chain slot, session scope): the
-/// session whose composer is being rendered. In dsh the owner is
-/// `ComposerChainProps`; phase 0 needs only the session id.
-class ComposerOwner {
-  const ComposerOwner(this.sessionId);
-  final String sessionId;
-}
-
-/// The typed view of dsh's `conversation.composer` slot for this feature.
-final Slot<ComposerOwner, Widget> composerSlot = DshSlots.conversationComposer
-    .typed<ComposerOwner, Widget>();
+/// The typed view of dsh's `conversation.composer` slot for this feature; the
+/// owner is the open session (`SessionOwner`, from `dsh_slots`).
+final Slot<SessionOwner, Widget> composerSlot = DshSlots.conversationComposer
+    .typed<SessionOwner, Widget>();
 
 /// Register the approval takeover into `conversation.composer`, as dsh's
 /// `ui-approval` does: the chain entry matches while the session has a pending
@@ -26,7 +19,7 @@ void registerApprovalFeature(
   required ApprovalTracker tracker,
   required DshI18n Function() i18n,
 }) {
-  slots.registerChain<ComposerOwner, PendingApproval, Widget>(
+  slots.registerChain<SessionOwner, PendingApproval, Widget>(
     composerSlot,
     id: 'approval',
     select: (owner) => tracker.forSession(owner.sessionId),
