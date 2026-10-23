@@ -1,0 +1,21 @@
+name: dsh_feature_model_selection
+description: model selection feature of the DSH Flutter client (dsh ui-model-selection), the composer model seat and its picker.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  dsh_client: ^0.0.1
+  dsh_models: ^0.0.1
+  dsh_i18n: ^0.0.1
+  dsh_slots: ^0.0.1
+  dsh_ui: ^0.0.1
+  dsh_theme: ^0.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0
+  dsh_parity: ^0.0.1

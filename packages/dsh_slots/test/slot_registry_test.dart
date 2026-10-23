@@ -155,4 +155,55 @@ void main() {
       },
     );
   });
+
+  group('labelled list entries', () {
+    test('entries lists id, order and the resolved label', () {
+      final s = DshSlots.settingsSection.typed<int, String>();
+      var locale = 'en';
+      r.register(
+        s,
+        (p) => 'models',
+        id: 'models',
+        order: 5,
+        label: () => locale == 'en' ? 'Models' : '模型',
+      );
+      r.register(
+        s,
+        (p) => 'general',
+        id: 'general',
+        order: 0,
+        label: () => 'General',
+      );
+      r.register(s, (p) => 'bare', id: 'bare', order: 9);
+      expect(
+        [for (final e in r.entries(s)) (e.id, e.order, e.label)],
+        [('general', 0, 'General'), ('models', 5, 'Models'), ('bare', 9, null)],
+      );
+      locale = 'zh';
+      expect(r.entries(s)[1].label, '模型');
+    });
+
+    test('renderOnly renders the one occupant', () {
+      final s = DshSlots.settingsSection.typed<int, String>();
+      r.register(s, (p) => 'g$p', id: 'general');
+      r.register(s, (p) => 'm$p', id: 'models');
+      expect(r.renderOnly(s, 'models', 7), 'm7');
+      expect(r.renderOnly(s, 'nope', 7), isNull);
+    });
+
+    test('a registration can be withdrawn and announces both changes', () {
+      final s = DshSlots.settingsGeneralItem.typed<int, String>();
+      final seen = <String>[];
+      final sub = r.changes.listen(seen.add);
+      final off = r.register(s, (p) => 'row', id: 'row');
+      expect(r.renderList(s, 0), ['row']);
+      off();
+      off();
+      expect(r.renderList(s, 0), isEmpty);
+      expect(seen, ['settings.general.item', 'settings.general.item']);
+      // The id is free again.
+      r.register(s, (p) => 'again', id: 'row');
+      sub.cancel();
+    });
+  });
 }

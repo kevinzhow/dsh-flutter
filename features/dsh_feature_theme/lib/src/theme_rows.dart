@@ -1,0 +1,342 @@
+import 'dart:math' as math;
+
+import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/widgets.dart';
+
+import 'theme_service.dart';
+
+const String _ns = 'settings.theme';
+
+String _t(DshI18n i18n, String key) => i18n.t(_ns, key);
+
+/// The Appearance row (dsh `AppearanceRow`): a title and three preference
+/// cubes, light, dark, system. Selection follows the persisted preference,
+/// never the resolved colour scheme.
+class AppearanceRow extends StatelessWidget {
+  const AppearanceRow({super.key, required this.service, required this.i18n});
+
+  final ThemeSettingsService service;
+  final DshI18n i18n;
+
+  static const _cubes = <(ThemePreference, String, DshIconData)>[
+    (ThemePreference.light, 'appearance.light', DshIcons.lightMedium),
+    (ThemePreference.dark, 'appearance.dark', DshIcons.darkMedium),
+    (ThemePreference.system, 'appearance.system', DshIcons.followSystemMedium),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    return DshWatch(
+      changes: service.settings.changes,
+      builder: (context) {
+        final preference = service.current.preference;
+        final separator = !DshColumnEnd.of(context);
+        return DecoratedBox(
+          key: const ValueKey('appearance-row'),
+          decoration: BoxDecoration(
+            border: separator
+                ? Border(
+                    bottom: BorderSide(
+                      color: theme.color('--dsw-alias-border-l2'),
+                      width: dshHairline,
+                    ),
+                  )
+                : null,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DshLineText(
+                  _t(i18n, 'appearance.title'),
+                  style: theme
+                      .textStyle('--dsw-font-s-14')
+                      .copyWith(color: theme.labelPrimary),
+                ),
+                const SizedBox(height: 8),
+                _Cubes(
+                  children: [
+                    for (final (pref, key, icon) in _cubes)
+                      _Cube(
+                        key: ValueKey<String>('cube-${pref.name}'),
+                        icon: icon,
+                        label: _t(i18n, key),
+                        selected: preference == pref,
+                        onPressed: service.writable || !service.available
+                            ? () => service.setPreference(pref)
+                            : null,
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// dsh's `.cubeRow`: `display: flex; flex-wrap: wrap; gap: 8px` over cubes of
+/// `flex: 1 1 180px`: as many per line as fit, each line shared equally.
+class _Cubes extends StatelessWidget {
+  const _Cubes({required this.children});
+
+  final List<Widget> children;
+
+  static const double _basis = 180;
+  static const double _gap = 8;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final perLine = math.max(1, ((width + _gap) / (_basis + _gap)).floor());
+        final lines = <List<Widget>>[
+          for (var i = 0; i < children.length; i += perLine)
+            children.sublist(i, math.min(i + perLine, children.length)),
+        ];
+        return Column(
+          children: [
+            for (var l = 0; l < lines.length; l++) ...[
+              if (l > 0) const SizedBox(height: _gap),
+              IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (var c = 0; c < lines[l].length; c++) ...[
+                      if (c > 0) const SizedBox(width: _gap),
+                      Expanded(child: lines[l][c]),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _Cube extends StatefulWidget {
+  const _Cube({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.selected,
+    required this.onPressed,
+  });
+
+  final DshIconData icon;
+  final String label;
+  final bool selected;
+  final VoidCallback? onPressed;
+
+  @override
+  State<_Cube> createState() => _CubeState();
+}
+
+class _CubeState extends State<_Cube> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final fill = widget.selected
+        ? theme.color('--dsw-alias-bg-module-platform')
+        : (_hovered ? theme.interactiveBgHover : null);
+    return Semantics(
+      button: true,
+      selected: widget.selected,
+      enabled: widget.onPressed != null,
+      label: widget.label,
+      excludeSemantics: true,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: widget.onPressed,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+            decoration: theme.cornerDecoration(
+              theme.radiusXl,
+              color: fill,
+              borderColor: widget.selected
+                  ? theme.color('--dsw-static-neutral-bluish-400')
+                  : theme.color('--dsw-alias-border-l4'),
+              borderWidth: dshHairline,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DshIcon(widget.icon, color: theme.labelPrimary),
+                const SizedBox(height: 4),
+                DshLineText(
+                  widget.label,
+                  style: theme
+                      .textStyle('--dsw-font-s-14')
+                      .copyWith(color: theme.labelPrimary),
+                  maxLines: 1,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The text font-size row and, behind its disclosure button, the font rows of
+/// every role and the code and terminal size rows (dsh `FontSettingsGroup`).
+/// The region starts collapsed on every mount.
+class FontSettingsGroup extends StatefulWidget {
+  const FontSettingsGroup({
+    super.key,
+    required this.service,
+    required this.i18n,
+    this.touch = false,
+  });
+
+  final ThemeSettingsService service;
+  final DshI18n i18n;
+
+  /// Whether input is by touch: the stepper arrows stay visible without hover.
+  final bool touch;
+
+  @override
+  State<FontSettingsGroup> createState() => _FontSettingsGroupState();
+}
+
+class _FontSettingsGroupState extends State<FontSettingsGroup> {
+  bool _open = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final service = widget.service;
+    return DshWatch(
+      changes: service.settings.changes,
+      builder: (context) {
+        final rows = <Widget Function(bool separator)>[
+          (sep) => _sizeRow(FontRole.text, sep, expander: true),
+          if (_open) ...[
+            (sep) => _familyRow(FontRole.text, sep),
+            (sep) => _familyRow(FontRole.code, sep),
+            (sep) => _sizeRow(FontRole.code, sep),
+            (sep) => _familyRow(FontRole.terminal, sep),
+            (sep) => _sizeRow(FontRole.terminal, sep),
+          ],
+        ];
+        // When the group ends the column, its last visible row drops the
+        // separator (dsh `FontSettingsGroup.module.css`).
+        final endsColumn = DshColumnEnd.of(context);
+        return Column(
+          key: ValueKey<String>(_open ? 'font-group-open' : 'font-group'),
+          children: [
+            for (var i = 0; i < rows.length; i++)
+              rows[i](!(endsColumn && i == rows.length - 1)),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _sizeRow(FontRole role, bool separator, {bool expander = false}) {
+    final service = widget.service;
+    final i18n = widget.i18n;
+    final spec = fontSizeSpecs[role]!;
+    final size = service.current.fontSizes[role];
+    final writable = service.writable || !service.available;
+    return DshSettingsRow(
+      separator: separator,
+      title: _t(i18n, 'fontSize.${role.name}.title'),
+      description: _t(i18n, 'fontSize.${role.name}.description'),
+      control: DshStepper(
+        value: size,
+        unit: _t(i18n, 'fontSize.unit'),
+        alwaysShowArrows: widget.touch,
+        increaseLabel: _t(i18n, 'fontSize.${role.name}.increase'),
+        decreaseLabel: _t(i18n, 'fontSize.${role.name}.decrease'),
+        upKey: ValueKey<String>('font-${role.name}-up'),
+        downKey: ValueKey<String>('font-${role.name}-down'),
+        onIncrease: size >= spec.max || !writable
+            ? null
+            : () => widget.service.setFontSize(role, size + 1),
+        onDecrease: size <= spec.min || !writable
+            ? null
+            : () => widget.service.setFontSize(role, size - 1),
+        trailing: expander ? _expander(i18n) : null,
+      ),
+    );
+  }
+
+  Widget _familyRow(FontRole role, bool separator) {
+    final service = widget.service;
+    final i18n = widget.i18n;
+    final title = _t(i18n, 'fontFamily.${role.name}.title');
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // `flex: 0 1 240px` beside a text column that keeps its 48px padding.
+        final field = math.max(
+          96.0,
+          math.min(240.0, constraints.maxWidth - 8 - 56),
+        );
+        return DshSettingsRow(
+          separator: separator,
+          title: title,
+          description: _t(i18n, 'fontFamily.${role.name}.description'),
+          control: SizedBox(
+            width: field,
+            child: DshFieldInput(
+              key: ValueKey<String>('font-${role.name}-family'),
+              value: service.current.fontFamilies[role],
+              placeholder: _t(i18n, 'fontFamily.placeholder'),
+              semanticLabel: title,
+              maxLength: 200,
+              enabled: service.writable || !service.available,
+              onCommit: (text) => service.setFontFamily(role, text),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _expander(DshI18n i18n) {
+    final theme = context.dsh;
+    final label = _t(i18n, 'fontSize.more');
+    return Semantics(
+      button: true,
+      expanded: _open,
+      label: label,
+      excludeSemantics: true,
+      child: GestureDetector(
+        key: const ValueKey<String>('font-expander'),
+        behavior: HitTestBehavior.opaque,
+        onTap: () => setState(() => _open = !_open),
+        child: SizedBox(
+          width: 24,
+          height: 24,
+          child: Center(
+            child: Transform.rotate(
+              angle: _open ? math.pi : 0,
+              child: DshIcon(
+                DshIcons.chevronDown,
+                size: 12,
+                color: theme.color('--dsw-alias-label-tertiary'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

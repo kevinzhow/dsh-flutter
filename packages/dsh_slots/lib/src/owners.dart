@@ -278,3 +278,10 @@ const double sidebarInlineMinWindowWidth = 1100;
 
 /// Width of the inline right sidebar.
 const double sidebarInlineWidth = 400;
+
+/// Owner props of the root-scoped settings slots (`settings.section`,
+/// `settings.general.item`, `plugins.item`): the surface supplies nothing, an
+/// occupant draws its own copy and owns its write path, as in dsh.
+class SettingsOwner {
+  const SettingsOwner();
+}

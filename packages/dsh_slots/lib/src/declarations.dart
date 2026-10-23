@@ -101,6 +101,45 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  /// One settings page (dsh `ui-settings`): `id` keys the page, `order` and
+  /// `label` its place and name in the navigation. The shell is
+  /// `dsh_feature_settings` (dsh `ui-settings-general`).
+  static const settingsSection = Slot<Object?, Object?>(
+    'settings.section',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
+
+  /// One preference row of the General section (dsh `ui-settings`): the
+  /// owner passes nothing, a row draws its own label and write path.
+  static const settingsGeneralItem = Slot<Object?, Object?>(
+    'settings.general.item',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
+
+  /// One official plugin's configuration card on the plugins page (dsh
+  /// `ui-plugin-manager`); filled by the `ui-settings-*` plugin pages.
+  static const pluginsItem = Slot<Object?, Object?>(
+    'plugins.item',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
+
+  /// The composer's current-session permission control and model selector
+  /// (dsh `ui-conversation`; filled by `ui-permission-presets` and
+  /// `ui-model-selection`).
+  static const conversationInputPermission = Slot<Object?, Object?>(
+    'conversation.input.permission',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const conversationInputModel = Slot<Object?, Object?>(
+    'conversation.input.model',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
     conversationHeader,
@@ -118,5 +157,10 @@ abstract final class DshSlots {
     toolCallImages,
     rightbarSession,
     sidebarRightPaneTab,
+    settingsSection,
+    settingsGeneralItem,
+    pluginsItem,
+    conversationInputPermission,
+    conversationInputModel,
   ];
 }
