@@ -22,7 +22,8 @@ class _FixedPermission implements PermissionDefaults {
           writable: json['writable'] as bool,
           currentValue: json['currentValue'] as String,
           options: [
-            for (final o in (json['options'] as List).cast<Map<String, dynamic>>())
+            for (final o
+                in (json['options'] as List).cast<Map<String, dynamic>>())
               PermissionDefaultOption(o['id'] as String, o['label'] as String),
           ],
         ),

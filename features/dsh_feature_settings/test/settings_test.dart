@@ -276,7 +276,9 @@ void main() {
       expect((box.decoration as BoxDecoration).border, isNull);
     });
 
-    testWidgets('a row that registers while the section is open appears', (t) async {
+    testWidgets('a row that registers while the section is open appears', (
+      t,
+    ) async {
       surface(t, const Size(390, 800));
       await t.pumpWidget(page(section: 'general'));
       expect(find.text('Late host row'), findsNothing);
