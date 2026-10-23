@@ -34,6 +34,7 @@ void registerToolFeature(
       i18n: i18n(),
       actions: actions,
       expandedByDefault: expandedByDefault,
+      slots: slots,
     ),
   );
 

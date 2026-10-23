@@ -1,0 +1,1565 @@
+[
+ {
+  "pattern": "\\w+",
+  "subject": "héllo_wörld 42",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    11
+   ]
+  ]
+ },
+ {
+  "pattern": "\\d+",
+  "subject": "ab 123 x",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "\\s+",
+  "subject": "a \t b",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\h+",
+  "subject": "xyz DEADbeef09 q",
+  "start": 0,
+  "expect": [
+   [
+    4,
+    14
+   ]
+  ]
+ },
+ {
+  "pattern": "\\bfoo\\b",
+  "subject": "a foo b",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "\\Bfoo",
+  "subject": "afoo",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "^abc",
+  "subject": "abcabc",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "abc$",
+  "subject": "abcabc\n",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "abc\\Z",
+  "subject": "xabc\n",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "abc\\z",
+  "subject": "xabc",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "^\\s*#",
+  "subject": "   # x\n",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "a.c",
+  "subject": "a\nc abc",
+  "start": 0,
+  "expect": [
+   [
+    4,
+    7
+   ]
+  ]
+ },
+ {
+  "pattern": "(?m)a.c",
+  "subject": "a\nc",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)abc",
+  "subject": "xABc",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)a(?-i)b",
+  "subject": "AB aB",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "a(?i)b|c",
+  "subject": "aB C",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i:a)b",
+  "subject": "Ab AB",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?x) a b # comment",
+  "subject": "ab",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?x)\n    (foo) # first\n    \\s+\n    (bar)",
+  "subject": "foo   bar",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    9
+   ],
+   [
+    0,
+    3
+   ],
+   [
+    6,
+    9
+   ]
+  ]
+ },
+ {
+  "pattern": "(a)(b)?(c)",
+  "subject": "ac",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    1
+   ],
+   null,
+   [
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<n>a)\\k<n>",
+  "subject": "aa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<n>a)\\k<n>",
+  "subject": "ab",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "(a)\\1",
+  "subject": "aa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "(a)(b)(c)(d)(e)(f)(g)(h)(i)(j)\\10",
+  "subject": "abcdefghijj",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    11
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    5
+   ],
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    8
+   ],
+   [
+    8,
+    9
+   ],
+   [
+    9,
+    10
+   ]
+  ]
+ },
+ {
+  "pattern": "(?>a+)b",
+  "subject": "aaab",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(?>a+)a",
+  "subject": "aaa",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "a++a",
+  "subject": "aaa",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "a*+b",
+  "subject": "aab",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "a?+a",
+  "subject": "a",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "(?:ab)++c",
+  "subject": "ababc",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "a{2,3}",
+  "subject": "aaaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "a{,2}",
+  "subject": "aaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "a{2}",
+  "subject": "aaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "a{2,}?",
+  "subject": "aaaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "a{x}",
+  "subject": "a{x}",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "a+?",
+  "subject": "aaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "[a-c]+",
+  "subject": "xabcd",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[^a-c]+",
+  "subject": "abxyzc",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\d-]+",
+  "subject": "a1-2b",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\w.-]+",
+  "subject": "a.b-c d",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:alpha:]]+",
+  "subject": "ab1",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:^alpha:]]+",
+  "subject": "ab12c",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:alnum:]_]+",
+  "subject": "12_ab-",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:upper:]][[:lower:]]+",
+  "subject": "xHello",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:space:]]+",
+  "subject": "a \t\nb",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:punct:]]+",
+  "subject": "a.,;b",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:xdigit:]]+",
+  "subject": "zz1aFg",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:word:]]+",
+  "subject": "-ab_1-",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:graph:]]+",
+  "subject": " ab ",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "[[:print:]]+",
+  "subject": "\u0001ab c\u0002",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[a-z&&[^aeiou]]+",
+  "subject": "aebcdi",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[a[bc]d]+",
+  "subject": "xabcdx",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[^a[bc]]+",
+  "subject": "abcxyzabc",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "[a-c[^b]]+",
+  "subject": "bbaxb",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\]]+",
+  "subject": "a]]",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "[]a]+",
+  "subject": "x]a]",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[a\\-z]+",
+  "subject": "a-z",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\x41-\\x43]+",
+  "subject": "ABCD",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "[A-C]+",
+  "subject": "ABCD",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\x{41}\\x41A",
+  "subject": "AAA",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\t\\n\\r\\e\\a",
+  "subject": "\t\n\r\u001b\u0007",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{L}+",
+  "subject": "ab12",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Lu}\\p{Ll}+",
+  "subject": "xHello",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "\\P{L}+",
+  "subject": "ab12c",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{^L}+",
+  "subject": "ab12c",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Han}+",
+  "subject": "ab中文c",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Alpha}+",
+  "subject": "12ab3",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Alnum}+",
+  "subject": "--a1--",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Upper}+",
+  "subject": "abCDe",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Digit}+",
+  "subject": "a12",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Greek}+",
+  "subject": "abαβγ",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "\\R",
+  "subject": "a\r\nb",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\N+",
+  "subject": "ab\ncd",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "\\O+",
+  "subject": "ab\ncd",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<=a)b",
+  "subject": "ab cb",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<!a)b",
+  "subject": "ab cb",
+  "start": 0,
+  "expect": [
+   [
+    4,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<=a|bc)d",
+  "subject": "bcd",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "a(?=b)",
+  "subject": "ac ab",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "a(?!b)",
+  "subject": "ab ac",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(?:a|b)+c",
+  "subject": "abac",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(a|b)*",
+  "subject": "abab",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ],
+   [
+    3,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(?#comment)a",
+  "subject": "a",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "a\\Kb",
+  "subject": "ab",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?~abc)",
+  "subject": "xxabcx",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<x>a|b\\g<x>c)",
+  "subject": "bbacc",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "\\g<0>?a",
+  "subject": "aa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "\\G\\s*x",
+  "subject": "  x",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\G\\s*x",
+  "subject": "a  x",
+  "start": 1,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "\\Gx|y",
+  "subject": "ax y",
+  "start": 1,
+  "expect": [
+   [
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "(\\G|,)x",
+  "subject": ",x x",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "a\\Gb",
+  "subject": "ab",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "(?:a)\\Gb",
+  "subject": "ab",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "￿|\\\\uFFFF",
+  "subject": "x\\￿y",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\-\\_\\#\\\"\\/\\ ",
+  "subject": "-_#\"/ ",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "\\(\\)\\[\\]\\{\\}\\.\\*\\+\\?\\^\\$\\|",
+  "subject": "()[]{}.*+?^$|",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    13
+   ]
+  ]
+ },
+ {
+  "pattern": "foo|bar|baz",
+  "subject": "xbarz",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(foo|bar)|baz",
+  "subject": "baz",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ],
+   null
+  ]
+ },
+ {
+  "pattern": "(?i)[a-z]+\\d",
+  "subject": "ABc1",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)straße",
+  "subject": "STRASSE straße",
+  "start": 0,
+  "expect": [
+   [
+    8,
+    14
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)\\b(count|group)\\b\\s*\\(",
+  "subject": "x COUNT(*)",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    8
+   ],
+   [
+    2,
+    7
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)\\b(avg|count|group)\\b\\s*\\(",
+  "subject": "x GROUP (",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    9
+   ],
+   [
+    2,
+    7
+   ]
+  ]
+ },
+ {
+  "pattern": "\\b(?i)(count|group)\\b",
+  "subject": "x Group",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    7
+   ],
+   [
+    2,
+    7
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i:abc)def|(?i)xyz",
+  "subject": "ABCdef XYZ",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)[k-n]+(?-i)[a-c]+",
+  "subject": "LMnABc abC",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "(?i)[^a-c]+",
+  "subject": "ABCdef",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    6
+   ]
+  ]
+ },
+ {
+  "pattern": "(?i)é+(?-i)x",
+  "subject": "ÉéX Éex",
+  "start": 0,
+  "expect": null
+ },
+ {
+  "pattern": "\\p{word}+",
+  "subject": "héllo_wörld!",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    11
+   ]
+  ]
+ },
+ {
+  "pattern": "[_[:alpha:]]\\p{word}*\\s*\\(",
+  "subject": "  my_func9 (",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    12
+   ]
+  ]
+ },
+ {
+  "pattern": "\\p{Alpha}\\p{M}+",
+  "subject": "éx",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "\\$\\{",
+  "subject": "a${b",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "}{",
+  "subject": "}{",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "a{",
+  "subject": "a{",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "[{}]+",
+  "subject": "a{}b",
+  "start": 0,
+  "expect": [
+   [
+    1,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\cA",
+  "subject": "\u0001",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "\\0",
+  "subject": "\u0000",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "\\012",
+  "subject": "\n",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<year>\\d{4})-(?<month>\\d{2})",
+  "subject": "on 2024-05-01",
+  "start": 0,
+  "expect": [
+   [
+    3,
+    10
+   ],
+   [
+    3,
+    7
+   ],
+   [
+    8,
+    10
+   ]
+  ]
+ },
+ {
+  "pattern": "(?:(a)|b)+",
+  "subject": "ab",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ],
+   null
+  ]
+ },
+ {
+  "pattern": "(a)?b",
+  "subject": "b",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    1
+   ],
+   null
+  ]
+ },
+ {
+  "pattern": "[^\\n]*",
+  "subject": "ab\ncd",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": ".*",
+  "subject": "ab\r\ncd",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\s*$",
+  "subject": "ab  \n",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    5
+   ]
+  ]
+ },
+ {
+  "pattern": "^$",
+  "subject": "\n",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    0
+   ]
+  ]
+ },
+ {
+  "pattern": "^",
+  "subject": "ab\n",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    0
+   ]
+  ]
+ },
+ {
+  "pattern": "$",
+  "subject": "ab\n",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "\\A\\s*x",
+  "subject": "  x",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\w&&[^\\d]]+",
+  "subject": "12ab3",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\W]+",
+  "subject": "ab--c",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[^\\W\\d]+",
+  "subject": "12ab3",
+  "start": 0,
+  "expect": [
+   [
+    2,
+    4
+   ]
+  ]
+ },
+ {
+  "pattern": "[\\s\\S]+",
+  "subject": "a\nb",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "\\y",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "(?(1)a|b)",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "[\\d-z]",
+  "subject": "1",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "a**",
+  "subject": "aaa",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ]
+  ]
+ },
+ {
+  "pattern": "(?<a>x)(?<a>y)\\k<a>",
+  "subject": "xyy",
+  "start": 0,
+  "expect": [
+   [
+    0,
+    3
+   ],
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    2
+   ]
+  ]
+ },
+ {
+  "pattern": "*a",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "(unclosed",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": ")",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "[a",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ },
+ {
+  "pattern": "\\k<missing>",
+  "subject": "a",
+  "start": 0,
+  "expect": "unsupported"
+ }
+]

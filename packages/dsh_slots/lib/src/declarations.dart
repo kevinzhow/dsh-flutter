@@ -63,6 +63,44 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  /// The draft-attachment rail above the composer (dsh `ui-attachment`).
+  static const conversationInputAttachments = Slot<Object?, Object?>(
+    'conversation.input.attachments',
+    SlotCardinality.single,
+    SlotScope.sessionMaybe,
+  );
+
+  /// Image groups of a user message, an assistant message and a tool result
+  /// (dsh `ui-chat`, `ui-tool`; filled by the attachment feature).
+  static const conversationChatUserImages = Slot<Object?, Object?>(
+    'conversation.chat.user.images',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const conversationChatMessageImages = Slot<Object?, Object?>(
+    'conversation.chat.message.images',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const toolCallImages = Slot<Object?, Object?>(
+    'tool.call.images',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+
+  /// The right sidebar of a session (dsh `ui-sidebar-right`): its content as a
+  /// panel, and one tab's body keyed by tab kind.
+  static const rightbarSession = Slot<Object?, Object?>(
+    'rightbar.session',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const sidebarRightPaneTab = Slot<Object?, Object?>(
+    'sidebar.right.pane.tab',
+    SlotCardinality.keyed,
+    SlotScope.session,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
     conversationHeader,
@@ -74,5 +112,11 @@ abstract final class DshSlots {
     toolCallToolview,
     conversationInputDock,
     conversationChatTurnTail,
+    conversationInputAttachments,
+    conversationChatUserImages,
+    conversationChatMessageImages,
+    toolCallImages,
+    rightbarSession,
+    sidebarRightPaneTab,
   ];
 }

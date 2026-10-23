@@ -1,0 +1,18 @@
+class _Unit<T extends num> extends Shape<T> {
+  _Unit() : super(1 as T, label: 'unit');
+  @override
+  double get area => 1.0;
+}
+
+typedef Callback = void Function(int, [String? name]);
+
+Stream<int> counter(int n) async* {
+  for (var i = 0; i < n; i++) {
+    yield i;
+  }
+}
+
+extension type Meters(double value) {}
+
+final r = RegExp(r'^\d+$');
+var hex = 0xFF + 1e3 + 1_000;

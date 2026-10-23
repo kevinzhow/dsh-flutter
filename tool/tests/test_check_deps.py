@@ -50,6 +50,22 @@ class CheckDepsTest(unittest.TestCase):
         self.assertEqual(len(v), 2)
         self.assertTrue(all('ui must never import client' in x for x in v))
 
+    def test_ui_may_use_the_highlight_leaf(self):
+        def build(r):
+            make(r, 'packages', 'dsh_highlight')
+            make(r, 'packages', 'dsh_theme')
+            make(r, 'packages', 'dsh_ui', ['dsh_theme', 'dsh_highlight'], ['dsh_highlight'])
+        self.assertEqual(self.run_check(build), [])
+
+    def test_highlight_is_a_leaf_and_features_do_not_reach_it_directly(self):
+        def build(r):
+            make(r, 'packages', 'dsh_models')
+            make(r, 'packages', 'dsh_highlight', ['dsh_models'], ['dsh_models'])
+            make(r, 'features', 'dsh_feature_one', ['dsh_highlight'], ['dsh_highlight'])
+        v = self.run_check(build)
+        self.assertTrue(any('dsh_highlight (highlight) must not depend on dsh_models' in x for x in v))
+        self.assertTrue(any('dsh_feature_one (feature) must not depend on dsh_highlight' in x for x in v))
+
     def test_theme_importing_client_fails(self):
         def build(r):
             make(r, 'packages', 'dsh_client')

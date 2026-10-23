@@ -15,6 +15,7 @@ const fixtures = [
   '../dsh_models/test/fixtures/session_window_vector.json',
   'test/fixtures/conversation_edge_vector.json',
   'test/fixtures/plan_todo_vector.json',
+  'test/fixtures/attachment_vector.json',
   'test/fixtures/tool_turn_vector.json',
 ];
 

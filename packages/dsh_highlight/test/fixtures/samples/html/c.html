@@ -1,0 +1,20 @@
+<!-- conditional and misc -->
+<div class=unquoted data-a = "spaced" hidden aria-label='single "inner"'>
+  <my-element some-attr="x">custom &copy; &#x1F600; &unknown;</my-element>
+  <pre>
+    preformatted   <b>text</b>
+  </pre>
+  <textarea name="t">&lt;raw&gt;</textarea>
+  <img src="a.png" alt=""><br><hr>
+  <script type="module">
+    import { x } from './x.js';
+    const re = /<\/script/;  // not end
+    document.title = `T ${x}`;
+  </script>
+  <script type="text/template"><p>{{ not js }}</p></script>
+  <style>
+    @media (max-width: 600px) { div > p { color: rgb(1 2 3 / 50%); } }
+  </style>
+  <iframe srcdoc="<p>hi</p>"></iframe>
+  <button onclick="if (a < b) { go('x'); }">go</button>
+</div>

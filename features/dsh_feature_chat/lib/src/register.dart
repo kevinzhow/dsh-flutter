@@ -45,11 +45,26 @@ void registerChatFeature(
 
   node('user', (o, t) {
     final d = o.node.data as MessageData;
-    return UserBubble(text: d.text, i18n: t);
+    final parts = d.parts;
+    return UserBubble(
+      text: parts.text,
+      i18n: t,
+      attachments: attachmentViews(parts.attachments),
+      owner: o.session,
+      slots: slots,
+    );
   });
   node('steering', (o, t) {
     final d = o.node.data as MessageData;
-    return UserBubble(text: d.text, i18n: t, steering: true);
+    final parts = d.parts;
+    return UserBubble(
+      text: parts.text,
+      i18n: t,
+      steering: true,
+      attachments: attachmentViews(parts.attachments),
+      owner: o.session,
+      slots: slots,
+    );
   });
   node('turn-trigger', (o, t) {
     final d = o.node.data as MessageData;
@@ -66,6 +81,8 @@ void registerChatFeature(
       data: o.node.data as AssistantData,
       nodeKey: o.node.key,
       i18n: t,
+      owner: o.session,
+      slots: slots,
     ),
   );
   node(

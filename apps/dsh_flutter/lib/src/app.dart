@@ -1,4 +1,6 @@
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app_controller.dart';
 import 'app_identity.dart';
+import 'platform/pickers.dart';
 import 'screens/pairing_screen.dart';
 import 'screens/session_screen.dart';
 import 'screens/sessions_screen.dart';
@@ -47,6 +50,11 @@ class WhaleeApp extends StatelessWidget {
             canvasColor: dsh.bgBase,
             extensions: [dsh],
           ),
+          // Above the navigator, so sheets and the lightbox highlight too.
+          builder: (context, child) => DshCodeHighlighting(
+            highlighter: controller.highlighter,
+            child: child ?? const SizedBox.shrink(),
+          ),
           home: RootScreen(controller: controller),
         );
       },
@@ -79,19 +87,22 @@ class RootScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.bgBase,
       body: connected
-          ? LayoutBuilder(
-              builder: (context, constraints) {
-                final wide = constraints.maxWidth >= wideBreakpoint;
-                return wide
-                    ? _Wide(
-                        controller: controller,
-                        onSettings: () => _settings(context),
-                      )
-                    : _Narrow(
-                        controller: controller,
-                        onSettings: () => _settings(context),
-                      );
-              },
+          ? _DropArea(
+              controller: controller,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final wide = constraints.maxWidth >= wideBreakpoint;
+                  return wide
+                      ? _Wide(
+                          controller: controller,
+                          onSettings: () => _settings(context),
+                        )
+                      : _Narrow(
+                          controller: controller,
+                          onSettings: () => _settings(context),
+                        );
+                },
+              ),
             )
           : Stack(
               children: [
@@ -187,4 +198,70 @@ class _Wide extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Desktop windows take files dropped anywhere on them: the composer of the
+/// session in view adds them, and an overlay invites the drop meanwhile (dsh
+/// `ComposerAttachments` drop target). Phones have no drag and drop: the child
+/// is returned as is.
+class _DropArea extends StatefulWidget {
+  const _DropArea({required this.controller, required this.child});
+
+  final AppController controller;
+  final Widget child;
+
+  @override
+  State<_DropArea> createState() => _DropAreaState();
+}
+
+class _DropAreaState extends State<_DropArea> {
+  bool _dragging = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = widget.controller;
+    if (!controller.platform.acceptsDrops) return widget.child;
+    final session = controller.openSession;
+    final accepting = session != null && !session.readOnly;
+    final limits = session == null
+        ? null
+        : ImageLimits.tryParse(session.session.projections.get('imageLimits'));
+    String c(String key, [Map<String, Object?> params = const {}]) =>
+        controller.i18n.t('conversation', key, params: params);
+    return DropTarget(
+      onDragEntered: (_) => setState(() => _dragging = true),
+      onDragExited: (_) => setState(() => _dragging = false),
+      onDragDone: (details) async {
+        setState(() => _dragging = false);
+        if (!accepting) return;
+        final files = [for (final f in details.files) await pickedFromXFile(f)];
+        controller.dropFiles(files);
+      },
+      child: Stack(
+        children: [
+          Positioned.fill(child: widget.child),
+          if (_dragging)
+            Positioned.fill(
+              child: DshDropOverlay(
+                title: accepting
+                    ? c('attachment.dropTitle')
+                    : c('attachment.dropBlocked'),
+                desc: accepting && limits != null
+                    ? c('attachment.dropDesc', {
+                        'count': limits.maxImagesPerMessage,
+                        'size': imageSizeText(limits.maxImageBytes),
+                      })
+                    : null,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// dsh `imageSizeText`: bytes as megabytes (`10MB`, `2.5MB`).
+String imageSizeText(int bytes) {
+  final mb = bytes / (1024 * 1024);
+  return '${mb == mb.truncateToDouble() ? mb.toInt() : mb.toStringAsFixed(1)}MB';
 }

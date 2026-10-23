@@ -1,0 +1,15 @@
+diff --git a/src/main.c b/src/main.c
+index 83db48f..bf2a3c1 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -10,7 +10,8 @@ int main(void) {
+     int a = 1;
+-    int b = 2;
++    int b = 3;
++    int c = 4;
+     return a + b;
+ }
+@@ -30,3 +31,2 @@
+ unchanged
+-removed line
+ end

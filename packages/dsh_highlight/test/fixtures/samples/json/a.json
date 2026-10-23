@@ -1,0 +1,13 @@
+{
+  "name": "demo",
+  "version": "1.2.3",
+  "private": true,
+  "count": -12.5e+3,
+  "escaped": "line\nbreak \"quoted\" é \\ back",
+  "nested": {
+    "list": [1, 2, 3, null, true, false],
+    "empty": {},
+    "emptyList": [],
+    "deep": [{"a": {"b": [ "x", "y" ]}}]
+  }
+}

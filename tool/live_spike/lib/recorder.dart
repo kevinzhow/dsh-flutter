@@ -79,6 +79,11 @@ class RecordingTransport implements SessionTransport {
   @override
   Future<void> cancel(String sessionId) => inner.cancel(sessionId);
   @override
+  Future<Map<String, Object?>> attachment(
+    String sessionId,
+    String attachmentId,
+  ) => inner.attachment(sessionId, attachmentId);
+  @override
   Stream<GenerationFrame> control() => inner.control();
   @override
   Stream<HostEvent> get hostEvents => inner.hostEvents;

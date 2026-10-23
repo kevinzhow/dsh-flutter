@@ -1,0 +1,58 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart' show Widget, Text;
+
+/// A documented class.
+abstract class Shape<T extends num> implements Comparable<Shape<T>> {
+  static const int sides = 4;
+  final T width;
+  late final String label;
+  Shape(this.width, {required this.label, int depth = 2});
+  factory Shape.unit() => _Unit<T>();
+
+  double get area;
+  @override
+  int compareTo(Shape<T> other) => area.compareTo(other.area);
+}
+
+enum Color { red, green, blue }
+
+mixin Logging on Object {
+  void log(String message) => print('[$runtimeType] $message');
+}
+
+extension on String {
+  String get shout => '${toUpperCase()}!';
+}
+
+Future<int> compute(List<int> values, {bool fast = false}) async {
+  var total = 0;
+  for (final v in values) {
+    if (v > 10 && !fast) continue;
+    total += v ~/ 2;
+  }
+  final text =
+      'multi ${values.length} "q" \n'
+      r'raw $notInterpolated';
+  final multi =
+      '''
+    triple $total
+  ''';
+  await Future<void>.delayed(const Duration(milliseconds: 10));
+  return total ?? 0;
+}
+
+void main() {
+  final map = <String, dynamic>{
+    'a': 1,
+    "b": [1, 2],
+  };
+  switch (map['a']) {
+    case 1:
+      break;
+    default:
+  }
+  // trailing comment
+  /* block */
+  print(map?['b']?.length);
+}

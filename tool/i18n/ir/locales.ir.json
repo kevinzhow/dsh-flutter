@@ -30,6 +30,13 @@
     "packages/client/ui-plan/src/client/locales.ts",
     "packages/client/ui-reference/src/client/locales.ts",
     "packages/client/ui-settings-general/src/client/locales.ts",
+    "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
+    "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
+    "packages/client/ui-sidebar-documentpreview/src/client/locales.ts",
+    "packages/client/ui-sidebar-documentpreview/src/client/markdown/locales.ts",
+    "packages/client/ui-sidebar-documentpreview/src/client/zoom/locales.ts",
+    "packages/client/ui-sidebar-files/src/client/locales.ts",
+    "packages/client/ui-sidebar-right/src/client/locales.ts",
     "packages/client/ui-sidebar/src/client/locales.ts",
     "packages/client/ui-skill/src/client/locales.ts",
     "packages/client/ui-subagent/src/client/locales.ts",
@@ -2875,6 +2882,29 @@
       }
     },
     {
+      "namespace": "documentMarkdown",
+      "package": "client/ui-sidebar-documentpreview",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/markdown/locales.ts",
+      "entries": {
+        "code.copied": {
+          "en": "Copied",
+          "zh": "已复制"
+        },
+        "code.copy": {
+          "en": "Copy",
+          "zh": "复制"
+        },
+        "footnotes": {
+          "en": "Footnotes",
+          "zh": "脚注"
+        },
+        "viewer.label": {
+          "en": "Markdown",
+          "zh": "Markdown"
+        }
+      }
+    },
+    {
       "namespace": "feedback",
       "package": "client/ui-message-feedback",
       "file": "packages/client/ui-message-feedback/src/client/locales.ts",
@@ -4185,6 +4215,389 @@
         "toggle.open": {
           "en": "Open sidebar",
           "zh": "打开侧边栏"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarCodePreview",
+      "package": "client/ui-sidebar-documentpreview",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
+      "entries": {
+        "copied": {
+          "en": "Copied",
+          "zh": "已复制"
+        },
+        "copy": {
+          "en": "Copy",
+          "zh": "复制"
+        },
+        "title": {
+          "en": "Code",
+          "zh": "代码"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarDocumentPreview",
+      "package": "client/ui-sidebar-documentpreview",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/locales.ts",
+      "entries": {
+        "autoRefresh": {
+          "en": "Auto refresh",
+          "zh": "自动刷新"
+        },
+        "autoRefresh.disable": {
+          "en": "Disable auto refresh",
+          "zh": "关闭自动刷新"
+        },
+        "autoRefresh.enable": {
+          "en": "Enable auto refresh",
+          "zh": "开启自动刷新"
+        },
+        "changed": {
+          "en": "The file has changed, showing the previous content.",
+          "zh": "文件已更新，当前显示为旧内容"
+        },
+        "error.notFound": {
+          "en": "File not found. It may have been moved or deleted.",
+          "zh": "文件不存在，可能已被移动或删除"
+        },
+        "error.notRegularFile": {
+          "en": "Not a regular file, nothing to display.",
+          "zh": "该路径不是普通文件，没有可显示的内容"
+        },
+        "error.notText": {
+          "en": "Preview is not available for this file type yet.",
+          "zh": "该格式文件暂时无法预览"
+        },
+        "error.tooLarge": {
+          "en": "This page exceeds the {limit} limit and cannot be read.",
+          "zh": "单页内容超过 {limit} 上限，无法读取"
+        },
+        "error.unavailable": {
+          "en": "Read failed: {message}",
+          "zh": "读取失败：{message}"
+        },
+        "loadMore": {
+          "en": "Load more",
+          "zh": "加载更多"
+        },
+        "loading": {
+          "en": "Rendering document...",
+          "zh": "文档渲染中..."
+        },
+        "openWith": {
+          "en": "Open with",
+          "zh": "打开方式"
+        },
+        "reload": {
+          "en": "Read the file again",
+          "zh": "重新读取文件"
+        },
+        "reloadNow": {
+          "en": "Reload",
+          "zh": "重新载入"
+        },
+        "rendererUnavailable": {
+          "en": "The {name} preview is unavailable.",
+          "zh": "预览器 {name} 不可用"
+        },
+        "resourceUnavailable": {
+          "en": "The file resource service is unavailable.",
+          "zh": "文件资源服务不可用"
+        },
+        "retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "unsupportedFile": {
+          "en": "Preview is not available for this file type yet.",
+          "zh": "该格式文件暂时无法预览"
+        },
+        "viewer.text": {
+          "en": "Plain text",
+          "zh": "纯文本"
+        },
+        "wrap.aria": {
+          "en": "Line wrap",
+          "zh": "自动换行"
+        },
+        "wrap.disable": {
+          "en": "Turn off line wrap",
+          "zh": "取消换行"
+        },
+        "wrap.enable": {
+          "en": "Turn on line wrap",
+          "zh": "自动换行"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarFiles",
+      "package": "client/ui-sidebar-files",
+      "file": "packages/client/ui-sidebar-files/src/client/locales.ts",
+      "entries": {
+        "autoRefresh": {
+          "en": "Auto refresh",
+          "zh": "自动刷新"
+        },
+        "autoRefresh.disable": {
+          "en": "Disable auto refresh",
+          "zh": "关闭自动刷新"
+        },
+        "autoRefresh.enable": {
+          "en": "Enable auto refresh",
+          "zh": "开启自动刷新"
+        },
+        "empty": {
+          "en": "Empty directory",
+          "zh": "空目录"
+        },
+        "entry.other": {
+          "en": "Not a file or a directory, so it cannot be opened.",
+          "zh": "这不是文件或目录，没法打开。"
+        },
+        "error.notDirectory": {
+          "en": "That is not a directory.",
+          "zh": "这不是一个目录。"
+        },
+        "error.notFound": {
+          "en": "That directory is gone. It may have been moved or deleted.",
+          "zh": "这个目录不在了。可能已被移动或删除。"
+        },
+        "error.outsideWorkspace": {
+          "en": "That directory is outside the workspace, so the sidebar will not read it.",
+          "zh": "这个目录在工作区之外，侧栏不会读取它。"
+        },
+        "error.unavailable": {
+          "en": "Read failed: {message}",
+          "zh": "读取失败：{message}"
+        },
+        "guide.description": {
+          "en": "Browse files in this session's workspace",
+          "zh": "浏览会话工作区的文件"
+        },
+        "guide.title": {
+          "en": "Workspace files",
+          "zh": "工作区文件"
+        },
+        "loading": {
+          "en": "Reading…",
+          "zh": "正在读取…"
+        },
+        "noWorkspace": {
+          "en": "This session has no workspace directory.",
+          "zh": "这个会话没有工作区目录。"
+        },
+        "reload": {
+          "en": "Reload",
+          "zh": "重新读取"
+        },
+        "shortcut.noSession": {
+          "en": "Select a session first",
+          "zh": "请先选择会话"
+        },
+        "truncated": {
+          "en": "Too many entries, showing only some of them.",
+          "zh": "条目太多，只显示了一部分。"
+        },
+        "type.label": {
+          "en": "Files",
+          "zh": "文件"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarImage",
+      "package": "client/ui-sidebar-documentpreview",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
+      "entries": {
+        "failed": {
+          "en": "This image could not be displayed.",
+          "zh": "无法显示这张图片"
+        },
+        "loading": {
+          "en": "Rendering document...",
+          "zh": "文档渲染中..."
+        },
+        "preview": {
+          "en": "Image preview: {name}",
+          "zh": "图片预览：{name}"
+        },
+        "title": {
+          "en": "Image",
+          "zh": "图片"
+        },
+        "unsupported": {
+          "en": "Image preview requires the complete file contents.",
+          "zh": "图片预览需要完整文件内容"
+        },
+        "zoomControls": {
+          "en": "Zoom controls",
+          "zh": "缩放控件"
+        },
+        "zoomFitWidth": {
+          "en": "Fit width",
+          "zh": "适应宽度"
+        },
+        "zoomIn": {
+          "en": "Zoom in",
+          "zh": "放大"
+        },
+        "zoomMenu": {
+          "en": "Choose zoom",
+          "zh": "选择缩放比例"
+        },
+        "zoomOut": {
+          "en": "Zoom out",
+          "zh": "缩小"
+        },
+        "zoomValue": {
+          "en": "{percent}%",
+          "zh": "{percent}%"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarRight",
+      "package": "client/ui-sidebar-right",
+      "file": "packages/client/ui-sidebar-right/src/client/locales.ts",
+      "entries": {
+        "chrome.collapse": {
+          "en": "Collapse sidebar",
+          "zh": "收起侧边栏"
+        },
+        "chrome.collapseAria": {
+          "en": "Collapse right sidebar",
+          "zh": "收起右侧边栏"
+        },
+        "chrome.exitFullscreen": {
+          "en": "Exit fullscreen",
+          "zh": "退出全屏"
+        },
+        "chrome.expand": {
+          "en": "Open sidebar",
+          "zh": "打开侧边栏"
+        },
+        "chrome.expandAria": {
+          "en": "Open right sidebar",
+          "zh": "打开右侧边栏"
+        },
+        "chrome.toFullscreen": {
+          "en": "Fullscreen",
+          "zh": "全屏"
+        },
+        "command.budget": {
+          "en": "Two panes is the limit",
+          "zh": "已达两格上限"
+        },
+        "command.close": {
+          "en": "Close current page or window",
+          "zh": "关闭当前页面／窗口"
+        },
+        "command.collapsed": {
+          "en": "Expand the right sidebar first",
+          "zh": "请先展开右侧栏"
+        },
+        "command.empty": {
+          "en": "Open a page first",
+          "zh": "请先打开页面"
+        },
+        "command.float": {
+          "en": "This action is unavailable in a floating panel",
+          "zh": "浮动面板不支持此操作"
+        },
+        "command.fullscreen": {
+          "en": "Toggle panel fullscreen",
+          "zh": "面板全屏／退出全屏"
+        },
+        "command.noFocus": {
+          "en": "Focus a right sidebar pane first",
+          "zh": "请先聚焦右侧面板"
+        },
+        "command.noRefresh": {
+          "en": "This page cannot be refreshed",
+          "zh": "当前页面不支持刷新"
+        },
+        "command.noSession": {
+          "en": "Select a session first",
+          "zh": "请先选择会话"
+        },
+        "command.refresh": {
+          "en": "Refresh current page",
+          "zh": "刷新当前页面"
+        },
+        "command.stale": {
+          "en": "The page changed; focus it again",
+          "zh": "页面已切换，请重新聚焦"
+        },
+        "command.toggle": {
+          "en": "Toggle right sidebar",
+          "zh": "展开／收起右侧栏"
+        },
+        "command.width": {
+          "en": "Not enough width to split, widen the sidebar",
+          "zh": "栏宽不足，拖宽侧边栏后再分栏"
+        },
+        "dock.addTab": {
+          "en": "New tab",
+          "zh": "新标签页"
+        },
+        "dock.closeFloat": {
+          "en": "Close",
+          "zh": "关闭"
+        },
+        "dock.closeTab": {
+          "en": "Close",
+          "zh": "关闭"
+        },
+        "dock.dockFloat": {
+          "en": "Send back to the sidebar",
+          "zh": "收回到侧边栏"
+        },
+        "dock.drop.bottom": {
+          "en": "Add bottom split",
+          "zh": "下分栏"
+        },
+        "dock.drop.center": {
+          "en": "Move here",
+          "zh": "移到这里"
+        },
+        "dock.drop.left": {
+          "en": "Add left split",
+          "zh": "左分栏"
+        },
+        "dock.drop.right": {
+          "en": "Add right split",
+          "zh": "右分栏"
+        },
+        "dock.drop.top": {
+          "en": "Add top split",
+          "zh": "上分栏"
+        },
+        "dock.emptyPane": {
+          "en": "Empty pane",
+          "zh": "空面板"
+        },
+        "dock.splitPane": {
+          "en": "Split",
+          "zh": "分栏"
+        },
+        "dock.splitPaneDisabled": {
+          "en": "Two panes is the limit",
+          "zh": "已达两格上限"
+        },
+        "dock.splitPaneNarrow": {
+          "en": "Not enough width to split, widen the sidebar",
+          "zh": "栏宽不足，拖宽侧边栏后再分栏"
+        },
+        "tab.guide.title": {
+          "en": "Start",
+          "zh": "开始"
+        },
+        "tab.unavailable": {
+          "en": "Nothing here can view this kind of content yet.",
+          "zh": "这类内容还没有可用的查看方式。"
         }
       }
     },

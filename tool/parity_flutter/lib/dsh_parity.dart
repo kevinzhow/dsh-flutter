@@ -12,4 +12,5 @@ export 'src/case.dart';
 export 'src/fonts.dart';
 export 'src/layout.dart';
 export 'src/runner.dart' show runParityCapture;
+export 'src/settle.dart';
 export 'src/theme.dart';

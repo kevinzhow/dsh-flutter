@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_code_highlight.dart';
+import 'dsh_corners.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'dsh_diff_block.dart' show DshFoldLabels;
@@ -49,9 +52,13 @@ class DshReadBlock extends StatefulWidget {
   State<DshReadBlock> createState() => _DshReadBlockState();
 }
 
-class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
+class _DshReadBlockState extends State<DshReadBlock>
+    with DshCopyFeedback, DshHighlightListener {
   bool _expanded = false;
   bool _wrapped = false;
+
+  @override
+  String? get highlightLang => widget.lang;
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +83,43 @@ class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
     final windowed = w.lines.length < w.totalLines;
     final raw = w.lines.map((l) => l.text).join('\n');
     final lineHeight = style.height! * style.fontSize!;
+    // Whole-window highlighting keeps multi-line grammar state; the gutter and
+    // the copied text stay plain.
+    final highlighted = DshCodeHighlighting.of(context)?.highlight(raw, w.lang);
+    final foreground = style.copyWith(color: theme.labelPrimary);
 
-    Widget line(DshReadLine l) => ConstrainedBox(
+    Widget content(int index, DshReadLine l) {
+      final spans = highlighted != null && index < highlighted.length
+          ? highlighted[index]
+          : null;
+      if (spans == null) {
+        return _wrapped
+            ? Expanded(
+                child: Text(
+                  dshWrapBreaks(l.text),
+                  style: foreground,
+                  strutStyle: dshStrut(foreground),
+                ),
+              )
+            : Text(
+                l.text,
+                softWrap: false,
+                style: foreground,
+                strutStyle: dshStrut(foreground),
+              );
+      }
+      final text = Text.rich(
+        TextSpan(
+          children: dshStyledSpans(context, spans, foreground, wrap: _wrapped),
+        ),
+        softWrap: _wrapped,
+        style: foreground,
+        strutStyle: dshStrut(foreground),
+      );
+      return _wrapped ? Expanded(child: text) : text;
+    }
+
+    Widget line(int index, DshReadLine l) => ConstrainedBox(
       constraints: BoxConstraints(minHeight: lineHeight),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,24 +129,14 @@ class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
             child: Text(
               '${l.number}',
               textAlign: TextAlign.right,
+              softWrap: false,
               style: style.copyWith(
                 color: theme.color('--dsw-alias-label-tertiary'),
               ),
             ),
           ),
           const SizedBox(width: 12),
-          _wrapped
-              ? Expanded(
-                  child: Text(
-                    l.text,
-                    style: style.copyWith(color: theme.labelPrimary),
-                  ),
-                )
-              : Text(
-                  l.text,
-                  softWrap: false,
-                  style: style.copyWith(color: theme.labelPrimary),
-                ),
+          content(index, l),
         ],
       ),
     );
@@ -113,7 +145,7 @@ class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final l in head) line(l),
+        for (var i = 0; i < head.length; i++) line(i, head[i]),
         if (cap.hidden > 0)
           GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -131,19 +163,20 @@ class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
               ),
             ),
           ),
-        for (final l in tail) line(l),
+        for (var i = 0; i < tail.length; i++)
+          line(w.lines.length - tail.length + i, tail[i]),
       ],
     );
 
     return DecoratedBox(
       key: const ValueKey('read-block'),
-      decoration: BoxDecoration(
+      decoration: theme.cornerDecoration(
+        theme.radiusLg,
         color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: Column(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -159,22 +192,7 @@ class _DshReadBlockState extends State<DshReadBlock> with DshCopyFeedback {
               onCopy: w.lines.isEmpty ? null : () => copyText(raw),
               onWrap: () => setState(() => _wrapped = !_wrapped),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(22, 6, 22, 20),
-              child: _wrapped
-                  ? body
-                  : LayoutBuilder(
-                      builder: (context, constraints) => SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minWidth: constraints.maxWidth,
-                          ),
-                          child: IntrinsicWidth(child: body),
-                        ),
-                      ),
-                    ),
-            ),
+            DshCodeBody(wrapped: _wrapped, child: body),
           ],
         ),
       ),

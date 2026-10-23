@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:dsh_client/dsh_client.dart';
 
 import 'assistant_stream.dart';
+import 'attachments.dart';
 import 'event_window.dart';
 import 'journal.dart';
 import 'observable.dart';
@@ -21,12 +24,57 @@ const Map<String, Object?> historyPageOptions = {
   'turnWindow': {'minMessages': pageMessages, 'minTurns': 2},
 };
 
+/// One attachment of an outgoing prompt, frozen when the message is sent (dsh
+/// `PendingAttachment`): an image the prompt carries inline, or a file already
+/// staged on the host and cited by its receipt.
+sealed class OutgoingAttachment {
+  const OutgoingAttachment(this.name);
+
+  /// Display name; empty when the source had none.
+  final String name;
+}
+
+/// An image sent as base64 inside the prompt (`{type: 'image', ...}`). Its
+/// [bytes] also serve as the local preview until the host admitted it.
+final class OutgoingImage extends OutgoingAttachment {
+  const OutgoingImage({
+    required String name,
+    required this.bytes,
+    required this.mediaType,
+    this.width,
+    this.height,
+  }) : super(name);
+
+  final Uint8List bytes;
+  final String mediaType;
+  final int? width;
+  final int? height;
+}
+
+/// A staged file cited by its upload receipt (`{type: 'file', receiptId}`).
+final class OutgoingFile extends OutgoingAttachment {
+  const OutgoingFile({
+    required String name,
+    required this.size,
+    required this.receiptId,
+  }) : super(name);
+
+  final int size;
+  final String receiptId;
+}
+
 /// A local prompt echo shown before durable admission (client memory only).
 class PendingSubmission {
-  const PendingSubmission(this.requestId, this.text, this.time);
+  const PendingSubmission(
+    this.requestId,
+    this.text,
+    this.time, [
+    this.attachments = const [],
+  ]);
   final String requestId;
   final String text;
   final DateTime time;
+  final List<OutgoingAttachment> attachments;
 }
 
 /// Immutable Session lifecycle and control snapshot (dsh `SessionSnapshot`).
@@ -79,6 +127,14 @@ class Session {
 
   final String sessionId;
   final SessionTransport _transport;
+
+  /// Durable image reads (`session/attachment`) of this session, cached.
+  late final SessionImages images = SessionImages(sessionId, (
+    id,
+    attachmentId,
+  ) {
+    return _transport.attachment(id, attachmentId);
+  });
 
   /// The history window requested by follow and used for repairs and pages
   /// (dsh `HISTORY_PAGE_OPTIONS`); tests and vectors pick a small window.
@@ -278,7 +334,11 @@ class Session {
 
   /// `session/prompt` (mode `queue`, or `steer` to inject into the running
   /// turn). A local echo is shown until the durable `user/message` arrives.
-  Future<void> prompt(String text, {String mode = 'queue'}) async {
+  Future<void> prompt(
+    String text, {
+    String mode = 'queue',
+    List<OutgoingAttachment> attachments = const [],
+  }) async {
     final requestId = 'req-${randomUuid()}';
     _promptAttempted = true;
     _promptError = null;
@@ -288,7 +348,7 @@ class Session {
     }
     _pending = [
       ..._pending,
-      PendingSubmission(requestId, text, DateTime.now()),
+      PendingSubmission(requestId, text, DateTime.now(), attachments),
     ];
     _dirty();
     try {
@@ -296,8 +356,19 @@ class Session {
         'requestId': requestId,
         'sessionId': sessionId,
         'mode': mode,
+        // Attachments first in pick order, then the text (dsh `sendSession`).
         'content': [
-          {'type': 'text', 'text': text},
+          for (final a in attachments)
+            switch (a) {
+              OutgoingImage() => {
+                'type': 'image',
+                'mediaType': a.mediaType,
+                'data': base64Encode(a.bytes),
+                if (a.name.isNotEmpty) 'name': a.name,
+              },
+              OutgoingFile() => {'type': 'file', 'receiptId': a.receiptId},
+            },
+          if (text.isNotEmpty) {'type': 'text', 'text': text},
         ],
       });
     } on Object catch (e) {

@@ -6,6 +6,7 @@ library;
 export 'src/model/ask_model.dart';
 export 'src/model/details_model.dart';
 export 'src/model/diff_model.dart';
+export 'src/model/image_card_model.dart';
 export 'src/model/raw_call.dart';
 export 'src/model/read_search_web_model.dart';
 export 'src/model/row_model.dart';

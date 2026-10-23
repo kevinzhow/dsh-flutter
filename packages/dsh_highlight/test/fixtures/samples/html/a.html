@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Demo &amp; test</title>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    .card > h1:first-child { color: #336699; }
+  </style>
+  <script>
+    const items = [1, 2, 3].map(n => `<li>${n}</li>`);
+    function greet(name) { return "hi " + name; }
+  </script>
+</head>
+<body class="main" data-id='7'>
+  <!-- a comment -->
+  <div id="app" style="color: red; margin: 0 auto">
+    <a href="https://example.org/?q=1&amp;r=2" target=_blank>link</a>
+    <input type="text" disabled value="x">
+    <br/>
+    <script type="application/json">{"a": [1, 2]}</script>
+  </div>
+</body>
+</html>

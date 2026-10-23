@@ -5,16 +5,21 @@ environment:
 workspace:
   - apps/dsh_flutter
   - features/dsh_feature_approval
+  - features/dsh_feature_attachment
   - features/dsh_feature_chat
   - features/dsh_feature_conversation
+  - features/dsh_feature_documentpreview
+  - features/dsh_feature_files
   - features/dsh_feature_plan
   - features/dsh_feature_session
+  - features/dsh_feature_sidebar_right
   - features/dsh_feature_subagent
   - features/dsh_feature_tool
   - features/dsh_feature_user_questions
   - packages/dsh_client
   - packages/dsh_models
   - packages/dsh_conversation
+  - packages/dsh_highlight
   - packages/dsh_i18n
   - packages/dsh_slots
   - packages/dsh_theme

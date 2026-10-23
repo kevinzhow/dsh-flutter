@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
-import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_models/dsh_models.dart' hide isAbsoluteWorkspacePath;
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -1420,4 +1421,208 @@ void main() {
       expect(find.text('kept output'), findsOneWidget);
     },
   );
+
+  group('read_image', () {
+    const envelope =
+        '<path>/w/shot.png</path>\n<type>image</type>\n<content>\nimage 320x200\n</content>';
+    Map<String, Object?> attachment({Object? original}) => {
+      'attachmentId': 'sha256:abc',
+      'mediaType': 'image/png',
+      'bytes': 1658,
+      'width': 320,
+      'height': 200,
+      'name': 'shot.png',
+      'originalDimensions': ?original,
+    };
+
+    ToolResult image({
+      List<Object?>? content,
+      Object? meta = const {'path': '/w/shot.png'},
+      bool error = false,
+      String? parent,
+    }) => done(
+      'read_image',
+      {'file_path': 'shot.png'},
+      content:
+          content ??
+          [
+            {'type': 'text', 'text': envelope},
+            {'type': 'image', 'attachment': attachment()},
+          ],
+      meta: meta,
+      error: error,
+      parent: parent,
+    );
+
+    test('a settled result becomes the gallery material', () {
+      final m = imageCardModel(image())!;
+      expect(m.path, '/w/shot.png');
+      expect(m.images.single.attachmentId, 'sha256:abc');
+      expect(m.extraText, isNull);
+      expect(m.originalSizes.single, isNull);
+    });
+
+    test('downscaled images keep their original size; extra text survives', () {
+      final m = imageCardModel(
+        image(
+          content: [
+            {'type': 'text', 'text': envelope},
+            {
+              'type': 'image',
+              'attachment': attachment(
+                original: {'width': 4000, 'height': 2500},
+              ),
+            },
+            {'type': 'text', 'text': 'hook note'},
+          ],
+        ),
+      )!;
+      expect(m.originalSizes.single, (width: 4000, height: 2500));
+      expect(m.extraText, 'hook note');
+    });
+
+    test('anything malformed declines to the generic card', () {
+      expect(imageCardModel(image(error: true)), isNull);
+      expect(imageCardModel(image(meta: null)), isNull);
+      expect(imageCardModel(image(meta: {'path': ''})), isNull);
+      // a nested call has no metadata and uses its own argument
+      expect(imageCardModel(image(meta: null, parent: 'p')), isNotNull);
+      expect(
+        imageCardModel(
+          image(
+            content: [
+              {'type': 'text', 'text': envelope},
+            ],
+          ),
+        ),
+        isNull,
+      );
+      expect(
+        imageCardModel(
+          image(
+            content: [
+              {'type': 'text', 'text': envelope},
+              {
+                'type': 'image',
+                'attachment': {'attachmentId': 'x'},
+              },
+            ],
+          ),
+        ),
+        isNull,
+      );
+      expect(
+        imageCardModel(
+          image(
+            content: [
+              {'type': 'text', 'text': 'no envelope'},
+              {'type': 'image', 'attachment': attachment()},
+            ],
+          ),
+        ),
+        isNull,
+      );
+      expect(
+        imageCardModel(
+          image(
+            content: [
+              {'type': 'text', 'text': envelope},
+              {'type': 'image', 'attachment': attachment()},
+              {'type': 'reasoning', 'text': 'x'},
+            ],
+          ),
+        ),
+        isNull,
+      );
+    });
+
+    testWidgets('the row expands to the gallery, path and size lines', (
+      tester,
+    ) async {
+      final h = Harness(cwd: '/w');
+      h.slots.register<ImageGalleryOwner, Widget>(
+        DshSlots.toolCallImages.typed<ImageGalleryOwner, Widget>(),
+        (o) => Text('gallery ${o.images.length}'),
+      );
+      await tester.pumpWidget(h.widget(image()));
+      expect(find.text('gallery 1'), findsNothing);
+      await tester.tap(find.byKey(const ValueKey('tool-row-read_image')));
+      await tester.pump();
+      expect(find.text('gallery 1'), findsOneWidget);
+      expect(find.byKey(const ValueKey('image-path')), findsOneWidget);
+      expect(
+        find.text(
+          t('row.imageSize', {'width': 320, 'height': 200, 'bytes': 1658}),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('a failed read shows the plain row', (tester) async {
+      final h = Harness(cwd: '/w');
+      await tester.pumpWidget(h.widget(image(error: true)));
+      expect(find.byKey(const ValueKey('tool-row-read_image')), findsOneWidget);
+    });
+  });
+
+  group('read highlighting', () {
+    testWidgets('an ambient highlighter colours the read card by its language', (
+      tester,
+    ) async {
+      final h = Harness(cwd: '/w');
+      const envelope =
+          '<path>/w/a.dart</path>\n<type>file</type>\n<content>\n1: var x\n</content>';
+      final call = done(
+        'read',
+        {'file_path': '/w/a.dart'},
+        text: envelope,
+        meta: {
+          'path': '/w/a.dart',
+          'offset': 1,
+          'totalLines': 1,
+          'lang': 'dart',
+          'lines': [
+            {'number': 1, 'text': 'var x'},
+          ],
+        },
+      );
+      final highlighter = _StubHighlighter();
+      await tester.pumpWidget(
+        DshCodeHighlighting(highlighter: highlighter, child: h.widget(call)),
+      );
+      await tester.tap(find.byKey(const ValueKey('tool-row-read')));
+      await tester.pump();
+      expect(highlighter.requested, contains('dart'));
+      final rich = tester
+          .widgetList<RichText>(find.byType(RichText))
+          .where((w) => w.text.toPlainText() == 'var x');
+      expect(rich, isNotEmpty);
+      final spans = <TextSpan>[];
+      rich.first.text.visitChildren((s) {
+        if (s is TextSpan && s.text != null) spans.add(s);
+        return true;
+      });
+      expect(spans.map((s) => s.text), ['var', ' x']);
+      expect(spans.first.style!.color, isNot(spans.last.style!.color));
+    });
+  });
+}
+
+class _StubHighlighter implements DshCodeHighlighter {
+  final List<String?> requested = [];
+
+  @override
+  List<List<DshCodeSpan>>? highlight(String code, String? lang) => [
+    for (final line in code.split('\n'))
+      [
+        const DshCodeSpan('var', DshCodeToken.keyword),
+        DshCodeSpan(line.substring(3)),
+      ],
+  ];
+
+  @override
+  void prepare(String? lang) => requested.add(lang);
+
+  @override
+  Stream<void> get loaded => const Stream.empty();
 }

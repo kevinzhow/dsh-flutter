@@ -26,10 +26,19 @@ import 'package:flutter/widgets.dart';
 /// Header of an open session (dsh `conversation.header`): the title projection
 /// and the model indicator, with a running dot.
 class SessionHeader extends StatefulWidget {
-  const SessionHeader({super.key, required this.owner, required this.i18n});
+  const SessionHeader({
+    super.key,
+    required this.owner,
+    required this.i18n,
+    this.slots,
+  });
 
   final SessionOwner owner;
   final DshI18n i18n;
+
+  /// Renders `conversation.session.header.actions` (the subagent trigger, the
+  /// sidebar button) at the end of the header.
+  final SlotRegistry? slots;
 
   @override
   State<SessionHeader> createState() => _SessionHeaderState();
@@ -67,7 +76,11 @@ class _SessionHeaderState extends State<SessionHeader> {
     final caption = theme
         .textStyle('--dsw-font-xxs-12')
         .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
-    return Column(
+    final actions = widget.slots?.renderList(
+      DshSlots.conversationSessionHeaderActions.typed<SessionOwner, Widget>(),
+      widget.owner,
+    );
+    final titles = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -103,6 +116,13 @@ class _SessionHeaderState extends State<SessionHeader> {
           overflow: TextOverflow.ellipsis,
           style: caption,
         ),
+      ],
+    );
+    if (actions == null || actions.isEmpty) return titles;
+    return Row(
+      children: [
+        Expanded(child: titles),
+        for (final action in actions) action,
       ],
     );
   }

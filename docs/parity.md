@@ -124,9 +124,16 @@ dsh bundles one font, Montserrat (brand wordmark, OFL); its text stack (`-apple-
 Latin text with the same Noto Sans files (SIL OFL 1.1, from Debian `fonts-noto-core` 20201225) and code text with Noto Sans Mono (`fonts-noto-mono`, registered under the code stack's leading name `SF Mono`), committed under
 `tool/parity-fonts/` with sha256 pins and the license: React serves them through `@font-face` for the stack's leading names,
 Flutter registers them with `FontLoader` (flutter_test ignores a fallback list when the primary family is unknown, so the
-leading names must exist). Only Regular and Bold exist, so 500/600 resolve to Regular/Bold on both sides. Not vendored yet:
-Montserrat (Flutter cannot load woff2; needed once a case shows the wordmark) and CJK faces (needed for the first zh-CN case).
-Metadata of both providers lists the files and digests; the React metadata also lists the faces Chromium really used.
+leading names must exist). Only Regular and Bold exist, so 500/600 resolve to Regular/Bold on both sides. Chinese text
+(`zh-CN` cases) is drawn with a Noto Sans CJK SC subset (Regular and Bold, SIL OFL 1.1, from Ubuntu/Debian `fonts-noto-cjk`
+1:20240730+repack1-1build1, upstream Noto Sans CJK 2.004; about 1.3 MB for both) registered under `PingFang SC`, the first
+CJK name of both the text and the code stack, on both providers. The subset holds the 3000 most frequent GB 2312
+hanzi plus CJK and fullwidth punctuation and every hanzi of dsh's conversation dictionary (`cjk-charset.txt`, rebuilt by
+`tool/parity-fonts/subset-cjk.py`); a builder asserts that the text of its Chinese cases is inside the charset, because a
+glyph outside it would fall back to a system font on the React side and to a missing glyph on the Flutter side. Not
+vendored yet: Montserrat (Flutter cannot load woff2; needed once a case shows the wordmark) and the other CJK stack
+entries (`Hiragino Sans GB`, `Microsoft YaHei`: they come after `PingFang SC` and are never reached for a glyph in the
+subset). Metadata of both providers lists the files and digests; the React metadata also lists the faces Chromium really used.
 `tool/parity fonts` verifies the pins.
 
 ## Reading the scores
@@ -176,6 +183,27 @@ ui-primitives barrel narrowed to the modules the mounted surfaces import). `tool
 `tool.card` mounts the keyed toolview row of each item's tool name (`BashRow`, `FileMutationRow`, ...), `plan.todo-panel` the
 `TodoPanel`, `plan.card` / `plan.preview` the plan cards and document.
 
+Kinds whose content settles asynchronously (images decoding, a lazy highlight grammar, a rejecting image loader) publish a
+promise as `window.__parityReady` (`tool/parity-ext/host/settle.ts`: `publishSettle(ready, what)`); `capture.mjs` awaits it
+after `document.fonts.ready` and before the interactions, and a timeout fails the capture instead of recording a
+half-rendered page. The Flutter counterpart is `precacheTreeImages(tester)` (decodes the `Image`s in the tree) and, for the
+code cases, loading the grammars outside the fake clock in the case's `interact` hook.
+
+Synthetic images come from `tool/parity-ext/synthetic_images.py` (generated pixels, shipped as base64 in the case props, so
+both providers draw identical bytes). Frames in dsh have a 1px border and `object-fit` snaps the picture to whole CSS
+pixels, so the builders size every source to the frame's content box in device pixels: nothing is resampled, and a
+mismatch inside a picture is a real geometry difference.
+
+## Reading a text-heavy case
+
+The `non-text` column counts glyph anti-aliasing only where it is dense ink; a glyph stem (a long, thin vertical edge) is
+classified as `hairline` and a stem pair as `offset`, so a screen full of text cannot reach 99.5% however the layout
+matches: Chromium's glyph coverage (a little heavier than Skia's) differs on every stem. To judge the layout of such a
+case, read it with the glyphs masked: an `outside-glyph` agreement (pixels outside every word-sized ink component, within
+3px) is far higher and what remains there is sub-pixel anti-aliasing of rounded corners and icon edges (a level or two).
+`tool/parity-ext/glyph-mask.py --out build/parity-ext --cases <glob> [--viz DIR]` prints that number next to the exact one and
+draws what is left.
+
 ## Provenance and licenses
 
 - dsh (MIT, pinned in `docs/upstream-sync.json`) components are imported at run time from the checkout, never copied.
@@ -187,4 +215,5 @@ ui-primitives barrel narrowed to the modules the mounted surfaces import). `tool
   (`tool/parity_lib/vt.py`, `pipeline.py`, `summary.py`, the providers) is dsh-flutter's, run as a separate process; the
   non-text/bucket analysis (`diffmetrics.py`) is a fresh implementation of the approach documented for raft-flutter's
   parity-ext (no code copied).
-- Noto Sans: SIL OFL 1.1, see `tool/parity-fonts/OFL.txt` and `THIRD_PARTY_NOTICES.md`.
+- Noto Sans, Noto Sans Mono and the Noto Sans CJK SC subset: SIL OFL 1.1, see `tool/parity-fonts/OFL.txt`,
+  `tool/parity-fonts/OFL-NotoSansCJK.txt` and `THIRD_PARTY_NOTICES.md`.

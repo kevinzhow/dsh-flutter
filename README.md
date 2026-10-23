@@ -2,25 +2,30 @@
 
 A cross-platform native client for DSH (DeepSeek Harness), built with Flutter. Working name: Whalee.
 
-Status: phase 1b-1 (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
+Status: phase 1b-2a (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
 
 ## Layout
 
 One package per layer of dsh's own web client (`docs/subsystems/web-client.md` upstream), one-way dependencies:
 
 ```
-packages/dsh_client        pure Dart   pairing, connection generations, /api/remote.mux, unary /api calls
+packages/dsh_client        pure Dart   pairing, connection generations, /api/remote.mux, unary /api calls (multipart binary results), streamed file upload, workspaceFiles client
 packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window)
 packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool
 packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's own
 packages/dsh_theme         Flutter     theme contract engine, vocabulary = dsh --dsw-* tokens, official pack
 packages/dsh_ui            Flutter     UI primitives that read only the theme contract (rows, terminal/diff/read/search/web blocks, icons from dsh's SVG paths)
 packages/dsh_i18n          pure Dart   zh/en catalog generated from dsh's locale dictionaries
+packages/dsh_highlight     pure Dart engine + Flutter assets   syntax highlighter: TextMate engine in Dart on shiki's grammars, scopes mapped to dsh's 9 --shiki-token-* classes
 features/dsh_feature_approval          ui-approval: composer takeover for approval requests
+features/dsh_feature_attachment        ui-attachment: composer attachment tray (pick, upload progress/cancel/retry), image tiles in messages
 features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
 features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (send/stop), to-do dock
+features/dsh_feature_documentpreview  ui-documentpreview: highlighted text, rendered/raw Markdown, image, open/save for other types
+features/dsh_feature_files             ui-files: workspace file tree, live-watched
 features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet, plan-mode chip
 features/dsh_feature_session           ui-session: the session list
+features/dsh_feature_sidebar_right     ui-sidebar-right: files/preview panel (sheet on phones, inline column on wide windows)
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
 features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions
@@ -30,7 +35,7 @@ tool/                                  generators, guards, preflight, live spike
 tool/vendor/raft-visual-testing/       vendored Raft visual-testing CLI, FSL-1.1-ALv2 (not MIT), see License below
 ```
 
-`tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client.
+`tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client; highlight is a leaf that only ui and apps may use.
 
 ## Pinned versions
 

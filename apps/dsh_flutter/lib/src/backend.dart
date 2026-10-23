@@ -23,6 +23,12 @@ abstract interface class HostBackend {
   /// Live connection state of the current host (for the reconnect banner).
   Stream<ConnectionState> get states;
 
+  /// Streams a file to the host's upload route (`session/uploadFileBinary`).
+  FileUploadClient get uploader;
+
+  /// The host's workspace file service (`workspaceFiles`).
+  WorkspaceFilesRemote get files;
+
   /// Pair with [origin] using [token] and return the transport once the first
   /// generation is up. Calling again re-pairs (after a host restart) and
   /// reuses the connection when the origin is unchanged.
@@ -49,6 +55,14 @@ class LiveBackend implements HostBackend {
 
   @override
   Stream<ConnectionState> get states => _states.stream;
+
+  @override
+  late final FileUploadClient uploader = HttpFileUploadClient(
+    credential: () => _connection?.generation?.credential,
+  );
+
+  @override
+  late final WorkspaceFilesRemote files = _LiveFiles(() => _connection);
 
   /// Unary calls through the live generation (used by tools that need host
   /// methods the app itself does not expose yet, such as the live test).
@@ -113,4 +127,46 @@ class LiveBackend implements HostBackend {
     await _teardown();
     await _states.close();
   }
+}
+
+/// The workspace file service of whatever connection is live now (a re-pair
+/// replaces the connection; the services handed out earlier keep working).
+class _LiveFiles implements WorkspaceFilesRemote {
+  _LiveFiles(this._connection);
+
+  final DshConnection? Function() _connection;
+
+  WorkspaceFilesRemote get _live {
+    final c = _connection();
+    if (c == null) throw NotConnected();
+    return DshWorkspaceFiles(c);
+  }
+
+  @override
+  Future<WorkspaceFileStat> stat(String sessionId, String path) =>
+      _live.stat(sessionId, path);
+
+  @override
+  Future<WorkspaceFileText> read(
+    String sessionId,
+    String path, {
+    int? offset,
+    int? limit,
+  }) => _live.read(sessionId, path, offset: offset, limit: limit);
+
+  @override
+  Future<WorkspaceFileBytes> readBytes(
+    String sessionId,
+    String path, {
+    ByteRange? range,
+    String? baseFile,
+  }) => _live.readBytes(sessionId, path, range: range, baseFile: baseFile);
+
+  @override
+  Future<WorkspaceDirectoryListing> list(String sessionId, String path) =>
+      _live.list(sessionId, path);
+
+  @override
+  Stream<WorkspaceWatchEvent> changes(String sessionId, String path) =>
+      _live.changes(sessionId, path);
 }

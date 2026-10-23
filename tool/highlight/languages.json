@@ -1,0 +1,11 @@
+{
+  "comment": "Grammar ids (shiki names) shipped as assets; their embedded dependencies are converted too, except the withheld ones. html, ini, diff, yaml and toml come from TextMate bundles whose licence is the TextMate permissive notice rather than MIT (see packages/dsh_highlight/assets/grammars/PROVENANCE.md); to drop one, move it to \"withheld\" and rerun convert.mjs.",
+  "languages": [
+    "typescript", "shellscript", "json", "python", "markdown", "yaml", "html", "css", "scss",
+    "dart", "go", "rust", "java", "c", "cpp", "csharp", "kotlin", "swift", "ruby", "php",
+    "sql", "xml", "toml", "ini", "diff", "lua", "make"
+  ],
+  "withheld": {
+    "glsl": "upstream polym0rph/GLSL.tmbundle states no licence; only an embedded dependency of cpp (glsl raw strings), so cpp loses that embedding"
+  }
+}

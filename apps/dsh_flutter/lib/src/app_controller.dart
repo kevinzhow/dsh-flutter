@@ -3,9 +3,13 @@ import 'dart:async';
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_approval/dsh_feature_approval.dart';
+import 'package:dsh_feature_attachment/dsh_feature_attachment.dart';
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart';
+import 'package:dsh_feature_documentpreview/dsh_feature_documentpreview.dart';
+import 'package:dsh_feature_files/dsh_feature_files.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
+import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
@@ -13,6 +17,7 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState;
 import 'package:url_launcher/url_launcher.dart';
@@ -20,6 +25,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'backend.dart';
 import 'connection_store.dart';
 import 'launch_link.dart';
+import 'platform/platform_services.dart';
 import 'session_controller.dart';
 
 /// Where the app is with its host.
@@ -56,6 +62,8 @@ class AppController extends ChangeNotifier {
     this.scanner = const NoScanner(),
     DshLocale? locale,
     this.frameScheduler,
+    this.platform = const PlatformServices(),
+    this.highlighter,
   }) : store = store ?? MemoryConnectionStore(),
        locale =
            locale ??
@@ -75,10 +83,19 @@ class AppController extends ChangeNotifier {
     );
     registerConversationFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
+    registerAttachmentFeature(slots, i18n: () => i18n);
+    sidebar = registerSidebarRightFeature(
+      slots,
+      i18n: () => i18n,
+      services: _SidebarBridge(this),
+    );
+    registerFilesFeature(slots, i18n: () => i18n);
+    registerDocumentPreviewFeature(slots, i18n: () => i18n);
     registerToolFeature(
       slots,
       i18n: () => i18n,
       actions: ToolHostActions(
+        openFile: (path, {line}) => _openFile(path, line: line),
         openUrl: (url) => unawaited(
           launchUrl(
             url,
@@ -104,6 +121,15 @@ class AppController extends ChangeNotifier {
   final HostBackend backend;
   final ConnectionStore store;
   final LaunchScanner scanner;
+
+  /// Pickers and file handling of the running platform.
+  final PlatformServices platform;
+
+  /// The syntax highlighter every code surface uses (null: plain text).
+  final DshCodeHighlighter? highlighter;
+
+  /// The right sidebar (file tree and previews) of every session.
+  late final SidebarRightFeature sidebar;
 
   /// `animation-frame` publications of the conversation flush on this
   /// scheduler (null: a short timer; tests pass an immediate one).
@@ -296,6 +322,9 @@ class AppController extends ChangeNotifier {
         scheduler: frameScheduler,
         cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
         hostHome: _transport?.generation?.hostHome ?? '',
+        uploader: backend.uploader,
+        files: backend.files,
+        platform: platform,
       ),
     );
     openSessionId = sessionId;
@@ -308,6 +337,17 @@ class AppController extends ChangeNotifier {
     openSessionId = null;
     notifyListeners();
   }
+
+  /// A tool card (or anything else) asked to show [path]: open it in the
+  /// sidebar of the session in view.
+  void _openFile(String path, {int? line}) {
+    final session = openSession;
+    if (session == null) return;
+    sidebar.openFile(session.owner, path, line: line);
+  }
+
+  /// Files dropped on the window (desktop) go to the session in view.
+  void dropFiles(List<LocalFile> files) => openSession?.dropFiles(files);
 
   /// `session/create` in the host's default directory, then open it.
   Future<void> createSession() async {
@@ -376,6 +416,9 @@ class _SubagentBridge implements SubagentServices {
         scheduler: app.frameScheduler,
         cwdReader: () => parent.cwd,
         hostHome: parent.hostHome,
+        uploader: app.backend.uploader,
+        files: app.backend.files,
+        platform: app.platform,
         readOnly: true,
       ),
     );
@@ -430,4 +473,15 @@ class _SubagentBridge implements SubagentServices {
       durationMs: duration,
     );
   }
+}
+
+/// The sidebar's seat in the app: it pushes its phone sheet onto the app
+/// navigator.
+class _SidebarBridge implements SidebarServices {
+  _SidebarBridge(this.app);
+
+  final AppController app;
+
+  @override
+  GlobalKey<NavigatorState> get navigatorKey => app.navigatorKey;
 }

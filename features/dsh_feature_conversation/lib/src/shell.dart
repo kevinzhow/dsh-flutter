@@ -60,8 +60,15 @@ class ConversationShell extends StatelessWidget {
         final composer = s.removed
             ? _Notice(title: i18n.t(appNamespace, 'session.removed'), body: '')
             : (slots.renderChain(composerSlot, owner) ??
-                  DefaultComposer(owner: owner, i18n: i18n));
-        return Column(
+                  DefaultComposer(owner: owner, i18n: i18n, slots: slots));
+        final sidebar =
+            MediaQuery.sizeOf(context).width >= sidebarInlineMinWindowWidth
+            ? slots.renderSingle(
+                DshSlots.rightbarSession.typed<SessionOwner, Widget>(),
+                owner,
+              )
+            : null;
+        final main = Column(
           children: [
             if (s.lastAgentError != null)
               Padding(
@@ -104,6 +111,16 @@ class ConversationShell extends StatelessWidget {
             ),
           ],
         );
+        // Wide windows show the right sidebar beside the conversation.
+        return sidebar == null
+            ? main
+            : Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: main),
+                  sidebar,
+                ],
+              );
       },
     );
   }

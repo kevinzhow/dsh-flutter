@@ -63,6 +63,12 @@ class FakeTransport implements SessionTransport {
   final List<Map<String, Object?>> prompts = [];
   final List<String> cancels = [];
 
+  /// Durable image reads: `sessionId/attachmentId` per call; [onAttachment]
+  /// answers (`{attachment, data}`), the default is a 1x1 PNG.
+  final List<String> attachmentReads = [];
+  Future<Map<String, Object?>> Function(String sessionId, String attachmentId)?
+  onAttachment;
+
   /// Open a follow generation as the host would: [StreamOpened] then items.
   StreamController<GenerationFrame> get currentFollow => follows.last;
 
@@ -108,12 +114,30 @@ class FakeTransport implements SessionTransport {
     'sessionId': 'new-session',
   };
 
+  /// Run before a prompt is recorded; throw to refuse it.
+  void Function(Map<String, Object?> request)? onPrompt;
+
   @override
-  Future<void> prompt(Map<String, Object?> request) async =>
-      prompts.add(request);
+  Future<void> prompt(Map<String, Object?> request) async {
+    onPrompt?.call(request);
+    prompts.add(request);
+  }
 
   @override
   Future<void> cancel(String sessionId) async => cancels.add(sessionId);
+
+  @override
+  Future<Map<String, Object?>> attachment(
+    String sessionId,
+    String attachmentId,
+  ) {
+    attachmentReads.add('$sessionId/$attachmentId');
+    return onAttachment?.call(sessionId, attachmentId) ??
+        Future.value({
+          'attachment': {'attachmentId': attachmentId},
+          'data': _onePixelPng,
+        });
+  }
 
   @override
   Future<Map<String, Object?>> page(Map<String, Object?> request) {
@@ -124,3 +148,7 @@ class FakeTransport implements SessionTransport {
 
 Future<void> pump([int ms = 20]) =>
     Future<void>.delayed(Duration(milliseconds: ms));
+
+/// A valid 1x1 PNG (base64) for tests that need decodable image bytes.
+const String _onePixelPng =
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';

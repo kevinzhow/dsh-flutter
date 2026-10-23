@@ -1,5 +1,7 @@
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart' show Icons, SelectableText;
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
@@ -18,8 +20,65 @@ TextStyle _caption(BuildContext context) {
       .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
 }
 
-/// A person's message: a right-aligned bubble on `--dsw-specific-bubble`.
-/// [pending] dims a local echo that the host has not yet admitted.
+/// The code card toolbar strings of dsh's `conversation` dictionary.
+DshCodeToolbarLabels codeLabels(DshI18n i18n) => DshCodeToolbarLabels(
+  codeLabel: i18n.t('conversation', 'codeBlock.title'),
+  wrapLabel: i18n.t('conversation', 'codeBlock.wrap'),
+  unwrapLabel: i18n.t('conversation', 'codeBlock.unwrap'),
+  copy: i18n.t('conversation', 'copy'),
+  copied: i18n.t('conversation', 'copied'),
+);
+
+/// One attachment of a user message as the chat shows it: an image (durable,
+/// or the local preview of a message still being admitted) or a file.
+sealed class UserAttachmentView {
+  const UserAttachmentView();
+}
+
+final class UserImageView extends UserAttachmentView {
+  const UserImageView(this.image);
+  final GalleryImage image;
+}
+
+final class UserFileView extends UserAttachmentView {
+  const UserFileView({required this.name, required this.bytes});
+  final String name;
+  final int bytes;
+}
+
+/// The attachments of a durable message, in content order.
+List<UserAttachmentView> attachmentViews(List<MessageAttachment> attachments) =>
+    [
+      for (final a in attachments)
+        switch (a) {
+          MessageImage() => UserImageView(DurableGalleryImage(a.image)),
+          MessageFile() => UserFileView(name: a.file.name, bytes: a.file.bytes),
+        },
+    ];
+
+/// The attachments of a local echo, in pick order.
+List<UserAttachmentView> echoAttachmentViews(
+  List<OutgoingAttachment> attachments,
+) => [
+  for (final a in attachments)
+    switch (a) {
+      OutgoingImage() => UserImageView(
+        PreviewGalleryImage(
+          a.bytes,
+          name: a.name.isEmpty ? null : a.name,
+          width: a.width,
+          height: a.height,
+        ),
+      ),
+      OutgoingFile() => UserFileView(name: a.name, bytes: a.size),
+    },
+];
+
+/// A person's message: its attachments (image groups through the
+/// `conversation.chat.user.images` slot, file cards) above a right-aligned
+/// bubble on `--dsw-specific-bubble` (dsh ui-chat `UserContent`; the bubble is
+/// only there for text). [pending] dims a local echo that the host has not yet
+/// admitted.
 class UserBubble extends StatelessWidget {
   const UserBubble({
     super.key,
@@ -27,16 +86,66 @@ class UserBubble extends StatelessWidget {
     required this.i18n,
     this.steering = false,
     this.pending = false,
+    this.attachments = const [],
+    this.owner,
+    this.slots,
   });
 
   final String text;
   final DshI18n i18n;
   final bool steering;
   final bool pending;
+  final List<UserAttachmentView> attachments;
+
+  /// Needed to render image groups (the session loads durable images).
+  final SessionOwner? owner;
+  final SlotRegistry? slots;
+
+  Widget _attachments() {
+    final images = [
+      for (final a in attachments)
+        if (a is UserImageView) a.image,
+    ];
+    final compact = attachments.length > 1;
+    var imageIndex = 0;
+    return Wrap(
+      key: const ValueKey('message-attachments'),
+      alignment: WrapAlignment.end,
+      spacing: DshSpace.sm,
+      runSpacing: DshSpace.sm,
+      children: [
+        for (final a in attachments)
+          switch (a) {
+            UserFileView() => DshMessageFileCard(name: a.name, bytes: a.bytes),
+            UserImageView() => Builder(
+              builder: (_) {
+                final index = imageIndex++;
+                final view = owner == null || slots == null
+                    ? null
+                    : slots!.renderSingle(
+                        DshSlots.conversationChatUserImages
+                            .typed<ImageGalleryOwner, Widget>(),
+                        ImageGalleryOwner(
+                          session: owner!,
+                          images: [a.image],
+                          alignEnd: true,
+                          compact: compact,
+                          group: images,
+                          groupIndex: index,
+                        ),
+                      );
+                return view ?? const SizedBox.shrink();
+              },
+            ),
+          },
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
+    final showBubble = text.isNotEmpty || attachments.isEmpty;
     return Align(
       alignment: AlignmentDirectional.centerEnd,
       child: LayoutBuilder(
@@ -55,24 +164,28 @@ class UserBubble extends StatelessWidget {
                       style: _caption(context),
                     ),
                   ),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: theme.color('--dsw-specific-bubble'),
-                    borderRadius: BorderRadius.circular(theme.radiusXl),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: DshSpace.lg,
-                      vertical: DshSpace.md,
+                if (attachments.isNotEmpty) _attachments(),
+                if (attachments.isNotEmpty && showBubble)
+                  const SizedBox(height: DshSpace.sm),
+                if (showBubble)
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: theme.color('--dsw-specific-bubble'),
+                      borderRadius: BorderRadius.circular(theme.radiusXl),
                     ),
-                    child: SelectableText(
-                      text,
-                      style: theme
-                          .textStyle('--dsw-font-base-16')
-                          .copyWith(color: theme.labelPrimary),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: DshSpace.lg,
+                        vertical: DshSpace.md,
+                      ),
+                      child: SelectableText(
+                        text,
+                        style: theme
+                            .textStyle('--dsw-font-base-16')
+                            .copyWith(color: theme.labelPrimary),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -90,11 +203,17 @@ class AssistantStepView extends StatelessWidget {
     required this.data,
     required this.nodeKey,
     required this.i18n,
+    this.owner,
+    this.slots,
   });
 
   final AssistantData data;
   final String nodeKey;
   final DshI18n i18n;
+
+  /// Needed to render image blocks through `conversation.chat.message.images`.
+  final SessionOwner? owner;
+  final SlotRegistry? slots;
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +233,31 @@ class AssistantStepView extends StatelessWidget {
             ),
           );
         case TextBlock(:final text) when text.trim().isNotEmpty:
-          children.add(DshMarkdown(text, key: ValueKey('text-$nodeKey-$i')));
-        case ImageBlock():
           children.add(
-            Text(
-              i18n.t('conversation', 'image.label'),
-              style: _caption(context),
+            DshMarkdown(
+              text,
+              key: ValueKey('text-$nodeKey-$i'),
+              codeLabels: codeLabels(i18n),
             ),
+          );
+        case ImageBlock(:final attachment):
+          final ref = ImageRef.tryParse(attachment);
+          final gallery = ref == null || owner == null || slots == null
+              ? null
+              : slots!.renderSingle(
+                  DshSlots.conversationChatMessageImages
+                      .typed<ImageGalleryOwner, Widget>(),
+                  ImageGalleryOwner(
+                    session: owner!,
+                    images: [DurableGalleryImage(ref)],
+                  ),
+                );
+          children.add(
+            gallery ??
+                Text(
+                  i18n.t('conversation', 'image.label'),
+                  style: _caption(context),
+                ),
           );
         case _:
           break;

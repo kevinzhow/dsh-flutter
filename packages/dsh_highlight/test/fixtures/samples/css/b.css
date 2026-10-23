@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Demo";
+  src: url(demo.woff2) format("woff2");
+}
+@supports (display: grid) and (not (display: inline-grid)) {
+  .x { gap: 1rem }
+}
+input:focus-visible { outline: 2px solid Highlight; }
+.a { color: #FFF; width: 10.5em; height: 50vh; z-index: -1 }

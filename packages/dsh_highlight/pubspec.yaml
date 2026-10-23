@@ -1,0 +1,17 @@
+name: dsh_highlight
+description: Syntax highlighter that reproduces dsh web's shiki css-variables colouring (TextMate engine in Dart).
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0
+flutter:
+  assets:
+    - assets/grammars/

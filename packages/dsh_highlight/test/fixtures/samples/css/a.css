@@ -1,0 +1,21 @@
+@charset "utf-8";
+@import url("base.css") screen;
+:root {
+  --accent: #1c7ed6;
+  --gap: 8px;
+}
+/* comment */
+html, body { margin: 0; padding: 0; }
+.card > .title:hover::before,
+a[href^="https"]:not(.plain) {
+  color: var(--accent);
+  background: rgba(0, 0, 0, .5) url('img/a.png') no-repeat;
+  margin: calc(var(--gap) * 2) -4px 0 auto;
+  font: italic bold 12px/1.5 "Helvetica Neue", sans-serif;
+  transition: opacity .3s ease-in-out;
+}
+@media (min-width: 600px) and (max-width: 900px) {
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+#id.class:nth-child(2n+1) { content: "a\"b"; width: 100% !important; }

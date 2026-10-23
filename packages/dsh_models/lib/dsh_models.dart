@@ -4,6 +4,7 @@
 library;
 
 export 'src/assistant_stream.dart';
+export 'src/attachments.dart';
 export 'src/client_sessions.dart';
 export 'src/event_window.dart';
 export 'src/journal.dart';
@@ -13,3 +14,4 @@ export 'src/session.dart';
 export 'src/session_manager.dart';
 export 'src/session_summary.dart';
 export 'src/transport.dart';
+export 'src/workspace_path.dart';
