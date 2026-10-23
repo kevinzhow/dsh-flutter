@@ -1,3 +1,5 @@
+import 'package:dsh_models/dsh_models.dart' show FileRef, ImageRef;
+
 import 'partial_arguments.dart';
 
 /// Assistant content blocks sorted by what a UI target presents (dsh
@@ -208,6 +210,76 @@ class MessageData {
     for (final b in content)
       if (b is Map && b['type'] == 'text') '${b['text']}',
   ].join();
+
+  /// The message split the way ui-chat's `contentParts` does: text joined,
+  /// durable attachments in order, every other block left over.
+  UserContentParts get parts => userContentParts(content);
+}
+
+/// One durable attachment of a message: an [ImageRef] or a [FileRef].
+sealed class MessageAttachment {
+  const MessageAttachment();
+}
+
+final class MessageImage extends MessageAttachment {
+  const MessageImage(this.image);
+  final ImageRef image;
+}
+
+final class MessageFile extends MessageAttachment {
+  const MessageFile(this.file);
+  final FileRef file;
+}
+
+/// dsh ui-chat `contentParts`.
+class UserContentParts {
+  const UserContentParts({
+    required this.text,
+    required this.attachments,
+    required this.rest,
+  });
+
+  final String text;
+  final List<MessageAttachment> attachments;
+
+  /// Blocks that are neither text nor a well-formed attachment.
+  final List<Object?> rest;
+}
+
+/// Split message [content] into text, attachments and the rest. A malformed
+/// attachment block stays in `rest` (dsh shows those as extra blocks).
+UserContentParts userContentParts(List<Object?> content) {
+  final texts = StringBuffer();
+  final attachments = <MessageAttachment>[];
+  final rest = <Object?>[];
+  for (final block in content) {
+    if (block is Map) {
+      final type = block['type'];
+      if (type == 'text' && block['text'] is String) {
+        texts.write(block['text']);
+        continue;
+      }
+      if (type == 'image') {
+        final ref = ImageRef.tryParse(block['attachment']);
+        if (ref != null) {
+          attachments.add(MessageImage(ref));
+          continue;
+        }
+      } else if (type == 'file') {
+        final ref = FileRef.tryParse(block['attachment']);
+        if (ref != null) {
+          attachments.add(MessageFile(ref));
+          continue;
+        }
+      }
+    }
+    rest.add(block);
+  }
+  return UserContentParts(
+    text: texts.toString(),
+    attachments: attachments,
+    rest: rest,
+  );
 }
 
 class TurnTailData {

@@ -14,3 +14,4 @@ export 'src/session.dart';
 export 'src/session_manager.dart';
 export 'src/session_summary.dart';
 export 'src/transport.dart';
+export 'src/workspace_path.dart';

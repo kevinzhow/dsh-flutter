@@ -189,6 +189,9 @@ class _ChatViewState extends State<ChatView> {
           text: p.text,
           i18n: widget.i18n,
           pending: true,
+          attachments: echoAttachmentViews(p.attachments),
+          owner: owner,
+          slots: widget.slots,
         ),
       );
     }

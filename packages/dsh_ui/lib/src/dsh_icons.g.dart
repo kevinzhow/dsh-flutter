@@ -643,4 +643,193 @@ abstract final class DshIcons {
       ),
     ],
   );
+
+  /// `IconPlusOutlineMedium`.
+  static const plus = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.3,
+    shapes: [
+      DshIconShape(
+        'M8 2V14',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M2 8H14',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconCloseOutlineRegular`.
+  static const close = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M2.5 2.5L13.5 13.5',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M13.5 2.5L2.5 13.5',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconCloseFillRegular`.
+  static const closeFill = DshIconData(
+    viewBox: 16,
+    size: 14,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M3.5 3.5L12.5 12.5',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M12.5 3.5L3.5 12.5',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconRefreshOutlineRegular`.
+  static const refresh = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M14.5001 8C14.5 9.28552 14.1188 10.5422 13.4045 11.611C12.6903 12.6799 11.6752 13.5129 10.4875 14.0049C9.29982 14.4968 7.99295 14.6255 6.73212 14.3747C5.4713 14.124 4.31314 13.505 3.4041 12.596C2.49514 11.687 1.87614 10.5288 1.62537 9.26798C1.37459 8.00716 1.50331 6.70028 1.99525 5.51261C2.48719 4.32494 3.32025 3.30981 4.3891 2.59557C5.45795 1.88134 6.71458 1.50008 8.0001 1.5C9.9001 1.5 11.7001 2.3 13.0001 3.6L14.5001 5.1',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M14.4999 1.5V5.1H10.8999',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconLoadingOutlineRegular`.
+  static const loading = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M12.596 12.596C11.687 13.5049 10.5288 14.1239 9.26798 14.3747C8.00716 14.6255 6.70028 14.4968 5.51261 14.0048C4.32494 13.5129 3.30981 12.6798 2.59557 11.611C1.88134 10.5421 1.50008 9.2855 1.5 7.99998C1.50008 6.71446 1.88134 5.45783 2.59557 4.38898C3.30981 3.32013 4.32494 2.48707 5.51261 1.99513C6.70028 1.50319 8.00716 1.37447 9.26798 1.62524C10.5288 1.87602 11.687 2.49502 12.596 3.40398',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconDownloadOutlineRegular`.
+  static const download = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M8 1.95317V10.0469',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M4.25 6.29688L8 10.0469L11.75 6.29688',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M1.5 10.0469V13.158C1.5 13.3937 1.60536 13.6198 1.79289 13.7865C1.98043 13.9532 2.23478 14.0469 2.5 14.0469H13.5C13.7652 14.0469 14.0196 13.9532 14.2071 13.7865C14.3946 13.6198 14.5 13.3937 14.5 13.158V10.0469',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconShareOutlineRegular`.
+  static const share = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M14.1256 7.58723C14.3483 7.81942 14.3482 8.18589 14.1254 8.41799L8.6646 14.1077C8.53985 14.2377 8.32031 14.1494 8.32031 13.9692L8.32035 10.2039C8.32035 10.1943 8.31534 10.1864 8.30592 10.1849C8.08306 10.148 5.30067 9.7729 1.50993 13.2904C1.49711 13.3023 1.47561 13.2943 1.4757 13.2768C1.49273 9.87168 3.42001 5.07166 8.29999 5.05835C8.31103 5.05832 8.32035 5.04937 8.32035 5.03832L8.32031 2.03109C8.32031 1.85088 8.53993 1.76259 8.66466 1.89266L14.1256 7.58723Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconFolderCloseRegular`.
+  static const folderClose = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M1.50439 3.11059C1.50439 2.55831 1.95211 2.1106 2.50439 2.1106H5.43389C5.67773 2.1106 5.91318 2.19969 6.09593 2.36113L7.71649 3.79265C7.89924 3.95409 8.1347 4.04319 8.3785 4.04319H13.4958C14.0481 4.04319 14.4958 4.4909 14.4958 5.04319V12.8894C14.4958 13.4417 14.0481 13.8894 13.4958 13.8894H2.50439C1.95211 13.8894 1.50439 13.4417 1.50439 12.8894V4.04319V3.11059Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M3.63501 7.66614H12.3647',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconFolderOpenRegular`.
+  static const folderOpen = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M2.55912 7.93683C2.67584 7.49906 3.0723 7.19446 3.52536 7.19446H13.6491C14.3061 7.19446 14.7846 7.81725 14.6153 8.45209L13.4411 12.856C13.3244 13.2938 12.9279 13.5984 12.4748 13.5984H2.35113C1.69411 13.5984 1.21562 12.9756 1.38489 12.3407L2.55912 7.93683Z',
+        fill: true,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M13.6491 6.69446C14.6346 6.69453 15.3522 7.62895 15.0983 8.58118L13.9245 12.9845C13.7494 13.6412 13.1539 14.0988 12.4743 14.0988H2.35126C1.36574 14.0988 0.648153 13.1643 0.902044 12.212L2.07587 7.80774C2.25102 7.15128 2.84567 6.69455 3.52509 6.69446H13.6491ZM3.52509 7.69446C3.29865 7.69455 3.10004 7.84674 3.04169 8.06555L1.86786 12.4698C1.78345 12.7872 2.02285 13.0988 2.35126 13.0988H12.4743C12.7007 13.0988 12.8992 12.9463 12.9577 12.7277L14.1325 8.32336C14.2171 8.00598 13.9776 7.69453 13.6491 7.69446H3.52509Z',
+        fill: true,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M4.7666 1.90137C5.13227 1.90144 5.48571 2.03525 5.75977 2.27734L7.27246 3.61328C7.36379 3.69382 7.48174 3.73828 7.60352 3.73828H12.3994C13.2276 3.73841 13.8993 4.41005 13.8994 5.23828V6.7168C13.8183 6.70327 13.735 6.69436 13.6494 6.69434H12.8994V5.23828C12.8993 4.96233 12.6754 4.73841 12.3994 4.73828H7.60352C7.23781 4.73828 6.88446 4.60438 6.61035 4.3623L5.09766 3.02637C5.00636 2.94576 4.88838 2.90144 4.7666 2.90137H2.0498C1.77366 2.90137 1.5498 3.12523 1.5498 3.40137V9.78223L0.902344 12.2119C0.648452 13.1642 1.36604 14.0986 2.35156 14.0986H2.0498C1.2214 14.0986 0.549838 13.427 0.549805 12.5986V3.40137C0.549805 2.57294 1.22138 1.90137 2.0498 1.90137H4.7666Z',
+        fill: true,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
 }

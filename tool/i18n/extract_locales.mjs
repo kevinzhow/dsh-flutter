@@ -31,6 +31,27 @@ function topLevelConst(sf, name) {
   return undefined
 }
 
+/** `name` imported by a relative named import of `sf`: its initializer and owning file. */
+function importedConst(sf, rel, name) {
+  for (const st of sf.statements) {
+    if (!ts.isImportDeclaration(st) || !ts.isStringLiteral(st.moduleSpecifier)) continue
+    const spec = st.moduleSpecifier.text
+    const named = st.importClause?.namedBindings
+    if (!spec.startsWith('.') || !named || !ts.isNamedImports(named)) continue
+    for (const el of named.elements) {
+      if ((el.name.text !== name) || (el.propertyName && el.propertyName.text !== name && el.name.text !== name)) continue
+      const exported = el.propertyName?.text ?? el.name.text
+      const rel2 = path.posix.normalize(path.posix.join(path.posix.dirname(rel), spec))
+      const sf2 = source(rel2)
+      const init = topLevelConst(sf2, exported)
+      if (init) { extraInputs.add(rel2); return { init, owner: { sf: sf2, rel: rel2 } } }
+    }
+  }
+  return undefined
+}
+
+const extraInputs = new Set()
+
 function unwrap(n) {
   while (ts.isAsExpression(n) || ts.isSatisfiesExpression(n) || ts.isParenthesizedExpression(n)) n = n.expression
   return n
@@ -58,10 +79,16 @@ function evalStr(n, sf, where) {
 function readObject(obj, sf, rel, label, out) {
   for (const p of obj.properties) {
     if (ts.isSpreadAssignment(p)) {
-      const target = ts.isIdentifier(p.expression) ? topLevelConst(sf, p.expression.text) : undefined
+      let owner = { sf, rel }
+      let target = ts.isIdentifier(p.expression) ? topLevelConst(sf, p.expression.text) : undefined
+      if (!target && ts.isIdentifier(p.expression)) {
+        // A dictionary spread from a sibling module (`import { zoomZh } from '../zoom/locales.ts'`).
+        const imported = importedConst(sf, rel, p.expression.text)
+        if (imported) { owner = imported.owner; target = imported.init }
+      }
       const inner = target && unwrap(target)
-      if (!inner || !ts.isObjectLiteralExpression(inner)) throw new Error(`${rel}: ${label} spreads something other than a same-file object const`)
-      readObject(inner, sf, rel, label, out)
+      if (!inner || !ts.isObjectLiteralExpression(inner)) throw new Error(`${rel}: ${label} spreads something other than a same-file or imported object const`)
+      readObject(inner, owner.sf, owner.rel, label, out)
       continue
     }
     if (!ts.isPropertyAssignment(p)) throw new Error(`${rel}: ${label} has an unsupported member`)
@@ -147,7 +174,7 @@ writeFileSync(args.get('--out'), JSON.stringify({
   irVersion: 1,
   kind: 'locale-catalog',
   noDictionary: config.noDictionary,
-  inputs: [...inputs].sort(),
+  inputs: [...new Set([...inputs, ...extraInputs])].sort(),
   namespaces,
 }, null, 2) + '\n')
 console.log(`extracted ${namespaces.length} namespaces, ${namespaces.reduce((a, n) => a + Object.keys(n.entries).length, 0)} keys`)

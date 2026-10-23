@@ -6,6 +6,7 @@ environment:
   sdk: ^3.13.5
 resolution: workspace
 dependencies:
+  dsh_client: ^0.0.1
   dsh_conversation: ^0.0.1
   dsh_models: ^0.0.1
 dev_dependencies:

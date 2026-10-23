@@ -88,10 +88,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "b2b20033f18cc9a96ee1c87854a467f06fe03df868f3d85e8f5dbb4040777c3e",
+      "irSha256": "09f76ea9772d504316968661e6ec1da4620c7ca9614b6621c76636fcc68097fd",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "8b1831a131fc77250e9675062b82bc811e1b3153eff20ee72f9b12308663a11e"
+        "sha256": "1b9e28856f00067c585f942eb772e1fb4bd3d3fffe58b601f50745266a9748d0"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -171,6 +171,34 @@
           "sha256": "9174829c38582386113fc654fea3e3ba83ac9aafdde6955d68018f4cfd6ff678"
         },
         {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
+          "sha256": "0a1b8d422527804117c8f2ecbf098e5b7ff7429ca97108479f393c2d6423188e"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
+          "sha256": "a5b74c49083547fa4a6c89cfa8e424e1f109403f03cd5eac23fa71e9e4afb606"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/locales.ts",
+          "sha256": "496cfedfb13b19695a2a2d2c909d4eeea686289513599b02a1dd38a1ddb8c957"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/markdown/locales.ts",
+          "sha256": "ef908eca03863203f18635d56f76a77ce130051060b6d3b4a1640007a2679903"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/zoom/locales.ts",
+          "sha256": "05018487040c4bbca548fc89b2e09f1d37e262640707c81a6a8b8d34b97b3eb0"
+        },
+        {
+          "path": "packages/client/ui-sidebar-files/src/client/locales.ts",
+          "sha256": "b54e6ad49743df09622afb37ab19418460174a1dd0eb073adcdc809e85a271a1"
+        },
+        {
+          "path": "packages/client/ui-sidebar-right/src/client/locales.ts",
+          "sha256": "992d127e6b7cd9c2bc7aab1a672c9ce79f3e97ba7a4bef86778bab3b0a317e9f"
+        },
+        {
           "path": "packages/client/ui-sidebar/src/client/locales.ts",
           "sha256": "0e97e11d42a1cbf7e7a4bfc7cff1dc6253db82005bb0f9d3fb35902229085019"
         },
@@ -203,8 +231,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "a2d5431da213f004ab4d87a44e9557f77ef04ec5e6e082a8dbaea202b9cf1096",
-      "outputSha256": "777c94b099d22166464fed657e74851761a36520e9a3425fa65976ffdee91fe2"
+      "rawSha256": "3f8f504abd4b630318533ec2c574c3dfb42de1463ce20c1c2170cd36cce0f06e",
+      "outputSha256": "621d04b5a671c4ce96fbc06d90fc46c56cabd613959b6cd2c79e09817f6b03da"
     }
   ]
 }

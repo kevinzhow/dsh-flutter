@@ -46,6 +46,15 @@ ICONS = {
     'IconBranchOutlineRegular': 'branch',
     'IconAgentPresetOutlineRegular': 'agentPreset',
     'IconCordisPluginOutlineRegular': 'cordisPlugin',
+    'IconPlusOutlineMedium': 'plus',
+    'IconCloseOutlineRegular': 'close',
+    'IconCloseFillRegular': 'closeFill',
+    'IconRefreshOutlineRegular': 'refresh',
+    'IconLoadingOutlineRegular': 'loading',
+    'IconDownloadOutlineRegular': 'download',
+    'IconShareOutlineRegular': 'share',
+    'IconFolderCloseRegular': 'folderClose',
+    'IconFolderOpenRegular': 'folderOpen',
 }
 STROKE = {'ICON_REGULAR_STROKE': 1.0, 'ICON_MEDIUM_STROKE': 1.3}
 

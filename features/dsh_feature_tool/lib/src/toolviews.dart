@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'model/ask_model.dart';
 import 'model/details_model.dart';
 import 'model/diff_model.dart';
+import 'model/image_card_model.dart';
 import 'model/raw_call.dart';
 import 'model/read_search_web_model.dart';
 import 'model/row_model.dart';
@@ -21,10 +22,15 @@ class ToolEnv {
     required this.i18n,
     this.actions = const ToolHostActions(),
     this.expandedByDefault,
+    this.slots,
   });
 
   final DshI18n i18n;
   final ToolHostActions actions;
+
+  /// Renders the image gallery of a `read_image` result through the
+  /// `tool.call.images` slot; without it the card shows the text lines only.
+  final SlotRegistry? slots;
 
   /// Whether a call's row starts expanded: the seat of dsh's chat-owned
   /// `useDisclosure` (open state that survives rebuilds of the row). Absent:
@@ -419,6 +425,7 @@ Widget webView(ToolContext c) {
 /// result text stays visible (dsh falls back the same way without it).
 Widget readImageView(ToolContext c) {
   final model = toolRowModel(c.name, c.call, cwd: c.cwd, home: c.home);
+  final image = imageCardModel(c.call);
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
@@ -429,12 +436,83 @@ Widget readImageView(ToolContext c) {
     icon: DshIcons.browse,
     title: c.t(model.titleKey),
     summary: model.summary,
-    output: model.output,
+    output: image == null ? model.output : null,
     errorSummary: model.errorSummary,
     state: model.state,
     filePath: model.filePath,
     onOpenFile: c.env.actions.openFile,
+    card: image == null ? null : (context) => _ImageCard(c: c, model: image),
   );
+}
+
+/// The `read_image` card (dsh `ToolRow` image body): the gallery of the
+/// returned images, then the full path and each image's size in the small code
+/// font, then any extra text.
+class _ImageCard extends StatelessWidget {
+  const _ImageCard({required this.c, required this.model});
+
+  final ToolContext c;
+  final ImageCardModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final slots = c.env.slots;
+    final gallery = slots?.renderSingle(
+      DshSlots.toolCallImages.typed<ImageGalleryOwner, Widget>(),
+      ImageGalleryOwner(
+        session: c.owner.session,
+        images: [for (final ref in model.images) DurableGalleryImage(ref)],
+      ),
+    );
+    final small = theme
+        .textStyle('--dsw-font-markdown-code-block-small')
+        .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
+    final t = c.t;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ?gallery,
+        Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(model.path, key: const ValueKey('image-path'), style: small),
+              for (var i = 0; i < model.images.length; i++)
+                Text(
+                  model.originalSizes[i] == null
+                      ? t('row.imageSize', {
+                          'width': model.images[i].width,
+                          'height': model.images[i].height,
+                          'bytes': model.images[i].bytes,
+                        })
+                      : t('row.imageSizeDownscaled', {
+                          'width': model.images[i].width,
+                          'height': model.images[i].height,
+                          'originalWidth': model.originalSizes[i]!.width,
+                          'originalHeight': model.originalSizes[i]!.height,
+                          'bytes': model.images[i].bytes,
+                        }),
+                  style: small,
+                ),
+            ],
+          ),
+        ),
+        if (model.extraText != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              model.extraText!,
+              style: theme
+                  .textStyle('--dsw-font-xs-13')
+                  .copyWith(color: theme.color('--dsw-alias-label-tertiary')),
+            ),
+          ),
+      ],
+    );
+  }
 }
 
 /// `todo_write`: completion summary with the active item, the change summary

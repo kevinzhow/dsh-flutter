@@ -3,12 +3,16 @@
 /// and never branch on a theme name.
 library;
 
+export 'src/dsh_attachment.dart';
 export 'src/dsh_button.dart';
 export 'src/dsh_ansi.dart';
+export 'src/dsh_code_block.dart';
+export 'src/dsh_code_highlight.dart';
 export 'src/dsh_code_language.dart';
 export 'src/dsh_code_toolbar.dart';
 export 'src/dsh_copy_feedback.dart';
 export 'src/dsh_diff.dart';
+export 'src/dsh_file_types.dart';
 export 'src/dsh_diff_block.dart';
 export 'src/dsh_disclosure_row.dart';
 export 'src/dsh_head_tail_cap.dart';
@@ -25,6 +29,7 @@ export 'src/dsh_web_block.dart';
 export 'src/dsh_card.dart';
 export 'src/dsh_disclosure.dart';
 export 'src/dsh_icon_button.dart';
+export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
 export 'src/dsh_status_dot.dart';
 export 'src/dsh_text_field.dart';

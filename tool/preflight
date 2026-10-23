@@ -10,7 +10,7 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
   theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
   i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
-  icons            tool/icons/gen_icons.py and gen_code_language.py --check: icon paths and code-language tables are
+  icons            tool/icons/gen_icons.py, gen_code_language.py and gen_file_types.py --check: icon paths and code-language tables are
                    fresh against the pinned dsh checkout
   vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
                    (skipped with exit 2 when the node install is missing)
@@ -120,7 +120,7 @@ def c_i18n():
 
 
 def c_icons():
-    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_code_language.py')]
+    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
     for r in results:
         if r[0] in (1, 'skip') or (isinstance(r[0], int) and r[0] not in (0, 2)):
             return r

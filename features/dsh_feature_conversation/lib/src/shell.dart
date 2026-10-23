@@ -60,7 +60,7 @@ class ConversationShell extends StatelessWidget {
         final composer = s.removed
             ? _Notice(title: i18n.t(appNamespace, 'session.removed'), body: '')
             : (slots.renderChain(composerSlot, owner) ??
-                  DefaultComposer(owner: owner, i18n: i18n));
+                  DefaultComposer(owner: owner, i18n: i18n, slots: slots));
         return Column(
           children: [
             if (s.lastAgentError != null)
