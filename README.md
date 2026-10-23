@@ -27,6 +27,7 @@ features/dsh_feature_user_questions    ui-user-questions: composer takeover for 
                                        (one feature per dsh ui-* package; features never import each other)
 apps/dsh_flutter                       composition root: pairing, navigation, platform manifests (Whalee)
 tool/                                  generators, guards, preflight, live spike, visual parity tool (docs/parity.md)
+tool/vendor/raft-visual-testing/       vendored Raft visual-testing CLI, FSL-1.1-ALv2 (not MIT), see License below
 ```
 
 `tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client.
@@ -77,3 +78,14 @@ platform manifests (Android, iOS, Linux); `test/app_identity_test.dart` fails wh
 
 `tool/live_spike` starts its own `dsh web` on `127.0.0.1`, drives the Dart client against it (pairing, streaming,
 cancel, approvals, restart and re-pair) and records timings; see the phase-0 PR for results.
+
+## License
+
+dsh-flutter is MIT licensed (`LICENSE`). Exceptions, each under its own license and listed in `THIRD_PARTY_NOTICES.md`:
+
+- `tool/vendor/raft-visual-testing/` is Raft's visual-testing CLI, vendored unchanged and licensed
+  [FSL-1.1-ALv2](tool/vendor/raft-visual-testing/LICENSE) (Copyright 2026 Botiverse, Inc.), **not MIT**. It is used only as an
+  internal development and test tool for the visual parity tool (`docs/parity.md`); see its
+  [`README-VENDOR.md`](tool/vendor/raft-visual-testing/README-VENDOR.md) for the origin, the Permitted Purpose and how to update it.
+- The pinned parity fonts (`tool/parity-fonts/`) are SIL OFL 1.1.
+- Data and types generated from DeepSeek Harness (MIT) are covered by its notice.

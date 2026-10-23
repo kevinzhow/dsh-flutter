@@ -29,6 +29,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+## Raft visual-testing CLI (visual parity tool)
+
+`tool/vendor/raft-visual-testing/` is a verbatim copy of `packages/visual-testing` from
+[botiverse/raft-source](https://github.com/botiverse/raft-source), tag `v1.21.23-source.1`, commit
+`db5e399f017d584e49597e3a28757645d6807893`, Copyright 2026 Botiverse, Inc. **That directory is not MIT.** It is licensed
+under the Functional Source License, Version 1.1, ALv2 Future License (FSL-1.1-ALv2); the unmodified license text is
+`tool/vendor/raft-visual-testing/LICENSE`, and `tool/vendor/raft-visual-testing/README-VENDOR.md` records its origin, the
+Permitted Purpose this repository relies on (internal development and test tool, not offered to others) and how to
+update it. The tool is used only by the visual parity tool (`docs/parity.md`) for manifest validation, diff metrics,
+the side-by-side images and the HTML report; it is not part of the app. The FSL terms apply to every copy of it:
+keep its `LICENSE` and copyright notice. Its runtime dependency `sharp` (Apache-2.0, with LGPL-3.0-or-later libvips
+binaries) is installed on demand by `tool/parity setup` and is not committed.
+
 ## Noto Sans and Noto Sans Mono (visual parity tool)
 
 `tool/parity-fonts/files/NotoSans-Regular.ttf`, `NotoSans-Bold.ttf`, `NotoSansMono-Regular.ttf` and `NotoSansMono-Bold.ttf`
