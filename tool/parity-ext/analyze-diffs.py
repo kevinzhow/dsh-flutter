@@ -4,11 +4,13 @@
   tool/parity-ext/analyze-diffs.py [--out build/parity-ext] [--cases GLOB] [--viz DIR] [--json FILE]
 
 Reads any parity output tree (`<out>/visual-testing-results/{react,flutter}/<key>.png`), so it works for
-the core suite too (`--out build/parity`). Buckets are defined in tool/parity_lib/diffmetrics.py (fill,
+the core suite too (`--out build/parity`). Buckets are dsh's own addition to the vendored CLI's scores, defined in
+tool/parity_lib/diffmetrics.py (fill,
 hairline, corner, offset, text, other). For each case and bucket the report gives the exact % the case
 would reach if that bucket's pixels matched: it ranks the systematic causes. Never iterate on the `text`
 bucket (Chromium vs Skia glyph anti-aliasing); fix geometry, colour, spacing, borders and radii.
-`--viz DIR` writes React | Flutter | bucket-map images.
+`--viz DIR` writes the bucket map of each case (the faded React capture with the mismatches painted in their bucket
+colour); the side-by-side images are the vendored CLI's (`<out>/visual-testing-results/diff/react__flutter/`).
 """
 import argparse
 import fnmatch
@@ -19,7 +21,7 @@ import sys
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from parity_lib import diffmetrics as dm, env  # noqa: E402
-from parity_lib.compose import side_by_side  # noqa: E402
+from PIL import Image  # noqa: E402
 
 
 def main():
@@ -46,7 +48,7 @@ def main():
         if args.viz:
             viz = pathlib.Path(args.viz)
             viz.mkdir(parents=True, exist_ok=True)
-            side_by_side(rp.astype('uint8'), fp.astype('uint8'), dm.diff_visual(rp, label), key).save(viz / ('%s.png' % key))
+            Image.fromarray(dm.diff_visual(rp, label)).save(viz / ('%s.png' % key))
     print('%-58s %8s %8s  %s' % ('case', 'exact %', 'nontext %', '  '.join('%8s' % b for b in dm.BUCKETS)))
     for r in rows:
         print('%-58s %8.2f %8.2f  %s' % (r['key'][:58], r['exactPct'], r['nonTextPct'], '  '.join('%8d' % r['buckets'][b] for b in dm.BUCKETS)))

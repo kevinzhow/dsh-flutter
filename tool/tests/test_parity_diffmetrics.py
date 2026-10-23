@@ -32,7 +32,7 @@ class Metrics(unittest.TestCase):
 
     def test_identical_is_same(self):
         r = self.compare(card(), card())
-        self.assertEqual((r['exactPct'], r['nonTextPct'], r['closePct'], r['verdict']), (100.0, 100.0, 100.0, 'same'))
+        self.assertEqual((r['exactPct'], r['nonTextPct'], r['closePct']), (100.0, 100.0, 100.0))
         self.assertEqual(r['mismatched'], 0)
 
     def test_counts_are_exact(self):
@@ -73,21 +73,13 @@ class Metrics(unittest.TestCase):
         b = card()
         b[10:50, 10:110] = (200, 30, 30)
         r = self.compare(card(), b)
-        self.assertEqual(r['verdict'], 'fail')
         self.assertGreater(r['buckets']['other'], 0)
         self.assertLess(r['nonTextPct'], dm.GEOMETRY_PASS)
 
-    def test_verdict_thresholds(self):
-        self.assertEqual(dm.verdict(100.0, 100.0), 'same')
-        self.assertEqual(dm.verdict(96.0, 96.0), 'pass')
-        self.assertEqual(dm.verdict(95.9, 99.5), 'geometry-pass')
-        self.assertEqual(dm.verdict(95.9, 99.4), 'fail')
-
-    def test_size_mismatch_pads_with_white_and_fails(self):
+    def test_size_mismatch_pads_with_white(self):
         a, b = card(), card()[:, :100]
         r = self.compare(a, b)
         self.assertTrue(r['sizeMismatch'])
-        self.assertEqual(r['verdict'], 'fail')
         self.assertEqual(r['sizeReact'], [120, 60])
         self.assertEqual(r['sizeFlutter'], [100, 60])
 

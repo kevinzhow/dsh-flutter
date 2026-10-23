@@ -10,7 +10,7 @@ import shutil
 import sys
 import urllib.request
 
-from . import env, fonts, flutter, manifest as mf, pipeline, react, report
+from . import env, fonts, flutter, manifest as mf, pipeline, react, summary as summary_md, vt
 
 
 class Suite:
@@ -45,10 +45,18 @@ def cmd_run(suite, args, out_env):
     problems = fonts.check()
     if problems:
         sys.exit('parity fonts: ' + '; '.join(problems))
+    cli_log = out / 'cli.log'
+    cli_log.write_text('')
+    vt.setup(out / 'vt-setup.log')
     man = suite.load(out)
-    entries = mf.select(mf.entries(man), args.cases)
+    every = mf.entries(man)
+    try:
+        vt.validate(every, out, cli_log)   # the vendored CLI validates the whole manifest before anything is captured
+    except vt.CliError as exc:
+        sys.exit('manifest rejected by the vendored visual-testing CLI: %s' % exc)
+    entries = mf.select(every, args.cases)
     if not entries:
-        sys.exit('no capture matches --cases %r (manifest has %d)' % (args.cases, len(mf.entries(man))))
+        sys.exit('no capture matches --cases %r (manifest has %d)' % (args.cases, len(every)))
     results = out / 'visual-testing-results'
     for provider in mf.PROVIDERS:
         (results / provider).mkdir(parents=True, exist_ok=True)
@@ -65,15 +73,18 @@ def cmd_run(suite, args, out_env):
         flutter.capture(entries, coverage_all, out, results, suite.fixtures_dirs,
                         {'suite': suite.name, 'dshCommit': env.dsh_commit()})
     coverage = pipeline.read_json(results / 'flutter-case-map.json', {})
-    rows = [pipeline.compare_entry(e, results, out) for e in entries]
+    rows = pipeline.compare(entries, out, results, cli_log)
     summary = pipeline.summarize(rows, coverage, suite.name, notes_for(suite, man))
+    now = datetime.datetime.now(datetime.timezone.utc)
     summary.update({'dshCommit': env.dsh_commit(), 'flutterVersion': flutter.flutter_version(),
-                    'generatedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')})
+                    'visualTesting': json.loads((env.VENDOR / 'package.json').read_text())['version'],
+                    'generatedAt': now.isoformat(timespec='seconds')})
     (out / 'summary.json').write_text(json.dumps(summary, indent=1) + '\n')
-    (out / 'summary.md').write_text(report.summary_markdown(summary))
-    site = report.write_site(summary, out, results)
-    print(report.summary_markdown(summary))
-    print('report: %s' % site)
+    (out / 'summary.md').write_text(summary_md.markdown(summary))
+    run_id = '%s-%s' % (now.strftime('%Y%m%dT%H%M%SZ'), env.git(env.ROOT, 'rev-parse', '--short', 'HEAD') or 'local')
+    site = vt.site(entries, out, out / 'site', run_id, 'dsh-flutter parity: %s' % suite.name, cli_log)
+    print(summary_md.markdown(summary))
+    print('report: %s' % (site / 'index.html'))
     return 0
 
 

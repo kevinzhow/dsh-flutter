@@ -1,0 +1,11 @@
+{
+  "name": "dsh-flutter-parity-vt",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "Runtime dependencies of the vendored raft visual-testing CLI (tool/vendor/raft-visual-testing). Installed outside the repository, see tool/parity.",
+  "engines": { "node": ">=24" },
+  "dependencies": {
+    "sharp": "0.35.5"
+  }
+}

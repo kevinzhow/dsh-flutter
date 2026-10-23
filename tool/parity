@@ -6,15 +6,17 @@
   tool/parity publish [--no-verify]
   tool/parity validate [--manifest FILE]     schema-check a manifest (default: the core one)
   tool/parity fonts                          verify the pinned parity fonts
-  tool/parity setup                          install the React provider's pinned npm dependencies
+  tool/parity setup                          install the pinned dependencies of the React provider (npm) and of the
+                                             vendored CLI (corepack pnpm), under $PARITY_WEB_DEPS / $PARITY_VT_DEPS
   tool/parity selftest                       fast offline checks (preflight runs this)
 
 `run` captures the React side (dsh's real components in Chromium; cached across worktrees unless
---refresh-react), captures the Flutter side (tool/parity_flutter, flutter_test), diffs the two with
-tool/parity_lib/diffmetrics.py, composes side-by-side images and writes everything under build/parity/
-(or $PARITY_OUT): summary.json, summary.md, site/index.html. The dsh checkout is only read.
-Machine specific settings are environment variables, see tool/parity_lib/env.py. Background:
-docs/parity.md.
+--refresh-react), captures the Flutter side (tool/parity_flutter, flutter_test), then lets the vendored raft
+visual-testing CLI (tool/vendor/raft-visual-testing) validate the manifest, diff the two providers (react__flutter),
+compose the side-by-side images and write the HTML report; tool/parity_lib adds the non-text/bucket analysis the CLI
+lacks. Everything lands under build/parity/ (or $PARITY_OUT): summary.json, summary.md, site/index.html,
+visual-testing-results/. The dsh checkout is only read. Machine specific settings are environment variables, see
+tool/parity_lib/env.py. Background: docs/parity.md.
 """
 import argparse
 import pathlib
@@ -22,7 +24,7 @@ import sys
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from parity_lib import env, fonts, manifest as mf, react, selftest, suite as suite_mod  # noqa: E402
+from parity_lib import env, fonts, manifest as mf, react, selftest, suite as suite_mod, vt  # noqa: E402
 
 
 def load_core(out):
@@ -58,15 +60,26 @@ def main(argv=None):
         except mf.ManifestError as exc:
             print('\n'.join(exc.errors))
             return 1
-        print('%s: %d cases, %d captures: ok' % (args.manifest, len(man['cases']), len(mf.entries(man))))
+        try:
+            if not vt.ready():
+                (env.ROOT / 'build').mkdir(exist_ok=True)
+                vt.setup(env.ROOT / 'build' / 'parity-setup.log')
+            vt.validate(mf.entries(man), env.ROOT / 'build' / 'parity-validate')
+        except vt.CliError as exc:
+            print('vendored CLI: %s' % exc)
+            return 1
+        print('%s: %d cases, %d captures: ok (dsh schema and the vendored CLI)' % (args.manifest, len(man['cases']), len(mf.entries(man))))
         return 0
     if args.cmd == 'fonts':
         problems = fonts.check()
         print('\n'.join(problems) or 'parity fonts: ok')
         return 1 if problems else 0
     if args.cmd == 'setup':
+        (env.ROOT / 'build').mkdir(exist_ok=True)
         react.setup(env.ROOT / 'build' / 'parity-setup.log')
         print('React provider dependencies installed under %s' % env.web_deps())
+        vt.setup(env.ROOT / 'build' / 'parity-setup.log')
+        print('Vendored CLI dependencies installed under %s' % env.vt_deps())
         return 0
     return selftest.run()
 

@@ -1,12 +1,12 @@
-"""Raw image diff metrics for provider captures (numpy + Pillow).
+"""What the vendored visual-testing CLI does not score: glyph-aware geometry, buckets and regions (numpy + Pillow).
 
-Both providers write a PNG of the same element; this module compares the two rasters pixel by
-pixel and explains where they differ. Nothing here knows about dsh, React or Flutter.
+The official numbers (pixel-perfect %, RGB similarity, status, side-by-side image) come from the vendored CLI
+(tool/vendor/raft-visual-testing, see tool/parity_lib/vt.py). It scores every pixel the same, so Chromium vs Skia
+glyph anti-aliasing, which never matches and is not worth iterating on, hides geometry differences. This module is
+dsh-flutter's own addition (MIT, a fresh implementation, no vendored code): it re-reads the same two rasters (both
+flattened on white, the smaller padded with white to the larger size, as the CLI does) and explains the differences.
 
-Scores (percent of pixels, after flattening both images on white and padding the smaller one
-with white to the larger size):
-
-  exact      pixels whose RGB is identical                         ("exact %")
+  exact      pixels whose RGB is identical (the CLI's pixel-perfect number, kept as the denominator of everything below)
   close      pixels whose largest channel delta is <= CLOSE_DELTA  (colour rounding noise)
   nonText    exact + pixels classified as glyph anti-aliasing      ("non-text %": geometry)
 
@@ -23,8 +23,7 @@ Every mismatching pixel is assigned to the FIRST bucket that explains it:
             glyph rasterisation and sub-pixel glyph placement (Chromium vs Skia anti-aliasing)
   other     everything else: wrong colours, missing or extra content
 
-A case reaches the *geometry pass* when nonText >= GEOMETRY_PASS; text anti-aliasing is
-deliberately not something to iterate on. Regions (named rectangles from the case, plus the
+A case reaches the *geometry pass* when nonText >= GEOMETRY_PASS. Regions (named rectangles from the case, plus the
 worst cells of a regular grid) are scored with the same buckets.
 
 The bucket definitions follow the documented approach of raft-flutter's parity-ext analysis;
@@ -40,8 +39,6 @@ BUCKET_COLOURS = {  # visualisation only
     'fill': (0, 160, 255), 'hairline': (255, 0, 0), 'corner': (255, 0, 255),
     'offset': (255, 160, 0), 'text': (0, 170, 0), 'other': (0, 0, 0),
 }
-PASS = 96.0
-STRICT_PASS = 99.0
 GEOMETRY_PASS = 99.5
 CLOSE_DELTA = 4
 FILL_DELTA = 4
@@ -209,17 +206,6 @@ def _score(mism, label, delta, window=None):
     }
 
 
-def verdict(exact_pct, non_text_pct):
-    """same | pass | geometry-pass | fail (a geometry pass is a pass of the non-text score only)."""
-    if exact_pct >= 100.0:
-        return 'same'
-    if exact_pct >= PASS:
-        return 'pass'
-    if non_text_pct >= GEOMETRY_PASS:
-        return 'geometry-pass'
-    return 'fail'
-
-
 def compare_arrays(r, f, density=1.0, regions=()):
     """Compare two flattened rasters. Returns (result dict, label array, padded react, padded flutter)."""
     size_react, size_flutter = (r.shape[1], r.shape[0]), (f.shape[1], f.shape[0])
@@ -232,11 +218,7 @@ def compare_arrays(r, f, density=1.0, regions=()):
         'sizeReact': list(size_react), 'sizeFlutter': list(size_flutter),
         'sizeMismatch': size_react != size_flutter,
         'meanAbsDelta': round(float(np.abs(rp - fp).mean()), 4),
-        'verdict': verdict(result['exactPct'], result['nonTextPct']),
     })
-    # A different raster size can never be a geometry pass: the padded white hides the extra area.
-    if result['sizeMismatch']:
-        result['verdict'] = 'fail'
     named = []
     for reg in regions:
         y0 = max(0, int(round(reg['y'] * density)))
