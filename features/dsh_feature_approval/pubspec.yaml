@@ -1,0 +1,20 @@
+name: dsh_feature_approval
+description: Approval feature, the ui-approval counterpart. Slot registrations and widgets.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  dsh_client: ^0.0.1
+  dsh_models: ^0.0.1
+  dsh_i18n: ^0.0.1
+  dsh_slots: ^0.0.1
+  dsh_ui: ^0.0.1
+  dsh_theme: ^0.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0
