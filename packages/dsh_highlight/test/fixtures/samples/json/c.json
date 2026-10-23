@@ -1,0 +1,8 @@
+[
+  { "id": 1, "tags": ["a", "b"], "ratio": 1.0E-2, "neg": -0, "ok": true },
+  { "id": 2, "text": "emoji \ud83d\ude00 and 日本語 and \/ slash and \t tab", "nested": [[1, [2, [3]]]] },
+  "bare string",
+  42,
+  null,
+  { "": "empty key", "key with spaces": { "$ref": "#/defs/x" } }
+]

@@ -1,0 +1,32 @@
+[package]
+name = "demo"            # trailing comment
+version = "0.1.0"
+authors = ["A <a@x.org>", 'B']
+edition = '2021'
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+tokio = "1.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi = "0.3"
+
+[table."quoted key".sub]
+a.b.c = 1
+"d" = -0.5
+e = +1
+f = nan
+g = inf
+h = 0o755
+i = 0b1101
+j = 1979-05-27T00:32:00.999999-07:00
+k = 07:32:00
+l = '''
+literal
+multi\n'''
+m = """
+basic \
+   continued "quotes" é
+"""
+n = [ [1, 2], ["a", "b"], { x = [1] } ]

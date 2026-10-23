@@ -8,6 +8,7 @@ one-way, and so is ours:
                                               features/*   (never each other)
     theme   <-  ui                                         (never client)
     i18n    leaf                                           (imports nothing)
+    highlight  leaf                                        (imports nothing; ui may use it)
     apps/*  composition root: may import everything
 
 The check reads two sources of truth and fails on any edge not listed in
@@ -30,10 +31,11 @@ ALLOWED = {
     'conversation': {'models', 'client'},
     'slots': {'conversation', 'models', 'client'},
     'theme': set(),
-    'ui': {'theme', 'i18n'},
+    'ui': {'theme', 'i18n', 'highlight'},
     'i18n': set(),
+    'highlight': set(),
     'feature': {'slots', 'conversation', 'models', 'client', 'ui', 'theme', 'i18n'},
-    'app': {'client', 'models', 'conversation', 'slots', 'theme', 'ui', 'i18n', 'feature'},
+    'app': {'client', 'models', 'conversation', 'slots', 'theme', 'ui', 'i18n', 'highlight', 'feature'},
 }
 
 LAYER_OF_PACKAGE = {
@@ -44,6 +46,7 @@ LAYER_OF_PACKAGE = {
     'dsh_theme': 'theme',
     'dsh_ui': 'ui',
     'dsh_i18n': 'i18n',
+    'dsh_highlight': 'highlight',
 }
 
 # Statements of intent, checked explicitly so a future edit of ALLOWED cannot

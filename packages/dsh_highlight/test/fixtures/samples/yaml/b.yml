@@ -1,0 +1,10 @@
+"quoted key": "double \"escaped\" \n value"
+multi: "line one
+  line two"
+date: 2024-05-01
+time: 12:30:45
+empty:
+nested:
+    deep:
+        deeper: [1, {a: b}, "c"]
+# trailing comment

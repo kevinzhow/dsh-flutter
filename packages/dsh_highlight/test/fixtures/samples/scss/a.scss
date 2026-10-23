@@ -1,0 +1,23 @@
+@use 'sass:math';
+$base: 16px !default;
+$colors: (primary: #036, secondary: #c60);
+
+@mixin respond($bp) {
+  @media (min-width: $bp) { @content; }
+}
+
+@function rem($px) { @return math.div($px, $base) * 1rem; }
+
+// line comment
+.btn {
+  padding: rem(12px) #{$base};
+  &:hover { color: darken(map-get($colors, primary), 10%); }
+  &--wide { width: 100%; }
+  .icon + & { margin-left: 4px; }
+  @include respond(600px) { display: block; }
+  @extend %placeholder;
+}
+@each $name, $c in $colors {
+  .text-#{$name} { color: $c; }
+}
+@if $base > 10px { .big { font-size: 2em; } } @else { .small { font-size: 1em; } }

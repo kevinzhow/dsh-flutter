@@ -16,6 +16,7 @@ packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's
 packages/dsh_theme         Flutter     theme contract engine, vocabulary = dsh --dsw-* tokens, official pack
 packages/dsh_ui            Flutter     UI primitives that read only the theme contract (rows, terminal/diff/read/search/web blocks, icons from dsh's SVG paths)
 packages/dsh_i18n          pure Dart   zh/en catalog generated from dsh's locale dictionaries
+packages/dsh_highlight     pure Dart engine + Flutter assets   syntax highlighter: TextMate engine in Dart on shiki's grammars, scopes mapped to dsh's 9 --shiki-token-* classes
 features/dsh_feature_approval          ui-approval: composer takeover for approval requests
 features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
 features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (send/stop), to-do dock
@@ -30,7 +31,7 @@ tool/                                  generators, guards, preflight, live spike
 tool/vendor/raft-visual-testing/       vendored Raft visual-testing CLI, FSL-1.1-ALv2 (not MIT), see License below
 ```
 
-`tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client.
+`tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client; highlight is a leaf that only ui and apps may use.
 
 ## Pinned versions
 

@@ -1,0 +1,35 @@
+%YAML 1.2
+---
+!!map
+tagged: !!str 123
+binary: !!binary |
+  R0lGODlhDAAMAIQAAP
+indented_block: |2
+    two extra spaces
+  keep: |+
+    trailing newlines kept
+
+strip: >-
+  folded
+  text
+seq_of_maps:
+  - &anchor name: first
+    value: 1
+  - <<: *anchor
+    value: 2
+flow: {a: [1, 2, {b: c}], d: "e, f", g: 'h'}
+"quoted: key": yes
+? [complex, key]
+: value
+url: http://example.org:8080/path?x=1#frag
+time: 2024-01-02T03:04:05Z
+neg: -1.5e+3
+inf: .inf
+nan: .NaN
+null_value: null
+multi word key: multi word value
+...
+---
+# second doc
+- ~
+- !custom {x: 1}

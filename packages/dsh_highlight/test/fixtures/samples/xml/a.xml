@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE note SYSTEM "note.dtd">
+<!-- document comment -->
+<root xmlns:x="urn:example" id="r1">
+  <item key="a&amp;b" count='3'>Text &lt;escaped&gt; &#169;</item>
+  <x:ns attr="v"/>
+  <empty></empty>
+  <![CDATA[ raw <data> & stuff ]]>
+  <nested>
+    <deep flag="yes">value</deep>
+  </nested>
+</root>

@@ -1,0 +1,22 @@
+@layer reset, base;
+@layer base {
+  :where(h1, h2):is(.a, .b) > a:not([href$=".pdf" i]) { margin-block: 1ch; }
+}
+.card {
+  --size: calc(100% - 2 * var(--gap, 8px));
+  --json: { "a": 1 };
+  inline-size: min(100%, 40rem);
+  background: linear-gradient(to right, #fff 0%, rgb(0 0 0 / .1) 100%), url(data:image/png;base64,AAAA);
+  grid-template-areas: "header header" "sidebar main";
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-box-shadow: 0 0 0 1px hsl(210deg 50% 50%);
+  &:hover { color: red; }
+  .child & { color: blue; }
+}
+@container (min-width: 30em) { .x { padding: 1em } }
+@font-face { unicode-range: U+0025-00FF, u+4??; }
+a::after { content: "\201C" attr(title) '\'' }
+@page :first { margin: 1in }
+@namespace svg url(http://www.w3.org/2000/svg);
+.sel\:escaped, #id-1_x, [data-x='1'], *|* , ::selection { color: #abcdef12 }
+@import "x.css" layer(base) supports(display: grid);

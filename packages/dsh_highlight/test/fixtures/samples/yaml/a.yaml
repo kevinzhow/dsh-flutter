@@ -1,0 +1,37 @@
+# Service definition
+name: demo-service
+replicas: 3
+enabled: true
+ratio: 0.75
+nothing: ~
+version: "1.0"
+labels: {tier: backend, env: 'prod'}
+ports: [80, 443]
+env:
+  - name: MODE
+    value: production
+  - name: GREETING
+    value: 'it''s fine'
+command:
+  - /bin/sh
+  - -c
+  - |
+    echo "start"
+    exec run --flag
+description: >
+  folded text that
+  continues here
+anchors:
+  base: &base
+    timeout: 30
+  derived:
+    <<: *base
+    retries: 2
+? complex key
+: complex value
+---
+second: document
+list:
+- a
+- b: 1
+  c: 2

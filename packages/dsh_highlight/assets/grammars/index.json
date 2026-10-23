@@ -1,0 +1,246 @@
+{
+ "requested": [
+  "typescript",
+  "shellscript",
+  "json",
+  "python",
+  "markdown",
+  "yaml",
+  "html",
+  "css",
+  "scss",
+  "dart",
+  "go",
+  "rust",
+  "java",
+  "c",
+  "cpp",
+  "csharp",
+  "kotlin",
+  "swift",
+  "ruby",
+  "php",
+  "sql",
+  "xml",
+  "toml",
+  "ini",
+  "diff",
+  "lua",
+  "make"
+ ],
+ "grammars": {
+  "c": {
+   "scopeName": "source.c",
+   "bytes": 69543,
+   "embeddedLangs": []
+  },
+  "cpp": {
+   "scopeName": "source.cpp",
+   "bytes": 476100,
+   "embeddedLangs": [
+    "cpp-macro",
+    "regexp"
+   ]
+  },
+  "cpp-macro": {
+   "scopeName": "source.cpp.embedded.macro",
+   "bytes": 270369,
+   "embeddedLangs": [
+    "regexp"
+   ]
+  },
+  "csharp": {
+   "scopeName": "source.cs",
+   "bytes": 86765,
+   "embeddedLangs": []
+  },
+  "css": {
+   "scopeName": "source.css",
+   "bytes": 48051,
+   "embeddedLangs": []
+  },
+  "dart": {
+   "scopeName": "source.dart",
+   "bytes": 8186,
+   "embeddedLangs": []
+  },
+  "diff": {
+   "scopeName": "source.diff",
+   "bytes": 2416,
+   "embeddedLangs": []
+  },
+  "go": {
+   "scopeName": "source.go",
+   "bytes": 44495,
+   "embeddedLangs": []
+  },
+  "graphql": {
+   "scopeName": "source.graphql",
+   "bytes": 17295,
+   "embeddedLangs": [
+    "javascript",
+    "typescript",
+    "jsx",
+    "tsx"
+   ]
+  },
+  "haml": {
+   "scopeName": "text.haml",
+   "bytes": 7676,
+   "embeddedLangs": [
+    "javascript",
+    "css"
+   ]
+  },
+  "html": {
+   "scopeName": "text.html.basic",
+   "bytes": 56387,
+   "embeddedLangs": [
+    "javascript",
+    "css"
+   ]
+  },
+  "ini": {
+   "scopeName": "source.ini",
+   "bytes": 1388,
+   "embeddedLangs": []
+  },
+  "java": {
+   "scopeName": "source.java",
+   "bytes": 26318,
+   "embeddedLangs": []
+  },
+  "javascript": {
+   "scopeName": "source.js",
+   "bytes": 159296,
+   "embeddedLangs": []
+  },
+  "json": {
+   "scopeName": "source.json",
+   "bytes": 2684,
+   "embeddedLangs": []
+  },
+  "jsx": {
+   "scopeName": "source.js.jsx",
+   "bytes": 162297,
+   "embeddedLangs": []
+  },
+  "kotlin": {
+   "scopeName": "source.kotlin",
+   "bytes": 8338,
+   "embeddedLangs": []
+  },
+  "lua": {
+   "scopeName": "source.lua",
+   "bytes": 14821,
+   "embeddedLangs": [
+    "c"
+   ]
+  },
+  "make": {
+   "scopeName": "source.makefile",
+   "bytes": 8585,
+   "embeddedLangs": []
+  },
+  "markdown": {
+   "scopeName": "text.html.markdown",
+   "bytes": 56832,
+   "embeddedLangs": []
+  },
+  "php": {
+   "scopeName": "source.php",
+   "bytes": 109397,
+   "embeddedLangs": [
+    "html",
+    "xml",
+    "sql",
+    "javascript",
+    "json",
+    "css"
+   ]
+  },
+  "python": {
+   "scopeName": "source.python",
+   "bytes": 68116,
+   "embeddedLangs": []
+  },
+  "regexp": {
+   "scopeName": "source.regexp.python",
+   "bytes": 7674,
+   "embeddedLangs": []
+  },
+  "ruby": {
+   "scopeName": "source.ruby",
+   "bytes": 44499,
+   "embeddedLangs": [
+    "html",
+    "haml",
+    "xml",
+    "sql",
+    "graphql",
+    "css",
+    "cpp",
+    "c",
+    "javascript",
+    "shellscript",
+    "lua",
+    "yaml"
+   ]
+  },
+  "rust": {
+   "scopeName": "source.rust",
+   "bytes": 14668,
+   "embeddedLangs": []
+  },
+  "scss": {
+   "scopeName": "source.css.scss",
+   "bytes": 26428,
+   "embeddedLangs": [
+    "css"
+   ]
+  },
+  "shellscript": {
+   "scopeName": "source.shell",
+   "bytes": 39895,
+   "embeddedLangs": []
+  },
+  "sql": {
+   "scopeName": "source.sql",
+   "bytes": 22868,
+   "embeddedLangs": []
+  },
+  "swift": {
+   "scopeName": "source.swift",
+   "bytes": 84166,
+   "embeddedLangs": []
+  },
+  "toml": {
+   "scopeName": "source.toml",
+   "bytes": 6084,
+   "embeddedLangs": []
+  },
+  "tsx": {
+   "scopeName": "source.tsx",
+   "bytes": 160041,
+   "embeddedLangs": []
+  },
+  "typescript": {
+   "scopeName": "source.ts",
+   "bytes": 163844,
+   "embeddedLangs": []
+  },
+  "xml": {
+   "scopeName": "text.xml",
+   "bytes": 5215,
+   "embeddedLangs": [
+    "java"
+   ]
+  },
+  "yaml": {
+   "scopeName": "source.yaml",
+   "bytes": 9821,
+   "embeddedLangs": []
+  }
+ },
+ "totalBytes": 2290558
+}

@@ -1,0 +1,15 @@
+--- a/file.txt	2024-01-01 10:00:00.000000000 +0000
++++ b/file.txt	2024-01-02 10:00:00.000000000 +0000
+@@ -1,5 +1,6 @@ section
+ context line
+-old line one
+-old line two
++new line one
++new line two
++added line
+ more context
+\ No newline at end of file
+*** old/style.txt
+--- new/style.txt
+! changed line
+Binary files a/x.bin and b/x.bin differ

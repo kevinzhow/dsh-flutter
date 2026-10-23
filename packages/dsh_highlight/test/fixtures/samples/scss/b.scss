@@ -1,0 +1,26 @@
+@use "sass:map";
+@forward "src/list" hide list-reset, $horizontal-list-gap;
+/// Doc comment
+/// @param {Number} $n
+@function double($n) { @return $n * 2; }
+%placeholder { color: red; }
+$map: (
+  'key': (nested: 1px, other: "str"),
+  other: #{double(2)}px,
+) !default;
+@mixin theme($args...) {
+  @each $k, $v in map.get($map, 'key') { --#{$k}: #{$v}; }
+}
+.a-#{$name} {
+  width: calc(100% - #{$gap});
+  #{$prop}-top: 1px;
+  @include theme(1, 2) using ($x) { color: $x; }
+  &.b:not(&--c) { margin: { top: 1px; bottom: 2px; } }
+  @media screen and (min-width: $bp) { float: left; }
+  @debug "value: #{$x}";
+  @for $i from 1 through 3 { .m-#{$i} { margin: #{$i * 4}px; } }
+  @while $i > 0 { .w-#{$i} { width: 10px * $i; } $i: $i - 1; }
+}
+/* multi
+   line */
+@supports (display: grid) { .g { display: grid; } }
