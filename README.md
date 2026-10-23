@@ -59,6 +59,7 @@ python3 tool/codegen/gen.py [--check]                      # Remote descriptors 
 python3 tool/theme-adapters/build_official_pack.py [--check]   # dsh stylesheets -> official theme pack
 python3 tool/i18n/gen_catalog.py [--check]                 # dsh locale dictionaries -> zh/en catalog
 python3 tool/vectors/gen_expected.py --check <fixture>     # TS-produced expectations for the behaviour vectors
+python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for the settings vectors
 ```
 
 ## Behaviour vectors
@@ -70,6 +71,12 @@ window (client model), `expectedChat` the chat snapshot of dsh's real conversati
 `tool_turn_vector.json` (recorded live tool-call turn, scrubbed; tool argument keys kept), and
 `conversation_edge_vector.json` (synthetic: reasoning and tool-call streaming, interruption, steering, failure,
 max tokens, notice-woken turn, retry; `tool/vectors/synth_edge_trace.py`).
+
+A second family, `dsh-settings-vector/1` (`tool/vectors/gen_settings_expected.py`, inputs from
+`tool/vectors/synth_settings_trace.py`), covers the settings client: `settings_schema_vector.json` runs thousands of
+values through dsh's real schemastery-backed schema service and compares verdict and failure text with the Dart port;
+`settings_form_vector.json` replays scripted traces (reads, failures, writes, reconnects, disposal) through dsh's real
+describe mirror and configuration forms; `settings_form_model_vector.json` does the same for the staged form model.
 
 ## Product name
 

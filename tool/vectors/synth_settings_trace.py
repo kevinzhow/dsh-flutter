@@ -1166,7 +1166,182 @@ def form_fixture():
 
 
 def model_fixture():
-    raise SystemExit('form-model vector not written yet')
+    steps = []
+
+    def add(op, **fields):
+        step = {'op': op}
+        step.update(fields)
+        steps.append(step)
+
+    def snap(status='ready', value=None, base=None, user=None, writable=True, revision=3):
+        out = {'status': status, 'writable': writable}
+        if value is not None:
+            out['value'] = value
+        if base is not None:
+            out['base'] = base
+        if user is not None:
+            out['user'] = user
+        if revision is not None:
+            out['revision'] = revision
+        return out
+
+    specs = [{'field': 'fontSize', 'kind': 'number'}, {'field': 'textFontFamily', 'kind': 'text'}]
+    section = {'fontSize': 14, 'textFontFamily': ''}
+    ready = snap(value=section, base={'fontSize': 14, 'textFontFamily': ''}, user={})
+
+    def start(name, snapshot=None, **extra):
+        add('start', name=name, specs=specs, snapshot=snapshot or ready, **extra)
+
+    def edit(field, text):
+        add('edit', field=field, text=text)
+
+    def answer(method, result, scope=None):
+        step = {'method': method, 'result': result}
+        if scope is not None:
+            step['scope'] = scope
+        add('answer', **step)
+
+    # 1. staging: edits preview the save, an edit equal to the stored text is not dirty, an invalid draft blocks
+    start('staging')
+    edit('fontSize', '16')
+    edit('fontSize', '14')
+    edit('fontSize', '')
+    edit('fontSize', 'abc')
+    add('save')
+    edit('fontSize', '15')
+    edit('textFontFamily', '  Inter  ')
+    edit('textFontFamily', '')
+    edit('textFontFamily', 'Inter')
+    add('discard')
+    add('discard')
+
+    # 2. every spelling of a number the field either accepts or refuses
+    start('number drafts')
+    for text in ['16', ' 12 ', '1e2', '0x10', '0b11', '0o7', '-0x1', '+5', '-5', '.5', '5.', '1_000', '1e999', 'Infinity', '-Infinity',
+                 'NaN', '-0', '0', '1.5e-7', '123456789012345680000', '1e21', '12px', '', '   ', '\u00a07', '\u00857', '\ufeff9',
+                 '\u20287', '१२', '１２', '1 2', '1,5', '٣', '0.1', '2e', 'e2', '++1', '1e+2', '1E2', '0X1f', '00012', '1.', '.', '-.5e1']:
+        edit('fontSize', text)
+    add('discard')
+
+    # 3. a save writes the staged ops fenced with the revision the first edit started from
+    start('save lands')
+    edit('fontSize', '18')
+    add('scope', snapshot=snap(value={'fontSize': 14, 'textFontFamily': 'x'}, base={'fontSize': 14, 'textFontFamily': ''}, user={'textFontFamily': 'x'}, revision=4))
+    edit('textFontFamily', 'Inter')
+    add('save')
+    add('save')
+    edit('fontSize', '19')
+    answer('mutate', True, snap(value={'fontSize': 18, 'textFontFamily': 'Inter'}, base={'fontSize': 14, 'textFontFamily': ''}, user={'fontSize': 18, 'textFontFamily': 'Inter'}, revision=5))
+    add('discard')
+    edit('fontSize', '20')
+    add('save')
+    answer('mutate', True, snap(value={'fontSize': 20, 'textFontFamily': 'Inter'}, base={'fontSize': 14, 'textFontFamily': ''}, user={'fontSize': 20, 'textFontFamily': 'Inter'}, revision=6))
+
+    # 4. a refused or failed save keeps the drafts and flags the form; the next edit or save clears the flag
+    start('save refused or failed')
+    edit('fontSize', '30')
+    add('save')
+    answer('mutate', False)
+    edit('fontSize', '31')
+    add('save')
+    answer('mutate', {'throw': 'connection lost'})
+    add('save')
+    answer('mutate', False)
+    add('discard')
+    add('discard')
+
+    # 5. reset stages a clear back to the composition value; it writes only when the user layer holds the field
+    clear_base = {'fontSize': 14, 'textFontFamily': 'Default'}
+    start('reset field', snap(value={'fontSize': 18, 'textFontFamily': 'Default'}, base=clear_base, user={'fontSize': 18}))
+    add('reset', field='fontSize')
+    add('reset', field='textFontFamily')
+    add('save')
+    answer('mutate', True, snap(value={'fontSize': 14, 'textFontFamily': 'Default'}, base=clear_base, user={}, revision=4))
+    add('reset', field='nope')
+    edit('textFontFamily', 'Mono')
+    add('reset', field='textFontFamily')
+    edit('fontSize', '')
+    add('save')
+
+    # 6. the badge answers for the user layer's presence, not for a value comparison
+    start('overridden is presence', snap(value={'fontSize': 14, 'textFontFamily': ''}, base={'fontSize': 14, 'textFontFamily': ''}, user={'fontSize': 14}))
+    edit('textFontFamily', 'x')
+    edit('fontSize', '14')
+    edit('fontSize', '15')
+    add('discard')
+    add('scope', snapshot=snap(value={'fontSize': 14, 'textFontFamily': ''}, base={'fontSize': 14, 'textFontFamily': ''}, user={}))
+    add('scope', snapshot=snap(value={'fontSize': 14, 'textFontFamily': ''}, base={'fontSize': 14, 'textFontFamily': ''}, user={'textFontFamily': ''}))
+    add('scope', snapshot=snap(value={'fontSize': 14, 'textFontFamily': ''}, base={'fontSize': 14, 'textFontFamily': ''}))
+
+    # 7. the scope not serving the entry, or the document read-only
+    start('unavailable and read-only', snap(status='loading', revision=None, writable=False))
+    edit('fontSize', '16')
+    add('save')
+    add('scope', snapshot=snap(value=section, base=section, user={}, writable=False))
+    add('save')
+    add('scope', snapshot=snap(status='unavailable', value=section, base=section, user={}))
+    add('scope', snapshot=snap(value={'fontSize': 'big', 'textFontFamily': 5}, base=section, user={}))
+    edit('fontSize', '14')
+    add('scope', snapshot=snap(value={}, base=section, user={}))
+    add('scope', snapshot=snap(value=None, base=None, user=None))
+    add('scope', snapshot=snap(value={'fontSize': 1e21, 'textFontFamily': 'ok'}, base=section, user={}))
+    add('scope', snapshot=snap(value={'fontSize': 1.5e-7, 'textFontFamily': 'ok'}, base=section, user={}))
+    add('scope', snapshot=snap(value={'fontSize': -0.0, 'textFontFamily': 'ok'}, base=section, user={}))
+    add('scope', snapshot=snap(value={'fontSize': 123456789.125, 'textFontFamily': 'ok'}, base=section, user={}))
+
+    # 8. secrets: write-only controls written outside the section, blank drafts write nothing
+    secret_specs = {'secrets': ['apiKey', 'otherKey']}
+    start('secrets', **secret_specs)
+    edit('apiKey', '   ')
+    edit('apiKey', ' sk-test ')
+    edit('otherKey', 'second')
+    add('save')
+    answer('secret:apiKey', True)
+    answer('secret:otherKey', False)
+    edit('fontSize', '17')
+    add('save')
+    answer('mutate', True, snap(value={'fontSize': 17, 'textFontFamily': ''}, base=section, user={'fontSize': 17}, revision=4))
+    answer('secret:apiKey', {'throw': 'keychain locked'})
+    add('save')
+    answer('secret:apiKey', True)
+    answer('secret:otherKey', True)
+    edit('otherKey', 'only')
+    add('save')
+    answer('secret:otherKey', False)
+    add('discard')
+    edit('apiKey', 'late')
+    add('save')
+    answer('secret:apiKey', True)
+
+    # 9. scope changes under drafts; a pending save blocks a second one; dispose releases the subscription
+    start('scope changes under drafts')
+    edit('fontSize', '16')
+    add('scope', snapshot=snap(value={'fontSize': 15, 'textFontFamily': 'x'}, base=section, user={'fontSize': 15, 'textFontFamily': 'x'}, revision=9))
+    edit('textFontFamily', 'y')
+    add('save')
+    add('scope', snapshot=snap(value={'fontSize': 12, 'textFontFamily': 'x'}, base=section, user={'fontSize': 12}, revision=10))
+    edit('fontSize', '13')
+    answer('mutate', True, snap(value={'fontSize': 16, 'textFontFamily': 'y'}, base=section, user={'fontSize': 16, 'textFontFamily': 'y'}, revision=11))
+    edit('fontSize', '17')
+    add('dispose')
+    add('scope', snapshot=snap(value={'fontSize': 20, 'textFontFamily': 'z'}, base=section, user={}, revision=12))
+    edit('fontSize', '18')
+
+    # 10. an answer that arrives before its call waits for it
+    start('early answer')
+    answer('mutate', True, snap(value={'fontSize': 22, 'textFontFamily': ''}, base=section, user={'fontSize': 22}, revision=4))
+    edit('fontSize', '22')
+    add('save')
+
+    return {
+        'format': 'dsh-settings-vector/1',
+        'kind': 'form-model',
+        'description': 'Scripted scope snapshots, edits and write outcomes through dsh\'s staged settings form model '
+                       '(ui-primitives SettingsFormModel with the number and text field specs). `expected` is the model state '
+                       'after each step; every `start` begins a fresh model. Inputs: tool/vectors/synth_settings_trace.py.',
+        'hostVersion': '0.2.1-rc.2',
+        'steps': steps,
+    }
 
 
 def main():
