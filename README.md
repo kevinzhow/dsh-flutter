@@ -2,7 +2,7 @@
 
 A cross-platform native client for DSH (DeepSeek Harness), built with Flutter. Working name: Whalee.
 
-Status: phase 1b-2a (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
+Status: phase 1b-2b (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting; settings page, model and permission selection, local notifications). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
 
 ## Layout
 
@@ -25,6 +25,13 @@ features/dsh_feature_documentpreview  ui-documentpreview: highlighted text, rend
 features/dsh_feature_files             ui-files: workspace file tree, live-watched
 features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet, plan-mode chip
 features/dsh_feature_session           ui-session: the session list
+features/dsh_feature_model_selection   ui-model-selection: model/effort seat in the composer tool row, model sheet
+features/dsh_feature_permission_presets ui-permission-presets: new-session default row, composer permission seat
+features/dsh_feature_settings          ui-settings: settings page (rail on wide windows, list then section on phones), General column, plugins section
+features/dsh_feature_settings_agent_loop  ui-settings-agent-loop: the agent loop plugin's config card
+features/dsh_feature_settings_shell    ui-settings-shell: the shell plugin's config card
+features/dsh_feature_settings_subagent ui-settings-subagent: the subagent plugin's config card
+features/dsh_feature_theme             ui-theme: light/dark/system appearance, font families and sizes (shared with dsh web through the host)
 features/dsh_feature_sidebar_right     ui-sidebar-right: files/preview panel (sheet on phones, inline column on wide windows)
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
 features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
@@ -61,6 +68,14 @@ python3 tool/i18n/gen_catalog.py [--check]                 # dsh locale dictiona
 python3 tool/vectors/gen_expected.py --check <fixture>     # TS-produced expectations for the behaviour vectors
 python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for the settings vectors
 ```
+
+## Notifications
+
+While the app is in the background and connected, a session that asks for an approval or a question becomes one local
+notification; tapping it opens that session at the pending takeover. On Android the connection is kept alive by a
+foreground service (type `specialUse`) that runs only while sessions are running, the app is in the background and
+notifications are on; the Android 13+ permission is asked when the user turns notifications on. This is not push: once
+the system kills the app nothing reaches the phone until a relay exists (out of scope). The switch is in Settings.
 
 ## Behaviour vectors
 
