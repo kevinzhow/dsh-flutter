@@ -31,6 +31,9 @@ class TodoHistory {
   TodoBaseline? get(String callId) => _calls[callId];
 
   int get length => _calls.length;
+
+  /// Every recorded call and its predecessor, by call id.
+  Iterable<MapEntry<String, TodoBaseline>> get entries => _calls.entries;
 }
 
 List<TodoItem> _items(Object? todos) => [

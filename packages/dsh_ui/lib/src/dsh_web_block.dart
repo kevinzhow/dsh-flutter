@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_markdown.dart';
+import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
 class DshWebSource {
@@ -141,11 +142,7 @@ class DshWebBlock extends StatelessWidget {
               context,
               url!,
               url!,
-              code.copyWith(
-                fontSize: 13,
-                height: 19 / 13,
-                fontWeight: FontWeight.w500,
-              ),
+              code.sized(13, line: 19).copyWith(fontWeight: FontWeight.w500),
               icon: true,
             ),
             const SizedBox(height: 6),
@@ -231,11 +228,11 @@ class DshWebBlock extends StatelessWidget {
                                     padding: const EdgeInsets.only(top: 2),
                                     child: Text(
                                       list[i].snippet!,
-                                      style: body.copyWith(
-                                        fontSize: 13,
-                                        height: 19 / 13,
-                                        color: theme.labelSecondary,
-                                      ),
+                                      style: body
+                                          .sized(13, line: 19)
+                                          .copyWith(
+                                            color: theme.labelSecondary,
+                                          ),
                                     ),
                                   ),
                                 if (list[i].publishedAt != null &&

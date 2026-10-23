@@ -36,7 +36,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
           padding: const EdgeInsets.fromLTRB(14, 10, 14, 6),
           child: Text(
             m.caption!,
-            style: base.copyWith(fontSize: 12, color: caption),
+            style: base.sized(12).copyWith(color: caption),
           ),
         ),
       );
@@ -154,9 +154,9 @@ class _DetailItemView extends StatelessWidget {
         height: 18,
         child: Center(
           child: v == 'added'
-              ? Text('+', style: base.copyWith(fontSize: 16, color: color))
+              ? Text('+', style: base.sized(16).copyWith(color: color))
               : v == 'removed'
-              ? Text('−', style: base.copyWith(fontSize: 16, color: color))
+              ? Text('−', style: base.sized(16).copyWith(color: color))
               : status!.value == 'completed'
               ? DshIcon(DshIcons.check, size: 14, color: color)
               : status.value == 'in_progress'
@@ -196,10 +196,7 @@ class _DetailItemView extends StatelessWidget {
         const SizedBox(width: 5),
         Text(
           item.badge!.label,
-          style: base.copyWith(
-            fontSize: 12,
-            color: _tone(theme, item.badge!.tone),
-          ),
+          style: base.sized(12).copyWith(color: _tone(theme, item.badge!.tone)),
         ),
       ],
       if (status != null) ...[
@@ -208,14 +205,14 @@ class _DetailItemView extends StatelessWidget {
         if (item.previousStatus != null)
           Text(
             '${item.previousStatus} → ',
-            style: base.copyWith(fontSize: 12, color: tertiary),
+            style: base.sized(12).copyWith(color: tertiary),
           ),
         Text(
           status.label +
               (item.change?.value == 'updated' && item.previousStatus == null
                   ? ' · ${item.change!.label}'
                   : ''),
-          style: base.copyWith(fontSize: 12, color: caption),
+          style: base.sized(12).copyWith(color: caption),
         ),
       ],
     ];
@@ -236,7 +233,7 @@ class _DetailItemView extends StatelessWidget {
               padding: const EdgeInsets.only(top: 3),
               child: Text(
                 item.subtitle!,
-                style: base.copyWith(fontSize: 12, color: tertiary),
+                style: base.sized(12).copyWith(color: tertiary),
               ),
             ),
           if (item.description != null)

@@ -98,11 +98,13 @@ class PlanCards extends StatelessWidget {
                             _t('preview.document'),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: base.copyWith(
-                              fontSize: 10,
-                              height: 16 / 10,
-                              color: theme.color('--dsw-alias-label-tertiary'),
-                            ),
+                            style: base
+                                .sized(10, line: 16)
+                                .copyWith(
+                                  color: theme.color(
+                                    '--dsw-alias-label-tertiary',
+                                  ),
+                                ),
                           ),
                         ],
                       ),
@@ -125,11 +127,9 @@ class PlanCards extends StatelessWidget {
                       ),
                       child: Text(
                         _t('preview.action'),
-                        style: base.copyWith(
-                          fontSize: 12,
-                          height: 18 / 12,
-                          color: theme.labelPrimary,
-                        ),
+                        style: base
+                            .sized(12, line: 18)
+                            .copyWith(color: theme.labelPrimary),
                       ),
                     ),
                   ],

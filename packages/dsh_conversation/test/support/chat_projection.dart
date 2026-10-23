@@ -5,7 +5,11 @@ import 'package:dsh_conversation/dsh_conversation.dart';
 /// The language-neutral projection of a chat snapshot that the TS side writes
 /// into `expectedChat` (tool/vectors/ts/chat_glue.mjs `projectChat`). Both sides
 /// must produce the same JSON.
-Map<String, Object?> projectChat(ChatSnapshot snapshot, int? openTurn) {
+Map<String, Object?> projectChat(
+  ChatSnapshot snapshot,
+  int? openTurn, [
+  TodoHistory? todoHistory,
+]) {
   final nodes = [
     for (final n in snapshot.visibleNodes)
       {
@@ -45,8 +49,41 @@ Map<String, Object?> projectChat(ChatSnapshot snapshot, int? openTurn) {
         };
       }(),
   ];
+  final plans = [
+    for (final n
+        in (snapshot.nodes.values
+            .where((n) => n.kind == submittedPlanKind)
+            .toList()
+          ..sort((a, b) {
+            final c = a.anchorSeq.compareTo(b.anchorSeq);
+            return c != 0 ? c : a.key.compareTo(b.key);
+          })))
+      {
+        'callId': (n.data! as SubmittedPlan).callId,
+        'title': (n.data! as SubmittedPlan).title,
+        'markdown': (n.data! as SubmittedPlan).markdown,
+        'anchorSeq': n.anchorSeq,
+        'turn': locationTurn(n.location),
+        'step': locationStep(n.location),
+      },
+  ];
+  final history = [
+    for (final e
+        in ((todoHistory ?? TodoHistory.empty).entries.toList()
+          ..sort((a, b) => a.key.compareTo(b.key))))
+      {
+        'callId': e.key,
+        'todos': e.value.todos == null
+            ? null
+            : [
+                for (final t in e.value.todos!) [t.content, t.status],
+              ],
+      },
+  ];
   return _canon({
     'nodes': nodes,
+    'plans': plans,
+    'todoHistory': history,
     'timeline': timeline,
     'nodeCount': snapshot.nodes.values
         .where((n) => n.kind != 'system-prompt')

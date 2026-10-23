@@ -76,23 +76,25 @@ class _DshShimmerState extends State<DshShimmer>
             child!,
             Positioned.fill(
               child: IgnorePointer(
-                child: ShaderMask(
-                  blendMode: BlendMode.dstIn,
-                  shaderCallback: (bounds) => LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: const [
-                      Color(0x00000000),
-                      Color(0xFF000000),
-                      Color(0xFF000000),
-                      Color(0x00000000),
-                    ],
-                    stops: const [0, 0.4, 0.6, 1],
-                    transform: _SlideGradient(dx),
-                  ).createShader(bounds),
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(shimmer, BlendMode.srcIn),
-                    child: child,
+                child: ExcludeSemantics(
+                  child: ShaderMask(
+                    blendMode: BlendMode.dstIn,
+                    shaderCallback: (bounds) => LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        shimmer.withValues(alpha: 0),
+                        shimmer,
+                        shimmer,
+                        shimmer.withValues(alpha: 0),
+                      ],
+                      stops: const [0, 0.4, 0.6, 1],
+                      transform: _SlideGradient(dx),
+                    ).createShader(bounds),
+                    child: ColorFiltered(
+                      colorFilter: ColorFilter.mode(shimmer, BlendMode.srcIn),
+                      child: child,
+                    ),
                   ),
                 ),
               ),

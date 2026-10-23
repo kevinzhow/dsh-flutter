@@ -36,9 +36,8 @@ class ExitBadge extends StatelessWidget {
                 maxLines: 1,
                 style: theme
                     .textStyle('--dsw-font-xs-13')
+                    .sized(11, line: 17)
                     .copyWith(
-                      fontSize: 11,
-                      height: 17 / 11,
                       fontWeight: FontWeight.w500,
                       color: theme.labelSecondary,
                     ),

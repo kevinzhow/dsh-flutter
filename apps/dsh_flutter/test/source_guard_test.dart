@@ -10,6 +10,8 @@ void main() {
     '../../features/dsh_feature_approval/lib',
     '../../features/dsh_feature_chat/lib',
     '../../features/dsh_feature_conversation/lib',
+    '../../features/dsh_feature_plan/lib',
+    '../../features/dsh_feature_subagent/lib',
     '../../features/dsh_feature_session/lib',
     '../../features/dsh_feature_tool/lib',
     '../../features/dsh_feature_user_questions/lib',

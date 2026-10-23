@@ -45,11 +45,22 @@ def build():
     return '\n'.join(lines)
 
 
+def formatted(text):
+    """The text as `dart format` writes it (the generated file is checked by the format guard too)."""
+    import subprocess
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        path = pathlib.Path(tmp) / 'gen.dart'
+        path.write_text(text)
+        subprocess.run(['dart', 'format', str(path)], check=True, capture_output=True)
+        return path.read_text()
+
+
 def main():
     if not EXT_FILE.exists():
         print('gen_code_language: tool unavailable: no dsh checkout at %s' % SRC, file=sys.stderr)
         sys.exit(2)
-    text = build()
+    text = formatted(build())
     if '--check' in sys.argv:
         if not OUT.exists() or OUT.read_text() != text:
             print('gen_code_language: %s is stale; run tool/icons/gen_code_language.py' % OUT.relative_to(ROOT), file=sys.stderr)

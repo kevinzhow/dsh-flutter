@@ -29,11 +29,11 @@ Color blendLikeChromium(Color fill, Color under) {
     return (premul + rest).clamp(0, 255);
   }
 
-  return Color.fromARGB(
-    255,
-    channel(fill.r, under.r),
-    channel(fill.g, under.g),
-    channel(fill.b, under.b),
+  return Color.from(
+    alpha: 1,
+    red: channel(fill.r, under.r) / 255,
+    green: channel(fill.g, under.g) / 255,
+    blue: channel(fill.b, under.b) / 255,
   );
 }
 

@@ -200,11 +200,8 @@ class _ToolRowState extends State<ToolRow> {
                   TextSpan(
                     style: theme
                         .textStyle('--dsw-font-markdown-code')
-                        .copyWith(
-                          fontSize: 11,
-                          height: 24 / 11,
-                          color: rowColor,
-                        ),
+                        .sized(11, line: 24)
+                        .copyWith(color: rowColor),
                     children: [
                       TextSpan(
                         text: '+${totals.added}',

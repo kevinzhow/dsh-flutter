@@ -21,6 +21,7 @@ void main() {
 
   for (final name in [
     'conversation_edge_vector.json',
+    'plan_todo_vector.json',
     'tool_turn_vector.json',
   ]) {
     test('$name carries nothing private', () {

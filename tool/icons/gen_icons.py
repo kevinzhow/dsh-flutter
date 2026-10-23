@@ -140,11 +140,22 @@ def build():
     return '\n'.join(lines) + '\n'
 
 
+def formatted(text):
+    """The text as `dart format` writes it (the generated file is checked by the format guard too)."""
+    import subprocess
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        path = pathlib.Path(tmp) / 'gen.dart'
+        path.write_text(text)
+        subprocess.run(['dart', 'format', str(path)], check=True, capture_output=True)
+        return path.read_text()
+
+
 def main():
     if not ICON_DIR.exists():
         print('gen_icons: tool unavailable: no dsh checkout at %s' % SRC, file=sys.stderr)
         sys.exit(2)
-    text = build()
+    text = formatted(build())
     if '--check' in sys.argv:
         if not OUT.exists() or OUT.read_text() != text:
             print('gen_icons: %s is stale; run tool/icons/gen_icons.py' % OUT.relative_to(ROOT), file=sys.stderr)

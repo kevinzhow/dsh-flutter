@@ -39,7 +39,9 @@ class Slot<P, R> {
   String toString() => 'Slot($name)';
 }
 
-final RegExp slotNamePattern = RegExp(r'^[a-z][a-z0-9-]*(\.[a-z][a-z0-9-]*)*$');
+final RegExp slotNamePattern = RegExp(
+  r'^[a-z][a-zA-Z0-9-]*(\.[a-z][a-zA-Z0-9-]*)*$',
+);
 
 /// Builds the occupant for one render occurrence from the owner props.
 typedef SlotBuilder<P, R> = R Function(P owner);

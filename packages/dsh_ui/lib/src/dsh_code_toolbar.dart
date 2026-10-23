@@ -4,6 +4,7 @@ import 'dsh_code_language.dart';
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
 /// Language fallback and wrapping labels of a code card toolbar.
@@ -52,9 +53,7 @@ class DshCodeToolbar extends StatelessWidget {
     final theme = context.dsh;
     final tertiary = theme.color('--dsw-alias-label-tertiary');
     final secondary = theme.color('--dsw-alias-label-secondary');
-    final base = theme
-        .textStyle('--dsw-font-xs-13')
-        .copyWith(fontSize: 11, height: 18 / 11);
+    final base = theme.textStyle('--dsw-font-xs-13').sized(11, line: 18);
     final code = theme.textStyle('--dsw-font-markdown-code-block');
 
     Widget action(
@@ -88,11 +87,7 @@ class DshCodeToolbar extends StatelessWidget {
               children: [
                 Text(
                   dshSupportsHighlighting(lang) ? lang! : labels.codeLabel,
-                  style: base.copyWith(
-                    color: tertiary,
-                    fontFamily: code.fontFamily,
-                    fontFamilyFallback: code.fontFamilyFallback,
-                  ),
+                  style: code.sized(11, line: 18).copyWith(color: tertiary),
                 ),
                 if (title != null) ...[
                   const SizedBox(width: 12),

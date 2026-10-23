@@ -6,6 +6,7 @@ import 'dsh_copy_feedback.dart';
 import 'dsh_head_tail_cap.dart';
 import 'dsh_pill.dart';
 import 'dsh_state_dot.dart';
+import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
 /// Output lines shown before the height cap collapses the middle.
@@ -138,14 +139,14 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
           : null;
       color = token != null
           ? theme.color(token)
-          : (fg.rgb != null ? Color(0xFF000000 | fg.rgb!) : null);
+          : (fg.rgb != null ? dshRgb(fg.rgb!) : null);
     }
     final bg = span.bg?.rgb;
     return TextSpan(
       text: span.text,
       style: TextStyle(
-        color: span.hidden ? const Color(0x00000000) : color,
-        backgroundColor: bg == null ? null : Color(0xFF000000 | bg),
+        color: span.hidden ? theme.bgBase.withValues(alpha: 0) : color,
+        backgroundColor: bg == null ? null : dshRgb(bg),
         fontWeight: span.bold ? FontWeight.w700 : null,
         fontStyle: span.italic ? FontStyle.italic : null,
         decoration: TextDecoration.combine([

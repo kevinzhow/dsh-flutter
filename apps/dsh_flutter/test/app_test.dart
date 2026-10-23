@@ -308,8 +308,9 @@ void main() {
         'argumentsDelta': '{"command":"ls',
       });
       await settle(t);
-      expect(find.byKey(const ValueKey('tool-card-call-1')), findsOneWidget);
-      expect(find.text('Preparing'), findsOneWidget);
+      // The bash row appears as soon as the call starts streaming.
+      expect(find.byKey(const ValueKey('tool-row-bash')), findsOneWidget);
+      expect(find.text('Bash'), findsWidgets);
       chunk({
         'type': 'tool-call-delta',
         'index': 1,
@@ -317,7 +318,6 @@ void main() {
         'argumentsDelta': ' -la"}',
       });
       await settle(t);
-      expect(find.text('ls -la'), findsOneWidget);
 
       // the durable events arrive: the call runs, then returns
       tr.item(1, {
@@ -335,7 +335,7 @@ void main() {
         )['event'],
       });
       await settle(t);
-      expect(find.text('Running'), findsOneWidget);
+      expect(find.text('ls -la'), findsWidgets);
       tr.item(1, {
         'type': 'event',
         'event': rec(
@@ -359,7 +359,10 @@ void main() {
         )['event'],
       });
       await settle(t);
-      expect(find.byKey(const ValueKey('tool-result-preview')), findsOneWidget);
+      // A settled call is a collapsed row; opening it shows the result.
+      expect(find.text('a.txt b.txt'), findsNothing);
+      await t.tap(find.byKey(const ValueKey('tool-row-bash')));
+      await settle(t);
       expect(find.text('a.txt b.txt'), findsOneWidget);
     });
 

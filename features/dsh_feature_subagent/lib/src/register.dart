@@ -155,6 +155,7 @@ class _SubagentTriggerState extends State<SubagentTrigger> {
     return Semantics(
       button: true,
       label: label,
+      excludeSemantics: true,
       child: GestureDetector(
         key: const ValueKey('subagent-trigger'),
         behavior: HitTestBehavior.opaque,

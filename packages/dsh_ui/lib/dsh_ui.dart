@@ -31,3 +31,4 @@ export 'src/dsh_text_field.dart';
 export 'src/theme_access.dart';
 export 'src/dsh_markdown_file_icon.dart';
 export 'src/dsh_shadow_box.dart';
+export 'src/dsh_text_scale.dart';

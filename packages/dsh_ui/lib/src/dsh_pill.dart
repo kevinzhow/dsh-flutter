@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
 /// A read-only capsule at the 24px text-line size (dsh `Pill`); the terminal
@@ -25,9 +26,8 @@ class DshPill extends StatelessWidget {
       child: DefaultTextStyle.merge(
         style: theme
             .textStyle('--dsw-font-xs-13')
+            .sized(12, line: 18)
             .copyWith(
-              fontSize: 12,
-              height: 18 / 12,
               color: color ?? theme.color('--dsw-alias-label-secondary'),
             ),
         child: child,
