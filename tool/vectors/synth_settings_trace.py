@@ -839,8 +839,330 @@ def schema_fixture():
 # ===================================================================== form / form-model
 
 
+class Trace:
+    """Builds the flat step list of a form vector; every `start` begins a fresh world."""
+
+    def __init__(self):
+        self.steps = []
+        with open(DESCRIBE, encoding='utf-8') as handle:
+            self.rows = {row['ns']: row for row in json.load(handle)['namespaces']}
+
+    def add(self, op, **fields):
+        step = {'op': op}
+        step.update(fields)
+        self.steps.append(step)
+
+    def view(self, ns, revision=0, value=None, user=None, base=None, drop=()):
+        row = json.loads(json.dumps(self.rows[ns]))
+        row['revision'] = revision
+        if value is not None:
+            row['value'] = value
+        if user is not None:
+            row['user'] = user
+        if base is not None:
+            row['base'] = base
+        for key in drop:
+            row.pop(key, None)
+        return row
+
+    @staticmethod
+    def described(*views, writable=True, has_document=True):
+        return {'ok': True, 'value': {'writable': writable, 'hasDocument': has_document, 'namespaces': list(views)}}
+
+    def start(self, name):
+        self.add('start', name=name)
+
+    def answer(self, method, result, comment=None):
+        step = {'method': method, 'result': result}
+        if comment:
+            step['comment'] = comment
+        self.add('answer', **step)
+
+    def describe_ok(self, *views, **kw):
+        self.answer('describe', self.described(*views, **kw))
+
+    def describe_refused(self, message, code='settings/internal'):
+        self.answer('describe', {'ok': False, 'error': {'code': code, 'message': message}})
+
+    def mutate_ok(self, view):
+        self.answer('mutate', {'ok': True, 'value': view})
+
+    def mutate_refused(self, message, code='settings/conflict'):
+        self.answer('mutate', {'ok': False, 'error': {'code': code, 'message': message}})
+
+    def transport_failure(self, method, message):
+        self.answer(method, {'throw': message})
+
+    def watch(self, *namespaces):
+        for ns in namespaces:
+            self.add('watch', ns=ns)
+
+    def emit_updated(self, ns='ui-theme', revision=1):
+        self.add('emit', event='settings/document-updated', args=[ns, revision])
+
+    def reset(self):
+        self.add('reset')
+
+    def set(self, id_, ns, field, value):
+        self.add('set', id=id_, ns=ns, field=field, value=value)
+
+    def unset(self, id_, ns, field):
+        self.add('unset', id=id_, ns=ns, field=field)
+
+    def mutate(self, id_, ns, ops, expected_revision=None):
+        step = {'id': id_, 'ns': ns, 'ops': ops}
+        if expected_revision is not None:
+            step['expectedRevision'] = expected_revision
+        self.add('mutate', **step)
+
+
+THEME = {'preference': 'system', 'fontSize': 14, 'codeFontSize': 11, 'terminalFontSize': 13,
+         'textFontFamily': '', 'codeFontFamily': '', 'terminalFontFamily': ''}
+
+
+def theme(**changes):
+    return dict(THEME, **changes)
+
+
 def form_fixture():
-    raise SystemExit('form vector not written yet')
+    tr = Trace()
+    v = tr.view
+
+    # 1. first read: eager read at startup, forms for served and unserved namespaces, document and reset invalidations
+    tr.start('first read')
+    tr.describe_ok(v('ui-theme'), v('agent-loop'))
+    tr.watch('ui-theme', 'agent-loop', 'not-served')
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=16), user={'fontSize': 16}), v('agent-loop'))
+    tr.emit_updated('ui-theme', 1)
+    tr.describe_ok(v('ui-theme', 2, theme(fontSize=18), user={'fontSize': 18}), v('agent-loop', 1, {'maxParallelToolCalls': 4}, user={'maxParallelToolCalls': 4}))
+    tr.reset()
+    tr.add('ensure')
+    tr.describe_ok(v('ui-theme', 2), v('agent-loop', 1), writable=False)
+    tr.emit_updated('agent-loop', 1)
+
+    # 2. read failure then retry; a later failure keeps serving the held view
+    tr.start('read failure then retry')
+    tr.describe_refused('read failed')
+    tr.watch('ui-theme')
+    tr.describe_ok(v('ui-theme'))
+    tr.add('ensure')
+    tr.add('ensure')
+    tr.transport_failure('describe', 'socket closed')
+    tr.emit_updated()
+    tr.describe_refused('host busy', 'settings/busy')
+    tr.reset()
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.emit_updated()
+    tr.add('ensure')
+
+    # 3. a first read that throws before anything is held falls back to idle and ensure reads again
+    tr.start('transport failure of the first read')
+    tr.transport_failure('describe', 'dial failed')
+    tr.watch('ui-theme')
+    tr.add('ensure')
+    tr.describe_ok(v('ui-theme'))
+    tr.add('ensure')
+
+    # 4. invalid sections stay out; the revision, base and user still follow the Host
+    tr.start('invalid section kept out')
+    tr.describe_ok(v('ui-theme', 0, theme(fontSize=99)), v('agent-loop', 0, {'maxParallelToolCalls': 0}))
+    tr.watch('ui-theme', 'agent-loop')
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=12), user={'fontSize': 12}), v('agent-loop', 1, {'maxParallelToolCalls': 3}, user={'maxParallelToolCalls': 3}))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 2, theme(fontSize=14.5), user={'fontSize': 14.5}), v('agent-loop', 2, [], user={'x': 1}))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 3, theme(preference='sepia'), user={'preference': 'sepia'}), v('agent-loop', 3, None))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 4, 'text'), v('agent-loop', 4, {'maxParallelToolCalls': 5}, user={'maxParallelToolCalls': 5}))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 5, {}, user={}), v('agent-loop', 5, {'extra': True, 'maxParallelToolCalls': 5}))
+    tr.emit_updated()
+
+    # 5. a namespace the Host does not serve, then serves, then stops serving; whileServed follows it
+    tr.start('namespace unserved then served')
+    tr.describe_ok(v('ui-theme'))
+    tr.watch('agent-loop')
+    tr.add('whileServed', id='page', namespaces=['agent-loop', 'permission'])
+    tr.add('whileServed', id='other', namespaces=['ui-theme'])
+    tr.describe_ok(v('ui-theme', 1), v('agent-loop', 0))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 2), v('agent-loop', 1, {'maxParallelToolCalls': 2}, user={'maxParallelToolCalls': 2}), v('permission'))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 3), v('permission', 1))
+    tr.emit_updated()
+    tr.describe_ok(v('ui-theme', 4), v('agent-loop', 2))
+    tr.emit_updated()
+    tr.add('stopWhileServed', id='other')
+    tr.describe_ok(v('ui-theme', 5))
+    tr.emit_updated()
+    tr.add('stopWhileServed', id='page')
+
+    # 6. rapid ordered writes: one wire call at a time, revisions chained through superseded answers
+    tr.start('rapid ordered writes')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.set('w2', 'ui-theme', 'fontSize', 16)
+    tr.unset('w3', 'ui-theme', 'codeFontSize')
+    tr.set('w4', 'ui-theme', 'preference', 'dark')
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.mutate_ok(v('ui-theme', 2, theme(fontSize=16), user={'fontSize': 16}))
+    tr.mutate_ok(v('ui-theme', 5, theme(fontSize=16), user={'fontSize': 16}))
+    tr.mutate_ok(v('ui-theme', 6, theme(fontSize=16, preference='dark'), user={'fontSize': 16, 'preference': 'dark'}))
+    tr.set('w5', 'ui-theme', 'fontSize', 17)
+    tr.mutate_ok(v('ui-theme', 7, theme(fontSize=17, preference='dark'), user={'fontSize': 17, 'preference': 'dark'}))
+
+    # 7. an explicit fence, multi-op mutations and the values copied when queued
+    tr.start('explicit revision and multi-op mutate')
+    tr.describe_ok(v('ui-theme', 3))
+    tr.watch('ui-theme')
+    tr.mutate('m1', 'ui-theme', [{'op': 'set', 'path': ['fontSize'], 'value': 20}, {'op': 'unset', 'path': ['codeFontSize']},
+                                  {'op': 'set', 'path': ['nested', 'deep'], 'value': {'k': [1, 2]}}], expected_revision=1)
+    tr.mutate('m2', 'ui-theme', [{'op': 'unset', 'path': ['fontSize']}])
+    tr.mutate_ok(v('ui-theme', 4, theme(fontSize=20), user={'fontSize': 20}))
+    tr.mutate_ok(v('ui-theme', 5, theme(), user={}))
+    tr.mutate('m3', 'ui-theme', [], expected_revision=0)
+    tr.mutate_ok(v('ui-theme', 6))
+
+    # 8. a refused latest write reloads Host state; the write resolves false after the recovery read
+    tr.start('refused write then recovery read')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 30)
+    tr.mutate_refused('fontSize out of range')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.set('w2', 'ui-theme', 'fontSize', 17)
+    tr.mutate_refused('stale revision')
+    tr.describe_ok(v('ui-theme', 4, theme(fontSize=19), user={'fontSize': 19}))
+    tr.set('w3', 'ui-theme', 'fontSize', 18)
+    tr.mutate_ok(v('ui-theme', 5, theme(fontSize=18), user={'fontSize': 18}))
+
+    # 9. a refused write that was superseded leaves recovery to its successor
+    tr.start('refused superseded write')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 30)
+    tr.set('w2', 'ui-theme', 'fontSize', 12)
+    tr.mutate_refused('first refused')
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=12), user={'fontSize': 12}))
+    tr.set('w3', 'ui-theme', 'fontSize', 31)
+    tr.set('w4', 'ui-theme', 'fontSize', 32)
+    tr.mutate_ok(v('ui-theme', 2, theme(fontSize=31), user={'fontSize': 31}))
+    tr.mutate_refused('latest refused')
+    tr.describe_ok(v('ui-theme', 2, theme(fontSize=31), user={'fontSize': 31}))
+
+    # 10. transport failures reject the write, the queue continues, no recovery read
+    tr.start('transport failure of a write')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.transport_failure('mutate', 'connection lost')
+    tr.set('w2', 'ui-theme', 'fontSize', 16)
+    tr.set('w3', 'ui-theme', 'fontSize', 17)
+    tr.transport_failure('mutate', 'timeout')
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=17), user={'fontSize': 17}))
+    tr.set('w4', 'ui-theme', 'fontSize', 18)
+    tr.mutate_ok(v('ui-theme', 2, theme(fontSize=18), user={'fontSize': 18}))
+
+    # 11. a write before the first read carries no revision; its answer is not published as a partial document
+    tr.start('write before the first read')
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.set('w2', 'ui-theme', 'fontSize', 16)
+    tr.mutate_ok(v('ui-theme', 2, theme(fontSize=16), user={'fontSize': 16}))
+
+    # 12. a write answer overtakes a read in flight: the stale read is dropped and read again
+    tr.start('write answer versus read in flight')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.emit_updated('ui-theme', 1)
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.describe_ok(v('ui-theme', 0))
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.emit_updated('ui-theme', 2)
+    tr.emit_updated('ui-theme', 2)
+    tr.reset()
+    tr.describe_ok(v('ui-theme', 1))
+    tr.describe_ok(v('ui-theme', 2, theme(fontSize=13), user={'fontSize': 13}))
+    tr.set('w2', 'ui-theme', 'fontSize', 14)
+    tr.emit_updated('ui-theme', 3)
+    tr.describe_ok(v('ui-theme', 3, theme(fontSize=14), user={'fontSize': 14}))
+    tr.mutate_ok(v('ui-theme', 3, theme(fontSize=14), user={'fontSize': 14}))
+
+    # 13. a refused write whose recovery read is already folded into a running read
+    tr.start('refused write while a read is in flight')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.emit_updated()
+    tr.set('w1', 'ui-theme', 'fontSize', 30)
+    tr.mutate_refused('too large')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=11), user={'fontSize': 11}))
+
+    # 14. acceptView folds a namespace answer into the held view (and appends an unknown one)
+    tr.start('accept view')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme', 'agent-loop')
+    tr.add('acceptView', view=v('ui-theme', 3, theme(fontSize=21), user={'fontSize': 21}))
+    tr.add('acceptView', view=v('agent-loop', 1, {'maxParallelToolCalls': 6}, user={'maxParallelToolCalls': 6}))
+    tr.emit_updated()
+    tr.add('acceptView', view=v('ui-theme', 4, theme(fontSize=22), user={'fontSize': 22}))
+    tr.describe_ok(v('ui-theme', 3))
+    tr.describe_ok(v('ui-theme', 4, theme(fontSize=22), user={'fontSize': 22}))
+
+    # 15. a document that does not accept writes and a missing document
+    tr.start('read-only document')
+    tr.describe_ok(v('ui-theme', 0), writable=False, has_document=False)
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.mutate_refused('settings document is read-only', 'settings/read-only')
+    tr.describe_ok(v('ui-theme', 0), writable=False, has_document=False)
+
+    # 16. a namespace row without base or user layers
+    tr.start('layers absent')
+    tr.describe_ok(v('ui-theme', 0, drop=('base', 'user')), v('agent-loop', 0, drop=('user',)))
+    tr.watch('ui-theme', 'agent-loop')
+    tr.describe_ok(v('ui-theme', 1, drop=('base',), user={'fontSize': 12}), v('agent-loop', 1, drop=('base',)))
+    tr.emit_updated()
+
+    # 17. dispose: the write already on the wire settles unpublished, later events and writes do nothing
+    tr.start('dispose')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.set('w2', 'ui-theme', 'fontSize', 16)
+    tr.add('dispose')
+    tr.mutate_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.emit_updated('ui-theme', 2)
+    tr.reset()
+    tr.set('w3', 'ui-theme', 'fontSize', 17)
+    tr.add('ensure')
+
+    # 18. dispose while a read is in flight and while a refused write would recover
+    tr.start('dispose with a read and a refused write pending')
+    tr.describe_ok(v('ui-theme', 0))
+    tr.watch('ui-theme')
+    tr.emit_updated()
+    tr.set('w1', 'ui-theme', 'fontSize', 15)
+    tr.add('dispose')
+    tr.mutate_refused('refused after dispose')
+    tr.describe_ok(v('ui-theme', 1, theme(fontSize=15), user={'fontSize': 15}))
+    tr.emit_updated('ui-theme', 2)
+
+    return {
+        'format': 'dsh-settings-vector/1',
+        'kind': 'form',
+        'description': 'Scripted traces through dsh\'s settings describe mirror and configuration forms (the real ui-settings '
+                       'plugin over a scripted settings remote). Every `start` begins a fresh world; `answer` steps answer '
+                       'the oldest pending settings.describe / settings.mutate call (or queue for the next one). '
+                       '`expected` is the state after each step. Inputs: tool/vectors/synth_settings_trace.py.',
+        'hostVersion': '0.2.1-rc.2',
+        'steps': tr.steps,
+    }
 
 
 def model_fixture():

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dsh_client/dsh_client.dart' show RemoteException;
 import 'package:dsh_client/generated_settings.dart' as wire;
 
 import '../observable.dart';
@@ -165,8 +166,8 @@ class SettingsDescribeMirror {
     }
   }
 
-  static String _message(Object error) {
-    final text = '$error';
-    return text.startsWith('RemoteException(') ? text : text;
-  }
+  /// The failure text dsh stores: the refusal's own message for a Host answer
+  /// or a failed carrier (`error.message`), the error's text for anything else.
+  static String _message(Object error) =>
+      error is RemoteException ? error.message : '$error';
 }
