@@ -2,7 +2,7 @@
 
 A cross-platform native client for DSH (DeepSeek Harness), built with Flutter. Working name: Whalee.
 
-Status: phase 1a (phone-first chat: pairing, session list, streamed conversation, tool cards, approvals and questions). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
+Status: phase 1b-1 (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
 
 ## Layout
 
@@ -11,16 +11,18 @@ One package per layer of dsh's own web client (`docs/subsystems/web-client.md` u
 ```
 packages/dsh_client        pure Dart   pairing, connection generations, /api/remote.mux, unary /api calls
 packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window)
-packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations) and the chat target, ported from ui-conversation/ui-chat
+packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool
 packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's own
 packages/dsh_theme         Flutter     theme contract engine, vocabulary = dsh --dsw-* tokens, official pack
-packages/dsh_ui            Flutter     UI primitives that read only the theme contract
+packages/dsh_ui            Flutter     UI primitives that read only the theme contract (rows, terminal/diff/read/search/web blocks, icons from dsh's SVG paths)
 packages/dsh_i18n          pure Dart   zh/en catalog generated from dsh's locale dictionaries
 features/dsh_feature_approval          ui-approval: composer takeover for approval requests
 features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
-features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (send/stop)
+features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (send/stop), to-do dock
+features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet, plan-mode chip
 features/dsh_feature_session           ui-session: the session list
-features/dsh_feature_tool              ui-tool: generic tool call card (tool.call.toolview fallback)
+features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
+features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions
                                        (one feature per dsh ui-* package; features never import each other)
 apps/dsh_flutter                       composition root: pairing, navigation, platform manifests (Whalee)

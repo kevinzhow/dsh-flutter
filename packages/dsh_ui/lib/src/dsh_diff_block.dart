@@ -20,12 +20,12 @@ class DshFoldLabels {
 /// premultiplied arithmetic Chromium paints with, so the row lands on the same
 /// pixel values as dsh's web client (Skia's float blend is off by one).
 Color blendLikeChromium(Color fill, Color under) {
-  final a = (fill.a * 255).floor();
+  final a = (fill.a * 255).round();
   int channel(double src, double dst) {
     final s = (src * 255).round();
     final d = (dst * 255).round();
     final premul = (s * a / 255).round();
-    final rest = (d * (255 - a) / 255).round();
+    final rest = (d * (255 - a) / 255).floor();
     return (premul + rest).clamp(0, 255);
   }
 

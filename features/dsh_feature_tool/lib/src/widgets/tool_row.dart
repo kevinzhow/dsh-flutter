@@ -34,6 +34,7 @@ class ToolRow extends StatefulWidget {
     this.href,
     this.onOpenUrl,
     this.initiallyExpanded = false,
+    this.stateId,
     this.panelLabel,
     this.onPanel,
   });
@@ -74,6 +75,11 @@ class ToolRow extends StatefulWidget {
   final void Function(Uri url)? onOpenUrl;
   final bool initiallyExpanded;
 
+  /// Identity (the call id) under which the open state survives the row being
+  /// scrolled out of the list and back (dsh keeps it in the chat's
+  /// `useDisclosure`).
+  final String? stateId;
+
   /// Optional panel action beside the summary (the ask row's reopen button).
   final String? panelLabel;
   final bool Function()? onPanel;
@@ -83,7 +89,27 @@ class ToolRow extends StatefulWidget {
 }
 
 class _ToolRowState extends State<ToolRow> {
-  late bool _expanded = widget.initiallyExpanded;
+  late bool _expanded = _restore() ?? widget.initiallyExpanded;
+
+  Object? get _identifier =>
+      widget.stateId == null ? null : 'tool-open-${widget.stateId}';
+
+  bool? _restore() {
+    final id = _identifier;
+    if (id == null) return null;
+    return PageStorage.maybeOf(context)?.readState(context, identifier: id)
+        as bool?;
+  }
+
+  void _toggle() {
+    setState(() => _expanded = !_expanded);
+    final id = _identifier;
+    if (id != null) {
+      PageStorage.maybeOf(context)
+          ?.writeState(context, _expanded, identifier: id);
+    }
+  }
+
   bool _hover = false;
 
   @override
@@ -234,7 +260,7 @@ class _ToolRowState extends State<ToolRow> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                if (!w.onPanel!()) setState(() => _expanded = !_expanded);
+                if (!w.onPanel!()) _toggle();
               },
               child: Text(
                 w.panelLabel!,
@@ -289,7 +315,7 @@ class _ToolRowState extends State<ToolRow> {
           open: open,
           expandable: expandable,
           running: running,
-          onToggle: () => setState(() => _expanded = !_expanded),
+          onToggle: _toggle,
           collapsedContent: collapsed,
           children: body,
         ),

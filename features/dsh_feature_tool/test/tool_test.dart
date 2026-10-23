@@ -1374,4 +1374,50 @@ void main() {
       expect(find.text('运行命令'), findsOneWidget);
     });
   });
+
+  testWidgets(
+    'a row stays open after it is scrolled out of the list and back',
+    (tester) async {
+      final h = Harness();
+      final controller = ScrollController();
+      Widget tall(ToolCall call) => dshTestApp(
+        ListView(
+          controller: controller,
+          children: [
+            h.slots.renderKeyed<ChatNodeOwner, Widget>(
+              chatNodeSlot,
+              'tool-call',
+              ChatNodeOwner(
+                session: h.owner,
+                node: ViewNode(
+                  key: 'k',
+                  kind: 'tool-call',
+                  id: call.callId,
+                  target: 'chat',
+                  anchorSeq: 1,
+                  location: const SessionLocation(),
+                  visible: true,
+                  data: ToolData(call),
+                ),
+                snapshot: ChatSnapshot.empty,
+              ),
+            )!,
+            const SizedBox(height: 4000),
+          ],
+        ),
+      );
+      await tester.pumpWidget(
+        tall(done('bash', shellArgs('ls'), text: 'kept output')),
+      );
+      await tester.tap(find.text('Bash'));
+      await tester.pump();
+      expect(find.text('kept output'), findsOneWidget);
+      controller.jumpTo(3500);
+      await tester.pump();
+      expect(find.text('Bash'), findsNothing);
+      controller.jumpTo(0);
+      await tester.pump();
+      expect(find.text('kept output'), findsOneWidget);
+    },
+  );
 }

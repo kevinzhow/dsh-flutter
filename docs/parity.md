@@ -142,10 +142,14 @@ merges the coverage maps. Use `ParityCase(framed: false)` and `capture.crop: "vi
 fixtures with fake controllers, the same fixtures the React host receives.
 
 React side. A `screens.*` case needs the real dsh component tree: add a host file whose `kind` mounts the real ui-chat / ui-tool
-components with fixture state (`tool/parity-web/host/cases/*.tsx`; the host already imports dsh sources through the `@dsh`
-alias, and new dsh packages that need more npm dependencies add them to `tool/parity-web/package.json` + lockfile). The
-React-side mocks for the host connection and store are not built yet: they are the first piece of work for the first screen
-case.
+components with fixture state (`tool/parity-web/host/cases/*.tsx`, or `tool/parity-ext/host/*.tsx` for the extension suite; the host
+already imports dsh sources through the `@dsh` alias, and new dsh packages that need more npm dependencies add them to
+`tool/parity-web/package.json` + lockfile). The host mocks that real components need are in `tool/parity-web/host/mocks/`:
+`locale.ts` (a translator over dsh's real dictionaries with its lookup order and interpolation), `tool-blocks.ts` (call, started
+and settled tool blocks built the way ui-chat's Definitions build them, with the real lazy argument view) and `primitives.ts` (the
+ui-primitives barrel narrowed to the modules the mounted surfaces import). `tool/parity-ext/host/tools.tsx` is the worked example:
+`tool.card` mounts the keyed toolview row of each item's tool name (`BashRow`, `FileMutationRow`, ...), `plan.todo-panel` the
+`TodoPanel`, `plan.card` / `plan.preview` the plan cards and document.
 
 ## Provenance and licenses
 

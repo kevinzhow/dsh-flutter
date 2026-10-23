@@ -126,6 +126,7 @@ Widget genericView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -294,6 +295,7 @@ Widget mutationView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -341,6 +343,7 @@ Widget readView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -369,6 +372,7 @@ Widget searchView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -395,6 +399,7 @@ Widget webView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -417,6 +422,7 @@ Widget readImageView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: c.t,
     toolName: c.name,
     variant: model.variant,
@@ -446,6 +452,7 @@ Widget todoView(ToolContext c, TodoHistory history, bool hasMore) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: t,
     toolName: c.name,
     variant: model.variant,
@@ -500,6 +507,7 @@ Widget askView(
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: t,
     toolName: c.name,
     variant: model.variant,
@@ -569,6 +577,7 @@ Widget detailsView(ToolContext c) {
   return ToolRow(
     key: ValueKey('tool-${c.call.callId}'),
     initiallyExpanded: c.expanded,
+    stateId: c.call.callId,
     t: t,
     toolName: c.name,
     variant: model.variant,
