@@ -5,6 +5,7 @@ import 'package:dsh_models/dsh_models.dart';
 import 'assembler.dart';
 import 'chat/definitions.dart';
 import 'chat/snapshot.dart';
+import 'tool/todo_history.dart';
 import 'contract.dart';
 import 'event.dart';
 
@@ -60,6 +61,7 @@ class ConversationBinding {
        _assembler = assembler,
        _scheduler = scheduler ?? FlushScheduler.frames() {
     _assembler.activateTarget(chatTarget);
+    _assembler.activateTarget(todoHistoryTarget);
     _replace(feed.window);
     _sub = feed.changes.listen(_accept);
     _publishSnapshot();
@@ -86,6 +88,9 @@ class ConversationBinding {
 
   /// The latest chat snapshot.
   final Observable<ChatSnapshot> chat = Observable(ChatSnapshot.empty);
+
+  /// The recorded todo list preceding each loaded todo call.
+  final Observable<TodoHistory> todoHistory = Observable(TodoHistory.empty);
 
   /// The open turn number, null unless the latest turn started and is open.
   final Observable<int?> openTurn = Observable(null);
@@ -153,6 +158,8 @@ class ConversationBinding {
   void _publishSnapshot() {
     final s = _assembler.snapshot(chatTarget);
     if (s is ChatSnapshot) chat.set(s);
+    final h = _assembler.snapshot(todoHistoryTarget);
+    if (h is TodoHistory) todoHistory.set(h);
   }
 
   Future<void> dispose() async {

@@ -5,6 +5,8 @@ import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_approval/dsh_feature_approval.dart';
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart';
+import 'package:dsh_feature_plan/dsh_feature_plan.dart';
+import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -12,6 +14,8 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
 import 'connection_store.dart';
@@ -71,7 +75,25 @@ class AppController extends ChangeNotifier {
     );
     registerConversationFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
-    registerToolFeature(slots, i18n: () => i18n);
+    registerToolFeature(
+      slots,
+      i18n: () => i18n,
+      actions: ToolHostActions(
+        openUrl: (url) => unawaited(
+          launchUrl(
+            url,
+            mode: LaunchMode.externalApplication,
+          ).then((_) => true),
+        ),
+        openSubagent: (parent, childId) => _subagents.openById(parent, childId),
+      ),
+    );
+    registerPlanFeature(slots, i18n: () => i18n);
+    _subagents = registerSubagentFeature(
+      slots,
+      i18n: () => i18n,
+      services: _SubagentBridge(this),
+    );
     registerApprovalFeature(slots, tracker: approvals, i18n: () => i18n);
     registerUserQuestionsFeature(slots, tracker: questions, i18n: () => i18n);
     _stateSub = backend.states.listen(_onConnectionState);
@@ -88,6 +110,13 @@ class AppController extends ChangeNotifier {
   final FlushScheduler? frameScheduler;
 
   final SlotRegistry slots = SlotRegistry();
+
+  /// The app's navigator: subagent transcripts push onto it.
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  late final SubagentFeature _subagents;
+  final StreamController<Object?> _listChanges =
+      StreamController<Object?>.broadcast(sync: true);
+  final Map<String, SessionController> _children = {};
   late final ApprovalTracker approvals;
   late final QuestionTracker questions;
 
@@ -192,7 +221,10 @@ class AppController extends ChangeNotifier {
     _hostEventSub = transport.hostEvents.listen(_events.add);
     unawaited(_listSub?.cancel());
     final m = manager = SessionManager(transport)..start();
-    _listSub = m.list.changes.listen((_) => notifyListeners());
+    _listSub = m.list.changes.listen((_) {
+      _listChanges.add(null);
+      notifyListeners();
+    });
   }
 
   void _onConnectionState(ConnectionState s) {
@@ -228,10 +260,11 @@ class AppController extends ChangeNotifier {
 
   Future<void> _resetModels() async {
     openSessionId = null;
-    for (final s in _sessions.values) {
+    for (final s in [..._sessions.values, ..._children.values]) {
       await s.dispose();
     }
     _sessions.clear();
+    _children.clear();
     await _hostEventSub?.cancel();
     _hostEventSub = null;
     await _listSub?.cancel();
@@ -258,7 +291,12 @@ class AppController extends ChangeNotifier {
     if (m == null) return null;
     final controller = _sessions.putIfAbsent(
       sessionId,
-      () => SessionController(m.get(sessionId), scheduler: frameScheduler),
+      () => SessionController(
+        m.get(sessionId),
+        scheduler: frameScheduler,
+        cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
+        hostHome: _transport?.generation?.hostHome ?? '',
+      ),
     );
     openSessionId = sessionId;
     notifyListeners();
@@ -308,5 +346,88 @@ class AppController extends ChangeNotifier {
     unawaited(_events.close());
     unawaited(backend.dispose());
     super.dispose();
+  }
+}
+
+/// The app's side of the subagent feature: child sessions as read-only
+/// owners, list facts for activity and usage, and the navigator.
+class _SubagentBridge implements SubagentServices {
+  _SubagentBridge(this.app);
+
+  final AppController app;
+
+  @override
+  GlobalKey<NavigatorState> get navigatorKey => app.navigatorKey;
+
+  @override
+  Stream<Object?> get changes => app._listChanges.stream;
+
+  @override
+  SessionOwner childOwner(SessionOwner parent, SubagentEntry entry) {
+    final m = app.manager!;
+    final controller = app._children.putIfAbsent(
+      '${parent.sessionId}:${entry.id}',
+      () => SessionController(
+        m.getSubagent(
+          parentSessionId: parent.sessionId,
+          childSessionId: entry.id,
+          mode: entry.mode,
+        ),
+        scheduler: app.frameScheduler,
+        cwdReader: () => parent.cwd,
+        hostHome: parent.hostHome,
+        readOnly: true,
+      ),
+    );
+    unawaited(controller.open());
+    return controller.owner;
+  }
+
+  @override
+  SubagentStatus statusOf(String childId) {
+    final m = app.manager;
+    if (m == null) return const SubagentStatus();
+    final summary = m.summaryOf(childId);
+    final values = {...?summary?.projections, ...m.projectionValues(childId)};
+    final usage = values['tokenUsage'];
+    int? tokens;
+    if (usage is Map) {
+      num n(String k) => usage[k] is num ? usage[k] as num : 0;
+      tokens =
+          (n('uncachedInputTokens') +
+                  n('outputTokens') +
+                  n('cacheReadTokens') +
+                  n('cacheWriteTokens'))
+              .round();
+    }
+    final running = summary?.running ?? false;
+    final timing = values['subagentTiming'];
+    num? duration;
+    var completed = false;
+    if (timing is Map) {
+      final settled = timing['settledMs'] is num
+          ? timing['settledMs'] as num
+          : 0;
+      final active = timing['active'];
+      var extra = 0.0;
+      if (active is Map && active['since'] is num) {
+        final end = running
+            ? DateTime.now().millisecondsSinceEpoch
+            : (active['through'] is num
+                  ? active['through'] as num
+                  : active['since'] as num);
+        extra = (end - (active['since'] as num))
+            .clamp(0, double.infinity)
+            .toDouble();
+      }
+      duration = settled + extra;
+      completed = !running && timing['lastTurnCompleted'] == true;
+    }
+    return SubagentStatus(
+      running: running,
+      completed: completed,
+      tokens: tokens,
+      durationMs: duration,
+    );
   }
 }

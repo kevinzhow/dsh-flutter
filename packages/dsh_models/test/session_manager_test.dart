@@ -239,6 +239,45 @@ void main() {
     b.release();
     expect(sessions.referenceCount('s1'), 0);
   });
+
+  test('a subagent child is followed by its exact address and kept apart from a session of the same id', () async {
+    final child = m.getSubagent(
+      parentSessionId: 'p',
+      childSessionId: 'c',
+      mode: 'continuable',
+    );
+    expect(
+      identical(
+        child,
+        m.getSubagent(
+          parentSessionId: 'p',
+          childSessionId: 'c',
+          mode: 'continuable',
+        ),
+      ),
+      isTrue,
+    );
+    expect(identical(child, m.get('c')), isFalse);
+    unawaited(child.open().catchError((Object _) {}));
+    await Future<void>.delayed(Duration.zero);
+    expect(t.followRequests.single['address'], {
+      'kind': 'subagent',
+      'parentSessionId': 'p',
+      'childSessionId': 'c',
+      'mode': 'continuable',
+    });
+    // projection frames for the child id still land in its store
+    expect(m.projectionValues('c'), isEmpty);
+  });
+
+  test('summaryOf reads the listed summary', () async {
+    t.onList = () async => {
+      'items': [row('a')],
+    };
+    await m.refreshList();
+    expect(m.summaryOf('a')?.cwd, '/ws');
+    expect(m.summaryOf('zzz'), isNull);
+  });
 }
 
 /// Generations are only published, never inspected, by the manager.

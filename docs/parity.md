@@ -100,7 +100,7 @@ contract can be diffed: a future third provider (Android, iOS) only has to produ
 
 dsh bundles one font, Montserrat (brand wordmark, OFL); its text stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI',
 'PingFang SC', ...`) is system fonts, so unpinned captures would depend on the machine. Both providers therefore draw
-Latin text with the same Noto Sans files (SIL OFL 1.1, from Debian `fonts-noto-core` 20201225), committed under
+Latin text with the same Noto Sans files (SIL OFL 1.1, from Debian `fonts-noto-core` 20201225) and code text with Noto Sans Mono (`fonts-noto-mono`, registered under the code stack's leading name `SF Mono`), committed under
 `tool/parity-fonts/` with sha256 pins and the license: React serves them through `@font-face` for the stack's leading names,
 Flutter registers them with `FontLoader` (flutter_test ignores a fallback list when the primary family is unknown, so the
 leading names must exist). Only Regular and Bold exist, so 500/600 resolve to Regular/Bold on both sides. Not vendored yet:
@@ -142,10 +142,14 @@ merges the coverage maps. Use `ParityCase(framed: false)` and `capture.crop: "vi
 fixtures with fake controllers, the same fixtures the React host receives.
 
 React side. A `screens.*` case needs the real dsh component tree: add a host file whose `kind` mounts the real ui-chat / ui-tool
-components with fixture state (`tool/parity-web/host/cases/*.tsx`; the host already imports dsh sources through the `@dsh`
-alias, and new dsh packages that need more npm dependencies add them to `tool/parity-web/package.json` + lockfile). The
-React-side mocks for the host connection and store are not built yet: they are the first piece of work for the first screen
-case.
+components with fixture state (`tool/parity-web/host/cases/*.tsx`, or `tool/parity-ext/host/*.tsx` for the extension suite; the host
+already imports dsh sources through the `@dsh` alias, and new dsh packages that need more npm dependencies add them to
+`tool/parity-web/package.json` + lockfile). The host mocks that real components need are in `tool/parity-web/host/mocks/`:
+`locale.ts` (a translator over dsh's real dictionaries with its lookup order and interpolation), `tool-blocks.ts` (call, started
+and settled tool blocks built the way ui-chat's Definitions build them, with the real lazy argument view) and `primitives.ts` (the
+ui-primitives barrel narrowed to the modules the mounted surfaces import). `tool/parity-ext/host/tools.tsx` is the worked example:
+`tool.card` mounts the keyed toolview row of each item's tool name (`BashRow`, `FileMutationRow`, ...), `plan.todo-panel` the
+`TodoPanel`, `plan.card` / `plan.preview` the plan cards and document.
 
 ## Provenance and licenses
 

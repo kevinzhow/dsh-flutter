@@ -61,7 +61,7 @@ ConversationBinding bind(MutableEventSource source) =>
     ConversationBinding.chat(source, scheduler: FlushScheduler.immediate());
 
 Map<String, Object?> view(ConversationBinding b) =>
-    projectChat(b.chat.value, b.openTurn.value);
+    projectChat(b.chat.value, b.openTurn.value, b.todoHistory.value);
 
 void main() {
   group('registry', () {

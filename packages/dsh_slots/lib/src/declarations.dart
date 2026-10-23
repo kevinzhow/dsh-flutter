@@ -52,6 +52,17 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  static const conversationInputDock = Slot<Object?, Object?>(
+    'conversation.input.dock',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+  static const conversationChatTurnTail = Slot<Object?, Object?>(
+    'conversation.chat.turnTail',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
     conversationHeader,
@@ -61,5 +72,7 @@ abstract final class DshSlots {
     conversationSessionHeaderActions,
     conversationChatNode,
     toolCallToolview,
+    conversationInputDock,
+    conversationChatTurnTail,
   ];
 }

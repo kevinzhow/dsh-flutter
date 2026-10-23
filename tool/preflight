@@ -10,6 +10,8 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
   theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
   i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
+  icons            tool/icons/gen_icons.py and gen_code_language.py --check: icon paths and code-language tables are
+                   fresh against the pinned dsh checkout
   vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
                    (skipped with exit 2 when the node install is missing)
   parity           tool/parity selftest: parity case manifests validate, font pins hold, diff metrics behave,
@@ -44,7 +46,8 @@ PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/ds
                       'packages/dsh_slots', 'packages/dsh_i18n']
 FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
                     'features/dsh_feature_chat', 'features/dsh_feature_conversation',
-                    'features/dsh_feature_session', 'features/dsh_feature_tool',
+                    'features/dsh_feature_plan', 'features/dsh_feature_session',
+                    'features/dsh_feature_subagent', 'features/dsh_feature_tool',
                     'features/dsh_feature_user_questions', 'apps/dsh_flutter',
                     'tool/parity_flutter']
 
@@ -115,9 +118,18 @@ def c_i18n():
     return run([sys.executable, '-I', 'tool/i18n/gen_catalog.py', '--check'])
 
 
+def c_icons():
+    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_code_language.py')]
+    for r in results:
+        if r[0] in (1, 'skip') or (isinstance(r[0], int) and r[0] not in (0, 2)):
+            return r
+    return results[0]
+
+
 VECTOR_FIXTURES = [
     'packages/dsh_models/test/fixtures/session_window_vector.json',
     'packages/dsh_conversation/test/fixtures/conversation_edge_vector.json',
+    'packages/dsh_conversation/test/fixtures/plan_todo_vector.json',
     'packages/dsh_conversation/test/fixtures/tool_turn_vector.json',
 ]
 
@@ -172,6 +184,7 @@ CHECKS = [
     ('codegen', c_codegen),
     ('theme-pack', c_theme_pack),
     ('i18n', c_i18n),
+    ('icons', c_icons),
     ('vector', c_vector),
     ('parity', c_parity),
     ('format', c_format),

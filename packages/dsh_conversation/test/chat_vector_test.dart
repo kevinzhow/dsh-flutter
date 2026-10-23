@@ -14,6 +14,7 @@ import 'support/chat_projection.dart';
 const fixtures = [
   '../dsh_models/test/fixtures/session_window_vector.json',
   'test/fixtures/conversation_edge_vector.json',
+  'test/fixtures/plan_todo_vector.json',
   'test/fixtures/tool_turn_vector.json',
 ];
 
@@ -45,7 +46,11 @@ void main() {
             );
           },
           project: () => {
-            'chat': projectChat(binding.chat.value, binding.openTurn.value),
+            'chat': projectChat(
+              binding.chat.value,
+              binding.openTurn.value,
+              binding.todoHistory.value,
+            ),
           },
         );
         final expected = (fixture['expectedChat']! as List)

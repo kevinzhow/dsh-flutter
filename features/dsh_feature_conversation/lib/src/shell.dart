@@ -18,6 +18,7 @@ class ConversationShell extends StatelessWidget {
     required this.i18n,
     required this.viewSlot,
     required this.composerSlot,
+    required this.dockSlot,
   });
 
   final SessionOwner owner;
@@ -25,6 +26,7 @@ class ConversationShell extends StatelessWidget {
   final DshI18n i18n;
   final Slot<SessionOwner, Widget> viewSlot;
   final Slot<SessionOwner, Widget> composerSlot;
+  final Slot<SessionOwner, Widget> dockSlot;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,17 @@ class ConversationShell extends StatelessWidget {
                 ),
               ),
             Expanded(child: body),
+            if (!s.removed)
+              for (final dock in slots.renderList(dockSlot, owner))
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: DshSpace.readableWidth,
+                    ),
+                    child: dock,
+                  ),
+                ),
             Align(
               alignment: Alignment.bottomCenter,
               child: ConstrainedBox(

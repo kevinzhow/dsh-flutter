@@ -1,5 +1,7 @@
 import '../contract.dart';
 import '../registry.dart';
+import '../plan/submitted_plan.dart';
+import '../tool/todo_history.dart';
 import 'definitions.dart';
 import 'nodes.dart';
 
@@ -35,6 +37,20 @@ class ChatSnapshot {
     for (final n in visibleNodes)
       if (locationTurn(n.location) == turn) n,
   ];
+
+  /// The data of every node of [kind] in one turn (hidden nodes included), in
+  /// anchor order: dsh's `turnDataSource(turn, kind)` read.
+  List<T> turnData<T>(int turn, String kind) {
+    final found = [
+      for (final n in nodes.values)
+        if (n.kind == kind && locationTurn(n.location) == turn) n,
+    ]..sort((a, b) => a.anchorSeq.compareTo(b.anchorSeq));
+    return [for (final n in found) n.data as T];
+  }
+
+  /// The submitted plans of one turn, in invocation order.
+  List<SubmittedPlan> plansOfTurn(int turn) =>
+      turnData<SubmittedPlan>(turn, submittedPlanKind);
 
   /// Whether any visible row exists (dsh `chatViewDefinition.isActive`).
   bool get isActive => order.isNotEmpty;
@@ -158,7 +174,12 @@ defaultChatRegistries() {
     ..register(const TurnErrorDefinition())
     ..register(const TurnMaxTokensDefinition())
     ..register(const TurnTailDefinition())
+    ..register(const SubmittedPlanDefinition())
+    ..register(const TodoWriteDefinition())
+    ..register(const TodoCallDefinition())
     ..registerFallback(const UnknownSurfaceDefinition());
-  final views = ConversationViewRegistry()..register(ChatViewDefinition());
+  final views = ConversationViewRegistry()
+    ..register(ChatViewDefinition())
+    ..register(TodoHistoryViewDefinition());
   return (events: events, views: views);
 }

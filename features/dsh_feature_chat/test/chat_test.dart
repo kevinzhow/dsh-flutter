@@ -204,4 +204,42 @@ void main() {
     expect(find.text('API 密钥无效'), findsOneWidget);
     expect(find.text('secret'), findsNothing);
   });
+
+  testWidgets(
+    'turn-tail entries follow the closing row of a finished turn; null adds nothing',
+    (t) async {
+      slots.register<TurnTailOwner, Widget?>(
+        DshSlots.conversationChatTurnTail.typed<TurnTailOwner, Widget?>(),
+        (o) => Text('tail of turn ${o.turn}', key: const ValueKey('tail-a')),
+        id: 'a',
+      );
+      slots.register<TurnTailOwner, Widget?>(
+        DshSlots.conversationChatTurnTail.typed<TurnTailOwner, Widget?>(),
+        (o) => null,
+        id: 'b',
+      );
+      await open(t, [
+        ...openTurn(),
+        ev(4, 'assistant/message', {
+          'turn': 1,
+          'step': 1,
+          'message': {
+            'role': 'assistant',
+            'content': [
+              {'type': 'text', 'text': 'Done.'},
+            ],
+            'id': 'a1',
+          },
+          'stream': <Object?>[],
+        }, surface: 'append'),
+        ev(5, 'step/end', {'turn': 1, 'step': 1}),
+        ev(6, 'turn/end', {
+          'turn': 1,
+          'reason': {'kind': 'completed'},
+        }),
+      ]);
+      expect(find.byKey(const ValueKey('tail-a')), findsOneWidget);
+      expect(find.text('tail of turn 1'), findsOneWidget);
+    },
+  );
 }

@@ -10,6 +10,8 @@
 //                    developer message, system message, assistant, tool,
 //                    turn-error, turn-max-tokens, turn-tail, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
+//   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
+//   ui-tool          the todo history Definitions and view (`tool-todo-history`)
 // NOT registered (deferred to later phases, see the PR): turn-process,
 // request-prompt, command, compaction, model-retry, process groups.
 //
@@ -38,6 +40,8 @@ export async function createChatGlue(load) {
   const { registerTurnTailConversationNode } = await load(chat + 'turn-tail.ts')
   const { registerUnknownConversationFallback } = await load(chat + 'fallback.ts')
   const { registerChatConversationView } = await load(chat + 'chat-snapshot-builder.ts')
+  const { planDefinition } = await load('packages/client/ui-plan/src/client/plan-definition.ts')
+  const { registerTodoHistory } = await load('packages/client/ui-tool/src/client/tool/models/todo-history.ts')
 
   const ctx = { effect: fn => { const dispose = fn(); return () => dispose?.() } }
   const events = new ConversationEventRegistry(ctx)
@@ -52,6 +56,8 @@ export async function createChatGlue(load) {
   registerTurnErrorConversationNode(scope)
   registerTurnMaxTokensConversationNode(scope)
   registerTurnTailConversationNode(scope)
+  events.register(planDefinition)
+  registerTodoHistory(scope)
   registerUnknownConversationFallback(scope)
   registerChatConversationView(scope)
 
@@ -67,6 +73,7 @@ export async function createChatGlue(load) {
         publish(assembler.replaceWindow(window.entries, window.hasMore))
       }
       assembler.activateTarget('chat')
+      assembler.activateTarget('tool-todo-history')
       replace(feed.getSnapshot())
       const unsubscribe = feed.subscribe(() => {
         const window = feed.getSnapshot()
@@ -201,8 +208,19 @@ export function projectChat(assembler) {
       })),
     }
   })
+  // Hidden plan nodes (turn data, not rows) and the todo call -> predecessor lookup.
+  const plans = [...snapshot.nodes.values()]
+    .filter(node => node.kind === 'submitted-plan')
+    .sort((a, b) => a.anchorSeq - b.anchorSeq || (a.key < b.key ? -1 : 1))
+    .map(node => ({ callId: node.data.callId, title: node.data.title, markdown: node.data.markdown, anchorSeq: node.anchorSeq, ...coordinates(node.location) }))
+  const history = assembler.get('tool-todo-history')
+  const todoHistory = [...history.entries()]
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([callId, baseline]) => ({ callId, todos: baseline.todos === undefined ? null : baseline.todos.map(todo => [todo.content, todo.status]) }))
   return {
     nodes,
+    plans,
+    todoHistory,
     timeline,
     nodeCount: snapshot.nodes.values().filter(node => node.kind !== 'system-prompt').length,
     openTurn: assembler.openTurn() ?? null,

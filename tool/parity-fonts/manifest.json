@@ -1,9 +1,9 @@
 {
   "schema": "dsh-parity-fonts/1",
-  "note": "dsh's web client bundles only the Montserrat brand font; its text stack (-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', ...) resolves to whatever the machine has. Both parity providers therefore pin the same Latin face under the stack's leading names that no Linux machine has (`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`): the React provider serves the files through @font-face, the Flutter provider registers them with FontLoader (flutter_test ignores a font fallback list when the primary family is unknown, so the leading names must exist). Weights 500/600 resolve to the nearest face (Regular below 500, Bold from 600) on both sides.",
+  "note": "dsh's web client bundles only the Montserrat brand font; its text stack (-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', ...) resolves to whatever the machine has. Both parity providers therefore pin the same Latin face under the stack's leading names that no Linux machine has (`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`): the React provider serves the files through @font-face, the Flutter provider registers them with FontLoader (flutter_test ignores a font fallback list when the primary family is unknown, so the leading names must exist). Weights 500/600 resolve to the nearest face (Regular below 500, Bold from 600) on both sides. The code stack (--ds-font-family-code: 'SF Mono', 'JetBrains Mono', ...) is pinned the same way: Noto Sans Mono is registered under the leading name `SF Mono`.",
   "license": "OFL-1.1",
   "licenseFile": "OFL.txt",
-  "source": "https://github.com/googlei18n/noto-fonts (Debian fonts-noto-core 20201225-2build1)",
+  "source": "https://github.com/googlei18n/noto-fonts (Debian fonts-noto-core and fonts-noto-mono 20201225-2build1)",
   "families": [
     {
       "role": "text",
@@ -25,6 +25,26 @@
         "-apple-system",
         "BlinkMacSystemFont",
         "Segoe UI"
+      ]
+    },
+    {
+      "role": "code",
+      "faces": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "file": "files/NotoSansMono-Regular.ttf",
+          "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "file": "files/NotoSansMono-Bold.ttf",
+          "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+        }
+      ],
+      "names": [
+        "SF Mono"
       ]
     }
   ],

@@ -71,7 +71,9 @@ class Session {
     this._transport, {
     ProjectionStore? projections,
     this.pageOptions = historyPageOptions,
-  }) : projections = projections ?? ProjectionStore() {
+    Map<String, Object?>? address,
+  }) : _addressOverride = address,
+       projections = projections ?? ProjectionStore() {
     _snapshot = Observable(_build());
   }
 
@@ -127,10 +129,13 @@ class Session {
 
   void _dirty() => _snapshot.set(_build());
 
-  Map<String, Object?> get _address => {
-    'kind': 'session',
-    'sessionId': sessionId,
-  };
+  final Map<String, Object?>? _addressOverride;
+
+  /// The durable address this Session follows: the ordinary session, or one
+  /// direct subagent child `{kind: 'subagent', parentSessionId,
+  /// childSessionId, mode}`.
+  Map<String, Object?> get _address =>
+      _addressOverride ?? {'kind': 'session', 'sessionId': sessionId};
 
   /// Open follow: resolves when the first complete window is published
   /// (single-flight; later calls share the same future).
