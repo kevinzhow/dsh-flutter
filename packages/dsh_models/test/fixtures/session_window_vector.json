@@ -1,0 +1,6534 @@
+{
+ "format": "dsh-session-vector/1",
+ "description": "Scrubbed real session trace: follow frames, page reads and client actions in observed order. `expected` is produced by dsh's own TypeScript client model.",
+ "hostVersion": "0.2.1-rc.2",
+ "openOptions": {
+  "maxMessages": 2,
+  "turnWindow": {
+   "minMessages": 1,
+   "minTurns": 1
+  }
+ },
+ "steps": [
+  {
+   "op": "action",
+   "name": "open"
+  },
+  {
+   "op": "opened",
+   "generation": 1
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "snapshot",
+    "header": {
+     "version": 4,
+     "id": "id-1",
+     "createdAt": 1792762522409,
+     "cwd": "s29",
+     "isSeeded": false,
+     "delegationDepth": 0,
+     "agentPreset": "s8"
+    },
+    "cursor": 166,
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 155,
+       "time": 1792763232688,
+       "data": {
+        "turn": 11,
+        "step": 2,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "tool-call",
+           "id": "id-2",
+           "name": "bash",
+           "arguments": "s378"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "toolUse"
+           },
+           "blocks": [
+            {
+             "type": "tool-call"
+            }
+           ]
+          }
+         },
+         "id": "id-3"
+        },
+        "usage": {
+         "inputTokens": 379,
+         "outputTokens": 163,
+         "totalTokens": 261662,
+         "cacheReadTokens": 261120
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792763232651,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "tool-call"
+          }
+         },
+         {
+          "type": "tool-call-chunks",
+          "time0": 1792763232651,
+          "index": 0,
+          "dt": [
+           6,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           5,
+           0,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           0,
+           0
+          ],
+          "id": "id-2",
+          "name": "bash",
+          "args": [
+           "s0",
+           "s1",
+           "s1",
+           "s7",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s3",
+           "s2",
+           "s2",
+           "s1",
+           "s2",
+           "s5",
+           "s2",
+           "s2",
+           "s2",
+           "s4",
+           "s2",
+           "s2",
+           "s2",
+           "s1",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s5",
+           "s3",
+           "s4",
+           "s2",
+           "s4",
+           "s1",
+           "s2",
+           "s1",
+           "s11",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s2",
+           "s6",
+           "s6",
+           "s5",
+           "s10",
+           "s7",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s9",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s8",
+           "s7",
+           "s3",
+           "s2",
+           "s1",
+           "s2",
+           "s5",
+           "s2",
+           "s2",
+           "s2",
+           "s4",
+           "s2",
+           "s2",
+           "s2",
+           "s1",
+           "s1",
+           "s5",
+           "s3",
+           "s4",
+           "s2",
+           "s4",
+           "s1",
+           "s6",
+           "s5",
+           "s8",
+           "s4",
+           "s10",
+           "s1",
+           "s3",
+           "s3",
+           "s9",
+           "s7",
+           "s6",
+           "s5",
+           "s10",
+           "s2",
+           "s4",
+           "s3",
+           "s7",
+           "s5",
+           "s5",
+           "s3",
+           "s10",
+           "s1",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s3",
+           "s4",
+           "s8",
+           "s1",
+           "s2",
+           "s1",
+           "s6",
+           "s5",
+           "s7",
+           "s1",
+           "s1"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792763232687,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "tool-call",
+            "id": "id-2",
+            "name": "bash",
+            "arguments": "s378"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763232687,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 379,
+            "outputTokens": 163,
+            "totalTokens": 261662,
+            "cacheReadTokens": 261120
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763232687,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "tool-calls"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "toolUse"
+            },
+            "blocks": [
+             {
+              "type": "tool-call"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/call",
+       "seq": 156,
+       "time": 1792763232689,
+       "data": {
+        "turn": 11,
+        "step": 2,
+        "callId": "call-1",
+        "name": "bash",
+        "arguments": "s378"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "approval/asked",
+       "seq": 157,
+       "time": 1792763232702,
+       "data": {
+        "id": "id-4",
+        "toolName": "s4",
+        "callId": "call-1",
+        "reason": "s225"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "approval/decided",
+       "seq": 158,
+       "time": 1792763233034,
+       "data": {
+        "id": "id-4",
+        "outcome": "s12"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/registered",
+       "seq": 159,
+       "time": 1792763233045,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792763233045,
+        "toolCall": {
+         "callId": "call-1",
+         "rootCallId": "s32"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/settled",
+       "seq": 160,
+       "time": 1792763233103,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792763233045,
+        "toolCall": {
+         "callId": "call-1",
+         "rootCallId": "s32"
+        },
+        "finishedAt": 1792763233103,
+        "status": "completed",
+        "cause": "s8",
+        "producerReported": true,
+        "detail": "s12"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/result",
+       "seq": 161,
+       "time": 1792763233106,
+       "data": {
+        "turn": 11,
+        "step": 2,
+        "message": {
+         "role": "tool",
+         "source": {
+          "kind": "tool",
+          "callId": "call-1"
+         },
+         "toolCallId": "call-1",
+         "content": [
+          {
+           "type": "text",
+           "text": "s11"
+          }
+         ],
+         "isError": false,
+         "id": "id-5"
+        },
+        "meta": {
+         "cwd": "s29"
+        }
+       },
+       "sourceEventSeqs": [
+        156
+       ],
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 162,
+       "time": 1792763233106,
+       "data": {
+        "turn": 11,
+        "step": 2
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 163,
+       "time": 1792763233165,
+       "data": {
+        "turn": 11,
+        "step": 3
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 164,
+       "time": 1792763250372,
+       "data": {
+        "turn": 11,
+        "step": 3,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "text",
+           "text": "s4"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "stop"
+           },
+           "blocks": [
+            {
+             "type": "text"
+            }
+           ]
+          }
+         },
+         "id": "id-6"
+        },
+        "usage": {
+         "inputTokens": 300,
+         "outputTokens": 2,
+         "totalTokens": 261678,
+         "cacheReadTokens": 261376
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792763250361,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "text"
+          }
+         },
+         {
+          "type": "text-chunks",
+          "time0": 1792763250362,
+          "index": 0,
+          "dt": [],
+          "texts": [
+           "s4"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792763250371,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "text",
+            "text": "s4"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763250371,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 300,
+            "outputTokens": 2,
+            "totalTokens": 261678,
+            "cacheReadTokens": 261376
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763250371,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "stop"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "stop"
+            },
+            "blocks": [
+             {
+              "type": "text"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 165,
+       "time": 1792763250372,
+       "data": {
+        "turn": 11,
+        "step": 3
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/end",
+       "seq": 166,
+       "time": 1792763250373,
+       "data": {
+        "turn": 11,
+        "reason": {
+         "kind": "completed"
+        }
+       }
+      }
+     }
+    ],
+    "hasMore": true,
+    "projections": {
+     "asOfSeq": 166,
+     "values": {
+      "title": "s19",
+      "goal": null,
+      "tokenUsage": {
+       "uncachedInputTokens": 5563,
+       "outputTokens": 1518,
+       "cacheReadTokens": 3895168,
+       "cacheWriteTokens": 0
+      },
+      "contextPressure": {
+       "pressureTokens": 261676,
+       "projectedTokens": 261685,
+       "contextWindow": 1000000
+      },
+      "contextBreakdown": {
+       "systemTokens": 1691,
+       "toolsTokens": 200909,
+       "messageTokens": 9644
+      },
+      "inbox": {
+       "next-turn": [],
+       "next-step": []
+      },
+      "sessionStats": {
+       "turns": 11,
+       "steps": 18,
+       "llmMs": 348538,
+       "toolMs": 2914,
+       "ttftMs": 334459,
+       "ttftSteps": 18,
+       "decodeMs": 8490,
+       "decodeTokens": 1518
+      },
+      "turnOutline": [
+       {
+        "turn": 1,
+        "seq": 4,
+        "prompt": "s22",
+        "response": "s2"
+       },
+       {
+        "turn": 2,
+        "seq": 21,
+        "prompt": "s50",
+        "response": "s120"
+       }
+      ],
+      "agentPreset": "s8",
+      "userQuestions": {
+       "active": [],
+       "settled": []
+      },
+      "permissions": {
+       "currentValue": "s15"
+      },
+      "workingDirectory": "s29",
+      "subagentCatalog": [],
+      "subagentTiming": {
+       "settledMs": 0
+      },
+      "subagent": null,
+      "todos": null,
+      "plan": {
+       "active": false,
+       "pending": false
+      },
+      "modelSelection": {
+       "lastUsed": {
+        "provider": "s11",
+        "model": "s19",
+        "reasoningEffort": "s3"
+       },
+       "next": {
+        "provider": "s11",
+        "model": "s19",
+        "reasoningEffort": "s3"
+       }
+      },
+      "sessionListMetadata": {
+       "blank": false,
+       "lastPromptAt": 1792763194321
+      },
+      "imageLimits": {
+       "maxImageBytes": 20971520,
+       "maxImagesPerMessage": 20,
+       "maxMessageImageBytes": 209715200,
+       "maxImagePixels": 64000000,
+       "maxImageDimension": 8192,
+       "mediaTypes": [
+        "s9",
+        "s10",
+        "s10",
+        "s9"
+       ]
+      }
+     }
+    },
+    "assistantStream": {
+     "revision": 248
+    }
+   }
+  },
+  {
+   "op": "action",
+   "name": "prompt"
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 167,
+     "time": 1792763250410,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [
+       {
+        "content": [
+         {
+          "type": "text",
+          "text": "s22"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-1"
+        },
+        "role": "user",
+        "id": "id-7"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/start",
+     "seq": 168,
+     "time": 1792763250411,
+     "data": {
+      "turn": 12
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 169,
+     "time": 1792763250411,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "removedCount": 1,
+      "inserted": []
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/start",
+     "seq": 170,
+     "time": 1792763250464,
+     "data": {
+      "turn": 12,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "user/message",
+     "seq": 171,
+     "time": 1792763250479,
+     "data": {
+      "content": [
+       {
+        "type": "text",
+        "text": "s22"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-1"
+      },
+      "role": "user",
+      "id": "id-7"
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "start",
+     "attemptId": "attempt-1",
+     "revision": 249,
+     "turn": 12,
+     "step": 1,
+     "startedAfterSeq": 171
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "chunk",
+     "attemptId": "attempt-1",
+     "revision": 250,
+     "index": 0,
+     "time": 1792763267358,
+     "chunk": {
+      "type": "block-start",
+      "index": 0,
+      "blockType": "text"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "chunk",
+     "attemptId": "attempt-1",
+     "revision": 251,
+     "index": 1,
+     "time": 1792763267359,
+     "chunk": {
+      "type": "text-delta",
+      "index": 0,
+      "text": "s2"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "chunk",
+     "attemptId": "attempt-1",
+     "revision": 252,
+     "index": 2,
+     "time": 1792763267361,
+     "chunk": {
+      "type": "block-end",
+      "index": 0,
+      "block": {
+       "type": "text",
+       "text": "s2"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "chunk",
+     "attemptId": "attempt-1",
+     "revision": 253,
+     "index": 3,
+     "time": 1792763267361,
+     "chunk": {
+      "type": "usage",
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "chunk",
+     "attemptId": "attempt-1",
+     "revision": 254,
+     "index": 4,
+     "time": 1792763267362,
+     "chunk": {
+      "type": "finish",
+      "reason": {
+       "kind": "stop"
+      },
+      "replayState": {
+       "response": {
+        "kind": "pi-ai",
+        "version": 2,
+        "api": "s18",
+        "provider": "s11",
+        "model": "s19",
+        "responseId": "s53",
+        "stopReason": "stop"
+       },
+       "blocks": [
+        {
+         "type": "text"
+        }
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "assistant/message",
+     "seq": 172,
+     "time": 1792763267362,
+     "data": {
+      "turn": 12,
+      "step": 1,
+      "message": {
+       "role": "assistant",
+       "content": [
+        {
+         "type": "text",
+         "text": "s2"
+        }
+       ],
+       "source": {
+        "kind": "model",
+        "provider": "s11",
+        "model": "s19",
+        "replayState": {
+         "response": {
+          "kind": "pi-ai",
+          "version": 2,
+          "api": "s18",
+          "provider": "s11",
+          "model": "s19",
+          "responseId": "s53",
+          "stopReason": "stop"
+         },
+         "blocks": [
+          {
+           "type": "text"
+          }
+         ]
+        }
+       },
+       "id": "id-8"
+      },
+      "usage": {
+       "inputTokens": 55,
+       "outputTokens": 2,
+       "totalTokens": 261689,
+       "cacheReadTokens": 261632
+      },
+      "stream": [
+       {
+        "type": "chunk",
+        "time": 1792763267358,
+        "chunk": {
+         "type": "block-start",
+         "index": 0,
+         "blockType": "text"
+        }
+       },
+       {
+        "type": "text-chunks",
+        "time0": 1792763267359,
+        "index": 0,
+        "dt": [],
+        "texts": [
+         "s2"
+        ]
+       },
+       {
+        "type": "chunk",
+        "time": 1792763267361,
+        "chunk": {
+         "type": "block-end",
+         "index": 0,
+         "block": {
+          "type": "text",
+          "text": "s2"
+         }
+        }
+       },
+       {
+        "type": "chunk",
+        "time": 1792763267361,
+        "chunk": {
+         "type": "usage",
+         "usage": {
+          "inputTokens": 55,
+          "outputTokens": 2,
+          "totalTokens": 261689,
+          "cacheReadTokens": 261632
+         }
+        }
+       },
+       {
+        "type": "chunk",
+        "time": 1792763267362,
+        "chunk": {
+         "type": "finish",
+         "reason": {
+          "kind": "stop"
+         },
+         "replayState": {
+          "response": {
+           "kind": "pi-ai",
+           "version": 2,
+           "api": "s18",
+           "provider": "s11",
+           "model": "s19",
+           "responseId": "s53",
+           "stopReason": "stop"
+          },
+          "blocks": [
+           {
+            "type": "text"
+           }
+          ]
+         }
+        }
+       }
+      ]
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "assistant-stream",
+    "frame": {
+     "type": "end",
+     "attemptId": "attempt-1",
+     "revision": 255,
+     "index": 5,
+     "outcome": {
+      "kind": "committed",
+      "eventType": "assistant/message",
+      "seq": 172
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/end",
+     "seq": 173,
+     "time": 1792763267363,
+     "data": {
+      "turn": 12,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/end",
+     "seq": 174,
+     "time": 1792763267365,
+     "data": {
+      "turn": 12,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 155,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "user/message",
+       "seq": 147,
+       "time": 1792763194321,
+       "data": {
+        "content": [
+         {
+          "type": "text",
+          "text": "s309"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-2"
+        },
+        "role": "user",
+        "id": "id-9"
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 148,
+       "time": 1792763213951,
+       "data": {
+        "turn": 11,
+        "step": 1,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "reasoning",
+           "text": "s324"
+          },
+          {
+           "type": "tool-call",
+           "id": "id-10",
+           "name": "bash",
+           "arguments": "s126"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "toolUse"
+           },
+           "blocks": [
+            {
+             "type": "reasoning",
+             "thinkingSignature": "s17"
+            },
+            {
+             "type": "tool-call"
+            }
+           ]
+          }
+         },
+         "id": "id-11"
+        },
+        "usage": {
+         "inputTokens": 379,
+         "outputTokens": 150,
+         "totalTokens": 261393,
+         "cacheReadTokens": 260864
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792763213212,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "reasoning"
+          }
+         },
+         {
+          "type": "reasoning-chunks",
+          "time0": 1792763213212,
+          "index": 0,
+          "dt": [
+           0,
+           63,
+           1,
+           0,
+           0,
+           85,
+           1,
+           0,
+           0,
+           70,
+           0,
+           2,
+           0,
+           66,
+           2,
+           0,
+           0,
+           61,
+           1,
+           1,
+           0,
+           100,
+           0,
+           1
+          ],
+          "texts": [
+           "s7",
+           "s16",
+           "s24",
+           "s30",
+           "s9",
+           "s8",
+           "s13",
+           "s16",
+           "s7",
+           "s11",
+           "s18",
+           "s19",
+           "s23",
+           "s14",
+           "s14",
+           "s3",
+           "s17",
+           "s8",
+           "s3",
+           "s8",
+           "s14",
+           "s8",
+           "s17",
+           "s16",
+           "s1"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792763213922,
+          "chunk": {
+           "type": "block-start",
+           "index": 1,
+           "blockType": "tool-call"
+          }
+         },
+         {
+          "type": "tool-call-chunks",
+          "time0": 1792763213922,
+          "index": 1,
+          "dt": [
+           2,
+           0,
+           1,
+           0,
+           1,
+           9,
+           1,
+           2,
+           2,
+           0,
+           0,
+           0,
+           1,
+           0,
+           3,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           1,
+           0,
+           0,
+           0,
+           0
+          ],
+          "id": "id-10",
+          "name": "bash",
+          "args": [
+           "s0",
+           "s1",
+           "s1",
+           "s7",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s3",
+           "s2",
+           "s2",
+           "s1",
+           "s2",
+           "s5",
+           "s2",
+           "s2",
+           "s2",
+           "s4",
+           "s2",
+           "s2",
+           "s2",
+           "s1",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s5",
+           "s3",
+           "s4",
+           "s2",
+           "s4",
+           "s1",
+           "s2",
+           "s1",
+           "s11",
+           "s1",
+           "s2",
+           "s1",
+           "s5",
+           "s6",
+           "s5",
+           "s8",
+           "s10",
+           "s1",
+           "s1"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792763213950,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "reasoning",
+            "text": "s324"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763213950,
+          "chunk": {
+           "type": "block-end",
+           "index": 1,
+           "block": {
+            "type": "tool-call",
+            "id": "id-10",
+            "name": "bash",
+            "arguments": "s126"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763213951,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 379,
+            "outputTokens": 150,
+            "totalTokens": 261393,
+            "cacheReadTokens": 260864
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763213951,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "tool-calls"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "toolUse"
+            },
+            "blocks": [
+             {
+              "type": "reasoning",
+              "thinkingSignature": "s17"
+             },
+             {
+              "type": "tool-call"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/call",
+       "seq": 149,
+       "time": 1792763213953,
+       "data": {
+        "turn": 11,
+        "step": 1,
+        "callId": "call-2",
+        "name": "bash",
+        "arguments": "s126"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/registered",
+       "seq": 150,
+       "time": 1792763213968,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792763213968,
+        "toolCall": {
+         "callId": "call-2",
+         "rootCallId": "s32"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/settled",
+       "seq": 151,
+       "time": 1792763214072,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792763213968,
+        "toolCall": {
+         "callId": "call-2",
+         "rootCallId": "s32"
+        },
+        "finishedAt": 1792763214072,
+        "status": "completed",
+        "cause": "s8",
+        "producerReported": true,
+        "detail": "s251"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/result",
+       "seq": 152,
+       "time": 1792763214075,
+       "data": {
+        "turn": 11,
+        "step": 1,
+        "message": {
+         "role": "tool",
+         "source": {
+          "kind": "tool",
+          "callId": "call-2"
+         },
+         "toolCallId": "call-2",
+         "content": [
+          {
+           "type": "text",
+           "text": "s350"
+          }
+         ],
+         "isError": false,
+         "id": "id-12"
+        },
+        "meta": {
+         "cwd": "s29"
+        }
+       },
+       "sourceEventSeqs": [
+        149
+       ],
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 153,
+       "time": 1792763214076,
+       "data": {
+        "turn": 11,
+        "step": 1
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 154,
+       "time": 1792763214128,
+       "data": {
+        "turn": 11,
+        "step": 2
+       }
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 147,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "user/message",
+       "seq": 139,
+       "time": 1792763175278,
+       "data": {
+        "content": [
+         {
+          "type": "text",
+          "text": "s67"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-3"
+        },
+        "role": "user",
+        "id": "id-13"
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 140,
+       "time": 1792763194222,
+       "data": {
+        "turn": 10,
+        "step": 1,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "text",
+           "text": "s299"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19"
+         },
+         "id": "id-14"
+        },
+        "interrupted": true,
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792763193392,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "text"
+          }
+         },
+         {
+          "type": "text-chunks",
+          "time0": 1792763193393,
+          "index": 0,
+          "dt": [
+           0,
+           143,
+           1,
+           1,
+           0,
+           76,
+           0,
+           0,
+           1,
+           96,
+           0,
+           1,
+           0,
+           232,
+           8,
+           9,
+           1,
+           56,
+           1,
+           0,
+           0,
+           75,
+           0,
+           1,
+           0,
+           55,
+           0,
+           0,
+           1,
+           54,
+           0,
+           1,
+           0
+          ],
+          "texts": [
+           "s5",
+           "s6",
+           "s6",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s9",
+           "s12"
+          ]
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 141,
+       "time": 1792763194223,
+       "data": {
+        "turn": 10,
+        "step": 1
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/end",
+       "seq": 142,
+       "time": 1792763194223,
+       "data": {
+        "turn": 10,
+        "reason": {
+         "kind": "aborted",
+         "reason": {
+          "kind": "user"
+         }
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 143,
+       "time": 1792763194238,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "inserted": [
+         {
+          "content": [
+           {
+            "type": "text",
+            "text": "s309"
+           }
+          ],
+          "source": {
+           "kind": "user",
+           "rpcId": "rpc-2"
+          },
+          "role": "user",
+          "id": "id-9"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/start",
+       "seq": 144,
+       "time": 1792763194239,
+       "data": {
+        "turn": 11
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 145,
+       "time": 1792763194240,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "removedCount": 1,
+        "inserted": []
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 146,
+       "time": 1792763194306,
+       "data": {
+        "turn": 11,
+        "step": 1
+       }
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 139,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "user/message",
+       "seq": 130,
+       "time": 1792763156806,
+       "data": {
+        "content": [
+         {
+          "type": "text",
+          "text": "s252"
+         }
+        ],
+        "source": {
+         "kind": "time-context",
+         "form": "snapshot",
+         "sections": [
+          {
+           "name": "time-context",
+           "text": "s252"
+          }
+         ]
+        },
+        "role": "user",
+        "id": "id-15"
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "request/header",
+       "seq": 131,
+       "time": 1792763156846,
+       "data": {
+        "header": {
+         "config": {
+          "provider": "s11",
+          "model": "s19",
+          "reasoningEffort": "s3"
+         },
+         "tools": [
+          {
+           "name": "ask_user_question",
+           "description": "s111",
+           "parameters": {
+            "type": "object",
+            "properties": {
+             "questions": {
+              "type": "array",
+              "description": "s44",
+              "items": {
+               "type": "object",
+               "additionalProperties": true,
+               "properties": {
+                "id": {
+                 "type": "string",
+                 "description": "s50"
+                },
+                "question": {
+                 "type": "string",
+                 "description": "s38"
+                },
+                "header": {
+                 "type": "string",
+                 "description": "s76"
+                },
+                "options": {
+                 "type": "array",
+                 "description": "s111",
+                 "items": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                   "label": {
+                    "type": "string",
+                    "description": "s31"
+                   },
+                   "description": {
+                    "type": "string",
+                    "description": "s47"
+                   }
+                  },
+                  "required": [
+                   "s5"
+                  ]
+                 }
+                },
+                "multi_select": {
+                 "type": "boolean",
+                 "description": "s68"
+                }
+               },
+               "required": [
+                "s2",
+                "s8"
+               ]
+              }
+             }
+            },
+            "required": [
+             "s9"
+            ]
+           }
+          },
+          {
+           "name": "bash",
+           "description": "s795",
+           "parameters": {
+            "type": "object",
+            "properties": {
+             "description": {
+              "type": "string",
+              "description": "s242"
+             },
+             "command": {
+              "type": "string",
+              "description": "s28"
+             },
+             "timeoutMs": {
+              "type": "number",
+              "description": "s157"
+             },
+             "workdir": {
+              "type": "string",
+              "description": "s110"
+             },
+             "run_in_background": {
+              "type": "boolean",
+              "description": "s120"
+             },
+             "sandbox_permissions": {
+              "type": "string",
+              "description": "s137",
+              "enum": [
+               "s15",
+               "s18"
+              ]
+             },
+             "justification": {
+              "type": "string",
+              "description": "s166"
+             }
+            },
+            "required": [
+             "s11",
+             "s7"
+            ]
+           }
+          }
+         ]
+        },
+        "reason": "s6"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 132,
+       "time": 1792763175176,
+       "data": {
+        "turn": 9,
+        "step": 1,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "text",
+           "text": "s2"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "stop"
+           },
+           "blocks": [
+            {
+             "type": "text"
+            }
+           ]
+          }
+         },
+         "id": "id-16"
+        },
+        "usage": {
+         "inputTokens": 197,
+         "outputTokens": 2,
+         "totalTokens": 260935,
+         "cacheReadTokens": 260736
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792763175171,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "text"
+          }
+         },
+         {
+          "type": "text-chunks",
+          "time0": 1792763175171,
+          "index": 0,
+          "dt": [],
+          "texts": [
+           "s2"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792763175174,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "text",
+            "text": "s2"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763175175,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 197,
+            "outputTokens": 2,
+            "totalTokens": 260935,
+            "cacheReadTokens": 260736
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792763175175,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "stop"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "stop"
+            },
+            "blocks": [
+             {
+              "type": "text"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 133,
+       "time": 1792763175177,
+       "data": {
+        "turn": 9,
+        "step": 1
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/end",
+       "seq": 134,
+       "time": 1792763175178,
+       "data": {
+        "turn": 9,
+        "reason": {
+         "kind": "completed"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 135,
+       "time": 1792763175210,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "inserted": [
+         {
+          "content": [
+           {
+            "type": "text",
+            "text": "s67"
+           }
+          ],
+          "source": {
+           "kind": "user",
+           "rpcId": "rpc-3"
+          },
+          "role": "user",
+          "id": "id-13"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/start",
+       "seq": 136,
+       "time": 1792763175211,
+       "data": {
+        "turn": 10
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 137,
+       "time": 1792763175212,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "removedCount": 1,
+        "inserted": []
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 138,
+       "time": 1792763175264,
+       "data": {
+        "turn": 10,
+        "step": 1
+       }
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 130,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/start",
+       "seq": 126,
+       "time": 1792763156637,
+       "data": {
+        "turn": 9
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 127,
+       "time": 1792763156638,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "removedCount": 1,
+        "inserted": []
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 128,
+       "time": 1792763156792,
+       "data": {
+        "turn": 9,
+        "step": 1
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "user/message",
+       "seq": 129,
+       "time": 1792763156805,
+       "data": {
+        "content": [
+         {
+          "type": "text",
+          "text": "s22"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-4"
+        },
+        "role": "user",
+        "id": "id-17"
+       },
+       "surfaceOp": "append"
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 126,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "user/message",
+       "seq": 120,
+       "time": 1792762893681,
+       "data": {
+        "content": [
+         {
+          "type": "text",
+          "text": "s22"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-5"
+        },
+        "role": "user",
+        "id": "id-18"
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 121,
+       "time": 1792762910260,
+       "data": {
+        "turn": 8,
+        "step": 1,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "text",
+           "text": "s2"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "stop"
+           },
+           "blocks": [
+            {
+             "type": "text"
+            }
+           ]
+          }
+         },
+         "id": "id-19"
+        },
+        "usage": {
+         "inputTokens": 112,
+         "outputTokens": 2,
+         "totalTokens": 260850,
+         "cacheReadTokens": 260736
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792762910253,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "text"
+          }
+         },
+         {
+          "type": "text-chunks",
+          "time0": 1792762910254,
+          "index": 0,
+          "dt": [],
+          "texts": [
+           "s2"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792762910257,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "text",
+            "text": "s2"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762910258,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 112,
+            "outputTokens": 2,
+            "totalTokens": 260850,
+            "cacheReadTokens": 260736
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762910258,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "stop"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "stop"
+            },
+            "blocks": [
+             {
+              "type": "text"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 122,
+       "time": 1792762910261,
+       "data": {
+        "turn": 8,
+        "step": 1
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/end",
+       "seq": 123,
+       "time": 1792762910262,
+       "data": {
+        "turn": 8,
+        "reason": {
+         "kind": "completed"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "session/end-seed",
+       "seq": 124,
+       "time": 1792762926662,
+       "data": {}
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 125,
+       "time": 1792763156636,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "inserted": [
+         {
+          "content": [
+           {
+            "type": "text",
+            "text": "s22"
+           }
+          ],
+          "source": {
+           "kind": "user",
+           "rpcId": "rpc-4"
+          },
+          "role": "user",
+          "id": "id-17"
+         }
+        ]
+       }
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  },
+  {
+   "op": "action",
+   "name": "loadOlder"
+  },
+  {
+   "op": "page",
+   "request": {
+    "address": {
+     "kind": "session",
+     "sessionId": "session-1"
+    },
+    "throughSeq": 174,
+    "beforeSeq": 120,
+    "maxMessages": 2,
+    "turnWindow": {
+     "minMessages": 1,
+     "minTurns": 1
+    }
+   },
+   "response": {
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 104,
+       "time": 1792762875850,
+       "data": {
+        "turn": 7,
+        "step": 2,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "reasoning",
+           "text": "s320"
+          },
+          {
+           "type": "tool-call",
+           "id": "id-20",
+           "name": "bash",
+           "arguments": "s373"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "toolUse"
+           },
+           "blocks": [
+            {
+             "type": "reasoning",
+             "thinkingSignature": "s17"
+            },
+            {
+             "type": "tool-call"
+            }
+           ]
+          }
+         },
+         "id": "id-21"
+        },
+        "usage": {
+         "inputTokens": 369,
+         "outputTokens": 230,
+         "totalTokens": 260823,
+         "cacheReadTokens": 260224
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792762874605,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "reasoning"
+          }
+         },
+         {
+          "type": "reasoning-chunks",
+          "time0": 1792762874606,
+          "index": 0,
+          "dt": [
+           0,
+           63,
+           1,
+           2,
+           4,
+           77,
+           0,
+           1,
+           0,
+           24,
+           1,
+           0,
+           0,
+           79,
+           1,
+           0,
+           1,
+           62,
+           11,
+           31,
+           1
+          ],
+          "texts": [
+           "s3",
+           "s20",
+           "s14",
+           "s20",
+           "s25",
+           "s16",
+           "s20",
+           "s19",
+           "s8",
+           "s4",
+           "s26",
+           "s10",
+           "s7",
+           "s27",
+           "s7",
+           "s6",
+           "s24",
+           "s25",
+           "s19",
+           "s8",
+           "s6",
+           "s6"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792762875671,
+          "chunk": {
+           "type": "block-start",
+           "index": 1,
+           "blockType": "tool-call"
+          }
+         },
+         {
+          "type": "tool-call-chunks",
+          "time0": 1792762875675,
+          "index": 1,
+          "dt": [
+           1,
+           2,
+           2,
+           2,
+           1,
+           3,
+           2,
+           3,
+           2,
+           2,
+           3,
+           1,
+           0,
+           1,
+           3,
+           2,
+           1,
+           2,
+           3,
+           1,
+           2,
+           2,
+           3,
+           2,
+           2,
+           4,
+           3,
+           2,
+           3,
+           0,
+           1,
+           2,
+           1,
+           0,
+           3,
+           2,
+           1,
+           0,
+           0,
+           0,
+           0,
+           0,
+           0,
+           5,
+           0,
+           1,
+           6,
+           1,
+           3,
+           1,
+           2,
+           1,
+           2,
+           7,
+           0,
+           3,
+           1,
+           0,
+           1,
+           1,
+           1,
+           0,
+           1,
+           0,
+           1,
+           1,
+           1,
+           1,
+           1,
+           1,
+           1,
+           0,
+           1,
+           1,
+           0,
+           1,
+           1,
+           0,
+           1,
+           1,
+           1,
+           1,
+           0,
+           1,
+           1,
+           0,
+           1,
+           1,
+           0,
+           1,
+           0,
+           1,
+           0,
+           17,
+           2,
+           3,
+           1,
+           2,
+           2,
+           2,
+           1,
+           1,
+           0,
+           0,
+           0,
+           0,
+           3,
+           1,
+           3,
+           1,
+           2,
+           1
+          ],
+          "id": "id-20",
+          "name": "bash",
+          "args": [
+           "s0",
+           "s1",
+           "s1",
+           "s7",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s3",
+           "s2",
+           "s2",
+           "s1",
+           "s2",
+           "s5",
+           "s2",
+           "s2",
+           "s2",
+           "s4",
+           "s2",
+           "s2",
+           "s2",
+           "s1",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s5",
+           "s3",
+           "s4",
+           "s2",
+           "s4",
+           "s1",
+           "s2",
+           "s1",
+           "s11",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s2",
+           "s6",
+           "s6",
+           "s5",
+           "s10",
+           "s7",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s9",
+           "s1",
+           "s2",
+           "s1",
+           "s3",
+           "s8",
+           "s7",
+           "s3",
+           "s2",
+           "s1",
+           "s2",
+           "s5",
+           "s2",
+           "s2",
+           "s2",
+           "s4",
+           "s2",
+           "s2",
+           "s2",
+           "s1",
+           "s1",
+           "s5",
+           "s3",
+           "s4",
+           "s2",
+           "s4",
+           "s1",
+           "s6",
+           "s3",
+           "s8",
+           "s4",
+           "s10",
+           "s1",
+           "s3",
+           "s3",
+           "s6",
+           "s6",
+           "s5",
+           "s10",
+           "s2",
+           "s4",
+           "s7",
+           "s3",
+           "s7",
+           "s5",
+           "s5",
+           "s3",
+           "s10",
+           "s1",
+           "s1",
+           "s2",
+           "s1",
+           "s4",
+           "s3",
+           "s4",
+           "s8",
+           "s1",
+           "s2",
+           "s1",
+           "s6",
+           "s5",
+           "s7",
+           "s1",
+           "s1"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792762875848,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "reasoning",
+            "text": "s320"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762875849,
+          "chunk": {
+           "type": "block-end",
+           "index": 1,
+           "block": {
+            "type": "tool-call",
+            "id": "id-20",
+            "name": "bash",
+            "arguments": "s373"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762875849,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 369,
+            "outputTokens": 230,
+            "totalTokens": 260823,
+            "cacheReadTokens": 260224
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762875849,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "tool-calls"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "toolUse"
+            },
+            "blocks": [
+             {
+              "type": "reasoning",
+              "thinkingSignature": "s17"
+             },
+             {
+              "type": "tool-call"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/call",
+       "seq": 105,
+       "time": 1792762875853,
+       "data": {
+        "turn": 7,
+        "step": 2,
+        "callId": "call-3",
+        "name": "bash",
+        "arguments": "s373"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "approval/asked",
+       "seq": 106,
+       "time": 1792762875876,
+       "data": {
+        "id": "id-22",
+        "toolName": "s4",
+        "callId": "call-3",
+        "reason": "s220"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "approval/decided",
+       "seq": 107,
+       "time": 1792762876227,
+       "data": {
+        "id": "id-22",
+        "outcome": "s12"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/registered",
+       "seq": 108,
+       "time": 1792762876353,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792762876353,
+        "toolCall": {
+         "callId": "call-3",
+         "rootCallId": "s32"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "job/settled",
+       "seq": 109,
+       "time": 1792762876480,
+       "data": {
+        "jobId": "s21",
+        "owner": "s44",
+        "kind": "bash",
+        "label": "s61",
+        "startedAt": 1792762876353,
+        "toolCall": {
+         "callId": "call-3",
+         "rootCallId": "s32"
+        },
+        "finishedAt": 1792762876480,
+        "status": "completed",
+        "cause": "s8",
+        "producerReported": true,
+        "detail": "s12"
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "tool/result",
+       "seq": 110,
+       "time": 1792762876482,
+       "data": {
+        "turn": 7,
+        "step": 2,
+        "message": {
+         "role": "tool",
+         "source": {
+          "kind": "tool",
+          "callId": "call-3"
+         },
+         "toolCallId": "call-3",
+         "content": [
+          {
+           "type": "text",
+           "text": "s11"
+          }
+         ],
+         "isError": false,
+         "id": "id-23"
+        },
+        "meta": {
+         "cwd": "s29"
+        }
+       },
+       "sourceEventSeqs": [
+        105
+       ],
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 111,
+       "time": 1792762876486,
+       "data": {
+        "turn": 7,
+        "step": 2
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 112,
+       "time": 1792762876668,
+       "data": {
+        "turn": 7,
+        "step": 3
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "assistant/message",
+       "seq": 113,
+       "time": 1792762893187,
+       "data": {
+        "turn": 7,
+        "step": 3,
+        "message": {
+         "role": "assistant",
+         "content": [
+          {
+           "type": "text",
+           "text": "s4"
+          }
+         ],
+         "source": {
+          "kind": "model",
+          "provider": "s11",
+          "model": "s19",
+          "replayState": {
+           "response": {
+            "kind": "pi-ai",
+            "version": 2,
+            "api": "s18",
+            "provider": "s11",
+            "model": "s19",
+            "responseId": "s53",
+            "stopReason": "stop"
+           },
+           "blocks": [
+            {
+             "type": "text"
+            }
+           ]
+          }
+         },
+         "id": "id-24"
+        },
+        "usage": {
+         "inputTokens": 357,
+         "outputTokens": 2,
+         "totalTokens": 260839,
+         "cacheReadTokens": 260480
+        },
+        "stream": [
+         {
+          "type": "chunk",
+          "time": 1792762893181,
+          "chunk": {
+           "type": "block-start",
+           "index": 0,
+           "blockType": "text"
+          }
+         },
+         {
+          "type": "text-chunks",
+          "time0": 1792762893183,
+          "index": 0,
+          "dt": [],
+          "texts": [
+           "s4"
+          ]
+         },
+         {
+          "type": "chunk",
+          "time": 1792762893185,
+          "chunk": {
+           "type": "block-end",
+           "index": 0,
+           "block": {
+            "type": "text",
+            "text": "s4"
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762893186,
+          "chunk": {
+           "type": "usage",
+           "usage": {
+            "inputTokens": 357,
+            "outputTokens": 2,
+            "totalTokens": 260839,
+            "cacheReadTokens": 260480
+           }
+          }
+         },
+         {
+          "type": "chunk",
+          "time": 1792762893186,
+          "chunk": {
+           "type": "finish",
+           "reason": {
+            "kind": "stop"
+           },
+           "replayState": {
+            "response": {
+             "kind": "pi-ai",
+             "version": 2,
+             "api": "s18",
+             "provider": "s11",
+             "model": "s19",
+             "responseId": "s53",
+             "stopReason": "stop"
+            },
+            "blocks": [
+             {
+              "type": "text"
+             }
+            ]
+           }
+          }
+         }
+        ]
+       },
+       "surfaceOp": "append"
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/end",
+       "seq": 114,
+       "time": 1792762893188,
+       "data": {
+        "turn": 7,
+        "step": 3
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/end",
+       "seq": 115,
+       "time": 1792762893189,
+       "data": {
+        "turn": 7,
+        "reason": {
+         "kind": "completed"
+        }
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 116,
+       "time": 1792762893296,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "inserted": [
+         {
+          "content": [
+           {
+            "type": "text",
+            "text": "s22"
+           }
+          ],
+          "source": {
+           "kind": "user",
+           "rpcId": "rpc-5"
+          },
+          "role": "user",
+          "id": "id-18"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "turn/start",
+       "seq": 117,
+       "time": 1792762893300,
+       "data": {
+        "turn": 8
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "agent/inbox/spliced",
+       "seq": 118,
+       "time": 1792762893306,
+       "data": {
+        "target": "next-turn",
+        "start": 0,
+        "removedCount": 1,
+        "inserted": []
+       }
+      }
+     },
+     {
+      "type": "event",
+      "event": {
+       "type": "step/start",
+       "seq": 119,
+       "time": 1792762893631,
+       "data": {
+        "turn": 8,
+        "step": 1
+       }
+      }
+     }
+    ],
+    "hasMore": true
+   }
+  }
+ ],
+ "expectedBy": {
+  "model": "dsh TypeScript client (session-controller client + gateway journal)",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "runner": "tool/vectors/ts/run_vector.mjs",
+  "realClasses": [
+   "Session (session-controller/client/sessions/session.ts)",
+   "SessionEventStream (session-controller/client/transport.ts)",
+   "RemoteJournalStream (gateway/client/journal-stream.ts)",
+   "RemoteStream (gateway/client/remote-stream.ts)",
+   "RemoteStreamCarrierError (gateway/client/stream-client.ts)",
+   "ClientAssistantStream (session-controller/client/sessions/assistant-stream.ts)",
+   "MutableSessionEventSource (session-controller/client/contract/events.ts)",
+   "expandAssistantStream (llm/assistant-stream.ts)"
+  ],
+  "glue": [
+   "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
+   "step driver, settle loop and snapshot encoder",
+   "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
+  ]
+ },
+ "expected": [
+  {
+   "step": 1,
+   "openState": "loading",
+   "hasMore": false,
+   "entries": []
+  },
+  {
+   "step": 2,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 4,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ]
+   ]
+  },
+  {
+   "step": 5,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ]
+   ]
+  },
+  {
+   "step": 6,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ]
+   ]
+  },
+  {
+   "step": 7,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ]
+   ]
+  },
+  {
+   "step": 8,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ]
+   ]
+  },
+  {
+   "step": 9,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ]
+   ]
+  },
+  {
+   "step": 10,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ]
+   ]
+  },
+  {
+   "step": 11,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ]
+   ]
+  },
+  {
+   "step": 12,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ],
+    [
+     "live",
+     171.75,
+     "block-end",
+     ""
+    ]
+   ]
+  },
+  {
+   "step": 13,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ],
+    [
+     "live",
+     171.75,
+     "block-end",
+     ""
+    ],
+    [
+     "live",
+     171.8,
+     "usage",
+     ""
+    ]
+   ]
+  },
+  {
+   "step": 14,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ],
+    [
+     "live",
+     171.75,
+     "block-end",
+     ""
+    ],
+    [
+     "live",
+     171.8,
+     "usage",
+     ""
+    ],
+    [
+     "live",
+     171.83333333333334,
+     "finish",
+     ""
+    ]
+   ]
+  },
+  {
+   "step": 15,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ],
+    [
+     "live",
+     171.75,
+     "block-end",
+     ""
+    ],
+    [
+     "live",
+     171.8,
+     "usage",
+     ""
+    ],
+    [
+     "live",
+     171.83333333333334,
+     "finish",
+     ""
+    ]
+   ]
+  },
+  {
+   "step": 16,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "live",
+     171.5,
+     "block-start",
+     ""
+    ],
+    [
+     "live",
+     171.66666666666666,
+     "text-delta",
+     "s2"
+    ],
+    [
+     "live",
+     171.75,
+     "block-end",
+     ""
+    ],
+    [
+     "live",
+     171.8,
+     "usage",
+     ""
+    ],
+    [
+     "live",
+     171.83333333333334,
+     "finish",
+     ""
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ]
+   ]
+  },
+  {
+   "step": 17,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ]
+   ]
+  },
+  {
+   "step": 18,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 19,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 21,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     139,
+     "user/message"
+    ],
+    [
+     "event",
+     140,
+     "assistant/message"
+    ],
+    [
+     "event",
+     141,
+     "step/end"
+    ],
+    [
+     "event",
+     142,
+     "turn/end"
+    ],
+    [
+     "event",
+     143,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     144,
+     "turn/start"
+    ],
+    [
+     "event",
+     145,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     146,
+     "step/start"
+    ],
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 23,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     130,
+     "user/message"
+    ],
+    [
+     "event",
+     131,
+     "request/header"
+    ],
+    [
+     "event",
+     132,
+     "assistant/message"
+    ],
+    [
+     "event",
+     133,
+     "step/end"
+    ],
+    [
+     "event",
+     134,
+     "turn/end"
+    ],
+    [
+     "event",
+     135,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     136,
+     "turn/start"
+    ],
+    [
+     "event",
+     137,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     138,
+     "step/start"
+    ],
+    [
+     "event",
+     139,
+     "user/message"
+    ],
+    [
+     "event",
+     140,
+     "assistant/message"
+    ],
+    [
+     "event",
+     141,
+     "step/end"
+    ],
+    [
+     "event",
+     142,
+     "turn/end"
+    ],
+    [
+     "event",
+     143,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     144,
+     "turn/start"
+    ],
+    [
+     "event",
+     145,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     146,
+     "step/start"
+    ],
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 25,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     126,
+     "turn/start"
+    ],
+    [
+     "event",
+     127,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     128,
+     "step/start"
+    ],
+    [
+     "event",
+     129,
+     "user/message"
+    ],
+    [
+     "event",
+     130,
+     "user/message"
+    ],
+    [
+     "event",
+     131,
+     "request/header"
+    ],
+    [
+     "event",
+     132,
+     "assistant/message"
+    ],
+    [
+     "event",
+     133,
+     "step/end"
+    ],
+    [
+     "event",
+     134,
+     "turn/end"
+    ],
+    [
+     "event",
+     135,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     136,
+     "turn/start"
+    ],
+    [
+     "event",
+     137,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     138,
+     "step/start"
+    ],
+    [
+     "event",
+     139,
+     "user/message"
+    ],
+    [
+     "event",
+     140,
+     "assistant/message"
+    ],
+    [
+     "event",
+     141,
+     "step/end"
+    ],
+    [
+     "event",
+     142,
+     "turn/end"
+    ],
+    [
+     "event",
+     143,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     144,
+     "turn/start"
+    ],
+    [
+     "event",
+     145,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     146,
+     "step/start"
+    ],
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 27,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     120,
+     "user/message"
+    ],
+    [
+     "event",
+     121,
+     "assistant/message"
+    ],
+    [
+     "event",
+     122,
+     "step/end"
+    ],
+    [
+     "event",
+     123,
+     "turn/end"
+    ],
+    [
+     "event",
+     124,
+     "session/end-seed"
+    ],
+    [
+     "event",
+     125,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     126,
+     "turn/start"
+    ],
+    [
+     "event",
+     127,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     128,
+     "step/start"
+    ],
+    [
+     "event",
+     129,
+     "user/message"
+    ],
+    [
+     "event",
+     130,
+     "user/message"
+    ],
+    [
+     "event",
+     131,
+     "request/header"
+    ],
+    [
+     "event",
+     132,
+     "assistant/message"
+    ],
+    [
+     "event",
+     133,
+     "step/end"
+    ],
+    [
+     "event",
+     134,
+     "turn/end"
+    ],
+    [
+     "event",
+     135,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     136,
+     "turn/start"
+    ],
+    [
+     "event",
+     137,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     138,
+     "step/start"
+    ],
+    [
+     "event",
+     139,
+     "user/message"
+    ],
+    [
+     "event",
+     140,
+     "assistant/message"
+    ],
+    [
+     "event",
+     141,
+     "step/end"
+    ],
+    [
+     "event",
+     142,
+     "turn/end"
+    ],
+    [
+     "event",
+     143,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     144,
+     "turn/start"
+    ],
+    [
+     "event",
+     145,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     146,
+     "step/start"
+    ],
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 29,
+   "openState": "open",
+   "hasMore": true,
+   "entries": [
+    [
+     "event",
+     104,
+     "assistant/message"
+    ],
+    [
+     "event",
+     105,
+     "tool/call"
+    ],
+    [
+     "event",
+     106,
+     "approval/asked"
+    ],
+    [
+     "event",
+     107,
+     "approval/decided"
+    ],
+    [
+     "event",
+     108,
+     "job/registered"
+    ],
+    [
+     "event",
+     109,
+     "job/settled"
+    ],
+    [
+     "event",
+     110,
+     "tool/result"
+    ],
+    [
+     "event",
+     111,
+     "step/end"
+    ],
+    [
+     "event",
+     112,
+     "step/start"
+    ],
+    [
+     "event",
+     113,
+     "assistant/message"
+    ],
+    [
+     "event",
+     114,
+     "step/end"
+    ],
+    [
+     "event",
+     115,
+     "turn/end"
+    ],
+    [
+     "event",
+     116,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     117,
+     "turn/start"
+    ],
+    [
+     "event",
+     118,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     119,
+     "step/start"
+    ],
+    [
+     "event",
+     120,
+     "user/message"
+    ],
+    [
+     "event",
+     121,
+     "assistant/message"
+    ],
+    [
+     "event",
+     122,
+     "step/end"
+    ],
+    [
+     "event",
+     123,
+     "turn/end"
+    ],
+    [
+     "event",
+     124,
+     "session/end-seed"
+    ],
+    [
+     "event",
+     125,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     126,
+     "turn/start"
+    ],
+    [
+     "event",
+     127,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     128,
+     "step/start"
+    ],
+    [
+     "event",
+     129,
+     "user/message"
+    ],
+    [
+     "event",
+     130,
+     "user/message"
+    ],
+    [
+     "event",
+     131,
+     "request/header"
+    ],
+    [
+     "event",
+     132,
+     "assistant/message"
+    ],
+    [
+     "event",
+     133,
+     "step/end"
+    ],
+    [
+     "event",
+     134,
+     "turn/end"
+    ],
+    [
+     "event",
+     135,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     136,
+     "turn/start"
+    ],
+    [
+     "event",
+     137,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     138,
+     "step/start"
+    ],
+    [
+     "event",
+     139,
+     "user/message"
+    ],
+    [
+     "event",
+     140,
+     "assistant/message"
+    ],
+    [
+     "event",
+     141,
+     "step/end"
+    ],
+    [
+     "event",
+     142,
+     "turn/end"
+    ],
+    [
+     "event",
+     143,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     144,
+     "turn/start"
+    ],
+    [
+     "event",
+     145,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     146,
+     "step/start"
+    ],
+    [
+     "event",
+     147,
+     "user/message"
+    ],
+    [
+     "event",
+     148,
+     "assistant/message"
+    ],
+    [
+     "event",
+     149,
+     "tool/call"
+    ],
+    [
+     "event",
+     150,
+     "job/registered"
+    ],
+    [
+     "event",
+     151,
+     "job/settled"
+    ],
+    [
+     "event",
+     152,
+     "tool/result"
+    ],
+    [
+     "event",
+     153,
+     "step/end"
+    ],
+    [
+     "event",
+     154,
+     "step/start"
+    ],
+    [
+     "event",
+     155,
+     "assistant/message"
+    ],
+    [
+     "event",
+     156,
+     "tool/call"
+    ],
+    [
+     "event",
+     157,
+     "approval/asked"
+    ],
+    [
+     "event",
+     158,
+     "approval/decided"
+    ],
+    [
+     "event",
+     159,
+     "job/registered"
+    ],
+    [
+     "event",
+     160,
+     "job/settled"
+    ],
+    [
+     "event",
+     161,
+     "tool/result"
+    ],
+    [
+     "event",
+     162,
+     "step/end"
+    ],
+    [
+     "event",
+     163,
+     "step/start"
+    ],
+    [
+     "event",
+     164,
+     "assistant/message"
+    ],
+    [
+     "event",
+     165,
+     "step/end"
+    ],
+    [
+     "event",
+     166,
+     "turn/end"
+    ],
+    [
+     "event",
+     167,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     168,
+     "turn/start"
+    ],
+    [
+     "event",
+     169,
+     "agent/inbox/spliced"
+    ],
+    [
+     "event",
+     170,
+     "step/start"
+    ],
+    [
+     "event",
+     171,
+     "user/message"
+    ],
+    [
+     "event",
+     172,
+     "assistant/message"
+    ],
+    [
+     "event",
+     173,
+     "step/end"
+    ],
+    [
+     "event",
+     174,
+     "turn/end"
+    ]
+   ]
+  }
+ ]
+}

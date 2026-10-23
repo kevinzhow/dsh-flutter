@@ -1,0 +1,3077 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "session",
+  "package": "packages/api/session-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/session-controller/src/index.ts",
+    "packages/api/session-controller/src/types.ts",
+    "packages/attachment/attachment/src/types.ts",
+    "packages/core/agent/src/types.ts",
+    "packages/interaction/permission-presets/src/types.ts",
+    "packages/llm/llm/src/types.ts",
+    "packages/preset/agent-preset-registry/src/types.ts",
+    "packages/session/session-title/src/types.ts",
+    "packages/session/working-directory/src/index.ts",
+    "packages/subagent/subagent/src/projection-types.ts",
+    "packages/todo/tool-todo/src/types.ts",
+    "packages/util/native-command/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "_request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionListRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionListValue"
+      },
+      "doc": "Read all visible Session rows without resuming an Agent."
+    },
+    {
+      "name": "search",
+      "hostName": "search",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionSearchRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionSearchValue"
+      },
+      "doc": "Search visible Session content without resuming an Agent. A non-owner receives only the hits whose Session `allows()` admits; `hasMore` describes the bounded result before that filtering."
+    },
+    {
+      "name": "create",
+      "hostName": "create",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionCreateRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionCreateValue"
+      },
+      "doc": "Create one ordinary Session for a new conversation, reusing the named blank Session while it is reusable."
+    },
+    {
+      "name": "selectModel",
+      "hostName": "selectModel",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionSelectModelRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionSelectModelValue"
+      },
+      "doc": "Select one Session-local model after explicitly resuming the Session; save the default in the background."
+    },
+    {
+      "name": "initializeDefaultModel",
+      "hostName": "initializeDefaultModel",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "void"
+      },
+      "doc": "Select the first available account model after login when no provider API key is configured."
+    },
+    {
+      "name": "modelCatalog",
+      "hostName": "modelCatalog",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "ModelCatalog"
+      },
+      "doc": "Describe every currently routable model for Host-generation selectors."
+    },
+    {
+      "name": "canOpenWorkspacePath",
+      "hostName": "canOpenWorkspacePath",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "bool"
+      },
+      "doc": "Report whether this deployment can hand a Session workspace path to a native desktop."
+    },
+    {
+      "name": "openWorkspacePath",
+      "hostName": "openWorkspacePath",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionOpenWorkspacePathRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionOpenWorkspacePathValue"
+      },
+      "doc": "Verify one path through the composed filesystem and open it on the Host desktop."
+    },
+    {
+      "name": "workspacePathApplications",
+      "hostName": "workspacePathApplications",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "path",
+                "optional": false,
+                "type": {
+                  "k": "str"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "NativeFileApplication"
+        }
+      },
+      "doc": "Query current file handlers on the serving desktop without activating an Agent."
+    },
+    {
+      "name": "rename",
+      "hostName": "rename",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionRenameRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionRenameValue"
+      },
+      "doc": "Rename one Session after explicitly resuming it."
+    },
+    {
+      "name": "fork",
+      "hostName": "fork",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionForkRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionForkValue"
+      },
+      "doc": "Fork one cold-readable exact event prefix into a new Session. An omitted boundary selects the latest completed-turn prefix; an open cut receives synthetic fork closers."
+    },
+    {
+      "name": "prompt",
+      "hostName": "prompt",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionPromptRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionPromptValue"
+      },
+      "doc": "Admit one prompt after explicitly resuming its Session."
+    },
+    {
+      "name": "attachment",
+      "hostName": "attachment",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionAttachmentRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionAttachmentValue"
+      },
+      "doc": "Read one image proven reachable from the addressed Session log."
+    },
+    {
+      "name": "updateQueue",
+      "hostName": "updateQueue",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionUpdateQueueRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionUpdateQueueValue"
+      },
+      "doc": "Mutate one still-pending queue occurrence, resuming a cold Agent first."
+    },
+    {
+      "name": "cancel",
+      "hostName": "cancel",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionCancelRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionCancelValue"
+      },
+      "doc": "Cancel one active Agent turn without dropping its pending inbox."
+    },
+    {
+      "name": "page",
+      "hostName": "page",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionPageRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionPage"
+      },
+      "doc": "Read one cold-safe, message-aligned Session history page."
+    },
+    {
+      "name": "follow",
+      "hostName": "follow",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionFollowRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SessionFollowFrame"
+      },
+      "doc": "Follow one Session log from its opening or resume cursor."
+    },
+    {
+      "name": "projections",
+      "hostName": "projections",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionProjectionsRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "ref",
+          "name": "SessionProjectionsValue"
+        }
+      },
+      "doc": "Read exact projections, returning cached hints only when migration is required."
+    },
+    {
+      "name": "control",
+      "hostName": "control",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "SessionControlFrame"
+      },
+      "doc": "Stream a complete live-control baseline followed by replacement frames."
+    }
+  ],
+  "decls": {
+    "ImageAttachmentLimits": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "maxImageBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxImagesPerMessage",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxMessageImageBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxImagePixels",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxImageDimension",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum intrinsic width and maximum intrinsic height in pixels for one image."
+        },
+        {
+          "name": "mediaTypes",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ImageMediaType"
+            }
+          }
+        }
+      ],
+      "source": "packages/attachment/attachment/src/types.ts",
+      "doc": "Deployment-resolved limits used by upload admission and request buffering."
+    },
+    "ImageAttachmentRef": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "attachmentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Opaque storage identifier; never a filesystem path or bearer URL."
+        },
+        {
+          "name": "mediaType",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ImageMediaType"
+          },
+          "doc": "Media type verified from the stored bytes."
+        },
+        {
+          "name": "bytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Exact encoded byte length."
+        },
+        {
+          "name": "width",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Intrinsic encoded width in pixels."
+        },
+        {
+          "name": "height",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Intrinsic encoded height in pixels."
+        },
+        {
+          "name": "name",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Optional display name stripped of local path information."
+        },
+        {
+          "name": "originalDimensions",
+          "optional": true,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "width",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                }
+              },
+              {
+                "name": "height",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                }
+              }
+            ]
+          },
+          "doc": "Input dimensions after applying EXIF orientation and before normalization scaling. Present only when normalization reduced the image."
+        }
+      ],
+      "source": "packages/attachment/attachment/src/types.ts",
+      "doc": "Durable, serializable reference to one immutable normalized image."
+    },
+    "ImageMediaType": {
+      "k": "enum",
+      "values": [
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ],
+      "source": "packages/attachment/attachment/src/types.ts",
+      "doc": "Raster image formats accepted by the version-one attachment path."
+    },
+    "InboxWireState": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "next-turn",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "json"
+            }
+          }
+        },
+        {
+          "name": "next-step",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "json"
+            }
+          }
+        }
+      ],
+      "source": "packages/core/agent/src/types.ts",
+      "doc": "Wire-JSON pending Inbox value. Each message round-trips the session log losslessly, but the fold state's full `UserMessage` type cannot cross a typert Remote boundary (its source union carries an `unknown` replay field), so the typed projection table keeps this JSON-safe form."
+    },
+    "ModelCatalog": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "default",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ModelSelection"
+          }
+        },
+        {
+          "name": "routableProviders",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Provider routes with at least one currently available catalog model."
+        },
+        {
+          "name": "groups",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ModelProviderGroup"
+            }
+          }
+        },
+        {
+          "name": "failures",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ModelCatalogFailure"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Host-generation model catalog and the default used by unconfigured Sessions."
+    },
+    "ModelCatalogFailure": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One provider whose model catalog lookup failed."
+    },
+    "ModelCatalogModel": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "reasoning",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ModelReasoning"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One model displayed inside its provider group."
+    },
+    "ModelProviderGroup": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "models",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ModelCatalogModel"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One provider and its successfully loaded model catalog."
+    },
+    "ModelReasoning": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "efforts",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ModelReasoningEffort"
+            }
+          }
+        },
+        {
+          "name": "defaultEffort",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Selectable reasoning metadata for one exact model route."
+    },
+    "ModelReasoningEffort": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One adapter-owned reasoning effort for an exact model route."
+    },
+    "ModelSelection": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "provider",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "model",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "reasoningEffort",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Complete model selection for one Session."
+    },
+    "ModelSelectionProjection": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "lastUsed",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "ref",
+              "name": "ModelSelection"
+            }
+          },
+          "doc": "Selection consumed by the latest recorded model request."
+        },
+        {
+          "name": "next",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "ref",
+              "name": "ModelSelection"
+            }
+          },
+          "doc": "Selection the next request should use, falling back to {@link lastUsed}."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Client view of the durable model-selection fold."
+    },
+    "NativeFileApplication": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "OS application identifier; callers must revalidate it against the file's current handlers before opening."
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "default",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "icon",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "PNG or SVG data URL, or null when the desktop supplies no icon."
+        }
+      ],
+      "source": "packages/util/native-command/src/types.ts",
+      "doc": "One OS-registered application capable of opening the requested file."
+    },
+    "PermissionSelection": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "currentValue",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The effective current value: a configured preset key, `auto`, or `custom`."
+        }
+      ],
+      "source": "packages/interaction/permission-presets/src/types.ts",
+      "doc": "Whole `permissions` Session projection: current durable selection only."
+    },
+    "PromptContentPart": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "text"
+              }
+            },
+            {
+              "name": "text",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "image"
+              }
+            },
+            {
+              "name": "mediaType",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "ImageMediaType"
+              }
+            },
+            {
+              "name": "data",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "name",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "file"
+              }
+            },
+            {
+              "name": "receiptId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Browser-submitted prompt content; the Host promotes image bytes to durable references. File parts carry the opaque receipt returned by a preceding `uploadFile` call on the same Session."
+    },
+    "QueueAction": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "edit"
+              }
+            },
+            {
+              "name": "content",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "ref",
+                  "name": "TextBlock"
+                }
+              },
+              "doc": "Non-empty text-only replacement content."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "remove"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "steer"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One client-requested mutation of a still-pending queue item."
+    },
+    "SessionAddress": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "session"
+              }
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "subagent"
+              }
+            },
+            {
+              "name": "parentSessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "childSessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "continuable",
+                  "one-shot",
+                  "unknown"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Durable identity selecting an ordinary Session or one direct subagent child."
+    },
+    "SessionAssistantStreamAttempt": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "attemptId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "startedAfterSeq",
+          "optional": false,
+          "type": {
+            "k": "num",
+            "brand": true
+          },
+          "doc": "Last durable Session seq observed when this attempt started."
+        },
+        {
+          "name": "turn",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "step",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "nextIndex",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Dense position expected for the next live chunk frame."
+        },
+        {
+          "name": "stream",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "json"
+            }
+          },
+          "doc": "Compact detached stream accumulated at this opening revision."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One active assistant attempt in a reconnect opening snapshot."
+    },
+    "SessionAssistantStreamBaseline": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "revision",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "activeAttempt",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "SessionAssistantStreamAttempt"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Complete process-local assistant state at one follow opening."
+    },
+    "SessionAssistantStreamFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "start"
+              }
+            },
+            {
+              "name": "attemptId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "revision",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "startedAfterSeq",
+              "optional": false,
+              "type": {
+                "k": "num",
+                "brand": true
+              }
+            },
+            {
+              "name": "turn",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "step",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "chunk"
+              }
+            },
+            {
+              "name": "attemptId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "revision",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "index",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "time",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "chunk",
+              "optional": false,
+              "type": {
+                "k": "json"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "end"
+              }
+            },
+            {
+              "name": "attemptId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "revision",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "index",
+              "optional": false,
+              "type": {
+                "k": "num"
+              },
+              "doc": "Number of chunk frames represented by this terminal marker."
+            },
+            {
+              "name": "outcome",
+              "optional": false,
+              "type": {
+                "k": "union",
+                "members": [
+                  {
+                    "k": "obj",
+                    "props": [
+                      {
+                        "name": "kind",
+                        "optional": false,
+                        "type": {
+                          "k": "lit",
+                          "v": "committed"
+                        }
+                      },
+                      {
+                        "name": "eventType",
+                        "optional": false,
+                        "type": {
+                          "k": "enum",
+                          "values": [
+                            "assistant/attempt",
+                            "assistant/message"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "seq",
+                        "optional": false,
+                        "type": {
+                          "k": "num"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "k": "obj",
+                    "props": [
+                      {
+                        "name": "kind",
+                        "optional": false,
+                        "type": {
+                          "k": "lit",
+                          "v": "abandoned"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Browser wire form of one process-local assistant frame."
+    },
+    "SessionAttachmentRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "attachmentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Durable image read request."
+    },
+    "SessionAttachmentValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "attachment",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ImageAttachmentRef"
+          }
+        },
+        {
+          "name": "data",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Durable image read response value."
+    },
+    "SessionCancelRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Active-turn cancellation request."
+    },
+    "SessionCancelValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "accepted",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Receipt after cancellation is admitted to the live Agent."
+    },
+    "SessionControlBaseline": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "projections",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "ref",
+              "name": "SessionProjectionBaseline"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Complete live control baseline emitted once per control stream generation."
+    },
+    "SessionControlFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "baseline"
+              }
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionControlBaseline"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "projection"
+              }
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "key",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": {
+                "k": "json"
+              }
+            },
+            {
+              "name": "seq",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Host-wide live state stream. Each generation starts with exactly one baseline."
+    },
+    "SessionCreateRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Workspace the Session joins; exclusive with `cwd`."
+        },
+        {
+          "name": "cwd",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Directory the Session owns when no Workspace is named."
+        },
+        {
+          "name": "sessionId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Blank Session to reuse while it is reusable, or the identity of a new Session when none is stored under it."
+        },
+        {
+          "name": "agentPreset",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Preset the Session runs, replacing a reused Session's recorded preset; the configured default when omitted."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Request for a Session for a new conversation."
+    },
+    "SessionCreateValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "The created or reused Session, which may differ from the requested `sessionId`."
+        },
+        {
+          "name": "agentPreset",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Preset the Session runs, when the deployment composes a preset roster."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session creation response value."
+    },
+    "SessionEventEntry": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "event"
+          }
+        },
+        {
+          "name": "event",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionWireEvent"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One raw Session event in the Remote journal."
+    },
+    "SessionFollowFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "ref",
+          "name": "SessionEventEntry"
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "snapshot"
+              }
+            },
+            {
+              "name": "header",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionWireHeader"
+              }
+            },
+            {
+              "name": "cursor",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "records",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "ref",
+                  "name": "SessionEventEntry"
+                }
+              }
+            },
+            {
+              "name": "hasMore",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              }
+            },
+            {
+              "name": "projections",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionProjectionBaseline"
+              }
+            },
+            {
+              "name": "assistantStream",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "SessionAssistantStreamBaseline"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "assistant-stream"
+              }
+            },
+            {
+              "name": "frame",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionAssistantStreamFrame"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Complete opening window followed by ordered durable events and opted-in assistant frames."
+    },
+    "SessionFollowRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "address",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionAddress"
+          }
+        },
+        {
+          "name": "assistantStream",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": true
+          },
+          "doc": "Include process-local assistant presentation frames for the Web client."
+        },
+        {
+          "name": "maxMessages",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "turnWindow",
+          "optional": true,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "minMessages",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Minimum append-origin user/assistant messages; must not exceed maxMessages."
+              },
+              {
+                "name": "minTurns",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Minimum Turn starts crossed, including the partial Turn at beforeSeq."
+              }
+            ]
+          },
+          "doc": "Stop at a Turn start after both minima, unless maxMessages or history exhaustion wins."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One live event request for a durable Session address."
+    },
+    "SessionForkRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "atSeq",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Exact inclusive source event seq; omission selects the latest completed-turn prefix."
+        },
+        {
+          "name": "allowMigration",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "False asks the Host to check for required migration before forking. Defaults to true."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session fork request."
+    },
+    "SessionForkValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Identity of a newly forked Session."
+    },
+    "SessionListMetadata": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "blank",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the folded prefix contains no turn."
+        },
+        {
+          "name": "lastPromptAt",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "num"
+            }
+          },
+          "doc": "Latest human-authored prompt time in the folded prefix."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Persisted hints used to summarize a cold Session."
+    },
+    "SessionListRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "cursor",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session list request."
+    },
+    "SessionListValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "items",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SessionSummary"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session list response value."
+    },
+    "SessionOpenWorkspacePathRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "action",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": "reveal"
+          },
+          "doc": "File-manager navigation when requested; omission uses the default application."
+        },
+        {
+          "name": "application",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Registered application identifier; ignored for reveal. Omission preserves the operating system default."
+        },
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Path after best-effort Session workspace resolution, in Host filesystem syntax."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Request to open one path prepared by a Session-aware caller on the Host desktop."
+    },
+    "SessionOpenWorkspacePathValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "opened",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Confirmation that the Host handed a workspace path to its native opener."
+    },
+    "SessionPage": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "records",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SessionEventEntry"
+            }
+          }
+        },
+        {
+          "name": "hasMore",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One contiguous backwards page of a Session log."
+    },
+    "SessionPageRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "address",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionAddress"
+          }
+        },
+        {
+          "name": "throughSeq",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Inclusive log cut obtained from the corresponding follow opening frame."
+        },
+        {
+          "name": "beforeSeq",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxMessages",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "turnWindow",
+          "optional": true,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "minMessages",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Minimum append-origin user/assistant messages; must not exceed maxMessages."
+              },
+              {
+                "name": "minTurns",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Minimum Turn starts crossed, including the partial Turn at beforeSeq."
+              }
+            ]
+          },
+          "doc": "Stop at a Turn start after both minima, unless maxMessages or history exhaustion wins."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One message-aligned backwards-history request."
+    },
+    "SessionProjectionBaseline": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "asOfSeq",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "values",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionProjectionValues"
+          },
+          "doc": "Provider-validated values; omitted keys are absent capabilities at this cut."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Complete projection values at an exact Session event cursor."
+    },
+    "SessionProjectionHints": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "cached",
+              "sequenced"
+            ]
+          },
+          "doc": "`sequenced`: the Host's live registry produced the block for an attached Session, so `asOfSeq` is comparable with baselines and frames of the same connection. `cached`: a header-only listing viewed the block from the persisted projection cache, so `asOfSeq` is the stored record's own watermark and must not be compared with the connected Session's values."
+        },
+        {
+          "name": "asOfSeq",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Watermark of the block in the sequence space named by `kind`."
+        },
+        {
+          "name": "values",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SessionProjectionValues"
+          },
+          "doc": "Provider-validated values present in the block; omitted keys remain unknown."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Every available wire value a Session-list row carries as partial, possibly stale hints. `kind` and `asOfSeq` are independent facts: `kind` says which sequence space `asOfSeq` belongs to, and therefore how a client may merge the block; `asOfSeq` is the producer's watermark in that space."
+    },
+    "SessionProjectionValues": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "inbox",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "InboxWireState"
+          },
+          "doc": "Pending agent input reconstructed from durable inbox splices."
+        },
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "The session's current normalized title — the latest `session/title` event's text (last-wins), or `null` before the first title lands. A plain string: the shape the client list rows consume."
+        },
+        {
+          "name": "workingDirectory",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Recorded current directory for Session observations, or null when none is recorded."
+        },
+        {
+          "name": "todos",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "arr",
+              "of": {
+                "k": "ref",
+                "name": "TodoItem"
+              }
+            }
+          },
+          "doc": "The agent's current whole todo list (the latest `todo/write` snapshot), or `null` before the first write. Whole-value rule: every `todo/write` carries the complete replacement list, so the fold is last-wins."
+        },
+        {
+          "name": "agentPreset",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Preset the Session runs, or null when the deployment composes none."
+        },
+        {
+          "name": "sessionListMetadata",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "SessionListMetadata"
+          },
+          "doc": "Persisted facts used to summarize a Session without activating it."
+        },
+        {
+          "name": "imageLimits",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ImageAttachmentLimits"
+          },
+          "doc": "Image-intake limits enforced by the Session prompt endpoint."
+        },
+        {
+          "name": "modelSelection",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ModelSelectionProjection"
+          },
+          "doc": "Durable model selection already used and selected for the next request."
+        },
+        {
+          "name": "permissions",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PermissionSelection"
+          },
+          "doc": "The session's current permission, folded from the three whole-value knob events (`permission/preset`, `sandbox/mode`, `approval/policy`) over the composition defaults. Selectable options come from the process-level catalog Remote. Key absence means no permission service is composed — clients hide the control."
+        },
+        {
+          "name": "subagentCatalog",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SubagentCatalogEntry"
+            }
+          },
+          "doc": "Direct children in parent catalog event order, excluding fork-inherited facts."
+        },
+        {
+          "name": "subagentTiming",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "SubagentTimingProjection"
+          },
+          "doc": "Active-turn duration and latest closed-turn completion for a descriptor-backed subagent session."
+        },
+        {
+          "name": "subagent",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "union",
+              "members": [
+                {
+                  "k": "obj",
+                  "props": [
+                    {
+                      "name": "mode",
+                      "optional": false,
+                      "type": {
+                        "k": "lit",
+                        "v": "one-shot"
+                      },
+                      "doc": "A terminal one-shot child."
+                    },
+                    {
+                      "name": "label",
+                      "optional": true,
+                      "type": {
+                        "k": "str"
+                      },
+                      "doc": "Optional durable creation label from the child's descriptor."
+                    },
+                    {
+                      "name": "seq",
+                      "optional": false,
+                      "type": {
+                        "k": "num",
+                        "brand": true
+                      },
+                      "doc": "Seq of the `subagent/descriptor` event this identity was folded from. `session.isOwnSeq(seq)` proves the identity comes from the child's OWN log suffix — where a descriptor is immutable once appended — and not from a fork seed's replayed ancestor descriptor."
+                    }
+                  ]
+                },
+                {
+                  "k": "obj",
+                  "props": [
+                    {
+                      "name": "mode",
+                      "optional": false,
+                      "type": {
+                        "k": "lit",
+                        "v": "continuable"
+                      },
+                      "doc": "A resumable conversation."
+                    },
+                    {
+                      "name": "label",
+                      "optional": false,
+                      "type": {
+                        "k": "str"
+                      },
+                      "doc": "Durable creation label from the child's descriptor."
+                    },
+                    {
+                      "name": "seq",
+                      "optional": false,
+                      "type": {
+                        "k": "num",
+                        "brand": true
+                      },
+                      "doc": "Seq of the folded descriptor event; see the one-shot arm for the own-suffix proof."
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "doc": "Identity of a descriptor-backed subagent session. `null` ⟺ no valid descriptor (missing, malformed, or unrecognized-version — deliberately undistinguished). The sentinel is deliberately serializable: a value pushed over JSON transports must survive `JSON.stringify` losslessly, where an `undefined` field would be dropped and a stale identity would survive on the receiving side. The entry itself stays non-optional."
+        }
+      ],
+      "extras": {
+        "k": "json"
+      },
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Typed known projections plus JSON-safe values contributed outside this compilation face."
+    },
+    "SessionProjectionsRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One non-activating Session projection read."
+    },
+    "SessionProjectionsValue": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "asOfSeq",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "values",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionProjectionValues"
+              },
+              "doc": "Provider-validated values; omitted keys are absent capabilities at this cut."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "sequenced"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "migration-required"
+              }
+            },
+            {
+              "name": "values",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "SessionProjectionValues"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Exact projections carry their event cut; required migration returns sequence-free cache hints. Null means absent."
+    },
+    "SessionPromptRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "requestId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Client-minted identity persisted on the exact accepted user message."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "mode",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "queue",
+              "steer"
+            ]
+          }
+        },
+        {
+          "name": "content",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "PromptContentPart"
+            }
+          },
+          "doc": "At least one non-whitespace text part or attachment."
+        },
+        {
+          "name": "clientTimeZone",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session prompt request."
+    },
+    "SessionPromptValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "accepted",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Receipt after one prompt enters the target Agent inbox."
+    },
+    "SessionRenameRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session rename request."
+    },
+    "SessionRenameValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "seq",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Normalized title and the durable event position that committed it."
+    },
+    "SessionSearchItem": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "snippet",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One session-content search result."
+    },
+    "SessionSearchRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "query",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session search request."
+    },
+    "SessionSearchValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "items",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SessionSearchItem"
+            }
+          }
+        },
+        {
+          "name": "hasMore",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session search response value."
+    },
+    "SessionSelectModelRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "provider",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "model",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "reasoningEffort",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session model-selection request."
+    },
+    "SessionSelectModelValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "selected",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ModelSelection"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Accepted model selection after Host resolution."
+    },
+    "SessionSummary": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "agentAvailable",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether this Session currently owns a live Agent."
+        },
+        {
+          "name": "formatStatus",
+          "optional": true,
+          "type": {
+            "k": "enum",
+            "values": [
+              "current",
+              "migration-required"
+            ]
+          },
+          "doc": "Current for attached Sessions; otherwise the persistence format status when reported."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "updatedAt",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "running",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "blank",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "parentSessionId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "origin",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": "subagent"
+          }
+        },
+        {
+          "name": "cwd",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "projections",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "SessionProjectionHints"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One Session list entry."
+    },
+    "SessionUpdateQueueRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "itemId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "action",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "QueueAction"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Pending queue mutation request."
+    },
+    "SessionUpdateQueueValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "accepted",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Receipt after one pending queue mutation commits."
+    },
+    "SessionWireEvent": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "seq",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "data",
+          "optional": false,
+          "type": {
+            "k": "json"
+          }
+        },
+        {
+          "name": "ignorable",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        },
+        {
+          "name": "sourceEventSeqs",
+          "optional": true,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Earlier sources on current surface events; opaque JSON on unknown ignorable events."
+        },
+        {
+          "name": "surfaceOp",
+          "optional": true,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Canonical placement on current surface events; opaque JSON on unknown ignorable events."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Exact Session event envelope accepted by the Client journal adapter. Surface events require surfaceOp; only non-Assistant surface events may cite earlier sources. Durable readers own recognition of merge-extensible event names."
+    },
+    "SessionWireHeader": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "version",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "createdAt",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "cwd",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "parentSession",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "isSeeded",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the Session contains a fork-inherited prefix."
+        },
+        {
+          "name": "origin",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": "subagent"
+          }
+        },
+        {
+          "name": "delegationDepth",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "agentPreset",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Current logical Session metadata carried on the browser wire."
+    },
+    "SubagentCatalogEntry": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "one-shot"
+              }
+            },
+            {
+              "name": "label",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "external"
+              }
+            },
+            {
+              "name": "label",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "continuable"
+              }
+            },
+            {
+              "name": "label",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "createdAt",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "unknown"
+              }
+            },
+            {
+              "name": "label",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/subagent/subagent/src/projection-types.ts",
+      "doc": "One current direct-child discovery row materialized from parent facts."
+    },
+    "SubagentTimingProjection": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "settledMs",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Milliseconds accumulated across completed turns after the child's own descriptor."
+        },
+        {
+          "name": "active",
+          "optional": true,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "since",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Start of the open turn."
+              },
+              {
+                "name": "through",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                },
+                "doc": "Latest event time folded into this projection cut."
+              }
+            ]
+          },
+          "doc": "Same-cut bounds of the currently open turn, when one has not reached `turn/end`."
+        },
+        {
+          "name": "lastTurnCompleted",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the latest closed turn after the child's own descriptor completed normally; absent while a turn is open or before one closes."
+        }
+      ],
+      "source": "packages/subagent/subagent/src/projection-types.ts",
+      "doc": "Durable active-turn timing for one descriptor-backed child session."
+    },
+    "TextBlock": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "text"
+          }
+        },
+        {
+          "name": "text",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "Plain text visible to the end user."
+    },
+    "TodoItem": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "content",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "What this task is — a short imperative line shown in the UI."
+        },
+        {
+          "name": "status",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "completed",
+              "in_progress",
+              "pending"
+            ]
+          },
+          "doc": "Lifecycle state. `in_progress` marks a task being worked now; parallel work may mark several."
+        }
+      ],
+      "source": "packages/todo/tool-todo/src/types.ts",
+      "doc": "One entry in an agent's todo list — the unit of the `todo/write` whole-list snapshot declared by this package. Deliberately minimal: a human-readable `content` line and a three-state `status`. No id, priority, or `activeForm` — the list is replaced wholesale on every write (last-write-wins), so entries need no stable identity. The three statuses describe the complete portable lifecycle needed by model and UI consumers."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

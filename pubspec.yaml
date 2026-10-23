@@ -1,0 +1,15 @@
+name: dsh_flutter_workspace
+publish_to: none
+environment:
+  sdk: ^3.13.5
+workspace:
+  - apps/dsh_flutter
+  - features/dsh_feature_approval
+  - packages/dsh_client
+  - packages/dsh_models
+  - packages/dsh_conversation
+  - packages/dsh_i18n
+  - packages/dsh_slots
+  - packages/dsh_theme
+  - packages/dsh_ui
+  - tool/live_spike

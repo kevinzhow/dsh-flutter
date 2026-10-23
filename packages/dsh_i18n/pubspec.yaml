@@ -1,0 +1,10 @@
+name: dsh_i18n
+description: Pure Dart zh/en catalog generated from dsh's locale files, plus a small lookup class.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.3

@@ -1,0 +1,216 @@
+#!/usr/bin/env python3
+"""Fast local checks to run before opening a PR.
+
+Runs every cheap guard and reports all results (it never stops at the first
+failure), then prints a summary table and one `preflight: ...` line for the PR.
+
+  check-deps       tool/check_deps.py: package layering (client <- models <- conversation <- slots/features;
+                   features never import each other; ui/theme never import client)
+  tool-tests       python unit tests under tool/tests
+  codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
+  theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
+  i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
+  vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
+                   (skipped with exit 2 when the node install is missing)
+  format           dart format --set-exit-if-changed on every Dart file
+  analyze          dart analyze (whole workspace)
+  tests            dart test / flutter test per package (skipped with --fast)
+
+  tool/preflight [--fast] [--only NAME[,NAME...]] [--out .local/preflight.json]
+
+The pinned dsh checkout is found through $DSH_SRC or <repo>/.local/dsh-src
+(see README). The Flutter SDK is the one pinned in .fvmrc: $FLUTTER_SDK,
+~/fvm/versions/<pin>, ~/flutter-sdks/versions/<pin>, else `flutter` on PATH.
+Heavy children run under `nice -n 15`; tests use `-j 2`. Exit 1 if any check failed.
+"""
+import argparse
+import concurrent.futures
+import datetime
+import json
+import os
+import pathlib
+import shutil
+import subprocess
+import sys
+import time
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+NICE = ['nice', '-n', '15']
+OUT_DIR = ROOT / '.local' / 'preflight'
+
+PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/dsh_conversation',
+                      'packages/dsh_slots', 'packages/dsh_i18n']
+FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
+                    'apps/dsh_flutter']
+
+
+def flutter_bin_dir():
+    pin = json.loads((ROOT / '.fvmrc').read_text())['flutter']
+    candidates = []
+    if os.environ.get('FLUTTER_SDK'):
+        candidates.append(pathlib.Path(os.environ['FLUTTER_SDK']))
+    home = pathlib.Path.home()
+    candidates += [home / 'fvm' / 'versions' / pin, home / 'flutter-sdks' / 'versions' / pin]
+    for c in candidates:
+        if (c / 'bin' / 'flutter').exists():
+            return str(c / 'bin'), pin
+    return None, pin
+
+
+def env():
+    e = dict(os.environ)
+    bin_dir, _ = flutter_bin_dir()
+    if bin_dir:
+        e['PATH'] = bin_dir + os.pathsep + e['PATH']
+    return e
+
+
+def run(cmd, cwd=ROOT, timeout=1800):
+    start = time.time()
+    try:
+        p = subprocess.run(cmd, cwd=cwd, env=env(), capture_output=True, text=True, timeout=timeout)
+        return p.returncode, (p.stdout or '') + (p.stderr or ''), time.time() - start
+    except subprocess.TimeoutExpired as e:
+        return 124, 'timeout after %ds\n%s' % (timeout, e.stdout or ''), time.time() - start
+
+
+def dart_files():
+    out = []
+    for sub in ('packages', 'features', 'apps', 'tool'):
+        for p in sorted((ROOT / sub).rglob('*.dart')):
+            parts = set(p.relative_to(ROOT).parts)
+            if parts & {'.dart_tool', 'build', 'linux', '.local', 'node_modules'}:
+                continue
+            out.append(str(p.relative_to(ROOT)))
+    return out
+
+
+def c_check_deps():
+    return run([sys.executable, '-I', 'tool/check_deps.py'])
+
+
+def c_tool_tests():
+    return run([sys.executable, '-I', '-m', 'unittest', 'discover', '-s', 'tool/tests', '-p', 'test_*.py'])
+
+
+def c_codegen():
+    return run([sys.executable, '-I', 'tool/codegen/gen.py', '--check'])
+
+
+def c_theme_pack():
+    src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local' / 'dsh-src')))
+    if not (src / 'packages' / 'client' / 'ui-theme').is_dir():
+        return 'skip', 'dsh checkout not found at %s (set DSH_SRC or link .local/dsh-src)' % src, 0.0
+    return run([sys.executable, '-I', 'tool/theme-adapters/build_official_pack.py', '--check', '--quiet'])
+
+
+def c_i18n():
+    return run([sys.executable, '-I', 'tool/i18n/gen_catalog.py', '--check'])
+
+
+def c_vector():
+    fixture = 'packages/dsh_models/test/fixtures/session_window_vector.json'
+    code, out, secs = run([sys.executable, '-I', 'tool/vectors/gen_expected.py', '--check', fixture])
+    if code == 2:
+        return 'skip', out, secs
+    return code, out, secs
+
+
+def c_format():
+    files = dart_files()
+    return run(NICE + ['dart', 'format', '--output=none', '--set-exit-if-changed'] + files)
+
+
+def c_analyze():
+    return run(NICE + ['dart', 'analyze', '--fatal-infos', '.'])
+
+
+def c_tests():
+    start = time.time()
+    log = []
+    failed = False
+    for pkg in PURE_DART_PACKAGES:
+        code, out, _ = run(NICE + ['dart', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
+        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        failed |= code != 0
+    for pkg in FLUTTER_PACKAGES:
+        code, out, _ = run(NICE + ['flutter', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
+        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        failed |= code != 0
+    return (1 if failed else 0), '\n'.join(log), time.time() - start
+
+
+CHECKS = [
+    ('check-deps', c_check_deps),
+    ('tool-tests', c_tool_tests),
+    ('codegen', c_codegen),
+    ('theme-pack', c_theme_pack),
+    ('i18n', c_i18n),
+    ('vector', c_vector),
+    ('format', c_format),
+    ('analyze', c_analyze),
+    ('tests', c_tests),
+]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--fast', action='store_true', help='skip the test suites')
+    ap.add_argument('--only', default='', help='comma separated check names')
+    ap.add_argument('--out', default=str(ROOT / '.local' / 'preflight.json'))
+    args = ap.parse_args()
+    only = {x for x in args.only.split(',') if x}
+    selected = [(n, f) for n, f in CHECKS if (not only or n in only) and not (args.fast and n == 'tests')]
+    bin_dir, pin = flutter_bin_dir()
+    if bin_dir is None:
+        print('preflight: warning: pinned Flutter %s not found; using `flutter` from PATH' % pin)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    cheap = [(n, f) for n, f in selected if n not in ('format', 'analyze', 'tests')]
+    heavy = [(n, f) for n, f in selected if n in ('format', 'analyze', 'tests')]
+    results = {}
+
+    def go(item):
+        name, fn = item
+        code, out, secs = fn()
+        (OUT_DIR / (name + '.txt')).write_text(out)
+        return name, code, secs, out
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for name, code, secs, out in pool.map(go, cheap):
+            results[name] = (code, secs, out)
+    for item in heavy:  # sequential: they share the analysis server and pub cache
+        name, code, secs, out = go(item)
+        results[name] = (code, secs, out)
+
+    rows = []
+    failed = []
+    for name, _ in selected:
+        code, secs, out = results[name]
+        status = 'skip' if code == 'skip' else ('ok' if code == 0 else 'FAIL')
+        if status == 'FAIL':
+            failed.append(name)
+        last = [l for l in out.strip().splitlines() if l.strip()][-1:] or ['']
+        rows.append((name, status, secs, last[0][:90]))
+    print('\n%-12s %-5s %7s  %s' % ('check', 'state', 'secs', 'last line'))
+    for name, status, secs, last in rows:
+        print('%-12s %-5s %7.1f  %s' % (name, status, secs, last))
+    for name in failed:
+        print('\n--- %s (full output: .local/preflight/%s.txt) ---' % (name, name))
+        print('\n'.join(results[name][2].strip().splitlines()[-25:]))
+    tree = subprocess.run(['git', 'rev-parse', 'HEAD^{tree}'], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    payload = {
+        'when': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
+        'headTree': tree,
+        'fast': args.fast,
+        'results': {n: {'state': s, 'secs': round(t, 1)} for n, s, t, _ in rows},
+    }
+    pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    pathlib.Path(args.out).write_text(json.dumps(payload, indent=1) + '\n')
+    summary = ' '.join('%s=%s' % (n, s) for n, s, _, _ in rows)
+    print('\npreflight: %s%s' % ('FAILED ' if failed else 'ok ', summary))
+    return 1 if failed else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

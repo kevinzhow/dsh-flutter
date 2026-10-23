@@ -1,0 +1,11 @@
+{
+  "name": "dsh-flutter-session-vector-runner",
+  "private": true,
+  "type": "module",
+  "description": "Replays a dsh-session-vector through dsh's real TypeScript client model. Installed outside the repo, see tool/vectors/gen_expected.py.",
+  "devDependencies": {
+    "immer": "10.2.0",
+    "tsx": "4.21.0",
+    "zustand": "4.5.7"
+  }
+}
