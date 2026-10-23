@@ -26,10 +26,12 @@ The option label is what the host sends; the row shows it through dsh's displayP
 preset id (or to the English product label) of read-only / workspace-write / danger-full-access becomes the localized
 product label, any other name is title-cased from its kebab-case form (`team-review` -> `Team Review`).
 
-Sizes: viewport width 390 with the 16px frame padding gives the 358px column of the phone Settings page, density 2. The
-rows are not wrapped in dsh's 800px panel. Every case height is the measured content height of the React render plus the
-32px frame padding, rounded up to whole CSS pixels (the 0.5px separators make some rows fractional). Heights depend on
-text wrapping at 358px, so they are encoded per case; the host checks them: a case whose content does not fill its frame
+Sizes: viewport width 596 with the 16px frame padding gives a 564px content column, density 2. 564 is the column dsh's
+web settings panel gives these rows (800px panel, 188px nav rail, 24px padding either side: 800 - 188 - 2 * 24), the
+width at which their CSS is designed to work; at a phone width (358px) the font-family rows collapse to a 44px text
+column. The rows are not wrapped in the panel itself. Every case height is the measured content height of the React render plus the
+32px frame padding, rounded up to whole CSS pixels. Heights depend on
+text wrapping at 564px, so they are encoded per case; the host checks them: a case whose content does not fill its frame
 fails the React capture with the measured height. Variants of one case therefore share one height.
 
 Ids: components.settings.<surface>.<name>.<theme>. All content is invented.
@@ -48,15 +50,15 @@ HINT_FONT = UI + 'ui-theme/src/client/FontSettingsGroup.tsx'
 HINT_PERMISSION = UI + 'ui-permission-presets/src/client/PermissionRow.tsx'
 HINT_GENERAL = UI + 'ui-settings-general/src/client/GeneralSection.tsx'
 LAYOUT = {'direction': 'column', 'gap': 0, 'align': 'stretch'}
-WIDTH = 390
+WIDTH = 596
 PADDING = 32  # the parity frame's 16px padding on both axes
 
-# Case heights (CSS px, frame included), measured from the React render at the 358px column; see the module docstring.
+# Case heights (CSS px, frame included), measured from the React render at the 564px column; see the module docstring.
 HEIGHTS = {
-    'appearance.system': 363, 'appearance.zh-cn': 363,
-    'font.collapsed': 126, 'font.expanded': 1315, 'font.expanded-custom': 1315, 'font.zh-cn': 1063,
-    'permission.workspace-write': 145, 'permission.short-label': 127, 'permission.zh-cn': 109,
-    'general.defaults': 570, 'general.zh-cn': 516, 'general.font-expanded-full': 1741,
+    'appearance.system': 179, 'appearance.zh-cn': 179,
+    'font.collapsed': 108, 'font.expanded': 601, 'font.expanded-custom': 601, 'font.zh-cn': 547,
+    'permission.workspace-write': 109, 'permission.short-label': 109, 'permission.zh-cn': 109,
+    'general.defaults': 332, 'general.zh-cn': 332, 'general.font-expanded-full': 825,
 }
 
 DEFAULT_SIZES = {'text': 14, 'code': 11, 'terminal': 13}
