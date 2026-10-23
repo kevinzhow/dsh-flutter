@@ -285,3 +285,26 @@ const double sidebarInlineWidth = 400;
 class SettingsOwner {
   const SettingsOwner();
 }
+
+/// The view the Plugins page asks a `plugins.item` occupant for (dsh
+/// `PluginConfigViewProps.view`, `ui-plugin-manager` `slot-contract.ts`).
+enum PluginItemView {
+  /// The one-liner the card under the plugin's title shows.
+  summary,
+
+  /// The plugin's own page: its configuration form with its save control.
+  page,
+}
+
+/// Owner props of `plugins.item`, one official plugin's configuration: the
+/// Plugins page renders each occupant as the card's one-liner
+/// ([PluginItemView.summary]) and, once the card is opened, as the body of the
+/// plugin's page ([PluginItemView.page]). The occupant's `label` is the card's
+/// title and its `order` the card's place. dsh also passes the page's form
+/// here; the `ui-settings-*` occupants bind their own shared form instead, so
+/// this owner carries the view alone.
+class PluginItemOwner extends SettingsOwner {
+  const PluginItemOwner({required this.view});
+
+  final PluginItemView view;
+}
