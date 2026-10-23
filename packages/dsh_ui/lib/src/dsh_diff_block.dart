@@ -37,6 +37,40 @@ Color blendLikeChromium(Color fill, Color under) {
   );
 }
 
+/// CSS `saturate(amount)` on an opaque colour, as Chromium's colour matrix
+/// computes it (dsh's menu surfaces filter their backdrop with
+/// `saturate(150%)` before the translucent fill lands on it).
+Color saturateLikeChromium(Color c, double amount) {
+  final r = c.r * 255, g = c.g * 255, b = c.b * 255;
+  double mix(double a, double bb, double cc) =>
+      (a * r + bb * g + cc * b).clamp(0, 255);
+  final s = amount;
+  return Color.from(
+    alpha: 1,
+    red:
+        mix(
+          0.213 + 0.787 * s,
+          0.715 - 0.715 * s,
+          0.072 - 0.072 * s,
+        ).roundToDouble() /
+        255,
+    green:
+        mix(
+          0.213 - 0.213 * s,
+          0.715 + 0.285 * s,
+          0.072 - 0.072 * s,
+        ).roundToDouble() /
+        255,
+    blue:
+        mix(
+          0.213 - 0.213 * s,
+          0.715 - 0.715 * s,
+          0.072 + 0.928 * s,
+        ).roundToDouble() /
+        255,
+  );
+}
+
 /// A file mutation as an inline diff surface (dsh `DiffBlock`): a toolbar with
 /// the language, then the path header, context lines and `-`/`+` rows with
 /// their colour bars; the middle folds past [maxLines].

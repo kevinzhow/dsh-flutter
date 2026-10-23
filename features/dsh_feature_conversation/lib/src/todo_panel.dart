@@ -107,10 +107,22 @@ class _TodoPanelState extends State<TodoPanel> {
         key: const ValueKey('todo-panel'),
         color: blendLikeChromium(
           theme.color('--dsw-specific-menu'),
-          theme.bgBase,
+          // `backdrop-filter: blur(40px) saturate(150%)` over the flat page.
+          saturateLikeChromium(theme.bgBase, 1.5),
         ),
         radius: theme.radiusLg,
-        shadows: theme.boxShadow('--dsw-elevation-panel'),
+        // dsh's `.root` rebinds the stroke colour to the l1 border token, so
+        // the 0.5px ring is the hairline border, not the 16-20% stroke the
+        // resolved `--dsw-elevation-panel` token carries.
+        shadows: [
+          for (final (i, s) in theme.boxShadow('--dsw-elevation-panel').indexed)
+            i == 0
+                ? BoxShadow(
+                    color: theme.color('--dsw-alias-border-l1'),
+                    spreadRadius: s.spreadRadius,
+                  )
+                : s,
+        ],
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Column(
           mainAxisSize: MainAxisSize.min,

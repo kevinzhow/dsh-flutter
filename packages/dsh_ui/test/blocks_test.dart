@@ -310,6 +310,22 @@ void main() {
         (248, 231, 232),
       );
     });
+
+    test('the menu surface lands where Chromium put it over a saturated page', () {
+      // `saturate(150%)` lifts the dark page (21, 21, 23) to (21, 21, 24); the
+      // 45% menu fill over that is dsh's panel colour.
+      final under = saturateLikeChromium(const Color(0xFF151517), 1.5);
+      final c = blendLikeChromium(const Color(0x7343454A), under);
+      expect(
+        ((c.r * 255).round(), (c.g * 255).round(), (c.b * 255).round()),
+        (41, 42, 46),
+      );
+      // White stays white.
+      expect(
+        saturateLikeChromium(const Color(0xFFFFFFFF), 1.5),
+        const Color(0xFFFFFFFF),
+      );
+    });
   });
 
   group('read block', () {
