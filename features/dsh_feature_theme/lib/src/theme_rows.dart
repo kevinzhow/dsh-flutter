@@ -255,6 +255,7 @@ class _FontSettingsGroupState extends State<FontSettingsGroup> {
         final endsColumn = DshColumnEnd.of(context);
         return Column(
           key: ValueKey<String>(_open ? 'font-group-open' : 'font-group'),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             for (var i = 0; i < rows.length; i++)
               rows[i](!(endsColumn && i == rows.length - 1)),

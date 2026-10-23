@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
@@ -9,14 +11,37 @@ final Slot<SettingsOwner, Widget> _itemSlot = DshSlots.settingsGeneralItem
 /// The rows features contribute to `settings.general.item`, stacked in order
 /// (dsh `GeneralSection`'s `.section` column). The last row is marked as the end
 /// of the column, so it draws no separator.
-class GeneralColumn extends StatelessWidget {
+class GeneralColumn extends StatefulWidget {
   const GeneralColumn({super.key, required this.slots});
 
   final SlotRegistry slots;
 
   @override
+  State<GeneralColumn> createState() => _GeneralColumnState();
+}
+
+class _GeneralColumnState extends State<GeneralColumn> {
+  StreamSubscription<String>? _sub;
+
+  @override
+  void initState() {
+    super.initState();
+    // Rows come and go with the connection: the host-backed ones register once
+    // the host is up and withdraw when it is left.
+    _sub = widget.slots.changes.listen((name) {
+      if (name == _itemSlot.name && mounted) setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    unawaited(_sub?.cancel());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final rows = slots.renderList(_itemSlot, const SettingsOwner());
+    final rows = widget.slots.renderList(_itemSlot, const SettingsOwner());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

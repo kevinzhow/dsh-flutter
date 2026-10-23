@@ -276,6 +276,27 @@ void main() {
       expect((box.decoration as BoxDecoration).border, isNull);
     });
 
+    testWidgets('a row that registers while the section is open appears', (t) async {
+      surface(t, const Size(390, 800));
+      await t.pumpWidget(page(section: 'general'));
+      expect(find.text('Late host row'), findsNothing);
+      final withdraw = slots.register<SettingsOwner, Widget>(
+        itemSlot,
+        (_) => const DshSettingsRow(
+          title: 'Late host row',
+          description: 'd',
+          control: SizedBox(),
+        ),
+        id: 'late-host',
+        order: 5,
+      );
+      await t.pump();
+      expect(find.text('Late host row'), findsOneWidget);
+      withdraw();
+      await t.pump();
+      expect(find.text('Late host row'), findsNothing);
+    });
+
     testWidgets('the version row shows nothing while the host has not said', (
       t,
     ) async {
