@@ -24,7 +24,7 @@ features/dsh_feature_tool              ui-tool: generic tool call card (tool.cal
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions
                                        (one feature per dsh ui-* package; features never import each other)
 apps/dsh_flutter                       composition root: pairing, navigation, platform manifests (Whalee)
-tool/                                  generators, guards, preflight, live spike
+tool/                                  generators, guards, preflight, live spike, visual parity tool (docs/parity.md)
 ```
 
 `tool/check_deps.py` enforces: client <- models <- conversation <- slots/features; features never import each other; ui and theme never import client.

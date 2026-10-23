@@ -12,6 +12,8 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
   vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
                    (skipped with exit 2 when the node install is missing)
+  parity           tool/parity selftest: parity case manifests validate, font pins hold, diff metrics behave,
+                   Flutter case map regenerated (skipped with exit 2 when numpy/Pillow are missing)
   format           dart format --set-exit-if-changed on every Dart file
   analyze          dart analyze (whole workspace)
   tests            dart test / flutter test per package (skipped with --fast)
@@ -43,7 +45,8 @@ PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/ds
 FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
                     'features/dsh_feature_chat', 'features/dsh_feature_conversation',
                     'features/dsh_feature_session', 'features/dsh_feature_tool',
-                    'features/dsh_feature_user_questions', 'apps/dsh_flutter']
+                    'features/dsh_feature_user_questions', 'apps/dsh_flutter',
+                    'tool/parity_flutter']
 
 
 def flutter_bin_dir():
@@ -82,6 +85,8 @@ def dart_files():
         for p in sorted((ROOT / sub).rglob('*.dart')):
             parts = set(p.relative_to(ROOT).parts)
             if parts & {'.dart_tool', 'build', 'linux', '.local', 'node_modules'}:
+                continue
+            if p.name == 'case_map.g.dart':  # git-ignored, written by tool/parity_case_map.py
                 continue
             out.append(str(p.relative_to(ROOT)))
     return out
@@ -130,6 +135,13 @@ def c_vector():
     return 0, '\n'.join(log), time.time() - start
 
 
+def c_parity():
+    code, out, secs = run([sys.executable, '-I', 'tool/parity', 'selftest'])
+    if code == 2:
+        return 'skip', out, secs
+    return code, out, secs
+
+
 def c_format():
     files = dart_files()
     return run(NICE + ['dart', 'format', '--output=none', '--set-exit-if-changed'] + files)
@@ -161,6 +173,7 @@ CHECKS = [
     ('theme-pack', c_theme_pack),
     ('i18n', c_i18n),
     ('vector', c_vector),
+    ('parity', c_parity),
     ('format', c_format),
     ('analyze', c_analyze),
     ('tests', c_tests),
