@@ -39,7 +39,7 @@ directory, `PARITY_CACHE` to share captures.
 **Geometry pass** for every case of your area: the `non-text` column of `summary.md` >= 99.5% (similarity after counting the
 pixels classified as glyph anti-aliasing as matching). `tool/parity-ext/analyze-diffs.py --out build/parity-ext --cases <glob> --viz DIR`
 shows where the rest is (fill, hairline, corner, offset, text, other) ranked by leverage; `tool/alignment-audit.py run --root
-build/parity-ext --cases <glob>` gives edge and text-start offsets in CSS px. The strict `exact` number is reported next to it and
+build/parity-ext --cases <glob>` gives edge and text-start offsets in CSS px. The strict pixel-perfect number is reported next to it and
 is not the target. Never iterate on the `text` bucket: fix layout, colour, spacing, borders, radii and glyph positions that move
 by whole pixels.
 

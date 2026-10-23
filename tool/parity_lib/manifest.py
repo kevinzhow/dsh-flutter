@@ -1,4 +1,9 @@
-"""Case manifest for the dsh-flutter visual parity tool: schema, loading, validation.
+"""Case manifest for the dsh-flutter visual parity tool: dsh's schema, loading, selection.
+
+This is the dsh-specific layer: the id convention, `kind` (renderer key), theme/locale, interaction steps, regions
+and capture keys. The generic manifest checks (required fields, duplicate ids, variants, viewport, selector,
+tolerance) are the vendored CLI's own `validate`, run by tool/parity_lib/vt.py over the flattened manifest
+(`vt.cli_cases`), which every `tool/parity` / `tool/parity-ext/run` command and the selftest do.
 
 A manifest is one JSON object:
 
@@ -25,20 +30,20 @@ same case and must render the same thing:
     fixture     optional name of a JSON file in the suite's fixtures/ directory
     regions     optional named rectangles {name, x, y, width, height} (CSS px, relative to the crop)
                 that the diff scores separately
-    tolerance   optional {pixelRatio, layoutPx}: informative only; the verdict is in diff.py
+    tolerance   optional {pixelRatio, layoutPx}: informative only; the verdict is the vendored CLI's
     skip        optional true | {reason} : the case is listed but never captured
     notes       free text
 
 Capture keys (file stems of the provider output): `<id>` for the default variant and
 `<id>~<variantId>` for the others.
 
-Provider output contract (what any provider writes, what diff/report read):
+Provider output contract (what any provider writes, what the vendored CLI's diff/site read):
 
     <results>/<provider>/<captureKey>.png
     <results>/<provider>/<captureKey>.metadata.json   {provider, source, caseId, variantId, theme,
                                                        locale, viewport, image, crop, fonts, ...}
 
-This module is self-contained and has no third-party dependency.
+This module has no third-party dependency.
 """
 from __future__ import annotations
 

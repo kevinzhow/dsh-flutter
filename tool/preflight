@@ -14,8 +14,9 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
                    fresh against the pinned dsh checkout
   vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
                    (skipped with exit 2 when the node install is missing)
-  parity           tool/parity selftest: parity case manifests validate, font pins hold, diff metrics behave,
-                   Flutter case map regenerated (skipped with exit 2 when numpy/Pillow are missing)
+  parity           tool/parity selftest: parity case manifests validate (dsh schema and the vendored visual-testing CLI),
+                   font pins hold, the vendored CLI diffs synthetic captures, bucket metrics behave, Flutter case map
+                   regenerated (skipped with exit 2 when numpy/Pillow or the CLI's `tool/parity setup` install are missing)
   format           dart format --set-exit-if-changed on every Dart file
   analyze          dart analyze (whole workspace)
   tests            dart test / flutter test per package (skipped with --fast)

@@ -5,6 +5,8 @@ Everything machine specific comes from environment variables with portable defau
   DSH_SRC                the pinned dsh checkout (default <repo>/.local/dsh-src); read-only
   PARITY_WEB_DEPS        directory that holds the React provider's node_modules
                          (default <repo>/.local/parity-web); created by `tool/parity setup`
+  PARITY_VT_DEPS         directory that holds the vendored visual-testing CLI's node_modules (sharp; default
+                         <repo>/.local/parity-vt); created by `tool/parity setup` with `corepack pnpm`
   PARITY_NODE_BIN        directory with node + npm (Node >= 24); default: the first node on PATH
   PARITY_BROWSERS        PLAYWRIGHT_BROWSERS_PATH override (default: Playwright's own)
   FLUTTER_SDK            Flutter SDK directory (default: .fvmrc pin under ~/fvm or ~/flutter-sdks)
@@ -30,6 +32,8 @@ SHARED = TOOL / 'parity-shared'
 EXT = TOOL / 'parity-ext'
 FONTS = TOOL / 'parity-fonts'
 FLUTTER_PKG = TOOL / 'parity_flutter'
+VENDOR = TOOL / 'vendor' / 'raft-visual-testing'   # raft's visual-testing CLI, vendored unchanged (README-VENDOR.md)
+VT_GLUE = TOOL / 'parity-vt'                       # package.json + pnpm-lock.yaml of the CLI's runtime dependency
 
 
 def dsh_src():
@@ -38,6 +42,10 @@ def dsh_src():
 
 def web_deps():
     return pathlib.Path(os.environ.get('PARITY_WEB_DEPS', str(ROOT / '.local' / 'parity-web')))
+
+
+def vt_deps():
+    return pathlib.Path(os.environ.get('PARITY_VT_DEPS', str(ROOT / '.local' / 'parity-vt')))
 
 
 def git(cwd, *args):
