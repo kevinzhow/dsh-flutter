@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_feature_files/dsh_feature_files.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
-import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';

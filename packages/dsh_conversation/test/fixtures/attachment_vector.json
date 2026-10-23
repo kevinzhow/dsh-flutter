@@ -1,0 +1,870 @@
+{
+ "format": "dsh-session-vector/1",
+ "description": "Synthetic attachment trace (see tool/vectors/synth_attachment_trace.py): image and file blocks in user, steering and assistant messages and read_image results. `expected*` come from dsh's own TypeScript engine.",
+ "hostVersion": "0.2.1-rc.2",
+ "openOptions": {
+  "maxMessages": 500,
+  "turnWindow": {
+   "minMessages": 50,
+   "minTurns": 2
+  }
+ },
+ "steps": [
+  {
+   "op": "action",
+   "name": "open"
+  },
+  {
+   "op": "opened",
+   "generation": 1
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "snapshot",
+    "header": {
+     "version": 4,
+     "id": "session-synth",
+     "createdAt": 1,
+     "cwd": "work",
+     "isSeeded": false,
+     "delegationDepth": 0,
+     "agentPreset": "default"
+    },
+    "cursor": 1,
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "type": "system/message",
+       "seq": 1,
+       "time": 1000007,
+       "data": {
+        "turn": 0,
+        "step": 0,
+        "message": {
+         "role": "system",
+         "content": [
+          {
+           "type": "text",
+           "text": "You are a helpful assistant."
+          }
+         ],
+         "id": "sys-1"
+        }
+       },
+       "surfaceOp": "append"
+      }
+     }
+    ],
+    "hasMore": false,
+    "projections": {
+     "asOfSeq": 1,
+     "values": {}
+    },
+    "assistantStream": {
+     "revision": 0
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 2,
+     "time": 1000014,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [
+       {
+        "content": [
+         {
+          "type": "image",
+          "attachment": {
+           "attachmentId": "sha256:img1",
+           "mediaType": "image/png",
+           "bytes": 1001,
+           "width": 320,
+           "height": 200,
+           "name": "shot.png"
+          }
+         },
+         {
+          "type": "file",
+          "attachment": {
+           "attachmentId": "sha256:file1",
+           "name": "notes (1).txt",
+           "bytes": 2048
+          }
+         },
+         {
+          "type": "text",
+          "text": "Compare these"
+         },
+         {
+          "type": "image",
+          "attachment": {
+           "attachmentId": "sha256:img2",
+           "mediaType": "image/png",
+           "bytes": 1002,
+           "width": 4000,
+           "height": 900,
+           "name": "wide.png"
+          }
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-u1"
+        },
+        "role": "user",
+        "id": "u1"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/start",
+     "seq": 3,
+     "time": 1000021,
+     "data": {
+      "turn": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 4,
+     "time": 1000028,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [],
+      "removedCount": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/start",
+     "seq": 5,
+     "time": 1000035,
+     "data": {
+      "turn": 1,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "user/message",
+     "seq": 6,
+     "time": 1000042,
+     "data": {
+      "content": [
+       {
+        "type": "image",
+        "attachment": {
+         "attachmentId": "sha256:img1",
+         "mediaType": "image/png",
+         "bytes": 1001,
+         "width": 320,
+         "height": 200,
+         "name": "shot.png"
+        }
+       },
+       {
+        "type": "file",
+        "attachment": {
+         "attachmentId": "sha256:file1",
+         "name": "notes (1).txt",
+         "bytes": 2048
+        }
+       },
+       {
+        "type": "text",
+        "text": "Compare these"
+       },
+       {
+        "type": "image",
+        "attachment": {
+         "attachmentId": "sha256:img2",
+         "mediaType": "image/png",
+         "bytes": 1002,
+         "width": 4000,
+         "height": 900,
+         "name": "wide.png"
+        }
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-u1"
+      },
+      "role": "user",
+      "id": "u1"
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "assistant/message",
+     "seq": 7,
+     "time": 1000049,
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "message": {
+       "role": "assistant",
+       "content": [
+        {
+         "type": "image",
+         "attachment": {
+          "attachmentId": "sha256:img3",
+          "mediaType": "image/png",
+          "bytes": 1003,
+          "width": 320,
+          "height": 200,
+          "name": "chart.png"
+         }
+        },
+        {
+         "type": "text",
+         "text": "Done"
+        }
+       ],
+       "source": {
+        "kind": "model",
+        "provider": "p",
+        "model": "m"
+       },
+       "id": "a1"
+      },
+      "stream": [],
+      "usage": {
+       "inputTokens": 10,
+       "outputTokens": 5,
+       "totalTokens": 15
+      }
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/end",
+     "seq": 8,
+     "time": 1000056,
+     "data": {
+      "turn": 1,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/end",
+     "seq": 9,
+     "time": 1000063,
+     "data": {
+      "turn": 1,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 10,
+     "time": 1000070,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [
+       {
+        "content": [
+         {
+          "type": "file",
+          "attachment": {
+           "attachmentId": "sha256:file2",
+           "name": "data.csv",
+           "bytes": 0
+          }
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-u2"
+        },
+        "role": "user",
+        "id": "u2"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/start",
+     "seq": 11,
+     "time": 1000077,
+     "data": {
+      "turn": 2
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 12,
+     "time": 1000084,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [],
+      "removedCount": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/start",
+     "seq": 13,
+     "time": 1000091,
+     "data": {
+      "turn": 2,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "user/message",
+     "seq": 14,
+     "time": 1000098,
+     "data": {
+      "content": [
+       {
+        "type": "file",
+        "attachment": {
+         "attachmentId": "sha256:file2",
+         "name": "data.csv",
+         "bytes": 0
+        }
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-u2"
+      },
+      "role": "user",
+      "id": "u2"
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "tool/call",
+     "seq": 15,
+     "time": 1000105,
+     "data": {
+      "turn": 2,
+      "step": 1,
+      "callId": "img-1",
+      "name": "read_image",
+      "arguments": "{\"file_path\": \"shot.png\"}"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "tool/result",
+     "seq": 16,
+     "time": 1000112,
+     "data": {
+      "turn": 2,
+      "step": 1,
+      "message": {
+       "role": "tool",
+       "source": {
+        "kind": "tool",
+        "callId": "img-1"
+       },
+       "toolCallId": "img-1",
+       "content": [
+        {
+         "type": "text",
+         "text": "<path>shot.png</path>\n<type>image</type>\n<content>\nimage 320x200\n</content>"
+        },
+        {
+         "type": "image",
+         "attachment": {
+          "attachmentId": "sha256:img4",
+          "mediaType": "image/png",
+          "bytes": 1004,
+          "width": 320,
+          "height": 200,
+          "name": "shot.png"
+         }
+        }
+       ],
+       "isError": false,
+       "id": "tr1"
+      },
+      "meta": {
+       "path": "/work/shot.png"
+      }
+     },
+     "surfaceOp": "append",
+     "sourceEventSeqs": [
+      15
+     ]
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "tool/call",
+     "seq": 17,
+     "time": 1000119,
+     "data": {
+      "turn": 2,
+      "step": 1,
+      "callId": "img-2",
+      "name": "read_image",
+      "arguments": "{\"file_path\": \"missing.png\"}"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "tool/result",
+     "seq": 18,
+     "time": 1000126,
+     "data": {
+      "turn": 2,
+      "step": 1,
+      "message": {
+       "role": "tool",
+       "source": {
+        "kind": "tool",
+        "callId": "img-2"
+       },
+       "toolCallId": "img-2",
+       "content": [
+        {
+         "type": "text",
+         "text": "no such file"
+        }
+       ],
+       "isError": true,
+       "id": "tr2"
+      }
+     },
+     "surfaceOp": "append",
+     "sourceEventSeqs": [
+      17
+     ]
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/end",
+     "seq": 19,
+     "time": 1000133,
+     "data": {
+      "turn": 2,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/end",
+     "seq": 20,
+     "time": 1000140,
+     "data": {
+      "turn": 2,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 21,
+     "time": 1000147,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [
+       {
+        "content": [
+         {
+          "type": "text",
+          "text": "Keep going"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-u3"
+        },
+        "role": "user",
+        "id": "u3"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/start",
+     "seq": 22,
+     "time": 1000154,
+     "data": {
+      "turn": 3
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 23,
+     "time": 1000161,
+     "data": {
+      "target": "next-turn",
+      "start": 0,
+      "inserted": [],
+      "removedCount": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/start",
+     "seq": 24,
+     "time": 1000168,
+     "data": {
+      "turn": 3,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "user/message",
+     "seq": 25,
+     "time": 1000175,
+     "data": {
+      "content": [
+       {
+        "type": "text",
+        "text": "Keep going"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-u3"
+      },
+      "role": "user",
+      "id": "u3"
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 26,
+     "time": 1000182,
+     "data": {
+      "target": "next-step",
+      "start": 0,
+      "inserted": [
+       {
+        "content": [
+         {
+          "type": "image",
+          "attachment": {
+           "attachmentId": "sha256:img5",
+           "mediaType": "image/png",
+           "bytes": 1005,
+           "width": 320,
+           "height": 200,
+           "name": "extra.png"
+          }
+         },
+         {
+          "type": "text",
+          "text": "Also this one"
+         }
+        ],
+        "source": {
+         "kind": "user",
+         "rpcId": "rpc-u4"
+        },
+        "role": "user",
+        "id": "u4"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/end",
+     "seq": 27,
+     "time": 1000189,
+     "data": {
+      "turn": 3,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/start",
+     "seq": 28,
+     "time": 1000196,
+     "data": {
+      "turn": 3,
+      "step": 2
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "agent/inbox/spliced",
+     "seq": 29,
+     "time": 1000203,
+     "data": {
+      "target": "next-step",
+      "start": 0,
+      "inserted": [],
+      "removedCount": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "user/message",
+     "seq": 30,
+     "time": 1000210,
+     "data": {
+      "content": [
+       {
+        "type": "image",
+        "attachment": {
+         "attachmentId": "sha256:img5",
+         "mediaType": "image/png",
+         "bytes": 1005,
+         "width": 320,
+         "height": 200,
+         "name": "extra.png"
+        }
+       },
+       {
+        "type": "text",
+        "text": "Also this one"
+       }
+      ],
+      "source": {
+       "kind": "user",
+       "rpcId": "rpc-u4"
+      },
+      "role": "user",
+      "id": "u4"
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "step/end",
+     "seq": 31,
+     "time": 1000217,
+     "data": {
+      "turn": 3,
+      "step": 2
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "type": "turn/end",
+     "seq": 32,
+     "time": 1000224,
+     "data": {
+      "turn": 3,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  }
+ ]
+}
