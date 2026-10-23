@@ -33,6 +33,9 @@ class EventWindow {
     required this.hasMore,
     required this.revision,
     required this.change,
+    this.delta = const [],
+    this.settledAttemptId,
+    this.settlement,
   });
 
   static const empty = EventWindow(
@@ -46,6 +49,17 @@ class EventWindow {
   final bool hasMore;
   final int revision;
   final WindowChangeKind change;
+
+  /// The entries the latest change added: the older page of a `prepend`, the
+  /// appended entry of an `append` (dsh `SessionEventChange.entries`); empty for
+  /// `replace` and `settleAssistant`.
+  final List<EventEntry> delta;
+
+  /// `settleAssistant` only: the attempt whose transient rows were retired.
+  final String? settledAttemptId;
+
+  /// `settleAssistant` only: the durable settlement inserted in their place.
+  final EventEntry? settlement;
 }
 
 /// Session-owned feed; every accepted mutation publishes synchronously
@@ -56,13 +70,23 @@ class MutableEventSource {
   EventWindow get window => _window.value;
   Stream<EventWindow> get changes => _window.changes;
 
-  void _publish(List<EventEntry> entries, bool hasMore, WindowChangeKind kind) {
+  void _publish(
+    List<EventEntry> entries,
+    bool hasMore,
+    WindowChangeKind kind, {
+    List<EventEntry> delta = const [],
+    String? settledAttemptId,
+    EventEntry? settlement,
+  }) {
     _window.set(
       EventWindow(
         entries: List.unmodifiable(entries),
         hasMore: hasMore,
         revision: window.revision + 1,
         change: kind,
+        delta: List.unmodifiable(delta),
+        settledAttemptId: settledAttemptId,
+        settlement: settlement,
       ),
     );
   }
@@ -74,12 +98,14 @@ class MutableEventSource {
     [...older, ...window.entries],
     hasMore,
     WindowChangeKind.prepend,
+    delta: older,
   );
 
   void append(EventEntry entry) => _publish(
     [...window.entries, entry],
     window.hasMore,
     WindowChangeKind.append,
+    delta: [entry],
   );
 
   /// Replace one attempt's transient rows with its durable settlement.
@@ -99,6 +125,12 @@ class MutableEventSource {
         entries.insert(index, settlement);
       }
     }
-    _publish(entries, window.hasMore, WindowChangeKind.settleAssistant);
+    _publish(
+      entries,
+      window.hasMore,
+      WindowChangeKind.settleAssistant,
+      settledAttemptId: attemptId,
+      settlement: settlement,
+    );
   }
 }

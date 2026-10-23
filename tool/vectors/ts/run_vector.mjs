@@ -1,5 +1,6 @@
 // Replays a `dsh-session-vector/1` fixture through dsh's REAL TypeScript client
-// model and prints the `expected` window snapshots as JSON.
+// model and prints `{window, chat}`: the `expected` window snapshots and the chat
+// snapshots of dsh's real conversation engine over each window (chat_glue.mjs).
 //
 //   node run_vector.mjs FIXTURE.json [--out PATH] [--meta]
 //
@@ -85,6 +86,8 @@ const load = specifier => import(pathToFileURL(path.join(dshSrc, specifier)).hre
 const { Session } = await load('packages/api/session-controller/src/client/sessions/session.ts')
 const { RemoteStream } = await load('packages/api/gateway/src/client/remote-stream.ts')
 const { RemoteStreamCarrierError } = await load('packages/api/gateway/src/client/stream-client.ts')
+const { createChatGlue } = await import(pathToFileURL(path.join(here, 'chat_glue.mjs')).href)
+const chatGlue = await createChatGlue(load)
 
 // ---- fixture ----
 
@@ -154,6 +157,7 @@ steps.forEach((step, index) => {
 
 async function * follow(_request, signal) {
   const generation = ++followCalls
+  if (process.env.DSH_VECTOR_TRACE) note(currentStep, `follow opened (#${generation})`)
   const channel = channelOf(generation)
   while (true) {
     const next = await channel.next(signal)
@@ -229,7 +233,9 @@ function encodeEntry(entry) {
 const SNAPSHOT_OPS = new Set(['opened', 'frame', 'ended'])
 let session
 let openPromise
+let chatBinding
 const expected = []
+const expectedChat = []
 
 for (let index = 0; index < steps.length; index++) {
   const step = steps[index]
@@ -240,6 +246,7 @@ for (let index = 0; index < steps.length; index++) {
       if (step.name === 'open') {
         if (session !== undefined) die(`step ${index}: second open action`)
         session = new Session(SESSION_ID, remote)
+        chatBinding = chatGlue.bind(session.eventSource)
         openPromise = session.open().catch(error => { note(index, `open() rejected: ${error instanceof Error ? error.message : String(error)}`) })
       } else if (step.name === 'loadOlder') {
         if (session === undefined) die(`step ${index}: loadOlder before open`)
@@ -285,8 +292,10 @@ for (let index = 0; index < steps.length; index++) {
     hasMore: window.hasMore,
     entries: window.entries.map(encodeEntry),
   })
+  expectedChat.push({ step: index, ...chatBinding.project() })
 }
 
+chatBinding?.unsubscribe()
 await session?.dispose()
 void openPromise
 
@@ -298,7 +307,7 @@ for (const unused of recordedPages.filter(candidate => !candidate.used)) {
   notes.push(`recorded page at step ${unused.index} was never requested by the model`)
 }
 
-const json = `${JSON.stringify(expected)}\n`
+const json = `${JSON.stringify({ window: expected, chat: expectedChat })}\n`
 if (outPath === undefined) process.stdout.write(json)
 else fs.writeFileSync(outPath, json)
 if (wantMeta || notes.length > 0) {
