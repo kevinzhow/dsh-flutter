@@ -90,13 +90,15 @@ Future<String> decodeWithGenerated(List<Map<String, Object?>> steps) async {
 
 Future<void> main(List<String> args) async {
   final port = int.parse(arg(args, 'port', '18701'));
-  final ws = arg(args, 'ws', '../../.local/live-spike/ws');
+  final wsArg = arg(args, 'ws', '../../.local/live-spike/ws');
   final out = arg(args, 'out', '../../.local/live-spike/results.json');
   final rawDir = arg(args, 'raw', '../../.local/live-spike/raw');
   final pinned = arg(args, 'pinned', '0.2.1-rc.2');
   final reuseSession = arg(args, 'session', '');
   final codecOnly = args.contains('--codec-only');
-  Directory(ws).createSync(recursive: true);
+  Directory(wsArg).createSync(recursive: true);
+  // Absolute: the host gets it as cwd and the prompts embed it.
+  final ws = Directory(wsArg).resolveSymbolicLinksSync();
   Directory(rawDir).createSync(recursive: true);
   final c = Checks();
   final clock = Stopwatch()..start();
