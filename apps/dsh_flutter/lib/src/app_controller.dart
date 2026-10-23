@@ -17,6 +17,7 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState;
 import 'package:url_launcher/url_launcher.dart';
@@ -62,6 +63,7 @@ class AppController extends ChangeNotifier {
     DshLocale? locale,
     this.frameScheduler,
     this.platform = const PlatformServices(),
+    this.highlighter,
   }) : store = store ?? MemoryConnectionStore(),
        locale =
            locale ??
@@ -122,6 +124,9 @@ class AppController extends ChangeNotifier {
 
   /// Pickers and file handling of the running platform.
   final PlatformServices platform;
+
+  /// The syntax highlighter every code surface uses (null: plain text).
+  final DshCodeHighlighter? highlighter;
 
   /// The right sidebar (file tree and previews) of every session.
   late final SidebarRightFeature sidebar;

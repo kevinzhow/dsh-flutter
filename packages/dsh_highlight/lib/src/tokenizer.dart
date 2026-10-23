@@ -558,8 +558,13 @@ class Grammar implements RuleHost {
     }
 
     final stopwatch = timeLimitMs != 0 ? (Stopwatch()..start()) : null;
+    final coldAtStart = coldSearchMicros;
     while (!stop) {
-      if (stopwatch != null && stopwatch.elapsedMilliseconds > timeLimitMs) {
+      // The one-time native compile of a pattern's first search is not
+      // tokenizing time (see [coldSearchMicros]).
+      if (stopwatch != null &&
+          stopwatch.elapsedMicroseconds - (coldSearchMicros - coldAtStart) >
+              timeLimitMs * 1000) {
         return _TokenizeStringResult(stack, true);
       }
       final r = _matchRuleOrInjections(

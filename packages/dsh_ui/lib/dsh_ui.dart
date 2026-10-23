@@ -25,6 +25,7 @@ export 'src/dsh_read_block.dart';
 export 'src/dsh_search_block.dart';
 export 'src/dsh_shimmer.dart';
 export 'src/dsh_state_dot.dart';
+export 'src/dsh_syntax_highlighter.dart';
 export 'src/dsh_terminal_block.dart';
 export 'src/dsh_web_block.dart';
 export 'src/dsh_card.dart';

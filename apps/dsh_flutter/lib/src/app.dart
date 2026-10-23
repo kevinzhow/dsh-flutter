@@ -50,6 +50,11 @@ class WhaleeApp extends StatelessWidget {
             canvasColor: dsh.bgBase,
             extensions: [dsh],
           ),
+          // Above the navigator, so sheets and the lightbox highlight too.
+          builder: (context, child) => DshCodeHighlighting(
+            highlighter: controller.highlighter,
+            child: child ?? const SizedBox.shrink(),
+          ),
           home: RootScreen(controller: controller),
         );
       },

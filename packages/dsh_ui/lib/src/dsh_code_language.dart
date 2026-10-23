@@ -24,3 +24,6 @@ bool dshSupportsHighlighting(String? lang) =>
 /// (`CODE_HIGHLIGHT_EXTENSIONS`): the suffixes its code viewer claims.
 List<String> get dshCodeLanguageExtensions =>
     dshLanguageByExtension.keys.toList(growable: false);
+
+/// The grammar id of a (lower-cased) language hint (dsh `grammarForHint`).
+String? dshGrammarByHintOf(String hint) => dshGrammarByHint[hint];

@@ -73,6 +73,14 @@ class OnigMatch {
   }
 }
 
+/// Microseconds spent compiling patterns on their first use. A Dart RegExp
+/// compiles to native code on first use, which can take hundreds of
+/// milliseconds for the big TextMate patterns; that one-time cost must not
+/// count against a line's tokenizing budget (shiki's JS engine compiles
+/// eagerly, outside it), or the first line of a file could time out on a
+/// slow device and come back uncoloured.
+int coldSearchMicros = 0;
+
 /// An Oniguruma pattern compiled to a Dart RegExp.
 class CompiledPattern {
   CompiledPattern._(
@@ -175,6 +183,20 @@ class CompiledPattern {
   /// The first match at or after [start] (only at [start] for `\G`-anchored
   /// patterns).
   OnigMatch? search(String text, int start) {
+    if (!_warm) {
+      // Force the native compile on an empty text so that only the compile,
+      // not a slow match, is booked as cold.
+      _warm = true;
+      final watch = Stopwatch()..start();
+      regex.hasMatch('');
+      coldSearchMicros += watch.elapsedMicroseconds;
+    }
+    return _search(text, start);
+  }
+
+  bool _warm = false;
+
+  OnigMatch? _search(String text, int start) {
     final t = _translated;
     if (t.clipSearch && start > 0) {
       final clipped = text.substring(start);
