@@ -38,3 +38,7 @@ export { ReferenceIconRegular } from '@dsh/ui-primitives/src/ReferenceIcon.tsx'
 export { rankByName } from '@dsh/ui-primitives/src/rank-by-name.ts'
 // Workspace surfaces (ui-workspace WorkspacePickFlow, ui-directory-picker-browse DirectoryBrowser): the modal layer.
 export { Modal } from '@dsh/ui-primitives/src/Modal.tsx'
+
+// Message actions (ui-chat MessageIconActions): the copy tooltip and the clipboard write.
+export { Tooltip } from '@dsh/ui-primitives/src/Tooltip.tsx'
+export { writeClipboard } from '@dsh/ui-primitives/src/clipboard.ts'

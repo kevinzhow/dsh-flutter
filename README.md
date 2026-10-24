@@ -19,7 +19,7 @@ packages/dsh_i18n          pure Dart   zh/en catalog generated from dsh's locale
 packages/dsh_highlight     pure Dart engine + Flutter assets   syntax highlighter: TextMate engine in Dart on shiki's grammars, scopes mapped to dsh's 9 --shiki-token-* classes
 features/dsh_feature_approval          ui-approval: composer takeover for approval requests
 features/dsh_feature_attachment        ui-attachment: composer attachment tray (pick, upload progress/cancel/retry), image tiles in messages
-features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
+features/dsh_feature_chat              ui-chat: chat view (two-sided timeline: older pages never move the reader, automatic paging next to "Load earlier", the latest end is followed, back-to-bottom, scrollbar), user/assistant/turn nodes, reasoning, markdown, message actions, selection
 features/dsh_feature_commands          ui-commands: the `/` command source over the per-session command directory, popupSelect shell, contributions
 features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (chips, send/stop), to-do dock
 features/dsh_feature_directory_picker_browse ui-directory-picker-browse: the in-app folder browser (dsh's Miller dialog at every width), new folder, path editor

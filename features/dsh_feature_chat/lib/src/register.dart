@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'chat_nodes.dart';
 import 'chat_view.dart';
+import 'stream/reading_anchor.dart';
 
 /// `conversation.view` as this feature uses it (owner: the open session).
 final Slot<SessionOwner, Widget> viewSlot = DshSlots.conversationView
@@ -17,16 +18,23 @@ final Slot<ChatNodeOwner, Widget> chatNodeSlot = DshSlots.conversationChatNode
 
 /// Occupy `conversation.view` with the chat and `conversation.chat.node` with
 /// the node renderers this feature owns. `tool-call` is the tool feature's.
+///
+/// [host] is what a tapped link may open (the browser for http(s), the
+/// workspace file preview for local paths); without it links stay inert.
 void registerChatFeature(
   SlotRegistry slots, {
   required DshI18n Function() i18n,
+  ToolHostActions? host,
 }) {
+  // Where each session's reader stopped, for as long as the app runs.
+  final memory = ChatReadingMemory();
   slots.register<SessionOwner, Widget>(
     viewSlot,
     (owner) => ChatView(
       owner: owner,
       slots: slots,
       i18n: i18n(),
+      memory: memory,
       nodeSlot: chatNodeSlot,
       turnTailSlot: DshSlots.conversationChatTurnTail
           .typed<TurnTailOwner, Widget?>(),
@@ -43,12 +51,26 @@ void registerChatFeature(
     key: kind,
   );
 
+  /// Whether [o]'s node is the newest of [kinds] in the snapshot: those rows
+  /// keep their actions visible, earlier ones reveal them on hover.
+  bool newest(ChatNodeOwner o, Set<String> kinds) {
+    final order = o.snapshot.order;
+    for (var i = order.length - 1; i >= 0; i--) {
+      final n = o.snapshot.nodes[order[i]];
+      if (n != null && kinds.contains(n.kind)) return n.key == o.node.key;
+    }
+    return false;
+  }
+
+  const userKinds = {'user', 'steering'};
   node('user', (o, t) {
     final d = o.node.data as MessageData;
     final parts = d.parts;
     return UserBubble(
       text: parts.text,
       i18n: t,
+      time: d.time,
+      latest: newest(o, userKinds),
       attachments: attachmentViews(parts.attachments),
       owner: o.session,
       slots: slots,
@@ -61,6 +83,8 @@ void registerChatFeature(
       text: parts.text,
       i18n: t,
       steering: true,
+      time: d.time,
+      latest: newest(o, userKinds),
       attachments: attachmentViews(parts.attachments),
       owner: o.session,
       slots: slots,
@@ -83,11 +107,16 @@ void registerChatFeature(
       i18n: t,
       owner: o.session,
       slots: slots,
+      host: host,
     ),
   );
   node(
     'turn-tail',
-    (o, t) => TurnTailView(data: o.node.data as TurnTailData, i18n: t),
+    (o, t) => TurnTailView(
+      data: o.node.data as TurnTailData,
+      i18n: t,
+      latest: newest(o, const {'turn-tail'}),
+    ),
   );
   node(
     'turn-error',
