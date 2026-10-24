@@ -1,6 +1,5 @@
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import '../app_controller.dart';
@@ -31,8 +30,8 @@ class SecurityChip extends StatelessWidget {
       key: ValueKey('security-${security.name}'),
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          plain ? Icons.lock_open : Icons.lock_outline,
+        DshIcon(
+          plain ? CharcoalIcons.warning : CharcoalIcons.lock,
           size: 12,
           color: color,
         ),

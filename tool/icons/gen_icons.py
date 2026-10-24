@@ -105,7 +105,7 @@ def circle_path(cx, cy, r):
     return 'M%g %gm-%g 0a%g %g 0 1 0 %g 0a%g %g 0 1 0 -%g 0' % (cx, cy, r, r, r, 2 * r, r, r, 2 * r)
 
 
-def elements(svg):
+def elements(svg, default_fill=False):
     out = []
     for m in re.finditer(r'<(path|circle|rect|line)\b([^>]*?)/>', svg):
         tag, attrs = m.group(1), dict(re.findall(r'(\w+)="([^"]*)"', m.group(2)))
@@ -117,8 +117,13 @@ def elements(svg):
             d = 'M%s %sL%s %s' % (attrs['x1'], attrs['y1'], attrs['x2'], attrs['y2'])
         else:
             x, y, w, h = (float(attrs.get(k, 0)) for k in ('x', 'y', 'width', 'height'))
-            d = 'M%g %gh%gv%gh-%gz' % (x, y, w, h, w)
-        fill = attrs.get('fill') == 'currentColor'
+            r = float(attrs.get('rx', 0))
+            if r:
+                d = 'M%g %gh%ga%g %g 0 0 1 %g %gv%ga%g %g 0 0 1 -%g %gh-%ga%g %g 0 0 1 -%g -%gv-%ga%g %g 0 0 1 %g -%gz' % (
+                    x + r, y, w - 2 * r, r, r, r, r, h - 2 * r, r, r, r, r, w - 2 * r, r, r, r, r, h - 2 * r, r, r, r, r)
+            else:
+                d = 'M%g %gh%gv%gh-%gz' % (x, y, w, h, w)
+        fill = attrs.get('fill', 'currentColor' if default_fill else 'none') == 'currentColor'
         cap = 'square' if 'strokeLinecap="square"' in m.group(2) else ('round' if 'strokeLinecap="round"' in m.group(2) else 'butt')
         evenodd = attrs.get('fillRule') == 'evenodd' or 'fillRule="evenodd"' in m.group(2)
         opacity = float(attrs['opacity']) if 'opacity' in attrs else 1.0

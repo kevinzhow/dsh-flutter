@@ -3,7 +3,6 @@
 /// controls.
 library;
 
-export 'src/brand_mark.dart';
 export 'src/leading_controls.dart';
 export 'src/register.dart';
 export 'src/sidebar_root.dart';

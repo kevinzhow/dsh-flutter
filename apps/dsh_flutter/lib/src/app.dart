@@ -189,7 +189,7 @@ class RootScreen extends StatelessWidget {
                   child: SafeArea(
                     child: DshIconButton(
                       key: const ValueKey('pairing-settings'),
-                      icon: Icons.tune,
+                      icon: CharcoalIcons.sliders,
                       plain: true,
                       semanticLabel: controller.i18n.t('settings', 'trigger'),
                       onPressed: () => _settings(context),

@@ -164,3 +164,30 @@ repository. Its own dependencies are `equatable` (MIT, Felix Angelov), `quiver` 
 The visual parity tool (`tool/parity-web`, development and test only, not part of the app) adds the npm packages `@xterm/xterm`
 and `@xterm/addon-fit` (MIT, Copyright (c) 2017-2022 The xterm.js authors and 2014-2016 SourceLair, Microsoft Corporation and
 contributors) because dsh web's terminal is built on them and the React provider mounts that real component.
+
+## Charcoal V2 icons
+
+The Charcoal V2 SVG glyphs vendored in `tool/icons/charcoal/` and generated into `packages/dsh_ui/lib/src/charcoal_icons.g.dart`
+come from kevinzhow/charcoal-flutter (`packages/charcoal_icons`, commit `de89016ed5ed8b2054ff782d4ddd38cc5ca3847`), whose
+artwork is from pixiv/charcoal (Copyright 2022 pixiv Inc.) and pixiv/charcoal-ios (Copyright pixiv Inc.), all licensed under the
+Apache License, Version 2.0. The licence text and the upstream NOTICE are in `tool/icons/charcoal/LICENSE` and
+`tool/icons/charcoal/NOTICE`:
+
+    Charcoal UI for Flutter
+    Copyright 2026 charcoal-flutter contributors
+
+    This product includes design tokens and behavior derived from Charcoal:
+
+      Charcoal
+      Copyright 2022 pixiv Inc.
+      https://github.com/pixiv/charcoal
+
+      Charcoal iOS
+      Copyright pixiv Inc.
+      https://github.com/pixiv/charcoal-ios
+
+    The upstream works and this distribution are licensed under the Apache License,
+    Version 2.0. Product names and trademarks remain the property of their respective
+    owners.
+
+The glyphs are used unmodified apart from the conversion of their path data into Dart constants.

@@ -224,7 +224,9 @@ class _Chrome extends StatelessWidget {
         if (showFullscreen) ...[
           _ChromeButton(
             key: const ValueKey('sidebar-fullscreen'),
-            icon: DshShellIcons.fullscreen,
+            icon: state.fullscreen
+                ? DshShellIcons.panelExitFullscreen
+                : DshShellIcons.panelFullscreen,
             label: fullscreenLabel,
             keys: fullscreenKeys,
             onPressed: state.toggleFullscreen,

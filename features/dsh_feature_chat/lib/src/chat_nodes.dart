@@ -3,7 +3,7 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons, SelectableText;
+import 'package:flutter/material.dart' show SelectableText;
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 import 'package:flutter/widgets.dart';
 
@@ -320,9 +320,9 @@ class _ReasoningRowState extends State<_ReasoningRow> {
       onToggle: (open) => setState(() => _byHand = open),
       header: Row(
         children: [
-          Icon(
-            Icons.psychology_outlined,
-            size: 16,
+          DshIcon(
+            DshShellIcons.think,
+            size: 14,
             color: theme.color('--dsw-alias-label-tertiary'),
           ),
           const SizedBox(width: DshSpace.xs),

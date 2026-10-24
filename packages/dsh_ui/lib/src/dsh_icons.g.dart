@@ -327,7 +327,7 @@ abstract final class DshIcons {
     strokeWidth: 1.0,
     shapes: [
       DshIconShape(
-        'M1.52075 4.07373h10.3932v10.3932h-10.3932z',
+        'M3.52075 4.07373h6.3932a2 2 0 0 1 2 2v6.3932a2 2 0 0 1 -2 2h-6.3932a2 2 0 0 1 -2 -2v-6.3932a2 2 0 0 1 2 -2z',
         fill: false,
         cap: DshIconCap.butt,
         evenOdd: false,

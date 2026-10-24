@@ -133,7 +133,7 @@ def c_i18n():
 
 
 def c_icons():
-    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_shell_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
+    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_shell_icons.py', 'gen_charcoal_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
     for r in results:
         if r[0] == 1 or (isinstance(r[0], int) and r[0] not in (0, 2)):
             return r

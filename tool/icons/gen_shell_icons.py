@@ -27,7 +27,6 @@ ICONS = {
     'IconNewChatOutlineRegular': 'newChatRegular',
     'IconNewChatOutlineMedium': 'newChatMedium',
     'IconEllipsisOutlineRegular': 'ellipsis',
-    'IconFullscreenOutlineRegular': 'fullscreen',
     'IconPluginPinwheelOutlineRegular': 'pluginPinwheel',
     'IconAlarmClockOutlineRegular': 'alarmClock',
     'IconUserOutlineRegular': 'user',
@@ -60,7 +59,30 @@ ICONS = {
     'IconPlusOutlineRegular': 'plusOutline',
     'IconChevronsUpDownOutlineRegular': 'chevronsUpDown',
     'IconCompareSplitOutlineRegular': 'compareSplit',
+    'IconEllipsisOutlineMedium': 'ellipsisMedium',
+    'IconThinkOutlineRegular': 'think',
 }
+
+# Glyphs dsh draws as inline SVG inside a component (no `Icon*` export): ident -> (file under packages/client,
+# anchor text inside the <svg>, view box edge, doc). The enclosing <svg>...</svg> is read; elements without a
+# `fill` attribute inherit the svg's own `fill` (none, or currentColor).
+INLINE = {
+    'send': ('ui-conversation/src/client/skeleton/InputBar.tsx', 'M8.3125 0.980183', 16, 'the composer send arrow'),
+    'stop': ('ui-conversation/src/client/skeleton/InputBar.tsx', '<rect x="3" y="3" width="10" height="10" rx="3"', 16,
+             'the composer stop square'),
+    'panelFullscreen': ('ui-sidebar-right/src/client/shell/SidebarRight.tsx', 'M2.33203 10.4054V13.1681', 16,
+                   'the right panel fullscreen glyph'),
+    'panelExitFullscreen': ('ui-sidebar-right/src/client/shell/SidebarRight.tsx', 'M9 2.5V6C9', 16,
+                       'the right panel restore glyph'),
+    'dockSplit': ('ui-dockkit/src/components/TabPanel.tsx', 'M13.5 1.5H2.5C1.94772', 16, "the dock pane's split control"),
+}
+
+# The shortcuts feature's supplied artwork (Icons.tsx): an object of path fragments, drawn filled at 16px (edit: 12px).
+SHORTCUT_ARTWORK = {'error': ('shortcutError', 16), 'success': ('shortcutSuccess', 16), 'edit': ('shortcutEdit', 12)}
+
+# The drop hint's glyph (TabPanel.tsx ZoneGlyph): the panel frame as an even-odd ring and the zone's solid fill.
+DOCK_ZONES = {'center': 'dockZoneCenter', 'left': 'dockZoneLeft', 'right': 'dockZoneRight', 'top': 'dockZoneTop',
+              'bottom': 'dockZoneBottom'}
 
 
 def build():
@@ -104,6 +126,62 @@ def build():
                 d, str(fill).lower(), cap, str(evenodd).lower(), '' if opacity == 1.0 else ', opacity: %s' % opacity))
         lines.append('    ],')
         lines.append('  );')
+    def emit(ident, doc, view_box, size, els, cut=None):
+        lines.append('  /// %s.' % doc)
+        lines.append('  static const %s = DshIconData(' % ident)
+        lines.append('    viewBox: %d,' % view_box)
+        lines.append('    size: %d,' % size)
+        lines.append('    strokeWidth: 1.0,')
+        lines.append('    shapes: [')
+        for i, (d, fill, cap, evenodd, opacity) in enumerate(els):
+            if cut is not None and i == cut[0]:
+                lines.append("      DshIconShape('%s', cutWidth: %s)," % (d, cut[1]))
+                continue
+            lines.append("      DshIconShape('%s', fill: %s, cap: DshIconCap.%s, evenOdd: %s%s)," % (
+                d, str(fill).lower(), cap, str(evenodd).lower(), '' if opacity == 1.0 else ', opacity: %s' % opacity))
+        lines.append('    ],')
+        lines.append('  );')
+
+    # IconArchiveOffOutlineRegular: the box strokes are masked along the slash (mask path stroked 3 wider than the icon).
+    index_tsx = index
+    m = re.search(r'const IconArchiveOffOutlineArtwork = [\s\S]*?</svg>', index_tsx)
+    art = m.group(0)
+    body = re.search(r'<g mask[^>]*>([\s\S]*?)</g>', art).group(1)
+    cut_d = re.search(r'<path d="([^"]+)" stroke="black"', art).group(1)
+    slash = re.findall(r'<path d="([^"]+)" />\s*</svg>', art)[0]
+    els = [(d, False, 'round', False, 1.0) for d, _f, _c, _e, _o in g.elements(body)]
+    els.append((cut_d, False, 'round', False, 1.0))
+    els.append((slash, False, 'round', False, 1.0))
+    emit('archiveOff', '`IconArchiveOffOutlineRegular` (masked along the slash)', 16, 16, els, cut=(len(els) - 2, 4.0))
+
+    client = g.SRC / 'packages' / 'client'
+    for ident, (rel, anchor, edge, doc) in INLINE.items():
+        text = (client / rel).read_text()
+        at = text.find(anchor)
+        if at < 0:
+            sys.exit('gen_shell_icons: anchor of %s not found in %s' % (ident, rel))
+        start, end = text.rfind('<svg', 0, at), text.find('</svg>', at)
+        svg = text[start:end]
+        fill_none = re.match(r'<svg[^>]*fill="none"', svg) is not None
+        els = g.elements(svg, default_fill=not fill_none)
+        if not els:
+            sys.exit('gen_shell_icons: no geometry in %s' % ident)
+        emit(ident, 'dsh inline SVG: %s (%s)' % (doc, rel.split('/')[-1]), edge, edge, els)
+
+    icons_tsx = (client / 'ui-shortcuts/src/client/Icons.tsx').read_text()
+    for key, (ident, size) in SHORTCUT_ARTWORK.items():
+        m = re.search(r'\b%s: <>(.*?)</>' % key, icons_tsx, re.S)
+        if m is None:
+            sys.exit('gen_shell_icons: shortcut artwork %s not found' % key)
+        emit(ident, 'dsh inline SVG: the shortcuts %s glyph (Icons.tsx)' % key, size, size,
+             g.elements('<svg>%s</svg>' % m.group(1), default_fill=True))
+
+    panel = (client / 'ui-dockkit/src/components/TabPanel.tsx').read_text()
+    frame = re.search(r"const PANEL_FRAME =\s*'([^']+)'", panel).group(1)
+    for zone, ident in DOCK_ZONES.items():
+        fill = re.search(r"\b%s: '([^']+)'" % zone, panel[panel.index('ZONE_FILL'):]).group(1)
+        emit(ident, 'dsh inline SVG: the dock drop hint, %s zone (TabPanel.tsx)' % zone, 16, 16,
+             [(frame, True, 'butt', True, 1.0), (fill, True, 'butt', False, 1.0)])
     lines.append('}')
     return '\n'.join(lines) + '\n'
 
@@ -120,7 +198,7 @@ def main():
         print('gen_shell_icons: up to date')
         return
     OUT.write_text(text)
-    print('gen_shell_icons: wrote %s (%d icons)' % (OUT.relative_to(g.ROOT), len(ICONS)))
+    print('gen_shell_icons: wrote %s (%d icons)' % (OUT.relative_to(g.ROOT), len(ICONS) + len(INLINE) + len(SHORTCUT_ARTWORK) + len(DOCK_ZONES)))
 
 
 if __name__ == '__main__':

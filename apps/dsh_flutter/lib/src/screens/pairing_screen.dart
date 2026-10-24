@@ -1,6 +1,6 @@
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons, Scaffold;
+import 'package:flutter/material.dart' show Scaffold;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -87,7 +87,7 @@ class RepairRoute extends StatelessWidget {
                     children: [
                       DshIconButton(
                         key: const ValueKey('repair-back'),
-                        icon: Icons.arrow_back,
+                        icon: CharcoalIcons.arrowLeft,
                         plain: true,
                         semanticLabel: controller.i18n.t('common', 'back'),
                         onPressed: () => Navigator.of(context).maybePop(),
@@ -315,8 +315,8 @@ class _PairingFormState extends State<PairingForm> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.lock_open,
+                DshIcon(
+                  CharcoalIcons.warning,
                   size: 14,
                   color: theme.color('--dsw-alias-state-warn-label'),
                 ),
@@ -354,14 +354,14 @@ class _PairingFormState extends State<PairingForm> {
             DshButton(
               key: const ValueKey('pairing-paste'),
               variant: DshButtonVariant.outline,
-              icon: const Icon(Icons.content_paste),
+              icon: DshIcon(CharcoalIcons.paste, size: 16),
               onPressed: connecting ? null : _paste,
               child: Text(_a('pairing.action.paste')),
             ),
             DshButton(
               key: const ValueKey('pairing-scan'),
               variant: DshButtonVariant.outline,
-              icon: const Icon(Icons.qr_code_scanner),
+              icon: DshIcon(CharcoalIcons.scan, size: 16),
               onPressed: connecting ? null : _scan,
               child: Text(_a('pairing.action.scan')),
             ),

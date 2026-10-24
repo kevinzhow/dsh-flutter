@@ -426,12 +426,12 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
       DshMenuItem(
         'hide-archived',
         _t('viewOptions.hideArchived'),
-        icon: DshShellIcons.archive,
+        icon: DshShellIcons.archiveOff,
       ),
       DshMenuItem(
         'show-archived',
         _t('viewOptions.showArchived'),
-        icon: DshShellIcons.flatList,
+        icon: DshIcons.chatLines,
       ),
       DshMenuItem(
         'only-archived',
@@ -788,7 +788,7 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
         key: const ValueKey('browser-empty'),
         children: [
           DshIcon(
-            archivedOnly ? DshShellIcons.archive : DshShellIcons.flatList,
+            archivedOnly ? DshShellIcons.archive : DshIcons.chatLines,
             size: 24,
             color: theme.color('--dsw-alias-label-caption'),
           ),

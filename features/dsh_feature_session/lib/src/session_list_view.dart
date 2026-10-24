@@ -1,7 +1,7 @@
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons, RefreshIndicator;
+import 'package:flutter/material.dart' show RefreshIndicator;
 import 'package:flutter/widgets.dart';
 
 /// Relative time of [then] against [now] in the app copy ("5 min ago").
@@ -192,9 +192,9 @@ class _Row extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  size: 20,
+                DshIcon(
+                  DshIcons.chevronRight,
+                  size: 16,
                   color: theme.color('--dsw-alias-label-tertiary'),
                 ),
               ],

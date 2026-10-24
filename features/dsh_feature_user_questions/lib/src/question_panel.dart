@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'question_tracker.dart';
@@ -223,10 +222,11 @@ class _QuestionPanelState extends State<QuestionPanel> {
                 ),
               ),
             const SizedBox(height: DshSpace.sm),
-            for (final o in q.options)
+            for (final (i, o) in q.options.indexed)
               _OptionTile(
                 key: ValueKey('option-${o.label}'),
                 option: o,
+                index: i,
                 selected: draft.selected.contains(o.label),
                 multi: q.multiSelect,
                 enabled: !_busy,
@@ -301,10 +301,83 @@ class _QuestionPanelState extends State<QuestionPanel> {
   }
 }
 
+/// dsh's option indicator (QuestionComposer `.checkbox` and `.number`): a
+/// 14px box with the check inside for several answers, the option's number on
+/// a small overlay tile for one.
+class _OptionMark extends StatelessWidget {
+  const _OptionMark({
+    required this.multi,
+    required this.selected,
+    required this.index,
+  });
+
+  final bool multi;
+  final bool selected;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final radius = BorderRadius.circular(theme.number('--dsw-radius-xs'));
+    return SizedBox(
+      width: 20,
+      height: 20,
+      child: multi
+          ? Center(
+              child: DshDecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: radius,
+                  color: selected ? theme.labelPrimary : null,
+                  border: Border.all(
+                    color: selected
+                        ? theme.labelPrimary
+                        : theme.color('--dsw-alias-border-l4'),
+                    width: 0.5,
+                  ),
+                ),
+                child: SizedBox(
+                  width: 14,
+                  height: 14,
+                  child: selected
+                      ? Center(
+                          child: DshIcon(
+                            DshIcons.check,
+                            size: 12,
+                            color: theme.labelPrimaryForeground,
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+            )
+          : DshDecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: radius,
+                color: theme.color('--dsw-alias-bg-overlay'),
+              ),
+              child: Center(
+                child: DshChromeText(
+                  '${index + 1}',
+                  style: theme
+                      .textStyle('--dsw-font-xxs-12')
+                      .copyWith(
+                        color: selected
+                            ? theme.labelPrimary
+                            : theme.color('--dsw-alias-label-secondary'),
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+              ),
+            ),
+    );
+  }
+}
+
 class _OptionTile extends StatelessWidget {
   const _OptionTile({
     super.key,
     required this.option,
+    required this.index,
     required this.selected,
     required this.multi,
     required this.enabled,
@@ -312,6 +385,7 @@ class _OptionTile extends StatelessWidget {
   });
 
   final QuestionOption option;
+  final int index;
   final bool selected;
   final bool multi;
   final bool enabled;
@@ -320,7 +394,6 @@ class _OptionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    final accent = theme.color('--dsw-alias-state-business-primary');
     return Semantics(
       button: true,
       selected: selected,
@@ -333,19 +406,7 @@ class _OptionTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: DshSpace.xs),
             child: Row(
               children: [
-                Icon(
-                  multi
-                      ? (selected
-                            ? Icons.check_box
-                            : Icons.check_box_outline_blank)
-                      : (selected
-                            ? Icons.radio_button_checked
-                            : Icons.radio_button_unchecked),
-                  size: 20,
-                  color: selected
-                      ? accent
-                      : theme.color('--dsw-alias-label-tertiary'),
-                ),
+                _OptionMark(multi: multi, selected: selected, index: index),
                 const SizedBox(width: DshSpace.md),
                 Expanded(
                   child: Column(

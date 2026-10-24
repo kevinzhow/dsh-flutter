@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_icon.dart';
+import 'dsh_icons.g.dart';
 import 'theme_access.dart';
 
 /// A collapsible section: a tappable header row and a body shown while open
@@ -54,9 +55,9 @@ class _DshDisclosureState extends State<DshDisclosure> {
               child: Row(
                 children: [
                   Expanded(child: widget.header),
-                  Icon(
-                    _open ? Icons.expand_less : Icons.expand_more,
-                    size: 18,
+                  DshIcon(
+                    _open ? DshIcons.chevronUp : DshIcons.chevronDown,
+                    size: 14,
                     color: theme.color('--dsw-alias-label-tertiary'),
                   ),
                 ],
