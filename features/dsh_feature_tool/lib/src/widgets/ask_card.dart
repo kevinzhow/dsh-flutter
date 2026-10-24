@@ -19,13 +19,16 @@ class AskCardView extends StatelessWidget {
       UnansweredAsk(:final questions, :final verdict) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(verdict, style: base.copyWith(color: theme.labelPrimary)),
+          DshChromeText(
+            verdict,
+            style: base.copyWith(color: theme.labelPrimary),
+          ),
           const SizedBox(height: 16),
           for (var i = 0; i < questions.length; i++) ...[
             if (i > 0) const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text(
+              child: DshChromeText(
                 questions[i].question,
                 style: base.copyWith(color: tertiary),
               ),
@@ -38,13 +41,19 @@ class AskCardView extends StatelessWidget {
         children: [
           for (var i = 0; i < questions.length; i++) ...[
             if (i > 0) const SizedBox(height: 16),
-            Text(questions[i].question, style: base.copyWith(color: tertiary)),
+            DshChromeText(
+              questions[i].question,
+              style: base.copyWith(color: tertiary),
+            ),
             const SizedBox(height: 2),
             if (questions[i].answers.isEmpty)
-              Text(skippedLabel, style: base.copyWith(color: tertiary))
+              DshChromeText(skippedLabel, style: base.copyWith(color: tertiary))
             else
               for (final a in questions[i].answers)
-                Text(a, style: base.copyWith(color: theme.labelPrimary)),
+                DshChromeText(
+                  a,
+                  style: base.copyWith(color: theme.labelPrimary),
+                ),
           ],
         ],
       ),

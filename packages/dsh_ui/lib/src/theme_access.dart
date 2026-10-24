@@ -46,6 +46,10 @@ abstract final class DshSpace {
   static const double readableWidth = 760;
 }
 
-/// Width of dsh's `0.5px` hairlines (card borders, dividers) as Chromium paints
-/// them: whole device pixels, two at the 2x density of the parity captures.
+/// Width of dsh's `0.5px` hairlines (card borders, dividers) as the web client
+/// paints them: a CSS border is snapped to whole layout pixels and never to
+/// less than one, so `0.5px` is a full 1px line. Blink in the parity captures
+/// lays out in CSS pixels at every device scale factor (the captures emulate it
+/// instead of zooming the page), so the line is one logical pixel at 1x and 2x
+/// alike (two device pixels at 2x).
 const double dshHairline = 1.0;

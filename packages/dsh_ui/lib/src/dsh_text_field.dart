@@ -3,6 +3,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/services.dart' show TextInputAction;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// Token-styled text input (fill `--dsw-specific-input-major`, hairline
@@ -92,7 +93,7 @@ class DshTextField extends StatelessWidget {
         if (hasError)
           Padding(
             padding: const EdgeInsets.only(top: DshSpace.xs),
-            child: Text(
+            child: DshChromeText(
               errorText!,
               style: theme
                   .textStyle('--dsw-font-xxs-12')

@@ -7,6 +7,7 @@ import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_settings.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// One choice of a [showDshOptionSheet].
@@ -94,7 +95,7 @@ class DshOptionSheet extends StatelessWidget {
                 DshSpace.lg,
                 DshSpace.xs,
               ),
-              child: Text(
+              child: DshChromeText(
                 title!,
                 style: theme
                     .textStyle('--dsw-font-s-strong-14')
@@ -149,7 +150,7 @@ class DshOptionSheet extends StatelessWidget {
                                       Row(
                                         children: [
                                           Flexible(
-                                            child: Text(
+                                            child: DshChromeText(
                                               option.label,
                                               style: label,
                                             ),
@@ -165,7 +166,7 @@ class DshOptionSheet extends StatelessWidget {
                                           padding: const EdgeInsets.only(
                                             top: 2,
                                           ),
-                                          child: Text(
+                                          child: DshChromeText(
                                             option.detail!,
                                             style: caption,
                                           ),
@@ -208,7 +209,7 @@ class _Badge extends StatelessWidget {
         theme.radiusSm / 2,
         color: theme.color('--dsw-alias-bg-module-platform'),
       ),
-      child: Text(
+      child: DshChromeText(
         text,
         style: theme
             .textStyle('--dsw-font-xxxs-strong-11')
@@ -308,7 +309,7 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(
+                        child: DshChromeText(
                           widget.title,
                           style: theme
                               .textStyle('--dsw-font-base-strong-16')
@@ -354,7 +355,7 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: Text(
+                        child: DshChromeText(
                           widget.description,
                           key: const ValueKey('risk-description'),
                           style: body,
@@ -385,7 +386,7 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                         onPressed: () => Navigator.of(context).pop(false),
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(minWidth: 44),
-                          child: Text(
+                          child: DshChromeText(
                             widget.cancelLabel,
                             textAlign: TextAlign.center,
                           ),
@@ -399,7 +400,7 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                             : null,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(minWidth: 108),
-                          child: Text(
+                          child: DshChromeText(
                             widget.confirmLabel,
                             textAlign: TextAlign.center,
                           ),

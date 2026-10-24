@@ -38,11 +38,11 @@ DshConnectionIndicator indicator(
   onReconnect: onReconnect ?? () {},
 );
 
-BoxDecoration surface(WidgetTester t) =>
+ShapeDecoration surface(WidgetTester t) =>
     t
             .widget<Container>(find.byKey(DshConnectionIndicator.surfaceKey))
             .decoration!
-        as BoxDecoration;
+        as ShapeDecoration;
 
 void main() {
   for (final brightness in [Brightness.light, Brightness.dark]) {

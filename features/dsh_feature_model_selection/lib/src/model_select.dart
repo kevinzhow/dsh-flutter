@@ -105,7 +105,7 @@ class _ModelSeatState extends State<ModelSeat> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: DshChromeText(
                         modelLabel,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -116,7 +116,7 @@ class _ModelSeatState extends State<ModelSeat> {
                       const SizedBox(width: 4),
                       Flexible(
                         flex: 0,
-                        child: Text(
+                        child: DshChromeText(
                           effort,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -389,7 +389,7 @@ class _ModelSheetState extends State<ModelSheet> {
           else
             const SizedBox(width: DshSpace.sm),
           Expanded(
-            child: Text(
+            child: DshChromeText(
               title,
               style: theme
                   .textStyle('--dsw-font-s-strong-14')
@@ -418,7 +418,7 @@ class _ModelSheetState extends State<ModelSheet> {
           padding: const EdgeInsets.symmetric(horizontal: DshSpace.lg),
           child: Row(
             children: [
-              Text(
+              DshChromeText(
                 label,
                 style: theme
                     .textStyle('--dsw-font-base-16')
@@ -426,7 +426,7 @@ class _ModelSheetState extends State<ModelSheet> {
               ),
               const SizedBox(width: DshSpace.md),
               Expanded(
-                child: Text(
+                child: DshChromeText(
                   value,
                   textAlign: TextAlign.end,
                   maxLines: 1,
@@ -503,7 +503,7 @@ class _ModelSheetState extends State<ModelSheet> {
           ),
           const SizedBox(width: DshSpace.sm),
           Expanded(
-            child: Text(
+            child: DshChromeText(
               text,
               style: theme
                   .textStyle('--dsw-font-xxs-12')
@@ -517,7 +517,7 @@ class _ModelSheetState extends State<ModelSheet> {
               onTap: retry,
               child: Padding(
                 padding: const EdgeInsets.only(left: DshSpace.sm),
-                child: Text(
+                child: DshChromeText(
                   widget.i18n.t('common', 'retry'),
                   style: theme
                       .textStyle('--dsw-font-xxs-strong-12')
@@ -556,7 +556,7 @@ class _ModelSheetState extends State<ModelSheet> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
+                  child: DshChromeText(
                     label,
                     style: theme
                         .textStyle('--dsw-font-base-16')
@@ -643,7 +643,7 @@ class _ModelSheetState extends State<ModelSheet> {
                     DshSpace.lg,
                     DshSpace.xs,
                   ),
-                  child: Text(
+                  child: DshChromeText(
                     e.group.id == 'deepseek-account'
                         ? accountName
                         : e.group.name,
@@ -687,7 +687,7 @@ class _ModelSheetState extends State<ModelSheet> {
       horizontal: DshSpace.lg,
       vertical: DshSpace.md,
     ),
-    child: Text(
+    child: DshChromeText(
       text,
       style: theme
           .textStyle('--dsw-font-s-14')

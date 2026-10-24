@@ -95,7 +95,7 @@ class _QuestionPanelState extends State<QuestionPanel> {
               const DshStatusDot(DshStatus.warn),
               const SizedBox(width: DshSpace.sm),
               Expanded(
-                child: Text(
+                child: DshChromeText(
                   questions.length > 1
                       ? _a(
                           'question.progress',
@@ -114,19 +114,19 @@ class _QuestionPanelState extends State<QuestionPanel> {
                 key: const ValueKey('question-dismiss'),
                 size: DshButtonSize.sm,
                 onPressed: _busy ? null : () => _run(widget.pending.dismiss),
-                child: Text(_q('nav.cancel')),
+                child: DshChromeText(_q('nav.cancel')),
               ),
             ],
           ),
           const SizedBox(height: DshSpace.sm),
           if (q.header != null)
-            Text(
+            DshChromeText(
               q.header!,
               style: theme
                   .textStyle('--dsw-font-xxs-strong-12')
                   .copyWith(color: theme.labelSecondary),
             ),
-          Text(
+          DshChromeText(
             q.question,
             key: const ValueKey('question-text'),
             style: theme
@@ -136,7 +136,7 @@ class _QuestionPanelState extends State<QuestionPanel> {
           if (q.detail != null)
             Padding(
               padding: const EdgeInsets.only(top: DshSpace.xs),
-              child: Text(
+              child: DshChromeText(
                 q.detail!,
                 style: theme
                     .textStyle('--dsw-font-s-14')
@@ -180,7 +180,7 @@ class _QuestionPanelState extends State<QuestionPanel> {
           if (_error != null)
             Padding(
               padding: const EdgeInsets.only(top: DshSpace.xs),
-              child: Text(
+              child: DshChromeText(
                 _error!,
                 key: const ValueKey('question-error'),
                 style: theme
@@ -198,7 +198,7 @@ class _QuestionPanelState extends State<QuestionPanel> {
                 DshButton(
                   key: const ValueKey('question-prev'),
                   onPressed: _busy ? null : () => setState(() => _index--),
-                  child: Text(_q('nav.prev')),
+                  child: DshChromeText(_q('nav.prev')),
                 ),
               const SizedBox(width: DshSpace.sm),
               DshButton(
@@ -207,7 +207,9 @@ class _QuestionPanelState extends State<QuestionPanel> {
                 onPressed: _busy || !_answered(_index)
                     ? null
                     : (last ? _submit : () => setState(() => _index++)),
-                child: Text(last ? _a('question.submit') : _q('action.next')),
+                child: DshChromeText(
+                  last ? _a('question.submit') : _q('action.next'),
+                ),
               ),
             ],
           ),
@@ -267,14 +269,14 @@ class _OptionTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      DshChromeText(
                         option.label,
                         style: theme
                             .textStyle('--dsw-font-s-14')
                             .copyWith(color: theme.labelPrimary),
                       ),
                       if (option.description != null)
-                        Text(
+                        DshChromeText(
                           option.description!,
                           style: theme
                               .textStyle('--dsw-font-xxs-12')

@@ -45,7 +45,7 @@ class PlanSheet extends StatelessWidget {
               const DshMarkdownFileIcon(size: 16),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: DshChromeText(
                   plan.title,
                   key: const ValueKey('plan-sheet-title'),
                   maxLines: 1,
@@ -63,7 +63,7 @@ class PlanSheet extends StatelessWidget {
                   width: DshSpace.touch,
                   height: DshSpace.touch,
                   child: Center(
-                    child: Text(
+                    child: DshChromeText(
                       i18n.t('common', 'close'),
                       style: theme
                           .textStyle('--dsw-font-xs-13')

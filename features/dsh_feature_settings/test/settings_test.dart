@@ -106,7 +106,9 @@ void main() {
       expect(find.byKey(const ValueKey('general-section')), findsOneWidget);
       expect(
         t
-            .widget<Text>(find.byKey(const ValueKey('settings-section-title')))
+            .widget<DshChromeText>(
+              find.byKey(const ValueKey('settings-section-title')),
+            )
             .data,
         'General',
       );

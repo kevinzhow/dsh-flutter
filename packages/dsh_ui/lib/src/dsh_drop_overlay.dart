@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'dsh_file_types.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// The invitation shown over the window while a file is dragged onto it (dsh
@@ -28,7 +29,7 @@ class DshDropOverlay extends StatelessWidget {
               children: [
                 const DshFileTypeIcon(kind: 'image', size: 56),
                 const SizedBox(height: 16),
-                Text(
+                DshChromeText(
                   title,
                   textAlign: TextAlign.center,
                   style: theme
@@ -37,7 +38,7 @@ class DshDropOverlay extends StatelessWidget {
                 ),
                 if (desc != null) ...[
                   const SizedBox(height: 16),
-                  Text(
+                  DshChromeText(
                     desc!,
                     textAlign: TextAlign.center,
                     style: theme

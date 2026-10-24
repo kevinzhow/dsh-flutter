@@ -5,6 +5,7 @@ import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'dsh_diff.dart';
 import 'dsh_head_tail_cap.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// Body lines before the middle collapses (dsh `DEFAULT_DIFF_MAX_LINES`).
@@ -143,7 +144,7 @@ class _DshDiffBlockState extends State<DshDiffBlock> with DshCopyFeedback {
           null,
         ),
       };
-      Widget text = Text(
+      Widget text = DshChromeText(
         '$prefix${r.text}',
         softWrap: _wrapped,
         style: style.copyWith(
@@ -187,7 +188,7 @@ class _DshDiffBlockState extends State<DshDiffBlock> with DshCopyFeedback {
             onTap: () => setState(() => _expanded = !_expanded),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Text(
+              child: DshChromeText(
                 _expanded
                     ? widget.fold.collapse
                     : widget.fold.expand(cap.hidden),

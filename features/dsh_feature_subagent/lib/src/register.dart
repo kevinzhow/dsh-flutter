@@ -190,7 +190,7 @@ class _SubagentTriggerState extends State<SubagentTrigger> {
                     color: theme.labelSecondary,
                   ),
                 const SizedBox(width: 4),
-                Text(
+                DshChromeText(
                   '${entries.length}',
                   key: const ValueKey('subagent-count'),
                   style: theme
@@ -312,7 +312,7 @@ class _SubagentCatalogSheetState extends State<SubagentCatalogSheet> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                DshChromeText(
                                   entry.label ?? entry.id,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -324,7 +324,7 @@ class _SubagentCatalogSheetState extends State<SubagentCatalogSheet> {
                                             : theme.labelSecondary,
                                       ),
                                 ),
-                                Text(meta, style: caption),
+                                DshChromeText(meta, style: caption),
                               ],
                             ),
                           ),

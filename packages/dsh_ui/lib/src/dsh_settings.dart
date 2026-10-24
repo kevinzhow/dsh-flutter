@@ -46,16 +46,12 @@ class DshLineText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DshChromeBaseline(
+    return DshChromeText(
+      text,
+      maxLines: maxLines,
+      overflow: maxLines == null ? null : TextOverflow.ellipsis,
+      textAlign: textAlign,
       style: style,
-      child: Text(
-        text,
-        maxLines: maxLines,
-        overflow: maxLines == null ? null : TextOverflow.ellipsis,
-        textAlign: textAlign,
-        style: style,
-        strutStyle: dshStrut(style),
-      ),
     );
   }
 }
@@ -138,7 +134,10 @@ class DshSettingsRow extends StatelessWidget {
         border: line
             ? Border(
                 bottom: BorderSide(
-                  color: theme.color('--dsw-alias-border-l2'),
+                  color: DshSurface.paint(
+                    context,
+                    theme.color('--dsw-alias-border-l2'),
+                  ),
                   width: dshHairline,
                 ),
               )
@@ -538,13 +537,19 @@ class _DshFieldInputState extends State<DshFieldInput> {
       child: Container(
         // dsh's input is content-box: 32px of content inside a 1px border.
         height: 34,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        // 8px of the wrapper plus the UA's own `padding: 1px 2px` on the
+        // `<input>` element, which dsh's `.input` does not reset.
+        padding: const EdgeInsets.symmetric(horizontal: 8 + 2),
         decoration: theme.cornerDecoration(
           theme.radiusMd,
           color: theme.color('--dsw-alias-bg-layer-1'),
           borderColor: _focused
               ? theme.focusRingColor
-              : theme.color('--dsw-alias-border-l4'),
+              : DshSurface.paint(
+                  context,
+                  theme.color('--dsw-alias-border-l4'),
+                  over: theme.color('--dsw-alias-bg-layer-1'),
+                ),
           borderWidth: dshHairline,
         ),
         alignment: Alignment.center,
@@ -559,7 +564,7 @@ class _DshFieldInputState extends State<DshFieldInput> {
                 builder: (context, value, _) =>
                     value.text.isEmpty && widget.placeholder != null
                     ? IgnorePointer(
-                        child: Text(
+                        child: DshChromeText(
                           widget.placeholder!,
                           maxLines: 1,
                           overflow: TextOverflow.clip,
@@ -668,7 +673,7 @@ class DshCheckbox extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Expanded(child: Text(label, style: style)),
+              Expanded(child: DshChromeText(label, style: style)),
             ],
           ),
         ),

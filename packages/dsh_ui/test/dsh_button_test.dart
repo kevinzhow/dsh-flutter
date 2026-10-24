@@ -23,9 +23,19 @@ Widget host(DshThemeData theme, Widget child) => MaterialApp(
   home: Scaffold(body: Center(child: child)),
 );
 
-BoxDecoration surface(WidgetTester tester) =>
+ShapeDecoration surface(WidgetTester tester) =>
     tester.widget<DecoratedBox>(find.byKey(DshButton.surfaceKey)).decoration
-        as BoxDecoration;
+        as ShapeDecoration;
+
+DshCornerBorder shape(WidgetTester tester) =>
+    surface(tester).shape as DshCornerBorder;
+
+/// The painted focus ring (a stroke centred on the button's border edge).
+DshCornerBorder ring(WidgetTester tester) =>
+    (tester.widget<DecoratedBox>(find.byKey(DshButton.focusRingKey)).decoration
+                as ShapeDecoration)
+            .shape
+        as DshCornerBorder;
 
 Color? textColor(WidgetTester tester) =>
     DefaultTextStyle.of(tester.element(find.text('Go'))).style.color;
@@ -50,10 +60,7 @@ void main() {
           theme.color('--dsw-alias-button-primary-fill'),
         );
         expect(textColor(tester), theme.labelPrimaryForeground);
-        expect(
-          surface(tester).borderRadius,
-          BorderRadius.circular(theme.radiusMd),
-        );
+        expect(shape(tester).radius, theme.radiusMd);
       });
     }
 
@@ -92,19 +99,22 @@ void main() {
 
       await pump(DshButtonVariant.ghost);
       expect(surface(tester).color, isNull);
-      expect(surface(tester).border, isNull);
+      expect(shape(tester).side, BorderSide.none);
       expect(textColor(tester), theme.labelPrimary);
 
       await pump(DshButtonVariant.outline);
       expect(surface(tester).color, isNull);
-      final border = surface(tester).border! as Border;
-      expect(border.top.color, theme.borderL3);
-      expect(border.top.width, 0.5);
+      // 0.5px is a whole pixel in Chromium's border snapping.
+      final border = shape(tester).side;
+      expect(border.color, DshSurface.quantizeAlpha(theme.borderL3));
+      expect(border.width, dshHairline);
 
       await pump(DshButtonVariant.toolbar);
       expect(
         surface(tester).color,
-        theme.color('--dsw-alias-button-tool-bar-fill'),
+        DshSurface.quantizeAlpha(
+          theme.color('--dsw-alias-button-tool-bar-fill'),
+        ),
       );
     });
 
@@ -116,7 +126,7 @@ void main() {
         host(theme, DshButton(onPressed: () {}, child: const Text('Go'))),
       );
       expect(tester.getSize(find.byKey(DshButton.surfaceKey)).height, 36);
-      expect(surface(tester).borderRadius, BorderRadius.circular(12));
+      expect(shape(tester).radius, 12);
       await tester.pumpWidget(
         host(
           theme,
@@ -128,7 +138,7 @@ void main() {
         ),
       );
       expect(tester.getSize(find.byKey(DshButton.surfaceKey)).height, 28);
-      expect(surface(tester).borderRadius, BorderRadius.circular(8));
+      expect(shape(tester).radius, 8);
       final style = DefaultTextStyle.of(tester.element(find.text('Go'))).style;
       expect(style.fontSize, 12);
     });
@@ -195,14 +205,23 @@ void main() {
         await mouse.addPointer(location: Offset.zero);
         await mouse.moveTo(center);
         await tester.pump();
-        expect(surface(tester).color, theme.interactiveBgHover);
+        expect(
+          surface(tester).color,
+          DshSurface.quantizeAlpha(theme.interactiveBgHover),
+        );
         await mouse.down(center);
         await tester.pump();
-        expect(surface(tester).color, theme.interactiveBgActive);
+        expect(
+          surface(tester).color,
+          DshSurface.quantizeAlpha(theme.interactiveBgActive),
+        );
         await mouse.up();
         await tester.pump();
         expect(taps, 1);
-        expect(surface(tester).color, theme.interactiveBgHover);
+        expect(
+          surface(tester).color,
+          DshSurface.quantizeAlpha(theme.interactiveBgHover),
+        );
       },
     );
 
@@ -257,18 +276,15 @@ void main() {
         expect(find.byKey(DshButton.focusRingKey), findsNothing);
         await tester.sendKeyEvent(LogicalKeyboardKey.tab);
         await tester.pump();
-        final ring =
-            tester
-                    .widget<DecoratedBox>(find.byKey(DshButton.focusRingKey))
-                    .decoration
-                as BoxDecoration;
-        final border = ring.border! as Border;
-        expect(border.top.width, theme.focusRingWidth);
-        expect(border.top.color, theme.focusRingColor);
-        expect(border.top.color, const Color(0xff4176e6));
+        final side = ring(tester).side;
+        expect(side.width, theme.focusRingWidth);
+        expect(side.color, theme.focusRingColor);
+        expect(side.color, const Color(0xff4176e6));
+        // `outline-style: auto`: centred on the border edge, so half the
+        // ring is outside the button and half inside.
         expect(
           tester.getSize(find.byKey(DshButton.focusRingKey)).height,
-          36 + 2 * theme.focusRingWidth,
+          36 + theme.focusRingWidth,
         );
         await tester.sendKeyEvent(LogicalKeyboardKey.enter);
         await tester.sendKeyEvent(LogicalKeyboardKey.space);
@@ -328,7 +344,7 @@ void main() {
           isNot(reference.color('--dsw-alias-button-primary-fill')),
         );
         expect(textColor(tester), const Color(0xff010203));
-        expect(surface(tester).borderRadius, BorderRadius.circular(3));
+        expect(shape(tester).radius, 3);
 
         final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await mouse.addPointer(location: Offset.zero);
@@ -349,13 +365,8 @@ void main() {
       );
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pump();
-      final ring =
-          tester
-                  .widget<DecoratedBox>(find.byKey(DshButton.focusRingKey))
-                  .decoration
-              as BoxDecoration;
-      expect((ring.border! as Border).top.color, const Color(0xff00ff00));
-      expect((ring.border! as Border).top.width, 5);
+      expect(ring(tester).side.color, const Color(0xff00ff00));
+      expect(ring(tester).side.width, 5);
     });
 
     testWidgets(

@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_corners.dart';
+import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_state_dot.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -148,6 +151,9 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
           : tertiary;
       border = foreground.withValues(alpha: foreground.a * 0.2);
     }
+    // The 1px border is translucent over the pill's own opaque fill (the
+    // background runs under the border); Chromium blends it in 8 bits.
+    final borderOnFill = blendLikeChromium(border, fill);
     final style = theme
         .textStyle('--dsw-font-xxs-12')
         .sized(12, line: 18)
@@ -161,16 +167,16 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
         : connecting
         ? widget.connectingLabel
         : widget.disconnectedLabel;
-    final radius = BorderRadius.circular(theme.radiusSm);
 
     Widget body = Container(
       key: DshConnectionIndicator.surfaceKey,
       height: 28,
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
+      decoration: theme.cornerDecoration(
+        theme.radiusSm,
         color: fill,
-        borderRadius: radius,
-        border: Border.all(color: border, width: 1),
+        borderColor: borderOnFill,
+        borderWidth: 1,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -197,11 +203,11 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
                 ? Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(label, softWrap: false),
+                      DshChromeText(label, softWrap: false),
                       _Dots(style: style),
                     ],
                   )
-                : Text(label, softWrap: false),
+                : DshChromeText(label, softWrap: false),
           ),
         ],
       ),

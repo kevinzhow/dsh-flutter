@@ -110,7 +110,7 @@ class _PlanChipState extends State<_PlanChip> {
               children: [
                 DshIcon(DshIcons.plan, size: 14, color: color),
                 const SizedBox(width: 4),
-                Text(
+                DshChromeText(
                   label,
                   style: theme
                       .textStyle('--dsw-font-xs-13')

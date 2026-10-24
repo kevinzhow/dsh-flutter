@@ -14,6 +14,7 @@ import 'dsh_button.dart';
 import 'dsh_corners.dart';
 import 'dsh_settings.dart';
 import 'dsh_settings_form_model.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// The copy the form frame renders, from the owning plugin's dictionary (dsh
@@ -170,7 +171,7 @@ class _DshSettingsFormState extends State<DshSettingsForm> {
                 child: DshButton(
                   variant: DshButtonVariant.primary,
                   onPressed: blocked ? null : widget.onSave,
-                  child: Text(
+                  child: DshChromeText(
                     state.saving ? labels.saving : labels.save,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -541,7 +542,7 @@ class _Tag extends StatelessWidget {
         color: theme.color('--dsw-alias-bg-module-platform'),
         borderRadius: BorderRadius.circular(999),
       ),
-      child: Text(
+      child: DshChromeText(
         text,
         maxLines: 1,
         style: theme

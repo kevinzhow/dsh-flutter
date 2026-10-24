@@ -157,7 +157,7 @@ class _SettingsPageState extends State<SettingsPage> {
               else
                 const SizedBox(width: DshSpace.sm),
               Expanded(
-                child: Text(
+                child: DshChromeText(
                   entry?.label ?? '',
                   key: const ValueKey('settings-section-title'),
                   style: theme
@@ -258,7 +258,7 @@ class _Nav extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Text(
+                child: DshChromeText(
                   title,
                   key: const ValueKey('settings-title'),
                   style: theme
@@ -331,7 +331,7 @@ class _Cell extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: DshChromeText(
                     entry.label ?? entry.id,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

@@ -71,7 +71,7 @@ class SubagentTranscript extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        DshChromeText(
                           title,
                           key: const ValueKey('subagent-title'),
                           maxLines: 1,
@@ -80,7 +80,7 @@ class SubagentTranscript extends StatelessWidget {
                               .textStyle('--dsw-font-base-strong-16')
                               .copyWith(color: theme.labelPrimary),
                         ),
-                        Text(
+                        DshChromeText(
                           modeLabel(i18n, entry.mode),
                           style: theme
                               .textStyle('--dsw-font-xxs-12')
@@ -115,14 +115,14 @@ class SubagentTranscript extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  DshChromeText(
                     readonly.$1,
                     style: theme
                         .textStyle('--dsw-font-s-strong-14')
                         .copyWith(color: theme.labelPrimary),
                   ),
                   const SizedBox(height: 4),
-                  Text(
+                  DshChromeText(
                     readonly.$2,
                     style: theme
                         .textStyle('--dsw-font-xs-13')

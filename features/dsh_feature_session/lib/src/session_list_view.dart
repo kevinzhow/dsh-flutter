@@ -62,7 +62,7 @@ class SessionListView extends StatelessWidget {
         action: DshButton(
           variant: DshButtonVariant.primary,
           onPressed: onRefresh,
-          child: Text(i18n.t('common', 'retry')),
+          child: DshChromeText(i18n.t('common', 'retry')),
         ),
       );
     }
@@ -71,7 +71,7 @@ class SessionListView extends StatelessWidget {
           snapshot.phase == ListPhase.pending) {
         return Center(
           key: const ValueKey('sessions-loading'),
-          child: Text(
+          child: DshChromeText(
             i18n.t('common', 'loading'),
             style: theme
                 .textStyle('--dsw-font-s-14')
@@ -87,7 +87,7 @@ class SessionListView extends StatelessWidget {
           key: const ValueKey('sessions-empty-new'),
           variant: DshButtonVariant.primary,
           onPressed: onNew,
-          child: Text(_a('sessions.new')),
+          child: DshChromeText(_a('sessions.new')),
         ),
       );
     }
@@ -166,7 +166,7 @@ class _Row extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      DshChromeText(
                         title.isEmpty
                             ? i18n.t(appNamespace, 'sessions.untitled')
                             : title,
@@ -177,7 +177,7 @@ class _Row extends StatelessWidget {
                             .copyWith(color: theme.labelPrimary),
                       ),
                       const SizedBox(height: DshSpace.xs),
-                      Text(
+                      DshChromeText(
                         s.running
                             ? '${i18n.t(appNamespace, 'sessions.running')} · $subtitle'
                             : subtitle,
@@ -227,7 +227,7 @@ class _Message extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            DshChromeText(
               title,
               textAlign: TextAlign.center,
               style: theme
@@ -235,7 +235,7 @@ class _Message extends StatelessWidget {
                   .copyWith(color: theme.labelPrimary),
             ),
             const SizedBox(height: DshSpace.sm),
-            Text(
+            DshChromeText(
               body,
               textAlign: TextAlign.center,
               style: theme

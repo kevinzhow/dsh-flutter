@@ -115,7 +115,10 @@ replace_cases('components.plan.todo.', themed(base_case(
     [('default', 'Collapsed', {'todos': TODOS}, None),
      ('expanded', 'Expanded by a click on the header', {'todos': TODOS}, [{'type': 'click', 'target': 'todo-header'}])],
     category='extension/plan',
-    react_hint='packages/client/ui-conversation/src/client/skeleton/TodoPanel.tsx')))
+    react_hint='packages/client/ui-conversation/src/client/skeleton/TodoPanel.tsx',
+    # The header strip is the whole collapsed panel and the top of the expanded one: its fill is the part Chromium draws
+    # through `backdrop-filter: blur(40px) saturate(150%)` (docs/parity.md, "Known engine differences").
+    regions=[{'name': 'panel-header', 'x': 16, 'y': 16, 'width': 358, 'height': 36}])))
 
 # ---- plan cards and the plan document --------------------------------------------------------------------------
 PLAN_MARKDOWN = """# Release checklist

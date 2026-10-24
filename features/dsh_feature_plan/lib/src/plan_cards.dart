@@ -83,7 +83,7 @@ class PlanCards extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          DshChromeText(
                             plans[i].title,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -94,7 +94,7 @@ class PlanCards extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 2),
-                          Text(
+                          DshChromeText(
                             _t('preview.document'),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -125,7 +125,7 @@ class PlanCards extends StatelessWidget {
                           width: dshHairline,
                         ),
                       ),
-                      child: Text(
+                      child: DshChromeText(
                         _t('preview.action'),
                         style: base
                             .sized(12, line: 18)

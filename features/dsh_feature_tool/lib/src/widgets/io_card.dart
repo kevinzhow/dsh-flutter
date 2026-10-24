@@ -37,7 +37,7 @@ class IoCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(
+              DshChromeText(
                 label,
                 style: style.copyWith(
                   color: theme.color('--dsw-alias-label-caption'),
@@ -45,7 +45,7 @@ class IoCard extends StatelessWidget {
               ),
               const SizedBox(width: 14),
               Expanded(
-                child: Text(text, style: style.copyWith(color: color)),
+                child: DshChromeText(text, style: style.copyWith(color: color)),
               ),
             ],
           ),
@@ -54,17 +54,14 @@ class IoCard extends StatelessWidget {
     );
     return Container(
       key: const ValueKey('io-card'),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        border: Border.all(
-          color: theme.color('--dsw-alias-border-l1'),
-          width: dshHairline,
-        ),
+      decoration: context.dshOutlined(
+        theme.radiusLg,
+        fill: theme.color('--dsw-alias-markdown-code-block'),
+        border: theme.color('--dsw-alias-border-l1'),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: Column(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

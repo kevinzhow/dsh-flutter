@@ -137,7 +137,7 @@ class _ChatViewState extends State<ChatView> {
             key: const ValueKey('load-older'),
             size: DshButtonSize.sm,
             onPressed: session.loadingOlder ? null : owner.actions.loadOlder,
-            child: Text(
+            child: DshChromeText(
               session.loadingOlder
                   ? widget.i18n.t('chat', 'chat.loadingHistory')
                   : widget.i18n.t('chat', 'chat.loadOlder'),
@@ -212,7 +212,7 @@ class _ChatViewState extends State<ChatView> {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(DshSpace.xl),
-          child: Text(
+          child: DshChromeText(
             key: const ValueKey('chat-empty'),
             widget.i18n.t(appNamespace, 'session.empty'),
             textAlign: TextAlign.center,

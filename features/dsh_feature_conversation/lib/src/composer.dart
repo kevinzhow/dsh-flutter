@@ -109,7 +109,7 @@ class _AttachSheet extends StatelessWidget {
                           color: theme.labelSecondary,
                         ),
                         const SizedBox(width: DshSpace.md),
-                        Text(
+                        DshChromeText(
                           i18n.t(appNamespace, 'attach.${source.name}'),
                           style: theme
                               .textStyle('--dsw-font-base-16')
@@ -303,7 +303,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
           if (_error != null)
             Padding(
               padding: const EdgeInsets.only(bottom: DshSpace.xs),
-              child: Text(
+              child: DshChromeText(
                 _error!,
                 key: const ValueKey('composer-error'),
                 style: theme

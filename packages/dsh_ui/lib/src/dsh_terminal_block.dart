@@ -3,9 +3,11 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_ansi.dart';
 import 'dsh_copy_feedback.dart';
+import 'dsh_corners.dart';
 import 'dsh_head_tail_cap.dart';
 import 'dsh_pill.dart';
 import 'dsh_state_dot.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -207,12 +209,15 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(label, style: promptStyle.copyWith(color: tertiary)),
+              DshChromeText(
+                label,
+                style: promptStyle.copyWith(color: tertiary),
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Semantics(
                   label: labels.commandLine(index + 1),
-                  child: Text(
+                  child: DshChromeText(
                     line,
                     style: promptStyle.copyWith(color: primary),
                   ),
@@ -243,7 +248,10 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
             DshPill(
               height: 18,
               color: theme.color('--dsw-alias-state-error-primary'),
-              child: Text(status, key: const ValueKey('terminal-status')),
+              child: DshChromeText(
+                status,
+                key: const ValueKey('terminal-status'),
+              ),
             ),
           ],
           if (w.copyText != null ||
@@ -252,7 +260,7 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => copyText(w.copyText ?? (w.output ?? '')),
-              child: Text(
+              child: DshChromeText(
                 copied ? labels.copied : labels.copy,
                 key: const ValueKey('terminal-copy'),
                 style: theme
@@ -299,7 +307,7 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () => setState(() => _expanded = !_expanded),
-                    child: Text(
+                    child: DshChromeText(
                       _expanded ? labels.collapse : labels.expand(cap.hidden),
                       key: const ValueKey('terminal-expand'),
                       style: code.copyWith(color: tertiary),
@@ -315,17 +323,14 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
 
     return Container(
       key: const ValueKey('terminal-block'),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        border: Border.all(
-          color: theme.color('--dsw-alias-border-l1'),
-          width: dshHairline,
-        ),
+      decoration: context.dshOutlined(
+        theme.radiusLg,
+        fill: theme.color('--dsw-alias-markdown-code-block'),
+        border: theme.color('--dsw-alias-border-l1'),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: Column(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -346,7 +351,7 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
               empty
                   ? Padding(
                       padding: const EdgeInsets.fromLTRB(30, 12, 14, 12),
-                      child: Text(
+                      child: DshChromeText(
                         labels.noOutput,
                         style: code.copyWith(color: tertiary),
                       ),
