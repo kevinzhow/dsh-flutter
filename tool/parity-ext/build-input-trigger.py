@@ -10,7 +10,8 @@ surface. Flutter: TriggerMenuOverlay / PopupSelectOverlay
   input.popup   {command, options, active, ...} parity id: menu
 
 Ids: components.input-trigger.<name>-<locale>.<theme> and components.command-popup.<name>-<locale>.<theme>. A phone width (390) and a
-wide window width (760, the composer column) are separate cases: the phone adaptation applies below 768.
+wide window width (760, the composer column) are separate cases: both are scored against dsh web at the same width
+(docs/parity.md, owner decisions: no phone adaptation).
 """
 import json
 import pathlib
