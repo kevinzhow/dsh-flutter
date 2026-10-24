@@ -1,0 +1,775 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "workspace",
+  "package": "packages/api/workspace-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/workspace-controller/src/index.ts",
+    "packages/api/workspace-controller/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "create",
+      "hostName": "create",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceCreateRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceCreateValue"
+      },
+      "doc": "Create or idempotently resolve one Workspace over an existing directory."
+    },
+    {
+      "name": "initializeDefault",
+      "hostName": "initializeDefault",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "ref",
+          "name": "WorkspaceValue"
+        }
+      },
+      "doc": "Initialize or reuse the default Workspace during first-use startup. The directory name is fixed, so the Host never renames or relocates an existing default; its initial title is that same name, which browser consumers label in the reader's language."
+    },
+    {
+      "name": "rename",
+      "hostName": "rename",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceRenameRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceValue"
+      },
+      "doc": "Rename one Workspace to a unique non-blank title."
+    },
+    {
+      "name": "delete",
+      "hostName": "delete",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceDeleteRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceDeleteValue"
+      },
+      "doc": "Remove one Workspace registration while retaining files and Sessions."
+    },
+    {
+      "name": "insertBefore",
+      "hostName": "insertBefore",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceInsertBeforeRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceOrderValue"
+      },
+      "doc": "Move one Workspace within the registry display order."
+    },
+    {
+      "name": "insertSessionBefore",
+      "hostName": "insertSessionBefore",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceInsertSessionBeforeRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceValue"
+      },
+      "doc": "Move one accounted Session within a Workspace."
+    },
+    {
+      "name": "archiveSession",
+      "hostName": "archiveSession",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceArchiveSessionRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceArchiveValue"
+      },
+      "doc": "Hide one known Session from Workspace grouping surfaces."
+    },
+    {
+      "name": "unarchiveSession",
+      "hostName": "unarchiveSession",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceUnarchiveSessionRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceArchiveValue"
+      },
+      "doc": "Restore one archived Session to Workspace grouping surfaces."
+    },
+    {
+      "name": "pinSession",
+      "hostName": "pinSession",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspacePinSessionRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspacePinValue"
+      },
+      "doc": "Surface one known unarchived Session ahead of unpinned Sessions."
+    },
+    {
+      "name": "unpinSession",
+      "hostName": "unpinSession",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceUnpinSessionRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WorkspacePinValue"
+      },
+      "doc": "Remove one Session's pin without changing its saved Session order."
+    },
+    {
+      "name": "follow",
+      "hostName": "follow",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "WorkspaceFollowFrame"
+      },
+      "doc": "Stream a complete Workspace baseline followed by ordered increments. A non-owner receives only the Workspaces and Sessions `allows()` admits. When a delivered Workspace is no longer admitted at its next change or the next order change, the stream sends a `replace` frame with the complete filtered state instead of a `remove`, because a Client never resurrects a removed Workspace; a `remove` frame reports a deletion and reaches only a Client that received that Workspace."
+    }
+  ],
+  "decls": {
+    "WorkspaceArchiveSessionRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "stopActivity",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Stop the Session's running work — its turn, subagent descendants, owned background jobs, and active schedules — instead of refusing the archive as `workspace/session-active`. The stops are requested before the archive write and are not awaited; the response arrives once the archive set is durable."
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Session requested for archival from Workspace grouping surfaces."
+    },
+    "WorkspaceArchiveValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "archivedSessionIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Complete archived Session set after a mutation."
+    },
+    "WorkspaceBaseline": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "items",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "WorkspaceView"
+            }
+          }
+        },
+        {
+          "name": "archivedSessionIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          }
+        },
+        {
+          "name": "pinnedSessionIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          },
+          "doc": "Registry-global pin set, most recently pinned first."
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Complete reconnect baseline for Workspace browser state."
+    },
+    "WorkspaceCreateRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Existing directory requested for Workspace adoption."
+    },
+    "WorkspaceCreateValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspace",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceView"
+          }
+        },
+        {
+          "name": "created",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Created or previously registered Workspace."
+    },
+    "WorkspaceDeleteRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Workspace registration deletion."
+    },
+    "WorkspaceDeleteValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "deleted",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Receipt after one Workspace registration is deleted."
+    },
+    "WorkspaceFollowFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "baseline"
+              }
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WorkspaceBaseline"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "replace"
+              }
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WorkspaceBaseline"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "upsert"
+              }
+            },
+            {
+              "name": "workspace",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WorkspaceView"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "remove"
+              }
+            },
+            {
+              "name": "workspaceId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "order"
+              }
+            },
+            {
+              "name": "workspaceIds",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "str",
+                  "brand": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "archived"
+              }
+            },
+            {
+              "name": "archivedSessionIds",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "str",
+                  "brand": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "pinned"
+              }
+            },
+            {
+              "name": "pinnedSessionIds",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "str",
+                  "brand": true
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Workspace state stream; every generation starts with exactly one baseline."
+    },
+    "WorkspaceInsertBeforeRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "beforeWorkspaceId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "DOM-insertBefore-like Workspace order mutation."
+    },
+    "WorkspaceInsertSessionBeforeRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "beforeSessionId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "DOM-insertBefore-like Session membership order mutation."
+    },
+    "WorkspaceOrderValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Complete Workspace registry order after a mutation."
+    },
+    "WorkspacePinSessionRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Session requested for pinning ahead of unpinned Sessions on grouping surfaces."
+    },
+    "WorkspacePinValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "pinnedSessionIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Complete pinned Session set after a mutation, most recently pinned first."
+    },
+    "WorkspaceRenameRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Workspace title mutation."
+    },
+    "WorkspaceUnarchiveSessionRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Session requested for restoration from the archived Session list."
+    },
+    "WorkspaceUnpinSessionRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Session requested for removal from the pin set."
+    },
+    "WorkspaceValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspace",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "WorkspaceView"
+          }
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "Workspace mutation returning the complete changed row."
+    },
+    "WorkspaceView": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "workspaceId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical host directory path."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "User-visible title."
+        },
+        {
+          "name": "sessionIds",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str",
+              "brand": true
+            }
+          },
+          "doc": "Sessions accounted to this Workspace in manual order."
+        },
+        {
+          "name": "createdAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "ISO-8601 creation instant."
+        },
+        {
+          "name": "updatedAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "ISO-8601 last-mutation instant."
+        }
+      ],
+      "source": "packages/api/workspace-controller/src/types.ts",
+      "doc": "One durable Workspace projected for browser consumers."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

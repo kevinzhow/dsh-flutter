@@ -10,10 +10,13 @@ import 'package:dsh_feature_attachment/dsh_feature_attachment.dart';
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart';
 import 'package:dsh_feature_documentpreview/dsh_feature_documentpreview.dart';
+import 'package:dsh_feature_commands/dsh_feature_commands.dart';
 import 'package:dsh_feature_files/dsh_feature_files.dart';
+import 'package:dsh_feature_input_trigger/dsh_feature_input_trigger.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
+import 'package:dsh_feature_reference/dsh_feature_reference.dart';
 import 'package:dsh_feature_settings/dsh_feature_settings.dart';
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_feature_sidebar_terminal/dsh_feature_sidebar_terminal.dart';
@@ -181,7 +184,13 @@ class AppController extends ChangeNotifier {
         projectionChanges: _projectionEvents.stream,
       ),
     );
-    registerConversationFeature(slots, i18n: () => i18n);
+    registerConversationFeature(
+      slots,
+      i18n: () => i18n,
+      commandUi: commandUi,
+      inputOf: (id) => _sessions[id]?.owner.input,
+    );
+    registerInputTriggerFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
     registerAttachmentFeature(slots, i18n: () => i18n);
     sidebar = registerSidebarRightFeature(
@@ -279,6 +288,13 @@ class AppController extends ChangeNotifier {
   final FlushScheduler? frameScheduler;
 
   final SlotRegistry slots = SlotRegistry();
+
+  /// The `/` and `@` sources of every session's composer, and the client
+  /// commands features contribute to the `/` menu (dsh `ctx.inputTriggers` and
+  /// `ctx.commandUi`).
+  final InputTriggerRegistry inputTriggers = InputTriggerRegistry();
+  final CommandUiRegistry commandUi = CommandUiRegistry();
+  late final InputSessionPort _sessionPort = _AppSessionPort(this);
 
   /// The app's navigator: subagent transcripts push onto it.
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -727,11 +743,33 @@ class AppController extends ChangeNotifier {
       remotes: r,
       forms: f,
       i18n: () => i18n,
+      commandUi: commandUi,
+      projectionsOf: (id) => _sessions[id]?.session.projections,
     );
     _models = registerModelSelectionFeature(
       slots,
       remotes: r,
       i18n: () => i18n,
+      commandUi: commandUi,
+      projectionsOf: (id) => _sessions[id]?.session.projections,
+      isSubagent: _sessionPort.isSubagentTranscript,
+    );
+    final commands = registerCommandsFeature(
+      slots,
+      triggers: inputTriggers,
+      commandUi: commandUi,
+      remotes: r,
+      sessions: _sessionPort,
+      i18n: () => i18n,
+    );
+    _hostOffs.add(commands.dispose);
+    _hostOffs.add(
+      registerReferenceFeature(
+        triggers: inputTriggers,
+        remotes: r,
+        sessions: _sessionPort,
+        i18n: () => i18n,
+      ),
     );
     unawaited(
       readHostVersion(backend.remoteCaller).then((v) {
@@ -868,6 +906,7 @@ class AppController extends ChangeNotifier {
       () => SessionController(
         m.get(sessionId),
         scheduler: frameScheduler,
+        triggers: inputTriggers,
         cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
         hostHome: _transport?.generation?.hostHome ?? '',
         uploader: backend.uploader,
@@ -1103,4 +1142,51 @@ class _SidebarBridge implements SidebarServices {
 
   @override
   GlobalKey<NavigatorState> get navigatorKey => app.navigatorKey;
+}
+
+/// The sessions the trigger sources ask about (dsh's `ctx.sessions` seat).
+class _AppSessionPort implements InputSessionPort {
+  _AppSessionPort(this.app);
+
+  final AppController app;
+
+  @override
+  Future<void> ensureOpen(String sessionId, AbortSignal signal) async {
+    final controller = app._sessions[sessionId];
+    if (controller == null) {
+      throw StateError('session "$sessionId" is not held by this client');
+    }
+    final state = controller.session.snapshot.value;
+    if (state.openState == OpenState.error) {
+      throw state.openError ?? StateError('session "$sessionId" is not open');
+    }
+    if (state.openState != OpenState.open) {
+      final aborted = Completer<void>();
+      signal.onAbort(
+        () => aborted.completeError(signal.reason ?? const AbortedException()),
+      );
+      await Future.any<void>([controller.open(), aborted.future]);
+    }
+    final settled = controller.session.snapshot.value;
+    if (settled.openState != OpenState.open) {
+      throw settled.openError ?? StateError('session "$sessionId" is not open');
+    }
+  }
+
+  @override
+  bool isSubagentTranscript(String sessionId) => false;
+
+  @override
+  SessionSummary? summary(String sessionId) =>
+      app.manager?.summaryOf(sessionId);
+
+  @override
+  String get hostHome => app._transport?.generation?.hostHome ?? '';
+
+  @override
+  void openFile(String sessionId, String path) {
+    final controller = app._sessions[sessionId];
+    if (controller == null) return;
+    app.sidebar.openFile(controller.owner, path);
+  }
 }

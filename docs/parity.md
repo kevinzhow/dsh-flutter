@@ -335,6 +335,13 @@ case, read it with the glyphs masked: an `outside-glyph` agreement (pixels outsi
 `tool/parity-ext/glyph-mask.py --out build/parity-ext --cases <glob> [--viz DIR]` prints that number next to the exact one and
 draws what is left.
 
+## Owner decisions
+
+- **2026-10-24, phone adaptation of the composer menus.** The `/`, `@`, `/model` and `/permission` menus keep the popover
+  anchored above the keyboard (a surface hanging off the composer's top edge, capped below the session header), not a
+  bottom sheet. Below 768px the rows grow to 44px touch targets; from 768px the menu is dsh's own geometry (34px rows).
+  The directory picker and workspace picker are the places that use a sheet below 768px.
+
 ## Provenance and licenses
 
 - dsh (MIT, pinned in `docs/upstream-sync.json`) components are imported at run time from the checkout, never copied.

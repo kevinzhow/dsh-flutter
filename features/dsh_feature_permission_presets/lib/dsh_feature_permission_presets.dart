@@ -5,6 +5,7 @@
 library;
 
 export 'src/permission_catalog.dart';
+export 'src/permission_command.dart';
 export 'src/permission_default.dart';
 export 'src/permission_widgets.dart';
 export 'src/presentation.dart';

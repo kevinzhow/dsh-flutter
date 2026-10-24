@@ -11,7 +11,7 @@ One package per layer of dsh's own web client (`docs/subsystems/web-client.md` u
 ```
 packages/dsh_client        pure Dart   pairing, certificate trust (pins), connection generations with backoff status, /api/remote.mux, unary /api calls (multipart binary results), streamed file upload, workspaceFiles client
 packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window); terminal views over the duplex attach stream
-packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool
+packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool; the composer input model (draft with chips, submit machine) and the input-trigger pipeline (ui-input-trigger core)
 packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's own
 packages/dsh_theme         Flutter     theme contract engine, vocabulary = dsh --dsw-* tokens, official pack
 packages/dsh_ui            Flutter     UI primitives that read only the theme contract (rows, terminal/diff/read/search/web blocks, icons from dsh's SVG paths)
@@ -20,10 +20,13 @@ packages/dsh_highlight     pure Dart engine + Flutter assets   syntax highlighte
 features/dsh_feature_approval          ui-approval: composer takeover for approval requests
 features/dsh_feature_attachment        ui-attachment: composer attachment tray (pick, upload progress/cancel/retry), image tiles in messages
 features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
-features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (send/stop), to-do dock
+features/dsh_feature_commands          ui-commands: the `/` command source over the per-session command directory, popupSelect shell, contributions
+features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (chips, send/stop), to-do dock
 features/dsh_feature_documentpreview  ui-documentpreview: highlighted text, rendered/raw Markdown, image, open/save for other types
 features/dsh_feature_files             ui-files: workspace file tree, live-watched
+features/dsh_feature_input_trigger     ui-input-trigger: the `/` and `@` candidate menu above the composer (the pipeline itself is pure Dart in dsh_conversation)
 features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet, plan-mode chip
+features/dsh_feature_reference         ui-reference: the `@` file, folder and session source, reference chips and their exact payload
 features/dsh_feature_session           ui-session: the session list
 features/dsh_feature_model_selection   ui-model-selection: model/effort seat in the composer tool row, model sheet
 features/dsh_feature_permission_presets ui-permission-presets: new-session default row, composer permission seat

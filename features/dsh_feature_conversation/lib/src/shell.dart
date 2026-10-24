@@ -68,48 +68,50 @@ class ConversationShell extends StatelessWidget {
                 owner,
               )
             : null;
-        final main = Column(
-          children: [
-            if (s.lastAgentError != null)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  DshSpace.lg,
-                  DshSpace.sm,
-                  DshSpace.lg,
-                  0,
-                ),
-                child: DshChromeText(
-                  '${i18n.t(appNamespace, 'session.agentError')}: ${s.lastAgentError}',
-                  key: const ValueKey('agent-error'),
-                  style: theme
-                      .textStyle('--dsw-font-xxs-12')
-                      .copyWith(
-                        color: theme.color('--dsw-alias-state-error-primary'),
-                      ),
-                ),
-              ),
-            Expanded(child: body),
-            if (!s.removed)
-              for (final dock in slots.renderList(dockSlot, owner))
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: DshSpace.readableWidth,
-                    ),
-                    child: dock,
+        final main = ConversationRegion(
+          child: Column(
+            children: [
+              if (s.lastAgentError != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    DshSpace.lg,
+                    DshSpace.sm,
+                    DshSpace.lg,
+                    0,
+                  ),
+                  child: DshChromeText(
+                    '${i18n.t(appNamespace, 'session.agentError')}: ${s.lastAgentError}',
+                    key: const ValueKey('agent-error'),
+                    style: theme
+                        .textStyle('--dsw-font-xxs-12')
+                        .copyWith(
+                          color: theme.color('--dsw-alias-state-error-primary'),
+                        ),
                   ),
                 ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: DshSpace.readableWidth,
+              Expanded(child: body),
+              if (!s.removed)
+                for (final dock in slots.renderList(dockSlot, owner))
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: DshSpace.readableWidth,
+                      ),
+                      child: dock,
+                    ),
+                  ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: DshSpace.readableWidth,
+                  ),
+                  child: composer,
                 ),
-                child: composer,
               ),
-            ),
-          ],
+            ],
+          ),
         );
         // Wide windows show the right sidebar beside the conversation.
         return sidebar == null
@@ -163,4 +165,45 @@ class _Notice extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The area below the session header that holds the conversation and its
+/// composer. The composer's floating menus never rise above its top edge, as
+/// dsh keeps its menus clear of the header (`TOP_MARGIN` of `MenuView`).
+class ConversationRegion extends StatefulWidget {
+  const ConversationRegion({super.key, required this.child});
+
+  final Widget child;
+
+  /// The region's top edge in global coordinates, or null outside one.
+  static double? topOf(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<_RegionScope>()
+        ?.regionKey;
+    final box = scope?.currentContext?.findRenderObject();
+    if (box is! RenderBox || !box.attached) return null;
+    return box.localToGlobal(Offset.zero).dy;
+  }
+
+  @override
+  State<ConversationRegion> createState() => _ConversationRegionState();
+}
+
+class _ConversationRegionState extends State<ConversationRegion> {
+  final GlobalKey _key = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) => _RegionScope(
+    regionKey: _key,
+    child: KeyedSubtree(key: _key, child: widget.child),
+  );
+}
+
+class _RegionScope extends InheritedWidget {
+  const _RegionScope({required this.regionKey, required super.child});
+
+  final GlobalKey regionKey;
+
+  @override
+  bool updateShouldNotify(_RegionScope old) => old.regionKey != regionKey;
 }

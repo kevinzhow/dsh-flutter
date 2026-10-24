@@ -42,6 +42,7 @@ export 'src/dsh_disclosure.dart';
 export 'src/dsh_icon_button.dart';
 export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
+export 'src/dsh_menu_surface.dart';
 export 'src/dsh_status_dot.dart';
 export 'src/dsh_text_field.dart';
 export 'src/theme_access.dart';

@@ -91,3 +91,25 @@ FileAddress? parseSessionFileAddress(String address) {
       1;
   return (directory: trimmed.substring(0, cut), name: trimmed.substring(cut));
 }
+
+/// `~` for the POSIX home and `~/…` below it (dsh `abbreviateHomePath`); the
+/// path unchanged for another location, a Windows-style path or no home.
+String abbreviateHome(String path, String? home) {
+  if (home == null || home.isEmpty) return path;
+  if (_isWindowsStyle(path) || _isWindowsStyle(home)) return path;
+  final root = home.replaceAll(RegExp(r'/+$'), '');
+  if (root.isEmpty || root == '/') return path;
+  if (path.replaceAll(RegExp(r'/+$'), '') == root) return '~';
+  if (path.startsWith('$root/')) return '~${path.substring(root.length)}';
+  return path;
+}
+
+/// The final non-empty segment of a workspace path, for display (dsh
+/// `workspaceTitleOf`); empty for a separator-only path.
+String workspaceTitleOf(String path) {
+  final trimmed = path.replaceAll(RegExp(r'[/\\]+$'), '');
+  final sep = trimmed.lastIndexOf('/') > trimmed.lastIndexOf(r'\')
+      ? trimmed.lastIndexOf('/')
+      : trimmed.lastIndexOf(r'\');
+  return trimmed.substring(sep + 1);
+}

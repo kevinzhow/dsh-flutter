@@ -7,4 +7,5 @@ export 'src/model_catalog.dart';
 export 'src/model_directory.dart';
 export 'src/model_select.dart' show ModelSeat, ModelSheet;
 export 'src/provider_order.dart';
+export 'src/model_command.dart';
 export 'src/register.dart';

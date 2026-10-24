@@ -72,9 +72,13 @@
    "area": "input-commands",
    "dshSource": "packages/client/ui-commands",
    "description": "Type \"/\" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box.",
-   "status": "missing",
-   "notes": "Only the /permission write path is wired (commands/execute from the permission seat); there is no command list or \"/\" menu.",
-   "priority": "P1"
+   "status": "partial",
+   "notes": "Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands.",
+   "priority": "P1",
+   "whalee": [
+    "features/dsh_feature_commands",
+    "packages/dsh_conversation/lib/src/input/command_ui.dart"
+   ]
   },
   {
    "id": "package:ui-conversation",
@@ -157,9 +161,17 @@
    "area": "input-commands",
    "dshSource": "packages/client/ui-input-trigger",
    "description": "Type \"/\" or \"@\" in the message box to open a candidate menu and insert the pick.",
-   "status": "missing",
-   "notes": "The composer is a plain text field with no trigger detection.",
-   "priority": "P1"
+   "status": "partial",
+   "notes": "The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.",
+   "priority": "P1",
+   "whalee": [
+    "features/dsh_feature_input_trigger",
+    "packages/dsh_conversation/lib/src/input/trigger_controller.dart",
+    "packages/dsh_conversation/lib/src/input/trigger_detect.dart",
+    "packages/dsh_conversation/lib/src/input/trigger_menu.dart",
+    "packages/dsh_conversation/lib/src/input/composer_input.dart",
+    "features/dsh_feature_conversation/lib/src/composer.dart"
+   ]
   },
   {
    "id": "package:ui-jobs",
@@ -277,9 +289,13 @@
    "area": "input-commands",
    "dshSource": "packages/client/ui-reference",
    "description": "Mention a workspace file or another session with \"@\" so the agent reads it.",
-   "status": "missing",
-   "notes": "fileReferences/list and sessionReferenceResolver/candidates are not generated or called.",
-   "priority": "P2"
+   "status": "partial",
+   "notes": "The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text.",
+   "priority": "P2",
+   "whalee": [
+    "features/dsh_feature_reference",
+    "features/dsh_feature_conversation/lib/src/composer_text.dart"
+   ]
   },
   {
    "id": "package:ui-renderer",
@@ -772,11 +788,11 @@
    "area": "input-commands",
    "dshSource": "packages/interaction/commands/src/index.ts",
    "description": "Run a slash command (for example /permission) without sending it to the model.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
+    "features/dsh_feature_commands/lib/src/command_source.dart",
     "features/dsh_feature_permission_presets/lib/src/permission_widgets.dart"
-   ],
-   "notes": "Only the permission seat uses it (/permission <preset>); arbitrary slash commands cannot be run."
+   ]
   },
   {
    "id": "remote:commands/list",
@@ -784,8 +800,10 @@
    "area": "input-commands",
    "dshSource": "packages/interaction/commands/src/index.ts",
    "description": "List the slash commands the session offers.",
-   "status": "missing",
-   "notes": "Generated, never called: no command directory or \"/\" menu."
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_commands/lib/src/directory.dart"
+   ]
   },
   {
    "id": "remote:cotTranslation/limits",
@@ -973,8 +991,11 @@
    "area": "input-commands",
    "dshSource": "packages/api/session-controller/src/file-references.ts",
    "description": "List file and directory candidates for one Agent's working directory.",
-   "status": "missing",
-   "notes": "\"@\" file candidates (ui-reference); not built."
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_reference/lib/src/reference_source.dart",
+    "packages/dsh_client/lib/src/generated/file_references_remote.g.dart"
+   ]
   },
   {
    "id": "remote:fileUploads/upload",
@@ -1618,8 +1639,11 @@
    "area": "input-commands",
    "dshSource": "packages/context/session-reference/src/index.ts",
    "description": "Offer sessions to mention with \"@\" in a message.",
-   "status": "missing",
-   "notes": "\"@\" session candidates (ui-reference); not built."
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_reference/lib/src/reference_source.dart",
+    "packages/dsh_client/lib/src/generated/session_reference_resolver_remote.g.dart"
+   ]
   },
   {
    "id": "remote:settings/describe",
@@ -2462,7 +2486,12 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Floating entries rendered inside the resident composer card.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_input_trigger/lib/src/register.dart",
+    "features/dsh_feature_commands/lib/src/register.dart",
+    "features/dsh_feature_conversation/lib/src/composer.dart"
+   ]
   },
   {
    "id": "slot:conversation.input.permission",

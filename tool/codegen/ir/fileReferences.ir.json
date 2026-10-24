@@ -1,0 +1,76 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "fileReferences",
+  "package": "packages/api/session-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/session-controller/src/file-references.ts",
+    "packages/context/file-reference/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "query",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "FileReferenceCandidate"
+        }
+      },
+      "doc": "List file and directory candidates for one Agent's working directory."
+    }
+  ],
+  "decls": {
+    "FileReferenceCandidate": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "User-facing path accepted by normal prompts and filesystem tools."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "directory",
+              "file"
+            ]
+          },
+          "doc": "Directories keep completion open; files finish the mention."
+        }
+      ],
+      "source": "packages/context/file-reference/src/types.ts",
+      "doc": "One path-only completion candidate inside the target session cwd."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

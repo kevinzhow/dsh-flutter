@@ -12,8 +12,8 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 21 | 16 | 55 | 10 | 102 |
-| Input and commands | 3 | 1 | 20 | 1 | 25 |
+| Sessions and chat | 22 | 16 | 54 | 10 | 102 |
+| Input and commands | 7 | 3 | 14 | 1 | 25 |
 | Tools and approvals | 9 | 2 | 1 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 0 | 1 | 18 | 1 | 20 |
 | Files and preview | 6 | 5 | 8 | 0 | 19 |
@@ -21,22 +21,22 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 14 | 3 | 2 | 6 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 64 | 31 | 173 | 51 | 319 |
+| **all** | 69 | 33 | 166 | 51 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 13 | 10 | 27 | 6 | 56 |
-| remote | 27 | 5 | 89 | 25 | 146 |
-| slot | 21 | 16 | 44 | 19 | 100 |
+| package | 13 | 13 | 24 | 6 | 56 |
+| remote | 31 | 4 | 86 | 25 | 146 |
+| slot | 22 | 16 | 43 | 19 | 100 |
 | settings | 3 | 0 | 13 | 1 | 17 |
 
 ## Packages still to do, by priority
 
 **P1**
 
-- `ui-commands` (missing): Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. Only the /permission write path is wired (commands/execute from the permission seat); there is no command list or "/" menu.
+- `ui-commands` (partial): Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands.
 - `ui-directory-picker-browse` (missing): Browse the host's folders and create a new one to choose where a session works. Needs directoryPicker/list and createDirectory; new sessions currently always start in the host default workspace.
-- `ui-input-trigger` (missing): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The composer is a plain text field with no trigger detection.
+- `ui-input-trigger` (partial): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.
 - `ui-sidebar` (partial): Browse sessions in a tree grouped by workspace, search them, and see which are running. A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu.
 - `ui-user-questions` (partial): Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code.
 - `ui-workspace` (missing): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. workspace/* is not generated or called, and the session list has no workspace concept.
@@ -48,7 +48,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 - `ui-deliverables` (partial): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer.
 - `ui-goal` (missing): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. goals/* is not generated or called; the get_goal, create_goal and update_goal tool rows only show raw details.
 - `ui-plan` (partial): Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview.
-- `ui-reference` (missing): Mention a workspace file or another session with "@" so the agent reads it. fileReferences/list and sessionReferenceResolver/candidates are not generated or called.
+- `ui-reference` (partial): Mention a workspace file or another session with "@" so the agent reads it. The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text.
 - `ui-secret-mask` (missing): Hide recognized credentials (keys, tokens) in the text of messages you sent. Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see.
 
 **P3**
@@ -83,7 +83,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 ## Sessions and chat
 
-21 ported, 16 partial, 55 missing, 10 na.
+22 ported, 16 partial, 54 missing, 10 na.
 
 ### package (10)
 
@@ -171,7 +171,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | `conversation.input.dock` | ported | Full-width entries above the composer card. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plan/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/register.dart`; No queue dock occupant. |
 | `conversation.input.left` | missing | Compact controls at the left of the composer tool row. |  |
 | `conversation.input.model` | ported | Model selector inside the composer tool row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_model_selection/lib/src/register.dart` |
-| `conversation.input.overlay` | missing | Floating entries rendered inside the resident composer card. |  |
+| `conversation.input.overlay` | ported | Floating entries rendered inside the resident composer card. | `features/dsh_feature_input_trigger/lib/src/register.dart`, `features/dsh_feature_commands/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/composer.dart` |
 | `conversation.input.permission` | ported | Current-session permission control inside the composer tool row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_permission_presets/lib/src/register.dart` |
 | `conversation.input.plan` | partial | Plan control inside the composer tool row. | `features/dsh_feature_plan/lib/src/register.dart`; The plan-mode chip occupies conversation.input.dock instead; it is read-only. |
 | `conversation.input.right` | missing | Compact controls before the composer submit action. |  |
@@ -209,7 +209,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 ## Input and commands
 
-3 ported, 1 partial, 20 missing, 1 na.
+7 ported, 3 partial, 14 missing, 1 na.
 
 ### package (8)
 
@@ -217,10 +217,10 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 |---|---|---|---|
 | `ui-agent-preset` | missing | Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. | The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice. |
 | `ui-attachment` | ported | Attach photos, camera shots and files to a message with upload progress, cancel and retry, and view images in messages. | `features/dsh_feature_attachment`, `packages/dsh_models/lib/src/attachments.dart`, `packages/dsh_client/lib/src/file_upload.dart` |
-| `ui-commands` | missing | Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. | Only the /permission write path is wired (commands/execute from the permission seat); there is no command list or "/" menu. |
-| `ui-input-trigger` | missing | Type "/" or "@" in the message box to open a candidate menu and insert the pick. | The composer is a plain text field with no trigger detection. |
+| `ui-commands` | partial | Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. | `features/dsh_feature_commands`, `packages/dsh_conversation/lib/src/input/command_ui.dart`; Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands. |
+| `ui-input-trigger` | partial | Type "/" or "@" in the message box to open a candidate menu and insert the pick. | `features/dsh_feature_input_trigger`, `packages/dsh_conversation/lib/src/input/trigger_controller.dart`, `packages/dsh_conversation/lib/src/input/trigger_detect.dart`, `packages/dsh_conversation/lib/src/input/trigger_menu.dart`, `packages/dsh_conversation/lib/src/input/composer_input.dart`, `features/dsh_feature_conversation/lib/src/composer.dart`; The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts. |
 | `ui-model-selection` | ported | Pick the model and reasoning effort for the session from the message box. | `features/dsh_feature_model_selection` |
-| `ui-reference` | missing | Mention a workspace file or another session with "@" so the agent reads it. | fileReferences/list and sessionReferenceResolver/candidates are not generated or called. |
+| `ui-reference` | partial | Mention a workspace file or another session with "@" so the agent reads it. | `features/dsh_feature_reference`, `features/dsh_feature_conversation/lib/src/composer_text.dart`; The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text. |
 | `ui-secret-mask` | missing | Hide recognized credentials (keys, tokens) in the text of messages you sent. | Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see. |
 | `ui-shortcuts` | na | See and rebind keyboard shortcuts. | Physical-keyboard shortcuts of the web client; a phone-first client has none. Revisit if a desktop build ships. |
 
@@ -231,11 +231,11 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | `agentPresets/list` | missing | Read the selection roster. | Agent preset roster (ui-agent-preset); not built. |
 | `agentPresets/read` | missing | Read one declaration's child plugin list as YAML, for viewing only. | Agent preset composition viewer (ui-agent-preset); not built. |
 | `agentPresets/select` | missing | Select a preset before a session starts its first turn. | Agent preset choice (ui-agent-preset); not built. |
-| `commands/execute` | partial | Run a slash command (for example /permission) without sending it to the model. | `features/dsh_feature_permission_presets/lib/src/permission_widgets.dart`; Only the permission seat uses it (/permission <preset>); arbitrary slash commands cannot be run. |
-| `commands/list` | missing | List the slash commands the session offers. | Generated, never called: no command directory or "/" menu. |
-| `fileReferences/list` | missing | List file and directory candidates for one Agent's working directory. | "@" file candidates (ui-reference); not built. |
+| `commands/execute` | ported | Run a slash command (for example /permission) without sending it to the model. | `features/dsh_feature_commands/lib/src/command_source.dart`, `features/dsh_feature_permission_presets/lib/src/permission_widgets.dart` |
+| `commands/list` | ported | List the slash commands the session offers. | `features/dsh_feature_commands/lib/src/directory.dart` |
+| `fileReferences/list` | ported | List file and directory candidates for one Agent's working directory. | `features/dsh_feature_reference/lib/src/reference_source.dart`, `packages/dsh_client/lib/src/generated/file_references_remote.g.dart` |
 | `fileUploads/upload` | ported | Upload a file or image so it can be attached to the next message. | `packages/dsh_client/lib/src/file_upload.dart`; Whalee streams to the raw upload route (/api/session/uploadFileBinary), the route the web client uses for binary files. |
-| `sessionReferenceResolver/candidates` | missing | Offer sessions to mention with "@" in a message. | "@" session candidates (ui-reference); not built. |
+| `sessionReferenceResolver/candidates` | ported | Offer sessions to mention with "@" in a message. | `features/dsh_feature_reference/lib/src/reference_source.dart`, `packages/dsh_client/lib/src/generated/session_reference_resolver_remote.g.dart` |
 | `speech/cancelPreparation` | missing | Explicitly cancel resource preparation. | Experimental voice input; not built. Dictation could suit a phone. |
 | `speech/catalog` | missing | Read provider choices without preparing a recognizer. | Experimental voice input (client-ui-voice-input); not called by the web client today but part of its provider choice. |
 | `speech/configure` | missing | Persist the user's recognition preferences. | Experimental voice input; not built. Dictation could suit a phone. |

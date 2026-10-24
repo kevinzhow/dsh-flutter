@@ -63,6 +63,7 @@ class SessionController implements SessionActions {
     required WorkspaceFilesRemote files,
     PlatformServices platform = const PlatformServices(),
     FlushScheduler? scheduler,
+    InputTriggerRegistry? triggers,
     String? Function()? cwdReader,
     String hostHome = '',
     this.readOnly = false,
@@ -84,6 +85,8 @@ class SessionController implements SessionActions {
             platform.picker,
             platform.acceptsDrops,
           );
+    final textDraft = TextDraft(sessionId: session.sessionId);
+    if (triggers != null && !readOnly) textDraft.input.bind(triggers);
     owner = SessionOwner(
       session: session,
       conversation: conversation,
@@ -91,7 +94,7 @@ class SessionController implements SessionActions {
       cwdReader: cwdReader,
       hostHome: hostHome,
       attachments: _attachments,
-      textDraft: readOnly ? null : TextDraft(),
+      textDraft: readOnly ? null : textDraft,
       files: _Files(files, platform.fileActions),
     );
   }
@@ -128,6 +131,7 @@ class SessionController implements SessionActions {
   Future<void> loadOlder() => session.loadOlder();
 
   Future<void> dispose() async {
+    owner.input?.dispose();
     await conversation.dispose();
     await _attachments?.drafts.dispose();
     await _attachments?.dropController.close();

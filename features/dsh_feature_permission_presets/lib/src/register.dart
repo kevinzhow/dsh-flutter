@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:flutter/widgets.dart';
 
 import 'permission_catalog.dart';
+import 'permission_command.dart';
 import 'permission_default.dart';
 import 'permission_widgets.dart';
 
@@ -41,6 +45,8 @@ PermissionPresetsFeature registerPermissionPresetsFeature(
   required HostRemotes remotes,
   required ConfigForms forms,
   required DshI18n Function() i18n,
+  CommandUiRegistry? commandUi,
+  ProjectionStore? Function(String sessionId)? projectionsOf,
 }) {
   final catalog = PermissionCatalogDirectory(remotes);
   final defaults = PermissionDefaultController(
@@ -69,5 +75,33 @@ PermissionPresetsFeature registerPermissionPresetsFeature(
       ),
     ),
   );
+  if (commandUi != null && projectionsOf != null) {
+    offs
+      ..add(
+        decoratePermissionCommand(
+          commandUi,
+          catalog: catalog,
+          projectionsOf: projectionsOf,
+          submit: (sessionId, preset) =>
+              submitPermission(remotes, sessionId, preset),
+          i18n: i18n,
+        ),
+      )
+      ..add(
+        // Only an invalidation makes displayed options stale: drop an open popup
+        // on it, and leave one a read merely settled alone.
+        _dismissOnInvalidation(catalog, commandUi),
+      );
+  }
   return PermissionPresetsFeature._(catalog, defaults, offs);
+}
+
+void Function() _dismissOnInvalidation(
+  PermissionCatalogDirectory catalog,
+  CommandUiRegistry commandUi,
+) {
+  final sub = catalog.invalidations.changes.listen(
+    (_) => commandUi.dismiss('permission'),
+  );
+  return () => unawaited(sub.cancel());
 }

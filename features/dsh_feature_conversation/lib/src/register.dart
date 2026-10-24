@@ -1,3 +1,4 @@
+import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:flutter/widgets.dart';
@@ -5,6 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'session_header.dart';
 import 'shell.dart';
 import 'todo_panel.dart';
+
+/// Resolves a session id to its composer model (the app keeps them).
+typedef ComposerInputLookup = ComposerInput? Function(String sessionId);
 
 /// `conversation.session` as this feature uses it.
 final Slot<SessionOwner, Widget> sessionSlot = DshSlots.conversationSession
@@ -22,10 +26,27 @@ final Slot<SessionOwner, Widget> _composerSlot = DshSlots.conversationComposer
 /// Occupy `conversation.session` (the shell) and `conversation.header` (title
 /// and model indicator). The shell composes the view list and the composer
 /// chain that other features fill.
+///
+/// With a [commandUi] registry the composer's `File` command joins the `/`
+/// menu (dsh registers it through the same contribution API): a bare
+/// invocation opens the attach picker of the mounted composer.
 void registerConversationFeature(
   SlotRegistry slots, {
   required DshI18n Function() i18n,
+  CommandUiRegistry? commandUi,
+  ComposerInputLookup? inputOf,
 }) {
+  if (commandUi != null && inputOf != null) {
+    commandUi.register(
+      CommandContribution(
+        name: 'file',
+        label: () => i18n().t('conversation', 'input.file'),
+        icon: 'paperclip',
+        available: (sessionId) => inputOf(sessionId)?.canPickFiles ?? false,
+        ui: ActionSpec((sessionId) => inputOf(sessionId)?.pickFiles()),
+      ),
+    );
+  }
   slots.register<SessionOwner, Widget>(
     sessionSlot,
     (owner) => ConversationShell(

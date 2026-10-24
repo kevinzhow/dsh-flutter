@@ -1,0 +1,113 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "sessionReferenceResolver",
+  "package": "packages/context/session-reference",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/context/session-reference/src/index.ts",
+    "packages/context/session-reference/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "candidates",
+      "hostName": "remoteExportCandidates",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "query",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "SessionReferenceMentionCandidate"
+        }
+      },
+      "doc": "Remote face of {@link listCandidates}: the configured candidate limit applies, and every candidate carries the canonical mention a host inserts into the prompt draft."
+    }
+  ],
+  "decls": {
+    "SessionReferenceMentionCandidate": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "mention",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical `@[label](dsh-session:…)` mention serialized into the prompt draft."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Opaque source session identity."
+        },
+        {
+          "name": "label",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Latest log-backed title, falling back to the opaque session id."
+        },
+        {
+          "name": "displayTitle",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Display and canonical-mention text, preferring a subagent's durable creation label over {@link label}."
+        },
+        {
+          "name": "cwd",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Source session working directory, when recorded."
+        },
+        {
+          "name": "sameWorkspace",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "True when {@link SessionReferenceCandidate.cwd} is recorded and equals the requesting agent's. Hosts that only surface a distinguishing location read this instead of comparing paths they never received."
+        },
+        {
+          "name": "createdAt",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Source session creation time in Unix epoch milliseconds."
+        }
+      ],
+      "source": "packages/context/session-reference/src/types.ts",
+      "doc": "One discovery candidate carrying its canonical prompt mention."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}
