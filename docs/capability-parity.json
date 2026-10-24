@@ -68,7 +68,7 @@
     "features/dsh_feature_chat",
     "packages/dsh_conversation/lib/src/chat"
    ],
-   "notes": "Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. No fork-at-message, no like/dislike. Links and file paths in answers are styled but not tappable (DshMarkdown has no link handler).",
+   "notes": "Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy).",
    "priority": "P2"
   },
   {
@@ -2511,7 +2511,7 @@
    "whalee": [
     "features/dsh_feature_chat/lib/src/chat_nodes.dart"
    ],
-   "notes": "Only a copy action in the turn tail; no seat and no like/dislike."
+   "notes": "Copy and the turn clock in the turn tail (dsh's MessageIconActions without branch); no seat for other actions and no like/dislike (ui-message-feedback)."
   },
   {
    "id": "slot:conversation.chat.commandview",

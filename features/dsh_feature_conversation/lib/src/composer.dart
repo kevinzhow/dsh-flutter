@@ -730,11 +730,24 @@ class ComposerCard extends StatelessWidget {
                       if (i > 0) const SizedBox(width: 8),
                       leading[i],
                     ],
-                    const Spacer(),
-                    for (var i = 0; i < trailing.length; i++) ...[
-                      if (i > 0) const SizedBox(width: 8),
-                      trailing[i],
-                    ],
+                    // The trailing group takes all the room that is left and
+                    // sits at its end: a `Spacer` between two `Flexible`
+                    // groups would be given only a share of it, stopping the
+                    // send circle short of the card's edge.
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional.centerEnd,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (var i = 0; i < trailing.length; i++) ...[
+                              if (i > 0) const SizedBox(width: 8),
+                              trailing[i],
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

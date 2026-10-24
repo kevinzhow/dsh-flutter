@@ -64,7 +64,7 @@ class ConversationShell extends StatelessWidget {
             title: i18n.t(appNamespace, 'session.openFailed'),
             body: '${s.openError}',
           );
-        } else if (s.openState != OpenState.open) {
+        } else if (s.openState != OpenState.open && views.isEmpty) {
           body = Center(
             key: const ValueKey('session-loading'),
             child: DshChromeText(
@@ -75,6 +75,9 @@ class ConversationShell extends StatelessWidget {
             ),
           );
         } else {
+          // While the session opens the view shows its own placeholder (dsh's
+          // ChatView owns the loading state); the text above is only for a
+          // composition without a view.
           body = views.isEmpty ? const SizedBox.shrink() : views.first;
         }
         // A blank session shows the hero: the headline, the workspace chip and
@@ -140,24 +143,8 @@ class ConversationShell extends StatelessWidget {
                 Expanded(child: body),
                 if (!s.removed)
                   for (final dock in slots.renderList(dockSlot, owner))
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxWidth: DshSpace.readableWidth,
-                        ),
-                        child: dock,
-                      ),
-                    ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: DshSpace.readableWidth,
-                    ),
-                    child: composer,
-                  ),
-                ),
+                    _AxisSeat(child: dock),
+                _AxisSeat(child: composer),
                 if (!s.removed) ..._composerDock(context),
               ],
             ],
@@ -197,20 +184,58 @@ extension on ConversationShell {
     );
     if (pills.isEmpty) return const [];
     return [
-      Padding(
+      _AxisSeat(
         key: const ValueKey('composer-dock'),
-        padding: const EdgeInsets.only(top: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (var i = 0; i < pills.length; i++) ...[
-              if (i > 0) const SizedBox(width: 12),
-              pills[i],
+        capped: false,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < pills.length; i++) ...[
+                if (i > 0) const SizedBox(width: 12),
+                pills[i],
+              ],
             ],
-          ],
+          ),
         ),
       ),
     ];
+  }
+}
+
+/// A seat of the composer stack on dsh's width axis (`InputBar.module.css`
+/// `.root` / `.card`, `--dsh-composer-card-max-width`): the input card, the
+/// docks and the pills sit on the same centre as the message column, which is
+/// the scroll body's box without its margin and scrollbar gutter.
+class _AxisSeat extends StatelessWidget {
+  const _AxisSeat({super.key, required this.child, this.capped = true});
+
+  final Widget child;
+
+  /// Whether the seat is as wide as the composer area (cards) or only
+  /// centred on the axis (the pills row).
+  final bool capped;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final axis = DshChatAxis.of(context, constraints.maxWidth);
+        return Padding(
+          padding: EdgeInsets.only(right: axis.trailing),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: capped
+                ? ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: axis.composerWidth),
+                    child: child,
+                  )
+                : child,
+          ),
+        );
+      },
+    );
   }
 }
 

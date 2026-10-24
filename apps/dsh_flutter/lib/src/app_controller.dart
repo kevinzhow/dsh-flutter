@@ -206,7 +206,18 @@ class AppController extends ChangeNotifier {
       i18n: () => i18n,
     );
     registerInputTriggerFeature(slots, i18n: () => i18n);
-    registerChatFeature(slots, i18n: () => i18n);
+    // What a tapped link or file path may open, shared by the chat's
+    // Markdown links and the tool cards.
+    final hostActions = ToolHostActions(
+      openFile: (path, {line}) => _openFile(path, line: line),
+      openUrl: (url) => unawaited(
+        launchUrl(url, mode: LaunchMode.externalApplication).then((_) => true),
+      ),
+      openSubagent: (parent, childId) => _subagents.openById(parent, childId),
+      revealQuestion: (parent, callId) =>
+          questions.reveal(parent.sessionId, callId),
+    );
+    registerChatFeature(slots, i18n: () => i18n, host: hostActions);
     registerAttachmentFeature(slots, i18n: () => i18n);
     layout = registerLayoutFeature(
       slots,
@@ -235,22 +246,7 @@ class AppController extends ChangeNotifier {
       terminals: terminals,
     );
     registerDocumentPreviewFeature(slots, i18n: () => i18n);
-    registerToolFeature(
-      slots,
-      i18n: () => i18n,
-      actions: ToolHostActions(
-        openFile: (path, {line}) => _openFile(path, line: line),
-        openUrl: (url) => unawaited(
-          launchUrl(
-            url,
-            mode: LaunchMode.externalApplication,
-          ).then((_) => true),
-        ),
-        openSubagent: (parent, childId) => _subagents.openById(parent, childId),
-        revealQuestion: (parent, callId) =>
-            questions.reveal(parent.sessionId, callId),
-      ),
-    );
+    registerToolFeature(slots, i18n: () => i18n, actions: hostActions);
     registerPlanFeature(slots, i18n: () => i18n);
     _subagents = registerSubagentFeature(
       slots,

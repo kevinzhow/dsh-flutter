@@ -1,11 +1,13 @@
+import 'dart:math' as math;
+
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show SelectableText;
-import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 import 'package:flutter/widgets.dart';
+
+import 'stream/message_actions.dart';
 
 String _chat(
   DshI18n i18n,
@@ -89,12 +91,25 @@ class UserBubble extends StatelessWidget {
     this.attachments = const [],
     this.owner,
     this.slots,
+    this.time,
+    this.actions = true,
+    this.latest = false,
   });
 
   final String text;
   final DshI18n i18n;
   final bool steering;
   final bool pending;
+
+  /// The message's event time, for the clock of its actions row.
+  final num? time;
+
+  /// Show the copy action (and clock) under the bubble.
+  final bool actions;
+
+  /// The newest user message keeps its actions visible on pointer platforms;
+  /// earlier ones show them on hover (dsh `data-actions-reveal`).
+  final bool latest;
   final List<UserAttachmentView> attachments;
 
   /// Needed to render image groups (the session loads durable images).
@@ -150,43 +165,62 @@ class UserBubble extends StatelessWidget {
       alignment: AlignmentDirectional.centerEnd,
       child: LayoutBuilder(
         builder: (context, constraints) => ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.86),
+          // `.userStack { max-width: min(content width * 0.702, 82%) }`
+          constraints: BoxConstraints(
+            maxWidth: math.min(
+              DshChatContent.of(context) * 0.702,
+              constraints.maxWidth * 0.82,
+            ),
+          ),
           child: Opacity(
             opacity: pending ? 0.6 : 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                if (steering)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: DshSpace.xs),
-                    child: DshChromeText(
-                      i18n.t('conversation', 'settings.enter.steer'),
-                      style: _caption(context),
-                    ),
-                  ),
-                if (attachments.isNotEmpty) _attachments(),
-                if (attachments.isNotEmpty && showBubble)
-                  const SizedBox(height: DshSpace.sm),
-                if (showBubble)
-                  DshDecoratedBox(
-                    decoration: BoxDecoration(
-                      color: theme.color('--dsw-specific-bubble'),
-                      borderRadius: BorderRadius.circular(theme.radiusXl),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: DshSpace.lg,
-                        vertical: DshSpace.md,
-                      ),
-                      child: SelectableText(
-                        text,
-                        style: theme
-                            .textStyle('--dsw-font-base-16')
-                            .copyWith(color: theme.labelPrimary),
+            child: HoverReveal(
+              always: latest || pending,
+              builder: (context, revealed) => Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (steering)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: DshSpace.xs),
+                      child: DshChromeText(
+                        i18n.t('conversation', 'settings.enter.steer'),
+                        style: _caption(context),
                       ),
                     ),
-                  ),
-              ],
+                  if (attachments.isNotEmpty) _attachments(),
+                  if (attachments.isNotEmpty && showBubble)
+                    const SizedBox(height: DshSpace.sm),
+                  if (showBubble)
+                    DshDecoratedBox(
+                      decoration: BoxDecoration(
+                        color: theme.color('--dsw-specific-bubble'),
+                        borderRadius: BorderRadius.circular(theme.radiusXl),
+                      ),
+                      child: Padding(
+                        // `.bubble { padding: 10px 16px }`, 14/22 text.
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: DshSpace.lg,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          text,
+                          style: theme
+                              .textStyle('--dsw-font-s-14')
+                              .copyWith(color: theme.labelPrimary),
+                        ),
+                      ),
+                    ),
+                  // `.userRow { gap: 6px }` between the stack and the actions.
+                  if (actions && text.isNotEmpty) const SizedBox(height: 6),
+                  if (actions && text.isNotEmpty)
+                    MessageActions(
+                      text: text,
+                      time: time,
+                      i18n: i18n,
+                      revealed: revealed,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -205,11 +239,15 @@ class AssistantStepView extends StatelessWidget {
     required this.i18n,
     this.owner,
     this.slots,
+    this.host,
   });
 
   final AssistantData data;
   final String nodeKey;
   final DshI18n i18n;
+
+  /// What a tapped link may open (browser, workspace file preview).
+  final ToolHostActions? host;
 
   /// Needed to render image blocks through `conversation.chat.message.images`.
   final SessionOwner? owner;
@@ -238,6 +276,9 @@ class AssistantStepView extends StatelessWidget {
               text,
               key: ValueKey('text-$nodeKey-$i'),
               codeLabels: codeLabels(i18n),
+              streaming: data.status == 'running',
+              onOpenUrl: host?.openUrl,
+              onOpenFile: host?.openFile,
             ),
           );
         case ImageBlock(:final attachment):
@@ -306,6 +347,24 @@ class _ReasoningRow extends StatefulWidget {
 class _ReasoningRowState extends State<_ReasoningRow> {
   bool? _byHand;
 
+  /// The reader's choice survives the row scrolling out of the built range
+  /// (the list is lazy): it is kept in the enclosing [PageStorage] by row key.
+  Object get _storeKey => widget.key ?? 'reasoning';
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _byHand ??= PageStorage.maybeOf(
+      context,
+    )?.readState(context, identifier: _storeKey) as bool?;
+  }
+
+  void _toggle(bool open) {
+    setState(() => _byHand = open);
+    PageStorage.maybeOf(context)
+        ?.writeState(context, open, identifier: _storeKey);
+  }
+
   @override
   Widget build(BuildContext context) {
     final text = widget.text;
@@ -317,7 +376,7 @@ class _ReasoningRowState extends State<_ReasoningRow> {
         .copyWith(color: theme.labelSecondary);
     return DshDisclosure(
       open: _byHand ?? streaming,
-      onToggle: (open) => setState(() => _byHand = open),
+      onToggle: _toggle,
       header: Row(
         children: [
           DshIcon(
@@ -348,7 +407,7 @@ class _ReasoningRowState extends State<_ReasoningRow> {
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: DshSpace.md),
-            child: SelectableText(text, style: style),
+            child: Text(text, style: style),
           ),
         ),
       ),
@@ -356,22 +415,23 @@ class _ReasoningRowState extends State<_ReasoningRow> {
   }
 }
 
-/// The closing row of a finished turn: copy of the closing answer.
-class TurnTailView extends StatefulWidget {
-  const TurnTailView({super.key, required this.data, required this.i18n});
+/// The closing row of a finished turn (dsh `TurnTailNodeView`): the copy
+/// action for the closing answer and the turn's clock. The newest turn keeps
+/// them visible; earlier turns show them on hover on pointer platforms.
+class TurnTailView extends StatelessWidget {
+  const TurnTailView({
+    super.key,
+    required this.data,
+    required this.i18n,
+    this.latest = false,
+  });
 
   final TurnTailData data;
   final DshI18n i18n;
-
-  @override
-  State<TurnTailView> createState() => _TurnTailViewState();
-}
-
-class _TurnTailViewState extends State<TurnTailView> {
-  bool _copied = false;
+  final bool latest;
 
   String? get _text {
-    final closing = widget.data.closing;
+    final closing = data.closing;
     if (closing == null) return null;
     return [
       for (final b in closing.blocks)
@@ -385,16 +445,15 @@ class _TurnTailViewState extends State<TurnTailView> {
     if (text == null || text.trim().isEmpty) return const SizedBox.shrink();
     return Align(
       alignment: AlignmentDirectional.centerStart,
-      child: DshButton(
-        key: const ValueKey('turn-copy'),
-        size: DshButtonSize.sm,
-        onPressed: () async {
-          await Clipboard.setData(ClipboardData(text: text));
-          if (!mounted) return;
-          setState(() => _copied = true);
-        },
-        child: DshChromeText(
-          widget.i18n.t('common', _copied ? 'copied' : 'copy'),
+      child: HoverReveal(
+        always: latest,
+        builder: (context, revealed) => MessageActions(
+          key: const ValueKey('turn-copy'),
+          text: text,
+          time: data.closing?.time ?? data.time,
+          i18n: i18n,
+          clockFirst: false,
+          revealed: revealed,
         ),
       ),
     );
