@@ -433,7 +433,43 @@ app. The host itself is the caller's: start one on a loopback port with its own 
 Below 1024 px the left column starts as its rail, so those cases widen it first, on both sides. The dark cases set `WHALEE_PLATFORM_BRIGHTNESS=dark` for the
 app (a capture hook, like `WHALEE_WINDOW_SIZE` and `WHALEE_PIN_FONTS`) and `colorScheme` for the page; the Chinese cases set `LC_ALL` and the browser locale.
 
-### Weston GPU smoke
+### Weston GPU interaction replay
+
+`tool/parity-desktop/run --app-backend weston` replays the desktop cases in a private native Wayland session on the GPU.
+Install Weston **14** and matching `libweston-14-dev`, a C compiler, `pkg-config`, `dbus-run-session` and the
+`weston-screenshooter` client. The user needs render-node access (`render` group on k172). Keep the isolated fixture host
+and the `PARITY_DESKTOP_*` variables from the section above; use a fresh app settings directory for each run:
+
+```sh
+export PARITY_DESKTOP_HOME="$PWD/.local/gpu-home-$(date +%s)"
+# XDG_RUNTIME_DIR must be a short writable directory, normally /run/user/$(id -u).
+tool/parity-desktop/run --app-backend weston --cases session.1280x720.light.en \
+  --out "$PWD/build/parity-desktop-gpu"
+```
+
+Use `--skip-web` to capture only the app. The default backend remains `x11`; use separate output directories for the two
+environments. GPU capture compiles `weston_input.c` into the output directory. This test-only module creates a keyboard and
+pointer in the private compositor and receives commands on an inherited pipe. It reads no physical input devices, opens
+no input service port, and is never installed in the system compositor. It uses Weston 14 private seat/input APIs, so both
+the runner and compilation reject other major versions; revalidate against the installed build after upgrading Weston.
+
+The runner uses the existing case coordinates for pairing and page clicks, plus `scroll: [x, y, verticalPixels]` for wheel
+input and `capture: "label"` for intermediate screenshots. Typing uses an explicitly configured US keyboard and rejects
+unsupported characters before sending any key. Each case has its own runtime directory, D-Bus session and app settings.
+The runner records its PIDs and stops those process groups on success and failure; it also terminates Weston when the
+input pipe closes. The fixture host remains the caller's responsibility.
+
+Each case writes `environment.json` with the actual GL renderer, kernel and the render node opened by the application
+process itself. Software renderers and an app without an open render node fail the run. The Weston and app logs are kept
+beside it; treat the app log and captures as private until checked, since failed pairing can leave the launch token on
+screen. Screenshots and the app log are created with owner-only access. This harness establishes GPU input replay; it does
+not measure frame latency or prove visual parity. Record Flutter, Mesa, fonts and scale along with any published scores.
+
+On k172 (Weston 14.0.2 / Mesa 26.0.8 / Intel Lunar Lake), the harness paired with the synthetic host, opened the 320-turn
+fixture, scrolled from turn 320 back to turns 310–311, and confirmed application renderD128 access. Both recorded process
+groups exited. An intentionally failing app also exercised cleanup.
+
+### Manual Weston GPU startup
 
 For native Wayland startup and GPU screenshots, use an isolated Weston headless GL session. The user needs read/write access
 to the render node (normally the `render` group; a new login or `sg render` applies a newly added membership). Install Weston
@@ -472,7 +508,7 @@ mkdir -p .local/weston-captures
 
 Record the GPU/device, kernel driver, Mesa, Weston, Flutter, fonts, scale and GL renderer with the result; `--renderer=gl`
 alone does not establish hardware acceleration. The Weston log names the actual rendering device and GL renderer. Keep
-this environment distinct from the Xvfb baseline when comparing scores. The existing whole-page click driver uses X11;
-the commands above verify native startup and capture, rather than replaying that interaction trace on Wayland.
+this environment distinct from the Xvfb baseline when comparing scores. The manual commands above verify startup and
+capture; use `--app-backend weston` for native input replay.
 The runtime directory uses the login session's short path to stay within Unix socket path limits; parallel runs need
 different runtime directories.
