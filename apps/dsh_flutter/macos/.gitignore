@@ -1,0 +1,17 @@
+# Flutter-related
+**/Flutter/ephemeral/
+**/Pods/
+
+# Xcode-related
+**/dgph
+**/xcuserdata/
+
+# Local signing configuration and developer credentials
+LocalSigning.xcconfig
+*.mobileprovision
+*.provisionprofile
+*.p12
+*.p8
+*.cer
+*.pem
+*.key

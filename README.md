@@ -61,6 +61,17 @@ tool/preflight --fast                 # guards: layering, codegen/theme/i18n sta
 tool/preflight                        # same plus every package's tests (not the `live` ones, which start real dsh hosts)
 ```
 
+For a local macOS release, use your own Apple Development certificate and a matching provisioning profile in Xcode.
+Pass the signing team at build time; keep account-specific signing settings and credentials out of the repository:
+
+```sh
+cd apps/dsh_flutter
+FLUTTER_XCODE_DEVELOPMENT_TEAM='YOUR_TEAM_ID' FLUTTER_XCODE_CODE_SIGN_IDENTITY='Apple Development' \
+  flutter build macos --release
+ditto build/macos/Build/Products/Release/Whalee.app /Applications/Whalee.app
+open /Applications/Whalee.app
+```
+
 CI (`.github/workflows/ci.yml`) runs `tool/preflight` on every pull request and push to main, and builds an Android APK
 (see "CI builds and release signing"). It has no dsh checkout, so it skips five checks on purpose and says so in the job
 summary: `theme-pack`, `icons`, `vector`, `parity` (the parity selftest) and `capability` (the upstream half of the capability
@@ -221,7 +232,7 @@ describe mirror and configuration forms; `settings_form_model_vector.json` does 
 ## Product name
 
 The display name and application id live in `apps/dsh_flutter/lib/src/app_identity.dart` and are repeated in the
-platform manifests (Android, iOS, Linux); `test/app_identity_test.dart` fails when they drift.
+platform manifests (Android, iOS, macOS, Linux). `test/app_identity_test.dart` checks the Android, iOS and Linux copies.
 
 ## Live tests
 
