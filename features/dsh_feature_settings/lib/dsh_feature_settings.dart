@@ -6,3 +6,5 @@ library;
 export 'src/general_section.dart';
 export 'src/register.dart';
 export 'src/settings_page.dart';
+export 'src/settings_dialog.dart';
+export 'src/settings_shell.dart';

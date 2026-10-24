@@ -11,6 +11,7 @@ export 'src/host_info.dart';
 export 'src/host_scope.dart';
 export 'src/ids.dart' show randomUuid;
 export 'src/mux.dart';
+export 'src/open_in_app.dart';
 export 'src/pairing.dart';
 export 'src/remote_caller.dart';
 export 'src/transport_error.dart';

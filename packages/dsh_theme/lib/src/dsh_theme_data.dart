@@ -114,6 +114,21 @@ class DshThemeData extends ThemeExtension<DshThemeData> {
     );
   }
 
+  /// A text-stack style at a literal size and line height, for the few places
+  /// dsh's stylesheets spell a pixel size instead of a ladder step (a session
+  /// row's 10px time). Like the CSS, it ignores the user's size delta.
+  TextStyle fixedTextStyle({
+    required double size,
+    required double line,
+    int weight = 400,
+  }) => _style(
+    FontRole.text,
+    size: size,
+    height: line / size,
+    weight: weight,
+    italic: false,
+  );
+
   /// A style for the terminal at the user's terminal size.
   TextStyle get terminalTextStyle {
     final size = settings.terminalFontSize.toDouble();

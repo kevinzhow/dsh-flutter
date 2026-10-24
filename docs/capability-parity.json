@@ -149,9 +149,12 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-directory-picker-native",
    "description": "Open the host operating system's own folder chooser to pick a working directory.",
-   "status": "missing",
-   "notes": "Was na because a phone user cannot see the host display. A desktop build runs with a host on the same machine, where the host OS chooser is the right picker (remote:directoryPicker/pick); with a remote host the in-app browser (ui-directory-picker-browse) stays the way.",
-   "priority": "P2"
+   "status": "ported",
+   "notes": "The host OS chooser (directoryPicker/pick) fills both directory-flow holes ahead of the browse flow, only where the host is this machine and the build is a desktop one; renderless, one chooser per open, one outcome.",
+   "whalee": [
+    "features/dsh_feature_directory_picker_native/lib/src/flow.dart",
+    "apps/dsh_flutter/lib/src/desktop_shell.dart"
+   ]
   },
   {
    "id": "package:ui-dockkit",
@@ -160,9 +163,13 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-dockkit",
    "description": "Arrange panels in a draggable split-tree docking layout.",
-   "status": "missing",
-   "notes": "Was na as phone-first. The split-tree docking engine behind the desktop right sidebar surface (split, drag, invert); a desktop build replicates it. Phones keep the full-screen sheet.",
-   "priority": "P2"
+   "status": "partial",
+   "notes": "The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified.",
+   "priority": "P2",
+   "whalee": [
+    "packages/dsh_dockkit/lib/src/engine/controller.dart",
+    "packages/dsh_dockkit/lib/src/widgets/dock_layout.dart"
+   ]
   },
   {
    "id": "package:ui-goal",
@@ -212,9 +219,15 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout",
    "description": "Resize and collapse the three-column window: sidebar, conversation and right column.",
-   "status": "missing",
-   "notes": "Was partial because a page stack (phone) and a fixed sessions pane plus conversation (840 px and wider, apps/dsh_flutter/lib/src/app.dart) exist. That is Whalee's own adaptation, not dsh's AppFrame: three columns with drag handles, sidebar collapse rules (auto-collapse, narrow-expanded), the shell seats and the ctx.layout navigation and panels state are all absent, so the row is missing for desktop. Below the phone breakpoint the existing phone layout stays.",
-   "priority": "P1"
+   "status": "partial",
+   "notes": "dsh AppFrame: three-column solve, drag handles, collapse below 1024 with the narrow override, ctx.layout, main panel selection, the shell seats, per-platform window chrome (macOS and Windows compile-safe, untested). Below 600 wide the sidebar is a modal drawer under a phone top bar (owner decision 2026-10-24); 600 to 1023 the rail, 1024 and up docked.",
+   "priority": "P1",
+   "whalee": [
+    "features/dsh_feature_layout/lib/src/app_frame.dart",
+    "packages/dsh_layout/lib/src/layout_store.dart",
+    "packages/dsh_layout/lib/src/columns.dart",
+    "packages/dsh_ui/lib/src/dsh_phone_chrome.dart"
+   ]
   },
   {
    "id": "package:ui-message-feedback",
@@ -246,9 +259,13 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-open-in-app",
    "description": "Open the workspace folder or a previewed file in an application installed on the host.",
-   "status": "missing",
-   "notes": "Needs session/canOpenWorkspacePath, workspacePathApplications and openWorkspacePath. Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_open_in_app/lib/src/target_button.dart",
+    "packages/dsh_client/lib/src/open_in_app.dart"
+   ]
   },
   {
    "id": "package:ui-permission-presets",
@@ -507,9 +524,13 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-shortcuts",
    "description": "See and rebind keyboard shortcuts.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A desktop build has a physical keyboard: shortcut reference, recording and local preference editing are in scope.",
-   "priority": "P2"
+   "status": "ported",
+   "notes": "The service with preference documents (v1, v2), conflicts and serialized persistence; the key adapter (priority chords on macOS and Windows); the searchable reference with recording, editing and restore defaults; the Settings row.",
+   "whalee": [
+    "packages/dsh_shortcuts/lib/src/service.dart",
+    "features/dsh_feature_shortcuts/lib/src/reference_dialog.dart",
+    "features/dsh_feature_shortcuts/lib/src/keyboard_host.dart"
+   ]
   },
   {
    "id": "package:ui-sidebar",
@@ -520,10 +541,10 @@
    "description": "Browse sessions in a tree grouped by workspace, search them, and see which are running.",
    "status": "partial",
    "whalee": [
-    "features/dsh_feature_session",
-    "apps/dsh_flutter/lib/src/screens/sessions_screen.dart"
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart",
+    "features/dsh_feature_sidebar/lib/src/leading_controls.dart"
    ],
-   "notes": "A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu.",
+   "notes": "Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a \"not available yet\" page.",
    "priority": "P1"
   },
   {
@@ -696,13 +717,13 @@
    "dshSource": "packages/client/ui-workspace",
    "description": "Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it.",
    "status": "partial",
-   "notes": "Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session (\"+\": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start.",
+   "notes": "On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the \"N more\" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards.",
    "priority": "P1",
    "whalee": [
-    "features/dsh_feature_workspace",
-    "packages/dsh_models/lib/src/workspace_list.dart",
-    "packages/dsh_models/lib/src/workspace_navigation.dart",
-    "features/dsh_feature_conversation/lib/src/hero.dart"
+    "features/dsh_feature_session/lib/src/workspace/browser.dart",
+    "features/dsh_feature_session/lib/src/workspace/tree.dart",
+    "features/dsh_feature_session/lib/src/workspace/view_state.dart",
+    "features/dsh_feature_workspace/lib/src/register.dart"
    ]
   },
   {
@@ -971,8 +992,11 @@
    "platform": "desktop",
    "dshSource": "packages/api/workspace-controller/src/directory-picker.ts",
    "description": "Open the host operating system's folder chooser on the host machine.",
-   "status": "missing",
-   "notes": "Was na because a phone user cannot see the host display. A desktop build with a host on the same machine can use the OS chooser; needs a local-host check before it is offered (a remote host would open the dialog on another machine)."
+   "status": "ported",
+   "notes": "Called by the native directory flow; see ui-directory-picker-native.",
+   "whalee": [
+    "features/dsh_feature_directory_picker_native/lib/src/flow.dart"
+   ]
   },
   {
    "id": "remote:dynamicCordisRunner/getClientCode",
@@ -1855,8 +1879,12 @@
    "platform": "desktop",
    "dshSource": "packages/api/settings-controller/src/index.ts",
    "description": "Materialize the provider-owned settings document and open it in a native text editor.",
-   "status": "missing",
-   "notes": "Was na because a phone cannot reach the host editor. With a local host (same machine) the native text editor opens where the user is; offered only when the host is local."
+   "status": "ported",
+   "notes": "The Settings dialog offers \"open the settings document\" where the host is this machine.",
+   "whalee": [
+    "apps/dsh_flutter/lib/src/desktop_shell.dart",
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "remote:settings/replace",
@@ -2610,7 +2638,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Ambient entries below the composer card.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_chat/lib/src/stats_pills.dart"
+   ],
+   "notes": "The session statistics pills (activity and usage) with their dialogs."
   },
   {
    "id": "slot:conversation.header",
@@ -2837,9 +2869,10 @@
    "description": "Strict per-Session title, actions, and View navigation.",
    "status": "partial",
    "whalee": [
+    "features/dsh_feature_conversation/lib/src/desktop_header.dart",
     "features/dsh_feature_conversation/lib/src/session_header.dart"
    ],
-   "notes": "The session header is a fixed widget; only its actions seat is declared."
+   "notes": "Desktop: crumb, actions, utilities, corner and view tabs (Chat, and Trajectory as a \"not available yet\" page). No subagent breadcrumbs yet."
   },
   {
    "id": "slot:conversation.session.header.actions",
@@ -2862,7 +2895,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "The header's far-right corner, past the utilities' edge and into the header's own padding, for one control.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_sidebar_right/lib/src/register.dart"
+   ],
+   "notes": "The right sidebar's way back in."
   },
   {
    "id": "slot:conversation.session.header.lineage",
@@ -2880,7 +2917,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Right-aligned Session utilities in ascending order.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_open_in_app/lib/src/register.dart",
+    "apps/dsh_flutter/lib/src/desktop_shell.dart"
+   ],
+   "notes": "Open-in-app and the Session overflow menu (Copy Session ID; the other verbs wait for the Workspace actions)."
   },
   {
    "id": "slot:conversation.trajectory.images",
@@ -2939,8 +2981,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "Central panel selected by sidebar entry id.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_layout/lib/src/app_frame.dart"
+   ]
   },
   {
    "id": "slot:main.conversation",
@@ -3047,11 +3092,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "The right column: a track the centre makes room for, or nothing.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
-    "features/dsh_feature_sidebar_right/lib/src/panel.dart"
+    "features/dsh_feature_sidebar_right/lib/src/register.dart",
+    "features/dsh_feature_layout/lib/src/app_frame.dart"
    ],
-   "notes": "The right column exists (sheet or inline column) but is not a layout seat."
+   "notes": "The right column track and its occupant (the Session's sidebar)."
   },
   {
    "id": "slot:rightbar.session",
@@ -3085,8 +3131,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "Optional actions rendered in the content-column header before Close.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:settings.close",
@@ -3095,8 +3144,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "The close button's visually-hidden label text (the button itself — icon, geometry, focus — is shell chrome).",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:settings.general.item",
@@ -3120,8 +3172,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "The panel title text seat.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:settings.launcher",
@@ -3130,8 +3185,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "Optional sidebar account launcher; opens the shell-owned settings panel.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:settings.models.footer",
@@ -3199,8 +3257,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "The sidebar-foot trigger row content: icon + label, supplied as slot content (the accessible name comes from the content — rail state renders the label visually hidden).",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:shell.bottom",
@@ -3209,8 +3270,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "Full-width bottom content below all three columns.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_layout/lib/src/app_frame.dart"
+   ]
   },
   {
    "id": "slot:shell.leading",
@@ -3219,8 +3283,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "Window-chrome seat at the frame's top-left, over every main panel.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_layout/lib/src/app_frame.dart"
+   ]
   },
   {
    "id": "slot:shell.overlay",
@@ -3229,8 +3296,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "Frame-wide floating layer, above every column and outside their scroll containers.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_layout/lib/src/app_frame.dart"
+   ]
   },
   {
    "id": "slot:shell.quota-notice",
@@ -3248,8 +3318,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-layout/src/client/index.ts",
    "description": "The whole left column.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.brand.mark",
@@ -3258,8 +3331,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "Brand mark rendered in the expanded brand row and collapsed rail.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. The seat is shell chrome and is replicated; its occupant is not: the DeepSeek mark and name stay out (ui-brand-official is na) and Whalee supplies its own name."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.brand.name",
@@ -3268,8 +3344,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "Brand name rendered beside the expanded mark.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. The seat is shell chrome and is replicated; its occupant is not: the DeepSeek mark and name stay out (ui-brand-official is na) and Whalee supplies its own name."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.chat.conversation",
@@ -3287,8 +3366,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "Optional actions beside Settings at the sidebar foot.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.panellist",
@@ -3297,8 +3379,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "Global panel icons.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.right.pane.tab",
@@ -3457,8 +3542,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "The settings seat at the sidebar foot.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The settings dialog seats of the sidebar foot.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/settings_shell.dart"
+   ]
   },
   {
    "id": "slot:sidebar.toggle.badge",
@@ -3467,8 +3555,11 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-sidebar/src/client/contract/slots.ts",
    "description": "Non-interactive notification inside the collapsed sidebar expand button.",
-   "status": "missing",
-   "notes": "Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat."
+   "status": "ported",
+   "notes": "The desktop frame's seat; filled by the sidebar and layout features.",
+   "whalee": [
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart"
+   ]
   },
   {
    "id": "slot:sidebar.workspaces",
@@ -3480,9 +3571,9 @@
    "status": "partial",
    "whalee": [
     "features/dsh_feature_workspace/lib/src/add_action.dart",
-    "apps/dsh_flutter/lib/src/screens/sessions_screen.dart"
+    "features/dsh_feature_session/lib/src/workspace/browser.dart"
    ],
-   "notes": "The add-workspace action sits in the session list header; the list itself stays flat (no workspace groups, search or row actions).",
+   "notes": "The add-workspace action sits in the browser header (a 28px control; the phone list keeps the touch-size one). The browsing region itself is the app's composition of the workspace browser, not an occupant of this slot.",
    "priority": "P1"
   },
   {

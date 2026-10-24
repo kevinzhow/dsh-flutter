@@ -24,13 +24,18 @@
     "packages/client/ui-goal/src/client/locales.ts",
     "packages/client/ui-input-trigger/src/client/locales.ts",
     "packages/client/ui-jobs/src/client/locales.ts",
+    "packages/client/ui-layout/src/client/shortcut-locales.ts",
     "packages/client/ui-message-feedback/src/client/locales.ts",
     "packages/client/ui-model-selection/src/client/locales.ts",
     "packages/client/ui-open-in-app/src/client/locales.ts",
     "packages/client/ui-permission-presets/src/client/locales.ts",
     "packages/client/ui-plan/src/client/locales.ts",
+    "packages/client/ui-plugin-manager/src/client/locales.ts",
     "packages/client/ui-reference/src/client/locales.ts",
+    "packages/client/ui-schedule/src/client/frequency-locales.ts",
+    "packages/client/ui-schedule/src/client/task-manager-locales.ts",
     "packages/client/ui-settings-general/src/client/locales.ts",
+    "packages/client/ui-shortcuts/src/client/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/locales.ts",
@@ -3711,6 +3716,897 @@
       }
     },
     {
+      "namespace": "pluginManager",
+      "package": "client/ui-plugin-manager",
+      "file": "packages/client/ui-plugin-manager/src/client/locales.ts",
+      "entries": {
+        "addPlugin": {
+          "en": "Add plugin",
+          "zh": "添加插件"
+        },
+        "backToList": {
+          "en": "Back to plugins",
+          "zh": "返回插件"
+        },
+        "backToPackage": {
+          "en": "Back to {name}",
+          "zh": "返回 {name}"
+        },
+        "basicTitle": {
+          "en": "Built-in plugin settings",
+          "zh": "内置插件配置"
+        },
+        "bundlesTitle": {
+          "en": "Installed plugins",
+          "zh": "已安装插件"
+        },
+        "cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "chooseAddMethod": {
+          "en": "Choose how to add a plugin",
+          "zh": "选择添加插件方式"
+        },
+        "close": {
+          "en": "Close",
+          "zh": "关闭"
+        },
+        "configureRow": {
+          "en": "Configure {name}",
+          "zh": "配置 {name}"
+        },
+        "confirmUninstall": {
+          "en": "Uninstall",
+          "zh": "卸载"
+        },
+        "confirmUninstallDescription": {
+          "en": "What it provides goes away once it is uninstalled.",
+          "zh": "卸载后它提供的功能会消失。"
+        },
+        "confirmUninstallTitle": {
+          "en": "Uninstall \"{name}\"?",
+          "zh": "卸载「{name}」？"
+        },
+        "crumbRoot": {
+          "en": "Plugins",
+          "zh": "插件"
+        },
+        "empty": {
+          "en": "No plugins are installed yet.",
+          "zh": "还没有安装任何插件。"
+        },
+        "enableToggle": {
+          "en": "Enable {name}",
+          "zh": "启用 {name}"
+        },
+        "error": {
+          "en": "Could not read all plugins, possibly due to a network problem",
+          "zh": "可能由于网络问题，无法读取全部插件"
+        },
+        "extensionsTitle": {
+          "en": "Experimental plugins",
+          "zh": "实验性插件"
+        },
+        "failedDisable": {
+          "en": "Could not disable: {reason}",
+          "zh": "停用失败：{reason}"
+        },
+        "failedEnable": {
+          "en": "Could not enable: {reason}",
+          "zh": "启用失败：{reason}"
+        },
+        "failedRowDisable": {
+          "en": "Could not disable the component: {reason}",
+          "zh": "组件停用失败：{reason}"
+        },
+        "failedRowEnable": {
+          "en": "Could not enable the component: {reason}",
+          "zh": "组件启用失败：{reason}"
+        },
+        "failedUninstall": {
+          "en": "Could not uninstall: {reason}",
+          "zh": "卸载失败：{reason}"
+        },
+        "infoDescription": {
+          "en": "Configure official plugins and install or manage other plugins here. View the built-in plugin list and runtime status in Settings → Built-in plugins.",
+          "zh": "在这里配置官方插件，安装和管理其他插件。内置插件列表及运行状态可在「设置 → 内置插件」中查看"
+        },
+        "infoLabel": {
+          "en": "About plugins",
+          "zh": "插件说明"
+        },
+        "installApplying": {
+          "en": "Applying configuration, please wait…",
+          "zh": "正在应用配置，请稍候…"
+        },
+        "installApplyingCancellationError": {
+          "en": "Cancellation was not confirmed. Installation is being applied; wait for its result. {reason}",
+          "zh": "取消请求未得到确认；安装已进入收尾阶段，请等待结果。{reason}"
+        },
+        "installApprovalCaution": {
+          "en": "Allow only packages you trust.",
+          "zh": "只在信任这些包时允许。"
+        },
+        "installApprovalConsequence": {
+          "en": "Once allowed, the scripts run here with your permissions, and the permission is saved in this profile.",
+          "zh": "允许后，脚本会以你的权限在本机运行，授权保存在当前 profile，之后不再询问。"
+        },
+        "installApprovalDescription": {
+          "en": "These packages have install scripts that pnpm did not run.",
+          "zh": "以下包声明了安装脚本，pnpm 默认不运行。"
+        },
+        "installApprovalTitle": {
+          "en": "Install scripts need permission",
+          "zh": "需要允许安装脚本"
+        },
+        "installApproveAndRetry": {
+          "en": "Allow these scripts and retry",
+          "zh": "允许这些脚本并重试"
+        },
+        "installAttempt": {
+          "en": "{previous} could not serve the package; retrying through {registry} (registry {index} of {total})",
+          "zh": "{previous} 不可用，正在改用 {registry} 重试（第 {index} 个源，共 {total} 个）"
+        },
+        "installAttemptBadge": {
+          "en": "Attempt {index} · {registry}",
+          "zh": "第 {index} 次 · {registry}"
+        },
+        "installAwaitingAcceptance": {
+          "en": "Waiting for the Host to accept installation. Cancellation will retry automatically after confirmation.",
+          "zh": "正在等待后端接收安装任务，收到确认后会自动重试取消。"
+        },
+        "installBackgroundApplying": {
+          "en": "Installation is being applied and cannot be cancelled. View installation progress.",
+          "zh": "安装已进入收尾阶段，无法取消，可查看安装进度。"
+        },
+        "installBackgroundDone": {
+          "en": "Installation finished. View installation details.",
+          "zh": "插件安装已完成，可查看安装结果。"
+        },
+        "installBackgroundFailed": {
+          "en": "Installation failed. View installation details.",
+          "zh": "插件安装失败，可查看安装详情。"
+        },
+        "installBackgroundUnconfirmed": {
+          "en": "Installation status is unconfirmed. View the installation for details.",
+          "zh": "安装状态暂未确认，请查看安装任务了解详情。"
+        },
+        "installBackgroundUnknown": {
+          "en": "Installation result unavailable. Check the plugin list.",
+          "zh": "未能获取安装结果，请检查插件列表。"
+        },
+        "installCancel": {
+          "en": "Cancel install",
+          "zh": "取消安装"
+        },
+        "installCancelAndEdit": {
+          "en": "Cancel installation and return to editing",
+          "zh": "取消安装并返回编辑"
+        },
+        "installCancelUnconfirmed": {
+          "en": "Installation has not been confirmed stopped. Retry cancellation or wait for the installation result. {reason}",
+          "zh": "尚未确认安装已停止，请重试取消或等待安装结果。{reason}"
+        },
+        "installCancelled": {
+          "en": "Installation cancelled; the plugin is not enabled, and downloaded files may remain",
+          "zh": "已取消安装，插件未启用，下载的文件可能保留"
+        },
+        "installCancelledShort": {
+          "en": "Cancelled",
+          "zh": "已取消"
+        },
+        "installCancelling": {
+          "en": "Stopping installation…",
+          "zh": "正在停止安装…"
+        },
+        "installChangeRegistry": {
+          "en": "Change registry",
+          "zh": "更换安装源"
+        },
+        "installChecking": {
+          "en": "Checking…",
+          "zh": "正在检查…"
+        },
+        "installClose": {
+          "en": "Done",
+          "zh": "完成"
+        },
+        "installCloseCancels": {
+          "en": "Cancel install and close",
+          "zh": "取消安装并关闭"
+        },
+        "installConfirmedRefused": {
+          "en": "This plugin cannot be installed",
+          "zh": "无法安装此插件"
+        },
+        "installConfirmedTitle": {
+          "en": "Install plugin",
+          "zh": "安装插件"
+        },
+        "installDescription": {
+          "en": "Enter the plugin's package name, GitHub repository address, or local directory path.",
+          "zh": "输入插件的包名、GitHub 仓库地址或本地目录路径。"
+        },
+        "installDetailsHide": {
+          "en": "Hide install details",
+          "zh": "收起安装详情"
+        },
+        "installDetailsShow": {
+          "en": "Show install details",
+          "zh": "查看安装详情"
+        },
+        "installDoneApproved": {
+          "en": "Install scripts allowed for {names}",
+          "zh": "已允许运行安装脚本：{names}"
+        },
+        "installDoneNothing": {
+          "en": "Install finished with no new dependency.",
+          "zh": "安装完成，没有新增依赖。"
+        },
+        "installDoneOtherVersion": {
+          "en": "Under pnpm's supply-chain security policy (minimumReleaseAge), versions published more recently than the required age are not installed automatically, so this installation used {installed} instead of the latest version {version}. A newly published version has not completed this waiting period and may contain undetected malicious code or defects. If you need {version}, uninstall the current version and then install {exact} to request that version.",
+          "zh": "根据 pnpm 供应链安全策略（minimumReleaseAge），发布时间未满规定时长的版本不会被自动安装，因此本次安装的是 {installed}，而非最新版本 {version}。新发布的版本尚未经过该观察期，可能存在未被发现的恶意代码或缺陷。如确需使用 {version}，请先卸载当前版本，再安装 {exact} 以指定该版本。"
+        },
+        "installDoneRestart": {
+          "en": "Installed; restart DSH to load it. {reason}",
+          "zh": "已安装，请重启 DSH 加载它。{reason}"
+        },
+        "installEdit": {
+          "en": "Edit",
+          "zh": "编辑"
+        },
+        "installEditAria": {
+          "en": "Back to editing",
+          "zh": "返回编辑"
+        },
+        "installEnableNow": {
+          "en": "Enable now",
+          "zh": "立即启用"
+        },
+        "installExisting": {
+          "en": "Install a third-party plugin",
+          "zh": "安装第三方插件"
+        },
+        "installExistingDescription": {
+          "en": "Supports npm packages, Git repositories, and local directories",
+          "zh": "支持 npm 包、Git 仓库和本地目录"
+        },
+        "installFailedTitle": {
+          "en": "The plugin could not be installed",
+          "zh": "插件安装失败"
+        },
+        "installFailureBuildBlocked": {
+          "en": "A dependency's install scripts need your permission before the install can continue",
+          "zh": "有依赖的安装脚本需要你允许后才能继续"
+        },
+        "installFailureBuildBlockedManual": {
+          "en": "pnpm blocked install scripts; allow them under allowBuilds in pnpm-workspace.yaml and retry",
+          "zh": "有依赖的安装脚本被 pnpm 拦下，请在 profile 的 pnpm-workspace.yaml 的 allowBuilds 中放行后重试"
+        },
+        "installFailureDiskFull": {
+          "en": "The disk is full; the install stopped",
+          "zh": "磁盘空间不足，安装已停止"
+        },
+        "installFailureGeneric": {
+          "en": "Something went wrong during the install; the details say what",
+          "zh": "安装过程中出错，原因见安装详情"
+        },
+        "installFailureIntegrity": {
+          "en": "The downloaded package failed its integrity check",
+          "zh": "下载的安装包校验失败"
+        },
+        "installFailureNetwork": {
+          "en": "The network connection failed",
+          "zh": "网络连接失败"
+        },
+        "installFailureNetworkAll": {
+          "en": "No registry could be reached (tried: {registries}). Check the network or proxy settings, or change the registry and retry.",
+          "zh": "所有安装源都无法连接（已尝试：{registries}）。请检查网络或代理设置，或更换安装源后重试。"
+        },
+        "installFailureNetworkHost": {
+          "en": "{host} could not be reached. A GitHub address or a .tgz link is not fetched through the registry: this machine must reach it directly or through a proxy. If the plugin is also published to npm, enter its package name instead.",
+          "zh": "无法连接 {host}。GitHub 地址和 .tgz 直链不经过安装源，需要本机能直接访问它或配置代理；如果这个插件也发布到了 npm，请改填包名。"
+        },
+        "installFailureNoMatchingVersion": {
+          "en": "No version matches the request",
+          "zh": "没有匹配的版本"
+        },
+        "installFailureNotFound": {
+          "en": "No such plugin was found",
+          "zh": "未找到相关插件"
+        },
+        "installFailurePermission": {
+          "en": "No write permission; the plugin cannot be installed",
+          "zh": "没有写入权限，无法安装"
+        },
+        "installFailurePnpmMissing": {
+          "en": "pnpm was not found, so nothing can be installed",
+          "zh": "没有找到 pnpm，无法安装"
+        },
+        "installFailureTimeout": {
+          "en": "The install timed out",
+          "zh": "安装超时"
+        },
+        "installGitTemplateHint": {
+          "en": "Replace this with the actual Git repository address.",
+          "zh": "请替换为实际的 Git 仓库地址"
+        },
+        "installGithubFailedDescription": {
+          "en": "Try another installation source.",
+          "zh": "请尝试其他安装来源。"
+        },
+        "installGithubFailedTitle": {
+          "en": "Cannot access GitHub",
+          "zh": "无法访问 GitHub"
+        },
+        "installGithubTimeoutTitle": {
+          "en": "GitHub connection timed out",
+          "zh": "连接 GitHub 超时"
+        },
+        "installGuideExampleLabel": {
+          "en": "Example: ",
+          "zh": "示例："
+        },
+        "installGuideFill": {
+          "en": "Use example",
+          "zh": "填入示例"
+        },
+        "installGuideFillAria": {
+          "en": "Use the example {example}",
+          "zh": "填入示例 {example}"
+        },
+        "installGuideHide": {
+          "en": "Hide the guide",
+          "zh": "收起引导"
+        },
+        "installGuideIdExample": {
+          "en": "dsh-plugin-whale-pet",
+          "zh": "dsh-plugin-whale-pet"
+        },
+        "installGuideIdHint": {
+          "en": "The plugin package name is the npm package name (like dsh-xxx or @author/plugin): the part after dsh plugin add or pnpm add in a community plugin's README install command.",
+          "zh": "插件包名即 npm 包名（如 dsh-xxx 或 @作者/插件名），社区插件的 README 安装命令中 dsh plugin add 或 pnpm add 之后的部分。"
+        },
+        "installGuideIdTitle": {
+          "en": "Enter the plugin's npm package name",
+          "zh": "填入插件 npm 包名"
+        },
+        "installGuideSafety": {
+          "en": "Install only plugins you trust: they run with your permissions and can damage DeepSeek Harness or leak your data.",
+          "zh": "请确认插件来源可信。插件在本机以你的权限运行，来源不明的插件可能损坏 DeepSeek Harness，或读取和泄露你的数据。"
+        },
+        "installGuideToggle": {
+          "en": "Install guide and examples",
+          "zh": "插件安装引导和示例"
+        },
+        "installLocation": {
+          "en": "Installs into {dir}",
+          "zh": "安装位置：{dir}"
+        },
+        "installPackageLabel": {
+          "en": "Plugin package name",
+          "zh": "插件包名"
+        },
+        "installPathTemplateHint": {
+          "en": "Replace this with the actual path to your local plugin directory.",
+          "zh": "请替换为本机插件目录的实际路径"
+        },
+        "installProblemInstalled": {
+          "en": "This plugin is already installed. To upgrade it, uninstall it and install it again",
+          "zh": "该插件已安装。如需升级，请卸载后重新安装"
+        },
+        "installProblemInvalid": {
+          "en": "This is not a package name or address that can be installed: {reason}",
+          "zh": "无法识别这个包名或地址：{reason}"
+        },
+        "installProblemNetwork": {
+          "en": "The plugin registry could not be reached; check the network and try again",
+          "zh": "无法连接插件源，请检查网络后重试"
+        },
+        "installProblemNetworkAll": {
+          "en": "No registry could be reached (tried: {registries}); check the network or proxy settings, or change the registry",
+          "zh": "所有安装源都无法连接（已尝试：{registries}），请检查网络或代理设置，或更换安装源"
+        },
+        "installProblemNotBundle": {
+          "en": "This package declares no bundle, so it cannot be installed as a plugin: {reason}",
+          "zh": "这个包没有声明组合包，无法作为插件安装：{reason}"
+        },
+        "installProblemNotFound": {
+          "en": "No such plugin was found",
+          "zh": "未找到相关插件"
+        },
+        "installProblemNotPackage": {
+          "en": "The path does not exist or is not a valid plugin package",
+          "zh": "该路径不存在或不是有效的插件包"
+        },
+        "installProblemShipped": {
+          "en": "This plugin ships with DSH; upgrading DSH updates it",
+          "zh": "该插件随 DSH 提供，升级 DSH 即可获得新版本"
+        },
+        "installProblemUnknown": {
+          "en": "The plugin could not be looked up: {reason}",
+          "zh": "无法获取插件信息：{reason}"
+        },
+        "installReconcile": {
+          "en": "Check installation status",
+          "zh": "核对安装状态"
+        },
+        "installResultUnconfirmed": {
+          "en": "The installation result was not received. Check installation status. {reason}",
+          "zh": "未收到安装结果，请核对安装状态。{reason}"
+        },
+        "installRetry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "installRun": {
+          "en": "Install",
+          "zh": "安装"
+        },
+        "installSpecLabel": {
+          "en": "Package name or address",
+          "zh": "包名或地址"
+        },
+        "installSpecPlaceholder": {
+          "en": "for example dsh-plugin-whale-pet",
+          "zh": "例如 dsh-plugin-whale-pet"
+        },
+        "installStarting": {
+          "en": "Preparing installation…",
+          "zh": "正在准备安装…"
+        },
+        "installSubjectGit": {
+          "en": "Git repository",
+          "zh": "Git 仓库"
+        },
+        "installSubjectPath": {
+          "en": "Local directory",
+          "zh": "本地目录"
+        },
+        "installSubjectTarball": {
+          "en": "Tarball",
+          "zh": "压缩包"
+        },
+        "installTitle": {
+          "en": "Add plugin",
+          "zh": "添加插件"
+        },
+        "installTryAnotherWay": {
+          "en": "Try another way",
+          "zh": "试试其他方式"
+        },
+        "installUnconfirmedTitle": {
+          "en": "Installation status unconfirmed",
+          "zh": "安装状态尚未确认"
+        },
+        "installUnknownDescription": {
+          "en": "The Host has no active installation with this request id. Check the plugin list before trying again.",
+          "zh": "后端当前没有此安装任务。请检查插件列表后再尝试安装。"
+        },
+        "installUnknownTitle": {
+          "en": "Installation result unavailable",
+          "zh": "未能获取安装结果"
+        },
+        "installUpgradeNotice": {
+          "en": "On-demand Official plugins offer Update when their version differs from DSH. To update other plugins, uninstall and reinstall them.",
+          "zh": "按需安装的官方插件会在版本与 DSH 不同时提供“更新”。其他插件请先卸载再安装新版。"
+        },
+        "installUseGithubMirror": {
+          "en": "Use mainland China mirror",
+          "zh": "改用国内镜像"
+        },
+        "installVersion": {
+          "en": "Version {version}",
+          "zh": "版本 {version}"
+        },
+        "installViewTask": {
+          "en": "View installation",
+          "zh": "查看安装任务"
+        },
+        "installedTab": {
+          "en": "Installed",
+          "zh": "已安装"
+        },
+        "installedTitle": {
+          "en": "Installed",
+          "zh": "已安装"
+        },
+        "installingTitle": {
+          "en": "Installing the plugin…",
+          "zh": "插件安装中…"
+        },
+        "intro": {
+          "en": "Install, enable, and configure plugins",
+          "zh": "安装、启用和配置插件"
+        },
+        "loading": {
+          "en": "Reading plugins…",
+          "zh": "正在读取插件…"
+        },
+        "metadataError": {
+          "en": "Package metadata error: {error}",
+          "zh": "包元信息错误：{error}"
+        },
+        "moreAction": {
+          "en": "More",
+          "zh": "更多"
+        },
+        "moreTitle": {
+          "en": "Experimental plugins",
+          "zh": "实验性插件"
+        },
+        "openDetail": {
+          "en": "View {name}",
+          "zh": "查看 {name}"
+        },
+        "overriddenNotice": {
+          "en": "{name} was saved, but a higher-priority configuration overrides it, so it is not in effect",
+          "zh": "{name} 已保存，但被更高优先级的配置覆盖，当前未生效"
+        },
+        "panel": {
+          "en": "Plugins",
+          "zh": "插件"
+        },
+        "partOff": {
+          "en": "Off",
+          "zh": "已关闭"
+        },
+        "partToggle": {
+          "en": "Enable component {name}",
+          "zh": "启用组件 {name}"
+        },
+        "partsCountFailed": {
+          "en": "{count} failed",
+          "zh": "{count} 异常"
+        },
+        "partsCountOff": {
+          "en": "{count} off",
+          "zh": "{count} 已停用"
+        },
+        "partsCountRunning": {
+          "en": "{count} running",
+          "zh": "{count} 运行中"
+        },
+        "partsCountTotal": {
+          "en": "{count} total",
+          "zh": "共 {count} 个"
+        },
+        "partsEmpty": {
+          "en": "This plugin pack contains no components.",
+          "zh": "这个插件包不包含任何组件。"
+        },
+        "partsFilter": {
+          "en": "Filter components",
+          "zh": "筛选组件"
+        },
+        "partsFilterEmpty": {
+          "en": "No component matches.",
+          "zh": "没有匹配的组件。"
+        },
+        "partsLabel": {
+          "en": "Components",
+          "zh": "包含的组件"
+        },
+        "previewAlt": {
+          "en": "{name} feature preview",
+          "zh": "{name}功能预览"
+        },
+        "previewUnavailable": {
+          "en": "Could not display feature preview",
+          "zh": "无法显示功能配图"
+        },
+        "reasonAlreadyInstalled": {
+          "en": "This package is already installed; uninstall it before installing another version.",
+          "zh": "这个包已经安装；要安装其他版本，请先卸载它"
+        },
+        "reasonAmbiguousInstall": {
+          "en": "Which package was installed cannot be told from the dependency change.",
+          "zh": "无法从依赖变更中确定安装了哪一个包"
+        },
+        "reasonBundleInUse": {
+          "en": "Other configuration still uses this bundle's components; switch them off first.",
+          "zh": "其他配置仍在使用这个组合包的组件，请先停用它们"
+        },
+        "reasonIncompatibleInstall": {
+          "en": "Install a plugin version compatible with this DSH.",
+          "zh": "请安装与当前 DSH 兼容的插件版本。"
+        },
+        "reasonIncompatibleInstalled": {
+          "en": "Uninstall it and install a version compatible with this DSH.",
+          "zh": "请卸载后重新安装与当前 DSH 兼容的版本。"
+        },
+        "reasonIncompatibleVersion": {
+          "en": "{plugin} is incompatible with DSH {runtime} (requires {requirements}); running it may cause crashes or data loss.",
+          "zh": "{plugin} 与 DSH {runtime} 不兼容（要求 {requirements}），运行它可能导致崩溃或数据丢失。"
+        },
+        "reasonIncompatibleVersionUnnamed": {
+          "en": "This plugin is incompatible with the running DSH version; running it may cause crashes or data loss.",
+          "zh": "这个插件与当前 DSH 版本不兼容，运行它可能导致崩溃或数据丢失。"
+        },
+        "reasonInvalidSpec": {
+          "en": "Enter a valid package name or address.",
+          "zh": "请输入有效的包名或地址"
+        },
+        "reasonLabel": {
+          "en": "Reason",
+          "zh": "原因"
+        },
+        "reasonManagementRequired": {
+          "en": "Plugin management needs it; it cannot be switched off or uninstalled.",
+          "zh": "插件管理所需，不能停用或卸载"
+        },
+        "reasonNotBundle": {
+          "en": "This package declares no bundle, so it cannot be managed as a plugin.",
+          "zh": "这个包没有声明组合包，不能作为插件管理"
+        },
+        "reasonNotRemovable": {
+          "en": "This package is not owned by the profile, or plugin management needs it.",
+          "zh": "这个包不属于当前 profile，或者是插件管理所需的组件"
+        },
+        "reasonOperationError": {
+          "en": "The Host reported an error.",
+          "zh": "Host 报告了一个错误"
+        },
+        "reasonStaleApproval": {
+          "en": "The pending script approvals changed; install again to refresh them.",
+          "zh": "待允许的安装脚本列表已变化，请重新安装以刷新"
+        },
+        "reasonStopProfile": {
+          "en": "This profile runs without HMR; stop it and uninstall the package with dsh plugin.",
+          "zh": "这个 profile 没有启用 HMR，正在使用的包要停止后用 dsh plugin 卸载"
+        },
+        "reasonUnaddressable": {
+          "en": "The profile patch cannot address this one uniquely.",
+          "zh": "当前 profile 的 patch 无法唯一定位这一项"
+        },
+        "reasonUnknownPlugin": {
+          "en": "No such plugin.",
+          "zh": "找不到该插件"
+        },
+        "refresh": {
+          "en": "Refresh",
+          "zh": "刷新"
+        },
+        "refreshError": {
+          "en": "Refresh failed. Please try again.",
+          "zh": "刷新失败，请重试"
+        },
+        "registryCustom": {
+          "en": "Custom address",
+          "zh": "自定义地址"
+        },
+        "registryCustomHint": {
+          "en": "Enter an internal or private npm registry address starting with http:// or https://. If it requires a login, store the credentials in ~/.npmrc on this machine.",
+          "zh": "填写内网或私有 npm 源地址，以 http:// 或 https:// 开头。若为需要登录的源，请把凭据放在本机的 ~/.npmrc 里。"
+        },
+        "registryCustomInvalid": {
+          "en": "Enter an address starting with http:// or https://",
+          "zh": "请输入以 http:// 或 https:// 开头的地址"
+        },
+        "registryCustomPlaceholder": {
+          "en": "https://npm.example.com/",
+          "zh": "https://npm.example.com/"
+        },
+        "registryDefault": {
+          "en": "Default registry",
+          "zh": "默认安装源"
+        },
+        "registryLegend": {
+          "en": "The npm registry the plugin is downloaded from",
+          "zh": "从哪个 npm 源下载插件"
+        },
+        "registryListSeparator": {
+          "en": ", ",
+          "zh": "、"
+        },
+        "registryNpmmirror": {
+          "en": "Mainland China mirror",
+          "zh": "中国大陆镜像源"
+        },
+        "registryOfficial": {
+          "en": "Official npm registry",
+          "zh": "npm 官方源"
+        },
+        "registryToggle": {
+          "en": "Registry",
+          "zh": "安装源"
+        },
+        "restartNotice": {
+          "en": "Restart DSH to apply the change. {reason}",
+          "zh": "请重启 DSH 使更改生效。{reason}"
+        },
+        "restartReasonHostModule": {
+          "en": "The change reaches modules DSH itself loaded.",
+          "zh": "更改涉及 DSH 自身已加载的模块。"
+        },
+        "restartReasonModuleComparison": {
+          "en": "DSH could not compare the loaded plugins with their files.",
+          "zh": "DSH 无法将已加载的插件与磁盘上的文件进行比较。"
+        },
+        "restartReasonNoHmr": {
+          "en": "This profile applies changes only at startup.",
+          "zh": "这个 profile 只在启动时应用更改。"
+        },
+        "restartReasonPackageMoved": {
+          "en": "An installed package now resolves to another directory, or the change replaces a package the DSH installation provides. Uninstall a package before installing it from another location.",
+          "zh": "已安装的插件包解析到了另一个目录，或者更改替换了 DSH 安装自带的包。从其他位置安装前请先卸载。"
+        },
+        "restartReasonUnmanagedPlugin": {
+          "en": "The change reaches a plugin running outside the plugin list.",
+          "zh": "更改涉及一个不受插件列表管理的插件。"
+        },
+        "retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "rowPhaseActive": {
+          "en": "Running",
+          "zh": "运行中"
+        },
+        "rowPhaseFailed": {
+          "en": "Problem",
+          "zh": "异常"
+        },
+        "rowPhaseLoading": {
+          "en": "Loading",
+          "zh": "加载中"
+        },
+        "rowPhasePending": {
+          "en": "Waiting for dependencies",
+          "zh": "等待依赖"
+        },
+        "rowPhaseUnloading": {
+          "en": "Unloading",
+          "zh": "卸载中"
+        },
+        "rowStateIdle": {
+          "en": "Not running",
+          "zh": "未运行"
+        },
+        "sentenceSeparator": {
+          "en": " ",
+          "zh": ""
+        },
+        "sourceBuiltIn": {
+          "en": "Built in",
+          "zh": "内置"
+        },
+        "sourceNotInstalled": {
+          "en": "Not installed",
+          "zh": "未安装"
+        },
+        "sourceSpec": {
+          "en": "Code source",
+          "zh": "代码来源"
+        },
+        "sourceTargetSpec": {
+          "en": "Source for this DSH",
+          "zh": "当前 DSH 对应来源"
+        },
+        "sourceTargetVersion": {
+          "en": "Version for this DSH",
+          "zh": "当前 DSH 对应版本"
+        },
+        "sourceTitle": {
+          "en": "Source",
+          "zh": "来源信息"
+        },
+        "sourceVersion": {
+          "en": "Current version",
+          "zh": "当前版本"
+        },
+        "statusBeta": {
+          "en": "Experimental",
+          "zh": "实验性"
+        },
+        "statusMissingFiles": {
+          "en": "Package unavailable",
+          "zh": "包不可用"
+        },
+        "statusNotInstalled": {
+          "en": "Not installed",
+          "zh": "未安装"
+        },
+        "statusProblem": {
+          "en": "Problem",
+          "zh": "异常"
+        },
+        "statusUpdateAvailable": {
+          "en": "Update available",
+          "zh": "可更新"
+        },
+        "tabsLabel": {
+          "en": "Plugin views",
+          "zh": "插件视图"
+        },
+        "terminalCollapse": {
+          "en": "Collapse",
+          "zh": "收起"
+        },
+        "terminalCollapseAria": {
+          "en": "Collapse output",
+          "zh": "收起输出"
+        },
+        "terminalCommandLine": {
+          "en": "Command line {n}",
+          "zh": "命令第 {n} 行"
+        },
+        "terminalCopied": {
+          "en": "Copied",
+          "zh": "复制成功"
+        },
+        "terminalCopy": {
+          "en": "Copy",
+          "zh": "复制"
+        },
+        "terminalDone": {
+          "en": "Done",
+          "zh": "已完成"
+        },
+        "terminalExitCode": {
+          "en": "exit code {code}",
+          "zh": "退出码 {code}"
+        },
+        "terminalExpand": {
+          "en": "… {n} more lines",
+          "zh": "… 其余 {n} 行"
+        },
+        "terminalExpandAria": {
+          "en": "Expand the remaining {n} output lines",
+          "zh": "展开其余 {n} 行输出"
+        },
+        "terminalFailed": {
+          "en": "Failed",
+          "zh": "失败"
+        },
+        "terminalNoExitCode": {
+          "en": "no exit code",
+          "zh": "未正常退出"
+        },
+        "terminalNoOutput": {
+          "en": "No output",
+          "zh": "无输出"
+        },
+        "terminalRunning": {
+          "en": "Running",
+          "zh": "运行中"
+        },
+        "terminalSignal": {
+          "en": "signal {signal}",
+          "zh": "信号 {signal}"
+        },
+        "title": {
+          "en": "Plugins",
+          "zh": "插件"
+        },
+        "unavailable": {
+          "en": "This deployment runs without a manageable profile, so plugins cannot be installed or switched here.",
+          "zh": "本部署没有可管理的 profile，无法安装或启停插件。"
+        },
+        "uninstall": {
+          "en": "Uninstall",
+          "zh": "卸载"
+        },
+        "uninstallLabel": {
+          "en": "Uninstall {name}",
+          "zh": "卸载 {name}"
+        },
+        "update": {
+          "en": "Update",
+          "zh": "更新"
+        },
+        "updateLabel": {
+          "en": "Update {name}",
+          "zh": "更新 {name}"
+        },
+        "versionTag": {
+          "en": "v{version}",
+          "zh": "v{version}"
+        }
+      }
+    },
+    {
       "namespace": "question",
       "package": "client/ui-user-questions",
       "file": "packages/client/ui-user-questions/src/client/locales.ts",
@@ -3905,6 +4801,765 @@
         "time.years": {
           "en": "{n}y",
           "zh": "{n}年"
+        }
+      }
+    },
+    {
+      "namespace": "schedule.manager",
+      "package": "client/ui-schedule",
+      "file": "packages/client/ui-schedule/src/client/task-manager-locales.ts",
+      "entries": {
+        "card.deleted": {
+          "en": "Deleted",
+          "zh": "已删除"
+        },
+        "card.open": {
+          "en": "Open",
+          "zh": "打开"
+        },
+        "card.openLabel": {
+          "en": "Open task details: {title}",
+          "zh": "打开任务详情：{title}"
+        },
+        "cron.day.both": {
+          "en": "Day {days} of every month or {weekdays}{months}",
+          "zh": "每月 {days} 日或{weekdays}{months}"
+        },
+        "cron.day.bothStarred": {
+          "en": "Day {days} of every month and {weekdays}{months}",
+          "zh": "每月 {days} 日且{weekdays}{months}"
+        },
+        "cron.day.every": {
+          "en": "Every day{months}",
+          "zh": "每天{months}"
+        },
+        "cron.day.monthDays": {
+          "en": "Day {days} of every month{months}",
+          "zh": "每月 {days} 日{months}"
+        },
+        "cron.day.weekdays": {
+          "en": "{weekdays}{months}",
+          "zh": "{weekdays}{months}"
+        },
+        "cron.hours.list": {
+          "en": "{hours}",
+          "zh": "{hours}"
+        },
+        "cron.hours.range": {
+          "en": "{from}–{to}",
+          "zh": "{from} 至 {to}"
+        },
+        "cron.list.join": {
+          "en": ", ",
+          "zh": "、"
+        },
+        "cron.months": {
+          "en": " in {months}",
+          "zh": "（{months}）"
+        },
+        "cron.part.join": {
+          "en": " ",
+          "zh": " "
+        },
+        "cron.time.at": {
+          "en": "at {times}",
+          "zh": "{times}"
+        },
+        "cron.time.everyHour": {
+          "en": "Every hour",
+          "zh": "每小时"
+        },
+        "cron.time.everyMinute": {
+          "en": "Every minute",
+          "zh": "每分钟"
+        },
+        "cron.time.everyMinutes": {
+          "en": "Every {step} minutes",
+          "zh": "每 {step} 分钟"
+        },
+        "cron.time.everyNHours": {
+          "en": "Every {count} hours",
+          "zh": "每 {count} 小时"
+        },
+        "cron.time.hourlyAt": {
+          "en": "Every hour at minute {minutes}",
+          "zh": "每小时的第 {minutes} 分钟"
+        },
+        "cron.time.hoursAt": {
+          "en": "at minute {minutes} of hours {hours}",
+          "zh": "{hours} 点的第 {minutes} 分钟"
+        },
+        "cron.time.hoursEveryMinute": {
+          "en": "every minute during hours {hours}",
+          "zh": "{hours} 点的每分钟"
+        },
+        "cron.time.hoursEveryMinutes": {
+          "en": "every {step} minutes during hours {hours}",
+          "zh": "{hours} 点内每 {step} 分钟"
+        },
+        "cron.time.joinedEveryHour": {
+          "en": "every hour",
+          "zh": "每小时"
+        },
+        "cron.time.joinedEveryMinute": {
+          "en": "every minute",
+          "zh": "每分钟"
+        },
+        "cron.time.joinedEveryMinutes": {
+          "en": "every {step} minutes",
+          "zh": "每 {step} 分钟"
+        },
+        "cron.time.joinedEveryNHours": {
+          "en": "every {count} hours",
+          "zh": "每 {count} 小时"
+        },
+        "cron.time.joinedHourlyAt": {
+          "en": "every hour at minute {minutes}",
+          "zh": "每小时的第 {minutes} 分钟"
+        },
+        "cron.weekday.name": {
+          "en": "{weekday}",
+          "zh": "周{weekday}"
+        },
+        "cron.weekday.range": {
+          "en": "{from}–{to}",
+          "zh": "{from}至{to}"
+        },
+        "cronForm.atMinute": {
+          "en": "At minute",
+          "zh": "在第几分钟"
+        },
+        "cronForm.daily": {
+          "en": "Every day",
+          "zh": "每天"
+        },
+        "cronForm.dateOption": {
+          "en": "Day {day}",
+          "zh": "{day} 日"
+        },
+        "cronForm.dates": {
+          "en": "On dates",
+          "zh": "在以下日期"
+        },
+        "cronForm.frequency": {
+          "en": "Frequency",
+          "zh": "频率"
+        },
+        "cronForm.minuteDecrease": {
+          "en": "Decrease minute",
+          "zh": "减小分钟"
+        },
+        "cronForm.minuteIncrease": {
+          "en": "Increase minute",
+          "zh": "增大分钟"
+        },
+        "cronForm.monthly": {
+          "en": "Monthly",
+          "zh": "每月"
+        },
+        "cronForm.weekly": {
+          "en": "Weekly",
+          "zh": "每周"
+        },
+        "delete.action": {
+          "en": "Delete task",
+          "zh": "删除任务"
+        },
+        "delete.cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "delete.close": {
+          "en": "Close deletion confirmation",
+          "zh": "关闭删除确认"
+        },
+        "delete.confirm": {
+          "en": "Confirm deletion",
+          "zh": "确认删除"
+        },
+        "delete.description": {
+          "en": "This stops the task from triggering and deletes it together with its saved delivery records. The original session and its messages remain; queued messages are not withdrawn.",
+          "zh": "任务将停止触发，并连同其已保存的任务运行记录一并删除。原会话及其消息仍然保留；已排队的消息不会被撤回。"
+        },
+        "delete.pending": {
+          "en": "Deleting…",
+          "zh": "正在删除…"
+        },
+        "delete.title": {
+          "en": "Delete this task?",
+          "zh": "删除此任务？"
+        },
+        "delivery.collapse": {
+          "en": "Collapse",
+          "zh": "收起"
+        },
+        "delivery.cursorError": {
+          "en": "Records were updated.",
+          "zh": "记录已更新"
+        },
+        "delivery.empty": {
+          "en": "No delivery record available",
+          "zh": "暂无任务运行记录"
+        },
+        "delivery.error": {
+          "en": "Could not load delivery records.",
+          "zh": "无法加载任务运行记录"
+        },
+        "delivery.expand": {
+          "en": "Expand",
+          "zh": "展开"
+        },
+        "delivery.label": {
+          "en": "Saved delivery record",
+          "zh": "已保存的任务运行记录"
+        },
+        "delivery.loadMore": {
+          "en": "Load more",
+          "zh": "加载更多"
+        },
+        "delivery.loading": {
+          "en": "Loading delivery records…",
+          "zh": "正在加载任务运行记录…"
+        },
+        "delivery.notFound": {
+          "en": "This task is no longer available.",
+          "zh": "任务已不可用"
+        },
+        "delivery.pruned": {
+          "en": "Earlier delivery records have been cleared",
+          "zh": "更早的运行记录已清理"
+        },
+        "delivery.refresh": {
+          "en": "Refresh",
+          "zh": "刷新"
+        },
+        "delivery.retention": {
+          "en": "Retention rules",
+          "zh": "保留规则"
+        },
+        "delivery.retentionBounds": {
+          "en": "Each task keeps up to {records} delivery records from the last {days} days.",
+          "zh": "每个任务最多保留近 {days} 天内的 {records} 条运行记录。"
+        },
+        "delivery.retentionExplanation": {
+          "en": "When a new record is saved, older records outside these limits are cleared automatically. Clearing records does not stop the task.",
+          "zh": "产生新记录时，超出范围的旧记录会自动清理。清理记录不影响任务继续运行。"
+        },
+        "delivery.retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "detail.close": {
+          "en": "Close details",
+          "zh": "关闭详情"
+        },
+        "detail.frequency": {
+          "en": "Frequency",
+          "zh": "提醒频率"
+        },
+        "detail.id": {
+          "en": "Task ID",
+          "zh": "任务 ID"
+        },
+        "detail.instruction": {
+          "en": "Automation task instruction",
+          "zh": "自动化任务内容"
+        },
+        "detail.label": {
+          "en": "Task details",
+          "zh": "任务详情"
+        },
+        "detail.missing": {
+          "en": "Task unavailable. It may have been deleted.",
+          "zh": "任务已不可用，可能已被删除"
+        },
+        "detail.more": {
+          "en": "Automation task actions",
+          "zh": "自动化任务操作"
+        },
+        "detail.name": {
+          "en": "Automation task name",
+          "zh": "自动化任务名称"
+        },
+        "detail.next": {
+          "en": "Next scheduled time",
+          "zh": "下次计划时间"
+        },
+        "detail.nextRun": {
+          "en": "Next run",
+          "zh": "下次运行"
+        },
+        "detail.openSession": {
+          "en": "Linked session: open original session",
+          "zh": "关联会话：打开原会话"
+        },
+        "detail.openSessionTitle": {
+          "en": "Linked session {title}: open original session",
+          "zh": "关联会话 {title}：打开原会话"
+        },
+        "detail.records": {
+          "en": "Records",
+          "zh": "任务运行记录"
+        },
+        "detail.rule": {
+          "en": "Rules",
+          "zh": "规则"
+        },
+        "detail.session": {
+          "en": "Linked session",
+          "zh": "关联会话"
+        },
+        "detail.sessionArchived": {
+          "en": "The original session is archived.",
+          "zh": "原会话已归档"
+        },
+        "detail.sessionLoading": {
+          "en": "Loading original session information.",
+          "zh": "正在加载原会话信息"
+        },
+        "detail.sessionUnavailable": {
+          "en": "The original session is unavailable.",
+          "zh": "原会话当前不可用"
+        },
+        "detail.status": {
+          "en": "Status",
+          "zh": "状态"
+        },
+        "detail.tabs": {
+          "en": "Task detail views",
+          "zh": "任务详情视图"
+        },
+        "empty.action": {
+          "en": "New automation task",
+          "zh": "新建自动化任务"
+        },
+        "frequency.cron": {
+          "en": "Cron {expression} ({timeZone})",
+          "zh": "Cron {expression}（{timeZone}）"
+        },
+        "frequency.cronLocal": {
+          "en": "Cron {expression}",
+          "zh": "Cron {expression}"
+        },
+        "frequency.cronRule": {
+          "en": "{rule} ({timeZone})",
+          "zh": "{rule}（{timeZone}）"
+        },
+        "frequency.daily": {
+          "en": "Daily at {time} ({timeZone})",
+          "zh": "每天 {time}（{timeZone}）"
+        },
+        "frequency.dailyLocal": {
+          "en": "Daily at {time}",
+          "zh": "每天 {time}"
+        },
+        "frequency.every": {
+          "en": "Every {value} {unit}",
+          "zh": "每 {value} {unit}"
+        },
+        "frequency.once": {
+          "en": "Once",
+          "zh": "仅一次"
+        },
+        "frequency.weekday.1": {
+          "en": "Mon",
+          "zh": "一"
+        },
+        "frequency.weekday.2": {
+          "en": "Tue",
+          "zh": "二"
+        },
+        "frequency.weekday.3": {
+          "en": "Wed",
+          "zh": "三"
+        },
+        "frequency.weekday.4": {
+          "en": "Thu",
+          "zh": "四"
+        },
+        "frequency.weekday.5": {
+          "en": "Fri",
+          "zh": "五"
+        },
+        "frequency.weekday.6": {
+          "en": "Sat",
+          "zh": "六"
+        },
+        "frequency.weekday.7": {
+          "en": "Sun",
+          "zh": "日"
+        },
+        "frequency.weekday.join": {
+          "en": ", ",
+          "zh": "、"
+        },
+        "frequency.weekly": {
+          "en": "Weekly on {weekdays} at {time} ({timeZone})",
+          "zh": "每周{weekdays} {time}（{timeZone}）"
+        },
+        "frequency.weeklyLocal": {
+          "en": "Weekly on {weekdays} at {time}",
+          "zh": "每周{weekdays} {time}"
+        },
+        "list.empty": {
+          "en": "No tasks yet. Tasks created in your sessions appear here.",
+          "zh": "还没有自动化任务，在会话中创建的任务会显示在这里"
+        },
+        "list.emptyInactive": {
+          "en": "No inactive automation tasks",
+          "zh": "没有已结束的自动化任务"
+        },
+        "list.error": {
+          "en": "Could not load tasks.",
+          "zh": "无法加载任务"
+        },
+        "list.label": {
+          "en": "Task catalog",
+          "zh": "任务列表"
+        },
+        "list.loading": {
+          "en": "Loading tasks…",
+          "zh": "正在加载任务…"
+        },
+        "list.nextPrefix": {
+          "en": "Next scheduled time: ",
+          "zh": "下次计划时间："
+        },
+        "list.noMatches": {
+          "en": "No matching tasks",
+          "zh": "没有匹配的自动化任务"
+        },
+        "list.retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "new.action": {
+          "en": "New",
+          "zh": "新建"
+        },
+        "panel": {
+          "en": "Automation tasks",
+          "zh": "自动化任务"
+        },
+        "relative.future": {
+          "en": "in {value} {unit}",
+          "zh": "{value}{unit}后"
+        },
+        "relative.now": {
+          "en": "Due now",
+          "zh": "现在到期"
+        },
+        "relative.overdue": {
+          "en": "{value} {unit} overdue",
+          "zh": "已逾期 {value}{unit}"
+        },
+        "rule.cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "rule.cron": {
+          "en": "Custom",
+          "zh": "自定义"
+        },
+        "rule.cronInvalid": {
+          "en": "Enter a five-field cron expression, for example 0 9 * * 1-5.",
+          "zh": "请输入 5 字段的 cron 表达式，例如 0 9 * * 1-5"
+        },
+        "rule.cronLabel": {
+          "en": "Cron expression",
+          "zh": "Cron 表达式"
+        },
+        "rule.daily": {
+          "en": "Every day",
+          "zh": "每天"
+        },
+        "rule.error.conflict": {
+          "en": "This task changed before the update was saved. The row shows the saved rule; try again.",
+          "zh": "任务在保存前已发生变化。当前显示已保存的规则，请重试"
+        },
+        "rule.error.notFound": {
+          "en": "This task is no longer available.",
+          "zh": "此任务当前不可用"
+        },
+        "rule.error.unknown": {
+          "en": "Could not confirm the rule update. The row shows the saved rule.",
+          "zh": "无法确认规则是否已更新。当前显示已保存的规则"
+        },
+        "rule.everyHours": {
+          "en": "Every N hours",
+          "zh": "每 N 小时"
+        },
+        "rule.everyMinutes": {
+          "en": "Every N minutes",
+          "zh": "每 N 分钟"
+        },
+        "rule.everySeconds": {
+          "en": "Every N seconds",
+          "zh": "每 N 秒"
+        },
+        "rule.invalidPrompt": {
+          "en": "Enter a task instruction.",
+          "zh": "请输入任务内容"
+        },
+        "rule.invalidTitle": {
+          "en": "Enter a task name of at most 120 characters.",
+          "zh": "请输入不超过 120 个字符的任务名称"
+        },
+        "rule.once": {
+          "en": "Once",
+          "zh": "仅一次"
+        },
+        "rule.repeat": {
+          "en": "Repeat",
+          "zh": "重复"
+        },
+        "rule.save": {
+          "en": "Save changes",
+          "zh": "保存修改"
+        },
+        "rule.saving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "rule.title": {
+          "en": "Run time",
+          "zh": "运行时间"
+        },
+        "rule.unsaved": {
+          "en": "Unsaved changes",
+          "zh": "有未保存的修改"
+        },
+        "rule.weekday": {
+          "en": "Weekday",
+          "zh": "星期"
+        },
+        "rule.weekdayOption": {
+          "en": "Weekday {weekday}",
+          "zh": "星期{weekday}"
+        },
+        "rule.weekdays": {
+          "en": "Monday to Friday",
+          "zh": "周一至周五"
+        },
+        "rule.weekly": {
+          "en": "Weekly",
+          "zh": "每周"
+        },
+        "rule.zone.system": {
+          "en": " (system)",
+          "zh": "（系统）"
+        },
+        "search.clear": {
+          "en": "Clear search",
+          "zh": "清空搜索"
+        },
+        "search.label": {
+          "en": "Search tasks",
+          "zh": "搜索任务"
+        },
+        "search.placeholder": {
+          "en": "Search automation tasks",
+          "zh": "搜索自动化任务"
+        },
+        "status.active": {
+          "en": "Enabled",
+          "zh": "已开启"
+        },
+        "status.inactive": {
+          "en": "Inactive",
+          "zh": "已结束"
+        },
+        "statusFilter.all": {
+          "en": "All",
+          "zh": "全部"
+        },
+        "statusFilter.label": {
+          "en": "Task status",
+          "zh": "任务状态"
+        },
+        "time.locale": {
+          "en": "en",
+          "zh": "zh-CN"
+        },
+        "time.utcPrefix": {
+          "en": "UTC",
+          "zh": "UTC"
+        },
+        "timing.conflict": {
+          "en": "This task changed while you were editing. Your draft is retained. Cancel and reopen after refresh to edit the latest rule.",
+          "zh": "编辑期间任务已变化，草稿已保留。请在刷新后取消并重新打开编辑器，以修改最新规则"
+        },
+        "timing.date": {
+          "en": "Date",
+          "zh": "日期"
+        },
+        "timing.error": {
+          "en": "Could not confirm the timing update. Your draft is retained. Check the task before retrying.",
+          "zh": "无法确认时间修改是否已保存。草稿已保留，请在重试前检查任务"
+        },
+        "timing.hour": {
+          "en": "Hour",
+          "zh": "时"
+        },
+        "timing.inactive": {
+          "en": "Inactive tasks are read-only. Their timing cannot be edited.",
+          "zh": "已结束的任务为只读，无法修改时间"
+        },
+        "timing.interval": {
+          "en": "Repeat every",
+          "zh": "重复间隔"
+        },
+        "timing.intervalDecrease": {
+          "en": "Decrease interval",
+          "zh": "减小间隔"
+        },
+        "timing.intervalHint.hour": {
+          "en": "At least 1 hour. The interval counts from task creation or the last rule change and is independent of time zones.",
+          "zh": "至少 1 小时。间隔自任务创建或上次修改规则时起计，不受时区影响"
+        },
+        "timing.intervalHint.minute": {
+          "en": "At least 1 minute. The interval counts from task creation or the last rule change and is independent of time zones.",
+          "zh": "至少 1 分钟。间隔自任务创建或上次修改规则时起计，不受时区影响"
+        },
+        "timing.intervalHint.second": {
+          "en": "At least 60 seconds. The interval counts from task creation or the last rule change and is independent of time zones.",
+          "zh": "至少 60 秒。间隔自任务创建或上次修改规则时起计，不受时区影响"
+        },
+        "timing.intervalIncrease": {
+          "en": "Increase interval",
+          "zh": "增大间隔"
+        },
+        "timing.invalid": {
+          "en": "Enter a valid date and time, or check the timing fields.",
+          "zh": "请输入有效的日期和时间，或检查时间字段"
+        },
+        "timing.invalidInterval": {
+          "en": "Enter an interval of at least 1 minute.",
+          "zh": "请输入至少 1 分钟的间隔"
+        },
+        "timing.invalidInterval.hour": {
+          "en": "Enter an interval of at least 1 hour.",
+          "zh": "请输入至少 1 小时的间隔"
+        },
+        "timing.invalidInterval.minute": {
+          "en": "Enter an interval of at least 1 minute.",
+          "zh": "请输入至少 1 分钟的间隔"
+        },
+        "timing.invalidInterval.second": {
+          "en": "Enter an interval of at least 60 seconds.",
+          "zh": "请输入至少 60 秒的间隔"
+        },
+        "timing.invalidZone": {
+          "en": "Enter a valid IANA time zone, for example Asia/Shanghai.",
+          "zh": "请输入有效的 IANA 时区，例如 Asia/Shanghai"
+        },
+        "timing.minute": {
+          "en": "Minute",
+          "zh": "分"
+        },
+        "timing.nextMonth": {
+          "en": "Next month",
+          "zh": "下个月"
+        },
+        "timing.notFound": {
+          "en": "This task is no longer available. Your draft is retained; cancel to close the editor.",
+          "zh": "此任务当前不可用，草稿已保留。请取消以关闭编辑器"
+        },
+        "timing.notFuture": {
+          "en": "Choose a date and time in the future.",
+          "zh": "请选择未来的日期和时间"
+        },
+        "timing.prevMonth": {
+          "en": "Previous month",
+          "zh": "上个月"
+        },
+        "timing.second": {
+          "en": "Second",
+          "zh": "秒"
+        },
+        "timing.subagentSession": {
+          "en": "This session belongs to a sub-agent, which never receives delivered reminders.",
+          "zh": "此会话属于子 agent，永远不会收到投递的提醒"
+        },
+        "timing.time": {
+          "en": "Time",
+          "zh": "时间"
+        },
+        "timing.unit.hour": {
+          "en": "hours",
+          "zh": "小时"
+        },
+        "timing.unit.minute": {
+          "en": "minutes",
+          "zh": "分钟"
+        },
+        "timing.unit.second": {
+          "en": "seconds",
+          "zh": "秒"
+        },
+        "timing.zone": {
+          "en": "Time zone",
+          "zh": "时区"
+        },
+        "timing.zoneNoResults": {
+          "en": "No matching time zones",
+          "zh": "没有匹配的时区"
+        },
+        "timing.zoneNoStored": {
+          "en": "A one-time task stores only its target moment, not a time zone. The date and time are interpreted in the selected time zone.",
+          "zh": "单次任务只保存触发时刻，不保存时区；日期和时间按所选时区换算"
+        },
+        "timing.zoneSearch": {
+          "en": "Search by UTC offset, IANA ID, or city",
+          "zh": "搜索 UTC 偏移、IANA 标识或城市"
+        },
+        "title": {
+          "en": "Automation tasks",
+          "zh": "自动化任务"
+        },
+        "toast.deleteFailed": {
+          "en": "Could not delete the task.",
+          "zh": "无法删除任务"
+        },
+        "toast.deleted": {
+          "en": "Task deleted.",
+          "zh": "任务已删除"
+        },
+        "tool.invoked": {
+          "en": "Invoked {name}",
+          "zh": "已调用 {name}"
+        },
+        "unit.day.one": {
+          "en": "day",
+          "zh": "天"
+        },
+        "unit.day.other": {
+          "en": "days",
+          "zh": "天"
+        },
+        "unit.hour.one": {
+          "en": "hour",
+          "zh": "小时"
+        },
+        "unit.hour.other": {
+          "en": "hours",
+          "zh": "小时"
+        },
+        "unit.minute.one": {
+          "en": "minute",
+          "zh": "分钟"
+        },
+        "unit.minute.other": {
+          "en": "minutes",
+          "zh": "分钟"
+        },
+        "unit.second.one": {
+          "en": "second",
+          "zh": "秒"
+        },
+        "unit.second.other": {
+          "en": "seconds",
+          "zh": "秒"
         }
       }
     },
@@ -4249,6 +5904,248 @@
         "fontSize.unit": {
           "en": "px",
           "zh": "px"
+        }
+      }
+    },
+    {
+      "namespace": "shortcuts",
+      "package": "client/ui-shortcuts",
+      "file": "packages/client/ui-shortcuts/src/client/locales.ts",
+      "entries": {
+        "application": {
+          "en": "Application",
+          "zh": "应用操作"
+        },
+        "approval": {
+          "en": "Approval area",
+          "zh": "审批区域"
+        },
+        "cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "clear": {
+          "en": "Remove",
+          "zh": "移除"
+        },
+        "clear-search": {
+          "en": "Clear search",
+          "zh": "清空搜索"
+        },
+        "close": {
+          "en": "Close keyboard shortcuts",
+          "zh": "关闭快捷键"
+        },
+        "close-confirmation": {
+          "en": "Close confirmation",
+          "zh": "关闭确认"
+        },
+        "conflict": {
+          "en": "Already used by “{commands}”",
+          "zh": "已被「{commands}」占用"
+        },
+        "description": {
+          "en": "View and edit available shortcuts and input actions",
+          "zh": "查看和编辑当前可用的快捷键和输入操作"
+        },
+        "desktop-document": {
+          "en": "userData/keybindings.json",
+          "zh": "userData/keybindings.json"
+        },
+        "desktop-reload": {
+          "en": "restart Harness",
+          "zh": "重新启动 Harness"
+        },
+        "dismiss": {
+          "en": "Close menu or top dialog",
+          "zh": "关闭菜单或顶层弹窗"
+        },
+        "edit-label": {
+          "en": "Edit shortcut for {command}",
+          "zh": "修改{command}快捷键"
+        },
+        "empty": {
+          "en": "No matching shortcuts",
+          "zh": "没有匹配的快捷键"
+        },
+        "future": {
+          "en": "Shortcut configuration in {location} was created by a newer version. Upgrade Harness and try again.",
+          "zh": "{location} 的快捷键配置由更新版本创建。请升级 Harness 后重试。"
+        },
+        "global-hint": {
+          "en": "Open from anywhere",
+          "zh": "全局唤起查看"
+        },
+        "input": {
+          "en": "Message input",
+          "zh": "消息输入"
+        },
+        "invalid": {
+          "en": "Shortcut configuration in {location} is damaged. Back up and repair this configuration, then {reload}.",
+          "zh": "{location} 的快捷键配置内容损坏。请先备份并修复该配置，然后{reload}。"
+        },
+        "macos-web-help": {
+          "en": "Use Command+/, Command+,, Command+Backslash, Control+Backquote, Command+Option+key, or Command+Shift+key. Combinations with three or four distinct modifiers are also supported. Browser or system shortcuts may not reach the page.",
+          "zh": "可设置 Command+/、Command+,、Command+反斜杠、Control+反引号、Command+Option+按键或 Command+Shift+按键。也支持三个或四个不同修饰键的组合。浏览器或系统占用的组合可能无法送达页面。"
+        },
+        "menus": {
+          "en": "Menus and dialogs",
+          "zh": "菜单与弹层"
+        },
+        "modified-count": {
+          "en": "{count} customized",
+          "zh": "{count} 项已自定义"
+        },
+        "modifier-required": {
+          "en": "Include Command, Ctrl, or Alt in the combination.",
+          "zh": "请同时按下 Command、Ctrl 或 Alt 修饰键。"
+        },
+        "move": {
+          "en": "Move menu selection",
+          "zh": "移动菜单选择"
+        },
+        "native-failed": {
+          "en": "Could not protect desktop key recording. Exit recording and try again.",
+          "zh": "无法启用桌面录键保护，请关闭后重试。"
+        },
+        "not-ready": {
+          "en": "Shortcuts are not ready. Please try again.",
+          "zh": "快捷键尚未准备好，请稍后重试。"
+        },
+        "open": {
+          "en": "Open keyboard shortcuts",
+          "zh": "快捷键速查"
+        },
+        "read": {
+          "en": "Could not read {location}. Check access permissions, then {reload}.",
+          "zh": "无法读取 {location}。请检查访问权限后{reload}。"
+        },
+        "record": {
+          "en": "Press a shortcut",
+          "zh": "按下快捷键"
+        },
+        "record-help": {
+          "en": "Release the keys to save. Tab moves between actions; Esc cancels.",
+          "zh": "松开组合键即保存。Tab 切换操作，Esc 退出录键。"
+        },
+        "reserved": {
+          "en": "This combination is reserved for system or text editing actions.",
+          "zh": "此组合由系统或文本编辑操作保留。"
+        },
+        "reset": {
+          "en": "Restore default",
+          "zh": "恢复默认"
+        },
+        "reset-all": {
+          "en": "Restore all defaults",
+          "zh": "恢复全部默认"
+        },
+        "reset-description": {
+          "en": "Restore the default shortcuts for this platform. All modified or removed shortcuts will be restored. Other platforms are unaffected.",
+          "zh": "将恢复当前平台的默认快捷键。你修改或移除的快捷键都会恢复，其他平台不受影响。"
+        },
+        "reset-failed": {
+          "en": "Could not restore defaults. Your shortcuts are unchanged. Please retry.",
+          "zh": "恢复默认失败。原快捷键已保留，请重试。"
+        },
+        "reset-saved": {
+          "en": "Default shortcuts restored",
+          "zh": "已恢复默认快捷键"
+        },
+        "reset-title": {
+          "en": "Restore all default shortcuts?",
+          "zh": "恢复全部默认快捷键？"
+        },
+        "retry-save": {
+          "en": "Retry save",
+          "zh": "重试保存"
+        },
+        "review": {
+          "en": "I have reviewed the latest configuration",
+          "zh": "已核对最新配置"
+        },
+        "saved": {
+          "en": "Modified",
+          "zh": "已修改"
+        },
+        "search": {
+          "en": "Search shortcuts",
+          "zh": "搜索快捷键"
+        },
+        "select": {
+          "en": "Select menu item",
+          "zh": "选择菜单项"
+        },
+        "settings": {
+          "en": "Keyboard shortcuts",
+          "zh": "快捷键"
+        },
+        "stale": {
+          "en": "Shortcut configuration or available commands changed. Review the latest bindings before saving.",
+          "zh": "快捷键配置或可用命令已更新。请核对最新键位后再保存。"
+        },
+        "title": {
+          "en": "Keyboard shortcuts",
+          "zh": "快捷键"
+        },
+        "too-many-keys": {
+          "en": "Hold at most two non-modifier keys. Release the keys to try again.",
+          "zh": "最多同时按下两个非修饰键。请松开后重试。"
+        },
+        "unbound": {
+          "en": "No shortcut",
+          "zh": "暂无快捷键"
+        },
+        "unsupported-browser": {
+          "en": "This browser does not support this combination yet.",
+          "zh": "此浏览器暂不支持该组合。"
+        },
+        "unsupported-key": {
+          "en": "This key is not supported.",
+          "zh": "暂不支持这个按键。"
+        },
+        "using-accepted": {
+          "en": "The last successfully read bindings remain active.",
+          "zh": "当前继续使用上次读取成功的键位。"
+        },
+        "using-defaults": {
+          "en": "Default bindings are active.",
+          "zh": "当前使用默认键位。"
+        },
+        "view": {
+          "en": "Edit shortcuts",
+          "zh": "编辑快捷键"
+        },
+        "web-document": {
+          "en": "this site’s localStorage entry dsh.keybindings.v1",
+          "zh": "当前网站本地存储中的 dsh.keybindings.v1"
+        },
+        "web-help": {
+          "en": "Browser combinations: Mod+/, Mod+Shift+,, Mod+Shift+.. Mod is Command on Mac and Ctrl elsewhere.",
+          "zh": "浏览器可用组合：Mod+/、Mod+Shift+,、Mod+Shift+.。Mod 在 Mac 上为 Command，其他系统为 Ctrl。"
+        },
+        "web-reload": {
+          "en": "reload the page",
+          "zh": "刷新页面"
+        },
+        "windows-web-help": {
+          "en": "Use Ctrl+/, Ctrl+,, Ctrl+Alt+key, or Ctrl+Shift+key. Combinations with three or four distinct modifiers are also supported. Browser or system shortcuts may not reach the page.",
+          "zh": "可设置 Ctrl+/、Ctrl+,、Ctrl+Alt+按键或 Ctrl+Shift+按键。也支持三个或四个不同修饰键的组合。浏览器或系统占用的组合可能无法送达页面。"
+        },
+        "write-failed": {
+          "en": "Could not save. Your previous shortcuts and current draft are preserved. Please retry.",
+          "zh": "保存失败。原快捷键和当前草稿已保留，请重试。"
+        }
+      }
+    },
+    {
+      "namespace": "shortcuts.layout",
+      "package": "client/ui-layout",
+      "file": "packages/client/ui-layout/src/client/shortcut-locales.ts",
+      "entries": {
+        "toggle": {
+          "en": "Toggle left sidebar",
+          "zh": "展开／收起左侧栏"
         }
       }
     },

@@ -1,7 +1,13 @@
+import 'dart:async' show unawaited;
+import 'dart:io' show Platform;
+
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:dsh_feature_layout/dsh_feature_layout.dart';
+import 'package:dsh_feature_shortcuts/dsh_feature_shortcuts.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/foundation.dart' show ValueListenable, ValueNotifier;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -9,19 +15,35 @@ import 'app_controller.dart';
 import 'app_identity.dart';
 import 'platform/pickers.dart';
 import 'screens/pairing_screen.dart';
-import 'screens/session_screen.dart';
-import 'screens/new_session_screen.dart';
-import 'screens/sessions_screen.dart';
-
-/// Width from which the app shows the list and the session side by side.
-const double wideBreakpoint = 840;
 
 /// Composition root widget: resolves the official theme pack under the user's
 /// settings and hands the contract to every component through a ThemeExtension.
+/// `WHALEE_PLATFORM_BRIGHTNESS=dark|light` stands in for the system setting (a
+/// Linux desktop session without a settings daemon cannot be switched): for
+/// the visual parity captures, which need both themes; unset in normal use.
+final Brightness? _brightnessOverride =
+    switch (Platform.environment['WHALEE_PLATFORM_BRIGHTNESS']) {
+      'dark' => Brightness.dark,
+      'light' => Brightness.light,
+      _ => null,
+    };
+
 class WhaleeApp extends StatefulWidget {
-  const WhaleeApp({super.key, required this.controller});
+  WhaleeApp({
+    super.key,
+    required this.controller,
+    ValueListenable<ShellChrome>? chrome,
+    this.onTitle,
+  }) : chrome = chrome ?? ValueNotifier(const ShellChrome());
 
   final AppController controller;
+
+  /// The window chrome the frame draws around itself (see `platform/window_chrome.dart`).
+  final ValueListenable<ShellChrome> chrome;
+
+  /// Called with the window title (the open session's title and the product
+  /// name) whenever it changes; the desktop window shows it.
+  final ValueChanged<String>? onTitle;
 
   @override
   State<WhaleeApp> createState() => _WhaleeAppState();
@@ -30,14 +52,30 @@ class WhaleeApp extends StatefulWidget {
 class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
   AppController get controller => widget.controller;
 
+  String? _title;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    controller.addListener(_syncTitle);
+    _syncTitle();
+  }
+
+  /// dsh's `DocumentTitle`: the session's title before the product name while
+  /// the Conversation is in view.
+  void _syncTitle() {
+    final id = controller.openSessionId;
+    final title = id == null ? null : controller.sessionTitleOf(id);
+    final next = title == null ? appDisplayName : '$title — $appDisplayName';
+    if (next == _title) return;
+    _title = next;
+    widget.onTitle?.call(next);
   }
 
   @override
   void dispose() {
+    controller.removeListener(_syncTitle);
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -54,6 +92,7 @@ class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
       listenable: controller,
       builder: (context, _) {
         final platform =
+            _brightnessOverride ??
             MediaQuery.maybePlatformBrightnessOf(context) ??
             WidgetsBinding.instance.platformDispatcher.platformBrightness;
         final dsh = resolveTheme(
@@ -75,11 +114,22 @@ class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
             extensions: [dsh],
           ),
           // Above the navigator, so sheets and the lightbox highlight too.
-          builder: (context, child) => DshCodeHighlighting(
-            highlighter: controller.highlighter,
-            child: child ?? const SizedBox.shrink(),
+          builder: (context, child) {
+            Widget body = DshCodeHighlighting(
+              highlighter: controller.highlighter,
+              child: child ?? const SizedBox.shrink(),
+            );
+            final shortcuts = controller.shortcuts;
+            if (shortcuts != null) {
+              body = ShortcutKeyboardHost(service: shortcuts, child: body);
+            }
+            return body;
+          },
+          home: ValueListenableBuilder<ShellChrome>(
+            valueListenable: widget.chrome,
+            builder: (context, chrome, _) =>
+                RootScreen(controller: controller, chrome: chrome),
           ),
-          home: RootScreen(controller: controller),
         );
       },
     );
@@ -88,9 +138,16 @@ class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
 
 /// Chooses the screen by connection state and form factor.
 class RootScreen extends StatelessWidget {
-  const RootScreen({super.key, required this.controller});
+  const RootScreen({
+    super.key,
+    required this.controller,
+    this.chrome = const ShellChrome(),
+  });
 
   final AppController controller;
+
+  /// The window chrome of the desktop frame.
+  final ShellChrome chrome;
 
   void _settings(BuildContext context) => controller.openSettings();
 
@@ -108,19 +165,19 @@ class RootScreen extends StatelessWidget {
       body: connected
           ? _DropArea(
               controller: controller,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final wide = constraints.maxWidth >= wideBreakpoint;
-                  return wide
-                      ? _Wide(
-                          controller: controller,
-                          onSettings: () => _settings(context),
-                        )
-                      : _Narrow(
-                          controller: controller,
-                          onSettings: () => _settings(context),
-                        );
-                },
+              // dsh's frame at every width: the three columns from 1024 px, the
+              // rail below, and on a phone (under 600 px) a top bar with the
+              // sidebar as a drawer.
+              child: AppFrame(
+                layout: controller.layout,
+                slots: controller.slots,
+                chrome: chrome,
+                phoneNewSession: () => unawaited(controller.startSession()),
+                phoneMenuLabel: controller.i18n.t('sidebar', 'toggle.open'),
+                phoneNewSessionLabel: controller.i18n.t(
+                  'sidebar',
+                  'session.new.label',
+                ),
               ),
             )
           : Stack(
@@ -141,85 +198,6 @@ class RootScreen extends StatelessWidget {
                 ),
               ],
             ),
-    );
-  }
-}
-
-/// Phone layout: the list, and a session pushed over it.
-class _Narrow extends StatelessWidget {
-  const _Narrow({required this.controller, required this.onSettings});
-
-  final AppController controller;
-  final VoidCallback onSettings;
-
-  @override
-  Widget build(BuildContext context) {
-    final session = controller.openSession;
-    final fresh = session == null && controller.newSessionPending;
-    return PopScope(
-      canPop: session == null && !fresh,
-      onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) controller.closeSession();
-      },
-      child: session != null
-          ? SessionView(
-              key: ValueKey('session-${session.sessionId}'),
-              controller: controller,
-              session: session,
-              onBack: controller.closeSession,
-            )
-          : fresh
-          ? NewSessionView(
-              controller: controller,
-              onBack: controller.closeSession,
-            )
-          : SessionsPane(
-              controller: controller,
-              onOpen: controller.open,
-              onSettings: onSettings,
-            ),
-    );
-  }
-}
-
-/// Tablet and desktop layout: the list on the left, the session on the right.
-class _Wide extends StatelessWidget {
-  const _Wide({required this.controller, required this.onSettings});
-
-  final AppController controller;
-  final VoidCallback onSettings;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final session = controller.openSession;
-    return Row(
-      children: [
-        SizedBox(
-          width: 340,
-          child: SessionsPane(
-            controller: controller,
-            onOpen: controller.open,
-            onSettings: onSettings,
-          ),
-        ),
-        VerticalDivider(
-          width: dshHairlineOf(context),
-          thickness: dshHairlineOf(context),
-          color: theme.color('--dsw-alias-border-l4'),
-        ),
-        Expanded(
-          child: session == null
-              ? (controller.newSessionPending
-                    ? NewSessionView(controller: controller)
-                    : const SizedBox.shrink())
-              : SessionView(
-                  key: ValueKey('session-${session.sessionId}'),
-                  controller: controller,
-                  session: session,
-                ),
-        ),
-      ],
     );
   }
 }

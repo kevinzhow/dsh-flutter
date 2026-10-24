@@ -46,7 +46,7 @@ void main() {
   Future<void> start(
     WidgetTester t, {
     DshLocale locale = DshLocale.en,
-    Size size = const Size(400, 800),
+    Size size = const Size(1200, 800),
   }) async {
     t.view.physicalSize = size;
     t.view.devicePixelRatio = 1;
@@ -91,7 +91,13 @@ void main() {
     };
     await t.runAsync(() => controller.pair('http://host:18686/?token=abc'));
     await settle(t);
-    await t.tap(find.byKey(const ValueKey('session-row-s1')));
+    // Inside the desktop frame the session sits in the folded Ungrouped group.
+    final group = find.byKey(const ValueKey('workspace-row-'));
+    if (group.evaluate().isNotEmpty) {
+      await t.tap(group);
+      await settle(t);
+    }
+    await openRow(t, 's1');
     await settle(t);
     backend.transport.open(
       1,
@@ -115,7 +121,7 @@ void main() {
   testWidgets(
     'typing / lists the commands above the composer; Escape closes it',
     (t) async {
-      await start(t);
+      await start(t, size: const Size(400, 800));
       await t.tap(find.byType(EditableText).last);
       await type(t, '/');
       expect(find.byKey(const ValueKey('trigger-menu')), findsOneWidget);
@@ -135,7 +141,7 @@ void main() {
       expect(
         menu.top,
         greaterThanOrEqualTo(
-          t.getRect(find.byKey(const ValueKey('session-title'))).bottom,
+          t.getRect(find.byKey(const ValueKey('phone-title'))).bottom,
         ),
       );
       await t.sendKeyEvent(LogicalKeyboardKey.escape);

@@ -7,3 +7,4 @@ library;
 export 'src/chat_nodes.dart';
 export 'src/chat_view.dart';
 export 'src/register.dart';
+export 'src/stats_pills.dart';

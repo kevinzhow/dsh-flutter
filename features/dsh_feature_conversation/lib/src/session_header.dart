@@ -76,10 +76,25 @@ class _SessionHeaderState extends State<SessionHeader> {
     final caption = theme
         .textStyle('--dsw-font-xxs-12')
         .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
-    final actions = widget.slots?.renderList(
-      DshSlots.conversationSessionHeaderActions.typed<SessionOwner, Widget>(),
-      widget.owner,
-    );
+    final actions = widget.slots == null
+        ? null
+        : [
+            ...widget.slots!.renderList(
+              DshSlots.conversationSessionHeaderActions
+                  .typed<SessionOwner, Widget>(),
+              widget.owner,
+            ),
+            ...widget.slots!.renderList(
+              DshSlots.conversationSessionHeaderUtilities
+                  .typed<SessionOwner, Widget>(),
+              widget.owner,
+            ),
+            ?widget.slots!.renderSingle(
+              DshSlots.conversationSessionHeaderCorner
+                  .typed<SessionOwner, Widget>(),
+              widget.owner,
+            ),
+          ];
     final titles = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,

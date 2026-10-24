@@ -41,7 +41,7 @@ void main() {
 
   Future<void> start(
     WidgetTester t, {
-    Size size = const Size(400, 800),
+    Size size = const Size(1200, 800),
     DshLocale locale = DshLocale.en,
     List<Map<String, Object?>> workspaces = const [],
     List<Map<String, Object?>> sessions = const [],
@@ -99,7 +99,7 @@ void main() {
         registered('wa', 'alpha', ['s1', 'blank1']);
         return {'sessionId': 'blank1'};
       };
-      await t.tap(key('sessions-new'));
+      await t.tap(key('sidebar-new-session'));
       await openBlank(t);
       expect(backend.transport.createRequests, [
         {'workspaceId': 'wa'},
@@ -142,7 +142,7 @@ void main() {
         if (r['workspaceId'] == 'wa') registered('wa', 'alpha', ['s1', id]);
         return {'sessionId': id};
       };
-      await t.tap(key('sessions-new'));
+      await t.tap(key('sidebar-new-session'));
       await openBlank(t);
       await t.enterText(find.byType(EditableText).last, 'hello there');
       await settle(t);
@@ -150,8 +150,9 @@ void main() {
       await t.tap(key('hero-workspace-chip'));
       await settle(t);
       await t.pump(const Duration(milliseconds: 600));
-      expect(find.text('beta'), findsOneWidget);
-      await t.tap(find.text('beta'));
+      // The sidebar lists the workspace too: the menu row is the later one.
+      expect(find.text('beta'), findsNWidgets(2));
+      await t.tap(find.text('beta').last);
       await settle(t);
       await t.pump(const Duration(milliseconds: 600));
       // beta already has a blank session: the Host is asked to reuse it.
@@ -193,7 +194,7 @@ void main() {
         return {'sessionId': 'first'};
       };
 
-      await t.tap(key('sessions-new'));
+      await t.tap(key('sidebar-new-session'));
       await settle(t);
       // Nothing to default to: the screen asks for a workspace first.
       expect(key('new-session'), findsOneWidget);
@@ -255,7 +256,7 @@ void main() {
       };
       backend.host.handlers['workspace/create'] = (_) =>
           throw RemoteException('workspace/invalid-path', 'Not a directory');
-      await t.tap(key('sessions-new'));
+      await t.tap(key('sidebar-new-session'));
       await settle(t);
       await t.tap(key('hero-workspace-chip'));
       await settle(t);
@@ -273,7 +274,7 @@ void main() {
     await start(t, workspaces: [workspace('wa', 'alpha')], sessions: const []);
     backend.transport.onCreate = (_) async =>
         throw RemoteException('session/create-failed', 'disk full');
-    await t.tap(key('sessions-new'));
+    await t.tap(key('sidebar-new-session'));
     await settle(t);
     expect(controller.createError, isA<RemoteException>());
     expect(key('create-error'), findsOneWidget);
@@ -283,11 +284,11 @@ void main() {
     t,
   ) async {
     await start(t, size: const Size(1100, 800));
-    await t.tap(key('sessions-new'));
+    await t.tap(key('sidebar-new-session'));
     await settle(t);
     expect(key('new-session'), findsOneWidget);
-    // The list stays beside it.
-    expect(key('sessions-title'), findsOneWidget);
+    // The sidebar stays beside it.
+    expect(key('browser-title'), findsOneWidget);
     // Wide: the stack is centered with the headline above the chip.
     final head = t.getTopLeft(key('hero-headline'));
     final chip = t.getTopLeft(key('hero-workspace-chip'));
@@ -307,7 +308,7 @@ void main() {
       registered('wa', 'alpha', ['s1', 'blank1']);
       return {'sessionId': 'blank1'};
     };
-    await t.tap(key('sessions-new'));
+    await t.tap(key('sidebar-new-session'));
     await openBlank(t);
     expect(find.text('探索未至之境'), findsOneWidget);
     expect(find.text('预览版'), findsOneWidget);
@@ -318,6 +319,7 @@ void main() {
     (t) async {
       await start(
         t,
+        size: const Size(400, 800),
         workspaces: [
           workspace('wa', 'alpha', sessions: ['s1']),
         ],
@@ -331,7 +333,7 @@ void main() {
         registered('wa', 'alpha', ['s1', 'blank1']);
         return {'sessionId': 'blank1'};
       };
-      await t.tap(key('sessions-new'));
+      await t.tap(key('phone-new-session'));
       await openBlank(t);
       t.view.viewInsets = const FakeViewPadding(bottom: 300);
       addTearDown(t.view.resetViewInsets);

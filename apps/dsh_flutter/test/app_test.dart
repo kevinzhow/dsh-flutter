@@ -25,7 +25,7 @@ void main() {
 
   Future<void> start(
     WidgetTester t, {
-    Size size = const Size(400, 800),
+    Size size = const Size(1200, 800),
     DshLocale locale = DshLocale.en,
   }) async {
     t.view.physicalSize = size;
@@ -145,7 +145,7 @@ void main() {
         await t.tap(find.byKey(const ValueKey('pairing-paste')));
         await settle(t);
         expect(backend.connects.single.$2, 'fromclip');
-        expect(find.byKey(const ValueKey('sessions-title')), findsOneWidget);
+        expect(find.byKey(const ValueKey('browser-title')), findsOneWidget);
       },
     );
 
@@ -163,7 +163,7 @@ void main() {
     testWidgets('an empty list shows the empty state', (t) async {
       await start(t);
       await connectWith(t, []);
-      expect(find.byKey(const ValueKey('sessions-empty')), findsOneWidget);
+      expect(find.byKey(const ValueKey('browser-empty')), findsOneWidget);
       expect(find.text('No sessions yet'), findsOneWidget);
     });
 
@@ -175,22 +175,26 @@ void main() {
         listRow('s1', title: 'Fix the build'),
         listRow('s2'),
       ]);
+      // Sessions no workspace accounts for sit in the folded Ungrouped group.
+      await t.tap(find.byKey(const ValueKey('workspace-row-')));
+      await settle(t);
       expect(find.text('Fix the build'), findsOneWidget);
-      expect(find.text('Untitled session'), findsOneWidget);
-      expect(find.text('http://host:18686'), findsOneWidget);
-      // the token never reaches the screen
+      expect(find.text('Untitled'), findsOneWidget);
+      // The host and how it is reached are in the foot menu; the token never
+      // reaches the screen.
+      await t.tap(find.byKey(const ValueKey('settings-trigger')));
+      await settle(t);
+      expect(find.text('host:18686'), findsOneWidget);
+      expect(find.byKey(const ValueKey('security-plain')), findsOneWidget);
       expect(find.textContaining('abc'), findsNothing);
     });
 
     testWidgets('settings open as a page and switch the language', (t) async {
       await start(t);
       await connectWith(t, []);
-      await t.tap(find.byKey(const ValueKey('sessions-settings')));
+      await openSettingsUi(t);
       await t.pumpAndSettle();
-      expect(find.byKey(const ValueKey('settings-page')), findsOneWidget);
-      // On a phone the section list comes first.
-      await t.tap(find.byKey(const ValueKey('settings-nav-general')));
-      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('settings-panel')), findsOneWidget);
       expect(find.byKey(const ValueKey('general-section')), findsOneWidget);
       await t.tap(find.byKey(const ValueKey('language-selector')));
       await t.pumpAndSettle();
@@ -205,9 +209,7 @@ void main() {
     ) async {
       await start(t);
       await connectWith(t, []);
-      await t.tap(find.byKey(const ValueKey('sessions-settings')));
-      await t.pumpAndSettle();
-      await t.tap(find.byKey(const ValueKey('settings-nav-general')));
+      await openSettingsUi(t);
       await t.pumpAndSettle();
       await t.ensureVisible(find.byKey(const ValueKey('settings-disconnect')));
       await t.tap(find.byKey(const ValueKey('settings-disconnect')));
@@ -224,7 +226,7 @@ void main() {
       List<Map<String, Object?>>? records,
     }) async {
       await connectWith(t, [listRow('s1', title: 'Task one', running: false)]);
-      await t.tap(find.byKey(const ValueKey('session-row-s1')));
+      await openRow(t, 's1');
       await settle(t);
       backend.transport.open(
         1,
@@ -248,10 +250,9 @@ void main() {
       await openFirst(t);
       expect(find.text('Earlier question'), findsOneWidget);
       expect(find.byKey(const ValueKey('session-title')), findsOneWidget);
-      expect(find.text('deepseek-test · high'), findsOneWidget);
-      await t.tap(find.byKey(const ValueKey('session-back')));
-      await settle(t);
-      expect(find.byKey(const ValueKey('sessions-title')), findsOneWidget);
+      // The model indicator is the phone header's second line; the desktop
+      // header carries the title and the view tabs.
+      expect(find.byKey(const ValueKey('view-tab-chat')), findsOneWidget);
     });
 
     testWidgets('streams assistant text and a tool call, then settles', (
@@ -483,7 +484,7 @@ void main() {
     testWidgets('a session that fails to open says so', (t) async {
       await start(t);
       await connectWith(t, [listRow('s1', title: 'T')]);
-      await t.tap(find.byKey(const ValueKey('session-row-s1')));
+      await openRow(t, 's1');
       await settle(t);
       expect(find.byKey(const ValueKey('session-loading')), findsOneWidget);
     });
@@ -493,14 +494,115 @@ void main() {
     testWidgets('a wide window shows the list beside the session', (t) async {
       await start(t, size: const Size(1200, 800));
       await connectWith(t, [listRow('s1', title: 'Wide task')]);
-      expect(find.byKey(const ValueKey('sessions-title')), findsOneWidget);
-      await t.tap(find.byKey(const ValueKey('session-row-s1')));
+      expect(find.byKey(const ValueKey('browser-title')), findsOneWidget);
+      // Sessions outside a Workspace sit under a folded Ungrouped group.
+      expect(find.text('Ungrouped'), findsOneWidget);
+      await t.tap(find.text('Ungrouped'));
+      await settle(t);
+      await openRow(t, 's1');
       await settle(t);
       backend.transport.open(1, snapshot([userMessage(1, 'hi from wide')]));
       await settle(t);
-      expect(find.byKey(const ValueKey('sessions-title')), findsOneWidget);
+      expect(find.byKey(const ValueKey('browser-title')), findsOneWidget);
       expect(find.text('hi from wide'), findsOneWidget);
       expect(find.byKey(const ValueKey('session-back')), findsNothing);
     });
+
+    testWidgets('a phone has a top bar and the sidebar in a drawer', (t) async {
+      await start(t, size: const Size(412, 915));
+      await connectWith(t, [listRow('s1', title: 'Phone task')]);
+      expect(find.byKey(const ValueKey('phone-top-bar')), findsOneWidget);
+      expect(find.byKey(const ValueKey('phone-drawer')), findsNothing);
+      expect(find.byKey(const ValueKey('browser-title')), findsNothing);
+      // The menu button opens the sidebar's real content.
+      await t.tap(find.byKey(const ValueKey('phone-menu')));
+      await settle(t);
+      await t.pump(const Duration(milliseconds: 300));
+      expect(find.byKey(const ValueKey('phone-drawer')), findsOneWidget);
+      expect(find.text('Ungrouped'), findsOneWidget);
+      // Picking a session opens it and closes the drawer.
+      await openRow(t, 's1');
+      await settle(t);
+      backend.transport.open(1, snapshot([userMessage(1, 'hi from phone')]));
+      await settle(t);
+      expect(find.byKey(const ValueKey('phone-drawer')), findsNothing);
+      expect(find.byKey(const ValueKey('phone-scrim')), findsNothing);
+      expect(find.text('hi from phone'), findsOneWidget);
+      expect(find.byKey(const ValueKey('phone-title')), findsOneWidget);
+    });
+
+    testWidgets(
+      'the sidebar lists the panels dsh has, and says what is missing',
+      (t) async {
+        await start(t, size: const Size(1200, 800));
+        await connectWith(t, [listRow('s1', title: 'Wide task')]);
+        expect(find.text('Plugins'), findsOneWidget);
+        expect(find.text('Automation tasks'), findsOneWidget);
+        await t.tap(find.text('Plugins'));
+        await settle(t);
+        expect(find.byKey(const ValueKey('panel-unavailable')), findsOneWidget);
+        expect(find.text('Not available yet'), findsNothing);
+        expect(
+          find.textContaining('is not part of Whalee yet'),
+          findsOneWidget,
+        );
+        await t.tap(find.text('Automation tasks'));
+        await settle(t);
+        expect(find.byKey(const ValueKey('panel-unavailable')), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'an open session has the Chat and Trajectory tabs and its menu',
+      (t) async {
+        await start(t, size: const Size(1200, 800));
+        await connectWith(t, [listRow('s1', title: 'Wide task')]);
+        await t.tap(find.text('Ungrouped'));
+        await settle(t);
+        await openRow(t, 's1');
+        await settle(t);
+        backend.transport.open(1, snapshot([userMessage(1, 'hi from wide')]));
+        await settle(t);
+        expect(
+          find.byKey(const ValueKey('desktop-session-header')),
+          findsOneWidget,
+        );
+        expect(find.byKey(const ValueKey('view-tab-chat')), findsOneWidget);
+        expect(
+          find.byKey(const ValueKey('view-tab-trajectory')),
+          findsOneWidget,
+        );
+        expect(find.text('hi from wide'), findsOneWidget);
+        await t.tap(find.byKey(const ValueKey('view-tab-trajectory')));
+        await settle(t);
+        expect(find.byKey(const ValueKey('panel-unavailable')), findsOneWidget);
+        expect(find.text('hi from wide'), findsNothing);
+        await t.tap(find.byKey(const ValueKey('view-tab-chat')));
+        await settle(t);
+        expect(find.text('hi from wide'), findsOneWidget);
+        // The overflow menu copies the session id.
+        String? copied;
+        t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          (call) async {
+            if (call.method == 'Clipboard.setData') {
+              copied = (call.arguments as Map)['text'] as String?;
+            }
+            return null;
+          },
+        );
+        addTearDown(
+          () => t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            SystemChannels.platform,
+            null,
+          ),
+        );
+        await t.tap(find.byKey(const ValueKey('session-overflow')));
+        await settle(t);
+        await t.tap(find.text('Copy Session ID'));
+        await settle(t);
+        expect(copied, 's1');
+      },
+    );
   });
 }

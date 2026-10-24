@@ -1,0 +1,228 @@
+{
+ "schema": "dsh-parity-desktop-cases/1",
+ "comment": "Whole desktop pages: the real dsh web client against the Whalee Linux build, same fixture host, same size. `web` and `app` are the steps that reach the state on each side (coordinates are window pixels of the app). Regions are CSS px rectangles of the page; `{W}` and `{H}` are the case's size. A state with `appOnly` has no dsh web counterpart (the phone top bar and drawer are an owner decision, docs/parity.md): only the app is captured, with its own `sizes`.",
+ "sizes": [
+  [
+   1280,
+   720
+  ],
+  [
+   1600,
+   1000
+  ],
+  [
+   800,
+   900
+  ]
+ ],
+ "states": {
+  "session": {
+   "title": "A started session with the Ungrouped group open",
+   "web": [
+    {
+     "click": "[data-row-key='workspace:']"
+    },
+    {
+     "wait": 800
+    },
+    {
+     "click": "[data-row-key^='session:']:has-text('Stream fixture')"
+    },
+    {
+     "wait": 2500
+    }
+   ],
+   "app": [
+    {
+     "click": [
+      76,
+      300
+     ]
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": [
+      120,
+      336
+     ]
+    },
+    {
+     "wait": 4000
+    }
+   ],
+   "regions": [
+    {
+     "name": "sidebar-brand",
+     "x": 0,
+     "y": 0,
+     "width": 280,
+     "height": 64
+    },
+    {
+     "name": "sidebar-new-session",
+     "x": 0,
+     "y": 64,
+     "width": 280,
+     "height": 50
+    },
+    {
+     "name": "sidebar-panels",
+     "x": 0,
+     "y": 114,
+     "width": 280,
+     "height": 90
+    },
+    {
+     "name": "sidebar-workspaces",
+     "x": 0,
+     "y": 204,
+     "width": 280,
+     "height": 200
+    },
+    {
+     "name": "sidebar-foot",
+     "x": 0,
+     "y": "{H-60}",
+     "width": 280,
+     "height": 60
+    },
+    {
+     "name": "header",
+     "x": 280,
+     "y": 0,
+     "width": "{W-280}",
+     "height": 76
+    },
+    {
+     "name": "conversation",
+     "x": 280,
+     "y": 76,
+     "width": "{W-280}",
+     "height": "{H-76-130}"
+    },
+    {
+     "name": "composer",
+     "x": 280,
+     "y": "{H-130}",
+     "width": "{W-280}",
+     "height": 100
+    },
+    {
+     "name": "usage-footer",
+     "x": 280,
+     "y": "{H-30}",
+     "width": "{W-280}",
+     "height": 30
+    }
+   ]
+  },
+  "phone-home": {
+   "title": "Phone: the Session page behind the top bar, drawer closed",
+   "appOnly": true,
+   "sizes": [
+    [
+     390,
+     844
+    ],
+    [
+     412,
+     915
+    ]
+   ],
+   "web": [],
+   "app": [],
+   "regions": []
+  },
+  "phone-drawer": {
+   "title": "Phone: the drawer open over the page",
+   "appOnly": true,
+   "sizes": [
+    [
+     390,
+     844
+    ],
+    [
+     412,
+     915
+    ]
+   ],
+   "web": [],
+   "app": [
+    {
+     "click": [
+      22,
+      26
+     ]
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": [
+      80,
+      300
+     ]
+    },
+    {
+     "wait": 1200
+    }
+   ],
+   "regions": []
+  },
+  "phone-session": {
+   "title": "Phone: a Session opened from the drawer",
+   "appOnly": true,
+   "sizes": [
+    [
+     390,
+     844
+    ],
+    [
+     412,
+     915
+    ]
+   ],
+   "web": [],
+   "app": [
+    {
+     "click": [
+      22,
+      26
+     ]
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": [
+      80,
+      300
+     ]
+    },
+    {
+     "wait": 1200
+    },
+    {
+     "click": [
+      100,
+      336
+     ]
+    },
+    {
+     "wait": 4000
+    }
+   ],
+   "regions": []
+  }
+ },
+ "themes": [
+  "light",
+  "dark"
+ ],
+ "locales": [
+  "en",
+  "zh"
+ ]
+}

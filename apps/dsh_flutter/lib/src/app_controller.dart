@@ -15,6 +15,7 @@ import 'package:dsh_feature_commands/dsh_feature_commands.dart';
 import 'package:dsh_feature_directory_picker_browse/dsh_feature_directory_picker_browse.dart';
 import 'package:dsh_feature_files/dsh_feature_files.dart';
 import 'package:dsh_feature_input_trigger/dsh_feature_input_trigger.dart';
+import 'package:dsh_feature_layout/dsh_feature_layout.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
@@ -28,7 +29,9 @@ import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
 import 'package:dsh_feature_workspace/dsh_feature_workspace.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_layout/dsh_layout.dart' show LayoutController;
 import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_shortcuts/dsh_shortcuts.dart' show ShortcutService;
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
@@ -39,6 +42,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
 import 'connection_store.dart';
+import 'desktop_shell.dart';
 import 'host_locale.dart';
 import 'launch_link.dart';
 import 'local_prefs.dart';
@@ -149,6 +153,8 @@ class AppController extends ChangeNotifier {
     LocalPrefs? prefs,
     this.notifications,
     HostResolver? resolver,
+    this.shortcuts,
+    double? viewportWidth,
   }) : _resolve = resolver ?? InternetAddress.lookup,
        store = store ?? MemoryConnectionStore(),
        prefs = prefs ?? MemoryLocalPrefs(),
@@ -202,6 +208,17 @@ class AppController extends ChangeNotifier {
     registerInputTriggerFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
     registerAttachmentFeature(slots, i18n: () => i18n);
+    layout = registerLayoutFeature(
+      slots,
+      shortcuts: shortcuts,
+      i18n: () => i18n,
+      viewportWidth:
+          viewportWidth ??
+          (PlatformDispatcher.instance.implicitView == null
+              ? 1280
+              : PlatformDispatcher.instance.implicitView!.physicalSize.width /
+                    PlatformDispatcher.instance.implicitView!.devicePixelRatio),
+    );
     sidebar = registerSidebarRightFeature(
       slots,
       i18n: () => i18n,
@@ -248,6 +265,7 @@ class AppController extends ChangeNotifier {
       hostVersion: () => hostVersion,
     );
     registerAppSettingsRows(slots, this);
+    desktop = DesktopShell(this);
     final notifier = notifications;
     if (notifier != null) {
       notices = NoticeCoordinator(
@@ -288,6 +306,28 @@ class AppController extends ChangeNotifier {
 
   /// The right sidebar (file tree, previews, terminals) of every session.
   late final SidebarRightFeature sidebar;
+
+  /// The window's shortcut service (null: no keyboard commands, as in tests).
+  final ShortcutService? shortcuts;
+
+  /// `ctx.layout` and the layout store of the desktop frame.
+  late final LayoutFeature layout;
+
+  /// The desktop shell's seats.
+  late final DesktopShell desktop;
+
+  /// Whether the frame is on screen (a host is connected), so that settings
+  /// open as the dialog rather than a page.
+  bool get desktopShellActive =>
+      manager != null && phase != ConnectionPhase.disconnected;
+
+  /// Whether a host generation is live (its Remote methods can be called).
+  bool get hostConnected =>
+      manager != null && phase != ConnectionPhase.disconnected;
+
+  /// The shell's own state changed (for instance the host turned out to be on
+  /// this machine).
+  void notifyShellChanged() => notifyListeners();
 
   /// The terminal views behind the sidebar's terminal tabs.
   late final ClientTerminals terminals;
@@ -958,6 +998,10 @@ class AppController extends ChangeNotifier {
     if (controller == null) return null;
     openSessionId = sessionId;
     newSessionPending = false;
+    // A global panel (Plugins, Automation tasks) gives way to the Session.
+    if (layout.store.panelInfo.activePanelId != null) {
+      layout.controller.selectPanel(null);
+    }
     notifyListeners();
     unawaited(controller.open().then((_) => notifyListeners()));
     return controller;
@@ -1171,13 +1215,28 @@ class AppController extends ChangeNotifier {
     );
   }
 
-  /// Open the settings page over the app.
+  /// Open the settings page over the app (the panel inside the desktop frame).
   void openSettings() {
+    if (desktopShellActive) {
+      unawaited(desktop.settings.open());
+      return;
+    }
     final nav = navigatorKey.currentState;
     if (nav == null) return;
     nav.push(
       MaterialPageRoute<void>(builder: (_) => SettingsRoute(controller: this)),
     );
+  }
+
+  /// The title of a session as the list shows it, or null when it has none yet.
+  String? sessionTitleOf(String sessionId) {
+    for (final e in sessionList.items) {
+      if (e.sessionId == sessionId && (e.title?.trim().isNotEmpty ?? false)) {
+        return e.title!.trim();
+      }
+    }
+    final title = manager?.projectionValues(sessionId)['title'];
+    return title is String && title.trim().isNotEmpty ? title.trim() : null;
   }
 
   String _sessionTitle(String sessionId) {
@@ -1207,6 +1266,8 @@ class AppController extends ChangeNotifier {
 
   @override
   void dispose() {
+    desktop.dispose();
+    layout.dispose();
     _recoveredTimer?.cancel();
     unawaited(_stateSub?.cancel());
     unawaited(_approvalSub?.cancel());
@@ -1342,6 +1403,12 @@ class _SidebarBridge implements SidebarServices {
 
   @override
   GlobalKey<NavigatorState> get navigatorKey => app.navigatorKey;
+
+  @override
+  LayoutController get layout => app.layout.controller;
+
+  @override
+  ShortcutService? get shortcuts => app.shortcuts;
 }
 
 /// The sessions the trigger sources ask about (dsh's `ctx.sessions` seat).

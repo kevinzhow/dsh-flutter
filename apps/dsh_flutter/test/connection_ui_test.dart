@@ -55,7 +55,7 @@ void main() {
     DshLocale locale = DshLocale.en,
     LaunchScanner scanner = const NoScanner(),
     HostResolver? resolver,
-    Size size = const Size(400, 800),
+    Size size = const Size(1200, 800),
   }) async {
     t.view.physicalSize = size;
     t.view.devicePixelRatio = 1;
@@ -94,7 +94,7 @@ void main() {
   }
 
   Future<void> openSession(WidgetTester t) async {
-    await t.tap(find.byKey(const ValueKey('session-row-s1')));
+    await openRow(t, 's1');
     await settle(t);
     backend.transport.open(
       1,
@@ -227,7 +227,7 @@ void main() {
       await connect(t);
       backend.emit(ConnectionState.needsPairing);
       await settle(t);
-      expect(key('sessions-title'), findsOneWidget, reason: 'sessions stay');
+      expect(key('browser-title'), findsOneWidget, reason: 'sessions stay');
       expect(find.text('The host restarted'), findsOneWidget);
       expect(key('pairing-connect'), findsNothing);
       await t.tap(key('connection-repair'));
@@ -242,7 +242,7 @@ void main() {
       await t.pumpAndSettle();
       expect(backend.connects.last.$2, newToken);
       expect(key('pairing-url'), findsNothing, reason: 'the page closed');
-      expect(key('sessions-title'), findsOneWidget);
+      expect(key('browser-title'), findsOneWidget);
       expect(controller.phase, ConnectionPhase.connected);
     });
 
@@ -276,9 +276,11 @@ void main() {
       await openSession(t);
       await t.enterText(find.byType(EditableText).last, 'kept text');
       await t.pump();
-      await t.tap(key('session-back'));
+      // Another page (the Plugins panel) takes the centre; the session comes back.
+      await t.tap(find.text('Plugins'));
       await settle(t);
-      await t.tap(key('session-row-s1'));
+      expect(find.text('kept text'), findsNothing);
+      await openRow(t, 's1');
       await settle(t);
       expect(find.text('kept text'), findsOneWidget);
     });
@@ -299,7 +301,7 @@ void main() {
       await settle(t);
       await t.pump();
       expect(find.textContaining('refused the token'), findsOneWidget);
-      expect(key('sessions-title'), findsNothing, reason: 'the page is on top');
+      expect(key('browser-title'), findsNothing, reason: 'the page is on top');
     });
 
     testWidgets('without sessions, the pairing screen explains', (t) async {
@@ -330,7 +332,7 @@ void main() {
       backend.transport.onList = () async => {'items': <Object?>[]};
       await t.tap(key('saved-host-retry'));
       await settle(t);
-      expect(key('sessions-title'), findsOneWidget);
+      expect(key('browser-title'), findsOneWidget);
       expect(backend.connects, hasLength(2));
     });
 
@@ -364,6 +366,8 @@ void main() {
     testWidgets('connected over http the chip says Not encrypted', (t) async {
       await start(t);
       await connect(t, link: plainLink);
+      await t.tap(key('settings-trigger'));
+      await settle(t);
       expect(key('security-plain'), findsOneWidget);
       expect(find.text('Not encrypted'), findsOneWidget);
     });
@@ -474,7 +478,9 @@ void main() {
       );
       expect(backend.connects.single.$1, Uri.parse('https://dsh.example:8443'));
       expect(backend.connects.single.$2, token);
-      expect(key('sessions-title'), findsOneWidget);
+      expect(key('browser-title'), findsOneWidget);
+      await t.tap(key('settings-trigger'));
+      await settle(t);
       expect(key('security-pinned'), findsOneWidget);
       expect(find.text('Encrypted, trusted certificate'), findsOneWidget);
     });
@@ -499,6 +505,8 @@ void main() {
       await t.runAsync(() => controller.pair(httpsLink));
       await settle(t);
       expect(backend.connects, hasLength(1));
+      await t.tap(key('settings-trigger'));
+      await settle(t);
       expect(key('security-encrypted'), findsOneWidget);
     });
 
@@ -567,7 +575,7 @@ void main() {
         ),
       );
       await settle(t);
-      expect(key('sessions-title'), findsOneWidget);
+      expect(key('browser-title'), findsOneWidget);
       expect(find.text('The connection was refused'), findsOneWidget);
       await t.tap(key('connection-certificate-review'));
       await t.pumpAndSettle();
@@ -597,7 +605,7 @@ void main() {
       backend.transport.onList = () async => {'items': <Object?>[]};
       await t.runAsync(() => controller.pair(httpsLink));
       await settle(t);
-      await t.tap(key('sessions-settings'));
+      await openSettingsUi(t);
       await t.pumpAndSettle();
       await t.tap(key('settings-nav-general'));
       await t.pumpAndSettle();

@@ -23,6 +23,7 @@ void registerSidebarTerminalFeature(
       kind: terminalTabKind,
       multiple: true,
       guideOrder: 20,
+      keepMounted: true,
       onClose: (sessionId, tabId, contentId) =>
           terminals.close(sessionId, tabId),
     ),

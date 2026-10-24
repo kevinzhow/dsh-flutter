@@ -1,0 +1,10 @@
+name: dsh_shortcuts
+description: dsh's shortcut service, ported (pure Dart). Physical-key bindings and their normalization, per-device preference documents with conflict resolution, serialized persistence, and the command registry with its dispatch rules.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.3

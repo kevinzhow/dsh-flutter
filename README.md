@@ -110,6 +110,33 @@ python3 tool/capability_parity.py --skeleton   # JSON stubs for the upstream ite
 removed one) until the table is reviewed; set `dsh.commit` in the table to the new pin after that. Statuses come from reading the
 Whalee code, not from names: when a feature lands, change its row (and the rows of its Remote methods, slots and settings) in the same PR.
 
+## Desktop
+
+Below 600 logical pixels the sidebar is a modal drawer under a 52 px top bar (menu, Session title, new Session): the menu button or a swipe
+from the left edge opens it, the scrim, a swipe back, the system back button or picking a Session closes it (owner decision, `docs/parity.md`).
+From 600 logical pixels wide (and always on a desktop window) Whalee draws dsh's own frame: the three
+columns of `ui-layout` (sidebar 264 to 420 px, centre, right panel), the sidebar of `ui-sidebar` with its 56 px rail below 1024 px,
+the workspace browser, the Session header with its view tabs, the right sidebar docked by `ui-dockkit`, the keyboard shortcuts
+(`ui-shortcuts`, with the reference dialog), the Settings dialog, and the actions that need the host's own desktop. Build it with
+`flutter build linux|macos|windows` in `apps/dsh_flutter`; the Linux build is the one exercised in CI and in the visual parity captures.
+
+- **Window chrome per platform.** macOS hides the title bar (traffic lights stay native, the sidebar leaves a 52 px strip and the
+  `shell.leading` controls sit beside them); Windows hides it too and draws a 40 px caption row with its own minimise, maximise and
+  close buttons (`window_manager` moves and snaps the window); Linux keeps the native frame.
+- **Host features.** The native directory chooser (`directoryPicker/pick`, behind Add workspace and Mod+O), "open in an application"
+  (the Session header split button and Mod+Alt+O) and "open the settings document" appear only when the host is this machine (a loopback
+  address or one of the machine's own); with a remote host the controls are not drawn.
+- **What Flutter cannot replicate.** Native window vibrancy and the macOS translucent sidebar (the fill is drawn at 40 % without blur
+  behind it); Windows 11 snap layouts on the maximise button; the exact Blink text rasteriser (glyph edges differ by sub-pixel
+  coverage, so the visual parity scores treat text edges apart); CSS `backdrop-filter` is approximated with `BackdropFilter`.
+- **Untested.** The macOS and Windows builds compile-check only (no machine here to run them): their chrome code paths are covered by
+  widget tests that inject a `ShellChrome`, not by a run on the real window system.
+- **Not ported yet** (each has its seat and, where the page would be, a "not available yet" page): Plugins, Automation tasks, the
+  Trajectory view, the turn rail beside the message stream, and the workspace rename, delete, drag and row menus. The composer's desktop
+  layout and the hero are the next step, after the composer and message-stream work has landed.
+- **Capture hooks.** `WHALEE_WINDOW_SIZE=1280x720` opens the window at that size and `WHALEE_PIN_FONTS=tool/parity-fonts/manifest.json`
+  registers the pinned parity fonts, `WHALEE_PLATFORM_BRIGHTNESS=dark|light` stands in for the system theme; all three are for `tool/parity-desktop` and do nothing in normal use.
+
 ## Connecting to a host
 
 Whalee talks to a `dsh web` that you run yourself. Nothing goes through a server of ours.

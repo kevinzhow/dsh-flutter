@@ -13,22 +13,22 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 31 | 17 | 53 | 1 | 102 |
-| Input and commands | 7 | 3 | 15 | 0 | 25 |
+| Sessions and chat | 42 | 17 | 42 | 1 | 102 |
+| Input and commands | 8 | 3 | 14 | 0 | 25 |
 | Tools and approvals | 9 | 2 | 1 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 0 | 1 | 18 | 1 | 20 |
-| Files and preview | 6 | 5 | 8 | 0 | 19 |
-| Settings | 8 | 1 | 45 | 3 | 57 |
+| Files and preview | 6 | 6 | 7 | 0 | 19 |
+| Settings | 14 | 1 | 39 | 3 | 57 |
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
-| Sidebar and browser | 14 | 2 | 9 | 0 | 25 |
+| Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 78 | 33 | 179 | 29 | 319 |
+| **all** | 102 | 35 | 153 | 29 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 14 | 13 | 26 | 3 | 56 |
-| remote | 36 | 4 | 83 | 23 | 146 |
-| slot | 25 | 16 | 57 | 2 | 100 |
+| package | 16 | 16 | 21 | 3 | 56 |
+| remote | 38 | 4 | 81 | 23 | 146 |
+| slot | 45 | 15 | 38 | 2 | 100 |
 | settings | 3 | 0 | 13 | 1 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
@@ -36,8 +36,8 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | platform | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
-| desktop | 0 | 0 | 29 | 1 | 30 |
-| both | 78 | 33 | 150 | 28 | 289 |
+| desktop | 20 | 3 | 6 | 1 | 30 |
+| both | 82 | 32 | 147 | 28 | 289 |
 
 ## Packages still to do, by priority
 
@@ -45,29 +45,27 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 - `ui-commands` (partial, both): Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands.
 - `ui-input-trigger` (partial, both): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.
-- `ui-layout` (missing, desktop): Resize and collapse the three-column window: sidebar, conversation and right column. Was partial because a page stack (phone) and a fixed sessions pane plus conversation (840 px and wider, apps/dsh_flutter/lib/src/app.dart) exist. That is Whalee's own adaptation, not dsh's AppFrame: three columns with drag handles, sidebar collapse rules (auto-collapse, narrow-expanded), the shell seats and the ctx.layout navigation and panels state are all absent, so the row is missing for desktop. Below the phone breakpoint the existing phone layout stays.
-- `ui-sidebar` (partial, both): Browse sessions in a tree grouped by workspace, search them, and see which are running. A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu.
+- `ui-layout` (partial, desktop): Resize and collapse the three-column window: sidebar, conversation and right column. dsh AppFrame: three-column solve, drag handles, collapse below 1024 with the narrow override, ctx.layout, main panel selection, the shell seats, per-platform window chrome (macOS and Windows compile-safe, untested). Below 600 wide the sidebar is a modal drawer under a phone top bar (owner decision 2026-10-24); 600 to 1023 the rail, 1024 and up docked.
+- `ui-sidebar` (partial, both): Browse sessions in a tree grouped by workspace, search them, and see which are running. Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a "not available yet" page.
 - `ui-user-questions` (partial, both): Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code.
-- `ui-workspace` (partial, both): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session ("+": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start.
+- `ui-workspace` (partial, both): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the "N more" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards.
 
 **P2**
 
 - `ui-chat` (partial, both): Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. No fork-at-message, no like/dislike. Links and file paths in answers are styled but not tappable (DshMarkdown has no link handler).
 - `ui-conversation` (partial, both): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.
 - `ui-deliverables` (partial, both): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer.
-- `ui-directory-picker-native` (missing, desktop): Open the host operating system's own folder chooser to pick a working directory. Was na because a phone user cannot see the host display. A desktop build runs with a host on the same machine, where the host OS chooser is the right picker (remote:directoryPicker/pick); with a remote host the in-app browser (ui-directory-picker-browse) stays the way.
-- `ui-dockkit` (missing, desktop): Arrange panels in a draggable split-tree docking layout. Was na as phone-first. The split-tree docking engine behind the desktop right sidebar surface (split, drag, invert); a desktop build replicates it. Phones keep the full-screen sheet.
+- `ui-dockkit` (partial, desktop): Arrange panels in a draggable split-tree docking layout. The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified.
 - `ui-goal` (missing, both): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. goals/* is not generated or called; the get_goal, create_goal and update_goal tool rows only show raw details.
 - `ui-plan` (partial, both): Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview.
 - `ui-reference` (partial, both): Mention a workspace file or another session with "@" so the agent reads it. The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text.
 - `ui-secret-mask` (missing, both): Hide recognized credentials (keys, tokens) in the text of messages you sent. Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see.
-- `ui-shortcuts` (missing, desktop): See and rebind keyboard shortcuts. Was na as phone-first. A desktop build has a physical keyboard: shortcut reference, recording and local preference editing are in scope.
 
 **P3**
 
 - `ui-agent-preset` (missing, both): Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice.
 - `ui-jobs` (missing, both): List the session's background jobs and watch or kill one from its streaming output panel. job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only.
-- `ui-open-in-app` (missing, desktop): Open the workspace folder or a previewed file in an application installed on the host. Needs session/canOpenWorkspacePath, workspacePathApplications and openWorkspacePath. Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local.
+- `ui-open-in-app` (partial, desktop): Open the workspace folder or a previewed file in an application installed on the host. The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported.
 - `ui-plugin-manager` (missing, both): Install, enable, disable, retry and remove plugin packages on the host. pluginManager/* is not generated; only listBundles is called, to read the host version.
 - `ui-schedule` (missing, both): List, edit and delete the host's scheduled tasks and a session's reminders. schedule/* is not generated or called; schedule_* tool rows show raw details only.
 - `ui-settings-agent-loop` (missing, both): Set how many tool calls the agent may run in parallel. Settings namespace agent-loop is not read; the generic form model exists (packages/dsh_ui/lib/src/dsh_settings_form_model.dart) but no card uses it.
@@ -94,7 +92,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Sessions and chat
 
-31 ported, 17 partial, 53 missing, 1 na.
+42 ported, 17 partial, 42 missing, 1 na.
 
 ### package (10)
 
@@ -103,13 +101,13 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `ui-chat` | partial | both | Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. | `features/dsh_feature_chat`, `packages/dsh_conversation/lib/src/chat`; Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. No fork-at-message, no like/dislike. Links and file paths in answers are styled but not tappable (DshMarkdown has no link handler). |
 | `ui-conversation` | partial | both | The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. | `features/dsh_feature_conversation`, `packages/dsh_conversation`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control. |
 | `ui-directory-picker-browse` | ported | both | Browse the host's folders and create a new one to choose where a session works. | `features/dsh_feature_directory_picker_browse`, `features/dsh_feature_directory_picker_browse/lib/src/browser_model.dart`, `features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart`; The Miller browser (dsh's dialog at every width: two columns of at least 256px that scroll sideways on a narrow card, the child pane pinned into view, the wrapping footer), the editable path with prefix filtering, hidden-file toggle, New folder, slow-scan pill and truncation note. The Remote caller has no per-call abort, so a superseded scan is dropped on arrival instead of cancelled on the wire. |
-| `ui-directory-picker-native` | missing | desktop | Open the host operating system's own folder chooser to pick a working directory. | Was na because a phone user cannot see the host display. A desktop build runs with a host on the same machine, where the host OS chooser is the right picker (remote:directoryPicker/pick); with a remote host the in-app browser (ui-directory-picker-browse) stays the way. |
+| `ui-directory-picker-native` | ported | desktop | Open the host operating system's own folder chooser to pick a working directory. | `features/dsh_feature_directory_picker_native/lib/src/flow.dart`, `apps/dsh_flutter/lib/src/desktop_shell.dart`; The host OS chooser (directoryPicker/pick) fills both directory-flow holes ahead of the browse flow, only where the host is this machine and the build is a desktop one; renderless, one chooser per open, one outcome. |
 | `ui-message-feedback` | missing | both | Like or dislike an answer and send a written remark about a message or the session. | messageFeedback/* and sessionFeedback/record are not generated or called. |
 | `ui-session` | ported | both | Open a session, keep its live state and history in step with the host, and send, queue and cancel prompts. | `packages/dsh_models/lib/src/session_manager.dart`, `packages/dsh_models/lib/src/session.dart`, `apps/dsh_flutter/lib/src/session_controller.dart` |
-| `ui-sidebar` | partial | both | Browse sessions in a tree grouped by workspace, search them, and see which are running. | `features/dsh_feature_session`, `apps/dsh_flutter/lib/src/screens/sessions_screen.dart`; A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu. |
+| `ui-sidebar` | partial | both | Browse sessions in a tree grouped by workspace, search them, and see which are running. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`, `features/dsh_feature_sidebar/lib/src/leading_controls.dart`; Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a "not available yet" page. |
 | `ui-subagent` | partial | both | See the subagents a session started, read each child's transcript, continue a child and mention one with "@". | `features/dsh_feature_subagent`; Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab. |
 | `ui-trajectory` | missing | both | Read the full event ledger of a session with a timing overview (a developer view). | No trajectory conversation view. |
-| `ui-workspace` | partial | both | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | `features/dsh_feature_workspace`, `packages/dsh_models/lib/src/workspace_list.dart`, `packages/dsh_models/lib/src/workspace_navigation.dart`, `features/dsh_feature_conversation/lib/src/hero.dart`; Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session ("+": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start. |
+| `ui-workspace` | partial | both | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/tree.dart`, `features/dsh_feature_session/lib/src/workspace/view_state.dart`, `features/dsh_feature_workspace/lib/src/register.dart`; On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the "N more" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards. |
 
 ### remote (39)
 
@@ -117,7 +115,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---|---|---|---|
 | `directoryPicker/createDirectory` | ported | both | Create a new folder while browsing the host's folders to choose a working directory. | `features/dsh_feature_directory_picker_browse/lib/src/register.dart` |
 | `directoryPicker/list` | ported | both | List the folders inside one host directory for the in-app folder browser. | `features/dsh_feature_directory_picker_browse/lib/src/register.dart` |
-| `directoryPicker/pick` | missing | desktop | Open the host operating system's folder chooser on the host machine. | Was na because a phone user cannot see the host display. A desktop build with a host on the same machine can use the OS chooser; needs a local-host check before it is offered (a remote host would open the dialog on another machine). |
+| `directoryPicker/pick` | ported | desktop | Open the host operating system's folder chooser on the host machine. | `features/dsh_feature_directory_picker_native/lib/src/flow.dart`; Called by the native directory flow; see ui-directory-picker-native. |
 | `messageFeedback/delete` | missing | both | Withdraw a like or dislike. | Like and dislike on messages (ui-message-feedback); not built. |
 | `messageFeedback/list` | missing | both | Load the likes and dislikes already given. | Like and dislike on messages (ui-message-feedback); not built. |
 | `messageFeedback/put` | missing | both | Like or dislike a message. | Like and dislike on messages (ui-message-feedback); not built. |
@@ -169,7 +167,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `conversation.chat.user.images` | ported | both | User-message images, including pending and local-echo previews, independently replaceable from output images. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_chat/lib/src/chat_nodes.dart` |
 | `conversation.composer` | ported | both | Selector-routed replacements for the current Session's resident composer. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_approval/lib/src/register.dart`, `features/dsh_feature_user_questions/lib/src/register.dart`; Occupants: default composer, approval, question; no read-only subagent composer seat. |
 | `conversation.composer.bar` | partial | both | Resident composer body, including the no-Session inert state. | `features/dsh_feature_conversation/lib/src/composer.dart`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is a fixed widget (DefaultComposer, ComposerCard), not an extension seat; its inert no-workspace form is InertComposer. |
-| `conversation.composer.dock` | missing | both | Ambient entries below the composer card. |  |
+| `conversation.composer.dock` | ported | both | Ambient entries below the composer card. | `features/dsh_feature_chat/lib/src/stats_pills.dart`; The session statistics pills (activity and usage) with their dialogs. |
 | `conversation.header` | ported | both | Resident navigation container, including when no Session is selected. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_conversation/lib/src/register.dart` |
 | `conversation.header.leading` | missing | desktop | Global navigation before the Session title, available without a Session. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
 | `conversation.hero.agentPreset` | missing | both | Agent-preset control staged for a New Session. |  |
@@ -187,26 +185,26 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `conversation.input.plan` | partial | both | Plan control inside the composer tool row. | `features/dsh_feature_plan/lib/src/register.dart`; The plan-mode chip occupies conversation.input.dock instead; it is read-only. |
 | `conversation.input.right` | missing | both | Compact controls before the composer submit action. |  |
 | `conversation.session` | ported | both | Strict per-Session Conversation body. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_conversation/lib/src/register.dart` |
-| `conversation.session.header` | partial | both | Strict per-Session title, actions, and View navigation. | `features/dsh_feature_conversation/lib/src/session_header.dart`; The session header is a fixed widget; only its actions seat is declared. |
+| `conversation.session.header` | partial | both | Strict per-Session title, actions, and View navigation. | `features/dsh_feature_conversation/lib/src/desktop_header.dart`, `features/dsh_feature_conversation/lib/src/session_header.dart`; Desktop: crumb, actions, utilities, corner and view tabs (Chat, and Trajectory as a "not available yet" page). No subagent breadcrumbs yet. |
 | `conversation.session.header.actions` | ported | both | Title-adjacent Session actions in ascending order. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_subagent/lib/src/register.dart`, `features/dsh_feature_sidebar_right/lib/src/register.dart` |
-| `conversation.session.header.corner` | missing | both | The header's far-right corner, past the utilities' edge and into the header's own padding, for one control. |  |
+| `conversation.session.header.corner` | ported | both | The header's far-right corner, past the utilities' edge and into the header's own padding, for one control. | `features/dsh_feature_sidebar_right/lib/src/register.dart`; The right sidebar's way back in. |
 | `conversation.session.header.lineage` | missing | both | Optional replacement for one Session breadcrumb title. |  |
-| `conversation.session.header.utilities` | missing | both | Right-aligned Session utilities in ascending order. |  |
+| `conversation.session.header.utilities` | ported | both | Right-aligned Session utilities in ascending order. | `features/dsh_feature_open_in_app/lib/src/register.dart`, `apps/dsh_flutter/lib/src/desktop_shell.dart`; Open-in-app and the Session overflow menu (Copy Session ID; the other verbs wait for the Workspace actions). |
 | `conversation.trajectory.images` | missing | both | Renderer for one group of durable record images in the Trajectory ledger. |  |
 | `conversation.user.text.node` | missing | both | One business-owned inline renderer for a pure JSON text node. |  |
 | `conversation.view` | ported | both | Registered Conversation target Views, rendered one at a time. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_chat/lib/src/register.dart`; Occupants: chat and subagent transcripts; no trajectory view. |
 | `main.conversation` | partial | both | Conversation shell beneath its root-scoped main-panel entry. | `features/dsh_feature_conversation/lib/src/shell.dart`; The conversation shell exists as a widget, not a seat. |
 | `shell.quota-notice` | missing | both | Frame-wide quota notice chain. |  |
-| `sidebar.brand.mark` | missing | desktop | Brand mark rendered in the expanded brand row and collapsed rail. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. The seat is shell chrome and is replicated; its occupant is not: the DeepSeek mark and name stay out (ui-brand-official is na) and Whalee supplies its own name. |
-| `sidebar.brand.name` | missing | desktop | Brand name rendered beside the expanded mark. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. The seat is shell chrome and is replicated; its occupant is not: the DeepSeek mark and name stay out (ui-brand-official is na) and Whalee supplies its own name. |
+| `sidebar.brand.mark` | ported | desktop | Brand mark rendered in the expanded brand row and collapsed rail. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `sidebar.brand.name` | ported | desktop | Brand name rendered beside the expanded mark. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar.chat.conversation` | missing | both | Session-scoped Conversation occurrence hosted by one Sidebar chat tab. |  |
-| `sidebar.footer.action` | missing | desktop | Optional actions beside Settings at the sidebar foot. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `sidebar.panellist` | missing | desktop | Global panel icons. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
+| `sidebar.footer.action` | ported | desktop | Optional actions beside Settings at the sidebar foot. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `sidebar.panellist` | ported | desktop | Global panel icons. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar.session.row.hover` | missing | desktop | Section of the Session row's hover card between its relative time and its trailing status line. | Pointer hover has no touch equivalent: desktop only. |
 | `sidebar.session.row.leading` | missing | both | Leading decoration of one Session row, in the 16px cell before the title that the row's own state dot otherwise occupies. |  |
-| `sidebar.settings` | missing | desktop | The settings seat at the sidebar foot. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `sidebar.toggle.badge` | missing | desktop | Non-interactive notification inside the collapsed sidebar expand button. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `sidebar.workspaces` | partial | both | The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog. | `features/dsh_feature_workspace/lib/src/add_action.dart`, `apps/dsh_flutter/lib/src/screens/sessions_screen.dart`; The add-workspace action sits in the session list header; the list itself stays flat (no workspace groups, search or row actions). |
+| `sidebar.settings` | ported | desktop | The settings seat at the sidebar foot. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
+| `sidebar.toggle.badge` | ported | desktop | Non-interactive notification inside the collapsed sidebar expand button. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `sidebar.workspaces` | partial | both | The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog. | `features/dsh_feature_workspace/lib/src/add_action.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`; The add-workspace action sits in the browser header (a 28px control; the phone list keeps the touch-size one). The browsing region itself is the app's composition of the workspace browser, not an occupant of this slot. |
 | `sidebar.workspaces.directoryFlow` | ported | both | Directory-flow hole under the sidebar browsing region (declared by the WorkspaceBrowser entry). | `features/dsh_feature_directory_picker_browse/lib/src/register.dart`, `features/dsh_feature_workspace/lib/src/add_action.dart` |
 | `sidebar.workspaces.session.menu.item` | missing | both | The rows of one Session's "..." menu, in ascending `order`. |  |
 | `sidebar.workspaces.session.row.action` | missing | desktop | The hover buttons at the end of one Session row, in ascending `order`, after the "..." menu trigger. | Pointer hover has no touch equivalent: desktop only. |
@@ -220,7 +218,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Input and commands
 
-7 ported, 3 partial, 15 missing, 0 na.
+8 ported, 3 partial, 14 missing, 0 na.
 
 ### package (8)
 
@@ -233,7 +231,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `ui-model-selection` | ported | both | Pick the model and reasoning effort for the session from the message box. | `features/dsh_feature_model_selection` |
 | `ui-reference` | partial | both | Mention a workspace file or another session with "@" so the agent reads it. | `features/dsh_feature_reference`, `features/dsh_feature_conversation/lib/src/composer_text.dart`; The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text. |
 | `ui-secret-mask` | missing | both | Hide recognized credentials (keys, tokens) in the text of messages you sent. | Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see. |
-| `ui-shortcuts` | missing | desktop | See and rebind keyboard shortcuts. | Was na as phone-first. A desktop build has a physical keyboard: shortcut reference, recording and local preference editing are in scope. |
+| `ui-shortcuts` | ported | desktop | See and rebind keyboard shortcuts. | `packages/dsh_shortcuts/lib/src/service.dart`, `features/dsh_feature_shortcuts/lib/src/reference_dialog.dart`, `features/dsh_feature_shortcuts/lib/src/keyboard_host.dart`; The service with preference documents (v1, v2), conflicts and serialized persistence; the key adapter (priority chords on macOS and Windows); the searchable reference with recording, editing and restore defaults; the Settings row. |
 
 ### remote (14)
 
@@ -339,14 +337,14 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Files and preview
 
-6 ported, 5 partial, 8 missing, 0 na.
+6 ported, 6 partial, 7 missing, 0 na.
 
 ### package (4)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
 | `ui-deliverables` | partial | both | Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. | `features/dsh_feature_tool/lib/src/model/diff_model.dart`, `packages/dsh_ui/lib/src/dsh_diff_block.dart`; Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer. |
-| `ui-open-in-app` | missing | desktop | Open the workspace folder or a previewed file in an application installed on the host. | Needs session/canOpenWorkspacePath, workspacePathApplications and openWorkspacePath. Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local. |
+| `ui-open-in-app` | partial | desktop | Open the workspace folder or a previewed file in an application installed on the host. | `features/dsh_feature_open_in_app/lib/src/target_button.dart`, `packages/dsh_client/lib/src/open_in_app.dart`; The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported. |
 | `ui-sidebar-documentpreview` | partial | both | Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. | `features/dsh_feature_documentpreview`; Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview. |
 | `ui-sidebar-files` | ported | both | Browse the session's workspace as a live-updating file tree and open files. | `features/dsh_feature_files` |
 
@@ -377,7 +375,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Settings
 
-8 ported, 1 partial, 45 missing, 3 na.
+14 ported, 1 partial, 39 missing, 3 na.
 
 ### package (10)
 
@@ -417,7 +415,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `llm/listProviders` | missing | both | List the model providers the host can route to. | Provider routes for the models settings page; not built. |
 | `settings/describe` | ported | both | Read every settings namespace with its values and the schema its form is built from. | `packages/dsh_models/lib/src/settings/settings_mirror.dart`, `packages/dsh_models/lib/src/settings/config_form.dart` |
 | `settings/mutate` | ported | both | Change one setting field with conflict detection. | `packages/dsh_models/lib/src/settings/config_form.dart`, `features/dsh_feature_permission_presets/lib/src/permission_default.dart` |
-| `settings/openSettingsDocument` | missing | desktop | Materialize the provider-owned settings document and open it in a native text editor. | Was na because a phone cannot reach the host editor. With a local host (same machine) the native text editor opens where the user is; offered only when the host is local. |
+| `settings/openSettingsDocument` | ported | desktop | Materialize the provider-owned settings document and open it in a native text editor. | `apps/dsh_flutter/lib/src/desktop_shell.dart`, `features/dsh_feature_settings/lib/src/settings_shell.dart`; The Settings dialog offers "open the settings document" where the host is this machine. |
 | `settings/replace` | na | both | Replace one namespace's stored user section wholesale. | The pinned dsh web client never calls it (host API only). |
 | `settings/update` | missing | both | Merge a patch into one settings namespace. | Generated, never called (used upstream by agent-preset and model settings). |
 
@@ -425,18 +423,18 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `settings.action` | missing | desktop | Optional actions rendered in the content-column header before Close. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `settings.close` | missing | desktop | The close button's visually-hidden label text (the button itself — icon, geometry, focus — is shell chrome). | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
+| `settings.action` | ported | desktop | Optional actions rendered in the content-column header before Close. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
+| `settings.close` | ported | desktop | The close button's visually-hidden label text (the button itself — icon, geometry, focus — is shell chrome). | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 | `settings.general.item` | ported | both | One preference row inside the General section — the additive seat for a single setting that needs no page of its own (a whole page is `settings.section`), contributed by the feature plugin that owns the preference (locale → Language, ui-theme → Appearance, ui-conversation → Composer Enter). | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_settings/lib/src/register.dart`, `features/dsh_feature_theme/lib/src/register.dart`, `features/dsh_feature_permission_presets/lib/src/register.dart` |
-| `settings.header` | missing | desktop | The panel title text seat. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `settings.launcher` | missing | desktop | Optional sidebar account launcher; opens the shell-owned settings panel. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
+| `settings.header` | ported | desktop | The panel title text seat. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
+| `settings.launcher` | ported | desktop | Optional sidebar account launcher; opens the shell-owned settings panel. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 | `settings.models.footer` | missing | both | Ordered extension area after the provider rows and the add controls. |  |
 | `settings.models.provider-card` | missing | both | One provider card's adapter extension area, dispatched with `entryKey = settingsNs` on every card that renders a directory row: a saved row's card (its first-run setup posture included) and the add-provider draft card. |  |
 | `settings.models.sign-in` | missing | both | Optional account login choice before the credential editor. |  |
 | `settings.onboarding` | missing | both | Root-scoped onboarding steps contributed by settings features. |  |
 | `settings.plugins.tab` | missing | both | One page inside the Plugins settings section. |  |
 | `settings.section` | ported | both | One settings page per list entry. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_settings/lib/src/register.dart`; Only the General section occupies it. |
-| `settings.trigger` | missing | desktop | The sidebar-foot trigger row content: icon + label, supplied as slot content (the accessible name comes from the content — rail state renders the label visually hidden). | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
+| `settings.trigger` | ported | desktop | The sidebar-foot trigger row content: icon + label, supplied as slot content (the accessible name comes from the content — rail state renders the label visually hidden). | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 
 ### settings (13)
 
@@ -522,14 +520,14 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Sidebar and browser
 
-14 ported, 2 partial, 9 missing, 0 na.
+20 ported, 3 partial, 2 missing, 0 na.
 
 ### package (5)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `ui-dockkit` | missing | desktop | Arrange panels in a draggable split-tree docking layout. | Was na as phone-first. The split-tree docking engine behind the desktop right sidebar surface (split, drag, invert); a desktop build replicates it. Phones keep the full-screen sheet. |
-| `ui-layout` | missing | desktop | Resize and collapse the three-column window: sidebar, conversation and right column. | Was partial because a page stack (phone) and a fixed sessions pane plus conversation (840 px and wider, apps/dsh_flutter/lib/src/app.dart) exist. That is Whalee's own adaptation, not dsh's AppFrame: three columns with drag handles, sidebar collapse rules (auto-collapse, narrow-expanded), the shell seats and the ctx.layout navigation and panels state are all absent, so the row is missing for desktop. Below the phone breakpoint the existing phone layout stays. |
+| `ui-dockkit` | partial | desktop | Arrange panels in a draggable split-tree docking layout. | `packages/dsh_dockkit/lib/src/engine/controller.dart`, `packages/dsh_dockkit/lib/src/widgets/dock_layout.dart`; The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified. |
+| `ui-layout` | partial | desktop | Resize and collapse the three-column window: sidebar, conversation and right column. | `features/dsh_feature_layout/lib/src/app_frame.dart`, `packages/dsh_layout/lib/src/layout_store.dart`, `packages/dsh_layout/lib/src/columns.dart`, `packages/dsh_ui/lib/src/dsh_phone_chrome.dart`; dsh AppFrame: three-column solve, drag handles, collapse below 1024 with the narrow override, ctx.layout, main panel selection, the shell seats, per-platform window chrome (macOS and Windows compile-safe, untested). Below 600 wide the sidebar is a modal drawer under a phone top bar (owner decision 2026-10-24); 600 to 1023 the rail, 1024 and up docked. |
 | `ui-sidebar-browser` | missing | both | Open a sandboxed web page in a right-sidebar tab. | No browser tab kind. |
 | `ui-sidebar-right` | ported | both | The right sidebar: tab strip, guide page and the files, preview and terminal tabs (a full-screen sheet on phones, an inline column on wide windows). | `features/dsh_feature_sidebar_right`; Tab kinds not built: review, plan preview, schedule task, browser, subagent chat, session inspector. |
 | `ui-sidebar-terminal` | ported | both | Open interactive shell tabs on the host from the sidebar, with a key bar for phones. | `features/dsh_feature_sidebar_terminal`, `packages/dsh_models/lib/src/terminal` |
@@ -551,13 +549,13 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `main` | missing | desktop | Central panel selected by sidebar entry id. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `rightbar` | partial | both | The right column: a track the centre makes room for, or nothing. | `features/dsh_feature_sidebar_right/lib/src/panel.dart`; The right column exists (sheet or inline column) but is not a layout seat. |
+| `main` | ported | desktop | Central panel selected by sidebar entry id. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `rightbar` | ported | both | The right column: a track the centre makes room for, or nothing. | `features/dsh_feature_sidebar_right/lib/src/register.dart`, `features/dsh_feature_layout/lib/src/app_frame.dart`; The right column track and its occupant (the Session's sidebar). |
 | `rightbar.session` | ported | both | Session content selected by the root-scoped right Sidebar controller. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_sidebar_right/lib/src/register.dart` |
-| `shell.bottom` | missing | desktop | Full-width bottom content below all three columns. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `shell.leading` | missing | desktop | Window-chrome seat at the frame's top-left, over every main panel. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `shell.overlay` | missing | desktop | Frame-wide floating layer, above every column and outside their scroll containers. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
-| `sidebar` | missing | desktop | The whole left column. | Was na as phone-first. A seat of the desktop three-column shell (AppFrame in ui-layout), which a desktop build must replicate; missing for desktop until the shell lands. The phone layout needs no such seat. |
+| `shell.bottom` | ported | desktop | Full-width bottom content below all three columns. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `shell.leading` | ported | desktop | Window-chrome seat at the frame's top-left, over every main panel. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `shell.overlay` | ported | desktop | Frame-wide floating layer, above every column and outside their scroll containers. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
+| `sidebar` | ported | desktop | The whole left column. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar.right.pane.tab` | ported | both | One tab's body, dispatched with the `id` of the type in force for `tab.kind`. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_files/lib/src/register.dart`, `features/dsh_feature_documentpreview/lib/src/register.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart`; Occupants: files, document preview, terminal, guide. Not built: review, plan preview, schedule task, browser, subagent chat. |
 | `sidebar.right.pane.tab.title` | ported | both | A tab's title as its chip (and a floating panel's header) shows it, dispatched with the same key and information hook as the body. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart` |
 | `sidebar.right.tab.guide` | partial | both | The guide tab's body. | `features/dsh_feature_sidebar_right/lib/src/guide.dart`; The guide page exists as a widget fed by guide.entry; the body is not a chain seat. |

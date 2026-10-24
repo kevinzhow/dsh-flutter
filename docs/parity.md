@@ -346,6 +346,13 @@ draws what is left.
   (attach, permission, model, send) inside it. What stays Whalee's: the keyboard (the web layout simply sits above it), the
   cap that keeps floating menus below the session header, and the app's own navigation around the conversation (no icon
   rail). Parity is scored against dsh web at the same width, phone widths included, with the same bar as desktop.
+- **2026-10-24, the phone drawer (the one exception to "align with web first").** Kevin approved the mockups ("手机抽屉设计没问题"):
+  below 600 logical pixels the page is a 52px top bar (menu, Session title, new Session) and the sidebar is a modal drawer
+  (85% of the width, at most 320px; the menu button or a swipe from the left edge opens it, a tap on the scrim, a swipe toward
+  the edge, the system back button or picking a Session closes it). The drawer holds dsh's real sidebar content and visuals
+  (the browsing region, Plugins, Automation tasks, the foot) under Whalee's own header with no brand mark. From 600 to 1023 px the
+  frame is dsh's: the 56px rail, with the sidebar expanding over the centre; from 1024 px the sidebar is docked. The top bar and
+  the drawer chrome have no dsh counterpart, so the phone captures score the page behind them and the drawer's content separately.
 
 ## Provenance and licenses
 
@@ -360,3 +367,27 @@ draws what is left.
   parity-ext (no code copied).
 - Noto Sans, Noto Sans Mono and the Noto Sans CJK SC subset: SIL OFL 1.1, see `tool/parity-fonts/OFL.txt`,
   `tool/parity-fonts/OFL-NotoSansCJK.txt` and `THIRD_PARTY_NOTICES.md`.
+
+## Whole desktop pages
+
+`tool/parity-desktop/run` compares whole pages of the real dsh web client with the Whalee Linux build: the same fixture host, the
+same size, theme and language, the parity fonts pinned on both sides, density 1. The scoring is `tool/parity_lib/diffmetrics` (the
+bucket analysis of the component suite) over each capture, and the named regions of `tool/parity-desktop/cases.json` (sidebar brand,
+New Session, panels, workspaces, foot, header, conversation, composer, usage footer) are scored separately; the report is
+`summary.json`, `summary.md` and one side-by-side image per case under `$PARITY_DESKTOP_OUT`.
+
+```sh
+tool/parity-desktop/run --list
+tool/parity-desktop/run --cases session.1280x720.light.en,session.1600x1000.      # a case id or a prefix
+```
+
+Environment: `PARITY_WEB_DEPS` (as the component suite), `PARITY_DESKTOP_HOST_LOG` (the log of an isolated `dsh web --port ...` whose
+`DSH_HOME` holds the fixture sessions, written through dsh's own persistence with no model call), `PARITY_DESKTOP_CHROME` (a
+Chromium), `PARITY_DESKTOP_APP` (the built `build/linux/x64/*/bundle/dsh_flutter`), `PARITY_DESKTOP_HOME` (an empty directory used as
+the app's HOME), `PARITY_DESKTOP_OUT`, `PARITY_NODE_BIN`; Python needs `numpy`, `Pillow` and `python-xlib`, and the machine `Xvfb`,
+`xwininfo` and ImageMagick's `import`. The tool starts its own Xvfb display and its own app process per case and stops exactly those
+(their PIDs are in `pids.txt`); it never touches another process and never reads or prints the launch token beyond typing it into the
+app. The host itself is the caller's: start one on a loopback port with its own `DSH_HOME` and keep its PID.
+
+Below 1024 px the left column starts as its rail, so those cases widen it first, on both sides. The dark cases set `WHALEE_PLATFORM_BRIGHTNESS=dark` for the
+app (a capture hook, like `WHALEE_WINDOW_SIZE` and `WHALEE_PIN_FONTS`) and `colorScheme` for the page; the Chinese cases set `LC_ALL` and the browser locale.

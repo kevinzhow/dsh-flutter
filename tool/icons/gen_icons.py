@@ -219,4 +219,5 @@ def main():
     print('gen_icons: wrote %s (%d icons)' % (OUT.relative_to(ROOT), len(ICONS) + len(SHARED_ARTWORK) + len(PERMISSION_ICONS)))
 
 
-main()
+if __name__ == '__main__':
+    main()

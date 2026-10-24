@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
@@ -10,6 +11,8 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:dsh_slots/testing.dart';
+import 'package:flutter/widgets.dart' hide ConnectionState;
+import 'package:flutter_test/flutter_test.dart';
 
 /// A [HostTrust] whose probe answers what the test scripts; nothing opens a
 /// socket. Pins work as in the real one.
@@ -59,6 +62,27 @@ CertificateInfo fakeCertificate({
   notAfter: notAfter ?? DateTime.now().add(const Duration(days: 300)),
 );
 
+/// The host's open-in-app routes, scripted: which applications are installed
+/// and what was launched.
+class FakeOpenInApp implements OpenInAppClient {
+  List<String> installed = const [];
+  final List<({String app, String path})> opened = [];
+  Object? failOpen;
+
+  @override
+  Future<List<String>> apps() async => installed;
+
+  @override
+  Future<void> open(String app, String path) async {
+    final failure = failOpen;
+    if (failure != null) throw failure;
+    opened.add((app: app, path: path));
+  }
+
+  @override
+  Future<Uint8List?> icon(String app) async => null;
+}
+
 /// A [HostBackend] over a scriptable [FakeTransport]; no sockets.
 class FakeBackend implements HostBackend {
   FakeBackend({FakeTransport? transport})
@@ -83,6 +107,8 @@ class FakeBackend implements HostBackend {
   TerminalHost get terminalHost => terminals.terminalHost;
   @override
   final FakeUploadClient uploader = FakeUploadClient();
+  @override
+  final FakeOpenInApp openInApp = FakeOpenInApp();
   @override
   final FakeWorkspaceFiles files = FakeWorkspaceFiles();
   final StreamController<ConnectionStatus> stateController =
@@ -291,4 +317,50 @@ class FakeNotifications implements NotificationService {
 
   @override
   Future<void> openSettings() async => settingsOpens++;
+}
+
+/// Open the session [id] from the sidebar tree: its group (Ungrouped, for a
+/// session no workspace accounts) opens first when the row is not showing.
+Future<void> openRow(
+  WidgetTester t,
+  String id, {
+  Future<void> Function(WidgetTester t)? settle,
+}) async {
+  final row = find.byKey(ValueKey('session-row-$id'));
+  Future<void> wait() async =>
+      settle != null ? await settle(t) : await t.pump();
+  // On a phone the tree is in the drawer.
+  final menu = find.byKey(const ValueKey('phone-menu'));
+  if (row.evaluate().isEmpty &&
+      menu.evaluate().isNotEmpty &&
+      find.byKey(const ValueKey('phone-drawer')).evaluate().isEmpty) {
+    await t.tap(menu);
+    await wait();
+    await t.pump(const Duration(milliseconds: 300));
+  }
+  if (row.evaluate().isEmpty) {
+    final group = find.byKey(const ValueKey('workspace-row-'));
+    if (group.evaluate().isNotEmpty) {
+      await t.tap(group);
+      await wait();
+    }
+  }
+  await t.tap(row);
+  // A phone's drawer slides shut over 220ms.
+  if (menu.evaluate().isNotEmpty) {
+    await t.pump(const Duration(milliseconds: 300));
+  }
+}
+
+/// Open Settings from the sidebar foot: the "More" menu, then Settings.
+Future<void> openSettingsUi(
+  WidgetTester t, {
+  Future<void> Function(WidgetTester t)? settle,
+}) async {
+  Future<void> wait() async =>
+      settle != null ? await settle(t) : await t.pump();
+  await t.tap(find.byKey(const ValueKey('settings-trigger')));
+  await wait();
+  await t.tap(find.byKey(const ValueKey('settings-more-settings')));
+  await wait();
 }

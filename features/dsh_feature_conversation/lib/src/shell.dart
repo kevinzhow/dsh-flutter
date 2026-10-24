@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'composer.dart';
 import 'hero.dart';
+import 'view_selection.dart';
 
 /// The conversation shell of one session (dsh `ConversationSession`): the
 /// view area fed by `conversation.view`, the composer area fed by the
@@ -35,13 +36,27 @@ class ConversationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ValueListenableBuilder<String?>(
+      valueListenable: viewSelectionOf(owner.session),
+      builder: (context, _, _) => _build(context),
+    );
+  }
+
+  Widget _build(BuildContext context) {
     final theme = context.dsh;
     return StreamBuilder<SessionSnapshot>(
       stream: owner.session.snapshot.changes,
       initialData: owner.session.snapshot.value,
       builder: (context, snap) {
         final s = snap.data!;
-        final views = slots.renderList(viewSlot, owner);
+        final entries = slots.entries(viewSlot);
+        final chosen = viewSelectionOf(owner.session).value;
+        final active = entries.any((e) => e.id == chosen)
+            ? chosen
+            : (entries.isEmpty ? null : entries.first.id);
+        final views = [
+          if (active != null) ?slots.renderOnly(viewSlot, active, owner),
+        ];
         Widget body;
         if (s.openState == OpenState.error) {
           body = _Notice(
@@ -81,7 +96,8 @@ class ConversationShell extends StatelessWidget {
                         : null,
                   ));
         final sidebar =
-            MediaQuery.sizeOf(context).width >= sidebarInlineMinWindowWidth
+            MediaQuery.sizeOf(context).width >= sidebarInlineMinWindowWidth &&
+                !DshRightbarHost.owned(context)
             ? slots.renderSingle(
                 DshSlots.rightbarSession.typed<SessionOwner, Widget>(),
                 owner,
@@ -142,6 +158,7 @@ class ConversationShell extends StatelessWidget {
                     child: composer,
                   ),
                 ),
+                if (!s.removed) ..._composerDock(context),
               ],
             ],
           ),
@@ -168,6 +185,34 @@ Widget? _docks(List<Widget> docks) => docks.isEmpty
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: docks,
       );
+
+extension on ConversationShell {
+  /// The pills under the composer card (dsh `conversation.composer.dock`),
+  /// drawn inside the desktop frame only.
+  List<Widget> _composerDock(BuildContext context) {
+    if (!DshRightbarHost.owned(context)) return const [];
+    final pills = slots.renderList(
+      DshSlots.conversationComposerDock.typed<SessionOwner, Widget>(),
+      owner,
+    );
+    if (pills.isEmpty) return const [];
+    return [
+      Padding(
+        key: const ValueKey('composer-dock'),
+        padding: const EdgeInsets.only(top: 4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i = 0; i < pills.length; i++) ...[
+              if (i > 0) const SizedBox(width: 12),
+              pills[i],
+            ],
+          ],
+        ),
+      ),
+    ];
+  }
+}
 
 class _Notice extends StatelessWidget {
   const _Notice({super.key, required this.title, required this.body});

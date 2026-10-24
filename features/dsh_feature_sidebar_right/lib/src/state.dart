@@ -1,3 +1,4 @@
+import 'package:dsh_dockkit/dsh_dockkit.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ class SidebarTab {
     required this.id,
     required this.kind,
     required this.contentId,
+    this.title = '',
     this.params = const {},
     this.line,
     this.revision = 0,
@@ -23,19 +25,14 @@ class SidebarTab {
   /// `sidebar://<kind>/<n>` for a page.
   final String contentId;
 
+  /// The text the chip shows unless the type draws its own title; captured when
+  /// the tab opens.
+  final String title;
+
   /// What the opener passed (`{shellPath}` for a terminal chosen on the guide).
   final Map<String, Object?> params;
   final int? line;
   final int revision;
-
-  SidebarTab navigated(int? line, int revision) => SidebarTab(
-    id: id,
-    kind: kind,
-    contentId: contentId,
-    params: params,
-    line: line,
-    revision: revision,
-  );
 }
 
 /// The tab kind of the workspace file tree, of a file preview and of the guide
@@ -44,57 +41,150 @@ const String filesTabKind = 'files';
 const String textTabKind = 'text';
 const String guideTabKind = 'guide';
 
-/// The sidebar of one session (dsh's per-session docking state, reduced to a
-/// tab list: the tree, the previews and pages the person opened).
+class _Extra {
+  _Extra({this.params = const {}, this.line, this.revision = 0});
+
+  final Map<String, Object?> params;
+  int? line;
+  int revision;
+}
+
+/// The sidebar of one session (dsh's per-session docking surface, reduced to
+/// what Whalee offers): a [DockController] holding the tabs the person opened
+/// in up to two panes, the expanded flag and the presentation, plus the
+/// navigation facts a tab body reads (parameters, line, revision).
+///
+/// A session starts collapsed and empty; the expansion that would first show an
+/// empty layout seeds the guide, as in dsh. A collapsed surface keeps its tabs.
 class SidebarState extends ChangeNotifier implements SidebarTabActions {
-  SidebarState(this.sessionId, {SidebarTabTypes? types})
-    : _types = types ?? SidebarTabTypes();
+  SidebarState(
+    this.sessionId, {
+    SidebarTabTypes? types,
+    String Function()? guideTitle,
+  }) : _types = types ?? SidebarTabTypes(),
+       _guideTitle = guideTitle ?? (() => '') {
+    dock = DockController(
+      DockControllerOptions(makePaneTab: _guide, maxPanes: 2),
+    );
+    _off = dock.subscribe(notifyListeners);
+  }
 
   final String sessionId;
   final SidebarTabTypes _types;
+  final String Function() _guideTitle;
 
-  final List<SidebarTab> tabs = [
-    const SidebarTab(
-      id: 'files',
-      kind: filesTabKind,
-      contentId: 'sidebar://files',
-    ),
-  ];
-  String activeId = 'files';
+  /// The docking surface this sidebar renders.
+  late final DockController dock;
+  late final void Function() _off;
 
-  /// Whether the inline column is shown (wide windows). The sheet on phones is
-  /// a route and keeps no flag here.
-  bool inlineOpen = false;
+  final Map<String, _Extra> _extras = {};
   int _revision = 0;
   int _pages = 0;
 
+  TabRecord _guide(TabId id) => TabRecord(
+    id: id,
+    kind: guideTabKind,
+    contentId: 'sidebar://guide/0',
+    title: _guideTitle(),
+  );
+
+  LayoutState get layout => dock.snapshot.state;
+
+  /// The tabs, pane by pane in visual order.
+  List<SidebarTab> get tabs => [
+    for (final pane in dockPaneIds(layout))
+      for (final id in getPane(layout, pane).tabs) _tab(id),
+  ];
+
+  SidebarTab _tab(String id) {
+    final record = layout.tabs[id]!;
+    final extra = _extras[id];
+    return SidebarTab(
+      id: id,
+      kind: record.kind,
+      contentId: record.contentId,
+      title: record.title,
+      params: extra?.params ?? const {},
+      line: extra?.line,
+      revision: extra?.revision ?? 0,
+    );
+  }
+
+  /// The id of the active tab of the active pane (empty when there is none).
+  String get activeId =>
+      getPane(layout, activeDockPaneId(layout)).activeTabId?.value ?? '';
+
+  /// The tab in front in the active docked pane.
   SidebarTab get active => tabs.firstWhere((t) => t.id == activeId);
 
-  /// Whether the strip offers the add control: not while a guide is open (dsh
-  /// draws it only while its pane holds none).
-  bool get canAddTab => !tabs.any((t) => t.kind == guideTabKind);
+  /// Whether [tabId] is the one in front in its own pane.
+  bool isFront(String tabId) {
+    for (final pane in dockPaneIds(layout)) {
+      if (getPane(layout, pane).activeTabId?.value == tabId) return true;
+    }
+    return false;
+  }
+
+  /// Whether the strip offers the add control in [paneId]: not while a guide is
+  /// open there (dsh draws it only while its pane holds none).
+  bool canAddTab(String paneId) => !getPane(
+    layout,
+    paneId,
+  ).tabs.any((t) => layout.tabs[t]?.kind == guideTabKind);
+
+  /// Whether the add control is on offer anywhere (the single-pane view).
+  bool get canAddAnywhere => !tabs.any((t) => t.kind == guideTabKind);
+
+  /// Whether [tabId] has a close control: the guide standing alone draws none.
+  bool canClose(String tabId) {
+    final all = tabs;
+    final lone = all.length == 1 && all.first.id == tabId;
+    return !(lone && layout.tabs[tabId]?.kind == guideTabKind);
+  }
+
+  /// Whether the column is expanded.
+  bool get expanded => layout.expanded;
+
+  /// Whether the panel covers the viewport (the recorded presentation).
+  bool get fullscreen => layout.mode == DockMode.fullscreen;
+
+  /// Expand or collapse the column. Expanding an empty surface seeds the guide.
+  void setExpanded(bool value) {
+    dock.setExpanded(value);
+    if (value) dock.settle();
+  }
+
+  void toggleExpanded() => setExpanded(!expanded);
+
+  void setFullscreen(bool value) =>
+      dock.setMode(value ? DockMode.fullscreen : DockMode.push);
+
+  void toggleFullscreen() => setFullscreen(!fullscreen);
+
+  /// Whether the inline column is shown (kept for the callers of the first
+  /// version of this state).
+  bool get inlineOpen => expanded;
+
+  void setInlineOpen(bool open) => setExpanded(open);
 
   /// Open [address]; a file address reuses the tab already showing it and
   /// navigates it to [line].
   @override
   void openResource(String address, {int? line}) {
-    if (parseSessionFileAddress(address) == null) return;
-    _revision++;
-    final index = tabs.indexWhere((t) => t.contentId == address);
-    if (index >= 0) {
-      tabs[index] = tabs[index].navigated(line, _revision);
-      activeId = tabs[index].id;
-    } else {
-      final tab = SidebarTab(
-        id: 'text-${tabs.length}-$_revision',
-        kind: textTabKind,
+    final file = parseSessionFileAddress(address);
+    if (file == null) return;
+    if (layout.tabs.isEmpty) dock.settle();
+    final id = dock.openContent(
+      OpenContentInput(
         contentId: address,
-        line: line,
-        revision: _revision,
-      );
-      tabs.add(tab);
-      activeId = tab.id;
-    }
+        title: pathPartsOf(file.path).name,
+        kind: textTabKind,
+      ),
+    );
+    _revision++;
+    final extra = _extras.putIfAbsent(id, _Extra.new);
+    extra.line = line;
+    extra.revision = _revision;
     notifyListeners();
   }
 
@@ -112,61 +202,87 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
     if (kind != guideTabKind && type == null && kind != filesTabKind) {
       throw StateError('no sidebar tab type "$kind" is registered');
     }
-    final replaceIndex = replaceTabId == null
-        ? -1
-        : tabs.indexWhere((t) => t.id == replaceTabId);
+    if (layout.tabs.isEmpty) dock.settle();
+    final replace =
+        replaceTabId != null && layout.tabs.containsKey(replaceTabId)
+        ? replaceTabId
+        : null;
     if (!multiple) {
-      final existing = tabs.indexWhere((t) => t.kind == kind);
-      if (existing >= 0) {
-        if (replaceIndex >= 0 && replaceIndex != existing) {
-          tabs.removeAt(replaceIndex);
+      final existing = layout.tabs.values
+          .where((t) => t.kind == kind)
+          .firstOrNull;
+      if (existing != null) {
+        if (replace != null && replace != existing.id) {
+          _closeRecord(replace, runHandler: false);
         }
-        activeId = tabs.firstWhere((t) => t.kind == kind).id;
-        notifyListeners();
+        dock.focusTab(existing.id);
         return;
       }
     }
     _revision++;
     final n = ++_pages;
-    final tab = SidebarTab(
-      id: '$kind-$n',
-      kind: kind,
-      contentId: 'sidebar://$kind/$n',
-      params: params,
-      revision: _revision,
-    );
-    if (replaceIndex > 0) {
-      tabs[replaceIndex] = tab;
-    } else {
-      tabs.add(tab);
+    final contentId = 'sidebar://$kind/$n';
+    // The page takes the place of the guide that offered it.
+    PaneId? paneId;
+    int? index;
+    if (replace != null) {
+      final pane = findTabPane(layout, TabId(replace));
+      paneId = pane.paneId;
+      index = pane.tabs.indexOf(TabId(replace));
     }
-    activeId = tab.id;
+    final id = dock.openContent(
+      OpenContentInput(
+        contentId: contentId,
+        title: _titleOf(kind),
+        kind: kind,
+        paneId: paneId,
+        index: index,
+        revealIfOpened: false,
+      ),
+    );
+    _extras[id] = _Extra(params: params, revision: _revision);
+    if (replace != null) _closeRecord(replace, runHandler: false);
     notifyListeners();
   }
+
+  String _titleOf(String kind) => kind;
 
   void select(String id) {
-    if (activeId == id || !tabs.any((t) => t.id == id)) return;
-    activeId = id;
-    notifyListeners();
+    if (!layout.tabs.containsKey(id)) return;
+    dock.focusTab(TabId(id));
   }
 
-  /// Close a tab (the file tree stays). A type with a close handler takes over
-  /// its cleanup first (a terminal's process ends in the background).
+  /// Close a tab. A type with a close handler takes over its cleanup first (a
+  /// terminal's process ends in the background). The guide standing alone is
+  /// not closable; another tab standing alone closes with the column.
   void close(String id) {
-    final index = tabs.indexWhere((t) => t.id == id);
-    if (index <= 0) return;
-    final tab = tabs[index];
-    _types.typeOf(tab.kind)?.onClose?.call(sessionId, tab.id, tab.contentId);
-    tabs.removeAt(index);
-    if (activeId == id) {
-      activeId = tabs[(index - 1).clamp(0, tabs.length - 1)].id;
+    final record = layout.tabs[id];
+    if (record == null || !canClose(id)) return;
+    final lone = tabs.length == 1;
+    _closeRecord(id);
+    if (lone) {
+      dock.setExpanded(false);
+    } else {
+      dock.settle(reseed: false);
     }
-    notifyListeners();
   }
 
-  void setInlineOpen(bool open) {
-    if (inlineOpen == open) return;
-    inlineOpen = open;
-    notifyListeners();
+  void _closeRecord(String id, {bool runHandler = true}) {
+    final record = layout.tabs[id];
+    if (record == null) return;
+    if (runHandler) {
+      _types
+          .typeOf(record.kind)
+          ?.onClose
+          ?.call(sessionId, id, record.contentId);
+    }
+    _extras.remove(id);
+    dock.closeTab(TabId(id));
+  }
+
+  @override
+  void dispose() {
+    _off();
+    super.dispose();
   }
 }

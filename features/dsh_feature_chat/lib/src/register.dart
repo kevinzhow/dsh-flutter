@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'chat_nodes.dart';
 import 'chat_view.dart';
+import 'stats_pills.dart';
 
 /// `conversation.view` as this feature uses it (owner: the open session).
 final Slot<SessionOwner, Widget> viewSlot = DshSlots.conversationView
@@ -32,7 +33,22 @@ void registerChatFeature(
           .typed<TurnTailOwner, Widget?>(),
     ),
     id: 'chat',
+    order: 0,
+    label: () => i18n().t('chat', 'view.chat'),
   );
+
+  // The statistics pills under the composer (dsh `StatsPills`).
+  for (final (id, order, activity) in [
+    ('activity', 0, true),
+    ('usage', 10, false),
+  ]) {
+    slots.register<SessionOwner, Widget>(
+      DshSlots.conversationComposerDock.typed<SessionOwner, Widget>(),
+      (owner) => StatsPill(owner: owner, i18n: i18n(), activity: activity),
+      id: id,
+      order: order,
+    );
+  }
 
   void node(
     String kind,

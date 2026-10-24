@@ -1,0 +1,15 @@
+name: dsh_feature_directory_picker_native
+description: the host's own folder chooser (dsh ui-directory-picker-native) of the DSH Flutter client. It fills the two directory-flow holes of the workspace picker with a call to directoryPicker/pick; offered only where the host is this machine.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  dsh_slots: ^0.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0

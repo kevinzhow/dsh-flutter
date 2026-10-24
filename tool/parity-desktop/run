@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""Whole-page desktop parity: the real dsh web client against the Whalee Linux build.
+
+    tool/parity-desktop/run [--cases 'session.1280x720.light.en,...'] [--skip-web] [--skip-app] [--out DIR]
+    tool/parity-desktop/run --list        # the expanded case ids
+
+Both sides render the same fixture host at the same size, theme and language, with the parity fonts pinned on both. The
+diff metrics are tool/parity_lib/diffmetrics (the bucket analysis of the component suite) over the captured pages, with the
+named regions of cases.json scored separately; the report is summary.json, summary.md and one side-by-side image per case.
+See docs/parity.md ("Whole desktop pages") for the environment and the fixture host.
+"""
+import argparse, json, os, pathlib, subprocess, sys
+
+sys.dont_write_bytecode = True
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+sys.path.insert(0, str(ROOT))
+from tool.parity_lib import diffmetrics as dm  # noqa: E402
+
+
+def expand(spec):
+    out = []
+    for state, s in spec['states'].items():
+        for w, h in s.get('sizes', spec['sizes']):
+            for theme in spec['themes']:
+                for locale in spec['locales']:
+                    def num(v):
+                        if isinstance(v, str):
+                            return eval(v.strip('{}').replace('W', str(w)).replace('H', str(h)), {}, {})
+                        return v
+                    out.append({
+                        'id': '%s.%dx%d.%s.%s' % (state, w, h, theme, locale), 'state': state, 'title': s['title'],
+                        'appOnly': bool(s.get('appOnly')),
+                        'width': w, 'height': h, 'theme': theme, 'locale': locale,
+                        # Below 1024 the left column starts as its icon rail: the first step widens it over the centre.
+                        'web': ([{'click': '[class*=sidebarCol] button'}, {'wait': 600}] if 600 <= w < 1024 else []) + s['web'],
+                        'app': ([{'click': [28, 36]}, {'wait': 800}] if 600 <= w < 1024 else []) + s['app'],
+                        'regions': [{k: (v if k == 'name' else num(v)) for k, v in r.items()} for r in s['regions']],
+                    })
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--cases', default='')
+    ap.add_argument('--out', default=os.environ.get('PARITY_DESKTOP_OUT', str(ROOT / 'build' / 'parity-desktop')))
+    ap.add_argument('--skip-web', action='store_true')
+    ap.add_argument('--skip-app', action='store_true')
+    ap.add_argument('--list', action='store_true')
+    args = ap.parse_args()
+    cases = expand(json.loads((HERE / 'cases.json').read_text()))
+    if args.cases:
+        wanted = [c.strip() for c in args.cases.split(',') if c.strip()]
+        cases = [c for c in cases if any(c['id'] == w or c['id'].startswith(w) for w in wanted)]
+    if args.list:
+        print('\n'.join(c['id'] for c in cases))
+        return
+    out = pathlib.Path(args.out); (out / 'web').mkdir(parents=True, exist_ok=True); (out / 'app').mkdir(exist_ok=True)
+    expanded = out / 'cases.expanded.json'
+    expanded.write_text(json.dumps({'cases': cases}, indent=1))
+    ids = [c['id'] for c in cases]
+    web_ids = [c['id'] for c in cases if not c['appOnly']]
+    node = (pathlib.Path(os.environ['PARITY_NODE_BIN']) / 'node') if os.environ.get('PARITY_NODE_BIN') else 'node'
+    if not args.skip_web and web_ids:
+        subprocess.run(['nice', '-n', '15', str(node), str(HERE / 'web_capture.mjs'), str(out / 'web'), str(expanded), *web_ids], check=True)
+    if not args.skip_app:
+        subprocess.run(['nice', '-n', '15', sys.executable, '-I', str(HERE / 'app_capture.py'), str(out / 'app'), str(expanded), *ids], check=True)
+    rows = []
+    for c in cases:
+        web, app = out / 'web' / (c['id'] + '.png'), out / 'app' / (c['id'] + '.png')
+        if c['appOnly']:
+            rows.append({'id': c['id'], 'title': c['title'], 'status': 'captured' if app.is_file() else 'missing'})
+            continue
+        if not (web.is_file() and app.is_file()):
+            rows.append({'id': c['id'], 'status': 'missing'})
+            continue
+        res, label, rp, fp = dm.compare_files(web, app, 1.0, c['regions'])
+        rows.append({'id': c['id'], 'title': c['title'], 'status': 'compared', 'sizeWeb': res['sizeReact'], 'sizeApp': res['sizeFlutter'],
+                     'exactPct': res['exactPct'], 'closePct': res['closePct'], 'nonTextPct': res['nonTextPct'],
+                     'regions': [{k: r[k] for k in ('name', 'exactPct', 'closePct', 'nonTextPct') if k in r} for r in res['regions']]})
+        try:
+            from PIL import Image
+            a, b = Image.open(web).convert('RGB'), Image.open(app).convert('RGB')
+            d = Image.fromarray(dm.diff_visual(rp, label))
+            sheet = Image.new('RGB', (a.width + b.width + d.width + 20, max(a.height, b.height, d.height)), (230, 230, 230))
+            sheet.paste(a, (0, 0)); sheet.paste(b, (a.width + 10, 0)); sheet.paste(d, (a.width + b.width + 20, 0))
+            sheet.save(out / (c['id'] + '.side-by-side.png'))
+        except ImportError:
+            pass
+    (out / 'summary.json').write_text(json.dumps({'schema': 'dsh-parity-desktop-summary/1', 'cases': rows}, indent=1))
+    lines = ['# Desktop pages: dsh web vs Whalee (Linux build)', '', '| case | exact | close | non-text |', '|---|---|---|---|']
+    for r in rows:
+        if r['status'] == 'captured':
+            lines.append('| %s | app only | | |' % r['id'])
+            continue
+        lines.append('| %s | %s | %s | %s |' % (r['id'], *(('%.2f%%' % r[k]) if k in r else 'n/a' for k in ('exactPct', 'closePct', 'nonTextPct'))))
+    lines += ['', '## Regions (exact / non-text)', '']
+    names = [r['name'] for r in next((c for c in cases if c['regions']), {'regions': []})['regions']]
+    lines += ['| case | ' + ' | '.join(names) + ' |', '|---|' + '---|' * len(names)]
+    for r in rows:
+        if r['status'] != 'compared':
+            continue
+        by = {x['name']: x for x in r.get('regions', [])}
+        lines.append('| %s | %s |' % (r['id'], ' | '.join('%.1f / %.1f' % (by[n]['exactPct'], by[n]['nonTextPct']) if n in by else 'n/a' for n in names)))
+    (out / 'summary.md').write_text('\n'.join(lines) + '\n')
+    print('\n'.join(lines))
+
+
+if __name__ == '__main__':
+    main()

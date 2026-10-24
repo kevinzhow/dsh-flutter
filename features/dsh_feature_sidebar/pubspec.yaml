@@ -1,0 +1,20 @@
+name: dsh_feature_sidebar
+description: the sidebar shell (dsh ui-sidebar) of the DSH Flutter client. The brand row, New Session, global panel entries, the collapse rail, and the window-chrome controls.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  dsh_i18n: ^0.0.1
+  dsh_layout: ^0.0.1
+  dsh_shortcuts: ^0.0.1
+  dsh_slots: ^0.0.1
+  dsh_theme: ^0.0.1
+  dsh_ui: ^0.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0
