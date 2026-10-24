@@ -1,0 +1,142 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.model-retry.cancelled-open-desktop-en.light",
+  "variantId": "default",
+  "captureKey": "components.model-retry.cancelled-open-desktop-en.light",
+  "theme": "light",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "light"
+  },
+  "locale": "en",
+  "image": "visual-testing-results/flutter/components.model-retry.cancelled-open-desktop-en.light.png",
+  "viewport": {
+    "width": 520,
+    "height": 300,
+    "density": 1
+  },
+  "selector": "[data-parity-id=\"retry-el\"]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 16.0,
+      "y": 16.0,
+      "width": 480.0,
+      "height": 65.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_chat:ModelRetryView"
+    ],
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "Model request retry cancelled (1/3) · 3s",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#81858C"
+    },
+    {
+      "selector": "RenderParagraph[1]",
+      "text": "Retry delay: 2500ms",
+      "fontFamily": "monospace",
+      "fontSize": 48.0,
+      "fontWeight": 900,
+      "lineHeight": null,
+      "letterSpacing": 0.0,
+      "color": "#FF0000D0"
+    },
+    {
+      "selector": "RenderParagraph[2]",
+      "text": "Failure reason: Try later",
+      "fontFamily": "monospace",
+      "fontSize": 48.0,
+      "fontWeight": 900,
+      "lineHeight": null,
+      "letterSpacing": 0.0,
+      "color": "#FF0000D0"
+    }
+  ],
+  "styleTokens": [],
+  "capturedAt": "2026-10-24T22:44:00.578232Z"
+}
