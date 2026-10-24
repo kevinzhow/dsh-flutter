@@ -37,13 +37,16 @@ def items(*states):
 
 
 cases = []
-for name, locale, labels in (('states', 'en', EN), ('zh-cn', 'zh-CN', ZH)):
+# Density 2 is the suite's phone default; the 2.625x (a fractional phone density) and 3x cases run the same states where a
+# border or a baseline is not a whole number of device pixels (docs/parity.md, "What Blink does at a native density").
+for name, locale, labels, density in (('states', 'en', EN, 2), ('zh-cn', 'zh-CN', ZH, 2),
+                                      ('states-2p625x', 'en', EN, 2.625), ('states-3x', 'en', EN, 3)):
     props = {'layout': LAYOUT, 'labels': labels, 'items': items('disconnected', 'connecting', 'recovered')}
     variants = [('default', 'The three states', props, None),
                 ('hover', 'Hover on the outage control', props, [{'type': 'hover', 'target': 'ind-disconnected'}]),
                 ('press', 'Press on the outage control', props, [{'type': 'press', 'target': 'ind-disconnected'}])]
     cases += themed(base_case('components.connection-indicator.%s' % name, 'Connection indicator (%s)' % locale,
-                              'connection.indicator', {'width': 640, 'height': 72, 'density': 2}, variants,
+                              'connection.indicator', {'width': 640, 'height': 72, 'density': density}, variants,
                               locale=locale, category='extension/connection-indicator', react_hint=HINT,
                               flutter_hint=FLUTTER))
 replace_cases('components.connection-indicator.', cases)

@@ -28,7 +28,7 @@ def merge_coverage(results):
     return merged
 
 
-def capture(entries, coverage, out, results, fixtures_dirs, run_info):
+def capture(entries, coverage, out, results, fixtures_dirs, run_info, reference='native'):
     """Write results/flutter/* with every capture package; returns the worst exit code."""
     sys.path.insert(0, str(env.TOOL))
     import parity_case_map
@@ -37,7 +37,7 @@ def capture(entries, coverage, out, results, fixtures_dirs, run_info):
         stale.unlink()
     plan = {
         'resultsDir': str(results), 'fontsManifest': str(env.FONTS / 'manifest.json'),
-        'fixturesDirs': [str(d) for d in fixtures_dirs], 'runInfo': run_info,
+        'fixturesDirs': [str(d) for d in fixtures_dirs], 'runInfo': run_info, 'reference': reference,
         'entries': entries, 'coverage': coverage,
     }
     plan_path = out / 'flutter-plan.json'
@@ -48,7 +48,7 @@ def capture(entries, coverage, out, results, fixtures_dirs, run_info):
         cmd = ['nice', '-n', '15', 'flutter', 'test', 'test/parity/parity_capture_test.dart', '--reporter', 'compact', '-j', '2']
         e = env.flutter_env()
         e.update({'PARITY_PLAN': str(plan_path), 'PARITY_FONTS_MANIFEST': str(env.FONTS / 'manifest.json'),
-                  'PARITY_PACKAGE': pkg.name})
+                  'PARITY_PACKAGE': pkg.name, 'PARITY_REFERENCE': reference})
         print('+', ' '.join(cmd), '(%s)' % pkg.relative_to(env.ROOT), flush=True)
         with open(log, 'w') as sink:
             r = subprocess.run(cmd, cwd=pkg, env=e, stdout=sink, stderr=subprocess.STDOUT)

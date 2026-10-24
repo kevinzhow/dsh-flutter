@@ -2,6 +2,7 @@
 """dsh-flutter visual parity: the core suite (committed manifest tool/parity-shared/cases.json).
 
   tool/parity run [--cases <key|glob>[,...]] [--refresh-react] [--skip-react] [--skip-flutter]
+                      [--reference native|emulated]
   tool/parity summary
   tool/parity publish [--no-verify]
   tool/parity validate [--manifest FILE]     schema-check a manifest (default: the core one)

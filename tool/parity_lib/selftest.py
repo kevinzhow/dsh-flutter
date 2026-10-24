@@ -113,6 +113,21 @@ def diff_metrics():
     return 'ok'
 
 
+def reference_modes():
+    """The React cache key follows the reference mode for a density above 1 only, and emulated keys are the old ones."""
+    from . import react
+    base = {'dsh': 'x'}
+
+    def key(density, reference):
+        entry = {'key': 'k', 'case': {'viewport': {'width': 1, 'height': 1, 'density': density}}, 'variant': {'id': 'default'}}
+        return react.entry_key(entry, 'f', base, reference)
+
+    assert key(1, 'native') == key(1, 'emulated'), 'density 1 must not depend on the mode'
+    assert key(2, 'native') != key(2, 'emulated') and key(2.625, 'native') != key(3, 'native')
+    assert react.DEFAULT_REFERENCE == 'native'
+    return 'native default; density 1 shared, emulated keys unchanged'
+
+
 def case_map_fresh():
     sys.path.insert(0, str(env.TOOL))
     import parity_case_map
@@ -129,7 +144,8 @@ def run():
         return 2
     results = []
     for name, fn in (('core-manifest', core_manifest), ('font-pins', font_pins), ('ext-builders', ext_builders),
-                     ('diff-metrics', diff_metrics), ('case-map', case_map_fresh)):
+                     ('diff-metrics', diff_metrics), ('reference-modes', reference_modes),
+                     ('case-map', case_map_fresh)):
         _check(name, fn, results)
     skipped = not vt.ready()
     if not skipped:

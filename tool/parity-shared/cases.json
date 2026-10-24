@@ -915,6 +915,134 @@
     "pixelRatio": 0.02,
     "layoutPx": 1
    }
+  },
+  {
+   "id": "components.button.variants.md-2p625x.light",
+   "title": "Button variants at 2.625x (light)",
+   "kind": "button.items",
+   "surface": "button",
+   "category": "core/button",
+   "viewport": {
+    "width": 420,
+    "height": 68,
+    "density": 2.625
+   },
+   "theme": "light",
+   "locale": "en",
+   "variants": [
+    {
+     "id": "default",
+     "name": "Default",
+     "props": {
+      "layout": {
+       "direction": "row",
+       "gap": 12,
+       "align": "start"
+      },
+      "items": [
+       {
+        "id": "btn-primary",
+        "label": "Primary",
+        "variant": "primary",
+        "size": "md"
+       },
+       {
+        "id": "btn-ghost",
+        "label": "Ghost",
+        "variant": "ghost",
+        "size": "md"
+       },
+       {
+        "id": "btn-outline",
+        "label": "Outline",
+        "variant": "outline",
+        "size": "md"
+       },
+       {
+        "id": "btn-toolbar",
+        "label": "Toolbar",
+        "variant": "toolbar",
+        "size": "md"
+       }
+      ]
+     }
+    }
+   ],
+   "capture": {
+    "selector": "[data-parity-target]",
+    "flutterKey": "parity-target",
+    "crop": "element"
+   },
+   "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+   "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+   "tolerance": {
+    "pixelRatio": 0.02,
+    "layoutPx": 1
+   }
+  },
+  {
+   "id": "components.button.variants.md-3x.light",
+   "title": "Button variants at 3x (light)",
+   "kind": "button.items",
+   "surface": "button",
+   "category": "core/button",
+   "viewport": {
+    "width": 420,
+    "height": 68,
+    "density": 3
+   },
+   "theme": "light",
+   "locale": "en",
+   "variants": [
+    {
+     "id": "default",
+     "name": "Default",
+     "props": {
+      "layout": {
+       "direction": "row",
+       "gap": 12,
+       "align": "start"
+      },
+      "items": [
+       {
+        "id": "btn-primary",
+        "label": "Primary",
+        "variant": "primary",
+        "size": "md"
+       },
+       {
+        "id": "btn-ghost",
+        "label": "Ghost",
+        "variant": "ghost",
+        "size": "md"
+       },
+       {
+        "id": "btn-outline",
+        "label": "Outline",
+        "variant": "outline",
+        "size": "md"
+       },
+       {
+        "id": "btn-toolbar",
+        "label": "Toolbar",
+        "variant": "toolbar",
+        "size": "md"
+       }
+      ]
+     }
+    }
+   ],
+   "capture": {
+    "selector": "[data-parity-target]",
+    "flutterKey": "parity-target",
+    "crop": "element"
+   },
+   "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+   "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+   "tolerance": {
+    "pixelRatio": 0.02,
+    "layoutPx": 1
+   }
   }
  ]
 }

@@ -84,16 +84,30 @@ function Tagged({ locale, ctx, children }: { locale: string; ctx: ParityContext;
     tag()
     const observer = new MutationObserver(tag)
     observer.observe(host, { childList: true, subtree: true })
-    // The case frame has a fixed height (the builder encodes it): the content column must fill it exactly (to the
-    // CSS pixel the element crop rounds up to). Checked on every size change, so after fonts load and after the
-    // region expands; a mismatch is a console error, which fails the capture with the measured height.
+    // The case frame has a fixed height (the builder encodes it from the content measured with an emulated density, where
+    // every border is a whole CSS pixel): the content column must fill it to the CSS pixel the element crop rounds up to.
+    // At a native density the `0.5px` separators are one device pixel (0.5 CSS px at 2x), so the same content is up to
+    // half a CSS pixel per separator shorter and the frame has a little blank space under it, on both providers; a
+    // shortfall below one text line is accepted there, a wrapped or missing line (and any overflow) is not. Checked on
+    // every size change, so after fonts load and after the region expands; a mismatch is a console error, which fails the
+    // capture with the measured height.
     const column = host.parentElement!
+    const nativeDensity = () => {
+      const probe = document.createElement('div')
+      probe.style.cssText = 'position:absolute;visibility:hidden;border:0.5px solid'
+      document.body.appendChild(probe)
+      const border = parseFloat(getComputedStyle(probe).borderTopWidth)
+      probe.remove()
+      return window.devicePixelRatio > 1 && border < 1
+    }
     const check = () => {
       if (document.fonts.status !== 'loaded') return // text still being laid out with a fallback face
       if (expands && host.querySelector('input') === null) return // the click has not expanded the region yet
       const measured = column.getBoundingClientRect().height
-      if (Math.ceil(measured - 0.01) !== height - 32) {
-        console.error(`parity: settings content is ${measured}px high but the case frame holds ${height - 32}px`)
+      const frame = height - 32
+      const ok = nativeDensity() ? measured <= frame + 0.01 && measured > frame - 8 : Math.ceil(measured - 0.01) === frame
+      if (!ok) {
+        console.error(`parity: settings content is ${measured}px high but the case frame holds ${frame}px`)
       }
     }
     const fit = new ResizeObserver(check)

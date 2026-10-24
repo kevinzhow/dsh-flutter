@@ -29,8 +29,9 @@ product label, any other name is title-cased from its kebab-case form (`team-rev
 Sizes: viewport width 596 with the 16px frame padding gives a 564px content column, density 2. 564 is the column dsh's
 web settings panel gives these rows (800px panel, 188px nav rail, 24px padding either side: 800 - 188 - 2 * 24), the
 width at which their CSS is designed to work; at a phone width (358px) the font-family rows collapse to a 44px text
-column. The rows are not wrapped in the panel itself. Every case height is the measured content height of the React render plus the
-32px frame padding, rounded up to whole CSS pixels. Heights depend on
+column. The rows are not wrapped in the panel itself. Every case height is the measured content height of the React render
+(with an emulated density, where each border is a whole CSS pixel) plus the 32px frame padding, rounded up to whole CSS
+pixels; with a native density the `0.5px` separators are thinner and the content up to a few CSS pixels shorter (see the host). Heights depend on
 text wrapping at 564px, so they are encoded per case; the host checks them: a case whose content does not fill its frame
 fails the React capture with the measured height. Variants of one case therefore share one height.
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshPixelModel, dshPixelModel;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,17 +14,32 @@ import 'interactions.dart';
 import 'probes.dart';
 import 'theme.dart';
 
-/// The CSS-px rectangle enclosing [rect], scaled to device pixels.
+/// The pixel rectangle enclosing [rect], in device pixels.
 ///
-/// Playwright's element screenshot captures the CSS-pixel box that encloses a fractional element
-/// (floor / ceil in CSS px, then scaled); Flutter crops the same way so a card at y = 296.5 starts
-/// on the same device row on both sides.
-Rect enclosingPixelRect(Rect rect, double density) => Rect.fromLTRB(
-  rect.left.floorToDouble() * density,
-  rect.top.floorToDouble() * density,
-  rect.right.ceilToDouble() * density,
-  rect.bottom.ceilToDouble() * density,
-);
+/// Playwright's element screenshot captures the box that encloses a fractional element, and which box depends on how
+/// the reference got its density. With an emulated density (`--reference emulated`) Blink lays out in CSS pixels, so the
+/// crop is the enclosing CSS-pixel box (floor / ceil in CSS px, then scaled): a card at y = 296.5 starts on the same
+/// device row on both sides. With a native density (the default) layout units are device pixels and the crop is the
+/// enclosing device-pixel box (a 420 CSS px wide element at 2.625x is 1102.5 device px, captured as 1103).
+Rect enclosingPixelRect(Rect rect, double density) {
+  if (dshPixelModel == DshPixelModel.native) {
+    // 1/64 layout units: absorb the float noise of the multiplication.
+    double lo(double v) => (v * density + 1e-6).floorToDouble();
+    double hi(double v) => (v * density - 1e-6).ceilToDouble();
+    return Rect.fromLTRB(
+      lo(rect.left),
+      lo(rect.top),
+      hi(rect.right),
+      hi(rect.bottom),
+    );
+  }
+  return Rect.fromLTRB(
+    rect.left.floorToDouble() * density,
+    rect.top.floorToDouble() * density,
+    rect.right.ceilToDouble() * density,
+    rect.bottom.ceilToDouble() * density,
+  );
+}
 
 /// Pumps one manifest entry at its viewport and density and writes PNG + metadata in the provider
 /// output contract (`<outputDir>/<captureKey>.png|.metadata.json`).
