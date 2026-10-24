@@ -21,7 +21,11 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   analyze          dart analyze (whole workspace)
   tests            dart test / flutter test per package (skipped with --fast)
 
-  tool/preflight [--fast] [--only NAME[,NAME...]] [--out .local/preflight.json]
+  tool/preflight [--fast] [--only NAME[,NAME...]] [--allow-skip NAME[,NAME...]] [--out .local/preflight.json]
+
+A check that cannot run (no dsh checkout, no node install, ...) is reported as `skip` with its reason and does not fail the
+run. `--allow-skip` makes that explicit for CI: only the named checks may skip, any other skip counts as a failure, so a
+check that silently stopped running cannot pass. The `skip` reasons are printed in full and stored in the JSON output.
 
 The pinned dsh checkout is found through $DSH_SRC or <repo>/.local/dsh-src
 (see README). The Flutter SDK is the one pinned in .fvmrc: $FLUTTER_SDK,
@@ -125,8 +129,11 @@ def c_i18n():
 def c_icons():
     results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
     for r in results:
-        if r[0] in (1, 'skip') or (isinstance(r[0], int) and r[0] not in (0, 2)):
+        if r[0] == 1 or (isinstance(r[0], int) and r[0] not in (0, 2)):
             return r
+    for r in results:
+        if r[0] == 2:  # the generators exit 2 when the dsh checkout is missing
+            return 'skip', r[1], r[2]
     return results[0]
 
 
@@ -160,6 +167,13 @@ def c_vector():
 
 
 def c_parity():
+    if not (pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local' / 'dsh-src'))) / 'packages' / 'client' / 'ui-theme').is_dir():
+        # The extension builders read dsh's locale dictionaries, so the selftest needs the checkout. The Flutter case map
+        # (git-ignored, imported by every parity test entry point) is still regenerated: analyze and tests need it.
+        code, out, secs = run([sys.executable, '-I', 'tool/parity_case_map.py'])
+        if code != 0:
+            return code, out, secs
+        return 'skip', 'parity selftest needs the dsh checkout (not found; set DSH_SRC or link .local/dsh-src); only the Flutter case map was regenerated', secs
     code, out, secs = run([sys.executable, '-I', 'tool/parity', 'selftest'])
     if code == 2:
         return 'skip', out, secs
@@ -181,11 +195,12 @@ def c_tests():
     failed = False
     for pkg in PURE_DART_PACKAGES:
         code, out, _ = run(NICE + ['dart', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
-        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
         failed |= code != 0
     for pkg in FLUTTER_PACKAGES:
-        code, out, _ = run(NICE + ['flutter', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
-        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        # `-x live`: the live tests start real `dsh web` hosts (tool/live_spike, README "Live tests"); never part of preflight
+        code, out, _ = run(NICE + ['flutter', 'test', '-j', '2', '-x', 'live', '--reporter', 'compact'], cwd=ROOT / pkg)
+        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
         failed |= code != 0
     return (1 if failed else 0), '\n'.join(log), time.time() - start
 
@@ -209,9 +224,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--fast', action='store_true', help='skip the test suites')
     ap.add_argument('--only', default='', help='comma separated check names')
+    ap.add_argument('--allow-skip', default='', help='comma separated check names that may skip; any other skip fails (CI)')
     ap.add_argument('--out', default=str(ROOT / '.local' / 'preflight.json'))
     args = ap.parse_args()
     only = {x for x in args.only.split(',') if x}
+    allow_skip = {x for x in args.allow_skip.split(',') if x}
     selected = [(n, f) for n, f in CHECKS if (not only or n in only) and not (args.fast and n == 'tests')]
     bin_dir, pin = flutter_bin_dir()
     if bin_dir is None:
@@ -240,6 +257,10 @@ def main():
     for name, _ in selected:
         code, secs, out = results[name]
         status = 'skip' if code == 'skip' else ('ok' if code == 0 else 'FAIL')
+        if status == 'skip' and args.allow_skip and name not in allow_skip:
+            status = 'FAIL'
+            out = 'skipped but not allowed to skip (--allow-skip %s): %s' % (args.allow_skip, out)
+            results[name] = (code, secs, out)
         if status == 'FAIL':
             failed.append(name)
         last = [l for l in out.strip().splitlines() if l.strip()][-1:] or ['']
@@ -247,6 +268,11 @@ def main():
     print('\n%-12s %-5s %7s  %s' % ('check', 'state', 'secs', 'last line'))
     for name, status, secs, last in rows:
         print('%-12s %-5s %7.1f  %s' % (name, status, secs, last))
+    skipped = [(n, results[n][2].strip().splitlines()[-1][:300] if results[n][2].strip() else '') for n, st, _, _ in rows if st == 'skip']
+    if skipped:
+        print('\nskipped (%d):' % len(skipped))
+        for name, reason in skipped:
+            print('  %s: %s' % (name, reason))
     for name in failed:
         print('\n--- %s (full output: .local/preflight/%s.txt) ---' % (name, name))
         print('\n'.join(results[name][2].strip().splitlines()[-25:]))
@@ -255,7 +281,7 @@ def main():
         'when': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
         'headTree': tree,
         'fast': args.fast,
-        'results': {n: {'state': s, 'secs': round(t, 1)} for n, s, t, _ in rows},
+        'results': {n: {'state': s, 'secs': round(t, 1), **({'reason': dict(skipped)[n]} if s == 'skip' else {})} for n, s, t, _ in rows},
     }
     pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(payload, indent=1) + '\n')
