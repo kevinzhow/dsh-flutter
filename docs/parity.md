@@ -354,6 +354,15 @@ draws what is left.
   frame is dsh's: the 56px rail, with the sidebar expanding over the centre; from 1024 px the sidebar is docked. The top bar and
   the drawer chrome have no dsh counterpart, so the phone captures score the page behind them and the drawer's content separately.
 
+## Icons
+
+Kevin, 2026-10-24: an icon dsh web shows is dsh's icon, generated from its SVG artwork; a control only Whalee has uses Charcoal V2.
+
+- **dsh** (`DshIcons`, `DshShellIcons`; `tool/icons/gen_icons.py`, `gen_shell_icons.py`, read from the pinned checkout): every glyph of the sidebar, the rail, the workspace browser and its menus, the Session header, the composer (the `+`, the send arrow and the stop square are dsh's inline SVG, not Material), the right panel (its fullscreen and restore glyphs), the dock kit (add tab, split, drop-hint zones), the shortcuts reference and its toasts, the Settings dialog, stats pills, open-in-app and the reasoning row. Variants follow dsh: `Medium` where dsh draws `Medium` (Settings trigger, More trigger, the Settings menu row, the composer `+`), `Regular` elsewhere.
+- **Charcoal V2** (`CharcoalIcons`; `tool/icons/gen_charcoal_icons.py`): the phone top bar's menu button, the pairing page (settings entry, back, paste, scan, the plain-http and certificate notices), the connection security chip, the QR scanner's close, the attach sheet (photos, camera, files). The 24px regular SVGs are vendored in `tool/icons/charcoal/` from [kevinzhow/charcoal-flutter](https://github.com/kevinzhow/charcoal-flutter) (`packages/charcoal_icons`, commit `de89016ed5ed8b2054ff782d4ddd38cc5ca3847`, itself from pixiv/charcoal; Apache-2.0, notice in `THIRD_PARTY_NOTICES.md`).
+- **No Material or Cupertino glyph anywhere** in app code: `apps/dsh_flutter/test/source_guard_test.dart` fails on `Icons.`, `CupertinoIcons`, `IconData` or `Icon(` in any package's `lib/`.
+- **Brand mark.** The DeepSeek fish stays out. Whalee's mark is the 🐳 emoji (`DshWhaleMark`), drawn in the platform's emoji font (Noto Color Emoji on Linux, Apple Color Emoji, Segoe UI Emoji), fitted to the box dsh's mark takes: 24px beside the name in the sidebar, drawer and rail, 34px before the blank-session headline. An intended difference from dsh web: the brand region of the parity captures does not match by design, and the Linux capture machine needs an emoji font installed (`fonts-noto-color-emoji`) for the mark to render.
+
 ## Provenance and licenses
 
 - dsh (MIT, pinned in `docs/upstream-sync.json`) components are imported at run time from the checkout, never copied.

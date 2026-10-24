@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons, Scaffold;
+import 'package:flutter/material.dart' show Scaffold;
 import 'package:flutter/widgets.dart';
 
 import '../launch_link.dart';
@@ -145,7 +145,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                     children: [
                       DshIconButton(
                         key: const ValueKey('scan-close'),
-                        icon: Icons.close,
+                        icon: CharcoalIcons.close,
                         plain: true,
                         semanticLabel: _a('pairing.scan.close'),
                         onPressed: () => Navigator.of(context).pop(),

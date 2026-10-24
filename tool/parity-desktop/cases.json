@@ -20,12 +20,6 @@
    "title": "A started session with the Ungrouped group open",
    "web": [
     {
-     "click": "[data-row-key='workspace:']"
-    },
-    {
-     "wait": 800
-    },
-    {
      "click": "[data-row-key^='session:']:has-text('Stream fixture')"
     },
     {
@@ -34,9 +28,12 @@
    ],
    "app": [
     {
+     "wait": 3500
+    },
+    {
      "click": [
       76,
-      300
+      262
      ]
     },
     {
@@ -45,7 +42,7 @@
     {
      "click": [
       120,
-      336
+      298
      ]
     },
     {
@@ -151,6 +148,9 @@
    "web": [],
    "app": [
     {
+     "wait": 2500
+    },
+    {
      "click": [
       22,
       26
@@ -161,12 +161,12 @@
     },
     {
      "click": [
-      80,
-      300
+      76,
+      262
      ]
     },
     {
-     "wait": 1200
+     "wait": 1500
     }
    ],
    "regions": []
@@ -187,6 +187,9 @@
    "web": [],
    "app": [
     {
+     "wait": 2500
+    },
+    {
      "click": [
       22,
       26
@@ -197,17 +200,17 @@
     },
     {
      "click": [
-      80,
-      300
+      76,
+      262
      ]
     },
     {
-     "wait": 1200
+     "wait": 1500
     },
     {
      "click": [
       100,
-      336
+      298
      ]
     },
     {

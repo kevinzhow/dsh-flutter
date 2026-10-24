@@ -5,7 +5,6 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart' show DshThemeData;
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import 'composer.dart';
@@ -233,7 +232,7 @@ class _ConversationHeroState extends State<ConversationHero> {
 
 /// The headline and the Preview badge (dsh `HeroShell`). dsh leads the line
 /// with the DeepSeek fish through its `conversation.hero.brand.mark` slot;
-/// Whalee uses no DeepSeek brand asset, so the line starts at the headline.
+/// Whalee leads it with its own mark, the whale emoji, in the same 34px box.
 class HeroHeadline extends StatelessWidget {
   const HeroHeadline({super.key, required this.i18n});
 
@@ -264,6 +263,9 @@ class HeroHeadline extends StatelessWidget {
       spacing: 10,
       runSpacing: 12,
       children: [
+        // dsh leads the line with its brand mark (34px); Whalee's is the whale
+        // emoji.
+        const DshWhaleMark(size: 34),
         Wrap(
           alignment: WrapAlignment.center,
           crossAxisAlignment: WrapCrossAlignment.center,
@@ -482,7 +484,7 @@ class InertComposer extends StatelessWidget {
             ],
             trailing: [
               ComposerRoundButton(
-                icon: Icons.arrow_upward_rounded,
+                icon: DshShellIcons.send,
                 label: i18n.t('conversation', 'input.send'),
                 onPressed: null,
               ),

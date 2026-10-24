@@ -11,7 +11,6 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
-import 'brand_mark.dart';
 import 'sidebar_services.dart';
 
 /// Wide-content unmount delay; matches the 150ms wide-content fade-out.
@@ -282,7 +281,7 @@ class _LogoRow extends StatelessWidget {
           DshShellSlots.sidebarBrandMark.typed<SidebarBrandMarkOwner, Widget>(),
           const SidebarBrandMarkOwner(size: 24),
         ) ??
-        const WhaleeMark(size: 24);
+        const DshWhaleMark(size: 24);
     final name =
         slots.renderSingle(
           DshShellSlots.sidebarBrandName.typed<Object?, Widget>(),
@@ -392,7 +391,7 @@ class _ToggleState extends State<_Toggle> {
                 .typed<SidebarBrandMarkOwner, Widget>(),
             const SidebarBrandMarkOwner(size: 24),
           ) ??
-          const WhaleeMark(size: 24);
+          const DshWhaleMark(size: 24);
     } else {
       glyph = DshIcon(DshShellIcons.panelLeft, size: iconSize, color: ink);
     }

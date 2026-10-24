@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_icon.dart';
+import 'dsh_icon_data.dart';
 import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
@@ -15,7 +17,7 @@ class DshIconButton extends StatelessWidget {
     this.plain = false,
   });
 
-  final IconData icon;
+  final DshIconData icon;
   final String semanticLabel;
   final VoidCallback? onPressed;
   final bool filled;
@@ -54,7 +56,9 @@ class DshIconButton extends StatelessWidget {
                 child: SizedBox(
                   width: 36,
                   height: 36,
-                  child: Icon(icon, size: 18, color: foreground),
+                  child: Center(
+                    child: DshIcon(icon, size: 18, color: foreground),
+                  ),
                 ),
               ),
             ),

@@ -186,8 +186,8 @@ class _TriggerContent extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         DshIcon(
-          DshShellIcons.settingsRegular,
-          size: 16,
+          DshIcons.settingsMedium,
+          size: wide ? 16 : 18,
           color: theme.labelPrimary,
         ),
         if (wide) ...[
@@ -313,8 +313,8 @@ class _SettingsLauncherRowState extends State<SettingsLauncherRow> {
                           : MainAxisAlignment.center,
                       children: [
                         DshIcon(
-                          DshShellIcons.ellipsis,
-                          size: 16,
+                          DshShellIcons.ellipsisMedium,
+                          size: 14,
                           color: theme.labelPrimary,
                         ),
                         if (wide) ...[
@@ -409,7 +409,7 @@ class _MoreMenu extends StatelessWidget {
                     ],
                     _MenuRow(
                       key: const ValueKey('settings-more-settings'),
-                      icon: DshShellIcons.settingsRegular,
+                      icon: DshIcons.settingsMedium,
                       label: settingsLabel,
                       keys: keys,
                       onTap: onSettings,

@@ -4,12 +4,13 @@ import 'package:path_drawing/path_drawing.dart';
 import 'dsh_icon_data.dart';
 
 /// Draws a [DshIconData] in [color] at [size] (default: the glyph's own size).
+/// Without a [color] the ambient `IconTheme` colour is used (inside a button).
 class DshIcon extends StatelessWidget {
-  const DshIcon(this.icon, {super.key, this.size, required this.color});
+  const DshIcon(this.icon, {super.key, this.size, this.color});
 
   final DshIconData icon;
   final double? size;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,15 @@ class DshIcon extends StatelessWidget {
     return ExcludeSemantics(
       child: CustomPaint(
         size: Size.square(edge),
-        painter: _IconPainter(icon, color),
+        painter: _IconPainter(
+          icon,
+          color ??
+              context
+                  .dependOnInheritedWidgetOfExactType<IconTheme>()
+                  ?.data
+                  .color ??
+              const Color.from(alpha: 1, red: 0, green: 0, blue: 0),
+        ),
       ),
     );
   }
@@ -45,11 +54,25 @@ class _IconPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final scale = size.width / icon.viewBox;
+    final carves = icon.shapes.any((s) => s.cutWidth > 0);
+    if (carves) canvas.saveLayer(Offset.zero & size, Paint());
     canvas.save();
     canvas.scale(scale);
     final paths = _shapes;
     for (var i = 0; i < paths.length; i++) {
       final shape = icon.shapes[i];
+      if (shape.cutWidth > 0) {
+        canvas.drawPath(
+          paths[i],
+          Paint()
+            ..blendMode = BlendMode.clear
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = shape.cutWidth
+            ..strokeCap = StrokeCap.round
+            ..isAntiAlias = true,
+        );
+        continue;
+      }
       final paint = Paint()
         ..color = shape.opacity == 1
             ? color
@@ -71,6 +94,7 @@ class _IconPainter extends CustomPainter {
       canvas.drawPath(paths[i], paint);
     }
     canvas.restore();
+    if (carves) canvas.restore();
   }
 
   @override

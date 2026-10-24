@@ -535,8 +535,10 @@ class _ToastView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               DshIcon(
-                toast.error ? DshIcons.warning : DshIcons.check,
-                size: 14,
+                toast.error
+                    ? DshShellIcons.shortcutError
+                    : DshShellIcons.shortcutSuccess,
+                size: 16,
                 color: toast.error
                     ? theme.color('--dsw-alias-state-warn-secondary')
                     : theme.color('--dsw-alias-state-success-secondary'),
@@ -759,7 +761,7 @@ class _ReferenceRowState extends State<_ReferenceRow> {
               height: 26,
               child: Center(
                 child: DshIcon(
-                  DshIcons.edit,
+                  DshShellIcons.shortcutEdit,
                   size: 12,
                   color: theme.color('--dsw-alias-label-tertiary'),
                 ),

@@ -7,7 +7,7 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart'
-    show Icons, InputBorder, InputDecoration, TextField, showModalBottomSheet;
+    show InputBorder, InputDecoration, TextField, showModalBottomSheet;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -93,7 +93,7 @@ class _ComposerAttachButtonState extends State<ComposerAttachButton> {
                 child: Center(
                   child: DshIcon(
                     DshIcons.plus,
-                    size: 16,
+                    size: 14,
                     color: theme.labelPrimary,
                   ),
                 ),
@@ -116,7 +116,7 @@ class ComposerRoundButton extends StatefulWidget {
     required this.onPressed,
   });
 
-  final IconData icon;
+  final DshIconData icon;
   final String label;
   final VoidCallback? onPressed;
 
@@ -156,9 +156,9 @@ class _ComposerRoundButtonState extends State<ComposerRoundButton> {
                 width: 34,
                 height: 34,
                 child: Center(
-                  child: Icon(
+                  child: DshIcon(
                     widget.icon,
-                    size: 18,
+                    size: 16,
                     color: theme.color('--dsw-static-neutral-00'),
                   ),
                 ),
@@ -201,11 +201,11 @@ class _AttachSheet extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                        DshIcon(
                           switch (source) {
-                            AttachSource.photos => Icons.photo_library_outlined,
-                            AttachSource.camera => Icons.photo_camera_outlined,
-                            AttachSource.files => Icons.attach_file,
+                            AttachSource.photos => CharcoalIcons.images,
+                            AttachSource.camera => CharcoalIcons.camera,
+                            AttachSource.files => CharcoalIcons.file,
                           },
                           size: 22,
                           color: theme.labelSecondary,
@@ -587,14 +587,14 @@ class _DefaultComposerState extends State<DefaultComposer> {
         if (running)
           ComposerRoundButton(
             key: const ValueKey('composer-cancel'),
-            icon: Icons.stop_rounded,
+            icon: DshShellIcons.stop,
             label: widget.i18n.t('conversation', 'input.stop'),
             onPressed: _cancel,
           ),
         if (!running || _canSend)
           ComposerRoundButton(
             key: const ValueKey('composer-send'),
-            icon: Icons.arrow_upward_rounded,
+            icon: DshShellIcons.send,
             label: widget.i18n.t('conversation', 'input.send'),
             onPressed: _canSend ? _send : null,
           ),

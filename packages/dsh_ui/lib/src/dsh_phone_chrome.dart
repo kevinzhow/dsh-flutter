@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
+import 'charcoal_icons.g.dart';
 import 'dsh_shell_icons.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
@@ -41,15 +42,6 @@ class PhoneChrome extends InheritedWidget {
       menuLabel != old.menuLabel || newSessionLabel != old.newSessionLabel;
 }
 
-/// Three bars: the menu glyph (dsh has no menu icon; its sidebar glyph is the
-/// panel the drawer replaces).
-const DshIconData _menuGlyph = DshIconData(
-  viewBox: 18,
-  size: 18,
-  strokeWidth: 1.4,
-  shapes: [DshIconShape('M3 5h12M3 9h12M3 13h12', cap: DshIconCap.round)],
-);
-
 /// The phone top bar: the menu button that opens the drawer, the Session title
 /// and the new-session button, 52px, over the page.
 class PhoneTopBar extends StatelessWidget {
@@ -74,7 +66,7 @@ class PhoneTopBar extends StatelessWidget {
               width: 44,
               height: 44,
               child: Center(
-                child: DshIcon(icon, size: 20, color: theme.labelPrimary),
+                child: DshIcon(icon, size: 18, color: theme.labelPrimary),
               ),
             ),
           ),
@@ -88,7 +80,7 @@ class PhoneTopBar extends StatelessWidget {
         children: [
           button(
             const ValueKey('phone-menu'),
-            _menuGlyph,
+            CharcoalIcons.list,
             chrome.menuLabel,
             chrome.openDrawer,
           ),

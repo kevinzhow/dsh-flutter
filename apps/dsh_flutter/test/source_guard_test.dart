@@ -48,6 +48,36 @@ void main() {
     expect(files.length, greaterThan(30));
   });
 
+  test('icons come from dsh or Charcoal, never Material or Cupertino', () {
+    // dsh's own glyphs are DshIcons / DshShellIcons; a control only Whalee has
+    // uses CharcoalIcons (docs/parity.md, "Icons").
+    final bad = RegExp(r'\bIcons\.|CupertinoIcons|\bIconData\b|\bIcon\(');
+    // Every package of the workspace, not only the roots listed above.
+    final everything = [
+      'lib',
+      for (final group in ['features', 'packages'])
+        for (final d in Directory(
+          '../../$group',
+        ).listSync().whereType<Directory>())
+          '${d.path}/lib',
+    ].where((p) => Directory(p).existsSync());
+    final all = [
+      for (final r in everything)
+        ...Directory(r)
+            .listSync(recursive: true)
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.dart')),
+    ];
+    expect(all.length, greaterThan(files.length));
+    for (final f in all) {
+      expect(
+        bad.hasMatch(strip(f.readAsStringSync())),
+        isFalse,
+        reason: '${f.path} draws a Material or Cupertino icon',
+      );
+    }
+  });
+
   test('no hard-coded colours: every colour is a theme token', () {
     final bad = RegExp(
       r'Color\(\s*0x|Colors\.|Color\.fromRGBO|Color\.fromARGB',

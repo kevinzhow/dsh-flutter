@@ -632,7 +632,13 @@ class _DropHints extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               DshIcon(
-                DshShellIcons.panelLeft,
+                switch (z) {
+                  DockZone.center => DshShellIcons.dockZoneCenter,
+                  DockZone.left => DshShellIcons.dockZoneLeft,
+                  DockZone.right => DshShellIcons.dockZoneRight,
+                  DockZone.top => DshShellIcons.dockZoneTop,
+                  DockZone.bottom => DshShellIcons.dockZoneBottom,
+                },
                 size: 16,
                 color: active
                     ? theme.color(
@@ -889,7 +895,7 @@ class _TabStripState extends State<_TabStrip> {
                 const SizedBox(width: 4),
                 _IconAction(
                   key: ValueKey('dock-add-${pane.paneId}'),
-                  icon: DshIcons.plus,
+                  icon: DshShellIcons.plusOutline,
                   iconSize: 14,
                   label: w.labels.addTab,
                   onPressed: () => host.controller.addTab(pane.paneId),
@@ -909,8 +915,8 @@ class _TabStripState extends State<_TabStrip> {
                   delay: const Duration(milliseconds: 500),
                   child: _IconAction(
                     key: ValueKey('dock-split-${pane.paneId}'),
-                    icon: DshShellIcons.compareSplit,
-                    iconSize: 15,
+                    icon: DshShellIcons.dockSplit,
+                    iconSize: 16,
                     label: w.labels.splitPane,
                     enabled: block == null,
                     onPressed: () => host.controller.splitPane(pane.paneId),

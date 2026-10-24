@@ -1,7 +1,7 @@
 import 'package:dsh_client/dsh_client.dart' show CertificateInfo;
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show Icons, SelectableText;
+import 'package:flutter/material.dart' show SelectableText;
 import 'package:flutter/widgets.dart';
 
 import '../app_controller.dart';
@@ -68,8 +68,8 @@ class CertificateCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                warning ? Icons.gpp_maybe_outlined : Icons.lock_outline,
+              DshIcon(
+                warning ? CharcoalIcons.warning : CharcoalIcons.lock,
                 size: 18,
                 color: warning
                     ? theme.color('--dsw-alias-state-error-primary')
