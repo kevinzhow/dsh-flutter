@@ -9,7 +9,7 @@ Status: phase 1b-2b (phone-first chat: pairing, session list, streamed conversat
 One package per layer of dsh's own web client (`docs/subsystems/web-client.md` upstream), one-way dependencies:
 
 ```
-packages/dsh_client        pure Dart   pairing, connection generations, /api/remote.mux, unary /api calls (multipart binary results), streamed file upload, workspaceFiles client
+packages/dsh_client        pure Dart   pairing, certificate trust (pins), connection generations with backoff status, /api/remote.mux, unary /api calls (multipart binary results), streamed file upload, workspaceFiles client
 packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window)
 packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool
 packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's own
@@ -65,6 +65,74 @@ python3 tool/i18n/gen_catalog.py [--check]                 # dsh locale dictiona
 python3 tool/vectors/gen_expected.py --check <fixture>     # TS-produced expectations for the behaviour vectors
 python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for the settings vectors
 ```
+
+## Connecting to a host
+
+Whalee talks to a `dsh web` that you run yourself. Nothing goes through a server of ours.
+
+1. On the computer that hosts your sessions, start it: `dsh web --no-open`. It prints one line, `dsh web: http://127.0.0.1:8686/?token=...`.
+   That **launch link** is the key to the host: anyone who has it can use your agent, so treat it like a password. It stops
+   working when the host restarts (the next `dsh web` prints a new one).
+2. To reach it from a phone the host must listen on an address the phone can reach, not only on the loopback address:
+   `dsh web --no-open --host <address of this computer>` (dsh refuses "all interfaces" on purpose). The printed link then
+   carries that address. Behind a reverse proxy or a port forward, `--public-url <url>` makes it print the address the phone
+   really uses, and `--trusted-host <host:port>` tells the host to accept it.
+3. In Whalee, paste the link, or scan a QR code of it. dsh does not draw a QR code, so make one on the computer with a tool
+   that works offline, for example `qrencode -t ansiutf8 '<launch link>'`, and scan it off the screen. Do not paste the link
+   into a website that makes QR codes: it would see your key. Whalee only accepts a code that is a complete launch link and
+   never shows or logs what the code contained.
+
+### Plain http, and what Whalee does about it
+
+A `http://` host sends everything (including your prompts and the launch link) unencrypted. Whalee therefore accepts plain
+http only for the device itself and for private networks (loopback, `10.x`, `172.16-31.x`, `192.168.x`, link-local, the
+`100.64.0.0/10` range that Tailscale uses, IPv6 unique-local; a host name counts when every address it resolves to is one of
+those). Any other `http://` address is refused. An accepted http connection says **Not encrypted** next to the host address, and
+the pairing form warns while you type it. Use it only on a network you trust.
+
+### https with a certificate of your own (self-signed)
+
+`dsh web` serves https when you give it a certificate and its key: `--tls-cert <file> --tls-key <file>` (PEM, key without
+passphrase). A certificate you made yourself is not signed by anyone the phone knows, so Whalee does not trust it on its own.
+Make one for the address you will connect to (here `<address>`, and a name if you have one):
+
+```sh
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes -days 365 \
+  -keyout dsh-key.pem -out dsh-cert.pem -subj "/CN=dsh" \
+  -addext "subjectAltName=IP:<address>,DNS:<name>"
+chmod 600 dsh-key.pem
+dsh web --no-open --host <address> --tls-cert dsh-cert.pem --tls-key dsh-key.pem
+```
+
+The first time Whalee connects it shows the certificate's **SHA-256 fingerprint** and sends nothing else: no request, no
+launch link. Compare it with the fingerprint on the host:
+
+```sh
+openssl x509 -in dsh-cert.pem -noout -fingerprint -sha256
+```
+
+If they are the same, choose **Trust and connect**. Whalee remembers that one certificate for that host and port
+(Settings, General, Host shows it and has **Forget certificate**) and from then on talks to exactly that certificate. If the host
+later shows a different one, even one a public authority signed, Whalee refuses, sends nothing, and says the certificate
+changed; you can look at the new fingerprint and trust it only after confirming that warning. There is no setting that accepts
+every certificate. A certificate that a public authority signed (for example from Let's Encrypt) needs no confirmation.
+
+### Tailscale
+
+If the phone and the computer are on the same tailnet, the simplest setup is to let `dsh web` listen on the computer's
+tailnet address and use the launch link with that address (Tailscale encrypts the path between the two devices, though to Whalee
+it is still plain http and says so, because the app cannot see the tunnel). For an encrypted connection that needs no
+confirmation, Tailscale can issue a real certificate for the computer's tailnet name (`tailscale cert <name>.<tailnet>.ts.net`,
+after HTTPS is enabled for the tailnet); give those two files to `--tls-cert` and `--tls-key`, bind to the tailnet address, and
+start `dsh web` with `--public-url https://<name>.<tailnet>.ts.net:<port>/` so the printed link carries that name.
+
+### When the connection drops
+
+Whalee keeps your sessions on screen and your unsent messages in place while it reconnects. It retries after 0.5 s, then 1, 2,
+4, 8 and every 10 s at most, and shows what dsh web shows (Reconnecting, Disconnected, Connected) with the retry number and a
+countdown; tapping it retries at once. After three failed retries it says the host cannot be reached. If the host restarted,
+the launch link is no longer valid: Whalee says so and **Pair again** takes a new link (scan or paste) without leaving your
+sessions.
 
 ## Notifications
 

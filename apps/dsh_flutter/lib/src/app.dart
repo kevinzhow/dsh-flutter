@@ -96,10 +96,12 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
+    // The sessions stay on screen for as long as they exist: while the
+    // connection is retried, and while the user pairs again after a restart
+    // (their unsent messages live in this tree).
     final connected =
-        controller.phase == ConnectionPhase.connected ||
-        (controller.phase == ConnectionPhase.connecting &&
-            controller.manager != null);
+        controller.manager != null &&
+        controller.phase != ConnectionPhase.disconnected;
     return Scaffold(
       backgroundColor: theme.bgBase,
       body: connected

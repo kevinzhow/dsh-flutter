@@ -17,10 +17,12 @@ class UnauthorizedException extends RemoteException {
 /// `POST /api/<namespace>/<method>` with dsh's `client-request` envelope.
 class HttpRemoteCaller implements RemoteCaller {
   HttpRemoteCaller(this.credential, {HttpClient? httpClient})
-    : _http = httpClient ?? HttpClient();
+    : _http = httpClient ?? HttpClient(),
+      _owns = httpClient == null;
 
   final PairedCredential credential;
   final HttpClient _http;
+  final bool _owns;
 
   @override
   Future<Object?> call(
@@ -95,5 +97,7 @@ class HttpRemoteCaller implements RemoteCaller {
     throw RemoteException('transport/bad-envelope', 'malformed error result');
   }
 
-  void close() => _http.close(force: true);
+  void close() {
+    if (_owns) _http.close(force: true);
+  }
 }

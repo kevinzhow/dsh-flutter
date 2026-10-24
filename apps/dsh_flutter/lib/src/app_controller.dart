@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_conversation/dsh_conversation.dart';
@@ -36,6 +37,7 @@ import 'notice_coordinator.dart';
 import 'platform/notifications.dart';
 import 'platform/platform_services.dart';
 import 'screens/app_settings_rows.dart';
+import 'screens/pairing_screen.dart' show RepairRoute;
 import 'screens/settings_route.dart';
 import 'session_controller.dart';
 
@@ -55,13 +57,73 @@ enum ConnectionPhase {
 }
 
 /// Why pairing failed, for the pairing screen.
-enum PairingErrorKind { invalid, rejected, unreachable }
+enum PairingErrorKind {
+  /// The text is not a launch link.
+  invalid,
+
+  /// The host refused the launch token.
+  rejected,
+
+  /// Nothing answered.
+  unreachable,
+
+  /// Plain http to an address that is not this device or a private network
+  /// (`detail` is the host).
+  insecure,
+
+  /// The TLS handshake was refused by the trust policy.
+  certificate,
+}
 
 class PairingError {
   const PairingError(this.kind, [this.detail]);
   final PairingErrorKind kind;
   final String? detail;
 }
+
+/// A certificate waiting for the user's decision. Nothing has been sent to the
+/// host: the certificate was read in a handshake that was closed right after.
+class CertificatePrompt {
+  CertificatePrompt({
+    required this.origin,
+    required this.certificate,
+    this.previous,
+  });
+
+  final Uri origin;
+
+  /// What the host presents now.
+  final CertificateInfo certificate;
+
+  /// The fingerprint trusted before, when this is a change (null for a first
+  /// contact).
+  final String? previous;
+
+  /// The user has read the change warning and asked to look at the new
+  /// certificate; only then may it be trusted.
+  bool acknowledged = false;
+
+  /// This is a different certificate than the one trusted before.
+  bool get changed => previous != null;
+
+  /// The decision UI may offer "trust" now.
+  bool get canTrust => !changed || acknowledged;
+}
+
+/// How the connection to the host is protected.
+enum LinkSecurity {
+  /// https with a certificate the system trusts.
+  encrypted,
+
+  /// https with a certificate the user confirmed.
+  pinned,
+
+  /// Plain http (only loopback and private networks are allowed).
+  plain,
+}
+
+/// Resolves a host name to its addresses (injectable for tests).
+typedef HostResolver = Future<List<InternetAddress>> Function(String host);
 
 /// Composition root state: backend, models, the slot registry with every
 /// feature registered, locale and theme settings, and the session in view. No
@@ -77,7 +139,9 @@ class AppController extends ChangeNotifier {
     this.highlighter,
     LocalPrefs? prefs,
     this.notifications,
-  }) : store = store ?? MemoryConnectionStore(),
+    HostResolver? resolver,
+  }) : _resolve = resolver ?? InternetAddress.lookup,
+       store = store ?? MemoryConnectionStore(),
        prefs = prefs ?? MemoryLocalPrefs(),
        _deviceLocale = DshLocale.fromTag(
          PlatformDispatcher.instance.locale.toLanguageTag(),
@@ -160,7 +224,7 @@ class AppController extends ChangeNotifier {
       );
       unawaited(notices!.init());
     }
-    _stateSub = backend.states.listen(_onConnectionState);
+    _stateSub = backend.statuses.listen(_onStatus);
     _approvalSub = approvals.pending.changes.listen((_) => notifyListeners());
     _questionSub = questions.pending.changes.listen((_) => notifyListeners());
   }
@@ -204,7 +268,8 @@ class AppController extends ChangeNotifier {
 
   final StreamController<HostEvent> _events =
       StreamController<HostEvent>.broadcast(sync: true);
-  StreamSubscription<ConnectionState>? _stateSub;
+  final HostResolver _resolve;
+  StreamSubscription<ConnectionStatus>? _stateSub;
   StreamSubscription<HostEvent>? _hostEventSub;
   StreamSubscription<SessionListSnapshot>? _listSub;
   StreamSubscription<List<PendingApproval>>? _approvalSub;
@@ -217,6 +282,30 @@ class AppController extends ChangeNotifier {
 
   /// True while the live connection dropped and is retrying.
   bool reconnecting = false;
+
+  /// The latest connection status of the host (retry number, next retry).
+  ConnectionStatus status = const ConnectionStatus(state: ConnectionState.idle);
+
+  /// The connection came back a moment ago (the indicator confirms for two
+  /// seconds, as dsh web does).
+  bool recovered = false;
+  Timer? _recoveredTimer;
+
+  /// How long the "connected again" confirmation stays.
+  static const Duration recoveredFor = Duration(seconds: 2);
+
+  /// A certificate waiting for the user's decision, if any.
+  CertificatePrompt? certificatePrompt;
+  String? _pendingToken;
+  bool _pendingRemember = false;
+
+  /// The launch token of the live connection, in memory only (the keystore
+  /// holds the persisted copy). Used to continue after a certificate decision.
+  String? _activeToken;
+
+  /// The host remembered from the last run that could not be reached at
+  /// start-up (origin only): the pairing screen offers to retry or forget it.
+  String? savedHostOrigin;
 
   SessionManager? manager;
   String? openSessionId;
@@ -262,11 +351,36 @@ class AppController extends ChangeNotifier {
   Future<void> restore() async {
     final saved = await store.load();
     if (saved == null) return;
-    await _connect(Uri.parse(saved.origin), saved.token, remember: false);
+    final ok = await _connect(
+      Uri.parse(saved.origin),
+      saved.token,
+      remember: false,
+    );
+    if (!ok &&
+        pairingError?.kind == PairingErrorKind.unreachable &&
+        manager == null) {
+      savedHostOrigin = saved.origin;
+      notifyListeners();
+    }
+  }
+
+  /// Retry the host remembered from the last run.
+  Future<void> retrySavedHost() async {
+    savedHostOrigin = null;
+    await restore();
+  }
+
+  /// Forget the host remembered from the last run.
+  Future<void> forgetSavedHost() async {
+    savedHostOrigin = null;
+    pairingError = null;
+    await store.clear();
+    notifyListeners();
   }
 
   /// Pair from the pairing form ([text] is a launch link or host address).
-  /// Returns whether the app is now connected; [pairingError] says why not.
+  /// Returns whether the app is now connected; [pairingError] or
+  /// [certificatePrompt] say why not.
   Future<bool> pair(String text, {String token = ''}) async {
     final LaunchLink link;
     try {
@@ -279,20 +393,77 @@ class AppController extends ChangeNotifier {
     return _connect(link.origin, link.token, remember: true);
   }
 
+  /// Plain http is for this device and private networks only: a name is
+  /// resolved and every address it has must be one of those.
+  Future<PairingError?> _checkPlainHttp(Uri origin) async {
+    var scope = classifyHost(origin.host);
+    if (scope == HostScope.name) {
+      try {
+        scope = classifyAddresses(await _resolve(origin.host));
+      } on SocketException catch (e) {
+        return PairingError(PairingErrorKind.unreachable, e.message);
+      }
+    }
+    return scope == HostScope.public
+        ? PairingError(PairingErrorKind.insecure, origin.host)
+        : null;
+  }
+
   Future<bool> _connect(
     Uri origin,
     String token, {
     required bool remember,
   }) async {
+    final before = phase;
+    void failed() {
+      phase = before == ConnectionPhase.connecting
+          ? ConnectionPhase.disconnected
+          : before;
+      notifyListeners();
+    }
+
     pairingError = null;
+    certificatePrompt = null;
+    savedHostOrigin = null;
     phase = ConnectionPhase.connecting;
     hostOrigin = origin.toString();
     notifyListeners();
+    if (origin.scheme == 'http') {
+      final problem = await _checkPlainHttp(origin);
+      if (problem != null) {
+        pairingError = problem;
+        failed();
+        return false;
+      }
+    } else {
+      final probe = await backend.trust.probe(origin);
+      switch (probe) {
+        case ProbeUntrusted(:final certificate):
+          _holdForCertificate(origin, token, remember, certificate, null);
+          failed();
+          return false;
+        case ProbeChanged(:final certificate, :final pinned):
+          _holdForCertificate(origin, token, remember, certificate, pinned);
+          failed();
+          return false;
+        case ProbeUnreachable(:final error):
+          pairingError = PairingError(
+            PairingErrorKind.unreachable,
+            describeTransportError(error),
+          );
+          failed();
+          return false;
+        case ProbeNoTls() || ProbeSystemTrusted() || ProbePinned():
+          break;
+      }
+    }
     try {
       final transport = await backend.connect(origin, token);
       _adopt(transport);
       phase = ConnectionPhase.connected;
       reconnecting = false;
+      _activeToken = token;
+      _pendingToken = null;
       if (remember) await store.save(SavedHost(origin.toString(), token));
       notifyListeners();
       notices?.setConnected(true);
@@ -312,21 +483,129 @@ class AppController extends ChangeNotifier {
       );
       return true;
     } on ConnectException catch (e) {
-      phase = e.failure == ConnectFailure.rejected
-          ? ConnectionPhase.needsPairing
-          : ConnectionPhase.disconnected;
-      pairingError = PairingError(
-        e.failure == ConnectFailure.rejected
-            ? PairingErrorKind.rejected
-            : PairingErrorKind.unreachable,
-        e.detail,
-      );
+      switch (e.failure) {
+        case ConnectFailure.rejected:
+          phase = ConnectionPhase.needsPairing;
+          pairingError = const PairingError(PairingErrorKind.rejected);
+        case ConnectFailure.unreachable:
+          phase = before == ConnectionPhase.connecting
+              ? ConnectionPhase.disconnected
+              : before;
+          pairingError = PairingError(PairingErrorKind.unreachable, e.detail);
+        case ConnectFailure.certificate:
+          phase = before == ConnectionPhase.connecting
+              ? ConnectionPhase.disconnected
+              : before;
+          final refusal = e.refusal;
+          if (refusal != null) {
+            _holdForCertificate(
+              origin,
+              token,
+              remember,
+              refusal.presented,
+              refusal.pinned,
+            );
+          } else {
+            pairingError = const PairingError(PairingErrorKind.certificate);
+          }
+      }
     } on Object catch (e) {
       phase = ConnectionPhase.disconnected;
-      pairingError = PairingError(PairingErrorKind.unreachable, '$e');
+      pairingError = PairingError(
+        PairingErrorKind.unreachable,
+        describeTransportError(e),
+      );
     }
     notifyListeners();
     return false;
+  }
+
+  void _holdForCertificate(
+    Uri origin,
+    String token,
+    bool remember,
+    CertificateInfo certificate,
+    String? pinned,
+  ) {
+    _pendingToken = token;
+    _pendingRemember = remember;
+    certificatePrompt = CertificatePrompt(
+      origin: origin,
+      certificate: certificate,
+      previous: pinned,
+    );
+    pairingError = const PairingError(PairingErrorKind.certificate);
+  }
+
+  /// The user compared the fingerprint and trusts the certificate: pin it and
+  /// connect (the handshake itself then holds the host to exactly it).
+  Future<bool> trustCertificate() async {
+    final prompt = certificatePrompt;
+    final token = _pendingToken;
+    if (prompt == null || token == null || !prompt.canTrust) return false;
+    await backend.trust.pin(prompt.origin, prompt.certificate);
+    return _connect(prompt.origin, token, remember: _pendingRemember);
+  }
+
+  /// The user does not trust the certificate: nothing was sent, nothing is
+  /// kept.
+  void declineCertificate() {
+    certificatePrompt = null;
+    pairingError = null;
+    _pendingToken = null;
+    notifyListeners();
+  }
+
+  /// The user read the change warning and wants to look at the new
+  /// certificate: the old pin is dropped (the user still has to trust the new
+  /// one explicitly).
+  Future<void> reviewCertificateChange() async {
+    final prompt = certificatePrompt;
+    if (prompt == null || !prompt.changed) return;
+    await backend.trust.forget(prompt.origin);
+    prompt.acknowledged = true;
+    notifyListeners();
+  }
+
+  /// A live connection was refused because the host now shows another
+  /// certificate than the trusted one: put the decision in front of the user.
+  void reviewRefusedCertificate() {
+    final refusal = status.refusal;
+    final token = _activeToken;
+    final origin = hostOrigin == null ? null : Uri.parse(hostOrigin!);
+    if (refusal == null || token == null || origin == null) return;
+    _holdForCertificate(
+      origin,
+      token,
+      false,
+      refusal.presented,
+      refusal.pinned,
+    );
+    notifyListeners();
+    openRepair();
+  }
+
+  /// How the connection is protected, for the indicator and Settings.
+  LinkSecurity get security {
+    final origin = hostOrigin == null ? null : Uri.parse(hostOrigin!);
+    if (origin == null || origin.scheme != 'https') return LinkSecurity.plain;
+    return backend.trust.pinnedFingerprint(origin) == null
+        ? LinkSecurity.encrypted
+        : LinkSecurity.pinned;
+  }
+
+  /// The fingerprint trusted for the current host, if any.
+  String? get pinnedFingerprint {
+    final origin = hostOrigin == null ? null : Uri.parse(hostOrigin!);
+    return origin == null ? null : backend.trust.pinnedFingerprint(origin);
+  }
+
+  /// Forget the trusted certificate of the current host and leave it.
+  Future<void> forgetCertificate() async {
+    final origin = hostOrigin == null ? null : Uri.parse(hostOrigin!);
+    if (origin == null) return;
+    await backend.trust.forget(origin);
+    await disconnect();
   }
 
   void _adopt(SessionTransport transport) {
@@ -425,25 +704,46 @@ class AppController extends ChangeNotifier {
     hostVersion = null;
   }
 
-  void _onConnectionState(ConnectionState s) {
-    switch (s) {
+  void _onStatus(ConnectionStatus next) {
+    status = next;
+    switch (next.state) {
       case ConnectionState.needsPairing:
         phase = ConnectionPhase.needsPairing;
         pairingError = const PairingError(PairingErrorKind.rejected);
         reconnecting = false;
+      case ConnectionState.certificateRefused:
+        reconnecting = false;
       case ConnectionState.connected:
+        final wasDown = reconnecting;
         reconnecting = false;
         if (phase == ConnectionPhase.needsPairing) {
           phase = ConnectionPhase.connected;
           pairingError = null;
         }
-      case ConnectionState.pairing || ConnectionState.connecting:
+        if (wasDown) {
+          recovered = true;
+          _recoveredTimer?.cancel();
+          _recoveredTimer = Timer(recoveredFor, () {
+            recovered = false;
+            notifyListeners();
+          });
+        }
+      case ConnectionState.pairing ||
+          ConnectionState.connecting ||
+          ConnectionState.waiting:
         reconnecting = phase == ConnectionPhase.connected;
+        if (reconnecting) {
+          recovered = false;
+          _recoveredTimer?.cancel();
+        }
       case ConnectionState.idle || ConnectionState.stopped:
         break;
     }
     notifyListeners();
   }
+
+  /// Retry now instead of waiting out the backoff.
+  void reconnectNow() => backend.reconnectNow();
 
   /// Forget the host and return to the pairing screen.
   Future<void> disconnect() async {
@@ -452,7 +752,13 @@ class AppController extends ChangeNotifier {
     await _resetModels();
     phase = ConnectionPhase.disconnected;
     pairingError = null;
+    certificatePrompt = null;
+    _pendingToken = null;
+    _activeToken = null;
     hostOrigin = null;
+    reconnecting = false;
+    recovered = false;
+    status = const ConnectionStatus(state: ConnectionState.idle);
     notifyListeners();
   }
 
@@ -566,7 +872,21 @@ class AppController extends ChangeNotifier {
   bool get notificationsEnabled => prefs.notificationsEnabled;
 
   /// The app moved to or from the foreground ([AppLifecycleState] resumed).
-  void setForeground(bool foreground) => notices?.setForeground(foreground);
+  void setForeground(bool foreground) {
+    notices?.setForeground(foreground);
+    // A connection that went quiet while the app was away is retried at once
+    // instead of after the rest of its backoff.
+    if (foreground && reconnecting) backend.reconnectNow();
+  }
+
+  /// Open the page that pairs again over the app (sessions stay behind it).
+  void openRepair() {
+    final nav = navigatorKey.currentState;
+    if (nav == null) return;
+    nav.push(
+      MaterialPageRoute<void>(builder: (_) => RepairRoute(controller: this)),
+    );
+  }
 
   /// Open the settings page over the app.
   void openSettings() {
@@ -604,6 +924,7 @@ class AppController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _recoveredTimer?.cancel();
     unawaited(_stateSub?.cancel());
     unawaited(_approvalSub?.cancel());
     unawaited(_questionSub?.cancel());

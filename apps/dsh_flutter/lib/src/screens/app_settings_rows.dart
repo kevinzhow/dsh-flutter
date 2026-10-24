@@ -177,19 +177,46 @@ class HostRow extends StatelessWidget {
       return const SizedBox.shrink();
     }
     final i18n = controller.i18n;
-    String a(String key) => i18n.t(appNamespace, key);
+    String a(String key, [Map<String, Object?> params = const {}]) =>
+        i18n.t(appNamespace, key, params: params);
+    final security = controller.security;
+    final pinned = controller.pinnedFingerprint;
+    final detail = switch (security) {
+      LinkSecurity.plain => a('security.plain.detail'),
+      LinkSecurity.encrypted => a('security.encrypted'),
+      LinkSecurity.pinned => a('cert.settings.description', {
+        'fingerprint': pinned ?? '',
+      }),
+    };
     return DshSettingsRow(
       key: const ValueKey('host-row'),
       title: a('settings.host.title'),
-      description: controller.hostOrigin ?? '',
-      control: DshButton(
-        key: const ValueKey('settings-disconnect'),
-        variant: DshButtonVariant.outline,
-        onPressed: () async {
-          Navigator.of(context).pop();
-          await controller.disconnect();
-        },
-        child: Text(a('sessions.disconnect')),
+      description: '${controller.hostOrigin ?? ''}\n$detail',
+      alert: security == LinkSecurity.plain,
+      control: Wrap(
+        spacing: DshSpace.sm,
+        runSpacing: DshSpace.sm,
+        children: [
+          if (pinned != null)
+            DshButton(
+              key: const ValueKey('settings-forget-certificate'),
+              variant: DshButtonVariant.outline,
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await controller.forgetCertificate();
+              },
+              child: Text(a('cert.forget')),
+            ),
+          DshButton(
+            key: const ValueKey('settings-disconnect'),
+            variant: DshButtonVariant.outline,
+            onPressed: () async {
+              Navigator.of(context).pop();
+              await controller.disconnect();
+            },
+            child: Text(a('sessions.disconnect')),
+          ),
+        ],
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 import '../app_controller.dart';
+import 'connection_bar.dart';
+import 'security_chip.dart';
 
 /// The session list pane with its toolbar (new session, settings, disconnect)
 /// and the reconnect banner. Hosts no navigation: [onOpen] decides what
@@ -64,6 +66,8 @@ class SessionsPane extends StatelessWidget {
                                 ),
                               ),
                         ),
+                      if (controller.hostOrigin != null)
+                        SecurityChip(controller: controller),
                     ],
                   ),
                 ),
@@ -85,22 +89,7 @@ class SessionsPane extends StatelessWidget {
             ),
           ),
         ),
-        if (controller.reconnecting)
-          Container(
-            key: const ValueKey('reconnecting-banner'),
-            width: double.infinity,
-            color: theme.color('--dsw-alias-state-warn-tertiary'),
-            padding: const EdgeInsets.symmetric(
-              horizontal: DshSpace.lg,
-              vertical: DshSpace.xs,
-            ),
-            child: Text(
-              a('pairing.status.reconnecting'),
-              style: theme
-                  .textStyle('--dsw-font-xxs-12')
-                  .copyWith(color: theme.labelPrimary),
-            ),
-          ),
+        ConnectionBar(controller: controller),
         if (controller.createError != null)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: DshSpace.lg),

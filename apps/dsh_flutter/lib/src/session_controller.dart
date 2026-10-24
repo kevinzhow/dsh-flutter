@@ -91,6 +91,7 @@ class SessionController implements SessionActions {
       cwdReader: cwdReader,
       hostHome: hostHome,
       attachments: _attachments,
+      textDraft: readOnly ? null : TextDraft(),
       files: _Files(files, platform.fileActions),
     );
   }

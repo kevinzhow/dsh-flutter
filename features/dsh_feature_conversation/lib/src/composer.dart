@@ -148,7 +148,12 @@ class _DefaultComposerState extends State<DefaultComposer> {
     });
     // Files dropped on a desktop window arrive like picked ones.
     _dropSub = widget.owner.attachments?.dropped.listen(_add);
-    _text.addListener(() => setState(() {}));
+    final draft = widget.owner.textDraft;
+    if (draft != null) _text.text = draft.text;
+    _text.addListener(() {
+      widget.owner.textDraft?.text = _text.text;
+      setState(() {});
+    });
   }
 
   @override
