@@ -295,6 +295,21 @@ void main() {
       expect(t.getSize(drawer()).width, closeTo(272, 0.01));
     });
 
+    testWidgets('the top bar and the drawer sit between the system bars', (
+      t,
+    ) async {
+      t.view.padding = const FakeViewPadding(top: 40, bottom: 30);
+      t.view.viewPadding = const FakeViewPadding(top: 40, bottom: 30);
+      addTearDown(t.view.resetPadding);
+      addTearDown(t.view.resetViewPadding);
+      await phone(t);
+      expect(t.getTopLeft(find.byKey(const ValueKey('phone-top-bar'))).dy, 40);
+      await t.tap(find.byKey(const ValueKey('phone-menu')));
+      await settle(t);
+      expect(t.getTopLeft(drawer()).dy, 40);
+      expect(t.getBottomLeft(drawer()).dy, 915 - 30);
+    });
+
     testWidgets('the scrim closes it', (t) async {
       await phone(t);
       await t.tap(find.byKey(const ValueKey('phone-menu')));
