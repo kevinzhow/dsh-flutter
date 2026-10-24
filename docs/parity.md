@@ -390,13 +390,125 @@ tool/parity-desktop/run --list
 tool/parity-desktop/run --cases session.1280x720.light.en,session.1600x1000.      # a case id or a prefix
 ```
 
+Create the isolated fixture host first. `tool/parity-desktop/gen-session.mjs` writes 320 synthetic turns through the pinned
+dsh JSONL persistence; it makes no model calls and needs no credentials. It creates a new session and refuses an existing
+session id. Use a fresh directory outside `/tmp` on machines where `/tmp` is a memory disk, and name the workspace `ws`
+to match the screenshots. The CLI install can be local or global:
+
+```sh
+npm install --prefix .local/desktop-runtime @deepseek-ai/dsh@0.2.1-rc.2
+fixture_root="$PWD/.local/desktop-fixture"    # a new, isolated directory
+mkdir -p "$fixture_root/ws" "$fixture_root/dsh-home"
+FIXTURE_CWD="$fixture_root/ws" node tool/parity-desktop/gen-session.mjs \
+  "$PWD/.local/desktop-runtime/node_modules/@deepseek-ai/dsh" \
+  "$fixture_root/dsh-home/sessions" fixture-long-1 320
+
+# Run the host in the foreground; use another terminal for captures.
+# Stop this host with Ctrl+C when captures finish.
+dsh_bin="$PWD/.local/desktop-runtime/node_modules/.bin/dsh"
+(
+  cd "$fixture_root/ws"
+  DSH_HOME="$fixture_root/dsh-home" "$dsh_bin" web \
+    --host 127.0.0.1 --port 18786 --no-open > "$fixture_root/dsh-web.log" 2>&1
+)
+```
+
+Set `PARITY_DESKTOP_HOST_LOG` to that private log; it contains the host's launch credential and must not be committed or
+attached to a report. Use only this fixture host for captures, and match its appearance setting to the case theme (restart
+the host after changing it).
+
+The session case selects `fixture-long-1` by its stable row key. A cold host initially lists it as Untitled: opening it
+replays the log and populates dsh's title projection cache. Run a Web session case before capturing app-only phone cases;
+the default full run does this automatically. No manual rename or pre-existing projection cache is needed.
+
 Environment: `PARITY_WEB_DEPS` (as the component suite), `PARITY_DESKTOP_HOST_LOG` (the log of an isolated `dsh web --port ...` whose
 `DSH_HOME` holds the fixture sessions, written through dsh's own persistence with no model call), `PARITY_DESKTOP_CHROME` (a
 Chromium), `PARITY_DESKTOP_APP` (the built `build/linux/x64/*/bundle/dsh_flutter`), `PARITY_DESKTOP_HOME` (an empty directory used as
 the app's HOME), `PARITY_DESKTOP_OUT`, `PARITY_NODE_BIN`; Python needs `numpy`, `Pillow` and `python-xlib`, and the machine `Xvfb`,
-`xwininfo` and ImageMagick's `import`. The tool starts its own Xvfb display and its own app process per case and stops exactly those
-(their PIDs are in `pids.txt`); it never touches another process and never reads or prints the launch token beyond typing it into the
+`dbus-run-session`, `xwininfo` and ImageMagick's `import`. The tool starts its own Xvfb display and an isolated D-Bus/app session per case;
+it stops its recorded app process groups and display (their PIDs are in `pids.txt`). This keeps headless startup independent of the
+caller's desktop services, which can otherwise leave the capture black. It never touches another process or reads or prints the launch token beyond typing it into the
 app. The host itself is the caller's: start one on a loopback port with its own `DSH_HOME` and keep its PID.
 
 Below 1024 px the left column starts as its rail, so those cases widen it first, on both sides. The dark cases set `WHALEE_PLATFORM_BRIGHTNESS=dark` for the
 app (a capture hook, like `WHALEE_WINDOW_SIZE` and `WHALEE_PIN_FONTS`) and `colorScheme` for the page; the Chinese cases set `LC_ALL` and the browser locale.
+
+### Weston GPU interaction replay
+
+`tool/parity-desktop/run --app-backend weston` replays the desktop cases in a private native Wayland session on the GPU.
+Install Weston **14** and matching `libweston-14-dev`, a C compiler, `pkg-config`, `dbus-run-session` and the
+`weston-screenshooter` client. The user needs render-node access (`render` group on k172). Keep the isolated fixture host
+and the `PARITY_DESKTOP_*` variables from the section above; use a fresh app settings directory for each run:
+
+```sh
+export PARITY_DESKTOP_HOME="$PWD/.local/gpu-home-$(date +%s)"
+# XDG_RUNTIME_DIR must be a short writable directory, normally /run/user/$(id -u).
+tool/parity-desktop/run --app-backend weston --cases session.1280x720.light.en \
+  --out "$PWD/build/parity-desktop-gpu"
+```
+
+Use `--skip-web` to capture only the app. The default backend remains `x11`; use separate output directories for the two
+environments. GPU capture compiles `weston_input.c` into the output directory. This test-only module creates a keyboard and
+pointer in the private compositor and receives commands on an inherited pipe. It reads no physical input devices, opens
+no input service port, and is never installed in the system compositor. It uses Weston 14 private seat/input APIs, so both
+the runner and compilation reject other major versions; revalidate against the installed build after upgrading Weston.
+
+The runner uses the existing case coordinates for pairing and page clicks, plus `scroll: [x, y, verticalPixels]` for wheel
+input and `capture: "label"` for intermediate screenshots. Typing uses an explicitly configured US keyboard and rejects
+unsupported characters before sending any key. Each case has its own runtime directory, D-Bus session and app settings.
+The runner records its PIDs and stops those process groups on success and failure; it also terminates Weston when the
+input pipe closes. The fixture host remains the caller's responsibility.
+
+Each case writes `environment.json` with the actual GL renderer, kernel and the render node opened by the application
+process itself. Software renderers and an app without an open render node fail the run. The Weston and app logs are kept
+beside it; treat the app log and captures as private until checked, since failed pairing can leave the launch token on
+screen. Screenshots and the app log are created with owner-only access. This harness establishes GPU input replay; it does
+not measure frame latency or prove visual parity. Record Flutter, Mesa, fonts and scale along with any published scores.
+
+On k172 (Weston 14.0.2 / Mesa 26.0.8 / Intel Lunar Lake), the harness paired with the synthetic host, opened the 320-turn
+fixture, scrolled from turn 320 back to turns 310–311, and confirmed application renderD128 access. Both recorded process
+groups exited. An intentionally failing app also exercised cleanup.
+
+### Manual Weston GPU startup
+
+For native Wayland startup and GPU screenshots, use an isolated Weston headless GL session. The user needs read/write access
+to the render node (normally the `render` group; a new login or `sg render` applies a newly added membership). Install Weston
+and its `weston-screenshooter` client. From the repository root, start the compositor in one terminal:
+
+```sh
+runtime="${XDG_RUNTIME_DIR:?}/whalee-gpu"
+mkdir -p "$runtime"
+chmod 700 "$runtime"
+XDG_RUNTIME_DIR="$runtime" weston --backend=headless --renderer=gl \
+  --width=1280 --height=720 --shell=kiosk-shell.so --socket=wayland-whalee \
+  --no-config --idle-time=0 --debug --log="$PWD/.local/weston-gpu.log"
+```
+
+The private test compositor enables its debug/capture protocol. In another terminal at the repository root, launch the app
+with its own D-Bus session and the native Wayland backend, with software-rendering overrides removed:
+
+```sh
+XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:?}/whalee-gpu" WAYLAND_DISPLAY=wayland-whalee \
+  GDK_BACKEND=wayland GTK_USE_PORTAL=0 WHALEE_WINDOW_SIZE=1280x720 \
+  env -u LIBGL_ALWAYS_SOFTWARE -u FLUTTER_LINUX_RENDERER dbus-run-session -- \
+  apps/dsh_flutter/build/linux/x64/release/bundle/dsh_flutter
+```
+
+Capture from a third terminal, again starting at the repository root. The client writes a timestamped PNG in its working
+directory. Stop the app and compositor with Ctrl+C after the run:
+
+```sh
+runtime="${XDG_RUNTIME_DIR:?}/whalee-gpu"
+mkdir -p .local/weston-captures
+(
+  cd .local/weston-captures
+  XDG_RUNTIME_DIR="$runtime" WAYLAND_DISPLAY=wayland-whalee weston-screenshooter
+)
+```
+
+Record the GPU/device, kernel driver, Mesa, Weston, Flutter, fonts, scale and GL renderer with the result; `--renderer=gl`
+alone does not establish hardware acceleration. The Weston log names the actual rendering device and GL renderer. Keep
+this environment distinct from the Xvfb baseline when comparing scores. The manual commands above verify startup and
+capture; use `--app-backend weston` for native input replay.
+The runtime directory uses the login session's short path to stay within Unix socket path limits; parallel runs need
+different runtime directories.

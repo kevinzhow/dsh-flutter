@@ -20,7 +20,7 @@
    "title": "A started session with the Ungrouped group open",
    "web": [
     {
-     "click": "[data-row-key^='session:']:has-text('Stream fixture')"
+     "click": "[data-row-key='session:fixture-long-1']"
     },
     {
      "wait": 2500

@@ -46,6 +46,8 @@ def main():
     ap.add_argument('--out', default=os.environ.get('PARITY_DESKTOP_OUT', str(ROOT / 'build' / 'parity-desktop')))
     ap.add_argument('--skip-web', action='store_true')
     ap.add_argument('--skip-app', action='store_true')
+    ap.add_argument('--app-backend', choices=['x11', 'weston'], default='x11',
+                    help='x11: private software Xvfb; weston: native Wayland on GPU (Weston 14)')
     ap.add_argument('--list', action='store_true')
     args = ap.parse_args()
     cases = expand(json.loads((HERE / 'cases.json').read_text()))
@@ -60,11 +62,17 @@ def main():
     expanded.write_text(json.dumps({'cases': cases}, indent=1))
     ids = [c['id'] for c in cases]
     web_ids = [c['id'] for c in cases if not c['appOnly']]
+    backend_record = out / 'app' / 'backend.txt'
+    if not args.skip_app and backend_record.exists() and backend_record.read_text().strip() != args.app_backend:
+        ap.error('Use a separate output directory for a different app backend')
     node = (pathlib.Path(os.environ['PARITY_NODE_BIN']) / 'node') if os.environ.get('PARITY_NODE_BIN') else 'node'
     if not args.skip_web and web_ids:
         subprocess.run(['nice', '-n', '15', str(node), str(HERE / 'web_capture.mjs'), str(out / 'web'), str(expanded), *web_ids], check=True)
     if not args.skip_app:
-        subprocess.run(['nice', '-n', '15', sys.executable, '-I', str(HERE / 'app_capture.py'), str(out / 'app'), str(expanded), *ids], check=True)
+        provider = 'gpu_capture.py' if args.app_backend == 'weston' else 'app_capture.py'
+        subprocess.run(['nice', '-n', '15', sys.executable, '-I', str(HERE / provider), str(out / 'app'), str(expanded), *ids], check=True)
+        backend_record.write_text(args.app_backend + '\n')
+    backend = backend_record.read_text().strip() if backend_record.exists() else 'unrecorded'
     rows = []
     for c in cases:
         web, app = out / 'web' / (c['id'] + '.png'), out / 'app' / (c['id'] + '.png')
@@ -87,8 +95,9 @@ def main():
             sheet.save(out / (c['id'] + '.side-by-side.png'))
         except ImportError:
             pass
-    (out / 'summary.json').write_text(json.dumps({'schema': 'dsh-parity-desktop-summary/1', 'cases': rows}, indent=1))
-    lines = ['# Desktop pages: dsh web vs Whalee (Linux build)', '', '| case | exact | close | non-text |', '|---|---|---|---|']
+    (out / 'summary.json').write_text(json.dumps({'schema': 'dsh-parity-desktop-summary/1', 'appBackend': backend, 'cases': rows}, indent=1))
+    lines = ['# Desktop pages: dsh web vs Whalee (Linux build)', '', 'App capture backend: ' + backend, '',
+             '| case | exact | close | non-text |', '|---|---|---|---|']
     for r in rows:
         if r['status'] == 'captured':
             lines.append('| %s | app only | | |' % r['id'])
