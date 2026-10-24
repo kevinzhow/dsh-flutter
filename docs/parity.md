@@ -425,8 +425,9 @@ Environment: `PARITY_WEB_DEPS` (as the component suite), `PARITY_DESKTOP_HOST_LO
 `DSH_HOME` holds the fixture sessions, written through dsh's own persistence with no model call), `PARITY_DESKTOP_CHROME` (a
 Chromium), `PARITY_DESKTOP_APP` (the built `build/linux/x64/*/bundle/dsh_flutter`), `PARITY_DESKTOP_HOME` (an empty directory used as
 the app's HOME), `PARITY_DESKTOP_OUT`, `PARITY_NODE_BIN`; Python needs `numpy`, `Pillow` and `python-xlib`, and the machine `Xvfb`,
-`xwininfo` and ImageMagick's `import`. The tool starts its own Xvfb display and its own app process per case and stops exactly those
-(their PIDs are in `pids.txt`); it never touches another process and never reads or prints the launch token beyond typing it into the
+`dbus-run-session`, `xwininfo` and ImageMagick's `import`. The tool starts its own Xvfb display and an isolated D-Bus/app session per case;
+it stops its recorded app process groups and display (their PIDs are in `pids.txt`). This keeps headless startup independent of the
+caller's desktop services, which can otherwise leave the capture black. It never touches another process or reads or prints the launch token beyond typing it into the
 app. The host itself is the caller's: start one on a loopback port with its own `DSH_HOME` and keep its PID.
 
 Below 1024 px the left column starts as its rail, so those cases widen it first, on both sides. The dark cases set `WHALEE_PLATFORM_BRIGHTNESS=dark` for the

@@ -75,6 +75,8 @@ def main():
     cases = json.loads(pathlib.Path(sys.argv[2]).read_text())['cases']
     only = sys.argv[3:]
     app, log, home = need('PARITY_DESKTOP_APP'), need('PARITY_DESKTOP_HOST_LOG'), need('PARITY_DESKTOP_HOME')
+    if shutil.which('dbus-run-session') is None:
+        raise SystemExit('dbus-run-session is required for isolated desktop captures')
     link = re.search(r'http://127\.0\.0\.1:\d+/\?token=\S+', pathlib.Path(log).read_text()).group(0)
     name = ':%d' % int(os.environ.get('PARITY_DESKTOP_DISPLAY', '91'))
     pids = out / 'pids.txt'
@@ -93,12 +95,14 @@ def main():
             case_home.mkdir(parents=True)
             env = dict(os.environ, DISPLAY=name, LIBGL_ALWAYS_SOFTWARE='1', GDK_BACKEND='x11', HOME=str(case_home),
                        XDG_CONFIG_HOME=str(case_home / '.config'), XDG_DATA_HOME=str(case_home / '.local/share'),
-                       WHALEE_WINDOW_SIZE='%dx%d' % (c['width'], c['height']), WHALEE_PIN_FONTS=str(FONTS))
+                       GTK_USE_PORTAL='0', WHALEE_WINDOW_SIZE='%dx%d' % (c['width'], c['height']), WHALEE_PIN_FONTS=str(FONTS))
             if c['theme'] == 'dark':
                 env['WHALEE_PLATFORM_BRIGHTNESS'] = 'dark'
             if c['locale'] == 'zh':
                 env['LC_ALL'] = 'zh_CN.UTF-8'; env['LANGUAGE'] = 'zh_CN'
-            proc = subprocess.Popen([app], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+            # Desktop services belong to this capture's display, not the caller's logged-in desktop.
+            proc = subprocess.Popen(['dbus-run-session', '--', app], env=env,
+                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
             with pids.open('a') as f:
                 f.write('app %d\n' % proc.pid)
             try:
@@ -131,11 +135,18 @@ def main():
                 subprocess.run(['import', '-display', name, '-window', 'root', '-crop', '%dx%d+%d+%d' % (w, h, x, y), '+repage', str(shot)], check=True)
                 print('app', c['id'])
             finally:
-                proc.send_signal(signal.SIGTERM)
+                try:
+                    os.killpg(proc.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass  # The capture session already exited.
                 try:
                     proc.wait(timeout=10)
                 except subprocess.TimeoutExpired:
-                    proc.kill()
+                    try:
+                        os.killpg(proc.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass  # The session exited as the timeout elapsed.
+                    proc.wait(timeout=10)
     finally:
         xvfb.send_signal(signal.SIGTERM)
         xvfb.wait(timeout=10)
