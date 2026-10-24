@@ -59,10 +59,12 @@ jobs:
         #   icons       regenerates icon paths and code-language tables from the same checkout
         #   vector      replays the behaviour vectors through dsh's TypeScript code (dsh checkout + its node install)
         #   parity      the parity selftest builds its cases from dsh's locale files; only the Flutter case map is regenerated
+        #   capability  the upstream half of the capability table (every ui package, Remote method, slot and settings namespace has a row);
+        #               the table's own checks (schema, Whalee paths, fresh markdown, reviewed pin) still run
         # Run them locally before a PR (README, "Working on it").
         env:
           FLUTTER_SDK: ${{ env.FLUTTER_ROOT }}
-        run: tool/preflight --allow-skip theme-pack,icons,vector,parity
+        run: tool/preflight --allow-skip theme-pack,icons,vector,parity,capability
 
       - name: Summary
         if: always()

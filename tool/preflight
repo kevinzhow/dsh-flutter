@@ -17,6 +17,8 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   parity           tool/parity selftest: parity case manifests validate (dsh schema and the vendored visual-testing CLI),
                    font pins hold, the vendored CLI diffs synthetic captures, bucket metrics behave, Flutter case map
                    regenerated (skipped with exit 2 when numpy/Pillow or the CLI's `tool/parity setup` install are missing)
+  capability       tool/capability_parity.py --check: docs/capability-parity.json is well formed and fresh, and the pinned dsh has no
+                   ui package, Remote method, slot or settings namespace without a row (skipped with exit 2 without the dsh checkout)
   format           dart format --set-exit-if-changed on every Dart file
   analyze          dart analyze (whole workspace)
   tests            dart test / flutter test per package (skipped with --fast)
@@ -180,6 +182,13 @@ def c_parity():
     return code, out, secs
 
 
+def c_capability():
+    code, out, secs = run([sys.executable, '-I', 'tool/capability_parity.py', '--check'])
+    if code == 2:  # the table itself is fine; only the upstream coverage could not be checked
+        return 'skip', out, secs
+    return code, out, secs
+
+
 def c_format():
     files = dart_files()
     return run(NICE + ['dart', 'format', '--output=none', '--set-exit-if-changed'] + files)
@@ -214,6 +223,7 @@ CHECKS = [
     ('icons', c_icons),
     ('vector', c_vector),
     ('parity', c_parity),
+    ('capability', c_capability),
     ('format', c_format),
     ('analyze', c_analyze),
     ('tests', c_tests),

@@ -36,7 +36,7 @@ features/dsh_feature_tool              ui-tool: tool rows and cards per tool kin
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions
                                        (one feature per dsh ui-* package; features never import each other)
 apps/dsh_flutter                       composition root: pairing, navigation, platform manifests (Whalee)
-tool/                                  generators, guards, preflight, live spike, visual parity tool (docs/parity.md)
+tool/                                  generators, guards, preflight, live spike, visual parity tool (docs/parity.md), capability table (docs/capability-parity.json)
 tool/vendor/raft-visual-testing/       vendored Raft visual-testing CLI, FSL-1.1-ALv2 (not MIT), see License below
 ```
 
@@ -57,8 +57,9 @@ tool/preflight                        # same plus every package's tests (not the
 ```
 
 CI (`.github/workflows/ci.yml`) runs `tool/preflight` on every pull request and push to main, and builds an Android APK
-(see "CI builds and release signing"). It has no dsh checkout, so it skips four checks on purpose and says so in the job
-summary: `theme-pack`, `icons`, `vector` and `parity` (the parity selftest). Run the full `tool/preflight` locally before a PR.
+(see "CI builds and release signing"). It has no dsh checkout, so it skips five checks on purpose and says so in the job
+summary: `theme-pack`, `icons`, `vector`, `parity` (the parity selftest) and `capability` (the upstream half of the capability
+table, see below). Run the full `tool/preflight` locally before a PR.
 
 Generators read the pinned dsh checkout: put it at `.local/dsh-src` (or set `DSH_SRC`). They are committed output
 with a `--check` mode:
@@ -70,6 +71,24 @@ python3 tool/i18n/gen_catalog.py [--check]                 # dsh locale dictiona
 python3 tool/vectors/gen_expected.py --check <fixture>     # TS-produced expectations for the behaviour vectors
 python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for the settings vectors
 ```
+
+## Capability parity
+
+`docs/capability-parity.json` is the table of what the pinned dsh web client can do and how much of it Whalee has: one row for
+every `packages/client/ui-*` package, every `@Remote` method, every slot name and every settings namespace, each marked
+`ported`, `partial`, `missing` or `na` (not applicable, with the reason), with the Whalee file that implements it and, for
+a partial row, what is missing. `docs/capability-parity.md` is the readable summary (counts per area, open packages by priority), generated:
+
+```sh
+python3 tool/capability_parity.py --write      # regenerate docs/capability-parity.md from the table
+python3 tool/capability_parity.py --check      # table well formed, Whalee paths exist, markdown fresh, table reviewed for the pinned dsh;
+                                               # with the dsh checkout: no ui package, Remote method, slot or settings namespace without a row
+python3 tool/capability_parity.py --skeleton   # JSON stubs for the upstream items that have no row yet
+```
+
+`--check` is the `capability` check of `tool/preflight`. When the dsh pin moves it goes red for every new upstream item (and every
+removed one) until the table is reviewed; set `dsh.commit` in the table to the new pin after that. Statuses come from reading the
+Whalee code, not from names: when a feature lands, change its row (and the rows of its Remote methods, slots and settings) in the same PR.
 
 ## Connecting to a host
 
@@ -143,10 +162,10 @@ sessions.
 
 The workflow `.github/workflows/ci.yml` (actions pinned by commit SHA, Flutter from `.fvmrc`) has two jobs:
 
-- **preflight**: `tool/preflight --allow-skip theme-pack,icons,vector,parity`. The four named checks need the pinned dsh
+- **preflight**: `tool/preflight --allow-skip theme-pack,icons,vector,parity,capability`. The five named checks need the pinned dsh
   checkout (and, for `vector`, its node install), which CI does not have; they are skipped, listed in the job summary with the
-  reason, and any other skipped check fails the job. Everything else runs: layering, tool tests, codegen and i18n staleness
-  (offline mode), format, analyze and every package's tests.
+  reason, and any other skipped check fails the job. Everything else runs: layering, tool tests (which include the capability
+  table's own checks), codegen and i18n staleness (offline mode), format, analyze and every package's tests.
 - **android apk**: `flutter build apk --release`, uploaded as a workflow artifact (14 days). With no release keystore the APK
   is signed with the Android **debug** key and the job summary says so; such an APK installs for testing but is not the
   release identity (it cannot update a release-signed install, and the debug key is public knowledge).
