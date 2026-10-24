@@ -7,22 +7,31 @@ import 'dart:typed_data';
 /// per-socket Peers, unary `POST /api/<ns>/<method>`, and the
 /// `/api/remote.mux` WebSocket with logical streams. Synthetic data only.
 class FakeHost {
-  FakeHost._(this._server, this.token, this.port);
+  FakeHost._(this._server, this.token, this.port, this._tls);
 
+  /// [tls] makes the host serve https with that certificate (a self-signed
+  /// one in the trust tests).
   static Future<FakeHost> start({
     int port = 0,
     String token = 'launch-token-1',
+    SecurityContext? tls,
   }) async {
-    final server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
-    final host = FakeHost._(server, token, server.port);
+    final server = await _bind(port, tls);
+    final host = FakeHost._(server, token, server.port, tls);
     host._listen();
     return host;
   }
 
+  static Future<HttpServer> _bind(int port, SecurityContext? tls) => tls == null
+      ? HttpServer.bind(InternetAddress.loopbackIPv4, port)
+      : HttpServer.bindSecure(InternetAddress.loopbackIPv4, port, tls);
+
   HttpServer _server;
+  final SecurityContext? _tls;
   String token;
   final int port;
-  Uri get origin => Uri.parse('http://127.0.0.1:$port');
+  Uri get origin =>
+      Uri.parse('${_tls == null ? 'http' : 'https'}://127.0.0.1:$port');
 
   final Map<String, bool> _peers = {}; // peerId -> socket attached
   final Map<String, WebSocket> _sockets = {};
@@ -261,7 +270,7 @@ class FakeHost {
     _streamsById.clear();
     openStreams.clear();
     token = newToken;
-    _server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
+    _server = await _bind(port, _tls);
     _listen();
   }
 

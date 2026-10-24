@@ -1,16 +1,25 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_models/dsh_models.dart';
 
 /// Why [HostBackend.connect] failed, in terms the pairing screen explains.
-enum ConnectFailure { rejected, unreachable }
+enum ConnectFailure {
+  /// The host refused the launch token.
+  rejected,
+
+  /// Nothing answered.
+  unreachable,
+
+  /// The TLS handshake was refused by the trust policy ([ConnectException.refusal]).
+  certificate,
+}
 
 class ConnectException implements Exception {
-  const ConnectException(this.failure, [this.detail]);
+  const ConnectException(this.failure, [this.detail, this.refusal]);
   final ConnectFailure failure;
   final String? detail;
+  final CertificateRefusal? refusal;
   @override
   String toString() =>
       'ConnectException($failure${detail == null ? '' : ': $detail'})';
@@ -20,8 +29,15 @@ class ConnectException implements Exception {
 /// widget tests inject a fake. The launch token passes through [connect] and
 /// is never logged by the app.
 abstract interface class HostBackend {
-  /// Live connection state of the current host (for the reconnect banner).
-  Stream<ConnectionState> get states;
+  /// Live connection status of the current host: state, retry number and next
+  /// retry time (for the connection indicator).
+  Stream<ConnectionStatus> get statuses;
+
+  /// Certificate trust of https hosts: probing, the pins the user confirmed.
+  HostTrust get trust;
+
+  /// Retry now instead of waiting out the backoff (dsh's "reconnect now").
+  void reconnectNow();
 
   /// Streams a file to the host's upload route (`session/uploadFileBinary`).
   FileUploadClient get uploader;
@@ -49,21 +65,30 @@ abstract interface class HostBackend {
 }
 
 class LiveBackend implements HostBackend {
-  LiveBackend({this.connectTimeout = const Duration(seconds: 12)});
+  LiveBackend({
+    this.connectTimeout = const Duration(seconds: 12),
+    HostTrust? trust,
+  }) : trust = trust ?? HostTrust();
 
   final Duration connectTimeout;
+  @override
+  final HostTrust trust;
   DshConnection? _connection;
   DshSessionTransport? _transport;
-  final StreamController<ConnectionState> _states =
-      StreamController<ConnectionState>.broadcast();
-  StreamSubscription<ConnectionState>? _stateSub;
+  final StreamController<ConnectionStatus> _statuses =
+      StreamController<ConnectionStatus>.broadcast();
+  StreamSubscription<ConnectionStatus>? _stateSub;
 
   @override
-  Stream<ConnectionState> get states => _states.stream;
+  Stream<ConnectionStatus> get statuses => _statuses.stream;
+
+  @override
+  void reconnectNow() => _connection?.reconnectNow();
 
   @override
   late final FileUploadClient uploader = HttpFileUploadClient(
     credential: () => _connection?.generation?.credential,
+    clientFor: trust.clientFor,
   );
 
   @override
@@ -82,9 +107,9 @@ class LiveBackend implements HostBackend {
     final reuse = existing != null && existing.origin == origin;
     if (!reuse) {
       await _teardown();
-      final connection = DshConnection(origin: origin);
+      final connection = DshConnection(origin: origin, trust: trust);
       _connection = connection;
-      _stateSub = connection.states.listen(_states.add);
+      _stateSub = connection.statuses.listen(_statuses.add);
       _transport = DshSessionTransport(connection);
     }
     final connection = _connection!;
@@ -94,19 +119,33 @@ class LiveBackend implements HostBackend {
         connection.untilConnected(timeout: connectTimeout),
         connection
             .untilState(
-              (s) => s == ConnectionState.needsPairing,
+              (s) =>
+                  s == ConnectionState.needsPairing ||
+                  s == ConnectionState.certificateRefused,
               timeout: connectTimeout,
             )
-            .then((_) => throw const ConnectException(ConnectFailure.rejected)),
+            .then((state) {
+              if (state == ConnectionState.certificateRefused) {
+                throw ConnectException(
+                  ConnectFailure.certificate,
+                  null,
+                  connection.status.refusal,
+                );
+              }
+              throw const ConnectException(ConnectFailure.rejected);
+            }),
       ]);
     } on ConnectException {
       rethrow;
     } on TimeoutException {
-      final error = connection.lastError;
-      await _teardown();
+      final detail = describeTransportError(connection.lastError);
+      // A first connection that never came up is dropped. An existing one
+      // (a re-pair after a restart) keeps retrying in the background with the
+      // new token: the sessions it serves are still on screen.
+      if (!reuse) await _teardown();
       throw ConnectException(
         ConnectFailure.unreachable,
-        error is SocketException ? error.message : error?.toString(),
+        detail.isEmpty ? null : detail,
       );
     }
     return _transport!;
@@ -133,7 +172,8 @@ class LiveBackend implements HostBackend {
   @override
   Future<void> dispose() async {
     await _teardown();
-    await _states.close();
+    await _statuses.close();
+    await trust.dispose();
   }
 }
 

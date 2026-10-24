@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import '../app_controller.dart';
 import '../session_controller.dart';
+import 'connection_bar.dart';
 
 /// One open session: the header slot with a back control (phones), and the
 /// `conversation.session` slot below it.
@@ -72,22 +73,7 @@ class SessionView extends StatelessWidget {
           ),
           child: const SizedBox(width: double.infinity),
         ),
-        if (controller.reconnecting)
-          Container(
-            key: const ValueKey('session-reconnecting'),
-            width: double.infinity,
-            color: theme.color('--dsw-alias-state-warn-tertiary'),
-            padding: const EdgeInsets.symmetric(
-              horizontal: DshSpace.lg,
-              vertical: DshSpace.xs,
-            ),
-            child: Text(
-              controller.i18n.t('app', 'pairing.status.reconnecting'),
-              style: theme
-                  .textStyle('--dsw-font-xxs-12')
-                  .copyWith(color: theme.labelPrimary),
-            ),
-          ),
+        ConnectionBar(controller: controller),
         Expanded(
           child: SafeArea(top: false, child: body ?? const SizedBox.shrink()),
         ),

@@ -11,6 +11,54 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:dsh_slots/testing.dart';
 
+/// A [HostTrust] whose probe answers what the test scripts; nothing opens a
+/// socket. Pins work as in the real one.
+class FakeTrust extends HostTrust {
+  FakeTrust({super.pins});
+
+  /// What probing any https origin returns next.
+  CertificateProbe next = const ProbeSystemTrusted();
+  final List<Uri> probes = [];
+
+  @override
+  Future<CertificateProbe> probe(
+    Uri origin, {
+    Duration timeout = const Duration(seconds: 10),
+  }) async {
+    probes.add(origin);
+    if (origin.scheme != 'https') return const ProbeNoTls();
+    final pinned = pinnedFingerprint(origin);
+    final answer = next;
+    if (pinned != null) {
+      final certificate = switch (answer) {
+        ProbeUntrusted(:final certificate) => certificate,
+        ProbePinned(:final certificate) => certificate,
+        ProbeChanged(:final certificate) => certificate,
+        _ => null,
+      };
+      if (certificate != null) {
+        return certificate.sha256 == pinned
+            ? ProbePinned(certificate)
+            : ProbeChanged(certificate, pinned);
+      }
+    }
+    return answer;
+  }
+}
+
+/// A certificate for tests: a made-up fingerprint, no key material.
+CertificateInfo fakeCertificate({
+  String sha256 = 'AA:BB:CC:DD:EE:FF:00:11',
+  String subject = '/CN=host.example',
+  DateTime? notAfter,
+}) => CertificateInfo(
+  sha256: sha256,
+  subject: subject,
+  issuer: subject,
+  notBefore: DateTime(2020),
+  notAfter: notAfter ?? DateTime.now().add(const Duration(days: 300)),
+);
+
 /// A [HostBackend] over a scriptable [FakeTransport]; no sockets.
 class FakeBackend implements HostBackend {
   FakeBackend({FakeTransport? transport})
@@ -32,15 +80,36 @@ class FakeBackend implements HostBackend {
   final FakeUploadClient uploader = FakeUploadClient();
   @override
   final FakeWorkspaceFiles files = FakeWorkspaceFiles();
-  final StreamController<ConnectionState> stateController =
-      StreamController<ConnectionState>.broadcast();
+  final StreamController<ConnectionStatus> stateController =
+      StreamController<ConnectionStatus>.broadcast();
+  @override
+  final FakeTrust trust = FakeTrust();
+  int reconnects = 0;
+
+  /// Publish a connection status as the live connection would.
+  void emit(
+    ConnectionState state, {
+    int attempt = 0,
+    DateTime? retryAt,
+    CertificateRefusal? refusal,
+  }) => stateController.add(
+    ConnectionStatus(
+      state: state,
+      attempt: attempt,
+      retryAt: retryAt,
+      refusal: refusal,
+    ),
+  );
+
+  @override
+  void reconnectNow() => reconnects++;
   final List<(Uri, String)> connects = [];
   final List<(String, Map<String, Object?>)> answers = [];
   Object? failWith;
   int disconnects = 0;
 
   @override
-  Stream<ConnectionState> get states => stateController.stream;
+  Stream<ConnectionStatus> get statuses => stateController.stream;
 
   @override
   Future<SessionTransport> connect(Uri origin, String token) async {

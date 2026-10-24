@@ -1,6 +1,7 @@
 import 'dart:async' show unawaited;
 import 'dart:io' show Platform;
 
+import 'package:dsh_client/dsh_client.dart' show HostTrust;
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,9 @@ import 'src/app.dart';
 import 'src/app_controller.dart';
 import 'src/backend.dart';
 import 'src/connection_store.dart';
+import 'src/launch_link.dart';
 import 'src/local_prefs.dart';
+import 'src/platform/camera_scanner.dart';
 import 'src/platform/notifications.dart';
 import 'src/platform/platform_services.dart';
 
@@ -23,8 +26,15 @@ Future<void> main() async {
   final secure = Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
   final prefs = await SharedLocalPrefs.load();
   late final AppController controller;
+  final camera = Platform.isAndroid || Platform.isIOS;
   controller = AppController(
-    backend: LiveBackend(),
+    backend: LiveBackend(trust: HostTrust(pins: PrefsPinStore(prefs))),
+    scanner: camera
+        ? CameraLaunchScanner(
+            navigator: () => controller.navigatorKey,
+            i18n: () => controller.i18n,
+          )
+        : const NoScanner(),
     store: secure ? SecureConnectionStore() : MemoryConnectionStore(),
     platform: PlatformServices.current(),
     highlighter: highlighter,

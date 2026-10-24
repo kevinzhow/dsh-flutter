@@ -53,16 +53,25 @@ class PairingRejected extends RemoteException {
 /// Performs `GET /connect?token=...&interactions=...` (docs: connection README,
 /// "Only API callers use GET /connect").
 class Pairing {
-  Pairing({HttpClient? httpClient}) : _http = httpClient ?? HttpClient();
+  /// A client handed in stays the caller's: [close] only closes a client this
+  /// created.
+  Pairing({HttpClient? httpClient})
+    : _http = httpClient ?? HttpClient(),
+      _owns = httpClient == null;
 
   final HttpClient _http;
+  final bool _owns;
 
   /// Exchange [launchToken] for an API cookie. Never follows the redirect
   /// (it points at the mux destination); reads the signed cookie instead.
+  /// [client] replaces this [Pairing]'s own client for this exchange (the
+  /// connection asks its `HostTrust` per attempt, because a pin may have been
+  /// added or forgotten since the last one).
   Future<PairedCredential> pair(
     Uri origin,
     String launchToken, {
     Interactions interactions = Interactions.answer,
+    HttpClient? client,
   }) async {
     final uri = origin.replace(
       path: '/connect',
@@ -71,10 +80,17 @@ class Pairing {
         'interactions': interactions.name,
       },
     );
-    final request = await _http.getUrl(uri);
-    request.followRedirects = false;
-    final response = await request.close();
-    await response.drain<void>();
+    // The launch token is in the request URL, and dart:io puts the URL into
+    // the text of some of its exceptions: those are reduced to their message.
+    final HttpClientResponse response;
+    try {
+      final request = await (client ?? _http).getUrl(uri);
+      request.followRedirects = false;
+      response = await request.close();
+      await response.drain<void>();
+    } on HttpException catch (e) {
+      throw RemoteException('pairing/http', e.message);
+    }
     if (response.statusCode == HttpStatus.unauthorized ||
         response.statusCode == HttpStatus.forbidden) {
       throw PairingRejected(response.statusCode);
@@ -102,7 +118,9 @@ class Pairing {
     );
   }
 
-  void close() => _http.close(force: true);
+  void close() {
+    if (_owns) _http.close(force: true);
+  }
 }
 
 /// Parse an `http://host:port/?token=...` URL as printed by `dsh web`

@@ -140,3 +140,16 @@ state no MIT/BSD licence; their README says:
 
 This wording is permissive but is not one of the licences this repository otherwise accepts; those five grammars can be
 removed with the `withheld` list in `tool/highlight/languages.json` (see `PROVENANCE.md`).
+
+## QR scanning (mobile_scanner, ML Kit barcode scanning)
+
+The pairing screen scans the QR code of a host's launch link with the camera through the
+[`mobile_scanner`](https://pub.dev/packages/mobile_scanner) Flutter plugin (BSD-3-Clause, Copyright Julian Steenbakker
+and contributors; it ships with its own `LICENSE`, which Flutter's licence page lists). On Android the plugin decodes with
+Google's ML Kit barcode scanning library (`com.google.mlkit:barcode-scanning`, the bundled model, so no Google Play services
+are required); on iOS and macOS it uses Apple's Vision framework. ML Kit is not open source: it is distributed as a binary
+under [Google's ML Kit terms](https://developers.google.com/ml-kit/terms), which the app's Android build pulls in as a
+Gradle dependency. The decoder runs on the device; nothing it sees leaves the phone. A build without the camera (desktop)
+does not include it, and pasting the launch link is always available.
+
+The certificate fingerprint uses `package:crypto` (BSD-3-Clause, the Dart team).

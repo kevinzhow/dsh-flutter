@@ -124,10 +124,13 @@ class HttpFileUploadClient implements FileUploadClient {
   HttpFileUploadClient({
     required PairedCredential? Function() credential,
     HttpClient? httpClient,
+    HttpClient Function(Uri origin)? clientFor,
   }) : _credential = credential,
+       _clientFor = clientFor,
        _http = httpClient ?? HttpClient();
 
   final PairedCredential? Function() _credential;
+  final HttpClient Function(Uri origin)? _clientFor;
   final HttpClient _http;
 
   /// The route path (dsh `FILE_UPLOAD_PATH`).
@@ -162,7 +165,9 @@ class HttpFileUploadClient implements FileUploadClient {
       }),
     );
     try {
-      request = await _http.postUrl(uri);
+      request = await (_clientFor?.call(credential.origin) ?? _http).postUrl(
+        uri,
+      );
       if (cancelled) {
         throw const UploadCancelled();
       }

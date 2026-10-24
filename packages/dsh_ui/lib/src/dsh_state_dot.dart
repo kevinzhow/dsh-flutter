@@ -11,10 +11,14 @@ enum DshStateDotState { done, warning, ongoing, error, idle }
 /// `ongoing` is a 14px spinner (a quiet ring behind a breathing arc). With
 /// animations disabled the spinner is static, like `prefers-reduced-motion`.
 class DshStateDot extends StatefulWidget {
-  const DshStateDot(this.state, {super.key, this.size});
+  const DshStateDot(this.state, {super.key, this.size, this.color});
 
   final DshStateDotState state;
   final double? size;
+
+  /// Overrides the state's own colour (dsh's `ConnectionIndicator` lets its
+  /// text colour reach the spinner).
+  final Color? color;
 
   @override
   State<DshStateDot> createState() => _DshStateDotState();
@@ -59,6 +63,7 @@ class _DshStateDotState extends State<DshStateDot>
 
   Color _color(BuildContext context) {
     final theme = context.dsh;
+    if (widget.color != null) return widget.color!;
     return switch (widget.state) {
       DshStateDotState.done => theme.color('--dsw-alias-state-success-primary'),
       DshStateDotState.warning => theme.color('--dsw-alias-state-warn-primary'),

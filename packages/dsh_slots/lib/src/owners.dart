@@ -22,6 +22,15 @@ abstract interface class SessionActions {
   Future<void> loadOlder();
 }
 
+/// The text of a session's composer, kept outside the composer widget: the
+/// widget goes away when the session screen is left, or while the app shows the
+/// pairing page after a host restart, and the text must still be there when it
+/// comes back (dsh web keeps composer drafts per session, too).
+class TextDraft {
+  /// The unsent text.
+  String text = '';
+}
+
 /// Owner props of the session-scoped slots (`conversation.session`,
 /// `conversation.header`, `conversation.view`, `conversation.composer`, ...):
 /// the one open session and what is derived from it. dsh declares these owner
@@ -36,7 +45,11 @@ class SessionOwner {
     this.hostHome = '',
     this.attachments,
     this.files,
+    this.textDraft,
   });
+
+  /// The composer's unsent text; null where the composer keeps none.
+  final TextDraft? textDraft;
 
   /// The composer's attachment drafts and the platform pickers; null where a
   /// session takes no attachments (a read-only subagent transcript).

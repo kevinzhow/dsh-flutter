@@ -10,6 +10,7 @@ export 'src/dsh_code_block.dart';
 export 'src/dsh_code_highlight.dart';
 export 'src/dsh_code_language.dart';
 export 'src/dsh_code_toolbar.dart';
+export 'src/dsh_connection_indicator.dart';
 export 'src/dsh_copy_feedback.dart';
 export 'src/dsh_diff.dart';
 export 'src/dsh_drop_overlay.dart';

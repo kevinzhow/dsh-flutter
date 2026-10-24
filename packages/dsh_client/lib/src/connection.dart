@@ -5,6 +5,7 @@ import 'events.dart';
 import 'mux.dart';
 import 'pairing.dart';
 import 'remote_caller.dart';
+import 'trust.dart';
 import 'unary.dart';
 
 /// Where the connection is in dsh's generation lifecycle.
@@ -21,12 +22,62 @@ enum ConnectionState {
   /// A generation is published: baselines may be fetched and streams opened.
   connected,
 
+  /// A generation was lost or an attempt failed; the loop sleeps its backoff
+  /// delay ([ConnectionStatus.retryAt]) before the next attempt. dsh web calls
+  /// this `disconnected`: the outage is visible, the retry is scheduled.
+  waiting,
+
   /// The host refused the launch token (typically: host restarted and minted a
   /// new one). The loop is halted until [DshConnection.start] gets a new token.
   needsPairing,
 
+  /// The TLS handshake was refused by the trust policy: the host shows a
+  /// certificate nobody confirmed, or a different one than the user pinned.
+  /// The loop is halted (retrying would not change the answer) until the user
+  /// decides: [DshConnection.start] again, after pinning or forgetting.
+  certificateRefused,
+
   /// Stopped by the app.
   stopped,
+}
+
+/// A snapshot of the connection for display: what it is doing, which retry it
+/// is on, when the next one starts, and why the last attempt failed.
+class ConnectionStatus {
+  const ConnectionStatus({
+    required this.state,
+    this.attempt = 0,
+    this.retryAt,
+    this.error,
+    this.refusal,
+  });
+
+  final ConnectionState state;
+
+  /// 0 until something failed; then the number of the retry that is waiting
+  /// ([ConnectionState.waiting]) or in flight (`pairing` / `connecting`), dsh's
+  /// `retry #N`. It restarts from 0 once a generation is up.
+  final int attempt;
+
+  /// When the sleeping loop wakes ([ConnectionState.waiting] only).
+  final DateTime? retryAt;
+
+  /// The last pairing or transport failure.
+  final Object? error;
+
+  /// Set with [ConnectionState.certificateRefused].
+  final CertificateRefusal? refusal;
+
+  /// Attempts failed this often in a row: the host is probably not reachable
+  /// from here at all (off, wrong network), not just blinking.
+  static const unreachableAfter = 3;
+
+  /// The outage has lasted [unreachableAfter] retries and still goes on.
+  bool get unreachable =>
+      attempt >= unreachableAfter &&
+      (state == ConnectionState.waiting ||
+          state == ConnectionState.pairing ||
+          state == ConnectionState.connecting);
 }
 
 /// One connection generation: a paired Peer, one mux socket, and the host's
@@ -103,16 +154,33 @@ class DshConnection {
     this.readyTimeout = const Duration(seconds: 15),
     Random? random,
     Pairing? pairing,
+    this.trust,
+    Future<void> Function(Duration)? sleep,
+    DateTime Function()? clock,
+    this.pingInterval = const Duration(seconds: 6),
   }) : _random = random ?? Random(),
+       _sleep = sleep ?? Future<void>.delayed,
+       _clock = clock ?? DateTime.now,
        _pairing = pairing ?? Pairing();
 
   final Uri origin;
   final Interactions interactions;
   final Duration readyTimeout;
+
+  /// Certificate trust of an https [origin]; null means the platform defaults.
+  final HostTrust? trust;
+
+  /// Keep-alive ping of the mux socket (see [MuxCarrier.connect]).
+  final Duration pingInterval;
   final Random _random;
   final Pairing _pairing;
+  final Future<void> Function(Duration) _sleep;
+  final DateTime Function() _clock;
 
   ConnectionState _state = ConnectionState.idle;
+  int _attempt = 0;
+  DateTime? _retryAt;
+  CertificateRefusal? _refusal;
   ConnectionGeneration? _generation;
   Object? _lastError;
   String? _token;
@@ -122,11 +190,24 @@ class DshConnection {
   MuxCarrier? _liveCarrier;
 
   final _states = StreamController<ConnectionState>.broadcast();
+  final _statuses = StreamController<ConnectionStatus>.broadcast();
   final _generations = StreamController<ConnectionGeneration?>.broadcast();
   final _events = StreamController<HostEvent>.broadcast();
 
   ConnectionState get state => _state;
   Stream<ConnectionState> get states => _states.stream;
+
+  /// State plus retry number, next retry time and failure, for display.
+  ConnectionStatus get status => ConnectionStatus(
+    state: _state,
+    attempt: _attempt,
+    retryAt: _state == ConnectionState.waiting ? _retryAt : null,
+    error: _lastError,
+    refusal: _state == ConnectionState.certificateRefused ? _refusal : null,
+  );
+
+  /// Every change of [status] (state, retry number, next retry).
+  Stream<ConnectionStatus> get statuses => _statuses.stream;
 
   /// The live generation, or null while connecting or reconnecting.
   ConnectionGeneration? get generation => _generation;
@@ -171,6 +252,28 @@ class DshConnection {
     return states.firstWhere(test).timeout(timeout);
   }
 
+  /// Retry now instead of waiting out the backoff, or replace an attempt that
+  /// is still in flight (dsh `ctx.connection.reconnect()`): the retry number
+  /// starts over. Does nothing while connected, without a token, or once
+  /// stopped; a halted connection (token refused, certificate refused) needs
+  /// [start] with the user's decision instead.
+  void reconnectNow() {
+    final token = _token;
+    if (token == null || _stopped) return;
+    switch (_state) {
+      case ConnectionState.waiting ||
+          ConnectionState.pairing ||
+          ConnectionState.connecting:
+        start(token);
+      case ConnectionState.idle ||
+          ConnectionState.connected ||
+          ConnectionState.needsPairing ||
+          ConnectionState.certificateRefused ||
+          ConnectionState.stopped:
+        break;
+    }
+  }
+
   /// Drop the live socket now; the loop starts retry 1 immediately-ish
   /// (dsh `ctx.connection.reconnect()`).
   Future<void> dropForTesting() async => _liveCarrier?.close();
@@ -184,9 +287,25 @@ class DshConnection {
   }
 
   void _setState(ConnectionState s) {
-    if (_state == s) return;
+    final changed = _state != s;
     _state = s;
-    if (!_states.isClosed) _states.add(s);
+    if (changed && !_states.isClosed) _states.add(s);
+    _emitStatus();
+  }
+
+  ConnectionStatus? _lastStatus;
+
+  void _emitStatus() {
+    final next = status;
+    final last = _lastStatus;
+    if (last != null &&
+        last.state == next.state &&
+        last.attempt == next.attempt &&
+        last.retryAt == next.retryAt) {
+      return;
+    }
+    _lastStatus = next;
+    if (!_statuses.isClosed) _statuses.add(next);
   }
 
   void _publish(ConnectionGeneration? g) {
@@ -196,19 +315,28 @@ class DshConnection {
 
   Future<void> _run(int loopId) async {
     var attempt = 0;
+    _attempt = 0;
+    _retryAt = null;
     bool live() => !_stopped && loopId == _loopId;
     while (live()) {
       MuxCarrier? carrier;
+      trust?.clearRefusal(origin);
       try {
         _setState(ConnectionState.pairing);
         final credential = await _pairing.pair(
           origin,
           _token!,
           interactions: interactions,
+          client: trust?.clientFor(origin),
         );
         if (!live()) return;
         _setState(ConnectionState.connecting);
-        carrier = await MuxCarrier.connect(credential, timeout: readyTimeout);
+        carrier = await MuxCarrier.connect(
+          credential,
+          timeout: readyTimeout,
+          client: trust?.clientFor(origin),
+          pingInterval: pingInterval,
+        );
         _liveCarrier = carrier;
         if (!live()) {
           await carrier.close();
@@ -220,24 +348,39 @@ class DshConnection {
           return;
         }
         attempt = 0;
+        _attempt = 0;
+        _retryAt = null;
+        _lastError = null;
         _publish(generation);
         _setState(ConnectionState.connected);
         await generation.carrier.closed;
       } on PairingRejected catch (e) {
+        if (!live()) return;
         _lastError = e;
         _publish(null);
         _setState(ConnectionState.needsPairing);
         return;
       } on Object catch (e) {
         _lastError = e;
+        final refusal = trust?.refusalBehind(origin, e);
+        if (refusal != null && live()) {
+          _refusal = refusal;
+          _publish(null);
+          _setState(ConnectionState.certificateRefused);
+          return;
+        }
       } finally {
         if (loopId == _loopId && _generation != null) _publish(null);
         await carrier?.close();
         if (identical(_liveCarrier, carrier)) _liveCarrier = null;
       }
       if (!live()) return;
-      _setState(ConnectionState.connecting);
-      await Future<void>.delayed(reconnectDelay(attempt++, _random));
+      final delay = reconnectDelay(attempt, _random);
+      _attempt = ++attempt;
+      _retryAt = _clock().add(delay);
+      _setState(ConnectionState.waiting);
+      await _sleep(delay);
+      if (!live()) return;
     }
   }
 
@@ -248,7 +391,10 @@ class DshConnection {
     MuxCarrier carrier,
   ) async {
     final id = ++_generationCounter;
-    final caller = HttpRemoteCaller(credential);
+    final caller = HttpRemoteCaller(
+      credential,
+      httpClient: trust?.clientFor(origin),
+    );
     if (interactions == Interactions.none) {
       return ConnectionGeneration._(
         id: id,

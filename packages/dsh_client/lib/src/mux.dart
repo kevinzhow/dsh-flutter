@@ -81,15 +81,27 @@ class MuxCarrier {
 
   /// Connect with the paired cookie. A host refusal (401/409) surfaces as
   /// [RemoteException] `transport/upgrade-refused`.
+  ///
+  /// [client] carries the certificate trust policy for `wss` (see
+  /// `HostTrust.clientFor`).
+  ///
+  /// The socket pings the host every [pingInterval] and closes when no pong
+  /// came back by the next ping, so a connection that died silently (a phone
+  /// that changed networks) ends within about two intervals instead of
+  /// whenever the operating system gives up on it.
   static Future<MuxCarrier> connect(
     PairedCredential credential, {
     Duration timeout = const Duration(seconds: 15),
+    HttpClient? client,
+    Duration pingInterval = const Duration(seconds: 6),
   }) async {
     try {
       final ws = await WebSocket.connect(
         credential.muxUri.toString(),
         headers: {HttpHeaders.cookieHeader: credential.cookieHeader},
+        customClient: client,
       ).timeout(timeout);
+      ws.pingInterval = pingInterval;
       return MuxCarrier._(ws);
     } on WebSocketException catch (e) {
       throw RemoteException('transport/upgrade-refused', e.message);
