@@ -64,7 +64,7 @@ class ConversationShell extends StatelessWidget {
             title: i18n.t(appNamespace, 'session.openFailed'),
             body: '${s.openError}',
           );
-        } else if (s.openState != OpenState.open) {
+        } else if (s.openState != OpenState.open && views.isEmpty) {
           body = Center(
             key: const ValueKey('session-loading'),
             child: DshChromeText(
@@ -75,6 +75,9 @@ class ConversationShell extends StatelessWidget {
             ),
           );
         } else {
+          // While the session opens the view shows its own placeholder (dsh's
+          // ChatView owns the loading state); the text above is only for a
+          // composition without a view.
           body = views.isEmpty ? const SizedBox.shrink() : views.first;
         }
         // A blank session shows the hero: the headline, the workspace chip and

@@ -5,6 +5,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'dsh_code_block.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_pixel_snap.dart';
+import 'dsh_file_link.dart';
 
 import 'theme_access.dart';
 
@@ -17,6 +18,9 @@ class DshMarkdown extends StatelessWidget {
     super.key,
     this.selectable = false,
     this.codeLabels,
+    this.onOpenUrl,
+    this.onOpenFile,
+    this.streaming = false,
   });
 
   final String data;
@@ -26,6 +30,30 @@ class DshMarkdown extends StatelessWidget {
   /// card (language, wrap and copy, coloured by the ambient highlighter);
   /// without, a plain padded block.
   final DshCodeToolbarLabels? codeLabels;
+
+  /// An http(s) link was tapped (dsh `MarkdownDelegate.openExternalLink`).
+  /// Without it links are styled but inert.
+  final void Function(Uri url)? onOpenUrl;
+
+  /// A local file link was tapped (dsh `MarkdownDelegate.openFile`), with the
+  /// first line of a `#L24` fragment. Like dsh, local links are live only in
+  /// settled text, not while [streaming].
+  final void Function(String path, {int? line})? onOpenFile;
+
+  /// The text is still arriving: file links are not yet actionable.
+  final bool streaming;
+
+  void _tap(String text, String? href, String title) {
+    if (href == null) return;
+    final uri = Uri.tryParse(href);
+    if (uri != null && (uri.scheme == 'http' || uri.scheme == 'https')) {
+      onOpenUrl?.call(uri);
+      return;
+    }
+    if (streaming) return;
+    final file = parseFileLink(href);
+    if (file != null) onOpenFile?.call(file.path, line: file.line);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +118,7 @@ class DshMarkdown extends StatelessWidget {
       data: data,
       selectable: selectable,
       styleSheet: sheet,
+      onTapLink: onOpenUrl == null && onOpenFile == null ? null : _tap,
       builders: {if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!)},
     );
   }

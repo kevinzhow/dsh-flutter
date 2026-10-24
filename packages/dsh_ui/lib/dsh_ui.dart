@@ -14,6 +14,7 @@ export 'src/dsh_connection_indicator.dart';
 export 'src/dsh_copy_feedback.dart';
 export 'src/dsh_diff.dart';
 export 'src/dsh_drop_overlay.dart';
+export 'src/dsh_file_link.dart';
 export 'src/dsh_file_types.dart';
 export 'src/dsh_guide.dart';
 export 'src/dsh_diff_block.dart';

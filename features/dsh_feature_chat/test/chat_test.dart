@@ -5,7 +5,10 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
 
+import 'dart:async';
 import 'dart:typed_data';
+
+import 'package:dsh_models/testing.dart' show snapshot;
 
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
@@ -49,14 +52,27 @@ void main() {
   late SessionOwner owner;
   var i18n = const DshI18n(DshLocale.en);
 
-  setUp(() {
+  /// An owner over a session that has been opened (empty), as the app shows a
+  /// session: the chat view shows a skeleton until it is.
+  Future<SessionOwner> openedOwner(String id) async {
+    final transport = FakeTransport();
+    final session = Session(id, transport);
+    unawaited(session.open());
+    await Future<void>.delayed(Duration.zero);
+    transport.open(1, snapshot([]));
+    await Future<void>.delayed(Duration.zero);
+    expect(session.snapshot.value.openState, OpenState.open);
+    return testSessionOwner(id, session: session);
+  }
+
+  setUp(() async {
     i18n = const DshI18n(DshLocale.en);
     slots = SlotRegistry();
     for (final s in DshSlots.all) {
       slots.declare(s);
     }
     registerChatFeature(slots, i18n: () => i18n);
-    owner = testSessionOwner('s1');
+    owner = await openedOwner('s1');
   });
 
   Widget view() => dshTestApp(slots.renderList(viewSlot, owner).first);
