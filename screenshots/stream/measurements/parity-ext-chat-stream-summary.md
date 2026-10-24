@@ -1,10 +1,10 @@
 # dsh-flutter parity: parity-ext
 
-Suite parity-ext: 224 cases in the manifest. light complete; dark sampled to 1-2 cases per surface (PARITY_EXT_ALL_THEMES=1 for all)
+Suite parity-ext: 276 cases in the manifest. light complete; dark sampled to 1-2 cases per surface (PARITY_EXT_ALL_THEMES=1 for all)
 
 pixel-perfect and RGB similarity are the vendored visual-testing CLI's (status: pass > 99%, basic pass > 96% pixel-perfect); non-text = identical pixels plus glyph anti-aliasing pixels (dsh geometry target, >= 99.5%); close = within 4/255 per channel.
 
-24 captures: 24 compared, 0 same, 0 pass (official, > 96% pixel-perfect), 0 geometry pass (incl. those), 24 fail, 0 not covered, 0 missing. Mean pixel-perfect 83.36%, mean non-text 91.79%.
+24 captures: 24 compared, 0 same, 0 pass (official, > 96% pixel-perfect), 0 geometry pass (incl. those), 24 fail, 0 not covered, 0 missing. Mean pixel-perfect 83.40%, mean non-text 91.87%.
 
 ## Per case
 
@@ -26,17 +26,17 @@ pixel-perfect and RGB similarity are the vendored visual-testing CLI's (status: 
 | `components.chat-stream.load-earlier-loading-desktop.dark` | dark | 81.45 | 98.13 | 83.90 | 95.50 | FAIL | text 281 px |
 | `components.chat-stream.load-earlier-loading-phone.light` | light | 85.83 | 99.15 | 87.66 | 91.30 | FAIL | hairline 1068 px |
 | `components.chat-stream.load-earlier-loading-phone.dark` | dark | 85.35 | 98.86 | 86.43 | 90.99 | FAIL | hairline 1089 px |
-| `components.chat-stream.actions-user-desktop.light` | light | 84.94 | 99.10 | 89.00 | 96.04 | FAIL | text 429 px |
-| `components.chat-stream.actions-user-desktop.dark` | dark | 84.70 | 98.70 | 86.85 | 95.99 | FAIL | text 436 px |
-| `components.chat-stream.actions-user-phone.light` | light | 92.64 | 99.05 | 93.68 | 95.80 | FAIL | hairline 914 px |
-| `components.chat-stream.actions-user-phone.dark` | dark | 92.44 | 98.75 | 93.17 | 95.89 | FAIL | hairline 949 px |
-| `components.chat-stream.actions-tail-desktop.light` | light | 84.11 | 98.62 | 87.85 | 95.30 | FAIL | text 398 px |
-| `components.chat-stream.actions-tail-desktop.dark` | dark | 83.92 | 98.04 | 85.66 | 95.25 | FAIL | text 403 px |
-| `components.chat-stream.actions-tail-phone.light` | light | 92.24 | 99.00 | 93.73 | 96.10 | FAIL | text 951 px |
-| `components.chat-stream.actions-tail-phone.dark` | dark | 92.07 | 98.67 | 92.93 | 96.07 | FAIL | text 986 px |
+| `components.chat-stream.actions-user-desktop.light` | light | 84.83 | 99.15 | 89.18 | 96.35 | FAIL | text 445 px |
+| `components.chat-stream.actions-user-desktop.dark` | dark | 84.58 | 98.76 | 86.98 | 96.30 | FAIL | text 453 px |
+| `components.chat-stream.actions-user-phone.light` | light | 92.90 | 99.12 | 93.96 | 96.06 | FAIL | hairline 899 px |
+| `components.chat-stream.actions-user-phone.dark` | dark | 92.58 | 98.84 | 93.45 | 96.04 | FAIL | hairline 965 px |
+| `components.chat-stream.actions-tail-desktop.light` | light | 84.17 | 98.67 | 87.99 | 95.44 | FAIL | text 401 px |
+| `components.chat-stream.actions-tail-desktop.dark` | dark | 84.00 | 98.09 | 85.77 | 95.42 | FAIL | text 406 px |
+| `components.chat-stream.actions-tail-phone.light` | light | 92.59 | 99.11 | 94.10 | 96.42 | FAIL | text 945 px |
+| `components.chat-stream.actions-tail-phone.dark` | dark | 92.34 | 98.81 | 93.28 | 96.33 | FAIL | text 982 px |
 
 ## Per area
 
 | area | captures | compared | geometry pass | mean pixel-perfect % | mean non-text % |
 |---|---:|---:|---:|---:|---:|
-| chat-stream | 24 | 24 | 0 | 83.37 | 91.79 |
+| chat-stream | 24 | 24 | 0 | 83.40 | 91.87 |
