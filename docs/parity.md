@@ -107,6 +107,7 @@ contract can be diffed: a future third provider (Android, iOS) only has to produ
 
 ## Determinism rules
 
+- The Flutter frame declares itself the page (`DshSurface`, `bg-base`) so translucent fills inside it composite like Blink's (below).
 - Fixed viewport and `deviceScaleFactor` / `devicePixelRatio` per case; one fresh browser context or widget test per capture.
 - Chromium runs with `--disable-lcd-text --font-render-hinting=none` (grayscale text) and Playwright `animations: "disabled"`,
   `caret: "hide"`, reduced motion; Flutter uses `disableAnimations` and a transparent caret.
@@ -135,6 +136,83 @@ vendored yet: Montserrat (Flutter cannot load woff2; needed once a case shows th
 entries (`Hiragino Sans GB`, `Microsoft YaHei`: they come after `PingFang SC` and are never reached for a glyph in the
 subset). Metadata of both providers lists the files and digests; the React metadata also lists the faces Chromium really used.
 `tool/parity fonts` verifies the pins.
+
+## What Blink does in the captures
+
+The React captures run Chromium with an emulated device scale factor (Playwright's `deviceScaleFactor`). Blink then lays
+out in CSS pixels at every density, as if at 1x, and only the compositor scales the result: a font's ascent and descent
+are rounded to whole CSS pixels (not device pixels), a `0.5px` border is snapped to one CSS pixel (two device pixels at 2x:
+`dshHairline`), and a line of text is painted at a whole CSS pixel (a line whose top is on a half pixel rounds up). These
+are properties of the reference, and the Flutter widgets reproduce them in logical pixels. A real phone running Chrome
+with its own zoom-for-DSF layout rounds in device pixels instead: parity is measured against the captures, not against
+that.
+
+Two things follow in `dsh_ui`, both in shared primitives and neither keyed to a theme:
+
+- **Translucent colours** (`DshSurface.paint`): Blink holds an alpha as 8 bits and blends in 8-bit arithmetic that rounds
+  the source share and floors the backdrop's, one level away from Skia's float blend on many channels. A fill or hairline
+  over a surface the widget knows (`DshSurface`, which the parity frame declares as `bg-base`) is composited like
+  Blink's; over an unknown one it stays translucent with Blink's 8-bit alpha. Inside an `opacity` group (a disabled
+  button) it must stay translucent, the group composites onto the page.
+- **Corner shape**: every rounded surface uses `DshCornerBorder` (`corner-shape: superellipse(1.5)`), including the
+  button, its focus ring and the connection pill.
+
+## The text baseline
+
+Both engines put the baseline of a fixed-`line-height` line at the top of the line plus the ascent plus half the
+leading, and compute it differently:
+
+| | ascent, descent | half-leading | baseline |
+|---|---|---|---|
+| Blink (`FontHeight::AddLeading`) | rounded to whole CSS px | `floor((line - ascent - descent) / 2)` | `ascent + floor(leading / 2)` |
+| Flutter (`ParagraphSkia`) | fractional | exactly `(line - ascent - descent) / 2` | rounded to a whole logical px |
+
+They agree for dsh's body text (14px on 22px, Noto Sans: Blink 16, Flutter `round(16.43)` = 16) and differ by one CSS
+pixel (one device pixel at 1x, two at 2x, three at 3x) whenever the two roundings go opposite ways: 12px on 18px, and
+12 on 14, 16 and 20, 13 on 15, 16 on 19, 17 on 26, 20 on 28 (8 of the 29 pairs swept). `tool/parity-ext/text-baseline-sweep.py` measures it: a line
+of capitals per size/line-height pair, weight, family and density, drawn in Chromium and in Flutter, baseline compared at
+the ink's bottom edge. Result over 29 size/line-height pairs x 2 weights x 2 families x 5 densities (1, 1.5, 2, 2.625,
+3) = 580 baselines: a plain `Text` with dsh's style is right in 420 (72%), `DshChromeText` in 580. The model is
+`dshBaselineNudge` (`dsh_text_baseline.dart`): the paint offset `ascent' + floor(leading / 2) - round(Flutter's
+baseline)`, with `ascent'` and `descent'` the font's rounded metrics; it needs no density. `DshChromeText` is a `Text`
+that applies it (and the strut that pins mixed CJK/Latin lines to the primary font's height, as CSS does), and moves the
+line to the whole CSS pixel Blink paints it at.
+
+It replaces a model fitted on the 14/22 case at 2x (computed in device pixels, compared with a logical-pixel rounding),
+which was right there and wrong for most other pairs and densities, and which only the attachment and settings rows
+used. Every `Text` in `dsh_ui` and the feature packages is a `DshChromeText` now.
+
+Chromium's glyph rasterisation is not reproduced: stems are heavier than Skia's (summed ink of the same capitals,
+Chromium over Flutter, mean of the sweep: 1.17 at 1x, 1.08 at 2x, 1.05 at 3x) and Skia snaps cap heights to whole device
+pixels where Blink leaves a partial top row. That is what the `text` bucket and the `outside-glyph` number of
+`glyph-mask.py` separate out.
+
+## Known engine differences
+
+Differences that cannot be reproduced in Flutter's own pipeline, with the evidence:
+
+- **`backdrop-filter: blur(40px) saturate(150%)` over a flat page** (the to-do panel and every menu surface, dsh's
+  `--dsw-menu-backdrop-filter`). At 1x Chromium draws one flat fill. At the 2x of the dark to-do captures its blur leaves four
+  values, `41,42,46`, `42,43,45`, `41,42,45` and `42,43,46`, in horizontal bands and a checkerboard near the corner
+  (rounding in the downscaled 8-bit blur, not content: a plain `div` over the page background shows it, with and without the
+  shadow; `tool/parity-ext/probes/backdrop-banding.mjs` prints it). Flutter's `BackdropFilter` over the same flat page gives
+  one flat value (`42,43,46`, no saturate; a Flutter shader filter is not available outside Impeller), so the dark to-do
+  panel cannot pass: its `panel-header` region scores about 20-30% of the panel's pixels exact whatever the fill, and the
+  panel is drawn flat (the fill over `saturate(150%)` of the page) because that is what the page shows. The whole banded
+  difference is `fill` bucket; text and geometry of the panel are scored in the other regions (light: 95.9% exact).
+- **Translucent blending**: `blendLikeChromium` (rounded source share, floored backdrop share) reproduces 1056 of the 1248
+  pixels of a probe grid (12 backdrops x 8 greys x 13 alphas, `rgba()` over `rgb()` in Chromium); the other 15% sit one
+  level away and no rounding/flooring/quantisation of a single formula explains them (the 8-bit path has stages the model
+  does not have). A fill that lands there stays one level off whatever Flutter does.
+- **Box edges**: Blink snaps the edges of a box to whole CSS pixels, so a pill 112.47px wide ends at 128; Flutter paints
+  the fractional edge anti-aliased. Painting the connection pill's decoration at the snapped rectangle was tried and moved
+  its score by +0.09 points, so it is not kept.
+- **Faint shadow halos**: Chromium truncates the Gaussian tails of faint shadows with 8-bit floor arithmetic, Flutter blends in
+  float: +-1/255 over a halo of a few thousand pixels around the panel (to-do panel, 2x).
+- **The focus ring in a dark page**: dsh sets only `outline-width` and `outline-color`; the button keeps the UA's
+  `outline-style: auto`, which Chromium draws centred on the border edge in the outline colour in a light page and as a
+  white ring with a dark (`#101010`) outer ring in a dark one, whatever the colour (`color-scheme: dark`; checked with a
+  plain button and four colours). The Flutter ring keeps the geometry (2px centred on the edge) and the token colour in both.
 
 ## Reading the scores
 
