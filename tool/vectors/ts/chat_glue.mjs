@@ -13,7 +13,7 @@
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
 //   ui-tool          the todo history Definitions and view (`tool-todo-history`)
 // NOT registered (deferred to later phases, see the PR): turn-process,
-// request-prompt, command, compaction, model-retry, process groups.
+// request-prompt, command, compaction, process groups.
 //
 // GLUE written here:
 //   - a stand-in for the cordis Context (`effect` runs immediately),
@@ -36,6 +36,7 @@ export async function createChatGlue(load) {
   const { systemMessageDefinition, requestPromptDefinition } = await load(chat + 'request-prompt.ts')
   const { registerAssistantConversationNode } = await load(chat + 'assistant.ts')
   const { registerToolConversationNode } = await load(chat + 'tool.ts')
+  const { registerRetryConversationNode } = await load(chat + 'retry.ts')
   const { registerTurnErrorConversationNode } = await load(chat + 'turn-error.ts')
   const { registerTurnMaxTokensConversationNode } = await load(chat + 'turn-max-tokens.ts')
   const { registerTurnTailConversationNode } = await load(chat + 'turn-tail.ts')
@@ -55,6 +56,7 @@ export async function createChatGlue(load) {
   events.register(requestPromptDefinition(inspectRequestPrompt))
   registerAssistantConversationNode(scope)
   registerToolConversationNode(scope)
+  registerRetryConversationNode(scope)
   registerTurnErrorConversationNode(scope)
   registerTurnMaxTokensConversationNode(scope)
   registerTurnTailConversationNode(scope)
@@ -176,6 +178,12 @@ function dataJson(node) {
         usage: json(d.usage), final: finalJson(d.finalNode),
       }
     case 'tool-call': return toolJson(d.root)
+    case 'model-retry':
+      return { attempts: d.attempts.map(a => ({
+        seq: a.seq, time: a.time, retryId: a.retryId, turn: a.turn, step: a.step,
+        retry: a.retry, delayMs: a.delayMs, maxRetries: a.mode === 'normal' ? a.maxRetries : null,
+        failureCode: a.failure.code, failureMessage: a.failure.message, state: a.retryState,
+      })) }
     case 'turn-tail':
       return { turn: d.turn, seq: d.seq, time: d.time, closingSeq: d.closing?.finalNode.seq ?? null, branchUnavailable: d.branchUnavailable }
     case 'turn-error':

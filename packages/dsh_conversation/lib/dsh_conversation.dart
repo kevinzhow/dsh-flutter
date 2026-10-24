@@ -8,6 +8,7 @@ export 'src/assembler.dart' show ConversationAssembler, conversationContextKey;
 export 'src/binding.dart';
 export 'src/chat/definitions.dart';
 export 'src/chat/nodes.dart';
+export 'src/chat/retry.dart';
 export 'src/chat/partial_arguments.dart';
 export 'src/chat/snapshot.dart';
 export 'src/chat/system_prompt.dart';

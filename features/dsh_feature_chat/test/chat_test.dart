@@ -131,6 +131,40 @@ void main() {
     expect(find.byKey(const ValueKey('chat-empty')), findsOneWidget);
   });
 
+  testWidgets(
+    'retry events render and update through the registered chat slot',
+    (t) async {
+      await open(t, [
+        ...openTurn(),
+        ev(4, 'llm/retry', {
+          'turn': 1,
+          'step': 1,
+          'retryId': 'fixture',
+          'retry': 1,
+          'mode': 'normal',
+          'maxRetries': 3,
+          'delayMs': 2500,
+          'provider': 'fixture',
+          'policyKey': 'fixture',
+          'failure': {'code': 'RATE_LIMIT', 'message': 'Try later'},
+        }),
+      ]);
+      expect(find.byType(ModelRetryView), findsOneWidget);
+      expect(find.textContaining('Retrying model request'), findsWidgets);
+      owner.session.eventSource.append(
+        ev(5, 'llm/retry-started', {
+          'turn': 1,
+          'step': 1,
+          'retryId': 'fixture',
+          'retry': 1,
+        }),
+      );
+      await t.pump();
+      expect(find.textContaining('Retried model request'), findsOneWidget);
+      await t.pumpWidget(const SizedBox.shrink());
+    },
+  );
+
   testWidgets('streams answer text and keeps it as markdown', (t) async {
     await open(t, openTurn());
     expect(find.text('Hello there'), findsOneWidget);

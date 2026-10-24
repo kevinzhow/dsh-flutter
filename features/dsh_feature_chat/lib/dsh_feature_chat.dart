@@ -6,6 +6,7 @@ library;
 
 export 'src/chat_nodes.dart';
 export 'src/chat_view.dart';
+export 'src/model_retry_view.dart';
 export 'src/register.dart';
 export 'src/system_prompt_view.dart';
 export 'src/stats_pills.dart';
