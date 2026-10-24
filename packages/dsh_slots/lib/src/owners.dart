@@ -22,14 +22,30 @@ abstract interface class SessionActions {
   Future<void> loadOlder();
 }
 
-/// The text of a session's composer, kept outside the composer widget: the
-/// widget goes away when the session screen is left, or while the app shows the
-/// pairing page after a host restart, and the text must still be there when it
-/// comes back (dsh web keeps composer drafts per session, too).
+/// The composer's draft, kept outside the composer widget: the widget goes
+/// away when the session screen is left, or while the app shows the pairing
+/// page after a host restart, and the draft (text, reference chips, a claimed
+/// command) must still be there when it comes back (dsh web keeps composer
+/// drafts per session, too).
 class TextDraft {
-  /// The unsent text.
-  String text = '';
+  TextDraft({String sessionId = '', ComposerInput? input})
+    : input = input ?? ComposerInput(sessionId: sessionId);
+
+  /// The draft model: text with its reference chips, the submit machine and the
+  /// trigger pipeline of this session.
+  final ComposerInput input;
+
+  /// The draft as plain text (reference chips expanded to their clipboard
+  /// text). Writing replaces the whole draft.
+  String get text => input.clipboardText;
+  set text(String value) => input.setPlainText(value);
 }
+
+/// The tap-region group of one session's composer: the composer card and its
+/// floating overlays (the candidate menu, the command popup) share it, so a
+/// press inside any of them is not "outside" for the others (dsh's `[data-
+/// composer-card]` containment test).
+Object composerTapGroup(String sessionId) => ('composer-card', sessionId);
 
 /// Owner props of the session-scoped slots (`conversation.session`,
 /// `conversation.header`, `conversation.view`, `conversation.composer`, ...):
@@ -48,8 +64,11 @@ class SessionOwner {
     this.textDraft,
   });
 
-  /// The composer's unsent text; null where the composer keeps none.
+  /// The composer's unsent draft; null where the composer keeps none.
   final TextDraft? textDraft;
+
+  /// The composer model (draft chips, submit machine, trigger pipeline).
+  ComposerInput? get input => textDraft?.input;
 
   /// The composer's attachment drafts and the platform pickers; null where a
   /// session takes no attachments (a read-only subagent transcript).

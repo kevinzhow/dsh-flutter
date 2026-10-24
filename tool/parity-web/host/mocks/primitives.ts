@@ -29,3 +29,10 @@ export { extractMarkdownPlainText } from '@dsh/ui-primitives/src/markdown/plain-
 export { Input } from '@dsh/ui-primitives/src/Input.tsx'
 export { Menu } from '@dsh/ui-primitives/src/Menu.tsx'
 export { RiskConfirmation } from '@dsh/ui-primitives/src/RiskConfirmation.tsx'
+// Composer overlays (ui-input-trigger MenuView, ui-commands PopupSelectView): the menu material, its sticky group headings,
+// the anchored max-height hook and the reference glyphs.
+export { MenuSurface } from '@dsh/ui-primitives/src/MenuSurface.tsx'
+export { MenuGroup, observeStickyMenuGroups } from '@dsh/ui-primitives/src/MenuGroup.tsx'
+export { useAnchoredMaxHeight } from '@dsh/ui-primitives/src/useAnchoredMaxHeight.ts'
+export { ReferenceIconRegular } from '@dsh/ui-primitives/src/ReferenceIcon.tsx'
+export { rankByName } from '@dsh/ui-primitives/src/rank-by-name.ts'

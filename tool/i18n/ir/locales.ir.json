@@ -20,6 +20,7 @@
     "packages/client/ui-commands/src/client/locales.ts",
     "packages/client/ui-conversation/src/client/locales.ts",
     "packages/client/ui-deliverables/src/client/locales.ts",
+    "packages/client/ui-directory-picker-browse/src/client/index.ts",
     "packages/client/ui-goal/src/client/locales.ts",
     "packages/client/ui-input-trigger/src/client/locales.ts",
     "packages/client/ui-jobs/src/client/locales.ts",
@@ -2879,6 +2880,65 @@
         "row.title": {
           "en": "Present files",
           "zh": "交付文件"
+        }
+      }
+    },
+    {
+      "namespace": "directory-browser",
+      "package": "client/ui-directory-picker-browse",
+      "file": "packages/client/ui-directory-picker-browse/src/client/index.ts",
+      "entries": {
+        "browser.cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "browser.create": {
+          "en": "Create",
+          "zh": "创建"
+        },
+        "browser.createIn": {
+          "en": "New folder in \"{name}\"",
+          "zh": "在\"{name}\"中新建文件夹"
+        },
+        "browser.editPath": {
+          "en": "Edit path",
+          "zh": "编辑路径"
+        },
+        "browser.folderName": {
+          "en": "Folder name",
+          "zh": "文件夹名称"
+        },
+        "browser.home": {
+          "en": "Home",
+          "zh": "主目录"
+        },
+        "browser.loading": {
+          "en": "Loading…",
+          "zh": "加载中…"
+        },
+        "browser.newFolder": {
+          "en": "New folder",
+          "zh": "新建文件夹"
+        },
+        "browser.open": {
+          "en": "Open",
+          "zh": "打开"
+        },
+        "browser.showHidden": {
+          "en": "Show hidden files",
+          "zh": "显示隐藏文件"
+        },
+        "browser.title": {
+          "en": "Select Workspace Directory",
+          "zh": "选择工作区目录"
+        },
+        "browser.truncated": {
+          "en": "Too many folders to list; only the beginning is shown.",
+          "zh": "文件夹过多，仅显示开头部分。"
+        },
+        "browser.untitledFolder": {
+          "en": "Untitled folder",
+          "zh": "未命名文件夹"
         }
       }
     },

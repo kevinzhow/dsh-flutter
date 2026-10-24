@@ -24,6 +24,7 @@ void main() {
     'plan_todo_vector.json',
     'attachment_vector.json',
     'tool_turn_vector.json',
+    'input_vector.json',
   ]) {
     test('$name carries nothing private', () {
       final text = File('test/fixtures/$name').readAsStringSync();

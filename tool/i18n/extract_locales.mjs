@@ -108,6 +108,35 @@ function readDict(rel, exportName) {
   return readObject(obj, sf, rel, exportName, {})
 }
 
+/**
+ * A dictionary registered inline: `const <name>: ... = [['zh', {...}], ['en', {...}]]` anywhere in the
+ * file (ui-directory-picker-browse registers its dialog copy that way). Returns `{zh, en}`.
+ */
+function readInlinePairs(rel, name) {
+  const sf = source(rel)
+  let found
+  const visit = (n) => {
+    if (found) return
+    if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.name.text === name && n.initializer) {
+      found = unwrap(n.initializer)
+      return
+    }
+    ts.forEachChild(n, visit)
+  }
+  visit(sf)
+  if (!found || !ts.isArrayLiteralExpression(found)) throw new Error(`${rel}: inline dictionary array ${name} not found`)
+  const out = {}
+  for (const el of found.elements) {
+    const pair = unwrap(el)
+    if (!ts.isArrayLiteralExpression(pair) || pair.elements.length !== 2) throw new Error(`${rel}: ${name} member is not a [locale, dict] pair`)
+    const locale = evalStr(pair.elements[0], sf, `${rel}:${name}`)
+    const obj = unwrap(pair.elements[1])
+    if (!ts.isObjectLiteralExpression(obj)) throw new Error(`${rel}: ${name}[${locale}] is not an object literal`)
+    out[locale] = readObject(obj, sf, rel, `${name}[${locale}]`, {})
+  }
+  return out
+}
+
 function walk(dir, acc) {
   for (const e of readdirSync(dir)) {
     const p = path.join(dir, e)
@@ -147,11 +176,18 @@ for (const d of config.dictionaries) {
   const enFile = d.enFile ?? d.file
   inputs.add(zhFile)
   inputs.add(enFile)
-  const zh = readDict(zhFile, d.zhExport ?? 'zh')
-  const en = readDict(enFile, d.enExport ?? 'en')
-  if (!declaredCache.has(d.package)) declaredCache.set(d.package, declaredNamespaces(d.package))
-  if (!declaredCache.get(d.package).has(d.namespace)) {
-    throw new Error(`namespace ${d.namespace} is not declared in LocaleNamespaceMap of packages/${d.package}`)
+  let zh, en
+  if (d.inlinePairs) {
+    const pairs = readInlinePairs(zhFile, d.inlinePairs)
+    zh = pairs.zh ?? {}
+    en = pairs.en ?? {}
+  } else {
+    zh = readDict(zhFile, d.zhExport ?? 'zh')
+    en = readDict(enFile, d.enExport ?? 'en')
+    if (!declaredCache.has(d.package)) declaredCache.set(d.package, declaredNamespaces(d.package))
+    if (!declaredCache.get(d.package).has(d.namespace)) {
+      throw new Error(`namespace ${d.namespace} is not declared in LocaleNamespaceMap of packages/${d.package}`)
+    }
   }
   const keys = [...new Set([...Object.keys(en), ...Object.keys(zh)])].sort()
   const entries = {}

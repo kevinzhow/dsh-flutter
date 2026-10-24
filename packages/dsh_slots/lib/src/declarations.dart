@@ -156,6 +156,15 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  /// Floating entries rendered above the composer card (dsh `ui-conversation`;
+  /// filled by `ui-input-trigger` (the candidate menu) and `ui-commands` (the
+  /// command popup)).
+  static const conversationInputOverlay = Slot<Object?, Object?>(
+    'conversation.input.overlay',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
     conversationHeader,
@@ -180,5 +189,6 @@ abstract final class DshSlots {
     pluginsItem,
     conversationInputPermission,
     conversationInputModel,
+    conversationInputOverlay,
   ];
 }

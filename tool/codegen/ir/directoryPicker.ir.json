@@ -1,0 +1,163 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "directoryPicker",
+  "package": "packages/api/workspace-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/workspace-controller/src/directory-picker.ts",
+    "packages/host/directory-picker/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "pick",
+      "hostName": "pick",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "str"
+        }
+      },
+      "doc": "Open the host's OS chooser for a Remote caller."
+    },
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "path",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "DirectoryListing"
+      },
+      "doc": "List one directory level for a Remote caller's in-app browser."
+    },
+    {
+      "name": "createDirectory",
+      "hostName": "createDirectory",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "str"
+      },
+      "doc": "Create one child directory for a Remote caller's in-app browser."
+    }
+  ],
+  "decls": {
+    "DirectoryEntry": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Base name shown in a browser row (a root crumb carries its full path)."
+        },
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute host path — clients never join path segments themselves."
+        },
+        {
+          "name": "hidden",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Hidden by the host platform's convention (dot-prefixed on POSIX); the client owns whether to show it."
+        }
+      ],
+      "source": "packages/host/directory-picker/src/types.ts",
+      "doc": "One directory row: a listing child or a breadcrumb ancestor."
+    },
+    "DirectoryListing": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute path of the listed directory."
+        },
+        {
+          "name": "home",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The host account's home directory (breadcrumb \"Home\" rooting)."
+        },
+        {
+          "name": "crumbs",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "DirectoryEntry"
+            }
+          },
+          "doc": "Ancestor chain from the filesystem root to the listed directory inclusive; every crumb is a jump target (crumb `hidden` is always false)."
+        },
+        {
+          "name": "entries",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "DirectoryEntry"
+            }
+          },
+          "doc": "Direct child directories, name-sorted; symlinks to directories included."
+        },
+        {
+          "name": "truncated",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "True when the backend cut `entries` at its complete-result bound: the level has more child directories than reported, and the missing rows are the name-sorted tail (hidden rows count toward the bound)."
+        }
+      ],
+      "source": "packages/host/directory-picker/src/types.ts",
+      "doc": "One directory level plus its ancestry, as a browse backend reports it."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

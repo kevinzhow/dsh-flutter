@@ -169,6 +169,78 @@
       "outputSha256": "12c449aa4e540e1e868e9f00989ea43dfaec8001b3b1f8599283f67db06f47c3"
     },
     {
+      "output": "packages/dsh_client/lib/src/generated/file_references_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/fileReferences.ir.json",
+      "irSha256": "a9711e39e3965c61c990c31ef4b885adebe4f20de138d8ec64286386321d1ef9",
+      "inputs": [
+        {
+          "path": "packages/api/session-controller/src/file-references.ts",
+          "sha256": "870a790822334996b731d05901e4dc4b6a8ac6dec431b697b2c95db41739d91b"
+        },
+        {
+          "path": "packages/context/file-reference/src/types.ts",
+          "sha256": "9c72ffb7158bc573a3da5d7a1ce1bee0d83ac132883540a4e4e980f326836684"
+        }
+      ],
+      "rawSha256": "1c2cf03c09e5357a3bd3c137ffcddecb51a3af7d123973e5444c1d5afd581706",
+      "outputSha256": "461d2c3694423970c2bd675938a9112bc96883cd92e79761a5dd41fe6f5cd2b5"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/session_reference_resolver_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/sessionReferenceResolver.ir.json",
+      "irSha256": "18ad406f37a53461cc67879cf82c55a9927675cedecffa7705e5604d4c8b9ca2",
+      "inputs": [
+        {
+          "path": "packages/context/session-reference/src/index.ts",
+          "sha256": "31303d09b42199d0bca872e0a3e16ba9d0056022f4bd412f5fd305e96ec4686e"
+        },
+        {
+          "path": "packages/context/session-reference/src/types.ts",
+          "sha256": "07f207a01d27f9ebf7254b22976858a7a739aeb09993a1a332cc185281de1b80"
+        }
+      ],
+      "rawSha256": "4981c6f2b8c81e637c1f47724703aa5f40bc4233fb7f4ef358a2583a32517e74",
+      "outputSha256": "11cb3a4e27627cb9c59f4800b78d9a4f13527946b39496cffb21db01c6b52e5f"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/workspace_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/workspace.ir.json",
+      "irSha256": "46ea57d55ed967a1da4626b4421bb45f8834f7b601e215ca20dc4d8025749c75",
+      "inputs": [
+        {
+          "path": "packages/api/workspace-controller/src/index.ts",
+          "sha256": "3e2111b89706766738e6b661d684fce046589557bff44397626d0eee947d7b36"
+        },
+        {
+          "path": "packages/api/workspace-controller/src/types.ts",
+          "sha256": "82fd3e1cb741ecfa1e6988088bec15f44e26102555320d8b058dba26ea38298b"
+        }
+      ],
+      "rawSha256": "97a2a63015aebc6d0304b318b5ea3d11985e32570636ad9a0c1a6cb60920812e",
+      "outputSha256": "286c795949fc8fdd56788e806061c03474aeabc35f17c10bf10d8fdccfaf2cc1"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/directory_picker_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/directoryPicker.ir.json",
+      "irSha256": "70d6ca7e347acbbb0d1de5679e1fbdb19699f0b4de46e42b87d3abb7357004be",
+      "inputs": [
+        {
+          "path": "packages/api/workspace-controller/src/directory-picker.ts",
+          "sha256": "cc28328439c2950a52fd1132a89ac3d6b38f530f279cab392db5a8bdcece9ba0"
+        },
+        {
+          "path": "packages/host/directory-picker/src/types.ts",
+          "sha256": "3c8619fae5336a3f9c6fb6c8e2922794add5051d4ec0909c4b9b9d8a435db59c"
+        }
+      ],
+      "rawSha256": "f1a58b18f2a15bc012257b5d54bcc636635a7180bc6741d6a2ff9b38ec22699c",
+      "outputSha256": "17e67098ddca1e492b32f263049b7223ee41aa28bb9ef0eb2d7832eed36f257b"
+    },
+    {
       "output": "packages/dsh_models/lib/src/generated/session_events.g.dart",
       "generator": "tool/codegen/gen.py (tool/codegen/events_ir.py + dart_emit.py)",
       "ir": "tool/codegen/ir/events.ir.json",
@@ -190,10 +262,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "e18874d929b81d6d0eeec795c73617303f953e08c2e1144e4853f8390c8cea02",
+      "irSha256": "59c82b5259af1e8e75cb9af7a83dd4cb684d619cb2deaef03cb4b45a13bfbb11",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "19cda77c7cbf99ef9767a872b56890fdc217846b926fef70a8e98135c6a3fd39"
+        "sha256": "d869135e0e665638abdf966e6500b94eab2ba9eb4a35ae45747dbe522bf03fe1"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -231,6 +303,10 @@
         {
           "path": "packages/client/ui-deliverables/src/client/locales.ts",
           "sha256": "4840dc1d554a4f2457b51339e9195041b6230822c72fc5b10c8f3c2aad971cdb"
+        },
+        {
+          "path": "packages/client/ui-directory-picker-browse/src/client/index.ts",
+          "sha256": "7dfcf42cbe37ca0d54264dfc2e7e0248536a38f7ccfd51a17c401fc0514f1128"
         },
         {
           "path": "packages/client/ui-goal/src/client/locales.ts",
@@ -337,8 +413,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "68a8fa96fa2718f47617cd0b5a5a01df52c57cb1cb4f223133e3cb4e4fec134c",
-      "outputSha256": "1f21e743b1e9e4aa0562996ad119a8629434d82df6ce9195db998f7c58d4ba60"
+      "rawSha256": "aaa7df49945196db42d68d23020bb18041d00a9eebabc0b408f220fef61194be",
+      "outputSha256": "04db955ef6ea440ff7b1a8b6b2cd255cdb257b863fff3447408293c7dc6680a5"
     }
   ]
 }

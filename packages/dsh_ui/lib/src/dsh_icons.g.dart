@@ -817,6 +817,7 @@ abstract final class DshIcons {
         fill: true,
         cap: DshIconCap.butt,
         evenOdd: false,
+        opacity: 0.16,
       ),
       DshIconShape(
         'M13.6491 6.69446C14.6346 6.69453 15.3522 7.62895 15.0983 8.58118L13.9245 12.9845C13.7494 13.6412 13.1539 14.0988 12.4743 14.0988H2.35126C1.36574 14.0988 0.648153 13.1643 0.902044 12.212L2.07587 7.80774C2.25102 7.15128 2.84567 6.69455 3.52509 6.69446H13.6491ZM3.52509 7.69446C3.29865 7.69455 3.10004 7.84674 3.04169 8.06555L1.86786 12.4698C1.78345 12.7872 2.02285 13.0988 2.35126 13.0988H12.4743C12.7007 13.0988 12.8992 12.9463 12.9577 12.7277L14.1325 8.32336C14.2171 8.00598 13.9776 7.69453 13.6491 7.69446H3.52509Z',
@@ -1039,6 +1040,86 @@ abstract final class DshIcons {
       ),
       DshIconShape(
         'M8 10.708V11.708',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconPaperPlaneOutlineRegular`.
+  static const paperPlane = DshIconData(
+    viewBox: 16,
+    size: 14,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M4.74024 9.11029L1.82882 7.79865C1.75022 7.76323 1.75026 7.65161 1.82889 7.61626L12.9665 2.60943C13.0354 2.57846 13.1125 2.63213 13.1073 2.70749L12.3914 13.1388C12.3864 13.2117 12.3073 13.2548 12.2433 13.2194L6.12677 9.83657',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M8.44336 11.0825L6.2832 13.2843C6.22048 13.3482 6.11182 13.3038 6.11182 13.2143V9.86772C6.11182 9.84165 6.122 9.8166 6.1402 9.79793L12.972 2.78748',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconPaperclipOutlineRegular`.
+  static const paperclip = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M12.75 4.5V9.5C12.75 10.7598 12.2496 11.968 11.3588 12.8588C10.468 13.7496 9.25978 14.25 8 14.25C6.74022 14.25 5.53204 13.7496 4.64124 12.8588C3.75045 11.968 3.25 10.7598 3.25 9.5V5C3.25 4.13805 3.59241 3.3114 4.2019 2.7019C4.8114 2.09241 5.63805 1.75 6.5 1.75C7.36195 1.75 8.1886 2.09241 8.7981 2.7019C9.40759 3.3114 9.75 4.13805 9.75 5V9.5C9.75 9.96413 9.56563 10.4092 9.23744 10.7374C8.90925 11.0656 8.46413 11.25 8 11.25C7.53587 11.25 7.09075 11.0656 6.76256 10.7374C6.43437 10.4092 6.25 9.96413 6.25 9.5V5.5',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconCompactOutlineRegular`.
+  static const compact = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M8 14.5C11.5899 14.5 14.5 11.5899 14.5 8C14.5 4.41015 11.5899 1.5 8 1.5C4.41015 1.5 1.5 4.41015 1.5 8C1.5 11.5899 4.41015 14.5 8 14.5Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+        opacity: 0.35,
+      ),
+      DshIconShape(
+        'M8 1.5C8.85359 1.5 9.69883 1.66813 10.4874 1.99478C11.2761 2.32144 11.9926 2.80022 12.5962 3.40381C13.1998 4.00739 13.6786 4.72394 14.0052 5.51256C14.3319 6.30117 14.5 7.14641 14.5 8',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `ReferenceIconRegular(session)`.
+  static const chatLines = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M5 6.75H11',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape('M5 9H8', fill: false, cap: DshIconCap.butt, evenOdd: false),
+      DshIconShape(
+        'M2.37067 11.2497C1.5872 9.89252 1.32042 8.29798 1.61945 6.7597C1.91847 5.22141 2.76317 3.84293 3.99801 2.87809C5.23285 1.91325 6.7747 1.427 8.33964 1.50888C9.90458 1.59076 11.3873 2.23526 12.5147 3.32369C13.6422 4.41232 14.3384 5.8717 14.4751 7.43304C14.6118 8.99438 14.1797 10.5525 13.2585 11.8205C12.3372 13.0885 10.9889 13.9809 9.4617 14.3334C8.18666 14.6277 6.8587 14.529 5.64964 14.0601C5.17095 13.8745 4.76937 13.4929 4.26509 13.3963C3.67389 13.2832 2.95232 13.5595 2.0377 14.3334',
         fill: false,
         cap: DshIconCap.butt,
         evenOdd: false,

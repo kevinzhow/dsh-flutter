@@ -50,6 +50,10 @@ REMOTES = [
     {"ns": "commands", "cls": "CommandRuntime", "entry": "packages/interaction/commands/src/index.ts"},
     {"ns": "terminal", "cls": "TerminalController", "entry": "packages/api/terminal-controller/src/index.ts"},
     {"ns": "userQuestions", "cls": "UserQuestionService", "entry": "packages/interaction/user-questions/src/index.ts"},
+    {"ns": "fileReferences", "cls": "SessionFileReferences", "entry": "packages/api/session-controller/src/file-references.ts"},
+    {"ns": "sessionReferenceResolver", "cls": "SessionReferenceResolver", "entry": "packages/context/session-reference/src/index.ts"},
+    {"ns": "workspace", "cls": "WorkspaceController", "entry": "packages/api/workspace-controller/src/index.ts"},
+    {"ns": "directoryPicker", "cls": "DirectoryPickerController", "entry": "packages/api/workspace-controller/src/directory-picker.ts"},
 ]
 for _r in REMOTES:
     _r["ir"] = IR_DIR / (_r["ns"] + ".ir.json")

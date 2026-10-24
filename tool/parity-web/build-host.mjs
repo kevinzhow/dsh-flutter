@@ -35,6 +35,7 @@ const client = path.join(dsh, 'packages/client')
 // (host/mocks/primitives.ts says why).
 const workspace = {
   '@deepseek-ai/dsh-client-ui-primitives': path.join(here, 'host/mocks/primitives.ts'),
+  '@deepseek-ai/dsh-client-store': path.join(here, 'host/mocks/client-store.ts'),
   '@deepseek-ai/dsh-util-workspace-path': path.join(dsh, 'packages/util/workspace-path/src/index.ts'),
   '@deepseek-ai/dsh-util-code-language': path.join(dsh, 'packages/util/code-language/src/index.ts'),
   '@deepseek-ai/dsh-util-values': path.join(dsh, 'packages/util/values/src/index.ts'),

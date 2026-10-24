@@ -62,9 +62,17 @@ ICONS = {
     'IconFollowsystemOutlineMedium': 'followSystemMedium',
     'IconDataOutlineRegular': 'data',
     'IconWarningOutlineRegular': 'warning',
+    'IconPaperPlaneOutlineRegular': 'paperPlane',
+    'IconPaperclipOutlineRegular': 'paperclip',
+    'IconCompactOutlineRegular': 'compact',
 }
 # Permission glyphs: ui-primitives PermissionIcon.tsx draws them as local `function XArtwork({ size = 16, ..., strokeWidth })`
 # components; the Regular variants (1px stroke) are the ones the composer and the settings rows use.
+# Shared artwork drawn directly, without an `Icon*` export of its own: the session reference glyph
+# (ReferenceIcon.tsx draws ChatLinesOutlineArtwork at the regular 1px stroke).
+SHARED_ARTWORK = {
+    'ChatLinesOutlineArtwork': ('ReferenceIconRegular(session)', 'chatLines'),
+}
 PERMISSION_ICONS = {
     'ReadOnlyArtwork': ('PermissionIconReadOnlyRegular', 'permissionReadOnly'),
     'WorkspaceWriteArtwork': ('PermissionIconWorkspaceWriteRegular', 'permissionWorkspaceWrite'),
@@ -112,7 +120,8 @@ def elements(svg):
         fill = attrs.get('fill') == 'currentColor'
         cap = 'square' if 'strokeLinecap="square"' in m.group(2) else ('round' if 'strokeLinecap="round"' in m.group(2) else 'butt')
         evenodd = attrs.get('fillRule') == 'evenodd' or 'fillRule="evenodd"' in m.group(2)
-        out.append((d, fill, cap, evenodd))
+        opacity = float(attrs['opacity']) if 'opacity' in attrs else 1.0
+        out.append((d, fill, cap, evenodd, opacity))
     return out
 
 
@@ -139,6 +148,15 @@ def build():
         if not els:
             sys.exit('gen_icons: no geometry in %s' % export)
         rows.append((ident, export, int(vb.group(1)), size, width, els))
+    for art, (export, ident) in SHARED_ARTWORK.items():
+        if art not in arts:
+            sys.exit('gen_icons: shared artwork %s not found' % art)
+        size, svg = arts[art]
+        vb = re.search(r'viewBox="0 0 (\d+) (\d+)"', svg)
+        els = elements(svg)
+        if not els:
+            sys.exit('gen_icons: no geometry in %s' % art)
+        rows.append((ident, export, int(vb.group(1)), size, STROKE['ICON_REGULAR_STROKE'], els))
     permission = read('../PermissionIcon.tsx')
     for artwork, (export, ident) in PERMISSION_ICONS.items():
         m = re.search(r'function %s\(\{ size = (\d+)[^)]*\)[^{]*\{\s*return \(\s*(<svg[\s\S]*?</svg>)\s*\)' % artwork, permission)
@@ -165,9 +183,9 @@ def build():
         lines.append('    size: %d,' % size)
         lines.append('    strokeWidth: %s,' % width)
         lines.append('    shapes: [')
-        for d, fill, cap, evenodd in els:
-            lines.append("      DshIconShape('%s', fill: %s, cap: DshIconCap.%s, evenOdd: %s)," % (
-                d, str(fill).lower(), cap, str(evenodd).lower()))
+        for d, fill, cap, evenodd, opacity in els:
+            lines.append("      DshIconShape('%s', fill: %s, cap: DshIconCap.%s, evenOdd: %s%s)," % (
+                d, str(fill).lower(), cap, str(evenodd).lower(), '' if opacity == 1.0 else ', opacity: %s' % opacity))
         lines.append('    ],')
         lines.append('  );')
     lines.append('}')
@@ -197,7 +215,7 @@ def main():
         print('gen_icons: up to date')
         return
     OUT.write_text(text)
-    print('gen_icons: wrote %s (%d icons)' % (OUT.relative_to(ROOT), len(ICONS) + len(PERMISSION_ICONS)))
+    print('gen_icons: wrote %s (%d icons)' % (OUT.relative_to(ROOT), len(ICONS) + len(SHARED_ARTWORK) + len(PERMISSION_ICONS)))
 
 
 main()

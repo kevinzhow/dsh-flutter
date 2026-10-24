@@ -53,9 +53,9 @@ PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/ds
                       'packages/dsh_slots', 'packages/dsh_i18n']
 FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
                     'features/dsh_feature_attachment', 'features/dsh_feature_chat',
-                    'features/dsh_feature_conversation', 'features/dsh_feature_documentpreview',
-                    'features/dsh_feature_files', 'features/dsh_feature_model_selection',
-                    'features/dsh_feature_permission_presets', 'features/dsh_feature_plan',
+                    'features/dsh_feature_commands', 'features/dsh_feature_conversation', 'features/dsh_feature_documentpreview',
+                    'features/dsh_feature_files', 'features/dsh_feature_input_trigger', 'features/dsh_feature_model_selection',
+                    'features/dsh_feature_permission_presets', 'features/dsh_feature_plan', 'features/dsh_feature_reference',
                     'features/dsh_feature_session', 'features/dsh_feature_settings',
                     'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
                     'features/dsh_feature_theme', 'features/dsh_feature_tool',
@@ -152,12 +152,17 @@ SETTINGS_VECTOR_FIXTURES = [
     'packages/dsh_models/test/fixtures/settings_form_vector.json',
     'packages/dsh_ui/test/fixtures/settings_form_model_vector.json',
 ]
+# dsh-input-vector/1 fixtures (trigger detection, @file grammar, menu reduction, ranking)
+INPUT_VECTOR_FIXTURES = [
+    'packages/dsh_conversation/test/fixtures/input_vector.json',
+]
 
 
 def c_vector():
     start = time.time()
     log = []
-    checks = [('gen_expected.py', f) for f in VECTOR_FIXTURES] + [('gen_settings_expected.py', f) for f in SETTINGS_VECTOR_FIXTURES]
+    checks = [('gen_expected.py', f) for f in VECTOR_FIXTURES] + [('gen_settings_expected.py', f) for f in SETTINGS_VECTOR_FIXTURES] \
+        + [('gen_input_expected.py', f) for f in INPUT_VECTOR_FIXTURES]
     for driver, fixture in checks:
         code, out, _ = run([sys.executable, '-I', 'tool/vectors/' + driver, '--check', fixture])
         if code == 2:

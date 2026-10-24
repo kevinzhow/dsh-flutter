@@ -51,7 +51,9 @@ class _IconPainter extends CustomPainter {
     for (var i = 0; i < paths.length; i++) {
       final shape = icon.shapes[i];
       final paint = Paint()
-        ..color = color
+        ..color = shape.opacity == 1
+            ? color
+            : color.withValues(alpha: color.a * shape.opacity)
         ..isAntiAlias = true;
       if (shape.fill) {
         paint.style = PaintingStyle.fill;

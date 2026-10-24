@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert' show base64Encode;
 
+import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
@@ -9,6 +11,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'attachment_text.dart';
+import 'composer_text.dart';
+import 'shell.dart' show ConversationRegion;
 
 /// The default composer (dsh `ui-conversation` `InputBar`, phone subset): a
 /// growing text field, a send button, and a stop button while a turn runs.
@@ -128,18 +132,30 @@ class _AttachSheet extends StatelessWidget {
 }
 
 class _DefaultComposerState extends State<DefaultComposer> {
-  final TextEditingController _text = TextEditingController();
+  late final ComposerInput _input;
+  late final ComposerTextController _text;
+  final FocusNode _focus = FocusNode();
+  final LayerLink _link = LayerLink();
+  final OverlayPortalController _portal = OverlayPortalController();
+  final GlobalKey _anchor = GlobalKey();
   StreamSubscription<SessionSnapshot>? _sub;
   StreamSubscription<DraftSnapshot>? _draftSub;
   StreamSubscription<List<LocalFile>>? _dropSub;
+  StreamSubscription<InputSnapshot>? _inputSub;
+  StreamSubscription<InputNotice?>? _noticeSub;
+  final List<void Function()> _unbind = [];
   bool _sending = false;
   String? _error;
+  bool _errorIsNotice = false;
 
   DraftAttachments? get _drafts => widget.owner.attachments?.drafts;
 
   @override
   void initState() {
     super.initState();
+    _input =
+        widget.owner.input ?? ComposerInput(sessionId: widget.owner.sessionId);
+    _text = ComposerTextController(_input, onOpenChip: _openChip);
     _sub = widget.owner.session.snapshot.changes.listen((_) {
       if (mounted) setState(() {});
     });
@@ -148,24 +164,48 @@ class _DefaultComposerState extends State<DefaultComposer> {
     });
     // Files dropped on a desktop window arrive like picked ones.
     _dropSub = widget.owner.attachments?.dropped.listen(_add);
-    final draft = widget.owner.textDraft;
-    if (draft != null) _text.text = draft.text;
-    _text.addListener(() {
-      widget.owner.textDraft?.text = _text.text;
-      setState(() {});
+    _inputSub = _input.state.changes.listen((_) {
+      if (mounted) setState(() {});
+    });
+    _noticeSub = _input.notice.changes.listen((n) {
+      if (n == null || !mounted) return;
+      setState(() {
+        _error = n.text;
+        _errorIsNotice = !n.error;
+      });
+    });
+    _unbind
+      ..add(
+        _input.bindFilePicker(
+          () => !_sending && widget.owner.attachments?.picker != null,
+          () => unawaited(_attach()),
+        ),
+      )
+      ..add(_input.bindFocus(_focus.requestFocus));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _portal.show();
     });
   }
 
   @override
   void dispose() {
+    for (final off in _unbind) {
+      off();
+    }
     unawaited(_sub?.cancel());
     unawaited(_draftSub?.cancel());
     unawaited(_dropSub?.cancel());
+    unawaited(_inputSub?.cancel());
+    unawaited(_noticeSub?.cancel());
     _text.dispose();
+    _focus.dispose();
     super.dispose();
   }
 
   String _a(String key) => widget.i18n.t(appNamespace, key);
+
+  void _openChip(DraftChip chip) =>
+      _input.triggers?.openReference(chip.source, chip.ref, chip.appearance);
 
   ImageLimits? get _limits =>
       ImageLimits.tryParse(widget.owner.session.projections.get('imageLimits'));
@@ -175,32 +215,61 @@ class _DefaultComposerState extends State<DefaultComposer> {
   bool get _canSend {
     final drafts = _drafts?.value;
     final hasDrafts = drafts != null && !drafts.isEmpty;
-    return (_text.text.trim().isNotEmpty || hasDrafts) &&
+    return (_input.clipboardText.trim().isNotEmpty || hasDrafts) &&
         !_sending &&
         !(drafts?.uploadsPending ?? false);
   }
 
+  /// The frozen drafts as a command submission carries them.
+  List<SubmitAttachment> _commandAttachments() => [
+    for (final a in _drafts?.freeze() ?? const <OutgoingAttachment>[])
+      switch (a) {
+        OutgoingImage() => {
+          'type': 'image',
+          'mediaType': a.mediaType,
+          'data': base64Encode(a.bytes),
+          if (a.name.isNotEmpty) 'name': a.name,
+        },
+        OutgoingFile() => {'type': 'file', 'receiptId': a.receiptId},
+      },
+  ];
+
   Future<void> _send() async {
     if (!_canSend) return;
-    final text = _text.text.trim();
     setState(() {
       _sending = true;
       _error = null;
     });
     try {
-      final attachments = _drafts?.freeze() ?? const <OutgoingAttachment>[];
-      await widget.owner.actions.send(text, attachments: attachments);
+      final drafts = _drafts?.value;
+      final result = await _input.submit(
+        attachments: drafts?.items.length ?? 0,
+        commandAttachments: _commandAttachments,
+        unsupportedAttachments: (token) => widget.i18n.t(
+          'command',
+          'notice.attachmentsUnsupported',
+          params: {
+            'command': token.startsWith('/') ? token.substring(1) : token,
+          },
+        ),
+        send: (text) async {
+          final attachments = _drafts?.freeze() ?? const <OutgoingAttachment>[];
+          await widget.owner.actions.send(text, attachments: attachments);
+        },
+      );
       if (!mounted) return;
-      _text.clear();
-      _drafts?.clear();
+      if (result is SubmitSent || result is SubmitCommandRan) _drafts?.clear();
     } on Object catch (e) {
       if (!mounted) return;
       final reason = attachmentRefusalReason(e);
-      setState(
-        () => _error = reason != null
+      setState(() {
+        _errorIsNotice = false;
+        _error = e is SubmitRefused
+            ? e.message
+            : reason != null
             ? attachmentErrorText(widget.i18n, reason, _limits)
-            : '${_a('session.composer.sendFailed')}: $e',
-      );
+            : '${_a('session.composer.sendFailed')}: $e';
+      });
     } finally {
       if (mounted) setState(() => _sending = false);
     }
@@ -212,11 +281,12 @@ class _DefaultComposerState extends State<DefaultComposer> {
     if (drafts == null || files.isEmpty) return;
     final result = await drafts.add(files);
     if (!mounted) return;
-    setState(
-      () => _error = result.refusal == null
+    setState(() {
+      _errorIsNotice = false;
+      _error = result.refusal == null
           ? null
-          : intakeRefusalText(widget.i18n, result),
-    );
+          : intakeRefusalText(widget.i18n, result);
+    });
   }
 
   Future<void> _pick(AttachSource source) async {
@@ -247,6 +317,43 @@ class _DefaultComposerState extends State<DefaultComposer> {
     } on Object catch (e) {
       if (mounted) setState(() => _error = '$e');
     }
+  }
+
+  /// The menu's keys while it is open (dsh `registerComposerKeymap`): arrows
+  /// move, Enter and Tab settle, Escape and Shift+Tab leave. Without an open
+  /// menu every key stays the text field's.
+  KeyEventResult _onKey(FocusNode node, KeyEvent event) {
+    if (event is KeyUpEvent) return KeyEventResult.ignored;
+    final triggers = _input.triggers;
+    if (triggers == null) return KeyEventResult.ignored;
+    final k = event.logicalKey;
+    final kb = HardwareKeyboard.instance;
+    final ArbitrateKey? key;
+    if (k == LogicalKeyboardKey.arrowUp) {
+      key = ArbitrateKey.up;
+    } else if (k == LogicalKeyboardKey.arrowDown) {
+      key = ArbitrateKey.down;
+    } else if (k == LogicalKeyboardKey.escape) {
+      key = ArbitrateKey.escape;
+    } else if (k == LogicalKeyboardKey.tab) {
+      key = kb.isShiftPressed ? ArbitrateKey.tabBack : ArbitrateKey.tab;
+    } else if ((k == LogicalKeyboardKey.enter ||
+            k == LogicalKeyboardKey.numpadEnter) &&
+        !kb.isShiftPressed &&
+        !kb.isControlPressed &&
+        !kb.isMetaPressed &&
+        !kb.isAltPressed) {
+      key = ArbitrateKey.enter;
+    } else {
+      key = null;
+    }
+    if (key == null) return KeyEventResult.ignored;
+    final composing =
+        _text.value.composing.isValid && !_text.value.composing.isCollapsed;
+    final outcome = triggers.arbitrate(key, composing: composing);
+    return outcome == ArbitrateOutcome.pass
+        ? KeyEventResult.ignored
+        : KeyEventResult.handled;
   }
 
   /// The controls above the field (dsh's composer tool row): the
@@ -285,88 +392,170 @@ class _DefaultComposerState extends State<DefaultComposer> {
     ];
   }
 
+  /// The floating entries of `conversation.input.overlay` (the candidate menu,
+  /// the command popup) in a column above the composer, as raft-flutter anchors
+  /// its mention suggestions: a portal in the app overlay that follows the
+  /// composer's top edge, so it rises with the keyboard and never resizes the
+  /// conversation.
+  Widget _overlay(BuildContext context) {
+    final slots = widget.slots;
+    final box = _anchor.currentContext?.findRenderObject();
+    if (slots == null || box is! RenderBox || !box.attached) {
+      return const SizedBox.shrink();
+    }
+    final entries = slots.renderList(
+      DshSlots.conversationInputOverlay.typed<SessionOwner, Widget>(),
+      widget.owner,
+    );
+    if (entries.isEmpty) return const SizedBox.shrink();
+    final top = box.localToGlobal(Offset.zero).dy;
+    // The menu stops below the session header (dsh: the header block plus 8px),
+    // so the title row stays whole; without a conversation region it keeps the
+    // status bar clear.
+    final region = ConversationRegion.topOf(context);
+    final ceiling = region != null
+        ? region + DshSpace.sm
+        : MediaQuery.paddingOf(context).top + DshSpace.sm;
+    final available = (top - ceiling - 4).clamp(0.0, double.infinity);
+    // The menu's edges sit on the composer's content edges, not the screen's:
+    // a phone keeps an 8px margin, a wide window aligns with the field.
+    final compact = MediaQuery.sizeOf(context).width < 768;
+    final inset = compact ? DshSpace.sm : DshSpace.lg;
+    return Positioned(
+      left: 0,
+      top: 0,
+      width: box.size.width - inset - DshSpace.sm,
+      child: CompositedTransformFollower(
+        link: _link,
+        showWhenUnlinked: false,
+        targetAnchor: Alignment.topLeft,
+        followerAnchor: Alignment.bottomLeft,
+        offset: Offset(inset, -4),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: available),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [...entries],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final running = widget.owner.session.snapshot.value.running;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        DshSpace.lg,
-        DshSpace.sm,
-        DshSpace.sm,
-        DshSpace.sm,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (_error != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: DshSpace.xs),
-              child: DshChromeText(
-                _error!,
-                key: const ValueKey('composer-error'),
-                style: theme
-                    .textStyle('--dsw-font-xxs-12')
-                    .copyWith(
-                      color: theme.color('--dsw-alias-state-error-primary'),
-                    ),
-              ),
+    final locked =
+        _input.snapshot.phase == InputPhase.adjudicating ||
+        _input.snapshot.phase == InputPhase.submitting;
+    return OverlayPortal(
+      controller: _portal,
+      overlayChildBuilder: _overlay,
+      child: TapRegion(
+        groupId: composerTapGroup(widget.owner.sessionId),
+        child: CompositedTransformTarget(
+          link: _link,
+          child: Padding(
+            key: _anchor,
+            padding: const EdgeInsets.fromLTRB(
+              DshSpace.lg,
+              DshSpace.sm,
+              DshSpace.sm,
+              DshSpace.sm,
             ),
-          if (widget.slots != null)
-            widget.slots!.renderSingle(
-                  DshSlots.conversationInputAttachments
-                      .typed<SessionOwner, Widget>(),
-                  widget.owner,
-                ) ??
-                const SizedBox.shrink(),
-          ..._toolRow(),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (widget.owner.attachments?.picker != null)
-                _AttachButton(
-                  label: _a('attach.title'),
-                  onPressed: _sending ? null : _attach,
-                ),
-              Expanded(
-                child: CallbackShortcuts(
-                  bindings: {
-                    const SingleActivator(
-                      LogicalKeyboardKey.enter,
-                      control: true,
-                    ): _send,
-                    const SingleActivator(LogicalKeyboardKey.enter, meta: true):
-                        _send,
-                  },
-                  child: DshTextField(
-                    controller: _text,
-                    placeholder: _a('session.composer.placeholder'),
-                    minLines: 1,
-                    maxLines: 6,
-                    keyboardType: TextInputType.multiline,
-                    textInputAction: TextInputAction.newline,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (_error != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: DshSpace.xs),
+                    child: DshChromeText(
+                      _error!,
+                      key: const ValueKey('composer-error'),
+                      style: theme
+                          .textStyle('--dsw-font-xxs-12')
+                          .copyWith(
+                            color: _errorIsNotice
+                                ? theme.labelSecondary
+                                : theme.color(
+                                    '--dsw-alias-state-error-primary',
+                                  ),
+                          ),
+                    ),
                   ),
+                if (widget.slots != null)
+                  widget.slots!.renderSingle(
+                        DshSlots.conversationInputAttachments
+                            .typed<SessionOwner, Widget>(),
+                        widget.owner,
+                      ) ??
+                      const SizedBox.shrink(),
+                ..._toolRow(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (widget.owner.attachments?.picker != null)
+                      _AttachButton(
+                        label: _a('attach.title'),
+                        onPressed: _sending ? null : _attach,
+                      ),
+                    Expanded(
+                      child: CallbackShortcuts(
+                        bindings: {
+                          const SingleActivator(
+                            LogicalKeyboardKey.enter,
+                            control: true,
+                          ): _send,
+                          const SingleActivator(
+                            LogicalKeyboardKey.enter,
+                            meta: true,
+                          ): _send,
+                        },
+                        child: Focus(
+                          onKeyEvent: _onKey,
+                          child: DshTextField(
+                            controller: _text,
+                            focusNode: _focus,
+                            enabled: !locked,
+                            placeholder: _a('session.composer.placeholder'),
+                            minLines: 1,
+                            maxLines: 6,
+                            keyboardType: TextInputType.multiline,
+                            textInputAction: TextInputAction.newline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (running)
+                      DshIconButton(
+                        key: const ValueKey('composer-cancel'),
+                        icon: Icons.stop_rounded,
+                        semanticLabel: widget.i18n.t(
+                          'conversation',
+                          'input.stop',
+                        ),
+                        onPressed: _cancel,
+                      ),
+                    if (!running || _canSend)
+                      DshIconButton(
+                        key: const ValueKey('composer-send'),
+                        icon: Icons.arrow_upward_rounded,
+                        semanticLabel: widget.i18n.t(
+                          'conversation',
+                          'input.send',
+                        ),
+                        filled: true,
+                        onPressed: _canSend ? _send : null,
+                      ),
+                  ],
                 ),
-              ),
-              if (running)
-                DshIconButton(
-                  key: const ValueKey('composer-cancel'),
-                  icon: Icons.stop_rounded,
-                  semanticLabel: widget.i18n.t('conversation', 'input.stop'),
-                  onPressed: _cancel,
-                ),
-              if (!running || _canSend)
-                DshIconButton(
-                  key: const ValueKey('composer-send'),
-                  icon: Icons.arrow_upward_rounded,
-                  semanticLabel: widget.i18n.t('conversation', 'input.send'),
-                  filled: true,
-                  onPressed: _canSend ? _send : null,
-                ),
-            ],
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
