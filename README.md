@@ -53,7 +53,7 @@ tool/vendor/raft-visual-testing/       vendored Raft visual-testing CLI, FSL-1.1
 ```sh
 flutter pub get                       # workspace resolution, run from the repo root
 tool/preflight --fast                 # guards: layering, codegen/theme/i18n staleness, format, analyze
-tool/preflight                        # same plus every package's tests
+tool/preflight                        # same plus every package's tests (not the `live` ones, which start real dsh hosts)
 ```
 
 CI (`.github/workflows/ci.yml`) runs `tool/preflight` on every pull request and push to main, and builds an Android APK
