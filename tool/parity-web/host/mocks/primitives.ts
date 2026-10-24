@@ -23,3 +23,8 @@ export { CodeBlock } from '@dsh/ui-primitives/src/markdown/CodeBlock.tsx'
 export * from '@dsh/ui-primitives/src/icons/index.tsx'
 export { MarkdownText } from '@dsh/ui-primitives/src/markdown/MarkdownText.tsx'
 export { extractMarkdownPlainText } from '@dsh/ui-primitives/src/markdown/plain-text.ts'
+// Settings rows (ui-theme, ui-permission-presets): the font-family text field, the permission selector's menu and its
+// full-access risk confirmation dialog (both closed in every case).
+export { Input } from '@dsh/ui-primitives/src/Input.tsx'
+export { Menu } from '@dsh/ui-primitives/src/Menu.tsx'
+export { RiskConfirmation } from '@dsh/ui-primitives/src/RiskConfirmation.tsx'

@@ -8,9 +8,13 @@ import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart';
 import 'package:dsh_feature_documentpreview/dsh_feature_documentpreview.dart';
 import 'package:dsh_feature_files/dsh_feature_files.dart';
+import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
+import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
+import 'package:dsh_feature_settings/dsh_feature_settings.dart';
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
+import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -19,13 +23,20 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' show MaterialPageRoute;
 import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
 import 'connection_store.dart';
+import 'host_locale.dart';
 import 'launch_link.dart';
+import 'local_prefs.dart';
+import 'notice_coordinator.dart';
+import 'platform/notifications.dart';
 import 'platform/platform_services.dart';
+import 'screens/app_settings_rows.dart';
+import 'screens/settings_route.dart';
 import 'session_controller.dart';
 
 /// Where the app is with its host.
@@ -64,12 +75,28 @@ class AppController extends ChangeNotifier {
     this.frameScheduler,
     this.platform = const PlatformServices(),
     this.highlighter,
+    LocalPrefs? prefs,
+    this.notifications,
   }) : store = store ?? MemoryConnectionStore(),
+       prefs = prefs ?? MemoryLocalPrefs(),
+       _deviceLocale = DshLocale.fromTag(
+         PlatformDispatcher.instance.locale.toLanguageTag(),
+       ),
        locale =
            locale ??
-           DshLocale.fromTag(
-             PlatformDispatcher.instance.locale.toLanguageTag(),
-           ) {
+           (prefs?.locale == null
+               ? DshLocale.fromTag(
+                   PlatformDispatcher.instance.locale.toLanguageTag(),
+                 )
+               : DshLocale.fromTag(prefs!.locale!)) {
+    final cache = this.prefs.themeCache;
+    if (cache != null) {
+      try {
+        themeSettings = ThemeSettings.fromJson(cache);
+      } on ThemeException {
+        // A cache this build cannot read is no cache.
+      }
+    }
     for (final slot in DshSlots.all) {
       slots.declare(slot);
     }
@@ -113,6 +140,26 @@ class AppController extends ChangeNotifier {
     );
     registerApprovalFeature(slots, tracker: approvals, i18n: () => i18n);
     registerUserQuestionsFeature(slots, tracker: questions, i18n: () => i18n);
+    registerSettingsFeature(
+      slots,
+      i18n: () => i18n,
+      hostVersion: () => hostVersion,
+    );
+    registerAppSettingsRows(slots, this);
+    final notifier = notifications;
+    if (notifier != null) {
+      notices = NoticeCoordinator(
+        service: notifier,
+        approvals: approvals,
+        questions: questions,
+        i18n: () => i18n,
+        sessionTitle: _sessionTitle,
+        runningSessions: _runningSessions,
+        onOpen: _openFromNotice,
+        enabled: this.prefs.notificationsEnabled,
+      );
+      unawaited(notices!.init());
+    }
     _stateSub = backend.states.listen(_onConnectionState);
     _approvalSub = approvals.pending.changes.listen((_) => notifyListeners());
     _questionSub = questions.pending.changes.listen((_) => notifyListeners());
@@ -120,6 +167,15 @@ class AppController extends ChangeNotifier {
 
   final HostBackend backend;
   final ConnectionStore store;
+
+  /// What the device itself remembers (language, theme cache, notifications).
+  final LocalPrefs prefs;
+
+  /// Local notifications and the keep-alive of the connection while in the
+  /// background (null: none, as in tests and on the desktop).
+  final NotificationService? notifications;
+  NoticeCoordinator? notices;
+  final DshLocale _deviceLocale;
   final LaunchScanner scanner;
 
   /// Pickers and file handling of the running platform.
@@ -167,10 +223,29 @@ class AppController extends ChangeNotifier {
   Object? createError;
 
   DshLocale locale;
-  ThemePreference themePreference = ThemePreference.system;
+
+  /// The theme in force: the host's `ui-theme` section once connected (shared
+  /// with dsh web), the last one seen before.
+  ThemeSettings themeSettings = ThemeSettings();
+
+  /// The release the host reports, once known.
+  String? hostVersion;
+
+  /// The host-backed services, present while connected.
+  HostRemotes? remotes;
+  ConfigForms? forms;
+  ThemeSettingsService? _theme;
+  HostLocale? _hostLocale;
+  PermissionPresetsFeature? _permissions;
+  ModelSelectionFeature? _models;
+  final List<void Function()> _hostOffs = [];
+  StreamSubscription<ThemeSettings>? _themeSub;
+  String? _pendingOpen;
 
   DshI18n get i18n => DshI18n(locale);
-  ThemeSettings get themeSettings => ThemeSettings(preference: themePreference);
+
+  /// Whether the persisted theme can be edited now.
+  bool get hostSettingsLive => _theme != null;
 
   /// The origin of the paired host (no token), for display.
   String? hostOrigin;
@@ -220,7 +295,21 @@ class AppController extends ChangeNotifier {
       reconnecting = false;
       if (remember) await store.save(SavedHost(origin.toString(), token));
       notifyListeners();
-      unawaited(manager!.refreshList().catchError((Object _) {}));
+      notices?.setConnected(true);
+      unawaited(notices?.requestIfNeeded());
+      unawaited(
+        manager!
+            .refreshList()
+            .then((_) {
+              final id = _pendingOpen;
+              if (id != null && manager?.summaryOf(id) != null) {
+                _pendingOpen = null;
+                return open(id);
+              }
+              return null;
+            })
+            .catchError((Object _) => null),
+      );
       return true;
     } on ConnectException catch (e) {
       phase = e.failure == ConnectFailure.rejected
@@ -249,8 +338,91 @@ class AppController extends ChangeNotifier {
     final m = manager = SessionManager(transport)..start();
     _listSub = m.list.changes.listen((_) {
       _listChanges.add(null);
+      notices?.sessionsChanged();
       notifyListeners();
     });
+    _attachHost(transport);
+  }
+
+  /// Start the settings-side services over the live host and fill their slots.
+  void _attachHost(SessionTransport transport) {
+    _detachHost();
+    final r = remotes = HostRemotes(
+      caller: backend.remoteCaller,
+      hostEvents: _events.stream,
+      generations: transport.generations,
+      currentGeneration: () => transport.generation,
+    );
+    final f = forms = ConfigForms(r);
+    final theme = _theme = ThemeSettingsService(
+      host: f.get('ui-theme'),
+      initial: themeSettings,
+    );
+    _themeSub = theme.settings.changes.listen((next) {
+      themeSettings = next;
+      unawaited(prefs.setThemeCache(next.toJson()));
+      notifyListeners();
+    });
+    _hostLocale = HostLocale(
+      host: f.get(localeSettingsNamespace),
+      initial: locale,
+      deviceLocale: _deviceLocale,
+      onChange: (next) {
+        locale = next;
+        unawaited(prefs.setLocale(next.name));
+        notifyListeners();
+      },
+    );
+    _hostOffs.add(
+      registerThemeFeature(
+        slots,
+        service: theme,
+        i18n: () => i18n,
+        touch: platform.touchInput,
+      ),
+    );
+    _permissions = registerPermissionPresetsFeature(
+      slots,
+      remotes: r,
+      forms: f,
+      i18n: () => i18n,
+    );
+    _models = registerModelSelectionFeature(
+      slots,
+      remotes: r,
+      i18n: () => i18n,
+    );
+    unawaited(
+      readHostVersion(backend.remoteCaller).then((v) {
+        hostVersion = v;
+        notifyListeners();
+      }, onError: (Object _) {}),
+    );
+  }
+
+  void _detachHost() {
+    for (final off in _hostOffs) {
+      off();
+    }
+    _hostOffs.clear();
+    unawaited(_themeSub?.cancel());
+    _themeSub = null;
+    _hostLocale?.dispose();
+    _hostLocale = null;
+    final theme = _theme;
+    _theme = null;
+    if (theme != null) unawaited(theme.dispose());
+    final permissions = _permissions;
+    _permissions = null;
+    if (permissions != null) unawaited(permissions.dispose());
+    final models = _models;
+    _models = null;
+    if (models != null) unawaited(models.dispose());
+    final f = forms;
+    forms = null;
+    if (f != null) unawaited(f.dispose());
+    remotes = null;
+    hostVersion = null;
   }
 
   void _onConnectionState(ConnectionState s) {
@@ -298,6 +470,8 @@ class AppController extends ChangeNotifier {
     await manager?.dispose();
     manager = null;
     _transport = null;
+    _detachHost();
+    notices?.setConnected(false);
   }
 
   // ---- sessions --------------------------------------------------------
@@ -365,14 +539,67 @@ class AppController extends ChangeNotifier {
 
   // ---- settings --------------------------------------------------------
 
+  /// Change the interface language: written to the host's settings document
+  /// when connected (the choice is shared with dsh web), kept on the device
+  /// otherwise.
   void setLocale(DshLocale l) {
+    final host = _hostLocale;
+    if (host != null) {
+      host.set(l);
+      return;
+    }
     locale = l;
+    unawaited(prefs.setLocale(l.name));
     notifyListeners();
   }
 
-  void setThemePreference(ThemePreference p) {
-    themePreference = p;
+  /// Whether the language can be saved on the host.
+  bool get localeOnHost => _hostLocale != null && _hostLocale!.available;
+
+  /// Turn notifications on or off (a device setting).
+  void setNotificationsEnabled(bool enabled) {
+    unawaited(prefs.setNotificationsEnabled(enabled));
+    notices?.setEnabled(enabled);
     notifyListeners();
+  }
+
+  bool get notificationsEnabled => prefs.notificationsEnabled;
+
+  /// The app moved to or from the foreground ([AppLifecycleState] resumed).
+  void setForeground(bool foreground) => notices?.setForeground(foreground);
+
+  /// Open the settings page over the app.
+  void openSettings() {
+    final nav = navigatorKey.currentState;
+    if (nav == null) return;
+    nav.push(
+      MaterialPageRoute<void>(builder: (_) => SettingsRoute(controller: this)),
+    );
+  }
+
+  String _sessionTitle(String sessionId) {
+    for (final e in sessionList.items) {
+      if (e.sessionId == sessionId && (e.title?.trim().isNotEmpty ?? false)) {
+        return e.title!.trim();
+      }
+    }
+    final title = manager?.projectionValues(sessionId)['title'];
+    return title is String && title.trim().isNotEmpty
+        ? title.trim()
+        : i18n.t(appNamespace, 'sessions.untitled');
+  }
+
+  int _runningSessions() =>
+      sessionList.items.where((e) => e.summary.running).length;
+
+  /// A notification was tapped: show that session, now or once the list is in.
+  void _openFromNotice(String sessionId) {
+    final m = manager;
+    if (m != null && m.summaryOf(sessionId) != null) {
+      unawaited(open(sessionId));
+    } else {
+      _pendingOpen = sessionId;
+    }
   }
 
   @override
@@ -381,6 +608,7 @@ class AppController extends ChangeNotifier {
     unawaited(_approvalSub?.cancel());
     unawaited(_questionSub?.cancel());
     unawaited(_resetModels());
+    unawaited(notices?.dispose());
     unawaited(approvals.dispose());
     unawaited(questions.dispose());
     unawaited(_events.close());

@@ -2,7 +2,7 @@
 
 A cross-platform native client for DSH (DeepSeek Harness), built with Flutter. Working name: Whalee.
 
-Status: phase 1b-2a (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
+Status: phase 1b-2b (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting; settings page, model and permission selection, local notifications). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
 
 ## Layout
 
@@ -25,6 +25,10 @@ features/dsh_feature_documentpreview  ui-documentpreview: highlighted text, rend
 features/dsh_feature_files             ui-files: workspace file tree, live-watched
 features/dsh_feature_plan              ui-plan: submitted-plan cards, plan sheet, plan-mode chip
 features/dsh_feature_session           ui-session: the session list
+features/dsh_feature_model_selection   ui-model-selection: model/effort seat in the composer tool row, model sheet
+features/dsh_feature_permission_presets ui-permission-presets: new-session default row, composer permission seat
+features/dsh_feature_settings          ui-settings: settings page (rail on wide windows, list then section on phones), General column
+features/dsh_feature_theme             ui-theme: light/dark/system appearance, font families and sizes (shared with dsh web through the host)
 features/dsh_feature_sidebar_right     ui-sidebar-right: files/preview panel (sheet on phones, inline column on wide windows)
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
 features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
@@ -59,7 +63,16 @@ python3 tool/codegen/gen.py [--check]                      # Remote descriptors 
 python3 tool/theme-adapters/build_official_pack.py [--check]   # dsh stylesheets -> official theme pack
 python3 tool/i18n/gen_catalog.py [--check]                 # dsh locale dictionaries -> zh/en catalog
 python3 tool/vectors/gen_expected.py --check <fixture>     # TS-produced expectations for the behaviour vectors
+python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for the settings vectors
 ```
+
+## Notifications
+
+While the app is in the background and connected, a session that asks for an approval or a question becomes one local
+notification; tapping it opens that session at the pending takeover. On Android the connection is kept alive by a
+foreground service (type `specialUse`) that runs only while sessions are running, the app is in the background and
+notifications are on; the Android 13+ permission is asked when the user turns notifications on. This is not push: once
+the system kills the app nothing reaches the phone until a relay exists (out of scope). The switch is in Settings.
 
 ## Behaviour vectors
 
@@ -70,6 +83,12 @@ window (client model), `expectedChat` the chat snapshot of dsh's real conversati
 `tool_turn_vector.json` (recorded live tool-call turn, scrubbed; tool argument keys kept), and
 `conversation_edge_vector.json` (synthetic: reasoning and tool-call streaming, interruption, steering, failure,
 max tokens, notice-woken turn, retry; `tool/vectors/synth_edge_trace.py`).
+
+A second family, `dsh-settings-vector/1` (`tool/vectors/gen_settings_expected.py`, inputs from
+`tool/vectors/synth_settings_trace.py`), covers the settings client: `settings_schema_vector.json` runs thousands of
+values through dsh's real schemastery-backed schema service and compares verdict and failure text with the Dart port;
+`settings_form_vector.json` replays scripted traces (reads, failures, writes, reconnects, disposal) through dsh's real
+describe mirror and configuration forms; `settings_form_model_vector.json` does the same for the staged form model.
 
 ## Product name
 

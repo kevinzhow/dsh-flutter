@@ -5,7 +5,8 @@
 // Pinned dsh: deepseek-ai/deepseek-harness commit 687f282e8625c6b8d11ff58211a90524be2e4317 (dsh-v0.2.1-rc.2, npm 0.2.1-rc.2).
 // Namespace `session` (SessionRemote), package packages/api/session-controller.
 // Remote methods: list, search, create, selectModel, initializeDefaultModel, modelCatalog, canOpenWorkspacePath, openWorkspacePath, workspacePathApplications, rename, fork, prompt, attachment, updateQueue, cancel, page, follow (stream), projections, control (stream).
-// Wire args are the Host parameter names verbatim (`list` sends `_request`).
+// Wire args are the Host parameter names verbatim (`list` sends `_request`); a Typert lookup parameter
+// travels as `<parameter>Id`.
 // Not covered: raw HTTP `POST /api/session/uploadFileBinary` (not a @Remote method) and other namespaces.
 // SessionWireEvent keeps data/surfaceOp/sourceEventSeqs as raw JSON; the models layer decodes it with
 // SessionEvent.fromJson(event.toJson()).

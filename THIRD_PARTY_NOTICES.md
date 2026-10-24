@@ -64,6 +64,12 @@ License 1.1 (`tool/parity-fonts/OFL-NotoSansCJK.txt`). They are not part of the 
 `packages/dsh_ui` parses the SVG path data of dsh's product icons with the `path_drawing` package (BSD 3-Clause, Dart
 project authors / Flutter community), a Dart dependency resolved through pub.
 
+## Notification, settings and preference dependencies (apps/dsh_flutter)
+
+`apps/dsh_flutter` resolves three packages through pub: `flutter_local_notifications` (BSD 3-Clause, MaiKaim), `app_settings`
+(MIT, Spencer Collins) and `shared_preferences` (BSD 3-Clause, Flutter team). No source or asset of them is copied into
+this repository.
+
 ## Syntax highlighter: TextMate engine and grammars (packages/dsh_highlight)
 
 `packages/dsh_highlight` reproduces the syntax colouring of dsh web, which uses [shiki](https://github.com/shikijs/shiki)

@@ -712,11 +712,15 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
     extra = [
         f"Namespace `{ns}` ({pascal(ns)}Remote), package {ir['package']}.",
         "Remote methods: " + ", ".join(f"{m['name']}{' (stream)' if m['mode'] == 'stream' else ''}" for m in ir["methods"] if m["name"] not in skipped) + ".",
-        "Wire args are the Host parameter names verbatim (`list` sends `_request`).",
-        "Not covered: raw HTTP `POST /api/session/uploadFileBinary` (not a @Remote method) and other namespaces.",
-        "SessionWireEvent keeps data/surfaceOp/sourceEventSeqs as raw JSON; the models layer decodes it with",
-        "SessionEvent.fromJson(event.toJson()).",
+        "Wire args are the Host parameter names verbatim (`list` sends `_request`); a Typert lookup parameter",
+        "travels as `<parameter>Id`.",
     ]
+    if ns == "session":
+        extra += [
+            "Not covered: raw HTTP `POST /api/session/uploadFileBinary` (not a @Remote method) and other namespaces.",
+            "SessionWireEvent keeps data/surfaceOp/sourceEventSeqs as raw JSON; the models layer decodes it with",
+            "SessionEvent.fromJson(event.toJson()).",
+        ]
     if skipped:
         extra.append("Skipped: " + "; ".join(skipped))
     else:

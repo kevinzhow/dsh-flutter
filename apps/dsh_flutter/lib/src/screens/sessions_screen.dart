@@ -78,7 +78,7 @@ class SessionsPane extends StatelessWidget {
                   key: const ValueKey('sessions-settings'),
                   icon: Icons.tune,
                   plain: true,
-                  semanticLabel: a('settings.title'),
+                  semanticLabel: i18n.t('settings', 'trigger'),
                   onPressed: onSettings,
                 ),
               ],

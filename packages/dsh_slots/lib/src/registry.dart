@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'slot.dart';
 
 /// Raised for programming errors in slot composition (dsh fails these during
@@ -17,8 +19,10 @@ class _Entry<P, R> {
     this.order,
     this.seq,
     this.builder,
-    this.select,
-  );
+    this.select, [
+    this.label,
+  ]);
+  final Object? label; // String Function()?
   final String id;
   final String? key;
   final int priority;
@@ -27,6 +31,19 @@ class _Entry<P, R> {
   final Object
   builder; // SlotBuilder<P, R> or SlotBuilder<(P, Object?), R> for chain
   final Object? select; // ChainSelect<P, Object?>?
+}
+
+/// What a list slot's occupant declares about itself besides what it renders
+/// (dsh's registration options: `id`, `order`, a locale-following `label`).
+class SlotEntryInfo {
+  const SlotEntryInfo(this.id, this.order, this.label);
+
+  /// The occupant's id (the key `only` selects it by).
+  final String id;
+  final int order;
+
+  /// The label, resolved now (null when the occupant registered none).
+  final String? label;
 }
 
 /// Typed slot registry with dsh's slot semantics.
@@ -38,7 +55,14 @@ class _Entry<P, R> {
 class SlotRegistry {
   final Map<String, Slot<Object?, Object?>> _declared = {};
   final Map<String, List<_Entry<Object?, Object?>>> _cells = {};
+  final StreamController<String> _changes = StreamController<String>.broadcast(
+    sync: true,
+  );
   int _seq = 0;
+
+  /// The name of a slot whose occupants changed (registered or withdrawn).
+  /// dsh's `ctx.slots.subscribe(name, listener)` / `getVersion(name)`.
+  Stream<String> get changes => _changes.stream;
 
   /// Make [slot] live. A name already declared fails ("declaring a child
   /// already owned elsewhere fails").
@@ -77,13 +101,18 @@ class SlotRegistry {
   /// a `single` and a `chain` cell address by registration only. Registering
   /// the same id/key twice in one slot throws; `single` allows several
   /// occupants and the lowest [priority] shadows the rest.
-  void register<P, R>(
+  ///
+  /// [label] is the occupant's display text, a thunk so it follows the locale
+  /// (dsh's slot `label` option); [entries] reads it. Returns the disposer
+  /// that withdraws exactly this occupant (a no-op once withdrawn).
+  void Function() register<P, R>(
     Slot<P, R> slot,
     SlotBuilder<P, R> builder, {
     String? id,
     String? key,
     int priority = 0,
     int order = 0,
+    String Function()? label,
   }) {
     final cells = _cellsOf(slot as Slot<Object?, Object?>);
     switch (slot.cardinality) {
@@ -108,17 +137,21 @@ class SlotRegistry {
       case SlotCardinality.single:
         break;
     }
-    cells.add(
-      _Entry<Object?, Object?>(
-        id ?? '',
-        key,
-        priority,
-        order,
-        _seq++,
-        builder,
-        null,
-      ),
+    final entry = _Entry<Object?, Object?>(
+      id ?? '',
+      key,
+      priority,
+      order,
+      _seq++,
+      builder,
+      null,
+      label,
     );
+    cells.add(entry);
+    _changes.add(slot.name);
+    return () {
+      if (cells.remove(entry)) _changes.add(slot.name);
+    };
   }
 
   /// Register a chain occupant: [select] decides whether it matches the owner
@@ -169,6 +202,22 @@ class SlotRegistry {
   List<R> renderList<P, R>(Slot<P, R> slot, P owner) => [
     for (final c in _sorted(slot as Slot<Object?, Object?>))
       (c.builder as dynamic)(owner) as R,
+  ];
+
+  /// `list`: the occupant [id] alone (dsh's `renderSlot(name, props, { only })`),
+  /// or null when none has that id.
+  R? renderOnly<P, R>(Slot<P, R> slot, String id, P owner) {
+    for (final c in _sorted(slot as Slot<Object?, Object?>)) {
+      if (c.id == id) return (c.builder as dynamic)(owner) as R;
+    }
+    return null;
+  }
+
+  /// `list`: the id, order and label of every occupant, in render order (dsh's
+  /// `ctx.slots.entries(name)`).
+  List<SlotEntryInfo> entries(Slot<Object?, Object?> slot) => [
+    for (final c in _sorted(slot))
+      SlotEntryInfo(c.id, c.order, (c.label as String Function()?)?.call()),
   ];
 
   /// `keyed`: the occupant for [key] (lowest priority among equals), or null.

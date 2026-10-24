@@ -1,5 +1,4 @@
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
@@ -12,17 +11,41 @@ import 'platform/pickers.dart';
 import 'screens/pairing_screen.dart';
 import 'screens/session_screen.dart';
 import 'screens/sessions_screen.dart';
-import 'screens/settings_sheet.dart';
 
 /// Width from which the app shows the list and the session side by side.
 const double wideBreakpoint = 840;
 
 /// Composition root widget: resolves the official theme pack under the user's
 /// settings and hands the contract to every component through a ThemeExtension.
-class WhaleeApp extends StatelessWidget {
+class WhaleeApp extends StatefulWidget {
   const WhaleeApp({super.key, required this.controller});
 
   final AppController controller;
+
+  @override
+  State<WhaleeApp> createState() => _WhaleeAppState();
+}
+
+class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
+  AppController get controller => widget.controller;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// Only a resumed app is in front of the user: from every other state a
+  /// session that needs them is told through a notification.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) =>
+      controller.setForeground(state == AppLifecycleState.resumed);
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +91,7 @@ class RootScreen extends StatelessWidget {
 
   final AppController controller;
 
-  void _settings(BuildContext context) {
-    final theme = context.dsh;
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: theme.color('--dsw-alias-bg-layer-2'),
-      builder: (_) => SettingsSheet(controller: controller),
-    );
-  }
+  void _settings(BuildContext context) => controller.openSettings();
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +131,7 @@ class RootScreen extends StatelessWidget {
                       key: const ValueKey('pairing-settings'),
                       icon: Icons.tune,
                       plain: true,
-                      semanticLabel: controller.i18n.t(
-                        appNamespace,
-                        'settings.title',
-                      ),
+                      semanticLabel: controller.i18n.t('settings', 'trigger'),
                       onPressed: () => _settings(context),
                     ),
                   ),

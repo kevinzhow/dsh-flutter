@@ -1,0 +1,729 @@
+{
+ "comment": "settings.describe of a fresh dsh web host 0.2.1-rc.2 (default composition, empty user layer), trimmed to the namespaces the client tests use.",
+ "writable": true,
+ "hasDocument": true,
+ "namespaces": [
+  {
+   "ns": "session-log-deepseek",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3620,
+    "refs": {
+     "3619": {
+      "type": "boolean",
+      "meta": {
+       "default": true
+      }
+     },
+     "3620": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "enabled": 3619
+      }
+     }
+    }
+   },
+   "value": {
+    "enabled": true
+   },
+   "base": {
+    "enabled": true
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "bash-sandbox",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3780,
+    "refs": {
+     "3774": {
+      "type": "string",
+      "meta": {}
+     },
+     "3775": {
+      "type": "number",
+      "meta": {
+       "default": 120000
+      }
+     },
+     "3776": {
+      "type": "number",
+      "meta": {
+       "default": 600000
+      }
+     },
+     "3777": {
+      "type": "number",
+      "meta": {
+       "default": 64000
+      }
+     },
+     "3778": {
+      "type": "number",
+      "meta": {
+       "default": 67108864
+      }
+     },
+     "3779": {
+      "type": "number",
+      "meta": {
+       "default": 3000
+      }
+     },
+     "3780": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "cwd": 3774,
+       "timeoutMs": 3775,
+       "maxTimeoutMs": 3776,
+       "maxOutputBytes": 3777,
+       "maxSpillBytes": 3778,
+       "graceMs": 3779
+      }
+     }
+    }
+   },
+   "value": {
+    "timeoutMs": 60000,
+    "maxTimeoutMs": 600000,
+    "maxOutputBytes": 64000,
+    "maxSpillBytes": 67108864,
+    "graceMs": 3000
+   },
+   "base": {
+    "timeoutMs": 60000,
+    "maxTimeoutMs": 600000,
+    "maxOutputBytes": 64000,
+    "maxSpillBytes": 67108864,
+    "graceMs": 3000
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "permission",
+   "autoGenerate": false,
+   "schema": {
+    "uid": 3788,
+    "refs": {
+     "3787": {
+      "type": "string",
+      "meta": {}
+     },
+     "3788": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "defaultPreset": 3787
+      }
+     }
+    }
+   },
+   "value": {},
+   "base": {},
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "subagent",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3792,
+    "refs": {
+     "3790": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 0,
+       "max": 9007199254740991,
+       "default": 1
+      }
+     },
+     "3791": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 1,
+       "max": 9007199254740991,
+       "default": 8
+      }
+     },
+     "3792": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "maxDepth": 3790,
+       "maxActiveSubagents": 3791
+      }
+     }
+    }
+   },
+   "value": {
+    "maxDepth": 1,
+    "maxActiveSubagents": 8
+   },
+   "base": {
+    "maxDepth": 1,
+    "maxActiveSubagents": 8
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "web-search-deepseek",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3807,
+    "refs": {
+     "3800": {
+      "type": "string",
+      "meta": {
+       "role": "secret"
+      }
+     },
+     "3801": {
+      "type": "string",
+      "meta": {
+       "role": "credential-ref",
+       "default": "DEEPSEEK_API_KEY"
+      }
+     },
+     "3802": {
+      "type": "string",
+      "meta": {}
+     },
+     "3803": {
+      "type": "string",
+      "meta": {
+       "default": "deepseek-v4-flash"
+      }
+     },
+     "3804": {
+      "type": "string",
+      "meta": {
+       "default": "2023-06-01"
+      }
+     },
+     "3805": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 1,
+       "default": 4096
+      }
+     },
+     "3806": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 1,
+       "default": 5
+      }
+     },
+     "3807": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "apiKey": 3800,
+       "apiKeyEnv": 3801,
+       "baseURL": 3802,
+       "model": 3803,
+       "apiVersion": 3804,
+       "maxTokens": 3805,
+       "maxUses": 3806
+      }
+     }
+    }
+   },
+   "value": {
+    "apiKeyEnv": "DEEPSEEK_API_KEY",
+    "model": "deepseek-v4-flash",
+    "apiVersion": "2023-06-01",
+    "maxTokens": 4096,
+    "maxUses": 5
+   },
+   "base": {
+    "apiKeyEnv": "DEEPSEEK_API_KEY",
+    "model": "deepseek-v4-flash",
+    "apiVersion": "2023-06-01",
+    "maxTokens": 4096,
+    "maxUses": 5
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [
+    {
+     "path": [
+      "apiKey"
+     ],
+     "set": false
+    }
+   ],
+   "revision": 0
+  },
+  {
+   "ns": "agent-loop",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3827,
+    "refs": {
+     "3826": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 1,
+       "default": 10
+      }
+     },
+     "3827": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "maxParallelToolCalls": 3826
+      }
+     }
+    }
+   },
+   "value": {
+    "maxParallelToolCalls": 10
+   },
+   "base": {
+    "maxParallelToolCalls": 10
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "subagent-model-selection-settings",
+   "autoGenerate": true,
+   "schema": {
+    "uid": 3984,
+    "refs": {
+     "3979": {
+      "type": "boolean",
+      "meta": {
+       "default": false
+      }
+     },
+     "3980": {
+      "type": "string",
+      "meta": {
+       "min": 1,
+       "required": true
+      }
+     },
+     "3981": {
+      "type": "string",
+      "meta": {
+       "min": 1,
+       "required": true
+      }
+     },
+     "3982": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "provider": 3980,
+       "model": 3981
+      }
+     },
+     "3983": {
+      "type": "array",
+      "meta": {
+       "default": []
+      },
+      "inner": 3982
+     },
+     "3984": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "enabled": 3979,
+       "allowedModels": 3983
+      }
+     }
+    }
+   },
+   "value": {
+    "enabled": false,
+    "allowedModels": []
+   },
+   "base": {
+    "enabled": false,
+    "allowedModels": []
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "ui-theme",
+   "autoGenerate": false,
+   "schema": {
+    "uid": 4031,
+    "refs": {
+     "4021": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "light"
+     },
+     "4022": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "dark"
+     },
+     "4023": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "system"
+     },
+     "4024": {
+      "type": "union",
+      "meta": {
+       "default": "system"
+      },
+      "list": [
+       4021,
+       4022,
+       4023
+      ]
+     },
+     "4025": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 10,
+       "max": 22,
+       "default": 14
+      }
+     },
+     "4026": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 10,
+       "max": 16,
+       "default": 11
+      }
+     },
+     "4027": {
+      "type": "number",
+      "meta": {
+       "step": 1,
+       "min": 10,
+       "max": 20,
+       "default": 13
+      }
+     },
+     "4028": {
+      "type": "string",
+      "meta": {
+       "default": ""
+      }
+     },
+     "4029": {
+      "type": "string",
+      "meta": {
+       "default": ""
+      }
+     },
+     "4030": {
+      "type": "string",
+      "meta": {
+       "default": ""
+      }
+     },
+     "4031": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "preference": 4024,
+       "fontSize": 4025,
+       "codeFontSize": 4026,
+       "terminalFontSize": 4027,
+       "textFontFamily": 4028,
+       "codeFontFamily": 4029,
+       "terminalFontFamily": 4030
+      }
+     }
+    }
+   },
+   "value": {
+    "preference": "system",
+    "fontSize": 14,
+    "codeFontSize": 11,
+    "terminalFontSize": 13,
+    "textFontFamily": "",
+    "codeFontFamily": "",
+    "terminalFontFamily": ""
+   },
+   "base": {
+    "preference": "system",
+    "fontSize": 14,
+    "codeFontSize": 11,
+    "terminalFontSize": 13,
+    "textFontFamily": "",
+    "codeFontFamily": "",
+    "terminalFontFamily": ""
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "ui-conversation",
+   "autoGenerate": false,
+   "schema": {
+    "uid": 4051,
+    "refs": {
+     "4048": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "queue"
+     },
+     "4049": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "steer"
+     },
+     "4050": {
+      "type": "union",
+      "meta": {
+       "default": "queue"
+      },
+      "list": [
+       4048,
+       4049
+      ]
+     },
+     "4051": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "busyEnter": 4050
+      }
+     }
+    }
+   },
+   "value": {
+    "busyEnter": "queue"
+   },
+   "base": {
+    "busyEnter": "queue"
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  },
+  {
+   "ns": "ui-chat",
+   "autoGenerate": false,
+   "schema": {
+    "uid": 4069,
+    "refs": {
+     "4053": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "compact"
+     },
+     "4054": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "standard"
+     },
+     "4055": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "detailed"
+     },
+     "4056": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "verbose"
+     },
+     "4057": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "normal"
+     },
+     "4058": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "expanded"
+     },
+     "4059": {
+      "type": "union",
+      "meta": {
+       "loose": true
+      },
+      "list": [
+       4053,
+       4054,
+       4055,
+       4056,
+       4057,
+       4058
+      ]
+     },
+     "4060": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "completion"
+     },
+     "4061": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "next-input"
+     },
+     "4062": {
+      "type": "union",
+      "meta": {
+       "default": "completion"
+      },
+      "list": [
+       4060,
+       4061
+      ]
+     },
+     "4063": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "compact"
+     },
+     "4064": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "detailed"
+     },
+     "4065": {
+      "type": "union",
+      "meta": {
+       "default": "detailed"
+      },
+      "list": [
+       4063,
+       4064
+      ]
+     },
+     "4066": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "sidebar"
+     },
+     "4067": {
+      "type": "const",
+      "meta": {
+       "required": true
+      },
+      "value": "new-tab"
+     },
+     "4068": {
+      "type": "union",
+      "meta": {
+       "default": "sidebar"
+      },
+      "list": [
+       4066,
+       4067
+      ]
+     },
+     "4069": {
+      "type": "object",
+      "meta": {
+       "default": {}
+      },
+      "dict": {
+       "transcriptView": 4059,
+       "collapseTiming": 4062,
+       "performanceUsage": 4065,
+       "linkOpening": 4068
+      }
+     }
+    }
+   },
+   "value": {
+    "collapseTiming": "completion",
+    "performanceUsage": "detailed",
+    "linkOpening": "sidebar"
+   },
+   "base": {
+    "collapseTiming": "completion",
+    "performanceUsage": "detailed",
+    "linkOpening": "sidebar"
+   },
+   "user": {},
+   "applies": "live",
+   "secrets": [],
+   "revision": 0
+  }
+ ]
+}

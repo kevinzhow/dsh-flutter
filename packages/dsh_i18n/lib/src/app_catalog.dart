@@ -143,15 +143,65 @@ const Map<String, DshText> appCatalog = {
     zh: '第 {index} / {count} 题',
   ),
 
-  // settings
-  'settings.title': (en: 'Appearance and language', zh: '外观与语言'),
-  'settings.theme.system': (en: 'System', zh: '跟随系统'),
-  'settings.theme.light': (en: 'Light', zh: '浅色'),
-  'settings.theme.dark': (en: 'Dark', zh: '深色'),
+  // settings (rows Whalee adds to dsh's General section)
   'settings.language.en': (en: 'English', zh: 'English'),
   'settings.language.zh': (en: '中文', zh: '中文'),
-  'settings.language': (en: 'Language', zh: '语言'),
-  'settings.theme': (en: 'Theme', zh: '主题'),
+  'settings.language.description': (
+    en: 'The language of the interface, shared with the host',
+    zh: '界面语言，与主机共用',
+  ),
+  'settings.notifications.title': (en: 'Notifications', zh: '通知'),
+  'settings.notifications.description': (
+    en: 'Notify me when a session needs an approval or an answer while Whalee is in the background',
+    zh: 'Whalee 在后台时，会话需要审批或回答就通知我',
+  ),
+  'settings.notifications.denied': (
+    en: 'Notifications are blocked for Whalee in the system settings',
+    zh: '系统设置中已关闭 Whalee 的通知',
+  ),
+  'settings.notifications.undetermined': (
+    en: 'Allow notifications when the system asks',
+    zh: '系统询问时请允许通知',
+  ),
+  'settings.notifications.allow': (en: 'Allow', zh: '允许'),
+  'settings.notifications.openSettings': (
+    en: 'Open system settings',
+    zh: '打开系统设置',
+  ),
+  'settings.notifications.switch': (
+    en: 'Notify about approvals and questions',
+    zh: '通知审批与提问',
+  ),
+  'settings.host.title': (en: 'Host', zh: '主机'),
+  'settings.plugins.nav': (en: 'Plugins', zh: '插件'),
+
+  // notifications
+  'notice.approval.title': (en: 'Approval needed', zh: '需要审批'),
+  'notice.approval.body': (en: '{session}: {tool}', zh: '{session}：{tool}'),
+  'notice.question.title': (en: 'Your agent has a question', zh: '智能体有问题要问你'),
+  'notice.question.body': (
+    en: '{session}: {question}',
+    zh: '{session}：{question}',
+  ),
+  'notice.channel.pending': (en: 'Approvals and questions', zh: '审批与提问'),
+  'notice.channel.pending.description': (
+    en: 'A session is waiting for you',
+    zh: '会话在等你处理',
+  ),
+  'notice.channel.watching': (en: 'Staying connected', zh: '保持连接'),
+  'notice.channel.watching.description': (
+    en: 'Shown while sessions run and the app is in the background',
+    zh: '会话运行且应用在后台时显示',
+  ),
+  'notice.watching.title': (en: 'Watching your sessions', zh: '正在关注你的会话'),
+  'notice.watching.body.one': (
+    en: '1 session is running. Whalee keeps the connection open to notify you.',
+    zh: '1 个会话正在运行，Whalee 保持连接以便通知你。',
+  ),
+  'notice.watching.body.other': (
+    en: '{count} sessions are running. Whalee keeps the connection open to notify you.',
+    zh: '{count} 个会话正在运行，Whalee 保持连接以便通知你。',
+  ),
 
   // time
   'time.justNow': (en: 'Just now', zh: '刚刚'),

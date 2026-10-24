@@ -1,6 +1,8 @@
-// Extract the `session` Remote namespace of the pinned dsh checkout into a small JSON IR.
-// Usage: node extract_session.mjs --dsh <dsh-src> --node-dir <dir with node_modules/typescript> --out <ir.json>
+// Extract one Remote namespace of the pinned dsh checkout into a small JSON IR.
+// Usage: node extract_remote.mjs --dsh <dsh-src> --node-dir <dir with node_modules/typescript> --out <ir.json>
+//          --namespace <wire namespace> --entry <source file of the host class, relative to dsh> --class <host class name>
 // Reads only the dsh sources; builds nothing. Resolves @deepseek-ai/* through dsh's own tsconfig.base.json paths.
+// A parameter typed as a class is a Typert lookup parameter: its wire name is `<parameter>Id` and it carries a string.
 import { createRequire } from 'node:module'
 import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -12,9 +14,12 @@ const nodeDir = path.resolve(args.get('--node-dir'))
 const outFile = args.get('--out')
 const ts = createRequire(path.join(nodeDir, 'package.json'))('typescript')
 
-const NAMESPACE = 'session'
-const PKG = 'packages/api/session-controller'
-const entry = path.join(dsh, PKG, 'src/index.ts')
+const NAMESPACE = args.get('--namespace')
+const CLASS_NAME = args.get('--class')
+const ENTRY = args.get('--entry')
+if (!NAMESPACE || !CLASS_NAME || !ENTRY) throw new Error('--namespace, --class and --entry are required')
+const entry = path.join(dsh, ENTRY)
+const PKG = path.relative(dsh, path.dirname(path.dirname(entry)))
 
 // ---- program -------------------------------------------------------------
 const baseCfg = ts.readConfigFile(path.join(dsh, 'tsconfig.base.json'), ts.sys.readFile)
@@ -75,17 +80,20 @@ function declKey(symbol) {
   return d ? `${rel(d.getSourceFile().fileName)}:${d.pos}` : symbol.name
 }
 
+const trail = [] // the named types being converted, outermost first: names the path to a collision
 function register(name, symbol, build) {
   const key = declKey(symbol)
   const existing = symbolOwner.get(name)
   if (existing !== undefined && existing !== key) {
-    throw new Error(`type name collision: ${name} declared at ${existing} and ${key}`)
+    throw new Error(`type name collision: ${name} declared at ${existing} and ${key} (reached through ${trail.join(' > ')})`)
   }
   trackInput(symbol)
   if (existing === undefined) {
     symbolOwner.set(name, key)
     decls.set(name, null)
+    trail.push(name)
     const ir = build()
+    trail.pop()
     ir.source = key.split(':')[0]
     const doc = docOf(symbol)
     if (doc) ir.doc = doc
@@ -254,10 +262,33 @@ function unwrapResult(type, mode) {
   return type
 }
 
+// ---- Typert lookups: `interface TypertLookupMap { agent: TypertLookup<Agent, SessionId> }` -------------------
+const lookups = []
+for (const file of program.getSourceFiles()) {
+  if (file.isDeclarationFile) continue
+  for (const statement of file.statements) {
+    if (!ts.isModuleDeclaration(statement) || !ts.isStringLiteral(statement.name)
+      || statement.name.text !== '@deepseek-ai/dsh-typert-protocol' || !statement.body || !ts.isModuleBlock(statement.body)) continue
+    for (const nested of statement.body.statements) {
+      if (!ts.isInterfaceDeclaration(nested) || nested.name.text !== 'TypertLookupMap') continue
+      for (const member of nested.members) {
+        if (!ts.isPropertySignature(member) || !member.type || !ts.isTypeReferenceNode(member.type)
+          || member.type.typeArguments?.length !== 2) throw new Error('TypertLookupMap values must be TypertLookup<Host, Wire>')
+        const host = checker.getTypeFromTypeNode(member.type.typeArguments[0]).getSymbol()
+        lookups.push({ key: member.name.text, host, wire: checker.getTypeFromTypeNode(member.type.typeArguments[1]) })
+      }
+    }
+  }
+}
+function lookupOf(typeNode) {
+  const symbol = checker.getTypeFromTypeNode(typeNode).getSymbol()
+  return symbol === undefined ? undefined : lookups.find(l => l.host === symbol)
+}
+
 const methods = []
 const skipped = []
 function visit(node) {
-  if (ts.isClassDeclaration(node) && node.name?.text === 'SessionController') {
+  if (ts.isClassDeclaration(node) && node.name?.text === CLASS_NAME) {
     for (const m of node.members) {
       if (!ts.isMethodDeclaration(m)) continue
       const rd = decoratorsOf(m).map(remoteInfo).find(Boolean)
@@ -268,25 +299,36 @@ function visit(node) {
       const params = []
       let cancellable = false
       for (const [i, p] of m.parameters.entries()) {
-        const pname = p.name.text // wire name is the identifier verbatim, including a leading underscore
+        let pname = p.name.text // wire name is the identifier verbatim, including a leading underscore
         if (pname === 'signal') {
           if (i !== m.parameters.length - 1) throw new Error('signal must be last in ' + hostName)
           cancellable = true
           continue
         }
         const ptype = checker.getTypeFromTypeNode(p.type)
-        const sym = ptype.getSymbol()
-        if (sym && (sym.flags & ts.SymbolFlags.Class)) throw new Error(`lookup parameter ${pname} in ${hostName}: needs agentId/sessionId rename rule`)
+        const lookup = lookupOf(p.type)
+        if (lookup !== undefined) {
+          // Typert lookup parameter (an Agent, a Session, ...): the wire carries its identity under `<key>Id`.
+          if (p.questionToken !== undefined) throw new Error(`lookup parameter ${pname} in ${hostName} cannot be optional`)
+          if (pname !== lookup.key) throw new Error(`lookup parameter for ${lookup.key} must also be named ${lookup.key} (in ${hostName})`)
+          params.push({ name: `${lookup.key}Id`, optional: false, type: convert(lookup.wire, `${pascal(NAMESPACE)}${pascal(wireName)}${pascal(lookup.key)}Id`), lookup: lookup.key })
+          continue
+        }
         const hint = pascal(NAMESPACE) + pascal(wireName) + pascal(pname.replace(/^_+/, ''))
-        params.push({ name: pname, optional: p.questionToken !== undefined, type: convert(ptype, hint) })
+        // `x: T | undefined` is as absent-able on the wire as `x?: T`: JSON omits an undefined argument.
+        const absent = p.questionToken !== undefined || (ptype.isUnion() && ptype.types.some(t => t.flags & F.Undefined))
+        params.push({ name: pname, optional: absent, type: convert(ptype, hint) })
       }
       const sig = checker.getSignatureFromDeclaration(m)
       const declared = m.type ? checker.getTypeFromTypeNode(m.type) : checker.getReturnTypeOfSignature(sig)
       const result = unwrapResult(declared, mode)
       const doc = docOf(checker.getSymbolAtLocation(m.name))
+      // A result that may be undefined arrives as an absent value; the client sees it as null.
+      const maybeUndefined = result.isUnion() && result.types.some(t => t.flags & F.Undefined)
+      const converted = convert(result, pascal(NAMESPACE) + pascal(wireName) + 'Value')
       methods.push({
         name: wireName, hostName, mode, cancellable,
-        params, result: convert(result, pascal(NAMESPACE) + pascal(wireName) + 'Value'),
+        params, result: maybeUndefined && converted.k !== 'nullable' ? { k: 'nullable', of: converted } : converted,
         ...(doc ? { doc } : {}),
       })
     }

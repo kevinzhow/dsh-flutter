@@ -1,0 +1,374 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "settings",
+  "package": "packages/api/settings-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/settings-controller/src/index.ts",
+    "packages/api/settings-controller/src/types.ts",
+    "packages/settings/settings/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "describe",
+      "hostName": "describe",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "SettingsDescribeValue"
+      },
+      "doc": "Describe every registered namespace for a configuration page: redacted layered values plus the serialized schema the page renders its form from."
+    },
+    {
+      "name": "update",
+      "hostName": "update",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "ns",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "patch",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "json"
+            }
+          }
+        },
+        {
+          "name": "expectedRevision",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SettingsNamespaceView"
+      },
+      "doc": "Merge a patch into one namespace's stored user section."
+    },
+    {
+      "name": "replace",
+      "hostName": "replace",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "ns",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "section",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "json"
+            }
+          }
+        },
+        {
+          "name": "expectedRevision",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SettingsNamespaceView"
+      },
+      "doc": "Replace one namespace's stored user section wholesale."
+    },
+    {
+      "name": "mutate",
+      "hostName": "mutate",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "ns",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "ops",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SettingsPathOpView"
+            }
+          }
+        },
+        {
+          "name": "expectedRevision",
+          "optional": true,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SettingsNamespaceView"
+      },
+      "doc": "Apply path-addressed edits to one namespace's user section, resolved against the section as stored rather than against whatever the caller last read, then answer with that namespace's new redacted view."
+    },
+    {
+      "name": "openSettingsDocument",
+      "hostName": "openSettingsDocument",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "SettingsDocumentOpenValue"
+      },
+      "doc": "Materialize the provider-owned settings document and open it in a native text editor."
+    }
+  ],
+  "decls": {
+    "SettingsDescribeValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "writable",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the profile accepts writes; `false` disables every write control."
+        },
+        {
+          "name": "hasDocument",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the configuration editor owns a local document, without exposing its Host path."
+        },
+        {
+          "name": "namespaces",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SettingsNamespaceView"
+            }
+          },
+          "doc": "One view per profile plugin entry."
+        }
+      ],
+      "source": "packages/settings/settings/src/types.ts",
+      "doc": "Every profile plugin entry with the deployment facts a configuration page renders around them."
+    },
+    "SettingsDocumentOpenValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "opened",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": true
+          }
+        }
+      ],
+      "source": "packages/api/settings-controller/src/types.ts",
+      "doc": "Confirmation that the settings document was handed to the native editor."
+    },
+    "SettingsNamespaceView": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "autoGenerate",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Generate a page if no custom page is registered for this instance."
+        },
+        {
+          "name": "ns",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Namespace key (`llm-deepseek`, `llm-pi-ai`, …)."
+        },
+        {
+          "name": "schema",
+          "optional": false,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Serialized schemastery schema envelope (`schema.toJSON()`); rehydrate with `new Schema(json)`."
+        },
+        {
+          "name": "value",
+          "optional": false,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Redacted resolved value (schema defaults → composition base → user layer)."
+        },
+        {
+          "name": "base",
+          "optional": true,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Redacted composition base layer, with defaults resolved."
+        },
+        {
+          "name": "user",
+          "optional": true,
+          "type": {
+            "k": "json"
+          },
+          "doc": "Redacted raw user section, when one exists; a field's presence here marks it user-overridden."
+        },
+        {
+          "name": "applies",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "live"
+          },
+          "doc": "When the owner applies changes."
+        },
+        {
+          "name": "secrets",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SettingsSecretView"
+            }
+          },
+          "doc": "Every schema-declared secret slot with its configured state."
+        },
+        {
+          "name": "revision",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Monotonic revision of the raw entry configuration this view was read at. Send it back as `expectedRevision` on a write so a stale editor is refused rather than silently overwriting a concurrent change."
+        }
+      ],
+      "source": "packages/settings/settings/src/types.ts",
+      "doc": "Wire view of one profile plugin entry, always read under `redactSecrets`. The JSON-valued fields are `JsonValue` rather than the descriptor's `unknown` because the Remote boundary admits no unconstrained data."
+    },
+    "SettingsPathOpView": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "op",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "set"
+              }
+            },
+            {
+              "name": "path",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "str"
+                }
+              }
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": {
+                "k": "json"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "op",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "unset"
+              }
+            },
+            {
+              "name": "path",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "str"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/settings/settings/src/types.ts",
+      "doc": "One path-addressed edit carried by a remote settings write. `set` writes the value at the path, creating intermediate objects; `unset` removes it. The empty path addresses the section root."
+    },
+    "SettingsSecretView": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Path from the section root to the removed field."
+        },
+        {
+          "name": "set",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the slot currently holds a value; the value itself never rides."
+        }
+      ],
+      "source": "packages/settings/settings/src/types.ts",
+      "doc": "One schema-declared secret slot inside a redacted namespace value."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

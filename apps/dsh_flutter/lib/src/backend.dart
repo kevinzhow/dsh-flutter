@@ -29,6 +29,11 @@ abstract interface class HostBackend {
   /// The host's workspace file service (`workspaceFiles`).
   WorkspaceFilesRemote get files;
 
+  /// Unary calls through whatever connection is live now (a re-pair replaces
+  /// the connection; the caller handed out earlier keeps working). Calls with
+  /// no live generation fail with [NotConnected].
+  RemoteCaller get remoteCaller;
+
   /// Pair with [origin] using [token] and return the transport once the first
   /// generation is up. Calling again re-pairs (after a host restart) and
   /// reuses the connection when the origin is unchanged.
@@ -63,6 +68,9 @@ class LiveBackend implements HostBackend {
 
   @override
   late final WorkspaceFilesRemote files = _LiveFiles(() => _connection);
+
+  @override
+  late final RemoteCaller remoteCaller = _LiveCaller(() => _connection);
 
   /// Unary calls through the live generation (used by tools that need host
   /// methods the app itself does not expose yet, such as the live test).
@@ -169,4 +177,22 @@ class _LiveFiles implements WorkspaceFilesRemote {
   @override
   Stream<WorkspaceWatchEvent> changes(String sessionId, String path) =>
       _live.changes(sessionId, path);
+}
+
+/// [RemoteCaller] over whichever [DshConnection] is current.
+class _LiveCaller implements RemoteCaller {
+  _LiveCaller(this._connection);
+
+  final DshConnection? Function() _connection;
+
+  @override
+  Future<Object?> call(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+  ) {
+    final c = _connection();
+    if (c == null) throw NotConnected();
+    return c.caller.call(namespace, method, args);
+  }
 }
