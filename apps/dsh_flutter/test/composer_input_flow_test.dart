@@ -270,11 +270,11 @@ void main() {
     expect(row.height, closeTo(34, 1));
   });
 
-  testWidgets('a phone keeps a 44px touch row', (t) async {
+  testWidgets('a phone gets the 34px rows of dsh too', (t) async {
     await start(t);
     await t.tap(find.byType(EditableText).last);
     await type(t, '/');
     final row = t.getRect(find.byKey(const ValueKey('trigger-row-goal')));
-    expect(row.height, greaterThanOrEqualTo(44));
+    expect(row.height, closeTo(34, 1));
   });
 }

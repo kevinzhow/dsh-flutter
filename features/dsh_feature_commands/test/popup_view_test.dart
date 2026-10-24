@@ -273,20 +273,21 @@ void main() {
     expect(find.text('搜索…'), findsOneWidget);
   });
 
-  tw('a phone row keeps the 44px target, a wide row dsh\'s compact 27px', (
-    t,
-  ) async {
-    await t.pumpWidget(app(size: const Size(400, 800)));
-    await open(t);
-    expect(
-      t.getRect(find.byKey(const ValueKey('popup-option-a/pro'))).height,
-      greaterThanOrEqualTo(44),
-    );
-    await t.pumpWidget(app(size: const Size(1200, 800)));
-    await t.pump();
-    expect(
-      t.getRect(find.byKey(const ValueKey('popup-option-a/pro'))).height,
-      closeTo(27, 1),
-    );
-  });
+  tw(
+    'a phone row is dsh\'s compact 27px too: the rows do not change with the width',
+    (t) async {
+      await t.pumpWidget(app(size: const Size(400, 800)));
+      await open(t);
+      expect(
+        t.getRect(find.byKey(const ValueKey('popup-option-a/pro'))).height,
+        closeTo(27, 1),
+      );
+      await t.pumpWidget(app(size: const Size(1200, 800)));
+      await t.pump();
+      expect(
+        t.getRect(find.byKey(const ValueKey('popup-option-a/pro'))).height,
+        closeTo(27, 1),
+      );
+    },
+  );
 }

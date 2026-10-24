@@ -337,10 +337,15 @@ draws what is left.
 
 ## Owner decisions
 
-- **2026-10-24, phone adaptation of the composer menus.** The `/`, `@`, `/model` and `/permission` menus keep the popover
-  anchored above the keyboard (a surface hanging off the composer's top edge, capped below the session header), not a
-  bottom sheet. Below 768px the rows grow to 44px touch targets; from 768px the menu is dsh's own geometry (34px rows).
-  The directory picker and workspace picker are the places that use a sheet below 768px.
+- **2026-10-24, align everything with dsh web first, on every width.** Kevin: "直接都跟网页对齐吧", changes follow after he has
+  seen it. A phone renders what dsh web renders at that viewport width, not a phone adaptation of it: menus and popups keep
+  dsh's rows (34px, the popup's 27px), the workspace picker is the popover anchored under the chip, the directory picker is
+  the dialog (`min(680px, 100%)` by `min(500px, 100dvh - 32px)`, two panes of at least 256px that scroll sideways, the child
+  pane pinned into view), New folder is the centered card, the blank-session hero is the centered stack (minus the DeepSeek
+  brand mark, which stays `na`), and the composer is dsh's single rounded card with the draft on top and the controls row
+  (attach, permission, model, send) inside it. What stays Whalee's: the keyboard (the web layout simply sits above it), the
+  cap that keeps floating menus below the session header, and the app's own navigation around the conversation (no icon
+  rail). Parity is scored against dsh web at the same width, phone widths included, with the same bar as desktop.
 
 ## Provenance and licenses
 

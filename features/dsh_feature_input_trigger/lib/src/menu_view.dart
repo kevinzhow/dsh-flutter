@@ -90,7 +90,6 @@ class _TriggerMenuOverlayState extends State<TriggerMenuOverlay> {
         }
       });
     }
-    final compact = MediaQuery.sizeOf(context).width < 768;
     final groups = state.groups
         .where((g) => !(g.ready && g.items.isEmpty))
         .toList();
@@ -128,7 +127,7 @@ class _TriggerMenuOverlayState extends State<TriggerMenuOverlay> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             for (final g in groups)
-                              ..._group(context, theme, g, highlight, compact),
+                              ..._group(context, theme, g, highlight),
                           ],
                         ),
                       ),
@@ -148,7 +147,6 @@ class _TriggerMenuOverlayState extends State<TriggerMenuOverlay> {
     DshThemeData theme,
     MenuGroup group,
     MenuHighlight? highlight,
-    bool compact,
   ) {
     final tertiary = theme.color('--dsw-alias-label-tertiary');
     final out = <Widget>[];
@@ -174,8 +172,7 @@ class _TriggerMenuOverlayState extends State<TriggerMenuOverlay> {
           child: Column(
             key: ValueKey('trigger-loading-${group.source}'),
             children: [
-              for (final w in const [0.32, 0.48])
-                _SkeletonRow(widthFactor: w, compact: compact),
+              for (final w in const [0.32, 0.48]) _SkeletonRow(widthFactor: w),
             ],
           ),
         ),
@@ -219,7 +216,6 @@ class _TriggerMenuOverlayState extends State<TriggerMenuOverlay> {
           key: _key(group.source, i),
           item: item,
           active: active,
-          compact: compact,
           drillHint: _t('drill.hint'),
           drillKey: _t('drill.key'),
           drillLabel: _t('drill.aria'),
@@ -238,7 +234,6 @@ class _Row extends StatelessWidget {
     super.key,
     required this.item,
     required this.active,
-    required this.compact,
     required this.drillHint,
     required this.drillKey,
     required this.drillLabel,
@@ -249,7 +244,6 @@ class _Row extends StatelessWidget {
 
   final InputTriggerCandidate item;
   final bool active;
-  final bool compact;
   final String drillHint;
   final String drillKey;
   final String drillLabel;
@@ -288,10 +282,8 @@ class _Row extends StatelessWidget {
               borderRadius: BorderRadius.circular(theme.radiusMd),
             ),
             child: ConstrainedBox(
-              // dsh rows are 34px; a phone row keeps the 44px touch target.
-              constraints: BoxConstraints(
-                minHeight: compact ? DshSpace.touch : 34,
-              ),
+              // dsh rows are 34px, at every width.
+              constraints: BoxConstraints(minHeight: 34),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 child: Row(
@@ -348,7 +340,7 @@ class _Row extends StatelessWidget {
                             ),
                     ),
                     if (item.drill) ...[
-                      if (active && !compact) ...[
+                      if (active) ...[
                         const SizedBox(width: 3),
                         DshChromeText(
                           drillHint,
@@ -394,11 +386,9 @@ class _Row extends StatelessWidget {
                           key: ValueKey('trigger-drill-${item.name}'),
                           behavior: HitTestBehavior.opaque,
                           onTap: onDrill,
-                          // A phone has no Tab: the chevron is the drill verb,
-                          // so it takes a full touch target.
                           child: SizedBox(
-                            width: compact ? DshSpace.touch : 18,
-                            height: compact ? DshSpace.touch - 12 : 18,
+                            width: 18,
+                            height: 18,
                             child: Center(
                               child: DshIcon(
                                 DshIcons.chevronRight,
@@ -499,16 +489,15 @@ class _Crumbs extends StatelessWidget {
 }
 
 class _SkeletonRow extends StatelessWidget {
-  const _SkeletonRow({required this.widthFactor, required this.compact});
+  const _SkeletonRow({required this.widthFactor});
 
   final double widthFactor;
-  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
     return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: compact ? DshSpace.touch : 34),
+      constraints: BoxConstraints(minHeight: 34),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         child: Align(

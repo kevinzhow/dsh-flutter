@@ -290,7 +290,6 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
     int index,
     int active,
   ) {
-    final compact = MediaQuery.sizeOf(context).width < 768;
     final isActive = index == active;
     final key = _rowKeys.putIfAbsent(index, GlobalKey.new);
     return Semantics(
@@ -315,11 +314,8 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
               borderRadius: BorderRadius.circular(theme.radiusMd),
             ),
             child: ConstrainedBox(
-              // dsh's rows are 5px + the 12px line + 5px; a phone row keeps the
-              // 44px touch target.
-              constraints: BoxConstraints(
-                minHeight: compact ? DshSpace.touch : 0,
-              ),
+              // dsh's rows are 5px + the 12px line + 5px, at every width.
+              constraints: const BoxConstraints(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
                 child: Row(
@@ -447,7 +443,6 @@ class _SearchField extends StatelessWidget {
     final style = theme
         .textStyle('--dsw-font-xxs-12')
         .copyWith(color: theme.labelPrimary, height: 17 / 12);
-    final compact = MediaQuery.sizeOf(context).width < 768;
     return Semantics(
       label: label,
       textField: true,
@@ -455,43 +450,40 @@ class _SearchField extends StatelessWidget {
       // transparent }`: transparent in both palettes, as dsh keeps it.
       child: Padding(
         padding: const EdgeInsets.fromLTRB(2, 2, 2, 3),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: compact ? 40 : 0),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 7 + dshBorderWidthOf(context, 0.5),
-              vertical: 5 + dshBorderWidthOf(context, 0.5),
-            ),
-            child: ListenableBuilder(
-              listenable: controller,
-              builder: (context, _) => Stack(
-                children: [
-                  if (controller.text.isEmpty)
-                    IgnorePointer(
-                      child: Text(
-                        placeholder,
-                        maxLines: 1,
-                        style: style.copyWith(
-                          color: theme.color('--dsw-alias-label-tertiary'),
-                        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 7 + dshBorderWidthOf(context, 0.5),
+            vertical: 5 + dshBorderWidthOf(context, 0.5),
+          ),
+          child: ListenableBuilder(
+            listenable: controller,
+            builder: (context, _) => Stack(
+              children: [
+                if (controller.text.isEmpty)
+                  IgnorePointer(
+                    child: Text(
+                      placeholder,
+                      maxLines: 1,
+                      style: style.copyWith(
+                        color: theme.color('--dsw-alias-label-tertiary'),
                       ),
                     ),
-                  EditableText(
-                    key: const ValueKey('popup-search'),
-                    controller: controller,
-                    focusNode: focusNode,
-                    readOnly: readOnly,
-                    style: style,
-                    cursorColor: theme.focusRingColor,
-                    backgroundCursorColor: theme.color(
-                      '--dsw-alias-label-tertiary',
-                    ),
-                    onChanged: onChanged,
-                    maxLines: 1,
-                    textInputAction: TextInputAction.search,
                   ),
-                ],
-              ),
+                EditableText(
+                  key: const ValueKey('popup-search'),
+                  controller: controller,
+                  focusNode: focusNode,
+                  readOnly: readOnly,
+                  style: style,
+                  cursorColor: theme.focusRingColor,
+                  backgroundCursorColor: theme.color(
+                    '--dsw-alias-label-tertiary',
+                  ),
+                  onChanged: onChanged,
+                  maxLines: 1,
+                  textInputAction: TextInputAction.search,
+                ),
+              ],
             ),
           ),
         ),
