@@ -195,11 +195,11 @@ def c_tests():
     failed = False
     for pkg in PURE_DART_PACKAGES:
         code, out, _ = run(NICE + ['dart', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
-        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
         failed |= code != 0
     for pkg in FLUTTER_PACKAGES:
         code, out, _ = run(NICE + ['flutter', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
-        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:]))
+        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
         failed |= code != 0
     return (1 if failed else 0), '\n'.join(log), time.time() - start
 

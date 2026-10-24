@@ -60,6 +60,8 @@ jobs:
         #   vector      replays the behaviour vectors through dsh's TypeScript code (dsh checkout + its node install)
         #   parity      the parity selftest builds its cases from dsh's locale files; only the Flutter case map is regenerated
         # Run them locally before a PR (README, "Working on it").
+        env:
+          FLUTTER_SDK: ${{ env.FLUTTER_ROOT }}
         run: tool/preflight --allow-skip theme-pack,icons,vector,parity
 
       - name: Summary
