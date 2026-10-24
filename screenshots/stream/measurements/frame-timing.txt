@@ -1,0 +1,22 @@
+== Android emulator, AMD iGPU (host GPU), profile build, 411dp: Whalee (this PR)
+A_older_fast: frames=1203 | total>16.7ms 1000 (83.1%), >33ms 1 | build>16.7ms 1 (0.1%) p99<<8ms max=81.6ms | raster>16.7ms 271 (22.5%) p99<<25ms max=29.2ms
+B_newer_fast: frames=131 | total>16.7ms 1 (0.8%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=11.2ms | raster>16.7ms 0 (0.0%) p99<<16.7ms max=8.8ms
+C_alternating_rapid: frames=566 | total>16.7ms 0 (0.0%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=5.2ms | raster>16.7ms 0 (0.0%) p99<<16.7ms max=10.9ms
+D_slow_drags: frames=701 | total>16.7ms 0 (0.0%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=1.3ms | raster>16.7ms 0 (0.0%) p99<<8ms max=11.4ms
+
+== same, origin/main (ListView, no auto-load: the older pages are not read, so phase A stops at the loaded top)
+A_older_fast: frames=932 | total>16.7ms 49 (5.3%), >33ms 3 | build>16.7ms 0 (0.0%) p99<<8ms max=3.7ms | raster>16.7ms 19 (2.0%) p99<<25ms max=34.8ms
+B_newer_fast: frames=25 | total>16.7ms 0 (0.0%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=0.6ms | raster>16.7ms 0 (0.0%) p99<<16.7ms max=9.0ms
+C_alternating_rapid: frames=516 | total>16.7ms 268 (51.9%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=0.8ms | raster>16.7ms 76 (14.7%) p99<<25ms max=23.1ms
+D_slow_drags: frames=747 | total>16.7ms 747 (100.0%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=1.2ms | raster>16.7ms 245 (32.8%) p99<<25ms max=28.2ms
+
+== Android emulator, software GL (SwiftShader), Whalee (raster is CPU-bound there)
+A_older_fast: frames=1183 | total>16.7ms 1096 (92.6%), >33ms 24 | build>16.7ms 1 (0.1%) p99<<8ms max=82.3ms | raster>16.7ms 509 (43.0%) p99<<33.4ms max=58.6ms
+B_newer_fast: frames=142 | total>16.7ms 132 (93.0%), >33ms 20 | build>16.7ms 0 (0.0%) p99<<16.7ms max=14.4ms | raster>16.7ms 77 (54.2%) p99<<33.4ms max=33.1ms
+C_alternating_rapid: frames=328 | total>16.7ms 328 (100.0%), >33ms 326 | build>16.7ms 0 (0.0%) p99<<8ms max=2.0ms | raster>16.7ms 328 (100.0%) p99<<50ms max=299.5ms
+D_slow_drags: frames=470 | total>16.7ms 470 (100.0%), >33ms 468 | build>16.7ms 0 (0.0%) p99<<8ms max=3.9ms | raster>16.7ms 469 (99.8%) p99<<33.4ms max=37.1ms
+
+== Linux desktop build, profile, 1280x720, software GL (build/layout are meaningful, raster is not)
+E_thumb_drag_fast: frames=573 | total>16.7ms 27 (4.7%), >33ms 1 | build>16.7ms 2 (0.3%) p99<<16.7ms max=107.4ms | raster>16.7ms 0 (0.0%) p99<<16.7ms max=13.1ms
+F_wheel_flings: frames=1945 | total>16.7ms 57 (2.9%), >33ms 0 | build>16.7ms 0 (0.0%) p99<<8ms max=3.8ms | raster>16.7ms 3 (0.2%) p99<<16.7ms max=17.6ms
+G_thumb_drag_slow: frames=461 | total>16.7ms 97 (21.0%), >33ms 2 | build>16.7ms 6 (1.3%) p99<<25ms max=29.4ms | raster>16.7ms 3 (0.7%) p99<<16.7ms max=25.5ms
