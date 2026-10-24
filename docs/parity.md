@@ -440,7 +440,7 @@ to the render node (normally the `render` group; a new login or `sg render` appl
 and its `weston-screenshooter` client. From the repository root, start the compositor in one terminal:
 
 ```sh
-runtime="$PWD/.local/weston-runtime"
+runtime="${XDG_RUNTIME_DIR:?}/whalee-gpu"
 mkdir -p "$runtime"
 chmod 700 "$runtime"
 XDG_RUNTIME_DIR="$runtime" weston --backend=headless --renderer=gl \
@@ -452,7 +452,7 @@ The private test compositor enables its debug/capture protocol. In another termi
 with its own D-Bus session and the native Wayland backend, with software-rendering overrides removed:
 
 ```sh
-XDG_RUNTIME_DIR="$PWD/.local/weston-runtime" WAYLAND_DISPLAY=wayland-whalee \
+XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:?}/whalee-gpu" WAYLAND_DISPLAY=wayland-whalee \
   GDK_BACKEND=wayland GTK_USE_PORTAL=0 WHALEE_WINDOW_SIZE=1280x720 \
   env -u LIBGL_ALWAYS_SOFTWARE -u FLUTTER_LINUX_RENDERER dbus-run-session -- \
   apps/dsh_flutter/build/linux/x64/release/bundle/dsh_flutter
@@ -462,7 +462,7 @@ Capture from a third terminal, again starting at the repository root. The client
 directory. Stop the app and compositor with Ctrl+C after the run:
 
 ```sh
-runtime="$PWD/.local/weston-runtime"
+runtime="${XDG_RUNTIME_DIR:?}/whalee-gpu"
 mkdir -p .local/weston-captures
 (
   cd .local/weston-captures
@@ -474,3 +474,5 @@ Record the GPU/device, kernel driver, Mesa, Weston, Flutter, fonts, scale and GL
 alone does not establish hardware acceleration. The Weston log names the actual rendering device and GL renderer. Keep
 this environment distinct from the Xvfb baseline when comparing scores. The existing whole-page click driver uses X11;
 the commands above verify native startup and capture, rather than replaying that interaction trace on Wayland.
+The runtime directory uses the login session's short path to stay within Unix socket path limits; parallel runs need
+different runtime directories.
