@@ -22,5 +22,11 @@ class Observable<T> {
   /// Re-publish the same (mutated) value.
   void touch() => set(_value);
 
-  Future<void> dispose() => _changes.close();
+  /// Ends the change stream. A broadcast controller reports done only once
+  /// every listener has left, so a listener that outlives the observable must
+  /// not hold the caller back.
+  Future<void> dispose() {
+    unawaited(_changes.close());
+    return Future.value();
+  }
 }

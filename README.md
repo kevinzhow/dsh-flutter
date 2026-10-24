@@ -2,7 +2,7 @@
 
 A cross-platform native client for DSH (DeepSeek Harness), built with Flutter. Working name: Whalee.
 
-Status: phase 1b-2b (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting; settings page, model and permission selection, local notifications). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
+Status: step 5 (phone-first chat: pairing, session list, streamed conversation, tool-specific cards, to-do and plan surfaces, subagent transcripts, approvals and questions with their timed waits; attachments: pick, upload, gallery; workspace file browser and document preview; syntax highlighting; settings page, model and permission selection, local notifications; the sidebar terminal). Not affiliated with or endorsed by DeepSeek; an unofficial third-party client with no DeepSeek logo or brand asset.
 
 ## Layout
 
@@ -10,7 +10,7 @@ One package per layer of dsh's own web client (`docs/subsystems/web-client.md` u
 
 ```
 packages/dsh_client        pure Dart   pairing, certificate trust (pins), connection generations with backoff status, /api/remote.mux, unary /api calls (multipart binary results), streamed file upload, workspaceFiles client
-packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window)
+packages/dsh_models        pure Dart   ClientSessions -> SessionManager -> Session (list, live updates, event window); terminal views over the duplex attach stream
 packages/dsh_conversation  pure Dart   event registry + assembler (Contexts, Locations), the chat target, submitted plans and the todo history, ported from ui-conversation/ui-chat/ui-plan/ui-tool
 packages/dsh_slots         pure Dart   typed slot registry, slot names are dsh's own
 packages/dsh_theme         Flutter     theme contract engine, vocabulary = dsh --dsw-* tokens, official pack
@@ -29,7 +29,8 @@ features/dsh_feature_model_selection   ui-model-selection: model/effort seat in 
 features/dsh_feature_permission_presets ui-permission-presets: new-session default row, composer permission seat
 features/dsh_feature_settings          ui-settings: settings page (rail on wide windows, list then section on phones), General column
 features/dsh_feature_theme             ui-theme: light/dark/system appearance, font families and sizes (shared with dsh web through the host)
-features/dsh_feature_sidebar_right     ui-sidebar-right: files/preview panel (sheet on phones, inline column on wide windows)
+features/dsh_feature_sidebar_right     ui-sidebar-right: tab strip, guide page, files/preview/terminal tabs (full-screen sheet on phones, inline column on wide windows)
+features/dsh_feature_sidebar_terminal  ui-sidebar-terminal: interactive shell tabs on the xterm emulator, key bar for phones (docs/terminal.md)
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
 features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions

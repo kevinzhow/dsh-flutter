@@ -101,6 +101,22 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  /// A tab's title as its chip shows it (dsh `ui-sidebar-right`), keyed by tab
+  /// kind like the body; a type without one shows the chip's captured text.
+  static const sidebarRightPaneTabTitle = Slot<Object?, Object?>(
+    'sidebar.right.pane.tab.title',
+    SlotCardinality.keyed,
+    SlotScope.session,
+  );
+
+  /// One provider's card on the guide page (dsh `ui-sidebar-right`), keyed by
+  /// tab kind; the sidebar draws the standard card when none occupies it.
+  static const sidebarRightTabGuideEntry = Slot<Object?, Object?>(
+    'sidebar.right.tab.guide.entry',
+    SlotCardinality.keyed,
+    SlotScope.session,
+  );
+
   /// One settings page (dsh `ui-settings`): `id` keys the page, `order` and
   /// `label` its place and name in the navigation. The shell is
   /// `dsh_feature_settings` (dsh `ui-settings-general`).
@@ -157,6 +173,8 @@ abstract final class DshSlots {
     toolCallImages,
     rightbarSession,
     sidebarRightPaneTab,
+    sidebarRightPaneTabTitle,
+    sidebarRightTabGuideEntry,
     settingsSection,
     settingsGeneralItem,
     pluginsItem,

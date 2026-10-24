@@ -37,6 +37,7 @@
     "packages/client/ui-sidebar-documentpreview/src/client/zoom/locales.ts",
     "packages/client/ui-sidebar-files/src/client/locales.ts",
     "packages/client/ui-sidebar-right/src/client/locales.ts",
+    "packages/client/ui-sidebar-terminal/src/client/locales.ts",
     "packages/client/ui-sidebar/src/client/locales.ts",
     "packages/client/ui-skill/src/client/locales.ts",
     "packages/client/ui-subagent/src/client/locales.ts",
@@ -4598,6 +4599,125 @@
         "tab.unavailable": {
           "en": "Nothing here can view this kind of content yet.",
           "zh": "这类内容还没有可用的查看方式。"
+        }
+      }
+    },
+    {
+      "namespace": "sidebarTerminal",
+      "package": "client/ui-sidebar-terminal",
+      "file": "packages/client/ui-sidebar-terminal/src/client/locales.ts",
+      "entries": {
+        "attachmentEnded": {
+          "en": "The terminal connection ended. Reconnect to continue.",
+          "zh": "终端连接已结束，请重新连接。"
+        },
+        "cleanupFailed": {
+          "en": "Terminal “{title}” could not be ended: {message}",
+          "zh": "终端「{title}」未能结束：{message}"
+        },
+        "closed": {
+          "en": "Terminal closed.",
+          "zh": "终端已关闭。"
+        },
+        "connecting": {
+          "en": "Connecting…",
+          "zh": "正在连接…"
+        },
+        "control": {
+          "en": "Take control",
+          "zh": "接管输入"
+        },
+        "creating": {
+          "en": "Starting…",
+          "zh": "正在启动…"
+        },
+        "description": {
+          "en": "Run commands in the Session workspace",
+          "zh": "在会话工作区运行命令"
+        },
+        "disconnected": {
+          "en": "Disconnected.",
+          "zh": "连接已断开。"
+        },
+        "exited": {
+          "en": "Process exited ({code})",
+          "zh": "进程已退出（{code}）"
+        },
+        "failed": {
+          "en": "Terminal error: {message}",
+          "zh": "终端错误：{message}"
+        },
+        "inputFull": {
+          "en": "The input buffer is full. Reconnect and try again.",
+          "zh": "输入缓冲区已满，请重新连接后重试。"
+        },
+        "invalidOutput": {
+          "en": "The terminal screen could not be received. Reconnect to recover it.",
+          "zh": "终端画面传输异常，请重新连接。"
+        },
+        "loading": {
+          "en": "Reading terminal environment…",
+          "zh": "正在读取终端环境…"
+        },
+        "missingTerminal": {
+          "en": "This terminal no longer exists. Open a new terminal.",
+          "zh": "此终端已不存在，请新建终端。"
+        },
+        "new": {
+          "en": "New terminal",
+          "zh": "新建终端"
+        },
+        "readonly": {
+          "en": "This view is read-only.",
+          "zh": "此页面当前只读。"
+        },
+        "reconnect": {
+          "en": "Reconnect",
+          "zh": "重新连接"
+        },
+        "recoveryFailed": {
+          "en": "Terminal recovery failed: {message}",
+          "zh": "恢复终端失败：{message}"
+        },
+        "rename": {
+          "en": "Terminal name",
+          "zh": "终端名称"
+        },
+        "retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "retryRecovery": {
+          "en": "Retry terminal recovery",
+          "zh": "重试恢复终端"
+        },
+        "shell": {
+          "en": "Choose shell",
+          "zh": "选择 Shell"
+        },
+        "shellEmpty": {
+          "en": "No shells available",
+          "zh": "没有可用的 Shell"
+        },
+        "shellLoading": {
+          "en": "Loading shells…",
+          "zh": "正在读取 Shell…"
+        },
+        "shortcut.noSession": {
+          "en": "Select a session first",
+          "zh": "请先选择会话"
+        },
+        "terminalLimit": {
+          "en": "The terminal limit has been reached. Close unused terminals and try again. Exited terminals also count toward the limit.",
+          "zh": "终端数量已达上限，请关闭不用的终端后重试。已退出的终端也计入数量。"
+        },
+        "title": {
+          "en": "Terminal",
+          "zh": "终端"
+        },
+        "unavailable": {
+          "en": "Unavailable",
+          "zh": "不可用"
         }
       }
     },

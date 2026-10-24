@@ -76,6 +76,11 @@ class FakeBackend implements HostBackend {
 
   @override
   RemoteCaller get remoteCaller => host;
+
+  /// The terminal host behind `terminalHost`: tests script terminals on it.
+  final FakeTerminalHost terminals = FakeTerminalHost();
+  @override
+  TerminalHost get terminalHost => terminals.terminalHost;
   @override
   final FakeUploadClient uploader = FakeUploadClient();
   @override
@@ -117,6 +122,17 @@ class FakeBackend implements HostBackend {
     final failure = failWith;
     if (failure != null) throw failure;
     return transport;
+  }
+
+  /// Claims of timed questions: tests push the Host's remaining duration (or
+  /// end the stream) on [claims]'s controllers.
+  final List<(String, StreamController<Duration>)> claims = [];
+
+  @override
+  Stream<Duration> attachQuestionWait(WaterfallEvent event, String callId) {
+    final controller = StreamController<Duration>();
+    claims.add((callId, controller));
+    return controller.stream;
   }
 
   @override

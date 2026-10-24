@@ -17,6 +17,7 @@ void main() {
     '../../features/dsh_feature_subagent/lib',
     '../../features/dsh_feature_session/lib',
     '../../features/dsh_feature_sidebar_right/lib',
+    '../../features/dsh_feature_sidebar_terminal/lib',
     '../../features/dsh_feature_tool/lib',
     '../../features/dsh_feature_user_questions/lib',
     '../../packages/dsh_ui/lib',
@@ -42,6 +43,12 @@ void main() {
       r'Color\(\s*0x|Colors\.|Color\.fromRGBO|Color\.fromARGB',
     );
     for (final f in files) {
+      // Fixed-colour artwork (dsh draws these glyphs with literal fills) and the
+      // emulator's sixteen ANSI colours, which dsh leaves at xterm.js's own.
+      if (f.path.endsWith('dsh_guide.dart') ||
+          f.path.endsWith('terminal_theme.dart')) {
+        continue;
+      }
       expect(
         bad.hasMatch(strip(f.readAsStringSync())),
         isFalse,
@@ -58,6 +65,9 @@ void main() {
       // dsh_text_baseline.dart measures a style's own face (it copies the
       // style's size and family; it names none).
       if (f.path.endsWith('dsh_text_baseline.dart')) continue;
+      // The emulator takes the user's terminal font list from the theme and
+      // names the built-in monospace stack beside it.
+      if (f.path.endsWith('terminal_theme.dart')) continue;
       expect(
         bad.hasMatch(strip(f.readAsStringSync())),
         isFalse,

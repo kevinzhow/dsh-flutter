@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'sidebar_tabs.dart';
 import 'slot.dart';
 
 /// Raised for programming errors in slot composition (dsh fails these during
@@ -59,6 +60,9 @@ class SlotRegistry {
     sync: true,
   );
   int _seq = 0;
+
+  /// The sidebar tab types features declare (dsh `ctx.sidebarRightTabs`).
+  final SidebarTabTypes sidebarTabs = SidebarTabTypes();
 
   /// The name of a slot whose occupants changed (registered or withdrawn).
   /// dsh's `ctx.slots.subscribe(name, listener)` / `getVersion(name)`.

@@ -15,6 +15,7 @@ export 'src/dsh_copy_feedback.dart';
 export 'src/dsh_diff.dart';
 export 'src/dsh_drop_overlay.dart';
 export 'src/dsh_file_types.dart';
+export 'src/dsh_guide.dart';
 export 'src/dsh_diff_block.dart';
 export 'src/dsh_disclosure_row.dart';
 export 'src/dsh_head_tail_cap.dart';

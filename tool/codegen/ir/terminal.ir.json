@@ -1,0 +1,696 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "terminal",
+  "package": "packages/api/terminal-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/terminal-controller/src/index.ts",
+    "packages/api/terminal-controller/src/types.ts",
+    "packages/typert/protocol/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "environment",
+      "hostName": "environment",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "TerminalEnvironment"
+      },
+      "doc": "Read the Session's current directory and terminal limits without filesystem validation or shell lookup."
+    },
+    {
+      "name": "shells",
+      "hostName": "shells",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "TerminalShell"
+        }
+      },
+      "doc": "Discover installed shells in the Session's execution environment."
+    },
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "WebTerminalInfo"
+        }
+      },
+      "doc": "List retained terminals without resolving or activating an Agent."
+    },
+    {
+      "name": "create",
+      "hostName": "create",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "TerminalCreateRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "WebTerminalInfo"
+      },
+      "doc": "Allocate a user shell once for a caller-generated identity, without Agent sandbox or approval restrictions."
+    },
+    {
+      "name": "retain",
+      "hostName": "retain",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "TerminalRetentionFrame"
+      },
+      "doc": "Retain an existing terminal for a window without activating its Agent or taking input control."
+    },
+    {
+      "name": "attach",
+      "hostName": "attach",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "TerminalFrame"
+      },
+      "uplink": {
+        "k": "ref",
+        "name": "TerminalInput"
+      },
+      "doc": "Attach terminal input and output to one physical Remote stream."
+    },
+    {
+      "name": "rename",
+      "hostName": "rename",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "void"
+      },
+      "doc": "Rename a terminal without changing its shell."
+    },
+    {
+      "name": "close",
+      "hostName": "close",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "void"
+      },
+      "doc": "Close an identity to future creation and kill its process range; repeated closes succeed."
+    }
+  ],
+  "decls": {
+    "RemoteUplinkWindow": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "maxBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum complete encoded frame bytes waiting for the Host consumer."
+        },
+        {
+          "name": "frameOverheadBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "UTF-8 envelope bytes added to a compact JSON item with a present value field."
+        }
+      ],
+      "source": "packages/typert/protocol/src/types.ts",
+      "doc": "Carrier capacity for buffered uplink frames of one logical stream."
+    },
+    "TerminalCreateRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "shellPath",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "A path returned by shell discovery; absent selects the execution default."
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "cols",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "rows",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Create is idempotent for an open identity; closed identities cannot be recreated."
+    },
+    "TerminalEnvironment": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "cwd",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Logged current directory, read without filesystem validation."
+        },
+        {
+          "name": "maxInputBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxBufferedBytes",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum complete encoded Client input bytes retained until acknowledgement."
+        },
+        {
+          "name": "maxCols",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "maxRows",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "scrollback",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Current Session directory and terminal limits; retained terminals keep their own process directories."
+    },
+    "TerminalFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "snapshot"
+              }
+            },
+            {
+              "name": "sequence",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "screen",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "info",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WebTerminalInfo"
+              }
+            },
+            {
+              "name": "writable",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              }
+            },
+            {
+              "name": "inputWindow",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "RemoteUplinkWindow"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "output"
+              }
+            },
+            {
+              "name": "sequence",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "data",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "state"
+              }
+            },
+            {
+              "name": "info",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WebTerminalInfo"
+              }
+            },
+            {
+              "name": "writable",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "ack"
+              }
+            },
+            {
+              "name": "sequence",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "refusal",
+              "optional": true,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "not-running",
+                  "read-only"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Every attachment begins with a complete bounded screen, then ordered output. inputWindow is absent when the carrier has no encoded-frame inbox limit."
+    },
+    "TerminalInput": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "write"
+              }
+            },
+            {
+              "name": "sequence",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "data",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "resize"
+              }
+            },
+            {
+              "name": "sequence",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "cols",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            },
+            {
+              "name": "rows",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Commands are numbered consecutively from one within each attachment; acknowledgements never authorize replay."
+    },
+    "TerminalRetentionFrame": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "retained"
+          }
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Acknowledges one physical window hold without taking screen or input control."
+    },
+    "TerminalShell": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "args",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "An executable shell verified in the subprocess provider's execution environment."
+    },
+    "WebTerminalInfo": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "shell",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "TerminalShell"
+          }
+        },
+        {
+          "name": "cwd",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Initial working directory; shell directory changes do not update this field."
+        },
+        {
+          "name": "cols",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "rows",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "state",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "exited",
+              "failed",
+              "running"
+            ]
+          }
+        },
+        {
+          "name": "exitCode",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "num"
+            }
+          }
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/api/terminal-controller/src/types.ts",
+      "doc": "Host-owned terminal state; process exit never creates a replacement shell."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

@@ -48,6 +48,8 @@ REMOTES = [
     {"ns": "settings", "cls": "SettingsController", "entry": "packages/api/settings-controller/src/index.ts"},
     {"ns": "permissionPresets", "cls": "PermissionPresetService", "entry": "packages/interaction/permission-presets/src/index.ts"},
     {"ns": "commands", "cls": "CommandRuntime", "entry": "packages/interaction/commands/src/index.ts"},
+    {"ns": "terminal", "cls": "TerminalController", "entry": "packages/api/terminal-controller/src/index.ts"},
+    {"ns": "userQuestions", "cls": "UserQuestionService", "entry": "packages/interaction/user-questions/src/index.ts"},
 ]
 for _r in REMOTES:
     _r["ir"] = IR_DIR / (_r["ns"] + ".ir.json")

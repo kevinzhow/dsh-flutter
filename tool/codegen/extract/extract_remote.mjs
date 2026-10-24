@@ -253,12 +253,19 @@ function remoteInfo(dec) {
   return info
 }
 
+// A duplex stream's uplink item type: the second argument of `RemoteStream<Out, In>` (`In` defaults to `never`).
+function uplinkOf(type) {
+  if (type.aliasSymbol?.name !== 'RemoteStream') return undefined
+  const args = type.aliasTypeArguments ?? []
+  return args.length >= 2 && !(args[1].flags & F.Never) ? args[1] : undefined
+}
+
 function unwrapResult(type, mode) {
-  // Promise<T> / AsyncIterable<T> / Iterable<T>
-  const sym = type.getSymbol() ?? type.aliasSymbol
+  // Promise<T> / AsyncIterable<T> / Iterable<T> / RemoteStream<T, In>
+  const sym = type.aliasSymbol?.name === 'RemoteStream' ? type.aliasSymbol : (type.getSymbol() ?? type.aliasSymbol)
   const args = type.aliasTypeArguments ?? checker.getTypeArguments(type)
-  if (sym && ['Promise', 'AsyncIterable', 'Iterable', 'PromiseLike'].includes(sym.name) && args.length >= 1) return args[0]
-  if (mode === 'stream') throw new Error('stream method must return AsyncIterable<T>')
+  if (sym && ['Promise', 'AsyncIterable', 'Iterable', 'PromiseLike', 'RemoteStream'].includes(sym.name) && args.length >= 1) return args[0]
+  if (mode === 'stream') throw new Error('stream method must return AsyncIterable<T> or RemoteStream<T, In>')
   return type
 }
 
@@ -322,6 +329,7 @@ function visit(node) {
       const sig = checker.getSignatureFromDeclaration(m)
       const declared = m.type ? checker.getTypeFromTypeNode(m.type) : checker.getReturnTypeOfSignature(sig)
       const result = unwrapResult(declared, mode)
+      const uplinkType = mode === 'stream' ? uplinkOf(declared) : undefined
       const doc = docOf(checker.getSymbolAtLocation(m.name))
       // A result that may be undefined arrives as an absent value; the client sees it as null.
       const maybeUndefined = result.isUnion() && result.types.some(t => t.flags & F.Undefined)
@@ -329,6 +337,7 @@ function visit(node) {
       methods.push({
         name: wireName, hostName, mode, cancellable,
         params, result: maybeUndefined && converted.k !== 'nullable' ? { k: 'nullable', of: converted } : converted,
+        ...(uplinkType ? { uplink: convert(uplinkType, pascal(NAMESPACE) + pascal(wireName) + 'Uplink') } : {}),
         ...(doc ? { doc } : {}),
       })
     }

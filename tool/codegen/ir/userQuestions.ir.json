@@ -1,0 +1,145 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "userQuestions",
+  "package": "packages/interaction/user-questions",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/interaction/user-questions/src/index.ts",
+    "packages/interaction/user-questions/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "answer",
+      "hostName": "answer",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "callId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "answer",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "AskUserQuestionAnswer"
+          }
+        }
+      ],
+      "result": {
+        "k": "bool"
+      },
+      "doc": "Answer a continued question. The reply is steered into the agent as a user message whose source names the call; that message is also the record that closes the question in the projection."
+    },
+    {
+      "name": "attachWait",
+      "hostName": "attachWait",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "agentId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "agent"
+        },
+        {
+          "name": "callId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "obj",
+        "props": [
+          {
+            "name": "remainingMs",
+            "optional": false,
+            "type": {
+              "k": "num"
+            }
+          }
+        ]
+      },
+      "doc": "Let one answer UI hold a live timed wait. Closing the stream releases its claim."
+    }
+  ],
+  "decls": {
+    "AskUserQuestionAnswer": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "answers",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "AskUserQuestionAnswerItem"
+            }
+          },
+          "doc": "Structured answers keyed by question id."
+        }
+      ],
+      "source": "packages/interaction/user-questions/src/types.ts",
+      "doc": "The human's answer."
+    },
+    "AskUserQuestionAnswerItem": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The answered question id."
+        },
+        {
+          "name": "selected",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Selected option labels. May accompany custom text for a multi-select question."
+        },
+        {
+          "name": "custom",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Optional free-text \"Other\" answer."
+        }
+      ],
+      "source": "packages/interaction/user-questions/src/types.ts",
+      "doc": "Answer to one question."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

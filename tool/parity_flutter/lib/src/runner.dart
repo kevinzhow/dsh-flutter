@@ -105,6 +105,7 @@ void runParityCapture({
         outputDir: outputDir,
         runInfo: runInfo,
         fonts: fonts,
+        framed: mapping.framed,
       );
     }, variant: TargetPlatformVariant.only(TargetPlatform.linux));
   }

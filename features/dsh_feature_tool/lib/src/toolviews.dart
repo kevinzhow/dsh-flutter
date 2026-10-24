@@ -577,6 +577,7 @@ Widget askView(
   required bool answerable,
   required List<AskAnswer>? settledAnswers,
 }) {
+  final reveal = c.env.actions.revealQuestion;
   final t = c.t;
   final model = toolRowModel(c.name, c.call);
   final p = presentAsk(
@@ -600,6 +601,11 @@ Widget askView(
     output: p.transcript == null ? model.output : null,
     state: p.state,
     card: p.transcript == null ? null : (_) => AskCardView(card: p.transcript!),
+    // An answerable call reopens its panel (dsh `QuestionToolRow`).
+    panelLabel: answerable && reveal != null ? t('ask.reopen') : null,
+    onPanel: answerable && reveal != null
+        ? () => reveal(c.owner.session, c.call.callId)
+        : null,
   );
 }
 

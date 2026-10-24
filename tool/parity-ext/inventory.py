@@ -56,7 +56,8 @@ ROWS = [
     ('Approval cards', 'packages/client/ui-approval', 'components.approval.*', 'P1', None),
     ('Settings', 'packages/client/ui-settings', 'screens.settings.*', 'P3', None),
     ('Settings General rows', 'packages/client/ui-settings-general', 'components.settings.*', 'P2', None),
-    ('Sidebar terminal', 'packages/client/ui-sidebar-terminal', 'components.terminal.*', None, 'no terminal surface planned'),
+    ('Sidebar terminal', 'packages/client/ui-sidebar-terminal', 'components.terminal.*', 'P1', None),
+    ('Question wait states', 'packages/client/ui-user-questions', 'components.question-wait.*', 'P2', None),
 ]
 STATUSES = ('ok', 'web-only', 'untested', 'MISSING', 'excluded')
 

@@ -1246,6 +1246,41 @@ void main() {
       expect(find.text(t('ask.cancelledDetail')), findsOneWidget);
     });
 
+    testWidgets('an answerable ask row reopens its panel', (tester) async {
+      String? revealed;
+      final h = Harness(
+        actions: ToolHostActions(
+          revealQuestion: (parent, callId) {
+            revealed = '${parent.sessionId}/$callId';
+            return true;
+          },
+        ),
+      );
+      final args = {
+        'questions': [
+          {'id': 'q1', 'question': 'Colour?'},
+        ],
+      };
+      final pending = done(
+        'ask_user_question',
+        args,
+        text: jsonEncode({'pending': true, 'callId': 'c1'}),
+      );
+      // Not listed by the projection: nothing to reopen.
+      await tester.pumpWidget(h.widget(pending));
+      expect(find.text(t('ask.reopen')), findsNothing);
+      h.owner.session.projections.apply('userQuestions', {
+        'active': [
+          {'callId': 'c1', 'state': 'continued', 'questions': <Object?>[]},
+        ],
+        'settled': <Object?>[],
+      }, 1);
+      await tester.pumpWidget(h.widget(pending));
+      await tester.pump();
+      await tester.tap(find.text(t('ask.reopen')));
+      expect(revealed, 's1/c1');
+    });
+
     testWidgets(
       'goal and schedule results render their fields; subagent offers its transcript',
       (tester) async {
