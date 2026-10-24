@@ -3,6 +3,7 @@ import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart' show SelectionArea;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -125,6 +126,35 @@ void main() {
     expect(find.textContaining('raw error'), findsNothing);
     expect(find.textContaining('2500'), findsOneWidget);
   });
+
+  testWidgets(
+    'Chinese duration spacing preserves selected text and spoken content',
+    (t) async {
+      String? selected;
+      const zh = DshI18n(DshLocale.zh);
+      await t.pumpWidget(
+        app(
+          SelectionArea(
+            onSelectionChanged: (value) => selected = value?.plainText,
+            child: ModelRetryView(
+              attempt: attempt(state: ModelRetryState.started),
+              i18n: zh,
+              initiallyOpen: true,
+            ),
+          ),
+        ),
+      );
+      t.state<SelectableRegionState>(find.byType(SelectableRegion)).selectAll();
+      await t.pump();
+      expect(selected, contains('2500毫秒'));
+      expect(selected, isNot(contains('\uFFFC')));
+      final duration = t.widget<Text>(find.textContaining('2500'));
+      expect(
+        duration.semanticsLabel,
+        '${zh.t('chat', 'message.retry.delay')}2500毫秒',
+      );
+    },
+  );
 
   testWidgets(
     'details can be opened with the keyboard and fit a narrow window',

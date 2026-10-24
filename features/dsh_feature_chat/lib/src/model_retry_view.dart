@@ -202,6 +202,7 @@ class _ModelRetryViewState extends State<ModelRetryView> {
                     'duration.milliseconds',
                     params: {'milliseconds': attempt.delayMs.round()},
                   ),
+                  localizedDuration: true,
                 ),
                 const SizedBox(height: 2),
                 _detail(context, _t('message.retry.failure'), _failure),
@@ -212,7 +213,12 @@ class _ModelRetryViewState extends State<ModelRetryView> {
     );
   }
 
-  Widget _detail(BuildContext context, String label, String value) {
+  Widget _detail(
+    BuildContext context,
+    String label,
+    String value, {
+    bool localizedDuration = false,
+  }) {
     final theme = context.dsh;
     final style = theme
         .textStyle('--dsw-font-xs-13')
@@ -220,6 +226,12 @@ class _ModelRetryViewState extends State<ModelRetryView> {
           height: 18 / 13,
           color: theme.color('--dsw-alias-label-tertiary'),
         );
+    // Blink's text-autospace:normal inserts 1/8ic between the numeric
+    // duration and its Chinese unit (2500毫秒). Pinned Noto CJK is full-em.
+    // Keep the translated string intact for accessibility/copy semantics.
+    final duration = localizedDuration
+        ? RegExp(r'^([0-9]+)([\u3400-\u9fff].*)$').firstMatch(value)
+        : null;
     return DshChromeBaseline(
       style: style,
       child: Text.rich(
@@ -230,10 +242,24 @@ class _ModelRetryViewState extends State<ModelRetryView> {
               text: label,
               style: TextStyle(color: theme.labelSecondary),
             ),
-            TextSpan(text: value),
+            if (duration == null)
+              TextSpan(text: value)
+            else ...[
+              TextSpan(text: duration.group(1)),
+              WidgetSpan(
+                child: SizedBox(
+                  key: const ValueKey('model-retry-duration-autospace'),
+                  width:
+                      MediaQuery.textScalerOf(context).scale(style.fontSize!) /
+                      8,
+                ),
+              ),
+              TextSpan(text: duration.group(2)),
+            ],
           ],
         ),
         strutStyle: dshStrut(style),
+        semanticsLabel: '$label$value',
       ),
     );
   }
