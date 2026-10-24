@@ -13,9 +13,9 @@
   "uncovered": 0,
   "missing": 0
  },
- "meanPixelPerfectPct": 91.741,
- "meanRgbPct": 99.266,
- "meanNonTextPct": 97.508,
+ "meanPixelPerfectPct": 91.831,
+ "meanRgbPct": 99.323,
+ "meanNonTextPct": 97.517,
  "thresholds": {
   "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
   "geometry": 99.5
@@ -2640,8 +2640,8 @@
    "title": "Model retry: started-open-desktop-zh (light)",
    "variantName": "Model retry: started-open-desktop-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 91.651,
-   "rgbPct": 99.6,
+   "pixelPerfectPct": 91.785,
+   "rgbPct": 99.705,
    "sizeReact": [
     480,
     65
@@ -2652,17 +2652,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-zh.light.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 91.651,
-   "closePct": 94.881,
-   "nonTextPct": 98.76,
-   "mismatched": 2605,
+   "exactPct": 91.785,
+   "closePct": 95.074,
+   "nonTextPct": 98.872,
+   "mismatched": 2563,
    "pixels": 31200,
    "buckets": {
     "fill": 0,
-    "hairline": 239,
-    "corner": 146,
+    "hairline": 246,
+    "corner": 104,
     "offset": 2,
-    "text": 2218,
+    "text": 2211,
     "other": 0
    },
    "regions": [],
@@ -2696,16 +2696,16 @@
       32
      ],
      "pixels": 1024,
-     "mismatched": 187,
-     "exactPct": 81.738,
-     "closePct": 87.5,
-     "nonTextPct": 93.262,
+     "mismatched": 183,
+     "exactPct": 82.129,
+     "closePct": 88.184,
+     "nonTextPct": 93.555,
      "buckets": {
       "fill": 0,
-      "hairline": 58,
-      "corner": 11,
+      "hairline": 60,
+      "corner": 6,
       "offset": 0,
-      "text": 118,
+      "text": 117,
       "other": 0
      }
     },
@@ -2732,27 +2732,6 @@
     },
     {
      "rect": [
-      96,
-      32,
-      32,
-      32
-     ],
-     "pixels": 1024,
-     "mismatched": 395,
-     "exactPct": 61.426,
-     "closePct": 72.559,
-     "nonTextPct": 94.141,
-     "buckets": {
-      "fill": 0,
-      "hairline": 23,
-      "corner": 37,
-      "offset": 0,
-      "text": 335,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
       64,
       32,
       32,
@@ -2771,6 +2750,27 @@
       "text": 177,
       "other": 0
      }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 273,
+     "exactPct": 73.34,
+     "closePct": 81.934,
+     "nonTextPct": 97.461,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 4,
+      "offset": 0,
+      "text": 247,
+      "other": 0
+     }
     }
    ],
    "status": "fail",
@@ -2785,8 +2785,8 @@
    "title": "Model retry: started-open-desktop-zh (dark)",
    "variantName": "Model retry: started-open-desktop-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 91.401,
-   "rgbPct": 99.254,
+   "pixelPerfectPct": 91.538,
+   "rgbPct": 99.392,
    "sizeReact": [
     480,
     65
@@ -2797,17 +2797,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-zh.dark.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 91.401,
-   "closePct": 92.67,
-   "nonTextPct": 98.824,
-   "mismatched": 2683,
+   "exactPct": 91.538,
+   "closePct": 92.853,
+   "nonTextPct": 98.936,
+   "mismatched": 2640,
    "pixels": 31200,
    "buckets": {
     "fill": 0,
-    "hairline": 218,
-    "corner": 149,
+    "hairline": 225,
+    "corner": 107,
     "offset": 0,
-    "text": 2316,
+    "text": 2308,
     "other": 0
    },
    "regions": [],
@@ -2841,14 +2841,14 @@
       32
      ],
      "pixels": 1024,
-     "mismatched": 193,
-     "exactPct": 81.152,
-     "closePct": 82.812,
-     "nonTextPct": 93.164,
+     "mismatched": 190,
+     "exactPct": 81.445,
+     "closePct": 83.301,
+     "nonTextPct": 93.457,
      "buckets": {
       "fill": 0,
-      "hairline": 59,
-      "corner": 11,
+      "hairline": 61,
+      "corner": 6,
       "offset": 0,
       "text": 123,
       "other": 0
@@ -2898,22 +2898,22 @@
     },
     {
      "rect": [
-      96,
+      0,
       32,
       32,
       32
      ],
      "pixels": 1024,
-     "mismatched": 405,
-     "exactPct": 60.449,
-     "closePct": 65.234,
-     "nonTextPct": 94.336,
+     "mismatched": 276,
+     "exactPct": 73.047,
+     "closePct": 77.246,
+     "nonTextPct": 97.461,
      "buckets": {
       "fill": 0,
-      "hairline": 21,
-      "corner": 37,
+      "hairline": 22,
+      "corner": 4,
       "offset": 0,
-      "text": 347,
+      "text": 250,
       "other": 0
      }
     }
@@ -3220,8 +3220,8 @@
    "title": "Model retry: started-open-phone-zh (light)",
    "variantName": "Model retry: started-open-phone-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 91.751,
-   "rgbPct": 99.242,
+   "pixelPerfectPct": 92.348,
+   "rgbPct": 99.532,
    "sizeReact": [
     630,
     171
@@ -3232,17 +3232,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-zh.light.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 91.751,
-   "closePct": 93.491,
-   "nonTextPct": 95.949,
-   "mismatched": 8887,
+   "exactPct": 92.348,
+   "closePct": 94.271,
+   "nonTextPct": 95.914,
+   "mismatched": 8244,
    "pixels": 107730,
    "buckets": {
     "fill": 0,
-    "hairline": 3645,
+    "hairline": 3683,
     "corner": 708,
     "offset": 11,
-    "text": 4523,
+    "text": 3842,
     "other": 0
    },
    "regions": [],
@@ -3265,6 +3265,27 @@
       "corner": 217,
       "offset": 0,
       "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1212,
+     "exactPct": 82.823,
+     "closePct": 86.947,
+     "nonTextPct": 90.717,
+     "buckets": {
+      "fill": 0,
+      "hairline": 652,
+      "corner": 3,
+      "offset": 0,
+      "text": 557,
       "other": 0
      }
     },
@@ -3312,27 +3333,6 @@
     },
     {
      "rect": [
-      252,
-      84,
-      84,
-      84
-     ],
-     "pixels": 7056,
-     "mismatched": 1584,
-     "exactPct": 77.551,
-     "closePct": 80.385,
-     "nonTextPct": 91.964,
-     "buckets": {
-      "fill": 0,
-      "hairline": 564,
-      "corner": 3,
-      "offset": 0,
-      "text": 1017,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
       84,
       0,
       84,
@@ -3365,8 +3365,8 @@
    "title": "Model retry: started-open-phone-zh (dark)",
    "variantName": "Model retry: started-open-phone-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 91.63,
-   "rgbPct": 98.895,
+   "pixelPerfectPct": 92.204,
+   "rgbPct": 99.27,
    "sizeReact": [
     630,
     171
@@ -3377,17 +3377,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-zh.dark.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 91.63,
-   "closePct": 92.633,
-   "nonTextPct": 95.929,
-   "mismatched": 9017,
+   "exactPct": 92.204,
+   "closePct": 93.285,
+   "nonTextPct": 95.893,
+   "mismatched": 8399,
    "pixels": 107730,
    "buckets": {
     "fill": 0,
-    "hairline": 3675,
+    "hairline": 3714,
     "corner": 711,
     "offset": 0,
-    "text": 4631,
+    "text": 3974,
     "other": 0
    },
    "regions": [],
@@ -3410,6 +3410,27 @@
       "corner": 223,
       "offset": 0,
       "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1236,
+     "exactPct": 82.483,
+     "closePct": 84.538,
+     "nonTextPct": 90.972,
+     "buckets": {
+      "fill": 0,
+      "hairline": 637,
+      "corner": 0,
+      "offset": 0,
+      "text": 599,
       "other": 0
      }
     },
@@ -3452,27 +3473,6 @@
       "corner": 87,
       "offset": 0,
       "text": 291,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
-      252,
-      84,
-      84,
-      84
-     ],
-     "pixels": 7056,
-     "mismatched": 1601,
-     "exactPct": 77.31,
-     "closePct": 78.713,
-     "nonTextPct": 92.205,
-     "buckets": {
-      "fill": 0,
-      "hairline": 550,
-      "corner": 0,
-      "offset": 0,
-      "text": 1051,
       "other": 0
      }
     },
@@ -3800,8 +3800,8 @@
    "title": "Model retry: cancelled-open-desktop-zh (light)",
    "variantName": "Model retry: cancelled-open-desktop-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 90.981,
-   "rgbPct": 99.588,
+   "pixelPerfectPct": 91.115,
+   "rgbPct": 99.692,
    "sizeReact": [
     480,
     65
@@ -3812,17 +3812,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-zh.light.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 90.981,
-   "closePct": 94.577,
-   "nonTextPct": 98.696,
-   "mismatched": 2814,
+   "exactPct": 91.115,
+   "closePct": 94.769,
+   "nonTextPct": 98.808,
+   "mismatched": 2772,
    "pixels": 31200,
    "buckets": {
     "fill": 0,
-    "hairline": 256,
-    "corner": 149,
+    "hairline": 263,
+    "corner": 107,
     "offset": 2,
-    "text": 2407,
+    "text": 2400,
     "other": 0
    },
    "regions": [],
@@ -3871,22 +3871,22 @@
     },
     {
      "rect": [
-      96,
-      32,
+      128,
+      0,
       32,
       32
      ],
      "pixels": 1024,
-     "mismatched": 395,
-     "exactPct": 61.426,
-     "closePct": 72.559,
-     "nonTextPct": 94.141,
+     "mismatched": 140,
+     "exactPct": 86.328,
+     "closePct": 91.309,
+     "nonTextPct": 94.922,
      "buckets": {
       "fill": 0,
-      "hairline": 23,
-      "corner": 37,
+      "hairline": 46,
+      "corner": 6,
       "offset": 0,
-      "text": 335,
+      "text": 88,
       "other": 0
      }
     },
@@ -3913,22 +3913,22 @@
     },
     {
      "rect": [
-      128,
+      96,
       0,
       32,
       32
      ],
      "pixels": 1024,
-     "mismatched": 144,
-     "exactPct": 85.938,
-     "closePct": 91.016,
-     "nonTextPct": 95.312,
+     "mismatched": 214,
+     "exactPct": 79.102,
+     "closePct": 89.941,
+     "nonTextPct": 96.973,
      "buckets": {
       "fill": 0,
-      "hairline": 42,
-      "corner": 6,
+      "hairline": 31,
+      "corner": 0,
       "offset": 0,
-      "text": 96,
+      "text": 183,
       "other": 0
      }
     }
@@ -3945,8 +3945,8 @@
    "title": "Model retry: cancelled-open-desktop-zh (dark)",
    "variantName": "Model retry: cancelled-open-desktop-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 90.699,
-   "rgbPct": 99.222,
+   "pixelPerfectPct": 90.837,
+   "rgbPct": 99.361,
    "sizeReact": [
     480,
     65
@@ -3957,17 +3957,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-zh.dark.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 90.699,
-   "closePct": 92.103,
-   "nonTextPct": 98.769,
-   "mismatched": 2902,
+   "exactPct": 90.837,
+   "closePct": 92.285,
+   "nonTextPct": 98.881,
+   "mismatched": 2859,
    "pixels": 31200,
    "buckets": {
     "fill": 0,
-    "hairline": 232,
-    "corner": 152,
+    "hairline": 239,
+    "corner": 110,
     "offset": 0,
-    "text": 2518,
+    "text": 2510,
     "other": 0
    },
    "regions": [],
@@ -4037,43 +4037,43 @@
     },
     {
      "rect": [
-      96,
-      32,
-      32,
-      32
-     ],
-     "pixels": 1024,
-     "mismatched": 405,
-     "exactPct": 60.449,
-     "closePct": 65.234,
-     "nonTextPct": 94.336,
-     "buckets": {
-      "fill": 0,
-      "hairline": 21,
-      "corner": 37,
-      "offset": 0,
-      "text": 347,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
       128,
       0,
       32,
       32
      ],
      "pixels": 1024,
-     "mismatched": 148,
-     "exactPct": 85.547,
-     "closePct": 87.012,
-     "nonTextPct": 95.41,
+     "mismatched": 144,
+     "exactPct": 85.938,
+     "closePct": 87.402,
+     "nonTextPct": 95.02,
      "buckets": {
       "fill": 0,
-      "hairline": 41,
+      "hairline": 45,
       "corner": 6,
       "offset": 0,
-      "text": 101,
+      "text": 93,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 226,
+     "exactPct": 77.93,
+     "closePct": 82.324,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 0,
+      "offset": 0,
+      "text": 195,
       "other": 0
      }
     }
@@ -4380,8 +4380,8 @@
    "title": "Model retry: cancelled-open-phone-zh (light)",
    "variantName": "Model retry: cancelled-open-phone-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 91.132,
-   "rgbPct": 99.189,
+   "pixelPerfectPct": 91.728,
+   "rgbPct": 99.48,
    "sizeReact": [
     630,
     171
@@ -4392,17 +4392,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-zh.light.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 91.132,
-   "closePct": 92.926,
-   "nonTextPct": 95.72,
-   "mismatched": 9554,
+   "exactPct": 91.728,
+   "closePct": 93.706,
+   "nonTextPct": 95.685,
+   "mismatched": 8911,
    "pixels": 107730,
    "buckets": {
     "fill": 0,
-    "hairline": 3842,
+    "hairline": 3880,
     "corner": 749,
     "offset": 20,
-    "text": 4943,
+    "text": 4262,
     "other": 0
    },
    "regions": [],
@@ -4425,6 +4425,27 @@
       "corner": 217,
       "offset": 0,
       "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1212,
+     "exactPct": 82.823,
+     "closePct": 86.947,
+     "nonTextPct": 90.717,
+     "buckets": {
+      "fill": 0,
+      "hairline": 652,
+      "corner": 3,
+      "offset": 0,
+      "text": 557,
       "other": 0
      }
     },
@@ -4472,27 +4493,6 @@
     },
     {
      "rect": [
-      252,
-      84,
-      84,
-      84
-     ],
-     "pixels": 7056,
-     "mismatched": 1584,
-     "exactPct": 77.551,
-     "closePct": 80.385,
-     "nonTextPct": 91.964,
-     "buckets": {
-      "fill": 0,
-      "hairline": 564,
-      "corner": 3,
-      "offset": 0,
-      "text": 1017,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
       0,
       0,
       84,
@@ -4525,8 +4525,8 @@
    "title": "Model retry: cancelled-open-phone-zh (dark)",
    "variantName": "Model retry: cancelled-open-phone-zh",
    "officialStatus": "different",
-   "pixelPerfectPct": 90.998,
-   "rgbPct": 98.823,
+   "pixelPerfectPct": 91.572,
+   "rgbPct": 99.197,
    "sizeReact": [
     630,
     171
@@ -4537,17 +4537,17 @@
    ],
    "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-zh.dark.side-by-side.png",
    "sizeMismatch": false,
-   "exactPct": 90.998,
-   "closePct": 92.083,
-   "nonTextPct": 95.673,
-   "mismatched": 9698,
+   "exactPct": 91.572,
+   "closePct": 92.736,
+   "nonTextPct": 95.637,
+   "mismatched": 9080,
    "pixels": 107730,
    "buckets": {
     "fill": 0,
-    "hairline": 3882,
+    "hairline": 3921,
     "corner": 767,
     "offset": 12,
-    "text": 5037,
+    "text": 4380,
     "other": 0
    },
    "regions": [],
@@ -4596,6 +4596,27 @@
     },
     {
      "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1236,
+     "exactPct": 82.483,
+     "closePct": 84.538,
+     "nonTextPct": 90.972,
+     "buckets": {
+      "fill": 0,
+      "hairline": 637,
+      "corner": 0,
+      "offset": 0,
+      "text": 599,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
       0,
       84,
       84,
@@ -4612,27 +4633,6 @@
       "corner": 87,
       "offset": 0,
       "text": 291,
-      "other": 0
-     }
-    },
-    {
-     "rect": [
-      252,
-      84,
-      84,
-      84
-     ],
-     "pixels": 7056,
-     "mismatched": 1601,
-     "exactPct": 77.31,
-     "closePct": 78.713,
-     "nonTextPct": 92.205,
-     "buckets": {
-      "fill": 0,
-      "hairline": 550,
-      "corner": 0,
-      "offset": 0,
-      "text": 1051,
       "other": 0
      }
     },
@@ -4666,5 +4666,5 @@
  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
  "flutterVersion": "3.47.6",
  "visualTesting": "0.1.0",
- "generatedAt": "2026-10-24T22:45:52+00:00"
+ "generatedAt": "2026-10-24T23:00:45+00:00"
 }
