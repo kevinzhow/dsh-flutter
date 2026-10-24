@@ -1,7 +1,11 @@
 import 'package:dsh_feature_chat/src/stream/jump_button.dart';
 import 'package:dsh_feature_chat/src/stream/row_extents.dart';
+import 'package:dsh_feature_chat/src/stream/selection.dart';
 import 'package:dsh_feature_chat/src/stream/skeleton.dart';
+import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:flutter/material.dart'
+    show MaterialApp, TextSelectionTheme, ThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,6 +13,48 @@ import 'package:flutter_test/flutter_test.dart';
 // the button's states are dsh's `.toBottom` plus Raft's "N new" label.
 
 void main() {
+  testWidgets('selection follows a changed custom theme in light and dark', (
+    t,
+  ) async {
+    for (final brightness in Brightness.values) {
+      final base = resolveTheme(officialPack, ThemeSettings(), brightness);
+      final selection = brightness == Brightness.light
+          ? const Color(0x66448822)
+          : const Color(0x9988CC44);
+      final handle = brightness == Brightness.light
+          ? const Color(0xFF884422)
+          : const Color(0xFFCC8844);
+      final custom = base.copyWith(
+        colors: {
+          ...base.colors,
+          '--dsw-alias-bg-document-selection': selection,
+          '--dsw-alias-state-business-primary': handle,
+        },
+      );
+      Color? actualSelection, actualHandle;
+      await t.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(brightness: brightness, extensions: [custom]),
+          themeAnimationDuration: Duration.zero,
+          home: DshSelectionArea(
+            child: Builder(
+              builder: (context) {
+                actualSelection = DefaultSelectionStyle.of(context)
+                    .selectionColor;
+                actualHandle = TextSelectionTheme.of(context)
+                    .selectionHandleColor;
+                return const Text('Selectable');
+              },
+            ),
+          ),
+        ),
+      );
+      await t.pump();
+      expect(actualSelection, selection);
+      expect(actualHandle, handle);
+    }
+  });
+
   testWidgets('the skeleton pulses, and holds still under reduced motion', (
     t,
   ) async {

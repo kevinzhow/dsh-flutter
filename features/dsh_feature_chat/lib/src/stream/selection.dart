@@ -1,6 +1,7 @@
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
-    show SelectionArea, TextSelectionTheme, TextSelectionThemeData, Theme;
+    show SelectionArea, TextSelectionTheme, TextSelectionThemeData;
 import 'package:flutter/widgets.dart';
 
 // Ported from raft-flutter `packages/raft_ui/lib/src/raft_selection_area.dart`:
@@ -38,23 +39,19 @@ class _DshSelectionAreaState extends State<DshSelectionArea> {
 
   @override
   Widget build(BuildContext context) {
-    // dsh paints no `::selection` of its own, so the browser's highlight
-    // shows: Chromium's blue (51,103,209 light, 4,56,162 dark). It also
-    // turns the glyphs white, which a Flutter selection cannot do, so the
-    // blue is translucent here to keep the dark text legible.
-    final dark = Theme.of(context).brightness == Brightness.dark;
+    // Keep selection inside the theme contract, including user theme packs.
+    // The document-selection token is translucent, keeping the original
+    // glyph colours legible (Flutter cannot recolour selected glyphs).
+    final theme = context.dsh;
     return TapRegion(
       groupId: SelectableRegion,
       onTapOutside: _outsidePress,
       child: TextSelectionTheme(
-        // The touch handles are the browser's blue too.
-        data: const TextSelectionThemeData(
-          selectionHandleColor: Color(0xFF3367D1),
+        data: TextSelectionThemeData(
+          selectionHandleColor: theme.focusRingColor,
         ),
         child: DefaultSelectionStyle(
-          selectionColor: dark
-              ? const Color(0xB30438A2)
-              : const Color(0x593367D1),
+          selectionColor: theme.color('--dsw-alias-bg-document-selection'),
           child: SelectionArea(
             child: Builder(
               builder: (context) {
