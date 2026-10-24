@@ -25,4 +25,6 @@ export 'src/terminal/terminal_prefs.dart';
 export 'src/terminal/terminal_service.dart';
 export 'src/terminal/terminal_view.dart';
 export 'src/transport.dart';
+export 'src/workspace_list.dart';
+export 'src/workspace_navigation.dart';
 export 'src/workspace_path.dart';

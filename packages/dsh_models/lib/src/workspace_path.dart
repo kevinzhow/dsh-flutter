@@ -113,3 +113,14 @@ String workspaceTitleOf(String path) {
       : trimmed.lastIndexOf(r'\');
   return trimmed.substring(sep + 1);
 }
+
+/// Leaf directory name of the first-use workspace (dsh
+/// `DEFAULT_WORKSPACE_DIRECTORY`); language-neutral, so one installation keeps
+/// one on-disk path across language switches.
+const String defaultWorkspaceDirectory = 'default-workspace';
+
+/// The text one workspace is labelled with (dsh `workspaceDisplayTitle`): a
+/// workspace still carrying the automatic first-use title reads as the
+/// caller's localized default name, every other title verbatim.
+String workspaceDisplayTitle(String title, String localizedDefault) =>
+    title == defaultWorkspaceDirectory ? localizedDefault : title;

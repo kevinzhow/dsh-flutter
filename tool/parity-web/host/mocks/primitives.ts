@@ -36,3 +36,5 @@ export { MenuGroup, observeStickyMenuGroups } from '@dsh/ui-primitives/src/MenuG
 export { useAnchoredMaxHeight } from '@dsh/ui-primitives/src/useAnchoredMaxHeight.ts'
 export { ReferenceIconRegular } from '@dsh/ui-primitives/src/ReferenceIcon.tsx'
 export { rankByName } from '@dsh/ui-primitives/src/rank-by-name.ts'
+// Workspace surfaces (ui-workspace WorkspacePickFlow, ui-directory-picker-browse DirectoryBrowser): the modal layer.
+export { Modal } from '@dsh/ui-primitives/src/Modal.tsx'

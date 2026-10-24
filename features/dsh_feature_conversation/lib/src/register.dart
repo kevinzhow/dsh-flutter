@@ -35,6 +35,7 @@ void registerConversationFeature(
   required DshI18n Function() i18n,
   CommandUiRegistry? commandUi,
   ComposerInputLookup? inputOf,
+  WorkspaceServices? workspaces,
 }) {
   if (commandUi != null && inputOf != null) {
     commandUi.register(
@@ -56,6 +57,7 @@ void registerConversationFeature(
       viewSlot: _viewSlot,
       composerSlot: _composerSlot,
       dockSlot: DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
+      workspaces: workspaces,
     ),
   );
   slots.register<SessionOwner, Widget>(

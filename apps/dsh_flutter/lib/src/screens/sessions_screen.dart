@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:dsh_feature_session/dsh_feature_session.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
@@ -71,12 +74,18 @@ class SessionsPane extends StatelessWidget {
                     ],
                   ),
                 ),
+                // dsh's add-workspace action, when a directory picker is composed.
+                ?controller.slots.renderSingle(
+                  DshSlots.sidebarWorkspaces
+                      .typed<SidebarWorkspacesOwner, Widget>(),
+                  SidebarWorkspacesOwner(onStarted: () {}),
+                ),
                 DshIconButton(
                   key: const ValueKey('sessions-new'),
                   icon: Icons.add,
                   plain: true,
                   semanticLabel: a('sessions.new'),
-                  onPressed: controller.createSession,
+                  onPressed: () => unawaited(controller.startSession()),
                 ),
                 DshIconButton(
                   key: const ValueKey('sessions-settings'),
@@ -109,7 +118,7 @@ class SessionsPane extends StatelessWidget {
             i18n: i18n,
             onOpen: onOpen,
             onRefresh: controller.refreshSessions,
-            onNew: controller.createSession,
+            onNew: () => unawaited(controller.startSession()),
           ),
         ),
       ],

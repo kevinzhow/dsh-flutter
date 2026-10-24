@@ -39,6 +39,7 @@ const workspace = {
   '@deepseek-ai/dsh-util-workspace-path': path.join(dsh, 'packages/util/workspace-path/src/index.ts'),
   '@deepseek-ai/dsh-util-code-language': path.join(dsh, 'packages/util/code-language/src/index.ts'),
   '@deepseek-ai/dsh-util-values': path.join(dsh, 'packages/util/values/src/index.ts'),
+  '@deepseek-ai/dsh-api-workspace-controller/default-workspace': path.join(dsh, 'packages/api/workspace-controller/src/default-workspace.ts'),
   '@deepseek-ai/dsh-spill-policy/notice': path.join(dsh, 'packages/spill/spill-policy/src/notice.ts'),
 }
 

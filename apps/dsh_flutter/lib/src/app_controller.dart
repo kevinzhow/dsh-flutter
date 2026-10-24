@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_client/generated_user_questions.dart'
     show AskUserQuestionAnswer, AskUserQuestionAnswerItem, UserQuestionsRemote;
 import 'package:dsh_conversation/dsh_conversation.dart';
@@ -11,6 +12,7 @@ import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart';
 import 'package:dsh_feature_documentpreview/dsh_feature_documentpreview.dart';
 import 'package:dsh_feature_commands/dsh_feature_commands.dart';
+import 'package:dsh_feature_directory_picker_browse/dsh_feature_directory_picker_browse.dart';
 import 'package:dsh_feature_files/dsh_feature_files.dart';
 import 'package:dsh_feature_input_trigger/dsh_feature_input_trigger.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
@@ -24,6 +26,7 @@ import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
 import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
+import 'package:dsh_feature_workspace/dsh_feature_workspace.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
@@ -189,6 +192,12 @@ class AppController extends ChangeNotifier {
       i18n: () => i18n,
       commandUi: commandUi,
       inputOf: (id) => _sessions[id]?.owner.input,
+      workspaces: workspaceServices,
+    );
+    registerWorkspaceFeature(
+      slots,
+      services: workspaceServices,
+      i18n: () => i18n,
     );
     registerInputTriggerFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
@@ -386,6 +395,21 @@ class AppController extends ChangeNotifier {
   SessionManager? manager;
   String? openSessionId;
   Object? createError;
+
+  /// The Host's workspaces, live (empty until the follow stream's baseline).
+  /// One observable for the life of the controller, so the surfaces that read
+  /// it survive a re-pair.
+  final Observable<WorkspaceSnapshot> workspaceState = Observable(
+    const WorkspaceSnapshot(),
+  );
+  late final WorkspaceServices workspaceServices = _WorkspaceBridge(this);
+  WorkspaceList? _workspaceList;
+  WorkspaceNavigation? _navigation;
+  StreamSubscription<WorkspaceSnapshot>? _workspaceSub;
+
+  /// The New session screen is up: no session is open and the conversation
+  /// area asks for a workspace first (dsh's sessionless hero).
+  bool newSessionPending = false;
 
   DshLocale locale;
 
@@ -771,6 +795,14 @@ class AppController extends ChangeNotifier {
         i18n: () => i18n,
       ),
     );
+    _hostOffs.add(
+      registerDirectoryPickerBrowseFeature(
+        slots,
+        remote: r.directoryPicker,
+        i18n: () => i18n,
+      ),
+    );
+    _attachWorkspaces(r);
     unawaited(
       readHostVersion(backend.remoteCaller).then((v) {
         hostVersion = v;
@@ -800,6 +832,7 @@ class AppController extends ChangeNotifier {
     final f = forms;
     forms = null;
     if (f != null) unawaited(f.dispose());
+    _detachWorkspaces();
     remotes = null;
     hostVersion = null;
   }
@@ -864,6 +897,7 @@ class AppController extends ChangeNotifier {
 
   Future<void> _resetModels() async {
     openSessionId = null;
+    newSessionPending = false;
     for (final s in [..._sessions.values, ..._children.values]) {
       await s.dispose();
     }
@@ -897,24 +931,33 @@ class AppController extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Make [sessionId] the session in view and start following it.
-  Future<SessionController?> open(String sessionId) async {
+  /// The controller of [sessionId], made on first use (its model stays
+  /// resident like dsh's session manager keeps it).
+  SessionController? _controllerFor(String sessionId) {
     final m = manager;
     if (m == null) return null;
-    final controller = _sessions.putIfAbsent(
+    return _sessions.putIfAbsent(
       sessionId,
       () => SessionController(
         m.get(sessionId),
         scheduler: frameScheduler,
         triggers: inputTriggers,
         cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
+        blankReader: () => manager?.summaryOf(sessionId)?.blank,
         hostHome: _transport?.generation?.hostHome ?? '',
         uploader: backend.uploader,
         files: backend.files,
         platform: platform,
       ),
     );
+  }
+
+  /// Make [sessionId] the session in view and start following it.
+  Future<SessionController?> open(String sessionId) async {
+    final controller = _controllerFor(sessionId);
+    if (controller == null) return null;
     openSessionId = sessionId;
+    newSessionPending = false;
     notifyListeners();
     unawaited(controller.open().then((_) => notifyListeners()));
     return controller;
@@ -922,6 +965,7 @@ class AppController extends ChangeNotifier {
 
   void closeSession() {
     openSessionId = null;
+    newSessionPending = false;
     notifyListeners();
   }
 
@@ -935,6 +979,138 @@ class AppController extends ChangeNotifier {
 
   /// Files dropped on the window (desktop) go to the session in view.
   void dropFiles(List<LocalFile> files) => openSession?.dropFiles(files);
+
+  // ---- workspaces ------------------------------------------------------
+
+  void _attachWorkspaces(HostRemotes r) {
+    final m = manager;
+    if (m == null) return;
+    _detachWorkspaces();
+    final list = _workspaceList = WorkspaceList(
+      remote: r.workspace,
+      follow: backend.workspaceFollow,
+    )..start();
+    workspaceState.set(list.value);
+    _workspaceSub = list.state.changes.listen((next) {
+      workspaceState.set(next);
+      notifyListeners();
+    });
+    _navigation = WorkspaceNavigation(
+      workspaces: list,
+      sessions: m,
+      current: () => openSessionId,
+      show: (id) async {
+        await open(id);
+      },
+      clear: () {
+        openSessionId = null;
+        newSessionPending = true;
+        notifyListeners();
+      },
+      onFailure: (error) {
+        createError = error;
+        notifyListeners();
+      },
+    );
+  }
+
+  void _detachWorkspaces() {
+    unawaited(_workspaceSub?.cancel());
+    _workspaceSub = null;
+    final list = _workspaceList;
+    _workspaceList = null;
+    _navigation = null;
+    if (list != null) unawaited(list.dispose());
+    workspaceState.set(const WorkspaceSnapshot());
+  }
+
+  /// Both lists have arrived, or [timeout] ran out: "+" right after connecting
+  /// must not read an unloaded list as "no workspace".
+  Future<void> _listsReady({
+    Duration timeout = const Duration(seconds: 4),
+  }) async {
+    final m = manager;
+    if (m == null) return;
+    bool ready() =>
+        workspaceState.value.phase == WorkspacePhase.ready &&
+        m.list.value.phase == ListPhase.ready;
+    if (ready()) return;
+    final done = Completer<void>();
+    void check(Object? _) {
+      if (!done.isCompleted && ready()) done.complete();
+    }
+
+    final subs = [
+      workspaceState.changes.listen(check),
+      m.list.changes.listen(check),
+    ];
+    try {
+      await done.future.timeout(timeout, onTimeout: () {});
+    } finally {
+      for (final sub in subs) {
+        unawaited(sub.cancel());
+      }
+    }
+  }
+
+  /// "New session": a fresh session in [workspaceId], else in the workspace in
+  /// view, else in the most recent one. With no workspace on a fresh account
+  /// the Host's default one is prepared first; with none to choose from the
+  /// New session screen asks for one (dsh `UiWorkspaceService.startSession`).
+  Future<void> startSession([String? workspaceId]) async {
+    final nav = _navigation;
+    final list = _workspaceList;
+    final m = manager;
+    if (nav == null || list == null || m == null) return;
+    createError = null;
+    await _listsReady();
+    if (identical(nav, _navigation)) {
+      final fresh =
+          workspaceId == null &&
+          workspaceState.value.phase == WorkspacePhase.ready &&
+          workspaceState.value.items.isEmpty &&
+          m.list.value.phase == ListPhase.ready &&
+          m.list.value.items.isEmpty;
+      if (fresh) {
+        try {
+          await list.initializeDefault();
+        } on Object {
+          // An ineligible account or a refusal leaves the chooser.
+        }
+      }
+    }
+    try {
+      await nav.startSession(workspaceId);
+    } on Object {
+      // Reported through [createError].
+    }
+  }
+
+  /// A workspace was picked for the conversation being prepared: its first
+  /// reusable blank session opens, and the draft of [from] moves over.
+  Future<void> openWorkspace(String workspaceId, {String? from}) async {
+    final nav = _navigation;
+    if (nav == null) return;
+    createError = null;
+    await nav.openWorkspace(
+      workspaceId,
+      beforeOpen: (next) => _moveDraft(from, next),
+    );
+  }
+
+  /// The unsent text of the blank session [from] follows the pick to [to]
+  /// (dsh moves the draft and its attachments; here the text moves and chips
+  /// become their plain text).
+  void _moveDraft(String? from, String to) {
+    if (from == null || from == to) return;
+    final source = _sessions[from]?.owner.input;
+    final target = _controllerFor(to)?.owner.input;
+    if (source == null || target == null) return;
+    final text = source.clipboardText;
+    if (text.isEmpty) return;
+    target.setPlainText(text);
+    source.clear();
+  }
 
   /// `session/create` in the host's default directory, then open it.
   Future<void> createSession() async {
@@ -1049,6 +1225,30 @@ class AppController extends ChangeNotifier {
 
 /// The app's side of the subagent feature: child sessions as read-only
 /// owners, list facts for activity and usage, and the navigator.
+class _WorkspaceBridge implements WorkspaceServices {
+  _WorkspaceBridge(this._app);
+
+  final AppController _app;
+
+  @override
+  Observable<WorkspaceSnapshot> get workspaces => _app.workspaceState;
+
+  @override
+  Future<WorkspaceView> createWorkspace(String path) {
+    final list = _app._workspaceList;
+    if (list == null) return Future.error(NotConnected());
+    return list.create(path);
+  }
+
+  @override
+  Future<void> startSession([String? workspaceId]) =>
+      _app.startSession(workspaceId);
+
+  @override
+  Future<void> openWorkspace(String workspaceId, {String? from}) =>
+      _app.openWorkspace(workspaceId, from: from);
+}
+
 class _SubagentBridge implements SubagentServices {
   _SubagentBridge(this.app);
 

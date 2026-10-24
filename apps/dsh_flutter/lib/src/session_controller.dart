@@ -65,6 +65,7 @@ class SessionController implements SessionActions {
     FlushScheduler? scheduler,
     InputTriggerRegistry? triggers,
     String? Function()? cwdReader,
+    bool? Function()? blankReader,
     String hostHome = '',
     this.readOnly = false,
   }) : conversation = ConversationBinding.chat(
@@ -92,6 +93,7 @@ class SessionController implements SessionActions {
       conversation: conversation,
       actions: this,
       cwdReader: cwdReader,
+      blankReader: blankReader,
       hostHome: hostHome,
       attachments: _attachments,
       textDraft: readOnly ? null : textDraft,

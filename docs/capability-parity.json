@@ -89,9 +89,10 @@
    "status": "partial",
    "whalee": [
     "features/dsh_feature_conversation",
-    "packages/dsh_conversation"
+    "packages/dsh_conversation",
+    "features/dsh_feature_conversation/lib/src/hero.dart"
    ],
-   "notes": "Plain send and stop only. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, empty-session hero (workspace, agent preset and options), composer toolbar seats (activity, left, right, overlay), in-composer plan control.",
+   "notes": "The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.",
    "priority": "P2"
   },
   {
@@ -123,9 +124,13 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-directory-picker-browse",
    "description": "Browse the host's folders and create a new one to choose where a session works.",
-   "status": "missing",
-   "notes": "Needs directoryPicker/list and createDirectory; new sessions currently always start in the host default workspace.",
-   "priority": "P1"
+   "status": "ported",
+   "notes": "The Miller browser (dsh's dialog at every width: two columns of at least 256px that scroll sideways on a narrow card, the child pane pinned into view, the wrapping footer), the editable path with prefix filtering, hidden-file toggle, New folder, slow-scan pill and truncation note. The Remote caller has no per-call abort, so a superseded scan is dropped on arrival instead of cancelled on the wire.",
+   "whalee": [
+    "features/dsh_feature_directory_picker_browse",
+    "features/dsh_feature_directory_picker_browse/lib/src/browser_model.dart",
+    "features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart"
+   ]
   },
   {
    "id": "package:ui-directory-picker-native",
@@ -133,8 +138,9 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-directory-picker-native",
    "description": "Open the host operating system's own folder chooser to pick a working directory.",
-   "status": "na",
-   "reason": "The chooser opens on the host machine's display (desktop or host OS), which a phone user cannot see; the in-app browser (ui-directory-picker-browse) is the remote equivalent."
+   "status": "missing",
+   "notes": "Desktop follow-up: opens the host operating system's own folder chooser, which only helps when Whalee runs on the host machine itself. The in-app browser (ui-directory-picker-browse) covers picking today.",
+   "priority": "P3"
   },
   {
    "id": "package:ui-dockkit",
@@ -634,9 +640,15 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-workspace",
    "description": "Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it.",
-   "status": "missing",
-   "notes": "workspace/* is not generated or called, and the session list has no workspace concept.",
-   "priority": "P1"
+   "status": "partial",
+   "notes": "Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session (\"+\": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start.",
+   "priority": "P1",
+   "whalee": [
+    "features/dsh_feature_workspace",
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "packages/dsh_models/lib/src/workspace_navigation.dart",
+    "features/dsh_feature_conversation/lib/src/hero.dart"
+   ]
   },
   {
    "id": "remote:account/ackBonusNotified",
@@ -856,8 +868,10 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/directory-picker.ts",
    "description": "Create a new folder while browsing the host's folders to choose a working directory.",
-   "status": "missing",
-   "notes": "In-app folder browser (ui-directory-picker-browse); not built."
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_directory_picker_browse/lib/src/register.dart"
+   ]
   },
   {
    "id": "remote:directoryPicker/list",
@@ -865,8 +879,10 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/directory-picker.ts",
    "description": "List the folders inside one host directory for the in-app folder browser.",
-   "status": "missing",
-   "notes": "In-app folder browser (ui-directory-picker-browse); not built."
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_directory_picker_browse/lib/src/register.dart"
+   ]
   },
   {
    "id": "remote:directoryPicker/pick",
@@ -874,8 +890,9 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/directory-picker.ts",
    "description": "Open the host operating system's folder chooser on the host machine.",
-   "status": "na",
-   "reason": "Opens the host OS folder chooser on the host machine's display; a phone user cannot use it."
+   "status": "missing",
+   "notes": "Desktop follow-up with ui-directory-picker-native: the host OS chooser opens on the host machine's display.",
+   "priority": "P3"
   },
   {
    "id": "remote:dynamicCordisRunner/getClientCode",
@@ -1917,8 +1934,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Add a project folder as a workspace.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "features/dsh_feature_workspace/lib/src/workspace_picker.dart"
+   ]
   },
   {
    "id": "remote:workspace/delete",
@@ -1935,8 +1955,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Follow the list of workspaces and their session grouping live.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/backend.dart"
+   ]
   },
   {
    "id": "remote:workspace/initializeDefault",
@@ -1944,8 +1967,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Create the default workspace on first use.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart"
+   ]
   },
   {
    "id": "remote:workspace/insertBefore",
@@ -2344,9 +2370,10 @@
    "description": "Resident composer body, including the no-Session inert state.",
    "status": "partial",
    "whalee": [
-    "features/dsh_feature_conversation/lib/src/composer.dart"
+    "features/dsh_feature_conversation/lib/src/composer.dart",
+    "features/dsh_feature_conversation/lib/src/hero.dart"
    ],
-   "notes": "The composer is a fixed widget (DefaultComposer), not an extension seat."
+   "notes": "The composer is a fixed widget (DefaultComposer, ComposerCard), not an extension seat; its inert no-workspace form is InertComposer."
   },
   {
    "id": "slot:conversation.composer.dock",
@@ -2408,7 +2435,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Workspace picker shown by the blank-session Hero.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_workspace/lib/src/register.dart",
+    "features/dsh_feature_conversation/lib/src/hero.dart"
+   ]
   },
   {
    "id": "slot:conversation.hero.workspace.directoryFlow",
@@ -2416,7 +2447,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "Directory-flow hole under the conversation empty-state picker (declared by the WorkspacePicker entry).",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_directory_picker_browse/lib/src/register.dart",
+    "features/dsh_feature_workspace/lib/src/workspace_picker.dart"
+   ]
   },
   {
    "id": "slot:conversation.input.activity",
@@ -3133,9 +3168,11 @@
    "description": "The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog.",
    "status": "partial",
    "whalee": [
-    "features/dsh_feature_session/lib/src/session_list_view.dart"
+    "features/dsh_feature_workspace/lib/src/add_action.dart",
+    "apps/dsh_flutter/lib/src/screens/sessions_screen.dart"
    ],
-   "notes": "A flat session list; no workspaces, search or grouping."
+   "notes": "The add-workspace action sits in the session list header; the list itself stays flat (no workspace groups, search or row actions).",
+   "priority": "P1"
   },
   {
    "id": "slot:sidebar.workspaces.directoryFlow",
@@ -3143,7 +3180,11 @@
    "area": "sessions-chat",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "Directory-flow hole under the sidebar browsing region (declared by the WorkspaceBrowser entry).",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_directory_picker_browse/lib/src/register.dart",
+    "features/dsh_feature_workspace/lib/src/add_action.dart"
+   ]
   },
   {
    "id": "slot:sidebar.workspaces.session.menu.item",

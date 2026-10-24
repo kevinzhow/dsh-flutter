@@ -57,6 +57,10 @@ abstract interface class HostBackend {
   /// no live generation fail with [NotConnected].
   RemoteCaller get remoteCaller;
 
+  /// The Host's workspace follow stream (`workspace/follow`) over whichever
+  /// connection is live: every generation opens with a complete baseline.
+  Stream<GenerationFrame> workspaceFollow();
+
   /// Pair with [origin] using [token] and return the transport once the first
   /// generation is up. Calling again re-pairs (after a host restart) and
   /// reuses the connection when the origin is unchanged.
@@ -140,6 +144,13 @@ class LiveBackend implements HostBackend {
   /// Unary calls through the live generation (used by tools that need host
   /// methods the app itself does not expose yet, such as the live test).
   RemoteCaller? get caller => _connection?.caller;
+
+  @override
+  Stream<GenerationFrame> workspaceFollow() {
+    final c = _connection;
+    if (c == null) throw NotConnected();
+    return c.openStream('workspace/follow', () => const <String, Object?>{});
+  }
 
   @override
   Future<SessionTransport> connect(Uri origin, String token) async {

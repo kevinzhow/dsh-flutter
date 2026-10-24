@@ -8,6 +8,7 @@ workspace:
   - features/dsh_feature_attachment
   - features/dsh_feature_chat
   - features/dsh_feature_conversation
+  - features/dsh_feature_directory_picker_browse
   - features/dsh_feature_documentpreview
   - features/dsh_feature_commands
   - features/dsh_feature_files
@@ -24,6 +25,7 @@ workspace:
   - features/dsh_feature_theme
   - features/dsh_feature_tool
   - features/dsh_feature_user_questions
+  - features/dsh_feature_workspace
   - packages/dsh_client
   - packages/dsh_models
   - packages/dsh_conversation

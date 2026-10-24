@@ -109,10 +109,17 @@ class FakeTransport implements SessionTransport {
   Future<Map<String, Object?>> list() =>
       onList?.call() ?? Future.value({'items': <Object?>[]});
 
+  /// Every `session/create` request, in order.
+  final List<Map<String, Object?>> createRequests = [];
+
+  /// Answers a `session/create`; the default creates `new-session`.
+  Future<Map<String, Object?>> Function(Map<String, Object?> request)? onCreate;
+
   @override
-  Future<Map<String, Object?>> create(Map<String, Object?> request) async => {
-    'sessionId': 'new-session',
-  };
+  Future<Map<String, Object?>> create(Map<String, Object?> request) async {
+    createRequests.add(request);
+    return onCreate?.call(request) ?? {'sessionId': 'new-session'};
+  }
 
   /// Run before a prompt is recorded; throw to refuse it.
   void Function(Map<String, Object?> request)? onPrompt;
