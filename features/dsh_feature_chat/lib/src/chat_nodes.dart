@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
@@ -163,7 +165,13 @@ class UserBubble extends StatelessWidget {
       alignment: AlignmentDirectional.centerEnd,
       child: LayoutBuilder(
         builder: (context, constraints) => ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.86),
+          // `.userStack { max-width: min(content width * 0.702, 82%) }`
+          constraints: BoxConstraints(
+            maxWidth: math.min(
+              DshChatContent.of(context) * 0.702,
+              constraints.maxWidth * 0.82,
+            ),
+          ),
           child: Opacity(
             opacity: pending ? 0.6 : 1,
             child: HoverReveal(
@@ -189,18 +197,21 @@ class UserBubble extends StatelessWidget {
                         borderRadius: BorderRadius.circular(theme.radiusXl),
                       ),
                       child: Padding(
+                        // `.bubble { padding: 10px 16px }`, 14/22 text.
                         padding: const EdgeInsets.symmetric(
                           horizontal: DshSpace.lg,
-                          vertical: DshSpace.md,
+                          vertical: 10,
                         ),
                         child: Text(
                           text,
                           style: theme
-                              .textStyle('--dsw-font-base-16')
+                              .textStyle('--dsw-font-s-14')
                               .copyWith(color: theme.labelPrimary),
                         ),
                       ),
                     ),
+                  // `.userRow { gap: 6px }` between the stack and the actions.
+                  if (actions && text.isNotEmpty) const SizedBox(height: 6),
                   if (actions && text.isNotEmpty)
                     MessageActions(
                       text: text,

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -24,9 +23,8 @@ import 'stream/timeline.dart';
 const followThreshold = 25.0;
 
 /// From this width the stream follows dsh's desktop app (draggable bar,
-/// list-wide selection); below it the phone adaptations apply (768 is the cut
-/// raft-flutter's presentation policy uses for compact windows).
-const wideLayoutWidth = 768.0;
+/// list-wide selection); below it the phone adaptations apply.
+const wideLayoutWidth = dshWideLayoutWidth;
 
 /// One row of the timeline: a chat node, a node's turn-tail entry, a local
 /// prompt echo or the running indicator. [id] is stable for the row's life.
@@ -570,7 +568,12 @@ class ChatViewState extends State<ChatView> {
 
   // ---- build --------------------------------------------------------------
 
-  Widget _frame(BuildContext context, int index, double side, double width) {
+  Widget _frame(
+    BuildContext context,
+    int index,
+    EdgeInsets sides,
+    double width,
+  ) {
     final row = _rows[index];
     return RowExtentRecorder(
       extents: _extents,
@@ -578,7 +581,7 @@ class ChatViewState extends State<ChatView> {
       child: KeyedSubtree(
         key: RowKey(row.id),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(side, 0, side, DshSpace.md),
+          padding: sides.copyWith(top: 0, bottom: DshSpace.md),
           child: StreamSelection(child: row.build()),
         ),
       ),
@@ -607,15 +610,18 @@ class ChatViewState extends State<ChatView> {
       return Semantics(
         label: hint,
         liveRegion: true,
-        child: SingleChildScrollView(
-          key: const ValueKey('session-loading'),
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(DshSpace.lg),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: DshSpace.readableWidth,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final axis = DshChatAxis.of(context, constraints.maxWidth);
+            final left = axis.leftOf(axis.messageWidth);
+            return SingleChildScrollView(
+              key: const ValueKey('session-loading'),
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.fromLTRB(
+                left,
+                DshSpace.lg,
+                constraints.maxWidth - left - axis.messageWidth,
+                DshSpace.lg,
               ),
               child: streamExtras
                   ? const StreamSkeleton()
@@ -623,8 +629,8 @@ class ChatViewState extends State<ChatView> {
                       alignment: AlignmentDirectional.centerStart,
                       child: LoadingHint(hint),
                     ),
-            ),
-          ),
+            );
+          },
         ),
       );
     }
@@ -647,9 +653,14 @@ class ChatViewState extends State<ChatView> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final side = math.max(
-          DshSpace.lg,
-          (width - DshSpace.readableWidth) / 2 + DshSpace.lg,
+        // dsh's width axis (`ChatView.module.css` `.column`, centred in the
+        // scroll body that is left of the 2px margin and the scrollbar
+        // gutter): the same column at every width, phone included.
+        final axis = DshChatAxis.of(context, width);
+        final left = axis.leftOf(axis.messageWidth);
+        final sides = EdgeInsets.only(
+          left: left,
+          right: width - left - axis.messageWidth,
         );
         // The window, not the column: a desktop window with the sidebars open
         // still follows the desktop app.
@@ -657,7 +668,10 @@ class ChatViewState extends State<ChatView> {
         final hasOlder = session.hasMore;
         Widget header() => SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(side, DshSpace.lg, side, DshSpace.md),
+            // `.scroll { padding-top: 16px }`; the first row sits 6px below the
+            // control (`.column:has(> .older)`), directly under the padding
+            // without one.
+            padding: sides.copyWith(top: DshSpace.lg, bottom: hasOlder ? 6 : 0),
             child: !hasOlder
                 ? const SizedBox.shrink()
                 : streamExtras && session.loadingOlder
@@ -690,13 +704,18 @@ class ChatViewState extends State<ChatView> {
           centerIndex: _centerIndex(),
           epoch: _epoch,
           indexOfId: (id) => _index[id],
-          rowBuilder: (context, index) => _frame(context, index, side, width),
+          rowBuilder: (context, index) => _frame(context, index, sides, width),
           estimateRow: (index) => _estimate(index, width),
           slivers: (history, forward) => [
             header(),
             history,
             forward,
-            const SliverToBoxAdapter(child: SizedBox(height: DshSpace.lg)),
+            // dsh gaps rows with a top margin and ends the column with the
+            // scroll's 16px padding; each row here carries its 12px gap below,
+            // so the tail adds the difference.
+            const SliverToBoxAdapter(
+              child: SizedBox(height: DshSpace.lg - DshSpace.md),
+            ),
           ],
           wide: wide,
           hasOlder: hasOlder,
@@ -715,10 +734,13 @@ class ChatViewState extends State<ChatView> {
         return Stack(
           fit: StackFit.expand,
           children: [
-            StreamSelection.list(timeline),
+            DshChatContent(
+              contentWidth: axis.contentWidth,
+              child: StreamSelection.list(timeline),
+            ),
             if (!_atBottom)
               Positioned(
-                right: side,
+                right: sides.right,
                 bottom: DshSpace.lg - (DshSpace.touch - 34) / 2,
                 child: StreamJumpButton(
                   label: widget.i18n.t('chat', 'chat.toBottom'),

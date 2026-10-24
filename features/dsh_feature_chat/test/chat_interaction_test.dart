@@ -165,20 +165,50 @@ void main() {
         // Page up to an earlier user message.
         await t.drag(find.byType(ChatView), const Offset(0, 500));
         await settleFrames(t, 5);
-        final earlier = find.textContaining('Question 1').evaluate().isNotEmpty
-            ? find.textContaining('Question 1').first
-            : find.textContaining('Question').first;
+        // A user message that is inside the window (the cache extent builds
+        // rows just beyond it too).
+        final inView = find.textContaining('Question').evaluate().where((e) {
+          final y = t.getCenter(find.byWidget(e.widget)).dy;
+          return y > 60 && y < 740;
+        });
+        final label = (inView.first.widget as Text).data!;
+        final earlier = find.text(label);
         expect(earlier, findsOneWidget);
-        expect(opacityOf((t.widget<Text>(earlier)).data!), 0);
+        expect(opacityOf(label), 0);
         final mouse = await t.createGesture(kind: PointerDeviceKind.mouse);
         await mouse.addPointer(location: Offset.zero);
         addTearDown(mouse.removePointer);
         await mouse.moveTo(t.getCenter(earlier));
         await t.pump(const Duration(milliseconds: 200));
-        expect(opacityOf((t.widget<Text>(earlier)).data!), 1);
+        expect(opacityOf(label), 1);
       },
       variant: TargetPlatformVariant.only(TargetPlatform.linux),
     );
+  });
+
+  group('message column', () {
+    // dsh web: `.column` is `min(content width, scroll width - 64)`, centred in
+    // the scroll body that is left of the 2px margin and the scrollbar gutter
+    // (`ChatView.module.css`, `ConversationRoot.module.css`).
+    testWidgets(
+      'a wide pane scales the column to 64% of it, centred like dsh web',
+      (t) async {
+        size(t, const Size(1280, 800));
+        await mount(t);
+        final bubble = lowest(t, find.byType(UserBubble));
+        // Content width 64% of 1280 = 819.2; 1280 - 2 - 5 = 1273 to centre on:
+        // the column is x 226.9 .. 1046.1.
+        expect(t.getTopRight(bubble).dx, closeTo(1046.1, 0.5));
+      },
+    );
+
+    testWidgets('a phone keeps 32px each side of the column', (t) async {
+      size(t, const Size(400, 800));
+      await mount(t);
+      final bubble = lowest(t, find.byType(UserBubble));
+      // No gutter on a touch phone: 400 - 2 = 398, column 334 from x 32.
+      expect(t.getTopRight(bubble).dx, closeTo(366, 0.5));
+    });
   });
 
   group('links', () {

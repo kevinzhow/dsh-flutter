@@ -11,7 +11,7 @@ class LoadEarlierButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
-    this.touchTarget = true,
+    this.touchTarget = false,
   });
 
   final String label;
@@ -19,7 +19,8 @@ class LoadEarlierButton extends StatelessWidget {
   /// Null while a page is being read (the control is disabled).
   final VoidCallback? onPressed;
 
-  /// Grow the 24px control to the 44px touch target (off for the parity captures).
+  /// Grow the control to the 44px touch target. Off: dsh draws the control at
+  /// its own size on every device and the transcript's rhythm depends on it.
   final bool touchTarget;
 
   @override
