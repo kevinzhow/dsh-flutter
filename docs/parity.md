@@ -390,6 +390,37 @@ tool/parity-desktop/run --list
 tool/parity-desktop/run --cases session.1280x720.light.en,session.1600x1000.      # a case id or a prefix
 ```
 
+Create the isolated fixture host first. `tool/parity-desktop/gen-session.mjs` writes 320 synthetic turns through the pinned
+dsh JSONL persistence; it makes no model calls and needs no credentials. It creates a new session and refuses an existing
+session id. Use a fresh directory outside `/tmp` on machines where `/tmp` is a memory disk, and name the workspace `ws`
+to match the screenshots. The CLI install can be local or global:
+
+```sh
+npm install --prefix .local/desktop-runtime @deepseek-ai/dsh@0.2.1-rc.2
+fixture_root="$PWD/.local/desktop-fixture"    # a new, isolated directory
+mkdir -p "$fixture_root/ws" "$fixture_root/dsh-home"
+FIXTURE_CWD="$fixture_root/ws" node tool/parity-desktop/gen-session.mjs \
+  "$PWD/.local/desktop-runtime/node_modules/@deepseek-ai/dsh" \
+  "$fixture_root/dsh-home/sessions" fixture-long-1 320
+
+# Run the host in the foreground; use another terminal for captures.
+# Stop this host with Ctrl+C when captures finish.
+dsh_bin="$PWD/.local/desktop-runtime/node_modules/.bin/dsh"
+(
+  cd "$fixture_root/ws"
+  DSH_HOME="$fixture_root/dsh-home" "$dsh_bin" web \
+    --host 127.0.0.1 --port 18786 --no-open > "$fixture_root/dsh-web.log" 2>&1
+)
+```
+
+Set `PARITY_DESKTOP_HOST_LOG` to that private log; it contains the host's launch credential and must not be committed or
+attached to a report. Use only this fixture host for captures, and match its appearance setting to the case theme (restart
+the host after changing it).
+
+The session case selects `fixture-long-1` by its stable row key. A cold host initially lists it as Untitled: opening it
+replays the log and populates dsh's title projection cache. Run a Web session case before capturing app-only phone cases;
+the default full run does this automatically. No manual rename or pre-existing projection cache is needed.
+
 Environment: `PARITY_WEB_DEPS` (as the component suite), `PARITY_DESKTOP_HOST_LOG` (the log of an isolated `dsh web --port ...` whose
 `DSH_HOME` holds the fixture sessions, written through dsh's own persistence with no model call), `PARITY_DESKTOP_CHROME` (a
 Chromium), `PARITY_DESKTOP_APP` (the built `build/linux/x64/*/bundle/dsh_flutter`), `PARITY_DESKTOP_HOME` (an empty directory used as
