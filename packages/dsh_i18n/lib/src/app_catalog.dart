@@ -209,6 +209,9 @@ const Map<String, DshText> appCatalog = {
   'session.loading': (en: 'Opening session…', zh: '正在打开会话…'),
   'session.openFailed': (en: 'Could not open this session', zh: '无法打开此会话'),
   'session.empty': (en: 'Say something to start.', zh: '说点什么开始吧。'),
+  // Stream: the count on the back-to-bottom control while content arrived
+  // below the reader (raft-flutter's "N new", dsh has no count).
+  'chat.newCount': (en: '{count} new', zh: '{count} 条新消息'),
   'session.removed': (en: 'This session was removed.', zh: '此会话已被移除。'),
   'session.reasoning': (en: 'Reasoning', zh: '推理过程'),
   'session.reasoning.running': (en: 'Thinking…', zh: '思考中…'),
