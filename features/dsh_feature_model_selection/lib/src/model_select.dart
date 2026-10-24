@@ -478,7 +478,7 @@ class _ModelSheetState extends State<ModelSheet> {
   }
 
   Widget _banner(DshThemeData theme, String text, VoidCallback? retry) {
-    return Container(
+    return DshContainer(
       key: const ValueKey('model-banner'),
       margin: const EdgeInsets.fromLTRB(
         DshSpace.md,

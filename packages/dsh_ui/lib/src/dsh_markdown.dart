@@ -4,6 +4,7 @@ import 'package:markdown/markdown.dart' as md;
 
 import 'dsh_code_block.dart';
 import 'dsh_code_toolbar.dart';
+import 'dsh_pixel_snap.dart';
 
 import 'theme_access.dart';
 
@@ -65,7 +66,7 @@ class DshMarkdown extends StatelessWidget {
         border: Border(
           left: BorderSide(
             color: theme.color('--dsw-alias-border-l2'),
-            width: 2,
+            width: dshBorderWidthOf(context, 2),
           ),
         ),
       ),
@@ -73,13 +74,13 @@ class DshMarkdown extends StatelessWidget {
       tableBody: t('--dsw-font-markdown-table'),
       tableBorder: TableBorder.all(
         color: theme.color('--dsw-alias-border-l3'),
-        width: 0.5,
+        width: dshHairlineOf(context),
       ),
       horizontalRuleDecoration: BoxDecoration(
         border: Border(
           top: BorderSide(
             color: theme.color('--dsw-alias-border-l3'),
-            width: 0.5,
+            width: dshHairlineOf(context),
           ),
         ),
       ),

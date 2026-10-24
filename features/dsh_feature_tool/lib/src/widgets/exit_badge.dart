@@ -13,7 +13,7 @@ class ExitBadge extends StatelessWidget {
     final theme = context.dsh;
     return Padding(
       padding: const EdgeInsets.only(left: 8),
-      child: DecoratedBox(
+      child: DshDecoratedBox(
         decoration: BoxDecoration(
           color: theme.color('--dsw-alias-bg-module-platform'),
           borderRadius: BorderRadius.circular(999),
@@ -23,7 +23,7 @@ class ExitBadge extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              DecoratedBox(
+              DshDecoratedBox(
                 decoration: BoxDecoration(
                   color: theme.color('--dsw-alias-state-error-primary'),
                   shape: BoxShape.circle,

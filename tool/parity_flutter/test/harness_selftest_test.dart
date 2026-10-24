@@ -7,6 +7,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dsh_parity/dsh_parity.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshPixelModel, dshPixelModel;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -79,7 +80,9 @@ void main() {
     });
   });
 
-  test('enclosingPixelRect floors and ceils in CSS px like Playwright', () {
+  test('enclosingPixelRect: CSS px for an emulated reference, device px for a native one', () {
+    addTearDown(() => dshPixelModel = DshPixelModel.native);
+    dshPixelModel = DshPixelModel.emulated;
     expect(
       enclosingPixelRect(const Rect.fromLTRB(10.4, 296.5, 50.2, 320.1), 3),
       const Rect.fromLTRB(30, 888, 153, 963),
@@ -87,6 +90,17 @@ void main() {
     expect(
       enclosingPixelRect(const Rect.fromLTWH(0, 0, 420, 68), 1),
       const Rect.fromLTWH(0, 0, 420, 68),
+    );
+    dshPixelModel = DshPixelModel.native;
+    // 10.4 * 3 = 31.2 floors to 31, 50.2 * 3 = 150.6 ceils to 151.
+    expect(
+      enclosingPixelRect(const Rect.fromLTRB(10.4, 296.5, 50.2, 320.1), 3),
+      const Rect.fromLTRB(31, 889, 151, 961),
+    );
+    // 420 * 2.625 = 1102.5 is captured as 1103 device px.
+    expect(
+      enclosingPixelRect(const Rect.fromLTWH(0, 0, 420, 68), 2.625),
+      const Rect.fromLTWH(0, 0, 1103, 179),
     );
   });
 

@@ -53,7 +53,7 @@ class CertificateCard extends StatelessWidget {
       ],
     );
     final cert = prompt.certificate;
-    return Container(
+    return DshContainer(
       key: const ValueKey('certificate-card'),
       padding: const EdgeInsets.all(DshSpace.md),
       decoration: BoxDecoration(

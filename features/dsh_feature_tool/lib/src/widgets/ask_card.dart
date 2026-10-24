@@ -60,14 +60,14 @@ class AskCardView extends StatelessWidget {
     };
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 360),
-      child: Container(
+      child: DshContainer(
         key: const ValueKey('ask-card'),
         decoration: BoxDecoration(
           color: theme.bgBase,
           borderRadius: BorderRadius.circular(theme.radiusLg),
           border: Border.all(
             color: theme.color('--dsw-alias-border-l1'),
-            width: dshHairline,
+            width: dshHairlineOf(context),
           ),
         ),
         child: SingleChildScrollView(

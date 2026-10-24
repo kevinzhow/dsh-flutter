@@ -13,6 +13,8 @@ import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_image_size.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
@@ -86,7 +88,7 @@ class DshRemoveBadge extends StatelessWidget {
             height: 18,
             child: Opacity(
               opacity: shown ? 1 : 0,
-              child: DecoratedBox(
+              child: DshDecoratedBox(
                 decoration: BoxDecoration(color: fill, shape: BoxShape.circle),
                 child: Center(
                   child: DshIcon(
@@ -206,7 +208,7 @@ class _DshFileCardState extends State<DshFileCard> {
           key: const ValueKey('file-card'),
           width: 240,
           height: 64,
-          child: DecoratedBox(
+          child: DshDecoratedBox(
             decoration: theme.cornerDecoration(
               theme.radiusLg,
               color: cardFill,
@@ -216,12 +218,12 @@ class _DshFileCardState extends State<DshFileCard> {
                       theme.color('--dsw-alias-border-l2'),
                       cardFill,
                     ),
-              borderWidth: dshHairline,
+              borderWidth: dshHairlineOf(context),
             ),
             // CSS lays the content out inside the border (and positions the
             // badge and the progress bar from the padding edge).
             child: Padding(
-              padding: const EdgeInsets.all(dshHairline),
+              padding: EdgeInsets.all(dshHairlineOf(context)),
               child: Stack(
                 children: [
                   Padding(
@@ -482,7 +484,7 @@ class DshMessageFileCard extends StatelessWidget {
         .textStyle('--dsw-font-xxs-12')
         .sized(12, line: 15)
         .copyWith(color: theme.color('--dsw-alias-label-tertiary'));
-    return Container(
+    return DshContainer(
       key: const ValueKey('message-file-card'),
       width: 240,
       constraints: const BoxConstraints(minHeight: 64),
@@ -494,7 +496,7 @@ class DshMessageFileCard extends StatelessWidget {
           theme.color('--dsw-alias-border-l2'),
           fill,
         ),
-        borderWidth: dshHairline,
+        borderWidth: dshHairlineOf(context),
       ),
       child: Semantics(
         label: name,
@@ -643,7 +645,7 @@ class DshImageFrame extends StatelessWidget {
           key: const ValueKey('image-retry'),
           behavior: HitTestBehavior.opaque,
           onTap: onRetry,
-          child: Container(
+          child: DshContainer(
             width: side,
             height: side,
             constraints: side == null
@@ -661,7 +663,7 @@ class DshImageFrame extends StatelessWidget {
                 theme.color('--dsw-alias-border-l2-darkmode-thin'),
                 fill,
               ),
-              borderWidth: dshHairline,
+              borderWidth: dshHairlineOf(context),
             ),
             child: thumb
                 ? Center(
@@ -678,7 +680,7 @@ class DshImageFrame extends StatelessWidget {
                     style: tertiary,
                   )
                 : theme.clipCorners(
-                    math.max(0, radius - dshHairline),
+                    math.max(0, radius - dshHairlineOf(context)),
                     // A button centres its text, but never above its top edge
                     // when the text is taller than the button.
                     CustomSingleChildLayout(
@@ -711,7 +713,8 @@ class DshImageFrame extends StatelessWidget {
     }
     final loaded = bytes;
     final inset =
-        2 * dshHairline + (variant == DshImageVariant.thumbnail ? 4 : 0);
+        2 * dshHairlineOf(context) +
+        (variant == DshImageVariant.thumbnail ? 4 : 0);
     final source = loaded == null ? null : dshImageSize(loaded);
     final inner = Size(boxW! - inset, boxH! - inset);
     // dsh quirk: the picture sits in a one-cell grid whose row grows to the
@@ -759,6 +762,7 @@ class DshImageFrame extends StatelessWidget {
                 source: source,
                 fit: fit,
                 base: tall ? Alignment.topCenter : alignment,
+                devicePixelRatio: dshDevicePixelRatioOf(context),
               ),
               gaplessPlayback: true,
               semanticLabel: label,
@@ -902,7 +906,7 @@ class _ImageBox extends StatelessWidget {
       theme.color('--dsw-alias-interactive-bg-hover'),
       DshSurface.of(context),
     );
-    return Container(
+    return DshContainer(
       width: width,
       height: height,
       constraints: BoxConstraints(minWidth: minSize, minHeight: minSize),
@@ -913,10 +917,10 @@ class _ImageBox extends StatelessWidget {
           theme.color('--dsw-alias-border-l2-darkmode-thin'),
           fill,
         ),
-        borderWidth: dshHairline,
+        borderWidth: dshHairlineOf(context),
       ),
       child: theme.clipCorners(
-        math.max(0, radius - dshHairline),
+        math.max(0, radius - dshHairlineOf(context)),
         Padding(padding: EdgeInsets.all(padding), child: child),
       ),
     );
@@ -983,7 +987,7 @@ class _DshDraftImageState extends State<DshDraftImage> {
     final visible = widget.forceRemoveVisible ?? (_touchPlatform || _hover);
     final draftTarget = dshDecodeTarget(
       dshImageSize(widget.bytes),
-      Size.square(64 - 2 * dshHairline) *
+      Size.square(64 - 2 * dshHairlineOf(context)) *
           MediaQuery.devicePixelRatioOf(context),
       DshImageFit.cover,
     );
@@ -1013,9 +1017,10 @@ class _DshDraftImageState extends State<DshDraftImage> {
                       widget.bytes,
                       fit: BoxFit.cover,
                       alignment: dshSnappedAlignment(
-                        box: const Size.square(64 - 2 * dshHairline),
+                        box: Size.square(64 - 2 * dshHairlineOf(context)),
                         source: dshImageSize(widget.bytes),
                         fit: DshImageFit.cover,
+                        devicePixelRatio: dshDevicePixelRatioOf(context),
                       ),
                       cacheWidth: draftTarget.width,
                       cacheHeight: draftTarget.height,

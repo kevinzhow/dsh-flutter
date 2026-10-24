@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
 /// Status vocabulary of rows and cards.
@@ -22,7 +23,7 @@ class DshStatusDot extends StatelessWidget {
   };
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => DshContainer(
     width: size,
     height: size,
     decoration: BoxDecoration(

@@ -301,7 +301,7 @@ class _ChipState extends State<_Chip> {
           onTap: widget.onPressed,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 220, minHeight: 28),
-            child: Container(
+            child: DshContainer(
               height: 28,
               padding: const EdgeInsets.only(left: 8, right: 4),
               decoration: theme.cornerDecoration(

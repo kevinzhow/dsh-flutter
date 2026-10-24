@@ -78,7 +78,7 @@ class SidebarPanel extends StatelessWidget {
       builder: (context, _) {
         final tabs = state.tabs;
         final activeIndex = tabs.indexWhere((t) => t.id == state.activeId);
-        return DecoratedBox(
+        return DshDecoratedBox(
           key: const ValueKey('sidebar-panel'),
           decoration: BoxDecoration(
             color: theme.bgBase,
@@ -86,7 +86,7 @@ class SidebarPanel extends StatelessWidget {
                 ? Border(
                     left: BorderSide(
                       color: theme.color('--dsw-alias-border-l4'),
-                      width: dshHairline,
+                      width: dshHairlineOf(context),
                     ),
                   )
                 : null,
@@ -183,12 +183,12 @@ class _Strip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return DecoratedBox(
+    return DshDecoratedBox(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: theme.color('--dsw-alias-border-l4'),
-            width: dshHairline,
+            width: dshHairlineOf(context),
           ),
         ),
       ),
@@ -301,7 +301,7 @@ class _TabChip extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
-        child: Container(
+        child: DshContainer(
           constraints: const BoxConstraints(maxWidth: 180),
           padding: const EdgeInsets.only(left: DshSpace.md),
           decoration: BoxDecoration(

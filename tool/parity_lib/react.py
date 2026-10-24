@@ -6,7 +6,7 @@ installs its dependencies, builds the host, writes the run plan and manages the 
 Cache (shared by every worktree, PARITY_CACHE): `<cache>/react/<key>.png|.metadata.json|.key.json` where
 key = sha256 of everything that can change the pixels: the dsh commit, the case/variant JSON without
 Flutter-only fields, the fixtures, the host sources and capture script, the pinned fonts, the
-Chromium flags, the lockfile and the browser version. Editing a host file or case recaptures only
+Chromium flags, the lockfile, the browser version and, for a density above 1, the reference mode. Editing a host file or case recaptures only
 what it affects; Flutter edits never invalidate it; `--refresh-react` ignores and overwrites it.
 """
 from __future__ import annotations
@@ -22,6 +22,11 @@ import sys
 from . import env
 
 CHROMIUM_ARGS = ['--disable-lcd-text', '--font-render-hinting=none']
+# How the page's device scale factor is produced: `native` launches Chromium with --force-device-scale-factor=<density>
+# (Blink lays out, snaps and rounds in device pixels, as on a phone); `emulated` is Playwright's deviceScaleFactor
+# emulation (layout in CSS pixels, scaled afterwards). Density 1 is the same pixels either way.
+REFERENCE_MODES = ('native', 'emulated')
+DEFAULT_REFERENCE = 'native'
 FLUTTER_ONLY_CASE_KEYS = {'flutterCaseHint', 'tolerance', 'notes', 'regions', 'title', 'category', 'suite', 'surface'}
 
 
@@ -79,11 +84,18 @@ def browser_version():
     return r.stdout.strip()
 
 
-def entry_key(entry, fixtures_hash, base):
+def entry_reference(entry, reference):
+    """The mode an entry is really captured in: density 1 has no native/emulated difference."""
+    return reference if entry['case']['viewport']['density'] != 1 else 'emulated'
+
+
+def entry_key(entry, fixtures_hash, base, reference=DEFAULT_REFERENCE):
     case = {k: v for k, v in entry['case'].items() if k not in FLUTTER_ONLY_CASE_KEYS}
     case['capture'] = {k: v for k, v in case.get('capture', {}).items() if k != 'flutterKey'}
-    payload = json.dumps({'case': case, 'variant': entry['variant'], 'fixtures': fixtures_hash, 'base': base},
-                         sort_keys=True)
+    key = {'case': case, 'variant': entry['variant'], 'fixtures': fixtures_hash, 'base': base}
+    if entry_reference(entry, reference) == 'native':   # emulated keys stay what they were before the native mode
+        key['reference'] = 'native'
+    payload = json.dumps(key, sort_keys=True)
     return hashlib.sha256(payload.encode()).hexdigest()[:32]
 
 
@@ -101,7 +113,7 @@ def base_inputs(host_dirs):
     }
 
 
-def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir):
+def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference=DEFAULT_REFERENCE):
     """Make sure results/react/<key>.png exists for every entry; returns {key: 'cache'|'captured'|'failed'}."""
     react_dir = results / 'react'
     react_dir.mkdir(parents=True, exist_ok=True)
@@ -112,7 +124,7 @@ def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir)
     log.write_text('')
     status, misses, keys = {}, [], {}
     for e in entries:
-        k = entry_key(e, fixtures_hash, base)
+        k = entry_key(e, fixtures_hash, base, reference)
         keys[e['key']] = k
         hit = cache / ('%s.png' % k)
         if not refresh and hit.is_file() and (cache / ('%s.metadata.json' % k)).is_file():
@@ -130,7 +142,7 @@ def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir)
     dist = build_host(out, log)
     plan = {
         'hostDist': str(dist), 'resultsDir': str(results), 'fontsManifest': str(env.FONTS / 'manifest.json'),
-        'chromiumArgs': CHROMIUM_ARGS, 'dshCommit': base['dsh'], 'entries': misses,
+        'chromiumArgs': CHROMIUM_ARGS, 'dshCommit': base['dsh'], 'reference': reference, 'entries': misses,
     }
     plan_path = out / 'react-plan.json'
     plan_path.write_text(json.dumps(plan, indent=1))

@@ -209,7 +209,7 @@ class _Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return Container(
+    return DshContainer(
       padding: const EdgeInsets.all(DshSpace.md),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-state-warn-tertiary'),

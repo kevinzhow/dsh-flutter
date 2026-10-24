@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'dsh_attachment.dart' show DshSpinner;
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
@@ -154,7 +156,7 @@ class _DshLightboxState extends State<DshLightbox> {
                       width: 44,
                       height: 44,
                       child: Center(
-                        child: Container(
+                        child: DshContainer(
                           width: 36,
                           height: 36,
                           decoration: BoxDecoration(
@@ -164,7 +166,7 @@ class _DshLightboxState extends State<DshLightbox> {
                               color: theme.color(
                                 '--dsw-alias-border-l2-darkmode-thin',
                               ),
-                              width: dshHairline,
+                              width: dshHairlineOf(context),
                             ),
                           ),
                           child: Center(
@@ -187,7 +189,7 @@ class _DshLightboxState extends State<DshLightbox> {
                   bottom: MediaQuery.paddingOf(context).bottom + 20,
                   child: IgnorePointer(
                     child: Center(
-                      child: Container(
+                      child: DshContainer(
                         key: const ValueKey('lightbox-position'),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,

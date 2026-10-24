@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
 /// A bordered surface on `--dsw-alias-bg-layer-*` with a hairline stroke, the
@@ -25,12 +27,12 @@ class DshCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return DecoratedBox(
+    return DshDecoratedBox(
       decoration: BoxDecoration(
         color: tint ?? theme.color('--dsw-alias-bg-layer-$layer'),
         border: Border.all(
           color: theme.color('--dsw-alias-border-l4'),
-          width: 0.5,
+          width: dshHairlineOf(context),
         ),
         borderRadius: BorderRadius.circular(theme.radiusLg),
       ),

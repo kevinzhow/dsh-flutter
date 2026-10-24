@@ -313,7 +313,7 @@ class _Cell extends StatelessWidget {
           key: ValueKey('settings-nav-${entry.id}'),
           behavior: HitTestBehavior.opaque,
           onTap: onTap,
-          child: Container(
+          child: DshContainer(
             height: 44,
             padding: const EdgeInsets.fromLTRB(12, 9, 16, 9),
             decoration: theme.cornerDecoration(

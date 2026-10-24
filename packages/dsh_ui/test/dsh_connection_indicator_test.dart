@@ -40,8 +40,8 @@ DshConnectionIndicator indicator(
 
 ShapeDecoration surface(WidgetTester t) =>
     t
-            .widget<Container>(find.byKey(DshConnectionIndicator.surfaceKey))
-            .decoration!
+            .widget<DshContainer>(find.byKey(DshConnectionIndicator.surfaceKey))
+            .decoration
         as ShapeDecoration;
 
 void main() {

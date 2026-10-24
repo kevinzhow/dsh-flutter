@@ -27,7 +27,8 @@ are the only shared input; do not special-case a theme (the widget reads the the
 
 ```sh
 tool/parity-ext/run list --cases 'components.<area>.*'     # which captures exist after sampling
-tool/parity-ext/run run --cases 'components.<area>.*'      # comma list / globs; --refresh-react to recapture
+tool/parity-ext/run run --cases 'components.<area>.*'      # comma list / globs; --refresh-react to recapture;
+                                                           # --reference emulated = the old Playwright density emulation (default: native)
 tool/parity-ext/run summary
 ```
 

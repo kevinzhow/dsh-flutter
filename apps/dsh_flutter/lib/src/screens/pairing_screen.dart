@@ -237,7 +237,7 @@ class _PairingFormState extends State<PairingForm> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (saved != null) ...[
-          Container(
+          DshContainer(
             key: const ValueKey('saved-host'),
             padding: const EdgeInsets.all(DshSpace.md),
             decoration: BoxDecoration(

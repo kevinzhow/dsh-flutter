@@ -35,7 +35,7 @@ class AppearanceRow extends StatelessWidget {
         final preference = service.current.preference;
         final separator = !DshColumnEnd.of(context);
         // A Container: the border takes room below the padding, as CSS's does.
-        return Container(
+        return DshContainer(
           key: const ValueKey('appearance-row'),
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
@@ -46,7 +46,7 @@ class AppearanceRow extends StatelessWidget {
                         context,
                         theme.color('--dsw-alias-border-l2'),
                       ),
-                      width: dshHairline,
+                      width: dshHairlineOf(context),
                     ),
                   )
                 : null,
@@ -175,7 +175,7 @@ class _CubeState extends State<_Cube> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: widget.onPressed,
-          child: Container(
+          child: DshContainer(
             padding: EdgeInsets.symmetric(
               horizontal: widget.compact ? 8 : 32,
               vertical: 20,
@@ -189,7 +189,7 @@ class _CubeState extends State<_Cube> {
                       theme.color('--dsw-alias-border-l4'),
                       fill ?? under,
                     ),
-              borderWidth: dshHairline,
+              borderWidth: dshHairlineOf(context),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -319,8 +319,11 @@ class _FontSettingsGroupState extends State<FontSettingsGroup> {
           title: title,
           description: _t(i18n, 'fontFamily.${role.name}.description'),
           // `flex: 0 1 240px` beside the text column.
-          // The 240px basis is the content box: 258 with padding and border.
-          control: wide ? SizedBox(width: 258, child: input) : input,
+          // The 240px basis is the content box: 256 with the wrapper's padding
+          // plus both borders (258 in the emulated capture, 257 at 2x).
+          control: wide
+              ? SizedBox(width: 256 + 2 * dshHairlineOf(context), child: input)
+              : input,
         );
       },
     );
@@ -369,7 +372,7 @@ class _ExpanderState extends State<_Expander> {
           key: const ValueKey<String>('font-expander'),
           behavior: HitTestBehavior.opaque,
           onTap: widget.onTap,
-          child: Container(
+          child: DshContainer(
             width: 24,
             height: 24,
             alignment: Alignment.center,

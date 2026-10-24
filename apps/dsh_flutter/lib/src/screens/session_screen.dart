@@ -62,12 +62,12 @@ class SessionView extends StatelessWidget {
             ),
           ),
         ),
-        DecoratedBox(
+        DshDecoratedBox(
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
                 color: theme.color('--dsw-alias-border-l4'),
-                width: 0.5,
+                width: dshHairlineOf(context),
               ),
             ),
           ),

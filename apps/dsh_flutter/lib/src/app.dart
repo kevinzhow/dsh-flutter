@@ -197,8 +197,8 @@ class _Wide extends StatelessWidget {
           ),
         ),
         VerticalDivider(
-          width: 0.5,
-          thickness: 0.5,
+          width: dshHairlineOf(context),
+          thickness: dshHairlineOf(context),
           color: theme.color('--dsw-alias-border-l4'),
         ),
         Expanded(

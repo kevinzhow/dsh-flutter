@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_snapped_box.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -15,7 +16,7 @@ class DshPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return Container(
+    return DshContainer(
       height: height,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       alignment: Alignment.center,

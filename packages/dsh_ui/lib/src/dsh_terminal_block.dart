@@ -6,6 +6,8 @@ import 'dsh_copy_feedback.dart';
 import 'dsh_corners.dart';
 import 'dsh_head_tail_cap.dart';
 import 'dsh_pill.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_state_dot.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
@@ -321,7 +323,7 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
       ),
     );
 
-    return Container(
+    return DshContainer(
       key: const ValueKey('terminal-block'),
       decoration: context.dshOutlined(
         theme.radiusLg,
@@ -334,13 +336,13 @@ class _DshTerminalBlockState extends State<DshTerminalBlock>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
+            DshContainer(
               decoration: BoxDecoration(
                 border: body
                     ? Border(
                         bottom: BorderSide(
                           color: theme.color('--dsw-alias-border-l2'),
-                          width: dshHairline,
+                          width: dshHairlineOf(context),
                         ),
                       )
                     : null,

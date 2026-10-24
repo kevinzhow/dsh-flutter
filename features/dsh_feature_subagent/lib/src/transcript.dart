@@ -99,7 +99,7 @@ class SubagentTranscript extends StatelessWidget {
             Expanded(
               child: views.isEmpty ? const SizedBox.shrink() : views.first,
             ),
-            Container(
+            DshContainer(
               key: const ValueKey('subagent-readonly'),
               width: double.infinity,
               margin: const EdgeInsets.all(DshSpace.md),
@@ -109,7 +109,7 @@ class SubagentTranscript extends StatelessWidget {
                 borderRadius: BorderRadius.circular(theme.radiusLg),
                 border: Border.all(
                   color: theme.color('--dsw-alias-border-l2'),
-                  width: dshHairline,
+                  width: dshHairlineOf(context),
                 ),
               ),
               child: Column(

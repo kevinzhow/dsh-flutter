@@ -8,6 +8,8 @@ import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -128,7 +130,7 @@ class DshSettingsRow extends StatelessWidget {
       ),
     );
     // A Container: the border takes room below the padding, as CSS's does.
-    return Container(
+    return DshContainer(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         border: line
@@ -138,7 +140,7 @@ class DshSettingsRow extends StatelessWidget {
                     context,
                     theme.color('--dsw-alias-border-l2'),
                   ),
-                  width: dshHairline,
+                  width: dshHairlineOf(context),
                 ),
               )
             : null,
@@ -213,7 +215,7 @@ class _DshSelectorPillState extends State<DshSelectorPill> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: widget.onPressed,
-          child: Container(
+          child: DshContainer(
             height: 36,
             padding: const EdgeInsets.symmetric(horizontal: 14),
             decoration: theme.cornerDecoration(
@@ -315,7 +317,7 @@ class _DshStepperState extends State<DshStepper> {
           key: key,
           behavior: HitTestBehavior.opaque,
           onTap: onPressed,
-          child: Container(
+          child: DshContainer(
             width: 17,
             height: 12,
             alignment: Alignment.center,
@@ -344,7 +346,7 @@ class _DshStepperState extends State<DshStepper> {
         MouseRegion(
           onEnter: (_) => setState(() => _hovered = true),
           onExit: (_) => setState(() => _hovered = false),
-          child: Container(
+          child: DshContainer(
             constraints: const BoxConstraints(minWidth: 72),
             height: 36,
             decoration: theme.cornerDecoration(
@@ -444,7 +446,7 @@ class DshSwitch extends StatelessWidget {
         onTap: enabled ? () => onChanged!(!value) : null,
         child: Opacity(
           opacity: enabled ? 1 : 0.5,
-          child: Container(
+          child: DshContainer(
             width: 36,
             height: 20,
             padding: const EdgeInsets.all(2),
@@ -453,7 +455,7 @@ class DshSwitch extends StatelessWidget {
               color: track,
               borderRadius: BorderRadius.circular(999),
             ),
-            child: Container(
+            child: DshContainer(
               width: 16,
               height: 16,
               decoration: BoxDecoration(color: thumb, shape: BoxShape.circle),
@@ -535,8 +537,10 @@ class _DshFieldInputState extends State<DshFieldInput> {
       label: widget.semanticLabel,
       textField: true,
       child: Container(
-        // dsh's input is content-box: 32px of content inside a 1px border.
-        height: 34,
+        // dsh's input is content-box: 32px of content inside the 0.5px border
+        // (two device pixels of border at a native density, 2 CSS px in the
+        // emulated capture), so the box is 32 + 2 borders tall.
+        height: 32 + 2 * dshHairlineOf(context),
         // 8px of the wrapper plus the UA's own `padding: 1px 2px` on the
         // `<input>` element, which dsh's `.input` does not reset.
         padding: const EdgeInsets.symmetric(horizontal: 8 + 2),
@@ -550,7 +554,7 @@ class _DshFieldInputState extends State<DshFieldInput> {
                   theme.color('--dsw-alias-border-l4'),
                   over: theme.color('--dsw-alias-bg-layer-1'),
                 ),
-          borderWidth: dshHairline,
+          borderWidth: dshHairlineOf(context),
         ),
         alignment: Alignment.center,
         child: Material(
@@ -647,7 +651,7 @@ class DshCheckbox extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 3),
-                child: Container(
+                child: DshContainer(
                   width: 16,
                   height: 16,
                   alignment: Alignment.center,

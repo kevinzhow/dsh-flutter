@@ -2,6 +2,7 @@
 """dsh-flutter visual parity: the EXTENSION suite (cases generated at run time).
 
   tool/parity-ext/run run [--cases <key|glob>[,...]] [--refresh-react] [--skip-react] [--skip-flutter]
+                [--reference native|emulated]
   tool/parity-ext/run list [--cases ...]     print the capture keys of the (sampled) manifest
   tool/parity-ext/run summary
   tool/parity-ext/run publish [--no-verify]

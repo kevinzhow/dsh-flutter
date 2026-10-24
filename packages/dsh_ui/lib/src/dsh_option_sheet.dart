@@ -7,6 +7,7 @@ import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_settings.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -203,7 +204,7 @@ class _Badge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return Container(
+    return DshContainer(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
       decoration: theme.cornerDecoration(
         theme.radiusSm / 2,
@@ -291,7 +292,7 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
         .copyWith(color: theme.labelSecondary);
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 440),
-      child: DecoratedBox(
+      child: DshDecoratedBox(
         key: const ValueKey('risk-dialog'),
         decoration: theme.cornerDecoration(
           theme.radiusPanel,

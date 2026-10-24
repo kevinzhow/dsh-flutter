@@ -367,12 +367,12 @@ class _Header extends StatelessWidget {
             ),
           ),
         );
-    return DecoratedBox(
+    return DshDecoratedBox(
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: theme.color('--dsw-alias-border-l3'),
-            width: dshHairline,
+            width: dshHairlineOf(context),
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dsh_ui/dsh_ui.dart' show DshPixelModel, dshPixelModel;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -33,6 +34,12 @@ void runParityCapture({
   }
   final plan =
       json.decode(File(planPath).readAsStringSync()) as Map<String, dynamic>;
+  // The reference's density mode (`tool/parity run --reference`) decides which pixel model the primitives snap by:
+  // `native` (a phone's Chromium, device pixels) or `emulated` (Playwright's deviceScaleFactor, CSS pixels).
+  final reference = (plan['reference'] as String?) ?? 'native';
+  dshPixelModel = reference == 'emulated'
+      ? DshPixelModel.emulated
+      : DshPixelModel.native;
   final resultsDir = plan['resultsDir'] as String;
   final outputDir = Directory('$resultsDir/flutter')
     ..createSync(recursive: true);
@@ -50,7 +57,10 @@ void runParityCapture({
       }
     }
   }
-  final runInfo = (plan['runInfo'] as Map?)?.cast<String, dynamic>() ?? {};
+  final runInfo = {
+    ...?(plan['runInfo'] as Map?)?.cast<String, dynamic>(),
+    'pixelModel': dshPixelModel.name,
+  };
   final entries = (plan['entries'] as List).cast<Map<String, dynamic>>();
   var fonts = <ParityFontFace>[];
 

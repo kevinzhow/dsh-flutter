@@ -22,14 +22,17 @@ const PITCH = 40
 const rows = []
 for (const family of cfg.families) for (const weight of cfg.weights) for (const [size, line] of cfg.combos) rows.push({ family, weight, size, line })
 fs.writeFileSync(path.join(dir, 'rows.json'), JSON.stringify({ pitch: PITCH, rows }))
-// The same flags as tool/parity-web/capture.mjs.
-const browser = await chromium.launch({ args: ['--disable-lcd-text', '--font-render-hinting=none'] })
+// The same flags as tool/parity-web/capture.mjs; `native` (the default reference) launches one browser per density with
+// --force-device-scale-factor, like capture.mjs: Blink then rounds font metrics and half-leading in device pixels.
+const flags = ['--disable-lcd-text', '--font-render-hinting=none']
 for (const dpr of cfg.dprs) {
+  const native = (cfg.reference ?? 'native') === 'native' && dpr !== 1
+  const browser = await chromium.launch({ args: native ? [...flags, `--force-device-scale-factor=${dpr}`] : flags })
   const page = await browser.newPage({ viewport: { width: 80, height: PITCH * rows.length }, deviceScaleFactor: dpr })
   const blocks = rows.map((r, i) => `<div style="top:${i * PITCH + 4}px;font:${r.weight} ${r.size}px/${r.line}px '${r.family}'">HHHH</div>`)
   await page.setContent(`<style>${css} body{margin:0;background:#fff} div{position:absolute;left:16px;white-space:nowrap;color:#000}</style>${blocks.join('')}`)
   await page.evaluate(() => document.fonts.ready)
   fs.writeFileSync(path.join(dir, `chromium-dpr${dpr}.png`), await page.screenshot({ fullPage: true }))
   await page.close()
+  await browser.close()
 }
-await browser.close()

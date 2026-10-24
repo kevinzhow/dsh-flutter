@@ -4,6 +4,7 @@ import 'dsh_code_highlight.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'dsh_corners.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -81,7 +82,7 @@ class _DshCodeBlockState extends State<DshCodeBlock>
       wrap: wrapped,
       lineNumbers: widget.lineNumbers,
     );
-    return DecoratedBox(
+    return DshDecoratedBox(
       key: const ValueKey('code-block'),
       decoration: theme.cornerDecoration(
         theme.radiusLg,

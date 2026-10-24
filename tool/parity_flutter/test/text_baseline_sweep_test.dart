@@ -21,6 +21,10 @@ void main() {
     final meta = json.decode(
       File('$dir/rows.json').readAsStringSync(),
     ) as Map<String, dynamic>;
+    dshPixelModel = cfg['reference'] == 'emulated'
+        ? DshPixelModel.emulated
+        : DshPixelModel.native;
+    addTearDown(() => dshPixelModel = DshPixelModel.native);
     final rows = (meta['rows'] as List).cast<Map<String, dynamic>>();
     final pitch = (meta['pitch'] as num).toDouble();
     for (final dprValue in cfg['dprs'] as List) {

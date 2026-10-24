@@ -363,11 +363,11 @@ void main() {
       await t.pump();
       bool hasLine(Finder row) =>
           (t
-                      .widget<DecoratedBox>(
+                      .widget<DshDecoratedBox>(
                         find
                             .descendant(
                               of: row,
-                              matching: find.byType(DecoratedBox),
+                              matching: find.byType(DshDecoratedBox),
                             )
                             .first,
                       )
@@ -378,11 +378,11 @@ void main() {
       // Appearance is not last: its hairline is drawn.
       expect(
         (t
-                    .widget<DecoratedBox>(
+                    .widget<DshDecoratedBox>(
                       find
                           .descendant(
                             of: find.byKey(const ValueKey('appearance-row')),
-                            matching: find.byType(DecoratedBox),
+                            matching: find.byType(DshDecoratedBox),
                           )
                           .first,
                     )

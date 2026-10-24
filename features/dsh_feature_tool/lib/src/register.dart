@@ -111,7 +111,7 @@ class ToolCallTree extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         row,
-        Container(
+        DshContainer(
           key: const ValueKey('sub-calls'),
           margin: const EdgeInsets.fromLTRB(22, 4, 0, 2),
           padding: const EdgeInsets.only(left: 8),
@@ -119,7 +119,7 @@ class ToolCallTree extends StatelessWidget {
             border: Border(
               left: BorderSide(
                 color: theme.color('--dsw-alias-border-l2'),
-                width: dshHairline,
+                width: dshHairlineOf(buildContext),
               ),
             ),
           ),

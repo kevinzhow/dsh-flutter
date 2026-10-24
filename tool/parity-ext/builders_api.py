@@ -13,6 +13,27 @@ import pathlib
 import sys
 
 THEMES = ('light', 'dark')
+
+
+def reference():
+    """`native` or `emulated`: how the React reference gets its density (`tool/parity run --reference`, default native)."""
+    value = os.environ.get('PARITY_REFERENCE', 'native')
+    if value not in ('native', 'emulated'):
+        sys.exit('PARITY_REFERENCE must be native or emulated, got %r' % value)
+    return value
+
+
+def border_device_px(css_width, density):
+    """Device pixels a CSS border of `css_width` takes in the reference (Blink's border-width snapping).
+
+    Native: the width times the density, 0 < w < 1 becomes 1, otherwise floored. Emulated: the same rule in CSS pixels, then
+    scaled (a 0.5px border is 1 CSS px = `density` device px). For builders that size synthetic images to a frame's content
+    box in device pixels (docs/parity.md, "What Blink does at a native density")."""
+    if reference() == 'native':
+        device = css_width * density
+        return 1 if device < 1 else int(device + 1e-6)
+    css = 1 if css_width < 1 else int(css_width)
+    return css * density
 SELECTOR = '[data-parity-target]'
 
 

@@ -42,13 +42,13 @@ class _ApprovalPanelState extends State<ApprovalPanel> {
     final reason = widget.approval.reasonFor(widget.i18n.locale.name);
     final label = theme.color('--dsw-alias-label-primary');
     final warn = theme.color('--dsw-alias-state-warn-primary');
-    return Container(
+    return DshContainer(
       key: const ValueKey('approval-panel'),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-bg-layer-2'),
         border: Border.all(
           color: theme.color('--dsw-alias-border-l4'),
-          width: 0.5,
+          width: dshHairlineOf(context),
         ),
         borderRadius: BorderRadius.circular(theme.number('--dsw-radius-lg')),
       ),
@@ -61,7 +61,7 @@ class _ApprovalPanelState extends State<ApprovalPanel> {
           children: [
             Row(
               children: [
-                Container(
+                DshContainer(
                   width: 8,
                   height: 8,
                   decoration: BoxDecoration(

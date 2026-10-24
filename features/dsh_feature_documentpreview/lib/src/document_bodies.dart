@@ -333,7 +333,7 @@ class _MarkdownBodyState extends State<MarkdownBody> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (split != null && split.source.isNotEmpty)
-            Container(
+            DshContainer(
               key: const ValueKey('document-frontmatter'),
               margin: const EdgeInsets.only(bottom: DshSpace.lg),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -342,7 +342,7 @@ class _MarkdownBodyState extends State<MarkdownBody> {
                 borderRadius: BorderRadius.circular(theme.radiusMd),
                 border: Border.all(
                   color: theme.color('--dsw-alias-border-l2'),
-                  width: dshHairline,
+                  width: dshHairlineOf(context),
                 ),
               ),
               child: DshChromeText(

@@ -97,7 +97,7 @@ class _PlanChipState extends State<_PlanChip> {
         alignment: Alignment.centerLeft,
         child: Semantics(
           label: widget.i18n.t('plan', 'chip.on.title'),
-          child: Container(
+          child: DshContainer(
             key: const ValueKey('plan-chip'),
             height: 28,
             padding: const EdgeInsets.symmetric(horizontal: 8),

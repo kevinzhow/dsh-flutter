@@ -1,7 +1,6 @@
 // DshButton (packages/dsh_ui) against dsh's Button.tsx. Props: {layout, items:[{id,label,variant,size,disabled}]}.
 import 'package:dsh_parity/dsh_parity.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/widgets.dart';
 
 DshButtonVariant _variant(String? name) => switch (name) {
   'primary' => DshButtonVariant.primary,
@@ -25,7 +24,7 @@ final Map<String, ParityCase> buttonCases = {
               size: item['size'] == 'sm' ? DshButtonSize.sm : DshButtonSize.md,
               // Enabled buttons need a handler; a no-op keeps them interactive like the web ones.
               onPressed: item['disabled'] == true ? null : () {},
-              child: Text(item['label'] as String),
+              child: DshChromeText(item['label'] as String),
             ),
           ),
       ],

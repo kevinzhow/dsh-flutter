@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 import 'dsh_corners.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -254,7 +255,7 @@ class _DshGuideCardState extends State<DshGuideCard> {
         onTapCancel: () => setState(() => _pressed = false),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 380, minHeight: 56),
-          child: DecoratedBox(
+          child: DshDecoratedBox(
             decoration: context.dshOutlined(
               radius,
               fill: fill,

@@ -12,8 +12,10 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_button.dart';
 import 'dsh_corners.dart';
+import 'dsh_pixel_snap.dart';
 import 'dsh_settings.dart';
 import 'dsh_settings_form_model.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -439,15 +441,15 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: enabled ? _focus.requestFocus : null,
-        child: Container(
-          height: 34,
+        child: DshContainer(
+          height: 32 + 2 * dshHairlineOf(context),
           padding: const EdgeInsets.symmetric(horizontal: 12),
           alignment: Alignment.centerLeft,
           decoration: theme.cornerDecoration(
             theme.radiusMd,
             color: theme.color('--dsw-alias-bg-layer-3'),
             borderColor: borderColor,
-            borderWidth: dshHairline,
+            borderWidth: dshHairlineOf(context),
           ),
           child: Material(
             type: MaterialType.transparency,
@@ -473,13 +475,13 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
       ),
     );
 
-    return DecoratedBox(
+    return DshDecoratedBox(
       decoration: BoxDecoration(
         border: widget.topDivider
             ? Border(
                 top: BorderSide(
                   color: theme.color('--dsw-alias-border-l2'),
-                  width: dshHairline,
+                  width: dshHairlineOf(context),
                 ),
               )
             : null,
@@ -536,7 +538,7 @@ class _Tag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return Container(
+    return DshContainer(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-bg-module-platform'),

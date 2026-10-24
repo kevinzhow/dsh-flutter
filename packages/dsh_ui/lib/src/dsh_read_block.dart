@@ -6,6 +6,7 @@ import 'dsh_copy_feedback.dart';
 import 'dsh_corners.dart';
 import 'dsh_diff_block.dart' show DshFoldLabels;
 import 'dsh_head_tail_cap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -168,7 +169,7 @@ class _DshReadBlockState extends State<DshReadBlock>
       ],
     );
 
-    return DecoratedBox(
+    return DshDecoratedBox(
       key: const ValueKey('read-block'),
       decoration: theme.cornerDecoration(
         theme.radiusLg,

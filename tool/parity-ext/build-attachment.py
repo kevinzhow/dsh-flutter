@@ -14,8 +14,10 @@ Kinds and props (the same JSON reaches both providers; every image is a syntheti
                       compact?, items: [{id, image, state: loaded|loading|failed, name?}]}]}; parity id: <gallery>-<item>
 
 Image sizes are chosen so the browser and Flutter map source pixels 1:1 at the case density (2): every frame has a
-1px border, so a 64px tile shows a 186x124 (or 124x186) source cropped by `cover` into its 124px content box, a 240x160
-single a 476x316 source, a 48px thumbnail (2px padding) an image of at most 84 device pixels. File names use glyph kinds the Flutter port draws like dsh
+`0.5px` border, which Blink snaps to B device pixels (`border_device_px`: 1 in the native reference, 2 in the emulated one), so
+a 64px tile shows a source cropped by `cover` into its (128 - 2B) device pixel content box (124 emulated, 126 native), a
+240x160 single a (480 - 2B) x (320 - 2B) source, a 48px thumbnail (2px padding) an image of at most 96 - 2B - 8 device
+pixels (84 emulated, 86 native). File names use glyph kinds the Flutter port draws like dsh
 (other, pdf, md, docx, png, csv); the language-specific code artwork is not ported, so no code file names.
 
 Ids: components.attachment.<surface>.<name>.<theme>. All content is invented. Chinese names avoid a hanzi next to a Latin
@@ -25,7 +27,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
-from builders_api import base_case, replace_cases, themed  # noqa: E402
+from builders_api import base_case, border_device_px, replace_cases, themed  # noqa: E402
 from parity_lib import fonts  # noqa: E402
 import synthetic_images as img  # noqa: E402
 
@@ -106,12 +108,17 @@ sent_cases += sent_case('zh-cn', 'Sent message with Chinese file names', sent_zh
 replace_cases('components.attachment.sent.', sent_cases)
 
 # ---- draft rail (ComposerAttachments) ----------------------------------------------------------------------------
+DENSITY = 2
+B = border_device_px(0.5, DENSITY)   # device pixels of a 0.5px border in the reference
+TILE = 64 * DENSITY - 2 * B          # content box of a 64px tile in device pixels (124 emulated, 126 native)
+SINGLE_W, SINGLE_H = 240 * DENSITY - 2 * B, 160 * DENSITY - 2 * B
+THUMB = 48 * DENSITY - 2 * B - 8     # 48px thumbnail minus the border and its 2px padding (84 emulated, 86 native)
 DRAFT_IMAGES = {
-    # The 64px box has a 1px border, so its content is 62px = 124 device px at density 2: a square source is shown 1:1,
-    # a 186x124 (or 124x186) one is cropped by `cover` without scaling.
-    'draft-square': img.scene(124, 124),
-    'draft-landscape': img.scene(186, 124, (70, 120, 90), (230, 220, 150)),
-    'draft-portrait': img.scene(124, 186, (150, 90, 170), (250, 200, 210)),
+    # The 64px box has a 0.5px border, so its content is TILE device px at density 2: a square source is shown 1:1,
+    # a 1.5 TILE x TILE (or TILE x 1.5 TILE) one is cropped by `cover` without scaling.
+    'draft-square': img.scene(TILE, TILE),
+    'draft-landscape': img.scene(TILE * 3 // 2, TILE, (70, 120, 90), (230, 220, 150)),
+    'draft-portrait': img.scene(TILE, TILE * 3 // 2, (150, 90, 170), (250, 200, 210)),
 }
 DRAFT_B64 = {k: img.png_base64(v) for k, v in DRAFT_IMAGES.items()}
 
@@ -170,18 +177,18 @@ replace_cases('components.attachment.draft.', draft_cases)
 GALLERY_IMAGES = {
     # key: (declared width, declared height, PNG). The declared size is the attachment's natural size (it only sizes a
     # lone image: long edge 240px); the pixels are the content box of the frame in device pixels, so nothing is scaled:
-    # a 240x160 single has a 1px border -> 238x158 content = 476x316 px; tile content 62px = 124 px; thumbnail 48px
-    # minus border and 2px padding = 42px = 84 px (`contain`; a portrait one is cut off instead, see thumb-portrait).
-    'single-landscape': (480, 320, img.scene(476, 316)),
-    'single-portrait': (320, 480, img.scene(316, 476, (150, 90, 170), (250, 200, 210))),
-    'tile-landscape': (186, 124, img.scene(186, 124, (70, 120, 90), (230, 220, 150))),
-    'tile-portrait': (124, 186, img.scene(124, 186, (200, 120, 70), (120, 190, 220))),
-    'tile-square': (124, 124, img.scene(124, 124)),
-    'thumb-landscape': (84, 56, img.scene(84, 56, (70, 120, 90), (230, 220, 150))),
-    'thumb-square': (84, 84, img.scene(84, 84)),
+    # a 240x160 single is (480 - 2B) x (320 - 2B) px; a tile TILE px; a thumbnail THUMB px (`contain`; a portrait one is
+    # cut off instead, see thumb-portrait). B = device pixels of the frame's border (see the module docstring).
+    'single-landscape': (480, 320, img.scene(SINGLE_W, SINGLE_H)),
+    'single-portrait': (320, 480, img.scene(SINGLE_H, SINGLE_W, (150, 90, 170), (250, 200, 210))),
+    'tile-landscape': (TILE * 3 // 2, TILE, img.scene(TILE * 3 // 2, TILE, (70, 120, 90), (230, 220, 150))),
+    'tile-portrait': (TILE, TILE * 3 // 2, img.scene(TILE, TILE * 3 // 2, (200, 120, 70), (120, 190, 220))),
+    'tile-square': (TILE, TILE, img.scene(TILE, TILE)),
+    'thumb-landscape': (THUMB, THUMB * 2 // 3, img.scene(THUMB, THUMB * 2 // 3, (70, 120, 90), (230, 220, 150))),
+    'thumb-square': (THUMB, THUMB, img.scene(THUMB, THUMB)),
     # A portrait picture in a thumbnail is laid out at the frame's width and cut off at the bottom (dsh grid quirk), so
-    # its width is the 84px content width.
-    'thumb-portrait': (84, 126, img.scene(84, 126, (150, 90, 170), (250, 200, 210))),
+    # its width is the THUMB content width.
+    'thumb-portrait': (THUMB, THUMB * 3 // 2, img.scene(THUMB, THUMB * 3 // 2, (150, 90, 170), (250, 200, 210))),
 }
 GALLERY_PROPS_IMAGES = {k: {'base64': img.png_base64(d), 'width': w, 'height': h} for k, (w, h, d) in GALLERY_IMAGES.items()}
 G_COLUMN = {'direction': 'column', 'gap': 12, 'align': 'stretch'}

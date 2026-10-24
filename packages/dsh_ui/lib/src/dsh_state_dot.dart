@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
 
+import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
 /// The compact status language of rows and cards (dsh `StateDot`).
@@ -83,7 +84,7 @@ class _DshStateDotState extends State<DshStateDot>
         height: edge,
         child: Padding(
           padding: EdgeInsets.all(edge * 0.2),
-          child: DecoratedBox(
+          child: DshDecoratedBox(
             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
         ),

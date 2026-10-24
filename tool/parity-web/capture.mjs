@@ -7,12 +7,17 @@
 //   node capture.mjs --plan <plan.json>
 //
 // plan.json (written by tool/parity_lib/runner.py):
-//   { hostDist, resultsDir, fontsManifest, chromiumArgs: [...], dshCommit,
+//   { hostDist, resultsDir, fontsManifest, chromiumArgs: [...], dshCommit, reference: 'native' | 'emulated',
 //     entries: [{ key, case, variant }] }
 //
 // Determinism: fixed viewport and device scale factor per case, grayscale text (chromiumArgs), the
 // pinned Latin face served as 'Segoe UI' (tool/parity-fonts), Playwright `animations: "disabled"` and
 // `caret: "hide"`, a fresh browser context per capture and no network: the host is a static bundle.
+//
+// Density (`plan.reference`): `native` launches Chromium with `--force-device-scale-factor=<density>` (one browser
+// per density), so Blink lays out, snaps borders and rounds font metrics in device pixels like a phone's Chromium;
+// `emulated` is Playwright's `deviceScaleFactor` emulation (layout in CSS pixels, scaled afterwards). At density 1
+// both are the same, and that case always uses the plain browser.
 import { chromium } from 'playwright-core'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
@@ -70,8 +75,53 @@ const origin = `http://127.0.0.1:${server.address().port}`
 // ---- capture -------------------------------------------------------------------------------------
 const outDir = path.join(plan.resultsDir, 'react')
 fs.mkdirSync(outDir, { recursive: true })
-const browser = await chromium.launch({ args: plan.chromiumArgs ?? [] })
+const reference = plan.reference ?? 'native'
+if (reference !== 'native' && reference !== 'emulated') throw new Error(`plan.reference must be native or emulated, got ${reference}`)
+const browsers = new Map()
+/** The browser for a density: one per density in native mode (the flag is a launch option), a single one otherwise. */
+async function browserFor(density) {
+  const native = reference === 'native' && density !== 1
+  const id = native ? `native-${density}` : 'plain'
+  if (!browsers.has(id)) {
+    const args = [...(plan.chromiumArgs ?? []), ...(native ? [`--force-device-scale-factor=${density}`] : [])]
+    browsers.set(id, await chromium.launch({ args }))
+  }
+  return { browser: browsers.get(id), native }
+}
 const failures = []
+
+/** Blink's border-width snapping at a device scale factor, in CSS px (what the native mode must show). */
+function snappedBorder(css, dpr) {
+  const device = css * dpr
+  return (device > 0 && device < 1 ? 1 : Math.floor(device)) / dpr
+}
+
+/**
+ * Proof of the density mode, taken from the page being captured: devicePixelRatio and the computed width of a
+ * `0.5px` and a `1px` border. Native: 1 device px (0.5 CSS px at 2x, 0.38 at 2.625x, 0.33 at 3x) and the 1px border
+ * floored to whole device pixels; emulated: whole CSS pixels. A native capture that disagrees fails.
+ */
+async function densityProof(page, density, native) {
+  const got = await page.evaluate(() => {
+    const out = { devicePixelRatio: window.devicePixelRatio }
+    for (const w of ['0.5px', '1px']) {
+      const el = document.createElement('div')
+      el.style.cssText = `position:absolute;visibility:hidden;border:${w} solid #000`
+      document.body.appendChild(el)
+      out[`border${w}`] = parseFloat(getComputedStyle(el).borderTopWidth)
+      el.remove()
+    }
+    return out
+  })
+  if (got.devicePixelRatio !== density) throw new Error(`devicePixelRatio ${got.devicePixelRatio} != case density ${density}`)
+  if (native) {
+    const near = (a, b) => Math.abs(a - b) < 1e-4
+    if (!near(got['border0.5px'], snappedBorder(0.5, density)) || !near(got['border1px'], snappedBorder(1, density))) {
+      throw new Error(`native density ${density} is not in effect: computed 0.5px -> ${got['border0.5px']}, 1px -> ${got['border1px']}`)
+    }
+  }
+  return { reference: native ? 'native' : 'emulated', ...got }
+}
 
 async function applyInteractions(page, steps) {
   for (const step of steps ?? []) {
@@ -145,6 +195,7 @@ async function platformFonts(page, selector) {
 for (const entry of plan.entries) {
   const { key, case: c, variant } = entry
   const { width, height, density } = c.viewport
+  const { browser, native } = await browserFor(density)
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: density, locale: c.locale, colorScheme: c.theme, reducedMotion: 'reduce' })
   const page = await context.newPage()
   const errors = []
@@ -154,6 +205,7 @@ for (const entry of plan.entries) {
     await page.addInitScript((ctx) => { window.__PARITY__ = ctx }, { case: c, variant })
     await page.goto(`${origin}/`)
     await page.waitForSelector('body[data-parity-ready="true"]')
+    const proof = await densityProof(page, density, native)
     const failure = await page.evaluate(() => document.body.dataset.parityError)
     if (failure) throw new Error(failure)
     await page.evaluate(() => document.fonts.ready)
@@ -188,7 +240,8 @@ for (const entry of plan.entries) {
       react: {
         browser: `chromium ${browser.version()}`,
         playwright: playwrightVersion,
-        chromiumArgs: plan.chromiumArgs ?? [],
+        chromiumArgs: [...(plan.chromiumArgs ?? []), ...(native ? [`--force-device-scale-factor=${density}`] : [])],
+        densityMode: proof,
         animationPolicy: 'playwright animations: disabled; prefers-reduced-motion: reduce',
         dshCommit: plan.dshCommit ?? null,
         renderer: 'static vite bundle of the real dsh components, no network',
@@ -211,7 +264,7 @@ for (const entry of plan.entries) {
     await context.close()
   }
 }
-await browser.close()
+for (const b of browsers.values()) await b.close()
 server.close()
 if (failures.length) {
   fs.writeFileSync(path.join(plan.resultsDir, 'react-failures.json'), JSON.stringify(failures, null, 2) + '\n')

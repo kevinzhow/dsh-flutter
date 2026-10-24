@@ -35,6 +35,10 @@ def fixtures_hash(dirs):
 def add_run_arguments(ap):
     ap.add_argument('--cases', default='', help='comma list of capture keys / case ids / globs (`components.button.*`)')
     ap.add_argument('--refresh-react', action='store_true', help='ignore and overwrite the React cache')
+    ap.add_argument('--reference', choices=react.REFERENCE_MODES, default=react.DEFAULT_REFERENCE,
+                    help='how the reference page gets its density: native (default; Chromium launched with '
+                         '--force-device-scale-factor, layout and snapping in device pixels like a phone) or emulated '
+                         '(Playwright deviceScaleFactor: layout in CSS pixels); density 1 is the same in both')
     ap.add_argument('--skip-react', action='store_true', help='reuse results/react from an earlier run')
     ap.add_argument('--skip-flutter', action='store_true', help='reuse results/flutter from an earlier run')
 
@@ -45,6 +49,7 @@ def cmd_run(suite, args, out_env):
     problems = fonts.check()
     if problems:
         sys.exit('parity fonts: ' + '; '.join(problems))
+    os.environ['PARITY_REFERENCE'] = args.reference   # the builders size synthetic images to the reference's borders
     cli_log = out / 'cli.log'
     cli_log.write_text('')
     vt.setup(out / 'vt-setup.log')
@@ -66,17 +71,18 @@ def cmd_run(suite, args, out_env):
                 (results / 'flutter' / ('%s.%s' % (e['key'], ext))).unlink(missing_ok=True)
     cache = env.default_cache()
     if not args.skip_react:
-        status = react.capture(entries, out, results, suite.host_dirs, fixtures_hash(suite.fixtures_dirs), args.refresh_react, cache)
+        status = react.capture(entries, out, results, suite.host_dirs, fixtures_hash(suite.fixtures_dirs), args.refresh_react, cache,
+                               args.reference)
         print('react: %s' % json.dumps({s: sum(v == s for v in status.values()) for s in ('cache', 'captured', 'failed')}))
     coverage_all = [{'id': c['id'], 'kind': c['kind']} for c in man['cases'] if not mf.is_skipped(c)]
     if not args.skip_flutter:
         flutter.capture(entries, coverage_all, out, results, suite.fixtures_dirs,
-                        {'suite': suite.name, 'dshCommit': env.dsh_commit()})
+                        {'suite': suite.name, 'dshCommit': env.dsh_commit()}, args.reference)
     coverage = pipeline.read_json(results / 'flutter-case-map.json', {})
     rows = pipeline.compare(entries, out, results, cli_log)
     summary = pipeline.summarize(rows, coverage, suite.name, notes_for(suite, man))
     now = datetime.datetime.now(datetime.timezone.utc)
-    summary.update({'dshCommit': env.dsh_commit(), 'flutterVersion': flutter.flutter_version(),
+    summary.update({'reference': args.reference, 'dshCommit': env.dsh_commit(), 'flutterVersion': flutter.flutter_version(),
                     'visualTesting': json.loads((env.VENDOR / 'package.json').read_text())['version'],
                     'generatedAt': now.isoformat(timespec='seconds')})
     (out / 'summary.json').write_text(json.dumps(summary, indent=1) + '\n')

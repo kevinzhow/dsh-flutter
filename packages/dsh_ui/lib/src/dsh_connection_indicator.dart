@@ -7,6 +7,8 @@ import 'dsh_corners.dart';
 import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_state_dot.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
@@ -168,7 +170,7 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
         ? widget.connectingLabel
         : widget.disconnectedLabel;
 
-    Widget body = Container(
+    Widget body = DshContainer(
       key: DshConnectionIndicator.surfaceKey,
       height: 28,
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -176,7 +178,7 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
         theme.radiusSm,
         color: fill,
         borderColor: borderOnFill,
-        borderWidth: 1,
+        borderWidth: dshBorderWidthOf(context, 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -265,7 +267,7 @@ class _DshConnectionIndicatorState extends State<DshConnectionIndicator> {
                         right: -2 - ring,
                         bottom: -2 - ring,
                         child: IgnorePointer(
-                          child: DecoratedBox(
+                          child: DshDecoratedBox(
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: theme.focusRingColor,

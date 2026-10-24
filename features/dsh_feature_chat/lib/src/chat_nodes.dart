@@ -168,7 +168,7 @@ class UserBubble extends StatelessWidget {
                 if (attachments.isNotEmpty && showBubble)
                   const SizedBox(height: DshSpace.sm),
                 if (showBubble)
-                  DecoratedBox(
+                  DshDecoratedBox(
                     decoration: BoxDecoration(
                       color: theme.color('--dsw-specific-bubble'),
                       borderRadius: BorderRadius.circular(theme.radiusXl),
@@ -337,12 +337,12 @@ class _ReasoningRowState extends State<_ReasoningRow> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: DshSpace.sm, bottom: DshSpace.xs),
-        child: DecoratedBox(
+        child: DshDecoratedBox(
           decoration: BoxDecoration(
             border: Border(
               left: BorderSide(
                 color: theme.color('--dsw-alias-border-l2'),
-                width: 2,
+                width: dshBorderWidthOf(context, 2),
               ),
             ),
           ),

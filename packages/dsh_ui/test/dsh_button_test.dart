@@ -24,7 +24,7 @@ Widget host(DshThemeData theme, Widget child) => MaterialApp(
 );
 
 ShapeDecoration surface(WidgetTester tester) =>
-    tester.widget<DecoratedBox>(find.byKey(DshButton.surfaceKey)).decoration
+    tester.widget<DshDecoratedBox>(find.byKey(DshButton.surfaceKey)).decoration
         as ShapeDecoration;
 
 DshCornerBorder shape(WidgetTester tester) =>
@@ -32,7 +32,9 @@ DshCornerBorder shape(WidgetTester tester) =>
 
 /// The painted focus ring (a stroke centred on the button's border edge).
 DshCornerBorder ring(WidgetTester tester) =>
-    (tester.widget<DecoratedBox>(find.byKey(DshButton.focusRingKey)).decoration
+    (tester
+                    .widget<DshDecoratedBox>(find.byKey(DshButton.focusRingKey))
+                    .decoration
                 as ShapeDecoration)
             .shape
         as DshCornerBorder;
@@ -107,7 +109,10 @@ void main() {
       // 0.5px is a whole pixel in Chromium's border snapping.
       final border = shape(tester).side;
       expect(border.color, DshSurface.quantizeAlpha(theme.borderL3));
-      expect(border.width, dshHairline);
+      expect(
+        border.width,
+        dshHairlineOf(tester.element(find.byType(DshButton).first)),
+      );
 
       await pump(DshButtonVariant.toolbar);
       expect(

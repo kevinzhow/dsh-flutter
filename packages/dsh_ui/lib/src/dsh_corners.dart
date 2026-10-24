@@ -4,6 +4,7 @@ import 'package:dsh_theme/dsh_theme.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_diff_block.dart' show blendLikeChromium;
+import 'dsh_pixel_snap.dart';
 import 'theme_access.dart';
 
 /// The curvature parameter of dsh's corner shape: `--dsw-corner-shape` is
@@ -148,21 +149,28 @@ extension DshCornerDecoration on DshThemeData {
   DshCornerBorder cornerBorder(
     double radius, {
     Color? borderColor,
-    double borderWidth = 1,
-  }) => DshCornerBorder(
-    radius: radius,
-    curvature: dshCornerCurvature(this),
-    side: borderColor == null
-        ? BorderSide.none
-        : BorderSide(color: borderColor, width: borderWidth),
-  );
+    double? borderWidth,
+  }) {
+    assert(
+      borderColor == null || borderWidth != null,
+      'a border needs its width, resolved at the display density '
+      '(dshBorderWidthOf / dshHairlineOf)',
+    );
+    return DshCornerBorder(
+      radius: radius,
+      curvature: dshCornerCurvature(this),
+      side: borderColor == null
+          ? BorderSide.none
+          : BorderSide(color: borderColor, width: borderWidth ?? 0),
+    );
+  }
 
   /// A filled (and optionally bordered) surface in the theme's corner shape.
   ShapeDecoration cornerDecoration(
     double radius, {
     Color? color,
     Color? borderColor,
-    double borderWidth = 1,
+    double? borderWidth,
   }) => ShapeDecoration(
     color: color,
     shape: cornerBorder(
@@ -192,7 +200,7 @@ extension DshCornerContext on BuildContext {
     Color? fill,
     Color? border,
     Color? over,
-    double borderWidth = dshHairline,
+    double? borderWidth,
   }) {
     final paintedFill = fill == null
         ? null
@@ -209,7 +217,7 @@ extension DshCornerContext on BuildContext {
                   ? paintedFill
                   : over,
             ),
-      borderWidth: borderWidth,
+      borderWidth: borderWidth ?? dshHairlineOf(this),
     );
   }
 
