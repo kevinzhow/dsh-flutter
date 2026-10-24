@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_copy_feedback.dart';
 import 'dsh_head_tail_cap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -218,7 +219,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
       ),
     };
 
-    return DecoratedBox(
+    return DshDecoratedBox(
       key: const ValueKey('search-block'),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-markdown-code-block'),

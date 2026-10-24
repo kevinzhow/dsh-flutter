@@ -4,6 +4,8 @@ import 'dart:ui' show Size;
 
 import 'package:flutter/painting.dart' show Alignment;
 
+import 'dsh_pixel_snap.dart';
+
 /// The pixel size of an encoded image read from its header (PNG, JPEG, GIF
 /// and WebP, the types dsh accepts), or null when [bytes] is none of them.
 ///
@@ -105,15 +107,20 @@ enum DshImageFit { cover, contain }
 
 /// The alignment that places an image of [source] pixels in [box] (logical
 /// pixels) where Chromium paints it: `object-fit` computes the picture's
-/// rectangle in CSS pixels and snaps its position to a whole CSS pixel (half
-/// up), so a 93 by 62 picture in a 62 box starts at -15, not at -15.5, which
-/// is one device pixel at 2x. [base] is the CSS `object-position`.
+/// rectangle in layout pixels and snaps its position to a whole layout pixel
+/// (half up). A phone's Chromium lays out in device pixels, so a 189 by 126
+/// device pixel picture in a 126 box starts at -32 device pixels, not at
+/// -31.5; the emulated capture lays out in CSS pixels, where a 93 by 62
+/// picture in a 62 box starts at -15, not at -15.5 ([DshPixelModel]).
+/// [devicePixelRatio] is the view's. [base] is the CSS `object-position`.
 Alignment dshSnappedAlignment({
   required Size box,
   required ({int width, int height})? source,
   required DshImageFit fit,
   Alignment base = Alignment.center,
+  double devicePixelRatio = 1,
 }) {
+  final density = dshSnapDensity(devicePixelRatio);
   if (source == null || source.width <= 0 || source.height <= 0) return base;
   final sx = box.width / source.width;
   final sy = box.height / source.height;
@@ -121,7 +128,8 @@ Alignment dshSnappedAlignment({
   double axis(double boxExtent, double imageExtent, double a) {
     final free = boxExtent - imageExtent * scale;
     if (free.abs() < 1e-9) return a;
-    final position = (free * (a + 1) / 2 + 0.5).floorToDouble();
+    final position =
+        (free * (a + 1) / 2 * density + 0.5).floorToDouble() / density;
     return 2 * position / free - 1;
   }
 

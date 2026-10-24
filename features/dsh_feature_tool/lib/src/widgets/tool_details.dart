@@ -26,7 +26,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
     final base = theme.textStyle('--dsw-font-xs-13');
     final caption = theme.color('--dsw-alias-label-caption');
     final divider = Container(
-      height: dshHairline,
+      height: dshHairlineOf(context),
       color: theme.color('--dsw-alias-border-l2'),
     );
     final children = <Widget>[];
@@ -92,7 +92,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
         }
       }
     }
-    return Container(
+    return DshContainer(
       key: const ValueKey('tool-details'),
       decoration: context.dshOutlined(
         theme.radiusLg,
@@ -158,9 +158,12 @@ class _DetailItemView extends StatelessWidget {
               ? DshIcon(DshIcons.check, size: 14, color: color)
               : status.value == 'in_progress'
               ? DshIcon(DshIcons.play, size: 14, color: color)
-              : DecoratedBox(
+              : DshDecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: tertiary),
+                    border: Border.all(
+                      color: tertiary,
+                      width: dshBorderWidthOf(context, 1),
+                    ),
                     borderRadius: BorderRadius.circular(2),
                   ),
                   child: const SizedBox(width: 10, height: 10),
@@ -183,7 +186,7 @@ class _DetailItemView extends StatelessWidget {
         ),
       if (item.badge != null) ...[
         const SizedBox(width: 8),
-        DecoratedBox(
+        DshDecoratedBox(
           decoration: BoxDecoration(
             color: _tone(theme, item.badge!.tone),
             shape: BoxShape.circle,

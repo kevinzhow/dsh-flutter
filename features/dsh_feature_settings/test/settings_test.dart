@@ -238,11 +238,11 @@ void main() {
       final rows = find.byType(DshSettingsRow);
       bool line(int i) =>
           (t
-                      .widget<DecoratedBox>(
+                      .widget<DshDecoratedBox>(
                         find
                             .descendant(
                               of: rows.at(i),
-                              matching: find.byType(DecoratedBox),
+                              matching: find.byType(DshDecoratedBox),
                             )
                             .first,
                       )
@@ -267,11 +267,11 @@ void main() {
       );
       surface(t, const Size(390, 800));
       await t.pumpWidget(page(section: 'general'));
-      final box = t.widget<DecoratedBox>(
+      final box = t.widget<DshDecoratedBox>(
         find
             .descendant(
               of: find.byType(DshSettingsRow),
-              matching: find.byType(DecoratedBox),
+              matching: find.byType(DshDecoratedBox),
             )
             .first,
       );

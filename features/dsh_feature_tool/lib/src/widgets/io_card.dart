@@ -52,7 +52,7 @@ class IoCard extends StatelessWidget {
         ),
       ),
     );
-    return Container(
+    return DshContainer(
       key: const ValueKey('io-card'),
       decoration: context.dshOutlined(
         theme.radiusLg,
@@ -69,7 +69,7 @@ class IoCard extends StatelessWidget {
               section(inputLabel, input!, theme.labelSecondary),
             if (input != null && output != null)
               Container(
-                height: dshHairline,
+                height: dshHairlineOf(context),
                 color: theme.color('--dsw-alias-border-l2'),
               ),
             if (output != null)

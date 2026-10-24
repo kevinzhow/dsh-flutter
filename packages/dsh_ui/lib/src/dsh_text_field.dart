@@ -3,6 +3,8 @@ import 'package:flutter/material.dart'
 import 'package:flutter/services.dart' show TextInputAction;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -54,10 +56,13 @@ class DshTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        DecoratedBox(
+        DshDecoratedBox(
           decoration: BoxDecoration(
             color: theme.color('--dsw-specific-input-major'),
-            border: Border.all(color: borderColor, width: 0.5),
+            border: Border.all(
+              color: borderColor,
+              width: dshHairlineOf(context),
+            ),
             borderRadius: BorderRadius.circular(theme.radiusLg),
           ),
           child: Padding(

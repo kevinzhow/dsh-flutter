@@ -196,7 +196,7 @@ class _ToolRowState extends State<ToolRow> {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (summaryText.isNotEmpty) ...[
-          Container(
+          DshContainer(
             width: 2,
             height: 2,
             margin: const EdgeInsets.symmetric(horizontal: 8),

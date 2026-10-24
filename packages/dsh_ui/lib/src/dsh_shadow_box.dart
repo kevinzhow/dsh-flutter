@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
 
+import 'dsh_snapped_box.dart';
+
 /// A rounded surface with CSS `box-shadow` semantics: [shadows] are painted
 /// outside the border box only, so a translucent [color] (dsh's menu surface)
 /// does not show them through, unlike Flutter's own `BoxDecoration.boxShadow`.
@@ -24,7 +26,7 @@ class DshShadowBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CustomPaint(
     painter: _OuterShadowPainter(shadows, radius),
-    child: DecoratedBox(
+    child: DshDecoratedBox(
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(radius),

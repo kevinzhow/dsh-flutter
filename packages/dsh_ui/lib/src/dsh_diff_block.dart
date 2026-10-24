@@ -5,6 +5,7 @@ import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
 import 'dsh_diff.dart';
 import 'dsh_head_tail_cap.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -160,7 +161,7 @@ class _DshDiffBlockState extends State<DshDiffBlock> with DshCopyFeedback {
         ),
       );
       if (bg == null) return text;
-      return DecoratedBox(
+      return DshDecoratedBox(
         decoration: BoxDecoration(color: bg),
         child: Stack(
           children: [
@@ -203,7 +204,7 @@ class _DshDiffBlockState extends State<DshDiffBlock> with DshCopyFeedback {
       ],
     );
 
-    return DecoratedBox(
+    return DshDecoratedBox(
       key: const ValueKey('diff-block'),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-markdown-code-block'),

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_markdown.dart';
+import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
@@ -121,7 +122,7 @@ class DshWebBlock extends StatelessWidget {
     final small = theme.textStyle('--dsw-font-xs-13');
     final tertiary = theme.color('--dsw-alias-label-tertiary');
     final fill = theme.color('--dsw-alias-markdown-code-block');
-    Widget card(Widget child) => DecoratedBox(
+    Widget card(Widget child) => DshDecoratedBox(
       key: const ValueKey('web-block'),
       decoration: BoxDecoration(
         color: fill,

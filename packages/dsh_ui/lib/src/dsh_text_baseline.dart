@@ -1,6 +1,8 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'dsh_pixel_snap.dart';
+
 /// Where Chromium puts the baseline of a line of text, which Flutter's
 /// paragraph does not reproduce.
 ///
@@ -8,34 +10,43 @@ import 'package:flutter/widgets.dart';
 /// top plus the font's ascent plus half of the leading, but they compute it
 /// differently:
 ///
-/// - Blink rounds the font's ascent and descent to whole CSS pixels, then puts
-///   `floor((line - ascent - descent) / 2)` of the leading above the text
-///   (`FontHeight::AddLeading`): `ascent + floor((line - ascent - descent) / 2)`.
-///   Layout is in CSS pixels, so the result does not depend on the display
-///   density.
+/// - Blink rounds the font's ascent and descent to whole *layout* pixels, then
+///   puts `floor((line - ascent - descent) / 2)` of the leading above the text
+///   (`FontHeight::AddLeading`): `ascent + floor((line - ascent - descent) / 2)`
+///   ([dshBlinkBaseline]). A phone's Chromium (zoom-for-device-scale-factor)
+///   lays out in device pixels, so ascent, descent, line height and the floor
+///   are device pixels: the baseline sits on a device pixel, not on a CSS one.
+///   The emulated capture setup lays out in CSS pixels ([DshPixelModel]).
 /// - Flutter keeps the metrics fractional, adds exactly half of the leading and
-///   rounds the sum: `round(ascent + (line - ascent - descent) / 2)`.
+///   rounds the sum to a whole *logical* pixel.
 ///
-/// The two agree for 14px on 22px (dsh's body text) and differ by one CSS pixel
-/// whenever the rounding goes the other way: 12px on 18px, 12 on 20, 17 on 26
-/// and 20 on 28 with the pinned Noto Sans (the captions, settings descriptions
-/// and large titles), at every density. Measured over 24 size and line-height
-/// pairs of dsh's type ladder, 2 weights and 5 densities
-/// (`docs/parity.md`, "The text baseline").
+/// The two agree for 14px on 22px (dsh's body text) at 1x and differ by one
+/// pixel whenever the rounding goes the other way (12 on 18, 12 on 20, 17 on
+/// 26, 20 on 28 with the pinned Noto Sans), and at 2x to 3x the device-pixel
+/// rounding moves them apart for most sizes (`docs/parity.md`, "The text
+/// baseline": 116 size, line height, weight and family combinations at 1, 1.5,
+/// 2, 2.625 and 3x against Chromium running at that density).
 ///
 /// Returns the vertical paint offset (logical pixels) that moves [style]'s
-/// baseline from Flutter's to Blink's; 0 when they agree, when the style has no
-/// fixed line height, or on a font without metrics.
-double dshBaselineNudge(TextStyle style) {
+/// baseline from Flutter's to Blink's at [devicePixelRatio] (1 when omitted: CSS
+/// pixels); 0 when they agree, when the style has no fixed line height, or on a
+/// font without metrics.
+double dshBaselineNudge(TextStyle style, [double devicePixelRatio = 1]) {
   final size = style.fontSize;
   final height = style.height;
   if (size == null || height == null) return 0;
-  return _nudges[style] ??= _nudge(style, size, height);
+  final density = dshSnapDensity(devicePixelRatio);
+  return (_nudges[style] ??= {})[density] ??= _nudge(
+    style,
+    size,
+    height,
+    density,
+  );
 }
 
-final Map<TextStyle, double> _nudges = {};
+final Map<TextStyle, Map<double, double>> _nudges = {};
 
-double _nudge(TextStyle style, double size, double height) {
+double _nudge(TextStyle style, double size, double height, double density) {
   // The style's own face without its fixed line height: the font's natural
   // ascent and descent.
   final plain = TextStyle(
@@ -70,13 +81,17 @@ double _nudge(TextStyle style, double size, double height) {
   final font = metrics(plain);
   final flutter = baseline(style, strut: dshStrut(style));
   if (font == null || flutter == null) return 0;
-  final ascent = _roundHalfUp(font.ascent);
-  final descent = _roundHalfUp(font.descent);
-  // Layout units are 1/64 px; `height * size` carries float noise below that.
-  final line = (height * size * 64).roundToDouble() / 64;
-  final blink = ascent + ((line - ascent - descent) / 2).floor();
+  // Blink scales the font size by the density, so the metrics are the logical
+  // ones times it; `height * size` carries float noise below a layout unit.
+  final blink =
+      dshBlinkBaseline(
+        ascent: font.ascent * density,
+        descent: font.descent * density,
+        lineHeight: height * size * density,
+      ) /
+      density;
   // The paragraph reports the fractional baseline but paints at the rounded
-  // one (layout is in logical pixels, whatever the density).
+  // logical one.
   return blink - _roundHalfUp(flutter);
 }
 
@@ -85,30 +100,37 @@ double _roundHalfUp(double v) => (v + 0.5).floorToDouble();
 /// Paints [child] (one text with [style]) with its baseline where Chromium
 /// puts it; layout is untouched.
 ///
-/// The baseline moves to Blink's rounding ([dshBaselineNudge]). Blink in the
-/// parity captures also lays out in CSS pixels and paints a line at a whole
-/// CSS pixel: a line whose top lands on a half pixel (a block centred in a
-/// box of the other parity) is rounded half up, where Flutter paints at the
-/// fraction and lets the device round it. The child is therefore moved to the
-/// whole logical pixel it sits at as well.
+/// The baseline moves to Blink's rounding ([dshBaselineNudge]). Blink also
+/// paints a line box at a whole layout pixel (a device pixel on a phone, a CSS
+/// pixel in the emulated capture): a line whose top lands between two (a block
+/// centred in a box of the other parity, or any fractional density) is rounded
+/// half up, where Flutter paints at the fraction. The child is therefore moved
+/// to the pixel it sits at as well ([dshSnapToPixel]).
 class DshChromeBaseline extends SingleChildRenderObjectWidget {
   const DshChromeBaseline({super.key, required this.style, super.child});
 
   final TextStyle style;
 
   @override
-  RenderObject createRenderObject(BuildContext context) =>
-      _RenderChromeBaseline(dshBaselineNudge(style));
+  RenderObject createRenderObject(BuildContext context) {
+    final dpr = dshDevicePixelRatioOf(context);
+    return _RenderChromeBaseline(dshBaselineNudge(style, dpr), dpr);
+  }
 
   @override
-  void updateRenderObject(BuildContext context, RenderObject renderObject) =>
-      (renderObject as _RenderChromeBaseline).nudge = dshBaselineNudge(style);
+  void updateRenderObject(BuildContext context, RenderObject renderObject) {
+    final dpr = dshDevicePixelRatioOf(context);
+    (renderObject as _RenderChromeBaseline)
+      ..devicePixelRatio = dpr
+      ..nudge = dshBaselineNudge(style, dpr);
+  }
 }
 
 class _RenderChromeBaseline extends RenderProxyBox {
-  _RenderChromeBaseline(this._nudge);
+  _RenderChromeBaseline(this._nudge, this._devicePixelRatio);
 
   double _nudge;
+  double _devicePixelRatio;
 
   set nudge(double value) {
     if (value == _nudge) return;
@@ -116,10 +138,16 @@ class _RenderChromeBaseline extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  set devicePixelRatio(double value) {
+    if (value == _devicePixelRatio) return;
+    _devicePixelRatio = value;
+    markNeedsPaint();
+  }
+
   @override
   void paint(PaintingContext context, Offset offset) {
     final top = localToGlobal(Offset.zero).dy;
-    final snap = (top + 0.5).floorToDouble() - top;
+    final snap = dshSnapToPixel(top, _devicePixelRatio) - top;
     super.paint(context, offset + Offset(0, _nudge + snap));
   }
 }

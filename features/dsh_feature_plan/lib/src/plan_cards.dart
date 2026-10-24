@@ -47,7 +47,7 @@ class PlanCards extends StatelessWidget {
               key: ValueKey('plan-card-${plans[i].callId}'),
               behavior: HitTestBehavior.opaque,
               onTap: () => onOpen(plans[i]),
-              child: Container(
+              child: DshContainer(
                 height: 60,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -58,12 +58,12 @@ class PlanCards extends StatelessWidget {
                   borderRadius: BorderRadius.circular(theme.radiusLg),
                   border: Border.all(
                     color: theme.color('--dsw-alias-border-l1'),
-                    width: dshHairline,
+                    width: dshHairlineOf(context),
                   ),
                 ),
                 child: Row(
                   children: [
-                    Container(
+                    DshContainer(
                       width: 40,
                       height: 40,
                       alignment: Alignment.center,
@@ -72,7 +72,7 @@ class PlanCards extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: theme.color('--dsw-alias-border-l1'),
-                          width: dshHairline,
+                          width: dshHairlineOf(context),
                         ),
                       ),
                       child: const DshMarkdownFileIcon(size: 20),
@@ -110,7 +110,7 @@ class PlanCards extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Container(
+                    DshContainer(
                       height: 28,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -122,7 +122,7 @@ class PlanCards extends StatelessWidget {
                         borderRadius: BorderRadius.circular(theme.radiusSm),
                         border: Border.all(
                           color: theme.color('--dsw-alias-border-l3'),
-                          width: dshHairline,
+                          width: dshHairlineOf(context),
                         ),
                       ),
                       child: DshChromeText(

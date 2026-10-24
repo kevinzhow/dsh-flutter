@@ -136,7 +136,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
               bottom: false,
               child: Padding(
                 padding: const EdgeInsets.all(DshSpace.sm),
-                child: DecoratedBox(
+                child: DshDecoratedBox(
                   decoration: BoxDecoration(
                     color: theme.bgBase.withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(theme.radiusMd),
@@ -171,7 +171,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
               top: false,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: DshSpace.xl),
-                child: Container(
+                child: DshContainer(
                   padding: const EdgeInsets.all(DshSpace.md),
                   decoration: BoxDecoration(
                     color: theme.bgBase.withValues(alpha: 0.9),

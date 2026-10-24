@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
 /// A round icon button at the minimum touch size. [filled] uses the brand
@@ -48,7 +49,7 @@ class DshIconButton extends StatelessWidget {
           child: Center(
             child: Opacity(
               opacity: enabled ? 1 : 0.4,
-              child: DecoratedBox(
+              child: DshDecoratedBox(
                 decoration: BoxDecoration(color: fill, shape: BoxShape.circle),
                 child: SizedBox(
                   width: 36,

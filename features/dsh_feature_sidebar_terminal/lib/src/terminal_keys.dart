@@ -46,14 +46,14 @@ class TerminalKeyBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    return DecoratedBox(
+    return DshDecoratedBox(
       key: const ValueKey('terminal-key-bar'),
       decoration: BoxDecoration(
         color: theme.color('--dsw-alias-bg-layer-1'),
         border: Border(
           top: BorderSide(
             color: theme.color('--dsw-alias-border-l4'),
-            width: dshHairline,
+            width: dshHairlineOf(context),
           ),
         ),
       ),
@@ -101,7 +101,7 @@ class _KeyButton extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Center(
-          child: DecoratedBox(
+          child: DshDecoratedBox(
             decoration: active
                 ? context.dshOutlined(
                     theme.radiusSm,

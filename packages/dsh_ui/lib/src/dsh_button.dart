@@ -4,7 +4,8 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_corners.dart' show DshCornerDecoration, DshSurface;
-import 'theme_access.dart';
+import 'dsh_pixel_snap.dart';
+import 'dsh_snapped_box.dart';
 
 /// Visual family of a [DshButton], as dsh's `ButtonVariant`.
 enum DshButtonVariant {
@@ -140,10 +141,12 @@ class _DshButtonState extends State<DshButton> {
         .textStyle(small ? '--dsw-font-xxs-12' : '--dsw-font-s-14')
         .copyWith(color: foreground, decoration: TextDecoration.none);
     // `.outline { border: 0.5px solid }` on a border-box button of fixed
-    // height: Chromium snaps the border to a whole pixel (`dshHairline`), and
-    // it widens the box (the content width is padding + label + both borders).
+    // height: Blink snaps the border to whole device pixels
+    // ([dshHairlineOf]: one device pixel on a phone, a whole CSS pixel in the
+    // emulated capture) and it widens the box (the content width is padding +
+    // label + both borders).
     final outlined = widget.variant == DshButtonVariant.outline;
-    final borderWidth = outlined ? dshHairline : 0.0;
+    final borderWidth = outlined ? dshHairlineOf(context) : 0.0;
     // Chromium paints the background under the border too, so the hairline
     // lands on the fill when there is one.
     // Chromium paints the background under the border too, so the hairline
@@ -152,7 +155,7 @@ class _DshButtonState extends State<DshButton> {
         ? paint(theme.borderL3, over: fill != null && fill.a >= 1 ? fill : null)
         : null;
 
-    final surface = DecoratedBox(
+    final surface = DshDecoratedBox(
       key: DshButton.surfaceKey,
       decoration: theme.cornerDecoration(
         radius,
@@ -205,7 +208,7 @@ class _DshButtonState extends State<DshButton> {
             right: -ringReach,
             bottom: -ringReach,
             child: IgnorePointer(
-              child: DecoratedBox(
+              child: DshDecoratedBox(
                 key: DshButton.focusRingKey,
                 decoration: theme.cornerDecoration(
                   radius + ringReach,
