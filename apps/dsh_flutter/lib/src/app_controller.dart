@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_user_questions.dart'
+    show AskUserQuestionAnswer, AskUserQuestionAnswerItem, UserQuestionsRemote;
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_approval/dsh_feature_approval.dart';
 import 'package:dsh_feature_attachment/dsh_feature_attachment.dart';
@@ -14,6 +16,7 @@ import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.da
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
 import 'package:dsh_feature_settings/dsh_feature_settings.dart';
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
+import 'package:dsh_feature_sidebar_terminal/dsh_feature_sidebar_terminal.dart';
 import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
 import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
@@ -171,6 +174,12 @@ class AppController extends ChangeNotifier {
     questions = QuestionTracker(
       events: _events.stream,
       answer: (event, outcome) => backend.answer(event, outcome),
+      host: QuestionHost(
+        attachWait: backend.attachQuestionWait,
+        answerContinued: _answerContinued,
+        continued: _continuedQuestions,
+        projectionChanges: _projectionEvents.stream,
+      ),
     );
     registerConversationFeature(slots, i18n: () => i18n);
     registerChatFeature(slots, i18n: () => i18n);
@@ -181,6 +190,15 @@ class AppController extends ChangeNotifier {
       services: _SidebarBridge(this),
     );
     registerFilesFeature(slots, i18n: () => i18n);
+    terminals = ClientTerminals(
+      host: backend.terminalHost,
+      prefs: PrefsTerminalPrefs(this.prefs),
+    );
+    registerSidebarTerminalFeature(
+      slots,
+      i18n: () => i18n,
+      terminals: terminals,
+    );
     registerDocumentPreviewFeature(slots, i18n: () => i18n);
     registerToolFeature(
       slots,
@@ -194,6 +212,8 @@ class AppController extends ChangeNotifier {
           ).then((_) => true),
         ),
         openSubagent: (parent, childId) => _subagents.openById(parent, childId),
+        revealQuestion: (parent, callId) =>
+            questions.reveal(parent.sessionId, callId),
       ),
     );
     registerPlanFeature(slots, i18n: () => i18n);
@@ -248,8 +268,11 @@ class AppController extends ChangeNotifier {
   /// The syntax highlighter every code surface uses (null: plain text).
   final DshCodeHighlighter? highlighter;
 
-  /// The right sidebar (file tree and previews) of every session.
+  /// The right sidebar (file tree, previews, terminals) of every session.
   late final SidebarRightFeature sidebar;
+
+  /// The terminal views behind the sidebar's terminal tabs.
+  late final ClientTerminals terminals;
 
   /// `animation-frame` publications of the conversation flush on this
   /// scheduler (null: a short timer; tests pass an immediate one).
@@ -265,6 +288,43 @@ class AppController extends ChangeNotifier {
   final Map<String, SessionController> _children = {};
   late final ApprovalTracker approvals;
   late final QuestionTracker questions;
+
+  final StreamController<String> _projectionEvents =
+      StreamController<String>.broadcast(sync: true);
+  StreamSubscription<String>? _projectionSub;
+
+  /// The questions the agent went on without, as the `userQuestions`
+  /// projection of every session lists them.
+  List<ProjectedQuestion> _continuedQuestions() {
+    final m = manager;
+    if (m == null) return const [];
+    return [
+      for (final id in m.projectionSessionIds)
+        ...ProjectedQuestion.rowsOf(
+          id,
+          m.projectionValues(id)['userQuestions'],
+        ),
+    ];
+  }
+
+  Future<bool> _answerContinued(
+    String sessionId,
+    String callId,
+    List<QuestionAnswer> answers,
+  ) => UserQuestionsRemote(backend.remoteCaller).answer(
+    sessionId,
+    callId,
+    AskUserQuestionAnswer(
+      answers: [
+        for (final a in answers)
+          AskUserQuestionAnswerItem(
+            id: a.id,
+            selected: a.selected,
+            custom: a.custom != null && a.custom!.isNotEmpty ? a.custom : null,
+          ),
+      ],
+    ),
+  );
 
   final StreamController<HostEvent> _events =
       StreamController<HostEvent>.broadcast(sync: true);
@@ -615,6 +675,8 @@ class AppController extends ChangeNotifier {
     _hostEventSub = transport.hostEvents.listen(_events.add);
     unawaited(_listSub?.cancel());
     final m = manager = SessionManager(transport)..start();
+    unawaited(_projectionSub?.cancel());
+    _projectionSub = m.projectionChanges.listen(_projectionEvents.add);
     _listSub = m.list.changes.listen((_) {
       _listChanges.add(null);
       notices?.sessionsChanged();
@@ -773,10 +835,16 @@ class AppController extends ChangeNotifier {
     _hostEventSub = null;
     await _listSub?.cancel();
     _listSub = null;
+    await _projectionSub?.cancel();
+    _projectionSub = null;
     await manager?.dispose();
     manager = null;
     _transport = null;
     _detachHost();
+    // The sidebars belong to the host that was left; its terminals keep
+    // running there until the host reaps them.
+    sidebar.reset();
+    await terminals.detachAll();
     notices?.setConnected(false);
   }
 
@@ -932,6 +1000,8 @@ class AppController extends ChangeNotifier {
     unawaited(notices?.dispose());
     unawaited(approvals.dispose());
     unawaited(questions.dispose());
+    unawaited(terminals.dispose());
+    unawaited(_projectionEvents.close());
     unawaited(_events.close());
     unawaited(backend.dispose());
     super.dispose();

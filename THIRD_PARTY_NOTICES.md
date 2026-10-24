@@ -153,3 +153,14 @@ Gradle dependency. The decoder runs on the device; nothing it sees leaves the ph
 does not include it, and pasting the launch link is always available.
 
 The certificate fingerprint uses `package:crypto` (BSD-3-Clause, the Dart team).
+
+## xterm (terminal emulator, features/dsh_feature_sidebar_terminal)
+
+`features/dsh_feature_sidebar_terminal` draws the sidebar terminal with the [`xterm`](https://pub.dev/packages/xterm) Dart
+package, version 4.0.0 (MIT, Copyright (c) 2020 xuty, TerminalStudio), resolved through pub; no source is copied into this
+repository. Its own dependencies are `equatable` (MIT, Felix Angelov), `quiver` (Apache-2.0, Google LLC) and `zmodem`
+(MIT, xuty). The choice is recorded in `docs/terminal.md`.
+
+The visual parity tool (`tool/parity-web`, development and test only, not part of the app) adds the npm packages `@xterm/xterm`
+and `@xterm/addon-fit` (MIT, Copyright (c) 2017-2022 The xterm.js authors and 2014-2016 SourceLair, Microsoft Corporation and
+contributors) because dsh web's terminal is built on them and the React provider mounts that real component.

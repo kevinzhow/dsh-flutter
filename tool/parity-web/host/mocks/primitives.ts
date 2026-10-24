@@ -5,6 +5,7 @@
 // form, which none of the parity surfaces draw. This file re-exports the SAME real modules for just the names the
 // mounted surfaces import, so no primitive is replaced or edited: only the unused part of the graph (and its npm
 // dependencies) stays out of the bundle. Add a line here when a new surface imports another primitive.
+export { Button } from '@dsh/ui-primitives/src/Button.tsx'
 export { StateDot } from '@dsh/ui-primitives/src/StateDot.tsx'
 export { DisclosureRow } from '@dsh/ui-primitives/src/DisclosureRow.tsx'
 export { TextShimmer } from '@dsh/ui-primitives/src/TextShimmer.tsx'

@@ -26,8 +26,13 @@ class SidebarRightFeature {
   final Map<String, SidebarState> _states = {};
 
   /// The sidebar state of [sessionId] (created on first use).
-  SidebarState stateFor(String sessionId) =>
-      _states.putIfAbsent(sessionId, () => SidebarState(sessionId));
+  SidebarState stateFor(String sessionId) => _states.putIfAbsent(
+    sessionId,
+    () => SidebarState(sessionId, types: _slots.sidebarTabs),
+  );
+
+  /// Forget every session's sidebar (the host was left).
+  void reset() => _states.clear();
 
   bool _inline(BuildContext context) =>
       MediaQuery.sizeOf(context).width >= sidebarInlineMinWindowWidth;
@@ -78,15 +83,26 @@ class SidebarRightFeature {
           ),
         ),
         clipBehavior: Clip.antiAlias,
-        builder: (sheet) => SizedBox(
-          key: const ValueKey('sidebar-sheet'),
-          height: MediaQuery.sizeOf(sheet).height * 0.92,
-          child: SidebarPanel(
-            state: state,
-            owner: owner,
-            slots: _slots,
-            i18n: _i18n(),
-            onCollapse: () => Navigator.of(sheet).pop(),
+        // Full screen, as dsh presents the panel below 768px, and above the
+        // on-screen keyboard (a terminal needs the room its keys leave).
+        builder: (sheet) => MediaQuery.removeViewInsets(
+          context: sheet,
+          removeBottom: true,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.viewInsetsOf(sheet).bottom,
+            ),
+            child: SizedBox(
+              key: const ValueKey('sidebar-sheet'),
+              height: double.infinity,
+              child: SidebarPanel(
+                state: state,
+                owner: owner,
+                slots: _slots,
+                i18n: _i18n(),
+                onCollapse: () => Navigator.of(sheet).pop(),
+              ),
+            ),
           ),
         ),
       );

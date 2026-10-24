@@ -468,6 +468,15 @@ class DshConnection {
   Stream<GenerationFrame> openStream(
     String endpoint,
     Map<String, Object?> Function() args,
+  ) => openDuplex(endpoint, args).frames;
+
+  /// [openStream] with the uplink of the same logical stream (dsh `RemoteStream`
+  /// with an `In` type): the returned handle sends items to the stream that is
+  /// open on the live generation. Nothing is queued or replayed across
+  /// generations: an item sent while no stream is open throws [NotConnected].
+  GenerationStream openDuplex(
+    String endpoint,
+    Map<String, Object?> Function() args,
   ) {
     late StreamController<GenerationFrame> out;
     StreamSubscription<ConnectionGeneration?>? genSub;
@@ -522,8 +531,40 @@ class DshConnection {
         await mux?.cancel();
       },
     );
-    return out.stream;
+    return GenerationStream(
+      out.stream,
+      send: (value) {
+        final m = mux;
+        if (m == null) throw NotConnected();
+        m.send(value);
+      },
+      end: () => mux?.end(),
+    );
   }
+}
+
+/// A logical stream that reopens on every connection generation, plus the
+/// uplink of whichever instance is open (see [DshConnection.openDuplex]).
+class GenerationStream {
+  GenerationStream(
+    this.frames, {
+    required void Function(Object?) send,
+    required void Function() end,
+  }) : _send = send,
+       _end = end;
+
+  /// Downlink: [StreamOpened], [StreamItem]s and [StreamEnded] per generation.
+  final Stream<GenerationFrame> frames;
+  final void Function(Object?) _send;
+  final void Function() _end;
+
+  /// Send one uplink item to the open instance. Throws [NotConnected] when the
+  /// stream is not open on a live generation, or [CarrierLost] when the socket
+  /// went away in the meantime; the item is not retained.
+  void send(Object? item) => _send(item);
+
+  /// Half-close the uplink of the open instance (no-op when none is open).
+  void end() => _end();
 }
 
 class _GenerationCaller implements RemoteCaller {

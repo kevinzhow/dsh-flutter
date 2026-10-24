@@ -5,5 +5,6 @@
 library;
 
 export 'src/testing/fake_host.dart';
+export 'src/testing/fake_terminal.dart';
 export 'src/testing/fake_transport.dart';
 export 'src/testing/replay.dart';

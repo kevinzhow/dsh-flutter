@@ -3,6 +3,7 @@
 /// sheet on phones and a column beside the conversation on wide windows.
 library;
 
+export 'src/guide.dart';
 export 'src/panel.dart';
 export 'src/register.dart';
 export 'src/state.dart';

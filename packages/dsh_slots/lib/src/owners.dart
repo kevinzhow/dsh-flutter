@@ -102,7 +102,16 @@ class ToolViewOwner {
 /// composition without a file preview shows paths as plain text, one without a
 /// browser launcher shows URLs unlinked.
 class ToolHostActions {
-  const ToolHostActions({this.openUrl, this.openFile, this.openSubagent});
+  const ToolHostActions({
+    this.openUrl,
+    this.openFile,
+    this.openSubagent,
+    this.revealQuestion,
+  });
+
+  /// Put one `ask_user_question` call's answer panel back in the composer (dsh
+  /// `userQuestionPanels.reveal`); false when no panel is there to show.
+  final bool Function(SessionOwner parent, String callId)? revealQuestion;
 
   /// Open one direct subagent child's read-only transcript. [parent] is the
   /// session the tool row belongs to; the receiver resolves the child's mode
@@ -250,31 +259,45 @@ abstract interface class HostFileActions {
   Future<HostFileSink> begin(String name);
 }
 
-/// Owner props of the keyed `sidebar.right.pane.tab` slot: one tab's body.
+/// Owner props of the keyed `sidebar.right.pane.tab` slot (and of its title):
+/// one tab.
 class SidebarTabOwner {
   const SidebarTabOwner({
     required this.session,
     required this.kind,
     required this.contentId,
     required this.actions,
+    this.id = '',
+    this.params = const {},
     this.line,
     this.revision = 0,
+    this.visible = true,
   });
 
   final SessionOwner session;
 
-  /// The tab kind (`files`, `text`).
+  /// The tab kind (`files`, `text`, `terminal`).
   final String kind;
 
+  /// The tab's identity within its session's sidebar (stable while it is open).
+  final String id;
+
   /// The content address (`dsh-resource://file/session/<id>/<path>` for a
-  /// file tab).
+  /// file tab; `sidebar://terminal/<n>` for a terminal).
   final String contentId;
+
+  /// What the opener passed (`{shellPath}` for a terminal chosen on the guide).
+  final Map<String, Object?> params;
 
   /// The 1-based line a navigation asked for, if any, and the navigation's
   /// revision: it changes each time the same tab is navigated to again, so a
   /// body can answer a new request for the same line.
   final int? line;
   final int revision;
+
+  /// Whether the tab is the one in front (a body kept mounted behind another
+  /// tab is not visible).
+  final bool visible;
 
   final SidebarTabActions actions;
 }
@@ -283,6 +306,32 @@ class SidebarTabOwner {
 abstract interface class SidebarTabActions {
   /// Open another resource in the sidebar; a file address opens a preview tab.
   void openResource(String address, {int? line});
+
+  /// Open a page of [kind] (dsh `openTab`); [replaceTab] closes the tab named
+  /// by [replaceTabId] (the guide that offered it) and takes its place.
+  void openTab(
+    String kind, {
+    String? replaceTabId,
+    Map<String, Object?> params = const {},
+  });
+}
+
+/// Owner props of the keyed `sidebar.right.tab.guide.entry` slot: the card of
+/// one tab type on the guide page.
+class SidebarGuideOwner {
+  const SidebarGuideOwner({
+    required this.session,
+    required this.kind,
+    required this.tabId,
+    required this.actions,
+  });
+
+  final SessionOwner session;
+  final String kind;
+
+  /// The guide tab that shows the card (the one an opened page replaces).
+  final String tabId;
+  final SidebarTabActions actions;
 }
 
 /// The window width from which a session shows its right sidebar beside the

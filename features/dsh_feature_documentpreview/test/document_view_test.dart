@@ -17,6 +17,13 @@ const _png =
 
 class _Actions implements SidebarTabActions {
   @override
+  void openTab(
+    String kind, {
+    String? replaceTabId,
+    Map<String, Object?> params = const {},
+  }) {}
+
+  @override
   void openResource(String address, {int? line}) {}
 }
 

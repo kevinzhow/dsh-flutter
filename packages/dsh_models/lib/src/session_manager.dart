@@ -82,10 +82,26 @@ class SessionManager {
       await s.dispose();
     }
     _sessions.clear();
+    await _projectionChanges.close();
   }
 
-  ProjectionStore _store(String id) =>
-      _stores.putIfAbsent(id, ProjectionStore.new);
+  final StreamController<String> _projectionChanges =
+      StreamController<String>.broadcast(sync: true);
+
+  /// The id of a session whose projection values changed (control frames and
+  /// follow snapshots alike: they share one store per session).
+  Stream<String> get projectionChanges => _projectionChanges.stream;
+
+  ProjectionStore _store(String id) => _stores.putIfAbsent(id, () {
+    final store = ProjectionStore();
+    store.changes.listen((_) {
+      if (!_projectionChanges.isClosed) _projectionChanges.add(id);
+    });
+    return store;
+  });
+
+  /// Ids of the sessions that have projection values.
+  Iterable<String> get projectionSessionIds => _stores.keys;
 
   /// The resident [Session] for [sessionId] (created lazily, never opened
   /// implicitly: call `Session.open`).

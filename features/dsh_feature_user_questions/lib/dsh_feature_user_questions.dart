@@ -5,4 +5,5 @@ library;
 
 export 'src/question_panel.dart';
 export 'src/question_tracker.dart';
+export 'src/question_wait_strip.dart';
 export 'src/register.dart';

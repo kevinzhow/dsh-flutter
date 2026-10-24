@@ -8,6 +8,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _Actions implements SidebarTabActions {
+  @override
+  void openTab(
+    String kind, {
+    String? replaceTabId,
+    Map<String, Object?> params = const {},
+  }) {}
+
   final List<String> opened = [];
   @override
   void openResource(String address, {int? line}) => opened.add(address);

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_user_questions.dart';
 import 'package:dsh_models/dsh_models.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 
 /// Why [HostBackend.connect] failed, in terms the pairing screen explains.
 enum ConnectFailure {
@@ -45,6 +47,11 @@ abstract interface class HostBackend {
   /// The host's workspace file service (`workspaceFiles`).
   WorkspaceFilesRemote get files;
 
+  /// The host's terminal service (`terminal` Remote namespace and its two
+  /// streams) over whichever connection is live; calls and attachments made
+  /// without one fail with [NotConnected].
+  TerminalHost get terminalHost;
+
   /// Unary calls through whatever connection is live now (a re-pair replaces
   /// the connection; the caller handed out earlier keeps working). Calls with
   /// no live generation fail with [NotConnected].
@@ -54,6 +61,12 @@ abstract interface class HostBackend {
   /// generation is up. Calling again re-pairs (after a host restart) and
   /// reuses the connection when the origin is unchanged.
   Future<SessionTransport> connect(Uri origin, String token);
+
+  /// Claim the foreground wait of a timed question (`userQuestions/attachWait`)
+  /// on the generation that delivered [event]: yields the Host-computed
+  /// remaining duration once and ends when the wait is over. Ends at once when
+  /// that generation is gone.
+  Stream<Duration> attachQuestionWait(WaterfallEvent event, String callId);
 
   /// Answer a pending waterfall on the live generation.
   Future<void> answer(WaterfallEvent event, WaterfallOutcome outcome);
@@ -85,6 +98,12 @@ class LiveBackend implements HostBackend {
   @override
   void reconnectNow() => _connection?.reconnectNow();
 
+  /// Close the live socket now (a network drop, for the live tests); the
+  /// connection retries on its own.
+  @visibleForTesting
+  Future<void> dropConnectionForTesting() async =>
+      _connection?.dropForTesting();
+
   @override
   late final FileUploadClient uploader = HttpFileUploadClient(
     credential: () => _connection?.generation?.credential,
@@ -96,6 +115,27 @@ class LiveBackend implements HostBackend {
 
   @override
   late final RemoteCaller remoteCaller = _LiveCaller(() => _connection);
+
+  final StreamController<ConnectionGeneration?> _terminalGenerations =
+      StreamController<ConnectionGeneration?>.broadcast();
+  StreamSubscription<ConnectionGeneration?>? _generationSub;
+
+  @override
+  late final TerminalHost terminalHost = TerminalHost(
+    caller: remoteCaller,
+    attach: (sessionId, id) {
+      final c = _connection;
+      if (c == null) throw NotConnected();
+      return TerminalHost.attachOn(c, sessionId, id);
+    },
+    retain: (sessionId, id) {
+      final c = _connection;
+      if (c == null) throw NotConnected();
+      return TerminalHost.retainOn(c, sessionId, id);
+    },
+    generations: _terminalGenerations.stream,
+    currentGeneration: () => _connection?.generation,
+  );
 
   /// Unary calls through the live generation (used by tools that need host
   /// methods the app itself does not expose yet, such as the live test).
@@ -110,6 +150,7 @@ class LiveBackend implements HostBackend {
       final connection = DshConnection(origin: origin, trust: trust);
       _connection = connection;
       _stateSub = connection.statuses.listen(_statuses.add);
+      _generationSub = connection.generations.listen(_terminalGenerations.add);
       _transport = DshSessionTransport(connection);
     }
     final connection = _connection!;
@@ -154,9 +195,30 @@ class LiveBackend implements HostBackend {
   Future<void> _teardown() async {
     await _stateSub?.cancel();
     _stateSub = null;
+    await _generationSub?.cancel();
+    _generationSub = null;
     await _connection?.stop();
     _connection = null;
     _transport = null;
+  }
+
+  @override
+  Stream<Duration> attachQuestionWait(WaterfallEvent event, String callId) {
+    final generation = _connection?.generation;
+    if (generation == null || generation.id != event.generation) {
+      return const Stream.empty();
+    }
+    final stream = UserQuestionsStreams.attachWait;
+    try {
+      final mux = generation.carrier.open(stream.endpoint, {
+        'args': stream.encodeArgs((agentId: event.agentId, callId: callId)),
+      });
+      return mux.items.map(
+        (v) => Duration(milliseconds: stream.decodeFrame(v).remainingMs),
+      );
+    } on CarrierLost catch (e) {
+      return Stream.error(e);
+    }
   }
 
   @override
@@ -173,6 +235,7 @@ class LiveBackend implements HostBackend {
   Future<void> dispose() async {
     await _teardown();
     await _statuses.close();
+    await _terminalGenerations.close();
     await trust.dispose();
   }
 }

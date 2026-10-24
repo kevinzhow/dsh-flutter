@@ -35,6 +35,7 @@ FIELD_RENAMES = {
 # `number` -> int only for names that are always integral on the wire; everything else stays `num`.
 INT_NAME = re.compile(
     r"^(seq|time|index|turn|step|version|revision|round|bytes|width|height|cursor|start|end|offset|exitCode|"
+    r"cols|rows|sequence|scrollback|limit|remainingMs|frameOverheadBytes|"
     r"maxRetries|retry|attempt|delegationDepth|.*Seqs?|.*Index(es)?|.*At|.*Tokens?|.*Count|.*FormatVersion|"
     r"max[A-Z].*|min[A-Z].*|.*Messages|.*Images)$"
 )
@@ -653,6 +654,7 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
     method_src: list[str] = []
     stream_src: list[str] = []
     stream_names: list[str] = []
+    duplex = False
     for m in ir["methods"]:
         if m["name"] in skipped:
             continue
@@ -666,10 +668,14 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
             params.append((p, dname, t))
         res = em.lower(m["result"], hint + "Value", "") if m["result"]["k"] != "void" else None
         if m["mode"] == "stream":
-            if len(params) > 1:
-                raise ValueError("stream methods with several params are not supported: " + m["name"])
             frame = res
-            if params:
+            if len(params) > 1:
+                # Several parameters travel as a named record: `(agentId: ..., id: ...)`.
+                if any(x[0]["optional"] for x in params):
+                    raise ValueError("optional stream parameters are not supported: " + m["name"])
+                arg_t = "({" + ", ".join(f"{t.dart} {d}" for p, d, t in params) + "})"
+                enc = "{" + ", ".join(f"{q(p['name'])}: {t.enc_expr('a.' + d)}" for p, d, t in params) + "}"
+            elif params:
                 p, dname, t = params[0]
                 arg_t = t.dart
                 enc = f"{{{q(p['name'])}: {t.enc_expr('a')}}}"
@@ -677,11 +683,16 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
                 arg_t = "NoStreamArgs"
                 enc = "const <String, Object?>{}"
             ep = f"{ns}/{m['name']}"
+            up = em.lower(m["uplink"], hint + "Uplink", "") if m.get("uplink") else None
+            if up is not None:
+                duplex = True
             stream_src += doc_lines(m.get("doc"), "  ")
             stream_src.append(f"  static final {camel(m['name'])} = StreamDescriptor<{arg_t}, {frame.dart}>(")
             stream_src.append(f"    endpoint: {q(ep)},")
             stream_src.append(f"    encodeArgs: ({'a' if params else '_'}) => {enc},")
             stream_src.append(f"    decodeFrame: (v) => {frame.dec}(v, {q(ep)}),")
+            if up is not None:
+                stream_src.append(f"    encodeUplink: (Object? u) => {up.enc_expr('(u as ' + up.dart + ')')},")
             stream_src.append("  );")
             stream_names.append(camel(m["name"]))
             continue
@@ -738,11 +749,14 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
            "  const StreamDescriptor({",
            "    required this.endpoint,",
            "    required this.encodeArgs,",
-           "    required this.decodeFrame,",
+           "    required this.decodeFrame,"] + (["    this.encodeUplink,"] if duplex else []) + [
            "  });",
            "  final String endpoint;",
            "  final Map<String, Object?> Function(Arg) encodeArgs;",
-           "  final Frame Function(Object?) decodeFrame;",
+           "  final Frame Function(Object?) decodeFrame;"] + (
+           ["  /// Encodes one uplink item of a duplex stream (the Client sends items after open);",
+            "  /// null for a stream that reads none. The argument is the method's uplink type.",
+            "  final Object? Function(Object?)? encodeUplink;"] if duplex else []) + [
            "}", "",
            "/// Argument of a stream method that takes no parameters.",
            "final class NoStreamArgs {",
