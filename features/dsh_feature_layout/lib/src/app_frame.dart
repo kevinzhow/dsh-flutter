@@ -354,7 +354,20 @@ class _AppFrameState extends State<AppFrame> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (windows) _Caption(chrome: chrome, fill: sidebarFill),
-              Expanded(child: columns),
+              // A phone draws edge to edge: the top bar, the drawer and the
+              // composer sit between the status bar and the gesture bar.
+              if (phone) SizedBox(height: MediaQuery.paddingOf(context).top),
+              Expanded(
+                child: phone
+                    ? MediaQuery.removePadding(
+                        context: context,
+                        removeTop: true,
+                        removeBottom: true,
+                        child: columns,
+                      )
+                    : columns,
+              ),
+              if (phone) SizedBox(height: MediaQuery.paddingOf(context).bottom),
               if (bottom != null)
                 ColoredBox(color: theme.bgBase, child: bottom),
             ],
