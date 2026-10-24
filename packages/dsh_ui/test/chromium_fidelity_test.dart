@@ -125,7 +125,73 @@ void main() {
 
   group('baseline nudge', () {
     test('a style without a fixed line height needs none', () {
-      expect(dshBaselineNudge(const TextStyle(fontSize: 14), 2), 0);
+      expect(dshBaselineNudge(const TextStyle(fontSize: 14)), 0);
+    });
+
+    // The test font (Ahem) has an ascent of 0.75em and a descent of 0.25em, so
+    // the two engines' rounding is easy to follow by hand.
+    TextStyle ahem(double size, double line) => TextStyle(
+      fontSize: size,
+      height: line / size,
+      leadingDistribution: TextLeadingDistribution.even,
+    );
+
+    test(
+      'Blink floors the half leading of rounded metrics, Flutter rounds',
+      () {
+        // 10px on 14: ascent 8, descent 3 (7.5 and 2.5 round up), leading 3.
+        // Blink: 8 + floor(1.5) = 9. Flutter: 7.5 + (14 - 10) / 2 = 9.5 rounds to 10.
+        expect(dshBaselineNudge(ahem(10, 14)), -1);
+        expect(dshBaselineNudge(ahem(10, 12)), -1);
+        // An even leading has no rounding to disagree about.
+        expect(dshBaselineNudge(ahem(10, 13)), 0);
+      },
+    );
+
+    test('1/64 layout units absorb float noise in height * size', () {
+      // 15/11 * 11 is not exactly 15 in floating point; the leading is 4.
+      expect(dshBaselineNudge(ahem(11, 15)), 0);
+    });
+  });
+
+  group('translucent colours', () {
+    final fill = const Color.fromRGBO(84, 85, 87, 0.5);
+
+    testWidgets('composite onto a declared surface in 8-bit arithmetic', (
+      t,
+    ) async {
+      late Color painted;
+      await t.pumpWidget(
+        DshSurface(
+          color: const Color(0xff151517),
+          child: Builder(
+            builder: (context) {
+              painted = DshSurface.paint(context, fill);
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+      // 84 * 128 / 255 rounds to 42, 21 * 127 / 255 floors to 10.
+      expect((painted.r * 255).round(), 52);
+      expect((painted.g * 255).round(), 53);
+      expect((painted.b * 255).round(), 55);
+      expect(painted.a, 1);
+    });
+
+    testWidgets('stay translucent, with an 8-bit alpha, over an unknown one', (
+      t,
+    ) async {
+      late Color painted;
+      await t.pumpWidget(
+        Builder(
+          builder: (context) {
+            painted = DshSurface.paint(context, fill);
+            return const SizedBox();
+          },
+        ),
+      );
+      expect(painted.a, 128 / 255);
     });
   });
 }

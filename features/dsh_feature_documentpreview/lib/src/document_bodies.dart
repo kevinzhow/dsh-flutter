@@ -204,7 +204,7 @@ class _SourceBodyState extends State<SourceBody> with DshHighlightListener {
           if (widget.highlight) ...[
             SizedBox(
               width: gutter,
-              child: Text(
+              child: DshChromeText(
                 '${i + 1}',
                 textAlign: TextAlign.right,
                 softWrap: false,
@@ -345,7 +345,7 @@ class _MarkdownBodyState extends State<MarkdownBody> {
                   width: dshHairline,
                 ),
               ),
-              child: Text(
+              child: DshChromeText(
                 split.source,
                 style: theme
                     .textStyle('--dsw-font-markdown-code-block-small')
@@ -391,7 +391,7 @@ class ImageBody extends StatelessWidget {
     final failed = i18n.t('sidebarImage', 'failed');
     if (bytes == null) {
       return Center(
-        child: Text(
+        child: DshChromeText(
           i18n.t('sidebarImage', 'unsupported'),
           style: theme
               .textStyle('--dsw-font-s-14')
@@ -417,7 +417,7 @@ class ImageBody extends StatelessWidget {
                 'preview',
                 params: {'name': name},
               ),
-              errorBuilder: (_, _, _) => Text(
+              errorBuilder: (_, _, _) => DshChromeText(
                 failed,
                 style: theme
                     .textStyle('--dsw-font-s-14')

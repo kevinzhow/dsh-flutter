@@ -70,13 +70,16 @@ class _ApprovalPanelState extends State<ApprovalPanel> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Text(t('waiting'), key: const ValueKey('approval-waiting')),
+                DshChromeText(
+                  t('waiting'),
+                  key: const ValueKey('approval-waiting'),
+                ),
               ],
             ),
             const SizedBox(height: 8),
             Semantics(
               label: t('detail.aria'),
-              child: Text(
+              child: DshChromeText(
                 reason ??
                     t(
                       'escalation',
@@ -93,14 +96,14 @@ class _ApprovalPanelState extends State<ApprovalPanel> {
                   key: const ValueKey('approval-reject'),
                   variant: DshButtonVariant.outline,
                   onPressed: _answered ? null : () => _answer('rejected'),
-                  child: Text(t('reject')),
+                  child: DshChromeText(t('reject')),
                 ),
                 const SizedBox(width: 8),
                 DshButton(
                   key: const ValueKey('approval-allow'),
                   variant: DshButtonVariant.primary,
                   onPressed: _answered ? null : () => _answer('allowed-once'),
-                  child: Text(t('allowOnce')),
+                  child: DshChromeText(t('allowOnce')),
                 ),
               ],
             ),

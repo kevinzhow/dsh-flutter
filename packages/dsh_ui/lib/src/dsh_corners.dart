@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:flutter/widgets.dart';
 
+import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'theme_access.dart';
 
 /// The curvature parameter of dsh's corner shape: `--dsw-corner-shape` is
@@ -180,6 +181,38 @@ extension DshCornerDecoration on DshThemeData {
 
 /// [context.dsh] sugar for the helpers above.
 extension DshCornerContext on BuildContext {
+  /// A bordered surface as dsh paints it: [radius] in the theme's corner shape,
+  /// an opaque [fill] and a [border] hairline of [borderWidth] that the web
+  /// client blends over that fill ([DshSurface.paint]). [fill] null is a
+  /// surface with no fill of its own, the border then blends over the declared
+  /// [DshSurface]. [over] names the surface behind when it is not the
+  /// ambient one (the caller sits outside the [DshSurface] it declares).
+  ShapeDecoration dshOutlined(
+    double radius, {
+    Color? fill,
+    Color? border,
+    Color? over,
+    double borderWidth = dshHairline,
+  }) {
+    final paintedFill = fill == null
+        ? null
+        : DshSurface.paint(this, fill, over: over);
+    return dsh.cornerDecoration(
+      radius,
+      color: paintedFill,
+      borderColor: border == null
+          ? null
+          : DshSurface.paint(
+              this,
+              border,
+              over: paintedFill != null && paintedFill.a >= 1
+                  ? paintedFill
+                  : over,
+            ),
+      borderWidth: borderWidth,
+    );
+  }
+
   /// The theme's [DshCornerBorder] of [radius].
   DshCornerBorder cornerBorder(double radius) => dsh.cornerBorder(radius);
 }
@@ -197,8 +230,29 @@ class DshSurface extends InheritedWidget {
 
   /// The surface behind [context]: the nearest [DshSurface], else `bg-base`.
   static Color of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<DshSurface>()?.color ??
-      context.dsh.bgBase;
+      maybeOf(context) ?? context.dsh.bgBase;
+
+  /// The surface behind [context] when a [DshSurface] declares it, else null.
+  static Color? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DshSurface>()?.color;
+
+  /// A translucent dsh colour as Chromium paints it. Chromium holds an alpha as
+  /// 8 bits and blends in 8-bit arithmetic that rounds the source share and
+  /// floors the backdrop's ([blendLikeChromium]); Skia blends in float, one
+  /// level off on many channels. With a declared [DshSurface] the colour is
+  /// composited onto it (opaque result, exact); without one the backdrop is
+  /// unknown (a card, an image), so it stays translucent with Chromium's
+  /// 8-bit alpha, which is as close as a blend over an unknown colour gets.
+  static Color paint(BuildContext context, Color colour, {Color? over}) {
+    if (colour.a >= 1) return colour;
+    final under = over ?? maybeOf(context);
+    if (under != null) return blendLikeChromium(colour, under);
+    return quantizeAlpha(colour);
+  }
+
+  /// [colour] with Chromium's 8-bit alpha (`0.5` is 128/255, not one half).
+  static Color quantizeAlpha(Color colour) =>
+      colour.withValues(alpha: (colour.a * 255).round() / 255);
 
   @override
   bool updateShouldNotify(DshSurface old) => old.color != color;

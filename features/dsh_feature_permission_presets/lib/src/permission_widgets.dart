@@ -318,7 +318,7 @@ class _ChipState extends State<_Chip> {
                   if (widget.glyph == null ||
                       !DshComposerRow.compactOf(context))
                     Flexible(
-                      child: Text(
+                      child: DshChromeText(
                         widget.label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

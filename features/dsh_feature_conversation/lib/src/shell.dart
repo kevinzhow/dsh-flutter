@@ -47,7 +47,7 @@ class ConversationShell extends StatelessWidget {
         } else if (s.openState != OpenState.open) {
           body = Center(
             key: const ValueKey('session-loading'),
-            child: Text(
+            child: DshChromeText(
               i18n.t(appNamespace, 'session.loading'),
               style: theme
                   .textStyle('--dsw-font-s-14')
@@ -78,7 +78,7 @@ class ConversationShell extends StatelessWidget {
                   DshSpace.lg,
                   0,
                 ),
-                child: Text(
+                child: DshChromeText(
                   '${i18n.t(appNamespace, 'session.agentError')}: ${s.lastAgentError}',
                   key: const ValueKey('agent-error'),
                   style: theme
@@ -140,7 +140,7 @@ class _Notice extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            DshChromeText(
               title,
               textAlign: TextAlign.center,
               style: theme
@@ -150,7 +150,7 @@ class _Notice extends StatelessWidget {
             if (body.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: DshSpace.sm),
-                child: Text(
+                child: DshChromeText(
                   body,
                   textAlign: TextAlign.center,
                   style: theme

@@ -42,7 +42,10 @@ class AppearanceRow extends StatelessWidget {
             border: separator
                 ? Border(
                     bottom: BorderSide(
-                      color: theme.color('--dsw-alias-border-l2'),
+                      color: DshSurface.paint(
+                        context,
+                        theme.color('--dsw-alias-border-l2'),
+                      ),
                       width: dshHairline,
                     ),
                   )

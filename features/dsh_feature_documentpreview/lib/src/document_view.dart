@@ -132,7 +132,7 @@ class _DocumentViewState extends State<DocumentView> {
     if (controller == null) {
       return Center(
         key: const ValueKey('document-unavailable'),
-        child: Text(
+        child: DshChromeText(
           _t('resourceUnavailable'),
           style: theme
               .textStyle('--dsw-font-s-14')
@@ -228,7 +228,7 @@ class _DocumentViewState extends State<DocumentView> {
         child: Row(
           children: [
             Expanded(
-              child: Text(
+              child: DshChromeText(
                 failureLine(widget.i18n, c.failure!),
                 style: _small(context),
               ),
@@ -277,7 +277,7 @@ class _DocumentViewState extends State<DocumentView> {
               padding: const EdgeInsets.all(DshSpace.lg),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
+                child: DshChromeText(
                   _t('openWith'),
                   style: theme
                       .textStyle('--dsw-font-xs-13')
@@ -299,7 +299,7 @@ class _DocumentViewState extends State<DocumentView> {
                     child: Row(
                       children: [
                         Expanded(
-                          child: Text(
+                          child: DshChromeText(
                             widget.i18n.t(r.titleNamespace, r.titleKey),
                             style: theme
                                 .textStyle('--dsw-font-base-16')
@@ -387,7 +387,7 @@ class _Header extends StatelessWidget {
                   key: const ValueKey('document-path'),
                   children: [
                     Flexible(
-                      child: Text(
+                      child: DshChromeText(
                         parts.directory,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -398,7 +398,7 @@ class _Header extends StatelessWidget {
                             ),
                       ),
                     ),
-                    Text(
+                    DshChromeText(
                       parts.name,
                       maxLines: 1,
                       style: theme
@@ -423,7 +423,7 @@ class _Header extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                             horizontal: DshSpace.sm,
                           ),
-                          child: Text(
+                          child: DshChromeText(
                             i18n.t(selected.titleNamespace, selected.titleKey),
                             style: theme
                                 .textStyle('--dsw-font-xs-13')
@@ -488,7 +488,7 @@ class _Bar extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(
+            child: DshChromeText(
               text,
               style: theme
                   .textStyle('--dsw-font-xxs-12')
@@ -524,7 +524,7 @@ class _TextButton extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: DshSpace.sm),
               child: ExcludeSemantics(
-                child: Text(
+                child: DshChromeText(
                   label,
                   style: theme
                       .textStyle('--dsw-font-s-14')
@@ -554,7 +554,7 @@ class _Loading extends StatelessWidget {
       children: [
         DshSpinner(size: 16, color: theme.color('--dsw-alias-label-tertiary')),
         const SizedBox(width: DshSpace.sm),
-        Text(
+        DshChromeText(
           label,
           style: theme
               .textStyle('--dsw-font-xs-13')
@@ -588,7 +588,7 @@ class _EmptyState extends StatelessWidget {
           children: [
             DshFileTypeIcon(path: path, size: 36),
             const SizedBox(height: DshSpace.md),
-            Text(
+            DshChromeText(
               line,
               textAlign: TextAlign.center,
               style: theme
@@ -651,7 +651,7 @@ class _FileActionsState extends State<_FileActions> {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (d.busy)
-            Text(
+            DshChromeText(
               key: const ValueKey('download-progress'),
               _a('file.downloading', {
                 'percent': ((d.fraction ?? 0) * 100).round(),
@@ -669,7 +669,7 @@ class _FileActionsState extends State<_FileActions> {
                     key: const ValueKey('file-open'),
                     variant: DshButtonVariant.primary,
                     onPressed: () => _run(d.open),
-                    child: Text(_a('file.open')),
+                    child: DshChromeText(_a('file.open')),
                   ),
                 if (actions.canOpen && actions.canSave)
                   const SizedBox(width: DshSpace.sm),
@@ -678,14 +678,14 @@ class _FileActionsState extends State<_FileActions> {
                     key: const ValueKey('file-save'),
                     variant: DshButtonVariant.outline,
                     onPressed: () => _run(d.save),
-                    child: Text(_a('file.save')),
+                    child: DshChromeText(_a('file.save')),
                   ),
               ],
             ),
           if (_note != null)
             Padding(
               padding: const EdgeInsets.only(top: DshSpace.sm),
-              child: Text(
+              child: DshChromeText(
                 _note!,
                 key: const ValueKey('download-note'),
                 textAlign: TextAlign.center,

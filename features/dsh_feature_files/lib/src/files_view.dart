@@ -70,7 +70,7 @@ class _FilesViewState extends State<FilesView> {
         key: const ValueKey('files-no-workspace'),
         child: Padding(
           padding: const EdgeInsets.all(DshSpace.xl),
-          child: Text(
+          child: DshChromeText(
             _t('noWorkspace'),
             textAlign: TextAlign.center,
             style: theme
@@ -238,7 +238,7 @@ class _Header extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(
+              child: DshChromeText(
                 path,
                 key: const ValueKey('files-root'),
                 maxLines: 1,
@@ -320,7 +320,7 @@ class _Row extends StatelessWidget {
                 const SizedBox(width: DshSpace.sm),
                 Expanded(
                   child: ExcludeSemantics(
-                    child: Text(
+                    child: DshChromeText(
                       name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -367,7 +367,7 @@ class _Note extends StatelessWidget {
         DshSpace.lg,
         DshSpace.xs,
       ),
-      child: Text(
+      child: DshChromeText(
         text,
         style: theme
             .textStyle('--dsw-font-xs-13')

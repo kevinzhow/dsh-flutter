@@ -94,7 +94,7 @@ class SidebarPanel extends StatelessWidget {
                               ),
                             ) ??
                             Center(
-                              child: Text(
+                              child: DshChromeText(
                                 i18n.t('sidebarRight', 'tab.unavailable'),
                                 style: theme
                                     .textStyle('--dsw-font-s-14')
@@ -239,7 +239,7 @@ class _TabChip extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-                child: Text(
+                child: DshChromeText(
                   label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

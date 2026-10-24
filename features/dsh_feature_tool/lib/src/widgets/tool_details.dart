@@ -34,7 +34,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
       children.add(
         Padding(
           padding: const EdgeInsets.fromLTRB(14, 10, 14, 6),
-          child: Text(
+          child: DshChromeText(
             m.caption!,
             style: base.sized(12).copyWith(color: caption),
           ),
@@ -45,7 +45,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
       children.add(
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          child: Text(
+          child: DshChromeText(
             m.empty ?? '',
             style: base.copyWith(color: theme.labelSecondary),
           ),
@@ -74,7 +74,7 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
                   color: theme.color('--dsw-alias-label-tertiary'),
                 ),
                 const SizedBox(width: 6),
-                Text(
+                DshChromeText(
                   unchanged.label,
                   style: base.copyWith(
                     color: theme.color('--dsw-alias-label-tertiary'),
@@ -94,17 +94,14 @@ class _ToolDetailsViewState extends State<ToolDetailsView> {
     }
     return Container(
       key: const ValueKey('tool-details'),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-alias-markdown-code-block'),
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        border: Border.all(
-          color: theme.color('--dsw-alias-border-l1'),
-          width: dshHairline,
-        ),
+      decoration: context.dshOutlined(
+        theme.radiusLg,
+        fill: theme.color('--dsw-alias-markdown-code-block'),
+        border: theme.color('--dsw-alias-border-l1'),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(theme.radiusLg),
-        child: ConstrainedBox(
+      child: theme.clipCorners(
+        theme.radiusLg,
+        ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 320),
           child: SingleChildScrollView(
             child: Column(
@@ -154,9 +151,9 @@ class _DetailItemView extends StatelessWidget {
         height: 18,
         child: Center(
           child: v == 'added'
-              ? Text('+', style: base.sized(16).copyWith(color: color))
+              ? DshChromeText('+', style: base.sized(16).copyWith(color: color))
               : v == 'removed'
-              ? Text('−', style: base.sized(16).copyWith(color: color))
+              ? DshChromeText('−', style: base.sized(16).copyWith(color: color))
               : status!.value == 'completed'
               ? DshIcon(DshIcons.check, size: 14, color: color)
               : status.value == 'in_progress'
@@ -176,7 +173,7 @@ class _DetailItemView extends StatelessWidget {
       if (status != null) ...[statusGlyph(), const SizedBox(width: 8)],
       if (item.title != null)
         Flexible(
-          child: Text(
+          child: DshChromeText(
             item.title!,
             style: base.copyWith(
               color: removed ? tertiary : theme.labelSecondary,
@@ -194,7 +191,7 @@ class _DetailItemView extends StatelessWidget {
           child: const SizedBox(width: 5, height: 5),
         ),
         const SizedBox(width: 5),
-        Text(
+        DshChromeText(
           item.badge!.label,
           style: base.sized(12).copyWith(color: _tone(theme, item.badge!.tone)),
         ),
@@ -203,11 +200,11 @@ class _DetailItemView extends StatelessWidget {
         const Spacer(),
         const SizedBox(width: 8),
         if (item.previousStatus != null)
-          Text(
+          DshChromeText(
             '${item.previousStatus} → ',
             style: base.sized(12).copyWith(color: tertiary),
           ),
-        Text(
+        DshChromeText(
           status.label +
               (item.change?.value == 'updated' && item.previousStatus == null
                   ? ' · ${item.change!.label}'
@@ -231,7 +228,7 @@ class _DetailItemView extends StatelessWidget {
           if (item.subtitle != null)
             Padding(
               padding: const EdgeInsets.only(top: 3),
-              child: Text(
+              child: DshChromeText(
                 item.subtitle!,
                 style: base.sized(12).copyWith(color: tertiary),
               ),
@@ -239,7 +236,7 @@ class _DetailItemView extends StatelessWidget {
           if (item.description != null)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
-              child: Text(
+              child: DshChromeText(
                 item.description!,
                 style: base.copyWith(color: caption),
               ),
@@ -257,14 +254,17 @@ class _DetailItemView extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: 5.5 * 13,
-                          child: Text(
+                          child: DshChromeText(
                             item.fields[i].label,
                             style: base.copyWith(color: caption),
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
-                          child: Text(item.fields[i].value, style: base),
+                          child: DshChromeText(
+                            item.fields[i].value,
+                            style: base,
+                          ),
                         ),
                       ],
                     ),

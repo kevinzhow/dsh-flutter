@@ -178,25 +178,17 @@ class _DshFileCardState extends State<DshFileCard> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DshChromeBaseline(
+          DshChromeText(
+            w.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: nameStyle,
-            child: Text(
-              w.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: nameStyle,
-              strutStyle: dshStrut(nameStyle),
-            ),
           ),
-          DshChromeBaseline(
+          DshChromeText(
+            meta,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: metaStyle,
-            child: Text(
-              meta,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: metaStyle,
-              strutStyle: dshStrut(metaStyle),
-            ),
           ),
         ],
       ),
@@ -515,25 +507,17 @@ class DshMessageFileCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DshChromeBaseline(
+                  DshChromeText(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: nameStyle,
-                    child: Text(
-                      name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: nameStyle,
-                      strutStyle: dshStrut(nameStyle),
-                    ),
                   ),
-                  DshChromeBaseline(
+                  DshChromeText(
+                    meta,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: metaStyle,
-                    child: Text(
-                      meta,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: metaStyle,
-                      strutStyle: dshStrut(metaStyle),
-                    ),
                   ),
                 ],
               ),
@@ -688,7 +672,7 @@ class DshImageFrame extends StatelessWidget {
                     ),
                   )
                 : variant == DshImageVariant.single
-                ? Text(
+                ? DshChromeText(
                     labels.loadFailed,
                     textAlign: TextAlign.center,
                     style: tertiary,
@@ -699,7 +683,7 @@ class DshImageFrame extends StatelessWidget {
                     // when the text is taller than the button.
                     CustomSingleChildLayout(
                       delegate: const _SafeCenterLayout(),
-                      child: Text(
+                      child: DshChromeText(
                         labels.loadFailed,
                         textAlign: TextAlign.center,
                         style: tertiary,
@@ -756,7 +740,7 @@ class DshImageFrame extends StatelessWidget {
                     size: 16,
                     color: theme.color('--dsw-alias-label-tertiary'),
                   )
-                : Text(
+                : DshChromeText(
                     labels.loading,
                     textAlign: TextAlign.center,
                     textWidthBasis: TextWidthBasis.longestLine,

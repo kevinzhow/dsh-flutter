@@ -31,7 +31,7 @@ class ExitBadge extends StatelessWidget {
                 child: const SizedBox(width: 4, height: 4),
               ),
               const SizedBox(width: 5),
-              Text(
+              DshChromeText(
                 label,
                 maxLines: 1,
                 style: theme

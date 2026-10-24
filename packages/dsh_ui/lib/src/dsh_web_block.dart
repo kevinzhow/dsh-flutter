@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_markdown.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -87,7 +88,7 @@ class DshWebBlock extends StatelessWidget {
     final theme = context.dsh;
     final uri = safeWebUri(targetUrl);
     final linkStyle = style.copyWith(color: theme.color('--dsw-alias-link'));
-    if (uri == null) return Text(label, style: style);
+    if (uri == null) return DshChromeText(label, style: style);
     final size = (style.fontSize ?? 14) * 1.1;
     return Text.rich(
       TextSpan(
@@ -150,13 +151,13 @@ class DshWebBlock extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               children: [
-                Text(
+                DshChromeText(
                   '${labels.http} $statusCode',
                   style: small.copyWith(color: theme.labelSecondary),
                 ),
                 if (truncated) ...[
                   const SizedBox(width: 12),
-                  Text(
+                  DshChromeText(
                     labels.contentTruncated,
                     style: small.copyWith(color: tertiary),
                   ),
@@ -181,7 +182,7 @@ class DshWebBlock extends StatelessWidget {
             if (!empty) const SizedBox(height: 8),
           ],
           if (empty)
-            Text(
+            DshChromeText(
               labels.noResults,
               style: small.copyWith(color: theme.labelSecondary),
             )
@@ -199,7 +200,7 @@ class DshWebBlock extends StatelessWidget {
                         children: [
                           SizedBox(
                             width: 34,
-                            child: Text(
+                            child: DshChromeText(
                               '${i + 1}.',
                               textAlign: TextAlign.right,
                               style: body.copyWith(
@@ -226,7 +227,7 @@ class DshWebBlock extends StatelessWidget {
                                     list[i].snippet!.isNotEmpty)
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
-                                    child: Text(
+                                    child: DshChromeText(
                                       list[i].snippet!,
                                       style: body
                                           .sized(13, line: 19)
@@ -239,7 +240,7 @@ class DshWebBlock extends StatelessWidget {
                                     list[i].publishedAt!.isNotEmpty)
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
-                                    child: Text(
+                                    child: DshChromeText(
                                       list[i].publishedAt!,
                                       style: small.copyWith(color: tertiary),
                                     ),
@@ -257,7 +258,7 @@ class DshWebBlock extends StatelessWidget {
           if (truncated)
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Text(
+              child: DshChromeText(
                 labels.sourcesTruncated,
                 style: small.copyWith(color: tertiary),
               ),

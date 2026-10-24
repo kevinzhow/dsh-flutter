@@ -4,6 +4,7 @@ import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_shimmer.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// The 24px process row of dsh's flow (`DisclosureRow`): a 16px leading box
@@ -73,7 +74,7 @@ class _DshDisclosureRowState extends State<DshDisclosureRow> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(widget.title, style: titleStyle, maxLines: 1),
+                DshChromeText(widget.title, style: titleStyle, maxLines: 1),
                 if (widget.collapsedContent != null)
                   Flexible(child: widget.collapsedContent!),
               ],

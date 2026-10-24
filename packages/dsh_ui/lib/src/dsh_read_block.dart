@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 
 import 'dsh_code_highlight.dart';
-import 'dsh_corners.dart';
-import 'dsh_text_baseline.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
+import 'dsh_corners.dart';
 import 'dsh_diff_block.dart' show DshFoldLabels;
 import 'dsh_head_tail_cap.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// Content lines shown before the middle collapses (dsh `DEFAULT_READ_MAX_LINES`).
@@ -95,13 +95,13 @@ class _DshReadBlockState extends State<DshReadBlock>
       if (spans == null) {
         return _wrapped
             ? Expanded(
-                child: Text(
+                child: DshChromeText(
                   dshWrapBreaks(l.text),
                   style: foreground,
                   strutStyle: dshStrut(foreground),
                 ),
               )
-            : Text(
+            : DshChromeText(
                 l.text,
                 softWrap: false,
                 style: foreground,
@@ -126,7 +126,7 @@ class _DshReadBlockState extends State<DshReadBlock>
         children: [
           SizedBox(
             width: gutter,
-            child: Text(
+            child: DshChromeText(
               '${l.number}',
               textAlign: TextAlign.right,
               softWrap: false,
@@ -152,7 +152,7 @@ class _DshReadBlockState extends State<DshReadBlock>
             onTap: () => setState(() => _expanded = !_expanded),
             child: Padding(
               padding: EdgeInsets.only(left: gutter + 12),
-              child: Text(
+              child: DshChromeText(
                 _expanded
                     ? w.labels.fold.collapse
                     : w.labels.fold.expand(cap.hidden),

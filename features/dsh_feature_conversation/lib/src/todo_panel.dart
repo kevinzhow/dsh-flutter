@@ -72,9 +72,10 @@ class _TodoPanelState extends State<TodoPanel> {
       onTap: () => setState(() => _collapsed = !_collapsed),
       child: Row(
         children: [
-          DshIcon(DshIcons.checklist, size: 16, color: tertiary),
+          // dsh's checklist and chevron artworks default to 14px (viewBox 16).
+          DshIcon(DshIcons.checklist, color: tertiary),
           const SizedBox(width: 10),
-          Text(
+          DshChromeText(
             _c('todo.title'),
             style: base.copyWith(
               height: 24 / 13,
@@ -84,7 +85,7 @@ class _TodoPanelState extends State<TodoPanel> {
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(
+            child: DshChromeText(
               todoProgressLabel(todos, widget.i18n),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -94,7 +95,6 @@ class _TodoPanelState extends State<TodoPanel> {
           const SizedBox(width: 10),
           DshIcon(
             _collapsed ? DshIcons.chevronUp : DshIcons.chevronDown,
-            size: 16,
             color: tertiary,
           ),
         ],
@@ -154,7 +154,7 @@ class _TodoPanelState extends State<TodoPanel> {
                             ),
                             const SizedBox(width: 10),
                             Expanded(
-                              child: Text(
+                              child: DshChromeText(
                                 todos[i].content,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

@@ -4,6 +4,7 @@ import 'dsh_code_language.dart';
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -85,14 +86,14 @@ class DshCodeToolbar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               children: [
-                Text(
+                DshChromeText(
                   dshSupportsHighlighting(lang) ? lang! : labels.codeLabel,
                   style: code.sized(11, line: 18).copyWith(color: tertiary),
                 ),
                 if (title != null) ...[
                   const SizedBox(width: 12),
                   Flexible(
-                    child: Text(
+                    child: DshChromeText(
                       title!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -104,7 +105,7 @@ class DshCodeToolbar extends StatelessWidget {
             ),
           ),
           if (status != null) ...[
-            Text(status!, style: base.copyWith(color: tertiary)),
+            DshChromeText(status!, style: base.copyWith(color: tertiary)),
             const SizedBox(width: 8),
           ],
           if (onWrap != null)

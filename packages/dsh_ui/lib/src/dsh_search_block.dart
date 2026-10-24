@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_copy_feedback.dart';
 import 'dsh_head_tail_cap.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 const int defaultSearchMaxLines = 16;
@@ -160,7 +161,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
 
     Widget render(_Row row) => switch (row) {
       _PathRow(:final path) => _line(
-        Text(
+        DshChromeText(
           path,
           softWrap: false,
           style: code.copyWith(color: theme.labelPrimary),
@@ -195,7 +196,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Flexible(
-                  child: Text(
+                  child: DshChromeText(
                     row.path,
                     softWrap: false,
                     overflow: TextOverflow.clip,
@@ -206,7 +207,10 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Text('${row.count}', style: code.copyWith(color: tertiary)),
+                DshChromeText(
+                  '${row.count}',
+                  style: code.copyWith(color: tertiary),
+                ),
               ],
             ),
           ),
@@ -236,7 +240,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
+                      child: DshChromeText(
                         summary,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -250,7 +254,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
                       GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () => copyText(_copyText()),
-                        child: Text(
+                        child: DshChromeText(
                           copied ? labels.copied : labels.copy,
                           key: const ValueKey('search-copy'),
                           style: theme
@@ -269,7 +273,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
                   horizontal: 14,
                   vertical: 12,
                 ),
-                child: Text(
+                child: DshChromeText(
                   labels.noResults,
                   style: code.copyWith(color: tertiary),
                 ),
@@ -299,7 +303,7 @@ class _DshSearchBlockState extends State<DshSearchBlock> with DshCopyFeedback {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 14,
                                   ),
-                                  child: Text(
+                                  child: DshChromeText(
                                     _expanded
                                         ? labels.collapse
                                         : labels.expand(cap.hidden),

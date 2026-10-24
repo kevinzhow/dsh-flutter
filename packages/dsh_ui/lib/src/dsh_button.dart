@@ -3,6 +3,9 @@ import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_corners.dart' show DshCornerDecoration, DshSurface;
+import 'theme_access.dart';
+
 /// Visual family of a [DshButton], as dsh's `ButtonVariant`.
 enum DshButtonVariant {
   /// Solid brand fill (`--dsw-alias-button-primary-*`).
@@ -122,27 +125,46 @@ class _DshButtonState extends State<DshButton> {
     }
     final small = widget.size == DshButtonSize.sm;
     final radius = small ? theme.radiusSm : theme.radiusMd;
-    final fill = _fill(theme);
+    final rawFill = _fill(theme);
+    // A disabled button is one translucent group (`opacity: 0.4` on the whole
+    // button), so its fill must stay translucent inside the group: the group
+    // composites onto the page, not the fill.
+    Color paint(Color c, {Color? over}) => _enabled
+        ? DshSurface.paint(context, c, over: over)
+        : DshSurface.quantizeAlpha(c);
+    final fill = rawFill == null ? null : paint(rawFill);
     final foreground = widget.variant == DshButtonVariant.primary
         ? theme.labelPrimaryForeground
         : theme.labelPrimary;
     final textStyle = theme
         .textStyle(small ? '--dsw-font-xxs-12' : '--dsw-font-s-14')
         .copyWith(color: foreground, decoration: TextDecoration.none);
-    final border = widget.variant == DshButtonVariant.outline
-        ? Border.all(color: theme.borderL3, width: 0.5)
+    // `.outline { border: 0.5px solid }` on a border-box button of fixed
+    // height: Chromium snaps the border to a whole pixel (`dshHairline`), and
+    // it widens the box (the content width is padding + label + both borders).
+    final outlined = widget.variant == DshButtonVariant.outline;
+    final borderWidth = outlined ? dshHairline : 0.0;
+    // Chromium paints the background under the border too, so the hairline
+    // lands on the fill when there is one.
+    // Chromium paints the background under the border too, so the hairline
+    // lands on the fill when there is one.
+    final borderColor = outlined
+        ? paint(theme.borderL3, over: fill != null && fill.a >= 1 ? fill : null)
         : null;
 
     final surface = DecoratedBox(
       key: DshButton.surfaceKey,
-      decoration: BoxDecoration(
+      decoration: theme.cornerDecoration(
+        radius,
         color: fill,
-        border: border,
-        borderRadius: BorderRadius.circular(radius),
+        borderColor: borderColor,
+        borderWidth: borderWidth,
       ),
       child: Container(
         height: small ? 28 : 36,
-        padding: EdgeInsets.symmetric(horizontal: small ? 10 : 14),
+        padding: EdgeInsets.symmetric(
+          horizontal: (small ? 10 : 14) + borderWidth,
+        ),
         child: DefaultTextStyle.merge(
           style: textStyle,
           child: IconTheme(
@@ -168,25 +190,27 @@ class _DshButtonState extends State<DshButton> {
     );
 
     final ringWidth = theme.focusRingWidth;
+    // dsh sets `outline-width` only; the button keeps the UA's `outline-style:
+    // auto`, which Chromium draws centred on the border edge (half the width
+    // outside, half inside), not outside it as a plain outline would.
+    final ringReach = ringWidth / 2;
     final stack = Stack(
       clipBehavior: Clip.none,
       children: [
         surface,
         if (_focusVisible && _enabled)
           Positioned(
-            left: -ringWidth,
-            top: -ringWidth,
-            right: -ringWidth,
-            bottom: -ringWidth,
+            left: -ringReach,
+            top: -ringReach,
+            right: -ringReach,
+            bottom: -ringReach,
             child: IgnorePointer(
               child: DecoratedBox(
                 key: DshButton.focusRingKey,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: theme.focusRingColor,
-                    width: ringWidth,
-                  ),
-                  borderRadius: BorderRadius.circular(radius + ringWidth),
+                decoration: theme.cornerDecoration(
+                  radius + ringReach,
+                  borderColor: theme.focusRingColor,
+                  borderWidth: ringWidth,
                 ),
               ),
             ),

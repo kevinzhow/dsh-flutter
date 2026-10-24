@@ -159,7 +159,7 @@ class UserBubble extends StatelessWidget {
                 if (steering)
                   Padding(
                     padding: const EdgeInsets.only(bottom: DshSpace.xs),
-                    child: Text(
+                    child: DshChromeText(
                       i18n.t('conversation', 'settings.enter.steer'),
                       style: _caption(context),
                     ),
@@ -254,7 +254,7 @@ class AssistantStepView extends StatelessWidget {
                 );
           children.add(
             gallery ??
-                Text(
+                DshChromeText(
                   i18n.t('conversation', 'image.label'),
                   style: _caption(context),
                 ),
@@ -265,7 +265,7 @@ class AssistantStepView extends StatelessWidget {
     }
     if (data.status == 'interrupted') {
       children.add(
-        Text(
+        DshChromeText(
           _chat(i18n, 'message.stopped'),
           key: const ValueKey('assistant-stopped'),
           style: _caption(context)
@@ -326,7 +326,7 @@ class _ReasoningRowState extends State<_ReasoningRow> {
             color: theme.color('--dsw-alias-label-tertiary'),
           ),
           const SizedBox(width: DshSpace.xs),
-          Text(
+          DshChromeText(
             streaming
                 ? i18n.t(appNamespace, 'session.reasoning.running')
                 : _chat(i18n, 'message.think'),
@@ -393,7 +393,9 @@ class _TurnTailViewState extends State<TurnTailView> {
           if (!mounted) return;
           setState(() => _copied = true);
         },
-        child: Text(widget.i18n.t('common', _copied ? 'copied' : 'copy')),
+        child: DshChromeText(
+          widget.i18n.t('common', _copied ? 'copied' : 'copy'),
+        ),
       ),
     );
   }
@@ -434,14 +436,14 @@ class TurnErrorView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                DshChromeText(
                   i18n.t(appNamespace, 'session.turn.failed'),
                   style: theme
                       .textStyle('--dsw-font-s-strong-14')
                       .copyWith(color: theme.labelPrimary),
                 ),
                 if (detail.isNotEmpty)
-                  Text(
+                  DshChromeText(
                     detail,
                     style: theme
                         .textStyle('--dsw-font-s-14')
@@ -471,7 +473,7 @@ class NoticeRow extends StatelessWidget {
         DshStatusDot(status!),
         const SizedBox(width: DshSpace.sm),
       ],
-      Flexible(child: Text(text, style: _caption(context))),
+      Flexible(child: DshChromeText(text, style: _caption(context))),
     ],
   );
 }

@@ -160,7 +160,7 @@ class _ToolRowState extends State<ToolRow> {
           onTap: () => linkable
               ? w.onOpenFile!(w.filePath!, line: w.filePathLine)
               : w.onOpenUrl!(w.href!),
-          child: Text(
+          child: DshChromeText(
             summaryText,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -176,7 +176,7 @@ class _ToolRowState extends State<ToolRow> {
       );
     } else {
       summaryWidget = Flexible(
-        child: Text(
+        child: DshChromeText(
           summaryText,
           key: const ValueKey('tool-summary'),
           maxLines: 1,
@@ -210,7 +210,7 @@ class _ToolRowState extends State<ToolRow> {
           if (suffix != null)
             Padding(
               padding: const EdgeInsets.only(left: 4),
-              child: Text(
+              child: DshChromeText(
                 suffix,
                 maxLines: 1,
                 softWrap: false,
@@ -262,7 +262,7 @@ class _ToolRowState extends State<ToolRow> {
               onTap: () {
                 if (!w.onPanel!()) _toggle();
               },
-              child: Text(
+              child: DshChromeText(
                 w.panelLabel!,
                 style: rowStyle.copyWith(color: theme.labelSecondary),
               ),

@@ -1,9 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'dsh_attachment.dart' show DshSpinner;
 import 'dsh_icon.dart';
 import 'dsh_icons.g.dart';
-import 'dsh_attachment.dart' show DshSpinner;
+import 'dsh_text_baseline.dart';
 import 'dsh_text_scale.dart';
 import 'theme_access.dart';
 
@@ -196,7 +197,7 @@ class _DshLightboxState extends State<DshLightbox> {
                           borderRadius: BorderRadius.circular(999),
                           color: theme.color('--dsw-specific-input-major'),
                         ),
-                        child: Text(
+                        child: DshChromeText(
                           widget.labels.position(_index + 1, total),
                           style: theme
                               .textStyle('--dsw-font-xxs-12')
@@ -287,7 +288,7 @@ class _LightboxPageState extends State<_LightboxPage> {
             ? GestureDetector(
                 key: const ValueKey('lightbox-retry'),
                 onTap: _load,
-                child: Text(
+                child: DshChromeText(
                   widget.labels.loadFailed,
                   style: theme
                       .textStyle('--dsw-font-s-14')
@@ -319,7 +320,7 @@ class _LightboxPageState extends State<_LightboxPage> {
                 fit: BoxFit.contain,
                 semanticLabel: widget.image.label,
                 gaplessPlayback: true,
-                errorBuilder: (_, _, _) => Text(
+                errorBuilder: (_, _, _) => DshChromeText(
                   widget.labels.loadFailed,
                   style: theme
                       .textStyle('--dsw-font-s-14')

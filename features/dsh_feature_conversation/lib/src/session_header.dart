@@ -91,7 +91,7 @@ class _SessionHeaderState extends State<SessionHeader> {
               const SizedBox(width: DshSpace.sm),
             ],
             Flexible(
-              child: Text(
+              child: DshChromeText(
                 title.isEmpty
                     ? widget.i18n.t(appNamespace, 'sessions.untitled')
                     : title,
@@ -105,7 +105,7 @@ class _SessionHeaderState extends State<SessionHeader> {
             ),
           ],
         ),
-        Text(
+        DshChromeText(
           model == null
               ? widget.i18n.t(appNamespace, 'session.model.unknown')
               : (model.effort == null

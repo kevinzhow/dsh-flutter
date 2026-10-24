@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 
 import 'dsh_code_highlight.dart';
-import 'dsh_corners.dart';
-import 'dsh_text_baseline.dart';
 import 'dsh_code_toolbar.dart';
 import 'dsh_copy_feedback.dart';
+import 'dsh_corners.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 /// Source split into lines with their colour spans (plain when no highlighter
@@ -222,7 +222,7 @@ class DshCodeLine extends StatelessWidget {
       children: [
         SizedBox(
           width: gutter,
-          child: Text(
+          child: DshChromeText(
             '$number',
             textAlign: TextAlign.right,
             softWrap: false,

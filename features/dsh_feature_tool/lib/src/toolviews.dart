@@ -247,7 +247,7 @@ WidgetBuilder? _cardFor(
           block,
           Padding(
             padding: const EdgeInsets.only(top: 4),
-            child: Text(
+            child: DshChromeText(
               search.recovery!,
               style: theme
                   .textStyle('--dsw-font-xs-13')
@@ -479,9 +479,13 @@ class _ImageCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(model.path, key: const ValueKey('image-path'), style: small),
+              DshChromeText(
+                model.path,
+                key: const ValueKey('image-path'),
+                style: small,
+              ),
               for (var i = 0; i < model.images.length; i++)
-                Text(
+                DshChromeText(
                   model.originalSizes[i] == null
                       ? t('row.imageSize', {
                           'width': model.images[i].width,
@@ -503,7 +507,7 @@ class _ImageCard extends StatelessWidget {
         if (model.extraText != null)
           Padding(
             padding: const EdgeInsets.only(top: 4),
-            child: Text(
+            child: DshChromeText(
               model.extraText!,
               style: theme
                   .textStyle('--dsw-font-xs-13')

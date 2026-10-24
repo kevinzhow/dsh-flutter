@@ -1,4 +1,5 @@
 import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshSurface;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -145,7 +146,9 @@ class ParityContext {
           color: theme.bgBase,
           padding: const EdgeInsets.all(16),
           alignment: Alignment.topLeft,
-          child: child,
+          // The frame is the page: translucent fills inside it composite onto
+          // `bg-base`, which dsh widgets learn through DshSurface.
+          child: DshSurface(color: theme.bgBase, child: child),
         ),
       ),
     ),
