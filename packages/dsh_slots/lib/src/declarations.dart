@@ -165,6 +165,33 @@ abstract final class DshSlots {
     SlotScope.session,
   );
 
+  /// The workspace picker of the blank-session hero (dsh `ui-conversation`;
+  /// filled by `ui-workspace`), and the hole under it that a directory picker
+  /// fills (`ui-directory-picker-browse`).
+  static const conversationHeroWorkspace = Slot<Object?, Object?>(
+    'conversation.hero.workspace',
+    SlotCardinality.single,
+    SlotScope.root,
+  );
+  static const conversationHeroWorkspaceDirectoryFlow = Slot<Object?, Object?>(
+    'conversation.hero.workspace.directoryFlow',
+    SlotCardinality.single,
+    SlotScope.root,
+  );
+
+  /// The workspace region of the session list (dsh `ui-sidebar` hole filled by
+  /// `ui-workspace`) and the directory-flow hole of its add action.
+  static const sidebarWorkspaces = Slot<Object?, Object?>(
+    'sidebar.workspaces',
+    SlotCardinality.single,
+    SlotScope.root,
+  );
+  static const sidebarWorkspacesDirectoryFlow = Slot<Object?, Object?>(
+    'sidebar.workspaces.directoryFlow',
+    SlotCardinality.single,
+    SlotScope.root,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
     conversationHeader,
@@ -190,5 +217,9 @@ abstract final class DshSlots {
     conversationInputPermission,
     conversationInputModel,
     conversationInputOverlay,
+    conversationHeroWorkspace,
+    conversationHeroWorkspaceDirectoryFlow,
+    sidebarWorkspaces,
+    sidebarWorkspacesDirectoryFlow,
   ];
 }

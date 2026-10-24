@@ -1,0 +1,350 @@
+import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+
+/// One row of the picker menu.
+class PickerRow {
+  const PickerRow({
+    required this.id,
+    required this.label,
+    required this.icon,
+    this.disabled = false,
+  });
+
+  final String id;
+  final String label;
+  final DshIconData icon;
+  final bool disabled;
+}
+
+/// dsh's anchored `Menu` as the workspace picker uses it (wide windows): a
+/// translucent card that opens below its anchor, rows of 34px with a leading
+/// folder, the selected one marked by a trailing check, and the add action
+/// pinned under a hairline below the scrolling rows.
+///
+/// Keyboard: Up and Down walk the rows (wrapping), Home and End jump, Enter,
+/// Space and Tab settle the focused row, Escape and Shift+Tab close.
+class PickerMenu extends StatefulWidget {
+  const PickerMenu({
+    super.key,
+    required this.link,
+    required this.rows,
+    required this.footer,
+    required this.selectedId,
+    required this.onSelect,
+    required this.onClose,
+  });
+
+  final LayerLink link;
+  final List<PickerRow> rows;
+  final List<PickerRow> footer;
+  final String? selectedId;
+
+  final void Function(String id) onSelect;
+  final VoidCallback onClose;
+
+  @override
+  State<PickerMenu> createState() => _PickerMenuState();
+}
+
+class _PickerMenuState extends State<PickerMenu> {
+  final FocusScopeNode _scope = FocusScopeNode(debugLabel: 'workspace-menu');
+
+  @override
+  void dispose() {
+    _scope.dispose();
+    super.dispose();
+  }
+
+  List<FocusNode> _rowNodes() => [
+    for (final n in _scope.traversalDescendants)
+      if (n.debugLabel?.startsWith('picker-row') ?? false) n,
+  ];
+
+  void _walk(int delta) {
+    final nodes = _rowNodes();
+    if (nodes.isEmpty) return;
+    final at = nodes.indexWhere((n) => n.hasPrimaryFocus);
+    final next = at == -1
+        ? (delta > 0 ? 0 : nodes.length - 1)
+        : (at + delta) % nodes.length;
+    nodes[next].requestFocus();
+  }
+
+  KeyEventResult _onKey(FocusNode node, KeyEvent event) {
+    if (event is KeyUpEvent) return KeyEventResult.ignored;
+    final key = event.logicalKey;
+    if (key == LogicalKeyboardKey.escape) {
+      widget.onClose();
+      return KeyEventResult.handled;
+    }
+    if (key == LogicalKeyboardKey.tab &&
+        HardwareKeyboard.instance.isShiftPressed) {
+      widget.onClose();
+      return KeyEventResult.handled;
+    }
+    if (key == LogicalKeyboardKey.arrowDown) {
+      _walk(1);
+      return KeyEventResult.handled;
+    }
+    if (key == LogicalKeyboardKey.arrowUp) {
+      _walk(-1);
+      return KeyEventResult.handled;
+    }
+    if (key == LogicalKeyboardKey.home) {
+      _rowNodes().firstOrNull?.requestFocus();
+      return KeyEventResult.handled;
+    }
+    if (key == LogicalKeyboardKey.end) {
+      _rowNodes().lastOrNull?.requestFocus();
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
+  /// The card grows with its widest row between 144 and 360 (dsh's `min-width`
+  /// and `max-width`): padding, icon and gap, the label as laid out, and the
+  /// trailing check of the selected row.
+  double _width(BuildContext context) {
+    final theme = context.dsh;
+    final style = theme.textStyle('--dsw-font-xs-13').copyWith(height: 20 / 13);
+    var widest = 0.0;
+    for (final row in [...widget.rows, ...widget.footer]) {
+      final painter = TextPainter(
+        text: TextSpan(text: row.label, style: style),
+        maxLines: 1,
+        textDirection: TextDirection.ltr,
+      )..layout();
+      final check = row.id == widget.selectedId ? 6 + 14 : 0;
+      final w = 8 + 14 + 6 + painter.width + check + 8;
+      painter.dispose();
+      if (w > widest) widest = w;
+    }
+    // A status line has its own natural width as well.
+    return (widest + 8).clamp(144.0, 360.0);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final screen = MediaQuery.sizeOf(context);
+    final menu = TapRegion(
+      // The chip that opened the menu shares the group: pressing it again is
+      // its own toggle, not an outside tap.
+      groupId: widget.link,
+      onTapOutside: (_) => widget.onClose(),
+      child: FocusScope(
+        node: _scope,
+        autofocus: true,
+        onKeyEvent: _onKey,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: 144,
+            maxWidth: 360,
+            // The card stops 12px short of the window's edges; taller content
+            // scrolls and keeps the pinned footer in view.
+            maxHeight: (screen.height - 24).clamp(0.0, 520.0),
+          ),
+          child: SizedBox(
+            width: _width(context),
+            child: DshMenuSurface(
+              key: const ValueKey('workspace-menu'),
+              child: Semantics(
+                container: true,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [for (final row in widget.rows) _row(row)],
+                        ),
+                      ),
+                    ),
+                    if (widget.footer.isNotEmpty)
+                      // `margin-top: 3px` above the rule, `padding-top: 3px` below it.
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: widget.rows.isEmpty ? 0 : 3,
+                        ),
+                        child: DshDecoratedBox(
+                          decoration: BoxDecoration(
+                            border: widget.rows.isEmpty
+                                ? null
+                                : Border(
+                                    top: BorderSide(
+                                      color: theme.color(
+                                        '--dsw-alias-border-l2',
+                                      ),
+                                      width: dshHairlineOf(context),
+                                    ),
+                                  ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: widget.rows.isEmpty ? 0 : 3,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                for (final r in widget.footer) _row(r),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    return CompositedTransformFollower(
+      link: widget.link,
+      showWhenUnlinked: false,
+      targetAnchor: Alignment.bottomLeft,
+      followerAnchor: Alignment.topLeft,
+      offset: const Offset(0, 4),
+      child: Align(
+        alignment: Alignment.topLeft,
+        // The menu hangs from the anchor, never wider than the window.
+        child: menu,
+      ),
+    );
+  }
+
+  Widget _row(PickerRow row) => _MenuItem(
+    key: ValueKey('workspace-row-${row.id}'),
+    row: row,
+    selected: row.id == widget.selectedId,
+    onPressed: () => widget.onSelect(row.id),
+  );
+}
+
+class _MenuItem extends StatefulWidget {
+  const _MenuItem({
+    super.key,
+    required this.row,
+    required this.selected,
+    required this.onPressed,
+  });
+
+  final PickerRow row;
+  final bool selected;
+  final VoidCallback onPressed;
+
+  @override
+  State<_MenuItem> createState() => _MenuItemState();
+}
+
+class _MenuItemState extends State<_MenuItem> {
+  bool _hover = false;
+  bool _focus = false;
+  late final FocusNode _node = FocusNode(
+    debugLabel: 'picker-row-${widget.row.id}',
+  );
+
+  @override
+  void dispose() {
+    _node.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh;
+    final row = widget.row;
+    final enabled = !row.disabled;
+    final lit = enabled && (_hover || _focus);
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      selected: widget.selected,
+      label: row.label,
+      excludeSemantics: true,
+      child: Opacity(
+        opacity: enabled ? 1 : 0.4,
+        child: FocusableActionDetector(
+          focusNode: _node,
+          enabled: enabled,
+          mouseCursor: enabled
+              ? SystemMouseCursors.click
+              : SystemMouseCursors.forbidden,
+          onShowHoverHighlight: (v) => setState(() => _hover = v),
+          onShowFocusHighlight: (v) => setState(() => _focus = v),
+          shortcuts: const {
+            SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+            SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+            SingleActivator(LogicalKeyboardKey.tab): ActivateIntent(),
+          },
+          actions: {
+            ActivateIntent: CallbackAction<ActivateIntent>(
+              onInvoke: (_) {
+                widget.onPressed();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: enabled ? widget.onPressed : null,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 34),
+              child: DshDecoratedBox(
+                decoration: BoxDecoration(
+                  color: lit
+                      ? theme.color('--dsw-alias-interactive-bg-hover')
+                      : null,
+                  borderRadius: BorderRadius.circular(theme.radiusMd),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 6,
+                  ),
+                  child: Row(
+                    children: [
+                      DshIcon(
+                        row.icon,
+                        size: 14,
+                        color: theme.color('--dsw-alias-menu-icon'),
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: DshChromeText(
+                          row.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme
+                              .textStyle('--dsw-font-xs-13')
+                              .copyWith(
+                                color: theme.labelPrimary,
+                                height: 20 / 13,
+                              ),
+                        ),
+                      ),
+                      if (widget.selected) ...[
+                        const SizedBox(width: 6),
+                        DshIcon(
+                          DshIcons.check,
+                          size: 14,
+                          color: theme.labelPrimary,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

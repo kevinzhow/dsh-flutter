@@ -12,7 +12,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 22 | 16 | 54 | 10 | 102 |
+| Sessions and chat | 31 | 17 | 46 | 8 | 102 |
 | Input and commands | 7 | 3 | 14 | 1 | 25 |
 | Tools and approvals | 9 | 2 | 1 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 0 | 1 | 18 | 1 | 20 |
@@ -21,13 +21,13 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 14 | 3 | 2 | 6 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 69 | 33 | 166 | 51 | 319 |
+| **all** | 78 | 34 | 158 | 49 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 13 | 13 | 24 | 6 | 56 |
-| remote | 31 | 4 | 86 | 25 | 146 |
-| slot | 22 | 16 | 43 | 19 | 100 |
+| package | 14 | 14 | 23 | 5 | 56 |
+| remote | 36 | 4 | 82 | 24 | 146 |
+| slot | 25 | 16 | 40 | 19 | 100 |
 | settings | 3 | 0 | 13 | 1 | 17 |
 
 ## Packages still to do, by priority
@@ -35,16 +35,15 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 **P1**
 
 - `ui-commands` (partial): Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands.
-- `ui-directory-picker-browse` (missing): Browse the host's folders and create a new one to choose where a session works. Needs directoryPicker/list and createDirectory; new sessions currently always start in the host default workspace.
 - `ui-input-trigger` (partial): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.
 - `ui-sidebar` (partial): Browse sessions in a tree grouped by workspace, search them, and see which are running. A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu.
 - `ui-user-questions` (partial): Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code.
-- `ui-workspace` (missing): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. workspace/* is not generated or called, and the session list has no workspace concept.
+- `ui-workspace` (partial): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session ("+": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start.
 
 **P2**
 
 - `ui-chat` (partial): Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. No fork-at-message, no like/dislike. Links and file paths in answers are styled but not tappable (DshMarkdown has no link handler).
-- `ui-conversation` (partial): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. Plain send and stop only. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, empty-session hero (workspace, agent preset and options), composer toolbar seats (activity, left, right, overlay), in-composer plan control.
+- `ui-conversation` (partial): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.
 - `ui-deliverables` (partial): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer.
 - `ui-goal` (missing): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. goals/* is not generated or called; the get_goal, create_goal and update_goal tool rows only show raw details.
 - `ui-plan` (partial): Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview.
@@ -54,6 +53,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 **P3**
 
 - `ui-agent-preset` (missing): Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice.
+- `ui-directory-picker-native` (missing): Open the host operating system's own folder chooser to pick a working directory. Desktop follow-up: opens the host operating system's own folder chooser, which only helps when Whalee runs on the host machine itself. The in-app browser (ui-directory-picker-browse) covers picking today.
 - `ui-jobs` (missing): List the session's background jobs and watch or kill one from its streaming output panel. job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only.
 - `ui-plugin-manager` (missing): Install, enable, disable, retry and remove plugin packages on the host. pluginManager/* is not generated; only listBundles is called, to read the host version.
 - `ui-schedule` (missing): List, edit and delete the host's scheduled tasks and a session's reminders. schedule/* is not generated or called; schedule_* tool rows show raw details only.
@@ -83,30 +83,30 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 ## Sessions and chat
 
-22 ported, 16 partial, 54 missing, 10 na.
+31 ported, 17 partial, 46 missing, 8 na.
 
 ### package (10)
 
 | item | status | what the user can do | Whalee |
 |---|---|---|---|
 | `ui-chat` | partial | Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. | `features/dsh_feature_chat`, `packages/dsh_conversation/lib/src/chat`; Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. No fork-at-message, no like/dislike. Links and file paths in answers are styled but not tappable (DshMarkdown has no link handler). |
-| `ui-conversation` | partial | The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. | `features/dsh_feature_conversation`, `packages/dsh_conversation`; Plain send and stop only. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, empty-session hero (workspace, agent preset and options), composer toolbar seats (activity, left, right, overlay), in-composer plan control. |
-| `ui-directory-picker-browse` | missing | Browse the host's folders and create a new one to choose where a session works. | Needs directoryPicker/list and createDirectory; new sessions currently always start in the host default workspace. |
-| `ui-directory-picker-native` | na | Open the host operating system's own folder chooser to pick a working directory. | The chooser opens on the host machine's display (desktop or host OS), which a phone user cannot see; the in-app browser (ui-directory-picker-browse) is the remote equivalent. |
+| `ui-conversation` | partial | The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. | `features/dsh_feature_conversation`, `packages/dsh_conversation`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control. |
+| `ui-directory-picker-browse` | ported | Browse the host's folders and create a new one to choose where a session works. | `features/dsh_feature_directory_picker_browse`, `features/dsh_feature_directory_picker_browse/lib/src/browser_model.dart`, `features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart`; The Miller browser (dsh's dialog at every width: two columns of at least 256px that scroll sideways on a narrow card, the child pane pinned into view, the wrapping footer), the editable path with prefix filtering, hidden-file toggle, New folder, slow-scan pill and truncation note. The Remote caller has no per-call abort, so a superseded scan is dropped on arrival instead of cancelled on the wire. |
+| `ui-directory-picker-native` | missing | Open the host operating system's own folder chooser to pick a working directory. | Desktop follow-up: opens the host operating system's own folder chooser, which only helps when Whalee runs on the host machine itself. The in-app browser (ui-directory-picker-browse) covers picking today. |
 | `ui-message-feedback` | missing | Like or dislike an answer and send a written remark about a message or the session. | messageFeedback/* and sessionFeedback/record are not generated or called. |
 | `ui-session` | ported | Open a session, keep its live state and history in step with the host, and send, queue and cancel prompts. | `packages/dsh_models/lib/src/session_manager.dart`, `packages/dsh_models/lib/src/session.dart`, `apps/dsh_flutter/lib/src/session_controller.dart` |
 | `ui-sidebar` | partial | Browse sessions in a tree grouped by workspace, search them, and see which are running. | `features/dsh_feature_session`, `apps/dsh_flutter/lib/src/screens/sessions_screen.dart`; A flat list sorted by last update with a running dot, working-directory name and relative time, pull to refresh, new session. No grouping or tree, search, rename, pin, archive, fork or per-row menu. |
 | `ui-subagent` | partial | See the subagents a session started, read each child's transcript, continue a child and mention one with "@". | `features/dsh_feature_subagent`; Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab. |
 | `ui-trajectory` | missing | Read the full event ledger of a session with a timing overview (a developer view). | No trajectory conversation view. |
-| `ui-workspace` | missing | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | workspace/* is not generated or called, and the session list has no workspace concept. |
+| `ui-workspace` | partial | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | `features/dsh_feature_workspace`, `packages/dsh_models/lib/src/workspace_list.dart`, `packages/dsh_models/lib/src/workspace_navigation.dart`, `features/dsh_feature_conversation/lib/src/hero.dart`; Ported: the workspace follow stream and list, the picker (the anchored menu), the add-workspace action with the directory flow and its error dialog, the blank-session hero with its workspace chip, New session ("+": explicit, current, else most recent workspace; a pick reuses the first blank session and moves the draft text), and the first-use default workspace. Missing: the workspace tree of the session list (grouping, pin, archive, rename, delete, reorder, search, session row actions, shortcuts, toasts), staged attachments following a workspace pick, and restoring the last session at start. |
 
 ### remote (39)
 
 | item | status | what the user can do | Whalee |
 |---|---|---|---|
-| `directoryPicker/createDirectory` | missing | Create a new folder while browsing the host's folders to choose a working directory. | In-app folder browser (ui-directory-picker-browse); not built. |
-| `directoryPicker/list` | missing | List the folders inside one host directory for the in-app folder browser. | In-app folder browser (ui-directory-picker-browse); not built. |
-| `directoryPicker/pick` | na | Open the host operating system's folder chooser on the host machine. | Opens the host OS folder chooser on the host machine's display; a phone user cannot use it. |
+| `directoryPicker/createDirectory` | ported | Create a new folder while browsing the host's folders to choose a working directory. | `features/dsh_feature_directory_picker_browse/lib/src/register.dart` |
+| `directoryPicker/list` | ported | List the folders inside one host directory for the in-app folder browser. | `features/dsh_feature_directory_picker_browse/lib/src/register.dart` |
+| `directoryPicker/pick` | missing | Open the host operating system's folder chooser on the host machine. | Desktop follow-up with ui-directory-picker-native: the host OS chooser opens on the host machine's display. |
 | `messageFeedback/delete` | missing | Withdraw a like or dislike. | Like and dislike on messages (ui-message-feedback); not built. |
 | `messageFeedback/list` | missing | Load the likes and dislikes already given. | Like and dislike on messages (ui-message-feedback); not built. |
 | `messageFeedback/put` | missing | Like or dislike a message. | Like and dislike on messages (ui-message-feedback); not built. |
@@ -133,10 +133,10 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | `subagents/interruptByParent` | missing | Interrupt a running subagent from its parent session. | Interrupting a child agent from the parent; not built. |
 | `subagents/prompt` | missing | Send a message to a subagent that can continue. | Sending a message to a child agent; child transcripts are read-only. |
 | `workspace/archiveSession` | missing | Hide a session from workspace lists. | Workspaces (ui-workspace); not built. |
-| `workspace/create` | missing | Add a project folder as a workspace. | Workspaces (ui-workspace); not built. |
+| `workspace/create` | ported | Add a project folder as a workspace. | `packages/dsh_models/lib/src/workspace_list.dart`, `features/dsh_feature_workspace/lib/src/workspace_picker.dart` |
 | `workspace/delete` | missing | Remove a workspace from the list, keeping its files and sessions. | Workspaces (ui-workspace); not built. |
-| `workspace/follow` | missing | Follow the list of workspaces and their session grouping live. | Workspaces (ui-workspace); not built. |
-| `workspace/initializeDefault` | missing | Create the default workspace on first use. | Workspaces (ui-workspace); not built. |
+| `workspace/follow` | ported | Follow the list of workspaces and their session grouping live. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/backend.dart` |
+| `workspace/initializeDefault` | ported | Create the default workspace on first use. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart` |
 | `workspace/insertBefore` | missing | Reorder workspaces. | Workspaces (ui-workspace); not built. |
 | `workspace/insertSessionBefore` | missing | Reorder sessions inside a workspace. | Workspaces (ui-workspace); not built. |
 | `workspace/pinSession` | missing | Pin a session to the top of its workspace. | Workspaces (ui-workspace); not built. |
@@ -157,15 +157,15 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | `conversation.chat.turnTail` | ported | Ordered feature contributions before a completed Turn's action row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plan/lib/src/register.dart` |
 | `conversation.chat.user.images` | ported | User-message images, including pending and local-echo previews, independently replaceable from output images. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_chat/lib/src/chat_nodes.dart` |
 | `conversation.composer` | ported | Selector-routed replacements for the current Session's resident composer. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_approval/lib/src/register.dart`, `features/dsh_feature_user_questions/lib/src/register.dart`; Occupants: default composer, approval, question; no read-only subagent composer seat. |
-| `conversation.composer.bar` | partial | Resident composer body, including the no-Session inert state. | `features/dsh_feature_conversation/lib/src/composer.dart`; The composer is a fixed widget (DefaultComposer), not an extension seat. |
+| `conversation.composer.bar` | partial | Resident composer body, including the no-Session inert state. | `features/dsh_feature_conversation/lib/src/composer.dart`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is a fixed widget (DefaultComposer, ComposerCard), not an extension seat; its inert no-workspace form is InertComposer. |
 | `conversation.composer.dock` | missing | Ambient entries below the composer card. |  |
 | `conversation.header` | ported | Resident navigation container, including when no Session is selected. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_conversation/lib/src/register.dart` |
 | `conversation.header.leading` | na | Global navigation before the Session title, available without a Session. | Chrome of the desktop three-column web shell (rail, window chrome, panel headers); Whalee navigates with a page stack or two panes and has no such seat. |
 | `conversation.hero.agentPreset` | missing | Agent-preset control staged for a New Session. |  |
 | `conversation.hero.brand.mark` | na | Brand mark shown before the blank-session headline. | DeepSeek brand mark; Whalee uses no DeepSeek brand asset. |
 | `conversation.hero.options` | missing | Compact options right-aligned in the New Session row after the workspace and preset controls; rendered only with a Session. |  |
-| `conversation.hero.workspace` | missing | Workspace picker shown by the blank-session Hero. |  |
-| `conversation.hero.workspace.directoryFlow` | missing | Directory-flow hole under the conversation empty-state picker (declared by the WorkspacePicker entry). |  |
+| `conversation.hero.workspace` | ported | Workspace picker shown by the blank-session Hero. | `features/dsh_feature_workspace/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/hero.dart` |
+| `conversation.hero.workspace.directoryFlow` | ported | Directory-flow hole under the conversation empty-state picker (declared by the WorkspacePicker entry). | `features/dsh_feature_directory_picker_browse/lib/src/register.dart`, `features/dsh_feature_workspace/lib/src/workspace_picker.dart` |
 | `conversation.input.activity` | missing | Compact action after the model selector; it can expand across the toolbar while retaining the editor and submit action. |  |
 | `conversation.input.attachments` | ported | Optional draft-attachment rail and drop target. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_attachment/lib/src/register.dart` |
 | `conversation.input.dock` | ported | Full-width entries above the composer card. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plan/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/register.dart`; No queue dock occupant. |
@@ -195,8 +195,8 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | `sidebar.session.row.leading` | missing | Leading decoration of one Session row, in the 16px cell before the title that the row's own state dot otherwise occupies. |  |
 | `sidebar.settings` | na | The settings seat at the sidebar foot. | Chrome of the desktop three-column web shell (rail, window chrome, panel headers); Whalee navigates with a page stack or two panes and has no such seat. |
 | `sidebar.toggle.badge` | na | Non-interactive notification inside the collapsed sidebar expand button. | Chrome of the desktop three-column web shell (rail, window chrome, panel headers); Whalee navigates with a page stack or two panes and has no such seat. |
-| `sidebar.workspaces` | partial | The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog. | `features/dsh_feature_session/lib/src/session_list_view.dart`; A flat session list; no workspaces, search or grouping. |
-| `sidebar.workspaces.directoryFlow` | missing | Directory-flow hole under the sidebar browsing region (declared by the WorkspaceBrowser entry). |  |
+| `sidebar.workspaces` | partial | The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog. | `features/dsh_feature_workspace/lib/src/add_action.dart`, `apps/dsh_flutter/lib/src/screens/sessions_screen.dart`; The add-workspace action sits in the session list header; the list itself stays flat (no workspace groups, search or row actions). |
+| `sidebar.workspaces.directoryFlow` | ported | Directory-flow hole under the sidebar browsing region (declared by the WorkspaceBrowser entry). | `features/dsh_feature_directory_picker_browse/lib/src/register.dart`, `features/dsh_feature_workspace/lib/src/add_action.dart` |
 | `sidebar.workspaces.session.menu.item` | missing | The rows of one Session's "..." menu, in ascending `order`. |  |
 | `sidebar.workspaces.session.row.action` | missing | The hover buttons at the end of one Session row, in ascending `order`, after the "..." menu trigger. |  |
 | `workspace.toast` | missing | Workspace notices selected by their existing business discriminator. |  |

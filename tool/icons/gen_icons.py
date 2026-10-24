@@ -65,6 +65,7 @@ ICONS = {
     'IconPaperPlaneOutlineRegular': 'paperPlane',
     'IconPaperclipOutlineRegular': 'paperclip',
     'IconCompactOutlineRegular': 'compact',
+    'IconProjectAddOutlineRegular': 'projectAdd',
 }
 # Permission glyphs: ui-primitives PermissionIcon.tsx draws them as local `function XArtwork({ size = 16, ..., strokeWidth })`
 # components; the Regular variants (1px stroke) are the ones the composer and the settings rows use.

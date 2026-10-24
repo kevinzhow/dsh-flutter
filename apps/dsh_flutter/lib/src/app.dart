@@ -10,6 +10,7 @@ import 'app_identity.dart';
 import 'platform/pickers.dart';
 import 'screens/pairing_screen.dart';
 import 'screens/session_screen.dart';
+import 'screens/new_session_screen.dart';
 import 'screens/sessions_screen.dart';
 
 /// Width from which the app shows the list and the session side by side.
@@ -154,8 +155,9 @@ class _Narrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final session = controller.openSession;
+    final fresh = session == null && controller.newSessionPending;
     return PopScope(
-      canPop: session == null,
+      canPop: session == null && !fresh,
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop) controller.closeSession();
       },
@@ -164,6 +166,11 @@ class _Narrow extends StatelessWidget {
               key: ValueKey('session-${session.sessionId}'),
               controller: controller,
               session: session,
+              onBack: controller.closeSession,
+            )
+          : fresh
+          ? NewSessionView(
+              controller: controller,
               onBack: controller.closeSession,
             )
           : SessionsPane(
@@ -203,7 +210,9 @@ class _Wide extends StatelessWidget {
         ),
         Expanded(
           child: session == null
-              ? const SizedBox.shrink()
+              ? (controller.newSessionPending
+                    ? NewSessionView(controller: controller)
+                    : const SizedBox.shrink())
               : SessionView(
                   key: ValueKey('session-${session.sessionId}'),
                   controller: controller,

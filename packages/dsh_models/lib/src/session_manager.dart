@@ -203,16 +203,24 @@ class SessionManager {
   }
 
   /// `session/create`; the new row appears via the `api-session/added` event
-  /// (or immediately as a placeholder if it is slower).
+  /// (or immediately as a placeholder if it is slower). [sessionId] names a
+  /// blank session to reuse while the Host finds it reusable (dsh's
+  /// `connectWorkspace` does that for a workspace's first blank row); the Host
+  /// answers with the session it used, which may be a new one.
+  /// [placeholderCwd] only labels the row shown before the Host's own arrives
+  /// (a session made for a workspace has no `cwd` of its own to send).
   Future<Session> create({
     String? cwd,
     String? workspaceId,
     String? agentPreset,
+    String? sessionId,
+    String? placeholderCwd,
   }) async {
     final value = await _transport.create({
       if (cwd != null) 'cwd': cwd,
       if (workspaceId != null) 'workspaceId': workspaceId,
       if (agentPreset != null) 'agentPreset': agentPreset,
+      if (sessionId != null) 'sessionId': sessionId,
     });
     final id = value['sessionId']! as String;
     if (_summaries.every((s) => s.sessionId != id)) {
@@ -224,7 +232,7 @@ class SessionManager {
             running: false,
             blank: true,
             agentAvailable: true,
-            cwd: cwd,
+            cwd: cwd ?? placeholderCwd,
           ),
         ),
       );

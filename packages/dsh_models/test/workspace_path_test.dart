@@ -2,6 +2,7 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:test/test.dart';
 
 void main() {
+  workspaceTitleTests();
   test('addresses inside the workspace become relative', () {
     expect(
       fileAddressFor('s1', '/w/proj', '/w/proj/src/a b.dart'),
@@ -63,4 +64,25 @@ void main() {
     expect(pathPartsOf('/a/b/'), (directory: '/a/', name: 'b'));
     expect(pathPartsOf(r'C:\x\y.txt'), (directory: r'C:\x\', name: 'y.txt'));
   });
+}
+
+void workspaceTitleTests() {
+  test('only the automatic first-use title reads as the localized default', () {
+    expect(
+      workspaceDisplayTitle('default-workspace', 'Default workspace'),
+      'Default workspace',
+    );
+    expect(workspaceDisplayTitle('default-workspace', '默认工作区'), '默认工作区');
+    expect(workspaceDisplayTitle('proj', 'Default workspace'), 'proj');
+    expect(workspaceDisplayTitle('', 'Default workspace'), '');
+  });
+
+  test(
+    'the chip label is the last path segment, or the raw cwd for a root',
+    () {
+      expect(workspaceTitleOf('/work/proj/'), 'proj');
+      expect(workspaceTitleOf(r'C:\work\proj'), 'proj');
+      expect(workspaceTitleOf('/'), '');
+    },
+  );
 }

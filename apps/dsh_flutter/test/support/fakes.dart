@@ -106,6 +106,29 @@ class FakeBackend implements HostBackend {
     ),
   );
 
+  /// The workspace follow stream: tests publish frames with [emitWorkspaces].
+  final StreamController<GenerationFrame> workspaceFrames =
+      StreamController<GenerationFrame>.broadcast(sync: true);
+
+  @override
+  Stream<GenerationFrame> workspaceFollow() => workspaceFrames.stream;
+
+  /// Publish a workspace baseline as the Host's follow stream opens with.
+  void emitWorkspaces(
+    List<Map<String, Object?>> items, {
+    List<String> archived = const [],
+    List<String> pinned = const [],
+  }) => workspaceFrames.add(
+    StreamItem(1, {
+      'type': 'baseline',
+      'value': {
+        'items': items,
+        'archivedSessionIds': archived,
+        'pinnedSessionIds': pinned,
+      },
+    }),
+  );
+
   @override
   void reconnectNow() => reconnects++;
   final List<(Uri, String)> connects = [];
@@ -153,12 +176,13 @@ Map<String, Object?> listRow(
   String id, {
   String? title,
   bool running = false,
+  bool blank = false,
   String cwd = '/work/project-x',
 }) => {
   'sessionId': id,
   'updatedAt': DateTime.now().millisecondsSinceEpoch,
   'running': running,
-  'blank': false,
+  'blank': blank,
   'agentAvailable': true,
   'cwd': cwd,
   if (title != null)

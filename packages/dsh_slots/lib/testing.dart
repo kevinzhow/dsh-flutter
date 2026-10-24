@@ -48,6 +48,8 @@ SessionOwner testSessionOwner(
   Session? session,
   AttachmentServices? attachments,
   SessionFileServices? files,
+  String? Function()? cwdReader,
+  bool? Function()? blankReader,
 }) {
   final s = session ?? Session(sessionId, FakeTransport());
   return SessionOwner(
@@ -59,6 +61,8 @@ SessionOwner testSessionOwner(
     actions: actions ?? FakeActions(),
     attachments: attachments,
     files: files,
+    cwdReader: cwdReader,
+    blankReader: blankReader,
   );
 }
 

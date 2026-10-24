@@ -5,6 +5,7 @@ import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
 import 'composer.dart';
+import 'hero.dart';
 
 /// The conversation shell of one session (dsh `ConversationSession`): the
 /// view area fed by `conversation.view`, the composer area fed by the
@@ -19,6 +20,7 @@ class ConversationShell extends StatelessWidget {
     required this.viewSlot,
     required this.composerSlot,
     required this.dockSlot,
+    this.workspaces,
   });
 
   final SessionOwner owner;
@@ -27,6 +29,9 @@ class ConversationShell extends StatelessWidget {
   final Slot<SessionOwner, Widget> viewSlot;
   final Slot<SessionOwner, Widget> composerSlot;
   final Slot<SessionOwner, Widget> dockSlot;
+
+  /// The workspace list and navigation of the blank-session hero.
+  final WorkspaceServices? workspaces;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +62,24 @@ class ConversationShell extends StatelessWidget {
         } else {
           body = views.isEmpty ? const SizedBox.shrink() : views.first;
         }
+        // A blank session shows the hero: the headline, the workspace chip and
+        // the composer, instead of an empty transcript (dsh's hero phase).
+        final hero =
+            s.blank &&
+            !s.removed &&
+            (s.openState == OpenState.open || owner.summaryBlank == true);
         final composer = s.removed
             ? _Notice(title: i18n.t(appNamespace, 'session.removed'), body: '')
             : (slots.renderChain(composerSlot, owner) ??
-                  DefaultComposer(owner: owner, i18n: i18n, slots: slots));
+                  DefaultComposer(
+                    owner: owner,
+                    i18n: i18n,
+                    slots: slots,
+                    hero: hero,
+                    placeholder: hero
+                        ? i18n.t('conversation', 'placeholder.hero')
+                        : null,
+                  ));
         final sidebar =
             MediaQuery.sizeOf(context).width >= sidebarInlineMinWindowWidth
             ? slots.renderSingle(
@@ -89,27 +108,41 @@ class ConversationShell extends StatelessWidget {
                         ),
                   ),
                 ),
-              Expanded(child: body),
-              if (!s.removed)
-                for (final dock in slots.renderList(dockSlot, owner))
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxWidth: DshSpace.readableWidth,
+              if (hero)
+                Expanded(
+                  child: ConversationHero(
+                    key: ValueKey('hero-${owner.sessionId}'),
+                    owner: owner,
+                    slots: slots,
+                    i18n: i18n,
+                    workspaces: workspaces,
+                    composer: composer,
+                    dock: _docks(slots.renderList(dockSlot, owner)),
+                  ),
+                )
+              else ...[
+                Expanded(child: body),
+                if (!s.removed)
+                  for (final dock in slots.renderList(dockSlot, owner))
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: DshSpace.readableWidth,
+                        ),
+                        child: dock,
                       ),
-                      child: dock,
                     ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      maxWidth: DshSpace.readableWidth,
+                    ),
+                    child: composer,
                   ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: DshSpace.readableWidth,
-                  ),
-                  child: composer,
                 ),
-              ),
+              ],
             ],
           ),
         );
@@ -127,6 +160,14 @@ class ConversationShell extends StatelessWidget {
     );
   }
 }
+
+Widget? _docks(List<Widget> docks) => docks.isEmpty
+    ? null
+    : Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: docks,
+      );
 
 class _Notice extends StatelessWidget {
   const _Notice({super.key, required this.title, required this.body});

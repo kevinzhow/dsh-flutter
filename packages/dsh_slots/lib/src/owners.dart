@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:dsh_client/dsh_client.dart' show WorkspaceFilesRemote;
+import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_models/dsh_models.dart';
 
@@ -58,6 +59,7 @@ class SessionOwner {
     required this.conversation,
     required this.actions,
     this.cwdReader,
+    this.blankReader,
     this.hostHome = '',
     this.attachments,
     this.files,
@@ -85,11 +87,19 @@ class SessionOwner {
   /// Reads the session workspace root (known once the session list carries it).
   final String? Function()? cwdReader;
 
+  /// Whether the session list already proves this session blank (the hero can
+  /// show before the session itself is open); null while the list does not
+  /// carry it.
+  final bool? Function()? blankReader;
+
   /// The host account home, used only to abbreviate displayed paths.
   final String hostHome;
 
   /// The session workspace root, when known.
   String? get cwd => cwdReader?.call();
+
+  /// What the session list says about this session being blank.
+  bool? get summaryBlank => blankReader?.call();
 
   String get sessionId => session.sessionId;
 }
@@ -365,4 +375,94 @@ const double sidebarInlineWidth = 400;
 /// occupant draws its own copy and owns its write path, as in dsh.
 class SettingsOwner {
   const SettingsOwner();
+}
+
+/// What the workspace surfaces ask of the composition root (dsh's
+/// `ctx.workspaces` list and `ctx.uiWorkspace` navigation).
+abstract interface class WorkspaceServices {
+  /// The Host's workspaces, live.
+  Observable<WorkspaceSnapshot> get workspaces;
+
+  /// Adopt an existing host directory as a workspace (`workspace/create`);
+  /// rejects with the Host's failure (`workspace/invalid-path`).
+  Future<WorkspaceView> createWorkspace(String path);
+
+  /// "New session": a fresh session in [workspaceId], else in the workspace of
+  /// the session in view, else in the most recent workspace; with none to
+  /// choose from the conversation area shows the workspace chooser. Throws
+  /// what the Host refused with.
+  Future<void> startSession([String? workspaceId]);
+
+  /// A workspace was picked for the conversation being prepared: its first
+  /// reusable blank session opens (else a new one), and the draft of [from]
+  /// moves over. Throws what the Host refused with.
+  Future<void> openWorkspace(String workspaceId, {String? from});
+}
+
+/// Owner props of `conversation.hero.workspace` (dsh `EmptyWorkspaceOwnerProps`):
+/// the picker the blank-session hero shows under its workspace chip.
+class HeroWorkspaceOwner {
+  const HeroWorkspaceOwner({
+    required this.open,
+    required this.onPick,
+    required this.onClose,
+    this.selectedId,
+    this.anchor,
+  });
+
+  /// The chip asked for the picker.
+  final bool open;
+
+  /// The workspace the blank session belongs to (the trailing check).
+  final String? selectedId;
+
+  /// A real workspace was picked or adopted.
+  final void Function(String workspaceId) onPick;
+
+  /// Close the picker (outside tap, Escape, after a pick).
+  final void Function() onClose;
+
+  /// What the picker anchors to on a wide window (the owner's chip link; the
+  /// slot registry knows no widget types).
+  final Object? anchor;
+}
+
+/// Owner props of the two directory-flow holes (dsh `DirectoryFlowOwnerProps`):
+/// the whole conversation between the surface that offers "Add workspace" and
+/// the picking interaction. The occupant reads [open] to run its interaction
+/// and reports exactly one outcome per open.
+class DirectoryFlowOwner {
+  const DirectoryFlowOwner({
+    required this.open,
+    required this.busy,
+    required this.onPicked,
+    required this.onCancel,
+    required this.onError,
+  });
+
+  /// A picking interaction is requested; flipping back to false withdraws it.
+  final bool open;
+
+  /// The owner is adopting a picked path: occupants disable their commit
+  /// affordances.
+  final bool busy;
+
+  /// The operator picked a directory (an absolute host path).
+  final void Function(String path) onPicked;
+
+  /// The operator dismissed the interaction.
+  final void Function() onCancel;
+
+  /// The interaction itself failed (listing denied); the owner shows its error
+  /// surface.
+  final void Function(String message) onError;
+}
+
+/// Owner props of `sidebar.workspaces`: the add-workspace action of the
+/// session list.
+class SidebarWorkspacesOwner {
+  const SidebarWorkspacesOwner({required this.onStarted});
+
+  /// A workspace was adopted and its session opened.
+  final void Function() onStarted;
 }

@@ -22,6 +22,7 @@ features/dsh_feature_attachment        ui-attachment: composer attachment tray (
 features/dsh_feature_chat              ui-chat: chat view, user/assistant/turn nodes, reasoning, markdown
 features/dsh_feature_commands          ui-commands: the `/` command source over the per-session command directory, popupSelect shell, contributions
 features/dsh_feature_conversation      ui-conversation: session shell, header + model indicator, composer (chips, send/stop), to-do dock
+features/dsh_feature_directory_picker_browse ui-directory-picker-browse: the in-app folder browser (dsh's Miller dialog at every width), new folder, path editor
 features/dsh_feature_documentpreview  ui-documentpreview: highlighted text, rendered/raw Markdown, image, open/save for other types
 features/dsh_feature_files             ui-files: workspace file tree, live-watched
 features/dsh_feature_input_trigger     ui-input-trigger: the `/` and `@` candidate menu above the composer (the pipeline itself is pure Dart in dsh_conversation)
@@ -37,6 +38,7 @@ features/dsh_feature_sidebar_terminal  ui-sidebar-terminal: interactive shell ta
 features/dsh_feature_subagent          ui-subagent: header catalog, child transcripts (read-only)
 features/dsh_feature_tool              ui-tool: tool rows and cards per tool kind (tool.call.toolview, generic fallback)
 features/dsh_feature_user_questions    ui-user-questions: composer takeover for agent questions
+features/dsh_feature_workspace         ui-workspace: workspace picker (anchored menu), add-workspace action, adoption error dialog; the blank-session hero lives in ui-conversation
                                        (one feature per dsh ui-* package; features never import each other)
 apps/dsh_flutter                       composition root: pairing, navigation, platform manifests (Whalee)
 tool/                                  generators, guards, preflight, live spike, visual parity tool (docs/parity.md), capability table (docs/capability-parity.json)
