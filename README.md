@@ -93,7 +93,11 @@ python3 tool/vectors/gen_settings_expected.py --check <fixture>   # the same for
 `docs/capability-parity.json` is the table of what the pinned dsh web client can do and how much of it Whalee has: one row for
 every `packages/client/ui-*` package, every `@Remote` method, every slot name and every settings namespace, each marked
 `ported`, `partial`, `missing` or `na` (not applicable, with the reason), with the Whalee file that implements it and, for
-a partial row, what is missing. `docs/capability-parity.md` is the readable summary (counts per area, open packages by priority), generated:
+a partial row, what is missing. Each row also names the `platform` it is meant for: `phone`, `desktop` or `both` (a desktop build
+replicates dsh's desktop app, so "phone-first" is no reason for `na`: an item that only needs a desktop is `missing` for platform
+`desktop`; `na` stays for brand assets, product telemetry, the model-written-JavaScript runner, the React renderer and anything the pinned
+web client never calls, and `--check` rejects a `na` reason that says the item is phone-first). `docs/capability-parity.md` is the
+readable summary (counts per area, per kind and per platform, open packages by priority), generated:
 
 ```sh
 python3 tool/capability_parity.py --write      # regenerate docs/capability-parity.md from the table

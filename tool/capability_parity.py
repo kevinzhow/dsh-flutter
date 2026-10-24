@@ -8,7 +8,9 @@ The source of truth is docs/capability-parity.json, one hand-reviewed row per up
   slot      every slot name in dsh's generated client slot catalog (`<domain>.<entry>.<hole>`)
   settings  every settings namespace the web client reads or writes through configForms / remote.settings
 
-Each row carries a Whalee status: ported, partial, missing (nothing yet) or na (not applicable, with the reason).
+Each row carries a Whalee status: ported, partial, missing (nothing yet) or na (not applicable, with the reason), and a
+platform: phone, desktop or both (where Whalee is meant to offer it; a desktop build replicates dsh's desktop app, so
+"phone-first" is not a reason for na).
 docs/capability-parity.md is generated from the table (counts per area and status, the missing and partial work by priority).
 
   capability_parity.py [--write]    regenerate docs/capability-parity.md
@@ -63,7 +65,11 @@ AREA_TITLES = {
     'misc': 'Misc',
 }
 PRIORITIES = ('P1', 'P2', 'P3', 'P4')
-ROW_FIELDS = {'id', 'kind', 'area', 'dshSource', 'description', 'status', 'whalee', 'notes', 'reason', 'priority'}
+PLATFORMS = ('phone', 'desktop', 'both')
+ROW_FIELDS = {'id', 'kind', 'area', 'platform', 'dshSource', 'description', 'status', 'whalee', 'notes', 'reason', 'priority'}
+
+# A na reason that only says the item needs a desktop (or that a phone cannot do it) is the reclassification this check prevents.
+_PHONE_FIRST = re.compile(r'phone[- ]first|phone user cannot|not reachable from a phone|a phone cannot', re.I)
 
 # Sources that are not part of the product surface: tests, build output, the generated cordis API catalog.
 _SKIP_PARTS = ('node_modules', '/tests/', '/lib/')
@@ -238,6 +244,8 @@ def validate(table: dict, root: Path = REPO) -> list[str]:
             errors.append('%s: id must start with "%s:"' % (where, kind))
         if row.get('area') not in AREAS:
             errors.append('%s: area must be one of %s' % (where, ', '.join(AREAS)))
+        if row.get('platform') not in PLATFORMS:
+            errors.append('%s: platform must be one of %s' % (where, ', '.join(PLATFORMS)))
         for field in ('dshSource', 'description'):
             if not isinstance(row.get(field), str) or not row[field].strip():
                 errors.append('%s: %s is required' % (where, field))
@@ -260,6 +268,8 @@ def validate(table: dict, root: Path = REPO) -> list[str]:
             errors.append('%s: partial needs notes saying what is missing' % where)
         if status == 'na' and not str(row.get('reason', '')).strip():
             errors.append('%s: na needs a reason' % where)
+        if status == 'na' and _PHONE_FIRST.search(str(row.get('reason', ''))):
+            errors.append('%s: "phone-first" is not a reason for na: a desktop build exists, mark it missing for platform desktop' % where)
         if status != 'na' and 'reason' in row:
             errors.append('%s: reason is only for na' % where)
         if 'priority' in row and row['priority'] not in PRIORITIES:
@@ -279,7 +289,7 @@ def coverage(table: dict, upstream: list[dict]) -> tuple[list[dict], list[str]]:
 
 
 def stub(item: dict) -> dict:
-    return {'id': item['id'], 'kind': item['kind'], 'area': 'misc', 'dshSource': item['dshSource'],
+    return {'id': item['id'], 'kind': item['kind'], 'area': 'misc', 'platform': 'both', 'dshSource': item['dshSource'],
             'description': item['description'] or 'TODO: what the user can do with this',
             'status': 'missing'}
 
@@ -311,7 +321,8 @@ def render(table: dict) -> str:
         'One row per upstream item of the pinned dsh (`%s`, npm `%s`): every `packages/client/ui-*` package, every `@Remote`'
         % (table['dsh']['commit'][:9], table['dsh'].get('npmVersion', '?')),
         'method, every slot name and every settings namespace, each marked **ported**, **partial**, **missing** or **na** (not',
-        'applicable, with the reason). The source of truth is [`capability-parity.json`](capability-parity.json); the status of a',
+        'applicable, with the reason) and with the **platform** it is meant for (`phone`, `desktop` or `both`).',
+        'The source of truth is [`capability-parity.json`](capability-parity.json); the status of a',
         'row comes from reading the Whalee code at the path in its `whalee` field. `tool/capability_parity.py --check` (part of',
         '`tool/preflight`) is red when the pin has an item without a row.',
         '',
@@ -331,6 +342,11 @@ def render(table: dict) -> str:
     for kind in KINDS:
         c = counts([r for r in rows if r['kind'] == kind])
         out.append('| %s | %d | %d | %d | %d | %d |' % (kind, c['ported'], c['partial'], c['missing'], c['na'], sum(c.values())))
+    out += ['', 'By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):', '',
+            '| platform | ported | partial | missing | na | total |', '|---|---:|---:|---:|---:|---:|']
+    for plat in PLATFORMS:
+        c = counts([r for r in rows if r['platform'] == plat])
+        out.append('| %s | %d | %d | %d | %d | %d |' % (plat, c['ported'], c['partial'], c['missing'], c['na'], sum(c.values())))
     todo = [r for r in rows if r['kind'] == 'package' and r['status'] in ('missing', 'partial') and 'priority' in r]
     if todo:
         out += ['', '## Packages still to do, by priority', '']
@@ -340,7 +356,7 @@ def render(table: dict) -> str:
                 continue
             out += ['**%s**' % pr, '']
             for r in sorted(group, key=lambda r: r['id']):
-                out.append('- `%s` (%s): %s%s' % (_name(r), r['status'], r['description'].rstrip('.') + '.',
+                out.append('- `%s` (%s, %s): %s%s' % (_name(r), r['status'], r['platform'], r['description'].rstrip('.') + '.',
                                                    (' ' + r['notes']) if r.get('notes') else ''))
             out.append('')
         out.pop()
@@ -355,12 +371,12 @@ def render(table: dict) -> str:
             part = [r for r in group if r['kind'] == kind]
             if not part:
                 continue
-            out += ['### %s (%d)' % (kind, len(part)), '', '| item | status | what the user can do | Whalee |', '|---|---|---|---|']
+            out += ['### %s (%d)' % (kind, len(part)), '', '| item | status | platform | what the user can do | Whalee |', '|---|---|---|---|---|']
             for r in sorted(part, key=lambda r: r['id']):
                 where = ', '.join('`%s`' % p for p in r.get('whalee', []))
                 extra = r.get('notes') or r.get('reason') or ''
                 tail = '; '.join(x for x in (where, extra) if x)
-                out.append('| `%s` | %s | %s | %s |' % (_name(r), r['status'], _cell(r['description']), _cell(tail)))
+                out.append('| `%s` | %s | %s | %s | %s |' % (_name(r), r['status'], r['platform'], _cell(r['description']), _cell(tail)))
             out.append('')
         out.pop()
     return '\n'.join(out) + '\n'

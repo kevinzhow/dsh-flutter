@@ -16,7 +16,7 @@ COMMIT = 'a' * 40
 
 def row(rid, status='missing', **extra):
     kind = rid.split(':')[0]
-    r = {'id': rid, 'kind': kind, 'area': 'misc', 'dshSource': 'x/y.ts', 'description': 'Does a thing.', 'status': status}
+    r = {'id': rid, 'kind': kind, 'area': 'misc', 'platform': 'both', 'dshSource': 'x/y.ts', 'description': 'Does a thing.', 'status': status}
     if kind == 'package' and status in ('missing', 'partial'):
         r['priority'] = 'P3'
     r.update(extra)
@@ -146,6 +146,22 @@ class ValidateTest(unittest.TestCase):
         self.assertTrue(self.errors(table(dict(row('slot:a'), kind='remote'))))
         self.assertTrue(self.errors(table(row('slot:a', whalee=['../x']))))
 
+    def test_platform_is_required_and_from_the_vocabulary(self):
+        for plat in cp.PLATFORMS:
+            self.assertEqual(self.errors(table(row('slot:a', platform=plat))), [])
+        self.assertEqual(set(cp.PLATFORMS), {'phone', 'desktop', 'both'})
+        self.assertTrue(self.errors(table(row('slot:a', platform='tablet'))))
+        r = row('slot:a')
+        del r['platform']
+        self.assertTrue(self.errors(table(r)))
+
+    def test_phone_first_is_not_a_reason_for_na(self):
+        for reason in ('Phone-first client, no use.', 'A phone user cannot see it.', 'Not reachable from a phone.',
+                       'Revisit if a desktop build ships; a phone-first client has none.'):
+            errs = self.errors(table(row('slot:a', 'na', reason=reason)))
+            self.assertTrue(any('phone-first' in e for e in errs), reason)
+        self.assertEqual(self.errors(table(row('slot:a', 'na', reason='DeepSeek brand asset; Whalee ships none.'))), [])
+
     def test_missing_package_needs_a_priority_and_only_open_rows_have_one(self):
         r = row('package:ui-a')
         del r['priority']
@@ -185,7 +201,8 @@ class CheckTest(unittest.TestCase):
             root, src = pathlib.Path(tmp), pathlib.Path(dsh)
             fake_dsh(src)
             rows = [dict(u, area='misc', status='missing') for u in cp.scan_all(src)]
-            rows = [{k: r[k] for k in ('id', 'kind', 'area', 'dshSource', 'description', 'status')} for r in rows]
+            rows = [dict({k: r[k] for k in ('id', 'kind', 'area', 'dshSource', 'description', 'status')}, platform='both')
+                    for r in rows]
             for r in rows:
                 r['description'] = r['description'] or 'Does a thing.'
             for r in rows:
@@ -237,7 +254,22 @@ class RenderTest(unittest.TestCase):
         md = cp.render(t)
         self.assertIn('| **all** | 1 | 0 | 1 | 1 | 3 |', md)
         self.assertIn('**P3**', md)
+        self.assertIn('- `ui-a` (missing, both):', md)
         self.assertEqual(md, cp.render(copy.deepcopy(t)))
+
+
+    def test_platform_counts_and_column(self):
+        t = table(row('slot:a', platform='desktop'), row('slot:b', 'ported', whalee=['x']),
+                  row('slot:c', 'na', reason='r', platform='desktop'))
+        md = cp.render(t)
+        self.assertIn('| phone | 0 | 0 | 0 | 0 | 0 |', md)
+        self.assertIn('| desktop | 0 | 0 | 1 | 1 | 2 |', md)
+        self.assertIn('| both | 1 | 0 | 0 | 0 | 1 |', md)
+        self.assertIn('| `a` | missing | desktop |', md)
+
+    def test_stub_has_a_platform(self):
+        s = cp.stub({'id': 'slot:z', 'kind': 'slot', 'dshSource': 's', 'description': ''})
+        self.assertEqual(s['platform'], 'both')
 
 
 class RealTableTest(unittest.TestCase):
@@ -247,6 +279,24 @@ class RealTableTest(unittest.TestCase):
         self.assertEqual(cp.MARKDOWN.read_text(), cp.render(t))
         code, text = cp.check(cp.REPO, cp.dsh_src())
         self.assertIn(code, (0, 2), text)
+
+    def test_desktop_shell_rows_are_missing_for_desktop_not_na(self):
+        rows = {r['id']: r for r in cp.load_table()['rows']}
+        shell_slots = ['conversation.header.leading', 'main', 'settings.action', 'settings.close', 'settings.header',
+                       'settings.launcher', 'settings.trigger', 'shell.bottom', 'shell.leading', 'shell.overlay', 'sidebar',
+                       'sidebar.brand.mark', 'sidebar.brand.name', 'sidebar.footer.action', 'sidebar.panellist',
+                       'sidebar.settings', 'sidebar.toggle.badge']
+        ids = ['slot:' + s for s in shell_slots] + [
+            'package:ui-layout', 'package:ui-dockkit', 'package:ui-shortcuts', 'package:ui-directory-picker-native',
+            'package:ui-open-in-app', 'remote:directoryPicker/pick', 'remote:settings/openSettingsDocument']
+        for rid in ids:
+            self.assertEqual(rows[rid]['platform'], 'desktop', rid)
+            self.assertNotEqual(rows[rid]['status'], 'na', rid)
+            self.assertTrue(rows[rid].get('notes'), rid)
+        # what stays na: brand assets, telemetry, the dynamic runner, the React renderer, never-called methods
+        for rid in ('package:ui-brand-official', 'remote:productAnalytics/report', 'remote:dynamicCordisRunner/invoke',
+                    'package:ui-renderer', 'remote:settings/replace'):
+            self.assertEqual(rows[rid]['status'], 'na', rid)
 
 
 if __name__ == '__main__':
