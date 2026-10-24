@@ -56,6 +56,10 @@ tool/preflight --fast                 # guards: layering, codegen/theme/i18n sta
 tool/preflight                        # same plus every package's tests
 ```
 
+CI (`.github/workflows/ci.yml`) runs `tool/preflight` on every pull request and push to main, and builds an Android APK
+(see "CI builds and release signing"). It has no dsh checkout, so it skips four checks on purpose and says so in the job
+summary: `theme-pack`, `icons`, `vector` and `parity` (the parity selftest). Run the full `tool/preflight` locally before a PR.
+
 Generators read the pinned dsh checkout: put it at `.local/dsh-src` (or set `DSH_SRC`). They are committed output
 with a `--check` mode:
 
@@ -134,6 +138,37 @@ Whalee keeps your sessions on screen and your unsent messages in place while it 
 countdown; tapping it retries at once. After three failed retries it says the host cannot be reached. If the host restarted,
 the launch link is no longer valid: Whalee says so and **Pair again** takes a new link (scan or paste) without leaving your
 sessions.
+
+## CI builds and release signing
+
+The workflow `.github/workflows/ci.yml` (actions pinned by commit SHA, Flutter from `.fvmrc`) has two jobs:
+
+- **preflight**: `tool/preflight --allow-skip theme-pack,icons,vector,parity`. The four named checks need the pinned dsh
+  checkout (and, for `vector`, its node install), which CI does not have; they are skipped, listed in the job summary with the
+  reason, and any other skipped check fails the job. Everything else runs: layering, tool tests, codegen and i18n staleness
+  (offline mode), format, analyze and every package's tests.
+- **android apk**: `flutter build apk --release`, uploaded as a workflow artifact (14 days). With no release keystore the APK
+  is signed with the Android **debug** key and the job summary says so; such an APK installs for testing but is not the
+  release identity (it cannot update a release-signed install, and the debug key is public knowledge).
+
+To get release-signed APKs, add four repository secrets (GitHub: Settings, Secrets and variables, Actions, New repository
+secret). The workflow signs with the release key only when all four are set; pull requests from forks never receive secrets.
+
+| secret | value |
+|---|---|
+| `WHALEE_KEYSTORE_BASE64` | the keystore file, base64 on one line: `base64 -w0 whalee-release.jks` (macOS: `base64 -i whalee-release.jks`) |
+| `WHALEE_KEYSTORE_PASSWORD` | the keystore password |
+| `WHALEE_KEY_ALIAS` | the key alias inside the keystore |
+| `WHALEE_KEY_PASSWORD` | the key password (the same as the keystore password for a PKCS12 keystore) |
+
+With the GitHub CLI: `base64 -w0 whalee-release.jks | gh secret set WHALEE_KEYSTORE_BASE64`, then `gh secret set` for the other three.
+Create the keystore yourself and keep it (and its passwords) somewhere safe outside the repository: a release identity that is lost cannot be
+replaced for installed copies. For example `keytool -genkeypair -v -keystore whalee-release.jks -alias whalee -keyalg RSA -keysize 2048 -validity 10000`.
+
+The step writes the keystore and an `apps/dsh_flutter/android/key.properties` (`storeFile`, `storePassword`, `keyAlias`,
+`keyPassword`) on the runner for the build and deletes both afterwards. Both file names are git-ignored; the same
+`key.properties` signs a local `flutter build apk --release` (without it the build uses the debug key). Treat anything that can edit
+the workflow as able to read the secrets: do not give write access to people you would not give the key.
 
 ## Notifications
 
