@@ -326,7 +326,7 @@ void main() {
       NoticePermission permission = NoticePermission.granted,
       MemoryLocalPrefs? prefs,
     }) async {
-      t.view.physicalSize = const Size(400, 800);
+      t.view.physicalSize = const Size(1200, 800);
       t.view.devicePixelRatio = 1;
       addTearDown(t.view.reset);
       backend = FakeBackend();
@@ -404,7 +404,7 @@ void main() {
     ) async {
       final prefs = MemoryLocalPrefs();
       await start(t, prefs: prefs);
-      await t.tap(find.byKey(const ValueKey('sessions-settings')));
+      await openSettingsUi(t);
       await t.pumpAndSettle();
       await t.tap(find.byKey(const ValueKey('settings-nav-general')));
       await t.pumpAndSettle();
@@ -422,7 +422,7 @@ void main() {
       'a refused permission is explained with a way to the system settings',
       (t) async {
         await start(t, permission: NoticePermission.denied);
-        await t.tap(find.byKey(const ValueKey('sessions-settings')));
+        await openSettingsUi(t);
         await t.pumpAndSettle();
         await t.tap(find.byKey(const ValueKey('settings-nav-general')));
         await t.pumpAndSettle();
@@ -440,7 +440,7 @@ void main() {
     );
 
     testWidgets('a platform without notifications shows no row', (t) async {
-      t.view.physicalSize = const Size(400, 800);
+      t.view.physicalSize = const Size(1200, 800);
       t.view.devicePixelRatio = 1;
       addTearDown(t.view.reset);
       backend = FakeBackend();
@@ -456,7 +456,7 @@ void main() {
       backend.transport.onList = () async => {'items': []};
       await t.runAsync(() => controller.pair('http://host:1/?token=abc'));
       await settle(t);
-      await t.tap(find.byKey(const ValueKey('sessions-settings')));
+      await openSettingsUi(t);
       await t.pumpAndSettle();
       await t.tap(find.byKey(const ValueKey('settings-nav-general')));
       await t.pumpAndSettle();

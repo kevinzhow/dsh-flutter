@@ -165,6 +165,11 @@ const Map<String, DshText> appCatalog = {
 
   // session list
   'sessions.title': (en: 'Sessions', zh: '会话'),
+  'panel.unavailable.title': (en: 'Not available yet', zh: '暂不可用'),
+  'panel.unavailable.body': (
+    en: '{name} is not part of Whalee yet. Use dsh web for it.',
+    zh: 'Whalee 暂时还没有“{name}”，请先在 dsh web 中使用。',
+  ),
   'sessions.empty.title': (en: 'No sessions yet', zh: '还没有会话'),
   'sessions.empty.body': (
     en: 'Start a new session to chat with your agent.',

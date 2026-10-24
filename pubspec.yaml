@@ -9,16 +9,21 @@ workspace:
   - features/dsh_feature_chat
   - features/dsh_feature_conversation
   - features/dsh_feature_directory_picker_browse
+  - features/dsh_feature_directory_picker_native
   - features/dsh_feature_documentpreview
   - features/dsh_feature_commands
   - features/dsh_feature_files
   - features/dsh_feature_input_trigger
+  - features/dsh_feature_layout
+  - features/dsh_feature_open_in_app
   - features/dsh_feature_model_selection
   - features/dsh_feature_permission_presets
   - features/dsh_feature_plan
   - features/dsh_feature_reference
   - features/dsh_feature_session
   - features/dsh_feature_settings
+  - features/dsh_feature_shortcuts
+  - features/dsh_feature_sidebar
   - features/dsh_feature_sidebar_right
   - features/dsh_feature_sidebar_terminal
   - features/dsh_feature_subagent
@@ -29,8 +34,11 @@ workspace:
   - packages/dsh_client
   - packages/dsh_models
   - packages/dsh_conversation
+  - packages/dsh_dockkit
   - packages/dsh_highlight
+  - packages/dsh_layout
   - packages/dsh_i18n
+  - packages/dsh_shortcuts
   - packages/dsh_slots
   - packages/dsh_theme
   - packages/dsh_ui

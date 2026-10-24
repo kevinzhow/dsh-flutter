@@ -1,0 +1,16 @@
+name: dsh_dockkit
+description: dsh ui-dockkit, ported. A split tree of tabbed panes with invertible operations (pure Dart engine) and the Flutter widgets that render and drive it.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dependencies:
+  flutter:
+    sdk: flutter
+  dsh_theme: ^0.0.1
+  dsh_ui: ^0.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^6.0.0

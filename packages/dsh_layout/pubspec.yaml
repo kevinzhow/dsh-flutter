@@ -1,0 +1,10 @@
+name: dsh_layout
+description: dsh ui-layout, ported (pure Dart). The column solve of the three-column frame, the layout store (sidebar collapse rules, right column presentation, main panel selection) and the ctx.layout controller.
+publish_to: none
+version: 0.0.1
+environment:
+  sdk: ^3.13.5
+resolution: workspace
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.3

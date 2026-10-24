@@ -10,6 +10,31 @@ void main() {
     }
   });
 
+  group('the desktop shell slots', () {
+    test('are all declared with dsh cardinality and root scope', () {
+      for (final slot in DshShellSlots.all) {
+        expect(r.isDeclared(slot.name), isTrue, reason: slot.name);
+        expect(slot.scope, SlotScope.root, reason: slot.name);
+      }
+      expect(DshShellSlots.main.cardinality, SlotCardinality.keyed);
+      expect(DshShellSlots.shellOverlay.cardinality, SlotCardinality.list);
+      expect(DshShellSlots.sidebarPanellist.cardinality, SlotCardinality.list);
+      expect(DshShellSlots.settingsAction.cardinality, SlotCardinality.list);
+      expect(DshShellSlots.sidebar.cardinality, SlotCardinality.single);
+      expect(DshShellSlots.all, hasLength(18));
+    });
+
+    test('keys lists the registered keys of a keyed slot', () {
+      final slot = DshShellSlots.main.typed<int, String>();
+      expect(r.keys(slot), isEmpty);
+      final off = r.register(slot, (p) => 'a', key: 'conversation');
+      r.register(slot, (p) => 'b', key: 'plugins');
+      expect(r.keys(slot), unorderedEquals(['conversation', 'plugins']));
+      off();
+      expect(r.keys(slot), ['plugins']);
+    });
+  });
+
   group('guard: composition errors fail loudly', () {
     test('registering into an undeclared slot fails', () {
       const undeclared = Slot<int, String>(

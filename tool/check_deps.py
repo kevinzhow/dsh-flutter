@@ -6,7 +6,8 @@ one-way, and so is ours:
 
     client  <-  models  <-  conversation  <-  slots
                                               features/*   (never each other)
-    theme   <-  ui                                         (never client)
+    theme   <-  ui   <-  dockkit                               (never client)
+    layout, shortcuts   leaves (pure Dart ports of dsh ui-layout and the shortcut service)
     i18n    leaf                                           (imports nothing)
     highlight  leaf                                        (imports nothing; ui may use it)
     apps/*  composition root: may import everything
@@ -32,10 +33,14 @@ ALLOWED = {
     'slots': {'conversation', 'models', 'client'},
     'theme': set(),
     'ui': {'theme', 'i18n', 'highlight'},
+    'dockkit': {'theme', 'ui'},
+    'layout': set(),
+    'shortcuts': set(),
     'i18n': set(),
     'highlight': set(),
-    'feature': {'slots', 'conversation', 'models', 'client', 'ui', 'theme', 'i18n'},
-    'app': {'client', 'models', 'conversation', 'slots', 'theme', 'ui', 'i18n', 'highlight', 'feature'},
+    'feature': {'slots', 'conversation', 'models', 'client', 'ui', 'theme', 'i18n', 'dockkit', 'layout', 'shortcuts'},
+    'app': {'client', 'models', 'conversation', 'slots', 'theme', 'ui', 'i18n', 'highlight', 'feature', 'dockkit', 'layout',
+            'shortcuts'},
 }
 
 LAYER_OF_PACKAGE = {
@@ -45,6 +50,9 @@ LAYER_OF_PACKAGE = {
     'dsh_slots': 'slots',
     'dsh_theme': 'theme',
     'dsh_ui': 'ui',
+    'dsh_dockkit': 'dockkit',
+    'dsh_layout': 'layout',
+    'dsh_shortcuts': 'shortcuts',
     'dsh_i18n': 'i18n',
     'dsh_highlight': 'highlight',
 }

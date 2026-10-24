@@ -1,6 +1,8 @@
-/// The right sidebar of a session (dsh `ui-sidebar-right`): a tab strip over
-/// bodies other features fill through `sidebar.right.pane.tab`, presented as a
-/// sheet on phones and a column beside the conversation on wide windows.
+/// The right sidebar of a session (dsh `ui-sidebar-right`): a docking surface of
+/// up to two panes of tabs, whose bodies other features fill through
+/// `sidebar.right.pane.tab`, presented as the frame's right column on the
+/// desktop shell, a column beside the conversation on a wide window without
+/// one, and a sheet on phones.
 library;
 
 export 'src/guide.dart';

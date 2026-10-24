@@ -7,6 +7,7 @@ class SidebarTabType {
     required this.kind,
     this.multiple = false,
     this.guideOrder,
+    this.keepMounted = false,
     this.onClose,
   });
 
@@ -19,6 +20,10 @@ class SidebarTabType {
 
   /// Where the type's card stands on the guide page; null lists no card.
   final int? guideOrder;
+
+  /// Whether a visited body stays mounted while another tab is in front (dsh
+  /// `keepMounted`): a live terminal keeps its state.
+  final bool keepMounted;
 
   /// Called when a tab of this kind is closed, before it goes (dsh
   /// `registerCloseHandler`): the owner takes over any cleanup. It must not

@@ -1,3 +1,4 @@
+import 'shell_slots.dart';
 import 'slot.dart';
 
 /// dsh's own slot names, declared with their shipped cardinality and scope
@@ -38,6 +39,30 @@ abstract final class DshSlots {
   );
   static const conversationSessionHeaderActions = Slot<Object?, Object?>(
     'conversation.session.header.actions',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+
+  /// Controls after the actions in the Session header's title row (dsh
+  /// `ui-conversation`; open-in-app, the Session overflow menu).
+  static const conversationSessionHeaderUtilities = Slot<Object?, Object?>(
+    'conversation.session.header.utilities',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+
+  /// The header's corner seat, past the utilities (dsh: the right sidebar's
+  /// way back in).
+  static const conversationSessionHeaderCorner = Slot<Object?, Object?>(
+    'conversation.session.header.corner',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+
+  /// The pills under the composer card (dsh `conversation.composer.dock`;
+  /// `ui-chat` fills it with the session statistics).
+  static const conversationComposerDock = Slot<Object?, Object?>(
+    'conversation.composer.dock',
     SlotCardinality.list,
     SlotScope.session,
   );
@@ -199,6 +224,9 @@ abstract final class DshSlots {
     conversationView,
     conversationComposer,
     conversationSessionHeaderActions,
+    conversationSessionHeaderUtilities,
+    conversationSessionHeaderCorner,
+    conversationComposerDock,
     conversationChatNode,
     toolCallToolview,
     conversationInputDock,
@@ -221,5 +249,6 @@ abstract final class DshSlots {
     conversationHeroWorkspaceDirectoryFlow,
     sidebarWorkspaces,
     sidebarWorkspacesDirectoryFlow,
+    ...DshShellSlots.all,
   ];
 }

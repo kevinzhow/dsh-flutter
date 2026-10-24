@@ -50,11 +50,15 @@ NICE = ['nice', '-n', '15']
 OUT_DIR = ROOT / '.local' / 'preflight'
 
 PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/dsh_conversation',
-                      'packages/dsh_slots', 'packages/dsh_i18n']
-FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'features/dsh_feature_approval',
+                      'packages/dsh_slots', 'packages/dsh_i18n', 'packages/dsh_layout',
+                      'packages/dsh_shortcuts']
+FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'packages/dsh_dockkit',
+                    'features/dsh_feature_approval',
                     'features/dsh_feature_attachment', 'features/dsh_feature_chat',
                     'features/dsh_feature_commands', 'features/dsh_feature_conversation', 'features/dsh_feature_directory_picker_browse', 'features/dsh_feature_documentpreview',
-                    'features/dsh_feature_files', 'features/dsh_feature_input_trigger', 'features/dsh_feature_model_selection',
+                    'features/dsh_feature_files', 'features/dsh_feature_input_trigger', 'features/dsh_feature_layout',
+                    'features/dsh_feature_open_in_app', 'features/dsh_feature_shortcuts', 'features/dsh_feature_sidebar',
+                    'features/dsh_feature_model_selection',
                     'features/dsh_feature_permission_presets', 'features/dsh_feature_plan', 'features/dsh_feature_reference',
                     'features/dsh_feature_session', 'features/dsh_feature_settings',
                     'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
@@ -129,7 +133,7 @@ def c_i18n():
 
 
 def c_icons():
-    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
+    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_shell_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
     for r in results:
         if r[0] == 1 or (isinstance(r[0], int) and r[0] not in (0, 2)):
             return r

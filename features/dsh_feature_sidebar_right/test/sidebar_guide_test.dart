@@ -1,5 +1,7 @@
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_layout/dsh_layout.dart';
+import 'package:dsh_shortcuts/dsh_shortcuts.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
@@ -10,6 +12,12 @@ import 'package:flutter_test/flutter_test.dart';
 class _Services implements SidebarServices {
   @override
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  LayoutController? get layout => null;
+
+  @override
+  ShortcutService? get shortcuts => null;
 }
 
 void main() {
@@ -62,18 +70,19 @@ void main() {
         kind: 'shell',
         multiple: true,
         guideOrder: 20,
+        keepMounted: true,
         onClose: (session, tab, content) =>
             closed.add('$session/$tab/$content'),
       ),
     );
     slots.register<SidebarTabOwner, Widget>(
       DshSlots.sidebarRightPaneTab.typed<SidebarTabOwner, Widget>(),
-      (o) => Text('shell ${o.id} ${o.params} visible=${o.visible}'),
+      (o) => Text('shell ${o.params} visible=${o.visible}'),
       key: 'shell',
     );
     slots.register<SidebarTabOwner, Widget>(
       DshSlots.sidebarRightPaneTabTitle.typed<SidebarTabOwner, Widget>(),
-      (o) => Text('title of ${o.id}'),
+      (o) => Text('title of ${o.contentId}'),
       key: 'shell',
     );
     slots.register<SidebarGuideOwner, Widget>(
@@ -104,11 +113,13 @@ void main() {
       theme: themed.theme,
       home: Scaffold(
         body: Row(
-          children: slots.renderList(
-            DshSlots.conversationSessionHeaderActions
-                .typed<SessionOwner, Widget>(),
-            owner,
-          ),
+          children: [
+            ?slots.renderSingle(
+              DshSlots.conversationSessionHeaderCorner
+                  .typed<SessionOwner, Widget>(),
+              owner,
+            ),
+          ],
         ),
       ),
     );
@@ -130,19 +141,23 @@ void main() {
   });
 
   testWidgets(
-    'the add control opens the guide, which lists each type in order',
+    'the guide lists each type in order and stands alone without add or close controls',
     (t) async {
       await openSheet(t);
-      expect(find.byKey(const ValueKey('sidebar-add')), findsOneWidget);
-      await t.tap(find.byKey(const ValueKey('sidebar-add')));
-      await t.pumpAndSettle();
+      final pane = feature.stateFor('s1').dock.activeDockPaneId();
       expect(find.byKey(const ValueKey('sidebar-guide')), findsOneWidget);
       expect(find.text('Start'), findsOneWidget, reason: 'the guide chip');
       final files = t.getTopLeft(find.text('Workspace files')).dy;
       final shell = t.getTopLeft(find.text('New shell')).dy;
       expect(files, lessThan(shell));
-      // A guide is open: no second add control.
-      expect(find.byKey(const ValueKey('sidebar-add')), findsNothing);
+      // A guide is open: no add control, and no close control for a lone guide.
+      expect(find.byKey(ValueKey('dock-add-$pane')), findsNothing);
+      expect(
+        find.byKey(
+          ValueKey('dock-close-${feature.stateFor('s1').tabs.single.id}'),
+        ),
+        findsNothing,
+      );
       // The guide stays one tab however often it is opened.
       feature.stateFor('s1').openTab('guide');
       expect(
@@ -152,76 +167,88 @@ void main() {
     },
   );
 
-  testWidgets('a card opens its page in the guide place', (t) async {
-    await openSheet(t);
-    await t.tap(find.byKey(const ValueKey('sidebar-add')));
-    await t.pumpAndSettle();
-    await t.tap(find.text('New shell'));
-    await t.pumpAndSettle();
-    final state = feature.stateFor('s1');
-    expect(state.tabs.map((x) => x.kind), ['files', 'shell']);
-    expect(find.byKey(const ValueKey('sidebar-guide')), findsNothing);
-    expect(
-      find.textContaining('shell shell-2 {} visible=true'),
-      findsOneWidget,
-    );
-    // The type's own title replaces the chip text.
-    expect(find.text('title of shell-2'), findsOneWidget);
-    expect(find.byKey(const ValueKey('sidebar-add')), findsOneWidget);
-  });
+  testWidgets(
+    'a card opens its page in the guide place; the add control returns once the guide is gone',
+    (t) async {
+      await openSheet(t);
+      final state = feature.stateFor('s1');
+      final pane = state.dock.activeDockPaneId();
+      await t.tap(find.text('New shell'));
+      await t.pumpAndSettle();
+      expect(state.tabs.map((x) => x.kind), ['shell']);
+      expect(find.byKey(const ValueKey('sidebar-guide')), findsNothing);
+      expect(find.textContaining('shell {} visible=true'), findsOneWidget);
+      // The type's own title replaces the chip text.
+      expect(find.textContaining('title of sidebar://shell/'), findsOneWidget);
+      expect(find.byKey(ValueKey('dock-add-$pane')), findsOneWidget);
+      // The add control opens the guide again.
+      await t.tap(find.byKey(ValueKey('dock-add-$pane')));
+      await t.pumpAndSettle();
+      expect(state.tabs.map((x) => x.kind), ['shell', 'guide']);
+      expect(find.byKey(ValueKey('dock-add-$pane')), findsNothing);
+    },
+  );
 
   testWidgets('a card with a choice passes its parameters', (t) async {
     await openSheet(t);
-    await t.tap(find.byKey(const ValueKey('sidebar-add')));
-    await t.pumpAndSettle();
     await t.tap(find.byKey(const ValueKey('shell-menu')));
     await t.pumpAndSettle();
     expect(feature.stateFor('s1').tabs.last.params, {'shellPath': '/bin/zsh'});
     expect(find.textContaining('{shellPath: /bin/zsh}'), findsOneWidget);
   });
 
-  testWidgets('the files card focuses the tree that is already there', (
-    t,
-  ) async {
+  testWidgets('the files card opens the tree in the guide place', (t) async {
     await openSheet(t);
-    await t.tap(find.byKey(const ValueKey('sidebar-add')));
-    await t.pumpAndSettle();
     await t.tap(find.text('Workspace files'));
     await t.pumpAndSettle();
     final state = feature.stateFor('s1');
     expect(state.tabs.map((x) => x.kind), ['files']);
     expect(state.active.kind, 'files');
+    expect(find.text('files body'), findsOneWidget);
   });
 
   test(
     'a multiple type opens independent instances; closing runs its handler',
     () {
       final state = feature.stateFor('s1');
+      state.setExpanded(true);
       state.openTab('shell');
       state.openTab('shell', params: {'shellPath': '/bin/sh'});
-      expect(state.tabs.map((t) => t.id), ['files', 'shell-1', 'shell-2']);
-      expect(state.tabs[1].contentId, isNot(state.tabs[2].contentId));
-      state.close('shell-1');
-      expect(closed, ['s1/shell-1/sidebar://shell/1']);
-      expect(state.tabs.map((t) => t.id), ['files', 'shell-2']);
+      final shells = state.tabs.where((t) => t.kind == 'shell').toList();
+      expect(shells, hasLength(2));
+      expect(shells[0].contentId, isNot(shells[1].contentId));
+      state.close(shells[0].id);
+      expect(closed, ['s1/${shells[0].id}/${shells[0].contentId}']);
+      expect(state.tabs.where((t) => t.kind == 'shell').map((t) => t.id), [
+        shells[1].id,
+      ]);
     },
   );
 
-  test('replacing a page ends the one it replaces', () {
-    final state = feature.stateFor('s1');
-    state.openTab('shell');
-    state.openTab('shell', replaceTabId: 'shell-1');
-    expect(
-      closed,
-      isEmpty,
-      reason: 'replacement of a live page is the opener\'s call',
-    );
-    expect(state.tabs.map((t) => t.id), ['files', 'shell-2']);
-  });
+  test(
+    'replacing a page ends the one it replaces without the close handler',
+    () {
+      final state = feature.stateFor('s1');
+      state.setExpanded(true);
+      state.openTab('shell');
+      final first = state.tabs.firstWhere((t) => t.kind == 'shell');
+      state.openTab('shell', replaceTabId: first.id);
+      expect(
+        closed,
+        isEmpty,
+        reason: "replacement of a live page is the opener's call",
+      );
+      expect(
+        state.tabs.where((t) => t.kind == 'shell').map((t) => t.id),
+        isNot(contains(first.id)),
+      );
+    },
+  );
 
   test('a page type opens once; its second open focuses it', () {
     slots.sidebarTabs.register(const SidebarTabType(kind: 'once'));
     final state = feature.stateFor('s1');
+    state.setExpanded(true);
     state.openTab('once');
     state.openTab('files');
     state.openTab('once');
@@ -248,8 +275,8 @@ void main() {
   });
 
   testWidgets('forgetting the host drops every sidebar', (t) async {
-    feature.stateFor('s1').openTab('shell');
+    feature.stateFor('s1').setExpanded(true);
     feature.reset();
-    expect(feature.stateFor('s1').tabs.map((t) => t.kind), ['files']);
+    expect(feature.stateFor('s1').tabs, isEmpty);
   });
 }

@@ -44,6 +44,9 @@ abstract interface class HostBackend {
   /// Streams a file to the host's upload route (`session/uploadFileBinary`).
   FileUploadClient get uploader;
 
+  /// The host's open-in-app routes (applications installed on the host).
+  OpenInAppClient get openInApp;
+
   /// The host's workspace file service (`workspaceFiles`).
   WorkspaceFilesRemote get files;
 
@@ -110,6 +113,12 @@ class LiveBackend implements HostBackend {
 
   @override
   late final FileUploadClient uploader = HttpFileUploadClient(
+    credential: () => _connection?.generation?.credential,
+    clientFor: trust.clientFor,
+  );
+
+  @override
+  late final OpenInAppClient openInApp = HttpOpenInAppClient(
     credential: () => _connection?.generation?.credential,
     clientFor: trust.clientFor,
   );

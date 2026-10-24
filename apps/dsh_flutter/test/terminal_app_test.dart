@@ -20,8 +20,11 @@ void main() {
   late FakeBackend backend;
   late AppController controller;
 
-  Future<void> openSession(WidgetTester t) async {
-    t.view.physicalSize = const Size(400, 800);
+  Future<void> openSession(
+    WidgetTester t, {
+    Size size = const Size(560, 800),
+  }) async {
+    t.view.physicalSize = size;
     t.view.devicePixelRatio = 1;
     addTearDown(t.view.reset);
     backend = FakeBackend();
@@ -38,7 +41,7 @@ void main() {
     };
     await t.runAsync(() => controller.pair('http://host:18686/?token=abc'));
     await settle(t);
-    await t.tap(find.byKey(const ValueKey('session-row-s1')));
+    await openRow(t, 's1');
     await settle(t);
     backend.transport.open(1, snapshot([userMessage(1, 'Earlier question')]));
     await settle(t);
@@ -50,8 +53,7 @@ void main() {
     await openSession(t);
     await t.tap(find.byKey(const ValueKey('sidebar-open')));
     await t.pumpAndSettle();
-    await t.tap(find.byKey(const ValueKey('sidebar-add')));
-    await t.pumpAndSettle();
+    // The surface seeds its guide on first opening: the cards are there.
     expect(find.text('New terminal'), findsOneWidget);
     expect(find.text('Workspace files'), findsOneWidget);
     await t.tap(find.text('New terminal'));
@@ -72,14 +74,19 @@ void main() {
     expect(find.byKey(const ValueKey('terminal-screen')), findsOneWidget);
     expect(find.byKey(const ValueKey('terminal-key-bar')), findsOneWidget);
     // Closing the tab ends the Host terminal in the background.
-    await t.tap(find.byKey(const ValueKey('close-terminal-2')));
+    final close = find.byWidgetPredicate((w) {
+      final k = w.key;
+      return k is ValueKey<String> && k.value.startsWith('dock-close-');
+    });
+    expect(close, findsOneWidget);
+    await t.tap(close);
     await settle(t);
     expect(fake.host.callsTo('terminal/close'), hasLength(1));
     expect(find.byKey(const ValueKey('terminal-screen')), findsNothing);
   });
 
   testWidgets('a timed question counts down in the composer', (t) async {
-    await openSession(t);
+    await openSession(t, size: const Size(1200, 800));
     backend.transport.events.add(
       const WaterfallEvent(
         generation: 1,

@@ -33,6 +33,15 @@ abstract interface class LocalPrefs {
   String? get terminalShell;
   Future<void> setTerminalShell(String path);
 
+  /// The workspace browser's viewing state as JSON (dsh's `dsh.workspace.view`).
+  String? get workspaceView;
+  Future<void> setWorkspaceView(String json);
+
+  /// The application last chosen to open a workspace in (desktop, local host;
+  /// dsh keeps it in `localStorage`).
+  String? get openInAppChoice;
+  Future<void> setOpenInAppChoice(String id);
+
   /// Terminal close requests the host has not confirmed: `{sessionId, id,
   /// title}` each, retried at the next start.
   List<Map<String, Object?>> get terminalCloses;
@@ -47,6 +56,8 @@ class MemoryLocalPrefs implements LocalPrefs {
     this.themeCache,
     Map<String, String>? certificatePins,
     this.terminalShell,
+    this.openInAppChoice,
+    this.workspaceView,
   }) : certificatePins = {...?certificatePins};
 
   @override
@@ -60,6 +71,10 @@ class MemoryLocalPrefs implements LocalPrefs {
   @override
   String? terminalShell;
   @override
+  String? openInAppChoice;
+  @override
+  String? workspaceView;
+  @override
   List<Map<String, Object?>> terminalCloses = [];
 
   @override
@@ -68,6 +83,12 @@ class MemoryLocalPrefs implements LocalPrefs {
 
   @override
   Future<void> setTerminalShell(String path) async => terminalShell = path;
+
+  @override
+  Future<void> setOpenInAppChoice(String id) async => openInAppChoice = id;
+
+  @override
+  Future<void> setWorkspaceView(String json) async => workspaceView = json;
 
   @override
   Future<void> setTerminalCloses(List<Map<String, Object?>> requests) async =>
@@ -98,6 +119,8 @@ class SharedLocalPrefs implements LocalPrefs {
   static const _pins = 'whalee.certificatePins';
   static const _terminalShell = 'whalee.terminalShell';
   static const _terminalCloses = 'whalee.terminalCloses';
+  static const _openInApp = 'whalee.openInAppChoice';
+  static const _workspaceView = 'whalee.workspaceView';
 
   @override
   String? get locale => _prefs.getString(_locale);
@@ -160,6 +183,22 @@ class SharedLocalPrefs implements LocalPrefs {
 
   @override
   String? get terminalShell => _prefs.getString(_terminalShell);
+
+  @override
+  String? get workspaceView => _prefs.getString(_workspaceView);
+
+  @override
+  Future<void> setWorkspaceView(String json) async {
+    await _prefs.setString(_workspaceView, json);
+  }
+
+  @override
+  String? get openInAppChoice => _prefs.getString(_openInApp);
+
+  @override
+  Future<void> setOpenInAppChoice(String id) async {
+    await _prefs.setString(_openInApp, id);
+  }
 
   @override
   Future<void> setTerminalShell(String path) async {

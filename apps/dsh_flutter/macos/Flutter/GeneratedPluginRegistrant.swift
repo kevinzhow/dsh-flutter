@@ -12,8 +12,10 @@ import file_selector_macos
 import flutter_local_notifications
 import flutter_secure_storage_darwin
 import mobile_scanner
+import screen_retriever_macos
 import shared_preferences_foundation
 import url_launcher_macos
+import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AppSettingsPlugin.register(with: registry.registrar(forPlugin: "AppSettingsPlugin"))
@@ -23,6 +25,8 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FlutterSecureStorageDarwinPlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStorageDarwinPlugin"))
   MobileScannerPlugin.register(with: registry.registrar(forPlugin: "MobileScannerPlugin"))
+  ScreenRetrieverMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenRetrieverMacosPlugin"))
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
+  WindowManagerPlugin.register(with: registry.registrar(forPlugin: "WindowManagerPlugin"))
 }

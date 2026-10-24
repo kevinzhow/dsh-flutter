@@ -1,8 +1,10 @@
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshRightbarHost;
 import 'package:flutter/widgets.dart';
 
+import 'desktop_header.dart';
 import 'session_header.dart';
 import 'shell.dart';
 import 'todo_panel.dart';
@@ -68,6 +70,12 @@ void registerConversationFeature(
   );
   slots.register<SessionOwner, Widget>(
     headerSlot,
-    (owner) => SessionHeader(owner: owner, i18n: i18n(), slots: slots),
+    // Inside the desktop frame the header is dsh's: crumb, utilities, corner
+    // and view tabs; elsewhere it is the phone's title and model line.
+    (owner) => Builder(
+      builder: (context) => DshRightbarHost.owned(context)
+          ? DesktopSessionHeader(owner: owner, i18n: i18n(), slots: slots)
+          : SessionHeader(owner: owner, i18n: i18n(), slots: slots),
+    ),
   );
 }

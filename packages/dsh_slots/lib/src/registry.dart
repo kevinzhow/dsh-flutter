@@ -224,6 +224,13 @@ class SlotRegistry {
       SlotEntryInfo(c.id, c.order, (c.label as String Function()?)?.call()),
   ];
 
+  /// `keyed`: the key of every occupant (dsh's `ctx.slots.entries(name)` reads
+  /// `options.key` of a keyed slot).
+  List<String> keys(Slot<Object?, Object?> slot) => [
+    for (final c in _sorted(slot))
+      if (c.key != null) c.key!,
+  ];
+
   /// `keyed`: the occupant for [key] (lowest priority among equals), or null.
   R? renderKeyed<P, R>(Slot<P, R> slot, String key, P owner) {
     final cells = _sorted(slot as Slot<Object?, Object?>)
