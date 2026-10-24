@@ -1,0 +1,78 @@
+{
+ "schema": "dsh-parity-desktop-summary/1",
+ "appBackend": "x11",
+ "cases": [
+  {
+   "id": "session.1280x720.light.en",
+   "title": "A started session with the Ungrouped group open",
+   "status": "compared",
+   "sizeWeb": [
+    1280,
+    720
+   ],
+   "sizeApp": [
+    1280,
+    720
+   ],
+   "exactPct": 90.067,
+   "closePct": 91.946,
+   "nonTextPct": 94.053,
+   "regions": [
+    {
+     "name": "sidebar-brand",
+     "exactPct": 87.974,
+     "closePct": 88.209,
+     "nonTextPct": 97.444
+    },
+    {
+     "name": "sidebar-new-session",
+     "exactPct": 93.95,
+     "closePct": 94.45,
+     "nonTextPct": 97.271
+    },
+    {
+     "name": "sidebar-panels",
+     "exactPct": 95.317,
+     "closePct": 95.607,
+     "nonTextPct": 98.198
+    },
+    {
+     "name": "sidebar-workspaces",
+     "exactPct": 95.875,
+     "closePct": 96.6,
+     "nonTextPct": 98.362
+    },
+    {
+     "name": "sidebar-foot",
+     "exactPct": 94.387,
+     "closePct": 97.548,
+     "nonTextPct": 95.952
+    },
+    {
+     "name": "header",
+     "exactPct": 96.937,
+     "closePct": 97.078,
+     "nonTextPct": 99.245
+    },
+    {
+     "name": "conversation",
+     "exactPct": 87.679,
+     "closePct": 88.446,
+     "nonTextPct": 92.69
+    },
+    {
+     "name": "composer",
+     "exactPct": 91.882,
+     "closePct": 96.016,
+     "nonTextPct": 94.889
+    },
+    {
+     "name": "usage-footer",
+     "exactPct": 74.937,
+     "closePct": 93.12,
+     "nonTextPct": 80.51
+    }
+   ]
+  }
+ ]
+}
