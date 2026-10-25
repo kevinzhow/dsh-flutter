@@ -68,7 +68,7 @@
     "features/dsh_feature_chat",
     "packages/dsh_conversation/lib/src/chat"
    ],
-   "notes": "Renders 11 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, unknown). No renderer for command, command-input, compaction, context, manual-compaction, question-reply, turn-process (work-details view modes) or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility and await the work-details view mode. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented.",
+   "notes": "Renders 14 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, compaction, manual-compaction, unknown). No renderer for command-input, context, question-reply, turn-process (work-details view modes) or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility and await the work-details view mode. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row.",
    "priority": "P2"
   },
   {
@@ -2520,7 +2520,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-chat/src/client/contract/slots.ts",
    "description": "Command row keyed by the command name.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "packages/dsh_slots/lib/src/owners.dart",
+    "features/dsh_feature_chat/lib/src/register.dart"
+   ],
+   "notes": "Session-scoped command-name dispatch with typed CommandViewOwner and the generic command fallback; manual compaction has its integrated renderer."
   },
   {
    "id": "slot:conversation.chat.flow",
@@ -2561,7 +2567,7 @@
     "features/dsh_feature_chat/lib/src/register.dart",
     "features/dsh_feature_tool/lib/src/register.dart"
    ],
-   "notes": "Eleven of the 19 node kinds have an occupant; missing: command, command-input, compaction, context, manual-compaction, question-reply, turn-process, workflow-run."
+   "notes": "Fourteen of the 19 node kinds have an occupant; missing: command-input, context, question-reply, turn-process, workflow-run."
   },
   {
    "id": "slot:conversation.chat.reasoning.body",

@@ -27,6 +27,11 @@ class PixelCropTest(unittest.TestCase):
             {x:31,y:889,width:120,height:72});
           assert.deepEqual(enclosingDeviceRect({x:16+1e-10,y:16-1e-10,width:100,height:50}, view, 2.625),
             {x:42,y:42,width:263,height:132});
+          // Observed DOMRect conversion of an exactly 233-device-pixel card.
+          assert.deepEqual(enclosingDeviceRect({x:16,y:16,width:240,height:88.76190948486328}, view, 2.625),
+            {x:42,y:42,width:630,height:233});
+          // A real minimum-size Blink fraction must not be rounded away.
+          assert.equal(enclosingDeviceRect({x:16,y:16,width:240,height:(233+1/64)/2.625}, view, 2.625).height,234);
         """)
 
     def test_intersection_and_invalid_geometry(self):

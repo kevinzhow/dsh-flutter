@@ -8,12 +8,12 @@
 //                    inspectSystemPrompt, inspectRequestPrompt
 //   ui-chat          the Definitions the Dart port covers (inbox, message,
 //                    developer message, system/request prompt, assistant, tool,
-//                    turn-error, turn-max-tokens, turn-tail, unknown fallback)
+//                    turn-error, turn-max-tokens, turn-tail, command, compaction, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
 //   ui-tool          the todo history Definitions and view (`tool-todo-history`)
 // NOT registered (deferred to later phases, see the PR): turn-process,
-// request-prompt, command, compaction, process groups.
+// process groups.
 //
 // GLUE written here:
 //   - a stand-in for the cordis Context (`effect` runs immediately),
@@ -36,6 +36,8 @@ export async function createChatGlue(load) {
   const { systemMessageDefinition, requestPromptDefinition } = await load(chat + 'request-prompt.ts')
   const { registerAssistantConversationNode } = await load(chat + 'assistant.ts')
   const { registerToolConversationNode } = await load(chat + 'tool.ts')
+  const { registerCommandConversationNode } = await load(chat + 'command.ts')
+  const { registerCompactionConversationNode } = await load(chat + 'compaction.ts')
   const { registerRetryConversationNode } = await load(chat + 'retry.ts')
   const { registerTurnErrorConversationNode } = await load(chat + 'turn-error.ts')
   const { registerTurnMaxTokensConversationNode } = await load(chat + 'turn-max-tokens.ts')
@@ -56,6 +58,8 @@ export async function createChatGlue(load) {
   events.register(requestPromptDefinition(inspectRequestPrompt))
   registerAssistantConversationNode(scope)
   registerToolConversationNode(scope)
+  registerCommandConversationNode(scope)
+  registerCompactionConversationNode(scope)
   registerRetryConversationNode(scope)
   registerTurnErrorConversationNode(scope)
   registerTurnMaxTokensConversationNode(scope)
@@ -178,6 +182,9 @@ function dataJson(node) {
         usage: json(d.usage), final: finalJson(d.finalNode),
       }
     case 'tool-call': return toolJson(d.root)
+    case 'command': return commandJson(d)
+    case 'compaction': return compactionJson(d)
+    case 'manual-compaction': return { command: commandJson(d.command), compaction: d.compaction === null ? null : compactionJson(d.compaction) }
     case 'model-retry':
       return { attempts: d.attempts.map(a => ({
         seq: a.seq, time: a.time, retryId: a.retryId, turn: a.turn, step: a.step,
@@ -192,6 +199,15 @@ function dataJson(node) {
     case 'unknown': return { seq: d.seq, time: d.time, type: d.type }
     default: throw new Error(`chat projection: unhandled node kind ${node.kind}`)
   }
+}
+
+function commandJson(d) {
+  return {seq:d.seq,time:d.time,commandId:json(d.commandId),name:d.name,args:d.args,
+    outcome:d.outcome === null ? null : {kind:d.outcome.kind,text:d.outcome.text ?? null,sourceEventSeq:d.outcome.sourceEventSeq ?? null}}
+}
+function compactionJson(d) {
+  return {seq:d.seq,time:d.time,summary:d.summary,summaryEventSeq:d.summaryEventSeq,
+    shadowedItemCount:d.shadowedItemCount,shadowedTokenCount:d.shadowedTokenCount}
 }
 
 function coordinates(location) {

@@ -76,6 +76,11 @@ abstract final class DshSlots {
     SlotCardinality.keyed,
     SlotScope.session,
   );
+  static const conversationChatCommandview = Slot<Object?, Object?>(
+    'conversation.chat.commandview',
+    SlotCardinality.keyed,
+    SlotScope.session,
+  );
 
   static const conversationInputDock = Slot<Object?, Object?>(
     'conversation.input.dock',
@@ -228,6 +233,7 @@ abstract final class DshSlots {
     conversationSessionHeaderCorner,
     conversationComposerDock,
     conversationChatNode,
+    conversationChatCommandview,
     toolCallToolview,
     conversationInputDock,
     conversationChatTurnTail,

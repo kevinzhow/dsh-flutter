@@ -118,6 +118,13 @@ class ChatNodeOwner {
   final ChatSnapshot snapshot;
 }
 
+/// Command-name specialization at `conversation.chat.commandview`.
+class CommandViewOwner {
+  const CommandViewOwner({required this.session, required this.command});
+  final SessionOwner session;
+  final CommandData command;
+}
+
 /// Owner props of the keyed `tool.call.toolview` slot: one tool call to render,
 /// keyed by its wire tool name. Tool-specific views occupy it; the generic card
 /// renders when no entry matches.

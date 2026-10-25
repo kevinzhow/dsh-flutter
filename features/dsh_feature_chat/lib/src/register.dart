@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 
 import 'chat_nodes.dart';
 import 'chat_view.dart';
+import 'command_view.dart';
+import 'compaction_view.dart';
 import 'model_retry_view.dart';
 import 'stats_pills.dart';
 import 'system_prompt_view.dart';
@@ -84,6 +86,32 @@ void registerChatFeature(
     final d = o.node.data as SystemPromptData;
     return SystemPromptView(text: d.text, update: d.update, i18n: t);
   });
+  node('command', (o, t) {
+    final data = o.node.data as CommandData;
+    return slots.renderKeyed(
+          DshSlots.conversationChatCommandview
+              .typed<CommandViewOwner, Widget>(),
+          data.name ?? '',
+          CommandViewOwner(session: o.session, command: data),
+        ) ??
+        CommandView(data: data, i18n: t);
+  });
+  node(
+    'compaction',
+    (o, t) => CompactionView(
+      data: o.node.data as CompactionData,
+      i18n: t,
+      host: host,
+    ),
+  );
+  node(
+    'manual-compaction',
+    (o, t) => ManualCompactionView(
+      data: o.node.data as ManualCompactionData,
+      i18n: t,
+      host: host,
+    ),
+  );
   const userKinds = {'user', 'steering'};
   node('user', (o, t) {
     final d = o.node.data as MessageData;

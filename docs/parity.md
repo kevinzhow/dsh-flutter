@@ -123,6 +123,8 @@ contract can be diffed: a future third provider (Android, iOS) only has to produ
   The React provider copies those pixels from the viewport PNG without resampling: locator/CDP clip rounding can
   truncate a fractional device row (85 CSS px at 2.625x needs 224 rows, not 223). Its metadata records the physical
   `crop.pixelRect` and policy. Emulated references retain Playwright's locator screenshot and enclosing CSS-pixel box.
+  Native edges absorb `1e-4` device-pixel DOMRect float noise, well below a genuine `1/64` layout fraction. Newly
+  expanded content waits for its requested font faces before measuring the crop, as well as before the screenshot.
 - The React side is a static Vite bundle with no network; Flutter never reads the platform brightness (the theme is explicit
   per capture, `resolveParityTheme`, and every capture verifies it: tree brightness, pack id and the frame's pixel colour).
 - Fonts are pinned (below). The React cache key includes every input that can change pixels (dsh commit, case JSON without
@@ -460,6 +462,10 @@ position, focus and hover remain intact. This matches browser screenshots, which
 The runner uses the existing case coordinates for pairing and page clicks, plus `scroll: [x, y, verticalPixels]` for wheel
 input and `capture: "label"` for intermediate screenshots. Typing uses an explicitly configured US keyboard and rejects
 unsupported characters before sending any key. Each case has its own runtime directory, D-Bus session and app settings.
+An optional `expect` step waits up to ten seconds for a pixel region to change or match a saved capture, for example
+`{"expect":{"reference":"closed","rect":[16,44,216,100],"changed":true}}`. Rectangles are device-pixel left/top/right/bottom
+bounds. Use stationary synthetic regions with animations disabled; the step requires Pillow from
+`tool/parity-requirements.txt` and records each successful condition and retry count in `environment.json`.
 The runner records its PIDs and stops those process groups on success and failure; it also terminates Weston when the
 input pipe closes. The fixture host remains the caller's responsibility.
 
@@ -538,3 +544,16 @@ both cards and scrolls the bounded body in desktop light and phone-size Chinese
 dark windows. This is native Linux component validation, not an Android device
 measurement or a real DSH conversation. Build the normal entry again before
 using the app bundle as the product.
+
+### Native command and compaction fixture
+
+`apps/dsh_flutter/test/parity/compaction_command_main.dart` renders synthetic ordinary-command output,
+a completed manual compaction, a long automatic summary and a running command. Build it with the same `-t`
+procedure above and use `tool/parity-desktop/compaction-command-cases.json` with the GPU provider. The cases
+open/collapse output and summaries, scroll the long body, then click its pinned header. Save the preserved
+fixture executable separately and rebuild the normal app entry before using the product artifacts.
+
+For Android interaction checks the same entry accepts `--dart-define=PARITY_LOCALE=zh` and
+`--dart-define=PARITY_DARK=true`. The native cases use pixel-region assertions to wait for each expected
+expansion, scroll and collapse before proceeding; they fail on a timeout. Assertion results and attempts are
+recorded in `environment.json`. This fixture performs no host connection or model request.

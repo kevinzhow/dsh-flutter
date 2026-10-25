@@ -102,6 +102,20 @@ void main() {
       enclosingPixelRect(const Rect.fromLTWH(0, 0, 420, 68), 2.625),
       const Rect.fromLTWH(0, 0, 1103, 179),
     );
+    expect(
+      enclosingPixelRect(
+        const Rect.fromLTWH(16, 16, 240, 88.76190948486328),
+        2.625,
+      ),
+      const Rect.fromLTWH(42, 42, 630, 233),
+    );
+    expect(
+      enclosingPixelRect(
+        Rect.fromLTWH(16, 16, 240, (233 + 1 / 64) / 2.625),
+        2.625,
+      ).height,
+      234,
+    );
   });
 
   test('ParityLayout reads the shared layout prop', () {
