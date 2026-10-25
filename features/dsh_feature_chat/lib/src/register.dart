@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'chat_nodes.dart';
 import 'chat_view.dart';
+import 'model_retry_view.dart';
 import 'stats_pills.dart';
 import 'system_prompt_view.dart';
 import 'stream/reading_anchor.dart';
@@ -137,6 +138,13 @@ void registerChatFeature(
       data: o.node.data as TurnTailData,
       i18n: t,
       latest: newest(o, const {'turn-tail'}),
+    ),
+  );
+  node(
+    'model-retry',
+    (o, t) => ModelRetryView(
+      attempt: (o.node.data as ModelRetryData).current,
+      i18n: t,
     ),
   );
   node(

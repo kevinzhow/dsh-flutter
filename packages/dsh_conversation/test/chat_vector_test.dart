@@ -18,6 +18,7 @@ const fixtures = [
   'test/fixtures/attachment_vector.json',
   'test/fixtures/tool_turn_vector.json',
   'test/fixtures/system_prompt_vector.json',
+  'test/fixtures/model_retry_vector.json',
 ];
 
 void main() {

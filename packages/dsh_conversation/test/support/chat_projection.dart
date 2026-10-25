@@ -217,6 +217,25 @@ Object? _data(ViewNode node) {
       };
     case 'tool-call':
       return _tool((d! as ToolData).root);
+    case 'model-retry':
+      return {
+        'attempts': [
+          for (final a in (d! as ModelRetryData).attempts)
+            {
+              'seq': a.seq,
+              'time': a.time,
+              'retryId': a.retryId,
+              'turn': a.turn,
+              'step': a.step,
+              'retry': a.retry,
+              'delayMs': a.delayMs,
+              'maxRetries': a.maxRetries,
+              'failureCode': a.failureCode,
+              'failureMessage': a.failureMessage,
+              'state': a.state.name,
+            },
+        ],
+      };
     case 'turn-tail':
       final t = d! as TurnTailData;
       return {

@@ -4,6 +4,7 @@ import '../plan/submitted_plan.dart';
 import '../tool/todo_history.dart';
 import 'definitions.dart';
 import 'nodes.dart';
+import 'retry.dart';
 import 'system_prompt.dart';
 
 /// The immutable chat target snapshot (dsh `ChatSnapshot`, without the legacy
@@ -173,6 +174,7 @@ defaultChatRegistries() {
     ..register(const RequestPromptDefinition())
     ..register(const AssistantDefinition())
     ..register(const ToolDefinition())
+    ..register(const ModelRetryDefinition())
     ..register(const TurnErrorDefinition())
     ..register(const TurnMaxTokensDefinition())
     ..register(const TurnTailDefinition())
