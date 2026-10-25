@@ -97,314 +97,349 @@ class _QuestionReplyViewState extends State<QuestionReplyView>
     final date = DateTime.fromMillisecondsSinceEpoch(data.time.toInt());
     final clock =
         '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
-    return Semantics(
-      label: t('reply.label'),
-      container: true,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: _ReplyWidth(
-                child: Align(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final labelPainter =
+            TextPainter(
+              text: TextSpan(
+                text: t('reply.label'),
+                style: theme
+                    .textStyle('--dsw-font-xs-13')
+                    .copyWith(height: 18 / 13),
+              ),
+              textDirection: Directionality.of(context),
+            )..layout(
+              maxWidth: (constraints.maxWidth * .72 - 15).clamp(
+                .1,
+                double.infinity,
+              ),
+            );
+        final wrappedHeader = labelPainter.computeLineMetrics().length > 1;
+        labelPainter.dispose();
+        return Semantics(
+          label: t('reply.label'),
+          container: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: DshDecoratedBox(
-                    decoration: theme.cornerDecoration(
-                      theme.radiusXl,
-                      color: theme.color('--dsw-specific-bubble'),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: _open ? 1 : 0,
-                              bottom: _open ? 3 : 0,
-                            ),
-                            child: action(
-                              label:
-                                  '${t('reply.label')} · ${t(_open ? 'reply.close' : 'reply.open')}',
-                              expanded: _open,
-                              onTap: () {
-                                DshDisclosureChange(
-                                  !_open,
-                                  context,
-                                ).dispatch(context);
-                                setState(() => _open = !_open);
-                              },
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      DshIcon(
-                                        _open
-                                            ? DshIcons.chevronDown
-                                            : DshIcons.chevronRight,
-                                        size: 12,
-                                        color: theme.labelSecondary,
-                                      ),
-                                      const SizedBox(width: 3),
-                                      Flexible(
-                                        child: text(
-                                          context,
-                                          t('reply.label'),
-                                          size: 13,
-                                          secondary: true,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  if (!_open)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: text(
-                                        context,
-                                        summary.isEmpty
-                                            ? t('reply.skipped')
-                                            : summary,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                            ),
+                  child: _ReplyWidth(
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: DshDecoratedBox(
+                        decoration: theme.cornerDecoration(
+                          theme.radiusXl,
+                          color: theme.color('--dsw-specific-bubble'),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 10,
                           ),
-                          if (_open)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: data.questions.isEmpty
-                                  ? text(context, data.text)
-                                  : DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color: theme.labelSecondary
-                                                .withValues(alpha: .24),
-                                            width: dshBorderWidthOf(context, 1),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: _open && !wrappedHeader ? 1 : 0,
+                                  bottom: _open && !wrappedHeader ? 3 : 0,
+                                ),
+                                child: action(
+                                  label:
+                                      '${t('reply.label')} · ${t(_open ? 'reply.close' : 'reply.open')}',
+                                  expanded: _open,
+                                  onTap: () {
+                                    DshDisclosureChange(
+                                      !_open,
+                                      context,
+                                    ).dispatch(context);
+                                    setState(() => _open = !_open);
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          DshIcon(
+                                            _open
+                                                ? DshIcons.chevronDown
+                                                : DshIcons.chevronRight,
+                                            size: 12,
+                                            color: theme.labelSecondary,
+                                          ),
+                                          const SizedBox(width: 3),
+                                          Flexible(
+                                            child: text(
+                                              context,
+                                              t('reply.label'),
+                                              size: 13,
+                                              secondary: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      if (!_open)
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 3,
+                                          ),
+                                          child: text(
+                                            context,
+                                            summary.isEmpty
+                                                ? t('reply.skipped')
+                                                : summary,
                                           ),
                                         ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 8 + dshBorderWidthOf(context, 1),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            for (
-                                              var i = 0;
-                                              i < data.questions.length;
-                                              i++
-                                            )
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: i == 0 ? 0 : 12,
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              if (_open)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: data.questions.isEmpty
+                                      ? text(context, data.text)
+                                      : DecoratedBox(
+                                          decoration: BoxDecoration(
+                                            border: Border(
+                                              top: BorderSide(
+                                                color: theme.labelSecondary
+                                                    .withValues(alpha: .24),
+                                                width: dshBorderWidthOf(
+                                                  context,
+                                                  1,
                                                 ),
-                                                child: Builder(
-                                                  builder: (context) {
-                                                    final q = data.questions[i],
-                                                        values = data.answerValues(
-                                                          data.questions[i]['id']
-                                                              as String,
-                                                        );
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .stretch,
-                                                      children: [
-                                                        if (q['header']
-                                                                is String &&
-                                                            (q['header']
-                                                                    as String)
-                                                                .isNotEmpty &&
-                                                            q['header'] !=
-                                                                q['question']) ...[
-                                                          text(
-                                                            context,
-                                                            q['header']
-                                                                as String,
-                                                            size: 11,
-                                                            secondary: true,
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 3,
-                                                          ),
-                                                        ],
-                                                        text(
-                                                          context,
-                                                          q['question']
-                                                              as String,
-                                                          size: 12,
-                                                        ),
-                                                        if (q['detail']
-                                                                is String &&
-                                                            (q['detail']
-                                                                    as String)
-                                                                .isNotEmpty) ...[
-                                                          const SizedBox(
-                                                            height: 3,
-                                                          ),
-                                                          text(
-                                                            context,
-                                                            q['detail']
-                                                                as String,
-                                                            size: 11,
-                                                            secondary: true,
-                                                          ),
-                                                        ],
-                                                        if (q['options']
-                                                            is List)
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets.only(
-                                                                  left: 16,
-                                                                  top: 3,
-                                                                ),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .stretch,
-                                                              children: [
-                                                                for (final o
-                                                                    in q['options']
-                                                                        as List)
-                                                                  text(
-                                                                    context,
-                                                                    '• ${(o as Map)['label']}${o['description'] is String && (o['description'] as String).isNotEmpty ? ' — ${o['description']}' : ''}',
-                                                                    size: 11,
-                                                                    secondary:
-                                                                        true,
-                                                                  ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets.only(
-                                                                top: 4,
+                                              ),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              top:
+                                                  8 +
+                                                  dshBorderWidthOf(context, 1),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                for (
+                                                  var i = 0;
+                                                  i < data.questions.length;
+                                                  i++
+                                                )
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: i == 0 ? 0 : 12,
+                                                    ),
+                                                    child: Builder(
+                                                      builder: (context) {
+                                                        final q = data
+                                                                .questions[i],
+                                                            values = data
+                                                                .answerValues(
+                                                                  data.questions[i]['id']
+                                                                      as String,
+                                                                );
+                                                        return Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            if (q['header']
+                                                                    is String &&
+                                                                (q['header']
+                                                                        as String)
+                                                                    .isNotEmpty &&
+                                                                q['header'] !=
+                                                                    q['question']) ...[
+                                                              text(
+                                                                context,
+                                                                q['header']
+                                                                    as String,
+                                                                size: 11,
+                                                                secondary: true,
                                                               ),
-                                                          child: Text.rich(
-                                                            TextSpan(
-                                                              style: theme
-                                                                  .textStyle(
-                                                                    '--dsw-font-s-14',
-                                                                  )
-                                                                  .copyWith(
-                                                                    color: theme
-                                                                        .labelPrimary,
-                                                                    height:
-                                                                        22 / 14,
+                                                              const SizedBox(
+                                                                height: 3,
+                                                              ),
+                                                            ],
+                                                            text(
+                                                              context,
+                                                              q['question']
+                                                                  as String,
+                                                              size: 12,
+                                                            ),
+                                                            if (q['detail']
+                                                                    is String &&
+                                                                (q['detail']
+                                                                        as String)
+                                                                    .isNotEmpty) ...[
+                                                              const SizedBox(
+                                                                height: 3,
+                                                              ),
+                                                              text(
+                                                                context,
+                                                                q['detail']
+                                                                    as String,
+                                                                size: 11,
+                                                                secondary: true,
+                                                              ),
+                                                            ],
+                                                            if (q['options']
+                                                                is List)
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets.only(
+                                                                      left: 16,
+                                                                      top: 3,
+                                                                    ),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .stretch,
+                                                                  children: [
+                                                                    for (final o
+                                                                        in q['options']
+                                                                            as List)
+                                                                      text(
+                                                                        context,
+                                                                        '• ${(o as Map)['label']}${o['description'] is String && (o['description'] as String).isNotEmpty ? ' — ${o['description']}' : ''}',
+                                                                        size:
+                                                                            11,
+                                                                        secondary:
+                                                                            true,
+                                                                      ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets.only(
+                                                                    top: 4,
                                                                   ),
-                                                              children: [
+                                                              child: Text.rich(
                                                                 TextSpan(
-                                                                  text: t(
-                                                                    'reply.answerLabel',
-                                                                  ),
                                                                   style: theme
                                                                       .textStyle(
-                                                                        '--dsw-font-xxs-12',
+                                                                        '--dsw-font-s-14',
                                                                       )
                                                                       .copyWith(
+                                                                        color: theme
+                                                                            .labelPrimary,
                                                                         height:
                                                                             22 /
-                                                                            12,
-                                                                        color: theme
-                                                                            .labelSecondary,
+                                                                            14,
                                                                       ),
-                                                                ),
-                                                                const WidgetSpan(
-                                                                  child:
-                                                                      SizedBox(
+                                                                  children: [
+                                                                    TextSpan(
+                                                                      text: t(
+                                                                        'reply.answerLabel',
+                                                                      ),
+                                                                      style: theme
+                                                                          .textStyle(
+                                                                            '--dsw-font-xxs-12',
+                                                                          )
+                                                                          .copyWith(
+                                                                            height:
+                                                                                22 /
+                                                                                12,
+                                                                            color:
+                                                                                theme.labelSecondary,
+                                                                          ),
+                                                                    ),
+                                                                    const WidgetSpan(
+                                                                      child: SizedBox(
                                                                         width:
                                                                             4,
                                                                       ),
-                                                                ),
-                                                                TextSpan(
-                                                                  text:
-                                                                      values
-                                                                          .isEmpty
-                                                                      ? t(
-                                                                          'reply.skipped',
-                                                                        )
-                                                                      : values
-                                                                            .join(
+                                                                    ),
+                                                                    TextSpan(
+                                                                      text:
+                                                                          values
+                                                                              .isEmpty
+                                                                          ? t(
+                                                                              'reply.skipped',
+                                                                            )
+                                                                          : values.join(
                                                                               ', ',
                                                                             ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                          ],
+                                                          ],
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 6),
-            Padding(
-              padding: const EdgeInsets.only(right: 4),
-              child: SizedBox(
-                height: 28,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: DshChromeText(
-                        clock,
-                        style: theme
-                            .textStyle('--dsw-font-xs-13')
-                            .copyWith(
-                              height: 24 / 13,
-                              color: theme.color('--dsw-alias-label-tertiary'),
-                            ),
-                      ),
-                    ),
-                    action(
-                      label: t(copied ? 'copied' : 'copy'),
-                      onTap: () =>
-                          copyText(replyClipboardText(data, widget.i18n)),
-                      child: SizedBox.square(
-                        dimension: 28,
-                        child: Center(
-                          child: DshIcon(
-                            copied ? DshIcons.check : DshIcons.copy,
-                            size: 15,
-                            color: theme.color('--dsw-alias-label-tertiary'),
+                                ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 6),
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: SizedBox(
+                    height: 28,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: DshChromeText(
+                            clock,
+                            style: theme
+                                .textStyle('--dsw-font-xs-13')
+                                .copyWith(
+                                  height: 24 / 13,
+                                  color: theme.color(
+                                    '--dsw-alias-label-tertiary',
+                                  ),
+                                ),
+                          ),
+                        ),
+                        action(
+                          label: t(copied ? 'copied' : 'copy'),
+                          onTap: () =>
+                              copyText(replyClipboardText(data, widget.i18n)),
+                          child: SizedBox.square(
+                            dimension: 28,
+                            child: Center(
+                              child: DshIcon(
+                                copied ? DshIcons.check : DshIcons.copy,
+                                size: 15,
+                                color: theme.color(
+                                  '--dsw-alias-label-tertiary',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

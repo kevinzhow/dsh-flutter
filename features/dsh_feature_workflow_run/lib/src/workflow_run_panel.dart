@@ -223,11 +223,11 @@ class _WorkflowRunPanelState extends State<WorkflowRunPanel> {
     String name, {
     WorkflowRunStatus? status,
     required String summary,
-    required String label,
+    required String controlId,
   }) {
     final theme = c.dsh;
     return _WorkflowAction(
-      key: ValueKey(label),
+      key: ValueKey(controlId),
       label: name,
       expanded: state.open,
       onTap: () => toggle(state),
@@ -309,7 +309,7 @@ class _WorkflowRunPanelState extends State<WorkflowRunPanel> {
           t('run.title', {'name': widget.data.name}),
           status: widget.data.status,
           summary: count(_run.facts.count),
-          label: 'workflow-run-header',
+          controlId: 'workflow-run-header',
         ),
         if (_run.open)
           content(

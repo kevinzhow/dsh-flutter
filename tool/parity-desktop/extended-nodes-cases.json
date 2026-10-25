@@ -1,0 +1,552 @@
+{
+ "cases": [
+  {
+   "id": "extended-nodes.desktop-light",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 1280,
+   "height": 720,
+   "theme": "light",
+   "locale": "en",
+   "app": [
+    {
+     "capture": "reply-closed"
+    },
+    {
+     "click": [
+      934,
+      88
+     ]
+    },
+    {
+     "expect": {
+      "reference": "reply-closed",
+      "rect": [
+       266,
+       64,
+       1014,
+       500
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "reply-open"
+    },
+    {
+     "click": [
+      934,
+      88
+     ]
+    },
+    {
+     "expect": {
+      "reference": "reply-closed",
+      "rect": [
+       266,
+       64,
+       1014,
+       500
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "reply-restored"
+    },
+    {
+     "click": [
+      800,
+      22
+     ]
+    },
+    {
+     "capture": "context-closed"
+    },
+    {
+     "click": [
+      346,
+      76
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-closed",
+      "rect": [
+       266,
+       90,
+       1014,
+       235
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "context-open"
+    },
+    {
+     "scroll": [
+      366,
+      160,
+      350
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-open",
+      "rect": [
+       288,
+       92,
+       1014,
+       230
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "context-scrolled"
+    },
+    {
+     "click": [
+      346,
+      76
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-closed",
+      "rect": [
+       266,
+       64,
+       1014,
+       235
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "context-restored"
+    },
+    {
+     "click": [
+      1120,
+      22
+     ]
+    },
+    {
+     "capture": "workflow-running"
+    },
+    {
+     "click": [
+      416,
+      144
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       266,
+       230,
+       1014,
+       280
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-member-opened"
+    },
+    {
+     "click": [
+      390,
+      212
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       266,
+       64,
+       1014,
+       184
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-completed"
+    },
+    {
+     "click": [
+      640,
+      126
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-completed",
+      "rect": [
+       266,
+       64,
+       1014,
+       230
+      ],
+      "changed": true
+     }
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       266,
+       64,
+       1014,
+       184
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "workflow-restarted"
+    },
+    {
+     "click": [
+      889,
+      212
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-restarted",
+      "rect": [
+       266,
+       64,
+       1014,
+       184
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-failed"
+    },
+    {
+     "click": [
+      346,
+      80
+     ]
+    },
+    {
+     "capture": "workflow-failed-collapsed"
+    },
+    {
+     "click": [
+      346,
+      80
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-failed",
+      "rect": [
+       266,
+       64,
+       1014,
+       184
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "workflow-failed-restored"
+    },
+    {
+     "click": [
+      160,
+      22
+     ]
+    },
+    {
+     "capture": "goal"
+    }
+   ]
+  },
+  {
+   "id": "extended-nodes.phone-dark-zh",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 390,
+   "height": 844,
+   "theme": "dark",
+   "locale": "zh",
+   "app": [
+    {
+     "capture": "reply-closed"
+    },
+    {
+     "click": [
+      290,
+      88
+     ]
+    },
+    {
+     "expect": {
+      "reference": "reply-closed",
+      "rect": [
+       20,
+       64,
+       370,
+       500
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "reply-open"
+    },
+    {
+     "click": [
+      290,
+      88
+     ]
+    },
+    {
+     "expect": {
+      "reference": "reply-closed",
+      "rect": [
+       20,
+       64,
+       370,
+       500
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "reply-restored"
+    },
+    {
+     "click": [
+      243,
+      22
+     ]
+    },
+    {
+     "capture": "context-closed"
+    },
+    {
+     "click": [
+      100,
+      76
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-closed",
+      "rect": [
+       20,
+       90,
+       370,
+       235
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "context-open"
+    },
+    {
+     "scroll": [
+      120,
+      160,
+      350
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-open",
+      "rect": [
+       42,
+       92,
+       370,
+       230
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "context-scrolled"
+    },
+    {
+     "click": [
+      100,
+      76
+     ]
+    },
+    {
+     "expect": {
+      "reference": "context-closed",
+      "rect": [
+       20,
+       64,
+       370,
+       235
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "context-restored"
+    },
+    {
+     "click": [
+      341,
+      22
+     ]
+    },
+    {
+     "capture": "workflow-running"
+    },
+    {
+     "click": [
+      170,
+      144
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       20,
+       230,
+       370,
+       280
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-member-opened"
+    },
+    {
+     "click": [
+      78,
+      212
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       20,
+       64,
+       370,
+       184
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-completed"
+    },
+    {
+     "click": [
+      195,
+      126
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-completed",
+      "rect": [
+       20,
+       64,
+       370,
+       230
+      ],
+      "changed": true
+     }
+    },
+    {
+     "expect": {
+      "reference": "workflow-running",
+      "rect": [
+       20,
+       64,
+       370,
+       184
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "workflow-restarted"
+    },
+    {
+     "click": [
+      311,
+      212
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-restarted",
+      "rect": [
+       20,
+       64,
+       370,
+       184
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "workflow-failed"
+    },
+    {
+     "click": [
+      100,
+      80
+     ]
+    },
+    {
+     "capture": "workflow-failed-collapsed"
+    },
+    {
+     "click": [
+      100,
+      80
+     ]
+    },
+    {
+     "expect": {
+      "reference": "workflow-failed",
+      "rect": [
+       20,
+       64,
+       370,
+       184
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "workflow-failed-restored"
+    },
+    {
+     "click": [
+      48,
+      22
+     ]
+    },
+    {
+     "capture": "goal"
+    }
+   ]
+  }
+ ]
+}

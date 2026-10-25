@@ -160,6 +160,7 @@ class _FixtureState extends State<_Fixture> {
                 Expanded(
                   child: DshButton(
                     onPressed: () => setState(() {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       status = next;
                       opened = null;
                     }),
