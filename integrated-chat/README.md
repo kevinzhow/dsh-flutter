@@ -7,3 +7,5 @@ All72 component comparisons are recaptured from the integrated source:32 model-r
 The normal Linux app was rebuilt at this source and paired to the isolated synthetic retry fixture under Weston/Intel LNL GPU. Both started/cancelled disclosures opened with the correct delay/failure details. Screenshot was inspected; no real conversation or provider call was used. Android was rebuilt at the integrated head; actual Android fixture interaction provenance remains in model-retry/ and system-prompt/.
 
 All owned capture app/compositor processes and the fixture host were stopped after validation.
+
+The functional scope is now merged: PR25 as e0d60bb, PR24 as 9920f7a. Final main tree is identical to the locally validated integrated tree recorded in preflight.json. Visual discrepancies continue as follow-up work; no visual acceptance is claimed.
