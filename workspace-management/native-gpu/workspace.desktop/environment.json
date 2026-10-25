@@ -1,0 +1,121 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "kernel": "7.0.0-38-generic",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "initial",
+      "rect": [
+        520,
+        130,
+        715,
+        190
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "session-drag",
+      "rect": [
+        520,
+        95,
+        700,
+        265
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "menu",
+      "rect": [
+        450,
+        255,
+        830,
+        464
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "rename",
+      "rect": [
+        475,
+        339,
+        805,
+        375
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "rename-draft",
+      "rect": [
+        450,
+        255,
+        830,
+        464
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "renamed",
+      "rect": [
+        480,
+        663,
+        800,
+        689
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "archive-confirm",
+      "rect": [
+        450,
+        210,
+        830,
+        510
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pinned",
+      "rect": [
+        480,
+        663,
+        800,
+        689
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    1280,
+    720
+  ],
+  "theme": "light",
+  "locale": "en"
+}

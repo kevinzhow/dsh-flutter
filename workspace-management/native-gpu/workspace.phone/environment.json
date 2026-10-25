@@ -1,0 +1,37 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "kernel": "7.0.0-38-generic",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "menu",
+      "rect": [
+        24,
+        270,
+        366,
+        560
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "zh"
+}

@@ -1,0 +1,150 @@
+{
+  "api": 36,
+  "synthetic": true,
+  "actualTapsAndKeyboard": true,
+  "fixtureActionsOnly": true,
+  "realHostRoutingVerifiedBy": "apps/dsh_flutter/test/workspace_management_flow_test.dart",
+  "scenes": [
+    {
+      "scene": "browser",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "row-longpress",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "row-menu-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "actions",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "refusal-armed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "menu-5",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "rename",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "rename-draft",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "rename-refused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "rename-retried",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "menu-10",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "pinned",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "menu-12",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "archive-confirm",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "archive-cancel",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "menu-15",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "archive-confirm-again",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "archived",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "archive-undo",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "footer-fork",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-rename",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-rename-draft",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-renamed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-delete",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-deleted",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "history-retained",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "ungrouped-retained",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "touchLongPressMenu": true,
+  "renameFailureRetainsDraftAndRetries": true,
+  "archiveCancelPreservesWork": true,
+  "explicitStopArchiveAndUndo": true,
+  "workspaceDeleteRetainsSessionHistory": true,
+  "footerForkExactBoundary": 6
+}
