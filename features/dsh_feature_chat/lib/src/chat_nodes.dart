@@ -94,6 +94,7 @@ class UserBubble extends StatelessWidget {
     this.time,
     this.actions = true,
     this.latest = false,
+    this.referenceLabels = const [],
   });
 
   final String text;
@@ -111,6 +112,7 @@ class UserBubble extends StatelessWidget {
   /// earlier ones show them on hover (dsh `data-actions-reveal`).
   final bool latest;
   final List<UserAttachmentView> attachments;
+  final List<String> referenceLabels;
 
   /// Needed to render image groups (the session loads durable images).
   final SessionOwner? owner;
@@ -202,11 +204,25 @@ class UserBubble extends StatelessWidget {
                           horizontal: DshSpace.lg,
                           vertical: 10,
                         ),
-                        child: Text(
-                          text,
+                        child: DefaultTextStyle(
                           style: theme
                               .textStyle('--dsw-font-s-14')
                               .copyWith(color: theme.labelPrimary),
+                          child:
+                              slots?.renderSingle(
+                                DshSlots.conversationUserText
+                                    .typed<UserTextOwner, Widget>(),
+                                UserTextOwner(
+                                  text: text,
+                                  facts: {
+                                    if (referenceLabels.isNotEmpty)
+                                      'sessionLabels': referenceLabels,
+                                  },
+                                  session: owner,
+                                  interactive: !pending,
+                                ),
+                              ) ??
+                              Text(text),
                         ),
                       ),
                     ),

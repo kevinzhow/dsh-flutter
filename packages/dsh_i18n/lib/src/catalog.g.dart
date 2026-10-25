@@ -31,6 +31,7 @@ const Map<String, String> dshCatalogPackages = {
   'question': 'client/ui-user-questions',
   'reference': 'client/ui-reference',
   'schedule.manager': 'client/ui-schedule',
+  'secretMask': 'client/ui-secret-mask',
   'settings': 'client/ui-settings-general',
   'settings.locale': 'client/locale',
   'settings.permission': 'client/ui-permission-presets',
@@ -2462,6 +2463,10 @@ const Map<String, Map<String, ({String en, String? zh})>> dshCatalog = {
     'unit.minute.other': (en: 'minutes', zh: '分钟'),
     'unit.second.one': (en: 'second', zh: '秒'),
     'unit.second.other': (en: 'seconds', zh: '秒'),
+  },
+  'secretMask': {
+    'secret.hide': (en: 'Hide secret', zh: '隐藏密钥'),
+    'secret.reveal': (en: 'Show secret', zh: '显示密钥'),
   },
   'settings': {
     'close': (en: 'Close', zh: '关闭'),

@@ -71,3 +71,5 @@ export 'src/dsh_disclosure_reset.dart';
 export 'src/dsh_json_block.dart';
 
 export 'src/dsh_markdown_plain_text.dart';
+
+export 'src/dsh_reference_chip.dart';

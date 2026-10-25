@@ -50,6 +50,9 @@ class CommandSource extends InputTriggerSource {
   String get name => 'command';
 
   @override
+  void prepareLaunch(String sessionId) => _popups[sessionId]?.dismiss();
+
+  @override
   bool get adjudicatesEnter => true;
   @override
   bool get adjudicatesSpace => true;

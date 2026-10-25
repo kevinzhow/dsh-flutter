@@ -11,6 +11,7 @@ import 'todo_panel.dart';
 import 'queue_dock.dart';
 import 'submission_policy.dart';
 import 'enter_settings.dart';
+import 'user_text.dart';
 
 /// Resolves a session id to its composer model (the app keeps them).
 typedef ComposerInputLookup = ComposerInput? Function(String sessionId);
@@ -42,7 +43,9 @@ void registerConversationFeature(
   ComposerInputLookup? inputOf,
   WorkspaceServices? workspaces,
   ConversationPreferences? preferences,
+  UserTextRegistry? userText,
 }) {
+  if (userText != null) registerUserTextFactory(slots, userText);
   if (commandUi != null && inputOf != null) {
     commandUi.register(
       CommandContribution(
@@ -75,7 +78,7 @@ void registerConversationFeature(
   );
   slots.register<SessionOwner, Widget>(
     DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
-    (owner) => QueueDock(owner: owner, i18n: i18n()),
+    (owner) => QueueDock(owner: owner, i18n: i18n(), slots: slots),
     id: 'queue',
     order: 20,
   );

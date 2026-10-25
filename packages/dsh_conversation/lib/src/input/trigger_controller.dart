@@ -238,6 +238,7 @@ class InputTriggerController {
       dismiss();
       return;
     }
+    match.prepareLaunch(sessionId);
     _stopFetch();
     _hit = hit;
     launcher.set(source);

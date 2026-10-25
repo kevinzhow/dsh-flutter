@@ -376,6 +376,9 @@ abstract class InputTriggerSource {
   /// The menu group label; unique per trigger.
   String get name;
 
+  /// Close source-owned option popups before its programmatic launcher opens.
+  void prepareLaunch(String sessionId) {}
+
   /// Menu group order (lower first).
   int get order => 0;
 

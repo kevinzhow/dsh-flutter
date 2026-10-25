@@ -60,7 +60,7 @@ FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'packages/dsh_dockk
                     'features/dsh_feature_open_in_app', 'features/dsh_feature_shortcuts', 'features/dsh_feature_sidebar',
                     'features/dsh_feature_model_selection',
                     'features/dsh_feature_permission_presets', 'features/dsh_feature_plan', 'features/dsh_feature_reference',
-                    'features/dsh_feature_session', 'features/dsh_feature_settings',
+                    'features/dsh_feature_secret_mask', 'features/dsh_feature_session', 'features/dsh_feature_settings',
                     'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
                     'features/dsh_feature_theme', 'features/dsh_feature_tool',
                     'features/dsh_feature_user_questions', 'features/dsh_feature_workspace', 'apps/dsh_flutter', 'tool/parity_flutter']
@@ -174,7 +174,8 @@ def c_vector():
         + [('gen_input_expected.py', f) for f in INPUT_VECTOR_FIXTURES] \
         + [('gen_submission_expected.py', 'features/dsh_feature_conversation/test/fixtures/submission_policy.json')] \
         + [('gen_plan_expected.py', 'features/dsh_feature_plan/test/fixtures/plan_behavior.json')] \
-        + [('gen_workspace_expected.py', 'features/dsh_feature_session/test/fixtures/workspace_behavior.json')]
+        + [('gen_workspace_expected.py', 'features/dsh_feature_session/test/fixtures/workspace_behavior.json')] \
+        + [('gen_user_text_expected.py', 'packages/dsh_conversation/test/fixtures/user_text_behavior.json')]
     for driver, fixture in checks:
         code, out, _ = run([sys.executable, '-I', 'tool/vectors/' + driver, '--check', fixture])
         if code == 2:

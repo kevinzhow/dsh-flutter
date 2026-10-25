@@ -17,6 +17,18 @@ abstract final class DshSlots {
     SlotScope.root,
   );
 
+  /// Flutter adapter for the upstream session-scoped UserText factory.
+  static const conversationUserText = Slot<Object?, Object?>(
+    'conversation.user.text',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const conversationUserTextNode = Slot<Object?, Object?>(
+    'conversation.user.text.node',
+    SlotCardinality.keyed,
+    SlotScope.session,
+  );
+
   static const conversationHeader = Slot<Object?, Object?>(
     'conversation.header',
     SlotCardinality.single,
@@ -260,6 +272,8 @@ abstract final class DshSlots {
 
   static const all = <Slot<Object?, Object?>>[
     root,
+    conversationUserText,
+    conversationUserTextNode,
     sidebarWorkspacesSessionMenuItem,
     sidebarWorkspacesSessionRowAction,
     sidebarSessionRowLeading,

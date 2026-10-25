@@ -553,3 +553,35 @@ class SessionLineageOwner {
   final SessionCrumb crumb;
   final void Function()? openTitle;
 }
+
+/// Original sent text and caller-confirmed facts. A node never acquires the
+/// currently selected Session's authority when it originated in another one.
+class UserTextOwner {
+  const UserTextOwner({
+    required this.text,
+    this.facts = const {},
+    this.session,
+    this.interactive = false,
+    this.ellipsis = false,
+  });
+  final String text;
+  final Map<String, Object?> facts;
+  final SessionOwner? session;
+  final bool interactive, ellipsis;
+}
+
+class UserTextNodeOwner {
+  const UserTextNodeOwner({
+    required this.node,
+    required this.raw,
+    required this.interactive,
+    this.ellipsis = false,
+    this.session,
+  });
+  final UserTextNode node;
+  final String raw;
+  final bool interactive;
+  final bool ellipsis;
+  final SessionOwner? session;
+  String get identity => '${node.id}:${node.start}';
+}

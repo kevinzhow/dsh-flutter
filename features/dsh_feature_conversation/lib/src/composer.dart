@@ -52,10 +52,15 @@ class DefaultComposer extends StatefulWidget {
 
 /// The attach circle (dsh `.add`): 28px, the selector fill, the plus glyph.
 class ComposerAttachButton extends StatefulWidget {
-  const ComposerAttachButton({required this.label, required this.onPressed});
+  const ComposerAttachButton({
+    required this.label,
+    required this.onPressed,
+    this.expanded,
+  });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool? expanded;
 
   @override
   State<ComposerAttachButton> createState() => _ComposerAttachButtonState();
@@ -68,36 +73,58 @@ class _ComposerAttachButtonState extends State<ComposerAttachButton> {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final enabled = widget.onPressed != null;
-    return Semantics(
-      button: true,
-      enabled: enabled,
+    return DshTooltip(
       label: widget.label,
-      excludeSemantics: true,
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _hover = true),
-        onExit: (_) => setState(() => _hover = false),
-        cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-        child: GestureDetector(
-          key: const ValueKey('composer-attach'),
-          behavior: HitTestBehavior.opaque,
-          onTap: widget.onPressed,
-          child: Opacity(
-            opacity: enabled ? 1 : 0.5,
-            child: DshDecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _hover && enabled
-                    ? theme.color('--dsw-alias-interactive-bg-hover-solid')
-                    : theme.color('--dsw-specific-selector'),
+      side: DshTooltipSide.top,
+      delay: const Duration(milliseconds: 500),
+      child: Semantics(
+        button: true,
+        enabled: enabled,
+        label: widget.label,
+        expanded: widget.expanded,
+        onTap: widget.onPressed,
+        excludeSemantics: true,
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _hover = true),
+          onExit: (_) => setState(() => _hover = false),
+          cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+          child: FocusableActionDetector(
+            enabled: enabled,
+            shortcuts: const {
+              SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+              SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+            },
+            actions: {
+              ActivateIntent: CallbackAction<ActivateIntent>(
+                onInvoke: (_) {
+                  widget.onPressed?.call();
+                  return null;
+                },
               ),
-              child: SizedBox(
-                width: 28,
-                height: 28,
-                child: Center(
-                  child: DshIcon(
-                    DshIcons.plus,
-                    size: 14,
-                    color: theme.labelPrimary,
+            },
+            child: GestureDetector(
+              key: const ValueKey('composer-attach'),
+              behavior: HitTestBehavior.opaque,
+              onTap: widget.onPressed,
+              child: Opacity(
+                opacity: enabled ? 1 : 0.5,
+                child: DshDecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _hover && enabled
+                        ? theme.color('--dsw-alias-interactive-bg-hover-solid')
+                        : theme.color('--dsw-specific-selector'),
+                  ),
+                  child: SizedBox(
+                    width: 28,
+                    height: 28,
+                    child: Center(
+                      child: DshIcon(
+                        DshIcons.plus,
+                        size: 14,
+                        color: theme.labelPrimary,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -245,6 +272,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
   StreamSubscription<List<LocalFile>>? _dropSub;
   StreamSubscription<InputSnapshot>? _inputSub;
   StreamSubscription<InputNotice?>? _noticeSub;
+  StreamSubscription<String?>? _launcherSub;
   final List<void Function()> _unbind = [];
   bool _sending = false;
   String? _error;
@@ -269,6 +297,9 @@ class _DefaultComposerState extends State<DefaultComposer> {
     });
     // Files dropped on a desktop window arrive like picked ones.
     _dropSub = widget.owner.attachments?.dropped.listen(_add);
+    _launcherSub = _input.triggers?.launcher.changes.listen((_) {
+      if (mounted) setState(() {});
+    });
     _inputSub = _input.state.changes.listen((_) {
       if (mounted) setState(() {});
     });
@@ -303,6 +334,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
     unawaited(_dropSub?.cancel());
     unawaited(_inputSub?.cancel());
     unawaited(_noticeSub?.cancel());
+    unawaited(_launcherSub?.cancel());
     _text.dispose();
     _focus.dispose();
     super.dispose();
@@ -427,6 +459,31 @@ class _DefaultComposerState extends State<DefaultComposer> {
     } on Object {
       if (mounted) setState(() => _error = _a('attach.pickFailed'));
     }
+  }
+
+  void _toggleCommands() {
+    final triggers = _input.triggers;
+    if (triggers == null) {
+      unawaited(_attach());
+      return;
+    }
+    // Focus before opening: a late editor selection update would otherwise
+    // retrack an empty draft and dismiss the synthetic launcher hit.
+    _focus.requestFocus();
+    FocusManager.instance.applyFocusChangesIfNeeded();
+    final span = _input.selectionSpan();
+    triggers.toggleSource(
+      'command',
+      TriggerHit(
+        trigger: TriggerChar.slash,
+        query: '',
+        quoted: false,
+        position: _input.snapshot.text.substring(0, span.start).trim().isEmpty
+            ? TriggerPosition.leading
+            : TriggerPosition.inline,
+        span: span,
+      ),
+    );
   }
 
   Future<void> _attach() async {
@@ -631,10 +688,15 @@ class _DefaultComposerState extends State<DefaultComposer> {
         ),
       ),
       leading: [
-        if (widget.owner.attachments?.picker != null)
+        if (_input.triggers != null || widget.owner.attachments?.picker != null)
           ComposerAttachButton(
-            label: _a('attach.title'),
-            onPressed: _sending ? null : _attach,
+            label: _input.triggers == null
+                ? _a('attach.title')
+                : widget.i18n.t('conversation', 'input.commands'),
+            expanded: _input.triggers == null
+                ? null
+                : _input.triggers!.launcher.value == 'command',
+            onPressed: locked || _sending ? null : _toggleCommands,
           ),
         ?seats.permission,
         ?widget.slots?.renderSingle(

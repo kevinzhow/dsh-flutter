@@ -14,3 +14,5 @@ export 'src/todo_panel.dart';
 export 'src/hero.dart'
     show ConversationHero, HeroHeadline, InertComposer, WorkspaceChip;
 export 'src/view_selection.dart';
+
+export 'src/user_text.dart';

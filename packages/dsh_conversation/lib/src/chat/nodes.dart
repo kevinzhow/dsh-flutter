@@ -191,6 +191,7 @@ class MessageData {
     this.producerLabel,
     this.form,
     this.waking = false,
+    this.referenceLabels = const [],
   });
 
   /// `user`, `steering` or `context`.
@@ -204,6 +205,21 @@ class MessageData {
   final String? producerLabel;
   final String? form;
   final bool waking;
+  final List<String> referenceLabels;
+
+  MessageData withReferenceLabels(List<String> labels) => MessageData(
+    kind: kind,
+    seq: seq,
+    time: time,
+    content: content,
+    source: source,
+    messageId: messageId,
+    producerRole: producerRole,
+    producerLabel: producerLabel,
+    form: form,
+    waking: waking,
+    referenceLabels: List.unmodifiable(labels),
+  );
 
   /// The text blocks joined, for plain display.
   String get text => [

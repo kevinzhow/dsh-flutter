@@ -262,10 +262,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "f70cfaf34a356e62e933e3da2f15aaf543f24a76587cfe726617e8786e1779b8",
+      "irSha256": "f843d24ebe4405b7a3bd2a471c20d043f613b4bc1a4f80e946a515ae55a9bee4",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "0de5b1cf3567d15a3bf8322a6f9436b0e797ae991bdf447f09fe9fecf33fe2ff"
+        "sha256": "156d5ee6b41e6c61b80d241a367a47b673fbf56834e9922dba59d5bba71ea8e5"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -361,6 +361,10 @@
           "sha256": "2c68931c9a4689f346551f1c4db6492ef59e9002946e27caf90465eaad72f2b0"
         },
         {
+          "path": "packages/client/ui-secret-mask/src/client/locales.ts",
+          "sha256": "4930b6841d37b38ad52de8de9def00486883e723e6b08284282e44968023becc"
+        },
+        {
           "path": "packages/client/ui-settings-general/src/client/locales.ts",
           "sha256": "9174829c38582386113fc654fea3e3ba83ac9aafdde6955d68018f4cfd6ff678"
         },
@@ -433,8 +437,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "73fafe0e7f5a6d10353d749b998f3fa6dbddb189863eb7035a636ae7456e2c3c",
-      "outputSha256": "fd9f70b4a58f07977df47637c77c0c5abe14aa79cb33f8473db622305dcaef42"
+      "rawSha256": "03844681e9513b7cf2b35f4b5c53207c9dc793a3ecb035599f247f27116b8c63",
+      "outputSha256": "5c991d9324735f70b6d2fe99b6b9c8656b84d1331fde6ecf369f1f409667ec8d"
     }
   ]
 }

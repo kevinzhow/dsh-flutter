@@ -151,6 +151,7 @@ ChatPreferences registerChatFeature(
       time: d.time,
       latest: newest(o, userKinds),
       attachments: attachmentViews(parts.attachments),
+      referenceLabels: d.referenceLabels,
       owner: o.session,
       slots: slots,
     );
@@ -165,6 +166,7 @@ ChatPreferences registerChatFeature(
       time: d.time,
       latest: newest(o, userKinds),
       attachments: attachmentViews(parts.attachments),
+      referenceLabels: d.referenceLabels,
       owner: o.session,
       slots: slots,
     );

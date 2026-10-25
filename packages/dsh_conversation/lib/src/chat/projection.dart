@@ -153,3 +153,11 @@ String jsString(Map<String, Object?> data, String key) {
   }
   return null;
 }
+
+/// Labels are confirmed only by a sourced recall, never by a title catalog.
+List<String> sessionRecallLabels(Object? source) {
+  final record = asRecord(source);
+  return record == null || _readString(record, 'kind') != 'session-reference'
+      ? const []
+      : _collect(record, 'references', 'label');
+}

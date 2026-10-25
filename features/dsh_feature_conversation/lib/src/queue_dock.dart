@@ -13,9 +13,15 @@ import 'package:flutter/widgets.dart';
 /// Session-owned queue seat. Transcript/steering echoes must not also appear
 /// in the queue while their Host admission is crossing the follow stream.
 class QueueDock extends StatelessWidget {
-  const QueueDock({super.key, required this.owner, required this.i18n});
+  const QueueDock({
+    super.key,
+    required this.owner,
+    required this.i18n,
+    this.slots,
+  });
   final SessionOwner owner;
   final DshI18n i18n;
+  final SlotRegistry? slots;
   @override
   Widget build(BuildContext context) => DshWatch(
     changes: owner.session.projections.changes,
@@ -51,6 +57,20 @@ class QueueDock extends StatelessWidget {
             i18n: i18n,
             updateQueue: owner.actions.updateQueue,
             loadImage: owner.session.images.load,
+            renderText: (text) =>
+                slots?.renderSingle(
+                  DshSlots.conversationUserText.typed<UserTextOwner, Widget>(),
+                  UserTextOwner(
+                    text: text,
+                    session: owner,
+                    ellipsis: true,
+                    facts: const {
+                      'trimWhitespace': true,
+                      'collapseWhitespace': true,
+                    },
+                  ),
+                ) ??
+                Text(text.replaceAll(RegExp(r'\s+'), ' ').trim()),
           ),
         );
       },
@@ -70,10 +90,12 @@ class QueuePanel extends StatefulWidget {
     required this.i18n,
     required this.updateQueue,
     this.loadImage,
+    this.renderText,
   });
   final List<InboxItem> rows;
   final List<PendingSubmission> pending;
   final bool running, mutable;
+  final Widget Function(String original)? renderText;
   final DshI18n i18n;
   final Future<void> Function(String, Map<String, Object?>) updateQueue;
   final Future<Uint8List> Function(ImageRef)? loadImage;
@@ -172,15 +194,19 @@ class _QueuePanelState extends State<QueuePanel> {
   );
 
   Widget _preview(String text) => Expanded(
-    child: DshChromeText(
-      text.replaceAll(RegExp(r'\s+'), ' ').trim(),
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
+    child: DefaultTextStyle(
       style: context.dsh
           .textStyle('--dsw-font-xs-13')
           .copyWith(
             height: 20 / 13,
             color: context.dsh.color('--dsw-alias-label-primary-dimmed'),
+          ),
+      child:
+          widget.renderText?.call(text) ??
+          Text(
+            text.replaceAll(RegExp(r'\s+'), ' ').trim(),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
     ),
   );

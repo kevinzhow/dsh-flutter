@@ -22,6 +22,7 @@ import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
 import 'package:dsh_feature_reference/dsh_feature_reference.dart';
+import 'package:dsh_feature_secret_mask/dsh_feature_secret_mask.dart';
 import 'package:dsh_feature_settings/dsh_feature_settings.dart';
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_feature_sidebar_terminal/dsh_feature_sidebar_terminal.dart';
@@ -205,6 +206,7 @@ class AppController extends ChangeNotifier {
       inputOf: (id) => _sessions[id]?.owner.input,
       workspaces: workspaceServices,
       preferences: conversationPreferences,
+      userText: userText,
     );
     registerWorkspaceFeature(
       slots,
@@ -212,6 +214,13 @@ class AppController extends ChangeNotifier {
       i18n: () => i18n,
     );
     registerInputTriggerFeature(slots, i18n: () => i18n);
+    registerSecretMaskFeature(slots, userText: userText, i18n: () => i18n);
+    registerSentReferenceFeature(
+      slots,
+      userText: userText,
+      i18n: () => i18n,
+      openFile: (owner, path) => sidebar.openFile(owner, path),
+    );
     // What a tapped link or file path may open, shared by the chat's
     // Markdown links and the tool cards.
     final hostActions = ToolHostActions(
@@ -492,6 +501,10 @@ class AppController extends ChangeNotifier {
   late final ChatPreferences chatPreferences;
   late final PlanFeature plans;
   final conversationPreferences = ConversationPreferences();
+  final userText = UserTextRegistry()
+    ..register(sessionReferenceRule)
+    ..register(trimWhitespaceRule)
+    ..register(collapseWhitespaceRule);
   StreamSubscription<ThemeSettings>? _themeSub;
   String? _pendingOpen;
 
@@ -1317,6 +1330,7 @@ class AppController extends ChangeNotifier {
   void dispose() {
     unawaited(chatPreferences.dispose());
     unawaited(conversationPreferences.dispose());
+    unawaited(userText.dispose());
     desktop.dispose();
     layout.dispose();
     _recoveredTimer?.cancel();
