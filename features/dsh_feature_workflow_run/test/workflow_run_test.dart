@@ -24,6 +24,50 @@ WorkflowRunData data(WorkflowRunStatus status, {int count = 1}) =>
       ],
     );
 void main() {
+  testWidgets('accessible member bounds exclude the following settled row', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    addTearDown(semantics.dispose);
+    var opens = 0;
+    const d = WorkflowRunData(
+      name: 'Synthetic review',
+      status: WorkflowRunStatus.running,
+      phases: [
+        WorkflowRunPhase('Read', [
+          WorkflowRunMember(
+            seq: 1,
+            label: 'Active reader',
+            childId: 'child-a',
+            status: WorkflowRunStatus.running,
+          ),
+          WorkflowRunMember(
+            seq: 2,
+            label: 'Finished reader',
+            childId: 'child-b',
+            status: WorkflowRunStatus.completed,
+          ),
+        ]),
+      ],
+    );
+    await tester.pumpWidget(
+      dshTestApp(
+        WorkflowRunPanel(
+          data: d,
+          i18n: i18n,
+          canOpen: (m) => m.status == WorkflowRunStatus.running,
+          onOpen: (_) => opens++,
+        ),
+      ),
+    );
+    final member = find.bySemanticsLabel('Open Active reader');
+    expect(member, findsOneWidget);
+    expect(tester.getSize(member).height, 24);
+    await tester.tap(member);
+    await tester.pump();
+    expect(opens, 1);
+    expect(tester.takeException(), isNull);
+  });
   testWidgets(
     'clean run starts closed; abnormal transitions open it; keyboard toggles',
     (tester) async {

@@ -228,7 +228,8 @@ class _WorkflowRunPanelState extends State<WorkflowRunPanel> {
     final theme = c.dsh;
     return _WorkflowAction(
       key: ValueKey(controlId),
-      label: name,
+      label:
+          '$name · $summary${status == null ? '' : ' · ${t('status.${status.name}')}'}',
       expanded: state.open,
       onTap: () => toggle(state),
       preventFocus: state.pending,
@@ -334,7 +335,12 @@ class _WorkflowRunPanelState extends State<WorkflowRunPanel> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               _WorkflowAction(
-                                label: p.phase ?? t('phase.unassigned'),
+                                label:
+                                    '${p.phase == null
+                                        ? t('phase.unassigned')
+                                        : p.phase!.isEmpty
+                                        ? t('phase.empty')
+                                        : p.phase} · ${count(p.members.length)} · ${phaseSummary(p)}',
                                 expanded: state.open,
                                 onTap: () => toggle(state),
                                 preventFocus: state.pending,
@@ -502,7 +508,11 @@ class _WorkflowActionState extends State<_WorkflowAction> {
 
   @override
   Widget build(BuildContext context) => Semantics(
+    container: true,
+    excludeSemantics: true,
+    onTap: widget.onTap,
     button: true,
+    focusable: widget.onTap != null,
     label: widget.label,
     expanded: widget.expanded,
     enabled: widget.onTap != null,
