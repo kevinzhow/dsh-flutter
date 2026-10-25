@@ -173,7 +173,8 @@ def c_vector():
     checks = [('gen_expected.py', f) for f in VECTOR_FIXTURES] + [('gen_settings_expected.py', f) for f in SETTINGS_VECTOR_FIXTURES] \
         + [('gen_input_expected.py', f) for f in INPUT_VECTOR_FIXTURES] \
         + [('gen_submission_expected.py', 'features/dsh_feature_conversation/test/fixtures/submission_policy.json')] \
-        + [('gen_plan_expected.py', 'features/dsh_feature_plan/test/fixtures/plan_behavior.json')]
+        + [('gen_plan_expected.py', 'features/dsh_feature_plan/test/fixtures/plan_behavior.json')] \
+        + [('gen_workspace_expected.py', 'features/dsh_feature_session/test/fixtures/workspace_behavior.json')]
     for driver, fixture in checks:
         code, out, _ = run([sys.executable, '-I', 'tool/vectors/' + driver, '--check', fixture])
         if code == 2:

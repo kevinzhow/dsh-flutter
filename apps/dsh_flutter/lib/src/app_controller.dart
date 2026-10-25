@@ -31,6 +31,8 @@ import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
 import 'package:dsh_feature_workspace/dsh_feature_workspace.dart';
+import 'package:dsh_feature_session/dsh_feature_session.dart'
+    show registerSessionRowFeatures;
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_layout/dsh_layout.dart' show LayoutController;
 import 'package:dsh_models/dsh_models.dart';
@@ -221,12 +223,14 @@ class AppController extends ChangeNotifier {
       revealQuestion: (parent, callId) =>
           questions.reveal(parent.sessionId, callId),
     );
+    registerSessionRowFeatures(slots, i18n: () => i18n);
     chatPreferences = ChatPreferences(desktop: !platform.touchInput);
     registerChatFeature(
       slots,
       i18n: () => i18n,
       host: hostActions,
       preferences: chatPreferences,
+      management: workspaceManagement,
     );
     registerAttachmentFeature(slots, i18n: () => i18n);
     layout = registerLayoutFeature(
@@ -990,6 +994,8 @@ class AppController extends ChangeNotifier {
 
   // ---- sessions --------------------------------------------------------
 
+  String get hostHome => _transport?.generation?.hostHome ?? '';
+
   Future<void> refreshSessions() async {
     try {
       await manager?.refreshList();
@@ -998,6 +1004,12 @@ class AppController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  List<SessionCrumb> _lineageFor(String id) => deriveSessionAncestry(
+    sessionList,
+    id,
+    untitled: i18n.t('workspace', 'session.untitled'),
+  );
 
   /// The controller of [sessionId], made on first use (its model stays
   /// resident like dsh's session manager keeps it).
@@ -1012,6 +1024,8 @@ class AppController extends ChangeNotifier {
         triggers: inputTriggers,
         cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
         blankReader: () => manager?.summaryOf(sessionId)?.blank,
+        lineageReader: () => _lineageFor(sessionId),
+        openAncestor: (id) => unawaited(open(id)),
         hostHome: _transport?.generation?.hostHome ?? '',
         uploader: backend.uploader,
         files: backend.files,
@@ -1580,7 +1594,7 @@ class _WorkspaceManagementBridge implements WorkspaceManagement {
       manager.rename(id, title);
   @override
   Future<String> forkSession(String id, {int? atSeq, bool open = false}) async {
-    final child = await manager.fork(id, atSeq: atSeq);
+    final child = await manager.fork(id, atSeq: atSeq, allowMigration: open);
     if (open) await app.open(child);
     return child;
   }

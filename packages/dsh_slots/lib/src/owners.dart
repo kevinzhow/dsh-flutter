@@ -69,6 +69,8 @@ class SessionOwner {
     this.files,
     this.textDraft,
     this.queueMutable = true,
+    this.lineageReader,
+    this.openAncestor,
   });
 
   /// The composer's unsent draft; null where the composer keeps none.
@@ -89,6 +91,9 @@ class SessionOwner {
   final ConversationBinding conversation;
   final SessionActions actions;
   final bool queueMutable;
+  final List<SessionCrumb> Function()? lineageReader;
+  final void Function(String sessionId)? openAncestor;
+  List<SessionCrumb> get lineage => lineageReader?.call() ?? const [];
 
   /// Reads the session workspace root (known once the session list carries it).
   final String? Function()? cwdReader;
@@ -521,4 +526,30 @@ class SidebarWorkspacesOwner {
 
   /// A workspace was adopted and its session opened.
   final void Function() onStarted;
+}
+
+/// A sidebar row occurrence; callbacks stay scoped to this exact identity even
+/// when another Session becomes current while its menu or dialog is open.
+class SessionRowOwner {
+  const SessionRowOwner({
+    required this.sessionId,
+    required this.displayTitle,
+    required this.pinned,
+    required this.archived,
+    required this.onAction,
+  });
+  final String sessionId, displayTitle;
+  final bool pinned, archived;
+  final void Function(String verb) onAction;
+}
+
+class SessionLineageOwner {
+  const SessionLineageOwner({
+    required this.session,
+    required this.crumb,
+    this.openTitle,
+  });
+  final SessionOwner session;
+  final SessionCrumb crumb;
+  final void Function()? openTitle;
 }

@@ -1,6 +1,8 @@
 import 'package:dsh_feature_session/dsh_feature_session.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_slots/dsh_slots.dart';
+import 'package:flutter/foundation.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:flutter/gestures.dart' show PointerDeviceKind;
 import 'package:flutter/material.dart';
@@ -36,6 +38,17 @@ TreeWorkspace workspace(String id, String title, List<String> sessions) =>
       sessionIds: sessions,
     );
 
+class Management implements WorkspaceManagement {
+  final restored = <String>[];
+  @override
+  Future<void> unarchiveSession(String id) async {
+    restored.add(id);
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   late WorkspaceViewState view;
   var opened = <String>[];
@@ -57,6 +70,7 @@ void main() {
     bool wide = true,
     Future<RemoteSearchResult> Function(String)? search,
     SessionRowState rowState = const SessionRowState(),
+    WorkspaceManagement? management,
   }) async {
     t.view.physicalSize = const Size(280, 600);
     t.view.devicePixelRatio = 1;
@@ -82,6 +96,7 @@ void main() {
                   workspace('w1', 'Project X', ['s1', 's2']),
                 ],
             view: view,
+            management: management,
             i18n: const DshI18n(DshLocale.en),
             currentId: currentId,
             rowState: rowState,
@@ -102,6 +117,50 @@ void main() {
     );
     await t.pumpAndSettle();
   }
+
+  testWidgets(
+    'pointer drag saves a local account order without moving membership',
+    (t) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.linux;
+      addTearDown(() => debugDefaultTargetPlatformOverride = null);
+      view.setGroupExpanded('w1', true);
+      await pump(
+        t,
+        management: Management(),
+        items: [
+          entry('s1', title: 'One', minutesAgo: 1),
+          entry('s2', title: 'Two', minutesAgo: 2),
+          entry('s3', title: 'Three', minutesAgo: 3),
+        ],
+        workspaces: [
+          workspace('w1', 'Fixture', ['s1', 's2', 's3']),
+        ],
+      );
+      final source = find.byKey(const ValueKey('session-row-s1'));
+      final target = find.byKey(const ValueKey('session-row-s3'));
+      final gesture = await t.startGesture(t.getCenter(source));
+      await gesture.moveBy(const Offset(0, 10));
+      await t.pump();
+      await gesture.moveTo(t.getBottomLeft(target) + const Offset(30, -2));
+      await t.pump();
+      await gesture.up();
+      await t.pumpAndSettle();
+      debugDefaultTargetPlatformOverride = null;
+      expect(view.orderBy, SessionOrderBy.manual);
+      expect(view.sessionOrderByAccount['w1'], ['s2', 's3', 's1']);
+      expect(t.takeException(), isNull);
+    },
+  );
+  testWidgets(
+    'managed row title opens on its first tap without a double-click delay',
+    (t) async {
+      view.setGroupExpanded('w1', true);
+      await pump(t, management: Management());
+      await t.tap(find.text('Fix parser'));
+      expect(opened, ['s1']);
+      expect(t.takeException(), isNull);
+    },
+  );
 
   testWidgets('groups are folded until opened, and Ungrouped trails', (
     t,
@@ -212,6 +271,51 @@ void main() {
     expect(opened, ['s2']);
     expect(find.byKey(const ValueKey('browser-search-open')), findsNothing);
   });
+
+  testWidgets(
+    'archived search result stays in search and restores without opening',
+    (t) async {
+      final management = Management();
+      view.setArchivedFilter(ArchivedFilter.show);
+      await pump(
+        t,
+        management: management,
+        rowState: const SessionRowState(
+          archived: ['s2'],
+          filter: ArchivedFilter.show,
+        ),
+      );
+      await t.tap(find.byKey(const ValueKey('browser-search')));
+      await t.pumpAndSettle();
+      await t.enterText(
+        find.byKey(const ValueKey('browser-search-input')),
+        'release',
+      );
+      await t.pump(searchDebounce + const Duration(milliseconds: 50));
+      await t.pumpAndSettle();
+      await t.tap(find.text('Plan release'));
+      await t.pumpAndSettle();
+      expect(opened, isEmpty);
+      expect(
+        find.byKey(const ValueKey('browser-search-input')),
+        findsOneWidget,
+      );
+      await t.pump(const Duration(seconds: 6));
+      final mouse = await t.createGesture(kind: PointerDeviceKind.mouse);
+      await mouse.addPointer(location: Offset.zero);
+      await mouse.moveTo(t.getCenter(find.text('Plan release')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('search-unarchive-s2')));
+      await t.pumpAndSettle();
+      expect(management.restored, ['s2']);
+      expect(opened, isEmpty);
+      expect(find.text('release'), findsOneWidget);
+      await mouse.removePointer();
+      await t.pumpWidget(const SizedBox());
+      await t.pump();
+      expect(t.takeException(), isNull);
+    },
+  );
 
   testWidgets('a search with no match says so', (t) async {
     await pump(t, search: (q) async => const RemoteSearchResult([], false));

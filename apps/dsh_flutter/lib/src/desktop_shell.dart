@@ -537,6 +537,8 @@ class _SessionsRegion extends StatelessWidget {
     return WorkspaceBrowser(
       snapshot: app.sessionList,
       management: app.workspaceManagement,
+      hostHome: app.hostHome,
+      slots: app.slots,
       workspaces: [
         for (final w in hosted.items)
           TreeWorkspace(
@@ -724,6 +726,7 @@ class SessionOverflowMenu extends StatelessWidget {
     final hosted = app.workspaceState.value;
     return WorkspaceSessionMenu(
       actions: app.workspaceManagement,
+      slots: app.slots,
       i18n: app.i18n,
       sessionId: owner.sessionId,
       title: (owner.session.projections.get('title') as String?) ?? '',

@@ -58,6 +58,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
   final LayerLink _link = LayerLink();
   late DshPanelController _controller;
   OverlayEntry? _entry;
+  LocalHistoryEntry? _history;
 
   @override
   void initState() {
@@ -73,6 +74,9 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     _controller._close = null;
     _entry?.remove();
     _entry = null;
+    final history = _history;
+    _history = null;
+    history?.remove();
     if (widget.controller == null) _controller.dispose();
     super.dispose();
   }
@@ -84,6 +88,9 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     _entry!.remove();
     _entry = null;
     _controller._set(false);
+    final history = _history;
+    _history = null;
+    history?.remove();
   }
 
   void _show() {
@@ -111,12 +118,28 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
       ),
     );
     overlay.insert(_entry!);
+    _history = LocalHistoryEntry(
+      onRemove: () {
+        _history = null;
+        _close();
+      },
+    );
+    ModalRoute.of(context)?.addLocalHistoryEntry(_history!);
     _controller._set(true);
   }
 
   @override
-  Widget build(BuildContext context) => CompositedTransformTarget(
-    link: _link,
-    child: widget.builder(context, _controller),
+  Widget build(BuildContext context) => ListenableBuilder(
+    listenable: _controller,
+    builder: (context, _) => PopScope(
+      canPop: !_controller.isOpen,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _close();
+      },
+      child: CompositedTransformTarget(
+        link: _link,
+        child: widget.builder(context, _controller),
+      ),
+    ),
   );
 }

@@ -30,3 +30,4 @@ export 'src/transport.dart';
 export 'src/workspace_list.dart';
 export 'src/workspace_navigation.dart';
 export 'src/workspace_path.dart';
+export 'src/session_lineage.dart';

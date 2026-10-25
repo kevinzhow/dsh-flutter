@@ -45,6 +45,28 @@ void main() {
     return picked;
   }
 
+  testWidgets('system back dismisses a menu and keeps its page', (t) async {
+    await pump(t);
+    await t.tap(find.byKey(const ValueKey('anchor')));
+    await t.pumpAndSettle();
+    expect(find.text('Alpha'), findsOneWidget);
+    await t.binding.handlePopRoute();
+    await t.pumpAndSettle();
+    expect(find.text('Alpha'), findsNothing);
+    expect(find.byKey(const ValueKey('anchor')), findsOneWidget);
+    // A manual close must release history too, so another menu can reopen.
+    await t.tap(find.byKey(const ValueKey('anchor')));
+    await t.pumpAndSettle();
+    await t.tap(find.text('Beta'));
+    await t.pumpAndSettle();
+    await t.tap(find.byKey(const ValueKey('anchor')));
+    await t.pumpAndSettle();
+    expect(find.text('Alpha'), findsOneWidget);
+    await t.pumpWidget(const SizedBox());
+    await t.pump();
+    expect(t.takeException(), isNull);
+  });
+
   testWidgets('opens under its anchor, marks selection and heads groups', (
     t,
   ) async {

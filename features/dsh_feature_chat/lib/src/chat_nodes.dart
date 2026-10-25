@@ -457,11 +457,15 @@ class TurnTailView extends StatelessWidget {
     required this.data,
     required this.i18n,
     this.latest = false,
+    this.onBranch,
+    this.branchUnavailable = false,
   });
 
   final TurnTailData data;
   final DshI18n i18n;
   final bool latest;
+  final Future<void> Function()? onBranch;
+  final bool branchUnavailable;
 
   String? get _text {
     final closing = data.closing;
@@ -482,6 +486,8 @@ class TurnTailView extends StatelessWidget {
         always: latest,
         builder: (context, revealed) => MessageActions(
           key: const ValueKey('turn-copy'),
+          onBranch: onBranch,
+          branchUnavailable: branchUnavailable || data.branchUnavailable,
           text: text,
           time: data.closing?.time ?? data.time,
           i18n: i18n,

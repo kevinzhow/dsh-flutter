@@ -57,6 +57,15 @@ class Input:
         self.send('button 272 1')  # BTN_LEFT
         self.send('button 272 0')
 
+    def drag(self, x0, y0, x1, y1):
+        self.send(f'move {x0} {y0}')
+        self.send('button 272 1')
+        try:
+            for part in range(1, 13):
+                self.send(f'move {round(x0 + (x1 - x0) * part / 12)} {round(y0 + (y1 - y0) * part / 12)}')
+        finally:
+            self.send('button 272 0')
+
     def type(self, text):
         unsupported = set(text) - self.keys.keys()
         if unsupported:
@@ -288,6 +297,14 @@ def main():
                         time.sleep(0.3)
                     elif 'wait' in step:
                         time.sleep(step['wait'] / 1000)
+                    elif 'drag' in step:
+                        points = step['drag']
+                        if not isinstance(points, list) or len(points) != 4 or any(type(v) is not int for v in points):
+                            raise ValueError('Drag requires four integer coordinates')
+                        if not all(0 <= points[i] < (w if i % 2 == 0 else h) for i in range(4)):
+                            raise ValueError('Drag coordinates must stay within this private output')
+                        screen.drag(*points)
+                        time.sleep(0.3)
                     elif 'scroll' in step:
                         screen.scroll(*step['scroll'])
                         time.sleep(0.8)

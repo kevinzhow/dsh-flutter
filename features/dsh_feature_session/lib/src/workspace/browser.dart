@@ -1,7 +1,7 @@
 /// The desktop sidebar's browsing region (dsh `ui-workspace` `WorkspaceBrowser`):
 /// the section header with search, view options and "Add workspace", the
 /// Workspace groups with their Session rows, the flat list, and the search
-/// results. Drag reordering, row menus and hover cards are not drawn.
+/// results, local drag order, row actions, and hover previews.
 library;
 
 import 'dart:async';
@@ -12,10 +12,14 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart' show DshThemeData;
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/gestures.dart' show PointerDeviceKind;
 
 import 'tree.dart';
 import 'view_state.dart';
 import 'actions.dart';
+import 'reorder_row.dart';
+import 'hover_card.dart';
+import 'title_marquee.dart';
 
 /// Debounce of the host content search (dsh `SEARCH_DEBOUNCE_MS`).
 const Duration searchDebounce = Duration(milliseconds: 250);
@@ -69,6 +73,8 @@ class WorkspaceBrowser extends StatefulWidget {
     this.now,
     this.workspaceReady = true,
     this.management,
+    this.slots,
+    this.hostHome = '',
   });
 
   final SessionListSnapshot snapshot;
@@ -106,6 +112,8 @@ class WorkspaceBrowser extends StatefulWidget {
   /// Whether the Workspace baseline arrived (rows wait for it).
   final bool workspaceReady;
   final WorkspaceManagement? management;
+  final SlotRegistry? slots;
+  final String hostHome;
 
   @override
   State<WorkspaceBrowser> createState() => _WorkspaceBrowserState();
@@ -122,12 +130,18 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
   Timer? _debounce;
   int _searchSeq = 0;
   final Map<String, num> _watermarks = {};
+  final _drag = WorkspaceDragState();
+  final _hoverGroup = WorkspaceHoverGroup();
 
   String get _normalized => _query.text.replaceAll('\u0000', '').trim();
 
   @override
   void initState() {
     super.initState();
+    _drag.onActive = (active) {
+      _hoverGroup.blocked = active;
+      if (active) _hoverGroup.close?.call();
+    };
     widget.view.addListener(_changed);
     _seenSearchRequest = widget.view.searchRequest;
     _query.addListener(_queryChanged);
@@ -554,7 +568,23 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
               selected: r.id == widget.currentId,
               untitled: _t('session.untitled'),
               ungrouped: _t('group.ungrouped'),
+              unarchiveLabel: _t('menu.unarchiveSession'),
+              onUnarchive: widget.management == null
+                  ? null
+                  : () async {
+                      try {
+                        await widget.management!.unarchiveSession(r.id);
+                      } on Object catch (e) {
+                        if (context.mounted) {
+                          showWorkspaceNotice(context, actionFailure(e));
+                        }
+                      }
+                    },
               onTap: () {
+                if (r.archived) {
+                  showWorkspaceNotice(context, _t('toast.archivedNotOpenable'));
+                  return;
+                }
                 _closeSearch();
                 widget.onOpen(r.id);
               },
@@ -609,7 +639,13 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
         for (final r in rows)
           Padding(
             padding: const EdgeInsets.only(bottom: 2),
-            child: _sessionRow(r, 0),
+            child: _sessionRow(
+              r,
+              0,
+              account: flatOrderKey,
+              order: _activeOrders()[flatOrderKey] ?? [],
+              visible: rows,
+            ),
           ),
       ],
     );
@@ -696,36 +732,70 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
       );
       final collapsed = watermarkRows(g.sessions, floor);
       final expandedAll = shown.hidden == 0;
-      return Padding(
+      void drop(String source, bool after) {
+        final siblings = workspaces
+            .where((w) => parents[w.workspaceId] == parents[g.key])
+            .toList();
+        final index = siblings.indexWhere((w) => w.workspaceId == g.key);
+        final before = after
+            ? (index + 1 < siblings.length
+                  ? siblings[index + 1].workspaceId
+                  : null)
+            : g.workspaceId;
+        if (before == source || widget.management == null) return;
+        unawaited(
+          widget.management!.insertWorkspaceBefore(source, before).catchError((
+            Object e,
+          ) {
+            if (mounted) {
+              showWorkspaceNotice(context, actionFailure(e));
+            }
+          }),
+        );
+      }
+
+      final body = Padding(
         padding: const EdgeInsets.only(bottom: 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _ProjectRow(
-              key: ValueKey('workspace-row-${g.key}'),
-              group: g,
-              management: widget.management,
-              i18n: widget.i18n,
-              label: g.workspaceId == null ? _t('group.ungrouped') : g.label,
-              active:
-                  ancestors.contains(g.key) ||
-                  (g.expanded && g.containsCurrent),
-              indent: depth * 12.0,
-              newLabel: _t('actions.newSession'),
-              newAria: _t('actions.newSession.aria', {
-                'name': g.workspaceId == null ? _t('group.ungrouped') : g.label,
-              }),
-              newKeys: widget.newKeys,
-              onNew: g.workspaceId == null || widget.onStartInWorkspace == null
-                  ? null
-                  : () {
-                      widget.view.setGroupExpanded(g.key, true);
-                      widget.onStartInWorkspace!(g.workspaceId!);
-                    },
-              onToggle: () {
-                if (g.expanded) _watermarks.remove(g.key);
-                widget.view.setGroupExpanded(g.key, !g.expanded);
-              },
+            WorkspaceReorderRow(
+              item: WorkspaceDragItem(g.key, 'workspace:${parents[g.key]}'),
+              state: _drag,
+              draggable: g.workspaceId != null && widget.management != null,
+              target: false,
+              onDrop: drop,
+              child: _ProjectRow(
+                key: ValueKey('workspace-row-${g.key}'),
+                group: g,
+                management: widget.management,
+                hoverGroup: _hoverGroup,
+                hostHome: widget.hostHome,
+                i18n: widget.i18n,
+                label: g.workspaceId == null ? _t('group.ungrouped') : g.label,
+                active:
+                    ancestors.contains(g.key) ||
+                    (g.expanded && g.containsCurrent),
+                indent: depth * 12.0,
+                newLabel: _t('actions.newSession'),
+                newAria: _t('actions.newSession.aria', {
+                  'name': g.workspaceId == null
+                      ? _t('group.ungrouped')
+                      : g.label,
+                }),
+                newKeys: widget.newKeys,
+                onNew:
+                    g.workspaceId == null || widget.onStartInWorkspace == null
+                    ? null
+                    : () {
+                        widget.view.setGroupExpanded(g.key, true);
+                        widget.onStartInWorkspace!(g.workspaceId!);
+                      },
+                onToggle: () {
+                  if (g.expanded) _watermarks.remove(g.key);
+                  widget.view.setGroupExpanded(g.key, !g.expanded);
+                },
+              ),
             ),
             ...nested.map(
               (w) => Padding(padding: const EdgeInsets.only(top: 2), child: w),
@@ -733,7 +803,17 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
             for (final s in shown.rows)
               Padding(
                 padding: const EdgeInsets.only(top: 2),
-                child: _sessionRow(s, depth * 12.0),
+                child: _sessionRow(
+                  s,
+                  depth * 12.0,
+                  account: g.key,
+                  order: g.workspaceId == null
+                      ? _orderOf(stray, ungroupedKey, byId)
+                      : workspaces
+                            .firstWhere((w) => w.workspaceId == g.workspaceId)
+                            .sessionIds,
+                  visible: shown.rows,
+                ),
               ),
             if (collapsed.hidden > 0)
               _OverflowButton(
@@ -755,6 +835,14 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
           ],
         ),
       );
+      if (g.workspaceId == null || widget.management == null) return body;
+      return WorkspaceReorderRow(
+        item: WorkspaceDragItem(g.key, 'workspace:${parents[g.key]}'),
+        state: _drag,
+        draggable: false,
+        onDrop: drop,
+        child: body,
+      );
     }
 
     return ListView(
@@ -768,23 +856,49 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
     );
   }
 
-  Widget _sessionRow(SessionNode node, double indent) => _SessionRow(
-    key: ValueKey('session-row-${node.id}'),
-    node: node,
-    indent: indent,
-    selected: node.id == widget.currentId,
-    now: _now,
-    i18n: widget.i18n,
-    management: widget.management,
-    onTap: () {
-      if (node.archived) {
-        showWorkspaceNotice(context, _t('toast.archivedNotOpenable'));
-      } else {
-        widget.onOpen(node.id);
+  Widget _sessionRow(
+    SessionNode node,
+    double indent, {
+    required String account,
+    required List<String> order,
+    required List<SessionNode> visible,
+  }) => WorkspaceReorderRow(
+    item: WorkspaceDragItem(node.id, 'session:$account:${node.pinned}'),
+    state: _drag,
+    draggable: !node.blank && widget.management != null,
+    afterOnly: node.blank,
+    onDrop: (source, after) {
+      final next = sessionDragOrder(
+        order,
+        visible,
+        source,
+        node.pinned,
+        node.id,
+        after: after,
+      );
+      if (next != null) {
+        widget.view.setSessionOrder(account, next, _activeOrders());
       }
     },
+    child: _SessionRow(
+      key: ValueKey('session-row-${node.id}'),
+      node: node,
+      indent: indent,
+      selected: node.id == widget.currentId,
+      now: _now,
+      i18n: widget.i18n,
+      management: widget.management,
+      hoverGroup: _hoverGroup,
+      slots: widget.slots,
+      onTap: () {
+        if (node.archived) {
+          showWorkspaceNotice(context, _t('toast.archivedNotOpenable'));
+        } else {
+          widget.onOpen(node.id);
+        }
+      },
+    ),
   );
-
   Widget _empty(BuildContext context) {
     final theme = context.dsh;
     final archivedOnly = _rowState.filter == ArchivedFilter.only;
@@ -1028,6 +1142,8 @@ class _ProjectRow extends StatefulWidget {
     required this.onToggle,
     this.management,
     required this.i18n,
+    required this.hoverGroup,
+    required this.hostHome,
   });
 
   final GroupNode group;
@@ -1041,6 +1157,8 @@ class _ProjectRow extends StatefulWidget {
   final VoidCallback onToggle;
   final WorkspaceManagement? management;
   final DshI18n i18n;
+  final WorkspaceHoverGroup hoverGroup;
+  final String hostHome;
 
   @override
   State<_ProjectRow> createState() => _ProjectRowState();
@@ -1084,17 +1202,6 @@ class _ProjectRowState extends State<_ProjectRow> {
           behavior: HitTestBehavior.opaque,
           onTap: widget.onToggle,
           onLongPress: menu,
-          onDoubleTap: widget.management == null || g.workspaceId == null
-              ? null
-              : () => unawaited(
-                  renameWorkspaceDialog(
-                    context,
-                    widget.management!,
-                    widget.i18n,
-                    g.workspaceId!,
-                    g.label,
-                  ),
-                ),
           child: DshContainer(
             height: 34,
             padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
@@ -1111,13 +1218,27 @@ class _ProjectRowState extends State<_ProjectRow> {
                 ),
                 const SizedBox(width: 6),
                 Expanded(
-                  child: DshChromeText(
-                    widget.label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle('--dsw-font-s-14')
-                        .copyWith(color: theme.labelPrimary, height: 20 / 14),
+                  child: _DoubleClickTitle(
+                    onDoubleClick:
+                        widget.management == null || g.workspaceId == null
+                        ? null
+                        : () => unawaited(
+                            renameWorkspaceDialog(
+                              context,
+                              widget.management!,
+                              widget.i18n,
+                              g.workspaceId!,
+                              g.label,
+                            ),
+                          ),
+                    child: DshChromeText(
+                      widget.label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme
+                          .textStyle('--dsw-font-s-14')
+                          .copyWith(color: theme.labelPrimary, height: 20 / 14),
+                    ),
                   ),
                 ),
                 if (_hover && widget.onNew != null)
@@ -1185,7 +1306,43 @@ class _ProjectRowState extends State<_ProjectRow> {
           danger: true,
         ),
       ],
-      builder: (_, menu) => row(menu.toggle),
+      builder: (_, menu) => WorkspaceHoverCard(
+        group: widget.hoverGroup,
+        disabled: menu.isOpen,
+        copyText: g.cwd,
+        copiedLabel: actionText(widget.i18n, 'hover.copied'),
+        content: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DshChromeText(widget.label),
+            const SizedBox(height: 8),
+            DshChromeText(
+              abbreviateHome(g.cwd ?? '', widget.hostHome),
+              style: context.dsh
+                  .textStyle('--dsw-font-xxs-12')
+                  .copyWith(
+                    color: context.dsh.color('--dsw-static-neutral-bluish-300'),
+                    height: 16 / 12,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            DshChromeText(
+              workspaceCreatedLabel(widget.i18n, g.createdAt ?? 0),
+              style: context.dsh
+                  .textStyle('--dsw-font-xxs-12')
+                  .copyWith(
+                    color: context.dsh.color('--dsw-static-neutral-bluish-300'),
+                    height: 16 / 12,
+                  ),
+            ),
+          ],
+        ),
+        child: row(() {
+          widget.hoverGroup.close?.call();
+          menu.toggle();
+        }),
+      ),
       onSelect: (id) => unawaited(
         id == 'rename'
             ? renameWorkspaceDialog(
@@ -1242,6 +1399,8 @@ class _SessionRow extends StatefulWidget {
     required this.i18n,
     required this.onTap,
     this.management,
+    this.slots,
+    required this.hoverGroup,
   });
 
   final SessionNode node;
@@ -1251,6 +1410,8 @@ class _SessionRow extends StatefulWidget {
   final DshI18n i18n;
   final VoidCallback onTap;
   final WorkspaceManagement? management;
+  final SlotRegistry? slots;
+  final WorkspaceHoverGroup hoverGroup;
 
   @override
   State<_SessionRow> createState() => _SessionRowState();
@@ -1279,6 +1440,45 @@ class _SessionRowState extends State<_SessionRow> {
             PendingInteraction.planReview => t('status.compact.planReview'),
             PendingInteraction.question => t('status.compact.answer'),
           };
+    final management = widget.management;
+    final rowOwner = SessionRowOwner(
+      sessionId: n.id,
+      displayTitle: n.title,
+      pinned: n.pinned,
+      archived: n.archived,
+      onAction: (verb) {
+        if (management != null) {
+          unawaited(
+            performSessionAction(
+              context,
+              management,
+              widget.i18n,
+              n.id,
+              n.title,
+              pinned: n.pinned,
+              archived: n.archived,
+              verb: verb,
+            ),
+          );
+        }
+      },
+    );
+    final contributions =
+        widget.slots
+            ?.renderList(
+              DshSlots.sidebarWorkspacesSessionRowAction
+                  .typed<SessionRowOwner, Widget?>(),
+              rowOwner,
+            )
+            .whereType<Widget>()
+            .toList() ??
+        const <Widget>[];
+    final leading = dot == null
+        ? widget.slots?.renderSingle(
+            DshSlots.sidebarSessionRowLeading.typed<SessionRowOwner, Widget>(),
+            rowOwner,
+          )
+        : null;
     Widget row(VoidCallback? menu) => MouseRegion(
       onEnter: (_) => setState(() => _hover = true),
       onExit: (_) => setState(() => _hover = false),
@@ -1291,17 +1491,6 @@ class _SessionRowState extends State<_SessionRow> {
           behavior: HitTestBehavior.opaque,
           onTap: widget.onTap,
           onLongPress: menu,
-          onDoubleTap: widget.management == null
-              ? null
-              : () => unawaited(
-                  renameSessionDialog(
-                    context,
-                    widget.management!,
-                    widget.i18n,
-                    n.id,
-                    n.title,
-                  ),
-                ),
           child: DshContainer(
             height: 32,
             padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
@@ -1316,64 +1505,71 @@ class _SessionRowState extends State<_SessionRow> {
                 SizedBox(
                   width: 16,
                   height: 20,
-                  child: dot == null ? null : Center(child: DshStateDot(dot)),
+                  child: dot == null
+                      ? leading
+                      : Center(child: DshStateDot(dot)),
                 ),
                 const SizedBox(width: 4),
                 Expanded(
-                  child: DshChromeText(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle('--dsw-font-s-14')
-                        .copyWith(color: ink, height: 20 / 14),
+                  child: _DoubleClickTitle(
+                    onDoubleClick: widget.management == null || n.blank
+                        ? null
+                        : () => unawaited(
+                            renameSessionDialog(
+                              context,
+                              widget.management!,
+                              widget.i18n,
+                              n.id,
+                              n.title,
+                            ),
+                          ),
+                    child: WorkspaceTitleMarquee(
+                      text: title,
+                      hovered: _hover,
+                      style: theme
+                          .textStyle('--dsw-font-s-14')
+                          .copyWith(color: ink, height: 20 / 14),
+                    ),
                   ),
                 ),
-                if (_hover && menu != null) ...[
-                  if (!n.archived)
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () => unawaited(() async {
-                        try {
-                          if (n.pinned) {
-                            await widget.management!.unpinSession(n.id);
-                          } else {
-                            await widget.management!.pinSession(n.id);
-                          }
-                        } on Object catch (e) {
-                          if (context.mounted) {
-                            showWorkspaceNotice(context, actionFailure(e));
-                          }
-                        }
-                      }()),
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: Center(
-                          child: DshIcon(
-                            DshShellIcons.pinFill,
-                            size: 14,
-                            color: ink,
-                          ),
-                        ),
-                      ),
-                    ),
+                if (_hover && menu != null && !n.blank) ...[
+                  const SizedBox(width: 6),
                   GestureDetector(
                     key: ValueKey('session-row-menu-${n.id}'),
                     behavior: HitTestBehavior.opaque,
                     onTap: menu,
                     child: SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Center(
-                        child: DshIcon(
-                          DshShellIcons.ellipsis,
-                          size: 14,
-                          color: ink,
-                        ),
+                      width: 16,
+                      height: 16,
+                      child: DshIcon(
+                        DshShellIcons.ellipsis,
+                        size: 14,
+                        color: theme.color('--dsw-alias-label-tertiary'),
                       ),
                     ),
                   ),
+                  for (final contribution in contributions) ...[
+                    const SizedBox(width: 15),
+                    contribution,
+                  ],
+                  if (contributions.isEmpty && !n.archived) ...[
+                    const SizedBox(width: 15),
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => rowOwner.onAction('pin'),
+                      child: SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: DshIcon(
+                          n.pinned
+                              ? DshShellIcons.pinFill
+                              : DshShellIcons.pinOutline,
+                          size: 14,
+                          color: theme.color('--dsw-alias-label-tertiary'),
+                        ),
+                      ),
+                    ),
+                  ],
                 ] else if (!n.blank) ...[
                   const SizedBox(width: 6),
                   DshChromeText(
@@ -1407,15 +1603,96 @@ class _SessionRowState extends State<_SessionRow> {
       ),
     );
     final actions = widget.management;
-    if (actions == null) return row(null);
+    if (actions == null || n.blank) return row(null);
     return WorkspaceSessionMenu(
       actions: actions,
+      slots: widget.slots,
       i18n: widget.i18n,
       sessionId: n.id,
       title: n.title,
       pinned: n.pinned,
       archived: n.archived,
-      builder: (_, menu) => row(menu.toggle),
+      builder: (_, menu) => WorkspaceHoverCard(
+        group: widget.hoverGroup,
+        disabled: menu.isOpen,
+        copyText: n.blank || n.title.isEmpty ? null : n.title,
+        copiedLabel: t('hover.copied'),
+        content: (context) => Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DshChromeText(title),
+            if (!n.blank) ...[
+              const SizedBox(height: 8),
+              DshChromeText(
+                hoverRelativeLabel(widget.i18n, n.updatedAt, widget.now),
+                style: context.dsh
+                    .textStyle('--dsw-font-xxs-12')
+                    .copyWith(
+                      color: context.dsh.color(
+                        '--dsw-static-neutral-bluish-300',
+                      ),
+                      height: 16 / 12,
+                    ),
+              ),
+            ],
+            ...?widget.slots?.renderList(
+              DshSlots.sidebarSessionRowHover.typed<SessionRowOwner, Widget>(),
+              rowOwner,
+            ),
+            for (final status in sessionHoverStatuses(n, widget.i18n)) ...[
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  DshStateDot(status.$1),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: DshChromeText(
+                      status.$2,
+                      style: context.dsh
+                          .textStyle('--dsw-font-xxs-12')
+                          .copyWith(
+                            color: context.dsh.color(
+                              '--dsw-static-neutral-bluish-400',
+                            ),
+                            height: 20 / 12,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            if (n.archived) ...[
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  DshIcon(
+                    DshShellIcons.archive,
+                    size: 14,
+                    color: context.dsh.color('--dsw-static-neutral-bluish-400'),
+                  ),
+                  const SizedBox(width: 8),
+                  DshChromeText(
+                    t('row.archived'),
+                    style: context.dsh
+                        .textStyle('--dsw-font-xxs-12')
+                        .copyWith(
+                          color: context.dsh.color(
+                            '--dsw-static-neutral-bluish-400',
+                          ),
+                          height: 20 / 12,
+                        ),
+                  ),
+                ],
+              ),
+            ],
+          ],
+        ),
+        child: row(() {
+          widget.hoverGroup.close?.call();
+          menu.toggle();
+        }),
+      ),
     );
   }
 }
@@ -1471,6 +1748,8 @@ class _SearchRow extends StatefulWidget {
     required this.selected,
     required this.untitled,
     required this.ungrouped,
+    required this.unarchiveLabel,
+    this.onUnarchive,
     required this.onTap,
   });
 
@@ -1478,6 +1757,8 @@ class _SearchRow extends StatefulWidget {
   final bool selected;
   final String untitled;
   final String ungrouped;
+  final String unarchiveLabel;
+  final Future<void> Function()? onUnarchive;
   final VoidCallback onTap;
 
   @override
@@ -1485,7 +1766,16 @@ class _SearchRow extends StatefulWidget {
 }
 
 class _SearchRowState extends State<_SearchRow> {
-  bool _hover = false;
+  bool _hover = false, _restoring = false;
+  Future<void> restore() async {
+    if (_restoring || widget.onUnarchive == null) return;
+    setState(() => _restoring = true);
+    try {
+      await widget.onUnarchive!();
+    } finally {
+      if (mounted) setState(() => _restoring = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1530,7 +1820,7 @@ class _SearchRowState extends State<_SearchRow> {
                     child: dot == null ? null : Center(child: DshStateDot(dot)),
                   ),
                   const SizedBox(width: 4),
-                  Flexible(
+                  Expanded(
                     child: DshChromeText(
                       r.title.isEmpty ? widget.untitled : r.title,
                       maxLines: 1,
@@ -1540,6 +1830,28 @@ class _SearchRowState extends State<_SearchRow> {
                           .copyWith(color: ink, height: 20 / 14),
                     ),
                   ),
+                  if (r.archived && widget.onUnarchive != null && _hover)
+                    Semantics(
+                      label: widget.unarchiveLabel,
+                      button: true,
+                      enabled: !_restoring,
+                      child: GestureDetector(
+                        key: ValueKey('search-unarchive-${r.id}'),
+                        behavior: HitTestBehavior.opaque,
+                        onTap: _restoring ? null : () => unawaited(restore()),
+                        child: SizedBox(
+                          width: 24,
+                          height: 20,
+                          child: Center(
+                            child: DshIcon(
+                              DshShellIcons.unarchive,
+                              size: 14,
+                              color: theme.color('--dsw-alias-label-tertiary'),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
               Padding(
@@ -1584,4 +1896,104 @@ class _SearchRowState extends State<_SearchRow> {
       ),
     );
   }
+}
+
+String workspaceCreatedLabel(DshI18n i18n, num stamp) {
+  final date = DateTime.fromMillisecondsSinceEpoch(stamp.toInt());
+  final ymd = browserText(i18n, 'date.ymd', {
+    'y': date.year,
+    'm': date.month,
+    'd': date.day,
+  });
+  return browserText(i18n, 'hover.created', {
+    'time':
+        '$ymd ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
+  });
+}
+
+String hoverRelativeLabel(DshI18n i18n, num stamp, DateTime now) {
+  final label = relativeLabel(i18n, stamp, now);
+  return now.millisecondsSinceEpoch - stamp < 60000
+      ? label
+      : browserText(i18n, 'time.ago', {'t': label});
+}
+
+List<(DshStateDotState, String)> sessionHoverStatuses(
+  SessionNode node,
+  DshI18n i18n,
+) {
+  String t(String key, [Map<String, Object?> params = const {}]) =>
+      browserText(i18n, key, params);
+  final subagents = node.runningSubagents == 0
+      ? null
+      : (
+          DshStateDotState.ongoing,
+          t(
+            node.runningSubagents == 1
+                ? 'status.subagentsRunning.one'
+                : 'status.subagentsRunning.other',
+            {'n': node.runningSubagents},
+          ),
+        );
+  final primary = node.pending != null
+      ? (
+          DshStateDotState.warning,
+          t(switch (node.pending!) {
+            PendingInteraction.approval => 'status.waitingApproval',
+            PendingInteraction.planReview => 'status.planReview',
+            PendingInteraction.question => 'status.waitingAnswer',
+          }),
+        )
+      : node.running
+      ? (DshStateDotState.ongoing, t('status.running'))
+      : null;
+  return [
+    if (primary != null) primary,
+    if (subagents != null) subagents,
+    if (primary == null && subagents == null && !node.archived)
+      (
+        node.completed ? DshStateDotState.done : DshStateDotState.idle,
+        t(node.completed ? 'status.completed' : 'status.idle'),
+      ),
+  ];
+}
+
+/// DOM click opens immediately; double-click is an additional title gesture.
+/// A DoubleTapGestureRecognizer would hold the first tap for its timeout and
+/// make every ordinary row click wait before opening or folding its group.
+class _DoubleClickTitle extends StatefulWidget {
+  const _DoubleClickTitle({required this.child, this.onDoubleClick});
+  final Widget child;
+  final VoidCallback? onDoubleClick;
+  @override
+  State<_DoubleClickTitle> createState() => _DoubleClickTitleState();
+}
+
+class _DoubleClickTitleState extends State<_DoubleClickTitle> {
+  Offset? _down, _lastPosition;
+  Duration? _lastUp;
+  @override
+  Widget build(BuildContext context) => Listener(
+    behavior: HitTestBehavior.opaque,
+    onPointerDown: (event) => _down = event.position,
+    onPointerUp: (event) {
+      if (event.kind != PointerDeviceKind.mouse ||
+          _down == null ||
+          (event.position - _down!).distance > 18) {
+        return;
+      }
+      final previous = _lastUp;
+      final position = _lastPosition;
+      _lastUp = event.timeStamp;
+      _lastPosition = event.position;
+      if (previous != null &&
+          position != null &&
+          event.timeStamp - previous <= const Duration(milliseconds: 300) &&
+          (event.position - position).distance <= 18) {
+        _lastUp = null;
+        widget.onDoubleClick?.call();
+      }
+    },
+    child: widget.child,
+  );
 }
