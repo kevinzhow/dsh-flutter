@@ -204,6 +204,41 @@ Object? _data(ViewNode node) {
         'form': m.form,
         'waking': m.waking,
       };
+    case 'command-input':
+      final v = d! as CommandInputData;
+      return {'commandId': v.commandId, 'text': v.text, 'time': v.time};
+    case 'question-reply':
+      final v = d! as QuestionReplyData;
+      return {
+        'callId': v.callId,
+        'outcome': 'answered',
+        'questions': v.questions,
+        'answers': v.answers,
+        'text': v.text,
+        'time': v.time,
+      };
+    case 'workflow-run':
+      final v = d! as WorkflowRunData;
+      return {
+        'name': v.name,
+        'status': v.status.name,
+        'phases': [
+          for (final p in v.phases)
+            {
+              'key': p.key,
+              'phase': p.phase,
+              'members': [
+                for (final m in p.members)
+                  {
+                    'seq': m.seq,
+                    'label': m.label,
+                    'childId': m.childId,
+                    'status': m.status.name,
+                  },
+              ],
+            },
+        ],
+      };
     case 'turn-process':
       final p = d! as TurnProcessData;
       return {

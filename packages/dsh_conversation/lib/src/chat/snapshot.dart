@@ -8,6 +8,8 @@ import 'nodes.dart';
 import 'retry.dart';
 import 'system_prompt.dart';
 import 'turn_process.dart';
+import 'extended_inputs.dart';
+import 'workflow_run.dart';
 
 /// The immutable chat target snapshot (dsh `ChatSnapshot`, without the legacy
 /// slice, navigation rail and process-group presentation, which are deferred).
@@ -226,6 +228,9 @@ defaultChatRegistries() {
     ..register(const TurnProcessDefinition())
     ..register(const ToolDefinition())
     ..register(const CommandDefinition())
+    ..register(const GoalCommandInputDefinition())
+    ..register(const QuestionReplyDefinition())
+    ..register(const WorkflowRunDefinition())
     ..register(const CompactionDefinition())
     ..register(const ModelRetryDefinition())
     ..register(const TurnErrorDefinition())

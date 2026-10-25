@@ -8,6 +8,8 @@ export 'src/assembler.dart' show ConversationAssembler, conversationContextKey;
 export 'src/binding.dart';
 export 'src/chat/definitions.dart';
 export 'src/chat/commands.dart';
+export 'src/chat/extended_inputs.dart';
+export 'src/chat/workflow_run.dart';
 export 'src/chat/turn_process.dart';
 export 'src/chat/nodes.dart';
 export 'src/chat/retry.dart';
