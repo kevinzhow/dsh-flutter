@@ -196,23 +196,11 @@
       "reference": "workflow-completed",
       "rect": [
        266,
-       64,
-       1014,
-       230
-      ],
-      "changed": true
-     }
-    },
-    {
-     "expect": {
-      "reference": "workflow-running",
-      "rect": [
-       266,
-       64,
+       144,
        1014,
        184
       ],
-      "changed": false
+      "changed": true
      }
     },
     {
@@ -252,6 +240,15 @@
      "click": [
       346,
       80
+     ]
+    },
+    {
+     "capture": "workflow-failed-reopened-focused"
+    },
+    {
+     "click": [
+      889,
+      212
      ]
     },
     {
@@ -476,23 +473,11 @@
       "reference": "workflow-completed",
       "rect": [
        20,
-       64,
-       370,
-       230
-      ],
-      "changed": true
-     }
-    },
-    {
-     "expect": {
-      "reference": "workflow-running",
-      "rect": [
-       20,
-       64,
+       144,
        370,
        184
       ],
-      "changed": false
+      "changed": true
      }
     },
     {
@@ -532,6 +517,15 @@
      "click": [
       100,
       80
+     ]
+    },
+    {
+     "capture": "workflow-failed-reopened-focused"
+    },
+    {
+     "click": [
+      311,
+      212
      ]
     },
     {
