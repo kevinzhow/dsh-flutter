@@ -1,0 +1,158 @@
+{
+  "synthetic": true,
+  "sourceCommit": "a09e0fc13a8285cc9dac4265fad16ed7c30b6e02",
+  "sourceTree": "f14539c037094a83b854a0add24eeb41e50c34fd",
+  "fixtureActionsOnly": true,
+  "realHostRoutingVerifiedBy": "apps/dsh_flutter/test/queue_flow_test.dart",
+  "scenes": [
+    {
+      "case": "queue.phone-dark",
+      "weston": "weston 14.0.2",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "glVersion": [
+        "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "backend": "native-wayland",
+      "kernel": "7.0.0-38-generic",
+      "cursorIncluded": false,
+      "captureAssertions": [
+        {
+          "reference": "collapsed",
+          "rect": [
+            16,
+            64,
+            374,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 3
+        },
+        {
+          "reference": "expanded",
+          "rect": [
+            16,
+            64,
+            374,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        },
+        {
+          "reference": "edited",
+          "rect": [
+            16,
+            64,
+            374,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        },
+        {
+          "reference": "removed",
+          "rect": [
+            16,
+            64,
+            374,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        }
+      ],
+      "pairedHost": false,
+      "size": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "locale": "zh"
+    },
+    {
+      "case": "queue.desktop-light",
+      "weston": "weston 14.0.2",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "glVersion": [
+        "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "backend": "native-wayland",
+      "kernel": "7.0.0-38-generic",
+      "cursorIncluded": false,
+      "captureAssertions": [
+        {
+          "reference": "collapsed",
+          "rect": [
+            266,
+            64,
+            1014,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        },
+        {
+          "reference": "expanded",
+          "rect": [
+            266,
+            64,
+            1014,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        },
+        {
+          "reference": "edited",
+          "rect": [
+            266,
+            64,
+            1014,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        },
+        {
+          "reference": "removed",
+          "rect": [
+            266,
+            64,
+            1014,
+            300
+          ],
+          "changed": true,
+          "passed": true,
+          "attempts": 1
+        }
+      ],
+      "pairedHost": false,
+      "size": [
+        1280,
+        720
+      ],
+      "theme": "light",
+      "locale": "en"
+    }
+  ],
+  "allOwnedGpuProcessesStopped": true
+}

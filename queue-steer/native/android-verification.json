@@ -1,0 +1,103 @@
+{
+  "api": 36,
+  "synthetic": true,
+  "actualTapsAndKeyboard": true,
+  "fixtureActionsOnly": true,
+  "realHostRoutingVerifiedBy": "apps/dsh_flutter/test/queue_flow_test.dart",
+  "scenes": [
+    {
+      "scene": "collapsed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "expanded",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "refusal-enabled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "editing",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "draft",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "edit-refused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "retry-enabled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "edited",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "removed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "steered",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "reset",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "idle",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "settings",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "settings-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "steer-preference",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "composer",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "composer-draft",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "steer-delivered",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "editFailureRetainsDraft": true,
+  "removeAndSteer": true,
+  "idleSteeringDisabled": true,
+  "busyPreferenceChangesDelivery": true
+}
