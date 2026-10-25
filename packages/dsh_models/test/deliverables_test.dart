@@ -88,8 +88,7 @@ void main() {
   test(
     'mounted association controls share reads, refresh and final cancellation',
     () async {
-      final client = _Fake(), model = DeliverablesModel(_Fake());
-      await model.dispose();
+      final client = _Fake();
       final active = DeliverablesModel(client);
       const file = DeliveryFile('s', 8, 0);
       final a = active.acquireApplications(file),
@@ -133,8 +132,7 @@ void main() {
     },
   );
   test('diff errors retry but missing comparisons do not', () async {
-    final client = _Fake(), model = DeliverablesModel(_Fake());
-    await model.dispose();
+    final client = _Fake();
     final active = DeliverablesModel(client);
     client.diffRead = (_) =>
         Future.error(const FormatException('synthetic invalid record'));

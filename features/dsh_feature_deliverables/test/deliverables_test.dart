@@ -1,3 +1,5 @@
+import 'dart:ui' show Tristate;
+
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_deliverables/dsh_feature_deliverables.dart';
@@ -122,9 +124,7 @@ void main() {
   testWidgets(
     'delivery fold and changes enablement consume only announced host data',
     (t) async {
-      final client = FakeDeliverables(),
-          model = DeliverablesModel(FakeDeliverables());
-      await model.dispose();
+      final client = FakeDeliverables();
       final live = DeliverablesModel(client),
           owner = testSessionOwner('s1'),
           slots = SlotRegistry(),
@@ -223,9 +223,8 @@ void main() {
   testWidgets(
     'review navigation keeps layout choices and never opens native files on render',
     (t) async {
-      final client = FakeDeliverables(),
-          model = DeliverablesModel(FakeDeliverables());
-      await model.dispose();
+      final semantics = t.ensureSemantics();
+      final client = FakeDeliverables();
       final live = DeliverablesModel(client),
           session = testSessionOwner('s1'),
           slots = SlotRegistry();
@@ -269,6 +268,13 @@ void main() {
       await t.tap(find.bySemanticsLabel('Split view'));
       await t.pumpAndSettle();
       expect(
+        t
+            .getSemantics(find.bySemanticsLabel('Split view'))
+            .flagsCollection
+            .isToggled,
+        Tristate.isTrue,
+      );
+      expect(
         find.byKey(const ValueKey('delivery-diff-split-false')),
         findsOneWidget,
       );
@@ -281,6 +287,7 @@ void main() {
       );
       expect(client.opened, isEmpty);
       await t.pumpWidget(const SizedBox());
+      semantics.dispose();
     },
   );
   test('numbered and split rows pair edits around context lines', () {

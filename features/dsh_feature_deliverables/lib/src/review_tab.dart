@@ -96,13 +96,15 @@ class _ReviewState extends State<ChangesReviewTab> {
       required DshIconData icon,
       required bool selected,
       required VoidCallback press,
-    }) => Semantics(
-      toggled: selected,
-      child: DshButton(
-        size: DshButtonSize.sm,
-        semanticLabel: label,
-        onPressed: press,
-        child: DshIcon(icon, size: 15),
+    }) => MergeSemantics(
+      child: Semantics(
+        toggled: selected,
+        child: DshButton(
+          size: DshButtonSize.sm,
+          semanticLabel: label,
+          onPressed: press,
+          child: DshIcon(icon, size: 15),
+        ),
       ),
     );
     return Column(

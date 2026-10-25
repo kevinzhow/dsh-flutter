@@ -59,8 +59,7 @@ void main() {
   testWidgets(
     'shared actions name the Host associations and forward the selected operation',
     (t) async {
-      final client = _Client(), model = DeliverablesModel(_Client());
-      await model.dispose();
+      final client = _Client();
       final active = DeliverablesModel(client),
           session = testSessionOwner('original');
       addTearDown(active.dispose);
