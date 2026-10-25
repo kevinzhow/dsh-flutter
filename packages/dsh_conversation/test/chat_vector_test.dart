@@ -21,6 +21,7 @@ const fixtures = [
   'test/fixtures/model_retry_vector.json',
   'test/fixtures/compaction_command_vector.json',
   'test/fixtures/turn_process_vector.json',
+  'test/fixtures/extended_nodes_vector.json',
 ];
 
 void main() {

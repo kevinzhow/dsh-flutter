@@ -10,6 +10,8 @@ import 'chat_preferences.dart';
 import 'work_details_view.dart';
 import 'work_details_settings.dart';
 import 'command_view.dart';
+import 'command_input_view.dart';
+import 'context_view.dart';
 import 'compaction_view.dart';
 import 'model_retry_view.dart';
 import 'stats_pills.dart';
@@ -102,6 +104,15 @@ ChatPreferences registerChatFeature(
   node(
     'turn-process',
     (o, t) => TurnProcessView(node: o.node, controls: o.turnProcess, i18n: t),
+  );
+  node(
+    'command-input',
+    (o, t) =>
+        GoalCommandInputView(data: o.node.data as CommandInputData, i18n: t),
+  );
+  node(
+    'context',
+    (o, t) => ContextInjectionView(data: o.node.data as MessageData, i18n: t),
   );
   node('command', (o, t) {
     final data = o.node.data as CommandData;

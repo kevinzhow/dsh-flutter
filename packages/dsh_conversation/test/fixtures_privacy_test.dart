@@ -27,6 +27,7 @@ void main() {
     'input_vector.json',
     'compaction_command_vector.json',
     'turn_process_vector.json',
+    'extended_nodes_vector.json',
   ]) {
     test('$name carries nothing private', () {
       final text = File('test/fixtures/$name').readAsStringSync();

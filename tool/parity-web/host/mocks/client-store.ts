@@ -23,3 +23,9 @@ export function createSnapshotStore<T>(initial: T): SnapshotStore<T> {
 export function defineStore(): never {
   throw new Error('Runtime engine stores are outside this component fixture')
 }
+
+// WorkflowRunPanel passes this comparator to its injected useSessions hook;
+// the fixture reads one immutable snapshot, so no subscription compares it.
+export function shallowEqual(): never {
+  throw new Error('Snapshot comparisons are outside this immutable fixture')
+}

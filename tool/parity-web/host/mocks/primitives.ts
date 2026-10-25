@@ -7,6 +7,7 @@
 // dependencies) stays out of the bundle. Add a line here when a new surface imports another primitive.
 export { Button } from '@dsh/ui-primitives/src/Button.tsx'
 export { StateDot } from '@dsh/ui-primitives/src/StateDot.tsx'
+export { ReferenceChip, UserTextRun } from '@dsh/ui-primitives/src/user-text.tsx'
 export { DisclosureRow } from '@dsh/ui-primitives/src/DisclosureRow.tsx'
 export { TextShimmer } from '@dsh/ui-primitives/src/TextShimmer.tsx'
 export { Tag } from '@dsh/ui-primitives/src/Tag.tsx'

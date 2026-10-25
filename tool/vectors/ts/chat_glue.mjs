@@ -10,6 +10,9 @@
 //                    developer message, system/request prompt, assistant, tool,
 //                    turn-error, turn-max-tokens, turn-tail, command, compaction, turn-process, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
+//   ui-goal          goalCommandInputDefinition
+//   ui-user-questions questionReplyDefinition (exclusive late reply)
+//   ui-workflow-run  workflowRunDefinition (durable lifecycle)
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
 //   ui-tool          the todo history Definitions and view (`tool-todo-history`)
 // NOT registered: process groups (presentation groups are projected separately).
