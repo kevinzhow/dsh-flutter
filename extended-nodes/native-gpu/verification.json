@@ -1,0 +1,96 @@
+[
+  {
+    "case": "extended-nodes.desktop-light",
+    "assertions": 10,
+    "attempts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "regions": {
+      "reply-closed": {
+        "rect": [
+          266,
+          64,
+          1014,
+          500
+        ],
+        "restoredPixelExactly": true
+      },
+      "context-closed": {
+        "rect": [
+          266,
+          64,
+          1014,
+          235
+        ],
+        "restoredPixelExactly": true
+      },
+      "workflow-failed": {
+        "rect": [
+          266,
+          64,
+          1014,
+          184
+        ],
+        "restoredPixelExactly": true
+      }
+    },
+    "restorationCondition": "Context hover is cleared; workflow focus returns to its status control before comparing. Restart checks member content reappears rather than requiring identical focus decoration.",
+    "processesRemain": false
+  },
+  {
+    "case": "extended-nodes.phone-dark-zh",
+    "assertions": 10,
+    "attempts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "regions": {
+      "reply-closed": {
+        "rect": [
+          20,
+          64,
+          370,
+          500
+        ],
+        "restoredPixelExactly": true
+      },
+      "context-closed": {
+        "rect": [
+          20,
+          64,
+          370,
+          235
+        ],
+        "restoredPixelExactly": true
+      },
+      "workflow-failed": {
+        "rect": [
+          20,
+          64,
+          370,
+          184
+        ],
+        "restoredPixelExactly": true
+      }
+    },
+    "restorationCondition": "Context hover is cleared; workflow focus returns to its status control before comparing. Restart checks member content reappears rather than requiring identical focus decoration.",
+    "processesRemain": false
+  }
+]

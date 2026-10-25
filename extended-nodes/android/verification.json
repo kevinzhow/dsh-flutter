@@ -1,0 +1,89 @@
+{
+  "api": 36,
+  "synthetic": true,
+  "actualTapAndSwipe": true,
+  "standaloneComponents": true,
+  "scenes": [
+    {
+      "scene": "reply-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "reply-open",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "reply-restored",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "context-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "context-open",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "context-scrolled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "context-restored",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-running",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-member-opened",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-completed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-restarted",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-failed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-failed-collapsed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workflow-failed-restored",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "goal",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "contextScrollChangedBody": true,
+  "lateReplyDisclosure": true,
+  "workflowCleanCollapseAndRestart": true,
+  "abnormalManualDisclosure": true,
+  "memberActionIsFixtureOnly": true,
+  "realChildFollowAddressVerifiedBy": "apps/dsh_flutter/test/extended_nodes_flow_test.dart"
+}

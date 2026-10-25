@@ -1,0 +1,145 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "kernel": "7.0.0-38-generic",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "reply-closed",
+      "rect": [
+        20,
+        64,
+        370,
+        500
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "reply-closed",
+      "rect": [
+        20,
+        64,
+        370,
+        500
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "context-closed",
+      "rect": [
+        20,
+        90,
+        370,
+        235
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "context-open",
+      "rect": [
+        42,
+        92,
+        370,
+        230
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "context-closed",
+      "rect": [
+        20,
+        64,
+        370,
+        235
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workflow-running",
+      "rect": [
+        20,
+        230,
+        370,
+        280
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workflow-running",
+      "rect": [
+        20,
+        64,
+        370,
+        184
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workflow-completed",
+      "rect": [
+        20,
+        144,
+        370,
+        184
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workflow-restarted",
+      "rect": [
+        20,
+        64,
+        370,
+        184
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workflow-failed",
+      "rect": [
+        20,
+        64,
+        370,
+        184
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "zh"
+}

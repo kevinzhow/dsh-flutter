@@ -1,0 +1,31 @@
+{
+  "source": "9389dedba57d1a0404d59aa8a707c2f8caa0f05d",
+  "validatedCodeAndBuild": "6d69f83bd1242949d1582f44395199b0ede1f02f",
+  "component": {
+    "chat.command-input": {
+      "cases": 24,
+      "meanNonTextPct": 98.492,
+      "strictAtLeast99_5": 0,
+      "sizeMismatches": 0
+    },
+    "chat.question-reply": {
+      "cases": 32,
+      "meanNonTextPct": 98.708,
+      "strictAtLeast99_5": 0,
+      "sizeMismatches": 6
+    },
+    "chat.context-injection": {
+      "cases": 104,
+      "meanNonTextPct": 98.351,
+      "strictAtLeast99_5": 17,
+      "sizeMismatches": 0
+    },
+    "chat.workflow-run": {
+      "cases": 56,
+      "meanNonTextPct": 97.537,
+      "strictAtLeast99_5": 0,
+      "sizeMismatches": 0
+    }
+  },
+  "strictTotal": 17
+}
