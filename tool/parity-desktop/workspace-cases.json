@@ -190,6 +190,60 @@
         },
         {
           "capture": "archive-confirm"
+        },
+        {
+          "click": [
+            620,
+            468
+          ]
+        },
+        {
+          "expect": {
+            "reference": "archive-confirm",
+            "rect": [
+              450,
+              210,
+              830,
+              510
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "archive-cancelled"
+        },
+        {
+          "click": [
+            640,
+            80
+          ]
+        },
+        {
+          "click": [
+            1180,
+            222
+          ]
+        },
+        {
+          "click": [
+            736,
+            468
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pinned",
+            "rect": [
+              480,
+              663,
+              800,
+              689
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "archived"
         }
       ]
     },
