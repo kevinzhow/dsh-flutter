@@ -1,0 +1,69 @@
+{
+  "api": 36,
+  "synthetic": true,
+  "actualTapsAndKeyboard": true,
+  "fixtureActionsOnly": true,
+  "realHostRoutingVerifiedBy": "apps/dsh_flutter/test/plan_flow_test.dart",
+  "scenes": [
+    {
+      "scene": "mode",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "exit-refused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "mode-off",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "opened",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "approval-refused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "approved",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-reset",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "changes",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "preview",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "scrolled",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "exitRefusalRetainsMode": true,
+  "approvalFailureAllowsRetry": true,
+  "originalApprovalLabel": true,
+  "changesDoesNotAnswer": true,
+  "documentScroll": true
+}
