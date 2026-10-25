@@ -77,6 +77,10 @@ class RecordingTransport implements SessionTransport {
   }
 
   @override
+  Future<void> updateQueue(Map<String, Object?> request) =>
+      inner.updateQueue(request);
+
+  @override
   Future<void> cancel(String sessionId) => inner.cancel(sessionId);
   @override
   Future<Map<String, Object?>> attachment(

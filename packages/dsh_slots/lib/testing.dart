@@ -17,6 +17,16 @@ export 'package:dsh_models/testing.dart' show FakeTransport;
 /// Recording [SessionActions] for tests.
 class FakeActions implements SessionActions {
   final List<String> sent = [];
+  final List<String> sentModes = [];
+  final List<(String, Map<String, Object?>)> queueUpdates = [];
+  Future<void> Function(String, Map<String, Object?>)? onUpdateQueue;
+
+  @override
+  Future<void> updateQueue(String id, Map<String, Object?> action) async {
+    queueUpdates.add((id, action));
+    await onUpdateQueue?.call(id, action);
+  }
+
   final List<List<OutgoingAttachment>> sentAttachments = [];
   int cancels = 0;
   int olderLoads = 0;
@@ -26,9 +36,11 @@ class FakeActions implements SessionActions {
   Future<void> send(
     String text, {
     List<OutgoingAttachment> attachments = const [],
+    String mode = 'queue',
   }) async {
     if (failSend != null) throw failSend!;
     sent.add(text);
+    sentModes.add(mode);
     sentAttachments.add(attachments);
   }
 

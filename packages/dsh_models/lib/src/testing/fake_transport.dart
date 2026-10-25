@@ -62,6 +62,14 @@ class FakeTransport implements SessionTransport {
   final List<Map<String, Object?>> pageRequests = [];
   final List<Map<String, Object?>> prompts = [];
   final List<String> cancels = [];
+  final List<Map<String, Object?>> queueUpdates = [];
+  Future<void> Function(Map<String, Object?>)? onUpdateQueue;
+
+  @override
+  Future<void> updateQueue(Map<String, Object?> request) async {
+    queueUpdates.add(request);
+    await onUpdateQueue?.call(request);
+  }
 
   /// Durable image reads: `sessionId/attachmentId` per call; [onAttachment]
   /// answers (`{attachment, data}`), the default is a 1x1 PNG.

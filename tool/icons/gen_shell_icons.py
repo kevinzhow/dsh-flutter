@@ -61,6 +61,8 @@ ICONS = {
     'IconCompareSplitOutlineRegular': 'compareSplit',
     'IconEllipsisOutlineMedium': 'ellipsisMedium',
     'IconThinkOutlineRegular': 'think',
+    'IconQueueOutlineRegular': 'queue',
+    'IconSendOutlineRegular': 'sendOutline',
 }
 
 # Glyphs dsh draws as inline SVG inside a component (no `Icon*` export): ident -> (file under packages/client,
@@ -103,9 +105,16 @@ def build():
         if m is None:
             sys.exit('gen_shell_icons: %s not found in index.tsx' % export)
         art, extra = m.group(1), m.group(2)
+        # Queue's exported artwork is a size-preserving alias of ChatLines.
+        if art == 'IconQueueOutlineArtwork':
+            if not re.search(r'const IconQueueOutlineArtwork = .*?size = 14.*?<ChatLinesOutlineArtwork size=\{size\} \{\.\.\.rest\} />', index, re.S):
+                sys.exit('gen_shell_icons: queue alias changed')
+            art = 'ChatLinesOutlineArtwork'
         if art not in arts:
             sys.exit('gen_shell_icons: artwork %s of %s not found' % (art, export))
         size, svg = arts[art]
+        if export == 'IconQueueOutlineRegular':
+            size = 14  # the size-preserving alias overrides ChatLines' default
         size_override = re.search(r'size=\{props\.size \?\? (\d+)\}', extra)
         if size_override:
             size = int(size_override.group(1))

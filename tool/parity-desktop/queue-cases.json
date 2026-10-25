@@ -1,0 +1,236 @@
+{
+ "cases": [
+  {
+   "id": "queue.desktop-light",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 1280,
+   "height": 720,
+   "theme": "light",
+   "locale": "en",
+   "app": [
+    {
+     "capture": "collapsed"
+    },
+    {
+     "click": [
+      640,
+      82
+     ]
+    },
+    {
+     "expect": {
+      "reference": "collapsed",
+      "rect": [
+       266,
+       64,
+       1014,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "expanded"
+    },
+    {
+     "click": [
+      919,
+      122
+     ]
+    },
+    {
+     "capture": "editing"
+    },
+    {
+     "keys": [
+      29,
+      30
+     ]
+    },
+    {
+     "text": "Edited synthetic queue"
+    },
+    {
+     "keys": [
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "expanded",
+      "rect": [
+       266,
+       64,
+       1014,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "edited"
+    },
+    {
+     "click": [
+      957,
+      122
+     ]
+    },
+    {
+     "expect": {
+      "reference": "edited",
+      "rect": [
+       266,
+       64,
+       1014,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "removed"
+    },
+    {
+     "click": [
+      995,
+      82
+     ]
+    },
+    {
+     "expect": {
+      "reference": "removed",
+      "rect": [
+       266,
+       64,
+       1014,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "steered"
+    }
+   ]
+  },
+  {
+   "id": "queue.phone-dark",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 390,
+   "height": 844,
+   "theme": "dark",
+   "locale": "zh",
+   "app": [
+    {
+     "capture": "collapsed"
+    },
+    {
+     "click": [
+      195,
+      82
+     ]
+    },
+    {
+     "expect": {
+      "reference": "collapsed",
+      "rect": [
+       16,
+       64,
+       374,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "expanded"
+    },
+    {
+     "click": [
+      279,
+      122
+     ]
+    },
+    {
+     "capture": "editing"
+    },
+    {
+     "keys": [
+      29,
+      30
+     ]
+    },
+    {
+     "text": "Edited synthetic queue"
+    },
+    {
+     "keys": [
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "expanded",
+      "rect": [
+       16,
+       64,
+       374,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "edited"
+    },
+    {
+     "click": [
+      317,
+      122
+     ]
+    },
+    {
+     "expect": {
+      "reference": "edited",
+      "rect": [
+       16,
+       64,
+       374,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "removed"
+    },
+    {
+     "click": [
+      355,
+      82
+     ]
+    },
+    {
+     "expect": {
+      "reference": "removed",
+      "rect": [
+       16,
+       64,
+       374,
+       300
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "steered"
+    }
+   ]
+  }
+ ]
+}

@@ -13,8 +13,8 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 44 | 17 | 40 | 1 | 102 |
-| Input and commands | 8 | 3 | 14 | 0 | 25 |
+| Sessions and chat | 45 | 17 | 39 | 1 | 102 |
+| Input and commands | 9 | 3 | 13 | 0 | 25 |
 | Tools and approvals | 9 | 2 | 1 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 0 | 3 | 16 | 1 | 20 |
 | Files and preview | 6 | 6 | 7 | 0 | 19 |
@@ -22,14 +22,14 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 104 | 37 | 149 | 29 | 319 |
+| **all** | 106 | 37 | 147 | 29 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | package | 16 | 18 | 19 | 3 | 56 |
-| remote | 38 | 4 | 81 | 23 | 146 |
+| remote | 39 | 4 | 80 | 23 | 146 |
 | slot | 47 | 14 | 37 | 2 | 100 |
-| settings | 3 | 1 | 12 | 1 | 17 |
+| settings | 4 | 1 | 11 | 1 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
 
@@ -37,7 +37,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
 | desktop | 20 | 3 | 6 | 1 | 30 |
-| both | 84 | 34 | 143 | 28 | 289 |
+| both | 86 | 34 | 141 | 28 | 289 |
 
 ## Packages still to do, by priority
 
@@ -53,7 +53,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 **P2**
 
 - `ui-chat` (partial, both): Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. Renders all 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, command-input, context, question-reply, compaction, manual-compaction, turn-process, workflow-run, unknown). Stream behaviour matches dsh web: "Loading history…" hint while a session opens, the "Load earlier" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the "N new" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work. Goal command inputs are projected separately from command results; answered late question replies exclusively own their source messages and copy the full answer. Context disclosures support instructions, catalog, snapshot, notice, relay and recall with all-or-nothing opaque fallbacks and bounded bodies. Ordinary contexts remain hidden, while tool additions/removals retain upstream visibility. Workflow runs keep durable run/member outcomes and collision-free phase identities, distinguish normal foreground closure from abandoned turns, and defer clean collapse while member focus remains inside.
-- `ui-conversation` (partial, both): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.
+- `ui-conversation` (partial, both): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Queue rows support count disclosure, text-only inline edit, remove and steer with durable occurrence ids, disabled pending rows and image/file previews. Busy-Enter preferences are Host-backed; Enter/Send share delivery intent, Ctrl/Cmd+Enter uses its opposite, and empty accelerated Enter steers queued occurrences in order. Missing: the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.
 - `ui-deliverables` (partial, both): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer.
 - `ui-dockkit` (partial, desktop): Arrange panels in a draggable split-tree docking layout. The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified.
 - `ui-goal` (partial, both): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented.
@@ -92,14 +92,14 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Sessions and chat
 
-44 ported, 17 partial, 40 missing, 1 na.
+45 ported, 17 partial, 39 missing, 1 na.
 
 ### package (10)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
 | `ui-chat` | partial | both | Read the conversation: your messages, streamed answers with collapsible reasoning, tool calls, turn errors, and the copy action. | `features/dsh_feature_chat`, `packages/dsh_conversation/lib/src/chat`; Renders all 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, command-input, context, question-reply, compaction, manual-compaction, turn-process, workflow-run, unknown). Stream behaviour matches dsh web: "Loading history…" hint while a session opens, the "Load earlier" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the "N new" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work. Goal command inputs are projected separately from command results; answered late question replies exclusively own their source messages and copy the full answer. Context disclosures support instructions, catalog, snapshot, notice, relay and recall with all-or-nothing opaque fallbacks and bounded bodies. Ordinary contexts remain hidden, while tool additions/removals retain upstream visibility. Workflow runs keep durable run/member outcomes and collision-free phase identities, distinguish normal foreground closure from abandoned turns, and defer clean collapse while member focus remains inside. |
-| `ui-conversation` | partial | both | The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. | `features/dsh_feature_conversation`, `packages/dsh_conversation`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control. |
+| `ui-conversation` | partial | both | The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. | `features/dsh_feature_conversation`, `packages/dsh_conversation`, `features/dsh_feature_conversation/lib/src/hero.dart`; The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Queue rows support count disclosure, text-only inline edit, remove and steer with durable occurrence ids, disabled pending rows and image/file previews. Busy-Enter preferences are Host-backed; Enter/Send share delivery intent, Ctrl/Cmd+Enter uses its opposite, and empty accelerated Enter steers queued occurrences in order. Missing: the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control. |
 | `ui-directory-picker-browse` | ported | both | Browse the host's folders and create a new one to choose where a session works. | `features/dsh_feature_directory_picker_browse`, `features/dsh_feature_directory_picker_browse/lib/src/browser_model.dart`, `features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart`; The Miller browser (dsh's dialog at every width: two columns of at least 256px that scroll sideways on a narrow card, the child pane pinned into view, the wrapping footer), the editable path with prefix filtering, hidden-file toggle, New folder, slow-scan pill and truncation note. The Remote caller has no per-call abort, so a superseded scan is dropped on arrival instead of cancelled on the wire. |
 | `ui-directory-picker-native` | ported | desktop | Open the host operating system's own folder chooser to pick a working directory. | `features/dsh_feature_directory_picker_native/lib/src/flow.dart`, `apps/dsh_flutter/lib/src/desktop_shell.dart`; The host OS chooser (directoryPicker/pick) fills both directory-flow holes ahead of the browse flow, only where the host is this machine and the build is a desktop one; renderless, one chooser per open, one outcome. |
 | `ui-message-feedback` | missing | both | Like or dislike an answer and send a written remark about a message or the session. | messageFeedback/* and sessionFeedback/record are not generated or called. |
@@ -132,11 +132,11 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `session/openWorkspacePath` | missing | desktop | Open a workspace folder or file in an application on the host desktop. | Generated, never called (ui-open-in-app). Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local. |
 | `session/page` | ported | both | Load an older page of a session's history. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart` |
 | `session/projections` | partial | both | Read a session's derived state (title, plan mode, to-dos, permissions) without following it. | `packages/dsh_models/lib/src/session.dart`, `packages/dsh_models/lib/src/projection_store.dart`; Projections arrive in the follow baseline and the control stream; the unary call (on-demand exact projections for sessions not followed) is not used. |
-| `session/prompt` | partial | both | Send a message to a session, queued behind a running turn or steering it. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart`, `apps/dsh_flutter/lib/src/session_controller.dart`; Sends in queue mode with attachments. The model accepts steer mode but no UI sends it (busy-Enter preference missing). |
+| `session/prompt` | partial | both | Send a message to a session, queued behind a running turn or steering it. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart`, `apps/dsh_flutter/lib/src/session_controller.dart`; Sends queue or steer mode with ordered attachments; busy Enter/Send follow Host settings and accelerated Enter uses the opposite intent. |
 | `session/rename` | missing | both | Rename a session. | Generated, never called; sessions cannot be renamed. |
 | `session/search` | missing | both | Search the content of all sessions. | Session search is not wired. |
 | `session/selectModel` | ported | both | Choose the model for a session and remember it as the default. | `features/dsh_feature_model_selection/lib/src/model_directory.dart` |
-| `session/updateQueue` | missing | both | Edit or remove a message that is still waiting in the queue. | Generated, never called; queued messages cannot be edited or dropped. |
+| `session/updateQueue` | ported | both | Edit or remove a message that is still waiting in the queue. | `packages/dsh_models/lib/src/session.dart`, `features/dsh_feature_conversation/lib/src/queue_dock.dart`; Edit, remove and steer actual queue occurrence ids. Benign steering races are ignored; other Host refusals remain visible and preserve editing text. |
 | `session/workspacePathApplications` | missing | desktop | List the applications on the host that can open a path. | Generated, never called (ui-open-in-app). Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local. |
 | `sessionFeedback/record` | missing | both | Send a written remark about the session. | Written session remark (ui-message-feedback); not built. |
 | `subagents/interruptByParent` | missing | both | Interrupt a running subagent from its parent session. | Interrupting a child agent from the parent; not built. |
@@ -177,7 +177,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `conversation.hero.workspace.directoryFlow` | ported | both | Directory-flow hole under the conversation empty-state picker (declared by the WorkspacePicker entry). | `features/dsh_feature_directory_picker_browse/lib/src/register.dart`, `features/dsh_feature_workspace/lib/src/workspace_picker.dart` |
 | `conversation.input.activity` | missing | both | Compact action after the model selector; it can expand across the toolbar while retaining the editor and submit action. |  |
 | `conversation.input.attachments` | ported | both | Optional draft-attachment rail and drop target. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_attachment/lib/src/register.dart` |
-| `conversation.input.dock` | ported | both | Full-width entries above the composer card. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plan/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/register.dart`; No queue dock occupant. |
+| `conversation.input.dock` | ported | both | Full-width entries above the composer card. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plan/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/register.dart`; Queue dock is registered at order20 alongside the existing todo dock; idle/queued/steering echoes use distinct placements. |
 | `conversation.input.left` | missing | both | Compact controls at the left of the composer tool row. |  |
 | `conversation.input.model` | ported | both | Model selector inside the composer tool row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_model_selection/lib/src/register.dart` |
 | `conversation.input.overlay` | ported | both | Floating entries rendered inside the resident composer card. | `features/dsh_feature_input_trigger/lib/src/register.dart`, `features/dsh_feature_commands/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/composer.dart` |
@@ -218,7 +218,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Input and commands
 
-8 ported, 3 partial, 14 missing, 0 na.
+9 ported, 3 partial, 13 missing, 0 na.
 
 ### package (8)
 
@@ -263,7 +263,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
 | `agent-preset-registry` | missing | both | Which agent preset later sessions start with. | Not read. |
-| `ui-conversation` | missing | both | What plain Enter does while the agent is busy: queue the message or steer the running turn. | Not read; the composer always queues. |
+| `ui-conversation` | ported | both | What plain Enter does while the agent is busy: queue the message or steer the running turn. | `features/dsh_feature_conversation/lib/src/submission_policy.dart`, `features/dsh_feature_conversation/lib/src/enter_settings.dart`; Host ui-conversation.busyEnter read/write with queue default, settings menu, live cross-client adoption and independent gesture intent capture. IME and Shift+Enter remain editing gestures. |
 
 ## Tools and approvals
 

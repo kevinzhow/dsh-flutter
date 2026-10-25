@@ -99,7 +99,7 @@
     "packages/dsh_conversation",
     "features/dsh_feature_conversation/lib/src/hero.dart"
    ],
-   "notes": "The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Missing: queue dock (see, edit or drop queued messages), busy-Enter steer preference, the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.",
+   "notes": "The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Queue rows support count disclosure, text-only inline edit, remove and steer with durable occurrence ids, disabled pending rows and image/file previews. Busy-Enter preferences are Host-backed; Enter/Send share delivery intent, Ctrl/Cmd+Enter uses its opposite, and empty accelerated Enter steers queued occurrences in order. Missing: the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.",
    "priority": "P2"
   },
   {
@@ -1777,7 +1777,7 @@
     "packages/dsh_models/lib/src/session.dart",
     "apps/dsh_flutter/lib/src/session_controller.dart"
    ],
-   "notes": "Sends in queue mode with attachments. The model accepts steer mode but no UI sends it (busy-Enter preference missing)."
+   "notes": "Sends queue or steer mode with ordered attachments; busy Enter/Send follow Host settings and accelerated Enter uses the opposite intent."
   },
   {
    "id": "remote:session/rename",
@@ -1818,8 +1818,12 @@
    "platform": "both",
    "dshSource": "packages/api/session-controller/src/index.ts",
    "description": "Edit or remove a message that is still waiting in the queue.",
-   "status": "missing",
-   "notes": "Generated, never called; queued messages cannot be edited or dropped."
+   "status": "ported",
+   "notes": "Edit, remove and steer actual queue occurrence ids. Benign steering races are ignored; other Host refusals remain visible and preserve editing text.",
+   "whalee": [
+    "packages/dsh_models/lib/src/session.dart",
+    "features/dsh_feature_conversation/lib/src/queue_dock.dart"
+   ]
   },
   {
    "id": "remote:session/workspacePathApplications",
@@ -2423,8 +2427,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/submission-settings.ts",
    "description": "What plain Enter does while the agent is busy: queue the message or steer the running turn.",
-   "status": "missing",
-   "notes": "Not read; the composer always queues."
+   "status": "ported",
+   "notes": "Host ui-conversation.busyEnter read/write with queue default, settings menu, live cross-client adoption and independent gesture intent capture. IME and Shift+Enter remain editing gestures.",
+   "whalee": [
+    "features/dsh_feature_conversation/lib/src/submission_policy.dart",
+    "features/dsh_feature_conversation/lib/src/enter_settings.dart"
+   ]
   },
   {
    "id": "settings:ui-settings",
@@ -2776,7 +2784,7 @@
     "features/dsh_feature_plan/lib/src/register.dart",
     "features/dsh_feature_conversation/lib/src/register.dart"
    ],
-   "notes": "No queue dock occupant."
+   "notes": "Queue dock is registered at order20 alongside the existing todo dock; idle/queued/steering echoes use distinct placements."
   },
   {
    "id": "slot:conversation.input.left",

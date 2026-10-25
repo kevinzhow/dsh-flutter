@@ -14,7 +14,11 @@ abstract interface class SessionActions {
   Future<void> send(
     String text, {
     List<OutgoingAttachment> attachments = const [],
+    String mode = 'queue',
   });
+
+  /// Update a durable queue occurrence.
+  Future<void> updateQueue(String itemId, Map<String, Object?> action);
 
   /// Cancel the active turn (`session/cancel`).
   Future<void> cancel();
@@ -64,6 +68,7 @@ class SessionOwner {
     this.attachments,
     this.files,
     this.textDraft,
+    this.queueMutable = true,
   });
 
   /// The composer's unsent draft; null where the composer keeps none.
@@ -83,6 +88,7 @@ class SessionOwner {
   final Session session;
   final ConversationBinding conversation;
   final SessionActions actions;
+  final bool queueMutable;
 
   /// Reads the session workspace root (known once the session list carries it).
   final String? Function()? cwdReader;

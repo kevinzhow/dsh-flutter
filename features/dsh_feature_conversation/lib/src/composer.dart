@@ -13,12 +13,13 @@ import 'package:flutter/widgets.dart';
 
 import 'attachment_text.dart';
 import 'composer_text.dart';
+import 'submission_policy.dart';
 import 'shell.dart' show ConversationRegion;
 
 /// The default composer (dsh `ui-conversation` `InputBar`, phone subset): a
 /// growing text field, a send button, and a stop button while a turn runs.
-/// Sending while a turn runs queues the message behind it (dsh's default
-/// `queue` mode). A takeover occupying the `conversation.composer` chain
+/// Busy Enter follows the Host's queue/steer preference; accelerated Enter
+/// uses the opposite intent. A takeover occupying the `conversation.composer` chain
 /// (approval, a question) replaces this widget while it is pending.
 class DefaultComposer extends StatefulWidget {
   const DefaultComposer({
@@ -28,9 +29,11 @@ class DefaultComposer extends StatefulWidget {
     this.slots,
     this.placeholder,
     this.hero = false,
+    this.preferences,
   });
 
   final SessionOwner owner;
+  final ConversationPreferences? preferences;
   final DshI18n i18n;
 
   /// The field's hint; the session default when null (the hero says what the
@@ -237,6 +240,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
   final OverlayPortalController _portal = OverlayPortalController();
   final GlobalKey _anchor = GlobalKey();
   StreamSubscription<SessionSnapshot>? _sub;
+  StreamSubscription<String>? _preferenceSub;
   StreamSubscription<DraftSnapshot>? _draftSub;
   StreamSubscription<List<LocalFile>>? _dropSub;
   StreamSubscription<InputSnapshot>? _inputSub;
@@ -254,6 +258,9 @@ class _DefaultComposerState extends State<DefaultComposer> {
     _input =
         widget.owner.input ?? ComposerInput(sessionId: widget.owner.sessionId);
     _text = ComposerTextController(_input, onOpenChip: _openChip);
+    _preferenceSub = widget.preferences?.busyEnter.changes.listen((_) {
+      if (mounted) setState(() {});
+    });
     _sub = widget.owner.session.snapshot.changes.listen((_) {
       if (mounted) setState(() {});
     });
@@ -291,6 +298,7 @@ class _DefaultComposerState extends State<DefaultComposer> {
       off();
     }
     unawaited(_sub?.cancel());
+    unawaited(_preferenceSub?.cancel());
     unawaited(_draftSub?.cancel());
     unawaited(_dropSub?.cancel());
     unawaited(_inputSub?.cancel());
@@ -332,8 +340,28 @@ class _DefaultComposerState extends State<DefaultComposer> {
       },
   ];
 
-  Future<void> _send() async {
-    if (!_canSend) return;
+  Future<void> _send({bool accelerated = false}) async {
+    if (!_canSend) {
+      if (accelerated &&
+          !_sending &&
+          widget.owner.queueMutable &&
+          widget.owner.session.snapshot.value.running &&
+          _input.clipboardText.trim().isEmpty &&
+          (_drafts?.value.isEmpty ?? true) &&
+          _input.snapshot.phase == InputPhase.plain &&
+          !(_input.triggers?.menu.value.open ?? false)) {
+        await _steerQueue();
+      }
+      return;
+    }
+    // Capture intent before command arbitration/upload work can change the
+    // running bit or the user's shared preference.
+    final mode = resolveSubmitMode(
+      widget.preferences?.busyEnter.value ?? 'queue',
+      widget.owner.session.snapshot.value.running,
+      accelerated: accelerated,
+      steeringAvailable: widget.owner.queueMutable,
+    );
     setState(() {
       _sending = true;
       _error = null;
@@ -352,7 +380,11 @@ class _DefaultComposerState extends State<DefaultComposer> {
         ),
         send: (text) async {
           final attachments = _drafts?.freeze() ?? const <OutgoingAttachment>[];
-          await widget.owner.actions.send(text, attachments: attachments);
+          await widget.owner.actions.send(
+            text,
+            attachments: attachments,
+            mode: mode,
+          );
         },
       );
       if (!mounted) return;
@@ -422,36 +454,67 @@ class _DefaultComposerState extends State<DefaultComposer> {
   /// menu every key stays the text field's.
   KeyEventResult _onKey(FocusNode node, KeyEvent event) {
     if (event is KeyUpEvent) return KeyEventResult.ignored;
-    final triggers = _input.triggers;
-    if (triggers == null) return KeyEventResult.ignored;
+    final composing =
+        _text.value.composing.isValid && !_text.value.composing.isCollapsed;
+    if (composing) return KeyEventResult.ignored;
     final k = event.logicalKey;
     final kb = HardwareKeyboard.instance;
-    final ArbitrateKey? key;
-    if (k == LogicalKeyboardKey.arrowUp) {
-      key = ArbitrateKey.up;
-    } else if (k == LogicalKeyboardKey.arrowDown) {
-      key = ArbitrateKey.down;
-    } else if (k == LogicalKeyboardKey.escape) {
-      key = ArbitrateKey.escape;
-    } else if (k == LogicalKeyboardKey.tab) {
-      key = kb.isShiftPressed ? ArbitrateKey.tabBack : ArbitrateKey.tab;
-    } else if ((k == LogicalKeyboardKey.enter ||
-            k == LogicalKeyboardKey.numpadEnter) &&
+    final enter =
+        k == LogicalKeyboardKey.enter || k == LogicalKeyboardKey.numpadEnter;
+    final plain =
         !kb.isShiftPressed &&
         !kb.isControlPressed &&
         !kb.isMetaPressed &&
-        !kb.isAltPressed) {
-      key = ArbitrateKey.enter;
-    } else {
-      key = null;
+        !kb.isAltPressed;
+    final ArbitrateKey? key = switch (k) {
+      LogicalKeyboardKey.arrowUp => ArbitrateKey.up,
+      LogicalKeyboardKey.arrowDown => ArbitrateKey.down,
+      LogicalKeyboardKey.escape => ArbitrateKey.escape,
+      LogicalKeyboardKey.tab =>
+        kb.isShiftPressed ? ArbitrateKey.tabBack : ArbitrateKey.tab,
+      _ => enter && plain ? ArbitrateKey.enter : null,
+    };
+    if (key != null &&
+        (_input.triggers?.arbitrate(key, composing: false) ??
+                ArbitrateOutcome.pass) !=
+            ArbitrateOutcome.pass) {
+      return KeyEventResult.handled;
     }
-    if (key == null) return KeyEventResult.ignored;
-    final composing =
-        _text.value.composing.isValid && !_text.value.composing.isCollapsed;
-    final outcome = triggers.arbitrate(key, composing: composing);
-    return outcome == ArbitrateOutcome.pass
-        ? KeyEventResult.ignored
-        : KeyEventResult.handled;
+    final accelerated =
+        !kb.isShiftPressed &&
+        !kb.isAltPressed &&
+        (kb.isControlPressed != kb.isMetaPressed);
+    if (!enter || (!plain && !accelerated)) return KeyEventResult.ignored;
+    if (event is KeyDownEvent) unawaited(_send(accelerated: accelerated));
+    return KeyEventResult.handled;
+  }
+
+  Future<void> _steerQueue() async {
+    final rows = inboxItems(
+      widget.owner.session.projections.get('inbox'),
+      'next-turn',
+    );
+    if (rows.isEmpty) return;
+    setState(() {
+      _sending = true;
+      _error = null;
+    });
+    try {
+      // Occurrence ids are captured once; a message added later belongs to the
+      // next gesture. Host races for already-consumed rows are benign.
+      for (final row in rows) {
+        if (!widget.owner.session.snapshot.value.running) break;
+        await widget.owner.actions.updateQueue(row.id, {'kind': 'steer'});
+      }
+    } on Object {
+      if (mounted) {
+        setState(
+          () => _error = widget.i18n.t('conversation', 'queue.steerFailed'),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
   }
 
   /// The seats of the controls row (dsh's composer tool row): the
@@ -542,34 +605,27 @@ class _DefaultComposerState extends State<DefaultComposer> {
         DshSlots.conversationInputAttachments.typed<SessionOwner, Widget>(),
         widget.owner,
       ),
-      draft: CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.enter, control: true): _send,
-          const SingleActivator(LogicalKeyboardKey.enter, meta: true): _send,
-        },
-        child: Focus(
-          onKeyEvent: _onKey,
-          child: TextField(
-            key: const ValueKey('composer-field'),
-            controller: _text,
-            focusNode: _focus,
-            enabled: !locked,
-            minLines: 1,
-            // dsh caps the draft at 14 lines.
-            maxLines: 14,
-            keyboardType: TextInputType.multiline,
-            textInputAction: TextInputAction.newline,
-            style: draft,
-            cursorColor: theme.color('--dsw-alias-state-business-primary'),
-            decoration: InputDecoration(
-              isCollapsed: true,
-              border: InputBorder.none,
-              hintText:
-                  widget.placeholder ?? _a('session.composer.placeholder'),
-              hintMaxLines: widget.hero ? 2 : 1,
-              hintStyle: draft.copyWith(
-                color: theme.color('--dsw-alias-label-caption'),
-              ),
+      draft: Focus(
+        onKeyEvent: _onKey,
+        child: TextField(
+          key: const ValueKey('composer-field'),
+          controller: _text,
+          focusNode: _focus,
+          enabled: !locked,
+          minLines: 1,
+          // dsh caps the draft at 14 lines.
+          maxLines: 14,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          style: draft,
+          cursorColor: theme.color('--dsw-alias-state-business-primary'),
+          decoration: InputDecoration(
+            isCollapsed: true,
+            border: InputBorder.none,
+            hintText: widget.placeholder ?? _a('session.composer.placeholder'),
+            hintMaxLines: widget.hero ? 2 : 1,
+            hintStyle: draft.copyWith(
+              color: theme.color('--dsw-alias-label-caption'),
             ),
           ),
         ),
@@ -595,7 +651,14 @@ class _DefaultComposerState extends State<DefaultComposer> {
           ComposerRoundButton(
             key: const ValueKey('composer-send'),
             icon: DshShellIcons.send,
-            label: widget.i18n.t('conversation', 'input.send'),
+            label: widget.i18n.t(
+              'conversation',
+              running &&
+                      _input.snapshot.phase == InputPhase.plain &&
+                      !_input.clipboardText.trimLeft().startsWith('/')
+                  ? 'input.send.${resolveSubmitMode(widget.preferences?.busyEnter.value ?? 'queue', running)}'
+                  : 'input.send',
+            ),
             onPressed: _canSend ? _send : null,
           ),
       ],

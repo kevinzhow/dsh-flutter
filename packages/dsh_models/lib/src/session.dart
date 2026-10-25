@@ -8,6 +8,7 @@ import 'assistant_stream.dart';
 import 'attachments.dart';
 import 'event_window.dart';
 import 'journal.dart';
+import 'inbox.dart';
 import 'observable.dart';
 import 'projection_store.dart';
 import 'transport.dart';
@@ -64,17 +65,21 @@ final class OutgoingFile extends OutgoingAttachment {
 }
 
 /// A local prompt echo shown before durable admission (client memory only).
+enum SubmissionPlacement { transcript, queued, steering }
+
 class PendingSubmission {
   const PendingSubmission(
     this.requestId,
     this.text,
     this.time, [
     this.attachments = const [],
+    this.placement = SubmissionPlacement.transcript,
   ]);
   final String requestId;
   final String text;
   final DateTime time;
   final List<OutgoingAttachment> attachments;
+  final SubmissionPlacement placement;
 }
 
 /// Immutable Session lifecycle and control snapshot (dsh `SessionSnapshot`).
@@ -123,6 +128,7 @@ class Session {
   }) : _addressOverride = address,
        projections = projections ?? ProjectionStore() {
     _snapshot = Observable(_build());
+    _inboxSub = this.projections.changes.listen((_) => _observeInbox());
   }
 
   final String sessionId;
@@ -166,6 +172,7 @@ class Session {
   Object? _promptError;
   String? _lastAgentError;
   List<PendingSubmission> _pending = const [];
+  StreamSubscription<Map<String, Object?>>? _inboxSub;
 
   SessionSnapshot _build() => SessionSnapshot(
     sessionId: sessionId,
@@ -301,6 +308,22 @@ class Session {
     if (_pending.isEmpty) return;
     final seen = <String>{};
     for (final e in entries) {
+      if (e.type == 'agent/inbox/spliced' && e.data is Map) {
+        final inserted = (e.data as Map)['inserted'];
+        if (inserted is List) {
+          for (final raw in inserted) {
+            final id = InboxItem.tryParse(raw)?.requestId;
+            if (id != null &&
+                _pending.any(
+                  (p) =>
+                      p.requestId == id &&
+                      p.placement == SubmissionPlacement.queued,
+                )) {
+              seen.add(id);
+            }
+          }
+        }
+      }
       if (e.type != 'user/message') continue;
       final source = (e.data as Map<String, Object?>?)?['source'];
       if (source is Map<String, Object?> && source['rpcId'] is String) {
@@ -309,6 +332,25 @@ class Session {
     }
     if (seen.isEmpty) return;
     _pending = _pending.where((p) => !seen.contains(p.requestId)).toList();
+  }
+
+  void _observeInbox() {
+    if (_pending.isEmpty) return;
+    final inbox = projections.get('inbox');
+    final admitted = {
+      for (final target in ['next-turn', 'next-step'])
+        for (final row in inboxItems(inbox, target)) ?row.requestId,
+    };
+    final next = _pending
+        .where(
+          (p) =>
+              p.placement != SubmissionPlacement.queued ||
+              !admitted.contains(p.requestId),
+        )
+        .toList();
+    if (next.length == _pending.length) return;
+    _pending = next;
+    _dirty();
   }
 
   /// Read and prepend one older message-aligned page.
@@ -348,7 +390,17 @@ class Session {
     }
     _pending = [
       ..._pending,
-      PendingSubmission(requestId, text, DateTime.now(), attachments),
+      PendingSubmission(
+        requestId,
+        text,
+        DateTime.now(),
+        attachments,
+        !_running
+            ? SubmissionPlacement.transcript
+            : mode == 'steer'
+            ? SubmissionPlacement.steering
+            : SubmissionPlacement.queued,
+      ),
     ];
     _dirty();
     try {
@@ -376,6 +428,25 @@ class Session {
       _pending = _pending.where((p) => p.requestId != requestId).toList();
       _firstPromptPendingTurn = false;
       _dirty();
+      rethrow;
+    }
+  }
+
+  /// Host owns queue occurrence validity and steering windows. Benign races
+  /// while steering a just-consumed item are no-ops, as on Web.
+  Future<void> updateQueue(String itemId, Map<String, Object?> action) async {
+    try {
+      await _transport.updateQueue({
+        'sessionId': sessionId,
+        'itemId': itemId,
+        'action': action,
+      });
+    } on RemoteException catch (e) {
+      if (action['kind'] == 'steer' &&
+          (e.code == 'session/steer-unavailable' ||
+              e.code == 'session/queue-item-not-found')) {
+        return;
+      }
       rethrow;
     }
   }
@@ -419,6 +490,7 @@ class Session {
   }
 
   Future<void> dispose() async {
+    await _inboxSub?.cancel();
     _openGeneration++;
     final journal = _journal;
     _journal = null;
