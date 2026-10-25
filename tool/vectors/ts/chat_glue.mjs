@@ -10,6 +10,9 @@
 //                    developer message, system/request prompt, assistant, tool,
 //                    turn-error, turn-max-tokens, turn-tail, command, compaction, turn-process, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
+//   ui-goal          goalCommandInputDefinition
+//   ui-user-questions questionReplyDefinition (exclusive late reply)
+//   ui-workflow-run  workflowRunDefinition (durable lifecycle)
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
 //   ui-tool          the todo history Definitions and view (`tool-todo-history`)
 // NOT registered: process groups (presentation groups are projected separately).
@@ -47,6 +50,10 @@ export async function createChatGlue(load) {
   const { planDefinition } = await load('packages/client/ui-plan/src/client/plan-definition.ts')
   const { registerTodoHistory } = await load('packages/client/ui-tool/src/client/tool/models/todo-history.ts')
 
+  const { goalCommandInputDefinition } = await load('packages/client/ui-goal/src/client/goal-command-input.ts')
+  const { questionReplyDefinition } = await load('packages/client/ui-user-questions/src/client/question-reply.ts')
+  const { workflowRunDefinition } = await load('packages/client/ui-workflow-run/src/client/workflow-definition.ts')
+
   const ctx = { effect: fn => { const dispose = fn(); return () => dispose?.() } }
   const events = new ConversationEventRegistry(ctx)
   const views = new ConversationViewRegistry(ctx)
@@ -66,6 +73,9 @@ export async function createChatGlue(load) {
   registerTurnMaxTokensConversationNode(scope)
   registerTurnTailConversationNode(scope)
   events.register(planDefinition)
+  events.register(goalCommandInputDefinition)
+  events.register(questionReplyDefinition)
+  events.register(workflowRunDefinition)
   registerTodoHistory(scope)
   registerUnknownConversationFallback(scope)
   registerChatConversationView(scope)
@@ -177,6 +187,7 @@ function dataJson(node) {
         producer: d.producer === undefined ? null : [d.producer.role, d.producer.label ?? null],
         form: d.form ?? null, waking: d.waking === true,
       }
+    case 'command-input': case 'question-reply': case 'workflow-run':
     case 'turn-process': return json(d)
     case 'assistant-step':
       return {

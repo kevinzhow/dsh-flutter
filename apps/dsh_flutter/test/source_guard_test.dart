@@ -29,6 +29,7 @@ void main() {
     '../../features/dsh_feature_sidebar_terminal/lib',
     '../../features/dsh_feature_tool/lib',
     '../../features/dsh_feature_user_questions/lib',
+    '../../features/dsh_feature_workflow_run/lib',
     '../../packages/dsh_dockkit/lib',
     '../../packages/dsh_ui/lib',
   ];

@@ -26,7 +26,7 @@ class DshStateDot extends StatefulWidget {
 }
 
 class _DshStateDotState extends State<DshStateDot>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   AnimationController? _controller;
 
   bool get _spins => widget.state == DshStateDotState.ongoing;

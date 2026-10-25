@@ -1,0 +1,660 @@
+{
+  "command-input": {
+    "bare": {
+      "data": {
+        "commandId": "goal",
+        "text": "/goal",
+        "time": 0
+      }
+    },
+    "short": {
+      "data": {
+        "commandId": "goal",
+        "text": "/goal Ship a fixture",
+        "time": 0
+      }
+    },
+    "long": {
+      "data": {
+        "commandId": "goal",
+        "text": "/goal Compare the synthetic examples and keep /goal in this plain objective.\nThen verify the resulting layout.",
+        "time": 0
+      }
+    }
+  },
+  "question-reply": {
+    "answered": {
+      "data": {
+        "callId": "ask-fixture",
+        "outcome": "answered",
+        "questions": [
+          {
+            "id": "q",
+            "question": "Which option?",
+            "header": "Choice",
+            "detail": "Pick a fixture",
+            "options": [
+              {
+                "label": "One",
+                "description": "First option"
+              },
+              {
+                "label": "Two"
+              }
+            ]
+          },
+          {
+            "id": "skip",
+            "question": "Any extras?"
+          }
+        ],
+        "answers": [
+          {
+            "id": "q",
+            "selected": [
+              "One"
+            ],
+            "custom": "Extra"
+          }
+        ],
+        "text": "Raw synthetic reply",
+        "time": 0
+      }
+    },
+    "expanded": {
+      "data": {
+        "callId": "ask-fixture",
+        "outcome": "answered",
+        "questions": [
+          {
+            "id": "q",
+            "question": "Which option?",
+            "header": "Choice",
+            "detail": "Pick a fixture",
+            "options": [
+              {
+                "label": "One",
+                "description": "First option"
+              },
+              {
+                "label": "Two"
+              }
+            ]
+          },
+          {
+            "id": "skip",
+            "question": "Any extras?"
+          }
+        ],
+        "answers": [
+          {
+            "id": "q",
+            "selected": [
+              "One"
+            ],
+            "custom": "Extra"
+          }
+        ],
+        "text": "Raw synthetic reply",
+        "time": 0
+      },
+      "open": true
+    },
+    "skipped": {
+      "data": {
+        "callId": "ask-fixture",
+        "outcome": "answered",
+        "questions": [
+          {
+            "id": "q",
+            "question": "Which option?",
+            "header": "Choice",
+            "detail": "Pick a fixture",
+            "options": [
+              {
+                "label": "One",
+                "description": "First option"
+              },
+              {
+                "label": "Two"
+              }
+            ]
+          },
+          {
+            "id": "skip",
+            "question": "Any extras?"
+          }
+        ],
+        "answers": [],
+        "text": "Raw synthetic reply",
+        "time": 0
+      }
+    },
+    "malformed": {
+      "data": {
+        "callId": "ask-fixture",
+        "outcome": "answered",
+        "questions": [],
+        "answers": [],
+        "text": "<literal>\n**plain text**",
+        "time": 0
+      },
+      "open": true
+    }
+  },
+  "context-injection": {
+    "opaque": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": null
+      }
+    },
+    "opaque-open": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Before "
+          },
+          {
+            "type": "text",
+            "text": "joined"
+          },
+          {
+            "type": "foreign",
+            "value": "kept"
+          },
+          {
+            "type": "text",
+            "text": "After"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": null
+      },
+      "open": true
+    },
+    "instructions": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "baseline": true,
+          "changes": [
+            {
+              "path": "AGENTS.md",
+              "action": "set"
+            },
+            {
+              "path": "README.md",
+              "action": "remove"
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "instructions"
+      },
+      "open": true
+    },
+    "catalog": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "update": true,
+          "entries": [
+            {
+              "name": "review",
+              "description": "Review synthetic changes"
+            },
+            {
+              "name": "test",
+              "description": "Run tests"
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "catalog"
+      },
+      "open": true
+    },
+    "catalog-invalid": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "entries": [
+            {
+              "name": "Incomplete"
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "catalog"
+      },
+      "open": true
+    },
+    "snapshot": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "sections": [
+            {
+              "name": "Runtime",
+              "text": "Synthetic state"
+            },
+            {
+              "name": "Environment",
+              "text": "Fixture only"
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "snapshot"
+      },
+      "open": true
+    },
+    "notice": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "summary": "The synthetic check completed"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "notice"
+      }
+    },
+    "notice-open": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "summary": "The synthetic check completed"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "notice"
+      },
+      "open": true
+    },
+    "relay": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "senderSessionId": "sender-fixture"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "relay"
+      },
+      "open": true
+    },
+    "recall": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture",
+          "references": [
+            {
+              "label": "Earlier fixture",
+              "retainedMessages": 3,
+              "omittedMessages": 2,
+              "truncated": true
+            }
+          ]
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic context\nSecond line"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": "recall"
+      },
+      "open": true
+    },
+    "long": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Synthetic line 0\nSynthetic line 1\nSynthetic line 2\nSynthetic line 3\nSynthetic line 4\nSynthetic line 5\nSynthetic line 6\nSynthetic line 7\nSynthetic line 8\nSynthetic line 9\nSynthetic line 10\nSynthetic line 11\nSynthetic line 12\nSynthetic line 13\nSynthetic line 14\nSynthetic line 15\nSynthetic line 16\nSynthetic line 17\nSynthetic line 18\nSynthetic line 19\nSynthetic line 20\nSynthetic line 21\nSynthetic line 22\nSynthetic line 23\nSynthetic line 24\nSynthetic line 25\nSynthetic line 26\nSynthetic line 27\nSynthetic line 28\nSynthetic line 29"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": null
+      },
+      "open": true
+    },
+    "tools": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture"
+        },
+        "content": [
+          {
+            "type": "tool-addition",
+            "toolName": "read"
+          },
+          {
+            "type": "tool-removal",
+            "toolName": "old"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": null
+      },
+      "open": true
+    },
+    "single-tool": {
+      "data": {
+        "kind": "context",
+        "seq": 1,
+        "time": 0,
+        "source": {
+          "kind": "fixture"
+        },
+        "content": [
+          {
+            "type": "tool-addition",
+            "toolName": "read"
+          }
+        ],
+        "producer": {
+          "role": "context",
+          "label": "Fixture"
+        },
+        "form": null
+      }
+    }
+  },
+  "workflow-run": {
+    "running": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "running",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "running"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "completed": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "completed",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "completed"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "failed": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "failed",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "failed"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "cancelled": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "cancelled",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "cancelled"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "interrupted": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "interrupted",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "interrupted"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "completed-open": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "completed",
+        "phases": [
+          {
+            "key": "value:4:Read",
+            "phase": "Read",
+            "members": [
+              {
+                "seq": 1,
+                "label": "Read synthetic files",
+                "childId": "child-a",
+                "status": "completed"
+              },
+              {
+                "seq": 2,
+                "label": "Compare fixture",
+                "childId": "child-b",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      "open": true
+    },
+    "empty": {
+      "data": {
+        "name": "Synthetic review",
+        "status": "running",
+        "phases": []
+      }
+    }
+  }
+}

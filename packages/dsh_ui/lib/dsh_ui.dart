@@ -67,3 +67,5 @@ export 'src/dsh_shell_chrome.dart';
 export 'src/dsh_whale_mark.dart';
 
 export 'src/dsh_disclosure_reset.dart';
+
+export 'src/dsh_json_block.dart';

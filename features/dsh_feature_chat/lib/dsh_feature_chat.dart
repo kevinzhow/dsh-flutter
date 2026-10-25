@@ -16,3 +16,6 @@ export 'src/stats_pills.dart';
 export 'src/chat_preferences.dart';
 export 'src/work_details_view.dart';
 export 'src/work_details_settings.dart';
+
+export 'src/context_view.dart';
+export 'src/command_input_view.dart';

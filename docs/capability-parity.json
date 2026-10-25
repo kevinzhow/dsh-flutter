@@ -68,7 +68,7 @@
     "features/dsh_feature_chat",
     "packages/dsh_conversation/lib/src/chat"
    ],
-   "notes": "Renders 15 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, compaction, manual-compaction, turn-process, unknown). No renderer for command-input, context, question-reply or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work.",
+   "notes": "Renders all 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, command-input, context, question-reply, compaction, manual-compaction, turn-process, workflow-run, unknown). Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work. Goal command inputs are projected separately from command results; answered late question replies exclusively own their source messages and copy the full answer. Context disclosures support instructions, catalog, snapshot, notice, relay and recall with all-or-nothing opaque fallbacks and bounded bodies. Ordinary contexts remain hidden, while tool additions/removals retain upstream visibility. Workflow runs keep durable run/member outcomes and collision-free phase identities, distinguish normal foreground closure from abandoned turns, and defer clean collapse while member focus remains inside.",
    "priority": "P2"
   },
   {
@@ -178,9 +178,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-goal",
    "description": "See, edit, pause, resume, complete and clear the session goal in a bar above the message box.",
-   "status": "missing",
-   "notes": "goals/* is not generated or called; the get_goal, create_goal and update_goal tool rows only show raw details.",
-   "priority": "P2"
+   "status": "partial",
+   "notes": "Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented.",
+   "priority": "P2",
+   "whalee": [
+    "features/dsh_feature_chat/lib/src/command_input_view.dart",
+    "packages/dsh_conversation/lib/src/chat/extended_inputs.dart"
+   ]
   },
   {
    "id": "package:ui-input-trigger",
@@ -695,7 +699,7 @@
    "whalee": [
     "features/dsh_feature_user_questions"
    ],
-   "notes": "Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code.",
+   "notes": "Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code. Settled late-reply bubbles now expand question/option/answer details with skipped-answer and raw-text fallback, keyboard activation and full clipboard text.",
    "priority": "P1"
   },
   {
@@ -705,9 +709,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-workflow-run",
    "description": "Follow a durable workflow run in the conversation, with its member agents expandable.",
-   "status": "missing",
-   "notes": "The workflow-run chat node has no renderer; the workflow tool call shows raw details only.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Durable workflow lifecycle projection, exact phase grouping, status counts and run/member disclosure are implemented. Clean completion collapses after keyboard focus leaves; abnormal/new cycles reopen. Current direct-child/session identity facts gate navigation. Visual alignment is still being verified and remains partial.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_workflow_run",
+    "packages/dsh_conversation/lib/src/chat/workflow_run.dart"
+   ]
   },
   {
    "id": "package:ui-workspace",
@@ -2565,13 +2573,15 @@
    "platform": "both",
    "dshSource": "packages/client/ui-chat/src/client/contract/slots.ts",
    "description": "Final Chat node renderer, keyed by `ChatNodeKind`.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
     "packages/dsh_slots/lib/src/declarations.dart",
     "features/dsh_feature_chat/lib/src/register.dart",
-    "features/dsh_feature_tool/lib/src/register.dart"
+    "features/dsh_feature_tool/lib/src/register.dart",
+    "features/dsh_feature_user_questions/lib/src/register.dart",
+    "features/dsh_feature_workflow_run/lib/src/register.dart"
    ],
-   "notes": "Fourteen of the 19 node kinds have an occupant; missing: command-input, context, question-reply, turn-process, workflow-run."
+   "notes": "All 19 declared chat node kinds have keyed occupants. Registrations preserve business-owned specializations and upstream visibility; full feature/visual parity is tracked in the package rows."
   },
   {
    "id": "slot:conversation.chat.reasoning.body",

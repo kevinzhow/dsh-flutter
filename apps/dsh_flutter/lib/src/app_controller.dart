@@ -24,6 +24,7 @@ import 'package:dsh_feature_settings/dsh_feature_settings.dart';
 import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart';
 import 'package:dsh_feature_sidebar_terminal/dsh_feature_sidebar_terminal.dart';
 import 'package:dsh_feature_subagent/dsh_feature_subagent.dart';
+import 'package:dsh_feature_workflow_run/dsh_feature_workflow_run.dart';
 import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
@@ -258,6 +259,11 @@ class AppController extends ChangeNotifier {
       slots,
       i18n: () => i18n,
       services: _SubagentBridge(this),
+    );
+    registerWorkflowRunFeature(
+      slots,
+      i18n: () => i18n,
+      services: _WorkflowBridge(this),
     );
     registerApprovalFeature(slots, tracker: approvals, i18n: () => i18n);
     registerUserQuestionsFeature(slots, tracker: questions, i18n: () => i18n);
@@ -1461,5 +1467,45 @@ class _AppSessionPort implements InputSessionPort {
     final controller = app._sessions[sessionId];
     if (controller == null) return;
     app.sidebar.openFile(controller.owner, path);
+  }
+}
+
+/// Resolve workflow navigation from current direct-child list facts, never from
+/// durable member labels alone (a historical or foreign child is not a link).
+class _WorkflowBridge implements WorkflowRunServices {
+  _WorkflowBridge(this.app);
+  final AppController app;
+  @override
+  Stream<Object?> get changes => app._listChanges.stream;
+  String? mode(SessionOwner parent, String childId) {
+    final manager = app.manager;
+    final child = manager?.summaryOf(childId);
+    if (child == null ||
+        child.parentSessionId != parent.sessionId ||
+        !child.running) {
+      return null;
+    }
+    final identity = manager!.projectionValues(childId)['subagent'];
+    if (identity is! Map || identity['mode'] is! String) return null;
+    final mode = identity['mode'] as String;
+    return const {'one-shot', 'continuable'}.contains(mode) ? mode : null;
+  }
+
+  @override
+  bool canOpen(SessionOwner parent, String childId) =>
+      mode(parent, childId) != null;
+  @override
+  void open(SessionOwner parent, WorkflowRunMember member) {
+    final childMode = mode(parent, member.childId);
+    if (childMode == null) return;
+    app._subagents.open(
+      parent,
+      SubagentEntry(
+        id: member.childId,
+        mode: childMode,
+        createdAt: 0,
+        label: member.label,
+      ),
+    );
   }
 }

@@ -43,6 +43,7 @@ REAL_CLASSES = [
     'ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)',
     'inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, '
     'turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)',
+    'goalCommandInputDefinition (ui-goal), questionReplyDefinition (ui-user-questions), workflowRunDefinition (ui-workflow-run)',
 ]
 GLUE = [
     'fake SessionRemotes: session.follow yields the fixture frames per connection generation, '
@@ -50,7 +51,7 @@ GLUE = [
     '$stream builds the real RemoteStream over a fake connection handle',
     'step driver, settle loop and snapshot encoder',
     'conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); '
-    'turn-process and process groups are not registered',
+    'presentation process groups are not registered',
     'module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install',
 ]
 

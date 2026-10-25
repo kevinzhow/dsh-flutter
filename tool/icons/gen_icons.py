@@ -24,6 +24,7 @@ ICONS = {
     'IconApiOutlineRegular': 'api',
     'IconEditOutlineRegular': 'edit',
     'IconBrowseOutlineRegular': 'browse',
+    'IconContextInjectionOutlineRegular': 'contextInjection',
     'IconSearchOutlineRegular': 'search',
     'IconGlobeOutlineRegular': 'globe',
     'IconChecklistOutlineRegular': 'checklist',
