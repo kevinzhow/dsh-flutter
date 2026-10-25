@@ -1,0 +1,121 @@
+{
+  "synthetic": true,
+  "api": 36,
+  "actualTapsAndKeyboard": true,
+  "fixtureActionsOnly": true,
+  "independentSecretAccessibility": true,
+  "hiddenSemanticsExcludeRaw": true,
+  "realRoutingTests": "apps/dsh_flutter/test/deliverables_flow_test.dart",
+  "scenes": [
+    {
+      "scene": "text-masked",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "text-revealed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "text-remasked",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "reference-preview",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "command-launcher",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "command-picked",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-dismissed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "files-collapsed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "all-changes",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "changes-collapsed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "changes-hidden",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "changes-restored",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "failure-armed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "native-open-refused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "native-open-retried",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "delivery-preview",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-selected",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-split",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-wrap",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "review-preview",
+      "passed": true,
+      "attempts": 1
+    }
+  ]
+}

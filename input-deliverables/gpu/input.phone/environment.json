@@ -1,0 +1,130 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "text",
+      "rect": [
+        40,
+        136,
+        320,
+        170
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "revealed",
+      "rect": [
+        40,
+        136,
+        320,
+        170
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "remasked",
+      "rect": [
+        32,
+        524,
+        358,
+        819
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "remasked",
+      "rect": [
+        32,
+        729,
+        358,
+        819
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "files",
+      "rect": [
+        20,
+        120,
+        370,
+        330
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "changes-restored",
+      "rect": [
+        20,
+        285,
+        370,
+        365
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "review",
+      "rect": [
+        0,
+        110,
+        390,
+        270
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "review-split",
+      "rect": [
+        0,
+        110,
+        390,
+        280
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "review-wrap",
+      "rect": [
+        0,
+        90,
+        390,
+        290
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "en",
+  "implementationHead": "30c64cff8a25e5f9f6f394095ba74b7d534377da"
+}

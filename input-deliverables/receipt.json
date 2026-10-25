@@ -1,0 +1,116 @@
+{
+  "implementationHead": "30c64cff8a25e5f9f6f394095ba74b7d534377da",
+  "tree": "30f1d69b9115c3dae9b774a845412d491452a659",
+  "syntheticOnly": true,
+  "actualUpstreamBehaviorCases": {
+    "userText": 255,
+    "deliverables": 116
+  },
+  "fullLocalPreflight": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 0.5
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 7.4
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 1.9
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.2
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 3.0
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 169.9
+    }
+  },
+  "fullPreflightSourceTree": "56aa2ea725fa3f698f94f948acc322a315ef9f63",
+  "finalDelta": "Review toggle accessibility label/state merge and test cleanups; targeted regression tests and final analysis passed. Exact final-head CI is recorded in the PR.",
+  "linuxAndAndroidNormalAndFixtureBuilds": "passed",
+  "buildArtifacts": [
+    {
+      "name": "android-normal.apk",
+      "sha256": "6d5f4a3d70ccadaf4ccb79177073503cd356ec17cc134619fa7b40b3bf418115"
+    },
+    {
+      "name": "android-fixture.apk",
+      "sha256": "29e4ea51054232a6463707edc8ac66e78567ca105c79417993bc14d57defba17"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "89ee2cc9d6940a25fc652aa0143255358510274175e86e39566742476214acef"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "5ec9e6771c38af90be885fa258e130613d6dc9b013916aa21b7305e48b1c2509"
+    }
+  ],
+  "nativeGpu": [
+    {
+      "case": "input.desktop",
+      "assertions": 9,
+      "allPassed": true
+    },
+    {
+      "case": "input.phone",
+      "assertions": 9,
+      "allPassed": true
+    }
+  ],
+  "androidScenes": 22,
+  "visual": {
+    "counts": {
+      "entries": 168,
+      "compared": 168,
+      "same": 0,
+      "strict": 0,
+      "pass": 8,
+      "geometryPass": 10,
+      "fail": 158,
+      "uncovered": 0,
+      "missing": 0
+    },
+    "meanNonTextPct": 85.542,
+    "dimensionsEqual": 104
+  },
+  "cleanup": {
+    "ownedWestonAndAppProcessesStopped": true,
+    "normalAndroidAppRestoredAndStopped": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbRetained": true
+  }
+}
