@@ -110,6 +110,27 @@ class SessionOwner {
   String get sessionId => session.sessionId;
 }
 
+/// Input-owned locked state of the plan control.
+class PlanInputOwner {
+  const PlanInputOwner(this.session, {this.locked = false});
+  final SessionOwner session;
+  final bool locked;
+}
+
+/// Data needed to open the exact plan under review, without coupling the
+/// question domain's pending-answer lifecycle to a preview implementation.
+class PlanReviewOwner {
+  const PlanReviewOwner({
+    required this.session,
+    required this.requestKey,
+    required this.markdown,
+    this.callId,
+  });
+  final SessionOwner session;
+  final String requestKey, markdown;
+  final String? callId;
+}
+
 /// Owner props of the keyed `conversation.chat.node` slot: one chat node to
 /// render, keyed by its kind (`user`, `assistant-step`, `tool-call`, ...).
 class ChatNodeOwner {

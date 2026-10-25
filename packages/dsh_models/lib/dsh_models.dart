@@ -10,6 +10,7 @@ export 'src/client_sessions.dart';
 export 'src/event_window.dart';
 export 'src/journal.dart';
 export 'src/inbox.dart';
+export 'src/history_read.dart';
 export 'src/observable.dart';
 export 'src/projection_store.dart';
 export 'src/session.dart';

@@ -180,6 +180,16 @@ abstract final class DshSlots {
     SlotCardinality.single,
     SlotScope.session,
   );
+  static const conversationInputPlan = Slot<Object?, Object?>(
+    'conversation.input.plan',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const conversationPlanReviewActions = Slot<Object?, Object?>(
+    'conversation.plan-review.actions',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
   static const conversationInputModel = Slot<Object?, Object?>(
     'conversation.input.model',
     SlotCardinality.single,
@@ -249,6 +259,8 @@ abstract final class DshSlots {
     settingsGeneralItem,
     pluginsItem,
     conversationInputPermission,
+    conversationInputPlan,
+    conversationPlanReviewActions,
     conversationInputModel,
     conversationInputOverlay,
     conversationHeroWorkspace,
