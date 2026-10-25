@@ -1,0 +1,376 @@
+{
+ "cases": [
+  {
+   "id": "work-details.desktop-light",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 1280,
+   "height": 720,
+   "theme": "light",
+   "locale": "en",
+   "app": [
+    {
+     "capture": "closed"
+    },
+    {
+     "click": [
+      300,
+      326
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       227,
+       360,
+       900,
+       550
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "process-open"
+    },
+    {
+     "click": [
+      300,
+      369
+     ]
+    },
+    {
+     "expect": {
+      "reference": "process-open",
+      "rect": [
+       227,
+       385,
+       900,
+       416
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "group-open"
+    },
+    {
+     "click": [
+      300,
+      400
+     ]
+    },
+    {
+     "expect": {
+      "reference": "group-open",
+      "rect": [
+       227,
+       422,
+       900,
+       490
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "reasoning-open"
+    },
+    {
+     "click": [
+      1210,
+      38
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       1060,
+       65,
+       1264,
+       204
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "mode-menu"
+    },
+    {
+     "click": [
+      1160,
+      183
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       1120,
+       22,
+       1264,
+       54
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "verbose"
+    },
+    {
+     "click": [
+      1210,
+      38
+     ]
+    },
+    {
+     "click": [
+      1160,
+      81
+     ]
+    },
+    {
+     "capture": "compact-open"
+    },
+    {
+     "click": [
+      300,
+      326
+     ]
+    },
+    {
+     "capture": "compact-closed-before-check"
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       0,
+       210,
+       1280,
+       720
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "compact-closed"
+    },
+    {
+     "click": [
+      1210,
+      38
+     ]
+    },
+    {
+     "click": [
+      1160,
+      149
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       1120,
+       22,
+       1264,
+       54
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "detailed-closed"
+    }
+   ]
+  },
+  {
+   "id": "work-details.phone-dark-zh",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 390,
+   "height": 844,
+   "theme": "dark",
+   "locale": "zh",
+   "app": [
+    {
+     "capture": "closed"
+    },
+    {
+     "click": [
+      100,
+      326
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       32,
+       360,
+       350,
+       550
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "process-open"
+    },
+    {
+     "click": [
+      100,
+      369
+     ]
+    },
+    {
+     "expect": {
+      "reference": "process-open",
+      "rect": [
+       32,
+       385,
+       350,
+       416
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "group-open"
+    },
+    {
+     "click": [
+      100,
+      400
+     ]
+    },
+    {
+     "expect": {
+      "reference": "group-open",
+      "rect": [
+       32,
+       422,
+       350,
+       490
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "reasoning-open"
+    },
+    {
+     "click": [
+      320,
+      38
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       170,
+       65,
+       374,
+       204
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "mode-menu"
+    },
+    {
+     "click": [
+      270,
+      183
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       230,
+       22,
+       374,
+       54
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "verbose"
+    },
+    {
+     "click": [
+      320,
+      38
+     ]
+    },
+    {
+     "click": [
+      270,
+      81
+     ]
+    },
+    {
+     "capture": "compact-open"
+    },
+    {
+     "click": [
+      100,
+      326
+     ]
+    },
+    {
+     "capture": "compact-closed-before-check"
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       0,
+       210,
+       390,
+       844
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "compact-closed"
+    },
+    {
+     "click": [
+      320,
+      38
+     ]
+    },
+    {
+     "click": [
+      270,
+      149
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       230,
+       22,
+       374,
+       54
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "detailed-closed"
+    }
+   ]
+  }
+ ]
+}

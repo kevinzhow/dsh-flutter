@@ -881,12 +881,12 @@
    "MutableSessionEventSource (session-controller/client/contract/events.ts)",
    "expandAssistantStream (llm/assistant-stream.ts)",
    "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
-   "inbox, message, developer-message, system-message, assistant, tool, turn-error, turn-max-tokens, turn-tail Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
+   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
   ],
   "glue": [
    "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
    "step driver, settle loop and snapshot encoder",
-   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process, request-prompt, command, compaction, model-retry and process groups are not registered",
+   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process and process groups are not registered",
    "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
   ]
  },
@@ -3822,7 +3822,28 @@
   },
   {
    "step": 4,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "plans": [],
    "todoHistory": [],
    "timeline": [
@@ -3848,12 +3869,33 @@
      "steps": []
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 5,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "plans": [],
    "todoHistory": [],
    "timeline": [
@@ -3879,12 +3921,33 @@
      "steps": []
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 6,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "plans": [],
    "todoHistory": [],
    "timeline": [
@@ -3917,7 +3980,7 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
@@ -3980,6 +4043,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -4014,7 +4097,7 @@
      ]
     }
    ],
-   "nodeCount": 1,
+   "nodeCount": 2,
    "openTurn": 1
   },
   {
@@ -4079,6 +4162,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4165,7 +4268,7 @@
      ]
     }
    ],
-   "nodeCount": 2,
+   "nodeCount": 3,
    "openTurn": 1
   },
   {
@@ -4230,6 +4333,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4316,7 +4439,7 @@
      ]
     }
    ],
-   "nodeCount": 2,
+   "nodeCount": 3,
    "openTurn": 1
   },
   {
@@ -4381,6 +4504,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4483,7 +4626,7 @@
      ]
     }
    ],
-   "nodeCount": 3,
+   "nodeCount": 4,
    "openTurn": null
   },
   {
@@ -4548,6 +4691,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4650,7 +4813,7 @@
      ]
     }
    ],
-   "nodeCount": 3,
+   "nodeCount": 4,
    "openTurn": null
   },
   {
@@ -4715,6 +4878,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4783,6 +4966,26 @@
       "closingSeq": 7,
       "branchUnavailable": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 10.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 11,
+      "processStartSeq": 11,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -4824,7 +5027,7 @@
      "steps": []
     }
    ],
-   "nodeCount": 3,
+   "nodeCount": 5,
    "openTurn": 2
   },
   {
@@ -4889,6 +5092,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -4957,6 +5180,26 @@
       "closingSeq": 7,
       "branchUnavailable": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 10.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 11,
+      "processStartSeq": 11,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -4998,7 +5241,7 @@
      "steps": []
     }
    ],
-   "nodeCount": 3,
+   "nodeCount": 5,
    "openTurn": 2
   },
   {
@@ -5063,6 +5306,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -5131,6 +5394,26 @@
       "closingSeq": 7,
       "branchUnavailable": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 10.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 11,
+      "processStartSeq": 11,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -5179,7 +5462,7 @@
      ]
     }
    ],
-   "nodeCount": 3,
+   "nodeCount": 5,
    "openTurn": 2
   },
   {
@@ -5244,6 +5527,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -5344,6 +5647,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 10.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 11,
+      "processStartSeq": 11,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -5392,7 +5715,7 @@
      ]
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 6,
    "openTurn": 2
   },
   {
@@ -5457,6 +5780,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -5556,6 +5899,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
      }
     },
     {
@@ -5626,7 +5989,7 @@
      ]
     }
    ],
-   "nodeCount": 5,
+   "nodeCount": 7,
    "openTurn": 2
   },
   {
@@ -5688,6 +6051,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -5790,6 +6173,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
      }
     },
     {
@@ -5882,7 +6285,7 @@
      ]
     }
    ],
-   "nodeCount": 5,
+   "nodeCount": 7,
    "openTurn": 2
   },
   {
@@ -5944,6 +6347,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -6046,6 +6469,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -6159,7 +6602,7 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 2
   },
   {
@@ -6224,6 +6667,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -6323,6 +6786,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -6445,7 +6928,7 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 2
   },
   {
@@ -6510,6 +6993,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -6609,6 +7112,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -6731,7 +7254,7 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 2
   },
   {
@@ -6796,6 +7319,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -6895,6 +7438,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -7033,7 +7596,7 @@
      ]
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 9,
    "openTurn": null
   },
   {
@@ -7098,6 +7661,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -7197,6 +7780,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -7335,7 +7938,7 @@
      ]
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 9,
    "openTurn": null
   },
   {
@@ -7400,6 +8003,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -7502,6 +8125,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "img-1",
      "anchorSeq": 15,
@@ -7589,6 +8232,26 @@
       "closingSeq": null,
       "branchUnavailable": true
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7644,7 +8307,7 @@
      "steps": []
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 10,
    "openTurn": 3
   },
   {
@@ -7709,6 +8372,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -7811,6 +8494,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "img-1",
      "anchorSeq": 15,
@@ -7898,6 +8601,26 @@
       "closingSeq": null,
       "branchUnavailable": true
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7953,7 +8676,7 @@
      "steps": []
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 10,
    "openTurn": 3
   },
   {
@@ -8018,6 +8741,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -8120,6 +8863,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "img-1",
      "anchorSeq": 15,
@@ -8207,6 +8970,26 @@
       "closingSeq": null,
       "branchUnavailable": true
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -8269,7 +9052,7 @@
      ]
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 10,
    "openTurn": 3
   },
   {
@@ -8334,6 +9117,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -8433,6 +9236,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -8551,6 +9374,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -8613,7 +9456,7 @@
      ]
     }
    ],
-   "nodeCount": 8,
+   "nodeCount": 11,
    "openTurn": 3
   },
   {
@@ -8678,6 +9521,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -8777,6 +9640,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -8895,6 +9778,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -8957,7 +9860,7 @@
      ]
     }
    ],
-   "nodeCount": 8,
+   "nodeCount": 11,
    "openTurn": 3
   },
   {
@@ -9022,6 +9925,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -9121,6 +10044,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -9239,6 +10182,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -9301,7 +10264,7 @@
      ]
     }
    ],
-   "nodeCount": 8,
+   "nodeCount": 11,
    "openTurn": 3
   },
   {
@@ -9366,6 +10329,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -9465,6 +10448,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -9583,6 +10586,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -9651,7 +10674,7 @@
      ]
     }
    ],
-   "nodeCount": 8,
+   "nodeCount": 11,
    "openTurn": 3
   },
   {
@@ -9716,6 +10739,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -9815,6 +10858,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -9933,6 +10996,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -10001,7 +11084,7 @@
      ]
     }
    ],
-   "nodeCount": 8,
+   "nodeCount": 11,
    "openTurn": 3
   },
   {
@@ -10066,6 +11149,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "1:1",
      "anchorSeq": 7,
@@ -10165,6 +11268,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -10321,6 +11444,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     }
    ],
@@ -10390,7 +11533,7 @@
      ]
     }
    ],
-   "nodeCount": 9,
+   "nodeCount": 12,
    "openTurn": 3
   },
   {
@@ -10452,6 +11595,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -10554,6 +11717,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -10710,6 +11893,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     }
    ],
@@ -10779,7 +11982,7 @@
      ]
     }
    ],
-   "nodeCount": 9,
+   "nodeCount": 12,
    "openTurn": 3
   },
   {
@@ -10841,6 +12044,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 6.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 7,
+      "processStartSeq": 3,
+      "answerAnchorSeq": 7,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -10943,6 +12166,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 14.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 15,
+      "processStartSeq": 15,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -11099,6 +12342,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "3",
+     "anchorSeq": 21.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 3,
+     "step": null,
+     "data": {
+      "turn": 3,
+      "controlAnchorSeq": 22,
+      "processStartSeq": 22,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -11184,7 +12447,7 @@
      ]
     }
    ],
-   "nodeCount": 10,
+   "nodeCount": 13,
    "openTurn": null
   }
  ]

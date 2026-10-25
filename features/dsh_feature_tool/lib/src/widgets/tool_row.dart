@@ -89,10 +89,20 @@ class ToolRow extends StatefulWidget {
 }
 
 class _ToolRowState extends State<ToolRow> {
+  int? _resetVersion;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final next = DshDisclosureReset.of(context);
+    if (_resetVersion != null && _resetVersion != next) _expanded = false;
+    _resetVersion = next;
+  }
+
   late bool _expanded = _restore() ?? widget.initiallyExpanded;
 
-  Object? get _identifier =>
-      widget.stateId == null ? null : 'tool-open-${widget.stateId}';
+  Object? get _identifier => widget.stateId == null
+      ? null
+      : ('tool-open-${widget.stateId}', _resetVersion ?? 0);
 
   bool? _restore() {
     final id = _identifier;
@@ -102,6 +112,7 @@ class _ToolRowState extends State<ToolRow> {
   }
 
   void _toggle() {
+    DshDisclosureChange(!_expanded, context).dispatch(context);
     setState(() => _expanded = !_expanded);
     final id = _identifier;
     if (id != null) {

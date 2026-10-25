@@ -7,7 +7,8 @@ import 'package:flutter/widgets.dart';
 
 /// A row of the timeline: the key a reader's position is remembered by.
 class RowKey extends ValueKey<String> {
-  const RowKey(super.value);
+  const RowKey(super.value, {this.pagingAnchor = true});
+  final bool pagingAnchor;
 }
 
 /// The reader's place in a session: the topmost visible row and how far below
@@ -92,6 +93,7 @@ ReadingAnchor? captureReadingAnchor(BuildContext context) {
   void visit(Element element) {
     final key = element.widget.key;
     if (key is RowKey) {
+      if (!key.pagingAnchor) return;
       final row = element.renderObject;
       final Object? clip = row == null
           ? null

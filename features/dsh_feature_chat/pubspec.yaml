@@ -6,6 +6,7 @@ environment:
   sdk: ^3.13.5
 resolution: workspace
 dependencies:
+  characters: ^1.4.1
   flutter:
     sdk: flutter
   dsh_client: ^0.0.1

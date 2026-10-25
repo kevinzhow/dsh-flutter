@@ -20,6 +20,7 @@ const fixtures = [
   'test/fixtures/system_prompt_vector.json',
   'test/fixtures/model_retry_vector.json',
   'test/fixtures/compaction_command_vector.json',
+  'test/fixtures/turn_process_vector.json',
 ];
 
 void main() {

@@ -216,7 +216,10 @@ void main() {
       final b = bind(source);
       // The result alone still builds a settled row (terminal events carry
       // fallback state); the step boundary alone builds nothing.
-      expect(b.chat.value.visibleNodes.map((n) => n.kind), ['tool-call']);
+      expect(b.chat.value.visibleNodes.map((n) => n.kind), [
+        'turn-process',
+        'tool-call',
+      ]);
       source.prepend([
         ev(4, 'tool/call', {
           'turn': 3,
@@ -226,7 +229,11 @@ void main() {
           'arguments': '{}',
         }),
       ], true);
-      final tool = b.chat.value.visibleNodes.single.data! as ToolData;
+      final tool =
+          b.chat.value.visibleNodes
+                  .singleWhere((n) => n.kind == 'tool-call')
+                  .data!
+              as ToolData;
       expect((tool.root as ToolResult).name, 'bash');
     });
 
@@ -248,7 +255,9 @@ void main() {
             surface: {'op': 'replace', 'startSeq': 1, 'endSeq': 1},
           ),
         ], false);
-      expect(bind(source).chat.value.visibleNodes, isEmpty);
+      expect(bind(source).chat.value.visibleNodes.map((n) => n.kind), [
+        'turn-process',
+      ]);
     });
 
     test('non-user context messages are hidden rows', () {
@@ -266,8 +275,11 @@ void main() {
           }, surface: 'append'),
         ], false);
       final b = bind(source);
-      expect(b.chat.value.visibleNodes, isEmpty);
-      expect(b.chat.value.nodes.values.single.kind, 'context');
+      expect(b.chat.value.visibleNodes.map((n) => n.kind), ['turn-process']);
+      expect(
+        b.chat.value.nodes.values.where((n) => n.kind == 'context'),
+        hasLength(1),
+      );
     });
 
     test('the open turn follows turn/start and turn/end', () {

@@ -7,6 +7,7 @@ import 'commands.dart';
 import 'nodes.dart';
 import 'retry.dart';
 import 'system_prompt.dart';
+import 'turn_process.dart';
 
 /// The immutable chat target snapshot (dsh `ChatSnapshot`, without the legacy
 /// slice, navigation rail and process-group presentation, which are deferred).
@@ -62,6 +63,9 @@ class ChatSnapshot {
 /// dsh `isVisibleChatNode`: system prompts and ordinary context are not rows.
 bool isVisibleChatNode(ViewNode n) {
   if (!n.visible || n.kind == 'system-prompt') return false;
+  if (n.kind == 'command' && (n.data! as CommandData).name == 'permission') {
+    return false;
+  }
   if (n.kind == 'context') {
     final data = n.data as MessageData;
     return data.content.any(
@@ -74,12 +78,57 @@ bool isVisibleChatNode(ViewNode n) {
 }
 
 /// Order visible chat nodes by anchor, then by key (dsh
-/// `orderedVisibleChatNodes` without turn-process controls).
+/// `orderedVisibleChatNodes`, including controls after the opening inputs).
 List<ViewNode> orderedVisibleChatNodes(Iterable<ViewNode> nodes) {
   final visible = nodes.where(isVisibleChatNode).toList();
+  final controls = <int, ViewNode>{
+    for (final n in visible)
+      if (n.data is TurnProcessData) (n.data! as TurnProcessData).turn: n,
+  };
+  final opening = <int, num>{}, earliest = <int, num>{};
+  for (final n in visible) {
+    final turn = locationTurn(n.location), owner = owningTurn(n.location);
+    if (turn == null) continue;
+    final control = controls[turn]?.data as TurnProcessData?;
+    if (const {'exchange', 'input'}.contains(n.groupTree) &&
+        control != null &&
+        (control.controlAnchorSeq == owner?.start?.seq ||
+            n.anchorSeq < control.controlAnchorSeq)) {
+      if (opening[turn] == null || n.anchorSeq > opening[turn]!) {
+        opening[turn] = n.anchorSeq;
+      }
+      continue;
+    }
+    if (const {'exchange', 'input', 'turn'}.contains(n.groupTree)) continue;
+    if (earliest[turn] == null || n.anchorSeq < earliest[turn]!) {
+      earliest[turn] = n.anchorSeq;
+    }
+  }
+  (num, int, num) position(ViewNode n) {
+    final turn = locationTurn(n.location),
+        input = opening[locationTurn(n.location)];
+    if (turn == null) return (n.anchorSeq, 0, n.anchorSeq);
+    if (input != null &&
+        n.anchorSeq < input &&
+        !const {'exchange', 'input', 'turn'}.contains(n.groupTree)) {
+      return (input, 2, n.anchorSeq);
+    }
+    if (controls[turn]?.key == n.key) {
+      return input == null
+          ? (earliest[turn] ?? n.anchorSeq, -1, n.anchorSeq)
+          : (input, 1, n.anchorSeq);
+    }
+    return (n.anchorSeq, 0, n.anchorSeq);
+  }
+
   visible.sort((a, b) {
-    final byAnchor = a.anchorSeq.compareTo(b.anchorSeq);
+    final x = position(a), y = position(b);
+    final byAnchor = x.$1.compareTo(y.$1);
     if (byAnchor != 0) return byAnchor;
+    final rank = x.$2.compareTo(y.$2);
+    if (rank != 0) return rank;
+    final original = x.$3.compareTo(y.$3);
+    if (original != 0) return original;
     return localeCompare(a.key, b.key);
   });
   return visible;
@@ -174,6 +223,7 @@ defaultChatRegistries() {
     ..register(const SystemMessageDefinition())
     ..register(const RequestPromptDefinition())
     ..register(const AssistantDefinition())
+    ..register(const TurnProcessDefinition())
     ..register(const ToolDefinition())
     ..register(const CommandDefinition())
     ..register(const CompactionDefinition())

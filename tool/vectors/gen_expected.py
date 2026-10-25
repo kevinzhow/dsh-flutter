@@ -42,7 +42,7 @@ REAL_CLASSES = [
     'expandAssistantStream (llm/assistant-stream.ts)',
     'ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)',
     'inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, '
-    'turn-tail, model-retry, command and compaction Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)',
+    'turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)',
 ]
 GLUE = [
     'fake SessionRemotes: session.follow yields the fixture frames per connection generation, '

@@ -6,6 +6,9 @@ import 'package:flutter/widgets.dart';
 
 import 'chat_nodes.dart';
 import 'chat_view.dart';
+import 'chat_preferences.dart';
+import 'work_details_view.dart';
+import 'work_details_settings.dart';
 import 'command_view.dart';
 import 'compaction_view.dart';
 import 'model_retry_view.dart';
@@ -26,11 +29,13 @@ final Slot<ChatNodeOwner, Widget> chatNodeSlot = DshSlots.conversationChatNode
 ///
 /// [host] is what a tapped link may open (the browser for http(s), the
 /// workspace file preview for local paths); without it links stay inert.
-void registerChatFeature(
+ChatPreferences registerChatFeature(
   SlotRegistry slots, {
   required DshI18n Function() i18n,
   ToolHostActions? host,
+  ChatPreferences? preferences,
 }) {
+  final prefs = preferences ?? ChatPreferences();
   // Where each session's reader stopped, for as long as the app runs.
   final memory = ChatReadingMemory();
   slots.register<SessionOwner, Widget>(
@@ -41,12 +46,20 @@ void registerChatFeature(
       i18n: i18n(),
       memory: memory,
       nodeSlot: chatNodeSlot,
+      preferences: prefs,
       turnTailSlot: DshSlots.conversationChatTurnTail
           .typed<TurnTailOwner, Widget?>(),
     ),
     id: 'chat',
     order: 0,
     label: () => i18n().t('chat', 'view.chat'),
+  );
+
+  slots.register<SettingsOwner, Widget>(
+    DshSlots.settingsGeneralItem.typed<SettingsOwner, Widget>(),
+    (_) => WorkDetailsSettings(preferences: prefs, i18n: i18n()),
+    id: 'transcript-view',
+    order: 30,
   );
 
   // The statistics pills under the composer (dsh `StatsPills`).
@@ -86,6 +99,10 @@ void registerChatFeature(
     final d = o.node.data as SystemPromptData;
     return SystemPromptView(text: d.text, update: d.update, i18n: t);
   });
+  node(
+    'turn-process',
+    (o, t) => TurnProcessView(node: o.node, controls: o.turnProcess, i18n: t),
+  );
   node('command', (o, t) {
     final data = o.node.data as CommandData;
     return slots.renderKeyed(
@@ -158,6 +175,8 @@ void registerChatFeature(
       owner: o.session,
       slots: slots,
       host: host,
+      groupPart: o.groupPart,
+      reasoningPreview: o.reasoningPreview,
     ),
   );
   node(
@@ -190,4 +209,5 @@ void registerChatFeature(
     final d = o.node.data as UnknownData;
     return NoticeRow(text: '${t.t('common', 'unknown')}: ${d.type}');
   });
+  return prefs;
 }

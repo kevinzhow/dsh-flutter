@@ -249,46 +249,55 @@ void main() {
     );
   });
 
-  testWidgets('reasoning is collapsible and open while it streams', (t) async {
-    await open(t, openTurn());
-    final es = owner.session.eventSource;
-    es.append(
-      live(3.5, {'type': 'block-start', 'index': 0, 'blockType': 'reasoning'}),
-    );
-    es.append(
-      live(3.6, {
-        'type': 'reasoning-delta',
-        'index': 0,
-        'text': 'weighing options',
-      }),
-    );
-    await t.pump();
-    expect(find.text('Thinking…'), findsOneWidget);
-    expect(find.text('weighing options'), findsOneWidget);
+  testWidgets(
+    'reasoning remains collapsed until opened, including while streaming',
+    (t) async {
+      await open(t, openTurn());
+      final es = owner.session.eventSource;
+      es.append(
+        live(3.5, {
+          'type': 'block-start',
+          'index': 0,
+          'blockType': 'reasoning',
+        }),
+      );
+      es.append(
+        live(3.6, {
+          'type': 'reasoning-delta',
+          'index': 0,
+          'text': 'weighing options',
+        }),
+      );
+      await t.pump();
+      expect(find.text('Think'), findsWidgets);
+      expect(find.text('weighing options'), findsNothing);
 
-    es.append(
-      live(3.7, {
-        'type': 'block-end',
-        'index': 0,
-        'block': {'type': 'reasoning', 'text': 'weighing options'},
-      }),
-    );
-    es.append(
-      live(3.8, {'type': 'block-start', 'index': 1, 'blockType': 'text'}),
-    );
-    es.append(live(3.9, {'type': 'text-delta', 'index': 1, 'text': 'Answer'}));
-    await t.pump();
-    // reasoning is no longer the last block: its header is the settled label
-    expect(find.text('Think'), findsOneWidget);
-    // streaming moved on to the answer: the reasoning folded away by itself
-    expect(find.text('weighing options'), findsNothing);
-    await t.tap(find.text('Think'));
-    await t.pump();
-    expect(find.text('weighing options'), findsOneWidget);
-    await t.tap(find.text('Think'));
-    await t.pump();
-    expect(find.text('weighing options'), findsNothing);
-  });
+      es.append(
+        live(3.7, {
+          'type': 'block-end',
+          'index': 0,
+          'block': {'type': 'reasoning', 'text': 'weighing options'},
+        }),
+      );
+      es.append(
+        live(3.8, {'type': 'block-start', 'index': 1, 'blockType': 'text'}),
+      );
+      es.append(
+        live(3.9, {'type': 'text-delta', 'index': 1, 'text': 'Answer'}),
+      );
+      await t.pump();
+      // reasoning is no longer the last block: its header is the settled label
+      expect(find.text('Think'), findsOneWidget);
+      // Settled reasoning has a one-line preview, while its body stays closed.
+      expect(find.text('weighing options'), findsOneWidget);
+      await t.tap(find.text('Think'));
+      await t.pump();
+      expect(find.text('weighing options'), findsOneWidget);
+      await t.tap(find.text('Think'));
+      await t.pump();
+      expect(find.text('weighing options'), findsOneWidget);
+    },
+  );
 
   testWidgets('a local echo is shown dimmed until the host admits the prompt', (
     t,

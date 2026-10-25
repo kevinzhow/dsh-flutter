@@ -546,8 +546,14 @@ class DshTimelineController extends ScrollController {
     ).dy;
     _pending = DshTimelineAlignment.row(
       find: () {
-        final now = row.mounted ? row.findRenderObject() : null;
-        return now is RenderBox ? now : null;
+        if (!row.mounted) return null;
+        try {
+          final now = row.findRenderObject();
+          return now is RenderBox && now.attached ? now : null;
+        } on FlutterError {
+          // A virtualized row can be inactive while still mounted.
+          return null;
+        }
       },
       leading: leading,
     );

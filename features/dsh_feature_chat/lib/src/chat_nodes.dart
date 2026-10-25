@@ -240,11 +240,15 @@ class AssistantStepView extends StatelessWidget {
     this.owner,
     this.slots,
     this.host,
+    this.groupPart,
+    this.reasoningPreview = true,
   });
 
   final AssistantData data;
   final String nodeKey;
   final DshI18n i18n;
+  final String? groupPart;
+  final bool reasoningPreview;
 
   /// What a tapped link may open (browser, workspace file preview).
   final ToolHostActions? host;
@@ -260,7 +264,8 @@ class AssistantStepView extends StatelessWidget {
     for (var i = 0; i < data.blocks.length; i++) {
       final block = data.blocks[i];
       switch (block) {
-        case ReasoningBlock(:final text) when text.trim().isNotEmpty:
+        case ReasoningBlock(:final text)
+            when text.trim().isNotEmpty && groupPart != 'response':
           final last = i == data.blocks.length - 1;
           children.add(
             _ReasoningRow(
@@ -268,9 +273,11 @@ class AssistantStepView extends StatelessWidget {
               text: text,
               streaming: data.status == 'running' && last,
               i18n: i18n,
+              preview: reasoningPreview,
             ),
           );
-        case TextBlock(:final text) when text.trim().isNotEmpty:
+        case TextBlock(:final text)
+            when text.trim().isNotEmpty && groupPart != 'reasoning':
           children.add(
             DshMarkdown(
               text,
@@ -281,7 +288,7 @@ class AssistantStepView extends StatelessWidget {
               onOpenFile: host?.openFile,
             ),
           );
-        case ImageBlock(:final attachment):
+        case ImageBlock(:final attachment) when groupPart != 'reasoning':
           final ref = ImageRef.tryParse(attachment);
           final gallery = ref == null || owner == null || slots == null
               ? null
@@ -304,7 +311,7 @@ class AssistantStepView extends StatelessWidget {
           break;
       }
     }
-    if (data.status == 'interrupted') {
+    if (data.status == 'interrupted' && groupPart != 'reasoning') {
       children.add(
         DshChromeText(
           _chat(i18n, 'message.stopped'),
@@ -334,11 +341,13 @@ class _ReasoningRow extends StatefulWidget {
     required this.text,
     required this.streaming,
     required this.i18n,
+    this.preview = true,
   });
 
   final String text;
   final bool streaming;
   final DshI18n i18n;
+  final bool preview;
 
   @override
   State<_ReasoningRow> createState() => _ReasoningRowState();
@@ -349,17 +358,22 @@ class _ReasoningRowState extends State<_ReasoningRow> {
 
   /// The reader's choice survives the row scrolling out of the built range
   /// (the list is lazy): it is kept in the enclosing [PageStorage] by row key.
-  Object get _storeKey => widget.key ?? 'reasoning';
+  Object get _storeKey => (widget.key ?? 'reasoning', _resetVersion ?? 0);
+  int? _resetVersion;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final next = DshDisclosureReset.of(context);
+    if (_resetVersion != null && _resetVersion != next) _byHand = false;
+    _resetVersion = next;
     _byHand ??= PageStorage.maybeOf(
       context,
     )?.readState(context, identifier: _storeKey) as bool?;
   }
 
   void _toggle(bool open) {
+    DshDisclosureChange(open, context).dispatch(context);
     setState(() => _byHand = open);
     PageStorage.maybeOf(context)
         ?.writeState(context, open, identifier: _storeKey);
@@ -374,41 +388,60 @@ class _ReasoningRowState extends State<_ReasoningRow> {
     final style = theme
         .textStyle('--dsw-font-s-14')
         .copyWith(color: theme.labelSecondary);
-    return DshDisclosure(
-      open: _byHand ?? streaming,
-      onToggle: _toggle,
-      header: Row(
-        children: [
-          DshIcon(
-            DshShellIcons.think,
-            size: 14,
-            color: theme.color('--dsw-alias-label-tertiary'),
-          ),
-          const SizedBox(width: DshSpace.xs),
-          DshChromeText(
-            streaming
-                ? i18n.t(appNamespace, 'session.reasoning.running')
-                : _chat(i18n, 'message.think'),
-            style: _caption(context)
-                .copyWith(color: theme.color('--dsw-alias-label-secondary')),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: DshSpace.sm, bottom: DshSpace.xs),
-        child: DshDecoratedBox(
-          decoration: BoxDecoration(
-            border: Border(
-              left: BorderSide(
-                color: theme.color('--dsw-alias-border-l2'),
-                width: dshBorderWidthOf(context, 2),
-              ),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: DshSpace.md),
-            child: Text(text, style: style),
-          ),
+    final open = _byHand ?? false;
+    var summary = text.split('\n').first;
+    if (streaming) {
+      summary = '';
+      final paragraphs = text.split(RegExp(r'\r?\n(?:[\t ]*\r?\n)+'));
+      for (final paragraph in paragraphs) {
+        final newline = paragraph.indexOf('\n');
+        if (newline >= 0 && paragraph.substring(0, newline).trim().isNotEmpty) {
+          summary = paragraph.substring(0, newline).trim();
+        }
+      }
+    }
+    summary = summary.replaceAll('**', '');
+    final preview =
+        !open && summary.isNotEmpty && (streaming || widget.preview);
+    return DshDisclosureRow(
+      icon: DshShellIcons.think,
+      title: _chat(i18n, 'message.think'),
+      running: streaming,
+      open: open,
+      expandable: true,
+      onToggle: () => _toggle(!open),
+      collapsedContent: preview
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Container(
+                    width: 2,
+                    height: 2,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: theme.color('--dsw-alias-label-caption'),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: DshChromeText(
+                    summary,
+                    style: style,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            )
+          : const SizedBox.shrink(),
+      children: Padding(
+        padding: const EdgeInsets.fromLTRB(22, 4, 0, 4),
+        child: DshMarkdown(
+          text,
+          codeLabels: codeLabels(i18n),
+          streaming: streaming,
         ),
       ),
     );

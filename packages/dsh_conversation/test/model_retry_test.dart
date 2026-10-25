@@ -133,7 +133,12 @@ void main() {
     expect(retries(binding), isEmpty);
     source.prepend([...opening, first], false);
     expect(retries(binding).single.attempts.length, 2);
-    expect(binding.chat.value.visibleNodes.single.anchorSeq, 3);
+    expect(
+      binding.chat.value.visibleNodes
+          .singleWhere((n) => n.kind == 'model-retry')
+          .anchorSeq,
+      3,
+    );
   });
 
   test('incremental and full replay agree after closing a retry chain', () {
