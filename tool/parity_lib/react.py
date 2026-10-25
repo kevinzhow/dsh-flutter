@@ -104,7 +104,7 @@ def base_inputs(host_dirs):
     return {
         'dsh': env.dsh_commit(),
         'host': env.tree_hash(env.WEB / 'host', env.WEB / 'index.html', env.WEB / 'build-host.mjs',
-                              env.WEB / 'capture.mjs', *host_dirs),
+                              env.WEB / 'capture.mjs', env.WEB / 'pixel-crop.mjs', *host_dirs),
         'fonts': env.tree_hash(env.FONTS / 'manifest.json'),
         'chromium': CHROMIUM_ARGS,
         'lock': env.sha256_file(env.WEB / 'package-lock.json'),

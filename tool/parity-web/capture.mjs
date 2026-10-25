@@ -24,6 +24,8 @@ import fs from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 import { createRequire } from 'node:module'
+import { PNG } from 'pngjs'
+import { enclosingDeviceRect, cropRgba } from './pixel-crop.mjs'
 
 const plan = JSON.parse(fs.readFileSync(process.argv[process.argv.indexOf('--plan') + 1], 'utf8'))
 const fontsDir = path.dirname(plan.fontsManifest)
@@ -220,7 +222,16 @@ for (const entry of plan.entries) {
     const crop = c.capture?.crop ?? 'element'
     const box = await target.boundingBox()
     const shotOptions = { path: png, animations: 'disabled', caret: 'hide', scale: 'device' }
+    let pixelRect
     if (crop === 'viewport') await page.screenshot(shotOptions)
+    else if (reference === 'native') {
+      // Locator/CDP clip rounding can drop the last device row at fractional
+      // densities. Copy the enclosing rectangle from the unchanged viewport
+      // raster instead, using the same floor/ceil contract as Flutter.
+      pixelRect = enclosingDeviceRect(box, { width, height }, density)
+      const full = PNG.sync.read(await page.screenshot({ ...shotOptions, path: undefined }))
+      fs.writeFileSync(png, PNG.sync.write(cropRgba(full, pixelRect)))
+    }
     else await target.screenshot(shotOptions)
     if (errors.length) throw new Error(`page errors: ${errors.join(' | ')}`)
     const faceStatus = await page.evaluate(() => [...document.fonts].map((f) => ({ family: f.family.replace(/"/g, ''), weight: f.weight, status: f.status })))
@@ -236,7 +247,8 @@ for (const entry of plan.entries) {
       image: `visual-testing-results/react/${key}.png`,
       viewport: c.viewport,
       selector,
-      crop: { mode: crop, rect: box && { x: box.x, y: box.y, width: box.width, height: box.height } },
+      crop: { mode: crop, rect: box && { x: box.x, y: box.y, width: box.width, height: box.height },
+        ...(pixelRect && { pixelRect, policy: 'viewport-intersection/enclosing-device-pixels' }) },
       react: {
         browser: `chromium ${browser.version()}`,
         playwright: playwrightVersion,

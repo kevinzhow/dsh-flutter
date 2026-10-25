@@ -16,8 +16,9 @@ import 'theme.dart';
 
 /// The pixel rectangle enclosing [rect], in device pixels.
 ///
-/// Playwright's element screenshot captures the box that encloses a fractional element, and which box depends on how
-/// the reference got its density. With an emulated density (`--reference emulated`) Blink lays out in CSS pixels, so the
+/// The native React provider copies this same enclosing rectangle from its full
+/// viewport raster; locator screenshots can truncate a fractional device row.
+/// With an emulated density (`--reference emulated`) Blink lays out in CSS pixels, so the
 /// crop is the enclosing CSS-pixel box (floor / ceil in CSS px, then scaled): a card at y = 296.5 starts on the same
 /// device row on both sides. With a native density (the default) layout units are device pixels and the crop is the
 /// enclosing device-pixel box (a 420 CSS px wide element at 2.625x is 1102.5 device px, captured as 1103).
@@ -211,7 +212,16 @@ Future<Map<String, dynamic>> captureParityCase(
     'image': 'visual-testing-results/flutter/$key.png',
     'viewport': ctx.viewport,
     'selector': capture['selector'],
-    'crop': {'mode': cropMode, 'rect': roundedRect},
+    'crop': {
+      'mode': cropMode,
+      'rect': roundedRect,
+      'pixelRect': {
+        'x': pixelRect.left,
+        'y': pixelRect.top,
+        'width': pixelRect.width,
+        'height': pixelRect.height,
+      },
+    },
     'flutter': {
       'widgets': mapping.widgets,
       if (mapping.notes.isNotEmpty) 'notes': mapping.notes,

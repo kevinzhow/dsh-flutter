@@ -56,6 +56,12 @@ static int command(struct input *in)
             .axis = WL_POINTER_AXIS_VERTICAL_SCROLL, .value = y,
         };
         notify_axis(&in->seat, &now, &axis);
+    } else if (sscanf(in->line, "cursor %u %c", &state, &extra) == 1 && state <= 1) {
+        /* Screenshots compare client content. Keep pointer focus and hover,
+         * but omit its compositor sprite just as Playwright screenshots do. */
+        struct weston_pointer *pointer = in->seat.pointer_state;
+        if (pointer && pointer->sprite)
+            weston_view_set_alpha(pointer->sprite, state ? 1.0f : 0.0f);
     } else {
         return -1;
     }
