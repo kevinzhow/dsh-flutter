@@ -113,6 +113,8 @@ def build():
         if art not in arts:
             sys.exit('gen_shell_icons: artwork %s of %s not found' % (art, export))
         size, svg = arts[art]
+        if export == 'IconQueueOutlineRegular':
+            size = 14  # the size-preserving alias overrides ChatLines' default
         size_override = re.search(r'size=\{props\.size \?\? (\d+)\}', extra)
         if size_override:
             size = int(size_override.group(1))

@@ -83,6 +83,15 @@ class QueuePanel extends StatefulWidget {
 
 class _QueuePanelState extends State<QueuePanel> {
   final _edit = TextEditingController();
+  final _editorFocus = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    _editorFocus.addListener(() {
+      if (mounted) setState(() {});
+    });
+  }
+
   bool _collapsed = true;
   String? _editing, _busy, _error;
   String t(String key, [Map<String, Object?> params = const {}]) =>
@@ -99,6 +108,7 @@ class _QueuePanelState extends State<QueuePanel> {
   @override
   void dispose() {
     _edit.dispose();
+    _editorFocus.dispose();
     super.dispose();
   }
 
@@ -126,7 +136,12 @@ class _QueuePanelState extends State<QueuePanel> {
 
   void _save() {
     final id = _editing;
-    if (id == null || _edit.text.trim().isEmpty || _busy != null) return;
+    if (id == null ||
+        _edit.text.trim().isEmpty ||
+        _busy != null ||
+        (_edit.value.composing.isValid && !_edit.value.composing.isCollapsed)) {
+      return;
+    }
     unawaited(
       _apply(id, {
         'kind': 'edit',
@@ -257,10 +272,11 @@ class _QueuePanelState extends State<QueuePanel> {
       constraints: const BoxConstraints(minHeight: 36),
       padding: const EdgeInsets.fromLTRB(12, 4, 5, 4),
       decoration: _QueueDecoration(
+        borderRadius: BorderRadius.circular(context.dsh.radiusMd),
         border: separator
             ? Border(
                 top: BorderSide(
-                  width: dshBorderWidthOf(context, .5),
+                  width: dshBorderWidthOf(context, 1),
                   color: context.dsh.color('--dsw-alias-border-l1'),
                 ),
               )
@@ -314,7 +330,9 @@ class _QueuePanelState extends State<QueuePanel> {
                         border: Border.all(
                           width: dshBorderWidthOf(context, .5),
                           color: context.dsh.color(
-                            '--dsw-alias-state-business-primary',
+                            _editorFocus.hasFocus
+                                ? '--dsw-alias-state-business-primary'
+                                : '--dsw-alias-border-l4',
                           ),
                         ),
                       ),
@@ -324,6 +342,7 @@ class _QueuePanelState extends State<QueuePanel> {
                           key: ValueKey('queue-editor-$id'),
                           controller: _edit,
                           autofocus: true,
+                          focusNode: _editorFocus,
                           enabled: !busy,
                           minLines: 1,
                           maxLines: 6,

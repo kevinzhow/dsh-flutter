@@ -274,6 +274,18 @@ def main():
                     if 'click' in step:
                         screen.click(*step['click'])
                         time.sleep(0.8)
+                    elif 'text' in step:
+                        screen.type(step['text'])
+                        time.sleep(0.3)
+                    elif 'keys' in step:
+                        codes = step['keys']
+                        if not isinstance(codes, list) or not codes or any(type(code) is not int or not 0 < code < 768 for code in codes):
+                            raise ValueError('Invalid evdev key chord')
+                        for code in codes:
+                            screen.send(f'key {code} 1')
+                        for code in reversed(codes):
+                            screen.send(f'key {code} 0')
+                        time.sleep(0.3)
                     elif 'wait' in step:
                         time.sleep(step['wait'] / 1000)
                     elif 'scroll' in step:

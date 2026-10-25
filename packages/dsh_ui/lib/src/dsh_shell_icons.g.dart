@@ -951,7 +951,7 @@ abstract final class DshShellIcons {
   /// `IconQueueOutlineRegular`.
   static const queue = DshIconData(
     viewBox: 16,
-    size: 16,
+    size: 14,
     strokeWidth: 1.0,
     shapes: [
       DshIconShape(
