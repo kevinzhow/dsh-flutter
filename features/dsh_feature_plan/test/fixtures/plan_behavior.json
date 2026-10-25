@@ -1,0 +1,598 @@
+{
+  "format": "dsh-plan-behavior/1",
+  "addresses": [
+    "dsh-resource://plan/s/call",
+    "dsh-resource://plan/a%2Fb/c%3F%23",
+    "dsh-resource://plan/subagent/p/c/one-shot/call",
+    "dsh-resource://plan/subagent/p/c/continuable/call",
+    "dsh-resource://plan/subagent/p/c/unknown/call",
+    "dsh-resource://plan//call",
+    "dsh-resource://plan/s/%XX",
+    "dsh-resource://plan/subagent/p/c/bad/call",
+    "dsh-resource://plan/s/call?x",
+    "dsh-resource://plan/s/a%20b%2F%E4%B8%AD%E6%96%87"
+  ],
+  "reviews": [
+    [],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      },
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ],
+        "multiSelect": true
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "other"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Missing"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "id": "q",
+        "question": "Approve?",
+        "detail": "# Fixture\n\nFirst paragraph.",
+        "intent": {
+          "kind": "plan-review",
+          "approve": "Start",
+          "callId": "call"
+        },
+        "options": [
+          {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          {
+            "label": "Wait"
+          },
+          {
+            "label": "Other"
+          }
+        ]
+      }
+    ]
+  ],
+  "markdown": [
+    "# **Ship** [fixture](https://example.test)\n\nFirst *semantic* paragraph.",
+    "# Heading\n\n- [x] First\n- Second",
+    "# Header only",
+    "> Quote **title**\n>\n> Paragraph `code`.",
+    "![Alt text](fixture.png)\n\nNext paragraph",
+    "<span>Literal HTML</span>\n\nText",
+    "```dart\nfinal x = 1;\n```\n\nAfter code",
+    "| A | B |\n|---|---|\n| One | Two |",
+    "## 中文**加粗**标题\n\n第一段。",
+    "[Reference][r]\n\n[r]: https://example.test",
+    "a  \nb",
+    "# Heading\n\n---\n\nBody"
+  ],
+  "expected": {
+    "addresses": [
+      {
+        "address": "dsh-resource://plan/s/call",
+        "parsed": {
+          "session": {
+            "kind": "session",
+            "sessionId": "s"
+          },
+          "callId": "call"
+        },
+        "encoded": "dsh-resource://plan/s/call"
+      },
+      {
+        "address": "dsh-resource://plan/a%2Fb/c%3F%23",
+        "parsed": {
+          "session": {
+            "kind": "session",
+            "sessionId": "a/b"
+          },
+          "callId": "c?#"
+        },
+        "encoded": "dsh-resource://plan/a%2Fb/c%3F%23"
+      },
+      {
+        "address": "dsh-resource://plan/subagent/p/c/one-shot/call",
+        "parsed": {
+          "session": {
+            "kind": "subagent",
+            "parentSessionId": "p",
+            "childSessionId": "c",
+            "mode": "one-shot"
+          },
+          "callId": "call"
+        },
+        "encoded": "dsh-resource://plan/subagent/p/c/one-shot/call"
+      },
+      {
+        "address": "dsh-resource://plan/subagent/p/c/continuable/call",
+        "parsed": {
+          "session": {
+            "kind": "subagent",
+            "parentSessionId": "p",
+            "childSessionId": "c",
+            "mode": "continuable"
+          },
+          "callId": "call"
+        },
+        "encoded": "dsh-resource://plan/subagent/p/c/continuable/call"
+      },
+      {
+        "address": "dsh-resource://plan/subagent/p/c/unknown/call",
+        "parsed": {
+          "session": {
+            "kind": "subagent",
+            "parentSessionId": "p",
+            "childSessionId": "c",
+            "mode": "unknown"
+          },
+          "callId": "call"
+        },
+        "encoded": "dsh-resource://plan/subagent/p/c/unknown/call"
+      },
+      {
+        "address": "dsh-resource://plan//call",
+        "parsed": null,
+        "encoded": null
+      },
+      {
+        "address": "dsh-resource://plan/s/%XX",
+        "parsed": null,
+        "encoded": null
+      },
+      {
+        "address": "dsh-resource://plan/subagent/p/c/bad/call",
+        "parsed": null,
+        "encoded": null
+      },
+      {
+        "address": "dsh-resource://plan/s/call?x",
+        "parsed": null,
+        "encoded": null
+      },
+      {
+        "address": "dsh-resource://plan/s/a%20b%2F%E4%B8%AD%E6%96%87",
+        "parsed": {
+          "session": {
+            "kind": "session",
+            "sessionId": "s"
+          },
+          "callId": "a b/中文"
+        },
+        "encoded": "dsh-resource://plan/s/a%20b%2F%E4%B8%AD%E6%96%87"
+      }
+    ],
+    "reviews": [
+      {
+        "questions": [],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          }
+        ],
+        "expected": {
+          "id": "q",
+          "question": "Approve?",
+          "plan": "# Fixture\n\nFirst paragraph.",
+          "callId": "call",
+          "approve": {
+            "label": "Start",
+            "description": "Proceed"
+          },
+          "decline": {
+            "label": "Wait"
+          }
+        }
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          },
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          }
+        ],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ],
+            "multiSelect": true
+          }
+        ],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "other"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          }
+        ],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Missing"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          }
+        ],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              }
+            ]
+          }
+        ],
+        "expected": null
+      },
+      {
+        "questions": [
+          {
+            "id": "q",
+            "question": "Approve?",
+            "detail": "# Fixture\n\nFirst paragraph.",
+            "intent": {
+              "kind": "plan-review",
+              "approve": "Start",
+              "callId": "call"
+            },
+            "options": [
+              {
+                "label": "Start",
+                "description": "Proceed"
+              },
+              {
+                "label": "Wait"
+              },
+              {
+                "label": "Other"
+              }
+            ]
+          }
+        ],
+        "expected": null
+      }
+    ],
+    "markdown": [
+      {
+        "text": "# **Ship** [fixture](https://example.test)\n\nFirst *semantic* paragraph.",
+        "expected": {
+          "all": "Ship fixture\n\nFirst semantic paragraph.",
+          "first-line": "Ship fixture",
+          "first-paragraph": "First semantic paragraph."
+        }
+      },
+      {
+        "text": "# Heading\n\n- [x] First\n- Second",
+        "expected": {
+          "all": "Heading\n\nFirst\nSecond",
+          "first-line": "Heading",
+          "first-paragraph": "First"
+        }
+      },
+      {
+        "text": "# Header only",
+        "expected": {
+          "all": "Header only",
+          "first-line": "Header only",
+          "first-paragraph": "Header only"
+        }
+      },
+      {
+        "text": "> Quote **title**\n>\n> Paragraph `code`.",
+        "expected": {
+          "all": "Quote title\n\nParagraph code.",
+          "first-line": "Quote title",
+          "first-paragraph": "Quote title"
+        }
+      },
+      {
+        "text": "![Alt text](fixture.png)\n\nNext paragraph",
+        "expected": {
+          "all": "Alt text\n\nNext paragraph",
+          "first-line": "Alt text",
+          "first-paragraph": "Alt text"
+        }
+      },
+      {
+        "text": "<span>Literal HTML</span>\n\nText",
+        "expected": {
+          "all": "<span>Literal HTML</span>\n\nText",
+          "first-line": "<span>Literal HTML</span>",
+          "first-paragraph": "<span>Literal HTML</span>"
+        }
+      },
+      {
+        "text": "```dart\nfinal x = 1;\n```\n\nAfter code",
+        "expected": {
+          "all": "final x = 1;\n\nAfter code",
+          "first-line": "final x = 1;",
+          "first-paragraph": "After code"
+        }
+      },
+      {
+        "text": "| A | B |\n|---|---|\n| One | Two |",
+        "expected": {
+          "all": "A\tB\nOne\tTwo",
+          "first-line": "A\tB",
+          "first-paragraph": "A\tB"
+        }
+      },
+      {
+        "text": "## 中文**加粗**标题\n\n第一段。",
+        "expected": {
+          "all": "中文加粗标题\n\n第一段。",
+          "first-line": "中文加粗标题",
+          "first-paragraph": "第一段。"
+        }
+      },
+      {
+        "text": "[Reference][r]\n\n[r]: https://example.test",
+        "expected": {
+          "all": "Reference",
+          "first-line": "Reference",
+          "first-paragraph": "Reference"
+        }
+      },
+      {
+        "text": "a  \nb",
+        "expected": {
+          "all": "a b",
+          "first-line": "a b",
+          "first-paragraph": "a b"
+        }
+      },
+      {
+        "text": "# Heading\n\n---\n\nBody",
+        "expected": {
+          "all": "Heading\n\nBody",
+          "first-line": "Heading",
+          "first-paragraph": "Body"
+        }
+      }
+    ]
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

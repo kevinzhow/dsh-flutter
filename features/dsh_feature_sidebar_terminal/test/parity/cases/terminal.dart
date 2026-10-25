@@ -14,7 +14,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 class _Actions implements SidebarTabActions {
   @override
-  void openResource(String address, {int? line}) {}
+  void openResource(
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) {}
   @override
   void openTab(
     String kind, {

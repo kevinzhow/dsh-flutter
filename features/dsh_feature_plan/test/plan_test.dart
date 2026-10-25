@@ -170,12 +170,10 @@ void main() {
   });
 
   testWidgets('the chip shows only while plan mode is the target', (t) async {
-    final dock = slots
-        .renderList(
-          DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
-          owner,
-        )
-        .single;
+    final dock = slots.renderSingle(
+      DshSlots.conversationInputPlan.typed<PlanInputOwner, Widget>(),
+      PlanInputOwner(owner),
+    )!;
     await t.pumpWidget(dshTestApp(dock));
     expect(find.byKey(const ValueKey('plan-chip')), findsNothing);
     owner.session.projections.apply('plan', {

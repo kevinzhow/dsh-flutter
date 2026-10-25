@@ -17,7 +17,11 @@ class _Actions implements SidebarTabActions {
 
   final List<String> opened = [];
   @override
-  void openResource(String address, {int? line}) => opened.add(address);
+  void openResource(
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) => opened.add(address);
 }
 
 WorkspaceDirectoryEntry dir(String n) =>

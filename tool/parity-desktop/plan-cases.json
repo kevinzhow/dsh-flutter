@@ -1,0 +1,390 @@
+{
+  "cases": [
+    {
+      "id": "plan.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            362,
+            108
+          ]
+        },
+        {
+          "click": [
+            296,
+            78
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              266,
+              64,
+              576,
+              92
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "exit-refused"
+        },
+        {
+          "click": [
+            362,
+            108
+          ]
+        },
+        {
+          "click": [
+            296,
+            78
+          ]
+        },
+        {
+          "expect": {
+            "reference": "exit-refused",
+            "rect": [
+              266,
+              64,
+              576,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "mode-off"
+        },
+        {
+          "click": [
+            640,
+            24
+          ]
+        },
+        {
+          "capture": "review-ready"
+        },
+        {
+          "click": [
+            362,
+            276
+          ]
+        },
+        {
+          "click": [
+            924,
+            220
+          ]
+        },
+        {
+          "expect": {
+            "reference": "review-ready",
+            "rect": [
+              266,
+              64,
+              1014,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "approval-refused"
+        },
+        {
+          "click": [
+            362,
+            276
+          ]
+        },
+        {
+          "click": [
+            924,
+            220
+          ]
+        },
+        {
+          "expect": {
+            "reference": "approval-refused",
+            "rect": [
+              266,
+              64,
+              1014,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "approved"
+        },
+        {
+          "click": [
+            296,
+            97
+          ]
+        },
+        {
+          "capture": "review-reset"
+        },
+        {
+          "click": [
+            794,
+            220
+          ]
+        },
+        {
+          "expect": {
+            "reference": "review-reset",
+            "rect": [
+              266,
+              64,
+              1014,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "changes"
+        },
+        {
+          "click": [
+            1066,
+            24
+          ]
+        },
+        {
+          "capture": "preview"
+        },
+        {
+          "scroll": [
+            640,
+            500,
+            470
+          ]
+        },
+        {
+          "expect": {
+            "reference": "preview",
+            "rect": [
+              16,
+              64,
+              1264,
+              500
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "preview-scrolled"
+        }
+      ]
+    },
+    {
+      "id": "plan.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "zh",
+      "app": [
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            112,
+            108
+          ]
+        },
+        {
+          "click": [
+            46,
+            78
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              16,
+              64,
+              326,
+              92
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "exit-refused"
+        },
+        {
+          "click": [
+            112,
+            108
+          ]
+        },
+        {
+          "click": [
+            46,
+            78
+          ]
+        },
+        {
+          "expect": {
+            "reference": "exit-refused",
+            "rect": [
+              16,
+              64,
+              326,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "mode-off"
+        },
+        {
+          "click": [
+            195,
+            24
+          ]
+        },
+        {
+          "capture": "review-ready"
+        },
+        {
+          "click": [
+            112,
+            298
+          ]
+        },
+        {
+          "click": [
+            288,
+            244
+          ]
+        },
+        {
+          "expect": {
+            "reference": "review-ready",
+            "rect": [
+              16,
+              64,
+              374,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "approval-refused"
+        },
+        {
+          "click": [
+            112,
+            298
+          ]
+        },
+        {
+          "click": [
+            288,
+            244
+          ]
+        },
+        {
+          "expect": {
+            "reference": "approval-refused",
+            "rect": [
+              16,
+              64,
+              374,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "approved"
+        },
+        {
+          "click": [
+            46,
+            97
+          ]
+        },
+        {
+          "capture": "review-reset"
+        },
+        {
+          "click": [
+            185,
+            244
+          ]
+        },
+        {
+          "expect": {
+            "reference": "review-reset",
+            "rect": [
+              16,
+              64,
+              374,
+              370
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "changes"
+        },
+        {
+          "click": [
+            325,
+            24
+          ]
+        },
+        {
+          "capture": "preview"
+        },
+        {
+          "scroll": [
+            195,
+            500,
+            470
+          ]
+        },
+        {
+          "expect": {
+            "reference": "preview",
+            "rect": [
+              16,
+              64,
+              374,
+              500
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "preview-scrolled"
+        }
+      ]
+    }
+  ]
+}

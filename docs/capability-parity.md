@@ -13,22 +13,22 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 45 | 17 | 39 | 1 | 102 |
+| Sessions and chat | 46 | 16 | 39 | 1 | 102 |
 | Input and commands | 9 | 3 | 13 | 0 | 25 |
-| Tools and approvals | 9 | 2 | 1 | 0 | 12 |
-| Plan, goal, jobs, schedule, workflows | 0 | 3 | 16 | 1 | 20 |
+| Tools and approvals | 11 | 1 | 0 | 0 | 12 |
+| Plan, goal, jobs, schedule, workflows | 1 | 2 | 16 | 1 | 20 |
 | Files and preview | 6 | 6 | 7 | 0 | 19 |
 | Settings | 14 | 1 | 39 | 3 | 57 |
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 106 | 37 | 147 | 29 | 319 |
+| **all** | 110 | 34 | 146 | 29 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 16 | 18 | 19 | 3 | 56 |
+| package | 18 | 16 | 19 | 3 | 56 |
 | remote | 39 | 4 | 80 | 23 | 146 |
-| slot | 47 | 14 | 37 | 2 | 100 |
+| slot | 49 | 13 | 36 | 2 | 100 |
 | settings | 4 | 1 | 11 | 1 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
@@ -37,7 +37,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
 | desktop | 20 | 3 | 6 | 1 | 30 |
-| both | 86 | 34 | 141 | 28 | 289 |
+| both | 90 | 31 | 140 | 28 | 289 |
 
 ## Packages still to do, by priority
 
@@ -47,7 +47,6 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-input-trigger` (partial, both): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.
 - `ui-layout` (partial, desktop): Resize and collapse the three-column window: sidebar, conversation and right column. dsh AppFrame: three-column solve, drag handles, collapse below 1024 with the narrow override, ctx.layout, main panel selection, the shell seats, per-platform window chrome (macOS and Windows compile-safe, untested). Below 600 wide the sidebar is a modal drawer under a phone top bar (owner decision 2026-10-24); 600 to 1023 the rail, 1024 and up docked.
 - `ui-sidebar` (partial, both): Browse sessions in a tree grouped by workspace, search them, and see which are running. Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a "not available yet" page.
-- `ui-user-questions` (partial, both): Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code. Settled late-reply bubbles now expand question/option/answer details with skipped-answer and raw-text fallback, keyboard activation and full clipboard text.
 - `ui-workspace` (partial, both): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the "N more" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards.
 
 **P2**
@@ -57,7 +56,6 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-deliverables` (partial, both): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no "present" delivery row and no file actions in the final answer.
 - `ui-dockkit` (partial, desktop): Arrange panels in a draggable split-tree docking layout. The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified.
 - `ui-goal` (partial, both): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented.
-- `ui-plan` (partial, both): Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview.
 - `ui-reference` (partial, both): Mention a workspace file or another session with "@" so the agent reads it. The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text.
 - `ui-secret-mask` (missing, both): Hide recognized credentials (keys, tokens) in the text of messages you sent. Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see.
 
@@ -92,7 +90,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Sessions and chat
 
-45 ported, 17 partial, 39 missing, 1 na.
+46 ported, 16 partial, 39 missing, 1 na.
 
 ### package (10)
 
@@ -182,7 +180,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `conversation.input.model` | ported | both | Model selector inside the composer tool row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_model_selection/lib/src/register.dart` |
 | `conversation.input.overlay` | ported | both | Floating entries rendered inside the resident composer card. | `features/dsh_feature_input_trigger/lib/src/register.dart`, `features/dsh_feature_commands/lib/src/register.dart`, `features/dsh_feature_conversation/lib/src/composer.dart` |
 | `conversation.input.permission` | ported | both | Current-session permission control inside the composer tool row. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_permission_presets/lib/src/register.dart` |
-| `conversation.input.plan` | partial | both | Plan control inside the composer tool row. | `features/dsh_feature_plan/lib/src/register.dart`; The plan-mode chip occupies conversation.input.dock instead; it is read-only. |
+| `conversation.input.plan` | ported | both | Plan control inside the composer tool row. | `features/dsh_feature_plan/lib/src/register.dart`; Plan control occupies the input.plan slot; handles locked/pending state, exit refusal, and Host-projected transitions. |
 | `conversation.input.right` | missing | both | Compact controls before the composer submit action. |  |
 | `conversation.session` | ported | both | Strict per-Session Conversation body. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_conversation/lib/src/register.dart` |
 | `conversation.session.header` | partial | both | Strict per-Session title, actions, and View navigation. | `features/dsh_feature_conversation/lib/src/desktop_header.dart`, `features/dsh_feature_conversation/lib/src/session_header.dart`; Desktop: crumb, actions, utilities, corner and view tabs (Chat, and Trajectory as a "not available yet" page). No subagent breadcrumbs yet. |
@@ -267,7 +265,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Tools and approvals
 
-9 ported, 2 partial, 1 missing, 0 na.
+11 ported, 1 partial, 0 missing, 0 na.
 
 ### package (4)
 
@@ -276,7 +274,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `ui-approval` | ported | both | Allow or reject a tool call that needs approval, right where the message box was. | `features/dsh_feature_approval` |
 | `ui-permission-presets` | ported | both | Choose how much the agent may do without asking, as a default for new sessions and for the current session. | `features/dsh_feature_permission_presets` |
 | `ui-tool` | ported | both | See each tool call as a purpose-built row: shell, read, edit and write with diffs, search, web, images, to-dos, questions and a details card for the rest. | `features/dsh_feature_tool`; Every key ui-tool registers is covered; the rows owned by other packages (present, skill, cordis_*) fall back to the generic card. |
-| `ui-user-questions` | partial | both | Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. | `features/dsh_feature_user_questions`; Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code. Settled late-reply bubbles now expand question/option/answer details with skipped-answer and raw-text fallback, keyboard activation and full clipboard text. |
+| `ui-user-questions` | ported | both | Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan. | `features/dsh_feature_user_questions`; Generic questions, countdown, continued replies, and supported single-question plan reviews are ported. Approval preserves the original label; Request changes returns to the composer without declining. Unsupported review shapes remain generic. Error feedback is limited to two lines with full detail in a tooltip to preserve the decision controls on narrow screens. Visual parity remains incomplete. |
 
 ### remote (3)
 
@@ -291,7 +289,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
 | `conversation.approval.detail` | partial | both | Optional detail for the Tool call correlated with an approval request. | `features/dsh_feature_approval/lib/src/approval_panel.dart`; The approval panel shows the tool name and reason, but has no detail seat for the correlated call. |
-| `conversation.plan-review.actions` | missing | both | Actions for the exact plan under review; approval remains with the question composer. |  |
+| `conversation.plan-review.actions` | ported | both | Actions for the exact plan under review; approval remains with the question composer. | `features/dsh_feature_plan/lib/src/register.dart`, `features/dsh_feature_user_questions/lib/src/plan_review_panel.dart`; Opens the exact logged plan call or params-only temporary review; one automatic open per review, manual reopen after closing. |
 | `tool.call.images` | ported | both | Durable images of a settled image-bearing Tool call, rendered through the attachment presentation plugin. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_attachment/lib/src/register.dart` |
 | `tool.call.toolview` | ported | both | Keyed Tool call view dispatched by wire Tool name. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_tool/lib/src/register.dart`; Every ui-tool key is occupied; missing keys belong to other packages: present, skill, cordis_define, cordis_run, cordis_stop, cordis_undefine. |
 
@@ -303,7 +301,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Plan, goal, jobs, schedule, workflows
 
-0 ported, 3 partial, 16 missing, 1 na.
+1 ported, 2 partial, 16 missing, 1 na.
 
 ### package (5)
 
@@ -311,7 +309,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---|---|---|---|
 | `ui-goal` | partial | both | See, edit, pause, resume, complete and clear the session goal in a bar above the message box. | `features/dsh_feature_chat/lib/src/command_input_view.dart`, `packages/dsh_conversation/lib/src/chat/extended_inputs.dart`; Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented. |
 | `ui-jobs` | missing | both | List the session's background jobs and watch or kill one from its streaming output panel. | job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only. |
-| `ui-plan` | partial | both | Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. | `features/dsh_feature_plan`, `packages/dsh_conversation/lib/src/plan`; Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview. |
+| `ui-plan` | ported | both | Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. | `features/dsh_feature_plan`, `packages/dsh_conversation/lib/src/plan`; Interactive input plan chip exits through /plan off and waits for Host projection. Submitted plans and exact review calls open a shared, cancelable history resource in the right sidebar (phone sheet); temporary reviews use navigation-only Markdown params. Review auto-opens once and supports manual reopen. Functional port; screenshot paint/font parity remains incomplete. |
 | `ui-schedule` | missing | both | List, edit and delete the host's scheduled tasks and a session's reminders. | schedule/* is not generated or called; schedule_* tool rows show raw details only. |
 | `ui-workflow-run` | partial | both | Follow a durable workflow run in the conversation, with its member agents expandable. | `features/dsh_feature_workflow_run`, `packages/dsh_conversation/lib/src/chat/workflow_run.dart`; Durable workflow lifecycle projection, exact phase grouping, status counts and run/member disclosure are implemented. Clean completion collapses after keyboard focus leaves; abnormal/new cycles reopen. Current direct-child/session identity facts gate navigation. Visual alignment is still being verified and remains partial. |
 
@@ -556,7 +554,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `shell.leading` | ported | desktop | Window-chrome seat at the frame's top-left, over every main panel. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `shell.overlay` | ported | desktop | Frame-wide floating layer, above every column and outside their scroll containers. | `features/dsh_feature_layout/lib/src/app_frame.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar` | ported | desktop | The whole left column. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
-| `sidebar.right.pane.tab` | ported | both | One tab's body, dispatched with the `id` of the type in force for `tab.kind`. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_files/lib/src/register.dart`, `features/dsh_feature_documentpreview/lib/src/register.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart`; Occupants: files, document preview, terminal, guide. Not built: review, plan preview, schedule task, browser, subagent chat. |
+| `sidebar.right.pane.tab` | ported | both | One tab's body, dispatched with the `id` of the type in force for `tab.kind`. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_files/lib/src/register.dart`, `features/dsh_feature_documentpreview/lib/src/register.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart`, `features/dsh_feature_plan/lib/src/register.dart`; Occupants: files, document preview, terminal, guide, plan preview. Not built: review, schedule task, browser, subagent chat. |
 | `sidebar.right.pane.tab.title` | ported | both | A tab's title as its chip (and a floating panel's header) shows it, dispatched with the same key and information hook as the body. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart` |
 | `sidebar.right.tab.guide` | partial | both | The guide tab's body. | `features/dsh_feature_sidebar_right/lib/src/guide.dart`; The guide page exists as a widget fed by guide.entry; the body is not a chain seat. |
 | `sidebar.right.tab.guide.entry` | ported | both | One provider's guide card, with the standard card as the owner's fallback. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_files/lib/src/register.dart`, `features/dsh_feature_sidebar_terminal/lib/src/register.dart` |

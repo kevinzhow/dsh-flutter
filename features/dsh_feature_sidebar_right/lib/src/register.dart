@@ -69,11 +69,22 @@ class SidebarRightFeature {
   /// Open the preview of [path] (absolute or workspace-relative) at [line],
   /// showing the sidebar if it is closed (the tool cards' `openFile`).
   void openFile(SessionOwner owner, String path, {int? line}) {
-    final state = stateFor(owner.sessionId);
-    state.openResource(
+    openResource(
+      owner,
       fileAddressFor(owner.sessionId, owner.cwd, path),
       line: line,
     );
+  }
+
+  /// Open a feature-registered resource, with in-memory navigation parameters.
+  void openResource(
+    SessionOwner owner,
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) {
+    final state = stateFor(owner.sessionId);
+    state.openResource(address, line: line, params: params);
     final context = _services.navigatorKey.currentContext;
     if (context == null) return;
     if (_inline(context)) {

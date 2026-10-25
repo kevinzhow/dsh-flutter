@@ -637,6 +637,10 @@ class _DefaultComposerState extends State<DefaultComposer> {
             onPressed: _sending ? null : _attach,
           ),
         ?seats.permission,
+        ?widget.slots?.renderSingle(
+          DshSlots.conversationInputPlan.typed<PlanInputOwner, Widget>(),
+          PlanInputOwner(widget.owner, locked: locked || _sending),
+        ),
       ],
       trailing: [
         if (seats.model != null) Flexible(child: seats.model!),

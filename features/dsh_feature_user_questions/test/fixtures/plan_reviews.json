@@ -1,0 +1,209 @@
+{
+  "format": "dsh-plan-reviews/1",
+  "cases": [
+    {
+      "questions": [],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "id": "q",
+        "question": "Approve?",
+        "plan": "# Fixture\n\nFirst paragraph.",
+        "callId": "call",
+        "approve": {
+          "label": "Start",
+          "description": "Proceed"
+        },
+        "decline": {
+          "label": "Wait"
+        }
+      }
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        },
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        }
+      ],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ],
+          "multiSelect": true
+        }
+      ],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "other"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        }
+      ],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Missing"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        }
+      ],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            }
+          ]
+        }
+      ],
+      "expected": null
+    },
+    {
+      "questions": [
+        {
+          "id": "q",
+          "question": "Approve?",
+          "detail": "# Fixture\n\nFirst paragraph.",
+          "intent": {
+            "kind": "plan-review",
+            "approve": "Start",
+            "callId": "call"
+          },
+          "options": [
+            {
+              "label": "Start",
+              "description": "Proceed"
+            },
+            {
+              "label": "Wait"
+            },
+            {
+              "label": "Other"
+            }
+          ]
+        }
+      ],
+      "expected": null
+    }
+  ],
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

@@ -290,13 +290,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-plan",
    "description": "Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
     "features/dsh_feature_plan",
     "packages/dsh_conversation/lib/src/plan"
    ],
-   "notes": "Read-only: the plan-mode chip only shows when plan mode is on and nothing in the UI turns it on or off. A submitted plan opens in a sheet, not a sidebar Markdown preview.",
-   "priority": "P2"
+   "notes": "Interactive input plan chip exits through /plan off and waits for Host projection. Submitted plans and exact review calls open a shared, cancelable history resource in the right sidebar (phone sheet); temporary reviews use navigation-only Markdown params. Review auto-opens once and supports manual reopen. Functional port; screenshot paint/font parity remains incomplete."
   },
   {
    "id": "package:ui-plugin-manager",
@@ -695,12 +694,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-user-questions",
    "description": "Answer the agent's questions (options, text, skip, timed countdown, late replies) and approve or reject a submitted plan.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
     "features/dsh_feature_user_questions"
    ],
-   "notes": "Question card, timed wait and continued answers are ported. The plan-review approval card (Approve and Request changes for exit_plan_mode) is not: no plan-review handling exists in the Dart code. Settled late-reply bubbles now expand question/option/answer details with skipped-answer and raw-text fallback, keyboard activation and full clipboard text.",
-   "priority": "P1"
+   "notes": "Generic questions, countdown, continued replies, and supported single-question plan reviews are ported. Approval preserves the original label; Request changes returns to the composer without declining. Unsupported review shapes remain generic. Error feedback is limited to two lines with full detail in a tooltip to preserve the decision controls on narrow screens. Visual parity remains incomplete."
   },
   {
    "id": "package:ui-workflow-run",
@@ -2851,11 +2849,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Plan control inside the composer tool row.",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
     "features/dsh_feature_plan/lib/src/register.dart"
    ],
-   "notes": "The plan-mode chip occupies conversation.input.dock instead; it is read-only."
+   "notes": "Plan control occupies the input.plan slot; handles locked/pending state, exit refusal, and Host-projected transitions."
   },
   {
    "id": "slot:conversation.input.right",
@@ -2873,7 +2871,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-user-questions/src/client/contract/slots.ts",
    "description": "Actions for the exact plan under review; approval remains with the question composer.",
-   "status": "missing"
+   "status": "ported",
+   "notes": "Opens the exact logged plan call or params-only temporary review; one automatic open per review, manual reopen after closing.",
+   "whalee": [
+    "features/dsh_feature_plan/lib/src/register.dart",
+    "features/dsh_feature_user_questions/lib/src/plan_review_panel.dart"
+   ]
   },
   {
    "id": "slot:conversation.session",
@@ -3425,9 +3428,10 @@
     "packages/dsh_slots/lib/src/declarations.dart",
     "features/dsh_feature_files/lib/src/register.dart",
     "features/dsh_feature_documentpreview/lib/src/register.dart",
-    "features/dsh_feature_sidebar_terminal/lib/src/register.dart"
+    "features/dsh_feature_sidebar_terminal/lib/src/register.dart",
+    "features/dsh_feature_plan/lib/src/register.dart"
    ],
-   "notes": "Occupants: files, document preview, terminal, guide. Not built: review, plan preview, schedule task, browser, subagent chat."
+   "notes": "Occupants: files, document preview, terminal, guide, plan preview. Not built: review, schedule task, browser, subagent chat."
   },
   {
    "id": "slot:sidebar.right.pane.tab.title",

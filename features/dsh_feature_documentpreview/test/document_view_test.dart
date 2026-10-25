@@ -24,7 +24,11 @@ class _Actions implements SidebarTabActions {
   }) {}
 
   @override
-  void openResource(String address, {int? line}) {}
+  void openResource(
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) {}
 }
 
 class _Highlighter implements DshCodeHighlighter {

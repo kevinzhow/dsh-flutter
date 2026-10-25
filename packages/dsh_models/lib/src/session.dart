@@ -200,6 +200,9 @@ class Session {
   Map<String, Object?> get _address =>
       _addressOverride ?? {'kind': 'session', 'sessionId': sessionId};
 
+  /// Exact transport address, including a direct parent/child binding.
+  Map<String, Object?> get address => Map.unmodifiable(_address);
+
   /// Open follow: resolves when the first complete window is published
   /// (single-flight; later calls share the same future).
   Future<void> open() => _openFuture ??= _doOpen(++_openGeneration);

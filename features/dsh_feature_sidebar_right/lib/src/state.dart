@@ -44,7 +44,7 @@ const String guideTabKind = 'guide';
 class _Extra {
   _Extra({this.params = const {}, this.line, this.revision = 0});
 
-  final Map<String, Object?> params;
+  Map<String, Object?> params;
   int? line;
   int revision;
 }
@@ -170,19 +170,27 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
   /// Open [address]; a file address reuses the tab already showing it and
   /// navigates it to [line].
   @override
-  void openResource(String address, {int? line}) {
+  void openResource(
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) {
     final file = parseSessionFileAddress(address);
-    if (file == null) return;
+    final type = file == null ? _types.typeForResource(address) : null;
+    if (file == null && type == null) return;
     if (layout.tabs.isEmpty) dock.settle();
     final id = dock.openContent(
       OpenContentInput(
         contentId: address,
-        title: pathPartsOf(file.path).name,
-        kind: textTabKind,
+        title: file != null
+            ? pathPartsOf(file.path).name
+            : type?.titleForResource?.call(address) ?? '',
+        kind: file != null ? textTabKind : type!.kind,
       ),
     );
     _revision++;
     final extra = _extras.putIfAbsent(id, _Extra.new);
+    extra.params = Map.unmodifiable(params);
     extra.line = line;
     extra.revision = _revision;
     notifyListeners();

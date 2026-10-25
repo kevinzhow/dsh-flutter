@@ -9,10 +9,17 @@ class SidebarTabType {
     this.guideOrder,
     this.keepMounted = false,
     this.onClose,
+    this.acceptsResource,
+    this.titleForResource,
   });
 
   /// The tab kind (`files`, `text`, `terminal`).
   final String kind;
+
+  /// A feature-owned address predicate; the sidebar stays independent of
+  /// each resource protocol (plans, files and future preview providers).
+  final bool Function(String address)? acceptsResource;
+  final String Function(String address)? titleForResource;
 
   /// Independent instances may be open at once (terminals); an ordinary page
   /// type opens once.
@@ -48,6 +55,10 @@ class SidebarTabTypes {
   }
 
   SidebarTabType? typeOf(String kind) => _types[kind];
+
+  SidebarTabType? typeForResource(String address) => _types.values
+      .where((type) => type.acceptsResource?.call(address) ?? false)
+      .firstOrNull;
 
   /// The types with a guide card, in card order.
   List<SidebarTabType> get guideTypes =>

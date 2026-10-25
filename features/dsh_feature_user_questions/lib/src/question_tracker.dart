@@ -248,7 +248,12 @@ class QuestionTracker {
   PendingQuestion? forSession(String sessionId) {
     PendingQuestion? last;
     for (final q in pending.value) {
-      if (q.sessionId == sessionId) last = q;
+      if (q.sessionId == sessionId &&
+          (last == null ||
+              planReviewOf(q.questions) != null ||
+              planReviewOf(last.questions) == null)) {
+        last = q;
+      }
     }
     return last;
   }

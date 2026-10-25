@@ -62,6 +62,7 @@ ICONS = {
     'IconEllipsisOutlineMedium': 'ellipsisMedium',
     'IconThinkOutlineRegular': 'think',
     'IconQueueOutlineRegular': 'queue',
+    'IconCloseCircleFillRegular': 'closeCircleFill',
     'IconSendOutlineRegular': 'sendOutline',
 }
 
