@@ -217,6 +217,18 @@ Object? _data(ViewNode node) {
       };
     case 'tool-call':
       return _tool((d! as ToolData).root);
+    case 'command':
+      return _command(d! as CommandData);
+    case 'compaction':
+      return _compaction(d! as CompactionData);
+    case 'manual-compaction':
+      final manual = d! as ManualCompactionData;
+      return {
+        'command': _command(manual.command),
+        'compaction': manual.compaction == null
+            ? null
+            : _compaction(manual.compaction!),
+      };
     case 'model-retry':
       return {
         'attempts': [
@@ -264,3 +276,26 @@ Object? _data(ViewNode node) {
   }
   throw StateError('chat projection: unhandled node kind ${node.kind}');
 }
+
+Map<String, Object?> _command(CommandData d) => {
+  'seq': d.seq,
+  'time': d.time,
+  'commandId': d.commandId,
+  'name': d.name,
+  'args': d.args,
+  'outcome': d.outcome == null
+      ? null
+      : {
+          'kind': d.outcome!.kind,
+          'text': d.outcome!.text,
+          'sourceEventSeq': d.outcome!.sourceEventSeq,
+        },
+};
+Map<String, Object?> _compaction(CompactionData d) => {
+  'seq': d.seq,
+  'time': d.time,
+  'summary': d.summary,
+  'summaryEventSeq': d.summaryEventSeq,
+  'shadowedItemCount': d.shadowedItemCount,
+  'shadowedTokenCount': d.shadowedTokenCount,
+};

@@ -1,0 +1,318 @@
+{
+ "cases": [
+  {
+   "id": "compaction-command.desktop-light",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 1280,
+   "height": 720,
+   "theme": "light",
+   "locale": "en",
+   "app": [
+    {
+     "capture": "closed"
+    },
+    {
+     "click": [
+      100,
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       44,
+       216,
+       100
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "command-open"
+    },
+    {
+     "click": [
+      100,
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       44,
+       216,
+       100
+      ],
+      "changed": false
+     }
+    },
+    {
+     "click": [
+      100,
+      70
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       84,
+       216,
+       130
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "manual-open"
+    },
+    {
+     "click": [
+      100,
+      70
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       84,
+       216,
+       130
+      ],
+      "changed": false
+     }
+    },
+    {
+     "click": [
+      100,
+      114
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       128,
+       216,
+       240
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "long-open"
+    },
+    {
+     "scroll": [
+      150,
+      220,
+      350
+     ]
+    },
+    {
+     "expect": {
+      "reference": "long-open",
+      "rect": [
+       16,
+       0,
+       216,
+       24
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "after-scroll"
+    },
+    {
+     "click": [
+      100,
+      12
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       0,
+       0,
+       1280,
+       720
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "sticky-collapsed"
+    }
+   ]
+  },
+  {
+   "id": "compaction-command.phone-dark-zh",
+   "state": "component",
+   "appOnly": true,
+   "pairHost": false,
+   "width": 390,
+   "height": 844,
+   "theme": "dark",
+   "locale": "zh",
+   "app": [
+    {
+     "capture": "closed"
+    },
+    {
+     "click": [
+      100,
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       44,
+       216,
+       100
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "command-open"
+    },
+    {
+     "click": [
+      100,
+      28
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       44,
+       216,
+       100
+      ],
+      "changed": false
+     }
+    },
+    {
+     "click": [
+      100,
+      70
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       84,
+       216,
+       130
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "manual-open"
+    },
+    {
+     "click": [
+      100,
+      70
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       84,
+       216,
+       130
+      ],
+      "changed": false
+     }
+    },
+    {
+     "click": [
+      100,
+      114
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       16,
+       128,
+       216,
+       240
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "long-open"
+    },
+    {
+     "scroll": [
+      150,
+      220,
+      350
+     ]
+    },
+    {
+     "expect": {
+      "reference": "long-open",
+      "rect": [
+       16,
+       0,
+       216,
+       24
+      ],
+      "changed": true
+     }
+    },
+    {
+     "capture": "after-scroll"
+    },
+    {
+     "click": [
+      100,
+      12
+     ]
+    },
+    {
+     "expect": {
+      "reference": "closed",
+      "rect": [
+       0,
+       0,
+       390,
+       844
+      ],
+      "changed": false
+     }
+    },
+    {
+     "capture": "sticky-collapsed"
+    }
+   ]
+  }
+ ]
+}

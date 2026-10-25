@@ -215,6 +215,14 @@ for (const entry of plan.entries) {
     // window.__parityReady; the capture waits for it (rejects after the kind's own timeout).
     await page.evaluate(() => window.__parityReady)
     await applyInteractions(page, variant.interactions)
+    // Expanding content can request another font weight (e.g. a summary's
+    // heading). Measure only after those new faces and their layout settle;
+    // screenshot() waiting for fonts would otherwise make the saved rect stale.
+    await page.evaluate(() => window.__parityReady)
+    await page.evaluate(async () => {
+      await document.fonts.ready
+      await new Promise(requestAnimationFrame)
+    })
     const selector = c.capture?.selector ?? '[data-parity-target]'
     const target = page.locator(selector)
     await target.waitFor({ state: 'visible' })

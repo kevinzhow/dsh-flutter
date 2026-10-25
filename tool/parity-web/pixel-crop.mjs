@@ -9,8 +9,11 @@ export function enclosingDeviceRect(box, viewport, density) {
   const right = Math.min(viewport.width, box.x + box.width)
   const bottom = Math.min(viewport.height, box.y + box.height)
   if (right <= left || bottom <= top) throw new Error('Capture target is outside the viewport')
-  const lo = (v) => Math.floor(v * density + 1e-6)
-  const hi = (v) => Math.ceil(v * density - 1e-6)
+  // DOMRect's float32 conversion can leave ~1e-5 device-pixel noise at an
+  // integral edge. This epsilon is still far below one Blink layout unit
+  // (1/64 device px), so genuine fractional edges remain enclosed.
+  const lo = (v) => Math.floor(v * density + 1e-4)
+  const hi = (v) => Math.ceil(v * density - 1e-4)
   const x = lo(left), y = lo(top)
   return { x, y, width: hi(right) - x, height: hi(bottom) - y }
 }

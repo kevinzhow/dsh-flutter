@@ -146,6 +146,43 @@ def host_link(cases):
     return match.group(0)
 
 
+def expect_capture(env, case_out, screen, spec, timeout=10):
+    """Wait for an explicit synthetic scene condition, not just a click delay."""
+    from PIL import Image, ImageChops
+    if not isinstance(spec, dict):
+        raise ValueError('Capture assertion must be an object')
+    label = spec.get('reference', '')
+    rect = spec.get('rect')
+    changed = spec.get('changed')
+    if not isinstance(label, str) or not re.fullmatch(r'[a-z0-9_-]+', label):
+        raise ValueError('Invalid capture assertion reference')
+    if not isinstance(rect, list) or len(rect) != 4 or any(type(v) is not int for v in rect) or type(changed) is not bool:
+        raise ValueError('Capture assertion requires an integer pixel rectangle and changed boolean')
+    with Image.open(case_out / f'{label}.png') as source:
+        size = source.size
+        if not (0 <= rect[0] < rect[2] <= size[0] and 0 <= rect[1] < rect[3] <= size[1]):
+            raise ValueError('Capture assertion rectangle is outside the image')
+        baseline = source.convert('RGB').crop(rect)
+    deadline = time.monotonic() + timeout
+    current = case_out / 'assert-current.png'
+    attempts = 0
+    try:
+        while True:
+            capture(env, case_out / 'assert-capture', current, screen)
+            attempts += 1
+            with Image.open(current) as shot:
+                if shot.size != size:
+                    raise RuntimeError('Capture assertion image dimensions changed')
+                differs = ImageChops.difference(baseline, shot.convert('RGB').crop(rect)).getbbox() is not None
+            if differs == changed:
+                return {**spec, 'passed': True, 'attempts': attempts}
+            if time.monotonic() >= deadline:
+                raise RuntimeError(f'Capture assertion timed out: reference={label}, changed={changed}')
+            time.sleep(0.1)
+    finally:
+        current.unlink(missing_ok=True)
+
+
 def main():
     out = pathlib.Path(sys.argv[1]).resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -220,6 +257,7 @@ def main():
                 if app_proc.poll() is not None or not devices:
                     raise RuntimeError('App did not stay running with an open GPU render node')
                 screen = Input(write_fd)
+                assertions = []
                 w, h = c['width'], c['height']
                 if w < 600:
                     field = (w // 2, 468 + (h - 915) // 2)
@@ -246,6 +284,8 @@ def main():
                         if not re.fullmatch(r'[a-z0-9_-]+', label):
                             raise ValueError('Capture labels must contain only a-z, 0-9, _ and -')
                         capture(env, case_out / 'capture', case_out / f'{label}.png', screen)
+                    elif 'expect' in step:
+                        assertions.append(expect_capture(env, case_out, screen, step['expect']))
                     else:
                         raise ValueError('Unknown app step')
                 time.sleep(1.5)
@@ -256,6 +296,7 @@ def main():
                     'appRenderer': re.findall(r'Using the Impeller rendering backend \(([^)]+)\)', app_log.read_text()),
                     'backend': 'native-wayland', 'kernel': os.uname().release,
                     'cursorIncluded': False,
+                    'captureAssertions': assertions,
                     'pairedHost': c.get('pairHost', True) is not False,
                     'size': [w, h], 'theme': c['theme'], 'locale': c['locale'],
                 }, indent=2) + '\n')

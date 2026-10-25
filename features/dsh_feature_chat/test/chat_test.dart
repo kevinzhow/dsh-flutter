@@ -83,6 +83,65 @@ void main() {
     await t.pump();
   }
 
+  testWidgets('ordinary command lifecycle renders in the real chat view', (
+    t,
+  ) async {
+    await open(t, [
+      ev(1, 'command/run', {'commandId': 'c', 'name': 'status'}),
+      ev(2, 'command/done', {
+        'commandId': 'c',
+        'kind': 'success',
+        'text': 'Command finished',
+      }),
+    ]);
+    expect(find.byType(CommandView), findsOneWidget);
+    expect(find.text('status'), findsOneWidget);
+    expect(find.text('Command finished'), findsOneWidget);
+  });
+
+  testWidgets(
+    'landed compaction keeps transcript and expands only the safe summary',
+    (t) async {
+      await open(t, [
+        ev(1, 'user/message', {
+          'id': 'old',
+          'role': 'user',
+          'source': {'kind': 'user'},
+          'content': [
+            {'type': 'text', 'text': 'Earlier visible user text'},
+          ],
+        }, surface: 'append'),
+        ev(2, 'compaction/summary', {
+          'compactionId': 'a',
+          'summary': [
+            {'type': 'text', 'text': 'Safe summary'},
+          ],
+          'shadowedSeqs': [1],
+          'shadowedTokenCount': 50,
+        }),
+        EventEntry({
+          'seq': 3,
+          'time': 1003,
+          'type': 'user/message',
+          'surfaceOp': {'op': 'replace', 'startSeq': 1, 'endSeq': 1},
+          'data': {
+            'id': 'checkpoint',
+            'source': {'kind': 'compact-checkpoint', 'compactionId': 'a'},
+            'content': [
+              {'type': 'text', 'text': 'MODEL ONLY ENVELOPE'},
+            ],
+          },
+        }),
+      ]);
+      expect(find.text('Earlier visible user text'), findsOneWidget);
+      expect(find.text('MODEL ONLY ENVELOPE'), findsNothing);
+      expect(find.byType(CompactionView), findsOneWidget);
+      await t.tap(find.text(i18n.t('chat', 'message.compaction')));
+      await t.pump();
+      expect(find.text('Safe summary'), findsOneWidget);
+    },
+  );
+
   testWidgets(
     'system prompt has a registered disclosure and stays outside the transcript',
     (t) async {

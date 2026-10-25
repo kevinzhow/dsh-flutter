@@ -3,6 +3,7 @@ import '../registry.dart';
 import '../plan/submitted_plan.dart';
 import '../tool/todo_history.dart';
 import 'definitions.dart';
+import 'commands.dart';
 import 'nodes.dart';
 import 'retry.dart';
 import 'system_prompt.dart';
@@ -174,6 +175,8 @@ defaultChatRegistries() {
     ..register(const RequestPromptDefinition())
     ..register(const AssistantDefinition())
     ..register(const ToolDefinition())
+    ..register(const CommandDefinition())
+    ..register(const CompactionDefinition())
     ..register(const ModelRetryDefinition())
     ..register(const TurnErrorDefinition())
     ..register(const TurnMaxTokensDefinition())

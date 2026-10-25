@@ -24,9 +24,10 @@ import 'theme.dart';
 /// enclosing device-pixel box (a 420 CSS px wide element at 2.625x is 1102.5 device px, captured as 1103).
 Rect enclosingPixelRect(Rect rect, double density) {
   if (dshPixelModel == DshPixelModel.native) {
-    // 1/64 layout units: absorb the float noise of the multiplication.
-    double lo(double v) => (v * density + 1e-6).floorToDouble();
-    double hi(double v) => (v * density - 1e-6).ceilToDouble();
+    // Match the browser's float32 DOMRect noise tolerance; 1e-4 device px
+    // remains well below Blink's smallest genuine 1/64 px layout fraction.
+    double lo(double v) => (v * density + 1e-4).floorToDouble();
+    double hi(double v) => (v * density - 1e-4).ceilToDouble();
     return Rect.fromLTRB(
       lo(rect.left),
       lo(rect.top),

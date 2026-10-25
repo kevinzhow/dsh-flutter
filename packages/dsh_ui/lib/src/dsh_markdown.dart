@@ -21,10 +21,15 @@ class DshMarkdown extends StatelessWidget {
     this.onOpenUrl,
     this.onOpenFile,
     this.streaming = false,
+    this.blockSpacing,
   });
 
   final String data;
   final bool selectable;
+
+  /// Space between block elements when the enclosing surface specifies its
+  /// own paragraph margins. Omitted preserves the standard body spacing.
+  final double? blockSpacing;
 
   /// Strings of the code card toolbar. With them a fenced block is dsh's code
   /// card (language, wrap and copy, coloured by the ambient highlighter);
@@ -112,7 +117,7 @@ class DshMarkdown extends StatelessWidget {
           ),
         ),
       ),
-      blockSpacing: DshSpace.sm,
+      blockSpacing: blockSpacing ?? DshSpace.sm,
     );
     return MarkdownBody(
       data: data,
