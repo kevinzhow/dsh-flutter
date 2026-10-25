@@ -970,6 +970,21 @@ abstract final class DshShellIcons {
     ],
   );
 
+  /// `IconCloseCircleFillRegular`.
+  static const closeCircleFill = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M15 8A7 7 0 1 1 1 8A7 7 0 1 1 15 8ZM6.409 10.652L5.348 9.591L6.939 8L5.348 6.409L6.409 5.348L8 6.939L9.591 5.348L10.652 6.409L9.061 8L10.652 9.591L9.591 10.652L8 9.061Z',
+        fill: true,
+        cap: DshIconCap.butt,
+        evenOdd: true,
+      ),
+    ],
+  );
+
   /// `IconSendOutlineRegular`.
   static const sendOutline = DshIconData(
     viewBox: 16,

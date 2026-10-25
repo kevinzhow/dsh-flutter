@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
 
-import 'package:dsh_feature_plan/src/plan_resource.dart';
+import 'package:dsh_feature_plan/dsh_feature_plan.dart';
+import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +15,81 @@ Map<String, Object?> call(int seq, String id) => rec(
     'arguments': jsonEncode({'plan': '# Synthetic plan\n\nDetails'}),
   },
 );
+
+class _Services implements PlanServices {
+  final transport = FakeTransport();
+  int reads = 0;
+  @override
+  Future<String?> exitPlanMode(String sessionId) async => null;
+  @override
+  void openResource(
+    SessionOwner owner,
+    String address, {
+    Map<String, Object?> params = const {},
+  }) {}
+  @override
+  SessionHistoryRead historyRead(Map<String, Object?> address) {
+    reads++;
+    return SessionHistoryRead(transport, address);
+  }
+}
+
 void main() {
+  test('title and document share one read; only last release cancels and reopen retries', () async {
+    final service = _Services();
+    final feature = PlanFeature(service);
+    addTearDown(feature.reset);
+    final address = PlanAddress({
+      'kind': 'session',
+      'sessionId': 's',
+    }, 'call').encoded;
+    final body = feature.acquire(address)!;
+    final title = feature.acquire(address)!;
+    expect(identical(body, title), true);
+    await pump();
+    expect(service.reads, 1);
+    feature.release(address, body);
+    expect(service.transport.currentFollow.hasListener, true);
+    feature.release(address, title);
+    await pump();
+    expect(service.transport.currentFollow.hasListener, false);
+    expect(body.closed, true);
+    final reopened = feature.acquire(address)!;
+    await pump();
+    expect(identical(reopened, body), false);
+    expect(service.reads, 2);
+    feature.release(address, reopened);
+    await pump();
+  });
+  test(
+    'settled resource survives closure and reset clears cached host data',
+    () async {
+      final service = _Services();
+      final feature = PlanFeature(service);
+      addTearDown(feature.reset);
+      final address = PlanAddress({
+        'kind': 'session',
+        'sessionId': 's',
+      }, 'wanted').encoded;
+      final body = feature.acquire(address)!;
+      await pump();
+      service.transport.open(1, snapshot([call(2, 'wanted')]));
+      await pump();
+      expect(body.state.value.plan!.callId, 'wanted');
+      feature.release(address, body);
+      final title = feature.acquire(address)!;
+      expect(identical(body, title), true);
+      expect(service.reads, 1);
+      feature.release(address, title);
+      feature.reset();
+      final fresh = feature.acquire(address)!;
+      await pump();
+      expect(service.reads, 2);
+      expect(fresh.state.value.plan, isNull);
+      feature.release(address, fresh);
+      await pump();
+    },
+  );
   test(
     'older plan reads keep the opening snapshot cut and exact child address',
     () async {

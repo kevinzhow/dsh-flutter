@@ -18,7 +18,11 @@ class _Actions implements SidebarTabActions {
   opened = [];
 
   @override
-  void openResource(String address, {int? line}) {}
+  void openResource(
+    String address, {
+    int? line,
+    Map<String, Object?> params = const {},
+  }) {}
 
   @override
   void openTab(

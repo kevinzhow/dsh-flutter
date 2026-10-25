@@ -1,0 +1,102 @@
+{
+  "format": "dsh-plan-markdown/1",
+  "cases": [
+    {
+      "text": "# **Ship** [fixture](https://example.test)\n\nFirst *semantic* paragraph.",
+      "expected": {
+        "all": "Ship fixture\n\nFirst semantic paragraph.",
+        "first-line": "Ship fixture",
+        "first-paragraph": "First semantic paragraph."
+      }
+    },
+    {
+      "text": "# Heading\n\n- [x] First\n- Second",
+      "expected": {
+        "all": "Heading\n\nFirst\nSecond",
+        "first-line": "Heading",
+        "first-paragraph": "First"
+      }
+    },
+    {
+      "text": "# Header only",
+      "expected": {
+        "all": "Header only",
+        "first-line": "Header only",
+        "first-paragraph": "Header only"
+      }
+    },
+    {
+      "text": "> Quote **title**\n>\n> Paragraph `code`.",
+      "expected": {
+        "all": "Quote title\n\nParagraph code.",
+        "first-line": "Quote title",
+        "first-paragraph": "Quote title"
+      }
+    },
+    {
+      "text": "![Alt text](fixture.png)\n\nNext paragraph",
+      "expected": {
+        "all": "Alt text\n\nNext paragraph",
+        "first-line": "Alt text",
+        "first-paragraph": "Alt text"
+      }
+    },
+    {
+      "text": "<span>Literal HTML</span>\n\nText",
+      "expected": {
+        "all": "<span>Literal HTML</span>\n\nText",
+        "first-line": "<span>Literal HTML</span>",
+        "first-paragraph": "<span>Literal HTML</span>"
+      }
+    },
+    {
+      "text": "```dart\nfinal x = 1;\n```\n\nAfter code",
+      "expected": {
+        "all": "final x = 1;\n\nAfter code",
+        "first-line": "final x = 1;",
+        "first-paragraph": "After code"
+      }
+    },
+    {
+      "text": "| A | B |\n|---|---|\n| One | Two |",
+      "expected": {
+        "all": "A\tB\nOne\tTwo",
+        "first-line": "A\tB",
+        "first-paragraph": "A\tB"
+      }
+    },
+    {
+      "text": "## 中文**加粗**标题\n\n第一段。",
+      "expected": {
+        "all": "中文加粗标题\n\n第一段。",
+        "first-line": "中文加粗标题",
+        "first-paragraph": "第一段。"
+      }
+    },
+    {
+      "text": "[Reference][r]\n\n[r]: https://example.test",
+      "expected": {
+        "all": "Reference",
+        "first-line": "Reference",
+        "first-paragraph": "Reference"
+      }
+    },
+    {
+      "text": "a  \nb",
+      "expected": {
+        "all": "a b",
+        "first-line": "a b",
+        "first-paragraph": "a b"
+      }
+    },
+    {
+      "text": "# Heading\n\n---\n\nBody",
+      "expected": {
+        "all": "Heading\n\nBody",
+        "first-line": "Heading",
+        "first-paragraph": "Body"
+      }
+    }
+  ],
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

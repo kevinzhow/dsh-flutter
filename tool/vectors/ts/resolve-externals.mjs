@@ -5,10 +5,10 @@
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-let anchor
+let anchors
 
 export function initialize(data) {
-  anchor = pathToFileURL(path.join(data.nodeDir, 'noop.mjs')).href
+  anchors = [data.nodeDir, ...(data.extraNodeDirs ?? [])].map(dir => pathToFileURL(path.join(dir, 'noop.mjs')).href)
 }
 
 export async function resolve(specifier, context, nextResolve) {
@@ -17,6 +17,10 @@ export async function resolve(specifier, context, nextResolve) {
   } catch (error) {
     const bare = !specifier.startsWith('.') && !specifier.startsWith('/') && !specifier.startsWith('file:') && !specifier.startsWith('node:')
     if (!bare || error?.code !== 'ERR_MODULE_NOT_FOUND') throw error
-    return nextResolve(specifier, { ...context, parentURL: anchor })
+    for (const anchor of anchors) {
+      try { return await nextResolve(specifier, { ...context, parentURL: anchor }) }
+      catch (fallback) { if (fallback?.code !== 'ERR_MODULE_NOT_FOUND') throw fallback }
+    }
+    throw error
   }
 }

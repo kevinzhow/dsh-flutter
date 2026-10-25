@@ -21,7 +21,7 @@ export function die(message, code = 1) {
  * Register tsx and the externals hook, and return a loader for dsh source files.
  * @returns `{ load(relativeSpecifier) }`, importing a file of the dsh checkout.
  */
-export async function loadDsh() {
+export async function loadDsh({ extraNodeDirs = [] } = {}) {
   const dshSrc = path.resolve(process.env.DSH_SRC ?? path.join(repoRoot, '.local', 'dsh-src'))
   const nodeDir = path.resolve(process.env.DSH_VECTOR_NODE_DIR ?? path.join(repoRoot, '.local', 'vector-node'))
   if (!fs.existsSync(path.join(dshSrc, 'packages/client/ui-settings/src/client/schema.ts'))) {
@@ -33,7 +33,7 @@ export async function loadDsh() {
   registerTsx({ tsconfig: path.join(dshSrc, 'tsconfig.base.json') })
   registerHooks(pathToFileURL(path.join(here, 'resolve-externals.mjs')).href, {
     parentURL: import.meta.url,
-    data: { nodeDir },
+    data: { nodeDir, extraNodeDirs },
   })
   return { load: specifier => import(pathToFileURL(path.join(dshSrc, specifier)).href) }
 }

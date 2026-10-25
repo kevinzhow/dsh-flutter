@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_commands.dart' show CommandsRemote;
 import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_client/generated_user_questions.dart'
     show AskUserQuestionAnswer, AskUserQuestionAnswerItem, UserQuestionsRemote;
@@ -255,7 +256,11 @@ class AppController extends ChangeNotifier {
     );
     registerDocumentPreviewFeature(slots, i18n: () => i18n);
     registerToolFeature(slots, i18n: () => i18n, actions: hostActions);
-    registerPlanFeature(slots, i18n: () => i18n);
+    plans = registerPlanFeature(
+      slots,
+      i18n: () => i18n,
+      services: _PlanBridge(this),
+    );
     _subagents = registerSubagentFeature(
       slots,
       i18n: () => i18n,
@@ -478,6 +483,7 @@ class AppController extends ChangeNotifier {
   ModelSelectionFeature? _models;
   final List<void Function()> _hostOffs = [];
   late final ChatPreferences chatPreferences;
+  late final PlanFeature plans;
   final conversationPreferences = ConversationPreferences();
   StreamSubscription<ThemeSettings>? _themeSub;
   String? _pendingOpen;
@@ -865,6 +871,7 @@ class AppController extends ChangeNotifier {
   }
 
   void _detachHost() {
+    plans.reset();
     chatPreferences.bind(null);
     conversationPreferences.bind(null);
     for (final off in _hostOffs) {
@@ -1512,5 +1519,33 @@ class _WorkflowBridge implements WorkflowRunServices {
         label: member.label,
       ),
     );
+  }
+}
+
+class _PlanBridge implements PlanServices {
+  _PlanBridge(this.app);
+  final AppController app;
+  @override
+  Future<String?> exitPlanMode(String sessionId) async {
+    try {
+      final result = await CommandsRemote(app.backend.remoteCaller)
+          .execute(sessionId, '/plan off', []);
+      return result == null ? 'unknown command: /plan off' : null;
+    } on RemoteException catch (e) {
+      return '${e.message} (${e.code})';
+    }
+  }
+
+  @override
+  void openResource(
+    SessionOwner owner,
+    String address, {
+    Map<String, Object?> params = const {},
+  }) => app.sidebar.openResource(owner, address, params: params);
+  @override
+  SessionHistoryRead historyRead(Map<String, Object?> address) {
+    final transport = app._transport;
+    if (transport == null) throw StateError('Host connection unavailable');
+    return SessionHistoryRead(transport, address);
   }
 }

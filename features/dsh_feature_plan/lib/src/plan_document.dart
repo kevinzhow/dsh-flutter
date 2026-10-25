@@ -16,7 +16,9 @@ class PlanDocument extends StatelessWidget {
     final theme = context.dsh;
     return SingleChildScrollView(
       key: const ValueKey('plan-document'),
-      padding: const EdgeInsets.fromLTRB(18, 16, 18, 32),
+      padding: MediaQuery.sizeOf(context).width < 768
+          ? const EdgeInsets.fromLTRB(18, 16, 18, 32)
+          : const EdgeInsets.fromLTRB(24, 20, 24, 40),
       child: DefaultTextStyle.merge(
         style: TextStyle(color: theme.labelPrimary),
         child: DshMarkdown(plan.markdown, selectable: true),

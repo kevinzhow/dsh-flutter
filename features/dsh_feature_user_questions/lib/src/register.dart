@@ -4,6 +4,7 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:flutter/widgets.dart';
 
 import 'question_panel.dart';
+import 'plan_review_panel.dart';
 import 'question_tracker.dart';
 import 'question_reply_view.dart';
 
@@ -31,10 +32,22 @@ void registerUserQuestionsFeature(
     composerSlot,
     id: 'user-questions',
     select: (owner) => tracker.forSession(owner.sessionId),
-    builder: (owner, matched) => QuestionPanel(
-      key: ValueKey(matched.key),
-      pending: matched,
-      i18n: i18n(),
-    ),
+    builder: (owner, matched) {
+      final review = planReviewOf(matched.questions);
+      return review == null
+          ? QuestionPanel(
+              key: ValueKey(matched.key),
+              pending: matched,
+              i18n: i18n(),
+            )
+          : PlanReviewPanel(
+              key: ValueKey(matched.key),
+              pending: matched,
+              review: review,
+              owner: owner,
+              slots: slots,
+              i18n: i18n(),
+            );
+    },
   );
 }
