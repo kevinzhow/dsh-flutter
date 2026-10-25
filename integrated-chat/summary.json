@@ -1,0 +1,10218 @@
+{
+ "schema": "dsh-parity-summary/2",
+ "suite": "parity-ext",
+ "notes": "Suite parity-ext: 374 cases in the manifest. all themes, every case (PARITY_EXT_ALL_THEMES=1)",
+ "counts": {
+  "entries": 72,
+  "compared": 72,
+  "same": 0,
+  "strict": 0,
+  "pass": 8,
+  "geometryPass": 8,
+  "fail": 64,
+  "uncovered": 0,
+  "missing": 0
+ },
+ "meanPixelPerfectPct": 93.802,
+ "meanRgbPct": 99.394,
+ "meanNonTextPct": 98.188,
+ "thresholds": {
+  "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
+  "geometry": 99.5
+ },
+ "cases": [
+  {
+   "key": "components.model-retry.scheduled-closed-desktop-en.light",
+   "caseId": "components.model-retry.scheduled-closed-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-desktop-en (light)",
+   "variantName": "Model retry: scheduled-closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.493,
+   "rgbPct": 99.694,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.493,
+   "closePct": 95.295,
+   "nonTextPct": 98.698,
+   "mismatched": 980,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 141,
+    "corner": 8,
+    "offset": 1,
+    "text": 830,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 158,
+     "exactPct": 79.427,
+     "closePct": 89.583,
+     "nonTextPct": 95.443,
+     "buckets": {
+      "fill": 0,
+      "hairline": 35,
+      "corner": 0,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 148,
+     "exactPct": 80.729,
+     "closePct": 85.417,
+     "nonTextPct": 95.573,
+     "buckets": {
+      "fill": 0,
+      "hairline": 26,
+      "corner": 8,
+      "offset": 0,
+      "text": 114,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 151,
+     "exactPct": 80.339,
+     "closePct": 91.406,
+     "nonTextPct": 96.615,
+     "buckets": {
+      "fill": 0,
+      "hairline": 26,
+      "corner": 0,
+      "offset": 0,
+      "text": 125,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 144,
+     "exactPct": 81.25,
+     "closePct": 88.542,
+     "nonTextPct": 97.005,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 0,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 173,
+     "exactPct": 77.474,
+     "closePct": 87.63,
+     "nonTextPct": 97.526,
+     "buckets": {
+      "fill": 0,
+      "hairline": 19,
+      "corner": 0,
+      "offset": 0,
+      "text": 154,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-desktop-en.dark",
+   "caseId": "components.model-retry.scheduled-closed-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-desktop-en (dark)",
+   "variantName": "Model retry: scheduled-closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.181,
+   "rgbPct": 99.457,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.181,
+   "closePct": 92.786,
+   "nonTextPct": 98.767,
+   "mismatched": 1016,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 133,
+    "corner": 8,
+    "offset": 1,
+    "text": 874,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 167,
+     "exactPct": 78.255,
+     "closePct": 83.203,
+     "nonTextPct": 95.703,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 0,
+      "text": 134,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 154,
+     "exactPct": 79.948,
+     "closePct": 82.943,
+     "nonTextPct": 95.703,
+     "buckets": {
+      "fill": 0,
+      "hairline": 25,
+      "corner": 8,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 147,
+     "exactPct": 80.859,
+     "closePct": 83.854,
+     "nonTextPct": 96.875,
+     "buckets": {
+      "fill": 0,
+      "hairline": 24,
+      "corner": 0,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 158,
+     "exactPct": 79.427,
+     "closePct": 84.115,
+     "nonTextPct": 97.135,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 0,
+      "offset": 0,
+      "text": 136,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 180,
+     "exactPct": 76.562,
+     "closePct": 81.901,
+     "nonTextPct": 97.656,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 0,
+      "offset": 0,
+      "text": 162,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-desktop-zh.light",
+   "caseId": "components.model-retry.scheduled-closed-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-desktop-zh (light)",
+   "variantName": "Model retry: scheduled-closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 90.356,
+   "rgbPct": 99.72,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 90.356,
+   "closePct": 95.052,
+   "nonTextPct": 98.403,
+   "mismatched": 1111,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 138,
+    "corner": 46,
+    "offset": 0,
+    "text": 927,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 224,
+     "exactPct": 70.833,
+     "closePct": 87.24,
+     "nonTextPct": 89.714,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 40,
+      "offset": 0,
+      "text": 145,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 132,
+     "exactPct": 82.812,
+     "closePct": 92.448,
+     "nonTextPct": 94.01,
+     "buckets": {
+      "fill": 0,
+      "hairline": 46,
+      "corner": 0,
+      "offset": 0,
+      "text": 86,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 91,
+     "exactPct": 88.151,
+     "closePct": 91.406,
+     "nonTextPct": 96.224,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 6,
+      "offset": 0,
+      "text": 62,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 264,
+     "exactPct": 65.625,
+     "closePct": 83.333,
+     "nonTextPct": 97.656,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 0,
+      "offset": 0,
+      "text": 246,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 114,
+     "exactPct": 85.156,
+     "closePct": 88.932,
+     "nonTextPct": 99.089,
+     "buckets": {
+      "fill": 0,
+      "hairline": 7,
+      "corner": 0,
+      "offset": 0,
+      "text": 107,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-desktop-zh.dark",
+   "caseId": "components.model-retry.scheduled-closed-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-desktop-zh (dark)",
+   "variantName": "Model retry: scheduled-closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 89.983,
+   "rgbPct": 99.458,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 89.983,
+   "closePct": 92.04,
+   "nonTextPct": 98.55,
+   "mismatched": 1154,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 121,
+    "corner": 46,
+    "offset": 0,
+    "text": 987,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 230,
+     "exactPct": 70.052,
+     "closePct": 76.953,
+     "nonTextPct": 89.453,
+     "buckets": {
+      "fill": 0,
+      "hairline": 41,
+      "corner": 40,
+      "offset": 0,
+      "text": 149,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 133,
+     "exactPct": 82.682,
+     "closePct": 85.938,
+     "nonTextPct": 95.182,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 96,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 94,
+     "exactPct": 87.76,
+     "closePct": 89.062,
+     "nonTextPct": 96.354,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 6,
+      "offset": 0,
+      "text": 66,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 276,
+     "exactPct": 64.062,
+     "closePct": 71.354,
+     "nonTextPct": 98.307,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 0,
+      "text": 263,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 120,
+     "exactPct": 84.375,
+     "closePct": 86.589,
+     "nonTextPct": 99.219,
+     "buckets": {
+      "fill": 0,
+      "hairline": 6,
+      "corner": 0,
+      "offset": 0,
+      "text": 114,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-phone-en.light",
+   "caseId": "components.model-retry.scheduled-closed-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-phone-en (light)",
+   "variantName": "Model retry: scheduled-closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.89,
+   "rgbPct": 99.228,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.89,
+   "closePct": 93.61,
+   "nonTextPct": 96.407,
+   "mismatched": 3219,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1365,
+    "corner": 20,
+    "offset": 41,
+    "text": 1793,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 507,
+     "exactPct": 90.42,
+     "closePct": 91.629,
+     "nonTextPct": 94.841,
+     "buckets": {
+      "fill": 0,
+      "hairline": 273,
+      "corner": 0,
+      "offset": 0,
+      "text": 234,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 469,
+     "exactPct": 91.138,
+     "closePct": 94.539,
+     "nonTextPct": 94.936,
+     "buckets": {
+      "fill": 0,
+      "hairline": 260,
+      "corner": 0,
+      "offset": 8,
+      "text": 201,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 488,
+     "exactPct": 90.779,
+     "closePct": 92.574,
+     "nonTextPct": 95.163,
+     "buckets": {
+      "fill": 0,
+      "hairline": 247,
+      "corner": 9,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 568,
+     "exactPct": 89.267,
+     "closePct": 91.799,
+     "nonTextPct": 95.805,
+     "buckets": {
+      "fill": 0,
+      "hairline": 204,
+      "corner": 11,
+      "offset": 7,
+      "text": 346,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 475,
+     "exactPct": 91.024,
+     "closePct": 92.574,
+     "nonTextPct": 95.899,
+     "buckets": {
+      "fill": 0,
+      "hairline": 208,
+      "corner": 0,
+      "offset": 9,
+      "text": 258,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-phone-en.dark",
+   "caseId": "components.model-retry.scheduled-closed-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-phone-en (dark)",
+   "variantName": "Model retry: scheduled-closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.738,
+   "rgbPct": 98.938,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.738,
+   "closePct": 92.701,
+   "nonTextPct": 96.478,
+   "mismatched": 3279,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1370,
+    "corner": 15,
+    "offset": 13,
+    "text": 1881,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 517,
+     "exactPct": 90.231,
+     "closePct": 91.194,
+     "nonTextPct": 94.898,
+     "buckets": {
+      "fill": 0,
+      "hairline": 270,
+      "corner": 0,
+      "offset": 0,
+      "text": 247,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 475,
+     "exactPct": 91.024,
+     "closePct": 92.101,
+     "nonTextPct": 94.974,
+     "buckets": {
+      "fill": 0,
+      "hairline": 266,
+      "corner": 0,
+      "offset": 0,
+      "text": 209,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 504,
+     "exactPct": 90.476,
+     "closePct": 91.421,
+     "nonTextPct": 95.333,
+     "buckets": {
+      "fill": 0,
+      "hairline": 243,
+      "corner": 4,
+      "offset": 0,
+      "text": 257,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 572,
+     "exactPct": 89.191,
+     "closePct": 90.476,
+     "nonTextPct": 95.899,
+     "buckets": {
+      "fill": 0,
+      "hairline": 206,
+      "corner": 11,
+      "offset": 0,
+      "text": 355,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 480,
+     "exactPct": 90.93,
+     "closePct": 91.912,
+     "nonTextPct": 96.032,
+     "buckets": {
+      "fill": 0,
+      "hairline": 210,
+      "corner": 0,
+      "offset": 0,
+      "text": 270,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-phone-zh.light",
+   "caseId": "components.model-retry.scheduled-closed-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-phone-zh (light)",
+   "variantName": "Model retry: scheduled-closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.373,
+   "rgbPct": 99.495,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.373,
+   "closePct": 93.671,
+   "nonTextPct": 95.583,
+   "mismatched": 3424,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1457,
+    "corner": 279,
+    "offset": 17,
+    "text": 1671,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 660,
+     "exactPct": 87.528,
+     "closePct": 91.912,
+     "nonTextPct": 89.985,
+     "buckets": {
+      "fill": 0,
+      "hairline": 434,
+      "corner": 96,
+      "offset": 0,
+      "text": 130,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 793,
+     "exactPct": 85.015,
+     "closePct": 89.985,
+     "nonTextPct": 91.553,
+     "buckets": {
+      "fill": 0,
+      "hairline": 365,
+      "corner": 82,
+      "offset": 0,
+      "text": 346,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 855,
+     "exactPct": 83.844,
+     "closePct": 88.511,
+     "nonTextPct": 91.931,
+     "buckets": {
+      "fill": 0,
+      "hairline": 338,
+      "corner": 89,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 449,
+     "exactPct": 91.515,
+     "closePct": 92.517,
+     "nonTextPct": 96.485,
+     "buckets": {
+      "fill": 0,
+      "hairline": 167,
+      "corner": 12,
+      "offset": 7,
+      "text": 263,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 382,
+     "exactPct": 92.782,
+     "closePct": 93.67,
+     "nonTextPct": 98.299,
+     "buckets": {
+      "fill": 0,
+      "hairline": 83,
+      "corner": 0,
+      "offset": 7,
+      "text": 292,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.scheduled-closed-phone-zh.dark",
+   "caseId": "components.model-retry.scheduled-closed-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: scheduled-closed-phone-zh (dark)",
+   "variantName": "Model retry: scheduled-closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.121,
+   "rgbPct": 99.252,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.scheduled-closed-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.121,
+   "closePct": 92.552,
+   "nonTextPct": 95.488,
+   "mismatched": 3524,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1498,
+    "corner": 292,
+    "offset": 1,
+    "text": 1733,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 688,
+     "exactPct": 86.999,
+     "closePct": 89.38,
+     "nonTextPct": 89.588,
+     "buckets": {
+      "fill": 0,
+      "hairline": 454,
+      "corner": 97,
+      "offset": 0,
+      "text": 137,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 902,
+     "exactPct": 82.955,
+     "closePct": 86.319,
+     "nonTextPct": 91.402,
+     "buckets": {
+      "fill": 0,
+      "hairline": 355,
+      "corner": 100,
+      "offset": 0,
+      "text": 447,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 802,
+     "exactPct": 84.845,
+     "closePct": 87.302,
+     "nonTextPct": 91.497,
+     "buckets": {
+      "fill": 0,
+      "hairline": 366,
+      "corner": 84,
+      "offset": 0,
+      "text": 352,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 451,
+     "exactPct": 91.478,
+     "closePct": 92.196,
+     "nonTextPct": 96.599,
+     "buckets": {
+      "fill": 0,
+      "hairline": 169,
+      "corner": 11,
+      "offset": 0,
+      "text": 271,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 392,
+     "exactPct": 92.593,
+     "closePct": 93.367,
+     "nonTextPct": 98.394,
+     "buckets": {
+      "fill": 0,
+      "hairline": 84,
+      "corner": 0,
+      "offset": 1,
+      "text": 307,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-desktop-en.light",
+   "caseId": "components.model-retry.started-closed-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-desktop-en (light)",
+   "variantName": "Model retry: started-closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.91,
+   "rgbPct": 99.701,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.91,
+   "closePct": 95.599,
+   "nonTextPct": 99.071,
+   "mismatched": 932,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 105,
+    "corner": 0,
+    "offset": 2,
+    "text": 825,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 149,
+     "exactPct": 80.599,
+     "closePct": 91.276,
+     "nonTextPct": 95.052,
+     "buckets": {
+      "fill": 0,
+      "hairline": 38,
+      "corner": 0,
+      "offset": 0,
+      "text": 111,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 171,
+     "exactPct": 77.734,
+     "closePct": 88.021,
+     "nonTextPct": 97.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 19,
+      "corner": 0,
+      "offset": 2,
+      "text": 150,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 139,
+     "exactPct": 81.901,
+     "closePct": 91.146,
+     "nonTextPct": 97.526,
+     "buckets": {
+      "fill": 0,
+      "hairline": 19,
+      "corner": 0,
+      "offset": 0,
+      "text": 120,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 134,
+     "exactPct": 82.552,
+     "closePct": 91.667,
+     "nonTextPct": 97.786,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 0,
+      "text": 117,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 164,
+     "exactPct": 78.646,
+     "closePct": 88.542,
+     "nonTextPct": 98.438,
+     "buckets": {
+      "fill": 0,
+      "hairline": 12,
+      "corner": 0,
+      "offset": 0,
+      "text": 152,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-desktop-en.dark",
+   "caseId": "components.model-retry.started-closed-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-desktop-en (dark)",
+   "variantName": "Model retry: started-closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.58,
+   "rgbPct": 99.486,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.58,
+   "closePct": 93.099,
+   "nonTextPct": 99.045,
+   "mismatched": 970,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 110,
+    "corner": 0,
+    "offset": 0,
+    "text": 860,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 151,
+     "exactPct": 80.339,
+     "closePct": 83.333,
+     "nonTextPct": 95.443,
+     "buckets": {
+      "fill": 0,
+      "hairline": 35,
+      "corner": 0,
+      "offset": 0,
+      "text": 116,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 143,
+     "exactPct": 81.38,
+     "closePct": 83.594,
+     "nonTextPct": 97.005,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 0,
+      "offset": 0,
+      "text": 120,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 176,
+     "exactPct": 77.083,
+     "closePct": 81.901,
+     "nonTextPct": 97.656,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 0,
+      "offset": 0,
+      "text": 158,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 142,
+     "exactPct": 81.51,
+     "closePct": 84.896,
+     "nonTextPct": 97.786,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 0,
+      "text": 125,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 176,
+     "exactPct": 77.083,
+     "closePct": 83.203,
+     "nonTextPct": 98.438,
+     "buckets": {
+      "fill": 0,
+      "hairline": 12,
+      "corner": 0,
+      "offset": 0,
+      "text": 164,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-desktop-zh.light",
+   "caseId": "components.model-retry.started-closed-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-desktop-zh (light)",
+   "variantName": "Model retry: started-closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.102,
+   "rgbPct": 99.725,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.102,
+   "closePct": 95.217,
+   "nonTextPct": 98.568,
+   "mismatched": 1025,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 136,
+    "corner": 27,
+    "offset": 2,
+    "text": 860,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 245,
+     "exactPct": 68.099,
+     "closePct": 81.641,
+     "nonTextPct": 91.536,
+     "buckets": {
+      "fill": 0,
+      "hairline": 42,
+      "corner": 21,
+      "offset": 2,
+      "text": 180,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 152,
+     "exactPct": 80.208,
+     "closePct": 87.76,
+     "nonTextPct": 91.667,
+     "buckets": {
+      "fill": 0,
+      "hairline": 58,
+      "corner": 6,
+      "offset": 0,
+      "text": 88,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 298,
+     "exactPct": 61.198,
+     "closePct": 82.161,
+     "nonTextPct": 97.917,
+     "buckets": {
+      "fill": 0,
+      "hairline": 16,
+      "corner": 0,
+      "offset": 0,
+      "text": 282,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 209,
+     "exactPct": 72.786,
+     "closePct": 88.542,
+     "nonTextPct": 98.307,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 0,
+      "text": 196,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 86,
+     "exactPct": 88.802,
+     "closePct": 92.188,
+     "nonTextPct": 99.089,
+     "buckets": {
+      "fill": 0,
+      "hairline": 7,
+      "corner": 0,
+      "offset": 0,
+      "text": 79,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-desktop-zh.dark",
+   "caseId": "components.model-retry.started-closed-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-desktop-zh (dark)",
+   "variantName": "Model retry: started-closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 90.755,
+   "rgbPct": 99.479,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 90.755,
+   "closePct": 92.674,
+   "nonTextPct": 98.759,
+   "mismatched": 1065,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 117,
+    "corner": 26,
+    "offset": 0,
+    "text": 922,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 158,
+     "exactPct": 79.427,
+     "closePct": 81.641,
+     "nonTextPct": 91.536,
+     "buckets": {
+      "fill": 0,
+      "hairline": 59,
+      "corner": 6,
+      "offset": 0,
+      "text": 93,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 257,
+     "exactPct": 66.536,
+     "closePct": 77.083,
+     "nonTextPct": 92.318,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 20,
+      "offset": 0,
+      "text": 198,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 308,
+     "exactPct": 59.896,
+     "closePct": 67.578,
+     "nonTextPct": 98.568,
+     "buckets": {
+      "fill": 0,
+      "hairline": 11,
+      "corner": 0,
+      "offset": 0,
+      "text": 297,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 91,
+     "exactPct": 88.151,
+     "closePct": 90.365,
+     "nonTextPct": 99.219,
+     "buckets": {
+      "fill": 0,
+      "hairline": 6,
+      "corner": 0,
+      "offset": 0,
+      "text": 85,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 214,
+     "exactPct": 72.135,
+     "closePct": 77.865,
+     "nonTextPct": 99.74,
+     "buckets": {
+      "fill": 0,
+      "hairline": 2,
+      "corner": 0,
+      "offset": 0,
+      "text": 212,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-phone-en.light",
+   "caseId": "components.model-retry.started-closed-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-phone-en (light)",
+   "variantName": "Model retry: started-closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.995,
+   "rgbPct": 99.244,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.995,
+   "closePct": 93.379,
+   "nonTextPct": 96.289,
+   "mismatched": 3177,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1426,
+    "corner": 20,
+    "offset": 27,
+    "text": 1704,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 647,
+     "exactPct": 87.774,
+     "closePct": 89.002,
+     "nonTextPct": 93.348,
+     "buckets": {
+      "fill": 0,
+      "hairline": 352,
+      "corner": 0,
+      "offset": 0,
+      "text": 295,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 544,
+     "exactPct": 89.72,
+     "closePct": 91.837,
+     "nonTextPct": 94.992,
+     "buckets": {
+      "fill": 0,
+      "hairline": 248,
+      "corner": 11,
+      "offset": 6,
+      "text": 279,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 455,
+     "exactPct": 91.402,
+     "closePct": 93.197,
+     "nonTextPct": 95.333,
+     "buckets": {
+      "fill": 0,
+      "hairline": 243,
+      "corner": 4,
+      "offset": 0,
+      "text": 208,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 515,
+     "exactPct": 90.268,
+     "closePct": 91.799,
+     "nonTextPct": 95.333,
+     "buckets": {
+      "fill": 0,
+      "hairline": 233,
+      "corner": 0,
+      "offset": 14,
+      "text": 268,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 436,
+     "exactPct": 91.761,
+     "closePct": 94.199,
+     "nonTextPct": 95.881,
+     "buckets": {
+      "fill": 0,
+      "hairline": 213,
+      "corner": 5,
+      "offset": 0,
+      "text": 218,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-phone-en.dark",
+   "caseId": "components.model-retry.started-closed-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-phone-en (dark)",
+   "variantName": "Model retry: started-closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.827,
+   "rgbPct": 98.964,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.827,
+   "closePct": 92.605,
+   "nonTextPct": 96.357,
+   "mismatched": 3244,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1425,
+    "corner": 20,
+    "offset": 1,
+    "text": 1798,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 657,
+     "exactPct": 87.585,
+     "closePct": 88.568,
+     "nonTextPct": 93.726,
+     "buckets": {
+      "fill": 0,
+      "hairline": 332,
+      "corner": 0,
+      "offset": 0,
+      "text": 325,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 552,
+     "exactPct": 89.569,
+     "closePct": 90.552,
+     "nonTextPct": 95.049,
+     "buckets": {
+      "fill": 0,
+      "hairline": 251,
+      "corner": 11,
+      "offset": 0,
+      "text": 290,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 465,
+     "exactPct": 91.213,
+     "closePct": 92.101,
+     "nonTextPct": 95.314,
+     "buckets": {
+      "fill": 0,
+      "hairline": 244,
+      "corner": 4,
+      "offset": 0,
+      "text": 217,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 516,
+     "exactPct": 90.249,
+     "closePct": 91.194,
+     "nonTextPct": 95.597,
+     "buckets": {
+      "fill": 0,
+      "hairline": 233,
+      "corner": 0,
+      "offset": 0,
+      "text": 283,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 459,
+     "exactPct": 91.327,
+     "closePct": 92.309,
+     "nonTextPct": 95.635,
+     "buckets": {
+      "fill": 0,
+      "hairline": 226,
+      "corner": 5,
+      "offset": 0,
+      "text": 228,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-phone-zh.light",
+   "caseId": "components.model-retry.started-closed-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-phone-zh (light)",
+   "variantName": "Model retry: started-closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.887,
+   "rgbPct": 99.539,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.887,
+   "closePct": 94.109,
+   "nonTextPct": 95.845,
+   "mismatched": 3220,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1343,
+    "corner": 295,
+    "offset": 11,
+    "text": 1571,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 716,
+     "exactPct": 86.47,
+     "closePct": 91.667,
+     "nonTextPct": 89.059,
+     "buckets": {
+      "fill": 0,
+      "hairline": 467,
+      "corner": 112,
+      "offset": 0,
+      "text": 137,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 875,
+     "exactPct": 83.466,
+     "closePct": 88.587,
+     "nonTextPct": 92.234,
+     "buckets": {
+      "fill": 0,
+      "hairline": 321,
+      "corner": 90,
+      "offset": 0,
+      "text": 464,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 668,
+     "exactPct": 87.377,
+     "closePct": 91.534,
+     "nonTextPct": 93.311,
+     "buckets": {
+      "fill": 0,
+      "hairline": 261,
+      "corner": 93,
+      "offset": 0,
+      "text": 314,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 547,
+     "exactPct": 89.664,
+     "closePct": 91.005,
+     "nonTextPct": 95.805,
+     "buckets": {
+      "fill": 0,
+      "hairline": 211,
+      "corner": 0,
+      "offset": 11,
+      "text": 325,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 313,
+     "exactPct": 94.085,
+     "closePct": 94.766,
+     "nonTextPct": 98.432,
+     "buckets": {
+      "fill": 0,
+      "hairline": 83,
+      "corner": 0,
+      "offset": 0,
+      "text": 230,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-closed-phone-zh.dark",
+   "caseId": "components.model-retry.started-closed-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-closed-phone-zh (dark)",
+   "variantName": "Model retry: started-closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.706,
+   "rgbPct": 99.322,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-closed-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.706,
+   "closePct": 93.018,
+   "nonTextPct": 95.823,
+   "mismatched": 3292,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 1363,
+    "corner": 295,
+    "offset": 0,
+    "text": 1634,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 727,
+     "exactPct": 86.262,
+     "closePct": 88.964,
+     "nonTextPct": 88.946,
+     "buckets": {
+      "fill": 0,
+      "hairline": 472,
+      "corner": 113,
+      "offset": 0,
+      "text": 142,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 900,
+     "exactPct": 82.993,
+     "closePct": 85.242,
+     "nonTextPct": 92.007,
+     "buckets": {
+      "fill": 0,
+      "hairline": 334,
+      "corner": 89,
+      "offset": 0,
+      "text": 477,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 677,
+     "exactPct": 87.207,
+     "closePct": 90.06,
+     "nonTextPct": 93.311,
+     "buckets": {
+      "fill": 0,
+      "hairline": 261,
+      "corner": 93,
+      "offset": 0,
+      "text": 323,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 562,
+     "exactPct": 89.38,
+     "closePct": 90.495,
+     "nonTextPct": 95.975,
+     "buckets": {
+      "fill": 0,
+      "hairline": 213,
+      "corner": 0,
+      "offset": 0,
+      "text": 349,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 319,
+     "exactPct": 93.972,
+     "closePct": 94.615,
+     "nonTextPct": 98.432,
+     "buckets": {
+      "fill": 0,
+      "hairline": 83,
+      "corner": 0,
+      "offset": 0,
+      "text": 236,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-desktop-en.light",
+   "caseId": "components.model-retry.started-open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-desktop-en (light)",
+   "variantName": "Model retry: started-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.798,
+   "rgbPct": 99.728,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.798,
+   "closePct": 96.045,
+   "nonTextPct": 99.0,
+   "mismatched": 2247,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 274,
+    "corner": 33,
+    "offset": 5,
+    "text": 1935,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 294,
+     "exactPct": 71.289,
+     "closePct": 84.277,
+     "nonTextPct": 93.359,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 31,
+      "offset": 0,
+      "text": 226,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 286,
+     "exactPct": 72.07,
+     "closePct": 87.598,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 45,
+      "corner": 0,
+      "offset": 0,
+      "text": 241,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 154,
+     "exactPct": 84.961,
+     "closePct": 93.066,
+     "nonTextPct": 96.094,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 0,
+      "offset": 0,
+      "text": 114,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 204,
+     "exactPct": 80.078,
+     "closePct": 88.77,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 0,
+      "offset": 3,
+      "text": 170,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 319,
+     "exactPct": 68.848,
+     "closePct": 81.641,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 29,
+      "corner": 2,
+      "offset": 0,
+      "text": 288,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-desktop-en.dark",
+   "caseId": "components.model-retry.started-open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-desktop-en (dark)",
+   "variantName": "Model retry: started-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.638,
+   "rgbPct": 99.472,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.638,
+   "closePct": 93.753,
+   "nonTextPct": 98.974,
+   "mismatched": 2297,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 284,
+    "corner": 36,
+    "offset": 0,
+    "text": 1977,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 297,
+     "exactPct": 70.996,
+     "closePct": 75.391,
+     "nonTextPct": 92.676,
+     "buckets": {
+      "fill": 0,
+      "hairline": 41,
+      "corner": 34,
+      "offset": 0,
+      "text": 222,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 286,
+     "exactPct": 72.07,
+     "closePct": 75.0,
+     "nonTextPct": 95.703,
+     "buckets": {
+      "fill": 0,
+      "hairline": 44,
+      "corner": 0,
+      "offset": 0,
+      "text": 242,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 156,
+     "exactPct": 84.766,
+     "closePct": 87.012,
+     "nonTextPct": 96.387,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 119,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 322,
+     "exactPct": 68.555,
+     "closePct": 72.461,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 2,
+      "offset": 0,
+      "text": 289,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 204,
+     "exactPct": 80.078,
+     "closePct": 82.617,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 0,
+      "offset": 0,
+      "text": 173,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-desktop-zh.light",
+   "caseId": "components.model-retry.started-open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-desktop-zh (light)",
+   "variantName": "Model retry: started-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.785,
+   "rgbPct": 99.705,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.785,
+   "closePct": 95.074,
+   "nonTextPct": 98.872,
+   "mismatched": 2563,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 246,
+    "corner": 104,
+    "offset": 2,
+    "text": 2211,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 485,
+     "exactPct": 52.637,
+     "closePct": 71.582,
+     "nonTextPct": 92.285,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 40,
+      "offset": 0,
+      "text": 406,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 183,
+     "exactPct": 82.129,
+     "closePct": 88.184,
+     "nonTextPct": 93.555,
+     "buckets": {
+      "fill": 0,
+      "hairline": 60,
+      "corner": 6,
+      "offset": 0,
+      "text": 117,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 270,
+     "exactPct": 73.633,
+     "closePct": 84.375,
+     "nonTextPct": 93.652,
+     "buckets": {
+      "fill": 0,
+      "hairline": 42,
+      "corner": 21,
+      "offset": 2,
+      "text": 205,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 227,
+     "exactPct": 77.832,
+     "closePct": 87.109,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 33,
+      "offset": 0,
+      "text": 177,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 273,
+     "exactPct": 73.34,
+     "closePct": 81.934,
+     "nonTextPct": 97.461,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 4,
+      "offset": 0,
+      "text": 247,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-desktop-zh.dark",
+   "caseId": "components.model-retry.started-open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-desktop-zh (dark)",
+   "variantName": "Model retry: started-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.538,
+   "rgbPct": 99.392,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.538,
+   "closePct": 92.853,
+   "nonTextPct": 98.936,
+   "mismatched": 2640,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 225,
+    "corner": 107,
+    "offset": 0,
+    "text": 2308,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 497,
+     "exactPct": 51.465,
+     "closePct": 54.59,
+     "nonTextPct": 92.676,
+     "buckets": {
+      "fill": 0,
+      "hairline": 35,
+      "corner": 40,
+      "offset": 0,
+      "text": 422,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 190,
+     "exactPct": 81.445,
+     "closePct": 83.301,
+     "nonTextPct": 93.457,
+     "buckets": {
+      "fill": 0,
+      "hairline": 61,
+      "corner": 6,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 80.469,
+     "nonTextPct": 94.238,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 20,
+      "offset": 0,
+      "text": 223,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 240,
+     "exactPct": 76.562,
+     "closePct": 80.859,
+     "nonTextPct": 94.336,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 37,
+      "offset": 0,
+      "text": 182,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 276,
+     "exactPct": 73.047,
+     "closePct": 77.246,
+     "nonTextPct": 97.461,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 4,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-phone-en.light",
+   "caseId": "components.model-retry.started-open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-phone-en (light)",
+   "variantName": "Model retry: started-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 93.052,
+   "rgbPct": 99.317,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 93.052,
+   "closePct": 94.411,
+   "nonTextPct": 96.866,
+   "mismatched": 7485,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3219,
+    "corner": 106,
+    "offset": 51,
+    "text": 4109,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 909,
+     "exactPct": 87.117,
+     "closePct": 89.583,
+     "nonTextPct": 93.778,
+     "buckets": {
+      "fill": 0,
+      "hairline": 400,
+      "corner": 39,
+      "offset": 0,
+      "text": 470,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 971,
+     "exactPct": 86.239,
+     "closePct": 89.612,
+     "nonTextPct": 93.92,
+     "buckets": {
+      "fill": 0,
+      "hairline": 428,
+      "corner": 1,
+      "offset": 0,
+      "text": 542,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1077,
+     "exactPct": 84.736,
+     "closePct": 87.018,
+     "nonTextPct": 94.742,
+     "buckets": {
+      "fill": 0,
+      "hairline": 361,
+      "corner": 4,
+      "offset": 6,
+      "text": 706,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 689,
+     "exactPct": 90.235,
+     "closePct": 91.213,
+     "nonTextPct": 94.799,
+     "buckets": {
+      "fill": 0,
+      "hairline": 362,
+      "corner": 5,
+      "offset": 0,
+      "text": 322,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 611,
+     "exactPct": 91.341,
+     "closePct": 94.019,
+     "nonTextPct": 95.734,
+     "buckets": {
+      "fill": 0,
+      "hairline": 265,
+      "corner": 28,
+      "offset": 8,
+      "text": 310,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-phone-en.dark",
+   "caseId": "components.model-retry.started-open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-phone-en (dark)",
+   "variantName": "Model retry: started-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.963,
+   "rgbPct": 99.046,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.963,
+   "closePct": 93.668,
+   "nonTextPct": 96.907,
+   "mismatched": 7581,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3221,
+    "corner": 106,
+    "offset": 5,
+    "text": 4249,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 930,
+     "exactPct": 86.82,
+     "closePct": 88.322,
+     "nonTextPct": 93.637,
+     "buckets": {
+      "fill": 0,
+      "hairline": 410,
+      "corner": 39,
+      "offset": 0,
+      "text": 481,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 973,
+     "exactPct": 86.21,
+     "closePct": 87.557,
+     "nonTextPct": 93.948,
+     "buckets": {
+      "fill": 0,
+      "hairline": 426,
+      "corner": 1,
+      "offset": 0,
+      "text": 546,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1078,
+     "exactPct": 84.722,
+     "closePct": 86.295,
+     "nonTextPct": 94.827,
+     "buckets": {
+      "fill": 0,
+      "hairline": 361,
+      "corner": 4,
+      "offset": 0,
+      "text": 713,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 699,
+     "exactPct": 90.094,
+     "closePct": 90.859,
+     "nonTextPct": 95.082,
+     "buckets": {
+      "fill": 0,
+      "hairline": 342,
+      "corner": 5,
+      "offset": 0,
+      "text": 352,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 610,
+     "exactPct": 91.355,
+     "closePct": 92.63,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 265,
+      "corner": 28,
+      "offset": 0,
+      "text": 317,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-phone-zh.light",
+   "caseId": "components.model-retry.started-open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-phone-zh (light)",
+   "variantName": "Model retry: started-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.348,
+   "rgbPct": 99.532,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.348,
+   "closePct": 94.271,
+   "nonTextPct": 95.914,
+   "mismatched": 8244,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3683,
+    "corner": 708,
+    "offset": 11,
+    "text": 3842,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1599,
+     "exactPct": 77.338,
+     "closePct": 82.526,
+     "nonTextPct": 87.982,
+     "buckets": {
+      "fill": 0,
+      "hairline": 631,
+      "corner": 217,
+      "offset": 0,
+      "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1212,
+     "exactPct": 82.823,
+     "closePct": 86.947,
+     "nonTextPct": 90.717,
+     "buckets": {
+      "fill": 0,
+      "hairline": 652,
+      "corner": 3,
+      "offset": 0,
+      "text": 557,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 793,
+     "exactPct": 88.761,
+     "closePct": 93.013,
+     "nonTextPct": 91.086,
+     "buckets": {
+      "fill": 0,
+      "hairline": 517,
+      "corner": 112,
+      "offset": 0,
+      "text": 164,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 907,
+     "exactPct": 87.146,
+     "closePct": 90.377,
+     "nonTextPct": 91.256,
+     "buckets": {
+      "fill": 0,
+      "hairline": 530,
+      "corner": 87,
+      "offset": 0,
+      "text": 290,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1033,
+     "exactPct": 85.36,
+     "closePct": 89.725,
+     "nonTextPct": 93.438,
+     "buckets": {
+      "fill": 0,
+      "hairline": 357,
+      "corner": 106,
+      "offset": 0,
+      "text": 570,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.started-open-phone-zh.dark",
+   "caseId": "components.model-retry.started-open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: started-open-phone-zh (dark)",
+   "variantName": "Model retry: started-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.204,
+   "rgbPct": 99.27,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.started-open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.204,
+   "closePct": 93.285,
+   "nonTextPct": 95.893,
+   "mismatched": 8399,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3714,
+    "corner": 711,
+    "offset": 0,
+    "text": 3974,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1630,
+     "exactPct": 76.899,
+     "closePct": 79.719,
+     "nonTextPct": 87.543,
+     "buckets": {
+      "fill": 0,
+      "hairline": 656,
+      "corner": 223,
+      "offset": 0,
+      "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1236,
+     "exactPct": 82.483,
+     "closePct": 84.538,
+     "nonTextPct": 90.972,
+     "buckets": {
+      "fill": 0,
+      "hairline": 637,
+      "corner": 0,
+      "offset": 0,
+      "text": 599,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 804,
+     "exactPct": 88.605,
+     "closePct": 90.83,
+     "nonTextPct": 91.001,
+     "buckets": {
+      "fill": 0,
+      "hairline": 522,
+      "corner": 113,
+      "offset": 0,
+      "text": 169,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 908,
+     "exactPct": 87.132,
+     "closePct": 89.215,
+     "nonTextPct": 91.256,
+     "buckets": {
+      "fill": 0,
+      "hairline": 530,
+      "corner": 87,
+      "offset": 0,
+      "text": 291,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1059,
+     "exactPct": 84.991,
+     "closePct": 86.905,
+     "nonTextPct": 93.268,
+     "buckets": {
+      "fill": 0,
+      "hairline": 370,
+      "corner": 105,
+      "offset": 0,
+      "text": 584,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-desktop-en.light",
+   "caseId": "components.model-retry.cancelled-open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-desktop-en (light)",
+   "variantName": "Model retry: cancelled-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.122,
+   "rgbPct": 99.711,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.122,
+   "closePct": 95.651,
+   "nonTextPct": 98.827,
+   "mismatched": 2458,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 330,
+    "corner": 33,
+    "offset": 3,
+    "text": 2092,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 294,
+     "exactPct": 71.289,
+     "closePct": 84.277,
+     "nonTextPct": 93.359,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 31,
+      "offset": 0,
+      "text": 226,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 184,
+     "exactPct": 82.031,
+     "closePct": 89.941,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 46,
+      "corner": 0,
+      "offset": 0,
+      "text": 138,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 149,
+     "exactPct": 85.449,
+     "closePct": 93.262,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 46,
+      "corner": 0,
+      "offset": 0,
+      "text": 103,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 286,
+     "exactPct": 72.07,
+     "closePct": 87.598,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 45,
+      "corner": 0,
+      "offset": 0,
+      "text": 241,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 150,
+     "exactPct": 85.352,
+     "closePct": 93.262,
+     "nonTextPct": 96.094,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 0,
+      "offset": 0,
+      "text": 110,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-desktop-en.dark",
+   "caseId": "components.model-retry.cancelled-open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-desktop-en (dark)",
+   "variantName": "Model retry: cancelled-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.974,
+   "rgbPct": 99.437,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.974,
+   "closePct": 93.196,
+   "nonTextPct": 98.756,
+   "mismatched": 2504,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 348,
+    "corner": 40,
+    "offset": 0,
+    "text": 2116,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 297,
+     "exactPct": 70.996,
+     "closePct": 75.391,
+     "nonTextPct": 92.676,
+     "buckets": {
+      "fill": 0,
+      "hairline": 41,
+      "corner": 34,
+      "offset": 0,
+      "text": 222,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 151,
+     "exactPct": 85.254,
+     "closePct": 87.207,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 45,
+      "corner": 0,
+      "offset": 0,
+      "text": 106,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      192,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 132,
+     "exactPct": 87.109,
+     "closePct": 89.16,
+     "nonTextPct": 95.703,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 4,
+      "offset": 0,
+      "text": 88,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 286,
+     "exactPct": 72.07,
+     "closePct": 75.0,
+     "nonTextPct": 95.703,
+     "buckets": {
+      "fill": 0,
+      "hairline": 44,
+      "corner": 0,
+      "offset": 0,
+      "text": 242,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 184,
+     "exactPct": 82.031,
+     "closePct": 85.254,
+     "nonTextPct": 95.898,
+     "buckets": {
+      "fill": 0,
+      "hairline": 42,
+      "corner": 0,
+      "offset": 0,
+      "text": 142,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-desktop-zh.light",
+   "caseId": "components.model-retry.cancelled-open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-desktop-zh (light)",
+   "variantName": "Model retry: cancelled-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.115,
+   "rgbPct": 99.692,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.115,
+   "closePct": 94.769,
+   "nonTextPct": 98.808,
+   "mismatched": 2772,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 263,
+    "corner": 107,
+    "offset": 2,
+    "text": 2400,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 485,
+     "exactPct": 52.637,
+     "closePct": 71.582,
+     "nonTextPct": 92.285,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 40,
+      "offset": 0,
+      "text": 406,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 240,
+     "exactPct": 76.562,
+     "closePct": 88.281,
+     "nonTextPct": 93.75,
+     "buckets": {
+      "fill": 0,
+      "hairline": 38,
+      "corner": 24,
+      "offset": 2,
+      "text": 176,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 140,
+     "exactPct": 86.328,
+     "closePct": 91.309,
+     "nonTextPct": 94.922,
+     "buckets": {
+      "fill": 0,
+      "hairline": 46,
+      "corner": 6,
+      "offset": 0,
+      "text": 88,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 227,
+     "exactPct": 77.832,
+     "closePct": 87.109,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 33,
+      "offset": 0,
+      "text": 177,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 214,
+     "exactPct": 79.102,
+     "closePct": 89.941,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 0,
+      "offset": 0,
+      "text": 183,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-desktop-zh.dark",
+   "caseId": "components.model-retry.cancelled-open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-desktop-zh (dark)",
+   "variantName": "Model retry: cancelled-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 90.837,
+   "rgbPct": 99.361,
+   "sizeReact": [
+    480,
+    65
+   ],
+   "sizeFlutter": [
+    480,
+    65
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 90.837,
+   "closePct": 92.285,
+   "nonTextPct": 98.881,
+   "mismatched": 2859,
+   "pixels": 31200,
+   "buckets": {
+    "fill": 0,
+    "hairline": 239,
+    "corner": 110,
+    "offset": 0,
+    "text": 2510,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      32,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 497,
+     "exactPct": 51.465,
+     "closePct": 54.59,
+     "nonTextPct": 92.676,
+     "buckets": {
+      "fill": 0,
+      "hairline": 35,
+      "corner": 40,
+      "offset": 0,
+      "text": 422,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 246,
+     "exactPct": 75.977,
+     "closePct": 79.004,
+     "nonTextPct": 94.043,
+     "buckets": {
+      "fill": 0,
+      "hairline": 38,
+      "corner": 23,
+      "offset": 0,
+      "text": 185,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 240,
+     "exactPct": 76.562,
+     "closePct": 80.859,
+     "nonTextPct": 94.336,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 37,
+      "offset": 0,
+      "text": 182,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 144,
+     "exactPct": 85.938,
+     "closePct": 87.402,
+     "nonTextPct": 95.02,
+     "buckets": {
+      "fill": 0,
+      "hairline": 45,
+      "corner": 6,
+      "offset": 0,
+      "text": 93,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 226,
+     "exactPct": 77.93,
+     "closePct": 82.324,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 31,
+      "corner": 0,
+      "offset": 0,
+      "text": 195,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-phone-en.light",
+   "caseId": "components.model-retry.cancelled-open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-phone-en (light)",
+   "variantName": "Model retry: cancelled-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.264,
+   "rgbPct": 97.968,
+   "sizeReact": [
+    630,
+    223
+   ],
+   "sizeFlutter": [
+    630,
+    224
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-en.light.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 94.264,
+   "closePct": 95.378,
+   "nonTextPct": 97.448,
+   "mismatched": 8094,
+   "pixels": 141120,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3428,
+    "corner": 110,
+    "offset": 64,
+    "text": 4492,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      420,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 486,
+     "exactPct": 93.112,
+     "closePct": 93.75,
+     "nonTextPct": 96.074,
+     "buckets": {
+      "fill": 0,
+      "hairline": 277,
+      "corner": 0,
+      "offset": 0,
+      "text": 209,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 483,
+     "exactPct": 93.155,
+     "closePct": 94.359,
+     "nonTextPct": 96.159,
+     "buckets": {
+      "fill": 0,
+      "hairline": 271,
+      "corner": 0,
+      "offset": 0,
+      "text": 212,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 662,
+     "exactPct": 90.618,
+     "closePct": 93.084,
+     "nonTextPct": 96.216,
+     "buckets": {
+      "fill": 0,
+      "hairline": 264,
+      "corner": 1,
+      "offset": 2,
+      "text": 395,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 534,
+     "exactPct": 92.432,
+     "closePct": 93.849,
+     "nonTextPct": 96.344,
+     "buckets": {
+      "fill": 0,
+      "hairline": 236,
+      "corner": 22,
+      "offset": 0,
+      "text": 276,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      56
+     ],
+     "pixels": 4704,
+     "mismatched": 425,
+     "exactPct": 90.965,
+     "closePct": 94.452,
+     "nonTextPct": 94.622,
+     "buckets": {
+      "fill": 0,
+      "hairline": 253,
+      "corner": 0,
+      "offset": 0,
+      "text": 172,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-phone-en.dark",
+   "caseId": "components.model-retry.cancelled-open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-phone-en (dark)",
+   "variantName": "Model retry: cancelled-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 93.751,
+   "rgbPct": 97.319,
+   "sizeReact": [
+    630,
+    223
+   ],
+   "sizeFlutter": [
+    630,
+    224
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 93.751,
+   "closePct": 94.384,
+   "nonTextPct": 97.012,
+   "mismatched": 8818,
+   "pixels": 141120,
+   "buckets": {
+    "fill": 0,
+    "hairline": 4089,
+    "corner": 107,
+    "offset": 20,
+    "text": 4602,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      56
+     ],
+     "pixels": 4704,
+     "mismatched": 510,
+     "exactPct": 89.158,
+     "closePct": 89.966,
+     "nonTextPct": 92.772,
+     "buckets": {
+      "fill": 0,
+      "hairline": 340,
+      "corner": 0,
+      "offset": 0,
+      "text": 170,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      56
+     ],
+     "pixels": 4704,
+     "mismatched": 650,
+     "exactPct": 86.182,
+     "closePct": 87.415,
+     "nonTextPct": 93.452,
+     "buckets": {
+      "fill": 0,
+      "hairline": 305,
+      "corner": 3,
+      "offset": 0,
+      "text": 342,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      168,
+      84,
+      56
+     ],
+     "pixels": 4704,
+     "mismatched": 563,
+     "exactPct": 88.031,
+     "closePct": 88.797,
+     "nonTextPct": 93.707,
+     "buckets": {
+      "fill": 0,
+      "hairline": 293,
+      "corner": 3,
+      "offset": 0,
+      "text": 267,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 496,
+     "exactPct": 92.971,
+     "closePct": 93.679,
+     "nonTextPct": 96.018,
+     "buckets": {
+      "fill": 0,
+      "hairline": 281,
+      "corner": 0,
+      "offset": 0,
+      "text": 215,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      168,
+      84,
+      56
+     ],
+     "pixels": 4704,
+     "mismatched": 506,
+     "exactPct": 89.243,
+     "closePct": 89.945,
+     "nonTextPct": 94.048,
+     "buckets": {
+      "fill": 0,
+      "hairline": 258,
+      "corner": 22,
+      "offset": 0,
+      "text": 226,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-phone-zh.light",
+   "caseId": "components.model-retry.cancelled-open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-phone-zh (light)",
+   "variantName": "Model retry: cancelled-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.728,
+   "rgbPct": 99.48,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.728,
+   "closePct": 93.706,
+   "nonTextPct": 95.685,
+   "mismatched": 8911,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3880,
+    "corner": 749,
+    "offset": 20,
+    "text": 4262,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1599,
+     "exactPct": 77.338,
+     "closePct": 82.526,
+     "nonTextPct": 87.982,
+     "buckets": {
+      "fill": 0,
+      "hairline": 631,
+      "corner": 217,
+      "offset": 0,
+      "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1212,
+     "exactPct": 82.823,
+     "closePct": 86.947,
+     "nonTextPct": 90.717,
+     "buckets": {
+      "fill": 0,
+      "hairline": 652,
+      "corner": 3,
+      "offset": 0,
+      "text": 557,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1085,
+     "exactPct": 84.623,
+     "closePct": 89.64,
+     "nonTextPct": 90.845,
+     "buckets": {
+      "fill": 0,
+      "hairline": 529,
+      "corner": 117,
+      "offset": 0,
+      "text": 439,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 907,
+     "exactPct": 87.146,
+     "closePct": 90.377,
+     "nonTextPct": 91.256,
+     "buckets": {
+      "fill": 0,
+      "hairline": 530,
+      "corner": 87,
+      "offset": 0,
+      "text": 290,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 882,
+     "exactPct": 87.5,
+     "closePct": 91.511,
+     "nonTextPct": 93.041,
+     "buckets": {
+      "fill": 0,
+      "hairline": 427,
+      "corner": 64,
+      "offset": 0,
+      "text": 391,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.model-retry.cancelled-open-phone-zh.dark",
+   "caseId": "components.model-retry.cancelled-open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.model-retry",
+   "title": "Model retry: cancelled-open-phone-zh (dark)",
+   "variantName": "Model retry: cancelled-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 91.572,
+   "rgbPct": 99.197,
+   "sizeReact": [
+    630,
+    171
+   ],
+   "sizeFlutter": [
+    630,
+    171
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.model-retry.cancelled-open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 91.572,
+   "closePct": 92.736,
+   "nonTextPct": 95.637,
+   "mismatched": 9080,
+   "pixels": 107730,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3921,
+    "corner": 767,
+    "offset": 12,
+    "text": 4380,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1630,
+     "exactPct": 76.899,
+     "closePct": 79.719,
+     "nonTextPct": 87.543,
+     "buckets": {
+      "fill": 0,
+      "hairline": 656,
+      "corner": 223,
+      "offset": 0,
+      "text": 751,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1102,
+     "exactPct": 84.382,
+     "closePct": 87.5,
+     "nonTextPct": 90.731,
+     "buckets": {
+      "fill": 0,
+      "hairline": 536,
+      "corner": 118,
+      "offset": 0,
+      "text": 448,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1236,
+     "exactPct": 82.483,
+     "closePct": 84.538,
+     "nonTextPct": 90.972,
+     "buckets": {
+      "fill": 0,
+      "hairline": 637,
+      "corner": 0,
+      "offset": 0,
+      "text": 599,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 908,
+     "exactPct": 87.132,
+     "closePct": 89.215,
+     "nonTextPct": 91.256,
+     "buckets": {
+      "fill": 0,
+      "hairline": 530,
+      "corner": 87,
+      "offset": 0,
+      "text": 291,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 919,
+     "exactPct": 86.976,
+     "closePct": 89.385,
+     "nonTextPct": 92.588,
+     "buckets": {
+      "fill": 0,
+      "hairline": 447,
+      "corner": 76,
+      "offset": 0,
+      "text": 396,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-desktop-en.light",
+   "caseId": "components.system-prompt.closed-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-desktop-en (light)",
+   "variantName": "closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.807,
+   "rgbPct": 99.887,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.807,
+   "closePct": 98.003,
+   "nonTextPct": 99.358,
+   "mismatched": 483,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 56,
+    "corner": 18,
+    "offset": 0,
+    "text": 409,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 96,
+     "exactPct": 87.5,
+     "closePct": 94.531,
+     "nonTextPct": 95.964,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 8,
+      "offset": 0,
+      "text": 65,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 133,
+     "exactPct": 82.682,
+     "closePct": 92.969,
+     "nonTextPct": 97.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 0,
+      "offset": 0,
+      "text": 112,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 90,
+     "exactPct": 88.281,
+     "closePct": 93.49,
+     "nonTextPct": 98.438,
+     "buckets": {
+      "fill": 0,
+      "hairline": 2,
+      "corner": 10,
+      "offset": 0,
+      "text": 78,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 164,
+     "exactPct": 78.646,
+     "closePct": 89.062,
+     "nonTextPct": 98.698,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 0,
+      "offset": 0,
+      "text": 154,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-desktop-en.dark",
+   "caseId": "components.system-prompt.closed-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-desktop-en (dark)",
+   "variantName": "closed-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.139,
+   "rgbPct": 99.774,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.139,
+   "closePct": 96.589,
+   "nonTextPct": 98.906,
+   "mismatched": 560,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 71,
+    "corner": 55,
+    "offset": 0,
+    "text": 434,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 153,
+     "exactPct": 80.078,
+     "closePct": 92.578,
+     "nonTextPct": 91.276,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 46,
+      "offset": 0,
+      "text": 86,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 105,
+     "exactPct": 86.328,
+     "closePct": 89.062,
+     "nonTextPct": 96.094,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 9,
+      "offset": 0,
+      "text": 75,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 138,
+     "exactPct": 82.031,
+     "closePct": 84.766,
+     "nonTextPct": 97.396,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 164,
+     "exactPct": 78.646,
+     "closePct": 82.422,
+     "nonTextPct": 98.828,
+     "buckets": {
+      "fill": 0,
+      "hairline": 9,
+      "corner": 0,
+      "offset": 0,
+      "text": 155,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-desktop-zh.light",
+   "caseId": "components.system-prompt.closed-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-desktop-zh (light)",
+   "variantName": "closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.408,
+   "rgbPct": 99.905,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.408,
+   "closePct": 97.76,
+   "nonTextPct": 99.384,
+   "mismatched": 529,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 55,
+    "corner": 16,
+    "offset": 0,
+    "text": 458,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 167,
+     "exactPct": 78.255,
+     "closePct": 88.151,
+     "nonTextPct": 94.01,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 6,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 256,
+     "exactPct": 66.667,
+     "closePct": 84.115,
+     "nonTextPct": 98.307,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 0,
+      "text": 243,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 106,
+     "exactPct": 86.198,
+     "closePct": 94.141,
+     "nonTextPct": 98.438,
+     "buckets": {
+      "fill": 0,
+      "hairline": 2,
+      "corner": 10,
+      "offset": 0,
+      "text": 94,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-desktop-zh.dark",
+   "caseId": "components.system-prompt.closed-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-desktop-zh (dark)",
+   "variantName": "closed-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.696,
+   "rgbPct": 99.787,
+   "sizeReact": [
+    480,
+    24
+   ],
+   "sizeFlutter": [
+    480,
+    24
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.696,
+   "closePct": 96.589,
+   "nonTextPct": 98.889,
+   "mismatched": 611,
+   "pixels": 11520,
+   "buckets": {
+    "fill": 0,
+    "hairline": 76,
+    "corner": 52,
+    "offset": 0,
+    "text": 483,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 170,
+     "exactPct": 77.865,
+     "closePct": 90.495,
+     "nonTextPct": 91.016,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 46,
+      "offset": 0,
+      "text": 101,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 169,
+     "exactPct": 77.995,
+     "closePct": 85.807,
+     "nonTextPct": 94.141,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 6,
+      "offset": 0,
+      "text": 124,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      24
+     ],
+     "pixels": 768,
+     "mismatched": 272,
+     "exactPct": 64.583,
+     "closePct": 72.526,
+     "nonTextPct": 98.177,
+     "buckets": {
+      "fill": 0,
+      "hairline": 14,
+      "corner": 0,
+      "offset": 0,
+      "text": 258,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-phone-en.light",
+   "caseId": "components.system-prompt.closed-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-phone-en (light)",
+   "variantName": "closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.614,
+   "rgbPct": 99.604,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.614,
+   "closePct": 96.437,
+   "nonTextPct": 97.931,
+   "mismatched": 1741,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 757,
+    "corner": 52,
+    "offset": 12,
+    "text": 920,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 464,
+     "exactPct": 91.232,
+     "closePct": 92.063,
+     "nonTextPct": 94.596,
+     "buckets": {
+      "fill": 0,
+      "hairline": 234,
+      "corner": 52,
+      "offset": 0,
+      "text": 178,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 532,
+     "exactPct": 89.947,
+     "closePct": 92.139,
+     "nonTextPct": 95.824,
+     "buckets": {
+      "fill": 0,
+      "hairline": 215,
+      "corner": 0,
+      "offset": 6,
+      "text": 311,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 432,
+     "exactPct": 91.837,
+     "closePct": 93.689,
+     "nonTextPct": 96.485,
+     "buckets": {
+      "fill": 0,
+      "hairline": 186,
+      "corner": 0,
+      "offset": 0,
+      "text": 246,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 313,
+     "exactPct": 94.085,
+     "closePct": 95.389,
+     "nonTextPct": 97.581,
+     "buckets": {
+      "fill": 0,
+      "hairline": 122,
+      "corner": 0,
+      "offset": 6,
+      "text": 185,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-phone-en.dark",
+   "caseId": "components.system-prompt.closed-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-phone-en (dark)",
+   "variantName": "closed-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.377,
+   "rgbPct": 99.449,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.377,
+   "closePct": 95.971,
+   "nonTextPct": 97.753,
+   "mismatched": 1835,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 836,
+    "corner": 56,
+    "offset": 0,
+    "text": 943,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 515,
+     "exactPct": 90.268,
+     "closePct": 91.912,
+     "nonTextPct": 93.821,
+     "buckets": {
+      "fill": 0,
+      "hairline": 271,
+      "corner": 56,
+      "offset": 0,
+      "text": 188,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 552,
+     "exactPct": 89.569,
+     "closePct": 90.571,
+     "nonTextPct": 95.956,
+     "buckets": {
+      "fill": 0,
+      "hairline": 214,
+      "corner": 0,
+      "offset": 0,
+      "text": 338,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 441,
+     "exactPct": 91.667,
+     "closePct": 92.706,
+     "nonTextPct": 96.183,
+     "buckets": {
+      "fill": 0,
+      "hairline": 202,
+      "corner": 0,
+      "offset": 0,
+      "text": 239,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 327,
+     "exactPct": 93.821,
+     "closePct": 94.596,
+     "nonTextPct": 97.184,
+     "buckets": {
+      "fill": 0,
+      "hairline": 149,
+      "corner": 0,
+      "offset": 0,
+      "text": 178,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-phone-zh.light",
+   "caseId": "components.system-prompt.closed-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-phone-zh (light)",
+   "variantName": "closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.435,
+   "rgbPct": 99.771,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.435,
+   "closePct": 96.987,
+   "nonTextPct": 97.438,
+   "mismatched": 1812,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 818,
+    "corner": 199,
+    "offset": 0,
+    "text": 795,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 826,
+     "exactPct": 84.392,
+     "closePct": 89.664,
+     "nonTextPct": 93.197,
+     "buckets": {
+      "fill": 0,
+      "hairline": 273,
+      "corner": 87,
+      "offset": 0,
+      "text": 466,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 516,
+     "exactPct": 90.249,
+     "closePct": 92.555,
+     "nonTextPct": 93.613,
+     "buckets": {
+      "fill": 0,
+      "hairline": 273,
+      "corner": 65,
+      "offset": 0,
+      "text": 178,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 470,
+     "exactPct": 91.119,
+     "closePct": 95.181,
+     "nonTextPct": 93.972,
+     "buckets": {
+      "fill": 0,
+      "hairline": 272,
+      "corner": 47,
+      "offset": 0,
+      "text": 151,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.closed-phone-zh.dark",
+   "caseId": "components.system-prompt.closed-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt closed-phone-zh (dark)",
+   "variantName": "closed-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.296,
+   "rgbPct": 99.66,
+   "sizeReact": [
+    630,
+    63
+   ],
+   "sizeFlutter": [
+    630,
+    63
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.closed-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.296,
+   "closePct": 96.057,
+   "nonTextPct": 97.385,
+   "mismatched": 1867,
+   "pixels": 39690,
+   "buckets": {
+    "fill": 0,
+    "hairline": 828,
+    "corner": 210,
+    "offset": 0,
+    "text": 829,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 566,
+     "exactPct": 89.305,
+     "closePct": 91.61,
+     "nonTextPct": 92.989,
+     "buckets": {
+      "fill": 0,
+      "hairline": 301,
+      "corner": 70,
+      "offset": 0,
+      "text": 195,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 833,
+     "exactPct": 84.259,
+     "closePct": 86.64,
+     "nonTextPct": 93.348,
+     "buckets": {
+      "fill": 0,
+      "hairline": 265,
+      "corner": 87,
+      "offset": 0,
+      "text": 481,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      63
+     ],
+     "pixels": 5292,
+     "mismatched": 468,
+     "exactPct": 91.156,
+     "closePct": 92.177,
+     "nonTextPct": 94.048,
+     "buckets": {
+      "fill": 0,
+      "hairline": 262,
+      "corner": 53,
+      "offset": 0,
+      "text": 153,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-desktop-en.light",
+   "caseId": "components.system-prompt.open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-desktop-en (light)",
+   "variantName": "open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.634,
+   "rgbPct": 99.714,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.634,
+   "closePct": 96.949,
+   "nonTextPct": 99.326,
+   "mismatched": 2627,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 229,
+    "corner": 80,
+    "offset": 21,
+    "text": 2297,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 323,
+     "exactPct": 68.457,
+     "closePct": 77.051,
+     "nonTextPct": 93.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 50,
+      "offset": 0,
+      "text": 260,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 89.062,
+     "nonTextPct": 96.582,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 2,
+      "text": 164,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 279,
+     "exactPct": 72.754,
+     "closePct": 82.227,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 11,
+      "offset": 0,
+      "text": 245,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 104,
+     "exactPct": 89.844,
+     "closePct": 95.215,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 9,
+      "offset": 0,
+      "text": 73,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 94.531,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-desktop-en.dark",
+   "caseId": "components.system-prompt.open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-desktop-en (dark)",
+   "variantName": "open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.549,
+   "rgbPct": 99.4,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.549,
+   "closePct": 95.1,
+   "nonTextPct": 99.269,
+   "mismatched": 2669,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 253,
+    "corner": 80,
+    "offset": 25,
+    "text": 2311,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 332,
+     "exactPct": 67.578,
+     "closePct": 68.457,
+     "nonTextPct": 94.141,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 50,
+      "offset": 0,
+      "text": 272,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 81.738,
+     "nonTextPct": 96.387,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 162,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 283,
+     "exactPct": 72.363,
+     "closePct": 76.074,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 11,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 105,
+     "exactPct": 89.746,
+     "closePct": 90.82,
+     "nonTextPct": 97.07,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 9,
+      "offset": 0,
+      "text": 75,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 87.891,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-desktop-zh.light",
+   "caseId": "components.system-prompt.open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-desktop-zh (light)",
+   "variantName": "open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.567,
+   "rgbPct": 99.722,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.567,
+   "closePct": 96.92,
+   "nonTextPct": 99.328,
+   "mismatched": 2660,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 231,
+    "corner": 77,
+    "offset": 21,
+    "text": 2331,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 323,
+     "exactPct": 68.457,
+     "closePct": 77.051,
+     "nonTextPct": 93.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 50,
+      "offset": 0,
+      "text": 260,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 166,
+     "exactPct": 83.789,
+     "closePct": 91.602,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 6,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 89.062,
+     "nonTextPct": 96.582,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 2,
+      "text": 164,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 279,
+     "exactPct": 72.754,
+     "closePct": 82.227,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 11,
+      "offset": 0,
+      "text": 245,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 195,
+     "exactPct": 80.957,
+     "closePct": 88.672,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 0,
+      "offset": 2,
+      "text": 175,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-desktop-zh.dark",
+   "caseId": "components.system-prompt.open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-desktop-zh (dark)",
+   "variantName": "open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.446,
+   "rgbPct": 99.397,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.446,
+   "closePct": 95.025,
+   "nonTextPct": 99.265,
+   "mismatched": 2719,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 258,
+    "corner": 77,
+    "offset": 25,
+    "text": 2359,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 332,
+     "exactPct": 67.578,
+     "closePct": 68.457,
+     "nonTextPct": 94.141,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 50,
+      "offset": 0,
+      "text": 272,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 169,
+     "exactPct": 83.496,
+     "closePct": 86.328,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 6,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 81.738,
+     "nonTextPct": 96.387,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 162,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 283,
+     "exactPct": 72.363,
+     "closePct": 76.074,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 11,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 211,
+     "exactPct": 79.395,
+     "closePct": 81.836,
+     "nonTextPct": 98.145,
+     "buckets": {
+      "fill": 0,
+      "hairline": 19,
+      "corner": 0,
+      "offset": 0,
+      "text": 192,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-phone-en.light",
+   "caseId": "components.system-prompt.open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-phone-en (light)",
+   "variantName": "open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.208,
+   "rgbPct": 99.436,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.208,
+   "closePct": 96.416,
+   "nonTextPct": 98.029,
+   "mismatched": 9358,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3272,
+    "corner": 331,
+    "offset": 92,
+    "text": 5509,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1065,
+     "exactPct": 84.906,
+     "closePct": 89.994,
+     "nonTextPct": 92.063,
+     "buckets": {
+      "fill": 0,
+      "hairline": 450,
+      "corner": 110,
+      "offset": 0,
+      "text": 505,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1180,
+     "exactPct": 83.277,
+     "closePct": 87.372,
+     "nonTextPct": 92.956,
+     "buckets": {
+      "fill": 0,
+      "hairline": 330,
+      "corner": 87,
+      "offset": 0,
+      "text": 683,
+      "other": 80
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 653,
+     "exactPct": 90.745,
+     "closePct": 92.205,
+     "nonTextPct": 95.522,
+     "buckets": {
+      "fill": 0,
+      "hairline": 296,
+      "corner": 20,
+      "offset": 0,
+      "text": 337,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.689,
+     "nonTextPct": 95.536,
+     "buckets": {
+      "fill": 0,
+      "hairline": 304,
+      "corner": 11,
+      "offset": 0,
+      "text": 476,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 667,
+     "exactPct": 90.547,
+     "closePct": 93.126,
+     "nonTextPct": 96.131,
+     "buckets": {
+      "fill": 0,
+      "hairline": 258,
+      "corner": 15,
+      "offset": 0,
+      "text": 394,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-phone-en.dark",
+   "caseId": "components.system-prompt.open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-phone-en (dark)",
+   "variantName": "open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.154,
+   "rgbPct": 99.192,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.154,
+   "closePct": 95.746,
+   "nonTextPct": 97.995,
+   "mismatched": 9465,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3327,
+    "corner": 330,
+    "offset": 104,
+    "text": 5550,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1074,
+     "exactPct": 84.779,
+     "closePct": 87.217,
+     "nonTextPct": 91.978,
+     "buckets": {
+      "fill": 0,
+      "hairline": 457,
+      "corner": 109,
+      "offset": 0,
+      "text": 508,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1191,
+     "exactPct": 83.121,
+     "closePct": 84.807,
+     "nonTextPct": 92.942,
+     "buckets": {
+      "fill": 0,
+      "hairline": 333,
+      "corner": 86,
+      "offset": 0,
+      "text": 693,
+      "other": 79
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.009,
+     "nonTextPct": 95.507,
+     "buckets": {
+      "fill": 0,
+      "hairline": 305,
+      "corner": 12,
+      "offset": 0,
+      "text": 474,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 660,
+     "exactPct": 90.646,
+     "closePct": 91.553,
+     "nonTextPct": 95.564,
+     "buckets": {
+      "fill": 0,
+      "hairline": 293,
+      "corner": 20,
+      "offset": 0,
+      "text": 347,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 664,
+     "exactPct": 90.59,
+     "closePct": 91.298,
+     "nonTextPct": 96.131,
+     "buckets": {
+      "fill": 0,
+      "hairline": 258,
+      "corner": 15,
+      "offset": 0,
+      "text": 391,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-phone-zh.light",
+   "caseId": "components.system-prompt.open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-phone-zh (light)",
+   "variantName": "open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.175,
+   "rgbPct": 99.475,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.175,
+   "closePct": 96.425,
+   "nonTextPct": 97.94,
+   "mismatched": 9423,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3300,
+    "corner": 480,
+    "offset": 90,
+    "text": 5399,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1065,
+     "exactPct": 84.906,
+     "closePct": 89.994,
+     "nonTextPct": 92.063,
+     "buckets": {
+      "fill": 0,
+      "hairline": 450,
+      "corner": 110,
+      "offset": 0,
+      "text": 505,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1180,
+     "exactPct": 83.277,
+     "closePct": 87.372,
+     "nonTextPct": 92.956,
+     "buckets": {
+      "fill": 0,
+      "hairline": 330,
+      "corner": 87,
+      "offset": 0,
+      "text": 683,
+      "other": 80
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 844,
+     "exactPct": 88.039,
+     "closePct": 90.547,
+     "nonTextPct": 94.955,
+     "buckets": {
+      "fill": 0,
+      "hairline": 269,
+      "corner": 87,
+      "offset": 0,
+      "text": 488,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 94.416,
+     "nonTextPct": 95.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 286,
+      "corner": 48,
+      "offset": 0,
+      "text": 153,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 653,
+     "exactPct": 90.745,
+     "closePct": 92.205,
+     "nonTextPct": 95.522,
+     "buckets": {
+      "fill": 0,
+      "hairline": 296,
+      "corner": 20,
+      "offset": 0,
+      "text": 337,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.open-phone-zh.dark",
+   "caseId": "components.system-prompt.open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt open-phone-zh (dark)",
+   "variantName": "open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.129,
+   "rgbPct": 99.236,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 95.129,
+   "closePct": 95.741,
+   "nonTextPct": 97.911,
+   "mismatched": 9514,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3343,
+    "corner": 478,
+    "offset": 104,
+    "text": 5435,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1074,
+     "exactPct": 84.779,
+     "closePct": 87.217,
+     "nonTextPct": 91.978,
+     "buckets": {
+      "fill": 0,
+      "hairline": 457,
+      "corner": 109,
+      "offset": 0,
+      "text": 508,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1191,
+     "exactPct": 83.121,
+     "closePct": 84.807,
+     "nonTextPct": 92.942,
+     "buckets": {
+      "fill": 0,
+      "hairline": 333,
+      "corner": 86,
+      "offset": 0,
+      "text": 693,
+      "other": 79
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 839,
+     "exactPct": 88.109,
+     "closePct": 89.739,
+     "nonTextPct": 94.94,
+     "buckets": {
+      "fill": 0,
+      "hairline": 270,
+      "corner": 87,
+      "offset": 0,
+      "text": 482,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 93.736,
+     "nonTextPct": 95.295,
+     "buckets": {
+      "fill": 0,
+      "hairline": 284,
+      "corner": 48,
+      "offset": 0,
+      "text": 155,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.009,
+     "nonTextPct": 95.507,
+     "buckets": {
+      "fill": 0,
+      "hairline": 305,
+      "corner": 12,
+      "offset": 0,
+      "text": 474,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-desktop-en.light",
+   "caseId": "components.system-prompt.update-open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-desktop-en (light)",
+   "variantName": "update-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.161,
+   "rgbPct": 99.697,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.161,
+   "closePct": 96.691,
+   "nonTextPct": 99.265,
+   "mismatched": 2859,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 259,
+    "corner": 80,
+    "offset": 21,
+    "text": 2499,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 323,
+     "exactPct": 68.457,
+     "closePct": 77.051,
+     "nonTextPct": 93.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 50,
+      "offset": 0,
+      "text": 260,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 151,
+     "exactPct": 85.254,
+     "closePct": 93.848,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 9,
+      "offset": 0,
+      "text": 105,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 89.062,
+     "nonTextPct": 96.582,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 2,
+      "text": 164,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 279,
+     "exactPct": 72.754,
+     "closePct": 82.227,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 11,
+      "offset": 0,
+      "text": 245,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 94.531,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-desktop-en.dark",
+   "caseId": "components.system-prompt.update-open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-desktop-en (dark)",
+   "variantName": "update-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.075,
+   "rgbPct": 99.358,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.075,
+   "closePct": 94.679,
+   "nonTextPct": 99.205,
+   "mismatched": 2901,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 284,
+    "corner": 80,
+    "offset": 25,
+    "text": 2512,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 332,
+     "exactPct": 67.578,
+     "closePct": 68.457,
+     "nonTextPct": 94.141,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 50,
+      "offset": 0,
+      "text": 272,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 152,
+     "exactPct": 85.156,
+     "closePct": 86.914,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 36,
+      "corner": 9,
+      "offset": 0,
+      "text": 107,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 81.738,
+     "nonTextPct": 96.387,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 162,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 283,
+     "exactPct": 72.363,
+     "closePct": 76.074,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 11,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 87.891,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-desktop-zh.light",
+   "caseId": "components.system-prompt.update-open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-desktop-zh (light)",
+   "variantName": "update-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.099,
+   "rgbPct": 99.708,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.099,
+   "closePct": 96.656,
+   "nonTextPct": 99.277,
+   "mismatched": 2889,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 246,
+    "corner": 87,
+    "offset": 21,
+    "text": 2535,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 323,
+     "exactPct": 68.457,
+     "closePct": 77.051,
+     "nonTextPct": 93.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 50,
+      "offset": 0,
+      "text": 260,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 251,
+     "exactPct": 75.488,
+     "closePct": 86.035,
+     "nonTextPct": 94.531,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 16,
+      "offset": 0,
+      "text": 195,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 89.062,
+     "nonTextPct": 96.582,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 2,
+      "text": 164,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 279,
+     "exactPct": 72.754,
+     "closePct": 82.227,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 23,
+      "corner": 11,
+      "offset": 0,
+      "text": 245,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      128,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 195,
+     "exactPct": 80.957,
+     "closePct": 88.672,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 0,
+      "offset": 2,
+      "text": 175,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-desktop-zh.dark",
+   "caseId": "components.system-prompt.update-open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-desktop-zh (dark)",
+   "variantName": "update-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 93.96,
+   "rgbPct": 99.358,
+   "sizeReact": [
+    480,
+    102
+   ],
+   "sizeFlutter": [
+    480,
+    102
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 93.96,
+   "closePct": 94.592,
+   "nonTextPct": 99.203,
+   "mismatched": 2957,
+   "pixels": 48960,
+   "buckets": {
+    "fill": 0,
+    "hairline": 278,
+    "corner": 87,
+    "offset": 25,
+    "text": 2567,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 332,
+     "exactPct": 67.578,
+     "closePct": 68.457,
+     "nonTextPct": 94.141,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 50,
+      "offset": 0,
+      "text": 272,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 256,
+     "exactPct": 75.0,
+     "closePct": 79.102,
+     "nonTextPct": 94.434,
+     "buckets": {
+      "fill": 0,
+      "hairline": 41,
+      "corner": 16,
+      "offset": 0,
+      "text": 199,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 199,
+     "exactPct": 80.566,
+     "closePct": 81.738,
+     "nonTextPct": 96.387,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 0,
+      "text": 162,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 283,
+     "exactPct": 72.363,
+     "closePct": 76.074,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 11,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 151,
+     "exactPct": 85.254,
+     "closePct": 86.523,
+     "nonTextPct": 98.145,
+     "buckets": {
+      "fill": 0,
+      "hairline": 19,
+      "corner": 0,
+      "offset": 0,
+      "text": 132,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-phone-en.light",
+   "caseId": "components.system-prompt.update-open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-phone-en (light)",
+   "variantName": "update-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.808,
+   "rgbPct": 99.389,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.808,
+   "closePct": 96.097,
+   "nonTextPct": 97.847,
+   "mismatched": 10139,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3628,
+    "corner": 331,
+    "offset": 92,
+    "text": 5934,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1065,
+     "exactPct": 84.906,
+     "closePct": 89.994,
+     "nonTextPct": 92.063,
+     "buckets": {
+      "fill": 0,
+      "hairline": 450,
+      "corner": 110,
+      "offset": 0,
+      "text": 505,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1180,
+     "exactPct": 83.277,
+     "closePct": 87.372,
+     "nonTextPct": 92.956,
+     "buckets": {
+      "fill": 0,
+      "hairline": 330,
+      "corner": 87,
+      "offset": 0,
+      "text": 683,
+      "other": 80
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 653,
+     "exactPct": 90.745,
+     "closePct": 92.205,
+     "nonTextPct": 95.522,
+     "buckets": {
+      "fill": 0,
+      "hairline": 296,
+      "corner": 20,
+      "offset": 0,
+      "text": 337,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.689,
+     "nonTextPct": 95.536,
+     "buckets": {
+      "fill": 0,
+      "hairline": 304,
+      "corner": 11,
+      "offset": 0,
+      "text": 476,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 667,
+     "exactPct": 90.547,
+     "closePct": 93.126,
+     "nonTextPct": 96.131,
+     "buckets": {
+      "fill": 0,
+      "hairline": 258,
+      "corner": 15,
+      "offset": 0,
+      "text": 394,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-phone-en.dark",
+   "caseId": "components.system-prompt.update-open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-phone-en (dark)",
+   "variantName": "update-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.755,
+   "rgbPct": 99.127,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.755,
+   "closePct": 95.378,
+   "nonTextPct": 97.817,
+   "mismatched": 10244,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3675,
+    "corner": 330,
+    "offset": 104,
+    "text": 5981,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1074,
+     "exactPct": 84.779,
+     "closePct": 87.217,
+     "nonTextPct": 91.978,
+     "buckets": {
+      "fill": 0,
+      "hairline": 457,
+      "corner": 109,
+      "offset": 0,
+      "text": 508,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1191,
+     "exactPct": 83.121,
+     "closePct": 84.807,
+     "nonTextPct": 92.942,
+     "buckets": {
+      "fill": 0,
+      "hairline": 333,
+      "corner": 86,
+      "offset": 0,
+      "text": 693,
+      "other": 79
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.009,
+     "nonTextPct": 95.507,
+     "buckets": {
+      "fill": 0,
+      "hairline": 305,
+      "corner": 12,
+      "offset": 0,
+      "text": 474,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 660,
+     "exactPct": 90.646,
+     "closePct": 91.553,
+     "nonTextPct": 95.564,
+     "buckets": {
+      "fill": 0,
+      "hairline": 293,
+      "corner": 20,
+      "offset": 0,
+      "text": 347,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      336,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 664,
+     "exactPct": 90.59,
+     "closePct": 91.298,
+     "nonTextPct": 96.131,
+     "buckets": {
+      "fill": 0,
+      "hairline": 258,
+      "corner": 15,
+      "offset": 0,
+      "text": 391,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-phone-zh.light",
+   "caseId": "components.system-prompt.update-open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-phone-zh (light)",
+   "variantName": "update-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.821,
+   "rgbPct": 99.46,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.821,
+   "closePct": 96.181,
+   "nonTextPct": 97.735,
+   "mismatched": 10114,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3625,
+    "corner": 554,
+    "offset": 90,
+    "text": 5691,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1065,
+     "exactPct": 84.906,
+     "closePct": 89.994,
+     "nonTextPct": 92.063,
+     "buckets": {
+      "fill": 0,
+      "hairline": 450,
+      "corner": 110,
+      "offset": 0,
+      "text": 505,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1180,
+     "exactPct": 83.277,
+     "closePct": 87.372,
+     "nonTextPct": 92.956,
+     "buckets": {
+      "fill": 0,
+      "hairline": 330,
+      "corner": 87,
+      "offset": 0,
+      "text": 683,
+      "other": 80
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 744,
+     "exactPct": 89.456,
+     "closePct": 91.468,
+     "nonTextPct": 93.098,
+     "buckets": {
+      "fill": 0,
+      "hairline": 418,
+      "corner": 69,
+      "offset": 0,
+      "text": 257,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 844,
+     "exactPct": 88.039,
+     "closePct": 90.547,
+     "nonTextPct": 94.955,
+     "buckets": {
+      "fill": 0,
+      "hairline": 269,
+      "corner": 87,
+      "offset": 0,
+      "text": 488,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 653,
+     "exactPct": 90.745,
+     "closePct": 92.205,
+     "nonTextPct": 95.522,
+     "buckets": {
+      "fill": 0,
+      "hairline": 296,
+      "corner": 20,
+      "offset": 0,
+      "text": 337,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.update-open-phone-zh.dark",
+   "caseId": "components.system-prompt.update-open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt update-open-phone-zh (dark)",
+   "variantName": "update-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 94.772,
+   "rgbPct": 99.196,
+   "sizeReact": [
+    630,
+    310
+   ],
+   "sizeFlutter": [
+    630,
+    310
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.update-open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 94.772,
+   "closePct": 95.416,
+   "nonTextPct": 97.707,
+   "mismatched": 10210,
+   "pixels": 195300,
+   "buckets": {
+    "fill": 0,
+    "hairline": 3667,
+    "corner": 553,
+    "offset": 104,
+    "text": 5732,
+    "other": 154
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1074,
+     "exactPct": 84.779,
+     "closePct": 87.217,
+     "nonTextPct": 91.978,
+     "buckets": {
+      "fill": 0,
+      "hairline": 457,
+      "corner": 109,
+      "offset": 0,
+      "text": 508,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 1191,
+     "exactPct": 83.121,
+     "closePct": 84.807,
+     "nonTextPct": 92.942,
+     "buckets": {
+      "fill": 0,
+      "hairline": 333,
+      "corner": 86,
+      "offset": 0,
+      "text": 693,
+      "other": 79
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 744,
+     "exactPct": 89.456,
+     "closePct": 90.448,
+     "nonTextPct": 93.126,
+     "buckets": {
+      "fill": 0,
+      "hairline": 416,
+      "corner": 69,
+      "offset": 0,
+      "text": 259,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 839,
+     "exactPct": 88.109,
+     "closePct": 89.739,
+     "nonTextPct": 94.94,
+     "buckets": {
+      "fill": 0,
+      "hairline": 270,
+      "corner": 87,
+      "offset": 0,
+      "text": 482,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 791,
+     "exactPct": 88.79,
+     "closePct": 90.009,
+     "nonTextPct": 95.507,
+     "buckets": {
+      "fill": 0,
+      "hairline": 305,
+      "corner": 12,
+      "offset": 0,
+      "text": 474,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-desktop-en.light",
+   "caseId": "components.system-prompt.long-open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-desktop-en (light)",
+   "variantName": "long-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.802,
+   "rgbPct": 99.744,
+   "sizeReact": [
+    480,
+    173
+   ],
+   "sizeFlutter": [
+    480,
+    173
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.802,
+   "closePct": 95.987,
+   "nonTextPct": 99.367,
+   "mismatched": 5977,
+   "pixels": 83040,
+   "buckets": {
+    "fill": 0,
+    "hairline": 393,
+    "corner": 89,
+    "offset": 44,
+    "text": 5451,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      160,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      96,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      128,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 104,
+     "exactPct": 89.844,
+     "closePct": 95.215,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 9,
+      "offset": 0,
+      "text": 73,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 223,
+     "exactPct": 78.223,
+     "closePct": 87.5,
+     "nonTextPct": 97.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 10,
+      "offset": 0,
+      "text": 195,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-desktop-en.dark",
+   "caseId": "components.system-prompt.long-open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-desktop-en (dark)",
+   "variantName": "long-open-desktop-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.754,
+   "rgbPct": 99.338,
+   "sizeReact": [
+    480,
+    173
+   ],
+   "sizeFlutter": [
+    480,
+    173
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.754,
+   "closePct": 93.424,
+   "nonTextPct": 99.323,
+   "mismatched": 6017,
+   "pixels": 83040,
+   "buckets": {
+    "fill": 0,
+    "hairline": 453,
+    "corner": 89,
+    "offset": 20,
+    "text": 5455,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      160,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      96,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      128,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 165,
+     "exactPct": 83.887,
+     "closePct": 84.57,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 34,
+      "corner": 0,
+      "offset": 0,
+      "text": 131,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      96,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 167,
+     "exactPct": 83.691,
+     "closePct": 84.375,
+     "nonTextPct": 96.777,
+     "buckets": {
+      "fill": 0,
+      "hairline": 33,
+      "corner": 0,
+      "offset": 0,
+      "text": 134,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-desktop-zh.light",
+   "caseId": "components.system-prompt.long-open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-desktop-zh (light)",
+   "variantName": "long-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.763,
+   "rgbPct": 99.748,
+   "sizeReact": [
+    480,
+    173
+   ],
+   "sizeFlutter": [
+    480,
+    173
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.763,
+   "closePct": 95.971,
+   "nonTextPct": 99.368,
+   "mismatched": 6010,
+   "pixels": 83040,
+   "buckets": {
+    "fill": 0,
+    "hairline": 395,
+    "corner": 86,
+    "offset": 44,
+    "text": 5485,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      160,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      96,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      128,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 84.57,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 166,
+     "exactPct": 83.789,
+     "closePct": 91.602,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 6,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      32,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 223,
+     "exactPct": 78.223,
+     "closePct": 87.5,
+     "nonTextPct": 97.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 18,
+      "corner": 10,
+      "offset": 0,
+      "text": 195,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-desktop-zh.dark",
+   "caseId": "components.system-prompt.long-open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-desktop-zh (dark)",
+   "variantName": "long-open-desktop-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 92.694,
+   "rgbPct": 99.337,
+   "sizeReact": [
+    480,
+    173
+   ],
+   "sizeFlutter": [
+    480,
+    173
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 92.694,
+   "closePct": 93.379,
+   "nonTextPct": 99.321,
+   "mismatched": 6067,
+   "pixels": 83040,
+   "buckets": {
+    "fill": 0,
+    "hairline": 458,
+    "corner": 86,
+    "offset": 20,
+    "text": 5503,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      160,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      96,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      160,
+      128,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 282,
+     "exactPct": 72.461,
+     "closePct": 75.195,
+     "nonTextPct": 95.117,
+     "buckets": {
+      "fill": 0,
+      "hairline": 30,
+      "corner": 20,
+      "offset": 0,
+      "text": 232,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 169,
+     "exactPct": 83.496,
+     "closePct": 86.328,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 6,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      64,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 165,
+     "exactPct": 83.887,
+     "closePct": 84.57,
+     "nonTextPct": 96.68,
+     "buckets": {
+      "fill": 0,
+      "hairline": 34,
+      "corner": 0,
+      "offset": 0,
+      "text": 131,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-phone-en.light",
+   "caseId": "components.system-prompt.long-open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-phone-en (light)",
+   "variantName": "long-open-phone-en",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 96.054,
+   "rgbPct": 98.301,
+   "sizeReact": [
+    630,
+    454
+   ],
+   "sizeFlutter": [
+    630,
+    455
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-phone-en.light.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 96.054,
+   "closePct": 96.972,
+   "nonTextPct": 98.372,
+   "mismatched": 11310,
+   "pixels": 286650,
+   "buckets": {
+    "fill": 0,
+    "hairline": 4265,
+    "corner": 342,
+    "offset": 60,
+    "text": 6643,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      252,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      336,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 505,
+     "exactPct": 92.843,
+     "closePct": 94.175,
+     "nonTextPct": 96.188,
+     "buckets": {
+      "fill": 0,
+      "hairline": 245,
+      "corner": 24,
+      "offset": 0,
+      "text": 236,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 505,
+     "exactPct": 92.843,
+     "closePct": 94.175,
+     "nonTextPct": 96.188,
+     "buckets": {
+      "fill": 0,
+      "hairline": 245,
+      "corner": 24,
+      "offset": 0,
+      "text": 236,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-phone-en.dark",
+   "caseId": "components.system-prompt.long-open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-phone-en (dark)",
+   "variantName": "long-open-phone-en",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.819,
+   "rgbPct": 97.853,
+   "sizeReact": [
+    630,
+    454
+   ],
+   "sizeFlutter": [
+    630,
+    455
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 95.819,
+   "closePct": 96.324,
+   "nonTextPct": 98.133,
+   "mismatched": 11984,
+   "pixels": 286650,
+   "buckets": {
+    "fill": 0,
+    "hairline": 4923,
+    "corner": 364,
+    "offset": 64,
+    "text": 6633,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      252,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      336,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      84,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 505,
+     "exactPct": 92.843,
+     "closePct": 93.467,
+     "nonTextPct": 96.159,
+     "buckets": {
+      "fill": 0,
+      "hairline": 245,
+      "corner": 26,
+      "offset": 0,
+      "text": 234,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      420,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 505,
+     "exactPct": 92.843,
+     "closePct": 93.467,
+     "nonTextPct": 96.159,
+     "buckets": {
+      "fill": 0,
+      "hairline": 245,
+      "corner": 26,
+      "offset": 0,
+      "text": 234,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-phone-zh.light",
+   "caseId": "components.system-prompt.long-open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-phone-zh (light)",
+   "variantName": "long-open-phone-zh",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 96.032,
+   "rgbPct": 98.319,
+   "sizeReact": [
+    630,
+    454
+   ],
+   "sizeFlutter": [
+    630,
+    455
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 96.032,
+   "closePct": 96.977,
+   "nonTextPct": 98.311,
+   "mismatched": 11375,
+   "pixels": 286650,
+   "buckets": {
+    "fill": 0,
+    "hairline": 4293,
+    "corner": 491,
+    "offset": 58,
+    "text": 6533,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 845,
+     "exactPct": 88.024,
+     "closePct": 90.547,
+     "nonTextPct": 94.94,
+     "buckets": {
+      "fill": 0,
+      "hairline": 270,
+      "corner": 87,
+      "offset": 0,
+      "text": 488,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 94.416,
+     "nonTextPct": 95.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 286,
+      "corner": 48,
+      "offset": 0,
+      "text": 153,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      252,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      336,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 716,
+     "exactPct": 89.853,
+     "closePct": 93.282,
+     "nonTextPct": 95.876,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 23,
+      "offset": 0,
+      "text": 425,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.long-open-phone-zh.dark",
+   "caseId": "components.system-prompt.long-open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt long-open-phone-zh (dark)",
+   "variantName": "long-open-phone-zh",
+   "officialStatus": "different",
+   "pixelPerfectPct": 95.802,
+   "rgbPct": 97.878,
+   "sizeReact": [
+    630,
+    454
+   ],
+   "sizeFlutter": [
+    630,
+    455
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.long-open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": true,
+   "exactPct": 95.802,
+   "closePct": 96.321,
+   "nonTextPct": 98.076,
+   "mismatched": 12033,
+   "pixels": 286650,
+   "buckets": {
+    "fill": 0,
+    "hairline": 4939,
+    "corner": 512,
+    "offset": 64,
+    "text": 6518,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 839,
+     "exactPct": 88.109,
+     "closePct": 89.739,
+     "nonTextPct": 94.94,
+     "buckets": {
+      "fill": 0,
+      "hairline": 270,
+      "corner": 87,
+      "offset": 0,
+      "text": 482,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 93.736,
+     "nonTextPct": 95.295,
+     "buckets": {
+      "fill": 0,
+      "hairline": 284,
+      "corner": 48,
+      "offset": 0,
+      "text": 155,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      168,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      252,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      84,
+      336,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 721,
+     "exactPct": 89.782,
+     "closePct": 90.788,
+     "nonTextPct": 95.848,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 25,
+      "offset": 0,
+      "text": 428,
+      "other": 0
+     }
+    }
+   ],
+   "status": "fail",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-desktop-en.light",
+   "caseId": "components.system-prompt.empty-open-desktop-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-desktop-en (light)",
+   "variantName": "empty-open-desktop-en",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.978,
+   "rgbPct": 99.938,
+   "sizeReact": [
+    480,
+    54
+   ],
+   "sizeFlutter": [
+    480,
+    54
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-desktop-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.978,
+   "closePct": 99.082,
+   "nonTextPct": 99.63,
+   "mismatched": 524,
+   "pixels": 25920,
+   "buckets": {
+    "fill": 0,
+    "hairline": 77,
+    "corner": 9,
+    "offset": 10,
+    "text": 428,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 104,
+     "exactPct": 89.844,
+     "closePct": 95.215,
+     "nonTextPct": 96.973,
+     "buckets": {
+      "fill": 0,
+      "hairline": 22,
+      "corner": 9,
+      "offset": 0,
+      "text": 73,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 94.531,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 13,
+     "exactPct": 98.153,
+     "closePct": 100.0,
+     "nonTextPct": 98.153,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 0,
+      "offset": 3,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      448,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 13,
+     "exactPct": 98.153,
+     "closePct": 100.0,
+     "nonTextPct": 98.153,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 0,
+      "offset": 3,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 166,
+     "exactPct": 83.789,
+     "closePct": 91.211,
+     "nonTextPct": 99.121,
+     "buckets": {
+      "fill": 0,
+      "hairline": 9,
+      "corner": 0,
+      "offset": 0,
+      "text": 157,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-desktop-en.dark",
+   "caseId": "components.system-prompt.empty-open-desktop-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-desktop-en (dark)",
+   "variantName": "empty-open-desktop-en",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.894,
+   "rgbPct": 99.832,
+   "sizeReact": [
+    480,
+    54
+   ],
+   "sizeFlutter": [
+    480,
+    54
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-desktop-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.894,
+   "closePct": 98.306,
+   "nonTextPct": 99.533,
+   "mismatched": 546,
+   "pixels": 25920,
+   "buckets": {
+    "fill": 0,
+    "hairline": 88,
+    "corner": 9,
+    "offset": 24,
+    "text": 425,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      96,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 105,
+     "exactPct": 89.746,
+     "closePct": 90.82,
+     "nonTextPct": 97.07,
+     "buckets": {
+      "fill": 0,
+      "hairline": 21,
+      "corner": 9,
+      "offset": 0,
+      "text": 75,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      448,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 24,
+     "exactPct": 96.591,
+     "closePct": 100.0,
+     "nonTextPct": 96.591,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 11,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 23,
+     "exactPct": 96.733,
+     "closePct": 100.0,
+     "nonTextPct": 96.733,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 6,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 138,
+     "exactPct": 86.523,
+     "closePct": 87.891,
+     "nonTextPct": 98.047,
+     "buckets": {
+      "fill": 0,
+      "hairline": 20,
+      "corner": 0,
+      "offset": 0,
+      "text": 118,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 164,
+     "exactPct": 83.984,
+     "closePct": 84.961,
+     "nonTextPct": 99.121,
+     "buckets": {
+      "fill": 0,
+      "hairline": 9,
+      "corner": 0,
+      "offset": 0,
+      "text": 155,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-desktop-zh.light",
+   "caseId": "components.system-prompt.empty-open-desktop-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-desktop-zh (light)",
+   "variantName": "empty-open-desktop-zh",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.851,
+   "rgbPct": 99.953,
+   "sizeReact": [
+    480,
+    54
+   ],
+   "sizeFlutter": [
+    480,
+    54
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-desktop-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.851,
+   "closePct": 99.028,
+   "nonTextPct": 99.633,
+   "mismatched": 557,
+   "pixels": 25920,
+   "buckets": {
+    "fill": 0,
+    "hairline": 79,
+    "corner": 6,
+    "offset": 10,
+    "text": 462,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 166,
+     "exactPct": 83.789,
+     "closePct": 91.602,
+     "nonTextPct": 95.605,
+     "buckets": {
+      "fill": 0,
+      "hairline": 39,
+      "corner": 6,
+      "offset": 0,
+      "text": 121,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 263,
+     "exactPct": 74.316,
+     "closePct": 87.402,
+     "nonTextPct": 98.73,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 0,
+      "text": 250,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 13,
+     "exactPct": 98.153,
+     "closePct": 100.0,
+     "nonTextPct": 98.153,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 0,
+      "offset": 3,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      448,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 13,
+     "exactPct": 98.153,
+     "closePct": 100.0,
+     "nonTextPct": 98.153,
+     "buckets": {
+      "fill": 0,
+      "hairline": 10,
+      "corner": 0,
+      "offset": 3,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 97,
+     "exactPct": 90.527,
+     "closePct": 96.387,
+     "nonTextPct": 99.414,
+     "buckets": {
+      "fill": 0,
+      "hairline": 4,
+      "corner": 0,
+      "offset": 2,
+      "text": 91,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-desktop-zh.dark",
+   "caseId": "components.system-prompt.empty-open-desktop-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-desktop-zh (dark)",
+   "variantName": "empty-open-desktop-zh",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.701,
+   "rgbPct": 99.827,
+   "sizeReact": [
+    480,
+    54
+   ],
+   "sizeFlutter": [
+    480,
+    54
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-desktop-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.701,
+   "closePct": 98.164,
+   "nonTextPct": 99.525,
+   "mismatched": 596,
+   "pixels": 25920,
+   "buckets": {
+    "fill": 0,
+    "hairline": 93,
+    "corner": 6,
+    "offset": 24,
+    "text": 473,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      64,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 169,
+     "exactPct": 83.496,
+     "closePct": 86.328,
+     "nonTextPct": 95.508,
+     "buckets": {
+      "fill": 0,
+      "hairline": 40,
+      "corner": 6,
+      "offset": 0,
+      "text": 123,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      448,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 24,
+     "exactPct": 96.591,
+     "closePct": 100.0,
+     "nonTextPct": 96.591,
+     "buckets": {
+      "fill": 0,
+      "hairline": 13,
+      "corner": 0,
+      "offset": 11,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      32,
+      32,
+      22
+     ],
+     "pixels": 704,
+     "mismatched": 23,
+     "exactPct": 96.733,
+     "closePct": 100.0,
+     "nonTextPct": 96.733,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 6,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      32,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 271,
+     "exactPct": 73.535,
+     "closePct": 75.684,
+     "nonTextPct": 98.633,
+     "buckets": {
+      "fill": 0,
+      "hairline": 14,
+      "corner": 0,
+      "offset": 0,
+      "text": 257,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "pixels": 1024,
+     "mismatched": 102,
+     "exactPct": 90.039,
+     "closePct": 91.504,
+     "nonTextPct": 99.121,
+     "buckets": {
+      "fill": 0,
+      "hairline": 4,
+      "corner": 0,
+      "offset": 5,
+      "text": 93,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-phone-en.light",
+   "caseId": "components.system-prompt.empty-open-phone-en.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-phone-en (light)",
+   "variantName": "empty-open-phone-en",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 98.061,
+   "rgbPct": 99.812,
+   "sizeReact": [
+    630,
+    142
+   ],
+   "sizeFlutter": [
+    630,
+    142
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-phone-en.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 98.061,
+   "closePct": 98.535,
+   "nonTextPct": 99.183,
+   "mismatched": 1735,
+   "pixels": 89460,
+   "buckets": {
+    "fill": 0,
+    "hairline": 663,
+    "corner": 0,
+    "offset": 68,
+    "text": 1004,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 553,
+     "exactPct": 92.163,
+     "closePct": 93.807,
+     "nonTextPct": 96.939,
+     "buckets": {
+      "fill": 0,
+      "hairline": 215,
+      "corner": 0,
+      "offset": 1,
+      "text": 337,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 437,
+     "exactPct": 93.807,
+     "closePct": 94.685,
+     "nonTextPct": 97.208,
+     "buckets": {
+      "fill": 0,
+      "hairline": 197,
+      "corner": 0,
+      "offset": 0,
+      "text": 240,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 327,
+     "exactPct": 95.366,
+     "closePct": 96.485,
+     "nonTextPct": 97.917,
+     "buckets": {
+      "fill": 0,
+      "hairline": 146,
+      "corner": 0,
+      "offset": 1,
+      "text": 180,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 324,
+     "exactPct": 95.408,
+     "closePct": 96.443,
+     "nonTextPct": 98.909,
+     "buckets": {
+      "fill": 0,
+      "hairline": 64,
+      "corner": 0,
+      "offset": 13,
+      "text": 247,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      588,
+      84,
+      42,
+      58
+     ],
+     "pixels": 2436,
+     "mismatched": 39,
+     "exactPct": 98.399,
+     "closePct": 100.0,
+     "nonTextPct": 98.399,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 22,
+      "text": 0,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-phone-en.dark",
+   "caseId": "components.system-prompt.empty-open-phone-en.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-phone-en (dark)",
+   "variantName": "empty-open-phone-en",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.982,
+   "rgbPct": 99.725,
+   "sizeReact": [
+    630,
+    142
+   ],
+   "sizeFlutter": [
+    630,
+    142
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-phone-en.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.982,
+   "closePct": 98.37,
+   "nonTextPct": 99.11,
+   "mismatched": 1805,
+   "pixels": 89460,
+   "buckets": {
+    "fill": 0,
+    "hairline": 706,
+    "corner": 0,
+    "offset": 90,
+    "text": 1009,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 553,
+     "exactPct": 92.163,
+     "closePct": 92.857,
+     "nonTextPct": 96.953,
+     "buckets": {
+      "fill": 0,
+      "hairline": 215,
+      "corner": 0,
+      "offset": 0,
+      "text": 338,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 443,
+     "exactPct": 93.722,
+     "closePct": 94.345,
+     "nonTextPct": 97.137,
+     "buckets": {
+      "fill": 0,
+      "hairline": 202,
+      "corner": 0,
+      "offset": 0,
+      "text": 241,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      252,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 328,
+     "exactPct": 95.351,
+     "closePct": 95.848,
+     "nonTextPct": 97.888,
+     "buckets": {
+      "fill": 0,
+      "hairline": 149,
+      "corner": 0,
+      "offset": 0,
+      "text": 179,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 335,
+     "exactPct": 95.252,
+     "closePct": 96.287,
+     "nonTextPct": 98.81,
+     "buckets": {
+      "fill": 0,
+      "hairline": 67,
+      "corner": 0,
+      "offset": 17,
+      "text": 251,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      588,
+      84,
+      42,
+      58
+     ],
+     "pixels": 2436,
+     "mismatched": 61,
+     "exactPct": 97.496,
+     "closePct": 100.0,
+     "nonTextPct": 97.496,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 24,
+      "text": 0,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-phone-zh.light",
+   "caseId": "components.system-prompt.empty-open-phone-zh.light",
+   "variantId": "default",
+   "theme": "light",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-phone-zh (light)",
+   "variantName": "empty-open-phone-zh",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.988,
+   "rgbPct": 99.899,
+   "sizeReact": [
+    630,
+    142
+   ],
+   "sizeFlutter": [
+    630,
+    142
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-phone-zh.light.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.988,
+   "closePct": 98.554,
+   "nonTextPct": 98.987,
+   "mismatched": 1800,
+   "pixels": 89460,
+   "buckets": {
+    "fill": 0,
+    "hairline": 691,
+    "corner": 149,
+    "offset": 66,
+    "text": 894,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 844,
+     "exactPct": 88.039,
+     "closePct": 90.547,
+     "nonTextPct": 94.955,
+     "buckets": {
+      "fill": 0,
+      "hairline": 269,
+      "corner": 87,
+      "offset": 0,
+      "text": 488,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 94.416,
+     "nonTextPct": 95.266,
+     "buckets": {
+      "fill": 0,
+      "hairline": 286,
+      "corner": 48,
+      "offset": 0,
+      "text": 153,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 375,
+     "exactPct": 94.685,
+     "closePct": 96.698,
+     "nonTextPct": 98.271,
+     "buckets": {
+      "fill": 0,
+      "hairline": 95,
+      "corner": 14,
+      "offset": 13,
+      "text": 253,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      588,
+      84,
+      42,
+      58
+     ],
+     "pixels": 2436,
+     "mismatched": 39,
+     "exactPct": 98.399,
+     "closePct": 100.0,
+     "nonTextPct": 98.399,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 22,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      58
+     ],
+     "pixels": 4872,
+     "mismatched": 36,
+     "exactPct": 99.261,
+     "closePct": 100.0,
+     "nonTextPct": 99.261,
+     "buckets": {
+      "fill": 0,
+      "hairline": 17,
+      "corner": 0,
+      "offset": 19,
+      "text": 0,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  },
+  {
+   "key": "components.system-prompt.empty-open-phone-zh.dark",
+   "caseId": "components.system-prompt.empty-open-phone-zh.dark",
+   "variantId": "default",
+   "theme": "dark",
+   "kind": "chat.system-prompt",
+   "title": "System prompt empty-open-phone-zh (dark)",
+   "variantName": "empty-open-phone-zh",
+   "officialStatus": "basic-pass",
+   "pixelPerfectPct": 97.928,
+   "rgbPct": 99.821,
+   "sizeReact": [
+    630,
+    142
+   ],
+   "sizeFlutter": [
+    630,
+    142
+   ],
+   "sideBySide": "visual-testing-results/diff/react__flutter/components.system-prompt.empty-open-phone-zh.dark.side-by-side.png",
+   "sizeMismatch": false,
+   "exactPct": 97.928,
+   "closePct": 98.359,
+   "nonTextPct": 98.927,
+   "mismatched": 1854,
+   "pixels": 89460,
+   "buckets": {
+    "fill": 0,
+    "hairline": 722,
+    "corner": 148,
+    "offset": 90,
+    "text": 894,
+    "other": 0
+   },
+   "regions": [],
+   "worstCells": [
+    {
+     "rect": [
+      84,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 837,
+     "exactPct": 88.138,
+     "closePct": 89.739,
+     "nonTextPct": 94.969,
+     "buckets": {
+      "fill": 0,
+      "hairline": 268,
+      "corner": 87,
+      "offset": 0,
+      "text": 482,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      168,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 487,
+     "exactPct": 93.098,
+     "closePct": 93.736,
+     "nonTextPct": 95.295,
+     "buckets": {
+      "fill": 0,
+      "hairline": 284,
+      "corner": 48,
+      "offset": 0,
+      "text": 155,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      0,
+      84,
+      84
+     ],
+     "pixels": 7056,
+     "mismatched": 384,
+     "exactPct": 94.558,
+     "closePct": 95.72,
+     "nonTextPct": 98.2,
+     "buckets": {
+      "fill": 0,
+      "hairline": 97,
+      "corner": 13,
+      "offset": 17,
+      "text": 257,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      588,
+      84,
+      42,
+      58
+     ],
+     "pixels": 2436,
+     "mismatched": 61,
+     "exactPct": 97.496,
+     "closePct": 100.0,
+     "nonTextPct": 97.496,
+     "buckets": {
+      "fill": 0,
+      "hairline": 37,
+      "corner": 0,
+      "offset": 24,
+      "text": 0,
+      "other": 0
+     }
+    },
+    {
+     "rect": [
+      0,
+      84,
+      84,
+      58
+     ],
+     "pixels": 4872,
+     "mismatched": 58,
+     "exactPct": 98.81,
+     "closePct": 100.0,
+     "nonTextPct": 98.81,
+     "buckets": {
+      "fill": 0,
+      "hairline": 27,
+      "corner": 0,
+      "offset": 31,
+      "text": 0,
+      "other": 0
+     }
+    }
+   ],
+   "status": "basic-pass",
+   "coverage": "mapped"
+  }
+ ],
+ "reference": "native",
+ "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+ "flutterVersion": "3.47.6",
+ "visualTesting": "0.1.0",
+ "generatedAt": "2026-10-25T06:35:33+00:00"
+}
