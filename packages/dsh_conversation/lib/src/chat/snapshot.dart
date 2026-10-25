@@ -2,6 +2,7 @@ import '../contract.dart';
 import '../registry.dart';
 import '../plan/submitted_plan.dart';
 import '../tool/todo_history.dart';
+import '../deliverables/turn_deliverables.dart';
 import 'definitions.dart';
 import 'commands.dart';
 import 'nodes.dart';
@@ -10,6 +11,7 @@ import 'system_prompt.dart';
 import 'turn_process.dart';
 import 'extended_inputs.dart';
 import 'workflow_run.dart';
+import 'reference_labels.dart';
 
 /// The immutable chat target snapshot (dsh `ChatSnapshot`, without the legacy
 /// slice, navigation rail and process-group presentation, which are deferred).
@@ -170,19 +172,22 @@ int localeCompare(String a, String b) {
 
 class ChatSnapshotBuilder extends ConversationViewBuilder {
   final Map<String, ViewNode> _byKey = {};
+  final _referenceLabels = ReferenceLabelProjector();
   ChatSnapshot _snapshot = ChatSnapshot.empty;
 
   @override
   ChatSnapshot replace(List<ViewNode> nodes, ConversationTimeline timeline) {
     _byKey
       ..clear()
-      ..addEntries(nodes.map((n) => MapEntry(n.key, n)));
+      ..addEntries(
+        _referenceLabels.replace(nodes).map((n) => MapEntry(n.key, n)),
+      );
     return _publish(timeline);
   }
 
   @override
   ChatSnapshot apply(List<ViewNode> upserts, ConversationTimeline timeline) {
-    for (final n in upserts) {
+    for (final n in _referenceLabels.apply(upserts, _byKey)) {
       _byKey[n.key] = n;
     }
     return _publish(timeline);
@@ -236,6 +241,7 @@ defaultChatRegistries() {
     ..register(const TurnErrorDefinition())
     ..register(const TurnMaxTokensDefinition())
     ..register(const TurnTailDefinition())
+    ..register(const DeliverablesDefinition())
     ..register(const SubmittedPlanDefinition())
     ..register(const TodoWriteDefinition())
     ..register(const TodoCallDefinition())

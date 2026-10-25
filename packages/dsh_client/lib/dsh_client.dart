@@ -6,6 +6,7 @@ library;
 export 'src/binary_response.dart' show decodeBinaryResponse, multipartBoundary;
 export 'src/connection.dart';
 export 'src/events.dart';
+export 'src/deliverables.dart';
 export 'src/file_upload.dart';
 export 'src/host_info.dart';
 export 'src/host_scope.dart';

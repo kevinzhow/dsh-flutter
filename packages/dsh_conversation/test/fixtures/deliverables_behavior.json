@@ -1,0 +1,2083 @@
+{
+  "format": "dsh-deliverables-behavior/1",
+  "synthetic": true,
+  "sequences": [
+    {
+      "turn": 1,
+      "closing": 8,
+      "events": [
+        {
+          "seq": 1,
+          "time": 1001,
+          "type": "turn/start",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 2,
+          "time": 1002,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"report.md\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 3,
+          "time": 1003,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            },
+            "meta": {
+              "path": "/synthetic/report.md"
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 4,
+          "time": 1004,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p1",
+            "files": [
+              null,
+              {
+                "path": "/synthetic/report.md",
+                "description": "First"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 5,
+          "time": 1005,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "invalid",
+            "name": "edit",
+            "arguments": "{\"file_path\": \"bad\", \"old_string\": \"same\", \"new_string\": \"same\"}"
+          }
+        },
+        {
+          "seq": 6,
+          "time": 1006,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "invalid"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 7,
+          "time": 1007,
+          "type": "workspace/changes",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 8,
+          "time": 1008,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p2",
+            "files": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest"
+              },
+              {
+                "path": "/synthetic/report.pdf"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 9,
+          "time": 1009,
+          "type": "turn/start",
+          "data": {
+            "turn": 2
+          }
+        },
+        {
+          "seq": 10,
+          "time": 1010,
+          "type": "tool/call",
+          "data": {
+            "turn": 2,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"other.txt\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 11,
+          "time": 1011,
+          "type": "tool/result",
+          "data": {
+            "turn": 2,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        }
+      ]
+    },
+    {
+      "turn": 1,
+      "closing": 20,
+      "events": [
+        {
+          "seq": 1,
+          "time": 1001,
+          "type": "turn/start",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 2,
+          "time": 1002,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"report.md\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 3,
+          "time": 1003,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            },
+            "meta": {
+              "path": "/synthetic/report.md"
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 4,
+          "time": 1004,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p1",
+            "files": [
+              null,
+              {
+                "path": "/synthetic/report.md",
+                "description": "First"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 5,
+          "time": 1005,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "invalid",
+            "name": "edit",
+            "arguments": "{\"file_path\": \"bad\", \"old_string\": \"same\", \"new_string\": \"same\"}"
+          }
+        },
+        {
+          "seq": 6,
+          "time": 1006,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "invalid"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 7,
+          "time": 1007,
+          "type": "workspace/changes",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 8,
+          "time": 1008,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p2",
+            "files": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest"
+              },
+              {
+                "path": "/synthetic/report.pdf"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 9,
+          "time": 1009,
+          "type": "turn/start",
+          "data": {
+            "turn": 2
+          }
+        },
+        {
+          "seq": 10,
+          "time": 1010,
+          "type": "tool/call",
+          "data": {
+            "turn": 2,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"other.txt\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 11,
+          "time": 1011,
+          "type": "tool/result",
+          "data": {
+            "turn": 2,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "closing": 20,
+      "events": [
+        {
+          "seq": 1,
+          "time": 1001,
+          "type": "turn/start",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 2,
+          "time": 1002,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"report.md\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 3,
+          "time": 1003,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            },
+            "meta": {
+              "path": "/synthetic/report.md"
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 4,
+          "time": 1004,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p1",
+            "files": [
+              null,
+              {
+                "path": "/synthetic/report.md",
+                "description": "First"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 5,
+          "time": 1005,
+          "type": "tool/call",
+          "data": {
+            "turn": 1,
+            "callId": "invalid",
+            "name": "edit",
+            "arguments": "{\"file_path\": \"bad\", \"old_string\": \"same\", \"new_string\": \"same\"}"
+          }
+        },
+        {
+          "seq": 6,
+          "time": 1006,
+          "type": "tool/result",
+          "data": {
+            "turn": 1,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "invalid"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        },
+        {
+          "seq": 7,
+          "time": 1007,
+          "type": "workspace/changes",
+          "data": {
+            "turn": 1
+          }
+        },
+        {
+          "seq": 8,
+          "time": 1008,
+          "type": "deliverables/presented",
+          "data": {
+            "turn": 1,
+            "callId": "p2",
+            "files": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest"
+              },
+              {
+                "path": "/synthetic/report.pdf"
+              }
+            ]
+          }
+        },
+        {
+          "seq": 9,
+          "time": 1009,
+          "type": "turn/start",
+          "data": {
+            "turn": 2
+          }
+        },
+        {
+          "seq": 10,
+          "time": 1010,
+          "type": "tool/call",
+          "data": {
+            "turn": 2,
+            "callId": "c1",
+            "name": "write",
+            "arguments": "{\"file_path\": \"other.txt\", \"content\": \"Synthetic\"}"
+          }
+        },
+        {
+          "seq": 11,
+          "time": 1011,
+          "type": "tool/result",
+          "data": {
+            "turn": 2,
+            "message": {
+              "isError": false,
+              "source": {
+                "callId": "c1"
+              }
+            }
+          },
+          "surfaceOp": "append"
+        }
+      ]
+    }
+  ],
+  "mutations": [
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": ""
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "  a.md ",
+        "content": "ok"
+      }
+    },
+    {
+      "name": "read",
+      "args": {
+        "file_path": "a.md"
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "",
+        "content": "ok"
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md"
+      }
+    },
+    {
+      "name": "edit",
+      "args": {
+        "file_path": "a.md",
+        "old_string": "x",
+        "new_string": "y"
+      }
+    },
+    {
+      "name": "edit",
+      "args": {
+        "file_path": "a.md",
+        "old_string": "",
+        "new_string": "y"
+      }
+    },
+    {
+      "name": "edit",
+      "args": {
+        "file_path": "a.md",
+        "old_string": "x",
+        "new_string": "x"
+      }
+    },
+    {
+      "name": "edit",
+      "args": {
+        "file_path": "a.md",
+        "old_string": "x",
+        "new_string": "y",
+        "replace_all": null
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "create",
+        "file_text": ""
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "str_replace",
+        "old_str": "x"
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "str_replace",
+        "old_str": "x",
+        "new_str": null
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "insert",
+        "insert_line": 0,
+        "new_str": "x"
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "insert",
+        "insert_line": 0.5,
+        "new_str": "x"
+      }
+    },
+    {
+      "name": "str_replace_editor",
+      "args": {
+        "path": "a.md",
+        "command": "view"
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": "ok"
+      },
+      "meta": {
+        "path": "/synthetic/a.md"
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": "ok"
+      },
+      "meta": {
+        "path": "relative.md"
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "/synthetic/a.md",
+        "content": "ok"
+      },
+      "meta": {
+        "path": null
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "C:\\synthetic\\a.md",
+        "content": "ok"
+      },
+      "meta": {
+        "path": null
+      }
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": "ok"
+      },
+      "meta": null
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": "ok"
+      },
+      "meta": {}
+    },
+    {
+      "name": "write",
+      "raw": "{malformed"
+    },
+    {
+      "name": "write",
+      "args": {
+        "file_path": "a.md",
+        "content": "ok"
+      },
+      "error": true
+    }
+  ],
+  "mentions": [
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "a.md"
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "c.txt"
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "/synthetic/a.md"
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "unknown"
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "synthetic/c.txt"
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "./a.md",
+      "operations": [
+        {
+          "path": "/synthetic/a.md",
+          "argumentPath": "./a.md"
+        }
+      ]
+    },
+    {
+      "paths": [
+        "/synthetic/a.md",
+        "/synthetic/b/a.md",
+        "/synthetic/c.txt"
+      ],
+      "value": "a.md",
+      "operations": [
+        {
+          "path": "/synthetic/c.txt",
+          "argumentPath": "a.md"
+        }
+      ]
+    }
+  ],
+  "files": [
+    null,
+    [],
+    {},
+    {
+      "path": " "
+    },
+    {
+      "path": "a.md"
+    },
+    {
+      "path": "a.md",
+      "description": ""
+    },
+    {
+      "path": "a.md",
+      "description": null
+    }
+  ],
+  "deliveries": [
+    null,
+    {},
+    {
+      "turn": 1,
+      "callId": "c",
+      "files": []
+    },
+    {
+      "turn": 0,
+      "callId": "c",
+      "files": []
+    },
+    {
+      "turn": 1,
+      "callId": "",
+      "files": []
+    },
+    {
+      "turn": 1,
+      "callId": "c",
+      "files": {}
+    }
+  ],
+  "changes": [
+    null,
+    {},
+    {
+      "turn": 1
+    },
+    {
+      "turn": 0
+    },
+    {
+      "turn": 1.5
+    },
+    {
+      "turn": 9007199254740992
+    }
+  ],
+  "expected": {
+    "sequences": [
+      [
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        }
+      ],
+      [
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ]
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "First",
+              "seq": 4,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "Latest",
+              "seq": 8,
+              "index": 0
+            },
+            {
+              "path": "/synthetic/report.pdf",
+              "seq": 8,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "Latest",
+              "seq": 8,
+              "index": 0
+            },
+            {
+              "path": "/synthetic/report.pdf",
+              "seq": 8,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "Latest",
+              "seq": 8,
+              "index": 0
+            },
+            {
+              "path": "/synthetic/report.pdf",
+              "seq": 8,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 3,
+                "path": "/synthetic/report.md",
+                "argumentPath": "report.md"
+              }
+            ],
+            "presented": [
+              {
+                "path": "/synthetic/report.md",
+                "description": "First",
+                "seq": 4,
+                "index": 1
+              },
+              {
+                "path": "/synthetic/report.md",
+                "description": "Latest",
+                "seq": 8,
+                "index": 0
+              },
+              {
+                "path": "/synthetic/report.pdf",
+                "seq": 8,
+                "index": 1
+              }
+            ],
+            "changes": {
+              "seq": 7
+            }
+          },
+          "produced": [
+            "/synthetic/report.md"
+          ],
+          "presented": [
+            {
+              "path": "/synthetic/report.md",
+              "description": "Latest",
+              "seq": 8,
+              "index": 0
+            },
+            {
+              "path": "/synthetic/report.pdf",
+              "seq": 8,
+              "index": 1
+            }
+          ],
+          "changes": {
+            "seq": 7
+          }
+        }
+      ],
+      [
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": null,
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": []
+          },
+          "produced": [],
+          "presented": [],
+          "changes": null
+        },
+        {
+          "data": {
+            "produced": [
+              {
+                "seq": 11,
+                "path": "other.txt"
+              }
+            ]
+          },
+          "produced": [
+            "other.txt"
+          ],
+          "presented": [],
+          "changes": null
+        }
+      ]
+    ],
+    "mutations": [
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [
+        {
+          "seq": 2,
+          "path": "  a.md "
+        }
+      ],
+      [],
+      [],
+      [],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [],
+      [],
+      [],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [],
+      [],
+      [
+        {
+          "seq": 2,
+          "path": "/synthetic/a.md",
+          "argumentPath": "a.md"
+        }
+      ],
+      [],
+      [
+        {
+          "seq": 2,
+          "path": "/synthetic/a.md"
+        }
+      ],
+      [
+        {
+          "seq": 2,
+          "path": "C:\\synthetic\\a.md"
+        }
+      ],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [
+        {
+          "seq": 2,
+          "path": "a.md"
+        }
+      ],
+      [],
+      []
+    ],
+    "mentions": [
+      null,
+      "/synthetic/c.txt",
+      "/synthetic/a.md",
+      null,
+      null,
+      "/synthetic/a.md",
+      null
+    ],
+    "validation": {
+      "files": [
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "deliveries": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ],
+      "changes": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    "records": {
+      "changedFiles": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "summaries": [
+        true,
+        false,
+        false,
+        true,
+        false
+      ],
+      "diffs": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "hosts": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "applications": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "changedFiles": [
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": 0
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": 0,
+      "binary": true
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": 0,
+      "binary": false
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": 0,
+      "oversized": null
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": -0.5,
+      "deleted": 0
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": -1
+    },
+    {
+      "path": " ",
+      "display": "file.dart",
+      "added": 1,
+      "deleted": 0
+    },
+    {
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "added": 9007199254740992,
+      "deleted": 0
+    }
+  ],
+  "summaries": [
+    {
+      "turn": 1,
+      "total": 1,
+      "added": 1,
+      "deleted": 0,
+      "files": [
+        {
+          "path": "/synthetic/file.dart",
+          "display": "file.dart",
+          "added": 1,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "turn": 0,
+      "total": 1,
+      "added": 1,
+      "deleted": 0,
+      "files": [
+        {
+          "path": "/synthetic/file.dart",
+          "display": "file.dart",
+          "added": 1,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "turn": 1,
+      "total": 1,
+      "added": 1,
+      "deleted": 0,
+      "files": [
+        null
+      ]
+    },
+    {
+      "turn": 1,
+      "total": -1,
+      "added": 1,
+      "deleted": 0,
+      "files": [
+        {
+          "path": "/synthetic/file.dart",
+          "display": "file.dart",
+          "added": 1,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "turn": 1,
+      "total": 1,
+      "added": 0.5,
+      "deleted": 0,
+      "files": [
+        {
+          "path": "/synthetic/file.dart",
+          "display": "file.dart",
+          "added": 1,
+          "deleted": 0
+        }
+      ]
+    }
+  ],
+  "diffs": [
+    {
+      "kind": "text",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "-old",
+            "+new",
+            " context"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "binary",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": null
+    },
+    {
+      "kind": "oversized",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "-old",
+            "+new",
+            " context"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "text",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": null,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "-old",
+            "+new",
+            " context"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "text",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "bad"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "text",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": -1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "-old",
+            "+new",
+            " context"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "text",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "other",
+      "path": "/synthetic/file.dart",
+      "display": "file.dart",
+      "before": true,
+      "after": true,
+      "coarse": false,
+      "hunks": [
+        {
+          "oldStart": 1,
+          "oldLines": 1,
+          "newStart": 1,
+          "newLines": 1,
+          "lines": [
+            "-old",
+            "+new",
+            " context"
+          ]
+        }
+      ]
+    }
+  ],
+  "hosts": [
+    {
+      "name": "Synthetic remote",
+      "available": true,
+      "fileManager": null
+    },
+    {
+      "name": "Synthetic remote",
+      "available": true,
+      "fileManager": "finder"
+    },
+    {
+      "name": "Synthetic remote",
+      "available": true,
+      "fileManager": "explorer"
+    },
+    {
+      "name": "Synthetic remote",
+      "available": true,
+      "fileManager": "directory"
+    },
+    {
+      "name": "Synthetic remote",
+      "available": true,
+      "fileManager": "other"
+    },
+    {
+      "name": "Synthetic",
+      "available": false
+    }
+  ],
+  "applications": [
+    [
+      {
+        "id": "synthetic.app",
+        "name": "Synthetic editor",
+        "default": true,
+        "icon": null
+      }
+    ],
+    [
+      {
+        "id": "synthetic.app",
+        "name": "Synthetic editor",
+        "default": true,
+        "icon": "data:image/png;base64,YQ=="
+      }
+    ],
+    [
+      {
+        "id": "synthetic.app",
+        "name": "Synthetic editor",
+        "default": true,
+        "icon": "data:image/svg+xml;base64,YQ=="
+      }
+    ],
+    [
+      {
+        "id": "synthetic.app",
+        "name": "Synthetic editor",
+        "default": true,
+        "icon": "https://synthetic.invalid/icon"
+      }
+    ],
+    [
+      {
+        "id": "synthetic.app",
+        "name": "Synthetic editor",
+        "default": true,
+        "icon": "data:image/png;base64,"
+      }
+    ],
+    {},
+    [
+      {
+        "id": "",
+        "name": "x",
+        "default": false,
+        "icon": null
+      }
+    ]
+  ]
+}

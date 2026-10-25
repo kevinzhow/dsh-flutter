@@ -404,6 +404,9 @@ class ChatViewState extends State<ChatView> {
               TurnTailOwner(
                 session: owner,
                 turn: (node.data as TurnTailData).turn,
+                seq:
+                    (node.data as TurnTailData).closing?.finalNode?.seq ??
+                    (node.data as TurnTailData).seq,
                 snapshot: chat,
               ),
             )

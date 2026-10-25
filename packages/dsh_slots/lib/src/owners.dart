@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dsh_client/dsh_client.dart' show WorkspaceFilesRemote;
+import 'package:dsh_client/dsh_client.dart'
+    show WorkspaceFilesRemote, NativeFileAction;
 import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_models/dsh_models.dart';
@@ -219,8 +220,10 @@ class TurnTailOwner {
     required this.session,
     required this.turn,
     required this.snapshot,
+    this.seq = double.infinity,
   });
 
+  final num seq;
   final SessionOwner session;
   final int turn;
   final ChatSnapshot snapshot;
@@ -552,4 +555,60 @@ class SessionLineageOwner {
   final SessionOwner session;
   final SessionCrumb crumb;
   final void Function()? openTitle;
+}
+
+/// Original sent text and caller-confirmed facts. A node never acquires the
+/// currently selected Session's authority when it originated in another one.
+class UserTextOwner {
+  const UserTextOwner({
+    required this.text,
+    this.facts = const {},
+    this.session,
+    this.interactive = false,
+    this.ellipsis = false,
+  });
+  final String text;
+  final Map<String, Object?> facts;
+  final SessionOwner? session;
+  final bool interactive, ellipsis;
+}
+
+class UserTextNodeOwner {
+  const UserTextNodeOwner({
+    required this.node,
+    required this.raw,
+    required this.interactive,
+    this.ellipsis = false,
+    this.session,
+  });
+  final UserTextNode node;
+  final String raw;
+  final bool interactive;
+  final bool ellipsis;
+  final SessionOwner? session;
+  String get identity => '${node.id}:${node.start}';
+}
+
+/// Native actions receive immutable event coordinates from their owner. The
+/// URL identifies shared feedback; only onAction performs the user gesture.
+class DeliverablesFileActionsOwner {
+  const DeliverablesFileActionsOwner({
+    required this.session,
+    required this.actionUrl,
+    required this.available,
+    required this.pending,
+    required this.onAction,
+    required this.acquireApplications,
+    required this.releaseApplications,
+  });
+  final SessionOwner session;
+  final FileApplicationsHandle Function() acquireApplications;
+  final void Function(FileApplicationsHandle handle) releaseApplications;
+  final String actionUrl;
+  final bool available, pending;
+  final Future<NativeOpenFailure?> Function(
+    NativeFileAction action, [
+    String? application,
+  ])
+  onAction;
 }

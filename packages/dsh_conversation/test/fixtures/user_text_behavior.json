@@ -1,0 +1,2562 @@
+{
+  "format": "dsh-user-text-behavior/1",
+  "synthetic": true,
+  "documents": [
+    {
+      "parts": []
+    },
+    {
+      "parts": [
+        "just plain text"
+      ]
+    },
+    {
+      "parts": [
+        "  plain\r\n\t text  "
+      ],
+      "facts": {
+        "trimWhitespace": true,
+        "collapseWhitespace": true
+      }
+    },
+    {
+      "parts": [
+        " @src/main.dart, and @\"folder with spaces/a.dart\" and @folder/！"
+      ]
+    },
+    {
+      "parts": [
+        "email@not-a-file a@broken @. @/ @\"unterminated value"
+      ]
+    },
+    {
+      "parts": [
+        "@[Synthetic](dsh-session:s1) @Synthetic longer @SyntheticX"
+      ],
+      "facts": {
+        "sessionLabels": [
+          "Synthetic",
+          "Synthetic longer"
+        ]
+      }
+    },
+    {
+      "parts": [
+        " \n @Synthetic ",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        " @folder/\t"
+      ],
+      "facts": {
+        "trimWhitespace": true,
+        "collapseWhitespace": true,
+        "sessionLabels": [
+          "Synthetic"
+        ]
+      }
+    },
+    {
+      "parts": [
+        "before ",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AIza",
+        {
+          "repeat": "Q",
+          "count": 35
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "ghp_",
+        {
+          "repeat": "Q",
+          "count": 36
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "github_pat_",
+        {
+          "repeat": "Q",
+          "count": 22
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "glpat-",
+        {
+          "repeat": "Q",
+          "count": 20
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "npm_",
+        {
+          "repeat": "Q",
+          "count": 36
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "hf_",
+        {
+          "repeat": "Q",
+          "count": 30
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AKIA",
+        {
+          "repeat": "Q",
+          "count": 16
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "LTAI",
+        {
+          "repeat": "Q",
+          "count": 12
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AKID",
+        {
+          "repeat": "Q",
+          "count": 28
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "xoxb-",
+        {
+          "repeat": "Q",
+          "count": 10
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "sk_test_",
+        {
+          "repeat": "Q",
+          "count": 16
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "whsec_",
+        {
+          "repeat": "Q",
+          "count": 24
+        },
+        " after"
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 40
+        }
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 256
+        },
+        "7"
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 255
+        },
+        "7"
+      ]
+    },
+    {
+      "parts": [
+        "wordsk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "parts": [
+        "x ",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "parts": [
+        "🐳",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "parts": [
+        "eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".",
+        {
+          "repeat": "Q",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "parts": [
+        "eyJ",
+        {
+          "repeat": "Q",
+          "count": 2049
+        },
+        ".eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".",
+        {
+          "repeat": "Q",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "parts": [
+        "https://user:",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        "@synthetic.invalid/"
+      ]
+    },
+    {
+      "parts": [
+        "https://:🦄s€cret@synthetic.invalid/"
+      ]
+    },
+    {
+      "parts": [
+        "https://user?x:password@synthetic.invalid/"
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN RSA PRIVATE KEY-----\r\nabc🐳\r\ndef\n-----END RSA PRIVATE KEY-----"
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN PRIVATE KEY-----one line-----END PRIVATE KEY-----"
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN PRIVATE KEY-----\nbody without closing line"
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 12
+        },
+        "-sk-",
+        {
+          "repeat": "Z8",
+          "count": 20
+        }
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 12
+        },
+        "-----BEGIN PRIVATE KEY-----\nbody\n-----END PRIVATE KEY-----"
+      ]
+    },
+    {
+      "parts": [
+        "@",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        " and @folder/"
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "parts": [
+        "before ",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AIza",
+        {
+          "repeat": "Q",
+          "count": 35
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "ghp_",
+        {
+          "repeat": "Q",
+          "count": 36
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "github_pat_",
+        {
+          "repeat": "Q",
+          "count": 22
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "glpat-",
+        {
+          "repeat": "Q",
+          "count": 20
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "npm_",
+        {
+          "repeat": "Q",
+          "count": 36
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "hf_",
+        {
+          "repeat": "Q",
+          "count": 30
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AKIA",
+        {
+          "repeat": "Q",
+          "count": 16
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "LTAI",
+        {
+          "repeat": "Q",
+          "count": 12
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "AKID",
+        {
+          "repeat": "Q",
+          "count": 28
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "xoxb-",
+        {
+          "repeat": "Q",
+          "count": 10
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "sk_test_",
+        {
+          "repeat": "Q",
+          "count": 16
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "before ",
+        "whsec_",
+        {
+          "repeat": "Q",
+          "count": 24
+        },
+        " after"
+      ],
+      "from": [
+        0,
+        7,
+        8,
+        12,
+        60
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 40
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 256
+        },
+        "7"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q",
+          "count": 255
+        },
+        "7"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "wordsk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "x ",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "🐳",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".",
+        {
+          "repeat": "Q",
+          "count": 8
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "eyJ",
+        {
+          "repeat": "Q",
+          "count": 2049
+        },
+        ".eyJ",
+        {
+          "repeat": "Q",
+          "count": 8
+        },
+        ".",
+        {
+          "repeat": "Q",
+          "count": 8
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "https://user:",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        "@synthetic.invalid/"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "https://:🦄s€cret@synthetic.invalid/"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "https://user?x:password@synthetic.invalid/"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN RSA PRIVATE KEY-----\r\nabc🐳\r\ndef\n-----END RSA PRIVATE KEY-----"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN PRIVATE KEY-----one line-----END PRIVATE KEY-----"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "-----BEGIN PRIVATE KEY-----\nbody without closing line"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 12
+        },
+        "-sk-",
+        {
+          "repeat": "Z8",
+          "count": 20
+        }
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 12
+        },
+        "-----BEGIN PRIVATE KEY-----\nbody\n-----END PRIVATE KEY-----"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    },
+    {
+      "parts": [
+        "@",
+        "sk-",
+        {
+          "repeat": "Q7",
+          "count": 20
+        },
+        " and @folder/"
+      ],
+      "from": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        9,
+        15,
+        25,
+        50
+      ]
+    }
+  ],
+  "expected": {
+    "documents": [
+      [],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 15,
+          "data": {
+            "text": "just plain text"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 2,
+          "data": {
+            "text": "  ",
+            "display": ""
+          }
+        },
+        {
+          "id": "text",
+          "start": 2,
+          "end": 7,
+          "data": {
+            "text": "plain"
+          }
+        },
+        {
+          "id": "text",
+          "start": 7,
+          "end": 11,
+          "data": {
+            "text": "\r\n\t ",
+            "display": " "
+          }
+        },
+        {
+          "id": "text",
+          "start": 11,
+          "end": 15,
+          "data": {
+            "text": "text"
+          }
+        },
+        {
+          "id": "text",
+          "start": 15,
+          "end": 17,
+          "data": {
+            "text": "  ",
+            "display": ""
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 1,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "file",
+          "start": 1,
+          "end": 15,
+          "data": {
+            "path": "src/main.dart",
+            "label": "main.dart"
+          }
+        },
+        {
+          "id": "text",
+          "start": 15,
+          "end": 21,
+          "data": {
+            "text": ", and "
+          }
+        },
+        {
+          "id": "file",
+          "start": 21,
+          "end": 49,
+          "data": {
+            "path": "folder with spaces/a.dart",
+            "label": "a.dart"
+          }
+        },
+        {
+          "id": "text",
+          "start": 49,
+          "end": 54,
+          "data": {
+            "text": " and "
+          }
+        },
+        {
+          "id": "folder",
+          "start": 54,
+          "end": 62,
+          "data": {
+            "path": "folder/",
+            "label": "folder"
+          }
+        },
+        {
+          "id": "text",
+          "start": 62,
+          "end": 63,
+          "data": {
+            "text": "！"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 29,
+          "data": {
+            "text": "email@not-a-file a@broken @. "
+          }
+        },
+        {
+          "id": "folder",
+          "start": 29,
+          "end": 31,
+          "data": {
+            "path": "/",
+            "label": "/"
+          }
+        },
+        {
+          "id": "text",
+          "start": 31,
+          "end": 32,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "file",
+          "start": 32,
+          "end": 46,
+          "data": {
+            "path": "unterminated",
+            "label": "unterminated"
+          }
+        },
+        {
+          "id": "text",
+          "start": 46,
+          "end": 52,
+          "data": {
+            "text": " value"
+          }
+        }
+      ],
+      [
+        {
+          "id": "session",
+          "start": 0,
+          "end": 28,
+          "data": {
+            "label": "Synthetic"
+          }
+        },
+        {
+          "id": "text",
+          "start": 28,
+          "end": 29,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "session",
+          "start": 29,
+          "end": 46,
+          "data": {
+            "label": "Synthetic longer"
+          }
+        },
+        {
+          "id": "text",
+          "start": 46,
+          "end": 47,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "session",
+          "start": 47,
+          "end": 57,
+          "data": {
+            "label": "Synthetic"
+          }
+        },
+        {
+          "id": "text",
+          "start": 57,
+          "end": 58,
+          "data": {
+            "text": "X"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 3,
+          "data": {
+            "text": " \n ",
+            "display": ""
+          }
+        },
+        {
+          "id": "session",
+          "start": 3,
+          "end": 13,
+          "data": {
+            "label": "Synthetic"
+          }
+        },
+        {
+          "id": "text",
+          "start": 13,
+          "end": 14,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 14,
+          "end": 57,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 57,
+          "end": 58,
+          "data": {
+            "text": " "
+          }
+        },
+        {
+          "id": "folder",
+          "start": 58,
+          "end": 66,
+          "data": {
+            "path": "folder/",
+            "label": "folder"
+          }
+        },
+        {
+          "id": "text",
+          "start": 66,
+          "end": 67,
+          "data": {
+            "text": "\t",
+            "display": ""
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 50,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 50,
+          "end": 56,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 46,
+          "data": {
+            "masked": "AIzaQQQQ*******************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 46,
+          "end": 52,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "ghp_QQQQ********************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 47,
+          "end": 53,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "github_p*************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 40,
+          "end": 46,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 33,
+          "data": {
+            "masked": "glpat-QQ******************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 33,
+          "end": 39,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "npm_QQQQ********************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 47,
+          "end": 53,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "hf_QQQQQ*************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 40,
+          "end": 46,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 27,
+          "data": {
+            "masked": "AKIAQQQQ************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 27,
+          "end": 33,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 23,
+          "data": {
+            "masked": "LTAIQQQQ********"
+          }
+        },
+        {
+          "id": "text",
+          "start": 23,
+          "end": 29,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 39,
+          "data": {
+            "masked": "AKIDQQQQ************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 39,
+          "end": 45,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 22,
+          "data": {
+            "masked": "xoxb-QQQ*******"
+          }
+        },
+        {
+          "id": "text",
+          "start": 22,
+          "end": 28,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 31,
+          "data": {
+            "masked": "sk_test_****************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 31,
+          "end": 37,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 7,
+          "data": {
+            "text": "before "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 37,
+          "data": {
+            "masked": "whsec_QQ**********************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 37,
+          "end": 43,
+          "data": {
+            "text": " after"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 43,
+          "data": {
+            "text": "sk-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 260,
+          "data": {
+            "text": "sk-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ7"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 259,
+          "data": {
+            "masked": "sk-QQQQQ***********************************************************************************************************************************************************************************************************************************************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 47,
+          "data": {
+            "text": "wordsk-Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 2,
+          "data": {
+            "text": "x "
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 2,
+          "data": {
+            "text": "🐳"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 32,
+          "data": {
+            "masked": "eyJQQQQQ************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 2073,
+          "data": {
+            "text": "eyJQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ.eyJQQQQQQQQ.QQQQQQQQ"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 13,
+          "data": {
+            "text": "https://user:"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "text",
+          "start": 56,
+          "end": 75,
+          "data": {
+            "text": "@synthetic.invalid/"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 9,
+          "data": {
+            "text": "https://:"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "text",
+          "start": 17,
+          "end": 36,
+          "data": {
+            "text": "@synthetic.invalid/"
+          }
+        }
+      ],
+      [
+        {
+          "id": "text",
+          "start": 0,
+          "end": 42,
+          "data": {
+            "text": "https://user?x:password@synthetic.invalid/"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 73,
+          "data": {
+            "masked": "-----BEGIN RSA PRIVATE KEY-----\r\n****\r\n***\n-----END RSA PRIVATE KEY-----"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 60,
+          "data": {
+            "masked": "************************************************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 53,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n*************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 71,
+          "data": {
+            "masked": "sk-Q7Q7Q***************************************************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 85,
+          "data": {
+            "masked": "sk-Q7Q7Q**********************************************\n****\n*************************"
+          }
+        }
+      ],
+      [
+        {
+          "id": "file",
+          "start": 0,
+          "end": 44,
+          "data": {
+            "path": "sk-Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7",
+            "label": "sk-Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7Q7"
+          }
+        },
+        {
+          "id": "text",
+          "start": 44,
+          "end": 49,
+          "data": {
+            "text": " and "
+          }
+        },
+        {
+          "id": "folder",
+          "start": 49,
+          "end": 57,
+          "data": {
+            "path": "folder/",
+            "label": "folder"
+          }
+        }
+      ]
+    ],
+    "queries": [
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 50,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 50,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 46,
+          "data": {
+            "masked": "AIzaQQQQ*******************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 46,
+          "data": {
+            "masked": "AIzaQQQQ*******************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "ghp_QQQQ********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "ghp_QQQQ********************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "github_p*************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "github_p*************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 33,
+          "data": {
+            "masked": "glpat-QQ******************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 33,
+          "data": {
+            "masked": "glpat-QQ******************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "npm_QQQQ********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 47,
+          "data": {
+            "masked": "npm_QQQQ********************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "hf_QQQQQ*************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 40,
+          "data": {
+            "masked": "hf_QQQQQ*************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 27,
+          "data": {
+            "masked": "AKIAQQQQ************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 27,
+          "data": {
+            "masked": "AKIAQQQQ************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 23,
+          "data": {
+            "masked": "LTAIQQQQ********"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 23,
+          "data": {
+            "masked": "LTAIQQQQ********"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 39,
+          "data": {
+            "masked": "AKIDQQQQ************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 39,
+          "data": {
+            "masked": "AKIDQQQQ************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 22,
+          "data": {
+            "masked": "xoxb-QQQ*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 22,
+          "data": {
+            "masked": "xoxb-QQQ*******"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 31,
+          "data": {
+            "masked": "sk_test_****************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 31,
+          "data": {
+            "masked": "sk_test_****************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 37,
+          "data": {
+            "masked": "whsec_QQ**********************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 7,
+          "end": 37,
+          "data": {
+            "masked": "whsec_QQ**********************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 259,
+          "data": {
+            "masked": "sk-QQQQQ***********************************************************************************************************************************************************************************************************************************************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 2,
+          "end": 45,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 32,
+          "data": {
+            "masked": "eyJQQQQQ************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 13,
+          "end": 56,
+          "data": {
+            "masked": "*******************************************"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 9,
+          "end": 17,
+          "data": {
+            "masked": "*******"
+          }
+        },
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 73,
+          "data": {
+            "masked": "-----BEGIN RSA PRIVATE KEY-----\r\n****\r\n***\n-----END RSA PRIVATE KEY-----"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 60,
+          "data": {
+            "masked": "************************************************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 53,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n*************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 71,
+          "data": {
+            "masked": "sk-Q7Q7Q***************************************************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 28,
+          "end": 71,
+          "data": {
+            "masked": "sk-Z8Z8Z***********************************"
+          }
+        },
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 0,
+          "end": 85,
+          "data": {
+            "masked": "sk-Q7Q7Q**********************************************\n****\n*************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 27,
+          "end": 85,
+          "data": {
+            "masked": "-----BEGIN PRIVATE KEY-----\n****\n-----END PRIVATE KEY-----"
+          }
+        },
+        null
+      ],
+      [
+        {
+          "id": "secret",
+          "start": 1,
+          "end": 44,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        {
+          "id": "secret",
+          "start": 1,
+          "end": 44,
+          "data": {
+            "masked": "sk-Q7Q7Q***********************************"
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

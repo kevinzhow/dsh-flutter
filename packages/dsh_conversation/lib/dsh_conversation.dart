@@ -30,3 +30,9 @@ export 'src/input/trigger_controller.dart';
 export 'src/input/trigger_detect.dart';
 export 'src/input/trigger_menu.dart';
 export 'src/input/trigger_types.dart';
+
+export 'src/user_text/document.dart';
+export 'src/user_text/credentials.dart';
+export 'src/user_text/reference_rules.dart';
+
+export 'src/deliverables/turn_deliverables.dart';

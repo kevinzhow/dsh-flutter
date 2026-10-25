@@ -34,6 +34,7 @@
     "packages/client/ui-reference/src/client/locales.ts",
     "packages/client/ui-schedule/src/client/frequency-locales.ts",
     "packages/client/ui-schedule/src/client/task-manager-locales.ts",
+    "packages/client/ui-secret-mask/src/client/locales.ts",
     "packages/client/ui-settings-general/src/client/locales.ts",
     "packages/client/ui-shortcuts/src/client/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
@@ -5560,6 +5561,21 @@
         "unit.second.other": {
           "en": "seconds",
           "zh": "秒"
+        }
+      }
+    },
+    {
+      "namespace": "secretMask",
+      "package": "client/ui-secret-mask",
+      "file": "packages/client/ui-secret-mask/src/client/locales.ts",
+      "entries": {
+        "secret.hide": {
+          "en": "Hide secret",
+          "zh": "隐藏密钥"
+        },
+        "secret.reveal": {
+          "en": "Show secret",
+          "zh": "显示密钥"
         }
       }
     },

@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'applications.dart';
 import 'controller.dart';
 import 'target_button.dart';
+import 'file_route_action.dart';
 
 /// The id of the command that opens the workspace in the chosen application.
 const String openLocalCommand = 'workspace.openLocal';
@@ -73,6 +74,22 @@ void Function() registerOpenInAppFeature(
       order: -10,
     ),
   ];
+  for (final slot in [
+    DshSlots.deliverablesFileActions,
+    DshSlots.deliverablesReviewFileActions,
+  ]) {
+    offs.add(
+      slots.register<DeliverablesFileActionsOwner, Widget>(
+        slot.typed<DeliverablesFileActionsOwner, Widget>(),
+        (owner) => FileRouteAction(
+          key: ValueKey(owner.actionUrl),
+          owner: owner,
+          i18n: services.i18n,
+        ),
+        id: 'open-in-app',
+      ),
+    );
+  }
   final shortcuts = services.shortcuts;
   if (shortcuts != null) {
     offs.add(

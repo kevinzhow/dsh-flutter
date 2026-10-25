@@ -1,0 +1,464 @@
+{
+  "cases": [
+    {
+      "id": "input.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "text"
+        },
+        {
+          "click": [
+            310,
+            128
+          ]
+        },
+        {
+          "expect": {
+            "reference": "text",
+            "rect": [
+              40,
+              114,
+              320,
+              146
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "revealed"
+        },
+        {
+          "click": [
+            310,
+            128
+          ]
+        },
+        {
+          "expect": {
+            "reference": "revealed",
+            "rect": [
+              40,
+              114,
+              320,
+              146
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "remasked"
+        },
+        {
+          "click": [
+            54,
+            677
+          ]
+        },
+        {
+          "capture": "launcher"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              32,
+              400,
+              1248,
+              695
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "command-picked"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              32,
+              605,
+              1248,
+              695
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            24
+          ]
+        },
+        {
+          "capture": "files"
+        },
+        {
+          "click": [
+            75,
+            100
+          ]
+        },
+        {
+          "capture": "changes-hidden"
+        },
+        {
+          "expect": {
+            "reference": "files",
+            "rect": [
+              20,
+              120,
+              1260,
+              330
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            75,
+            100
+          ]
+        },
+        {
+          "capture": "changes-restored"
+        },
+        {
+          "click": [
+            48,
+            320
+          ]
+        },
+        {
+          "capture": "all-changes"
+        },
+        {
+          "expect": {
+            "reference": "changes-restored",
+            "rect": [
+              20,
+              285,
+              1260,
+              365
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1066,
+            24
+          ]
+        },
+        {
+          "capture": "review"
+        },
+        {
+          "click": [
+            380,
+            86
+          ]
+        },
+        {
+          "capture": "review-split"
+        },
+        {
+          "expect": {
+            "reference": "review",
+            "rect": [
+              0,
+              110,
+              1280,
+              270
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            417,
+            86
+          ]
+        },
+        {
+          "capture": "review-wrap"
+        },
+        {
+          "expect": {
+            "reference": "review-split",
+            "rect": [
+              0,
+              110,
+              1280,
+              280
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            100,
+            86
+          ]
+        },
+        {
+          "capture": "review-files-menu"
+        },
+        {
+          "expect": {
+            "reference": "review-wrap",
+            "rect": [
+              0,
+              90,
+              400,
+              290
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "input.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "text"
+        },
+        {
+          "click": [
+            310,
+            150
+          ]
+        },
+        {
+          "expect": {
+            "reference": "text",
+            "rect": [
+              40,
+              136,
+              320,
+              170
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "revealed"
+        },
+        {
+          "click": [
+            310,
+            150
+          ]
+        },
+        {
+          "expect": {
+            "reference": "revealed",
+            "rect": [
+              40,
+              136,
+              320,
+              170
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "remasked"
+        },
+        {
+          "click": [
+            54,
+            801
+          ]
+        },
+        {
+          "capture": "launcher"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              32,
+              524,
+              358,
+              819
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "command-picked"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              32,
+              729,
+              358,
+              819
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            24
+          ]
+        },
+        {
+          "capture": "files"
+        },
+        {
+          "click": [
+            75,
+            100
+          ]
+        },
+        {
+          "capture": "changes-hidden"
+        },
+        {
+          "expect": {
+            "reference": "files",
+            "rect": [
+              20,
+              120,
+              370,
+              330
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            75,
+            100
+          ]
+        },
+        {
+          "capture": "changes-restored"
+        },
+        {
+          "click": [
+            48,
+            320
+          ]
+        },
+        {
+          "capture": "all-changes"
+        },
+        {
+          "expect": {
+            "reference": "changes-restored",
+            "rect": [
+              20,
+              285,
+              370,
+              365
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            325,
+            24
+          ]
+        },
+        {
+          "capture": "review"
+        },
+        {
+          "click": [
+            258,
+            86
+          ]
+        },
+        {
+          "capture": "review-split"
+        },
+        {
+          "expect": {
+            "reference": "review",
+            "rect": [
+              0,
+              110,
+              390,
+              270
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            295,
+            86
+          ]
+        },
+        {
+          "capture": "review-wrap"
+        },
+        {
+          "expect": {
+            "reference": "review-split",
+            "rect": [
+              0,
+              110,
+              390,
+              280
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            100,
+            86
+          ]
+        },
+        {
+          "capture": "review-files-menu"
+        },
+        {
+          "expect": {
+            "reference": "review-wrap",
+            "rect": [
+              0,
+              90,
+              390,
+              290
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -119,6 +119,57 @@ void main() {
   }
 
   testWidgets(
+    'launcher restores editor focus before keyboard opening and toggles without inserting slash',
+    (t) async {
+      await start(t);
+      final button = find.byKey(const ValueKey('composer-attach'));
+      Focus.of(t.element(button)).requestFocus();
+      await t.pump();
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await settle(t);
+      expect(find.byKey(const ValueKey('trigger-menu')), findsOneWidget);
+      expect(find.text('Goal'), findsOneWidget);
+      expect(
+        controller.openSession!.owner.input!.triggers!.launcher.value,
+        'command',
+      );
+      final editor = t.widget<EditableText>(find.byType(EditableText).last);
+      expect(editor.focusNode.hasFocus, isTrue);
+      expect(editor.controller.text, isEmpty);
+      expect(backend.transport.prompts, isEmpty);
+      await t.tap(button);
+      await settle(t);
+      expect(find.byKey(const ValueKey('trigger-menu')), findsNothing);
+      expect(
+        controller.openSession!.owner.input!.triggers!.launcher.value,
+        isNull,
+      );
+    },
+  );
+  testWidgets(
+    'launcher picks replace the current selection and retain surrounding draft text',
+    (t) async {
+      await start(t);
+      await t.enterText(find.byType(EditableText).last, 'replace tail');
+      await settle(t);
+      final editor = t.widget<EditableText>(find.byType(EditableText).last);
+      editor.controller.selection = const TextSelection(
+        baseOffset: 0,
+        extentOffset: 7,
+      );
+      await settle(t);
+      await t.tap(find.byKey(const ValueKey('composer-attach')));
+      await settle(t);
+      await t.tap(find.byKey(const ValueKey('trigger-row-goal')));
+      await settle(t);
+      final input = controller.openSession!.owner.input!;
+      expect(input.snapshot.claim?.name, 'goal');
+      expect(input.clipboardText, '/goal tail');
+      expect(backend.transport.prompts, isEmpty);
+    },
+  );
+
+  testWidgets(
     'typing / lists the commands above the composer; Escape closes it',
     (t) async {
       await start(t, size: const Size(400, 800));

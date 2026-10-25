@@ -37,6 +37,7 @@ class SidebarRightFeature {
   final DshI18n Function() _i18n;
   final SidebarServices _services;
   final Map<String, SidebarState> _states = {};
+  Object? _reportingSeat;
 
   /// The sidebar state of [sessionId] (created on first use).
   SidebarState stateFor(String sessionId) => _states.putIfAbsent(
@@ -325,11 +326,20 @@ class _RightbarSeatState extends State<RightbarSeat> {
   void dispose() {
     // Leaving is part of the report: a seat that goes away with its session
     // hands the track back.
-    widget.services.layout?.closeRightbar();
+    final feature = widget.feature, layout = widget.services.layout;
+    if (identical(feature._reportingSeat, this)) {
+      feature._reportingSeat = null;
+      // Finalizing a removed subtree locks its ancestors. Defer the report
+      // until that lock is gone, and never close a replacement seat's track.
+      scheduleMicrotask(() {
+        if (feature._reportingSeat == null) layout?.closeRightbar();
+      });
+    }
     super.dispose();
   }
 
   void _report(bool shown, bool track, bool fullscreen) {
+    widget.feature._reportingSeat = this;
     final next = (shown: shown, track: track, fullscreen: fullscreen);
     if (_reported == next) return;
     _reported = next;

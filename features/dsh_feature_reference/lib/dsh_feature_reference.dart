@@ -7,3 +7,5 @@ library;
 
 export 'src/reference_source.dart';
 export 'src/register.dart';
+
+export 'src/sent_reference.dart';

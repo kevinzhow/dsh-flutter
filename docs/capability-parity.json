@@ -68,7 +68,7 @@
     "features/dsh_feature_chat",
     "packages/dsh_conversation/lib/src/chat"
    ],
-   "notes": "Renders all 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, command-input, context, question-reply, compaction, manual-compaction, turn-process, workflow-run, unknown). Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work. Goal command inputs are projected separately from command results; answered late question replies exclusively own their source messages and copy the full answer. Context disclosures support instructions, catalog, snapshot, notice, relay and recall with all-or-nothing opaque fallbacks and bounded bodies. Ordinary contexts remain hidden, while tool additions/removals retain upstream visibility. Workflow runs keep durable run/member outcomes and collision-free phase identities, distinguish normal foreground closure from abandoned turns, and defer clean collapse while member focus remains inside.",
+   "notes": "Renders all 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, model-retry, system-prompt, command, command-input, context, question-reply, compaction, manual-compaction, turn-process, workflow-run, unknown). Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), unresolved arbitrary URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility in every display mode; raw request inspection belongs to Trajectory. Model retry chains are correlated by producer retryId; scheduled, started and boundary-cancelled states, a client-clock countdown and expandable failure details are implemented. Automatic compaction markers require a landed checkpoint and use only its loaded summary evidence; shadowed transcript remains visible. Manual compaction is folded into its command identity, including partial-window fallbacks. Ordinary commands use a command-name keyed seat and retain complete plain-text settlements; multiline output expands. Compaction summaries expand as Markdown with a header pinned within their row. Turn process controls fold only eligible completed ranges and preserve the final reply, partial-window boundaries and interleaved input. Four work-detail modes and independent completion/next-input timing are Host-backed; process groups split reasoning and response references without duplicating node data. Coordinated collapse animation, nested-group pagination compensation and some text/Markdown fidelity remain follow-up work. Goal command inputs are projected separately from command results; answered late question replies exclusively own their source messages and copy the full answer. Context disclosures support instructions, catalog, snapshot, notice, relay and recall with all-or-nothing opaque fallbacks and bounded bodies. Ordinary contexts remain hidden, while tool additions/removals retain upstream visibility. Workflow runs keep durable run/member outcomes and collision-free phase identities, distinguish normal foreground closure from abandoned turns, and defer clean collapse while member focus remains inside. Sent text now delegates to the extensible user-text factory for references and masks. Closing inline-code file mentions resolve only successful mutations and declared deliveries in the same closed turn; ambiguous and unknown tokens remain plain.",
    "priority": "P2"
   },
   {
@@ -121,10 +121,12 @@
    "description": "Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer.",
    "status": "partial",
    "whalee": [
-    "features/dsh_feature_tool/lib/src/model/diff_model.dart",
-    "packages/dsh_ui/lib/src/dsh_diff_block.dart"
+    "features/dsh_feature_deliverables",
+    "packages/dsh_client/lib/src/deliverables.dart",
+    "packages/dsh_models/lib/src/deliverables.dart",
+    "packages/dsh_conversation/lib/src/deliverables/turn_deliverables.dart"
    ],
-   "notes": "Each edit and write tool row shows its own diff; there is no aggregated changed-files card, no review tab, no \"present\" delivery row and no file actions in the final answer.",
+   "notes": "Implemented turn-local successful mutation evidence, declared deliveries, Host-served change summaries and diffs, four-card folds, a stable Review sidebar resource with per-navigation file selection and split/wrap choices, shared cancellable reads/native gesture feedback, and closing-code file mentions resolved only against recorded evidence. Render/transport/application routing tests and actual upstream contract vectors pass. Native capture and visual alignment are being evaluated; optional tool inspector integration belongs to the diagnostic views work.",
    "priority": "P2"
   },
   {
@@ -194,7 +196,7 @@
    "dshSource": "packages/client/ui-input-trigger",
    "description": "Type \"/\" or \"@\" in the message box to open a candidate menu and insert the pick.",
    "status": "partial",
-   "notes": "The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.",
+   "notes": "The slash/@ pipeline and programmatic plus launcher are implemented. Plus restores composer focus and opens the leading or inline command source without inserting text; selection-aware command picks retain remaining draft text. Actual reducer vectors and keyboard/application flows pass. Skill decorations and chip persistence remain in the subsequent Skill/settings scope.",
    "priority": "P1",
    "whalee": [
     "features/dsh_feature_input_trigger",
@@ -339,11 +341,12 @@
    "dshSource": "packages/client/ui-reference",
    "description": "Mention a workspace file or another session with \"@\" so the agent reads it.",
    "status": "partial",
-   "notes": "The `@` source (files, folders, sessions, direct subagents), chips in the composer with tap-to-preview, and the exact serialized payload are ported. Missing: the chips inside sent user messages (conversation.user.text.node renderers); sent references show as plain text.",
+   "notes": "Composer file/folder/session/direct-subagent source, serialization and preview are implemented. Sent file/folder labels render through keyed user-text seats; files preserve the originating Session authority with local retry/close feedback. Session labels use only the immediately sourced recall record. Remaining visual detail: long sent chips are atomic WidgetSpans instead of upstream plain inline wrapping; tracked by visual task6.",
    "priority": "P2",
    "whalee": [
     "features/dsh_feature_reference",
-    "features/dsh_feature_conversation/lib/src/composer_text.dart"
+    "features/dsh_feature_conversation/lib/src/composer_text.dart",
+    "packages/dsh_conversation/lib/src/user_text/reference_rules.dart"
    ]
   },
   {
@@ -374,9 +377,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-secret-mask",
    "description": "Hide recognized credentials (keys, tokens) in the text of messages you sent.",
-   "status": "missing",
-   "notes": "Sent text is shown verbatim. Cheap to port and relevant on a phone that others can see.",
-   "priority": "P2"
+   "status": "ported",
+   "notes": "Published credential formats, cursor/overlap arbitration, UTF16 ranges and codepoint masking match the actual upstream scanner. Sent and queued text masks display only; original copy/model input is retained. Per-value reveal resets on changed text, readonly previews have no toggle, hidden semantics contain no raw credential, and geometry remains stable. Native/visual evidence is tracked separately.",
+   "whalee": [
+    "features/dsh_feature_secret_mask",
+    "packages/dsh_conversation/lib/src/user_text/credentials.dart"
+   ]
   },
   {
    "id": "package:ui-session",
@@ -3032,7 +3038,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "One business-owned inline renderer for a pure JSON text node.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_conversation/lib/src/user_text.dart"
+   ],
+   "notes": "Session-keyed InlineSpan adapter with original text/facts/authority. Pure document reconciliation caches rule facts and cursor coverage; missing renderers preserve raw text, matcher errors report once and retain the original message."
   },
   {
    "id": "slot:conversation.view",
@@ -3055,7 +3066,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-deliverables/src/client/file-actions.ts",
    "description": "Open one file through its authorized Session event coordinates.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_slots/lib/src/owners.dart",
+    "features/dsh_feature_deliverables/lib/src/deliverables_tail.dart",
+    "features/dsh_feature_open_in_app/lib/src/file_route_action.dart"
+   ],
+   "notes": "Independent native actions use authenticated event coordinates and shared per-file associations; no native action runs during rendering. Default/explicit application/reveal gestures preserve the original event index."
   },
   {
    "id": "slot:deliverables.review.file.actions",
@@ -3064,7 +3081,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-deliverables/src/client/file-actions.ts",
    "description": "The same file actions owned by a changed-file review tab.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_deliverables/lib/src/review_tab.dart",
+    "features/dsh_feature_open_in_app/lib/src/file_route_action.dart"
+   ],
+   "notes": "Review actions share authorized coordinates, association reads and duplicate-gesture blocking with delivered-file controls."
   },
   {
    "id": "slot:main",
