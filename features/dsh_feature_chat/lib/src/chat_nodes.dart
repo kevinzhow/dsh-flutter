@@ -258,9 +258,11 @@ class AssistantStepView extends StatelessWidget {
     this.host,
     this.groupPart,
     this.reasoningPreview = true,
+    this.fileMentions,
   });
 
   final AssistantData data;
+  final DshMarkdownFileMention? Function(String value)? fileMentions;
   final String nodeKey;
   final DshI18n i18n;
   final String? groupPart;
@@ -302,6 +304,7 @@ class AssistantStepView extends StatelessWidget {
               streaming: data.status == 'running',
               onOpenUrl: host?.openUrl,
               onOpenFile: host?.openFile,
+              fileMentions: fileMentions,
             ),
           );
         case ImageBlock(:final attachment) when groupPart != 'reasoning':

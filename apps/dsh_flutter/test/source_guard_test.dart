@@ -20,6 +20,7 @@ void main() {
     '../../features/dsh_feature_open_in_app/lib',
     '../../features/dsh_feature_plan/lib',
     '../../features/dsh_feature_reference/lib',
+    '../../features/dsh_feature_deliverables/lib',
     '../../features/dsh_feature_secret_mask/lib',
     '../../features/dsh_feature_subagent/lib',
     '../../features/dsh_feature_session/lib',

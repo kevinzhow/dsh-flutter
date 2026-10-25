@@ -26,6 +26,87 @@ abstract final class DshIcons {
     ],
   );
 
+  /// `IconDeliverDocRegular`.
+  static const deliverDoc = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M6.15479 4.91687H9.84543',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M11.8798 9.55347V2.71525C11.8798 2.37416 11.564 2.09766 11.1744 2.09766H4.82577C4.43618 2.09766 4.12036 2.37416 4.12036 2.71525V9.55347',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M2.28735 13.8022V8.84792C2.28735 8.77514 2.36262 8.72673 2.42884 8.75693L13.2936 13.7112C13.3914 13.7558 13.3596 13.9022 13.2521 13.9022H2.38735C2.33213 13.9022 2.28735 13.8575 2.28735 13.8022Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M7.46929 10.979L13.5783 8.7416C13.6435 8.7177 13.7126 8.76601 13.7126 8.83551L13.7125 13.8022C13.7125 13.8574 13.6678 13.9022 13.6125 13.9022H7.99999',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M6.15479 7.2395H9.05644',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconRightUpOutlineRegular`.
+  static const rightUp = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M11.7256 2.77441C12.5538 2.77469 13.2256 3.44616 13.2256 4.27441V10.1416H12.2256V4.27441C12.2256 3.99844 12.0015 3.77469 11.7256 3.77441H5.7207V2.77441H11.7256Z',
+        fill: true,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M2.77441 13.2255L12.3756 3.62427',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
+  /// `IconCompareSplitOutlineRegular`.
+  static const compareSplit = DshIconData(
+    viewBox: 16,
+    size: 16,
+    strokeWidth: 1.0,
+    shapes: [
+      DshIconShape(
+        'M6 1.5H2.5C1.94772 1.5 1.5 1.94772 1.5 2.5V13.5C1.5 14.0523 1.94772 14.5 2.5 14.5H6C6.55228 14.5 7 14.0523 7 13.5V2.5C7 1.94772 6.55228 1.5 6 1.5Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+      DshIconShape(
+        'M13.5 1.5H10C9.44772 1.5 9 1.94772 9 2.5V13.5C9 14.0523 9.44772 14.5 10 14.5H13.5C14.0523 14.5 14.5 14.0523 14.5 13.5V2.5C14.5 1.94772 14.0523 1.5 13.5 1.5Z',
+        fill: false,
+        cap: DshIconCap.butt,
+        evenOdd: false,
+      ),
+    ],
+  );
+
   /// `IconEditOutlineRegular`.
   static const edit = DshIconData(
     viewBox: 16,

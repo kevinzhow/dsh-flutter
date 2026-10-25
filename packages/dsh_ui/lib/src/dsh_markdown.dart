@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:markdown/markdown.dart' as md;
 
@@ -22,9 +23,11 @@ class DshMarkdown extends StatelessWidget {
     this.onOpenFile,
     this.streaming = false,
     this.blockSpacing,
+    this.fileMentions,
   });
 
   final String data;
+  final DshMarkdownFileMention? Function(String value)? fileMentions;
   final bool selectable;
 
   /// Space between block elements when the enclosing surface specifies its
@@ -124,7 +127,11 @@ class DshMarkdown extends StatelessWidget {
       selectable: selectable,
       styleSheet: sheet,
       onTapLink: onOpenUrl == null && onOpenFile == null ? null : _tap,
-      builders: {if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!)},
+      builders: {
+        if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!),
+        if (!streaming && fileMentions != null)
+          'code': _FileMentionBuilder(fileMentions!),
+      },
     );
   }
 }
@@ -161,6 +168,65 @@ class _FenceBuilder extends MarkdownElementBuilder {
         code: element.textContent,
         lang: lang,
         labels: labels,
+      ),
+    );
+  }
+}
+
+/// A host feature resolves a literal inline-code token before granting an
+/// action. Plain or ambiguous tokens use Markdown's normal code renderer.
+class DshMarkdownFileMention {
+  const DshMarkdownFileMention({
+    required this.title,
+    required this.label,
+    required this.open,
+  });
+  final String title, label;
+  final VoidCallback open;
+}
+
+class _FileMentionBuilder extends MarkdownElementBuilder {
+  _FileMentionBuilder(this.resolve);
+  final DshMarkdownFileMention? Function(String) resolve;
+  @override
+  Widget? visitElementAfterWithContext(
+    BuildContext context,
+    md.Element element,
+    TextStyle? preferredStyle,
+    TextStyle? parentStyle,
+  ) {
+    final mention = resolve(element.textContent);
+    if (mention == null) return null;
+    final theme = context.dsh;
+    return Semantics(
+      container: true,
+      button: true,
+      label: mention.label,
+      excludeSemantics: true,
+      child: CallbackShortcuts(
+        bindings: {
+          const SingleActivator(LogicalKeyboardKey.enter): mention.open,
+          const SingleActivator(LogicalKeyboardKey.space): mention.open,
+        },
+        child: Focus(
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: mention.open,
+              child: Text(
+                element.textContent,
+                style: theme
+                    .textStyle('--dsw-font-markdown-code')
+                    .copyWith(
+                      color: theme.color('--dsw-alias-link'),
+                      backgroundColor: theme.color(
+                        '--dsw-alias-markdown-inline-code',
+                      ),
+                    ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

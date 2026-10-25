@@ -37,6 +37,8 @@ ChatPreferences registerChatFeature(
   ToolHostActions? host,
   ChatPreferences? preferences,
   WorkspaceManagement? management,
+  DshMarkdownFileMention? Function(ChatNodeOwner owner, String value)?
+  fileMentions,
 }) {
   final prefs = preferences ?? ChatPreferences();
   // Where each session's reader stopped, for as long as the app runs.
@@ -185,6 +187,9 @@ ChatPreferences registerChatFeature(
     (o, t) => AssistantStepView(
       data: o.node.data as AssistantData,
       nodeKey: o.node.key,
+      fileMentions: fileMentions == null
+          ? null
+          : (value) => fileMentions(o, value),
       i18n: t,
       owner: o.session,
       slots: slots,

@@ -2,6 +2,7 @@ import '../contract.dart';
 import '../registry.dart';
 import '../plan/submitted_plan.dart';
 import '../tool/todo_history.dart';
+import '../deliverables/turn_deliverables.dart';
 import 'definitions.dart';
 import 'commands.dart';
 import 'nodes.dart';
@@ -240,6 +241,7 @@ defaultChatRegistries() {
     ..register(const TurnErrorDefinition())
     ..register(const TurnMaxTokensDefinition())
     ..register(const TurnTailDefinition())
+    ..register(const DeliverablesDefinition())
     ..register(const SubmittedPlanDefinition())
     ..register(const TodoWriteDefinition())
     ..register(const TodoCallDefinition())

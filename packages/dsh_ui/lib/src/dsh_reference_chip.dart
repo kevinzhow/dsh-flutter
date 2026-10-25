@@ -56,6 +56,8 @@ class DshReferenceChip extends StatelessWidget {
       child: onActivate == null
           ? content
           : Semantics(
+              container: true,
+              excludeSemantics: true,
               button: true,
               label: label,
               child: FocusableActionDetector(

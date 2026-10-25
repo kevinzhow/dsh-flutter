@@ -5,6 +5,7 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
 
 const _eyeContour =
     'M1.5 8C2.9 5.25 5.25 3.5 8 3.5C10.75 3.5 13.1 5.25 14.5 8C13.1 10.75 10.75 12.5 8 12.5C5.25 12.5 2.9 10.75 1.5 8Z';
@@ -85,80 +86,93 @@ class _SecretTextState extends State<SecretText> {
           );
           final height = math.max(rawSize.height, maskSize.height);
           final value = revealed ? widget.raw : widget.masked;
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Semantics(
-                label: value,
-                excludeSemantics: true,
-                child: SizedBox(
-                  width: width,
-                  height: height,
-                  child: revealed
-                      ? Text(
-                          value,
-                          style: style,
-                          maxLines: widget.ellipsis ? 1 : null,
-                          overflow: widget.ellipsis
-                              ? TextOverflow.ellipsis
-                              : TextOverflow.clip,
-                        )
-                      : CustomPaint(
-                          painter: _MaskPainter(
-                            value,
-                            style,
-                            size * .125,
-                            widget.ellipsis,
-                          ),
-                        ),
-                ),
-              ),
-              if (widget.interactive)
+          final baselinePainter = TextPainter(
+            text: TextSpan(text: widget.raw, style: style),
+            maxLines: widget.ellipsis ? 1 : null,
+            textDirection: TextDirection.ltr,
+          )..layout(maxWidth: available);
+          final baseline =
+              baselinePainter.computeLineMetrics().firstOrNull?.baseline ??
+              height;
+          baselinePainter.dispose();
+          return _SecretBaseline(
+            distance: baseline,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
                 Semantics(
-                  button: true,
-                  toggled: revealed,
-                  label: widget.i18n.t(
-                    'secretMask',
-                    revealed ? 'secret.hide' : 'secret.reveal',
+                  label: value,
+                  excludeSemantics: true,
+                  child: SizedBox(
+                    width: width,
+                    height: height,
+                    child: revealed
+                        ? Text(
+                            value,
+                            style: style,
+                            maxLines: widget.ellipsis ? 1 : null,
+                            overflow: widget.ellipsis
+                                ? TextOverflow.ellipsis
+                                : TextOverflow.clip,
+                          )
+                        : CustomPaint(
+                            painter: _MaskPainter(
+                              value,
+                              style,
+                              size * .125,
+                              widget.ellipsis,
+                            ),
+                          ),
                   ),
-                  child: FocusableActionDetector(
-                    shortcuts: const {
-                      SingleActivator(LogicalKeyboardKey.enter):
-                          ActivateIntent(),
-                      SingleActivator(LogicalKeyboardKey.space):
-                          ActivateIntent(),
-                    },
-                    actions: {
-                      ActivateIntent: CallbackAction<ActivateIntent>(
-                        onInvoke: (_) {
-                          toggle();
-                          return null;
-                        },
-                      ),
-                    },
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        key: const ValueKey('secret-toggle'),
-                        behavior: HitTestBehavior.opaque,
-                        onTap: toggle,
-                        child: Transform.translate(
-                          offset: Offset(0, -size * .125),
-                          child: SizedBox.square(
-                            dimension: control,
-                            child: DshIcon(
-                              revealed ? _eyeOff : _eye,
-                              size: control,
-                              color: context.dsh.labelSecondary,
+                ),
+                if (widget.interactive)
+                  Semantics(
+                    container: true,
+                    button: true,
+                    toggled: revealed,
+                    label: widget.i18n.t(
+                      'secretMask',
+                      revealed ? 'secret.hide' : 'secret.reveal',
+                    ),
+                    child: FocusableActionDetector(
+                      shortcuts: const {
+                        SingleActivator(LogicalKeyboardKey.enter):
+                            ActivateIntent(),
+                        SingleActivator(LogicalKeyboardKey.space):
+                            ActivateIntent(),
+                      },
+                      actions: {
+                        ActivateIntent: CallbackAction<ActivateIntent>(
+                          onInvoke: (_) {
+                            toggle();
+                            return null;
+                          },
+                        ),
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          key: const ValueKey('secret-toggle'),
+                          behavior: HitTestBehavior.opaque,
+                          onTap: toggle,
+                          child: Transform.translate(
+                            offset: Offset(0, -size * .125),
+                            child: SizedBox.square(
+                              dimension: control,
+                              child: DshIcon(
+                                revealed ? _eyeOff : _eye,
+                                size: control,
+                                color: context.dsh.labelSecondary,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           );
         },
       ),
@@ -244,4 +258,39 @@ class _MaskPainter extends CustomPainter {
       old.style != style ||
       old.raise != raise ||
       old.ellipsis != ellipsis;
+}
+
+/// CustomPaint has no text baseline. Both reveal modes publish the measured
+/// value baseline so toggling cannot shift the surrounding paragraph.
+class _SecretBaseline extends SingleChildRenderObjectWidget {
+  const _SecretBaseline({required this.distance, required super.child});
+  final double distance;
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderSecretBaseline(distance);
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderSecretBaseline renderObject,
+  ) {
+    renderObject.distance = distance;
+  }
+}
+
+class _RenderSecretBaseline extends RenderProxyBox {
+  _RenderSecretBaseline(this._distance);
+  double _distance;
+  set distance(double value) {
+    if (value == _distance) return;
+    _distance = value;
+    markNeedsLayout();
+  }
+
+  @override
+  double computeDistanceToActualBaseline(TextBaseline baseline) => _distance;
+  @override
+  double computeDryBaseline(
+    covariant BoxConstraints constraints,
+    TextBaseline baseline,
+  ) => _distance;
 }

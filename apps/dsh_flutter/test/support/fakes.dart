@@ -110,6 +110,8 @@ class FakeBackend implements HostBackend {
   @override
   final FakeOpenInApp openInApp = FakeOpenInApp();
   @override
+  final FakeDeliverables deliverables = FakeDeliverables();
+  @override
   final FakeWorkspaceFiles files = FakeWorkspaceFiles();
   final StreamController<ConnectionStatus> stateController =
       StreamController<ConnectionStatus>.broadcast();
@@ -363,4 +365,47 @@ Future<void> openSettingsUi(
   await wait();
   await t.tap(find.byKey(const ValueKey('settings-more-settings')));
   await wait();
+}
+
+class FakeDeliverables implements DeliverablesClient {
+  @override
+  Future<List<NativeFileApplication>> applications(
+    DeliveryFile file, {
+    DeliverablesCancel? cancel,
+  }) async => const [];
+
+  final Map<String, ChangesSummary> summaries = {};
+  final Map<String, ChangesDiff> diffs = {};
+  final List<DeliveryFile> opened = [];
+  PresentedHost metadata = const PresentedHost(
+    name: 'Synthetic remote',
+    available: true,
+    fileManager: 'directory',
+  );
+  @override
+  Future<ChangesSummary> summary(
+    String id,
+    num seq, {
+    DeliverablesCancel? cancel,
+  }) async =>
+      summaries['$id:$seq'] ?? (throw const DeliverablesHttpFailure(404));
+  @override
+  Future<ChangesDiff> diff(
+    String id,
+    num seq,
+    int index, {
+    DeliverablesCancel? cancel,
+  }) async =>
+      diffs['$id:$seq:$index'] ?? (throw const DeliverablesHttpFailure(404));
+  @override
+  Future<PresentedHost> host({DeliverablesCancel? cancel}) async => metadata;
+  @override
+  Future<void> open(
+    DeliveryFile file, {
+    NativeFileAction action = NativeFileAction.open,
+    String? application,
+    DeliverablesCancel? cancel,
+  }) async {
+    opened.add(file);
+  }
 }

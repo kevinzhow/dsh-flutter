@@ -65,6 +65,49 @@ void main() {
     },
   );
   testWidgets(
+    'reveal preserves the surrounding paragraph baseline and line height',
+    (t) async {
+      await t.pumpWidget(
+        dshTestApp(
+          Builder(
+            builder: (context) => DefaultTextStyle(
+              style: context.dsh.textStyle('--dsw-font-s-14'),
+              child: SizedBox(
+                width: 450,
+                child: Text.rich(
+                  key: const ValueKey('paragraph'),
+                  TextSpan(
+                    children: [
+                      const TextSpan(text: 'Before '),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.baseline,
+                        baseline: TextBaseline.alphabetic,
+                        child: SecretText(
+                          raw: raw,
+                          masked: masked,
+                          interactive: true,
+                          i18n: const DshI18n(DshLocale.en),
+                        ),
+                      ),
+                      const TextSpan(text: ' after.'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      final before = t.getRect(find.byKey(const ValueKey('paragraph')));
+      await t.tap(find.byKey(const ValueKey('secret-toggle')));
+      await t.pump();
+      expect(t.getRect(find.byKey(const ValueKey('paragraph'))), before);
+      await t.tap(find.byKey(const ValueKey('secret-toggle')));
+      await t.pump();
+      expect(t.getRect(find.byKey(const ValueKey('paragraph'))), before);
+    },
+  );
+  testWidgets(
     'read-only text has no reveal control and keyboard activation works when interactive',
     (t) async {
       await mount(t, interactive: false);

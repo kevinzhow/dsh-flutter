@@ -47,6 +47,8 @@ abstract interface class HostBackend {
   /// The host's open-in-app routes (applications installed on the host).
   OpenInAppClient get openInApp;
 
+  DeliverablesClient get deliverables;
+
   /// The host's workspace file service (`workspaceFiles`).
   WorkspaceFilesRemote get files;
 
@@ -119,6 +121,12 @@ class LiveBackend implements HostBackend {
 
   @override
   late final OpenInAppClient openInApp = HttpOpenInAppClient(
+    credential: () => _connection?.generation?.credential,
+    clientFor: trust.clientFor,
+  );
+
+  @override
+  late final DeliverablesClient deliverables = HttpDeliverablesClient(
     credential: () => _connection?.generation?.credential,
     clientFor: trust.clientFor,
   );
@@ -254,6 +262,7 @@ class LiveBackend implements HostBackend {
   @override
   Future<void> dispose() async {
     await _teardown();
+    (deliverables as HttpDeliverablesClient).close();
     await _statuses.close();
     await _terminalGenerations.close();
     await trust.dispose();

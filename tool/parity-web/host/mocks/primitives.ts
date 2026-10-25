@@ -48,3 +48,5 @@ export { InlineEditor } from '@dsh/ui-primitives/src/InlineEditor.tsx'
 
 export { HoverCard } from '@dsh/ui-primitives/src/HoverCard.tsx'
 export { relativeTime } from '@dsh/ui-primitives/src/relative-time.ts'
+// Turn comparison surfaces use the same production code-language/highlighter hook.
+export { languageForPath, useCodeHighlighter } from '@dsh/ui-primitives/src/code-highlighting.ts'

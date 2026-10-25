@@ -22,6 +22,9 @@ ICON_DIR = SRC / 'packages' / 'client' / 'ui-primitives' / 'src' / 'icons'
 # Exported dsh icon name -> Dart identifier. Add a row when a feature needs another glyph.
 ICONS = {
     'IconApiOutlineRegular': 'api',
+    'IconDeliverDocRegular': 'deliverDoc',
+    'IconRightUpOutlineRegular': 'rightUp',
+    'IconCompareSplitOutlineRegular': 'compareSplit',
     'IconEditOutlineRegular': 'edit',
     'IconBrowseOutlineRegular': 'browse',
     'IconContextInjectionOutlineRegular': 'contextInjection',

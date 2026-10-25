@@ -104,6 +104,16 @@ abstract final class DshSlots {
     SlotCardinality.list,
     SlotScope.session,
   );
+  static const deliverablesFileActions = Slot<Object?, Object?>(
+    'deliverables.file.actions',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+  static const deliverablesReviewFileActions = Slot<Object?, Object?>(
+    'deliverables.review.file.actions',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
   static const conversationChatTurnTail = Slot<Object?, Object?>(
     'conversation.chat.turnTail',
     SlotCardinality.list,
@@ -292,6 +302,8 @@ abstract final class DshSlots {
     toolCallToolview,
     conversationInputDock,
     conversationChatTurnTail,
+    deliverablesFileActions,
+    deliverablesReviewFileActions,
     conversationInputAttachments,
     conversationChatUserImages,
     conversationChatMessageImages,
