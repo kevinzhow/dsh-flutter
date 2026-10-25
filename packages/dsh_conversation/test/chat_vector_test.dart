@@ -17,6 +17,7 @@ const fixtures = [
   'test/fixtures/plan_todo_vector.json',
   'test/fixtures/attachment_vector.json',
   'test/fixtures/tool_turn_vector.json',
+  'test/fixtures/system_prompt_vector.json',
 ];
 
 void main() {
@@ -51,6 +52,7 @@ void main() {
               binding.chat.value,
               binding.openTurn.value,
               binding.todoHistory.value,
+              fixture['projectSystemPrompts'] == true,
             ),
           },
         );

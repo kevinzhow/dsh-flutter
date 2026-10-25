@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'chat_nodes.dart';
 import 'chat_view.dart';
 import 'stats_pills.dart';
+import 'system_prompt_view.dart';
 import 'stream/reading_anchor.dart';
 
 /// `conversation.view` as this feature uses it (owner: the open session).
@@ -78,6 +79,10 @@ void registerChatFeature(
     return false;
   }
 
+  node('system-prompt', (o, t) {
+    final d = o.node.data as SystemPromptData;
+    return SystemPromptView(text: d.text, update: d.update, i18n: t);
+  });
   const userKinds = {'user', 'steering'};
   node('user', (o, t) {
     final d = o.node.data as MessageData;

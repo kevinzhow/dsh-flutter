@@ -10,6 +10,7 @@ export 'src/chat/definitions.dart';
 export 'src/chat/nodes.dart';
 export 'src/chat/partial_arguments.dart';
 export 'src/chat/snapshot.dart';
+export 'src/chat/system_prompt.dart';
 export 'src/contract.dart';
 export 'src/plan/submitted_plan.dart';
 export 'src/tool/todo_history.dart';

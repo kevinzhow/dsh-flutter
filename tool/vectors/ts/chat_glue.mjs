@@ -5,9 +5,9 @@
 // REAL dsh code (loaded from DSH_SRC, nothing copied or patched):
 //   ui-conversation  ConversationNodeAssembler, ConversationEventRegistry,
 //                    ConversationViewRegistry, ConversationLocationIndex,
-//                    inspectSystemPrompt
+//                    inspectSystemPrompt, inspectRequestPrompt
 //   ui-chat          the Definitions the Dart port covers (inbox, message,
-//                    developer message, system message, assistant, tool,
+//                    developer message, system/request prompt, assistant, tool,
 //                    turn-error, turn-max-tokens, turn-tail, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
@@ -30,9 +30,10 @@ export async function createChatGlue(load) {
   const { ConversationEventRegistry } = await load(dir + 'conversation/event-registry.ts')
   const { ConversationViewRegistry } = await load(dir + 'conversation/view-registry.ts')
   const { inspectSystemPrompt } = await load(dir + 'contract/system-prompt.ts')
+  const { inspectRequestPrompt } = await load(dir + 'contract/request-inspection.ts')
   const { registerInboxConversationNodes } = await load(chat + 'inbox.ts')
   const { registerMessageConversationNode } = await load(chat + 'message.ts')
-  const { systemMessageDefinition } = await load(chat + 'request-prompt.ts')
+  const { systemMessageDefinition, requestPromptDefinition } = await load(chat + 'request-prompt.ts')
   const { registerAssistantConversationNode } = await load(chat + 'assistant.ts')
   const { registerToolConversationNode } = await load(chat + 'tool.ts')
   const { registerTurnErrorConversationNode } = await load(chat + 'turn-error.ts')
@@ -51,6 +52,7 @@ export async function createChatGlue(load) {
   registerInboxConversationNodes(scope)
   registerMessageConversationNode(scope)
   events.register(systemMessageDefinition(inspectSystemPrompt))
+  events.register(requestPromptDefinition(inspectRequestPrompt))
   registerAssistantConversationNode(scope)
   registerToolConversationNode(scope)
   registerTurnErrorConversationNode(scope)
@@ -97,7 +99,7 @@ export async function createChatGlue(load) {
             publish(assembler.settleAssistant(window.change.attemptId, window.change.entry))
         }
       })
-      return { assembler, unsubscribe, project: () => projectChat(assembler) }
+      return { assembler, unsubscribe, project: options => projectChat(assembler, options) }
     },
   }
 }
@@ -190,7 +192,7 @@ function coordinates(location) {
   return { turn: null, step: null }
 }
 
-export function projectChat(assembler) {
+export function projectChat(assembler, options = {}) {
   const snapshot = assembler.get('chat')
   const nodes = snapshot.order.map((key) => {
     const node = snapshot.nodes.get(key)
@@ -219,6 +221,11 @@ export function projectChat(assembler) {
     .map(([callId, baseline]) => ({ callId, todos: baseline.todos === undefined ? null : baseline.todos.map(todo => [todo.content, todo.status]) }))
   return {
     nodes,
+    ...(options.systemPrompts ? { systemPrompts: [...snapshot.nodes.values()]
+      .filter(node => node.kind === 'system-prompt')
+      .sort((a,b) => a.anchorSeq-b.anchorSeq || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
+      .map(node => ({id:node.id, anchorSeq:node.anchorSeq, visible:node.visibility !== 'hidden',
+        text:node.data.text, update:node.data.update === true, ...coordinates(node.location)})) } : {}),
     plans,
     todoHistory,
     timeline,

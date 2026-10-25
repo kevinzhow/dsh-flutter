@@ -129,15 +129,22 @@ def capture(env, directory, output):
     directory.rmdir()
 
 
+def host_link(cases):
+    """Only explicit standalone component cases may run without a host."""
+    if all(c.get('pairHost', True) is False for c in cases):
+        return None
+    log = pathlib.Path(need('PARITY_DESKTOP_HOST_LOG'))
+    match = re.search(r'http://127\.0\.0\.1:\d+/\?token=\S+', log.read_text())
+    if not match:
+        raise SystemExit('No isolated host launch link found')
+    return match.group(0)
+
+
 def main():
     out = pathlib.Path(sys.argv[1]).resolve()
     out.mkdir(parents=True, exist_ok=True)
     app = str(pathlib.Path(need('PARITY_DESKTOP_APP')).resolve())
     home = pathlib.Path(need('PARITY_DESKTOP_HOME')).resolve()
-    log = pathlib.Path(need('PARITY_DESKTOP_HOST_LOG'))
-    match = re.search(r'http://127\.0\.0\.1:\d+/\?token=\S+', log.read_text())
-    if not match:
-        raise SystemExit('No isolated host launch link found')
     version = subprocess.check_output(['weston', '--version'], text=True).strip()
     if not version.startswith('weston 14.'):
         raise SystemExit('The test input module requires Weston 14 and matching libweston-14-dev')
@@ -151,6 +158,7 @@ def main():
     cases = [c for c in cases if not only or c['id'] in only]
     if not cases:
         raise SystemExit('No matching cases')
+    link = host_link(cases)
     runtime_base = pathlib.Path(need('XDG_RUNTIME_DIR'))
     if len(str(runtime_base / 'whalee-12345678' / 'wayland-test')) >= 104:
         raise SystemExit('XDG_RUNTIME_DIR is too long for a Unix socket; use a short private directory')
@@ -213,10 +221,11 @@ def main():
                 else:
                     field = (w // 2, 370 + (h - 720) // 2)
                     connect = (441 + (w - 1280) // 2, 568 + (h - 720) // 2)
-                screen.click(*field)
-                screen.type(match.group(0))
-                screen.click(*connect)
-                time.sleep(7)
+                if c.get('pairHost', True) is not False:
+                    screen.click(*field)
+                    screen.type(link)
+                    screen.click(*connect)
+                    time.sleep(7)
                 for step in c['app']:
                     if 'click' in step:
                         screen.click(*step['click'])
@@ -240,6 +249,7 @@ def main():
                     'glVersion': re.findall(r'\bGL version: (.+)', weston_log),
                     'appRenderer': re.findall(r'Using the Impeller rendering backend \(([^)]+)\)', app_log.read_text()),
                     'backend': 'native-wayland', 'kernel': os.uname().release,
+                    'pairedHost': c.get('pairHost', True) is not False,
                     'size': [w, h], 'theme': c['theme'], 'locale': c['locale'],
                 }, indent=2) + '\n')
                 print('gpu', c['id'], renderer[-1])

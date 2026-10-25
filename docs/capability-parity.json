@@ -68,7 +68,7 @@
     "features/dsh_feature_chat",
     "packages/dsh_conversation/lib/src/chat"
    ],
-   "notes": "Renders 9 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process (work-details view modes) or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy).",
+   "notes": "Renders 10 of the 19 chat node kinds dsh declares (user, steering, turn-trigger, assistant-step, tool-call, turn-tail, turn-error, turn-max-tokens, system-prompt, unknown). No renderer for command, command-input, compaction, context, manual-compaction, model-retry, question-reply, turn-process (work-details view modes) or workflow-run. Stream behaviour matches dsh web: \"Loading history…\" hint while a session opens, the \"Load earlier\" control (read automatically as well when the reader nears the top, which dsh does not), the plain back-to-bottom chevron, follow of the latest end, copy and clock under messages (hover-revealed where a pointer can hover), tappable http(s) and file links, one selection across messages. Kept from raft-flutter without a visible change: a two-sided timeline (older pages never move the reader), per-session reading position (memory only), scrollbar thumb drag on wide windows. Raft's skeleton and the \"N new\" count are behind one flag (`streamExtras`, off). Not ported: the turn rail (TurnNavigator), fork-at-message (needs session/fork), like/dislike (ui-message-feedback), secret masking (ui-secret-mask), URLs written as inline code, the link glyph, selection that survives rows leaving the built range (the list is lazy). System-prompt cards now interpret system messages, positional replacements and request-series anchors, with bounded plain-text disclosures; they remain outside the normal transcript per upstream visibility and await the work-details view mode.",
    "priority": "P2"
   },
   {
@@ -2561,7 +2561,7 @@
     "features/dsh_feature_chat/lib/src/register.dart",
     "features/dsh_feature_tool/lib/src/register.dart"
    ],
-   "notes": "Nine of the 19 node kinds have an occupant; missing: command, command-input, compaction, context, manual-compaction, model-retry, question-reply, system-prompt, turn-process, workflow-run."
+   "notes": "Ten of the 19 node kinds have an occupant; missing: command, command-input, compaction, context, manual-compaction, model-retry, question-reply, turn-process, workflow-run."
   },
   {
    "id": "slot:conversation.chat.reasoning.body",

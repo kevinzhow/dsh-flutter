@@ -9,6 +9,7 @@ Map<String, Object?> projectChat(
   ChatSnapshot snapshot,
   int? openTurn, [
   TodoHistory? todoHistory,
+  bool includeSystemPrompts = false,
 ]) {
   final nodes = [
     for (final n in snapshot.visibleNodes)
@@ -82,6 +83,26 @@ Map<String, Object?> projectChat(
   ];
   return _canon({
     'nodes': nodes,
+    if (includeSystemPrompts)
+      'systemPrompts': [
+        for (final n
+            in (snapshot.nodes.values
+                .where((n) => n.kind == 'system-prompt')
+                .toList()
+              ..sort((a, b) {
+                final c = a.anchorSeq.compareTo(b.anchorSeq);
+                return c != 0 ? c : a.key.compareTo(b.key);
+              })))
+          {
+            'id': n.id,
+            'anchorSeq': n.anchorSeq,
+            'visible': n.visible,
+            'text': (n.data as SystemPromptData).text,
+            'update': (n.data as SystemPromptData).update,
+            'turn': locationTurn(n.location),
+            'step': locationStep(n.location),
+          },
+      ],
     'plans': plans,
     'todoHistory': history,
     'timeline': timeline,

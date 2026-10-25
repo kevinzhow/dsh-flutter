@@ -6,6 +6,24 @@ import 'package:flutter/painting.dart' show TextStyle;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('theme text does not inherit ambient Material tracking', () {
+    const ambient = TextStyle(letterSpacing: 0.25, wordSpacing: 3);
+    for (final mode in Brightness.values) {
+      final theme = resolveTheme(officialPack, ThemeSettings(), mode);
+      for (final style in [
+        theme.textStyle('--dsw-font-s-14'),
+        theme.textStyle('--dsw-font-markdown-code-block-small'),
+        theme.fixedTextStyle(size: 10, line: 14),
+        theme.fixedCodeStyle(size: 11, line: 16),
+        theme.terminalTextStyle,
+      ]) {
+        final merged = ambient.merge(style);
+        expect(merged.letterSpacing, 0);
+        expect(merged.wordSpacing, 0);
+      }
+    }
+  });
+
   group('font stacks', () {
     test('built-in stacks when the user lists are empty', () {
       final t = resolveTheme(officialPack, ThemeSettings(), Brightness.light);

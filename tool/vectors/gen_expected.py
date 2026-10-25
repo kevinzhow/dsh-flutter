@@ -41,7 +41,7 @@ REAL_CLASSES = [
     'MutableSessionEventSource (session-controller/client/contract/events.ts)',
     'expandAssistantStream (llm/assistant-stream.ts)',
     'ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)',
-    'inbox, message, developer-message, system-message, assistant, tool, turn-error, turn-max-tokens, '
+    'inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, '
     'turn-tail Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)',
 ]
 GLUE = [
@@ -50,7 +50,7 @@ GLUE = [
     '$stream builds the real RemoteStream over a fake connection handle',
     'step driver, settle loop and snapshot encoder',
     'conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); '
-    'turn-process, request-prompt, command, compaction, model-retry and process groups are not registered',
+    'turn-process, command, compaction, model-retry and process groups are not registered',
     'module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install',
 ]
 

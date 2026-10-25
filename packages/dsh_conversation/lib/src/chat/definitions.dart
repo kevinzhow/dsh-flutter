@@ -290,36 +290,6 @@ class MessageDefinition extends ConversationDefinition {
   }
 }
 
-/// Claims `system/message` and surface replacements so the unknown fallback
-/// never shows them. dsh renders a system-prompt card here; chat hides those
-/// rows (`isVisibleChatNode`), and the card itself is deferred, so this
-/// Definition builds no node.
-class SystemMessageDefinition extends ConversationDefinition {
-  const SystemMessageDefinition();
-  @override
-  String get kind => 'system-message';
-  @override
-  String? get target => chatTarget;
-
-  @override
-  MatchResult? match(ConvEvent event) =>
-      event.type == 'system/message' ||
-          (event.entry.event.containsKey('surfaceOp') &&
-              event.surfaceOp != 'append')
-      ? MatchResult(seqText(event.seq), MatchRole.start)
-      : null;
-
-  @override
-  Object start(
-    NodeContext context,
-    ConversationMatch match,
-    ContextReader reader,
-  ) => const Object();
-
-  @override
-  Object update(NodeContext context, ConversationMatch match) => context.state!;
-}
-
 // ---- assistant ------------------------------------------------------------
 
 class _AssistantState {
