@@ -8,12 +8,14 @@ import 'dart:async';
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
+import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart' show DshThemeData;
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
 import 'tree.dart';
 import 'view_state.dart';
+import 'actions.dart';
 
 /// Debounce of the host content search (dsh `SEARCH_DEBOUNCE_MS`).
 const Duration searchDebounce = Duration(milliseconds: 250);
@@ -66,6 +68,7 @@ class WorkspaceBrowser extends StatefulWidget {
     this.resultLimit = 50,
     this.now,
     this.workspaceReady = true,
+    this.management,
   });
 
   final SessionListSnapshot snapshot;
@@ -102,6 +105,7 @@ class WorkspaceBrowser extends StatefulWidget {
 
   /// Whether the Workspace baseline arrived (rows wait for it).
   final bool workspaceReady;
+  final WorkspaceManagement? management;
 
   @override
   State<WorkspaceBrowser> createState() => _WorkspaceBrowserState();
@@ -700,6 +704,8 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
             _ProjectRow(
               key: ValueKey('workspace-row-${g.key}'),
               group: g,
+              management: widget.management,
+              i18n: widget.i18n,
               label: g.workspaceId == null ? _t('group.ungrouped') : g.label,
               active:
                   ancestors.contains(g.key) ||
@@ -769,7 +775,14 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
     selected: node.id == widget.currentId,
     now: _now,
     i18n: widget.i18n,
-    onTap: () => widget.onOpen(node.id),
+    management: widget.management,
+    onTap: () {
+      if (node.archived) {
+        showWorkspaceNotice(context, _t('toast.archivedNotOpenable'));
+      } else {
+        widget.onOpen(node.id);
+      }
+    },
   );
 
   Widget _empty(BuildContext context) {
@@ -1013,6 +1026,8 @@ class _ProjectRow extends StatefulWidget {
     required this.newKeys,
     required this.onNew,
     required this.onToggle,
+    this.management,
+    required this.i18n,
   });
 
   final GroupNode group;
@@ -1024,6 +1039,8 @@ class _ProjectRow extends StatefulWidget {
   final List<String>? newKeys;
   final VoidCallback? onNew;
   final VoidCallback onToggle;
+  final WorkspaceManagement? management;
+  final DshI18n i18n;
 
   @override
   State<_ProjectRow> createState() => _ProjectRowState();
@@ -1055,7 +1072,7 @@ class _ProjectRowState extends State<_ProjectRow> {
         color: theme.color('--dsw-alias-label-caption'),
       ),
     );
-    return MouseRegion(
+    Widget row(VoidCallback? menu) => MouseRegion(
       onEnter: (_) => setState(() => _hover = true),
       onExit: (_) => setState(() => _hover = false),
       cursor: SystemMouseCursors.click,
@@ -1066,6 +1083,18 @@ class _ProjectRowState extends State<_ProjectRow> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: widget.onToggle,
+          onLongPress: menu,
+          onDoubleTap: widget.management == null || g.workspaceId == null
+              ? null
+              : () => unawaited(
+                  renameWorkspaceDialog(
+                    context,
+                    widget.management!,
+                    widget.i18n,
+                    g.workspaceId!,
+                    g.label,
+                  ),
+                ),
           child: DshContainer(
             height: 34,
             padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
@@ -1116,10 +1145,63 @@ class _ProjectRowState extends State<_ProjectRow> {
                       ),
                     ),
                   ),
+                if (_hover && menu != null)
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: menu,
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Center(
+                        child: DshIcon(
+                          DshShellIcons.ellipsis,
+                          size: 14,
+                          color: tertiary,
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
         ),
+      ),
+    );
+    final actions = widget.management;
+    if (actions == null || g.workspaceId == null) return row(null);
+    return DshMenu(
+      align: DshMenuAlign.end,
+      dense: true,
+      entries: [
+        DshMenuItem(
+          'rename',
+          actionText(widget.i18n, 'rename'),
+          icon: DshShellIcons.editOutline,
+        ),
+        DshMenuItem(
+          'delete',
+          actionText(widget.i18n, 'delete.workspace'),
+          icon: DshShellIcons.trash,
+          danger: true,
+        ),
+      ],
+      builder: (_, menu) => row(menu.toggle),
+      onSelect: (id) => unawaited(
+        id == 'rename'
+            ? renameWorkspaceDialog(
+                context,
+                actions,
+                widget.i18n,
+                g.workspaceId!,
+                g.label,
+              )
+            : deleteWorkspaceDialog(
+                context,
+                actions,
+                widget.i18n,
+                g.workspaceId!,
+                g.label,
+              ),
       ),
     );
   }
@@ -1159,6 +1241,7 @@ class _SessionRow extends StatefulWidget {
     required this.now,
     required this.i18n,
     required this.onTap,
+    this.management,
   });
 
   final SessionNode node;
@@ -1167,6 +1250,7 @@ class _SessionRow extends StatefulWidget {
   final DateTime now;
   final DshI18n i18n;
   final VoidCallback onTap;
+  final WorkspaceManagement? management;
 
   @override
   State<_SessionRow> createState() => _SessionRowState();
@@ -1195,7 +1279,7 @@ class _SessionRowState extends State<_SessionRow> {
             PendingInteraction.planReview => t('status.compact.planReview'),
             PendingInteraction.question => t('status.compact.answer'),
           };
-    return MouseRegion(
+    Widget row(VoidCallback? menu) => MouseRegion(
       onEnter: (_) => setState(() => _hover = true),
       onExit: (_) => setState(() => _hover = false),
       cursor: SystemMouseCursors.click,
@@ -1206,6 +1290,18 @@ class _SessionRowState extends State<_SessionRow> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: widget.onTap,
+          onLongPress: menu,
+          onDoubleTap: widget.management == null
+              ? null
+              : () => unawaited(
+                  renameSessionDialog(
+                    context,
+                    widget.management!,
+                    widget.i18n,
+                    n.id,
+                    n.title,
+                  ),
+                ),
           child: DshContainer(
             height: 32,
             padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
@@ -1233,7 +1329,52 @@ class _SessionRowState extends State<_SessionRow> {
                         .copyWith(color: ink, height: 20 / 14),
                   ),
                 ),
-                if (!n.blank) ...[
+                if (_hover && menu != null) ...[
+                  if (!n.archived)
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => unawaited(() async {
+                        try {
+                          if (n.pinned) {
+                            await widget.management!.unpinSession(n.id);
+                          } else {
+                            await widget.management!.pinSession(n.id);
+                          }
+                        } on Object catch (e) {
+                          if (context.mounted) {
+                            showWorkspaceNotice(context, actionFailure(e));
+                          }
+                        }
+                      }()),
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: Center(
+                          child: DshIcon(
+                            DshShellIcons.pinFill,
+                            size: 14,
+                            color: ink,
+                          ),
+                        ),
+                      ),
+                    ),
+                  GestureDetector(
+                    key: ValueKey('session-row-menu-${n.id}'),
+                    behavior: HitTestBehavior.opaque,
+                    onTap: menu,
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Center(
+                        child: DshIcon(
+                          DshShellIcons.ellipsis,
+                          size: 14,
+                          color: ink,
+                        ),
+                      ),
+                    ),
+                  ),
+                ] else if (!n.blank) ...[
                   const SizedBox(width: 6),
                   DshChromeText(
                     time,
@@ -1264,6 +1405,17 @@ class _SessionRowState extends State<_SessionRow> {
           ),
         ),
       ),
+    );
+    final actions = widget.management;
+    if (actions == null) return row(null);
+    return WorkspaceSessionMenu(
+      actions: actions,
+      i18n: widget.i18n,
+      sessionId: n.id,
+      title: n.title,
+      pinned: n.pinned,
+      archived: n.archived,
+      builder: (_, menu) => row(menu.toggle),
     );
   }
 }

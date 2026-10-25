@@ -5,3 +5,4 @@ export 'src/session_list_view.dart';
 export 'src/workspace/browser.dart';
 export 'src/workspace/tree.dart';
 export 'src/workspace/view_state.dart';
+export 'src/workspace/actions.dart';

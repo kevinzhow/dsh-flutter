@@ -184,6 +184,100 @@ class WorkspaceList {
     return created.workspace;
   }
 
+  /// Rename only the registration; directory paths remain Host-owned.
+  Future<void> rename(String workspaceId, String title) async {
+    final answer = await _remote.rename(
+      ws.WorkspaceRenameRequest(workspaceId: workspaceId, title: title),
+    );
+    if (!_disposed) _upsert(answer.workspace);
+  }
+
+  /// Remove a registration while retaining its files and Session histories.
+  Future<void> delete(String workspaceId) async {
+    await _remote.delete(ws.WorkspaceDeleteRequest(workspaceId: workspaceId));
+    if (_disposed) return;
+    _removed.add(workspaceId);
+    state.set(
+      _copy(
+        items: [
+          for (final w in value.items)
+            if (w.workspaceId != workspaceId) w,
+        ],
+      ),
+    );
+  }
+
+  Future<void> insertBefore(
+    String workspaceId,
+    String? beforeWorkspaceId,
+  ) async {
+    final answer = await _remote.insertBefore(
+      ws.WorkspaceInsertBeforeRequest(
+        workspaceId: workspaceId,
+        beforeWorkspaceId: beforeWorkspaceId,
+      ),
+    );
+    if (_disposed) return;
+    _apply(ws.WorkspaceFollowFrameOrder(workspaceIds: answer.workspaceIds));
+  }
+
+  Future<void> insertSessionBefore(
+    String workspaceId,
+    String sessionId,
+    String? beforeSessionId,
+  ) async {
+    final answer = await _remote.insertSessionBefore(
+      ws.WorkspaceInsertSessionBeforeRequest(
+        workspaceId: workspaceId,
+        sessionId: sessionId,
+        beforeSessionId: beforeSessionId,
+      ),
+    );
+    if (!_disposed) _upsert(answer.workspace);
+  }
+
+  Future<void> archiveSession(
+    String sessionId, {
+    bool stopActivity = false,
+  }) async {
+    final answer = await _remote.archiveSession(
+      ws.WorkspaceArchiveSessionRequest(
+        sessionId: sessionId,
+        stopActivity: stopActivity ? true : null,
+      ),
+    );
+    if (!_disposed) {
+      state.set(_copy(archived: List.unmodifiable(answer.archivedSessionIds)));
+    }
+  }
+
+  Future<void> unarchiveSession(String sessionId) async {
+    final answer = await _remote.unarchiveSession(
+      ws.WorkspaceUnarchiveSessionRequest(sessionId: sessionId),
+    );
+    if (!_disposed) {
+      state.set(_copy(archived: List.unmodifiable(answer.archivedSessionIds)));
+    }
+  }
+
+  Future<void> pinSession(String sessionId) async {
+    final answer = await _remote.pinSession(
+      ws.WorkspacePinSessionRequest(sessionId: sessionId),
+    );
+    if (!_disposed) {
+      state.set(_copy(pinned: List.unmodifiable(answer.pinnedSessionIds)));
+    }
+  }
+
+  Future<void> unpinSession(String sessionId) async {
+    final answer = await _remote.unpinSession(
+      ws.WorkspaceUnpinSessionRequest(sessionId: sessionId),
+    );
+    if (!_disposed) {
+      state.set(_copy(pinned: List.unmodifiable(answer.pinnedSessionIds)));
+    }
+  }
+
   /// First-use initialization (`workspace/initializeDefault`): the default
   /// workspace, or null when the Host finds the account ineligible.
   Future<ws.WorkspaceView?> initializeDefault() async {

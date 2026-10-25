@@ -8,3 +8,4 @@ export 'src/registry.dart';
 export 'src/shell_slots.dart';
 export 'src/sidebar_tabs.dart';
 export 'src/slot.dart';
+export 'src/workspace_actions.dart';

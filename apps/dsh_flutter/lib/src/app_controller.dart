@@ -3,6 +3,7 @@ import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_client/generated_commands.dart' show CommandsRemote;
+import 'package:dsh_client/generated.dart' show SessionRemote;
 import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_client/generated_user_questions.dart'
     show AskUserQuestionAnswer, AskUserQuestionAnswerItem, UserQuestionsRemote;
@@ -457,6 +458,8 @@ class AppController extends ChangeNotifier {
     const WorkspaceSnapshot(),
   );
   late final WorkspaceServices workspaceServices = _WorkspaceBridge(this);
+  late final WorkspaceManagement workspaceManagement =
+      _WorkspaceManagementBridge(this);
   WorkspaceList? _workspaceList;
   WorkspaceNavigation? _navigation;
   StreamSubscription<WorkspaceSnapshot>? _workspaceSub;
@@ -771,7 +774,10 @@ class AppController extends ChangeNotifier {
     unawaited(_hostEventSub?.cancel());
     _hostEventSub = transport.hostEvents.listen(_events.add);
     unawaited(_listSub?.cancel());
-    final m = manager = SessionManager(transport)..start();
+    final m = manager = SessionManager(
+      transport,
+      operations: SessionRemote(backend.remoteCaller),
+    )..start();
     unawaited(_projectionSub?.cancel());
     _projectionSub = m.projectionChanges.listen(_projectionEvents.add);
     _listSub = m.list.changes.listen((_) {
@@ -1117,6 +1123,13 @@ class AppController extends ChangeNotifier {
         unawaited(sub.cancel());
       }
     }
+  }
+
+  void clearArchivedSession(String id) {
+    if (openSessionId != id) return;
+    openSessionId = null;
+    newSessionPending = true;
+    notifyListeners();
   }
 
   /// "New session": a fresh session in [workspaceId], else in the workspace in
@@ -1548,4 +1561,53 @@ class _PlanBridge implements PlanServices {
     if (transport == null) throw StateError('Host connection unavailable');
     return SessionHistoryRead(transport, address);
   }
+}
+
+class _WorkspaceManagementBridge implements WorkspaceManagement {
+  _WorkspaceManagementBridge(this.app);
+  final AppController app;
+  SessionManager get manager =>
+      app.manager ?? (throw StateError('Host connection unavailable'));
+  WorkspaceList get registry =>
+      app._workspaceList ??
+      (throw StateError('Workspace registry unavailable'));
+  @override
+  WorkspaceSnapshot get workspaces => app.workspaceState.value;
+  @override
+  SessionListSnapshot get sessions => app.sessionList;
+  @override
+  Future<void> renameSession(String id, String title) =>
+      manager.rename(id, title);
+  @override
+  Future<String> forkSession(String id, {int? atSeq, bool open = false}) async {
+    final child = await manager.fork(id, atSeq: atSeq);
+    if (open) await app.open(child);
+    return child;
+  }
+
+  @override
+  Future<void> archiveSession(String id, {bool stopActivity = false}) async {
+    await registry.archiveSession(id, stopActivity: stopActivity);
+    app.clearArchivedSession(id);
+  }
+
+  @override
+  Future<void> unarchiveSession(String id) => registry.unarchiveSession(id);
+  @override
+  Future<void> pinSession(String id) => registry.pinSession(id);
+  @override
+  Future<void> unpinSession(String id) => registry.unpinSession(id);
+  @override
+  Future<void> renameWorkspace(String id, String title) =>
+      registry.rename(id, title);
+  @override
+  Future<void> deleteWorkspace(String id) => registry.delete(id);
+  @override
+  Future<void> insertWorkspaceBefore(String id, String? before) =>
+      registry.insertBefore(id, before);
+  @override
+  Future<void> insertSessionBefore(String wid, String id, String? before) =>
+      registry.insertSessionBefore(wid, id, before);
+  @override
+  Future<void> openSession(String id) => app.open(id);
 }
