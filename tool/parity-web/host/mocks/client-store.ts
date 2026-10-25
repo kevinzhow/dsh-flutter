@@ -16,3 +16,10 @@ export function createSnapshotStore<T>(initial: T): SnapshotStore<T> {
     set: (next) => { value = next; for (const l of listeners) l() },
   }
 }
+
+// Process-group components import the store module for pure selectors. Their
+// fixture supplies its own immutable store; creating a runtime engine here
+// would hide a missing fixture dependency.
+export function defineStore(): never {
+  throw new Error('Runtime engine stores are outside this component fixture')
+}

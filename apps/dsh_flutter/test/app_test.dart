@@ -1,4 +1,5 @@
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_flutter/src/app.dart';
 import 'package:dsh_flutter/src/app_controller.dart';
 import 'package:dsh_flutter/src/backend.dart';
@@ -267,6 +268,9 @@ void main() {
           userMessage(3, 'run ls'),
         ],
       );
+      // This case tests the tool renderer rather than collapsed process groups.
+      controller.chatPreferences.setMode(TranscriptViewMode.verbose);
+      await settle(t);
       final tr = backend.transport;
       tr.item(
         1,

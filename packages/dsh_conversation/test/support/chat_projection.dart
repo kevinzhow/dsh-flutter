@@ -204,6 +204,19 @@ Object? _data(ViewNode node) {
         'form': m.form,
         'waking': m.waking,
       };
+    case 'turn-process':
+      final p = d! as TurnProcessData;
+      return {
+        'turn': p.turn,
+        'controlAnchorSeq': p.controlAnchorSeq,
+        'processStartSeq': p.processStartSeq,
+        'answerAnchorSeq': p.answerAnchorSeq,
+        'answerStep': p.answerStep,
+        'inlineReasoning': p.inlineReasoning,
+        'messageCount': p.messageCount,
+        'toolCallCount': p.toolCallCount,
+        'subagentCount': p.subagentCount,
+      };
     case 'assistant-step':
       final a = d! as AssistantData;
       return {

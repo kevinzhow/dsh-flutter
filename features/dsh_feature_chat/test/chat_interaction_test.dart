@@ -366,7 +366,11 @@ void main() {
       big.reasoning = {79: 'I weighed the two options carefully.'};
       fx = big;
       await mount(t);
-      expect(find.text('I weighed the two options carefully.'), findsNothing);
+      await t.tap(find.byKey(const ValueKey('turn-process-80')));
+      await t.pump();
+      await t.tap(find.text('Analysis completed'));
+      await t.pump();
+      expect(find.text('I weighed the two options carefully.'), findsOneWidget);
       await t.tap(find.text('Think'));
       await settleFrames(t, 5);
       expect(find.text('I weighed the two options carefully.'), findsOneWidget);

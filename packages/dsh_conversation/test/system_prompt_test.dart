@@ -179,7 +179,10 @@ void main() {
       );
       source.append(header(5));
       expect(prompts(binding).length, 1);
-      expect(binding.chat.value.visibleNodes, isEmpty);
+      expect(
+        binding.chat.value.visibleNodes.where((n) => n.kind != 'turn-process'),
+        isEmpty,
+      );
     },
   );
 

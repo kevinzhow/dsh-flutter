@@ -645,7 +645,7 @@
    "MutableSessionEventSource (session-controller/client/contract/events.ts)",
    "expandAssistantStream (llm/assistant-stream.ts)",
    "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
-   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command and compaction Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
+   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
   ],
   "glue": [
    "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",

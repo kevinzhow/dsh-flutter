@@ -3478,12 +3478,12 @@
    "MutableSessionEventSource (session-controller/client/contract/events.ts)",
    "expandAssistantStream (llm/assistant-stream.ts)",
    "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
-   "inbox, message, developer-message, system-message, assistant, tool, turn-error, turn-max-tokens, turn-tail Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
+   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
   ],
   "glue": [
    "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
    "step driver, settle loop and snapshot encoder",
-   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process, request-prompt, command, compaction, model-retry and process groups are not registered",
+   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process and process groups are not registered",
    "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
   ]
  },
@@ -6548,6 +6548,26 @@
    "step": 2,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -6670,13 +6690,33 @@
      ]
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 5,
    "openTurn": null
   },
   {
    "step": 4,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -6799,13 +6839,33 @@
      ]
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 5,
    "openTurn": null
   },
   {
    "step": 5,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -6902,6 +6962,26 @@
       "closingSeq": 164,
       "branchUnavailable": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -6935,13 +7015,33 @@
      "steps": []
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 6,
    "openTurn": 12
   },
   {
    "step": 6,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7037,6 +7137,26 @@
       "time": 1792763250373,
       "closingSeq": 164,
       "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     }
    ],
@@ -7071,13 +7191,33 @@
      "steps": []
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 6,
    "openTurn": 12
   },
   {
    "step": 7,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7174,6 +7314,26 @@
       "closingSeq": 164,
       "branchUnavailable": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7214,13 +7374,33 @@
      ]
     }
    ],
-   "nodeCount": 4,
+   "nodeCount": 6,
    "openTurn": 12
   },
   {
    "step": 8,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7345,6 +7525,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7385,13 +7585,33 @@
      ]
     }
    ],
-   "nodeCount": 5,
+   "nodeCount": 7,
    "openTurn": 12
   },
   {
    "step": 9,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7516,6 +7736,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7556,13 +7796,33 @@
      ]
     }
    ],
-   "nodeCount": 5,
+   "nodeCount": 7,
    "openTurn": 12
   },
   {
    "step": 10,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7687,6 +7947,26 @@
       "form": null,
       "waking": false
      }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 167.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 168,
+      "processStartSeq": 168,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
     }
    ],
    "plans": [],
@@ -7727,13 +8007,33 @@
      ]
     }
    ],
-   "nodeCount": 5,
+   "nodeCount": 7,
    "openTurn": 12
   },
   {
    "step": 11,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -7860,6 +8160,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 171.66666666666666,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 171.66666666666666,
@@ -7921,13 +8241,33 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 12,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -8054,6 +8394,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 171.66666666666666,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 171.66666666666666,
@@ -8115,13 +8475,33 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 13,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -8248,6 +8628,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 171.66666666666666,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 171.66666666666666,
@@ -8309,13 +8709,33 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 14,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -8442,6 +8862,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 171.66666666666666,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 171.66666666666666,
@@ -8503,13 +8943,33 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 15,
    "nodes": [
     {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "tool-call",
      "id": "call-1",
      "anchorSeq": 156,
@@ -8633,6 +9093,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 171.66666666666666,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -8697,12 +9177,32 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 16,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "tool-call",
      "id": "call-1",
@@ -8827,6 +9327,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.56666666666666,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 171.66666666666666,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -8918,12 +9438,32 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 17,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "tool-call",
      "id": "call-1",
@@ -9048,6 +9588,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -9139,12 +9699,32 @@
      ]
     }
    ],
-   "nodeCount": 6,
+   "nodeCount": 8,
    "openTurn": 12
   },
   {
    "step": 18,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 155.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 2,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 156,
+      "processStartSeq": 156,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "tool-call",
      "id": "call-1",
@@ -9269,6 +9849,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -9376,7 +9976,7 @@
      ]
     }
    ],
-   "nodeCount": 7,
+   "nodeCount": 9,
    "openTurn": null
   },
   {
@@ -9408,6 +10008,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 11,
+     "step": 1,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 148,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -9631,6 +10251,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 172,
@@ -9741,7 +10381,7 @@
      ]
     }
    ],
-   "nodeCount": 10,
+   "nodeCount": 12,
    "openTurn": null
   },
   {
@@ -9773,6 +10413,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "10",
+     "anchorSeq": 139.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 10,
+     "step": 1,
+     "data": {
+      "turn": 10,
+      "controlAnchorSeq": 140,
+      "processStartSeq": 140,
+      "answerAnchorSeq": 140,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -9857,6 +10517,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 144,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -10077,6 +10757,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -10204,12 +10904,32 @@
      ]
     }
    ],
-   "nodeCount": 13,
+   "nodeCount": 16,
    "openTurn": null
   },
   {
    "step": 23,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "9",
+     "anchorSeq": 131.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 9,
+     "step": 1,
+     "data": {
+      "turn": 9,
+      "controlAnchorSeq": 132,
+      "processStartSeq": 132,
+      "answerAnchorSeq": 132,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "assistant-step",
      "id": "9:1",
@@ -10305,6 +11025,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "10",
+     "anchorSeq": 139.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "controlAnchorSeq": 140,
+      "processStartSeq": 136,
+      "answerAnchorSeq": 140,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "10:1",
      "anchorSeq": 140,
@@ -10386,6 +11126,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 144,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -10606,6 +11366,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -10747,7 +11527,7 @@
      ]
     }
    ],
-   "nodeCount": 16,
+   "nodeCount": 20,
    "openTurn": null
   },
   {
@@ -10779,6 +11559,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "9",
+     "anchorSeq": 131.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "controlAnchorSeq": 132,
+      "processStartSeq": 126,
+      "answerAnchorSeq": 132,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -10876,6 +11676,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "10",
+     "anchorSeq": 139.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "controlAnchorSeq": 140,
+      "processStartSeq": 136,
+      "answerAnchorSeq": 140,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "10:1",
      "anchorSeq": 140,
@@ -10957,6 +11777,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 144,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -11177,6 +12017,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -11318,7 +12178,7 @@
      ]
     }
    ],
-   "nodeCount": 17,
+   "nodeCount": 21,
    "openTurn": null
   },
   {
@@ -11350,6 +12210,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "8",
+     "anchorSeq": 120.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 8,
+     "step": 1,
+     "data": {
+      "turn": 8,
+      "controlAnchorSeq": 121,
+      "processStartSeq": 121,
+      "answerAnchorSeq": 121,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -11447,6 +12327,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "9",
+     "anchorSeq": 131.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "controlAnchorSeq": 132,
+      "processStartSeq": 126,
+      "answerAnchorSeq": 132,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "9:1",
      "anchorSeq": 132,
@@ -11541,6 +12441,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "10",
+     "anchorSeq": 139.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "controlAnchorSeq": 140,
+      "processStartSeq": 136,
+      "answerAnchorSeq": 140,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "10:1",
      "anchorSeq": 140,
@@ -11622,6 +12542,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 144,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -11842,6 +12782,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -11997,12 +12957,32 @@
      ]
     }
    ],
-   "nodeCount": 20,
+   "nodeCount": 25,
    "openTurn": null
   },
   {
    "step": 29,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "7",
+     "anchorSeq": 103.9,
+     "groupTree": "turn",
+     "location": "step",
+     "turn": 7,
+     "step": 2,
+     "data": {
+      "turn": 7,
+      "controlAnchorSeq": 104,
+      "processStartSeq": 104,
+      "answerAnchorSeq": 113,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "assistant-step",
      "id": "7:2",
@@ -12192,6 +13172,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "8",
+     "anchorSeq": 120.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 8,
+     "step": null,
+     "data": {
+      "turn": 8,
+      "controlAnchorSeq": 121,
+      "processStartSeq": 117,
+      "answerAnchorSeq": 121,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "8:1",
      "anchorSeq": 121,
@@ -12283,6 +13283,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "9",
+     "anchorSeq": 131.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 9,
+     "step": null,
+     "data": {
+      "turn": 9,
+      "controlAnchorSeq": 132,
+      "processStartSeq": 126,
+      "answerAnchorSeq": 132,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
      }
     },
     {
@@ -12380,6 +13400,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "10",
+     "anchorSeq": 139.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 10,
+     "step": null,
+     "data": {
+      "turn": 10,
+      "controlAnchorSeq": 140,
+      "processStartSeq": 136,
+      "answerAnchorSeq": 140,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "10:1",
      "anchorSeq": 140,
@@ -12461,6 +13501,26 @@
       "producer": null,
       "form": null,
       "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "11",
+     "anchorSeq": 147.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 11,
+     "step": null,
+     "data": {
+      "turn": 11,
+      "controlAnchorSeq": 148,
+      "processStartSeq": 144,
+      "answerAnchorSeq": 164,
+      "answerStep": 3,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 2,
+      "subagentCount": 0
      }
     },
     {
@@ -12684,6 +13744,26 @@
      }
     },
     {
+     "kind": "turn-process",
+     "id": "12",
+     "anchorSeq": 171.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 12,
+     "step": null,
+     "data": {
+      "turn": 12,
+      "controlAnchorSeq": 172,
+      "processStartSeq": 168,
+      "answerAnchorSeq": 172,
+      "answerStep": 1,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
      "kind": "assistant-step",
      "id": "12:1",
      "anchorSeq": 172,
@@ -12856,7 +13936,7 @@
      ]
     }
    ],
-   "nodeCount": 24,
+   "nodeCount": 30,
    "openTurn": null
   }
  ]

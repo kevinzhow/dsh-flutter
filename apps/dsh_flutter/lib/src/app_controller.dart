@@ -217,7 +217,13 @@ class AppController extends ChangeNotifier {
       revealQuestion: (parent, callId) =>
           questions.reveal(parent.sessionId, callId),
     );
-    registerChatFeature(slots, i18n: () => i18n, host: hostActions);
+    chatPreferences = ChatPreferences(desktop: !platform.touchInput);
+    registerChatFeature(
+      slots,
+      i18n: () => i18n,
+      host: hostActions,
+      preferences: chatPreferences,
+    );
     registerAttachmentFeature(slots, i18n: () => i18n);
     layout = registerLayoutFeature(
       slots,
@@ -464,6 +470,7 @@ class AppController extends ChangeNotifier {
   PermissionPresetsFeature? _permissions;
   ModelSelectionFeature? _models;
   final List<void Function()> _hostOffs = [];
+  late final ChatPreferences chatPreferences;
   StreamSubscription<ThemeSettings>? _themeSub;
   String? _pendingOpen;
 
@@ -771,6 +778,7 @@ class AppController extends ChangeNotifier {
       currentGeneration: () => transport.generation,
     );
     final f = forms = ConfigForms(r);
+    chatPreferences.bind(f.get('ui-chat'));
     final theme = _theme = ThemeSettingsService(
       host: f.get('ui-theme'),
       initial: themeSettings,
@@ -848,6 +856,7 @@ class AppController extends ChangeNotifier {
   }
 
   void _detachHost() {
+    chatPreferences.bind(null);
     for (final off in _hostOffs) {
       off();
     }
@@ -1262,6 +1271,7 @@ class AppController extends ChangeNotifier {
 
   @override
   void dispose() {
+    unawaited(chatPreferences.dispose());
     desktop.dispose();
     layout.dispose();
     _recoveredTimer?.cancel();

@@ -303,6 +303,9 @@ void main() {
         }
         expect(fx.pages, hasLength(1));
         await settleFrames(t, 60);
+        // Settle the final fractional-pixel spring correction before measuring
+        // an idle reader's position across the page landing.
+        await t.pumpAndSettle();
         // dsh: the "Load earlier" control is disabled and reads "Loading…".
         expect(find.byKey(const ValueKey('load-older')), findsOneWidget);
         expect(find.text('Loading…'), findsOneWidget);

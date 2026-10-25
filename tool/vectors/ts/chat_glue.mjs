@@ -8,12 +8,11 @@
 //                    inspectSystemPrompt, inspectRequestPrompt
 //   ui-chat          the Definitions the Dart port covers (inbox, message,
 //                    developer message, system/request prompt, assistant, tool,
-//                    turn-error, turn-max-tokens, turn-tail, command, compaction, unknown fallback)
+//                    turn-error, turn-max-tokens, turn-tail, command, compaction, turn-process, unknown fallback)
 //                    and the Chat snapshot builder (ordering)
 //   ui-plan          planDefinition (submitted-plan nodes, hidden, turn data)
 //   ui-tool          the todo history Definitions and view (`tool-todo-history`)
-// NOT registered (deferred to later phases, see the PR): turn-process,
-// process groups.
+// NOT registered: process groups (presentation groups are projected separately).
 //
 // GLUE written here:
 //   - a stand-in for the cordis Context (`effect` runs immediately),
@@ -38,6 +37,7 @@ export async function createChatGlue(load) {
   const { registerToolConversationNode } = await load(chat + 'tool.ts')
   const { registerCommandConversationNode } = await load(chat + 'command.ts')
   const { registerCompactionConversationNode } = await load(chat + 'compaction.ts')
+  const { registerTurnProcess } = await load(chat + 'turn-process.ts')
   const { registerRetryConversationNode } = await load(chat + 'retry.ts')
   const { registerTurnErrorConversationNode } = await load(chat + 'turn-error.ts')
   const { registerTurnMaxTokensConversationNode } = await load(chat + 'turn-max-tokens.ts')
@@ -57,6 +57,7 @@ export async function createChatGlue(load) {
   events.register(systemMessageDefinition(inspectSystemPrompt))
   events.register(requestPromptDefinition(inspectRequestPrompt))
   registerAssistantConversationNode(scope)
+  registerTurnProcess(scope)
   registerToolConversationNode(scope)
   registerCommandConversationNode(scope)
   registerCompactionConversationNode(scope)
@@ -176,6 +177,7 @@ function dataJson(node) {
         producer: d.producer === undefined ? null : [d.producer.role, d.producer.label ?? null],
         form: d.form ?? null, waking: d.waking === true,
       }
+    case 'turn-process': return json(d)
     case 'assistant-step':
       return {
         status: d.status, turn: d.turn, step: d.step, time: d.time, blocks: d.blocks.map(blockJson),

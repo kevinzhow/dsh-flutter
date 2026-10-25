@@ -111,11 +111,29 @@ class ChatNodeOwner {
     required this.session,
     required this.node,
     required this.snapshot,
+    this.groupPart,
+    this.reasoningPreview = true,
+    this.turnProcess,
   });
 
   final SessionOwner session;
   final ViewNode node;
   final ChatSnapshot snapshot;
+  final String? groupPart;
+  final bool reasoningPreview;
+  final TurnProcessControls? turnProcess;
+}
+
+/// Session-owned disclosure state passed through the keyed Node seat.
+class TurnProcessControls {
+  const TurnProcessControls({
+    required this.open,
+    required this.foldable,
+    required this.hasContent,
+    required this.setOpen,
+  });
+  final bool open, foldable, hasContent;
+  final void Function(bool) setOpen;
 }
 
 /// Command-name specialization at `conversation.chat.commandview`.

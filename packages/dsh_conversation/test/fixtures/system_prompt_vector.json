@@ -559,12 +559,12 @@
    "MutableSessionEventSource (session-controller/client/contract/events.ts)",
    "expandAssistantStream (llm/assistant-stream.ts)",
    "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
-   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
+   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
   ],
   "glue": [
    "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
    "step driver, settle loop and snapshot encoder",
-   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process, command, compaction, model-retry and process groups are not registered",
+   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process and process groups are not registered",
    "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
   ]
  },
@@ -1872,7 +1872,28 @@
   },
   {
    "step": 3,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [],
    "plans": [],
    "todoHistory": [],
@@ -1885,12 +1906,33 @@
      "steps": []
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 4,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [],
    "plans": [],
    "todoHistory": [],
@@ -1910,12 +1952,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 5,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -1945,12 +2008,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 6,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -1980,12 +2064,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 7,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2024,12 +2129,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 8,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2068,12 +2194,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 9,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2112,12 +2259,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 10,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2162,12 +2330,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 11,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2221,12 +2410,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 12,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2280,12 +2490,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 13,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2348,12 +2579,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 14,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2416,12 +2668,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 15,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2493,12 +2766,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 16,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2570,12 +2864,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 17,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2656,12 +2971,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 18,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2742,12 +3078,33 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 19,
-   "nodes": [],
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
    "systemPrompts": [
     {
      "id": "5",
@@ -2837,12 +3194,32 @@
      ]
     }
    ],
-   "nodeCount": 0,
+   "nodeCount": 1,
    "openTurn": 1
   },
   {
    "step": 20,
    "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 2.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 3,
+      "processStartSeq": 3,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
     {
      "kind": "turn-tail",
      "id": "1",
@@ -2949,7 +3326,7 @@
      ]
     }
    ],
-   "nodeCount": 1,
+   "nodeCount": 2,
    "openTurn": null
   }
  ]

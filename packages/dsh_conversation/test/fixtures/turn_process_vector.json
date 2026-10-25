@@ -1,0 +1,4109 @@
+{
+ "format": "dsh-session-vector/1",
+ "description": "Synthetic turn-process trace: final answer boundaries, interim replies, tool/subagent activity counts and stopped turns; expected snapshots run real pinned upstream definitions. Partial-window recovery has separate model tests.",
+ "hostVersion": "0.2.1-rc.2",
+ "openOptions": {
+  "maxMessages": 2,
+  "turnWindow": {
+   "minMessages": 1,
+   "minTurns": 1
+  }
+ },
+ "steps": [
+  {
+   "op": "action",
+   "name": "open"
+  },
+  {
+   "op": "opened",
+   "generation": 1
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "snapshot",
+    "header": {
+     "version": 4,
+     "id": "turn-process-fixture",
+     "createdAt": 1792765155147,
+     "cwd": "fixture",
+     "isSeeded": false,
+     "agentPreset": "s8"
+    },
+    "cursor": 0,
+    "records": [
+     {
+      "type": "event",
+      "event": {
+       "seq": 0,
+       "time": 10000,
+       "type": "permission/preset",
+       "data": {
+        "preset": "synthetic"
+       }
+      }
+     }
+    ],
+    "hasMore": false,
+    "projections": {
+     "asOfSeq": 0,
+     "values": {
+      "title": null,
+      "goal": null,
+      "tokenUsage": {
+       "uncachedInputTokens": 0,
+       "outputTokens": 0,
+       "cacheReadTokens": 0,
+       "cacheWriteTokens": 0
+      },
+      "contextPressure": {},
+      "contextBreakdown": {
+       "systemTokens": 0,
+       "toolsTokens": 0,
+       "messageTokens": 0
+      },
+      "inbox": {
+       "next-turn": [],
+       "next-step": []
+      },
+      "sessionStats": {
+       "turns": 0,
+       "steps": 0,
+       "llmMs": 0,
+       "toolMs": 0,
+       "ttftMs": 0,
+       "ttftSteps": 0,
+       "decodeMs": 0,
+       "decodeTokens": 0
+      },
+      "turnOutline": [],
+      "agentPreset": "s8",
+      "userQuestions": {
+       "active": [],
+       "settled": []
+      },
+      "permissions": {
+       "currentValue": "s18"
+      },
+      "workingDirectory": "s30",
+      "subagentCatalog": [],
+      "subagentTiming": {
+       "settledMs": 0
+      },
+      "subagent": null,
+      "todos": null,
+      "plan": {
+       "active": false,
+       "pending": false
+      },
+      "modelSelection": {
+       "lastUsed": null,
+       "next": null
+      },
+      "sessionListMetadata": {
+       "blank": true,
+       "lastPromptAt": null
+      },
+      "imageLimits": {
+       "maxImageBytes": 20971520,
+       "maxImagesPerMessage": 20,
+       "maxMessageImageBytes": 209715200,
+       "maxImagePixels": 64000000,
+       "maxImageDimension": 8192,
+       "mediaTypes": [
+        "s9",
+        "s10",
+        "s10",
+        "s9"
+       ]
+      }
+     }
+    },
+    "assistantStream": {
+     "revision": 0
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 1,
+     "time": 11000,
+     "type": "turn/start",
+     "data": {
+      "turn": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 2,
+     "time": 12000,
+     "type": "step/start",
+     "data": {
+      "turn": 1,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 3,
+     "time": 13000,
+     "type": "user/message",
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "id": "input",
+      "role": "user",
+      "source": {
+       "kind": "user"
+      },
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ]
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 4,
+     "time": 14000,
+     "type": "assistant/message",
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "message": {
+       "id": "progress",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "reasoning",
+         "text": "Compare synthetic options."
+        },
+        {
+         "type": "text",
+         "text": "Progress update"
+        }
+       ],
+       "source": {
+        "kind": "model",
+        "provider": "fixture",
+        "model": "fixture"
+       }
+      },
+      "stream": []
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 5,
+     "time": 15000,
+     "type": "tool/call",
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "callId": "read-call",
+      "name": "read",
+      "args": "{}",
+      "arguments": "{}"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 6,
+     "time": 16000,
+     "type": "tool/call",
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "callId": "delegate",
+      "name": "subagent_worker",
+      "args": "{}",
+      "arguments": "{}"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 7,
+     "time": 17000,
+     "type": "step/end",
+     "data": {
+      "turn": 1,
+      "step": 1,
+      "reason": {
+       "kind": "tool-calls"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 8,
+     "time": 18000,
+     "type": "step/start",
+     "data": {
+      "turn": 1,
+      "step": 2
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 9,
+     "time": 19000,
+     "type": "assistant/message",
+     "data": {
+      "turn": 1,
+      "step": 2,
+      "message": {
+       "id": "answer",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "reasoning",
+         "text": "Final check."
+        },
+        {
+         "type": "text",
+         "text": "Final answer"
+        }
+       ],
+       "source": {
+        "kind": "model",
+        "provider": "fixture",
+        "model": "fixture"
+       }
+      },
+      "stream": []
+     },
+     "surfaceOp": "append"
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 10,
+     "time": 20000,
+     "type": "step/end",
+     "data": {
+      "turn": 1,
+      "step": 2,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 11,
+     "time": 21000,
+     "type": "turn/end",
+     "data": {
+      "turn": 1,
+      "reason": {
+       "kind": "completed"
+      }
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 12,
+     "time": 22000,
+     "type": "turn/start",
+     "data": {
+      "turn": 2
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 13,
+     "time": 23000,
+     "type": "step/start",
+     "data": {
+      "turn": 2,
+      "step": 1
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 14,
+     "time": 24000,
+     "type": "tool/call",
+     "data": {
+      "turn": 2,
+      "step": 1,
+      "callId": "failed",
+      "name": "bash",
+      "args": "{}",
+      "arguments": "{}"
+     }
+    }
+   }
+  },
+  {
+   "op": "frame",
+   "generation": 1,
+   "frame": {
+    "type": "event",
+    "event": {
+     "seq": 15,
+     "time": 25000,
+     "type": "turn/end",
+     "data": {
+      "turn": 2,
+      "reason": {
+       "kind": "aborted",
+       "reason": {
+        "kind": "user"
+       }
+      }
+     }
+    }
+   }
+  }
+ ],
+ "expectedBy": {
+  "model": "dsh TypeScript client (session-controller client + gateway journal) and conversation engine (ui-conversation + ui-chat)",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "runner": "tool/vectors/ts/run_vector.mjs",
+  "realClasses": [
+   "Session (session-controller/client/sessions/session.ts)",
+   "SessionEventStream (session-controller/client/transport.ts)",
+   "RemoteJournalStream (gateway/client/journal-stream.ts)",
+   "RemoteStream (gateway/client/remote-stream.ts)",
+   "RemoteStreamCarrierError (gateway/client/stream-client.ts)",
+   "ClientAssistantStream (session-controller/client/sessions/assistant-stream.ts)",
+   "MutableSessionEventSource (session-controller/client/contract/events.ts)",
+   "expandAssistantStream (llm/assistant-stream.ts)",
+   "ConversationNodeAssembler, ConversationEventRegistry, ConversationViewRegistry, ConversationLocationIndex (ui-conversation)",
+   "inbox, message, developer-message, system-message, request-prompt, assistant, tool, turn-error, turn-max-tokens, turn-tail, model-retry, command, compaction and turn-process Definitions, unknown-surface fallback and the chat snapshot builder (ui-chat)"
+  ],
+  "glue": [
+   "fake SessionRemotes: session.follow yields the fixture frames per connection generation, session.page answers recorded pages matched on (address, throughSeq, beforeSeq), $stream builds the real RemoteStream over a fake connection handle",
+   "step driver, settle loop and snapshot encoder",
+   "conversation feed loop (copy of BoundConversation) and the chat projection (tool/vectors/ts/chat_glue.mjs); turn-process and process groups are not registered",
+   "module resolution: dsh tsconfig paths via tsx, zustand/immer from the vector-node install"
+  ]
+ },
+ "expected": [
+  {
+   "step": 1,
+   "openState": "loading",
+   "hasMore": false,
+   "entries": []
+  },
+  {
+   "step": 2,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ]
+   ]
+  },
+  {
+   "step": 3,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ]
+   ]
+  },
+  {
+   "step": 4,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ]
+   ]
+  },
+  {
+   "step": 5,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ]
+   ]
+  },
+  {
+   "step": 6,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ]
+   ]
+  },
+  {
+   "step": 7,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ]
+   ]
+  },
+  {
+   "step": 8,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ]
+   ]
+  },
+  {
+   "step": 9,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ]
+   ]
+  },
+  {
+   "step": 10,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ]
+   ]
+  },
+  {
+   "step": 11,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ]
+   ]
+  },
+  {
+   "step": 12,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ]
+   ]
+  },
+  {
+   "step": 13,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ],
+    [
+     "event",
+     11,
+     "turn/end"
+    ]
+   ]
+  },
+  {
+   "step": 14,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ],
+    [
+     "event",
+     11,
+     "turn/end"
+    ],
+    [
+     "event",
+     12,
+     "turn/start"
+    ]
+   ]
+  },
+  {
+   "step": 15,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ],
+    [
+     "event",
+     11,
+     "turn/end"
+    ],
+    [
+     "event",
+     12,
+     "turn/start"
+    ],
+    [
+     "event",
+     13,
+     "step/start"
+    ]
+   ]
+  },
+  {
+   "step": 16,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ],
+    [
+     "event",
+     11,
+     "turn/end"
+    ],
+    [
+     "event",
+     12,
+     "turn/start"
+    ],
+    [
+     "event",
+     13,
+     "step/start"
+    ],
+    [
+     "event",
+     14,
+     "tool/call"
+    ]
+   ]
+  },
+  {
+   "step": 17,
+   "openState": "open",
+   "hasMore": false,
+   "entries": [
+    [
+     "event",
+     0,
+     "permission/preset"
+    ],
+    [
+     "event",
+     1,
+     "turn/start"
+    ],
+    [
+     "event",
+     2,
+     "step/start"
+    ],
+    [
+     "event",
+     3,
+     "user/message"
+    ],
+    [
+     "event",
+     4,
+     "assistant/message"
+    ],
+    [
+     "event",
+     5,
+     "tool/call"
+    ],
+    [
+     "event",
+     6,
+     "tool/call"
+    ],
+    [
+     "event",
+     7,
+     "step/end"
+    ],
+    [
+     "event",
+     8,
+     "step/start"
+    ],
+    [
+     "event",
+     9,
+     "assistant/message"
+    ],
+    [
+     "event",
+     10,
+     "step/end"
+    ],
+    [
+     "event",
+     11,
+     "turn/end"
+    ],
+    [
+     "event",
+     12,
+     "turn/start"
+    ],
+    [
+     "event",
+     13,
+     "step/start"
+    ],
+    [
+     "event",
+     14,
+     "tool/call"
+    ],
+    [
+     "event",
+     15,
+     "turn/end"
+    ]
+   ]
+  }
+ ],
+ "expectedChat": [
+  {
+   "step": 1,
+   "nodes": [],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [],
+   "nodeCount": 0,
+   "openTurn": null
+  },
+  {
+   "step": 2,
+   "nodes": [],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [],
+   "nodeCount": 0,
+   "openTurn": null
+  },
+  {
+   "step": 3,
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 0.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 1,
+      "processStartSeq": 1,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": []
+    }
+   ],
+   "nodeCount": 1,
+   "openTurn": 1
+  },
+  {
+   "step": 4,
+   "nodes": [
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 0.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 1,
+      "processStartSeq": 1,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 2,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 1,
+   "openTurn": 1
+  },
+  {
+   "step": 5,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 0.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 1,
+      "processStartSeq": 1,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 2,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 2,
+   "openTurn": 1
+  },
+  {
+   "step": 6,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 4,
+      "answerStep": 1,
+      "inlineReasoning": true,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 2,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 3,
+   "openTurn": 1
+  },
+  {
+   "step": 7,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 4,
+      "answerStep": 1,
+      "inlineReasoning": true,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "started",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "argsRaw": "{}",
+      "turn": 1,
+      "step": 1,
+      "time": 15000,
+      "subCalls": []
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 2,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 4,
+   "openTurn": 1
+  },
+  {
+   "step": 8,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 4,
+      "answerStep": 1,
+      "inlineReasoning": true,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "started",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "argsRaw": "{}",
+      "turn": 1,
+      "step": 1,
+      "time": 15000,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "started",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "argsRaw": "{}",
+      "turn": 1,
+      "step": 1,
+      "time": 16000,
+      "subCalls": []
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 2,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 1
+  },
+  {
+   "step": 9,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 4,
+      "answerStep": 1,
+      "inlineReasoning": true,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 1
+  },
+  {
+   "step": 10,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 4,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "open",
+       "startSeq": 8,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 5,
+   "openTurn": 1
+  },
+  {
+   "step": 11,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "open",
+       "startSeq": 8,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 1
+  },
+  {
+   "step": 12,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "open",
+     "startSeq": 1,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    }
+   ],
+   "nodeCount": 6,
+   "openTurn": 1
+  },
+  {
+   "step": 13,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "1",
+     "anchorSeq": 11.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "seq": 11,
+      "time": 21000,
+      "closingSeq": 9,
+      "branchUnavailable": false
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "closed",
+     "startSeq": 1,
+     "endSeq": 11,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    }
+   ],
+   "nodeCount": 7,
+   "openTurn": null
+  },
+  {
+   "step": 14,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "1",
+     "anchorSeq": 11.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "seq": 11,
+      "time": 21000,
+      "closingSeq": 9,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 11.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 12,
+      "processStartSeq": 12,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "closed",
+     "startSeq": 1,
+     "endSeq": 11,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    },
+    {
+     "turn": 2,
+     "status": "open",
+     "startSeq": 12,
+     "endSeq": null,
+     "steps": []
+    }
+   ],
+   "nodeCount": 8,
+   "openTurn": 2
+  },
+  {
+   "step": 15,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "1",
+     "anchorSeq": 11.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "seq": 11,
+      "time": 21000,
+      "closingSeq": 9,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 11.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 12,
+      "processStartSeq": 12,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 0,
+      "subagentCount": 0
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "closed",
+     "startSeq": 1,
+     "endSeq": 11,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    },
+    {
+     "turn": 2,
+     "status": "open",
+     "startSeq": 12,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 13,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 8,
+   "openTurn": 2
+  },
+  {
+   "step": 16,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "1",
+     "anchorSeq": 11.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "seq": 11,
+      "time": 21000,
+      "closingSeq": 9,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 13.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 14,
+      "processStartSeq": 14,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "failed",
+     "anchorSeq": 14,
+     "groupTree": null,
+     "location": "step",
+     "turn": 2,
+     "step": 1,
+     "data": {
+      "state": "started",
+      "callId": "failed",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "{}",
+      "argsRaw": "{}",
+      "turn": 2,
+      "step": 1,
+      "time": 24000,
+      "subCalls": []
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "closed",
+     "startSeq": 1,
+     "endSeq": 11,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    },
+    {
+     "turn": 2,
+     "status": "open",
+     "startSeq": 12,
+     "endSeq": null,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 13,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 9,
+   "openTurn": 2
+  },
+  {
+   "step": 17,
+   "nodes": [
+    {
+     "kind": "user",
+     "id": "input",
+     "anchorSeq": 3,
+     "groupTree": "exchange",
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "kind": "user",
+      "seq": 3,
+      "time": 13000,
+      "content": [
+       {
+        "type": "text",
+        "text": "Synthetic input"
+       }
+      ],
+      "source": {
+       "kind": "user"
+      },
+      "messageId": null,
+      "producer": null,
+      "form": null,
+      "waking": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "1",
+     "anchorSeq": 3.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "controlAnchorSeq": 4,
+      "processStartSeq": 1,
+      "answerAnchorSeq": 9,
+      "answerStep": 2,
+      "inlineReasoning": true,
+      "messageCount": 1,
+      "toolCallCount": 1,
+      "subagentCount": 1
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:1",
+     "anchorSeq": 4,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 1,
+      "time": 14000,
+      "blocks": [
+       [
+        "reasoning",
+        "Compare synthetic options."
+       ],
+       [
+        "text",
+        "Progress update"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 4,
+       "messageId": "progress",
+       "time": 14000,
+       "turn": 1,
+       "step": 1,
+       "blocks": [
+        [
+         "reasoning",
+         "Compare synthetic options."
+        ],
+        [
+         "text",
+         "Progress update"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 12000,
+       "firstTokenTime": null,
+       "completedTime": 14000
+      }
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "read-call",
+     "anchorSeq": 5,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "read-call",
+      "parentCallId": null,
+      "name": "read",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 15000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "delegate",
+     "anchorSeq": 6,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "delegate",
+      "parentCallId": null,
+      "name": "subagent_worker",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 16000,
+      "seq": 6.2,
+      "time": 17000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "assistant-step",
+     "id": "1:2",
+     "anchorSeq": 9,
+     "groupTree": null,
+     "location": "step",
+     "turn": 1,
+     "step": 2,
+     "data": {
+      "status": "settled",
+      "turn": 1,
+      "step": 2,
+      "time": 19000,
+      "blocks": [
+       [
+        "reasoning",
+        "Final check."
+       ],
+       [
+        "text",
+        "Final answer"
+       ]
+      ],
+      "usage": null,
+      "final": {
+       "seq": 9,
+       "messageId": "answer",
+       "time": 19000,
+       "turn": 1,
+       "step": 2,
+       "blocks": [
+        [
+         "reasoning",
+         "Final check."
+        ],
+        [
+         "text",
+         "Final answer"
+        ]
+       ],
+       "usage": null,
+       "interrupted": false,
+       "stepStartTime": 18000,
+       "firstTokenTime": null,
+       "completedTime": 19000
+      }
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "1",
+     "anchorSeq": 11.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 1,
+     "step": null,
+     "data": {
+      "turn": 1,
+      "seq": 11,
+      "time": 21000,
+      "closingSeq": 9,
+      "branchUnavailable": false
+     }
+    },
+    {
+     "kind": "turn-process",
+     "id": "2",
+     "anchorSeq": 13.9,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "controlAnchorSeq": 14,
+      "processStartSeq": 14,
+      "answerAnchorSeq": null,
+      "answerStep": null,
+      "inlineReasoning": false,
+      "messageCount": 0,
+      "toolCallCount": 1,
+      "subagentCount": 0
+     }
+    },
+    {
+     "kind": "tool-call",
+     "id": "failed",
+     "anchorSeq": 14,
+     "groupTree": null,
+     "location": "step",
+     "turn": 2,
+     "step": 1,
+     "data": {
+      "state": "settled",
+      "callId": "failed",
+      "parentCallId": null,
+      "name": "bash",
+      "args": "{}",
+      "callArgsRaw": "{}",
+      "callTime": 24000,
+      "seq": 14.2,
+      "time": 25000,
+      "isError": true,
+      "error": {
+       "name": "Interrupted",
+       "code": "interrupted"
+      },
+      "content": [],
+      "meta": null,
+      "subCalls": []
+     }
+    },
+    {
+     "kind": "turn-tail",
+     "id": "2",
+     "anchorSeq": 15.1,
+     "groupTree": "turn",
+     "location": "turn",
+     "turn": 2,
+     "step": null,
+     "data": {
+      "turn": 2,
+      "seq": 15,
+      "time": 25000,
+      "closingSeq": null,
+      "branchUnavailable": true
+     }
+    }
+   ],
+   "plans": [],
+   "todoHistory": [],
+   "timeline": [
+    {
+     "turn": 1,
+     "status": "closed",
+     "startSeq": 1,
+     "endSeq": 11,
+     "steps": [
+      {
+       "step": 1,
+       "status": "closed",
+       "startSeq": 2,
+       "endSeq": 7
+      },
+      {
+       "step": 2,
+       "status": "closed",
+       "startSeq": 8,
+       "endSeq": 10
+      }
+     ]
+    },
+    {
+     "turn": 2,
+     "status": "closed",
+     "startSeq": 12,
+     "endSeq": 15,
+     "steps": [
+      {
+       "step": 1,
+       "status": "open",
+       "startSeq": 13,
+       "endSeq": null
+      }
+     ]
+    }
+   ],
+   "nodeCount": 10,
+   "openTurn": null
+  }
+ ]
+}

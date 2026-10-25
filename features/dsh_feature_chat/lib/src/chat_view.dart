@@ -6,8 +6,12 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
 
 import 'chat_nodes.dart';
+import 'chat_preferences.dart';
+import 'process_layout.dart';
+import 'work_details_view.dart';
 import 'stream/extras.dart';
 import 'stream/jump_button.dart';
 import 'stream/load_earlier.dart';
@@ -29,7 +33,13 @@ const wideLayoutWidth = dshWideLayoutWidth;
 /// One row of the timeline: a chat node, a node's turn-tail entry, a local
 /// prompt echo or the running indicator. [id] is stable for the row's life.
 class _Row {
-  const _Row(this.id, this.build, {this.node, this.transient = false});
+  const _Row(
+    this.id,
+    this.build, {
+    this.node,
+    this.transient = false,
+    this.hidden = false,
+  });
   final String id;
   final Widget Function() build;
 
@@ -38,6 +48,7 @@ class _Row {
 
   /// Echoes and the status row come and go; a node row never does.
   final bool transient;
+  final bool hidden;
 }
 
 /// The chat view of one session (dsh `ui-chat` `ChatView`): the ordered chat
@@ -59,6 +70,7 @@ class ChatView extends StatefulWidget {
     required this.nodeSlot,
     this.turnTailSlot,
     this.memory,
+    this.preferences,
   });
 
   final SessionOwner owner;
@@ -72,6 +84,7 @@ class ChatView extends StatefulWidget {
 
   /// Where readers stopped in each session; a session reopens there.
   final ChatReadingMemory? memory;
+  final ChatPreferences? preferences;
 
   @override
   State<ChatView> createState() => ChatViewState();
@@ -83,6 +96,20 @@ class ChatViewState extends State<ChatView> {
 
   StreamSubscription<ChatSnapshot>? _chatSub;
   StreamSubscription<SessionSnapshot>? _sessionSub;
+  final _fallbackPreferences = ChatPreferences();
+  ChatPreferences get _preferences =>
+      widget.preferences ?? _fallbackPreferences;
+  StreamSubscription<TranscriptViewMode>? _modeSub;
+  StreamSubscription<CollapseTiming>? _timingSub;
+  ProcessLayout _processLayout = ProcessLayout();
+  final _turnChoices = <int, ({int answerStep, bool open})>{};
+  final _groupChoices = <String, bool>{};
+  final _rowFocus = <String, FocusNode>{};
+  final _controlFocus = <String, FocusNode>{};
+  Set<int> _foldedTurns = {};
+  final _resetVersions = <int, int>{};
+  Set<String> _pendingIds = {};
+  int? _releasedExchange;
 
   /// The timeline's scroll controller; replaced when a context is (re)opened.
   DshTimelineController? _scroll;
@@ -123,6 +150,11 @@ class ChatViewState extends State<ChatView> {
   @override
   void didUpdateWidget(ChatView oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.owner == widget.owner &&
+        oldWidget.preferences != widget.preferences) {
+      _unbind();
+      _bind();
+    }
     if (oldWidget.owner != widget.owner) {
       _saveAnchor(oldWidget.owner.session.sessionId);
       _unbind();
@@ -132,6 +164,13 @@ class ChatViewState extends State<ChatView> {
       _atBottom = true;
       _newCount = 0;
       _filledFor = null;
+      _processLayout = ProcessLayout();
+      _turnChoices.clear();
+      _groupChoices.clear();
+      _foldedTurns = {};
+      _resetVersions.clear();
+      _pendingIds = {};
+      _releasedExchange = null;
       _bind();
     }
     _refresh();
@@ -140,11 +179,15 @@ class ChatViewState extends State<ChatView> {
   void _bind() {
     _chatSub = widget.owner.conversation.chat.changes.listen(_changed);
     _sessionSub = widget.owner.session.snapshot.changes.listen(_changed);
+    _modeSub = _preferences.mode.changes.listen(_changed);
+    _timingSub = _preferences.timing.changes.listen(_changed);
   }
 
   void _unbind() {
     unawaited(_chatSub?.cancel());
     unawaited(_sessionSub?.cancel());
+    unawaited(_modeSub?.cancel());
+    unawaited(_timingSub?.cancel());
   }
 
   /// Leaving the tree (the session screen closes): the render objects are
@@ -161,6 +204,10 @@ class ChatViewState extends State<ChatView> {
   void dispose() {
     _saveTimer?.cancel();
     _unbind();
+    unawaited(_fallbackPreferences.dispose());
+    for (final focus in [..._rowFocus.values, ..._controlFocus.values]) {
+      focus.dispose();
+    }
     _scroll?.dispose();
     for (final retired in _retired) {
       retired.dispose();
@@ -193,18 +240,157 @@ class ChatViewState extends State<ChatView> {
     final chat = owner.conversation.chat.value;
     final session = owner.session.snapshot.value;
     final rows = <_Row>[];
-    for (final node in chat.visibleNodes) {
+    final prefs = _preferences;
+    final presentations = <int, TurnProcessPresentation>{
+      for (final node in chat.visibleNodes)
+        if (node.kind == 'turn-process')
+          (node.data! as TurnProcessData).turn: TurnProcessPresentation(
+            chat,
+            node,
+          ),
+    };
+    final openingTurns = chat.visibleNodes
+        .where((n) => n.groupTree == 'exchange')
+        .map((n) => locationTurn(n.location))
+        .whereType<int>()
+        .toList();
+    final exchange = openingTurns.isEmpty
+        ? chat.timeline.turnOrder.firstOrNull
+        : openingTurns.reduce((a, b) => a > b ? a : b);
+    if (!session.running &&
+        session.pendingSubmissions.any(
+          (p) => !_pendingIds.contains(p.requestId),
+        )) {
+      _releasedExchange = exchange;
+    }
+    _pendingIds = session.pendingSubmissions.map((p) => p.requestId).toSet();
+    bool deferred(int? turn) =>
+        prefs.timing.value == CollapseTiming.nextInput &&
+        exchange != null &&
+        turn != null &&
+        turn >= exchange &&
+        _releasedExchange != exchange;
+    final focusedTurns = <int>{
+      for (final row in _rows)
+        if (row.node?.kind != 'turn-process' &&
+            _rowFocus[row.id]?.hasFocus == true &&
+            row.node != null &&
+            locationTurn(row.node!.location) != null)
+          locationTurn(row.node!.location)!,
+    };
+    bool openTurn(TurnProcessPresentation p) {
+      if (!prefs.foldCompleted || p.alwaysOpen) return true;
+      final manual = _turnChoices[p.spec.turn];
+      if (manual != null && manual.answerStep == (p.spec.answerStep ?? 0)) {
+        return manual.open;
+      }
+      if (focusedTurns.contains(p.spec.turn)) {
+        _turnChoices[p.spec.turn] = (
+          answerStep: p.spec.answerStep ?? 0,
+          open: true,
+        );
+        return true;
+      }
+      return deferred(p.spec.turn);
+    }
+
+    final folded = presentations.values
+        .where((p) => prefs.foldCompleted && !openTurn(p))
+        .map((p) => p.spec.turn)
+        .toSet();
+    for (final turn in folded.difference(_foldedTurns)) {
+      _resetVersions[turn] = (_resetVersions[turn] ?? 0) + 1;
+      for (final row in _rows) {
+        if (locationTurn(row.node?.location ?? const UnresolvedLocation()) ==
+            turn) {
+          _groupChoices.remove(row.id);
+        }
+      }
+    }
+    _foldedTurns = folded;
+    bool hidden(ProcessMember m) {
+      final p = presentations[locationTurn(m.node.location)];
+      return p != null && prefs.foldCompleted && !openTurn(p) && p.member(m);
+    }
+
+    Widget renderMember(ProcessMember member) {
+      final node = member.node;
+      final p = presentations[locationTurn(node.location)];
+      final controls = p == null
+          ? null
+          : TurnProcessControls(
+              open: openTurn(p),
+              foldable: prefs.foldCompleted && !p.alwaysOpen,
+              hasContent: p.hasContent,
+              setOpen: (value) {
+                _turnChoices[p.spec.turn] = (
+                  answerStep: p.spec.answerStep ?? 0,
+                  open: value,
+                );
+                if (!value) {
+                  for (final group
+                      in _processLayout
+                          .project(chat)
+                          .where((e) => e.group?.turn == p.spec.turn)) {
+                    _groupChoices.remove(group.key);
+                  }
+                }
+                _refresh();
+              },
+            );
+      return DshDisclosureReset(
+        version: _resetVersions[locationTurn(node.location)] ?? 0,
+        child:
+            widget.slots.renderKeyed(
+              widget.nodeSlot,
+              node.kind,
+              ChatNodeOwner(
+                session: owner,
+                node: node,
+                snapshot: chat,
+                groupPart: member.part,
+                reasoningPreview: prefs.reasoningPreview,
+                turnProcess: controls,
+              ),
+            ) ??
+            const SizedBox.shrink(),
+      );
+    }
+
+    for (final entry in _processLayout.project(chat)) {
+      final node = entry.first;
+      final group = entry.group;
+      if (group == null &&
+          node.kind == 'turn-process' &&
+          owningTurn(node.location)?.status != BoundaryStatus.closed) {
+        continue;
+      }
+      final isHidden = group == null
+          ? hidden(entry.member!) ||
+                (node.kind == 'turn-process' &&
+                    owningTurn(node.location)?.status != BoundaryStatus.closed)
+          : group.members.every(hidden);
       rows.add(
         _Row(
-          node.key,
+          entry.key,
           node: node,
-          () =>
-              widget.slots.renderKeyed(
-                widget.nodeSlot,
-                node.kind,
-                ChatNodeOwner(session: owner, node: node, snapshot: chat),
-              ) ??
-              const SizedBox.shrink(),
+          hidden: isHidden,
+          () => group == null
+              ? renderMember(entry.member!)
+              : ProcessGroupView(
+                  key: ValueKey(group.key),
+                  group: group,
+                  preferences: prefs,
+                  i18n: widget.i18n,
+                  open: _groupChoices[group.key] ?? false,
+                  deferCollapse: deferred(group.turn),
+                  onToggle: () {
+                    _groupChoices[group.key] =
+                        !(_groupChoices[group.key] ?? false);
+                    _refresh();
+                  },
+                  buildMember: renderMember,
+                ),
         ),
       );
       final tailSlot = widget.turnTailSlot;
@@ -282,7 +468,7 @@ class ChatViewState extends State<ChatView> {
   /// the status row (which come and go) never hold the center.
   String? _lastNodeId(List<_Row> rows) {
     for (var i = rows.length - 1; i >= 0; i--) {
-      if (!rows[i].transient) return rows[i].id;
+      if (!rows[i].transient && !rows[i].hidden) return rows[i].id;
     }
     return null;
   }
@@ -346,11 +532,11 @@ class ChatViewState extends State<ChatView> {
                 insertsBetweenRetainedRows(
                   [
                     for (final r in current)
-                      if (!r.transient) r.id,
+                      if (!r.transient && r.node?.kind != 'turn-process') r.id,
                   ],
                   [
                     for (final r in next)
-                      if (!r.transient) r.id,
+                      if (!r.transient && r.node?.kind != 'turn-process') r.id,
                   ],
                 )) ||
             lostCenter)) {
@@ -472,6 +658,10 @@ class ChatViewState extends State<ChatView> {
       const Duration(milliseconds: 250),
       () => _saveAnchor(_sessionId),
     );
+    _sampleLatest(position);
+  }
+
+  void _sampleLatest(ScrollPosition position) {
     final near = _distanceFromLatest(position) <= followThreshold;
     if (near != _atBottom || (near && _newCount != 0)) {
       setState(() {
@@ -552,6 +742,8 @@ class ChatViewState extends State<ChatView> {
       }
       final session = widget.owner.session.snapshot.value;
       final position = scroll.position;
+      // Folding can shorten the range without a ScrollUpdate notification.
+      if (position.hasContentDimensions) _sampleLatest(position);
       final first = _rows.firstOrNull?.id;
       if (!session.hasMore ||
           session.loadingOlder ||
@@ -579,10 +771,50 @@ class ChatViewState extends State<ChatView> {
       extents: _extents,
       id: row.id,
       child: KeyedSubtree(
-        key: RowKey(row.id),
-        child: Padding(
-          padding: sides.copyWith(top: 0, bottom: DshSpace.md),
-          child: StreamSelection(child: row.build()),
+        key: RowKey(
+          row.id,
+          pagingAnchor: row.node?.kind != 'turn-process' && !row.hidden,
+        ),
+        child: Offstage(
+          offstage: row.hidden,
+          child: Focus(
+            focusNode: _rowFocus.putIfAbsent(row.id, () => FocusNode()),
+            canRequestFocus: !row.hidden,
+            child: Padding(
+              padding: sides.copyWith(top: 0, bottom: DshSpace.md),
+              child: NotificationListener<DshDisclosureChange>(
+                onNotification: (event) {
+                  _atBottom = false;
+                  _scroll?.messageExpansionChanged(event.open, event.anchor);
+                  if (event.open && row.node?.kind == 'turn-process') {
+                    final box = event.anchor.findRenderObject();
+                    final viewport = box == null
+                        ? null
+                        : RenderAbstractViewport.maybeOf(box);
+                    if (box is RenderBox && viewport != null) {
+                      final top = box
+                          .localToGlobal(Offset.zero, ancestor: viewport)
+                          .dy;
+                      _recenter(
+                        first: row.id,
+                        alignment: _alignOnRow(row.id, leading: top),
+                      );
+                    }
+                  }
+                  return true;
+                },
+                child: row.node?.kind == 'turn-process'
+                    ? TurnProcessFocusScope(
+                        focusNode: _controlFocus.putIfAbsent(
+                          row.id,
+                          () => FocusNode(),
+                        ),
+                        child: StreamSelection(child: row.build()),
+                      )
+                    : StreamSelection(child: row.build()),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -591,6 +823,7 @@ class ChatViewState extends State<ChatView> {
   double _estimate(int index, double width) {
     if (index < 0 || index >= _rows.length) return 96;
     final row = _rows[index];
+    if (row.hidden) return 0;
     final measured = _extents.measured(row.id, width);
     if (measured != null) return measured;
     final node = row.node;
