@@ -36,6 +36,7 @@ ChatPreferences registerChatFeature(
   required DshI18n Function() i18n,
   ToolHostActions? host,
   ChatPreferences? preferences,
+  WorkspaceManagement? management,
 }) {
   final prefs = preferences ?? ChatPreferences();
   // Where each session's reader stopped, for as long as the app runs.
@@ -196,6 +197,30 @@ ChatPreferences registerChatFeature(
       data: o.node.data as TurnTailData,
       i18n: t,
       latest: newest(o, const {'turn-tail'}),
+      branchUnavailable: o.snapshot
+          .nodesOfTurn((o.node.data as TurnTailData).turn)
+          .where(
+            (n) => !const {
+              'turn-tail',
+              'turn-process',
+              'turn-max-tokens',
+            }.contains(n.kind),
+          )
+          .any(
+            (n) =>
+                n.anchorSeq >
+                ((o.node.data as TurnTailData).closing?.finalNode?.seq ??
+                    (o.node.data as TurnTailData).seq),
+          ),
+      onBranch: management == null || !o.session.queueMutable
+          ? null
+          : () async {
+              await management.forkSession(
+                o.session.sessionId,
+                atSeq: (o.node.data as TurnTailData).seq.toInt(),
+                open: true,
+              );
+            },
     ),
   );
   node(

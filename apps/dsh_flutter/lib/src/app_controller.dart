@@ -3,6 +3,7 @@ import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_client/generated_commands.dart' show CommandsRemote;
+import 'package:dsh_client/generated.dart' show SessionRemote;
 import 'package:dsh_client/generated_workspace.dart' show WorkspaceView;
 import 'package:dsh_client/generated_user_questions.dart'
     show AskUserQuestionAnswer, AskUserQuestionAnswerItem, UserQuestionsRemote;
@@ -30,6 +31,8 @@ import 'package:dsh_feature_theme/dsh_feature_theme.dart';
 import 'package:dsh_feature_tool/dsh_feature_tool.dart';
 import 'package:dsh_feature_user_questions/dsh_feature_user_questions.dart';
 import 'package:dsh_feature_workspace/dsh_feature_workspace.dart';
+import 'package:dsh_feature_session/dsh_feature_session.dart'
+    show registerSessionRowFeatures;
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_layout/dsh_layout.dart' show LayoutController;
 import 'package:dsh_models/dsh_models.dart';
@@ -220,12 +223,14 @@ class AppController extends ChangeNotifier {
       revealQuestion: (parent, callId) =>
           questions.reveal(parent.sessionId, callId),
     );
+    registerSessionRowFeatures(slots, i18n: () => i18n);
     chatPreferences = ChatPreferences(desktop: !platform.touchInput);
     registerChatFeature(
       slots,
       i18n: () => i18n,
       host: hostActions,
       preferences: chatPreferences,
+      management: workspaceManagement,
     );
     registerAttachmentFeature(slots, i18n: () => i18n);
     layout = registerLayoutFeature(
@@ -457,6 +462,8 @@ class AppController extends ChangeNotifier {
     const WorkspaceSnapshot(),
   );
   late final WorkspaceServices workspaceServices = _WorkspaceBridge(this);
+  late final WorkspaceManagement workspaceManagement =
+      _WorkspaceManagementBridge(this);
   WorkspaceList? _workspaceList;
   WorkspaceNavigation? _navigation;
   StreamSubscription<WorkspaceSnapshot>? _workspaceSub;
@@ -771,7 +778,10 @@ class AppController extends ChangeNotifier {
     unawaited(_hostEventSub?.cancel());
     _hostEventSub = transport.hostEvents.listen(_events.add);
     unawaited(_listSub?.cancel());
-    final m = manager = SessionManager(transport)..start();
+    final m = manager = SessionManager(
+      transport,
+      operations: SessionRemote(backend.remoteCaller),
+    )..start();
     unawaited(_projectionSub?.cancel());
     _projectionSub = m.projectionChanges.listen(_projectionEvents.add);
     _listSub = m.list.changes.listen((_) {
@@ -984,6 +994,8 @@ class AppController extends ChangeNotifier {
 
   // ---- sessions --------------------------------------------------------
 
+  String get hostHome => _transport?.generation?.hostHome ?? '';
+
   Future<void> refreshSessions() async {
     try {
       await manager?.refreshList();
@@ -992,6 +1004,12 @@ class AppController extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  List<SessionCrumb> _lineageFor(String id) => deriveSessionAncestry(
+    sessionList,
+    id,
+    untitled: i18n.t('workspace', 'session.untitled'),
+  );
 
   /// The controller of [sessionId], made on first use (its model stays
   /// resident like dsh's session manager keeps it).
@@ -1006,6 +1024,8 @@ class AppController extends ChangeNotifier {
         triggers: inputTriggers,
         cwdReader: () => manager?.summaryOf(sessionId)?.cwd,
         blankReader: () => manager?.summaryOf(sessionId)?.blank,
+        lineageReader: () => _lineageFor(sessionId),
+        openAncestor: (id) => unawaited(open(id)),
         hostHome: _transport?.generation?.hostHome ?? '',
         uploader: backend.uploader,
         files: backend.files,
@@ -1117,6 +1137,13 @@ class AppController extends ChangeNotifier {
         unawaited(sub.cancel());
       }
     }
+  }
+
+  void clearArchivedSession(String id) {
+    if (openSessionId != id) return;
+    openSessionId = null;
+    newSessionPending = true;
+    notifyListeners();
   }
 
   /// "New session": a fresh session in [workspaceId], else in the workspace in
@@ -1548,4 +1575,53 @@ class _PlanBridge implements PlanServices {
     if (transport == null) throw StateError('Host connection unavailable');
     return SessionHistoryRead(transport, address);
   }
+}
+
+class _WorkspaceManagementBridge implements WorkspaceManagement {
+  _WorkspaceManagementBridge(this.app);
+  final AppController app;
+  SessionManager get manager =>
+      app.manager ?? (throw StateError('Host connection unavailable'));
+  WorkspaceList get registry =>
+      app._workspaceList ??
+      (throw StateError('Workspace registry unavailable'));
+  @override
+  WorkspaceSnapshot get workspaces => app.workspaceState.value;
+  @override
+  SessionListSnapshot get sessions => app.sessionList;
+  @override
+  Future<void> renameSession(String id, String title) =>
+      manager.rename(id, title);
+  @override
+  Future<String> forkSession(String id, {int? atSeq, bool open = false}) async {
+    final child = await manager.fork(id, atSeq: atSeq, allowMigration: open);
+    if (open) await app.open(child);
+    return child;
+  }
+
+  @override
+  Future<void> archiveSession(String id, {bool stopActivity = false}) async {
+    await registry.archiveSession(id, stopActivity: stopActivity);
+    app.clearArchivedSession(id);
+  }
+
+  @override
+  Future<void> unarchiveSession(String id) => registry.unarchiveSession(id);
+  @override
+  Future<void> pinSession(String id) => registry.pinSession(id);
+  @override
+  Future<void> unpinSession(String id) => registry.unpinSession(id);
+  @override
+  Future<void> renameWorkspace(String id, String title) =>
+      registry.rename(id, title);
+  @override
+  Future<void> deleteWorkspace(String id) => registry.delete(id);
+  @override
+  Future<void> insertWorkspaceBefore(String id, String? before) =>
+      registry.insertBefore(id, before);
+  @override
+  Future<void> insertSessionBefore(String wid, String id, String? before) =>
+      registry.insertSessionBefore(wid, id, before);
+  @override
+  Future<void> openSession(String id) => app.open(id);
 }

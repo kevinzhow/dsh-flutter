@@ -6,7 +6,7 @@
   "npmVersion": "0.2.1-rc.2"
  },
  "whalee": {
-  "reviewedAt": "cd3ee28"
+  "reviewedAt": "e8a9797"
  },
  "rows": [
   {
@@ -723,12 +723,13 @@
    "dshSource": "packages/client/ui-workspace",
    "description": "Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it.",
    "status": "partial",
-   "notes": "On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the \"N more\" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards.",
+   "notes": "Workspace tree/search/create, session pin/rename/fork/archive/restore and workspace rename/delete/order; local session drag order, hover cards, marquee, row extension seats and subagent ancestry. Remaining: shared access-snapshot gating, command shortcut hints and keyed workspace.toast factory (current notices are direct overlays).",
    "priority": "P1",
    "whalee": [
     "features/dsh_feature_session/lib/src/workspace/browser.dart",
-    "features/dsh_feature_session/lib/src/workspace/tree.dart",
-    "features/dsh_feature_session/lib/src/workspace/view_state.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart",
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart",
+    "features/dsh_feature_session/lib/src/workspace/reorder_row.dart",
     "features/dsh_feature_workspace/lib/src/register.dart"
    ]
   },
@@ -1662,10 +1663,11 @@
    "description": "Start a new session, optionally in a chosen folder, workspace and agent preset.",
    "status": "partial",
    "whalee": [
-    "packages/dsh_models/lib/src/transport.dart",
+    "features/dsh_feature_workspace/lib/src/register.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
     "packages/dsh_models/lib/src/session_manager.dart"
    ],
-   "notes": "The model can pass cwd, workspaceId and agentPreset, but no screen supplies them: every new session lands in the host default workspace."
+   "notes": "New-session workspace and directory controls supply cwd/workspaceId; agentPreset choice remains for agent management."
   },
   {
    "id": "remote:session/follow",
@@ -1687,8 +1689,13 @@
    "platform": "both",
    "dshSource": "packages/api/session-controller/src/index.ts",
    "description": "Branch a new session from an earlier point of a session.",
-   "status": "missing",
-   "notes": "Generated, never called; no fork-at-message."
+   "status": "ported",
+   "notes": "Session and header menus; footer fork passes the completed event boundary. Host-normalized title seqs, naming refusal and workspace-attach-failed durable children are retained. Access-filtered visibility awaits the shared remote-access snapshot.",
+   "whalee": [
+    "packages/dsh_models/lib/src/session_manager.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart",
+    "features/dsh_feature_chat/lib/src/stream/message_actions.dart"
+   ]
   },
   {
    "id": "remote:session/initializeDefaultModel",
@@ -1784,8 +1791,13 @@
    "platform": "both",
    "dshSource": "packages/api/session-controller/src/index.ts",
    "description": "Rename a session.",
-   "status": "missing",
-   "notes": "Generated, never called; sessions cannot be renamed."
+   "status": "ported",
+   "notes": "Session and header menus; footer fork passes the completed event boundary. Host-normalized title seqs, naming refusal and workspace-attach-failed durable children are retained. Access-filtered visibility awaits the shared remote-access snapshot.",
+   "whalee": [
+    "packages/dsh_models/lib/src/session_manager.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart",
+    "features/dsh_feature_chat/lib/src/stream/message_actions.dart"
+   ]
   },
   {
    "id": "remote:session/search",
@@ -1794,8 +1806,12 @@
    "platform": "both",
    "dshSource": "packages/api/session-controller/src/index.ts",
    "description": "Search the content of all sessions.",
-   "status": "missing",
-   "notes": "Session search is not wired."
+   "status": "ported",
+   "notes": "Debounced Host content search merges with local title/workspace matches. Archived results retain search and require restoration before opening. Application routing covered by integration tests.",
+   "whalee": [
+    "apps/dsh_flutter/lib/src/desktop_shell.dart",
+    "features/dsh_feature_session/lib/src/workspace/browser.dart"
+   ]
   },
   {
    "id": "remote:session/selectModel",
@@ -2148,8 +2164,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Hide a session from workspace lists.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/create",
@@ -2171,8 +2192,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Remove a workspace from the list, keeping its files and sessions.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/follow",
@@ -2207,8 +2233,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Reorder workspaces.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/insertSessionBefore",
@@ -2217,8 +2248,12 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Reorder sessions inside a workspace.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "partial",
+   "notes": "Typed model operation exists. The pinned browser intentionally saves local manual session order rather than calling this membership-changing remote.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart"
+   ]
   },
   {
    "id": "remote:workspace/pinSession",
@@ -2227,8 +2262,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Pin a session to the top of its workspace.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/rename",
@@ -2237,8 +2277,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Rename a workspace.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/unarchiveSession",
@@ -2247,8 +2292,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Bring an archived session back into workspace lists.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspace/unpinSession",
@@ -2257,8 +2307,13 @@
    "platform": "both",
    "dshSource": "packages/api/workspace-controller/src/index.ts",
    "description": "Unpin a session.",
-   "status": "missing",
-   "notes": "Workspaces (ui-workspace); not built."
+   "status": "ported",
+   "notes": "Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus.",
+   "whalee": [
+    "packages/dsh_models/lib/src/workspace_list.dart",
+    "apps/dsh_flutter/lib/src/app_controller.dart",
+    "features/dsh_feature_session/lib/src/workspace/actions.dart"
+   ]
   },
   {
    "id": "remote:workspaceFiles/changes",
@@ -2903,7 +2958,7 @@
     "features/dsh_feature_conversation/lib/src/desktop_header.dart",
     "features/dsh_feature_conversation/lib/src/session_header.dart"
    ],
-   "notes": "Desktop: crumb, actions, utilities, corner and view tabs (Chat, and Trajectory as a \"not available yet\" page). No subagent breadcrumbs yet."
+   "notes": "Desktop and phone headers support subagent breadcrumbs, title actions and view tabs. Trajectory remains an unavailable page."
   },
   {
    "id": "slot:conversation.session.header.actions",
@@ -2939,7 +2994,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-conversation/src/client/contract/slots.ts",
    "description": "Optional replacement for one Session breadcrumb title.",
-   "status": "missing"
+   "status": "ported",
+   "notes": "Typed per-crumb replacement seat; Host-visible subagent ancestry only, with missing-parent/cycle boundaries. Default breadcrumb navigation works; subagent-specific occupant follows in agent management.",
+   "whalee": [
+    "features/dsh_feature_conversation/lib/src/breadcrumbs.dart",
+    "packages/dsh_models/lib/src/session_lineage.dart",
+    "packages/dsh_slots/lib/src/owners.dart"
+   ]
   },
   {
    "id": "slot:conversation.session.header.utilities",
@@ -2953,7 +3014,7 @@
     "features/dsh_feature_open_in_app/lib/src/register.dart",
     "apps/dsh_flutter/lib/src/desktop_shell.dart"
    ],
-   "notes": "Open-in-app and the Session overflow menu (Copy Session ID; the other verbs wait for the Workspace actions)."
+   "notes": "Open-in-app plus the shared Session menu: pin, rename, fork, archive/restore and copy ID."
   },
   {
    "id": "slot:conversation.trajectory.images",
@@ -3555,8 +3616,13 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "Section of the Session row's hover card between its relative time and its trailing status line.",
-   "status": "missing",
-   "notes": "Pointer hover has no touch equivalent: desktop only."
+   "status": "ported",
+   "notes": "Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once.",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_session/lib/src/workspace/browser.dart",
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart"
+   ]
   },
   {
    "id": "slot:sidebar.session.row.leading",
@@ -3565,7 +3631,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "Leading decoration of one Session row, in the 16px cell before the title that the row's own state dot otherwise occupies.",
-   "status": "missing"
+   "status": "ported",
+   "notes": "Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once.",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_session/lib/src/workspace/browser.dart",
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart"
+   ]
   },
   {
    "id": "slot:sidebar.settings",
@@ -3628,7 +3700,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "The rows of one Session's \"...\" menu, in ascending `order`.",
-   "status": "missing"
+   "status": "ported",
+   "notes": "Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once.",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_session/lib/src/workspace/browser.dart",
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart"
+   ]
   },
   {
    "id": "slot:sidebar.workspaces.session.row.action",
@@ -3637,8 +3715,13 @@
    "platform": "desktop",
    "dshSource": "packages/client/ui-workspace/src/client/contract/slots.ts",
    "description": "The hover buttons at the end of one Session row, in ascending `order`, after the \"...\" menu trigger.",
-   "status": "missing",
-   "notes": "Pointer hover has no touch equivalent: desktop only."
+   "status": "ported",
+   "notes": "Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once.",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_session/lib/src/workspace/browser.dart",
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart"
+   ]
   },
   {
    "id": "slot:tool.call.images",

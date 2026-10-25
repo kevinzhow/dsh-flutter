@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// dsh `formatMessageClock` (`ui-chat` `message-chrome.ts`): `HH:mm` on the
@@ -68,10 +71,14 @@ class MessageActions extends StatefulWidget {
     this.clockFirst = true,
     this.revealed = true,
     this.touchTarget,
+    this.onBranch,
+    this.branchUnavailable = false,
   });
 
   /// What the copy action writes.
   final String text;
+  final Future<void> Function()? onBranch;
+  final bool branchUnavailable;
   final num? time;
   final DshI18n i18n;
 
@@ -91,8 +98,22 @@ class MessageActions extends StatefulWidget {
 
 class _MessageActionsState extends State<MessageActions>
     with DshCopyFeedback, HoverCapable {
-  bool _focused = false;
+  bool _focused = false, _branching = false;
   bool get _big => widget.touchTarget ?? !hoverCapable;
+
+  bool get _canBranch =>
+      !_branching && !widget.branchUnavailable && widget.onBranch != null;
+  Future<void> _branch() async {
+    if (!_canBranch) return;
+    setState(() => _branching = true);
+    try {
+      await widget.onBranch!();
+    } on Object {
+      // The source view remains when the Host refuses.
+    } finally {
+      if (mounted) setState(() => _branching = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +176,63 @@ class _MessageActionsState extends State<MessageActions>
           const SizedBox(width: 8),
         ],
         copy,
+        if (widget.onBranch != null) ...[
+          const SizedBox(width: 8),
+          DshTooltip(
+            label: widget.i18n.t(
+              'chat',
+              widget.branchUnavailable
+                  ? 'message.branchUnavailable'
+                  : 'message.branch',
+            ),
+            child: Semantics(
+              button: true,
+              enabled: !_branching && !widget.branchUnavailable,
+              label: widget.i18n.t(
+                'chat',
+                widget.branchUnavailable
+                    ? 'message.branchUnavailable'
+                    : 'message.branch',
+              ),
+              child: FocusableActionDetector(
+                enabled: _canBranch,
+                onFocusChange: (v) => setState(() => _focused = v),
+                shortcuts: const {
+                  SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+                  SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+                },
+                actions: {
+                  ActivateIntent: CallbackAction<ActivateIntent>(
+                    onInvoke: (_) {
+                      unawaited(_branch());
+                      return null;
+                    },
+                  ),
+                },
+                child: GestureDetector(
+                  key: const ValueKey('message-branch'),
+                  behavior: HitTestBehavior.opaque,
+                  onTap: _canBranch ? () => unawaited(_branch()) : null,
+                  child: SizedBox.square(
+                    dimension: _big ? DshSpace.touch : 28,
+                    child: Center(
+                      child: Opacity(
+                        opacity: _branching || widget.branchUnavailable
+                            ? .5
+                            : 1,
+                        child: DshIcon(
+                          DshIcons.branch,
+                          size: 17,
+                          color: tertiary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
         // The assistant tail: the gap plus `.endInfo`'s own 8px margin.
         if (!widget.clockFirst && clock != null)
           Padding(padding: const EdgeInsets.only(left: 16), child: clock),

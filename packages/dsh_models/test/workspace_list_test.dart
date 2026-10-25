@@ -59,6 +59,81 @@ void main() {
   void item(Object? value, [int generation = 1]) =>
       frames.add(StreamItem(generation, value));
 
+  test(
+    'durable mutations merge answers without waiting for stream echoes',
+    () async {
+      item(
+        baseline([
+          view('a', sessions: ['s1', 's2']),
+          view('b'),
+        ]),
+      );
+      host.handlers['workspace/insertBefore'] = (_) => {
+        'workspaceIds': ['b', 'a'],
+      };
+      host.handlers['workspace/insertSessionBefore'] = (_) => {
+        'workspace': view('a', sessions: ['s2', 's1']).toJson(),
+      };
+      host.handlers['workspace/pinSession'] = (_) => {
+        'pinnedSessionIds': ['s1'],
+      };
+      host.handlers['workspace/unpinSession'] = (_) => {'pinnedSessionIds': []};
+      host.handlers['workspace/archiveSession'] = (_) => {
+        'archivedSessionIds': ['s2'],
+      };
+      host.handlers['workspace/unarchiveSession'] = (_) => {
+        'archivedSessionIds': [],
+      };
+      await list.insertBefore('b', 'a');
+      await list.insertSessionBefore('a', 's2', 's1');
+      expect(list.value.items.map((w) => w.workspaceId), ['b', 'a']);
+      expect(list.value.byId('a')!.sessionIds, ['s2', 's1']);
+      await list.pinSession('s1');
+      expect(list.value.pinnedSessionIds, ['s1']);
+      await list.unpinSession('s1');
+      expect(list.value.pinnedSessionIds, isEmpty);
+      await list.archiveSession('s2', stopActivity: true);
+      expect(host.callsTo('workspace/archiveSession').single.args, {
+        'request': {'sessionId': 's2', 'stopActivity': true},
+      });
+      expect(list.value.archivedSessionIds, ['s2']);
+      await list.unarchiveSession('s2');
+      expect(list.value.archivedSessionIds, isEmpty);
+    },
+  );
+  test(
+    'delete removes only registry row and late rename cannot resurrect it',
+    () async {
+      item(
+        baseline([
+          view('a', sessions: ['s1']),
+          view('b'),
+        ]),
+      );
+      final renameAnswer = Completer<Object?>();
+      host.handlers['workspace/rename'] = (_) => renameAnswer.future;
+      host.handlers['workspace/delete'] = (_) => {'deleted': true};
+      final renaming = list.rename('a', 'Changed');
+      await list.delete('a');
+      renameAnswer.complete({
+        'workspace': view('a', sessions: ['s1']).toJson(),
+      });
+      await renaming;
+      expect(list.value.byId('a'), isNull);
+      expect(host.calls.map((c) => c.method), ['rename', 'delete']);
+      host.handlers['workspace/archiveSession'] = (_) =>
+          throw RemoteException('workspace/session-active', 'Still running', {
+            'activity': [
+              {'kind': 'turn'},
+            ],
+          });
+      await expectLater(
+        list.archiveSession('s1'),
+        throwsA(isA<RemoteException>()),
+      );
+      expect(list.value.archivedSessionIds, isEmpty);
+    },
+  );
   test('starts pending and empty; the baseline makes it ready', () {
     expect(list.value.phase, WorkspacePhase.pending);
     expect(list.value.items, isEmpty);

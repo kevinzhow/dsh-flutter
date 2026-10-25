@@ -25,12 +25,16 @@ class DshMenuItem extends DshMenuEntry {
     this.icon,
     this.danger = false,
     this.disabled = false,
+    this.onSelect,
   });
 
   final String label;
   final DshIconData? icon;
   final bool danger;
   final bool disabled;
+
+  /// A contributed row may own its action; the enclosing menu still closes.
+  final VoidCallback? onSelect;
 }
 
 /// A non-interactive heading row.
@@ -119,7 +123,6 @@ class DshMenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final radius = BorderRadius.circular(theme.radiusLg);
-    final hairline = dshHairlineOf(context);
     return DshContainer(
       constraints: BoxConstraints(minWidth: minWidth, maxWidth: 360),
       decoration: BoxDecoration(
@@ -144,10 +147,6 @@ class DshMenuCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.color('--dsw-menu-surface-fill'),
               borderRadius: radius,
-              border: Border.all(
-                color: theme.color('--dsw-alias-border-l1'),
-                width: hairline,
-              ),
             ),
             child: IntrinsicWidth(
               child: Column(
@@ -170,7 +169,10 @@ class DshMenuCard extends StatelessWidget {
                         item: item,
                         selected: selectedIds.contains(item.id),
                         dense: dense,
-                        onTap: () => onSelect(item.id),
+                        onTap: () {
+                          onSelect(item.id);
+                          item.onSelect?.call();
+                        },
                       ),
                     },
                 ],

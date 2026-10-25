@@ -581,3 +581,37 @@ int requiredWatermark(
   }
   return required;
 }
+
+/// Apply a visible reorder to the complete account. Hidden/archived members
+/// stay in their slots, blanks stay first, and the pinned block is a boundary.
+List<String>? sessionDragOrder(
+  List<String> order,
+  List<SessionNode> rows,
+  String sourceId,
+  bool pinned,
+  String targetId, {
+  required bool after,
+}) {
+  final source = rows.where((r) => r.id == sourceId).firstOrNull;
+  final target = rows.where((r) => r.id == targetId).firstOrNull;
+  if (source == null ||
+      target == null ||
+      source.blank ||
+      source.pinned != pinned ||
+      target.pinned != pinned ||
+      source.id == target.id ||
+      !order.contains(source.id)) {
+    return null;
+  }
+  final section = rows.where((r) => r.pinned == pinned).toList();
+  final sourceIndex = section.indexOf(source);
+  final without = section.where((r) => r.id != source.id).toList();
+  final insertAt =
+      without.indexWhere((r) => r.id == target.id) + (after ? 1 : 0);
+  if (insertAt == sourceIndex) return null;
+  final next = order.where((id) => id != source.id).toList();
+  final targetIndex = next.indexOf(target.id);
+  if (targetIndex == -1) return null;
+  next.insert(targetIndex + (after ? 1 : 0), source.id);
+  return pinCurrentBlank(next, rows.where((r) => r.blank).firstOrNull?.id);
+}

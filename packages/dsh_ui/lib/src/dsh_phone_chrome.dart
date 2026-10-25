@@ -45,9 +45,15 @@ class PhoneChrome extends InheritedWidget {
 /// The phone top bar: the menu button that opens the drawer, the Session title
 /// and the new-session button, 52px, over the page.
 class PhoneTopBar extends StatelessWidget {
-  const PhoneTopBar({super.key, required this.title, required this.chrome});
+  const PhoneTopBar({
+    super.key,
+    required this.title,
+    required this.chrome,
+    this.titleWidget,
+  });
 
   final String title;
+  final Widget? titleWidget;
   final PhoneChrome chrome;
 
   @override
@@ -86,15 +92,17 @@ class PhoneTopBar extends StatelessWidget {
           ),
           Expanded(
             child: Center(
-              child: DshChromeText(
-                title,
-                key: const ValueKey('phone-title'),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme
-                    .textStyle('--dsw-font-base-strong-16')
-                    .copyWith(color: theme.labelPrimary, height: 24 / 16),
-              ),
+              child:
+                  titleWidget ??
+                  DshChromeText(
+                    title,
+                    key: const ValueKey('phone-title'),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme
+                        .textStyle('--dsw-font-base-strong-16')
+                        .copyWith(color: theme.labelPrimary, height: 24 / 16),
+                  ),
             ),
           ),
           button(

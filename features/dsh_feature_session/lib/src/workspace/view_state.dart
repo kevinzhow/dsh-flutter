@@ -150,6 +150,22 @@ class WorkspaceViewState extends ChangeNotifier {
     _changed();
   }
 
+  /// A drag snapshots every account before selecting Manual, then changes
+  /// only its own account. It never moves a Session to another Workspace.
+  void setSessionOrder(
+    String key,
+    List<String> order,
+    Map<String, List<String>> initialOrders,
+  ) {
+    if (orderBy == SessionOrderBy.updated) sessionOrderByAccount.clear();
+    sessionOrderByAccount.addAll({
+      for (final e in initialOrders.entries) e.key: [...e.value],
+    });
+    orderBy = SessionOrderBy.manual;
+    sessionOrderByAccount[key] = [...order];
+    _changed();
+  }
+
   void setArchivedFilter(ArchivedFilter filter) {
     if (filter == archivedFilter) return;
     archivedFilter = filter;

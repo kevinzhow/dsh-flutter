@@ -1,0 +1,305 @@
+{
+  "cases": [
+    {
+      "id": "workspace.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "initial"
+        },
+        {
+          "drag": [
+            620,
+            142,
+            620,
+            188
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              520,
+              130,
+              715,
+              190
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "session-drag"
+        },
+        {
+          "drag": [
+            590,
+            106,
+            590,
+            275
+          ]
+        },
+        {
+          "expect": {
+            "reference": "session-drag",
+            "rect": [
+              520,
+              95,
+              700,
+              265
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "workspace-drag"
+        },
+        {
+          "click": [
+            960,
+            24
+          ]
+        },
+        {
+          "capture": "actions"
+        },
+        {
+          "click": [
+            640,
+            84
+          ]
+        },
+        {
+          "capture": "menu"
+        },
+        {
+          "click": [
+            1180,
+            150
+          ]
+        },
+        {
+          "capture": "rename"
+        },
+        {
+          "expect": {
+            "reference": "menu",
+            "rect": [
+              450,
+              255,
+              830,
+              464
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            356
+          ]
+        },
+        {
+          "keys": [
+            29,
+            30
+          ]
+        },
+        {
+          "text": "GPU title"
+        },
+        {
+          "capture": "rename-draft"
+        },
+        {
+          "expect": {
+            "reference": "rename",
+            "rect": [
+              475,
+              339,
+              805,
+              375
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            766,
+            421
+          ]
+        },
+        {
+          "expect": {
+            "reference": "rename-draft",
+            "rect": [
+              450,
+              255,
+              830,
+              464
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "renamed"
+        },
+        {
+          "click": [
+            640,
+            80
+          ]
+        },
+        {
+          "click": [
+            1180,
+            120
+          ]
+        },
+        {
+          "expect": {
+            "reference": "renamed",
+            "rect": [
+              480,
+              663,
+              800,
+              689
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "pinned"
+        },
+        {
+          "click": [
+            640,
+            80
+          ]
+        },
+        {
+          "click": [
+            1180,
+            222
+          ]
+        },
+        {
+          "capture": "archive-confirm"
+        },
+        {
+          "click": [
+            620,
+            468
+          ]
+        },
+        {
+          "expect": {
+            "reference": "archive-confirm",
+            "rect": [
+              450,
+              210,
+              830,
+              510
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "archive-cancelled"
+        },
+        {
+          "click": [
+            640,
+            80
+          ]
+        },
+        {
+          "click": [
+            1180,
+            222
+          ]
+        },
+        {
+          "click": [
+            736,
+            468
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pinned",
+            "rect": [
+              480,
+              663,
+              800,
+              689
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "archived"
+        }
+      ]
+    },
+    {
+      "id": "workspace.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "zh",
+      "app": [
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            292,
+            24
+          ]
+        },
+        {
+          "capture": "actions"
+        },
+        {
+          "click": [
+            195,
+            84
+          ]
+        },
+        {
+          "capture": "menu"
+        },
+        {
+          "click": [
+            290,
+            154
+          ]
+        },
+        {
+          "capture": "rename"
+        },
+        {
+          "expect": {
+            "reference": "menu",
+            "rect": [
+              24,
+              270,
+              366,
+              560
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

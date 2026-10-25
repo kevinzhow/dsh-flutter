@@ -51,6 +51,74 @@ List<GroupNode> groups(
 );
 
 void main() {
+  test(
+    'visible drag preserves hidden members and rejects pinned/blank boundaries',
+    () {
+      SessionNode node(String id, {bool pinned = false, bool blank = false}) =>
+          SessionNode(
+            id: id,
+            title: id,
+            blank: blank,
+            running: false,
+            runningSubagents: 0,
+            completed: false,
+            pinned: pinned,
+            archived: false,
+            updatedAt: 0,
+          );
+      final rows = [
+        node('blank', blank: true),
+        node('pin', pinned: true),
+        node('a'),
+        node('b'),
+      ];
+      expect(
+        sessionDragOrder(
+          ['blank', 'pin', 'a', 'hidden', 'b'],
+          rows,
+          'a',
+          false,
+          'b',
+          after: true,
+        ),
+        ['blank', 'pin', 'hidden', 'b', 'a'],
+      );
+      expect(
+        sessionDragOrder(
+          ['blank', 'pin', 'a', 'b'],
+          rows,
+          'pin',
+          true,
+          'a',
+          after: true,
+        ),
+        isNull,
+      );
+      expect(
+        sessionDragOrder(
+          ['blank', 'pin', 'a', 'b'],
+          rows,
+          'blank',
+          false,
+          'b',
+          after: true,
+        ),
+        isNull,
+      );
+      expect(
+        sessionDragOrder(
+          ['blank', 'pin', 'a', 'b'],
+          rows,
+          'a',
+          false,
+          'b',
+          after: false,
+        ),
+        isNull,
+      );
+    },
+  );
+
   group('deriveGroups', () {
     test('workspaces keep the host order, strays trail as Ungrouped', () {
       final g = groups(

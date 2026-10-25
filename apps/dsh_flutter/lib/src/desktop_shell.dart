@@ -32,7 +32,6 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_shortcuts/dsh_shortcuts.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 import 'package:flutter/widgets.dart';
 
 import 'app_controller.dart';
@@ -537,6 +536,9 @@ class _SessionsRegion extends StatelessWidget {
     final defaultName = app.i18n.t('conversation', 'workspace.defaultName');
     return WorkspaceBrowser(
       snapshot: app.sessionList,
+      management: app.workspaceManagement,
+      hostHome: app.hostHome,
+      slots: app.slots,
       workspaces: [
         for (final w in hosted.items)
           TreeWorkspace(
@@ -721,22 +723,15 @@ class SessionOverflowMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    String t(String key) => app.i18n.t('workspace', key);
-    return DshMenu(
-      align: DshMenuAlign.end,
-      dense: true,
-      entries: [
-        DshMenuItem(
-          'session-id',
-          t('menu.sessionId'),
-          icon: DshShellIcons.copyOutline,
-        ),
-      ],
-      onSelect: (id) {
-        if (id == 'session-id') {
-          unawaited(Clipboard.setData(ClipboardData(text: owner.sessionId)));
-        }
-      },
+    final hosted = app.workspaceState.value;
+    return WorkspaceSessionMenu(
+      actions: app.workspaceManagement,
+      slots: app.slots,
+      i18n: app.i18n,
+      sessionId: owner.sessionId,
+      title: (owner.session.projections.get('title') as String?) ?? '',
+      pinned: hosted.pinnedSessionIds.contains(owner.sessionId),
+      archived: hosted.archivedSessionIds.contains(owner.sessionId),
       builder: (context, menu) => DshTooltip(
         label: app.i18n.t(
           'workspace',

@@ -66,6 +66,8 @@ class SessionController implements SessionActions {
     InputTriggerRegistry? triggers,
     String? Function()? cwdReader,
     bool? Function()? blankReader,
+    List<SessionCrumb> Function()? lineageReader,
+    void Function(String)? openAncestor,
     String hostHome = '',
     this.readOnly = false,
   }) : conversation = ConversationBinding.chat(
@@ -93,6 +95,8 @@ class SessionController implements SessionActions {
       conversation: conversation,
       actions: this,
       queueMutable: !readOnly,
+      lineageReader: lineageReader,
+      openAncestor: openAncestor,
       cwdReader: cwdReader,
       blankReader: blankReader,
       hostHome: hostHome,

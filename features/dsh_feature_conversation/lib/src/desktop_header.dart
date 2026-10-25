@@ -6,6 +6,7 @@ import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
 import 'view_selection.dart';
+import 'breadcrumbs.dart';
 
 /// The Session header at desktop widths (dsh `ConversationSessionHeader`): the
 /// title crumb with the `actions` cluster, the `utilities` row and the `corner`
@@ -114,11 +115,16 @@ class _DesktopSessionHeaderState extends State<DesktopSessionHeader> {
                 child: Row(
                   children: [
                     Flexible(
-                      child: _Crumb(
-                        key: const ValueKey('session-title'),
-                        text: title.isEmpty
-                            ? browserTitleFallback(i18n)
-                            : title,
+                      child: SessionBreadcrumbs(
+                        owner: owner,
+                        slots: widget.slots,
+                        i18n: i18n,
+                        fallback: _Crumb(
+                          key: const ValueKey('session-title'),
+                          text: title.isEmpty
+                              ? browserTitleFallback(i18n)
+                              : title,
+                        ),
                       ),
                     ),
                     for (final a in actions) ...[const SizedBox(width: 10), a],
@@ -228,7 +234,23 @@ extension on _DesktopSessionHeaderState {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          PhoneTopBar(title: title, chrome: phone),
+          PhoneTopBar(
+            title: title,
+            chrome: phone,
+            titleWidget:
+                title.isEmpty || !widget.owner.lineage.any((c) => c.subagent)
+                ? null
+                : SessionBreadcrumbs(
+                    owner: widget.owner,
+                    slots: widget.slots,
+                    i18n: widget.i18n,
+                    fallback: DshChromeText(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+          ),
           if (showTabs)
             ValueListenableBuilder<String?>(
               valueListenable: selection,

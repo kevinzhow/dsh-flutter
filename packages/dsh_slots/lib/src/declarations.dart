@@ -37,6 +37,11 @@ abstract final class DshSlots {
     SlotCardinality.chain,
     SlotScope.session,
   );
+  static const conversationSessionHeaderLineage = Slot<Object?, Object?>(
+    'conversation.session.header.lineage',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
   static const conversationSessionHeaderActions = Slot<Object?, Object?>(
     'conversation.session.header.actions',
     SlotCardinality.list,
@@ -232,13 +237,39 @@ abstract final class DshSlots {
     SlotScope.root,
   );
 
+  static const sidebarWorkspacesSessionMenuItem = Slot<Object?, Object?>(
+    'sidebar.workspaces.session.menu.item',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+  static const sidebarWorkspacesSessionRowAction = Slot<Object?, Object?>(
+    'sidebar.workspaces.session.row.action',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+  static const sidebarSessionRowLeading = Slot<Object?, Object?>(
+    'sidebar.session.row.leading',
+    SlotCardinality.single,
+    SlotScope.session,
+  );
+  static const sidebarSessionRowHover = Slot<Object?, Object?>(
+    'sidebar.session.row.hover',
+    SlotCardinality.list,
+    SlotScope.session,
+  );
+
   static const all = <Slot<Object?, Object?>>[
     root,
+    sidebarWorkspacesSessionMenuItem,
+    sidebarWorkspacesSessionRowAction,
+    sidebarSessionRowLeading,
+    sidebarSessionRowHover,
     conversationHeader,
     conversationSession,
     conversationView,
     conversationComposer,
     conversationSessionHeaderActions,
+    conversationSessionHeaderLineage,
     conversationSessionHeaderUtilities,
     conversationSessionHeaderCorner,
     conversationComposerDock,

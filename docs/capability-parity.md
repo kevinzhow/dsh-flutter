@@ -13,7 +13,7 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| Sessions and chat | 46 | 16 | 39 | 1 | 102 |
+| Sessions and chat | 61 | 17 | 23 | 1 | 102 |
 | Input and commands | 9 | 3 | 13 | 0 | 25 |
 | Tools and approvals | 11 | 1 | 0 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 1 | 2 | 16 | 1 | 20 |
@@ -22,13 +22,13 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 110 | 34 | 146 | 29 | 319 |
+| **all** | 125 | 35 | 130 | 29 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | package | 18 | 16 | 19 | 3 | 56 |
-| remote | 39 | 4 | 80 | 23 | 146 |
-| slot | 49 | 13 | 36 | 2 | 100 |
+| remote | 49 | 5 | 69 | 23 | 146 |
+| slot | 54 | 13 | 31 | 2 | 100 |
 | settings | 4 | 1 | 11 | 1 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
@@ -36,8 +36,8 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | platform | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
-| desktop | 20 | 3 | 6 | 1 | 30 |
-| both | 90 | 31 | 140 | 28 | 289 |
+| desktop | 22 | 3 | 4 | 1 | 30 |
+| both | 103 | 32 | 126 | 28 | 289 |
 
 ## Packages still to do, by priority
 
@@ -47,7 +47,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-input-trigger` (partial, both): Type "/" or "@" in the message box to open a candidate menu and insert the pick. The `/` and `@` pipeline is ported (detection, menu reducer, drill and crumbs, space and enter adjudication, serialization) and checked against dsh by vectors. Missing: the composer `+` launcher (Whalee's `+` still opens the attach sheet; typing `/` lists File), the plain-text `/skill` and `@dir/` decoration (ui-skill is not ported), chip persistence across app restarts.
 - `ui-layout` (partial, desktop): Resize and collapse the three-column window: sidebar, conversation and right column. dsh AppFrame: three-column solve, drag handles, collapse below 1024 with the narrow override, ctx.layout, main panel selection, the shell seats, per-platform window chrome (macOS and Windows compile-safe, untested). Below 600 wide the sidebar is a modal drawer under a phone top bar (owner decision 2026-10-24); 600 to 1023 the rail, 1024 and up docked.
 - `ui-sidebar` (partial, both): Browse sessions in a tree grouped by workspace, search them, and see which are running. Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a "not available yet" page.
-- `ui-workspace` (partial, both): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the "N more" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards.
+- `ui-workspace` (partial, both): Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. Workspace tree/search/create, session pin/rename/fork/archive/restore and workspace rename/delete/order; local session drag order, hover cards, marquee, row extension seats and subagent ancestry. Remaining: shared access-snapshot gating, command shortcut hints and keyed workspace.toast factory (current notices are direct overlays).
 
 **P2**
 
@@ -90,7 +90,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Sessions and chat
 
-46 ported, 16 partial, 39 missing, 1 na.
+61 ported, 17 partial, 23 missing, 1 na.
 
 ### package (10)
 
@@ -105,7 +105,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `ui-sidebar` | partial | both | Browse sessions in a tree grouped by workspace, search them, and see which are running. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`, `features/dsh_feature_sidebar/lib/src/leading_controls.dart`; Brand row (Whalee mark and name), New Session, Plugins and Automation tasks entries, the browsing region and the foot, the 56px rail, and the macOS and Windows variants. Plugins and Automation tasks open a "not available yet" page. |
 | `ui-subagent` | partial | both | See the subagents a session started, read each child's transcript, continue a child and mention one with "@". | `features/dsh_feature_subagent`; Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab. |
 | `ui-trajectory` | missing | both | Read the full event ledger of a session with a timing overview (a developer view). | No trajectory conversation view. |
-| `ui-workspace` | partial | both | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/tree.dart`, `features/dsh_feature_session/lib/src/workspace/view_state.dart`, `features/dsh_feature_workspace/lib/src/register.dart`; On top of the follow stream, the picker, the add action, the hero and New session: the desktop browsing region with the Workspace tree (groups, Session rows, the "N more" fold, pins and archives from the host), search (titles, workspaces and the host content search), view options (group by, order by, archived filter), flat list and empty states. Not ported: row menus, rename and delete dialogs, drag reordering, hover cards. |
+| `ui-workspace` | partial | both | Pick a workspace (project folder) and keep sessions grouped, pinned, archived and ordered under it. | `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`, `features/dsh_feature_session/lib/src/workspace/row_slots.dart`, `features/dsh_feature_session/lib/src/workspace/reorder_row.dart`, `features/dsh_feature_workspace/lib/src/register.dart`; Workspace tree/search/create, session pin/rename/fork/archive/restore and workspace rename/delete/order; local session drag order, hover cards, marquee, row extension seats and subagent ancestry. Remaining: shared access-snapshot gating, command shortcut hints and keyed workspace.toast factory (current notices are direct overlays). |
 
 ### remote (39)
 
@@ -121,9 +121,9 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `session/canOpenWorkspacePath` | missing | desktop | Check whether the host can open a workspace folder in a desktop application. | Generated, never called (ui-open-in-app). Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local. |
 | `session/cancel` | ported | both | Stop the running turn. | `packages/dsh_models/lib/src/transport.dart` |
 | `session/control` | ported | both | Follow the live state of all sessions (running, titles, permissions) as a stream. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session_manager.dart` |
-| `session/create` | partial | both | Start a new session, optionally in a chosen folder, workspace and agent preset. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session_manager.dart`; The model can pass cwd, workspaceId and agentPreset, but no screen supplies them: every new session lands in the host default workspace. |
+| `session/create` | partial | both | Start a new session, optionally in a chosen folder, workspace and agent preset. | `features/dsh_feature_workspace/lib/src/register.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `packages/dsh_models/lib/src/session_manager.dart`; New-session workspace and directory controls supply cwd/workspaceId; agentPreset choice remains for agent management. |
 | `session/follow` | ported | both | Follow one session's events as they happen, resuming from the last seen position. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart` |
-| `session/fork` | missing | both | Branch a new session from an earlier point of a session. | Generated, never called; no fork-at-message. |
+| `session/fork` | ported | both | Branch a new session from an earlier point of a session. | `packages/dsh_models/lib/src/session_manager.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`, `features/dsh_feature_chat/lib/src/stream/message_actions.dart`; Session and header menus; footer fork passes the completed event boundary. Host-normalized title seqs, naming refusal and workspace-attach-failed durable children are retained. Access-filtered visibility awaits the shared remote-access snapshot. |
 | `session/initializeDefaultModel` | missing | both | Pick a default model right after signing in to a DeepSeek account. | Generated, never called; only matters after a DeepSeek account sign-in. |
 | `session/list` | ported | both | List all sessions with their state. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session_manager.dart` |
 | `session/modelCatalog` | ported | both | List the models the host can currently route to. | `features/dsh_feature_model_selection/lib/src/model_catalog.dart` |
@@ -131,25 +131,25 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `session/page` | ported | both | Load an older page of a session's history. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart` |
 | `session/projections` | partial | both | Read a session's derived state (title, plan mode, to-dos, permissions) without following it. | `packages/dsh_models/lib/src/session.dart`, `packages/dsh_models/lib/src/projection_store.dart`; Projections arrive in the follow baseline and the control stream; the unary call (on-demand exact projections for sessions not followed) is not used. |
 | `session/prompt` | partial | both | Send a message to a session, queued behind a running turn or steering it. | `packages/dsh_models/lib/src/transport.dart`, `packages/dsh_models/lib/src/session.dart`, `apps/dsh_flutter/lib/src/session_controller.dart`; Sends queue or steer mode with ordered attachments; busy Enter/Send follow Host settings and accelerated Enter uses the opposite intent. |
-| `session/rename` | missing | both | Rename a session. | Generated, never called; sessions cannot be renamed. |
-| `session/search` | missing | both | Search the content of all sessions. | Session search is not wired. |
+| `session/rename` | ported | both | Rename a session. | `packages/dsh_models/lib/src/session_manager.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`, `features/dsh_feature_chat/lib/src/stream/message_actions.dart`; Session and header menus; footer fork passes the completed event boundary. Host-normalized title seqs, naming refusal and workspace-attach-failed durable children are retained. Access-filtered visibility awaits the shared remote-access snapshot. |
+| `session/search` | ported | both | Search the content of all sessions. | `apps/dsh_flutter/lib/src/desktop_shell.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`; Debounced Host content search merges with local title/workspace matches. Archived results retain search and require restoration before opening. Application routing covered by integration tests. |
 | `session/selectModel` | ported | both | Choose the model for a session and remember it as the default. | `features/dsh_feature_model_selection/lib/src/model_directory.dart` |
 | `session/updateQueue` | ported | both | Edit or remove a message that is still waiting in the queue. | `packages/dsh_models/lib/src/session.dart`, `features/dsh_feature_conversation/lib/src/queue_dock.dart`; Edit, remove and steer actual queue occurrence ids. Benign steering races are ignored; other Host refusals remain visible and preserve editing text. |
 | `session/workspacePathApplications` | missing | desktop | List the applications on the host that can open a path. | Generated, never called (ui-open-in-app). Opens an application installed on the host machine: of value on a desktop build with a local host, not through a remote host. Offer it only when the host is local. |
 | `sessionFeedback/record` | missing | both | Send a written remark about the session. | Written session remark (ui-message-feedback); not built. |
 | `subagents/interruptByParent` | missing | both | Interrupt a running subagent from its parent session. | Interrupting a child agent from the parent; not built. |
 | `subagents/prompt` | missing | both | Send a message to a subagent that can continue. | Sending a message to a child agent; child transcripts are read-only. |
-| `workspace/archiveSession` | missing | both | Hide a session from workspace lists. | Workspaces (ui-workspace); not built. |
+| `workspace/archiveSession` | ported | both | Hide a session from workspace lists. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
 | `workspace/create` | ported | both | Add a project folder as a workspace. | `packages/dsh_models/lib/src/workspace_list.dart`, `features/dsh_feature_workspace/lib/src/workspace_picker.dart` |
-| `workspace/delete` | missing | both | Remove a workspace from the list, keeping its files and sessions. | Workspaces (ui-workspace); not built. |
+| `workspace/delete` | ported | both | Remove a workspace from the list, keeping its files and sessions. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
 | `workspace/follow` | ported | both | Follow the list of workspaces and their session grouping live. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/backend.dart` |
 | `workspace/initializeDefault` | ported | both | Create the default workspace on first use. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart` |
-| `workspace/insertBefore` | missing | both | Reorder workspaces. | Workspaces (ui-workspace); not built. |
-| `workspace/insertSessionBefore` | missing | both | Reorder sessions inside a workspace. | Workspaces (ui-workspace); not built. |
-| `workspace/pinSession` | missing | both | Pin a session to the top of its workspace. | Workspaces (ui-workspace); not built. |
-| `workspace/rename` | missing | both | Rename a workspace. | Workspaces (ui-workspace); not built. |
-| `workspace/unarchiveSession` | missing | both | Bring an archived session back into workspace lists. | Workspaces (ui-workspace); not built. |
-| `workspace/unpinSession` | missing | both | Unpin a session. | Workspaces (ui-workspace); not built. |
+| `workspace/insertBefore` | ported | both | Reorder workspaces. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
+| `workspace/insertSessionBefore` | partial | both | Reorder sessions inside a workspace. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`; Typed model operation exists. The pinned browser intentionally saves local manual session order rather than calling this membership-changing remote. |
+| `workspace/pinSession` | ported | both | Pin a session to the top of its workspace. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
+| `workspace/rename` | ported | both | Rename a workspace. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
+| `workspace/unarchiveSession` | ported | both | Bring an archived session back into workspace lists. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
+| `workspace/unpinSession` | ported | both | Unpin a session. | `packages/dsh_models/lib/src/workspace_list.dart`, `apps/dsh_flutter/lib/src/app_controller.dart`, `features/dsh_feature_session/lib/src/workspace/actions.dart`; Typed Host operation, durable answer merged before stream echo; actions exposed by workspace/session menus. |
 
 ### slot (52)
 
@@ -183,11 +183,11 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `conversation.input.plan` | ported | both | Plan control inside the composer tool row. | `features/dsh_feature_plan/lib/src/register.dart`; Plan control occupies the input.plan slot; handles locked/pending state, exit refusal, and Host-projected transitions. |
 | `conversation.input.right` | missing | both | Compact controls before the composer submit action. |  |
 | `conversation.session` | ported | both | Strict per-Session Conversation body. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_conversation/lib/src/register.dart` |
-| `conversation.session.header` | partial | both | Strict per-Session title, actions, and View navigation. | `features/dsh_feature_conversation/lib/src/desktop_header.dart`, `features/dsh_feature_conversation/lib/src/session_header.dart`; Desktop: crumb, actions, utilities, corner and view tabs (Chat, and Trajectory as a "not available yet" page). No subagent breadcrumbs yet. |
+| `conversation.session.header` | partial | both | Strict per-Session title, actions, and View navigation. | `features/dsh_feature_conversation/lib/src/desktop_header.dart`, `features/dsh_feature_conversation/lib/src/session_header.dart`; Desktop and phone headers support subagent breadcrumbs, title actions and view tabs. Trajectory remains an unavailable page. |
 | `conversation.session.header.actions` | ported | both | Title-adjacent Session actions in ascending order. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_subagent/lib/src/register.dart`, `features/dsh_feature_sidebar_right/lib/src/register.dart` |
 | `conversation.session.header.corner` | ported | both | The header's far-right corner, past the utilities' edge and into the header's own padding, for one control. | `features/dsh_feature_sidebar_right/lib/src/register.dart`; The right sidebar's way back in. |
-| `conversation.session.header.lineage` | missing | both | Optional replacement for one Session breadcrumb title. |  |
-| `conversation.session.header.utilities` | ported | both | Right-aligned Session utilities in ascending order. | `features/dsh_feature_open_in_app/lib/src/register.dart`, `apps/dsh_flutter/lib/src/desktop_shell.dart`; Open-in-app and the Session overflow menu (Copy Session ID; the other verbs wait for the Workspace actions). |
+| `conversation.session.header.lineage` | ported | both | Optional replacement for one Session breadcrumb title. | `features/dsh_feature_conversation/lib/src/breadcrumbs.dart`, `packages/dsh_models/lib/src/session_lineage.dart`, `packages/dsh_slots/lib/src/owners.dart`; Typed per-crumb replacement seat; Host-visible subagent ancestry only, with missing-parent/cycle boundaries. Default breadcrumb navigation works; subagent-specific occupant follows in agent management. |
+| `conversation.session.header.utilities` | ported | both | Right-aligned Session utilities in ascending order. | `features/dsh_feature_open_in_app/lib/src/register.dart`, `apps/dsh_flutter/lib/src/desktop_shell.dart`; Open-in-app plus the shared Session menu: pin, rename, fork, archive/restore and copy ID. |
 | `conversation.trajectory.images` | missing | both | Renderer for one group of durable record images in the Trajectory ledger. |  |
 | `conversation.user.text.node` | missing | both | One business-owned inline renderer for a pure JSON text node. |  |
 | `conversation.view` | ported | both | Registered Conversation target Views, rendered one at a time. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_chat/lib/src/register.dart`; Occupants: chat and subagent transcripts; no trajectory view. |
@@ -198,14 +198,14 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `sidebar.chat.conversation` | missing | both | Session-scoped Conversation occurrence hosted by one Sidebar chat tab. |  |
 | `sidebar.footer.action` | ported | desktop | Optional actions beside Settings at the sidebar foot. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar.panellist` | ported | desktop | Global panel icons. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
-| `sidebar.session.row.hover` | missing | desktop | Section of the Session row's hover card between its relative time and its trailing status line. | Pointer hover has no touch equivalent: desktop only. |
-| `sidebar.session.row.leading` | missing | both | Leading decoration of one Session row, in the 16px cell before the title that the row's own state dot otherwise occupies. |  |
+| `sidebar.session.row.hover` | ported | desktop | Section of the Session row's hover card between its relative time and its trailing status line. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/row_slots.dart`; Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once. |
+| `sidebar.session.row.leading` | ported | both | Leading decoration of one Session row, in the 16px cell before the title that the row's own state dot otherwise occupies. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/row_slots.dart`; Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once. |
 | `sidebar.settings` | ported | desktop | The settings seat at the sidebar foot. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 | `sidebar.toggle.badge` | ported | desktop | Non-interactive notification inside the collapsed sidebar expand button. | `features/dsh_feature_sidebar/lib/src/sidebar_root.dart`; The desktop frame's seat; filled by the sidebar and layout features. |
 | `sidebar.workspaces` | partial | both | The workspace/session browsing region: section header, search, the grouped/flat session list, and every workspace dialog. | `features/dsh_feature_workspace/lib/src/add_action.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`; The add-workspace action sits in the browser header (a 28px control; the phone list keeps the touch-size one). The browsing region itself is the app's composition of the workspace browser, not an occupant of this slot. |
 | `sidebar.workspaces.directoryFlow` | ported | both | Directory-flow hole under the sidebar browsing region (declared by the WorkspaceBrowser entry). | `features/dsh_feature_directory_picker_browse/lib/src/register.dart`, `features/dsh_feature_workspace/lib/src/add_action.dart` |
-| `sidebar.workspaces.session.menu.item` | missing | both | The rows of one Session's "..." menu, in ascending `order`. |  |
-| `sidebar.workspaces.session.row.action` | missing | desktop | The hover buttons at the end of one Session row, in ascending `order`, after the "..." menu trigger. | Pointer hover has no touch equivalent: desktop only. |
+| `sidebar.workspaces.session.menu.item` | ported | both | The rows of one Session's "..." menu, in ascending `order`. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/row_slots.dart`; Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once. |
+| `sidebar.workspaces.session.row.action` | ported | desktop | The hover buttons at the end of one Session row, in ascending `order`, after the "..." menu trigger. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_session/lib/src/workspace/browser.dart`, `features/dsh_feature_session/lib/src/workspace/row_slots.dart`; Typed row owner, lazy hover/leading contributions and ordered action/menu contributions. External menu callbacks execute once. |
 | `workspace.toast` | missing | both | Workspace notices selected by their existing business discriminator. |  |
 
 ### settings (1)

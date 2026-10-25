@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated.dart' as remote;
 
 import 'observable.dart';
 import 'projection_store.dart';
@@ -39,7 +40,10 @@ class SessionListSnapshot {
 /// instances, projection stores, and the conflict ordering between pulls and
 /// later updates (dsh `SessionManager`).
 class SessionManager {
-  SessionManager(this._transport);
+  SessionManager(this._transport, {remote.SessionRemote? operations})
+    : _operations = operations;
+
+  final remote.SessionRemote? _operations;
 
   final SessionTransport _transport;
 
@@ -240,6 +244,74 @@ class SessionManager {
     return get(id);
   }
 
+  /// Normalize through the Host, then merge the returned event seq so a late
+  /// response cannot overwrite a newer title projection. No history follow.
+  Future<void> rename(String sessionId, String title) async {
+    final operations = _operations;
+    if (operations == null) throw StateError('Session operations unavailable');
+    final answer = await operations.rename(
+      remote.SessionRenameRequest(sessionId: sessionId, title: title),
+    );
+    if (_disposed) return;
+    _store(sessionId).apply('title', answer.title, answer.seq);
+    _publish();
+  }
+
+  /// Publish a fork identity before returning, even when attachment failed
+  /// after the Host created its durable log. Never repeat the create silently.
+  Future<String> fork(
+    String sessionId, {
+    int? atSeq,
+    bool allowMigration = false,
+    bool increaseTitle = true,
+  }) async {
+    final operations = _operations;
+    if (operations == null) throw StateError('Session operations unavailable');
+    final source = _summaries
+        .where((s) => s.sessionId == sessionId)
+        .firstOrNull;
+    final sourceTitle = _store(sessionId).get('title');
+    void publish(String child) {
+      if (_disposed || _summaries.any((s) => s.sessionId == child)) return;
+      _record(
+        UpsertMutation(
+          SessionSummary(
+            sessionId: child,
+            updatedAt: DateTime.now().millisecondsSinceEpoch,
+            running: false,
+            blank: true,
+            agentAvailable: true,
+            parentSessionId: sessionId,
+            cwd: source?.cwd,
+          ),
+        ),
+      );
+    }
+
+    final String child;
+    try {
+      final answer = await operations.fork(
+        remote.SessionForkRequest(
+          sessionId: sessionId,
+          atSeq: atSeq,
+          allowMigration: allowMigration,
+        ),
+      );
+      child = answer.sessionId;
+    } on RemoteException catch (error) {
+      if (error.code == 'session/workspace-attach-failed') {
+        final id = error.details['sessionId'];
+        if (id is String) publish(id);
+      }
+      rethrow;
+    }
+    publish(child);
+    if (increaseTitle && sourceTitle is String) {
+      await rename(child, increasedForkTitle(sourceTitle));
+    }
+    return child;
+  }
+
   // ---- Live sinks ----
 
   void _onControl(GenerationFrame frame) {
@@ -358,4 +430,20 @@ class SessionManager {
       ),
     );
   }
+}
+
+/// Increment the suffix without losing full-width parentheses or large counts.
+String increasedForkTitle(String title) {
+  for (final pair in [('(', ')'), ('（', '）')]) {
+    final match = RegExp(
+      '^(.*?)${RegExp.escape(pair.$1)}'
+      r'(\d+)'
+      '${RegExp.escape(pair.$2)}'
+      r'$',
+    ).firstMatch(title);
+    if (match != null) {
+      return '${match[1]}${pair.$1}${BigInt.parse(match[2]!) + BigInt.one}${pair.$2}';
+    }
+  }
+  return '$title (1)';
 }

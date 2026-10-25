@@ -28,7 +28,7 @@ export { extractMarkdownPlainText } from '@dsh/ui-primitives/src/markdown/plain-
 // Settings rows (ui-theme, ui-permission-presets): the font-family text field, the permission selector's menu and its
 // full-access risk confirmation dialog (both closed in every case).
 export { Input } from '@dsh/ui-primitives/src/Input.tsx'
-export { Menu } from '@dsh/ui-primitives/src/Menu.tsx'
+export { Menu, MenuItemButton } from '@dsh/ui-primitives/src/Menu.tsx'
 export { RiskConfirmation } from '@dsh/ui-primitives/src/RiskConfirmation.tsx'
 // Composer overlays (ui-input-trigger MenuView, ui-commands PopupSelectView): the menu material, its sticky group headings,
 // the anchored max-height hook and the reference glyphs.
@@ -45,3 +45,6 @@ export { Tooltip } from '@dsh/ui-primitives/src/Tooltip.tsx'
 export { writeClipboard } from '@dsh/ui-primitives/src/clipboard.ts'
 
 export { InlineEditor } from '@dsh/ui-primitives/src/InlineEditor.tsx'
+
+export { HoverCard } from '@dsh/ui-primitives/src/HoverCard.tsx'
+export { relativeTime } from '@dsh/ui-primitives/src/relative-time.ts'
