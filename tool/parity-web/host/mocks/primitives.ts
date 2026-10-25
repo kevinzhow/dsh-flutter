@@ -43,3 +43,5 @@ export { Modal } from '@dsh/ui-primitives/src/Modal.tsx'
 // Message actions (ui-chat MessageIconActions): the copy tooltip and the clipboard write.
 export { Tooltip } from '@dsh/ui-primitives/src/Tooltip.tsx'
 export { writeClipboard } from '@dsh/ui-primitives/src/clipboard.ts'
+
+export { InlineEditor } from '@dsh/ui-primitives/src/InlineEditor.tsx'

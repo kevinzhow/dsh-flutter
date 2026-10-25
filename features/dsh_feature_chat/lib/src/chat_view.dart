@@ -96,6 +96,7 @@ class ChatViewState extends State<ChatView> {
 
   StreamSubscription<ChatSnapshot>? _chatSub;
   StreamSubscription<SessionSnapshot>? _sessionSub;
+  StreamSubscription<Map<String, Object?>>? _inboxSub;
   final _fallbackPreferences = ChatPreferences();
   ChatPreferences get _preferences =>
       widget.preferences ?? _fallbackPreferences;
@@ -179,6 +180,7 @@ class ChatViewState extends State<ChatView> {
   void _bind() {
     _chatSub = widget.owner.conversation.chat.changes.listen(_changed);
     _sessionSub = widget.owner.session.snapshot.changes.listen(_changed);
+    _inboxSub = widget.owner.session.projections.changes.listen(_changed);
     _modeSub = _preferences.mode.changes.listen(_changed);
     _timingSub = _preferences.timing.changes.listen(_changed);
   }
@@ -186,6 +188,7 @@ class ChatViewState extends State<ChatView> {
   void _unbind() {
     unawaited(_chatSub?.cancel());
     unawaited(_sessionSub?.cancel());
+    unawaited(_inboxSub?.cancel());
     unawaited(_modeSub?.cancel());
     unawaited(_timingSub?.cancel());
   }
@@ -411,20 +414,76 @@ class ChatViewState extends State<ChatView> {
         }
       }
     }
-    for (final p in session.pendingSubmissions) {
+    final observed = <String>{
+      for (final node in chat.nodes.values)
+        if (node.data case MessageData(:final source))
+          if (source?['kind'] == 'user' && source?['rpcId'] is String)
+            source!['rpcId']! as String,
+    };
+    final local = {
+      for (final p in session.pendingSubmissions)
+        if (p.placement != SubmissionPlacement.queued &&
+            !observed.contains(p.requestId))
+          p.requestId: p,
+    };
+    final localIds = session.pendingSubmissions
+        .where((p) => p.placement != SubmissionPlacement.queued)
+        .map((p) => p.requestId)
+        .toSet();
+    void pendingRow(
+      String id,
+      String text,
+      List<UserAttachmentView> attachments, {
+      bool steering = false,
+    }) {
       rows.add(
         _Row(
-          'pending-${p.requestId}',
+          'pending-$id',
           transient: true,
           () => UserBubble(
-            text: p.text,
+            text: text,
             i18n: widget.i18n,
             pending: true,
-            attachments: echoAttachmentViews(p.attachments),
+            steering: steering,
+            actions: false,
+            attachments: attachments,
             owner: owner,
             slots: widget.slots,
           ),
         ),
+      );
+    }
+
+    for (final item in inboxItems(
+      owner.session.projections.get('inbox'),
+      'next-step',
+    )) {
+      final id = item.requestId;
+      if (observed.contains(id)) continue;
+      final p = local.remove(id);
+      if (p != null) {
+        pendingRow(
+          p.requestId,
+          p.text,
+          echoAttachmentViews(p.attachments),
+          steering: true,
+        );
+      } else if (!localIds.contains(id)) {
+        final parts = userContentParts(item.content);
+        pendingRow(
+          item.id,
+          parts.text,
+          attachmentViews(parts.attachments),
+          steering: true,
+        );
+      }
+    }
+    for (final p in local.values) {
+      pendingRow(
+        p.requestId,
+        p.text,
+        echoAttachmentViews(p.attachments),
+        steering: p.placement == SubmissionPlacement.steering,
       );
     }
     if (_showRunning(chat, session)) {

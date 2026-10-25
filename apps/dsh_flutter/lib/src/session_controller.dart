@@ -92,6 +92,7 @@ class SessionController implements SessionActions {
       session: session,
       conversation: conversation,
       actions: this,
+      queueMutable: !readOnly,
       cwdReader: cwdReader,
       blankReader: blankReader,
       hostHome: hostHome,
@@ -122,9 +123,14 @@ class SessionController implements SessionActions {
   Future<void> send(
     String text, {
     List<OutgoingAttachment> attachments = const [],
+    String mode = 'queue',
   }) => readOnly
       ? Future.value()
-      : session.prompt(text.trim(), attachments: attachments);
+      : session.prompt(text.trim(), attachments: attachments, mode: mode);
+
+  @override
+  Future<void> updateQueue(String id, Map<String, Object?> action) =>
+      readOnly ? Future.value() : session.updateQueue(id, action);
 
   @override
   Future<void> cancel() => readOnly ? Future.value() : session.cancel();

@@ -86,10 +86,15 @@ class FixtureActions implements SessionActions {
   Future<void> send(
     String text, {
     List<OutgoingAttachment> attachments = const [],
+    String mode = 'queue',
   }) async {
     sent.add(text);
-    await session.prompt(text);
+    await session.prompt(text, attachments: attachments, mode: mode);
   }
+
+  @override
+  Future<void> updateQueue(String id, Map<String, Object?> action) =>
+      session.updateQueue(id, action);
 
   @override
   Future<void> cancel() async {}

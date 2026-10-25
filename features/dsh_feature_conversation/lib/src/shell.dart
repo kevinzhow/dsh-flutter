@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'composer.dart';
 import 'hero.dart';
 import 'view_selection.dart';
+import 'submission_policy.dart';
 
 /// The conversation shell of one session (dsh `ConversationSession`): the
 /// view area fed by `conversation.view`, the composer area fed by the
@@ -22,9 +23,11 @@ class ConversationShell extends StatelessWidget {
     required this.composerSlot,
     required this.dockSlot,
     this.workspaces,
+    this.preferences,
   });
 
   final SessionOwner owner;
+  final ConversationPreferences? preferences;
   final SlotRegistry slots;
   final DshI18n i18n;
   final Slot<SessionOwner, Widget> viewSlot;
@@ -91,6 +94,7 @@ class ConversationShell extends StatelessWidget {
             : (slots.renderChain(composerSlot, owner) ??
                   DefaultComposer(
                     owner: owner,
+                    preferences: preferences,
                     i18n: i18n,
                     slots: slots,
                     hero: hero,

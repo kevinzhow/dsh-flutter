@@ -82,6 +82,7 @@ void main() {
           DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
           owner,
         )
+        .whereType<TodoDock>()
         .single;
     await t.pumpWidget(dshTestApp(dock));
     expect(find.byKey(const ValueKey('todo-panel')), findsNothing);

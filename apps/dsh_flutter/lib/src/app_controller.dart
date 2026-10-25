@@ -200,6 +200,7 @@ class AppController extends ChangeNotifier {
       commandUi: commandUi,
       inputOf: (id) => _sessions[id]?.owner.input,
       workspaces: workspaceServices,
+      preferences: conversationPreferences,
     );
     registerWorkspaceFeature(
       slots,
@@ -477,6 +478,7 @@ class AppController extends ChangeNotifier {
   ModelSelectionFeature? _models;
   final List<void Function()> _hostOffs = [];
   late final ChatPreferences chatPreferences;
+  final conversationPreferences = ConversationPreferences();
   StreamSubscription<ThemeSettings>? _themeSub;
   String? _pendingOpen;
 
@@ -785,6 +787,7 @@ class AppController extends ChangeNotifier {
     );
     final f = forms = ConfigForms(r);
     chatPreferences.bind(f.get('ui-chat'));
+    conversationPreferences.bind(f.get('ui-conversation'));
     final theme = _theme = ThemeSettingsService(
       host: f.get('ui-theme'),
       initial: themeSettings,
@@ -863,6 +866,7 @@ class AppController extends ChangeNotifier {
 
   void _detachHost() {
     chatPreferences.bind(null);
+    conversationPreferences.bind(null);
     for (final off in _hostOffs) {
       off();
     }
@@ -1278,6 +1282,7 @@ class AppController extends ChangeNotifier {
   @override
   void dispose() {
     unawaited(chatPreferences.dispose());
+    unawaited(conversationPreferences.dispose());
     desktop.dispose();
     layout.dispose();
     _recoveredTimer?.cancel();

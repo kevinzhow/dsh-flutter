@@ -13,6 +13,9 @@ abstract interface class SessionTransport {
   /// `session/prompt` -> `{accepted: true}`.
   Future<void> prompt(Map<String, Object?> request);
 
+  /// Mutate one durable queued occurrence (`session/updateQueue`).
+  Future<void> updateQueue(Map<String, Object?> request);
+
   /// `session/cancel`.
   Future<void> cancel(String sessionId);
 
@@ -68,6 +71,11 @@ class DshSessionTransport implements SessionTransport {
   @override
   Future<void> prompt(Map<String, Object?> request) async {
     await _map('prompt', {'request': request});
+  }
+
+  @override
+  Future<void> updateQueue(Map<String, Object?> request) async {
+    await _map('updateQueue', {'request': request});
   }
 
   @override

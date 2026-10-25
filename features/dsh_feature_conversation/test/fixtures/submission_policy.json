@@ -1,0 +1,119 @@
+{
+  "format": "dsh-submission-policy/1",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "source": "ui-conversation/src/client/input/submission-policy.ts resolveSubmitMode",
+  "cases": [
+    {
+      "preferred": "queue",
+      "running": false,
+      "gesture": "enter",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": false,
+      "gesture": "enter",
+      "available": true,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": false,
+      "gesture": "accelerated",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": false,
+      "gesture": "accelerated",
+      "available": true,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": true,
+      "gesture": "enter",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": true,
+      "gesture": "enter",
+      "available": true,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": true,
+      "gesture": "accelerated",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "queue",
+      "running": true,
+      "gesture": "accelerated",
+      "available": true,
+      "expected": "steer"
+    },
+    {
+      "preferred": "steer",
+      "running": false,
+      "gesture": "enter",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": false,
+      "gesture": "enter",
+      "available": true,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": false,
+      "gesture": "accelerated",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": false,
+      "gesture": "accelerated",
+      "available": true,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": true,
+      "gesture": "enter",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": true,
+      "gesture": "enter",
+      "available": true,
+      "expected": "steer"
+    },
+    {
+      "preferred": "steer",
+      "running": true,
+      "gesture": "accelerated",
+      "available": false,
+      "expected": "queue"
+    },
+    {
+      "preferred": "steer",
+      "running": true,
+      "gesture": "accelerated",
+      "available": true,
+      "expected": "queue"
+    }
+  ]
+}

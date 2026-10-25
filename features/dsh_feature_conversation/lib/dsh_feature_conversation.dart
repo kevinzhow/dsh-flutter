@@ -3,6 +3,9 @@
 library;
 
 export 'src/composer.dart';
+export 'src/submission_policy.dart';
+export 'src/enter_settings.dart';
+export 'src/queue_dock.dart';
 export 'src/desktop_header.dart';
 export 'src/register.dart';
 export 'src/session_header.dart';

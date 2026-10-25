@@ -8,6 +8,9 @@ import 'desktop_header.dart';
 import 'session_header.dart';
 import 'shell.dart';
 import 'todo_panel.dart';
+import 'queue_dock.dart';
+import 'submission_policy.dart';
+import 'enter_settings.dart';
 
 /// Resolves a session id to its composer model (the app keeps them).
 typedef ComposerInputLookup = ComposerInput? Function(String sessionId);
@@ -38,6 +41,7 @@ void registerConversationFeature(
   CommandUiRegistry? commandUi,
   ComposerInputLookup? inputOf,
   WorkspaceServices? workspaces,
+  ConversationPreferences? preferences,
 }) {
   if (commandUi != null && inputOf != null) {
     commandUi.register(
@@ -60,6 +64,7 @@ void registerConversationFeature(
       composerSlot: _composerSlot,
       dockSlot: DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
       workspaces: workspaces,
+      preferences: preferences,
     ),
   );
   slots.register<SessionOwner, Widget>(
@@ -68,6 +73,20 @@ void registerConversationFeature(
     id: 'todo',
     order: 0,
   );
+  slots.register<SessionOwner, Widget>(
+    DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
+    (owner) => QueueDock(owner: owner, i18n: i18n()),
+    id: 'queue',
+    order: 20,
+  );
+  if (preferences != null) {
+    slots.register<SettingsOwner, Widget>(
+      DshSlots.settingsGeneralItem.typed<SettingsOwner, Widget>(),
+      (_) => EnterBehaviorSettings(preferences: preferences, i18n: i18n()),
+      id: 'composer-enter',
+      order: 40,
+    );
+  }
   slots.register<SessionOwner, Widget>(
     headerSlot,
     // Inside the desktop frame the header is dsh's: crumb, utilities, corner
