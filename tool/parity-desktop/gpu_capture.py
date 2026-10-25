@@ -117,10 +117,16 @@ def gpu_devices(pid, app):
     return sorted(found)
 
 
-def capture(env, directory, output):
+def capture(env, directory, output, screen):
     directory.mkdir(mode=0o700)
-    subprocess.run(['weston-screenshooter'], env=env, cwd=directory,
-                   stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=True, timeout=15)
+    screen.send('cursor 0')
+    try:
+        # Let the compositor repaint without moving the pointer or changing hover.
+        time.sleep(0.06)
+        subprocess.run(['weston-screenshooter'], env=env, cwd=directory,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=True, timeout=15)
+    finally:
+        screen.send('cursor 1')
     shots = list(directory.glob('*.png'))
     if len(shots) != 1:
         raise RuntimeError('Expected exactly one Weston output screenshot')
@@ -239,16 +245,17 @@ def main():
                         label = step['capture']
                         if not re.fullmatch(r'[a-z0-9_-]+', label):
                             raise ValueError('Capture labels must contain only a-z, 0-9, _ and -')
-                        capture(env, case_out / 'capture', case_out / f'{label}.png')
+                        capture(env, case_out / 'capture', case_out / f'{label}.png', screen)
                     else:
                         raise ValueError('Unknown app step')
                 time.sleep(1.5)
-                capture(env, case_out / 'capture', out / f'{c["id"]}.png')
+                capture(env, case_out / 'capture', out / f'{c["id"]}.png', screen)
                 (case_out / 'environment.json').write_text(json.dumps({
                     'weston': version, 'renderer': renderer[-1], 'appRenderDevices': devices,
                     'glVersion': re.findall(r'\bGL version: (.+)', weston_log),
                     'appRenderer': re.findall(r'Using the Impeller rendering backend \(([^)]+)\)', app_log.read_text()),
                     'backend': 'native-wayland', 'kernel': os.uname().release,
+                    'cursorIncluded': False,
                     'pairedHost': c.get('pairHost', True) is not False,
                     'size': [w, h], 'theme': c['theme'], 'locale': c['locale'],
                 }, indent=2) + '\n')

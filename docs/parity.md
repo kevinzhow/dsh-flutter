@@ -119,9 +119,10 @@ contract can be diffed: a future third provider (Android, iOS) only has to produ
   when they are not what Blink gives at that density.
 - Chromium runs with `--disable-lcd-text --font-render-hinting=none` (grayscale text) and Playwright `animations: "disabled"`,
   `caret: "hide"`, reduced motion; Flutter uses `disableAnimations` and a transparent caret.
-- Element crops follow Playwright's element screenshot: the enclosing box of the element, in device pixels for a native
-  reference (a 420 CSS px element at 2.625x is 1102.5 device px, captured as 1103) and in CSS pixels, then scaled, for an
-  emulated one.
+- Native element crops intersect the logical viewport, then enclose both edges in device pixels on both providers.
+  The React provider copies those pixels from the viewport PNG without resampling: locator/CDP clip rounding can
+  truncate a fractional device row (85 CSS px at 2.625x needs 224 rows, not 223). Its metadata records the physical
+  `crop.pixelRect` and policy. Emulated references retain Playwright's locator screenshot and enclosing CSS-pixel box.
 - The React side is a static Vite bundle with no network; Flutter never reads the platform brightness (the theme is explicit
   per capture, `resolveParityTheme`, and every capture verifies it: tree brightness, pack id and the frame's pixel colour).
 - Fonts are pinned (below). The React cache key includes every input that can change pixels (dsh commit, case JSON without
@@ -452,6 +453,9 @@ environments. GPU capture compiles `weston_input.c` into the output directory. T
 pointer in the private compositor and receives commands on an inherited pipe. It reads no physical input devices, opens
 no input service port, and is never installed in the system compositor. It uses Weston 14 private seat/input APIs, so both
 the runner and compilation reject other major versions; revalidate against the installed build after upgrading Weston.
+During screenshots the module hides only its pointer sprite, restoring it afterward even if capture fails. Pointer
+position, focus and hover remain intact. This matches browser screenshots, which omit the OS pointer;
+`environment.json` records `cursorIncluded: false`. No screenshot pixels are masked or repainted.
 
 The runner uses the existing case coordinates for pairing and page clicks, plus `scroll: [x, y, verticalPixels]` for wheel
 input and `capture: "label"` for intermediate screenshots. Typing uses an explicitly configured US keyboard and rejects
