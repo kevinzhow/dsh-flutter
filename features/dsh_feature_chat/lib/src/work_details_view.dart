@@ -387,12 +387,8 @@ class _ProcessGroupViewState extends State<ProcessGroupView> {
                             style: TextStyle(
                               fontSize: baseStyle.fontSize,
                               color: color,
-                              fontFamily: theme
-                                  .textStyle('--dsw-font-s-14')
-                                  .fontFamily,
-                              fontFamilyFallback: theme
-                                  .textStyle('--dsw-font-s-14')
-                                  .fontFamilyFallback,
+                              fontFamily: baseStyle.fontFamily,
+                              fontFamilyFallback: baseStyle.fontFamilyFallback,
                               fontWeight: FontWeight.w400,
                               letterSpacing: 0,
                             ),

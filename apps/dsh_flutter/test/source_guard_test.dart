@@ -108,8 +108,14 @@ void main() {
       // The emulator takes the user's terminal font list from the theme and
       // names the built-in monospace stack beside it.
       if (f.path.endsWith('terminal_theme.dart')) continue;
+      // Copying a resolved style's size/family preserves its theme tokens.
+      // Keep rejecting literal values, including those in the same file.
+      final source = strip(f.readAsStringSync()).replaceAll(
+        RegExp(r'\b(fontSize|fontFamily)\s*:\s*[a-zA-Z_]\w*\.\1\s*,'),
+        '',
+      );
       expect(
-        bad.hasMatch(strip(f.readAsStringSync())),
+        bad.hasMatch(source),
         isFalse,
         reason: '${f.path} hard-codes a font size or family',
       );
