@@ -1,0 +1,25 @@
+{
+  "source": "4e6d0cb",
+  "nativeAndComponentBuildSource": "eec1182",
+  "component": {
+    "chat.turn-process": {
+      "cases": 64,
+      "meanNonTextPct": 97.361,
+      "strictAtLeast99_5": 2,
+      "sizeMismatches": 0
+    },
+    "chat.work-settings": {
+      "cases": 32,
+      "meanNonTextPct": 98.116,
+      "strictAtLeast99_5": 0,
+      "sizeMismatches": 0
+    },
+    "chat.process-group": {
+      "cases": 40,
+      "meanNonTextPct": 92.595,
+      "strictAtLeast99_5": 0,
+      "sizeMismatches": 10
+    }
+  },
+  "strictTotal": 2
+}

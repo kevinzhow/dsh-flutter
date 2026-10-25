@@ -1,0 +1,44 @@
+[
+  {
+    "case": "work-details.desktop-light",
+    "assertions": 7,
+    "attempts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "chatRegionRestoredPixelExactly": true,
+    "chatRegion": [
+      0,
+      210,
+      1280,
+      720
+    ],
+    "processesRemain": false
+  },
+  {
+    "case": "work-details.phone-dark-zh",
+    "assertions": 7,
+    "attempts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "chatRegionRestoredPixelExactly": true,
+    "chatRegion": [
+      0,
+      210,
+      390,
+      844
+    ],
+    "processesRemain": false
+  }
+]

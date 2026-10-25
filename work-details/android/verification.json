@@ -1,0 +1,87 @@
+{
+  "api": 36,
+  "synthetic": true,
+  "actualTapAndSwipe": true,
+  "scenes": [
+    {
+      "scene": "closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "process-open",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "group-open",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "reasoning-open",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "after-scroll",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "returned-to-control",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "collapsed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "mode-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "verbose",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "mode-menu-again",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "compact",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "mode-menu-detailed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "detailed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "timing-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "next-input",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "fourModes": true,
+  "independentCollapseTiming": true,
+  "nestedReasoning": true,
+  "longProcessScroll": true,
+  "finalAnswerPreserved": true
+}
