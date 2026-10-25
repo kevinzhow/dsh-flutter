@@ -1,0 +1,32 @@
+[
+  {
+    "case": "compaction-command.desktop-light",
+    "assertions": 7,
+    "attempts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "closedRestoredPixelExactly": true,
+    "processesRemain": false
+  },
+  {
+    "case": "compaction-command.phone-dark-zh",
+    "assertions": 7,
+    "attempts": [
+      1,
+      1,
+      9,
+      1,
+      1,
+      1,
+      1
+    ],
+    "closedRestoredPixelExactly": true,
+    "processesRemain": false
+  }
+]
