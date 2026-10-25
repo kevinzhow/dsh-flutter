@@ -1,0 +1,18 @@
+{
+ "cases": [
+  {
+   "id": "system-prompt.desktop-light", "state": "component", "appOnly": true,
+   "pairHost": false, "width": 1280, "height": 720, "theme": "light", "locale": "en",
+   "app": [{"click": [100, 28]}, {"capture": "first-expanded"},
+    {"click": [100, 130]}, {"capture": "both-expanded"},
+    {"scroll": [150, 220, 350]}, {"capture": "after-scroll"}]
+  },
+  {
+   "id": "system-prompt.phone-dark-zh", "state": "component", "appOnly": true,
+   "pairHost": false, "width": 390, "height": 844, "theme": "dark", "locale": "zh",
+   "app": [{"click": [100, 28]}, {"capture": "first-expanded"},
+    {"click": [100, 130]}, {"capture": "both-expanded"},
+    {"scroll": [150, 220, 350]}, {"capture": "after-scroll"}]
+  }
+ ]
+}

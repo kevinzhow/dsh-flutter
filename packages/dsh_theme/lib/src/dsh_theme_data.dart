@@ -129,6 +129,20 @@ class DshThemeData extends ThemeExtension<DshThemeData> {
     italic: false,
   );
 
+  /// A code-stack style for CSS surfaces with a literal size/line height.
+  /// User font-family choices apply, while size stays at the source CSS value.
+  TextStyle fixedCodeStyle({
+    required double size,
+    required double line,
+    int weight = 400,
+  }) => _style(
+    FontRole.code,
+    size: size,
+    height: line / size,
+    weight: weight,
+    italic: false,
+  );
+
   /// A style for the terminal at the user's terminal size.
   TextStyle get terminalTextStyle {
     final size = settings.terminalFontSize.toDouble();
@@ -158,6 +172,10 @@ class DshThemeData extends ThemeExtension<DshThemeData> {
       fontWeight: FontWeight.values[weight ~/ 100 - 1],
       fontStyle: italic ? FontStyle.italic : FontStyle.normal,
       decoration: TextDecoration.none,
+      // CSS normal tracking is zero. Null would inherit Material's ambient
+      // letter/word spacing in the actual app (unlike the parity test frame).
+      letterSpacing: 0,
+      wordSpacing: 0,
     );
   }
 

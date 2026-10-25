@@ -149,6 +149,7 @@ VECTOR_FIXTURES = [
     'packages/dsh_conversation/test/fixtures/plan_todo_vector.json',
     'packages/dsh_conversation/test/fixtures/attachment_vector.json',
     'packages/dsh_conversation/test/fixtures/tool_turn_vector.json',
+        'packages/dsh_conversation/test/fixtures/system_prompt_vector.json',
 ]
 # dsh-settings-vector/1 fixtures, checked by their own driver
 SETTINGS_VECTOR_FIXTURES = [

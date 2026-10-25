@@ -292,7 +292,7 @@ for (let index = 0; index < steps.length; index++) {
     hasMore: window.hasMore,
     entries: window.entries.map(encodeEntry),
   })
-  expectedChat.push({ step: index, ...chatBinding.project() })
+  expectedChat.push({ step: index, ...chatBinding.project({ systemPrompts: fixture.projectSystemPrompts === true }) })
 }
 
 chatBinding?.unsubscribe()

@@ -83,6 +83,49 @@ void main() {
     await t.pump();
   }
 
+  testWidgets(
+    'system prompt has a registered disclosure and stays outside the transcript',
+    (t) async {
+      await open(t, [
+        ev(1, 'turn/start', {'turn': 1}),
+        ev(2, 'step/start', {'turn': 1, 'step': 1}),
+        ev(3, 'system/message', {
+          'turn': 1,
+          'step': 1,
+          'message': {
+            'id': 'sys',
+            'role': 'system',
+            'source': {'kind': 'system-prompt'},
+            'content': [
+              {'type': 'text', 'text': 'Model-visible prompt'},
+            ],
+          },
+        }, surface: 'append'),
+        ev(4, 'request/header', {
+          'turn': 1,
+          'step': 1,
+          'reason': 'initial',
+          'header': {'config': {}},
+        }),
+      ]);
+      final snapshot = owner.conversation.chat.value;
+      final node = snapshot.nodes.values.singleWhere(
+        (n) => n.kind == 'system-prompt',
+      );
+      expect(find.byType(SystemPromptView), findsNothing);
+      final card = slots.renderKeyed(
+        chatNodeSlot,
+        node.kind,
+        ChatNodeOwner(session: owner, node: node, snapshot: snapshot),
+      );
+      expect(card, isA<SystemPromptView>());
+      await t.pumpWidget(dshTestApp(card!));
+      await t.tap(find.text(i18n.t('chat', 'message.systemPrompt')));
+      await t.pump();
+      expect(find.text('Model-visible prompt'), findsOneWidget);
+    },
+  );
+
   testWidgets('shows the empty state until something happens', (t) async {
     await open(t, []);
     expect(find.byKey(const ValueKey('chat-empty')), findsOneWidget);

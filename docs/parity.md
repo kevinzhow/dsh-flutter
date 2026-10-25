@@ -512,3 +512,25 @@ this environment distinct from the Xvfb baseline when comparing scores. The manu
 capture; use `--app-backend weston` for native input replay.
 The runtime directory uses the login session's short path to stay within Unix socket path limits; parallel runs need
 different runtime directories.
+
+### Native system-prompt component fixture
+
+The standalone test entry renders the real system-prompt widget with synthetic
+text and no host/model connection. It is separate from the normal app entry:
+
+```sh
+cd apps/dsh_flutter
+flutter build linux --release -t test/parity/system_prompt_main.dart
+# Preserve this bundle under another directory before building the normal app.
+```
+
+Run `tool/parity-desktop/gpu_capture.py OUT
+ tool/parity-desktop/system-prompt-cases.json` with `PARITY_DESKTOP_APP` pointing
+to that preserved executable, `PARITY_DESKTOP_HOME` to a fresh private directory,
+and a short `XDG_RUNTIME_DIR`. The cases explicitly set `pairHost: false`; default
+cases still require `PARITY_DESKTOP_HOST_LOG` and perform pairing. GPU checks,
+private compositor/input, and process cleanup remain enabled. The fixture opens
+both cards and scrolls the bounded body in desktop light and phone-size Chinese
+dark windows. This is native Linux component validation, not an Android device
+measurement or a real DSH conversation. Build the normal entry again before
+using the app bundle as the product.

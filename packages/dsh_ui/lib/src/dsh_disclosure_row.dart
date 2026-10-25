@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
@@ -23,6 +24,7 @@ class DshDisclosureRow extends StatefulWidget {
     this.collapsedContent,
     this.children,
     this.titleColor,
+    this.chevronColor,
   });
 
   final DshIconData icon;
@@ -41,6 +43,7 @@ class DshDisclosureRow extends StatefulWidget {
   /// Expanded body, shown under the row while [open].
   final Widget? children;
   final Color? titleColor;
+  final Color? chevronColor;
 
   @override
   State<DshDisclosureRow> createState() => _DshDisclosureRowState();
@@ -59,13 +62,24 @@ class _DshDisclosureRowState extends State<DshDisclosureRow> {
     final titleStyle = theme
         .textStyle('--dsw-font-xs-13')
         .copyWith(color: rowColor, height: 24 / 13);
-    final leadingIcon = widget.open ? DshIcons.chevronUp : widget.icon;
+    final chevron = widget.open || (_hover && widget.expandable);
+    final leadingIcon = widget.open
+        ? DshIcons.chevronUp
+        : chevron
+        ? DshIcons.chevronDown
+        : widget.icon;
     final row = Row(
       children: [
         SizedBox(
           width: 16,
           height: 16,
-          child: Center(child: DshIcon(leadingIcon, size: 14, color: rowColor)),
+          child: Center(
+            child: DshIcon(
+              leadingIcon,
+              size: 14,
+              color: chevron ? widget.chevronColor ?? rowColor : rowColor,
+            ),
+          ),
         ),
         const SizedBox(width: 6),
         Flexible(
@@ -103,10 +117,27 @@ class _DshDisclosureRowState extends State<DshDisclosureRow> {
               ? Semantics(
                   button: true,
                   expanded: widget.open,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: widget.onToggle,
-                    child: header,
+                  child: FocusableActionDetector(
+                    mouseCursor: SystemMouseCursors.click,
+                    shortcuts: const {
+                      SingleActivator(LogicalKeyboardKey.enter):
+                          ActivateIntent(),
+                      SingleActivator(LogicalKeyboardKey.space):
+                          ActivateIntent(),
+                    },
+                    actions: {
+                      ActivateIntent: CallbackAction<ActivateIntent>(
+                        onInvoke: (_) {
+                          widget.onToggle();
+                          return null;
+                        },
+                      ),
+                    },
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: widget.onToggle,
+                      child: header,
+                    ),
                   ),
                 )
               : header,

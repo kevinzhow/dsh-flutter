@@ -4,6 +4,7 @@ import '../plan/submitted_plan.dart';
 import '../tool/todo_history.dart';
 import 'definitions.dart';
 import 'nodes.dart';
+import 'system_prompt.dart';
 
 /// The immutable chat target snapshot (dsh `ChatSnapshot`, without the legacy
 /// slice, navigation rail and process-group presentation, which are deferred).
@@ -169,6 +170,7 @@ defaultChatRegistries() {
     ..register(const MessageDefinition())
     ..register(const MessageDefinition(developer: true))
     ..register(const SystemMessageDefinition())
+    ..register(const RequestPromptDefinition())
     ..register(const AssistantDefinition())
     ..register(const ToolDefinition())
     ..register(const TurnErrorDefinition())
