@@ -1,25 +1,29 @@
 {
-  "implementationHead": "2385638e594f1d57d6ad33b61e180462658996c1",
-  "tree": "cb6fcc8cec08a4cd106ac6b9fa0e46feebf8da36",
+  "implementationHead": "900a7be384dd5e2e71631286dae6006997073ae9",
+  "tree": "3afd0064bba1ffd1b72362faba51c4cb1e7ebbd0",
+  "runtimeBuildAndCaptureHead": "2385638e594f1d57d6ad33b61e180462658996c1",
+  "changesSinceRuntime": [
+    "features/dsh_feature_commands/test/popup_view_test.dart (additional regression only)"
+  ],
   "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
   "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 MenuGroup.module.css",
   "syntheticOnly": true,
   "fullLocalPreflight": {
-    "when": "2026-10-26T20:33:56+00:00",
-    "headTree": "cb6fcc8cec08a4cd106ac6b9fa0e46feebf8da36",
+    "when": "2026-10-26T20:41:12+00:00",
+    "headTree": "3afd0064bba1ffd1b72362faba51c4cb1e7ebbd0",
     "fast": false,
     "results": {
       "check-deps": {
         "state": "ok",
-        "secs": 0.3
+        "secs": 0.2
       },
       "tool-tests": {
         "state": "ok",
-        "secs": 2.0
+        "secs": 1.5
       },
       "codegen": {
         "state": "ok",
-        "secs": 1.3
+        "secs": 1.0
       },
       "theme-pack": {
         "state": "ok",
@@ -27,11 +31,11 @@
       },
       "design-system": {
         "state": "ok",
-        "secs": 0.5
+        "secs": 0.3
       },
       "i18n": {
         "state": "ok",
-        "secs": 0.3
+        "secs": 0.2
       },
       "icons": {
         "state": "ok",
@@ -39,27 +43,27 @@
       },
       "vector": {
         "state": "ok",
-        "secs": 13.7
+        "secs": 10.0
       },
       "parity": {
         "state": "ok",
-        "secs": 3.4
+        "secs": 2.4
       },
       "capability": {
         "state": "ok",
-        "secs": 0.3
+        "secs": 0.2
       },
       "format": {
         "state": "ok",
-        "secs": 3.4
+        "secs": 2.7
       },
       "analyze": {
         "state": "ok",
-        "secs": 4.2
+        "secs": 3.2
       },
       "tests": {
         "state": "ok",
-        "secs": 216.1
+        "secs": 179.5
       }
     }
   },
