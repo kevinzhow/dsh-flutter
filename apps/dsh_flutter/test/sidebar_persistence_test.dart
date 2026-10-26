@@ -105,4 +105,15 @@ void main() {
       expect(storage.read('host', 'session-69'), 'synthetic');
     },
   );
+  test('oversized legacy preference maps are bounded during recovery', () {
+    final prefs = MemoryLocalPrefs(
+      sidebarLayouts: jsonEncode({
+        for (var i = 0; i < 70; i++)
+          jsonEncode(['host', 'session-$i']): 'synthetic',
+      }),
+    );
+    final storage = PrefsSidebarPersistence(prefs);
+    expect(storage.read('host', 'session-0'), isNull);
+    expect(storage.read('host', 'session-69'), 'synthetic');
+  });
 }

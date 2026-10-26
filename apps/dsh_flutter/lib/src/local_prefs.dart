@@ -336,6 +336,9 @@ class PrefsSidebarPersistence implements SidebarPersistence {
           for (final e in decoded.entries) {
             if (e.value is String && (e.value as String).length <= 512 * 1024) {
               _values[e.key] = e.value as String;
+              if (_values.length > 64) {
+                _values.remove(_values.keys.first);
+              }
             }
           }
         }
