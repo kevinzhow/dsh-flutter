@@ -1,0 +1,7 @@
+# Sticky menu groups: reference and native evidence
+
+The shared heading uses geometry and theme tokens generated from the published DSH menu-group stylesheet. A pinned heading stays within its group and yields to the next one. The command popup and model sheet use the shared component; accessible group names, scaled headings, ungrouped rows and keyboard selection are tested.
+
+Forty-eight comparisons use the real DSH command popup and model selector with synthetic data at desktop and phone sizes, English and Chinese, both themes, and initial, pinned and transition positions. Scroll offsets are prepared deterministically in the capture harness; native input is tested separately. Of 24 command cases, 12 have equal dimensions and one reaches the unchanged 99.5% non-text threshold. All 24 model cases differ in size and none reaches the target: this client still uses a full-width bottom sheet with taller rows than the reference menu.
+
+A cold Android run exposed an initial scroll while the viewport had zero height. The before/after images show the formerly covered first row and the fixed view. Full local preflight, normal and fixture builds, two hardware-accelerated desktop replays, and five Android cold-start/keyboard/touch scenes passed on the recorded source tree. Receipt.json contains provenance, build hashes, regression data and limitations. No deployment or release.

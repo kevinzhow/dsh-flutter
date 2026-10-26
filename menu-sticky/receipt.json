@@ -1,0 +1,163 @@
+{
+  "implementationHead": "2385638e594f1d57d6ad33b61e180462658996c1",
+  "tree": "cb6fcc8cec08a4cd106ac6b9fa0e46feebf8da36",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 MenuGroup.module.css",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T20:33:56+00:00",
+    "headTree": "cb6fcc8cec08a4cd106ac6b9fa0e46feebf8da36",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.0
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.3
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.5
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 13.7
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 3.4
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.4
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 4.2
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 216.1
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "e32d68fb7c6baaa602ad0c1a6f6af648ad89a42f0bbe8bd7eee318b849708985"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "e46f5230d09fcb687cc920a6fef2624e4cb1c15da1397b5801abc03bbf156774"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "8889a062b838f7e9ba59dba7044e29742dc29007d1d5926afe0c3e574593035a",
+      "applicationLibrarySha256": "54d37f28f660217bf7db0356abdf9768cf903aa976d2af6f3e5b4986ef155400"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "8889a062b838f7e9ba59dba7044e29742dc29007d1d5926afe0c3e574593035a",
+      "applicationLibrarySha256": "7f0ba89aef240f458051429bbb292edb8a181ea84ce0da949c663becaf654a1b"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "menu-sticky.desktop",
+      "assertions": 3
+    },
+    {
+      "case": "menu-sticky.phone",
+      "assertions": 3
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "cold start",
+      "keyboard down",
+      "touch swipe",
+      "touch switch"
+    ],
+    "scenes": [
+      {
+        "scene": "command-cold",
+        "attempts": 1
+      },
+      {
+        "scene": "command-keyboard",
+        "attempts": 1
+      },
+      {
+        "scene": "command-second-group",
+        "attempts": 1
+      },
+      {
+        "scene": "model-initial",
+        "attempts": 1
+      },
+      {
+        "scene": "model-second-group",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "command": {
+      "compared": 24,
+      "dimensionsEqual": 12,
+      "nonTextPassing995": 1,
+      "meanNonTextPct": 94.78366666666666
+    },
+    "model": {
+      "compared": 24,
+      "dimensionsEqual": 0,
+      "nonTextPassing995": 0,
+      "meanNonTextPct": 36.614333333333335
+    }
+  },
+  "commandRegression": {
+    "cases": 16,
+    "missing": [],
+    "providers": {
+      "react": {
+        "compared": 16,
+        "identical": 16,
+        "different": []
+      },
+      "flutter": {
+        "compared": 16,
+        "identical": 16,
+        "different": []
+      }
+    }
+  },
+  "androidColdStartFinding": "Before fix the first selected row was partly covered. Instrumentation recorded a 13.5px scroll while viewport height was zero; after fix it is fully visible.",
+  "remaining": "Model selector still uses a full-width sheet and taller rows; submenus, arbitrary-content blur, macOS material backing, shortcut catalog wiring and broader 99.5% visual parity remain unfinished.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

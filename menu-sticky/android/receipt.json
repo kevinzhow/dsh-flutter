@@ -1,0 +1,31 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "cold start",
+    "keyboard down",
+    "touch swipe",
+    "touch switch"
+  ],
+  "scenes": [
+    {
+      "scene": "command-cold",
+      "attempts": 1
+    },
+    {
+      "scene": "command-keyboard",
+      "attempts": 1
+    },
+    {
+      "scene": "command-second-group",
+      "attempts": 1
+    },
+    {
+      "scene": "model-initial",
+      "attempts": 1
+    },
+    {
+      "scene": "model-second-group",
+      "attempts": 1
+    }
+  ]
+}
