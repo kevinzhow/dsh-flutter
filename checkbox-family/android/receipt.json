@@ -1,0 +1,48 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "emulated hardware keyboard Space",
+    "Tab and Shift+Tab"
+  ],
+  "accessibility": "Android checkbox checked/enabled/clickable/focused states read from UIAutomator",
+  "focusOutlineChangedPixels": true,
+  "scenes": [
+    {
+      "scene": "initial",
+      "attempts": 1
+    },
+    {
+      "scene": "disabled-tap",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-on",
+      "attempts": 1
+    },
+    {
+      "scene": "risk-open",
+      "attempts": 1
+    },
+    {
+      "scene": "risk-space-on",
+      "attempts": 1
+    },
+    {
+      "scene": "risk-space-off",
+      "attempts": 1
+    },
+    {
+      "scene": "risk-refocused",
+      "attempts": 1
+    },
+    {
+      "scene": "risk-rechecked",
+      "attempts": 1
+    },
+    {
+      "scene": "confirmed",
+      "attempts": 1
+    }
+  ]
+}

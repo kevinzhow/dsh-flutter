@@ -1,0 +1,182 @@
+{
+  "implementationHead": "08235968dd223a7179d4145408a416e631c26def",
+  "tree": "bd764adc1683e372900df2d0afe9642ee8f20988",
+  "runtimeBuildHead": "e8be528b9db0ce490d593c4d39326fcf56a3dbef",
+  "changesSinceRuntimeBuild": [
+    "desktop replay manifest",
+    "removed redundant import in widget test"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 Checkbox and RiskConfirmation CSS and locked component sources",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T23:29:23+00:00",
+    "headTree": "bd764adc1683e372900df2d0afe9642ee8f20988",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.5
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.7
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.6
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 186.3
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "6ba85381497a13e988aaddccf5a59eb7920c533726b13d02f86472233d220946"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "17eb7274e6c18f9b1a85fe1bfb63aa3ae2299275d861419e91fa1f46685568c4"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "c45bb540e86c49a7aff18578f633199cd27136ce33386c949048301dcb3e3030",
+      "applicationLibrarySha256": "eece5786b584dbbf31ddc57260ca12a253c6c3147533e46536df64a54622df78"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "c45bb540e86c49a7aff18578f633199cd27136ce33386c949048301dcb3e3030",
+      "applicationLibrarySha256": "1b380704c6f9ebecc54fb70186e1c6ccfd736c9bc4d98fee5d6415222d20638d"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "checkbox-family.desktop",
+      "assertions": 9
+    },
+    {
+      "case": "checkbox-family.phone",
+      "assertions": 9
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "emulated hardware keyboard Space",
+      "Tab and Shift+Tab"
+    ],
+    "accessibility": "Android checkbox checked/enabled/clickable/focused states read from UIAutomator",
+    "focusOutlineChangedPixels": true,
+    "scenes": [
+      {
+        "scene": "initial",
+        "attempts": 1
+      },
+      {
+        "scene": "disabled-tap",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-on",
+        "attempts": 1
+      },
+      {
+        "scene": "risk-open",
+        "attempts": 1
+      },
+      {
+        "scene": "risk-space-on",
+        "attempts": 1
+      },
+      {
+        "scene": "risk-space-off",
+        "attempts": 1
+      },
+      {
+        "scene": "risk-refocused",
+        "attempts": 1
+      },
+      {
+        "scene": "risk-rechecked",
+        "attempts": 1
+      },
+      {
+        "scene": "confirmed",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "croppedControls": {
+      "compared": 48,
+      "dimensionsEqual": 20,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 89.24352083333333
+    },
+    "wholeDialogFocus": {
+      "compared": 8,
+      "dimensionsEqual": 0,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 87.720875
+    },
+    "thresholdPct": 99.5
+  },
+  "switchRegression": {
+    "cases": 48,
+    "flutterEqual": 48,
+    "reactEqual": 40
+  },
+  "browserProbe": {
+    "browser": "145.0.7632.6",
+    "states": 48,
+    "densities": [
+      1,
+      2.625
+    ]
+  },
+  "remaining": "The model editor is not yet wired to this checkbox. Real reference scores and dimension mismatches remain in components/summary.json; whole-dialog focus is not isolated-control parity.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

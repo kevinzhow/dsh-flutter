@@ -1,0 +1,410 @@
+{
+  "cases": [
+    {
+      "id": "checkbox-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            32,
+            34
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              23,
+              25,
+              42,
+              44
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "checkbox-on"
+        },
+        {
+          "click": [
+            32,
+            74
+          ]
+        },
+        {
+          "expect": {
+            "reference": "checkbox-on",
+            "rect": [
+              23,
+              64,
+              42,
+              84
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-tap"
+        },
+        {
+          "click": [
+            100,
+            122
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              420,
+              253,
+              860,
+              468
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-open"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              440,
+              364,
+              466,
+              391
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              526,
+              407,
+              672,
+              445
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-checked"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              440,
+              364,
+              466,
+              391
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              526,
+              407,
+              672,
+              445
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "risk-unchecked"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-unchecked",
+            "rect": [
+              440,
+              364,
+              466,
+              391
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-refocused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "risk-rechecked"
+        },
+        {
+          "click": [
+            600,
+            425
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              155,
+              190,
+              187
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "confirmed"
+        }
+      ]
+    },
+    {
+      "id": "checkbox-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            32,
+            34
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              23,
+              25,
+              42,
+              44
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "checkbox-on"
+        },
+        {
+          "click": [
+            32,
+            74
+          ]
+        },
+        {
+          "expect": {
+            "reference": "checkbox-on",
+            "rect": [
+              23,
+              64,
+              42,
+              84
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-tap"
+        },
+        {
+          "click": [
+            100,
+            122
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              292,
+              366,
+              552
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-open"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              44,
+              425,
+              72,
+              456
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              130,
+              490,
+              276,
+              530
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-checked"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              44,
+              425,
+              72,
+              456
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "risk-open",
+            "rect": [
+              130,
+              490,
+              276,
+              530
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "risk-unchecked"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "risk-unchecked",
+            "rect": [
+              44,
+              425,
+              72,
+              456
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "risk-refocused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "risk-rechecked"
+        },
+        {
+          "click": [
+            200,
+            509
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              155,
+              190,
+              187
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "confirmed"
+        }
+      ]
+    }
+  ]
+}

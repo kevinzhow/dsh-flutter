@@ -1,0 +1,1025 @@
+{
+  "thresholdPct": 99.5,
+  "croppedControls": {
+    "compared": 48,
+    "dimensionsEqual": 20,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 89.24352083333333
+  },
+  "wholeDialogFocus": {
+    "compared": 8,
+    "dimensionsEqual": 0,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 87.720875
+  },
+  "cases": [
+    {
+      "key": "components.checkbox-family.risk-desktop-en-off.light",
+      "caseId": "components.checkbox-family.risk-desktop-en-off.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 95.559,
+      "pixelPerfectPct": 82.966,
+      "rgbPct": 97.58,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-en-off.dark",
+      "caseId": "components.checkbox-family.risk-desktop-en-off.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 95.037,
+      "pixelPerfectPct": 82.839,
+      "rgbPct": 97.4,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-en-on.light",
+      "caseId": "components.checkbox-family.risk-desktop-en-on.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 94.875,
+      "pixelPerfectPct": 80.357,
+      "rgbPct": 97.408,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-en-on.dark",
+      "caseId": "components.checkbox-family.risk-desktop-en-on.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 94.376,
+      "pixelPerfectPct": 80.438,
+      "rgbPct": 97.353,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-en-focus.light",
+      "caseId": "components.checkbox-family.risk-desktop-en-focus.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 90.139,
+      "pixelPerfectPct": 78.095,
+      "rgbPct": 92.997,
+      "sizeReact": [
+        440,
+        292
+      ],
+      "sizeFlutter": [
+        440,
+        302
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-en-focus.dark",
+      "caseId": "components.checkbox-family.risk-desktop-en-focus.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 87.614,
+      "pixelPerfectPct": 74.713,
+      "rgbPct": 92.369,
+      "sizeReact": [
+        440,
+        292
+      ],
+      "sizeFlutter": [
+        440,
+        302
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-en-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-off.light",
+      "caseId": "components.checkbox-family.model-desktop-en-off.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 89.697,
+      "pixelPerfectPct": 76.742,
+      "rgbPct": 96.732,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-off.dark",
+      "caseId": "components.checkbox-family.model-desktop-en-off.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.621,
+      "pixelPerfectPct": 76.667,
+      "rgbPct": 96.485,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-on.light",
+      "caseId": "components.checkbox-family.model-desktop-en-on.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 91.894,
+      "pixelPerfectPct": 75.909,
+      "rgbPct": 96.54,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-on.dark",
+      "caseId": "components.checkbox-family.model-desktop-en-on.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 91.894,
+      "pixelPerfectPct": 75.758,
+      "rgbPct": 96.248,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-off-disabled.light",
+      "caseId": "components.checkbox-family.model-desktop-en-off-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 88.03,
+      "pixelPerfectPct": 75.379,
+      "rgbPct": 98.441,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-off-disabled.dark",
+      "caseId": "components.checkbox-family.model-desktop-en-off-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.924,
+      "pixelPerfectPct": 77.045,
+      "rgbPct": 98.283,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-on-disabled.light",
+      "caseId": "components.checkbox-family.model-desktop-en-on-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 75.53,
+      "pixelPerfectPct": 62.879,
+      "rgbPct": 98.403,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-en-on-disabled.dark",
+      "caseId": "components.checkbox-family.model-desktop-en-on-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.242,
+      "pixelPerfectPct": 76.364,
+      "rgbPct": 98.265,
+      "sizeReact": [
+        66,
+        20
+      ],
+      "sizeFlutter": [
+        66,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-en-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-off.light",
+      "caseId": "components.checkbox-family.risk-desktop-zh-off.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 97.75,
+      "pixelPerfectPct": 84.369,
+      "rgbPct": 98.342,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-off.dark",
+      "caseId": "components.checkbox-family.risk-desktop-zh-off.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 97.646,
+      "pixelPerfectPct": 84.184,
+      "rgbPct": 98.167,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-on.light",
+      "caseId": "components.checkbox-family.risk-desktop-zh-on.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 97.066,
+      "pixelPerfectPct": 81.76,
+      "rgbPct": 98.169,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-on.dark",
+      "caseId": "components.checkbox-family.risk-desktop-zh-on.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 96.985,
+      "pixelPerfectPct": 81.783,
+      "rgbPct": 98.121,
+      "sizeReact": [
+        392,
+        22
+      ],
+      "sizeFlutter": [
+        392,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-focus.light",
+      "caseId": "components.checkbox-family.risk-desktop-zh-focus.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 90.715,
+      "pixelPerfectPct": 76.585,
+      "rgbPct": 93.137,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        258
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-desktop-zh-focus.dark",
+      "caseId": "components.checkbox-family.risk-desktop-zh-focus.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 86.617,
+      "pixelPerfectPct": 71.904,
+      "rgbPct": 92.411,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        258
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-desktop-zh-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-off.light",
+      "caseId": "components.checkbox-family.model-desktop-zh-off.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 82.255,
+      "pixelPerfectPct": 66.765,
+      "rgbPct": 92.825,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-off.dark",
+      "caseId": "components.checkbox-family.model-desktop-zh-off.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 79.902,
+      "pixelPerfectPct": 64.51,
+      "rgbPct": 91.785,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-on.light",
+      "caseId": "components.checkbox-family.model-desktop-zh-on.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 78.824,
+      "pixelPerfectPct": 63.333,
+      "rgbPct": 91.339,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-on.dark",
+      "caseId": "components.checkbox-family.model-desktop-zh-on.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 76.765,
+      "pixelPerfectPct": 61.373,
+      "rgbPct": 89.866,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-off-disabled.light",
+      "caseId": "components.checkbox-family.model-desktop-zh-off-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 80.392,
+      "pixelPerfectPct": 64.902,
+      "rgbPct": 97.237,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-off-disabled.dark",
+      "caseId": "components.checkbox-family.model-desktop-zh-off-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 79.804,
+      "pixelPerfectPct": 64.804,
+      "rgbPct": 96.252,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-on-disabled.light",
+      "caseId": "components.checkbox-family.model-desktop-zh-on-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 64.608,
+      "pixelPerfectPct": 49.118,
+      "rgbPct": 97.266,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-desktop-zh-on-disabled.dark",
+      "caseId": "components.checkbox-family.model-desktop-zh-on-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 76.961,
+      "pixelPerfectPct": 61.961,
+      "rgbPct": 96.089,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        51,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-desktop-zh-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-off.light",
+      "caseId": "components.checkbox-family.risk-phone-en-off.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 97.3,
+      "pixelPerfectPct": 93.471,
+      "rgbPct": 98.283,
+      "sizeReact": [
+        772,
+        117
+      ],
+      "sizeFlutter": [
+        772,
+        116
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-off.dark",
+      "caseId": "components.checkbox-family.risk-phone-en-off.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 96.479,
+      "pixelPerfectPct": 92.628,
+      "rgbPct": 98.431,
+      "sizeReact": [
+        772,
+        117
+      ],
+      "sizeFlutter": [
+        772,
+        116
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-on.light",
+      "caseId": "components.checkbox-family.risk-phone-en-on.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 96.66,
+      "pixelPerfectPct": 92.0,
+      "rgbPct": 98.168,
+      "sizeReact": [
+        772,
+        117
+      ],
+      "sizeFlutter": [
+        772,
+        116
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-on.dark",
+      "caseId": "components.checkbox-family.risk-phone-en-on.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 95.794,
+      "pixelPerfectPct": 91.156,
+      "rgbPct": 98.374,
+      "sizeReact": [
+        772,
+        117
+      ],
+      "sizeFlutter": [
+        772,
+        116
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-focus.light",
+      "caseId": "components.checkbox-family.risk-phone-en-focus.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 89.706,
+      "pixelPerfectPct": 83.518,
+      "rgbPct": 93.727,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        909
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-en-focus.dark",
+      "caseId": "components.checkbox-family.risk-phone-en-focus.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 86.42,
+      "pixelPerfectPct": 79.903,
+      "rgbPct": 93.364,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        909
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-en-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-off.light",
+      "caseId": "components.checkbox-family.model-phone-en-off.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 93.82,
+      "pixelPerfectPct": 89.93,
+      "rgbPct": 93.625,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-off.dark",
+      "caseId": "components.checkbox-family.model-phone-en-off.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 91.727,
+      "pixelPerfectPct": 88.155,
+      "rgbPct": 93.993,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-on.light",
+      "caseId": "components.checkbox-family.model-phone-en-on.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 95.179,
+      "pixelPerfectPct": 89.809,
+      "rgbPct": 93.029,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-on.dark",
+      "caseId": "components.checkbox-family.model-phone-en-on.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 92.91,
+      "pixelPerfectPct": 88.034,
+      "rgbPct": 93.217,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-off-disabled.light",
+      "caseId": "components.checkbox-family.model-phone-en-off-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 91.004,
+      "pixelPerfectPct": 87.245,
+      "rgbPct": 97.194,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-off-disabled.dark",
+      "caseId": "components.checkbox-family.model-phone-en-off-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 91.541,
+      "pixelPerfectPct": 88.012,
+      "rgbPct": 97.117,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-on-disabled.light",
+      "caseId": "components.checkbox-family.model-phone-en-on-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 76.901,
+      "pixelPerfectPct": 73.143,
+      "rgbPct": 97.185,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-en-on-disabled.dark",
+      "caseId": "components.checkbox-family.model-phone-en-on-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 91.716,
+      "pixelPerfectPct": 88.188,
+      "rgbPct": 97.072,
+      "sizeReact": [
+        169,
+        53
+      ],
+      "sizeFlutter": [
+        169,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-en-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-off.light",
+      "caseId": "components.checkbox-family.risk-phone-zh-off.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 95.853,
+      "pixelPerfectPct": 90.984,
+      "rgbPct": 99.073,
+      "sizeReact": [
+        772,
+        58
+      ],
+      "sizeFlutter": [
+        772,
+        58
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-off.dark",
+      "caseId": "components.checkbox-family.risk-phone-zh-off.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 95.853,
+      "pixelPerfectPct": 91.064,
+      "rgbPct": 99.024,
+      "sizeReact": [
+        772,
+        58
+      ],
+      "sizeFlutter": [
+        772,
+        58
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-on.light",
+      "caseId": "components.checkbox-family.risk-phone-zh-on.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 94.142,
+      "pixelPerfectPct": 87.775,
+      "rgbPct": 98.823,
+      "sizeReact": [
+        772,
+        58
+      ],
+      "sizeFlutter": [
+        772,
+        58
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-on.dark",
+      "caseId": "components.checkbox-family.risk-phone-zh-on.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 94.137,
+      "pixelPerfectPct": 87.864,
+      "rgbPct": 98.933,
+      "sizeReact": [
+        772,
+        58
+      ],
+      "sizeFlutter": [
+        772,
+        58
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-focus.light",
+      "caseId": "components.checkbox-family.risk-phone-zh-focus.light",
+      "kind": "checkbox-family.risk",
+      "theme": "light",
+      "nonTextPct": 87.393,
+      "pixelPerfectPct": 79.76,
+      "rgbPct": 92.699,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        735
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.risk-phone-zh-focus.dark",
+      "caseId": "components.checkbox-family.risk-phone-zh-focus.dark",
+      "kind": "checkbox-family.risk",
+      "theme": "dark",
+      "nonTextPct": 83.163,
+      "pixelPerfectPct": 75.084,
+      "rgbPct": 92.264,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        735
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.risk-phone-zh-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-off.light",
+      "caseId": "components.checkbox-family.model-phone-zh-off.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 90.965,
+      "pixelPerfectPct": 87.977,
+      "rgbPct": 92.187,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-off.dark",
+      "caseId": "components.checkbox-family.model-phone-zh-off.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.127,
+      "pixelPerfectPct": 86.167,
+      "rgbPct": 92.856,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-on.light",
+      "caseId": "components.checkbox-family.model-phone-zh-on.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 92.27,
+      "pixelPerfectPct": 87.893,
+      "rgbPct": 91.407,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-on.dark",
+      "caseId": "components.checkbox-family.model-phone-zh-on.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 90.404,
+      "pixelPerfectPct": 86.097,
+      "rgbPct": 91.85,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-off-disabled.light",
+      "caseId": "components.checkbox-family.model-phone-zh-off-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 87.388,
+      "pixelPerfectPct": 84.456,
+      "rgbPct": 96.58,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-off-disabled.dark",
+      "caseId": "components.checkbox-family.model-phone-zh-off-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.212,
+      "pixelPerfectPct": 86.265,
+      "rgbPct": 96.589,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-on-disabled.light",
+      "caseId": "components.checkbox-family.model-phone-zh-on-disabled.light",
+      "kind": "checkbox-family.model",
+      "theme": "light",
+      "nonTextPct": 69.501,
+      "pixelPerfectPct": 66.568,
+      "rgbPct": 96.566,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.checkbox-family.model-phone-zh-on-disabled.dark",
+      "caseId": "components.checkbox-family.model-phone-zh-on-disabled.dark",
+      "kind": "checkbox-family.model",
+      "theme": "dark",
+      "nonTextPct": 89.169,
+      "pixelPerfectPct": 86.223,
+      "rgbPct": 96.525,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.checkbox-family.model-phone-zh-on-disabled.dark.side-by-side.png"
+    }
+  ]
+}
