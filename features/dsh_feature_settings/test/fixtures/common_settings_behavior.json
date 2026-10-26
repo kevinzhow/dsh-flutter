@@ -1,0 +1,1612 @@
+{
+  "web": [
+    {
+      "web": {
+        "searchProvider": "deepseek-official",
+        "fetchProvider": "http"
+      },
+      "messages": {
+        "baseURL": "",
+        "maxUses": 5
+      },
+      "api": {
+        "baseURL": "",
+        "count": 10
+      },
+      "actions": [
+        {
+          "op": "select",
+          "value": true
+        },
+        {
+          "op": "edit",
+          "field": "count",
+          "value": "51"
+        },
+        {
+          "op": "select",
+          "value": false
+        },
+        {
+          "op": "edit",
+          "field": "count",
+          "value": "12"
+        },
+        {
+          "op": "edit",
+          "field": "baseURL",
+          "value": "https://api.example/v1/tools"
+        },
+        {
+          "op": "save"
+        },
+        {
+          "op": "select",
+          "value": false
+        },
+        {
+          "op": "edit",
+          "field": "maxUses",
+          "value": "3"
+        },
+        {
+          "op": "fail",
+          "scope": "messages"
+        },
+        {
+          "op": "save"
+        },
+        {
+          "op": "select",
+          "value": true
+        },
+        {
+          "op": "discard"
+        },
+        {
+          "op": "edit",
+          "field": "apiKey",
+          "value": "synthetic-key"
+        },
+        {
+          "op": "save"
+        }
+      ]
+    }
+  ],
+  "subagent": [
+    {
+      "initial": {
+        "enabled": false,
+        "allowedModels": [
+          {
+            "provider": "retired",
+            "model": "old"
+          }
+        ]
+      },
+      "catalog": {
+        "groups": [
+          {
+            "id": "live",
+            "name": "Live",
+            "models": [
+              {
+                "id": "new",
+                "name": "New"
+              }
+            ]
+          }
+        ],
+        "failures": [],
+        "default": {
+          "provider": "live",
+          "model": "new"
+        },
+        "routableProviders": [
+          "live"
+        ]
+      },
+      "actions": [
+        {
+          "op": "enable"
+        },
+        {
+          "op": "toggle",
+          "provider": "retired",
+          "model": "old"
+        },
+        {
+          "op": "save"
+        },
+        {
+          "op": "toggle",
+          "provider": "live",
+          "model": "new"
+        },
+        {
+          "op": "save"
+        },
+        {
+          "op": "enable"
+        },
+        {
+          "op": "replace",
+          "value": {
+            "enabled": true,
+            "allowedModels": [
+              {
+                "provider": "retired",
+                "model": "old"
+              }
+            ]
+          }
+        },
+        {
+          "op": "save"
+        },
+        {
+          "op": "discard"
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "web": [
+      [
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "10",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "10",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": true,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": true,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "51",
+              "overridden": false,
+              "invalid": true
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": true,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": true,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "51",
+              "overridden": false,
+              "invalid": true
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "https://api.example/v1/tools",
+              "overridden": true,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "https://api.example/v1/tools",
+              "overridden": true,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "3",
+              "overridden": true,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "3",
+              "overridden": true,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": true,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": true,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "3",
+              "overridden": true,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web-search-deepseek",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "maxUses"
+                  ],
+                  "value": 3
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": true,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": true,
+            "useSearchApi": false,
+            "baseURL": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "3",
+              "overridden": true,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web-search-deepseek",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "maxUses"
+                  ],
+                  "value": 3
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "https://api.example/v1/tools",
+              "overridden": true,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web-search-deepseek",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "maxUses"
+                  ],
+                  "value": 3
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "https://api.example/v1/tools",
+              "overridden": true,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "synthetic-key",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": false,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web-search-deepseek",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "maxUses"
+                  ],
+                  "value": 3
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "apiSwitchAvailable": true,
+            "apiSwitchBlocked": false,
+            "useSearchApi": true,
+            "baseURL": {
+              "text": "https://api.example/v1/tools",
+              "overridden": true,
+              "invalid": false
+            },
+            "maxUses": {
+              "text": "5",
+              "overridden": false,
+              "invalid": false
+            },
+            "count": {
+              "text": "12",
+              "overridden": true,
+              "invalid": false
+            },
+            "apiKey": {
+              "text": "",
+              "overridden": false,
+              "invalid": false
+            },
+            "apiKeyConfigured": true,
+            "apiKeyWritable": true
+          },
+          "calls": [
+            {
+              "ns": "web-deepseek-api",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "count"
+                  ],
+                  "value": 12
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "baseURL"
+                  ],
+                  "value": "https://api.example/v1/tools"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "searchProvider"
+                  ],
+                  "value": "deepseek-search-api"
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "fetchProvider"
+                  ],
+                  "value": "deepseek-fetch-api"
+                }
+              ],
+              "revision": 3
+            },
+            {
+              "ns": "web-search-deepseek",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "maxUses"
+                  ],
+                  "value": 3
+                }
+              ],
+              "revision": 3
+            }
+          ],
+          "keys": [
+            {
+              "ref": "DEEPSEEK_API_KEY",
+              "value": "synthetic-key"
+            }
+          ]
+        }
+      ]
+    ],
+    "subagent": [
+      [
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": false,
+            "candidates": [
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": true
+              }
+            ],
+            "catalogStatus": "idle",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": false
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": true
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": true,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": false
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": false
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": true,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": false
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": false
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": true
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": false
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": []
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": true
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": [
+            {
+              "ns": "subagent-model-selection-settings",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "enabled"
+                  ],
+                  "value": true
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "allowedModels"
+                  ],
+                  "value": [
+                    {
+                      "provider": "live",
+                      "model": "new"
+                    }
+                  ]
+                }
+              ],
+              "revision": 3
+            }
+          ]
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": false,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": true
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": [
+            {
+              "ns": "subagent-model-selection-settings",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "enabled"
+                  ],
+                  "value": true
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "allowedModels"
+                  ],
+                  "value": [
+                    {
+                      "provider": "live",
+                      "model": "new"
+                    }
+                  ]
+                }
+              ],
+              "revision": 3
+            }
+          ]
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": false,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": true
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": false
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": true
+          },
+          "calls": [
+            {
+              "ns": "subagent-model-selection-settings",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "enabled"
+                  ],
+                  "value": true
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "allowedModels"
+                  ],
+                  "value": [
+                    {
+                      "provider": "live",
+                      "model": "new"
+                    }
+                  ]
+                }
+              ],
+              "revision": 3
+            }
+          ]
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": true,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": false,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": true
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": false
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": true
+          },
+          "calls": [
+            {
+              "ns": "subagent-model-selection-settings",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "enabled"
+                  ],
+                  "value": true
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "allowedModels"
+                  ],
+                  "value": [
+                    {
+                      "provider": "live",
+                      "model": "new"
+                    }
+                  ]
+                }
+              ],
+              "revision": 3
+            }
+          ]
+        },
+        {
+          "state": {
+            "available": true,
+            "writable": true,
+            "dirty": false,
+            "invalid": false,
+            "saving": false,
+            "failed": false,
+            "enabled": true,
+            "candidates": [
+              {
+                "provider": "live",
+                "model": "new",
+                "key": "live\u0000new",
+                "providerName": "Live",
+                "modelName": "New",
+                "available": true,
+                "selected": false
+              },
+              {
+                "provider": "retired",
+                "model": "old",
+                "key": "retired\u0000old",
+                "providerName": "retired",
+                "modelName": "old",
+                "available": false,
+                "selected": true
+              }
+            ],
+            "catalogStatus": "ready",
+            "catalogPartial": false,
+            "conflicted": false
+          },
+          "calls": [
+            {
+              "ns": "subagent-model-selection-settings",
+              "ops": [
+                {
+                  "op": "set",
+                  "path": [
+                    "enabled"
+                  ],
+                  "value": true
+                },
+                {
+                  "op": "set",
+                  "path": [
+                    "allowedModels"
+                  ],
+                  "value": [
+                    {
+                      "provider": "live",
+                      "model": "new"
+                    }
+                  ]
+                }
+              ],
+              "revision": 3
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

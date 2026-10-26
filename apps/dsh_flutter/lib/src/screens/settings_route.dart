@@ -6,9 +6,14 @@ import '../app_controller.dart';
 /// The settings page as a route of the app: it follows the controller (the
 /// language, the connection, the registered sections) and leaves by popping.
 class SettingsRoute extends StatelessWidget {
-  const SettingsRoute({super.key, required this.controller});
+  const SettingsRoute({
+    super.key,
+    required this.controller,
+    this.initialSection,
+  });
 
   final AppController controller;
+  final String? initialSection;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class SettingsRoute extends StatelessWidget {
       listenable: controller,
       builder: (context, _) => SettingsPage(
         slots: controller.slots,
+        initialSection: initialSection,
         i18n: controller.i18n,
         onClose: () => Navigator.of(context).pop(),
       ),

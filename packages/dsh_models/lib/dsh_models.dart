@@ -34,3 +34,5 @@ export 'src/session_lineage.dart';
 
 export 'src/deliverables.dart';
 export 'src/settings/developer_tools.dart';
+
+export 'src/settings/model_providers.dart';

@@ -1,0 +1,510 @@
+{
+  "keys": [
+    "",
+    " ",
+    "\t\n",
+    " value ",
+    "ABCD==",
+    "API_KEY=value",
+    "lower=value",
+    "'value'",
+    "\"value\"",
+    "`value`",
+    "space value",
+    "value\nvalue",
+    "键",
+    "v",
+    "v\u001f",
+    "VALUE=",
+    "ABC=",
+    "A==B",
+    "A=b=c",
+    "+value/with=padding",
+    "value",
+    "﻿value ",
+    " value　",
+    "",
+    "﻿"
+  ],
+  "refs": [
+    "openai",
+    "minimax-cn",
+    "my.gateway",
+    "m--a",
+    "9route",
+    "a_b",
+    "深度"
+  ],
+  "capacities": [
+    "",
+    " ",
+    "1",
+    "256K",
+    "2.3M",
+    "0.5k",
+    "0",
+    "0.1",
+    "-1",
+    "1k",
+    "1.5",
+    "1e3",
+    "12MK",
+    "x",
+    ".2M",
+    "2.3m",
+    "0.001K",
+    "1000",
+    "1K",
+    "﻿256K　"
+  ],
+  "formatted": [
+    1,
+    1000,
+    256000,
+    1000000,
+    2300000,
+    0,
+    1.5,
+    -1000
+  ],
+  "models": [
+    null,
+    [],
+    [
+      {}
+    ],
+    [
+      {
+        "id": "x"
+      }
+    ],
+    [
+      {
+        "id": " x "
+      },
+      {
+        "id": "x"
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "name": ""
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "contextWindow": 0
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "maxTokens": 1.5
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "contextWindow": 256000,
+        "maxTokens": 32000,
+        "unseen": true
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": false
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": null
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {}
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {
+          "off": null
+        }
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {
+          "off": null,
+          "high": "high"
+        }
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {
+          "high": null
+        }
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {
+          "high": ""
+        }
+      }
+    ],
+    [
+      {
+        "id": "x",
+        "reasoningEfforts": {
+          "medium": "custom"
+        }
+      }
+    ]
+  ],
+  "ops": [
+    {
+      "base": [
+        "providers",
+        "acme"
+      ],
+      "before": {
+        "baseURL": "old",
+        "opaque": {
+          "keep": true
+        },
+        "remove": 1
+      },
+      "after": {
+        "opaque": {
+          "keep": true
+        },
+        "baseURL": "new",
+        "add": 2
+      }
+    },
+    {
+      "base": [],
+      "before": null,
+      "after": {}
+    },
+    {
+      "base": [],
+      "before": {
+        "nullable": null
+      },
+      "after": {}
+    },
+    {
+      "base": [],
+      "before": {},
+      "after": {
+        "nullable": null
+      }
+    }
+  ],
+  "joins": [
+    {
+      "live": [
+        {
+          "id": "other",
+          "name": "Other"
+        },
+        {
+          "id": "deepseek-official",
+          "name": "Official"
+        },
+        {
+          "id": "live",
+          "name": "Live"
+        }
+      ],
+      "directory": [
+        {
+          "provider": "other",
+          "displayName": "other",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "other"
+          ]
+        },
+        {
+          "provider": "deepseek-account",
+          "displayName": "deepseek-account",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "deepseek-account"
+          ]
+        },
+        {
+          "provider": "deepseek-official",
+          "displayName": "deepseek-official",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "deepseek-official"
+          ]
+        },
+        {
+          "provider": "dormant",
+          "displayName": "dormant",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "dormant"
+          ]
+        }
+      ]
+    }
+  ],
+  "expected": {
+    "keys": [
+      null,
+      "keyBlank",
+      "keyBlank",
+      null,
+      null,
+      "keyIllegalCharacters",
+      null,
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      "keyIllegalCharacters",
+      null,
+      null,
+      null,
+      "keyIllegalCharacters",
+      null,
+      "keyIllegalCharacters",
+      null,
+      null,
+      "keyIllegalCharacters",
+      "keyBlank"
+    ],
+    "refs": [
+      "OPENAI_API_KEY",
+      "MINIMAX_CN_API_KEY",
+      "MY_GATEWAY_API_KEY",
+      "M_A_API_KEY",
+      "9ROUTE_API_KEY",
+      "A_B_API_KEY",
+      "__API_KEY"
+    ],
+    "capacities": [
+      null,
+      null,
+      1,
+      256000,
+      2300000,
+      500,
+      0,
+      0.1,
+      "NaN",
+      1000,
+      1.5,
+      "NaN",
+      "NaN",
+      "NaN",
+      "NaN",
+      2300000,
+      1,
+      1000,
+      "NaN",
+      256000
+    ],
+    "formatted": [
+      "1",
+      "1K",
+      "256K",
+      "1M",
+      "2300K",
+      "0",
+      "1.5",
+      "-1000"
+    ],
+    "models": [
+      null,
+      null,
+      {
+        "index": 0,
+        "key": "modelIdRequired"
+      },
+      null,
+      {
+        "index": 1,
+        "key": "modelIdDuplicate"
+      },
+      {
+        "index": 0,
+        "key": "modelNameInvalid"
+      },
+      {
+        "index": 0,
+        "key": "modelContextInvalid"
+      },
+      {
+        "index": 0,
+        "key": "modelMaxTokensInvalid"
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "reasoning": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "index": 0,
+        "key": "modelReasoningNeedsLevel"
+      },
+      {
+        "index": 0,
+        "key": "modelReasoningNeedsLevel"
+      },
+      {
+        "index": 0,
+        "key": "modelReasoningNeedsLevel"
+      },
+      null,
+      {
+        "index": 0,
+        "key": "modelReasoningValueRequired"
+      },
+      {
+        "index": 0,
+        "key": "modelReasoningValueRequired"
+      },
+      null
+    ],
+    "ops": [
+      [
+        {
+          "op": "set",
+          "path": [
+            "providers",
+            "acme",
+            "baseURL"
+          ],
+          "value": "new"
+        },
+        {
+          "op": "set",
+          "path": [
+            "providers",
+            "acme",
+            "add"
+          ],
+          "value": 2
+        },
+        {
+          "op": "unset",
+          "path": [
+            "providers",
+            "acme",
+            "remove"
+          ]
+        }
+      ],
+      [],
+      [
+        {
+          "op": "unset",
+          "path": [
+            "nullable"
+          ]
+        }
+      ],
+      [
+        {
+          "op": "set",
+          "path": [
+            "nullable"
+          ],
+          "value": null
+        }
+      ]
+    ],
+    "joins": [
+      [
+        {
+          "provider": "deepseek-account",
+          "displayName": "deepseek-account",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "deepseek-account"
+          ],
+          "active": false
+        },
+        {
+          "provider": "deepseek-official",
+          "displayName": "deepseek-official",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "deepseek-official"
+          ],
+          "active": true
+        },
+        {
+          "provider": "other",
+          "displayName": "other",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "other"
+          ],
+          "active": true
+        },
+        {
+          "provider": "dormant",
+          "displayName": "dormant",
+          "settingsNs": "llm-pi-ai",
+          "settingsPath": [
+            "providers",
+            "dormant"
+          ],
+          "active": false
+        },
+        {
+          "provider": "live",
+          "displayName": "Live",
+          "settingsNs": "",
+          "settingsPath": [],
+          "active": true
+        }
+      ]
+    ]
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}
