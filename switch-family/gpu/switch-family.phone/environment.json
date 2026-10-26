@@ -1,0 +1,84 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "initial",
+      "rect": [
+        323,
+        308,
+        374,
+        343
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "initial",
+      "rect": [
+        18,
+        292,
+        319,
+        359
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "focused",
+      "rect": [
+        323,
+        308,
+        374,
+        343
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "keyboard-off",
+      "rect": [
+        323,
+        308,
+        374,
+        343
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pointer-on",
+      "rect": [
+        225,
+        10,
+        269,
+        35
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "en"
+}

@@ -1,0 +1,159 @@
+{
+  "implementationHead": "e6e88d40d4135d0b7453b50ef3aab952e6c9fd34",
+  "tree": "6bc35fe63996c6819249d8a324421060c2b06bb0",
+  "runtimeBuildHead": "5a013fef935cc15847a99d311d3eae570b4be87e",
+  "changesSinceRuntimeBuild": [
+    "desktop replay manifest",
+    "brace-only lint fix in reference capture harness"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 Switch.module.css and locked Switch.tsx",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T22:39:38+00:00",
+    "headTree": "6bc35fe63996c6819249d8a324421060c2b06bb0",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.6
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 12.6
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 3.5
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 4.0
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 190.1
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "20a2dc8081522b9acb99422d96b4c3f3c70c8d61bfbc3f764ce5ace15c0752af"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "c5367c4663900fb973a55ec41fd08d4228baf13d7cb957152581c1098dd84c44"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "4b382926a0ccef16ee9b2be8c02a73ac310b9b513ec4955ef69978c60bea3414",
+      "applicationLibrarySha256": "e6abb802c0712fb8486cf51a10e620a6c5d961ab40b09aa7479afbff2e3c39ba"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "4b382926a0ccef16ee9b2be8c02a73ac310b9b513ec4955ef69978c60bea3414",
+      "applicationLibrarySha256": "8991ae359c5892e4cc251712123dba782d7269d1418d24eab262bd59026f535f"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "switch-family.desktop",
+      "assertions": 5
+    },
+    {
+      "case": "switch-family.phone",
+      "assertions": 5
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "emulated hardware keyboard Tab",
+      "emulated hardware keyboard Space"
+    ],
+    "accessibility": "Android switch checked/enabled/clickable states were read from UIAutomator",
+    "focusOutlineChangedPixels": true,
+    "tabsToSwitch": 7,
+    "scenes": [
+      {
+        "scene": "initial",
+        "attempts": 1
+      },
+      {
+        "scene": "disabled-tap",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-off",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-focused",
+        "attempts": 1
+      },
+      {
+        "scene": "space-on",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "croppedControls": {
+      "compared": 32,
+      "dimensionsEqual": 32,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 87.7893125
+    },
+    "wholePageFocus": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 8,
+      "meanNonTextPct": 99.5400625
+    },
+    "thresholdPct": 99.5
+  },
+  "pluginRegression": {
+    "cases": 8,
+    "providers": 2,
+    "equal": 16
+  },
+  "remaining": "All 32 individual switch crops remain below 99.5%; the full-page focus scores are not control-level parity. Dark off-track compositing differs by one channel level in the inspected sample.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

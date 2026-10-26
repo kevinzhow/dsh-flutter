@@ -1,0 +1,294 @@
+{
+  "cases": [
+    {
+      "id": "switch-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            45
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              1077,
+              260,
+              1128,
+              295
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              151,
+              242,
+              1070,
+              311
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "focused",
+            "rect": [
+              1077,
+              260,
+              1128,
+              295
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "keyboard-off"
+        },
+        {
+          "click": [
+            1102,
+            277
+          ]
+        },
+        {
+          "expect": {
+            "reference": "keyboard-off",
+            "rect": [
+              1077,
+              260,
+              1128,
+              295
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "pointer-on"
+        },
+        {
+          "click": [
+            692,
+            22
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pointer-on",
+            "rect": [
+              670,
+              10,
+              714,
+              35
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-tap"
+        }
+      ]
+    },
+    {
+      "id": "switch-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            45
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              323,
+              308,
+              374,
+              343
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              18,
+              292,
+              319,
+              359
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "focused",
+            "rect": [
+              323,
+              308,
+              374,
+              343
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "keyboard-off"
+        },
+        {
+          "click": [
+            347,
+            325
+          ]
+        },
+        {
+          "expect": {
+            "reference": "keyboard-off",
+            "rect": [
+              323,
+              308,
+              374,
+              343
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "pointer-on"
+        },
+        {
+          "click": [
+            247,
+            22
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pointer-on",
+            "rect": [
+              225,
+              10,
+              269,
+              35
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-tap"
+        }
+      ]
+    }
+  ]
+}

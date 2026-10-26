@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "emulated hardware keyboard Tab",
+    "emulated hardware keyboard Space"
+  ],
+  "accessibility": "Android switch checked/enabled/clickable states were read from UIAutomator",
+  "focusOutlineChangedPixels": true,
+  "tabsToSwitch": 7,
+  "scenes": [
+    {
+      "scene": "initial",
+      "attempts": 1
+    },
+    {
+      "scene": "disabled-tap",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-off",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-focused",
+      "attempts": 1
+    },
+    {
+      "scene": "space-on",
+      "attempts": 1
+    }
+  ]
+}

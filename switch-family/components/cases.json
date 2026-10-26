@@ -1,0 +1,1974 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.switch-family.plugin-desktop-en-on.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-on.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-on-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-on-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-on-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-on-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-en-off-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-en-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-on-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-desktop-zh-off-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-desktop-zh-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-on-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-en-off-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-en-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off-disabled.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off-disabled.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off-disabled",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-disabled",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": true
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+        "flutterKey": "plugin-switch-@synthetic/preview-bundle",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-on-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-on-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "on-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": true,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off-focused.light",
+      "title": "Plugin bundle switch (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.switch-family.plugin-phone-zh-off-focused.dark",
+      "title": "Plugin bundle switch (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "plugin-phone-zh-off-focused",
+      "category": "extension/switch-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "off-focused",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated",
+            "switchEnabled": false,
+            "switchLocked": false
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-switch-@synthetic/preview-bundle"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    }
+  ]
+}
