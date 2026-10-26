@@ -1,0 +1,117 @@
+{
+  "implementationHead": "5853a4ac9acb9ba81c6357d0c2e74786993175a7",
+  "tree": "4581b7b6444d1097cab5a2b96197b7842b4f3fe8",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInputs": "ui-theme and ui-sidebar-terminal 0.2.1-rc.2; archive/bundle/snapshot/injection-order verified",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T12:39:35+00:00",
+    "headTree": "4581b7b6444d1097cab5a2b96197b7842b4f3fe8",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.9
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 9.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.0
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 1.9
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 314.3
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "0e57728b2d9ce7c820a0909213926e12b7d0cccf280df9f932989468fdd1c87e"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "058d9dc4a6f41d23cdf5be8f36ebeca42aa853e503eaa466e096dd99b8b18847"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "20ed5018151949a616c8738165beef8e0bc5abdba27ce88f96bc3fc7c6ef228b",
+      "applicationLibrarySha256": "28420edb4463500ac15cf8ca91c51d7b1356f1994e31ee7be82a4319f4920038"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "20ed5018151949a616c8738165beef8e0bc5abdba27ce88f96bc3fc7c6ef228b",
+      "applicationLibrarySha256": "a12163915857349592a7bea12f61adcd2a431ea174703301c33b5937a9b40330"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "plugin-layout.desktop",
+      "passedAssertions": 4
+    },
+    {
+      "case": "plugin-layout.phone",
+      "passedAssertions": 4
+    }
+  ],
+  "androidPassedScenes": 18,
+  "androidInitialRun": "First run did not navigate after a detail-row tap; identical coordinates worked on inspection. Second run matched stale detail accessibility text as list readiness. Strengthened activity startup and two fresh reads requiring the actual list action; final full18-scene run passed without product changes. Original missed-tap cause not established.",
+  "visual": {
+    "compared": 88,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 12,
+    "dimensionsEqual": 88,
+    "meanNonTextPct": 97.73092045454545
+  },
+  "captureHead": "5853a4ac9acb9ba81c6357d0c2e74786993175a7",
+  "all88WidgetPngsRegeneratedAtImplementationHead": true,
+  "colourRgbaBytesUnchanged": 330,
+  "shadowGeometryAndColourBytesUnchanged": 12,
+  "fontsNumbersTypographyUnchanged": true,
+  "oldWhaleeUsedForRegressionOnly": true,
+  "unchangedWidgetPngs": 60,
+  "remaining28WidgetPngMaxChannelDelta": 1,
+  "fontsThresholdClassifierChanges": false,
+  "remainingMenuScopes": "Audited pending macOS material and dark menu stroke; no claim of runtime implementation",
+  "releaseOrDeployment": false
+}

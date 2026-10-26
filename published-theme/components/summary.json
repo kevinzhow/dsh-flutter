@@ -1,0 +1,1505 @@
+{
+  "compared": 88,
+  "nonTextThresholdPct": 99.5,
+  "nonTextPassing": 12,
+  "dimensionsEqual": 88,
+  "meanNonTextPct": 97.73092045454545,
+  "cases": [
+    {
+      "key": "components.button.matrix.primary-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.333,
+      "pixelPerfectPct": 94.311,
+      "rgbPct": 99.196,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.33,
+      "pixelPerfectPct": 94.314,
+      "rgbPct": 99.235,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.309,
+      "pixelPerfectPct": 94.301,
+      "rgbPct": 99.353,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.309,
+      "pixelPerfectPct": 94.301,
+      "rgbPct": 99.36,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.743,
+      "pixelPerfectPct": 94.74,
+      "rgbPct": 99.222,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.743,
+      "pixelPerfectPct": 94.74,
+      "rgbPct": 99.261,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.747,
+      "pixelPerfectPct": 94.774,
+      "rgbPct": 99.421,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.747,
+      "pixelPerfectPct": 94.774,
+      "rgbPct": 99.427,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.689,
+      "pixelPerfectPct": 94.948,
+      "rgbPct": 99.364,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.554,
+      "pixelPerfectPct": 94.813,
+      "rgbPct": 99.371,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.689,
+      "pixelPerfectPct": 94.942,
+      "rgbPct": 99.251,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.508,
+      "pixelPerfectPct": 94.77,
+      "rgbPct": 99.263,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 99.094,
+      "pixelPerfectPct": 95.24,
+      "rgbPct": 99.419,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.993,
+      "pixelPerfectPct": 95.139,
+      "rgbPct": 99.425,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 99.122,
+      "pixelPerfectPct": 95.226,
+      "rgbPct": 99.262,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.986,
+      "pixelPerfectPct": 95.087,
+      "rgbPct": 99.275,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 97.776,
+      "pixelPerfectPct": 94.035,
+      "rgbPct": 99.357,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 97.739,
+      "pixelPerfectPct": 93.998,
+      "rgbPct": 99.363,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 97.647,
+      "pixelPerfectPct": 93.9,
+      "rgbPct": 99.241,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 97.328,
+      "pixelPerfectPct": 93.379,
+      "rgbPct": 99.252,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.552,
+      "pixelPerfectPct": 94.698,
+      "rgbPct": 99.417,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.521,
+      "pixelPerfectPct": 94.667,
+      "rgbPct": 99.422,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.556,
+      "pixelPerfectPct": 94.66,
+      "rgbPct": 99.259,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.062,
+      "pixelPerfectPct": 94.118,
+      "rgbPct": 99.27,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.238,
+      "pixelPerfectPct": 94.329,
+      "rgbPct": 99.58,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.238,
+      "pixelPerfectPct": 94.332,
+      "rgbPct": 99.589,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.082,
+      "pixelPerfectPct": 94.347,
+      "rgbPct": 99.35,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.088,
+      "pixelPerfectPct": 94.36,
+      "rgbPct": 99.354,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.799,
+      "rgbPct": 99.621,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.802,
+      "rgbPct": 99.629,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.826,
+      "rgbPct": 99.362,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.719,
+      "pixelPerfectPct": 94.826,
+      "rgbPct": 99.366,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-desktop-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.679,
+      "pixelPerfectPct": 98.993,
+      "rgbPct": 99.906,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.664,
+      "pixelPerfectPct": 98.967,
+      "rgbPct": 99.88,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.727,
+      "pixelPerfectPct": 98.923,
+      "rgbPct": 99.803,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.728,
+      "pixelPerfectPct": 98.895,
+      "rgbPct": 99.777,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-phone-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.45,
+      "pixelPerfectPct": 98.974,
+      "rgbPct": 99.826,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-phone-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.459,
+      "pixelPerfectPct": 98.969,
+      "rgbPct": 99.812,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-phone-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.447,
+      "pixelPerfectPct": 98.622,
+      "rgbPct": 99.512,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.473,
+      "pixelPerfectPct": 98.616,
+      "rgbPct": 99.481,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-populated-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-desktop-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.705,
+      "pixelPerfectPct": 99.204,
+      "rgbPct": 99.863,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-desktop-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.704,
+      "pixelPerfectPct": 99.194,
+      "rgbPct": 99.818,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-desktop-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.775,
+      "pixelPerfectPct": 99.119,
+      "rgbPct": 99.784,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-desktop-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.786,
+      "pixelPerfectPct": 99.108,
+      "rgbPct": 99.735,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-phone-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.429,
+      "pixelPerfectPct": 98.95,
+      "rgbPct": 99.711,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-phone-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.445,
+      "pixelPerfectPct": 98.951,
+      "rgbPct": 99.657,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-phone-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.39,
+      "pixelPerfectPct": 98.67,
+      "rgbPct": 99.489,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-empty-phone-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.423,
+      "pixelPerfectPct": 98.67,
+      "rgbPct": 99.418,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-empty-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-desktop-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.73,
+      "pixelPerfectPct": 99.068,
+      "rgbPct": 99.943,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-desktop-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.748,
+      "pixelPerfectPct": 99.044,
+      "rgbPct": 99.917,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-desktop-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.725,
+      "pixelPerfectPct": 99.048,
+      "rgbPct": 99.813,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-desktop-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.799,
+      "pixelPerfectPct": 99.045,
+      "rgbPct": 99.776,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-phone-en.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.41,
+      "pixelPerfectPct": 98.94,
+      "rgbPct": 99.869,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-phone-en.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.43,
+      "pixelPerfectPct": 98.932,
+      "rgbPct": 99.842,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-phone-zh.light",
+      "kind": "plugins-preview.manager",
+      "theme": "light",
+      "nonTextPct": 99.391,
+      "pixelPerfectPct": 98.516,
+      "rgbPct": 99.54,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.manager-unavailable-phone-zh.dark",
+      "kind": "plugins-preview.manager",
+      "theme": "dark",
+      "nonTextPct": 99.499,
+      "pixelPerfectPct": 98.516,
+      "rgbPct": 99.455,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.manager-unavailable-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-desktop-en.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 98.441,
+      "pixelPerfectPct": 97.695,
+      "rgbPct": 99.243,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-desktop-en.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 80.378,
+      "pixelPerfectPct": 78.61,
+      "rgbPct": 97.469,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-desktop-zh.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 98.731,
+      "pixelPerfectPct": 98.229,
+      "rgbPct": 99.574,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-desktop-zh.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 80.503,
+      "pixelPerfectPct": 79.119,
+      "rgbPct": 97.81,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-phone-en.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 97.738,
+      "pixelPerfectPct": 96.825,
+      "rgbPct": 98.411,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-phone-en.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 81.527,
+      "pixelPerfectPct": 79.281,
+      "rgbPct": 96.759,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-phone-zh.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 98.555,
+      "pixelPerfectPct": 97.993,
+      "rgbPct": 99.161,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-populated-phone-zh.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 82.102,
+      "pixelPerfectPct": 80.391,
+      "rgbPct": 97.522,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-populated-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-desktop-en.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 99.021,
+      "pixelPerfectPct": 98.492,
+      "rgbPct": 99.335,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-desktop-en.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 95.962,
+      "pixelPerfectPct": 94.937,
+      "rgbPct": 99.034,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-desktop-zh.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 99.372,
+      "pixelPerfectPct": 99.057,
+      "rgbPct": 99.693,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-desktop-zh.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 96.179,
+      "pixelPerfectPct": 95.471,
+      "rgbPct": 99.405,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-phone-en.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 98.271,
+      "pixelPerfectPct": 97.543,
+      "rgbPct": 98.617,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-phone-en.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 95.206,
+      "pixelPerfectPct": 93.987,
+      "rgbPct": 98.321,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-phone-zh.light",
+      "kind": "plugins-preview.inventory",
+      "theme": "light",
+      "nonTextPct": 99.153,
+      "pixelPerfectPct": 98.755,
+      "rgbPct": 99.42,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.inventory-empty-phone-zh.dark",
+      "kind": "plugins-preview.inventory",
+      "theme": "dark",
+      "nonTextPct": 95.891,
+      "pixelPerfectPct": 95.145,
+      "rgbPct": 99.132,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.inventory-empty-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-desktop-en.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.391,
+      "pixelPerfectPct": 96.875,
+      "rgbPct": 98.491,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-desktop-en.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 98.411,
+      "pixelPerfectPct": 96.874,
+      "rgbPct": 98.183,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-desktop-zh.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.763,
+      "pixelPerfectPct": 97.06,
+      "rgbPct": 98.805,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-desktop-zh.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 98.815,
+      "pixelPerfectPct": 97.055,
+      "rgbPct": 98.466,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-phone-en.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 96.388,
+      "pixelPerfectPct": 94.672,
+      "rgbPct": 96.848,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-phone-en.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 96.473,
+      "pixelPerfectPct": 94.635,
+      "rgbPct": 96.492,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-phone-zh.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 96.643,
+      "pixelPerfectPct": 95.141,
+      "rgbPct": 97.364,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-noindexes-phone-zh.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 96.733,
+      "pixelPerfectPct": 95.098,
+      "rgbPct": 96.93,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-noindexes-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-desktop-en.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.973,
+      "pixelPerfectPct": 98.108,
+      "rgbPct": 99.214,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-desktop-en.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 97.542,
+      "pixelPerfectPct": 96.371,
+      "rgbPct": 99.142,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-desktop-zh.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 99.164,
+      "pixelPerfectPct": 98.417,
+      "rgbPct": 99.488,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-desktop-zh.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 97.526,
+      "pixelPerfectPct": 96.551,
+      "rgbPct": 99.396,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-phone-en.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 97.286,
+      "pixelPerfectPct": 96.457,
+      "rgbPct": 98.256,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-phone-en.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 96.325,
+      "pixelPerfectPct": 95.237,
+      "rgbPct": 98.345,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-phone-zh.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.076,
+      "pixelPerfectPct": 97.297,
+      "rgbPct": 98.942,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.plugins-preview.market-empty-phone-zh.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 97.158,
+      "pixelPerfectPct": 96.103,
+      "rgbPct": 99.036,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.plugins-preview.market-empty-phone-zh.dark.side-by-side.png"
+    }
+  ]
+}

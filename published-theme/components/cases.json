@@ -1,0 +1,3646 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.button.matrix.primary-md.light",
+      "title": "Button primary md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.primary-md.dark",
+      "title": "Button primary md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.primary-sm.light",
+      "title": "Button primary sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.primary-sm.dark",
+      "title": "Button primary sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.ghost-md.light",
+      "title": "Button ghost md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.ghost-md.dark",
+      "title": "Button ghost md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.ghost-sm.light",
+      "title": "Button ghost sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.ghost-sm.dark",
+      "title": "Button ghost sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.outline-md.light",
+      "title": "Button outline md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.outline-md.dark",
+      "title": "Button outline md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.outline-sm.light",
+      "title": "Button outline sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.outline-sm.dark",
+      "title": "Button outline sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.toolbar-md.light",
+      "title": "Button toolbar md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.toolbar-md.dark",
+      "title": "Button toolbar md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.toolbar-sm.light",
+      "title": "Button toolbar sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.toolbar-sm.dark",
+      "title": "Button toolbar sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-en.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-en.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-en.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-zh.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-desktop-en.light",
+      "title": "manager empty (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-desktop-en.dark",
+      "title": "manager empty (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-desktop-zh.light",
+      "title": "manager empty (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-desktop-zh.dark",
+      "title": "manager empty (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-phone-en.light",
+      "title": "manager empty (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-phone-en.dark",
+      "title": "manager empty (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-phone-zh.light",
+      "title": "manager empty (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-empty-phone-zh.dark",
+      "title": "manager empty (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-desktop-en.light",
+      "title": "manager unavailable (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-desktop-en.dark",
+      "title": "manager unavailable (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-desktop-zh.light",
+      "title": "manager unavailable (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-desktop-zh.dark",
+      "title": "manager unavailable (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-phone-en.light",
+      "title": "manager unavailable (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-phone-en.dark",
+      "title": "manager unavailable (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-phone-zh.light",
+      "title": "manager unavailable (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-unavailable-phone-zh.dark",
+      "title": "manager unavailable (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-unavailable-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "unavailable",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "unavailable"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-desktop-en.light",
+      "title": "inventory populated (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-desktop-en.dark",
+      "title": "inventory populated (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-desktop-zh.light",
+      "title": "inventory populated (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-desktop-zh.dark",
+      "title": "inventory populated (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-phone-en.light",
+      "title": "inventory populated (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-phone-en.dark",
+      "title": "inventory populated (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-phone-zh.light",
+      "title": "inventory populated (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-populated-phone-zh.dark",
+      "title": "inventory populated (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-desktop-en.light",
+      "title": "inventory empty (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-desktop-en.dark",
+      "title": "inventory empty (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-desktop-zh.light",
+      "title": "inventory empty (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-desktop-zh.dark",
+      "title": "inventory empty (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-phone-en.light",
+      "title": "inventory empty (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-phone-en.dark",
+      "title": "inventory empty (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-phone-zh.light",
+      "title": "inventory empty (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.inventory-empty-phone-zh.dark",
+      "title": "inventory empty (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-desktop-en.light",
+      "title": "market noindexes (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-desktop-en.dark",
+      "title": "market noindexes (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-desktop-zh.light",
+      "title": "market noindexes (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-desktop-zh.dark",
+      "title": "market noindexes (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-phone-en.light",
+      "title": "market noindexes (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-phone-en.dark",
+      "title": "market noindexes (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-phone-zh.light",
+      "title": "market noindexes (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-noindexes-phone-zh.dark",
+      "title": "market noindexes (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-noindexes-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "noindexes",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "noindexes"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-desktop-en.light",
+      "title": "market empty (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-desktop-en.dark",
+      "title": "market empty (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-desktop-zh.light",
+      "title": "market empty (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-desktop-zh.dark",
+      "title": "market empty (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-phone-en.light",
+      "title": "market empty (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-phone-en.dark",
+      "title": "market empty (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-phone-zh.light",
+      "title": "market empty (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.market-empty-phone-zh.dark",
+      "title": "market empty (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-empty-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "empty",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "empty"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    }
+  ]
+}
