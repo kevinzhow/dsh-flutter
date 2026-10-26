@@ -121,10 +121,11 @@ void main() {
     try {
       await pump(t);
       final first = t.getSemantics(row('0'));
-      t.renderObject(row('0')).owner!.semanticsOwner!.performAction(
-        first.id,
-        SemanticsAction.focus,
-      );
+      t
+          .renderObject(row('0'))
+          .owner!
+          .semanticsOwner!
+          .performAction(first.id, SemanticsAction.focus);
       await t.pumpAndSettle();
       expect(
         t.getSemantics(row('0')).flagsCollection.isFocused,
@@ -177,10 +178,11 @@ void main() {
         ),
       );
       final item = find.byKey(const ValueKey('standalone'));
-      t.renderObject(item).owner!.semanticsOwner!.performAction(
-        t.getSemantics(item).id,
-        SemanticsAction.focus,
-      );
+      t
+          .renderObject(item)
+          .owner!
+          .semanticsOwner!
+          .performAction(t.getSemantics(item).id, SemanticsAction.focus);
       await t.pumpAndSettle();
       expect(t.getSemantics(item).flagsCollection.isFocused, Tristate.isTrue);
       enabled.value = false;
