@@ -32,9 +32,9 @@
           "expect": {
             "reference": "actions",
             "rect": [
-              650,
-              95,
-              850,
+              1084,
+              100,
+              1265,
               280
             ],
             "changed": true
@@ -56,9 +56,6 @@
           ]
         },
         {
-          "capture": "rename"
-        },
-        {
           "expect": {
             "reference": "menu",
             "rect": [
@@ -69,6 +66,9 @@
             ],
             "changed": true
           }
+        },
+        {
+          "capture": "rename"
         }
       ]
     },
@@ -104,10 +104,10 @@
           "expect": {
             "reference": "actions",
             "rect": [
-              195,
-              95,
-              385,
-              290
+              218,
+              100,
+              374,
+              280
             ],
             "changed": true
           }
@@ -128,19 +128,19 @@
           ]
         },
         {
-          "capture": "rename"
-        },
-        {
           "expect": {
             "reference": "menu",
             "rect": [
               24,
-              270,
+              320,
               366,
-              560
+              530
             ],
             "changed": true
           }
+        },
+        {
+          "capture": "rename"
         }
       ]
     }
