@@ -5,10 +5,15 @@ import 'package:flutter/widgets.dart';
 
 import 'plugins_preview_main.dart' as preview;
 
-Future<void> main() => preview.runFixture(
-  initialPage: 'Dock',
-  extraPages: const {'Dock': _DockScene(), 'Workspaces': _WorkspaceScene()},
-);
+const _pages = <String, Widget>{
+  'Dock': _DockScene(),
+  'Workspaces': _WorkspaceScene(),
+};
+
+Widget menuGeometryFixture() =>
+    const preview.Fixture(initialPage: 'Dock', extraPages: _pages);
+Future<void> main() =>
+    preview.runFixture(initialPage: 'Dock', extraPages: _pages);
 
 const _labels = DockLabels(
   emptyPane: 'Empty pane',
@@ -81,9 +86,7 @@ class _WorkspaceSceneState extends State<_WorkspaceScene> {
         child: Text('Selected workspace: $selected'),
       ),
       if (open)
-        Positioned(
-          left: 0,
-          top: 0,
+        Positioned.fill(
           child: PickerMenu(
             link: link,
             rows: const [

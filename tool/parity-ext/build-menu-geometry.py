@@ -11,4 +11,11 @@ for device,density in [('desktop',1),('phone',2.625)]:
   ],locale=locale,category='extension/menu-geometry',react_hint='packages/client/ui-dockkit/src/components/TabMenu.tsx',flutter_hint='apps/dsh_flutter/test/parity/cases/menu_geometry.dart')
   c['capture']={'selector':'[data-dockkit-tab-menu]','flutterKey':'dock-menu-surface','crop':'element'}
   cases+=themed(c)
+for device,viewport,density in [('desktop',800,1),('phone',390,2.625)]:
+ for locale,label in [('en','Close tab'),('zh-CN','关闭标签页')]:
+  c=base_case(f"components.menu-geometry.screen-{device}-{locale.split('-')[0]}",'Actual dock surface with context menu','menu-geometry.screen',{'width':viewport,'height':600,'density':density},[
+   ('default','Open context menu',{'width':720 if device=='desktop' else 326,'label':label},None),
+  ],locale=locale,category='extension/menu-geometry',react_hint='packages/client/ui-dockkit/src/components/DockSurface.tsx',flutter_hint='apps/dsh_flutter/test/parity/cases/menu_geometry.dart')
+  c['capture']={'selector':'[data-parity-target]','crop':'viewport'}
+  cases+=themed(c)
 replace_cases('components.menu-geometry.',cases)
