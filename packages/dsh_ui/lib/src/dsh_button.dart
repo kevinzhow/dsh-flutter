@@ -55,6 +55,10 @@ class DshButton extends StatefulWidget {
     this.focusNode,
     this.autofocus = false,
     this.semanticLabel,
+    this.height,
+    this.horizontalPadding,
+    this.labelStyle,
+    this.radius,
   });
 
   /// Label, usually a `Text`; it inherits the button's text style and colour.
@@ -80,6 +84,10 @@ class DshButton extends StatefulWidget {
 
   /// Accessibility label; defaults to the child's text.
   final String? semanticLabel;
+
+  /// Component-level CSS overrides; omitted values retain primitive metrics.
+  final double? height, horizontalPadding, radius;
+  final TextStyle? labelStyle;
 
   /// Key of the painted surface (fill, border, radius); for tests.
   static const Key surfaceKey = ValueKey<String>('dshButtonSurface');
@@ -125,7 +133,7 @@ class _DshButtonState extends State<DshButton> {
       );
     }
     final small = widget.size == DshButtonSize.sm;
-    final radius = small ? theme.radiusSm : theme.radiusMd;
+    final radius = widget.radius ?? (small ? theme.radiusSm : theme.radiusMd);
     final rawFill = _fill(theme);
     // A disabled button is one translucent group (`opacity: 0.4` on the whole
     // button), so its fill must stay translucent inside the group: the group
@@ -139,7 +147,8 @@ class _DshButtonState extends State<DshButton> {
         : theme.labelPrimary;
     final textStyle = theme
         .textStyle(small ? '--dsw-font-xxs-12' : '--dsw-font-s-14')
-        .copyWith(color: foreground, decoration: TextDecoration.none);
+        .copyWith(color: foreground, decoration: TextDecoration.none)
+        .merge(widget.labelStyle);
     // `.outline { border: 0.5px solid }` on a border-box button of fixed
     // height: Blink snaps the border to whole device pixels
     // ([dshHairlineOf]: one device pixel on a phone, a whole CSS pixel in the
@@ -164,9 +173,10 @@ class _DshButtonState extends State<DshButton> {
         borderWidth: borderWidth,
       ),
       child: Container(
-        height: small ? 28 : 36,
+        height: widget.height ?? (small ? 28 : 36),
         padding: EdgeInsets.symmetric(
-          horizontal: (small ? 10 : 14) + borderWidth,
+          horizontal:
+              (widget.horizontalPadding ?? (small ? 10 : 14)) + borderWidth,
         ),
         child: DefaultTextStyle.merge(
           style: textStyle,

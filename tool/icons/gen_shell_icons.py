@@ -57,6 +57,7 @@ ICONS = {
     'IconCopyOutlineRegular': 'copyOutline',
     'IconBranchOutlineRegular': 'branch',
     'IconPlusOutlineRegular': 'plusOutline',
+    'IconInfoOutlineRegular': 'infoOutline',
     'IconChevronsUpDownOutlineRegular': 'chevronsUpDown',
     'IconCompareSplitOutlineRegular': 'compareSplit',
     'IconEllipsisOutlineMedium': 'ellipsisMedium',

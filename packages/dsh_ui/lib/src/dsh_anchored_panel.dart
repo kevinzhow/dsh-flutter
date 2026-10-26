@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
 /// Handle an anchor builder uses to open and close its panel.
@@ -27,7 +28,7 @@ enum DshPanelAlign { start, end }
 
 /// A panel that floats over the app beside its anchor (dsh `Menu` portal and
 /// the stat dialogs): [builder] draws the anchor, [panelBuilder] the card. It
-/// closes on a press outside it and when [DshPanelController.close] is called.
+/// closes on Escape, a press outside it, or [DshPanelController.close].
 /// Positions come from the anchor's [LayerLink]; a card wider than the room
 /// keeps its own size and is not clamped here.
 class DshAnchoredPanel extends StatefulWidget {
@@ -66,6 +67,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
   late DshPanelController _controller;
   OverlayEntry? _entry;
   LocalHistoryEntry? _history;
+  FocusNode? _previousFocus;
 
   @override
   void initState() {
@@ -98,10 +100,16 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     final history = _history;
     _history = null;
     history?.remove();
+    final previousFocus = _previousFocus;
+    _previousFocus = null;
+    if (previousFocus?.context != null && previousFocus!.canRequestFocus) {
+      previousFocus.requestFocus();
+    }
   }
 
   void _show() {
     final overlay = Overlay.of(context, rootOverlay: true);
+    _previousFocus = FocusManager.instance.primaryFocus;
     final end = widget.align == DshPanelAlign.end;
     final top = widget.side == DshPanelSide.top;
     double shiftX = 0;
@@ -124,34 +132,44 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
       shiftX = clamped - left;
     }
     _entry = OverlayEntry(
-      builder: (context) => Stack(
-        children: [
-          Positioned.fill(
-            child: Listener(
-              behavior: HitTestBehavior.translucent,
-              onPointerDown: (event) {
-                final box = this.context.findRenderObject()! as RenderBox;
-                final anchor = box.localToGlobal(Offset.zero) & box.size;
-                // The trigger owns its toggle. Closing on its pointer-down
-                // would make its subsequent tap reopen the same panel.
-                if (!anchor.contains(event.position)) _close();
-              },
-              child: const SizedBox.expand(),
+      builder: (context) => FocusScope(
+        autofocus: true,
+        onKeyEvent: (_, event) {
+          if (event.logicalKey != LogicalKeyboardKey.escape) {
+            return KeyEventResult.ignored;
+          }
+          _close();
+          return KeyEventResult.handled;
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Listener(
+                behavior: HitTestBehavior.translucent,
+                onPointerDown: (event) {
+                  final box = this.context.findRenderObject()! as RenderBox;
+                  final anchor = box.localToGlobal(Offset.zero) & box.size;
+                  // The trigger owns its toggle. Closing on its pointer-down
+                  // would make its subsequent tap reopen the same panel.
+                  if (!anchor.contains(event.position)) _close();
+                },
+                child: const SizedBox.expand(),
+              ),
             ),
-          ),
-          CompositedTransformFollower(
-            link: _link,
-            targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
-            followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
-            offset: Offset(shiftX, top ? -widget.gap : widget.gap),
-            child: width == null
-                ? widget.panelBuilder(context, _controller)
-                : SizedBox(
-                    width: width,
-                    child: widget.panelBuilder(context, _controller),
-                  ),
-          ),
-        ],
+            CompositedTransformFollower(
+              link: _link,
+              targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
+              followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
+              offset: Offset(shiftX, top ? -widget.gap : widget.gap),
+              child: width == null
+                  ? widget.panelBuilder(context, _controller)
+                  : SizedBox(
+                      width: width,
+                      child: widget.panelBuilder(context, _controller),
+                    ),
+            ),
+          ],
+        ),
       ),
     );
     overlay.insert(_entry!);

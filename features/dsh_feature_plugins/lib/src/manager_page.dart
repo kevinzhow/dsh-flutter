@@ -157,6 +157,234 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
     }
   }
 
+  Widget _pageStatus(BuildContext context, String text) => Text(
+    text,
+    style: context.dsh
+        .textStyle('--dsw-font-xs-13')
+        .copyWith(
+          height: 20 / 13,
+          color: context.dsh.color('--dsw-alias-label-tertiary'),
+        ),
+  );
+
+  Widget _groupHeading(BuildContext context, String text) => Text(
+    text,
+    style: context.dsh
+        .textStyle('--dsw-font-s-14')
+        .copyWith(
+          height: 22 / 14,
+          fontWeight: FontWeight.w500,
+          color: context.dsh.labelPrimary,
+        ),
+  );
+
+  Widget _heading(BuildContext context) {
+    final theme = context.dsh;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          t('title'),
+          style: theme
+              .textStyle('--dsw-font-l-20')
+              .copyWith(
+                height: 28 / 20,
+                fontWeight: FontWeight.w500,
+                color: theme.labelPrimary,
+              ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Text(
+                t('intro'),
+                style: theme
+                    .textStyle('--dsw-font-xs-13')
+                    .copyWith(height: 20 / 13, color: theme.labelSecondary),
+              ),
+            ),
+            const SizedBox(width: 4),
+            DshAnchoredPanel(
+              panelWidth: 300,
+              align: DshPanelAlign.end,
+              gap: 8,
+              builder: (context, panel) => AnimatedBuilder(
+                animation: panel,
+                builder: (context, _) => DshTooltip(
+                  label: t('infoDescription'),
+                  side: DshTooltipSide.bottom,
+                  delay: const Duration(milliseconds: 300),
+                  disabled: panel.isOpen,
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: DshButton(
+                      height: 20,
+                      horizontalPadding: 0,
+                      semanticLabel: t('infoLabel'),
+                      onPressed: panel.toggle,
+                      child: DshIcon(
+                        DshShellIcons.infoOutline,
+                        size: 11,
+                        color: theme.color('--dsw-alias-label-caption'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              panelBuilder: (context, panel) => DshContainer(
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                decoration: BoxDecoration(
+                  color: theme.color('--dsw-alias-tooltip-bg'),
+                  borderRadius: BorderRadius.circular(theme.radiusSm),
+                ),
+                child: Text(
+                  t('infoDescription'),
+                  style: theme
+                      .textStyle('--dsw-font-xs-13')
+                      .copyWith(
+                        height: 20 / 13,
+                        color: theme.color('--dsw-static-neutral-bluish-00'),
+                      ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _toolbar(BuildContext context) {
+    final theme = context.dsh,
+        loaded =
+            model.status == PluginManagerStatus.ready ||
+            model.status == PluginManagerStatus.error;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        DshTooltip(
+          label: t('refresh'),
+          side: DshTooltipSide.bottom,
+          delay: const Duration(milliseconds: 500),
+          disabled: !loaded || model.refreshing,
+          child: SizedBox(
+            width: 28,
+            height: 28,
+            child: DshButton(
+              height: 28,
+              horizontalPadding: 0,
+              onPressed: !loaded || model.refreshing
+                  ? null
+                  : () => unawaited(model.refresh()),
+              semanticLabel: t('refresh'),
+              child: model.refreshing
+                  ? const DshStateDot(DshStateDotState.ongoing, size: 18)
+                  : DshIcon(
+                      DshIcons.refresh,
+                      size: 16,
+                      color: theme.color('--dsw-alias-label-caption'),
+                    ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        DshAnchoredPanel(
+          align: DshPanelAlign.end,
+          panelWidth: 320,
+          builder: (context, panel) => ClipRRect(
+            borderRadius: BorderRadius.circular(theme.radiusMd),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DshButton(
+                  variant: DshButtonVariant.primary,
+                  height: 32,
+                  horizontalPadding: 12,
+                  radius: 0,
+                  labelStyle: theme
+                      .textStyle('--dsw-font-xs-13')
+                      .copyWith(height: 20 / 13),
+                  icon: const DshIcon(DshShellIcons.plusOutline, size: 13),
+                  onPressed: loaded ? () => unawaited(_install()) : null,
+                  child: Text(
+                    model.installer.requestId == null
+                        ? t('addPlugin')
+                        : t('installViewTask'),
+                  ),
+                ),
+                if (model.installer.requestId == null) ...[
+                  SizedBox(
+                    width: 32,
+                    height: 32,
+                    child: DshButton(
+                      variant: DshButtonVariant.primary,
+                      height: 32,
+                      horizontalPadding: 0,
+                      radius: 0,
+                      semanticLabel: t('chooseAddMethod'),
+                      onPressed: loaded ? panel.toggle : null,
+                      child: DshContainer(
+                        height: 32,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            left: BorderSide(
+                              color: theme.labelPrimaryForeground.withValues(
+                                alpha: .3,
+                              ),
+                              width: dshHairlineOf(context),
+                            ),
+                          ),
+                        ),
+                        child: const DshIcon(
+                          DshShellIcons.chevronDownRegular,
+                          size: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          panelBuilder: (context, panel) => DshMenuSurface(
+            child: DshButton(
+              height: 72,
+              horizontalPadding: 12,
+              onPressed: () {
+                panel.close();
+                unawaited(_install());
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t('installExisting'),
+                    style: theme.textStyle('--dsw-font-s-14'),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    t('installExistingDescription'),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme
+                        .textStyle('--dsw-font-xxs-12')
+                        .copyWith(height: 18 / 12, color: theme.labelSecondary),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final package = model.packages
@@ -170,9 +398,9 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
       builder: (context, constraints) => SingleChildScrollView(
         key: const ValueKey('plugin-manager-page'),
         padding: EdgeInsets.fromLTRB(
-          (constraints.maxWidth * .04).clamp(24, 48),
+          (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
           28,
-          (constraints.maxWidth * .04).clamp(24, 48),
+          (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
           48,
         ),
         child: Align(
@@ -184,41 +412,17 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
               children: [
                 Wrap(
                   alignment: WrapAlignment.spaceBetween,
-                  crossAxisAlignment: WrapCrossAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.start,
                   spacing: 16,
-                  runSpacing: 12,
+                  runSpacing: 16,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        pluginHeading(context, t('title')),
-                        pluginStatus(context, t('intro')),
-                      ],
-                    ),
-                    Wrap(
-                      spacing: 8,
-                      children: [
-                        DshButton(
-                          size: DshButtonSize.sm,
-                          onPressed: model.refreshing
-                              ? null
-                              : () => unawaited(model.refresh()),
-                          child: Text(t('refresh')),
-                        ),
-                        DshButton(
-                          size: DshButtonSize.sm,
-                          variant: DshButtonVariant.primary,
-                          onPressed:
-                              model.status == PluginManagerStatus.unavailable
-                              ? null
-                              : () => unawaited(_install()),
-                          child: Text(t('addPlugin')),
-                        ),
-                      ],
-                    ),
+                    _heading(context),
+                    if (!discover) _toolbar(context),
                   ],
                 ),
-                const SizedBox(height: 24),
+                SizedBox(
+                  height: selected == null && config == null && !more ? 16 : 32,
+                ),
                 if (selected != null || config != null || more) ...[
                   Align(
                     alignment: Alignment.centerLeft,
@@ -233,26 +437,23 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                   ),
                   const SizedBox(height: 16),
                 ] else ...[
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      DshButton(
-                        variant: discover
-                            ? DshButtonVariant.ghost
-                            : DshButtonVariant.toolbar,
-                        onPressed: () => setState(() => discover = false),
-                        child: Text(t('installedTab')),
-                      ),
-                      DshButton(
-                        variant: discover
-                            ? DshButtonVariant.toolbar
-                            : DshButtonVariant.ghost,
-                        onPressed: () => setState(() => discover = true),
-                        child: Text(widget.i18n.t('pluginMarket', 'title')),
-                      ),
-                    ],
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: DshSegmentedTabs(
+                      items: [
+                        DshSegmentedTab('installed', t('installedTab')),
+                        DshSegmentedTab(
+                          'discover',
+                          widget.i18n.t('pluginMarket', 'title'),
+                        ),
+                      ],
+                      value: discover ? 'discover' : 'installed',
+                      label: t('tabsLabel'),
+                      onChanged: (value) =>
+                          setState(() => discover = value == 'discover'),
+                    ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                 ],
                 if (model.notice case final notice?) ...[
                   _notice(context, notice),
@@ -276,9 +477,15 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                   )
                 else if (model.status == PluginManagerStatus.loading ||
                     model.status == PluginManagerStatus.idle)
-                  pluginStatus(context, t('loading'))
+                  _pageStatus(context, t('loading'))
                 else if (model.status == PluginManagerStatus.unavailable)
-                  pluginStatus(context, t('unavailable'))
+                  Row(
+                    children: [
+                      const DshStateDot(DshStateDotState.idle),
+                      const SizedBox(width: 6),
+                      Expanded(child: _pageStatus(context, t('unavailable'))),
+                    ],
+                  )
                 else if (model.status == PluginManagerStatus.error)
                   Column(
                     children: [
@@ -369,7 +576,7 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (!all && configurations.isNotEmpty) ...[
-          pluginHeading(context, t('basicTitle')),
+          _groupHeading(context, t('basicTitle')),
           const SizedBox(height: 8),
           _grid([
             for (final entry in configurations)
@@ -386,7 +593,7 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
         if (official.isNotEmpty) ...[
           Row(
             children: [
-              Expanded(child: pluginHeading(context, t('extensionsTitle'))),
+              Expanded(child: _groupHeading(context, t('extensionsTitle'))),
               if (!all)
                 DshButton(
                   onPressed: () => setState(() => more = true),
@@ -399,10 +606,10 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
           const SizedBox(height: 32),
         ],
         if (!all) ...[
-          pluginHeading(context, t('bundlesTitle')),
+          _groupHeading(context, t('bundlesTitle')),
           const SizedBox(height: 8),
           if (installed.isEmpty)
-            pluginStatus(context, t('empty'))
+            _pageStatus(context, t('empty'))
           else
             _grid([for (final p in installed) _card(context, p)]),
         ],
@@ -410,47 +617,93 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
     );
   }
 
-  Widget _grid(List<Widget> cards) => LayoutBuilder(
-    builder: (context, c) {
-      final columns = c.maxWidth >= 640 ? 2 : 1;
-      return Wrap(
-        spacing: 12,
-        runSpacing: 12,
-        children: [
-          for (final card in cards)
-            SizedBox(
-              width: (c.maxWidth - (columns - 1) * 12) / columns,
-              child: card,
-            ),
-        ],
-      );
-    },
+  Widget _grid(List<Widget> cards) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      for (var i = 0; i < cards.length; i++) ...[
+        if (i > 0) const SizedBox(height: 2),
+        cards[i],
+      ],
+    ],
   );
   String _title(BundleInfo bundle) =>
       pluginText(bundle.meta?.title, widget.i18n, bundle.name);
   Widget _card(BuildContext context, ManagedPluginPackage package) {
     final b = package.bundle, title = _title(package.bundle);
-    return pluginCard(
-      context,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
+    final theme = context.dsh;
+    final description = pluginText(
+      b.meta?.description,
+      widget.i18n,
+      b.description ?? '',
+    );
+    Widget artwork = const DshPluginDefaultArtwork();
+    if (b.meta?.icon case final icon?) {
+      artwork = Image.network(
+        icon,
+        width: 36,
+        height: 36,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => const DshPluginDefaultArtwork(),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        DshButton(
+          height: 64 + 2 * dshHairlineOf(context),
+          horizontalPadding: 0,
+          radius: theme.radiusXl,
+          onPressed: () => setState(() => selected = b.name),
+          semanticLabel: t('openDetail', {'name': title}),
+          child: Row(
             children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: DshButton(
-                    onPressed: () => setState(() => selected = b.name),
-                    semanticLabel: t('openDetail', {'name': title}),
-                    child: Text(
-                      title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+              DshContainer(
+                width: 48 + 2 * dshHairlineOf(context),
+                height: 48 + 2 * dshHairlineOf(context),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: theme.borderL3,
+                    width: dshHairlineOf(context),
                   ),
+                  borderRadius: BorderRadius.circular(theme.radiusLg),
+                ),
+                child: artwork,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme
+                          .textStyle('--dsw-font-s-14')
+                          .copyWith(
+                            height: 20 / 14,
+                            fontWeight: FontWeight.w500,
+                            color: theme.labelPrimary,
+                          ),
+                    ),
+                    if (description.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      DshSingleLineClamp(
+                        description,
+                        style: theme
+                            .textStyle('--dsw-font-xs-13')
+                            .copyWith(
+                              height: 18 / 13,
+                              color: theme.color('--dsw-alias-label-tertiary'),
+                            ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
+              const SizedBox(width: 14),
               DshSwitch(
                 value: b.enabled,
                 label: t('enableToggle', {'name': title}),
@@ -461,24 +714,17 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+        ),
+        if (b.error != null)
           pluginStatus(
             context,
-            pluginText(b.meta?.description, widget.i18n, b.description ?? ''),
-          ),
-          if (b.version != null)
-            pluginStatus(context, t('versionTag', {'version': b.version})),
-          if (b.error != null)
-            pluginStatus(
-              context,
-              managementErrorText(
-                b.error!.code.value,
-                b.error!.diagnostic,
-                widget.i18n,
-              ),
+            managementErrorText(
+              b.error!.code.value,
+              b.error!.diagnostic,
+              widget.i18n,
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
