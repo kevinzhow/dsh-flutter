@@ -1,3 +1,5 @@
+import 'dart:ui' show SemanticsAction, Tristate;
+
 import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/services.dart';
@@ -110,6 +112,85 @@ void main() {
     await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
     await t.sendKeyEvent(LogicalKeyboardKey.space);
     expect(picked, ['add', 'first']);
+  });
+
+  testWidgets('accessible focus follows keyboard from footer to last row', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    try {
+      await pump(t);
+      final first = t.getSemantics(row('0'));
+      t.binding.pipelineOwner.semanticsOwner!.performAction(
+        first.id,
+        SemanticsAction.focus,
+      );
+      await t.pumpAndSettle();
+      expect(
+        t.getSemantics(row('0')).flagsCollection.isFocused,
+        Tristate.isTrue,
+      );
+
+      await t.sendKeyEvent(LogicalKeyboardKey.end);
+      await t.pumpAndSettle();
+      expect(
+        t.getSemantics(row('add')).flagsCollection.isFocused,
+        Tristate.isTrue,
+      );
+      expect(
+        t.getSemantics(row('0')).flagsCollection.isFocused,
+        Tristate.isFalse,
+      );
+
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+      await t.pumpAndSettle();
+      expect(
+        t.getSemantics(row('add')).flagsCollection.isFocused,
+        Tristate.isFalse,
+      );
+      expect(
+        t.getSemantics(row('29')).flagsCollection.isFocused,
+        Tristate.isTrue,
+      );
+    } finally {
+      semantics.dispose();
+    }
+  });
+
+  testWidgets('standalone row accepts accessible focus only while enabled', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    final enabled = ValueNotifier(true);
+    try {
+      await t.pumpWidget(
+        dshTestApp(
+          ValueListenableBuilder(
+            valueListenable: enabled,
+            builder: (_, value, _) => DshMenuItemButton(
+              key: const ValueKey('standalone'),
+              label: 'Standalone',
+              disabled: !value,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
+      final item = find.byKey(const ValueKey('standalone'));
+      t.binding.pipelineOwner.semanticsOwner!.performAction(
+        t.getSemantics(item).id,
+        SemanticsAction.focus,
+      );
+      await t.pumpAndSettle();
+      expect(t.getSemantics(item).flagsCollection.isFocused, Tristate.isTrue);
+      enabled.value = false;
+      await t.pumpAndSettle();
+      expect(t.getSemantics(item).flagsCollection.isFocused, Tristate.none);
+    } finally {
+      await t.pumpWidget(const SizedBox());
+      enabled.dispose();
+      semantics.dispose();
+    }
   });
 
   testWidgets(
