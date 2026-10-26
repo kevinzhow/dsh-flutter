@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Generate the official dsh theme pack from dsh's own stylesheets.
 
-Reads the pinned dsh checkout (argument --src, env DSH_SRC, default
-<repo>/.local/dsh-src), parses the `--dsw-*` token sheets of
-packages/client/ui-theme, and writes three generated files into
-packages/dsh_theme:
+Reads verified CSS snapshots from the actual published ui-theme package and
+its published terminal-font fallback. The pinned dsh checkout (argument
+--src, env DSH_SRC) is checked only for dependency/input drift; --snapshot-only
+works offline without it. Writes generated files into packages/dsh_theme:
 
   assets/themes/official.theme.json   the pack (format "dsh-theme/1")
   lib/src/official_pack.g.dart        the same pack as a Dart const map
@@ -42,6 +42,7 @@ from __future__ import annotations
 import argparse
 import difflib
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -54,6 +55,16 @@ THEME_PKG = REPO / 'packages' / 'dsh_theme'
 OUT_JSON = THEME_PKG / 'assets' / 'themes' / 'official.theme.json'
 OUT_PACK_DART = THEME_PKG / 'lib' / 'src' / 'official_pack.g.dart'
 OUT_NAMES_DART = THEME_PKG / 'lib' / 'src' / 'contract_names.g.dart'
+
+DESIGN = REPO / 'tool/design-system'
+def load_module(name):
+    spec = importlib.util.spec_from_file_location('theme_' + name, DESIGN / (name + '.py'))
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+CSS, PUBLISHED = load_module('css'), load_module('published')
+AUDIT = DESIGN / 'theme.generated.json'
 
 DEFAULT_SRC = str(REPO / '.local' / 'dsh-src')
 THEME_REL = 'packages/client/ui-theme/src/styles'
@@ -133,60 +144,9 @@ def split_top(text: str, sep: str) -> list[str]:
     return out
 
 
-def parse_rules(text: str) -> list[tuple[str, list[tuple[str, str]]]]:
-    """Flatten a stylesheet into (selector, [(custom-property, value)]) rules.
-
-    At-rules with nested rules (@supports, @media) are flattened; @font-face and
-    other declaration-only at-rules contribute nothing. Only custom properties
-    are kept.
-    """
-    text = strip_comments(text)
-    rules: list[tuple[str, list[tuple[str, str]]]] = []
-
-    def block(pos: int) -> tuple[str, int]:
-        depth = 1
-        i = pos
-        while i < len(text) and depth:
-            if text[i] == '{':
-                depth += 1
-            elif text[i] == '}':
-                depth -= 1
-            i += 1
-        return text[pos:i - 1], i
-
-    def walk(src_start: int, src_end: int, body: str) -> None:
-        i = 0
-        while i < len(body):
-            brace = body.find('{', i)
-            if brace < 0:
-                break
-            prelude = body[i:brace].strip()
-            depth, j = 1, brace + 1
-            while j < len(body) and depth:
-                if body[j] == '{':
-                    depth += 1
-                elif body[j] == '}':
-                    depth -= 1
-                j += 1
-            inner = body[brace + 1:j - 1]
-            i = j
-            if prelude.startswith('@'):
-                if prelude.startswith(('@supports', '@media', '@layer')):
-                    walk(0, 0, inner)
-                continue
-            decls = []
-            for decl in split_top(inner, ';'):
-                if ':' not in decl:
-                    continue
-                name, value = decl.split(':', 1)
-                name, value = name.strip(), re.sub(r'\s+', ' ', value.strip())
-                if name.startswith('--'):
-                    decls.append((name, value))
-            if decls:
-                rules.append((re.sub(r'\s+', ' ', prelude), decls))
-
-    walk(0, len(text), text)
-    return rules
+def parse_rules(text: str):
+    """Read all declarations and preserve condition stacks; never flatten guards."""
+    return CSS.css_rules(text, allow_supports=True)
 
 
 # -------------------------------------------------------------- var() resolve
@@ -307,8 +267,13 @@ def fmt_pct(a: float) -> str:
 def canon_color(c: tuple[float, float, float, float]) -> str:
     r, g, b = (max(0, min(255, int(round(v)))) for v in c[:3])
     a = round(c[3], 5)
-    if a >= 1:
+    if c[3] >= 1:
         return f'#{r:02x}{g:02x}{b:02x}'
+    byte_alpha = round(c[3] * 255)
+    if abs(c[3] - byte_alpha / 255) < 1e-10:
+        # Preserve published hex alpha exactly instead of rounding it through
+        # a percentage string and changing a second time at runtime.
+        return f'#{r:02x}{g:02x}{b:02x}{byte_alpha:02x}'
     return f'rgb({r} {g} {b} / {fmt_pct(a)})'
 
 
@@ -482,25 +447,63 @@ def dedupe(names: list[str]) -> list[str]:
 
 # ------------------------------------------------------------------ the build
 
-def read_sheets(src: Path, rep: Report):
+# These existing scopes are retained in the generated audit, not projected
+# into global tokens. The owning component family must consume its scope.
+SCOPED_TOKENS = {
+    ('gradient-shadow-text.css', 'body[data-ds-dark-theme] [data-menu-material]'): ({'--dsw-elevation-stroke-color'}, 'menus: dark material stroke; pending family migration'),
+    ('focus.css', 'html[data-input-modality=pointer] body :focus-visible:not(:read-write)'): ({'--dsw-focus-ring-color'}, 'focus: keyboard-only highlight is handled by canonical controls'),
+    ('design-platform.css', 'html[data-platform=darwin] body'): ({'--dsw-specific-menu'}, 'menus: macOS material; pending family migration'),
+    ('design-platform.css', 'html[data-platform=darwin] body[data-ds-dark-theme]'): ({'--dsw-specific-menu'}, 'menus: macOS dark material; pending family migration'),
+}
+
+
+def read_sheets(src, rep: Report, *, sheets=None):
     layers = {'root': {}, 'body': {}, 'dark': {}}
-    scoped_seen: dict[str, set[str]] = {}
+    rep.rules = {}
+    rep.scopes = []
     for sheet in SHEETS:
-        path = src / THEME_REL / sheet
-        for selector, decls in parse_rules(path.read_text(encoding='utf-8')):
-            parts = [p.strip() for p in selector.split(',')]
+        text = sheets[sheet] if sheets is not None else (src / THEME_REL / sheet).read_text(encoding='utf-8')
+        rules = parse_rules(text)
+        rep.rules[sheet] = rules
+        for rule in rules:
+            selector = re.sub(r"\[([\w-]+)=['\"]([^'\"]+)['\"]\]", r'[\1=\2]', rule['selector'])
+            selector = selector.replace('*::before', ':before').replace('*::after', ':after')
+            decls = {k: v for k, v in rule['declarations'].items() if k.startswith('--')}
+            conditions = rule['conditions']
+            if '--dsw-corner-shape' in decls and not conditions:
+                raise ValueError('corner capability token lost its support guard')
+            if conditions:
+                accepted = (sheet == 'corner-shape.css' and len(conditions) == 1 and
+                    re.sub(r'\s+', '', conditions[0]) == '@supports(corner-shape:superellipse(1.5))')
+                fallback = (sheet == 'scrollbar.css' and conditions == ['@supports not selector(::-webkit-scrollbar)']
+                    and selector == 'body, body *' and rule['declarations'] == {
+                        'scrollbar-width': 'thin', 'scrollbar-color': 'var(--dsh-scrollbar-thumb) transparent'})
+                if fallback: continue  # CSS engine fallback; custom Flutter scrollbar consumes the same global tokens.
+                if not accepted:
+                    raise ValueError('unsupported theme condition: ' + sheet + ' ' + ' / '.join(conditions))
+                if selector == ':root' and decls != {'--dsw-corner-shape': 'superellipse(1.5)'}:
+                    raise ValueError('untranslated corner capability token')
+                if selector != ':root' and (selector != '*, :before, :after' or
+                        rule['declarations'] != {'corner-shape': 'var(--dsw-corner-shape)'}):
+                    raise ValueError('untranslated corner capability rule')
+                # Flutter implements this exact corner curve; its capability
+                # is explicit in the audit instead of erasing the CSS guard.
+            if not decls: continue
+            parts = CSS.split_outside(selector, ',')
             modeled = False
             for part in parts:
-                layer = {':root': 'root', 'body': 'body', 'body[data-ds-dark-theme]': 'dark'}.get(part)
+                layer = {':root': 'root', 'body': 'body', 'body[data-ds-dark-theme]': 'dark'}.get(part.strip())
                 if layer:
                     modeled = True
-                    for name, value in decls:
-                        layers[layer][name] = value
-                        rep.declared += 1
+                    layers[layer].update(decls)
+                    rep.declared += len(decls)
             if not modeled:
-                names = sorted(n for n, _ in decls)
-                rep.skipped_scopes.append(f'{sheet}: `{selector}` sets {", ".join(names)}')
-                scoped_seen.setdefault(selector, set()).update(names)
+                scoped = SCOPED_TOKENS.get((sheet, selector))
+                if scoped is None or set(decls) != scoped[0]:
+                    raise ValueError('unsupported theme token scope: ' + sheet + ' ' + selector)
+                rep.scopes.append({'sheet': sheet, 'selector': selector, 'conditions': conditions,
+                                   'declarations': decls, 'implementation': scoped[1]})
+                rep.skipped_scopes.append(sheet + ': ' + selector + ': ' + scoped[1])
     return layers
 
 
@@ -527,9 +530,16 @@ def classify_and_resolve(name: str, env: dict[str, str], rep: Report):
     return 'string', value
 
 
-def build(src: Path):
+def build(src: Path | None):
+    lock = PUBLISHED.verify_packages(src)
+    theme_package = next(p for p in lock['packages'] if p.get('extractionKind') == 'theme-css')
+    theme_folder = DESIGN / 'upstream' / theme_package['snapshotFolder']
+    if json.loads((theme_folder / 'styles-order.json').read_text()) != SHEETS:
+        raise ValueError('published theme injection order differs from adapter order')
+    terminal_package = next(p for p in lock['packages'] if p.get('extractionKind') == 'terminal-font')
+    terminal_folder = DESIGN / 'upstream' / terminal_package['snapshotFolder']
     rep = Report()
-    layers = read_sheets(src, rep)
+    layers = read_sheets(None, rep, sheets={sheet: (theme_folder / sheet).read_text() for sheet in SHEETS})
     light_raw = {**layers['root'], **layers['body']}
     dark_raw = {**light_raw, **layers['dark']}
     envs = {'light': light_raw, 'dark': dark_raw}
@@ -546,12 +556,7 @@ def build(src: Path):
         if fonts and fonts != got:
             rep.unresolved.append('font stacks differ between light and dark')
         fonts = got
-    terminal_src = (src / TERMINAL_REL).read_text(encoding='utf-8')
-    m = re.search(r"TERMINAL_FONT_STACK\s*=\s*'([^']*)'", terminal_src)
-    if m:
-        fonts['terminal'] = dedupe(parse_family_list(m.group(1)))
-    else:
-        rep.unresolved.append(f'terminal font stack: TERMINAL_FONT_STACK not found in {TERMINAL_REL}')
+    fonts['terminal'] = dedupe(parse_family_list(json.loads((terminal_folder / 'terminal-font.json').read_text())['terminalFontStack']))
 
     names = sorted(set(light_raw) | set(dark_raw))
     rep.distinct = len(names)
@@ -622,32 +627,27 @@ def build(src: Path):
         'common': prune(common),
         'modes': {'light': prune(modes['light']), 'dark': prune(modes['dark'])},
     }
+    if rep.unresolved:
+        raise ValueError('unresolved published theme tokens: ' + '; '.join(rep.unresolved))
     pack['source'] = source_metadata(src)
+    rep.provenance = lock
     return pack, kinds, rep
 
 
-def source_metadata(src: Path) -> dict:
-    try:
-        commit = subprocess.run(['git', '-C', str(src), 'rev-parse', 'HEAD'], check=True,
-                                capture_output=True, text=True).stdout.strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        commit = 'unknown'
-    files = [f'{THEME_REL}/{s}' for s in SHEETS] + [TERMINAL_REL]
-    digests = {}
-    for rel in files:
-        digests[rel] = hashlib.sha256((src / rel).read_bytes()).hexdigest()
+def source_metadata(src: Path | None) -> dict:
+    lock = PUBLISHED.verify_packages(src)
+    packages = [p for p in lock['packages'] if p.get('extractionKind') in ['theme-css', 'terminal-font']]
     return {
         'upstream': 'DSH (DeepSeek Harness), MIT',
-        'commit': commit,
-        'files': files,
-        'sha256': digests,
+        'commit': lock['referenceCommit'],
         'generator': 'tool/theme-adapters/build_official_pack.py',
+        'packages': [{k: p[k] for k in ['name', 'version', 'integrity', 'publishedBundleSha256', 'files']} for p in packages],
     }
 
 
 # ------------------------------------------------------------------- emitters
 
-GENERATED = 'GENERATED by tool/theme-adapters/build_official_pack.py from dsh {commit}. Do not edit; run the script.'
+GENERATED = 'GENERATED by tool/theme-adapters/build_official_pack.py from published {packages} (dsh {commit}). Do not edit; run the script.'
 
 
 def dart_str(s: str) -> str:
@@ -680,7 +680,7 @@ def emit_json(pack: dict) -> str:
 
 
 def emit_pack_dart(pack: dict) -> str:
-    header = GENERATED.format(commit=pack['source']['commit'][:12])
+    header = GENERATED.format(commit=pack['source']['commit'][:12], packages=' and '.join(p['name'] + '@' + p['version'] for p in pack['source']['packages']))
     return (
         f'// {header}\n'
         '// dart format off\n\n'
@@ -695,7 +695,7 @@ def emit_pack_dart(pack: dict) -> str:
 
 
 def emit_names_dart(pack: dict, kinds: dict[str, str]) -> str:
-    header = GENERATED.format(commit=pack['source']['commit'][:12])
+    header = GENERATED.format(commit=pack['source']['commit'][:12], packages=' and '.join(p['name'] + '@' + p['version'] for p in pack['source']['packages']))
     kind_lines = ''.join(f'  {dart_str(n)}: {dart_str(kinds[n])},\n' for n in sorted(kinds))
     role_lines = ''.join(f'  {dart_str(r)},\n' for r in sorted(pack['fonts']))
     return (
@@ -723,6 +723,7 @@ def outputs(src: Path):
         OUT_JSON: emit_json(pack),
         OUT_PACK_DART: emit_pack_dart(pack),
         OUT_NAMES_DART: emit_names_dart(pack, kinds),
+        AUDIT: json.dumps({'source': rep.provenance, 'sheets': rep.rules, 'scopedTokens': rep.scopes, 'capabilities': {'@supports (corner-shape: superellipse(1.5))': 'Implemented by DshCornerBorder; CSS condition retained above.'}}, indent=2) + '\n',
     }
     return files, pack, kinds, rep
 
@@ -752,13 +753,18 @@ def main() -> int:
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument('--write', action='store_true', help='write generated files (default)')
     mode.add_argument('--check', action='store_true', help='exit 1 if committed files are stale')
+    ap.add_argument('--snapshot-only', action='store_true', help='Generate from verified published snapshots without a reference checkout')
     ap.add_argument('--quiet', action='store_true', help='skip the token report')
     args = ap.parse_args()
     src = Path(args.src)
-    if not (src / THEME_REL).is_dir():
+    if not args.snapshot_only and not (src / THEME_REL).is_dir():
         print(f'error: {src / THEME_REL} not found; set --src or DSH_SRC', file=sys.stderr)
         return 2
-    files, pack, kinds, rep = outputs(src)
+    try:
+        files, pack, kinds, rep = outputs(None if args.snapshot_only else src)
+    except (ValueError, KeyError, OSError) as error:
+        print('theme: ' + str(error), file=sys.stderr)
+        return 1
     if not args.quiet:
         print_report(pack, kinds, rep)
     if args.check:

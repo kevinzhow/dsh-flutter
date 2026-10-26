@@ -37,6 +37,66 @@
       "referenceConsumer": "packages/bundle/web-app/package.json",
       "dependencyField": "dependencies",
       "dependencySpecifier": "workspace:*"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-theme",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-theme/-/dsh-client-ui-theme-0.2.1-rc.2.tgz",
+      "integrity": "sha512-WO9hMC9BnxhkOnJNoEHi28DHlDimAoQsykWu5I+1rjkap7U/TgkSEPshzMg6nagUxJ4eFotH//IIZVMacJMU1w==",
+      "publishedBundleSha256": "f9915fb53d5f156e75291e63be66c80e607a82bfd03c7d583e0a12ebef5a6cb8",
+      "extractionKind": "theme-css",
+      "extraction": "Decode static JSON literals without executing JavaScript",
+      "sourcePackage": "packages/client/ui-theme/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-theme",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "base.css": "77d5487e7f9cf7597d8b15f1b598598658d970f0cdb4a513c9a93c2f450aa77e",
+        "corner-shape.css": "b3ef70d30ee48289413e753be96b56a1e3273115d8123cc22105504dbd38ebe7",
+        "design-platform.css": "f04a03df7d266e4859959ceddcff12c5a58ff9c9972e80c8b10d2184376a833e",
+        "focus.css": "77bcbea3e42c33667afa8e835bf798cc9bbc4bdcd0d37e796423af9dbd9bbded",
+        "gradient-shadow-text.css": "814dee95539b2f719e22e6e22812d5b9d22fe620ad6ddd457b0303ea2e69d2c8",
+        "onboarding.css": "d321e1903c77ba69cfc2ba7c077504efda2fc2b3ee3d8cf4797a6746fe23224e",
+        "package.json": "dc7d7ea3f8ccb0a0001178af61dd4eb1b3d7032bd5af86af21b3bad6ee4971c9",
+        "scrollbar.css": "7457fa7bcde76d19981125c94c0a8afd7d83b1dac3f72bd418597bda35297c5b",
+        "shiki.css": "71deb2de951ab101ef23e584e4ea588c27d5cbfc4f3cdc8707bcf99243dac7e7",
+        "styles-order.json": "5636a6bb26c22a2ae2158b3e508d885ca40d8019484ada5c67acd2fb987d347e"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-theme/src/styles/base.css": "803926ce39f5ea48b652021d06b6ca65c4acc7be2c5c4e19bd904ab1dabf0b67",
+        "packages/client/ui-theme/src/styles/corner-shape.css": "d94f82e1332b6d37e8345aafe1b6b4129faed65891edd3861c00b88940ec4d3f",
+        "packages/client/ui-theme/src/styles/design-platform.css": "809b20ae477324fdf5181a2d338655a19919cabbf1b0e60adc149908462c5a66",
+        "packages/client/ui-theme/src/styles/focus.css": "f7398e7730415592ab1e81cec36f8c5e23065becd06c050f0129a6fa44d247e8",
+        "packages/client/ui-theme/src/styles/onboarding.css": "9b3a0541c9639e73aa52f001d9b2e8056d3e9ffb55ea69c5ba95989706c92ddb",
+        "packages/client/ui-theme/src/styles/scrollbar.css": "673450184fe82a679b5759a7f93ceab17895b9f12e1196f7efb281304afd8398",
+        "packages/client/ui-theme/src/styles/gradient-shadow-text.css": "b6e1e8387edbfa60ec03bb29aad7c01245c0adbd22229d5a6f2916caa7e7b427",
+        "packages/client/ui-theme/src/styles/shiki.css": "14f2b00083b035d8f92e26243a669d1b04a8d564c20d91856b20706cc79b8828",
+        "packages/client/ui-theme/src/client/styles.ts": "75c74517ebda2ea564d0dca53e3c5bdacd250673d49dbdbc4a15bdfc3fafa4cc"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-sidebar-terminal",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-sidebar-terminal/-/dsh-client-ui-sidebar-terminal-0.2.1-rc.2.tgz",
+      "integrity": "sha512-tMaVRci5IcqpJaBp/KFZHICJ9ff3nL5Z4m/7yeB31o0YqhhYhJO4LFRkkwSnzW9+EKOgPfMVoV032PgXQdK+Gg==",
+      "publishedBundleSha256": "0821b155ce820424ff788474fedea3e6f606d95cea6ebe03b580660e7701eb6f",
+      "extractionKind": "terminal-font",
+      "extraction": "Decode static JSON literals without executing JavaScript",
+      "sourcePackage": "packages/client/ui-sidebar-terminal/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-sidebar-terminal",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "package.json": "a4093117e6687d4fcc7ebf91be445393dc04be3c4c5f6b8aab35a7082ae977f5",
+        "terminal-font.json": "bd309601d61d0efd54fe3dfac862b1539d5e16881cd4f956a0c0cda97a884640"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-sidebar-terminal/src/client/terminal.tsx": "a2504ac85030d3e2a0f9f4cb69cc3a6219a9aefdf4ea7fd7d179e78e00656a95"
+      }
     }
   ]
 }

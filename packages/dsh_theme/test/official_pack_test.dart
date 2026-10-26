@@ -87,18 +87,22 @@ void main() {
       );
     });
 
-    test('alpha tokens keep their fractional alpha', () {
+    test('alpha tokens retain exact published package values', () {
       final light = resolveTheme(
         officialPack,
         ThemeSettings(preference: ThemePreference.light),
         Brightness.light,
       );
-      expect(light.color('--dsw-alias-border-l1').a, closeTo(0.04, 1e-9));
+      // Published design-platform.css uses #0000000a, #3b82f666 and #272730b3.
+      expect(light.color('--dsw-alias-border-l1'), const Color(0x0a000000));
       expect(
         light.color('--dsw-alias-bg-document-selection').a,
-        closeTo(0.4, 1e-9),
+        closeTo(0x66 / 255, 1e-9),
       );
-      expect(light.color('--dsw-alias-bg-mask-drop').a, closeTo(0.7, 1e-9));
+      expect(
+        light.color('--dsw-alias-bg-mask-drop').a,
+        closeTo(0xb3 / 255, 1e-9),
+      );
     });
 
     test('numbers, shadows and gradients come through', () {
