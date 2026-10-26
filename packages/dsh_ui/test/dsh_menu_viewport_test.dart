@@ -239,4 +239,79 @@ void main() {
       expect(t.takeException(), isNull);
     },
   );
+  testWidgets(
+    'OS insets bound menu layout after inherited padding is consumed',
+    (t) async {
+      t.view.devicePixelRatio = 2;
+      t.view.physicalSize = const Size(800, 800);
+      t.view.viewPadding = const FakeViewPadding(
+        left: 16,
+        top: 56,
+        right: 12,
+        bottom: 40,
+      );
+      addTearDown(t.view.reset);
+      final link = LayerLink();
+      final picked = <String>[];
+      await t.pumpWidget(
+        dshTestApp(
+          Builder(
+            builder: (context) => MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              removeBottom: true,
+              removeLeft: true,
+              removeRight: true,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 350,
+                    top: 350,
+                    child: CompositedTransformTarget(
+                      link: link,
+                      child: const SizedBox(width: 40, height: 28),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: DshMenuFollower(
+                      link: link,
+                      child: DshMenuCard(
+                        key: const ValueKey('card'),
+                        entries: [
+                          for (var i = 0; i < 30; i++)
+                            DshMenuItem('$i', 'Workspace $i'),
+                        ],
+                        footer: const [DshMenuItem('add', 'Add workspace')],
+                        onSelect: picked.add,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      final card = t.getRect(find.byKey(const ValueKey('card')));
+      // Logical OS insets 8/28/6/20 plus source portal margins of twelve.
+      expect(card.top, 40);
+      expect(card.bottom, 368);
+      expect(card.right, 382);
+      expect(card.height, 328);
+      t.view.viewPadding = const FakeViewPadding(
+        left: 16,
+        top: 80,
+        right: 12,
+        bottom: 40,
+      );
+      await t.pumpAndSettle();
+      final resized = t.getRect(find.byKey(const ValueKey('card')));
+      expect(resized.top, 52);
+      expect(resized.bottom, 368);
+      expect(resized.height, 316);
+      await t.tap(row('add'));
+      expect(picked, ['add']);
+    },
+  );
 }

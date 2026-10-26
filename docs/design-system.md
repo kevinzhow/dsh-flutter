@@ -84,3 +84,10 @@ WorkspacePickFlow long-list comparisons cover English/Chinese, light/dark and
 menus with/without the footer. Submenus, shortcut displays, sticky groups,
 arbitrary-content backdrop filtering, macOS backing and full app-frame reserve
 integration remain separate work.
+
+Native linked menus keep the source portal margins inside the Flutter view's OS
+safe bounds. The insets come from FlutterView rather than potentially consumed
+SafeArea padding, and metric updates reach both placement and menu height without
+resetting row focus or scroll state. This prevents a tall Android menu from
+putting its first row underneath the status bar; zero-inset desktop/Web fixture
+geometry is preserved.

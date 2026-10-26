@@ -7,6 +7,7 @@ import 'dsh_anchored_panel.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_menu_item.dart';
 import 'dsh_menu_footer.dart';
+import 'dsh_menu_follower.dart';
 import 'dsh_menu_surface.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
@@ -245,6 +246,7 @@ class _DshMenuCardState extends State<DshMenuCard> {
       maxHeight: math.max(
         0,
         MediaQuery.sizeOf(context).height -
+            dshMenuSafeInsetsOf(context).vertical -
             DshMenuRecipe.viewportBottomMargin -
             math.max(
               DshMenuRecipe.viewportTopMargin,

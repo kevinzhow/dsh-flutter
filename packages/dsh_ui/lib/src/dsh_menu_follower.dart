@@ -4,6 +4,23 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_recipes.g.dart';
 
+/// Browser page viewports exclude OS bars. Flutter overlays can cover those
+/// bars even when a parent's SafeArea already consumed its MediaQuery padding.
+EdgeInsets dshMenuSafeInsetsOf(BuildContext context) {
+  final menu = context
+      .dependOnInheritedWidgetOfExactType<_MenuViewportInsets>();
+  if (menu != null) return menu.insets;
+  final view = View.of(context);
+  return EdgeInsets.fromViewPadding(view.viewPadding, view.devicePixelRatio);
+}
+
+class _MenuViewportInsets extends InheritedWidget {
+  const _MenuViewportInsets({required this.insets, required super.child});
+  final EdgeInsets insets;
+  @override
+  bool updateShouldNotify(_MenuViewportInsets old) => insets != old.insets;
+}
+
 /// Linked menu placement with the source portal's viewport clamping. The
 /// zero-sized follower measures the actual composited anchor, including scroll
 /// and ancestor transforms; the visible card is laid out in overlay coordinates.
@@ -25,14 +42,27 @@ class DshMenuFollower extends StatefulWidget {
   State<DshMenuFollower> createState() => _DshMenuFollowerState();
 }
 
-class _DshMenuFollowerState extends State<DshMenuFollower> {
+class _DshMenuFollowerState extends State<DshMenuFollower>
+    with WidgetsBindingObserver {
   final _root = GlobalKey(), _probe = GlobalKey();
   Rect? _anchor;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(_measure);
+  }
+
+  @override
+  void didChangeMetrics() {
+    if (mounted) setState(() {});
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   void _measure(Duration _) {
@@ -57,31 +87,38 @@ class _DshMenuFollowerState extends State<DshMenuFollower> {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox.expand(
-    key: _root,
-    child: Stack(
-      children: [
-        CompositedTransformFollower(
-          link: widget.link,
-          showWhenUnlinked: false,
-          child: SizedBox.shrink(key: _probe),
-        ),
-        if (_anchor case final Rect anchor)
-          Positioned.fill(
-            child: CustomSingleChildLayout(
-              delegate: _MenuPlacement(
-                anchor,
-                alignEnd: widget.alignEnd,
-                above: widget.above,
-                top: math.max(
-                  DshMenuRecipe.portalMargin,
-                  widget.frameOverlayTop ?? DshMenuRecipe.portalMargin,
-                ),
-              ),
-              child: widget.child,
-            ),
+  Widget build(BuildContext context) => _MenuViewportInsets(
+    insets: EdgeInsets.fromViewPadding(
+      View.of(context).viewPadding,
+      View.of(context).devicePixelRatio,
+    ),
+    child: SizedBox.expand(
+      key: _root,
+      child: Stack(
+        children: [
+          CompositedTransformFollower(
+            link: widget.link,
+            showWhenUnlinked: false,
+            child: SizedBox.shrink(key: _probe),
           ),
-      ],
+          if (_anchor case final Rect anchor)
+            Positioned.fill(
+              child: CustomSingleChildLayout(
+                delegate: _MenuPlacement(
+                  anchor,
+                  safeInsets: dshMenuSafeInsetsOf(context),
+                  alignEnd: widget.alignEnd,
+                  above: widget.above,
+                  top: math.max(
+                    DshMenuRecipe.portalMargin,
+                    widget.frameOverlayTop ?? DshMenuRecipe.portalMargin,
+                  ),
+                ),
+                child: widget.child,
+              ),
+            ),
+        ],
+      ),
     ),
   );
 }
@@ -92,10 +129,12 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
     required this.alignEnd,
     required this.above,
     required this.top,
+    required this.safeInsets,
   });
   final Rect anchor;
   final bool alignEnd, above;
   final double top;
+  final EdgeInsets safeInsets;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
@@ -109,12 +148,18 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
         : anchor.bottom + DshMenuRecipe.anchorGap;
     return Offset(
       math.min(
-        math.max(x, DshMenuRecipe.portalMargin),
-        size.width - childSize.width - DshMenuRecipe.portalMargin,
+        math.max(x, safeInsets.left + DshMenuRecipe.portalMargin),
+        size.width -
+            childSize.width -
+            safeInsets.right -
+            DshMenuRecipe.portalMargin,
       ),
       math.min(
-        math.max(y, top),
-        size.height - childSize.height - DshMenuRecipe.portalMargin,
+        math.max(y, safeInsets.top + top),
+        size.height -
+            childSize.height -
+            safeInsets.bottom -
+            DshMenuRecipe.portalMargin,
       ),
     );
   }
@@ -124,5 +169,6 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
       anchor != old.anchor ||
       alignEnd != old.alignEnd ||
       above != old.above ||
-      top != old.top;
+      top != old.top ||
+      safeInsets != old.safeInsets;
 }
