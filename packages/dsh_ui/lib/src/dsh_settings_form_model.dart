@@ -579,6 +579,7 @@ num? _jsNumber(String text) {
     );
   }
   if (!value.isFinite) return null;
+  if (value == 0 && value.isNegative) return value;
   if (value == value.truncateToDouble() && value.abs() < 9007199254740992) {
     return value.toInt();
   }

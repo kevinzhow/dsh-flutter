@@ -612,3 +612,28 @@ class DeliverablesFileActionsOwner {
   ])
   onAction;
 }
+
+/// One ordered root onboarding step. Loading steps draw no blocking surface.
+class SettingsOnboardingOwner {
+  const SettingsOnboardingOwner({
+    required this.stepId,
+    required this.explicit,
+    required this.complete,
+    required this.openSection,
+  });
+  final String stepId;
+  final bool explicit;
+  final void Function() complete;
+  final void Function(String section) openSection;
+}
+
+class ModelsProviderCardOwner {
+  const ModelsProviderCardOwner({
+    required this.provider,
+    required this.configured,
+    required this.keyConfigured,
+  });
+  final ProviderEntry provider;
+  final bool configured;
+  final bool keyConfigured;
+}

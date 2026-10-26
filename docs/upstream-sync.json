@@ -9,6 +9,42 @@
   },
   "generated": [
     {
+      "output": "packages/dsh_client/lib/src/generated/credentials_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/credentials.ir.json",
+      "irSha256": "51a52f9b20d2f822f1a796c0da6c4f31bf41e9df3504b88ef0600991d97ad4de",
+      "inputs": [
+        {
+          "path": "packages/api/settings-controller/src/credentials.ts",
+          "sha256": "f84be4ca9e868fffd84575fd386ea63e0933c467c7f0739b68055da41a10a074"
+        },
+        {
+          "path": "packages/credentials/credentials/src/types.ts",
+          "sha256": "c4477b743020e14f6a191172d2f662765ffceabbe6b67b7c3681662dfed8049a"
+        }
+      ],
+      "rawSha256": "10a2a0043a34988b57261949cba1454ee2f67128d9a663e9b38a98821659cf0b",
+      "outputSha256": "54e658f60642fa42ffce888d7f570ec7c45cf4c7a179306a2fdab5870e95a78d"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/llm_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/llm.ir.json",
+      "irSha256": "8dbcdd02bbd025e755421b6d9634586e5d6d6735400bc4e810cd3250db687297",
+      "inputs": [
+        {
+          "path": "packages/llm/llm/src/index.ts",
+          "sha256": "12863e4b6419825e2600a63110379c5c6bbab18b3a2365ca45645baca5f96db2"
+        },
+        {
+          "path": "packages/llm/llm/src/types.ts",
+          "sha256": "3ced1a7f722bdf2d8391fc660b0c19dd809d9c0f3f7eb74e8a128d0216b37585"
+        }
+      ],
+      "rawSha256": "5bc87da50c0ae9aa7afc6351fec4e01e3d424a68b785e923991d91649e4bb018",
+      "outputSha256": "d1182c4d9a2cfde0c1d1050207f3bb2dfca384f3ed04a32801c9a5049f4ea96e"
+    },
+    {
       "output": "packages/dsh_client/lib/src/generated/session_remote.g.dart",
       "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
       "ir": "tool/codegen/ir/session.ir.json",
@@ -262,10 +298,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "f843d24ebe4405b7a3bd2a471c20d043f613b4bc1a4f80e946a515ae55a9bee4",
+      "irSha256": "30e3f634231ca9de8e493761ae2925c712c685746ca92b0c9bdaab667086708a",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "156d5ee6b41e6c61b80d241a367a47b673fbf56834e9922dba59d5bba71ea8e5"
+        "sha256": "ed879398e7d1699f142bb2964990bf3d4c12c95d7518b222091a3367118712f4"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -365,8 +401,32 @@
           "sha256": "4930b6841d37b38ad52de8de9def00486883e723e6b08284282e44968023becc"
         },
         {
+          "path": "packages/client/ui-settings-agent-loop/src/client/locales.ts",
+          "sha256": "0df2aff418a0f40980ba5e9c2541d56a201844beb432b9847d3188a826183e65"
+        },
+        {
           "path": "packages/client/ui-settings-general/src/client/locales.ts",
           "sha256": "9174829c38582386113fc654fea3e3ba83ac9aafdde6955d68018f4cfd6ff678"
+        },
+        {
+          "path": "packages/client/ui-settings-models/src/client/locales.ts",
+          "sha256": "b601b6c1b358dcc79a4576f3b674d5d0de92ebea1eab5772c1216beaec64ca5b"
+        },
+        {
+          "path": "packages/client/ui-settings-session-log/src/client/locales.ts",
+          "sha256": "ae3ab6c5c2f0ed34d1320f396aae8a00514ea240b43a1e6a9d873396172cf898"
+        },
+        {
+          "path": "packages/client/ui-settings-shell/src/client/locales.ts",
+          "sha256": "46d56e4881b8d06f7b699c43ae70fee8cb1c8505c81d7082e247ffccb63bfd21"
+        },
+        {
+          "path": "packages/client/ui-settings-subagent/src/client/locales.ts",
+          "sha256": "685dcf4cdf21ca9c358bc17b8870c26237003f1cd06baaf434e5cd86182f54e2"
+        },
+        {
+          "path": "packages/client/ui-settings-web-search/src/client/locales.ts",
+          "sha256": "bc3b155ffe2a11e8d91fd8348741837558c28fe89b82252b1cfd561661873b71"
         },
         {
           "path": "packages/client/ui-shortcuts/src/client/locales.ts",
@@ -437,8 +497,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "03844681e9513b7cf2b35f4b5c53207c9dc793a3ecb035599f247f27116b8c63",
-      "outputSha256": "5c991d9324735f70b6d2fe99b6b9c8656b84d1331fde6ecf369f1f409667ec8d"
+      "rawSha256": "9fa2db70923d0faee81882ac8ac6d1a094948699b7be59374a1a13dcc84880c5",
+      "outputSha256": "bdd00c3a2c5aaa774b21e98cc994a8bbc835216bfe8a4e29b817b42c765034fa"
     }
   ]
 }

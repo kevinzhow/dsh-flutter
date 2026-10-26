@@ -1,4 +1,6 @@
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_credentials.dart' as credentials_ns;
+import 'package:dsh_client/generated_llm.dart' as llm_ns;
 import 'package:dsh_client/generated.dart' as session_ns;
 import 'package:dsh_client/generated_commands.dart' as commands_ns;
 import 'package:dsh_client/generated_directory_picker.dart' as directory_ns;
@@ -23,6 +25,8 @@ class HostRemotes {
     ConnectionGeneration? Function()? currentGeneration,
   }) : currentGeneration = currentGeneration ?? (() => null),
        session = session_ns.SessionRemote(caller),
+       credentials = credentials_ns.CredentialsRemote(caller),
+       llm = llm_ns.LlmRemote(caller),
        settings = settings_ns.SettingsRemote(caller),
        permissionPresets = permission_ns.PermissionPresetsRemote(caller),
        commands = commands_ns.CommandsRemote(caller),
@@ -36,6 +40,9 @@ class HostRemotes {
 
   /// `session` (model catalog, `selectModel`).
   final session_ns.SessionRemote session;
+
+  final credentials_ns.CredentialsRemote credentials;
+  final llm_ns.LlmRemote llm;
 
   /// `settings` (`describe`, `mutate`, ...).
   final settings_ns.SettingsRemote settings;

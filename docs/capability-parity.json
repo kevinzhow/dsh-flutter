@@ -420,7 +420,7 @@
    "dshSource": "packages/client/ui-settings-account",
    "description": "Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing.",
    "status": "missing",
-   "notes": "account/* is not generated or called. Needs a decision first: the sign-in call sends client identity metadata and Whalee is unofficial.",
+   "notes": "Not yet generated or rendered. Pinned account/controller supports safe state/profile/balance and browser authorization; client metadata is build version, locale and timezone. Native sign-in needs an actual browser-accessible loopback callback origin. No unofficial-client approval hold is inferred; native account integration belongs with platform authentication work.",
    "priority": "P4"
   },
   {
@@ -430,9 +430,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-agent-loop",
    "description": "Set how many tool calls the agent may run in parallel.",
-   "status": "missing",
-   "notes": "Settings namespace agent-loop is not read; the generic form model exists (packages/dsh_ui/lib/src/dsh_settings_form_model.dart) but no card uses it.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Served staged maxParallelToolCalls, revision-fenced save/reset; native/visual validation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart"
+   ]
   },
   {
    "id": "package:ui-settings-general",
@@ -456,9 +459,14 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-models",
    "description": "Add and edit model providers and their API keys, discover models, and pick the default.",
-   "status": "missing",
-   "notes": "credentials/*, llm/* and settings/update are not generated or called.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Provider directory, write-only credentials, discovery, custom routes, catalog models and versioned welcome are implemented. Composer selection already calls session/selectModel, which saves the Host default in the background. Native/visual validation continues; native account credential onboarding is separate.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "package:ui-settings-plugin-inventory",
@@ -489,9 +497,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-session-log",
    "description": "Choose whether session logs are uploaded with DeepSeek API requests.",
-   "status": "missing",
-   "notes": "Settings namespace not read.",
-   "priority": "P4"
+   "status": "partial",
+   "notes": "Accepted Host upload toggle and persistent keyed shell notice; native/visual validation pending.",
+   "priority": "P4",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart"
+   ]
   },
   {
    "id": "package:ui-settings-shell",
@@ -500,9 +511,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-shell",
    "description": "Set the shell command timeout and the per-stream output cap.",
-   "status": "missing",
-   "notes": "Settings namespaces bash-sandbox and pwsh-sandbox are not read.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Both bash-sandbox and pwsh-sandbox are selected from served namespaces; staged timeoutMs and maxOutputBytes save/reset. Native/visual validation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart"
+   ]
   },
   {
    "id": "package:ui-settings-subagent",
@@ -511,9 +525,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-subagent",
    "description": "Set subagent recursion depth, parallel capacity and which models agents may choose for subagents.",
-   "status": "missing",
-   "notes": "Settings namespaces subagent and subagent-model-selection-settings are not read.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Staged safe-integer depth/capacity and exact provider/model allowlist; unavailable routes retained, revision conflicts and reconnect resets checked. Native/visual validation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart"
+   ]
   },
   {
    "id": "package:ui-settings-web-search",
@@ -522,9 +540,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-web-search",
    "description": "Set the DeepSeek web-search API key, endpoint and per-request search budget.",
-   "status": "missing",
-   "notes": "Settings namespaces web, web-deepseek-api and web-search-deepseek are not read.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Three staged namespaces, API switch, endpoint/limits, write-only key and credential facts, ordered section-before-selection save. Actual upstream controller traces match; native/visual validation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "package:ui-shortcuts",
@@ -951,8 +972,14 @@
    "platform": "both",
    "dshSource": "packages/api/settings-controller/src/credentials.ts",
    "description": "Show which provider keys are set, without revealing them.",
-   "status": "missing",
-   "notes": "Provider API key storage (ui-settings-models); not built."
+   "status": "ported",
+   "notes": "Generated exact credential contract; redacted describe, set and managed-reference removal exercised.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/credentials_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:credentials/set",
@@ -961,8 +988,14 @@
    "platform": "both",
    "dshSource": "packages/api/settings-controller/src/credentials.ts",
    "description": "Save a provider API key.",
-   "status": "missing",
-   "notes": "Provider API key storage (ui-settings-models); not built."
+   "status": "ported",
+   "notes": "Generated exact credential contract; redacted describe, set and managed-reference removal exercised.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/credentials_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:credentials/unset",
@@ -971,8 +1004,14 @@
    "platform": "both",
    "dshSource": "packages/api/settings-controller/src/credentials.ts",
    "description": "Remove a stored provider API key.",
-   "status": "missing",
-   "notes": "Provider API key storage (ui-settings-models); not built."
+   "status": "ported",
+   "notes": "Generated exact credential contract; redacted describe, set and managed-reference removal exercised.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/credentials_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:directoryPicker/createDirectory",
@@ -1264,8 +1303,14 @@
    "platform": "both",
    "dshSource": "packages/llm/llm/src/index.ts",
    "description": "Ask a provider which models it offers, before saving it.",
-   "status": "missing",
-   "notes": "Provider routes for the models settings page; not built."
+   "status": "ported",
+   "notes": "Generated directory/discovery contracts with draft-only interrogation and stale-response protection.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/llm_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:llm/listConfigurableProviders",
@@ -1274,8 +1319,14 @@
    "platform": "both",
    "dshSource": "packages/llm/llm/src/index.ts",
    "description": "List the providers that can be set up, including ones not yet configured.",
-   "status": "missing",
-   "notes": "Provider routes for the models settings page; not built."
+   "status": "ported",
+   "notes": "Generated directory/discovery contracts with draft-only interrogation and stale-response protection.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/llm_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:llm/listProviders",
@@ -1284,8 +1335,14 @@
    "platform": "both",
    "dshSource": "packages/llm/llm/src/index.ts",
    "description": "List the model providers the host can route to.",
-   "status": "missing",
-   "notes": "Provider routes for the models settings page; not built."
+   "status": "ported",
+   "notes": "Generated directory/discovery contracts with draft-only interrogation and stale-response protection.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/llm_remote.g.dart",
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ]
   },
   {
    "id": "remote:messageFeedback/delete",
@@ -2388,8 +2445,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-agent-loop/src/client/agent-loop-card-controller.ts",
    "description": "The cap on parallel tool calls in one agent step.",
-   "status": "missing",
-   "notes": "Not read; the generic form model exists but no card is wired."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:agent-preset-registry",
@@ -2408,8 +2470,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-shell/src/client/shell-card-controller.ts",
    "description": "Bash command timeout and per-stream output cap.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:locale",
@@ -2442,8 +2509,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-shell/src/client/shell-card-controller.ts",
    "description": "PowerShell command timeout and per-stream output cap.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:subagent",
@@ -2452,8 +2524,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-subagent/src/client/index.ts",
    "description": "Subagent recursion depth and parallel capacity.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:subagent-model-selection-settings",
@@ -2462,8 +2539,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-subagent/src/client/subagent-model-selection-card-controller.ts",
    "description": "The models agents may choose for subagents.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:ui-chat",
@@ -2500,18 +2582,22 @@
    "platform": "both",
    "dshSource": "packages/client/ui-agent-preset/src/client/index.ts",
    "description": "The developer-tools switch that reveals trajectory and raw views.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Accepted ui-settings.enabled drives coding views and the General switch. Root application flow verifies the generated mutation.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "packages/dsh_models/lib/src/settings/developer_tools.dart"
+   ]
   },
   {
    "id": "settings:ui-settings-account",
    "kind": "settings",
    "area": "settings",
-   "platform": "desktop",
+   "platform": "both",
    "dshSource": "packages/client/ui-settings-account/src/onboarding-settings.ts",
    "description": "Whether the desktop onboarding was completed.",
-   "status": "na",
-   "reason": "Desktop-app onboarding state; Whalee has its own pairing flow."
+   "status": "missing",
+   "notes": "DeepSeek account onboarding completion is distinct from Host pairing; native account onboarding integration remains."
   },
   {
    "id": "settings:ui-settings-general",
@@ -2520,8 +2606,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-models/src/onboarding-copy.ts",
    "description": "Whether the versioned welcome notice was seen.",
-   "status": "missing",
-   "notes": "Not read; no welcome notice or onboarding."
+   "status": "ported",
+   "notes": "Exact welcomeNoticeVersion acknowledgement through ConfigForms; refused writes retain notice for retry.",
+   "whalee": [
+    "features/dsh_feature_model_settings/lib/src/welcome.dart"
+   ]
   },
   {
    "id": "settings:ui-theme",
@@ -2543,8 +2632,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-web-search/src/client/web-search-card-controller.ts",
    "description": "Web fetch and search settings shared by the web tools.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:web-deepseek-api",
@@ -2553,8 +2647,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-web-search/src/client/web-search-card-controller.ts",
    "description": "The DeepSeek web API key and endpoint.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "settings:web-search-deepseek",
@@ -2563,8 +2662,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-web-search/src/client/web-search-card-controller.ts",
    "description": "The per-request search budget of the DeepSeek web-search provider.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Served namespace, staged edits and revision-fenced settings mutations.",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/common_settings.dart",
+    "features/dsh_feature_settings/lib/src/subagent_models.dart",
+    "features/dsh_feature_settings/lib/src/web_search.dart"
+   ]
   },
   {
    "id": "slot:conversation.approval.detail",
@@ -3312,7 +3416,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-models/src/client/slot-contract.ts",
    "description": "Ordered extension area after the provider rows and the add controls.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ],
+   "notes": "Ordered root footer after provider and add controls; follows slot changes."
   },
   {
    "id": "slot:settings.models.provider-card",
@@ -3321,7 +3431,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-models/src/client/slot-contract.ts",
    "description": "One provider card's adapter extension area, dispatched with `entryKey = settingsNs` on every card that renders a directory row: a saved row's card (its first-run setup posture included) and the add-provider draft card.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "features/dsh_feature_model_settings/lib/src/models_section.dart",
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+    "packages/dsh_models/lib/src/settings/model_providers.dart"
+   ],
+   "notes": "Keyed by owning namespace for saved/setup/add-catalog cards, with configured and redacted key facts. Late registrations invalidate the page."
   },
   {
    "id": "slot:settings.models.sign-in",
@@ -3339,7 +3455,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "Root-scoped onboarding steps contributed by settings features.",
-   "status": "missing"
+   "status": "partial",
+   "whalee": [
+    "features/dsh_feature_settings/lib/src/onboarding.dart"
+   ],
+   "notes": "One root step at a time; deciding steps render no blocking chrome. Versioned welcome implemented; explicit native account onboarding is later platform work."
   },
   {
    "id": "slot:settings.plugins.tab",

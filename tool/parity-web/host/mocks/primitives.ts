@@ -50,3 +50,9 @@ export { HoverCard } from '@dsh/ui-primitives/src/HoverCard.tsx'
 export { relativeTime } from '@dsh/ui-primitives/src/relative-time.ts'
 // Turn comparison surfaces use the same production code-language/highlighter hook.
 export { languageForPath, useCodeHighlighter } from '@dsh/ui-primitives/src/code-highlighting.ts'
+// Settings pages mount these exact production primitives and model classes.
+export { SettingsForm } from '@dsh/ui-primitives/src/settings-form/SettingsForm.tsx'
+export { SettingsValueField, SettingsSecretField } from '@dsh/ui-primitives/src/settings-form/fields.tsx'
+export { Switch } from '@dsh/ui-primitives/src/Switch.tsx'
+export { Toast } from '@dsh/ui-primitives/src/Toast.tsx'
+export { Checkbox } from '@dsh/ui-primitives/src/Checkbox.tsx'

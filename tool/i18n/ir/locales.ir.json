@@ -35,7 +35,13 @@
     "packages/client/ui-schedule/src/client/frequency-locales.ts",
     "packages/client/ui-schedule/src/client/task-manager-locales.ts",
     "packages/client/ui-secret-mask/src/client/locales.ts",
+    "packages/client/ui-settings-agent-loop/src/client/locales.ts",
     "packages/client/ui-settings-general/src/client/locales.ts",
+    "packages/client/ui-settings-models/src/client/locales.ts",
+    "packages/client/ui-settings-session-log/src/client/locales.ts",
+    "packages/client/ui-settings-shell/src/client/locales.ts",
+    "packages/client/ui-settings-subagent/src/client/locales.ts",
+    "packages/client/ui-settings-web-search/src/client/locales.ts",
     "packages/client/ui-shortcuts/src/client/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/code/locales.ts",
     "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
@@ -5751,6 +5757,61 @@
       }
     },
     {
+      "namespace": "settings.agentLoop",
+      "package": "client/ui-settings-agent-loop",
+      "file": "packages/client/ui-settings-agent-loop/src/client/locales.ts",
+      "entries": {
+        "description": {
+          "en": "Control how the Agent dispatches tool calls.",
+          "zh": "控制 Agent 派发工具调用的方式。"
+        },
+        "invalidNumber": {
+          "en": "Enter a number, or leave blank to use the default.",
+          "zh": "请填数字；留空表示使用默认值。"
+        },
+        "maxParallel": {
+          "en": "Parallel tool calls",
+          "zh": "并行工具调用数"
+        },
+        "maxParallelHint": {
+          "en": "Upper bound on parallel-safe calls running at once within one step.",
+          "zh": "同一步内最多同时运行多少个可并行的调用。"
+        },
+        "overridden": {
+          "en": "Overridden",
+          "zh": "已覆盖"
+        },
+        "readOnly": {
+          "en": "This deployment stores settings read-only.",
+          "zh": "本部署的设置为只读。"
+        },
+        "reset": {
+          "en": "Reset to default",
+          "zh": "恢复默认"
+        },
+        "save": {
+          "en": "Save",
+          "zh": "保存"
+        },
+        "saveFailed": {
+          "en": "The deployment did not accept these values; they were left for you to correct.",
+          "zh": "本部署没有接受这些值，已保留供你修改。"
+        },
+        "saving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "title": {
+          "en": "Agent loop",
+          "zh": "Agent 循环"
+        },
+        "unavailable": {
+          "en": "This plugin is not loaded, so it cannot be configured right now.",
+          "zh": "该插件当前未加载，暂时无法配置。"
+        }
+      }
+    },
+    {
       "namespace": "settings.locale",
       "package": "client/locale",
       "file": "packages/client/locale/src/locales/settings.ts",
@@ -5758,6 +5819,549 @@
         "language.title": {
           "en": "Language",
           "zh": "语言"
+        }
+      }
+    },
+    {
+      "namespace": "settings.models",
+      "package": "client/ui-settings-models",
+      "file": "packages/client/ui-settings-models/src/client/locales.ts",
+      "entries": {
+        "accountSignedIn": {
+          "en": "Signed in",
+          "zh": "已登录"
+        },
+        "add": {
+          "en": "Add model provider",
+          "zh": "添加模型提供商"
+        },
+        "addCatalog": {
+          "en": "Third-party model provider",
+          "zh": "第三方模型提供商"
+        },
+        "addCatalogExhausted": {
+          "en": "Every catalog provider is already configured.",
+          "zh": "目录中的提供商都已添加。"
+        },
+        "addCatalogHint": {
+          "en": "Pick OpenAI, Anthropic, Kimi, or another provider from the built-in catalog and enter its API key.",
+          "zh": "从内置目录中选择 OpenAI、Anthropic、Kimi 等提供商，填入其 API 密钥即可使用。"
+        },
+        "addCustom": {
+          "en": "Custom model API",
+          "zh": "自定义模型 API"
+        },
+        "addCustomHint": {
+          "en": "Connect a relay, a self-hosted server, or any other OpenAI- or Anthropic-compatible endpoint by its base URL, protocol, and models.",
+          "zh": "连接中转站、自部署服务或其他兼容 OpenAI / Anthropic 协议的接口，需填写 API 地址、协议和模型。"
+        },
+        "addCustomUnavailable": {
+          "en": "No API protocol is available to declare.",
+          "zh": "没有可用的 API 协议。"
+        },
+        "addMode": {
+          "en": "How to add",
+          "zh": "添加方式"
+        },
+        "addModel": {
+          "en": "Add model",
+          "zh": "添加模型"
+        },
+        "advancedHint": {
+          "en": "Other fields live in cordis.patch.yml; edit that section directly.",
+          "zh": "其余字段在 cordis.patch.yml 中，请直接编辑对应段。"
+        },
+        "apply": {
+          "en": "Apply",
+          "zh": "保存"
+        },
+        "applying": {
+          "en": "Applying…",
+          "zh": "保存中…"
+        },
+        "authHelp": {
+          "en": "Authentication details",
+          "zh": "认证说明"
+        },
+        "baseUrl": {
+          "en": "Base URL",
+          "zh": "API 地址"
+        },
+        "baseUrlConfigured": {
+          "en": "Provider-configured endpoint",
+          "zh": "由提供方配置地址"
+        },
+        "baseUrlDefault": {
+          "en": "No default endpoint",
+          "zh": "没有默认地址"
+        },
+        "baseUrlEnvironment": {
+          "en": "Provider endpoint configuration: {env}",
+          "zh": "提供方地址配置：{env}"
+        },
+        "baseUrlPlaceholder": {
+          "en": "{url}",
+          "zh": "{url}"
+        },
+        "cancel": {
+          "en": "Cancel",
+          "zh": "取消"
+        },
+        "close": {
+          "en": "Close",
+          "zh": "关闭"
+        },
+        "conflict": {
+          "en": "Someone else changed these settings while this card was open. Close it and reopen to edit the current values.",
+          "zh": "这张卡片打开期间，这些设置已被其他地方改动。请关闭后重新打开，在当前值上编辑。"
+        },
+        "contextWindow": {
+          "en": "Context window",
+          "zh": "上下文窗口"
+        },
+        "contextWindowPlaceholder": {
+          "en": "Uses the provider default",
+          "zh": "使用提供商默认值"
+        },
+        "create": {
+          "en": "Create provider",
+          "zh": "创建提供商"
+        },
+        "creating": {
+          "en": "Creating…",
+          "zh": "创建中…"
+        },
+        "credentialConfigured": {
+          "en": "API key configured",
+          "zh": "API 密钥已配置"
+        },
+        "credentialMissing": {
+          "en": "API key missing",
+          "zh": "API 密钥缺失"
+        },
+        "customAnthropicBaseUrlPlaceholder": {
+          "en": "https://gateway.example",
+          "zh": "https://gateway.example"
+        },
+        "customApi": {
+          "en": "API protocol",
+          "zh": "API 协议"
+        },
+        "customApiUnset": {
+          "en": "Not selected",
+          "zh": "未选择"
+        },
+        "customBaseUrlInvalid": {
+          "en": "Enter a valid HTTP or HTTPS URL.",
+          "zh": "请输入有效的 HTTP 或 HTTPS 地址。"
+        },
+        "customBaseUrlPlaceholder": {
+          "en": "https://gateway.example/v1",
+          "zh": "https://gateway.example/v1"
+        },
+        "customDisplayName": {
+          "en": "Display name",
+          "zh": "显示名称"
+        },
+        "customNeedsBaseUrl": {
+          "en": "A custom provider needs a base URL.",
+          "zh": "自定义模型 API 需要填写 API 地址。"
+        },
+        "customNeedsModels": {
+          "en": "A custom provider needs at least one model.",
+          "zh": "自定义模型 API 至少需要一个模型。"
+        },
+        "customRoute": {
+          "en": "Provider ID",
+          "zh": "Provider ID"
+        },
+        "customRouteHint": {
+          "en": "Lowercase identifier, starting with a letter, that uniquely names this provider in requests and as its credential name.",
+          "zh": "以小写字母开头的标识，在请求中唯一标识该提供商，并用于派生凭据名。"
+        },
+        "customRouteInvalid": {
+          "en": "Start with a lowercase letter; then lowercase letters, digits, and dashes.",
+          "zh": "需以小写字母开头，之后可用小写字母、数字和短横线。"
+        },
+        "customRouteTaken": {
+          "en": "A provider already uses this ID.",
+          "zh": "已有提供商使用了这个 ID。"
+        },
+        "customTag": {
+          "en": "Custom",
+          "zh": "自定义"
+        },
+        "customized": {
+          "en": "Customized settings",
+          "zh": "自定义设置"
+        },
+        "deepSeekAccount": {
+          "en": "DeepSeek Account",
+          "zh": "DeepSeek 账号"
+        },
+        "deepSeekBaseUrl": {
+          "en": "https://api.deepseek.com/anthropic (Default to use DEEPSEEK_BASE_URL)",
+          "zh": "https://api.deepseek.com/anthropic（默认使用环境 DEEPSEEK_BASE_URL）"
+        },
+        "deepSeekEndpointHint": {
+          "en": "Use an API endpoint compatible with Anthropic Messages.",
+          "zh": "请填写兼容 Anthropic Messages 协议的 API 地址。"
+        },
+        "deleteConfirm": {
+          "en": "Delete {provider}",
+          "zh": "删除 {provider}"
+        },
+        "deleteDescription": {
+          "en": "Deleting {provider} removes its configuration. Any credential it uses is managed elsewhere and will be kept.",
+          "zh": "删除 {provider} 会移除其配置；其使用的凭证（如有）由其他位置管理，将会保留。"
+        },
+        "deleteDescriptionWithCredential": {
+          "en": "Deleting {provider} removes its configuration and stored API key.",
+          "zh": "删除 {provider} 会移除其配置和存储的 API 密钥。"
+        },
+        "deleteTitle": {
+          "en": "Delete {provider}?",
+          "zh": "删除 {provider}？"
+        },
+        "deleting": {
+          "en": "Deleting {provider}…",
+          "zh": "正在删除 {provider}…"
+        },
+        "edit": {
+          "en": "Edit",
+          "zh": "编辑"
+        },
+        "editProvider": {
+          "en": "Edit {provider}",
+          "zh": "编辑 {provider}"
+        },
+        "fetchAdopt": {
+          "en": "Add selected",
+          "zh": "添加所选"
+        },
+        "fetchDescription": {
+          "en": "These are the models this provider has available. Choose the ones to add.",
+          "zh": "以下是模型提供商的可用模型，勾选要添加的模型。"
+        },
+        "fetchDeselectAll": {
+          "en": "Deselect all",
+          "zh": "取消全选"
+        },
+        "fetchEmpty": {
+          "en": "The provider listed no models. Add them by hand.",
+          "zh": "该提供商没有列出任何模型，请手动添加。"
+        },
+        "fetchModels": {
+          "en": "Fetch available models",
+          "zh": "获取可用模型"
+        },
+        "fetchNeedsBaseUrl": {
+          "en": "Enter the base URL first, then fetch.",
+          "zh": "请先填写 API 地址，再获取。"
+        },
+        "fetchNoMatches": {
+          "en": "No matching models.",
+          "zh": "没有匹配的模型。"
+        },
+        "fetchSearch": {
+          "en": "Search models",
+          "zh": "搜索模型"
+        },
+        "fetchSelectAll": {
+          "en": "Select all",
+          "zh": "全选"
+        },
+        "fetchTitle": {
+          "en": "Choose models to add",
+          "zh": "选择要添加的模型"
+        },
+        "fetching": {
+          "en": "Asking the provider…",
+          "zh": "正在询问提供商…"
+        },
+        "intro": {
+          "en": "Enter your API keys to use models from the following providers.",
+          "zh": "填入各提供商的 API 密钥即可使用其模型。"
+        },
+        "keyBlank": {
+          "en": "Enter the API key, or leave the field empty to keep the stored one.",
+          "zh": "请输入 API 密钥；留空则保持已存储的密钥。"
+        },
+        "keyBlankNew": {
+          "en": "Enter the API key, or leave the field empty if this provider authenticates another way.",
+          "zh": "请输入 API 密钥；若该提供商以其他方式鉴权，可以留空。"
+        },
+        "keyFallbackDetected": {
+          "en": "Env var detected. ({hint})",
+          "zh": "已检测到环境变量（{hint}）"
+        },
+        "keyFallbackDetectedHidden": {
+          "en": "Env var detected.",
+          "zh": "已检测到环境变量"
+        },
+        "keyFallbackMissing": {
+          "en": "Env var not detected. Enter an API key, or configure {hint} in your env.",
+          "zh": "未检测到环境变量。请填写 API 密钥，或设置环境变量 {hint}。"
+        },
+        "keyFallbackUnchecked": {
+          "en": "Environment credential status has not been confirmed.",
+          "zh": "环境凭据状态尚未确认"
+        },
+        "keyHelp": {
+          "en": "Saved credentials are used first. Environment fallbacks shown here, in order: {env}. Sources are launch environment, $cwd/.env, then $DSH_HOME/.env.",
+          "zh": "优先使用已保存的凭据。此处显示的环境后备按以下顺序排列：{env}。来源依次为启动环境、$cwd/.env、$DSH_HOME/.env。"
+        },
+        "keyHide": {
+          "en": "Hide secret",
+          "zh": "隐藏密钥"
+        },
+        "keyIllegalCharacters": {
+          "en": "This API key is not in a valid format. Please check it.",
+          "zh": "该 API 密钥格式错误，请检查。"
+        },
+        "keyInput": {
+          "en": "API key",
+          "zh": "API 密钥"
+        },
+        "keyPlaceholder": {
+          "en": "Enter your API key",
+          "zh": "输入 API 密钥"
+        },
+        "keyPlaceholderFallback": {
+          "en": "Leave blank to use env as auth ({hint})",
+          "zh": "留空使用环境认证（{hint}）"
+        },
+        "keyPlaceholderSaved": {
+          "en": "Leave blank to use saved credentials",
+          "zh": "留空使用已保存凭据"
+        },
+        "keyRequired": {
+          "en": "Enter an API key to continue.",
+          "zh": "请输入 API 密钥后继续。"
+        },
+        "keyReveal": {
+          "en": "Show secret",
+          "zh": "显示密钥"
+        },
+        "loadFailed": {
+          "en": "Loading the provider directory failed",
+          "zh": "加载提供商目录失败"
+        },
+        "maxTokens": {
+          "en": "Max output tokens",
+          "zh": "最大输出 token 数"
+        },
+        "maxTokensPlaceholder": {
+          "en": "Uses the provider default",
+          "zh": "使用提供商默认值"
+        },
+        "model": {
+          "en": "Model",
+          "zh": "模型"
+        },
+        "modelAdvanced": {
+          "en": "Model options",
+          "zh": "模型选项"
+        },
+        "modelCapacityInvalid": {
+          "en": "A capacity must be a number, optionally suffixed K or M.",
+          "zh": "容量需为数字，可加 K 或 M 后缀。"
+        },
+        "modelContextInvalid": {
+          "en": "Context window must be a positive count, like 131072, 256K, or 1M.",
+          "zh": "上下文窗口必须是正数，例如 131072、256K 或 1M。"
+        },
+        "modelDuplicate": {
+          "en": "Each model ID may appear once.",
+          "zh": "每个模型 ID 只能出现一次。"
+        },
+        "modelId": {
+          "en": "Model ID",
+          "zh": "模型 ID"
+        },
+        "modelIdDuplicate": {
+          "en": "Model ID must be unique.",
+          "zh": "模型 ID 不能重复。"
+        },
+        "modelIdRequired": {
+          "en": "Model ID is required.",
+          "zh": "模型 ID 不能为空。"
+        },
+        "modelInputImage": {
+          "en": "Image",
+          "zh": "图片"
+        },
+        "modelInputText": {
+          "en": "Text",
+          "zh": "文本"
+        },
+        "modelInputTypes": {
+          "en": "Input types",
+          "zh": "输入类型"
+        },
+        "modelMaxTokensInvalid": {
+          "en": "Max output tokens must be a positive count, like 8192, 64K, or 1M.",
+          "zh": "最大输出 token 数必须是正数，例如 8192、64K 或 1M。"
+        },
+        "modelName": {
+          "en": "Display name",
+          "zh": "显示名称"
+        },
+        "modelNameInvalid": {
+          "en": "Display name cannot be empty.",
+          "zh": "显示名称不能为空。"
+        },
+        "modelNamePlaceholder": {
+          "en": "Uses the model ID when empty",
+          "zh": "留空时使用模型 ID"
+        },
+        "modelReasoning": {
+          "en": "Reasoning levels",
+          "zh": "推理等级"
+        },
+        "modelReasoningAdd": {
+          "en": "Add level",
+          "zh": "添加档位"
+        },
+        "modelReasoningHelp": {
+          "en": "About reasoning levels",
+          "zh": "推理等级说明"
+        },
+        "modelReasoningHelpText": {
+          "en": "The API value is sent in the request's reasoning-effort field, such as OpenAI's reasoning_effort. It defaults to the level name; where the model provider's API documentation specifies a different value, follow it. Off turns reasoning off and needs no value; a value already written in the configuration is kept and sent.",
+          "zh": "API 参数值会写入请求的推理强度字段（如 OpenAI 的 reasoning_effort），默认与档位名相同；如有不同，以模型提供商的 API 文档为准。Off 表示关闭思考，不需要填写参数值；配置中已写入的值会保留并发送。"
+        },
+        "modelReasoningLevel": {
+          "en": "Level",
+          "zh": "档位"
+        },
+        "modelReasoningNeedsLevel": {
+          "en": "Add at least one level besides Off, or turn reasoning levels off.",
+          "zh": "至少添加一个 Off 以外的档位；不需要思考请关闭推理等级。"
+        },
+        "modelReasoningOffValuePlaceholder": {
+          "en": "Turns reasoning off",
+          "zh": "关闭思考"
+        },
+        "modelReasoningRemove": {
+          "en": "Delete level",
+          "zh": "删除档位"
+        },
+        "modelReasoningValue": {
+          "en": "API value",
+          "zh": "API 参数值"
+        },
+        "modelReasoningValueRequired": {
+          "en": "Every level besides Off needs an API value, and no value can be empty.",
+          "zh": "Off 以外的档位都需要填写 API 参数值，且参数值不能为空字符串。"
+        },
+        "models": {
+          "en": "Models",
+          "zh": "模型目录"
+        },
+        "modelsCustomized": {
+          "en": "Customized model catalog",
+          "zh": "已自定义模型目录"
+        },
+        "modelsEmpty": {
+          "en": "No models will be shown in the selector. Unlisted IDs can still be sent directly.",
+          "zh": "模型选择器中将不显示任何模型；目录外 ID 仍可直接发送。"
+        },
+        "modelsInherited": {
+          "en": "Using the adapter defaults",
+          "zh": "正在使用适配器默认模型"
+        },
+        "nav": {
+          "en": "Models",
+          "zh": "模型"
+        },
+        "onboardingDescription": {
+          "en": "Configure the official DeepSeek provider to start building.",
+          "zh": "配置 DeepSeek 官方模型，即可开始使用。"
+        },
+        "onboardingLater": {
+          "en": "Configure later",
+          "zh": "稍后配置"
+        },
+        "onboardingSave": {
+          "en": "Save and continue",
+          "zh": "保存并继续"
+        },
+        "onboardingSaving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "onboardingTitle": {
+          "en": "Add an API key to get started",
+          "zh": "添加一个 API Key 开始使用"
+        },
+        "protocolAnthropicMessages": {
+          "en": "Anthropic Messages",
+          "zh": "Anthropic Messages"
+        },
+        "protocolOpenAiCompletions": {
+          "en": "OpenAI Chat Completions",
+          "zh": "OpenAI Chat Completions"
+        },
+        "protocolOpenAiResponses": {
+          "en": "OpenAI Responses",
+          "zh": "OpenAI Responses"
+        },
+        "provider": {
+          "en": "Provider",
+          "zh": "提供商"
+        },
+        "readOnly": {
+          "en": "The settings document is read-only in this deployment.",
+          "zh": "当前部署的设置文档为只读。"
+        },
+        "remove": {
+          "en": "Delete",
+          "zh": "删除"
+        },
+        "removeModel": {
+          "en": "Delete model",
+          "zh": "删除模型"
+        },
+        "removeProvider": {
+          "en": "Delete {provider}",
+          "zh": "删除 {provider}"
+        },
+        "resetModels": {
+          "en": "Restore defaults",
+          "zh": "恢复默认模型"
+        },
+        "retry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "savedProvider": {
+          "en": "Saved {provider}.",
+          "zh": "已保存 {provider}。"
+        },
+        "settingsPathUnresolvable": {
+          "en": "unresolvable settings path",
+          "zh": "无法解析设置路径"
+        },
+        "title": {
+          "en": "Models",
+          "zh": "模型"
+        },
+        "welcomeBody": {
+          "en": "DeepSeek Harness 0.2 is still in preview, and many areas need continued improvement and refinement. We welcome feedback and suggestions from all developers and users. The new desktop app now targets a broad range of users, while developer-related advanced features can be enabled in the settings. DeepSeek Harness’s product features and plugin APIs are expected to continue rapid iteration and evolution, and will gradually stabilize over time.\n\nWe look forward to exploring the limits of intelligence together with users and developers around the world, building on open-source, reusable, and composable infrastructure. We welcome everyone to bring their ideas to life with DeepSeek Harness and participate in the community to enrich the plugin ecosystem.",
+          "zh": "DeepSeek Harness 目前的 0.2 版本仍处于预览阶段，还有许多地方需要持续改进和打磨，希望听取广大开发者和用户的反馈建议。现在，新的桌面端面向广泛用户，开发者相关的进阶功能可在配置中开启使用。预计 DeepSeek Harness 的产品功能以及插件 API 都会继续快速迭代、持续演化，并逐渐趋于稳定。\n\n我们期待与全球用户和开发者一起，在开源、可复用、可组合的基础设施之上，共同探索智能上限。欢迎大家用 DeepSeek Harness 将想法变成现实，与社区一起丰富插件生态。"
+        },
+        "welcomeContinue": {
+          "en": "Continue",
+          "zh": "继续"
+        },
+        "welcomeError": {
+          "en": "The acknowledgement could not be saved. Please try again.",
+          "zh": "暂时无法保存确认状态，请重试。"
+        },
+        "welcomeTitle": {
+          "en": "Preview Notice",
+          "zh": "预览版说明"
         }
       }
     },
@@ -5813,6 +6417,239 @@
         "unavailable": {
           "en": "Unavailable",
           "zh": "不可用"
+        }
+      }
+    },
+    {
+      "namespace": "settings.sessionLog",
+      "package": "client/ui-settings-session-log",
+      "file": "packages/client/ui-settings-session-log/src/client/locales.ts",
+      "entries": {
+        "description": {
+          "en": "Help improve DeepSeek models and products.",
+          "zh": "帮助改进 DeepSeek 模型与产品"
+        },
+        "failed": {
+          "en": "Could not save preference",
+          "zh": "无法保存设置"
+        },
+        "saved": {
+          "en": "Preference saved",
+          "zh": "设置已保存"
+        },
+        "title": {
+          "en": "Upload Session Log when using the official model API",
+          "zh": "在使用官方模型 API 时上传 Session Log"
+        }
+      }
+    },
+    {
+      "namespace": "settings.shell",
+      "package": "client/ui-settings-shell",
+      "file": "packages/client/ui-settings-shell/src/client/locales.ts",
+      "entries": {
+        "description": {
+          "en": "Limit how long each command may run and how much it may output.",
+          "zh": "限制每条命令最多能跑多久、最多输出多少内容。"
+        },
+        "invalidNumber": {
+          "en": "Enter a number, or leave blank to use the default.",
+          "zh": "请填数字；留空表示使用默认值。"
+        },
+        "maxOutputBytes": {
+          "en": "Output cap per stream (bytes)",
+          "zh": "单流输出上限（字节）"
+        },
+        "maxOutputBytesHint": {
+          "en": "Output beyond this spills to a temporary file rather than being lost.",
+          "zh": "超出部分会转存到临时文件，而不是被丢弃。"
+        },
+        "overridden": {
+          "en": "Overridden",
+          "zh": "已覆盖"
+        },
+        "readOnly": {
+          "en": "This deployment stores settings read-only.",
+          "zh": "本部署的设置为只读。"
+        },
+        "reset": {
+          "en": "Reset to default",
+          "zh": "恢复默认"
+        },
+        "save": {
+          "en": "Save",
+          "zh": "保存"
+        },
+        "saveFailed": {
+          "en": "The deployment did not accept these values; they were left for you to correct.",
+          "zh": "本部署没有接受这些值，已保留供你修改。"
+        },
+        "saving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "timeoutMs": {
+          "en": "Command timeout (ms)",
+          "zh": "命令超时（毫秒）"
+        },
+        "timeoutMsHint": {
+          "en": "How long one command may run before it is terminated.",
+          "zh": "单条命令允许运行多久，超时即终止。"
+        },
+        "title": {
+          "en": "Shell",
+          "zh": "终端"
+        },
+        "unavailable": {
+          "en": "This plugin is not loaded, so it cannot be configured right now.",
+          "zh": "该插件当前未加载，暂时无法配置。"
+        }
+      }
+    },
+    {
+      "namespace": "settings.subagent",
+      "package": "client/ui-settings-subagent",
+      "file": "packages/client/ui-settings-subagent/src/client/locales.ts",
+      "entries": {
+        "overridden": {
+          "en": "Overridden",
+          "zh": "已覆盖"
+        },
+        "readOnly": {
+          "en": "This deployment stores settings read-only.",
+          "zh": "本部署的设置为只读。"
+        },
+        "reset": {
+          "en": "Reset to default",
+          "zh": "恢复默认"
+        },
+        "save": {
+          "en": "Save",
+          "zh": "保存"
+        },
+        "saveFailed": {
+          "en": "The deployment did not accept these values; they were left for you to correct.",
+          "zh": "本部署没有接受这些值，已保留供你修改。"
+        },
+        "saving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "subagentCapacityHelp": {
+          "en": "Total live Subagents under the same main Agent, across all recursion levels. The main Agent is excluded. New start requests are rejected when the limit is reached.",
+          "zh": "同一主 Agent 下，所有递归层级同时存活的子智能体总数，主 Agent 不计入。达到上限时，新的启动请求会被拒绝。"
+        },
+        "subagentCapacityHelpLabel": {
+          "en": "About the Subagent parallelism limit",
+          "zh": "子智能体并行数量上限说明"
+        },
+        "subagentCapacityInvalid": {
+          "en": "Enter a whole number of 1 or more.",
+          "zh": "请输入不小于 1 的整数。"
+        },
+        "subagentDepthHelp": {
+          "en": "Limits how many levels of Subagents an Agent can create.",
+          "zh": "限制 Agent 创建子智能体的递归层级。"
+        },
+        "subagentDepthHelpLabel": {
+          "en": "About maximum recursion depth",
+          "zh": "最大递归深度说明"
+        },
+        "subagentDepthInvalid": {
+          "en": "Enter a whole number of 0 or more.",
+          "zh": "请输入不小于 0 的整数。"
+        },
+        "subagentDepthOne": {
+          "en": "Only the main Agent can create Subagents",
+          "zh": "仅允许主 Agent 创建子智能体"
+        },
+        "subagentDepthOverride": {
+          "en": "If a tool defines its own maximum recursion depth, that setting takes precedence.",
+          "zh": "如果某个工具单独设置了最大递归深度，以该工具的设置为准。"
+        },
+        "subagentDepthZero": {
+          "en": "Disable Subagents",
+          "zh": "禁用子智能体"
+        },
+        "subagentDescription": {
+          "en": "Set Subagent recursion depth, count, and models.",
+          "zh": "设置子智能体的递归层级、数量和模型。"
+        },
+        "subagentLimitsTitle": {
+          "en": "Limits",
+          "zh": "运行限制"
+        },
+        "subagentMaxActive": {
+          "en": "Subagent parallelism limit",
+          "zh": "子智能体并行数量上限"
+        },
+        "subagentMaxDepth": {
+          "en": "Maximum recursion depth",
+          "zh": "最大递归深度"
+        },
+        "subagentModelSelectionAllowed": {
+          "en": "Models agents may choose",
+          "zh": "Agent 可选择的模型"
+        },
+        "subagentModelSelectionChoose": {
+          "en": "When enabled, agents can choose a provider, model, and reasoning effort for each Subagent from the authorized models below. Applies only to new sessions.",
+          "zh": "开启后，Agent 可以从下方授权模型中，为每个子智能体选择提供方、模型和推理强度。仅影响新会话。"
+        },
+        "subagentModelSelectionConflict": {
+          "en": "Settings changed elsewhere. Discard your draft and try again.",
+          "zh": "设置已在其他位置更新。请放弃修改后重试。"
+        },
+        "subagentModelSelectionEmpty": {
+          "en": "No model provider currently advertises a model.",
+          "zh": "当前没有模型提供方公布模型。"
+        },
+        "subagentModelSelectionLoadFailed": {
+          "en": "Models could not be loaded.",
+          "zh": "无法加载模型。"
+        },
+        "subagentModelSelectionLoading": {
+          "en": "Loading models…",
+          "zh": "正在加载模型…"
+        },
+        "subagentModelSelectionOff": {
+          "en": "Subagents use configured defaults or inherit the parent agent's model. Saved model choices are retained.",
+          "zh": "关闭后，子智能体使用配置的默认模型或继承父 Agent 的模型；已选模型会保留。"
+        },
+        "subagentModelSelectionPartial": {
+          "en": "Some model providers could not be loaded; saved choices remain removable.",
+          "zh": "部分模型提供方暂时无法加载；已保存的选择仍可移除。"
+        },
+        "subagentModelSelectionRequired": {
+          "en": "Select at least one model before saving.",
+          "zh": "保存前请至少选择一个模型。"
+        },
+        "subagentModelSelectionRetry": {
+          "en": "Retry",
+          "zh": "重试"
+        },
+        "subagentModelSelectionTitle": {
+          "en": "Model selection",
+          "zh": "模型选择"
+        },
+        "subagentModelSelectionToggle": {
+          "en": "Allow agents to choose models for Subagents",
+          "zh": "允许 Agent 为子智能体选择模型"
+        },
+        "subagentModelSelectionUnavailable": {
+          "en": "Currently unavailable",
+          "zh": "当前不可用"
+        },
+        "subagentModelSelectionUnavailableGroup": {
+          "en": "Saved but currently unavailable",
+          "zh": "已保存但当前不可用"
+        },
+        "subagentTitle": {
+          "en": "Subagent",
+          "zh": "子智能体"
+        },
+        "unavailable": {
+          "en": "This plugin is not loaded, so it cannot be configured right now.",
+          "zh": "该插件当前未加载，暂时无法配置。"
         }
       }
     },
@@ -5920,6 +6757,121 @@
         "fontSize.unit": {
           "en": "px",
           "zh": "px"
+        }
+      }
+    },
+    {
+      "namespace": "settings.webSearch",
+      "package": "client/ui-settings-web-search",
+      "file": "packages/client/ui-settings-web-search/src/client/locales.ts",
+      "entries": {
+        "apiKey": {
+          "en": "API key",
+          "zh": "API Key"
+        },
+        "apiKeyHint": {
+          "en": "Stored outside the settings file. Leave blank to keep the current key.",
+          "zh": "不写入设置文件。留空表示保持当前密钥。"
+        },
+        "apiKeySet": {
+          "en": "A key is configured.",
+          "zh": "已配置密钥。"
+        },
+        "apiKeyUnset": {
+          "en": "No key is configured; only conversations using a DeepSeek Account model can search, through the default endpoint.",
+          "zh": "未配置密钥；仅使用 DeepSeek 账号模型的对话可以通过默认接口地址搜索。"
+        },
+        "baseUrl": {
+          "en": "Messages API base URL",
+          "zh": "Messages API 基础地址"
+        },
+        "baseUrlHint": {
+          "en": "Include the API prefix, such as https://api.deepseek.com/anthropic/v1. The provider appends /messages. Leave blank to restore the default.",
+          "zh": "填写含 API 前缀的地址，例如 https://api.deepseek.com/anthropic/v1；程序追加 /messages，留空恢复默认。"
+        },
+        "count": {
+          "en": "Results per search",
+          "zh": "每次搜索结果数"
+        },
+        "countHint": {
+          "en": "Results returned per query: an integer from 1 to 50, default 10. This controls result count, not search calls. web_search keeps no more sources than its own result limit.",
+          "zh": "每个查询返回的结果条数，须为 1–50 的整数，默认 10；不控制搜索调用次数。web_search 保留的来源数不超过其自身的结果上限。"
+        },
+        "description": {
+          "en": "Set up the DeepSeek search provider.",
+          "zh": "设置 DeepSeek 的搜索提供方。"
+        },
+        "invalidCount": {
+          "en": "Enter an integer from 1 to 50, or leave blank to use the default.",
+          "zh": "请填 1–50 的整数；留空表示使用默认值。"
+        },
+        "invalidNumber": {
+          "en": "Enter a number, or leave blank to use the default.",
+          "zh": "请填数字；留空表示使用默认值。"
+        },
+        "maxUses": {
+          "en": "Max searches per request",
+          "zh": "单次请求最多搜索次数"
+        },
+        "maxUsesHint": {
+          "en": "How many searches the auxiliary model may run within one Messages request. Applies only to the Messages API.",
+          "zh": "辅助模型在一次 Messages 请求内最多可执行的搜索次数，仅适用于 Messages API。"
+        },
+        "overridden": {
+          "en": "Overridden",
+          "zh": "已覆盖"
+        },
+        "readOnly": {
+          "en": "This deployment stores settings read-only.",
+          "zh": "本部署的设置为只读。"
+        },
+        "reset": {
+          "en": "Reset to default",
+          "zh": "恢复默认"
+        },
+        "save": {
+          "en": "Save",
+          "zh": "保存"
+        },
+        "saveFailed": {
+          "en": "The deployment did not accept these values; they were left for you to correct.",
+          "zh": "本部署没有接受这些值，已保留供你修改。"
+        },
+        "saving": {
+          "en": "Saving…",
+          "zh": "保存中…"
+        },
+        "searchApiBaseUrl": {
+          "en": "Search / Fetch API base URL",
+          "zh": "Search / Fetch API 基础地址"
+        },
+        "searchApiBaseUrlHint": {
+          "en": "Include the API prefix, such as https://api.deepseek.com/v1/tools. The provider appends /search or /fetch. Leave blank to restore the default.",
+          "zh": "填写含 API 前缀的地址，例如 https://api.deepseek.com/v1/tools；程序追加 /search 或 /fetch，留空恢复默认。"
+        },
+        "searchGuide": {
+          "en": "Search & Fetch guide",
+          "zh": "网页搜索与抓取指南"
+        },
+        "searchGuideUrl": {
+          "en": "https://api-docs.deepseek.com/guides/search",
+          "zh": "https://api-docs.deepseek.com/zh-cn/guides/search"
+        },
+        "title": {
+          "en": "Web search",
+          "zh": "网页搜索"
+        },
+        "unavailable": {
+          "en": "This plugin is not loaded, so it cannot be configured right now.",
+          "zh": "该插件当前未加载，暂时无法配置。"
+        },
+        "useSearchApi": {
+          "en": "Use the new Web Search API",
+          "zh": "启用新版 Web 搜索 API"
+        },
+        "useSearchApiHint": {
+          "en": "Off by default: search runs through DeepSeek Messages. For the new Web Search API's features and pricing, see the ",
+          "zh": "默认关闭，搜索通过 DeepSeek Messages 完成。新版 Web 搜索 API 功能与计费详见"
         }
       }
     },

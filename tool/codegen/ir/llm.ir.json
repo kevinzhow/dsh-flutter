@@ -1,0 +1,312 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "llm",
+  "package": "packages/llm/llm",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/llm/llm/src/index.ts",
+    "packages/llm/llm/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "listProviders",
+      "hostName": "listProviders",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "LlmProviderInfo"
+        }
+      },
+      "doc": "Describe provider routes with a registered adapter."
+    },
+    {
+      "name": "listConfigurableProviders",
+      "hostName": "listConfigurableProviders",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "LlmConfigurableProvider"
+        }
+      },
+      "doc": "List every declared configurable provider, registered or dormant."
+    },
+    {
+      "name": "discoverModels",
+      "hostName": "remoteDiscoverModels",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "settingsNs",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "LlmModelDiscoveryRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "LlmDiscoveredModel"
+        }
+      },
+      "doc": "Remote adapter for one draft provider interrogation."
+    }
+  ],
+  "decls": {
+    "LlmConfigurableProvider": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "provider",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Provider route key this entry activates when configured."
+        },
+        {
+          "name": "displayName",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Human-readable provider name for configuration surfaces."
+        },
+        {
+          "name": "settingsNs",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "User-settings namespace whose section configures this provider."
+        },
+        {
+          "name": "settingsPath",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Path from that namespace's section root to this provider's profile object; empty when the whole section is the profile."
+        },
+        {
+          "name": "declared",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the owning adapter knows this route only because configuration declared it — a gateway or self-hosted server it ships nothing about. Absent means the adapter draws no such distinction; false means it does and this route is one of its own. Only the adapter can answer: a stored profile is how a user-added route AND a corrected shipped one both look from outside."
+        },
+        {
+          "name": "defaultBaseURL",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Route endpoint the adapter uses when the profile sets no `baseURL`; the adapter may still send an individual model to that model's own endpoint. Absent when the route has no fixed endpoint."
+        },
+        {
+          "name": "baseURLEnv",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Environment variables used to construct a provider endpoint; absent when none are reported."
+        },
+        {
+          "name": "nativeAuth",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LlmNativeAuth"
+          },
+          "doc": "Authentication the adapter performs when the profile names no credential reference; absent when it reports none."
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Configuration diagnostic for repair; unaffected models may remain serviceable."
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "One provider route an adapter plugin can activate through configuration, whether or not the route is currently registered. Configuration surfaces merge this directory with `listProviders()` to offer every configurable provider alongside its live/dormant state."
+    },
+    "LlmDiscoveredModel": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Model id the endpoint accepts."
+        },
+        {
+          "name": "name",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Human-readable name when the endpoint supplies one."
+        },
+        {
+          "name": "contextWindow",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum combined request and response context, when disclosed."
+        },
+        {
+          "name": "maxTokens",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum output tokens, when disclosed."
+        },
+        {
+          "name": "inputModalities",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "ModelModality"
+            }
+          },
+          "doc": "Accepted input types when disclosed by the catalog or endpoint; absent means unknown."
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "One model an endpoint reports about itself. Every field but the id is optional because most provider listings disclose an id and nothing else; a surface adopting one of these still owes the capacities its adapter needs."
+    },
+    "LlmModelDiscoveryRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "provider",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Route the draft is editing, when it edits an existing one. A route whose adapter already knows its models answers from that knowledge instead of asking the endpoint — the adapter's own registry is the better answer, and it costs no network call."
+        },
+        {
+          "name": "baseURL",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Endpoint to interrogate. Optional because a route the adapter already describes needs none; a route it does not must supply one."
+        },
+        {
+          "name": "api",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Wire protocol the endpoint speaks, when the draft names one."
+        },
+        {
+          "name": "apiKey",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Credential for this interrogation alone; the harness never stores it."
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "One interrogation of a provider endpoint that configuration has not stored yet. Configuration surfaces send the draft a user is still editing, so the request carries the endpoint and credential directly instead of naming a route: a provider being added has no route to name."
+    },
+    "LlmNativeAuth": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "env",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Environment variables the route's authentication reads, in lookup order; empty when it reads none."
+        },
+        {
+          "name": "oauth",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether a stored OAuth sign-in can authenticate the route."
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "Authentication a provider route performs without a credential reference in its profile."
+    },
+    "LlmProviderInfo": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Provider route key used by {@link GenerateOptions.provider}."
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Human-readable provider name for selectors and diagnostics."
+        }
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "Display metadata for one registered provider route."
+    },
+    "ModelModality": {
+      "k": "enum",
+      "values": [
+        "image",
+        "text"
+      ],
+      "source": "packages/llm/llm/src/types.ts",
+      "doc": "Any declared provider model modality."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

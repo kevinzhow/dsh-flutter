@@ -177,6 +177,21 @@ abstract final class DshSlots {
   /// One settings page (dsh `ui-settings`): `id` keys the page, `order` and
   /// `label` its place and name in the navigation. The shell is
   /// `dsh_feature_settings` (dsh `ui-settings-general`).
+  static const settingsOnboarding = Slot<Object?, Object?>(
+    'settings.onboarding',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
+  static const modelsProviderCard = Slot<Object?, Object?>(
+    'settings.models.provider-card',
+    SlotCardinality.keyed,
+    SlotScope.root,
+  );
+  static const modelsFooter = Slot<Object?, Object?>(
+    'settings.models.footer',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
   static const settingsSection = Slot<Object?, Object?>(
     'settings.section',
     SlotCardinality.list,
@@ -312,6 +327,9 @@ abstract final class DshSlots {
     sidebarRightPaneTab,
     sidebarRightPaneTabTitle,
     sidebarRightTabGuideEntry,
+    settingsOnboarding,
+    modelsProviderCard,
+    modelsFooter,
     settingsSection,
     settingsGeneralItem,
     pluginsItem,

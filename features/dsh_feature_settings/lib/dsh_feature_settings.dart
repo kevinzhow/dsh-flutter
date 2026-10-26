@@ -8,3 +8,13 @@ export 'src/register.dart';
 export 'src/settings_page.dart';
 export 'src/settings_dialog.dart';
 export 'src/settings_shell.dart';
+
+export 'src/common_settings.dart';
+export 'src/form_scope.dart';
+
+export 'src/subagent_models.dart';
+export 'src/web_search.dart';
+
+export 'src/onboarding.dart';
+
+export 'src/subagent_settings.dart';

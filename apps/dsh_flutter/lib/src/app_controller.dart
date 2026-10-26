@@ -19,6 +19,7 @@ import 'package:dsh_feature_files/dsh_feature_files.dart';
 import 'package:dsh_feature_input_trigger/dsh_feature_input_trigger.dart';
 import 'package:dsh_feature_layout/dsh_feature_layout.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
+import 'package:dsh_feature_model_settings/dsh_feature_model_settings.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
 import 'package:dsh_feature_deliverables/dsh_feature_deliverables.dart';
@@ -44,7 +45,7 @@ import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show MaterialPageRoute;
-import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState;
+import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState, Widget;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
@@ -503,6 +504,7 @@ class AppController extends ChangeNotifier {
   String? hostVersion;
 
   /// The host-backed services, present while connected.
+  ModelSettingsFeature? _modelSettings;
   HostRemotes? remotes;
   ConfigForms? forms;
   ThemeSettingsService? _theme;
@@ -833,6 +835,32 @@ class AppController extends ChangeNotifier {
     final f = forms = ConfigForms(r);
     chatPreferences.bind(f.get('ui-chat'));
     developerTools.bind(f.get('ui-settings'));
+    _hostOffs.add(
+      slots.register<Object?, Widget>(
+        DshShellSlots.shellOverlay.typed<Object?, Widget>(),
+        (_) => SettingsOnboarding(
+          slots: slots,
+          openSection: (section) => openSettings(section: section),
+        ),
+        id: 'settings-onboarding',
+      ),
+    );
+    _modelSettings = registerModelSettingsFeature(
+      slots,
+      remotes: r,
+      forms: f,
+      i18n: () => i18n,
+    );
+    _hostOffs.add(
+      registerCommonSettings(
+        slots,
+        forms: f,
+        remotes: r,
+        i18n: () => i18n,
+        openUrl: (url) =>
+            unawaited(launchUrl(url, mode: LaunchMode.externalApplication)),
+      ),
+    );
     _deliverablesGeneration = transport.generations.listen(
       (_) => deliverablesModel.reset(),
     );
@@ -918,6 +946,9 @@ class AppController extends ChangeNotifier {
     unawaited(_deliverablesGeneration?.cancel());
     _deliverablesGeneration = null;
     deliverablesModel.reset();
+    final modelSettings = _modelSettings;
+    _modelSettings = null;
+    if (modelSettings != null) unawaited(modelSettings.dispose());
     developerTools.bind(null);
     chatPreferences.bind(null);
     conversationPreferences.bind(null);
@@ -1302,15 +1333,18 @@ class AppController extends ChangeNotifier {
   }
 
   /// Open the settings page over the app (the panel inside the desktop frame).
-  void openSettings() {
+  void openSettings({String? section}) {
     if (desktopShellActive) {
-      unawaited(desktop.settings.open());
+      unawaited(desktop.settings.open(section: section));
       return;
     }
     final nav = navigatorKey.currentState;
     if (nav == null) return;
     nav.push(
-      MaterialPageRoute<void>(builder: (_) => SettingsRoute(controller: this)),
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            SettingsRoute(controller: this, initialSection: section),
+      ),
     );
   }
 

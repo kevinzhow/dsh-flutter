@@ -18,26 +18,26 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Tools and approvals | 11 | 1 | 0 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 1 | 2 | 16 | 1 | 20 |
 | Files and preview | 8 | 6 | 5 | 0 | 19 |
-| Settings | 14 | 1 | 39 | 3 | 57 |
+| Settings | 32 | 8 | 15 | 2 | 57 |
 | Plugins and skills | 0 | 2 | 28 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 129 | 35 | 126 | 29 | 319 |
+| **all** | 147 | 42 | 102 | 28 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 19 | 16 | 18 | 3 | 56 |
-| remote | 49 | 5 | 69 | 23 | 146 |
-| slot | 57 | 13 | 28 | 2 | 100 |
-| settings | 4 | 1 | 11 | 1 | 17 |
+| package | 19 | 22 | 12 | 3 | 56 |
+| remote | 55 | 5 | 63 | 23 | 146 |
+| slot | 59 | 14 | 25 | 2 | 100 |
+| settings | 14 | 1 | 2 | 0 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
 
 | platform | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
-| desktop | 22 | 3 | 4 | 1 | 30 |
-| both | 107 | 32 | 122 | 28 | 289 |
+| desktop | 22 | 3 | 4 | 0 | 29 |
+| both | 125 | 39 | 98 | 28 | 290 |
 
 ## Packages still to do, by priority
 
@@ -65,12 +65,12 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-open-in-app` (partial, desktop): Open the workspace folder or a previewed file in an application installed on the host. The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported.
 - `ui-plugin-manager` (missing, both): Install, enable, disable, retry and remove plugin packages on the host. pluginManager/* is not generated; only listBundles is called, to read the host version.
 - `ui-schedule` (missing, both): List, edit and delete the host's scheduled tasks and a session's reminders. schedule/* is not generated or called; schedule_* tool rows show raw details only.
-- `ui-settings-agent-loop` (missing, both): Set how many tool calls the agent may run in parallel. Settings namespace agent-loop is not read; the generic form model exists (packages/dsh_ui/lib/src/dsh_settings_form_model.dart) but no card uses it.
-- `ui-settings-models` (missing, both): Add and edit model providers and their API keys, discover models, and pick the default. credentials/*, llm/* and settings/update are not generated or called.
+- `ui-settings-agent-loop` (partial, both): Set how many tool calls the agent may run in parallel. Served staged maxParallelToolCalls, revision-fenced save/reset; native/visual validation pending.
+- `ui-settings-models` (partial, both): Add and edit model providers and their API keys, discover models, and pick the default. Provider directory, write-only credentials, discovery, custom routes, catalog models and versioned welcome are implemented. Composer selection already calls session/selectModel, which saves the Host default in the background. Native/visual validation continues; native account credential onboarding is separate.
 - `ui-settings-plugins` (missing, both): The Plugins section of settings, with the tabs plugin features add to it. No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied.
-- `ui-settings-shell` (missing, both): Set the shell command timeout and the per-stream output cap. Settings namespaces bash-sandbox and pwsh-sandbox are not read.
-- `ui-settings-subagent` (missing, both): Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. Settings namespaces subagent and subagent-model-selection-settings are not read.
-- `ui-settings-web-search` (missing, both): Set the DeepSeek web-search API key, endpoint and per-request search budget. Settings namespaces web, web-deepseek-api and web-search-deepseek are not read.
+- `ui-settings-shell` (partial, both): Set the shell command timeout and the per-stream output cap. Both bash-sandbox and pwsh-sandbox are selected from served namespaces; staged timeoutMs and maxOutputBytes save/reset. Native/visual validation pending.
+- `ui-settings-subagent` (partial, both): Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. Staged safe-integer depth/capacity and exact provider/model allowlist; unavailable routes retained, revision conflicts and reconnect resets checked. Native/visual validation pending.
+- `ui-settings-web-search` (partial, both): Set the DeepSeek web-search API key, endpoint and per-request search budget. Three staged namespaces, API switch, endpoint/limits, write-only key and credential facts, ordered section-before-selection save. Actual upstream controller traces match; native/visual validation pending.
 - `ui-sidebar-documentpreview` (partial, both): Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview.
 - `ui-skill` (missing, both): See a skill the agent used as its own row and reference skills in your messages. skills/list is not generated or called; the skill tool call renders with the generic card.
 - `ui-subagent` (partial, both): See the subagents a session started, read each child's transcript, continue a child and mention one with "@". Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab.
@@ -80,10 +80,10 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 - `ui-message-feedback` (missing, both): Like or dislike an answer and send a written remark about a message or the session. messageFeedback/* and sessionFeedback/record are not generated or called.
 - `ui-plugin-market` (missing, both): Browse the configured plugin market indexes and install a bundle from the Discover tab. pluginMarket/* is not generated or called.
-- `ui-settings-account` (missing, both): Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing. account/* is not generated or called. Needs a decision first: the sign-in call sends client identity metadata and Whalee is unofficial.
+- `ui-settings-account` (missing, both): Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing. Not yet generated or rendered. Pinned account/controller supports safe state/profile/balance and browser authorization; client metadata is build version, locale and timezone. Native sign-in needs an actual browser-accessible loopback callback origin. No unofficial-client approval hold is inferred; native account integration belongs with platform authentication work.
 - `ui-settings-general` (partial, both): The General settings section: language, appearance, permissions default, host details and version. Has language, appearance and font size, permission default, notifications (device), host and certificate, host version. Missing: developer-tools switch, the versioned welcome notice and onboarding.
 - `ui-settings-plugin-inventory` (missing, both): Read the host's loaded plugin inventory in a read-only tab. pluginInventory/list is not generated or called.
-- `ui-settings-session-log` (missing, both): Choose whether session logs are uploaded with DeepSeek API requests. Settings namespace not read.
+- `ui-settings-session-log` (partial, both): Choose whether session logs are uploaded with DeepSeek API requests. Accepted Host upload toggle and persistent keyed shell notice; native/visual validation pending.
 - `ui-sidebar-browser` (missing, both): Open a sandboxed web page in a right-sidebar tab. No browser tab kind.
 - `ui-trajectory` (missing, both): Read the full event ledger of a session with a timing overview (a developer view). No trajectory conversation view.
 
@@ -372,21 +372,21 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Settings
 
-14 ported, 1 partial, 39 missing, 3 na.
+32 ported, 8 partial, 15 missing, 2 na.
 
 ### package (10)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
 | `ui-settings` | ported | both | The settings page and the shared configuration forms that read and write host settings with conflict detection. | `features/dsh_feature_settings`, `packages/dsh_models/lib/src/settings`; Forms and the page are ported; only the General section is filled (see ui-settings-general and the per-card packages). |
-| `ui-settings-account` | missing | both | Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing. | account/* is not generated or called. Needs a decision first: the sign-in call sends client identity metadata and Whalee is unofficial. |
-| `ui-settings-agent-loop` | missing | both | Set how many tool calls the agent may run in parallel. | Settings namespace agent-loop is not read; the generic form model exists (packages/dsh_ui/lib/src/dsh_settings_form_model.dart) but no card uses it. |
+| `ui-settings-account` | missing | both | Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing. | Not yet generated or rendered. Pinned account/controller supports safe state/profile/balance and browser authorization; client metadata is build version, locale and timezone. Native sign-in needs an actual browser-accessible loopback callback origin. No unofficial-client approval hold is inferred; native account integration belongs with platform authentication work. |
+| `ui-settings-agent-loop` | partial | both | Set how many tool calls the agent may run in parallel. | `features/dsh_feature_settings/lib/src/common_settings.dart`; Served staged maxParallelToolCalls, revision-fenced save/reset; native/visual validation pending. |
 | `ui-settings-general` | partial | both | The General settings section: language, appearance, permissions default, host details and version. | `features/dsh_feature_settings/lib/src/general_section.dart`, `apps/dsh_flutter/lib/src/screens/app_settings_rows.dart`; Has language, appearance and font size, permission default, notifications (device), host and certificate, host version. Missing: developer-tools switch, the versioned welcome notice and onboarding. |
-| `ui-settings-models` | missing | both | Add and edit model providers and their API keys, discover models, and pick the default. | credentials/*, llm/* and settings/update are not generated or called. |
-| `ui-settings-session-log` | missing | both | Choose whether session logs are uploaded with DeepSeek API requests. | Settings namespace not read. |
-| `ui-settings-shell` | missing | both | Set the shell command timeout and the per-stream output cap. | Settings namespaces bash-sandbox and pwsh-sandbox are not read. |
-| `ui-settings-subagent` | missing | both | Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. | Settings namespaces subagent and subagent-model-selection-settings are not read. |
-| `ui-settings-web-search` | missing | both | Set the DeepSeek web-search API key, endpoint and per-request search budget. | Settings namespaces web, web-deepseek-api and web-search-deepseek are not read. |
+| `ui-settings-models` | partial | both | Add and edit model providers and their API keys, discover models, and pick the default. | `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Provider directory, write-only credentials, discovery, custom routes, catalog models and versioned welcome are implemented. Composer selection already calls session/selectModel, which saves the Host default in the background. Native/visual validation continues; native account credential onboarding is separate. |
+| `ui-settings-session-log` | partial | both | Choose whether session logs are uploaded with DeepSeek API requests. | `features/dsh_feature_settings/lib/src/common_settings.dart`; Accepted Host upload toggle and persistent keyed shell notice; native/visual validation pending. |
+| `ui-settings-shell` | partial | both | Set the shell command timeout and the per-stream output cap. | `features/dsh_feature_settings/lib/src/common_settings.dart`; Both bash-sandbox and pwsh-sandbox are selected from served namespaces; staged timeoutMs and maxOutputBytes save/reset. Native/visual validation pending. |
+| `ui-settings-subagent` | partial | both | Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`; Staged safe-integer depth/capacity and exact provider/model allowlist; unavailable routes retained, revision conflicts and reconnect resets checked. Native/visual validation pending. |
+| `ui-settings-web-search` | partial | both | Set the DeepSeek web-search API key, endpoint and per-request search budget. | `features/dsh_feature_settings/lib/src/web_search.dart`; Three staged namespaces, API switch, endpoint/limits, write-only key and credential facts, ordered section-before-selection save. Actual upstream controller traces match; native/visual validation pending. |
 | `ui-theme` | ported | both | Switch between light, dark and system appearance and choose font families and sizes, shared with dsh web. | `features/dsh_feature_theme`, `packages/dsh_theme` |
 
 ### remote (22)
@@ -404,12 +404,12 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `account/startSignIn` | missing | both | Start a DeepSeek sign-in in the host's browser. | DeepSeek account sign-in, balance and bonuses (ui-settings-account); not built, see that row. |
 | `account/watch` | missing | both | Follow the account state live (signed in, signing in, expired). | DeepSeek account sign-in, balance and bonuses (ui-settings-account); not built, see that row. |
 | `account/watchExpiry` | na | both | Be told when the account credential expires. | The pinned dsh web client never calls it. |
-| `credentials/describe` | missing | both | Show which provider keys are set, without revealing them. | Provider API key storage (ui-settings-models); not built. |
-| `credentials/set` | missing | both | Save a provider API key. | Provider API key storage (ui-settings-models); not built. |
-| `credentials/unset` | missing | both | Remove a stored provider API key. | Provider API key storage (ui-settings-models); not built. |
-| `llm/discoverModels` | missing | both | Ask a provider which models it offers, before saving it. | Provider routes for the models settings page; not built. |
-| `llm/listConfigurableProviders` | missing | both | List the providers that can be set up, including ones not yet configured. | Provider routes for the models settings page; not built. |
-| `llm/listProviders` | missing | both | List the model providers the host can route to. | Provider routes for the models settings page; not built. |
+| `credentials/describe` | ported | both | Show which provider keys are set, without revealing them. | `packages/dsh_client/lib/src/generated/credentials_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated exact credential contract; redacted describe, set and managed-reference removal exercised. |
+| `credentials/set` | ported | both | Save a provider API key. | `packages/dsh_client/lib/src/generated/credentials_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated exact credential contract; redacted describe, set and managed-reference removal exercised. |
+| `credentials/unset` | ported | both | Remove a stored provider API key. | `packages/dsh_client/lib/src/generated/credentials_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated exact credential contract; redacted describe, set and managed-reference removal exercised. |
+| `llm/discoverModels` | ported | both | Ask a provider which models it offers, before saving it. | `packages/dsh_client/lib/src/generated/llm_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated directory/discovery contracts with draft-only interrogation and stale-response protection. |
+| `llm/listConfigurableProviders` | ported | both | List the providers that can be set up, including ones not yet configured. | `packages/dsh_client/lib/src/generated/llm_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated directory/discovery contracts with draft-only interrogation and stale-response protection. |
+| `llm/listProviders` | ported | both | List the model providers the host can route to. | `packages/dsh_client/lib/src/generated/llm_remote.g.dart`, `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Generated directory/discovery contracts with draft-only interrogation and stale-response protection. |
 | `settings/describe` | ported | both | Read every settings namespace with its values and the schema its form is built from. | `packages/dsh_models/lib/src/settings/settings_mirror.dart`, `packages/dsh_models/lib/src/settings/config_form.dart` |
 | `settings/mutate` | ported | both | Change one setting field with conflict detection. | `packages/dsh_models/lib/src/settings/config_form.dart`, `features/dsh_feature_permission_presets/lib/src/permission_default.dart` |
 | `settings/openSettingsDocument` | ported | desktop | Materialize the provider-owned settings document and open it in a native text editor. | `apps/dsh_flutter/lib/src/desktop_shell.dart`, `features/dsh_feature_settings/lib/src/settings_shell.dart`; The Settings dialog offers "open the settings document" where the host is this machine. |
@@ -425,10 +425,10 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `settings.general.item` | ported | both | One preference row inside the General section — the additive seat for a single setting that needs no page of its own (a whole page is `settings.section`), contributed by the feature plugin that owns the preference (locale → Language, ui-theme → Appearance, ui-conversation → Composer Enter). | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_settings/lib/src/register.dart`, `features/dsh_feature_theme/lib/src/register.dart`, `features/dsh_feature_permission_presets/lib/src/register.dart` |
 | `settings.header` | ported | desktop | The panel title text seat. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 | `settings.launcher` | ported | desktop | Optional sidebar account launcher; opens the shell-owned settings panel. | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
-| `settings.models.footer` | missing | both | Ordered extension area after the provider rows and the add controls. |  |
-| `settings.models.provider-card` | missing | both | One provider card's adapter extension area, dispatched with `entryKey = settingsNs` on every card that renders a directory row: a saved row's card (its first-run setup posture included) and the add-provider draft card. |  |
+| `settings.models.footer` | ported | both | Ordered extension area after the provider rows and the add controls. | `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Ordered root footer after provider and add controls; follows slot changes. |
+| `settings.models.provider-card` | ported | both | One provider card's adapter extension area, dispatched with `entryKey = settingsNs` on every card that renders a directory row: a saved row's card (its first-run setup posture included) and the add-provider draft card. | `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Keyed by owning namespace for saved/setup/add-catalog cards, with configured and redacted key facts. Late registrations invalidate the page. |
 | `settings.models.sign-in` | missing | both | Optional account login choice before the credential editor. |  |
-| `settings.onboarding` | missing | both | Root-scoped onboarding steps contributed by settings features. |  |
+| `settings.onboarding` | partial | both | Root-scoped onboarding steps contributed by settings features. | `features/dsh_feature_settings/lib/src/onboarding.dart`; One root step at a time; deciding steps render no blocking chrome. Versioned welcome implemented; explicit native account onboarding is later platform work. |
 | `settings.plugins.tab` | missing | both | One page inside the Plugins settings section. |  |
 | `settings.section` | ported | both | One settings page per list entry. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_settings/lib/src/register.dart`; Only the General section occupies it. |
 | `settings.trigger` | ported | desktop | The sidebar-foot trigger row content: icon + label, supplied as slot content (the accessible name comes from the content — rail state renders the label visually hidden). | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
@@ -437,19 +437,19 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `agent-loop` | missing | both | The cap on parallel tool calls in one agent step. | Not read; the generic form model exists but no card is wired. |
-| `bash-sandbox` | missing | both | Bash command timeout and per-stream output cap. | Not read. |
+| `agent-loop` | ported | both | The cap on parallel tool calls in one agent step. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `bash-sandbox` | ported | both | Bash command timeout and per-stream output cap. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
 | `locale` | ported | both | The interface language (English or Chinese), shared with dsh web. | `apps/dsh_flutter/lib/src/host_locale.dart` |
-| `pwsh-sandbox` | missing | both | PowerShell command timeout and per-stream output cap. | Not read. |
-| `subagent` | missing | both | Subagent recursion depth and parallel capacity. | Not read. |
-| `subagent-model-selection-settings` | missing | both | The models agents may choose for subagents. | Not read. |
-| `ui-settings` | missing | both | The developer-tools switch that reveals trajectory and raw views. | Not read. |
-| `ui-settings-account` | na | desktop | Whether the desktop onboarding was completed. | Desktop-app onboarding state; Whalee has its own pairing flow. |
-| `ui-settings-general` | missing | both | Whether the versioned welcome notice was seen. | Not read; no welcome notice or onboarding. |
+| `pwsh-sandbox` | ported | both | PowerShell command timeout and per-stream output cap. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `subagent` | ported | both | Subagent recursion depth and parallel capacity. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `subagent-model-selection-settings` | ported | both | The models agents may choose for subagents. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `ui-settings` | ported | both | The developer-tools switch that reveals trajectory and raw views. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `packages/dsh_models/lib/src/settings/developer_tools.dart`; Accepted ui-settings.enabled drives coding views and the General switch. Root application flow verifies the generated mutation. |
+| `ui-settings-account` | missing | both | Whether the desktop onboarding was completed. | DeepSeek account onboarding completion is distinct from Host pairing; native account onboarding integration remains. |
+| `ui-settings-general` | ported | both | Whether the versioned welcome notice was seen. | `features/dsh_feature_model_settings/lib/src/welcome.dart`; Exact welcomeNoticeVersion acknowledgement through ConfigForms; refused writes retain notice for retry. |
 | `ui-theme` | ported | both | Appearance (light, dark, system), font families and font size, shared with dsh web. | `features/dsh_feature_theme/lib/src/theme_service.dart`, `packages/dsh_theme/lib/src/theme_settings.dart` |
-| `web` | missing | both | Web fetch and search settings shared by the web tools. | Not read. |
-| `web-deepseek-api` | missing | both | The DeepSeek web API key and endpoint. | Not read. |
-| `web-search-deepseek` | missing | both | The per-request search budget of the DeepSeek web-search provider. | Not read. |
+| `web` | ported | both | Web fetch and search settings shared by the web tools. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `web-deepseek-api` | ported | both | The DeepSeek web API key and endpoint. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
+| `web-search-deepseek` | ported | both | The per-request search budget of the DeepSeek web-search provider. | `features/dsh_feature_settings/lib/src/common_settings.dart`, `features/dsh_feature_settings/lib/src/subagent_models.dart`, `features/dsh_feature_settings/lib/src/web_search.dart`; Served namespace, staged edits and revision-fenced settings mutations. |
 
 ## Plugins and skills
 
