@@ -4,6 +4,8 @@ import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_commands/dsh_feature_commands.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:flutter/foundation.dart'
+    show debugDefaultTargetPlatformOverride;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -221,9 +223,84 @@ void main() {
       t.getBottomLeft(option).dy,
       lessThanOrEqualTo(t.getBottomLeft(viewport).dy),
     );
+    for (var i = 0; i < 8; i++) {
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+      await t.pump();
+    }
+    await t.pump();
+    final earlier = find.byKey(const ValueKey('popup-option-item-16'));
+    final heading = find.text('Second');
+    expect(
+      t.getTopLeft(earlier).dy,
+      greaterThanOrEqualTo(t.getBottomLeft(heading).dy + 2),
+    );
     await t.sendKeyEvent(LogicalKeyboardKey.enter);
     await t.pump();
-    expect(selected, ['item-24']);
+    expect(selected, ['item-16']);
+  });
+
+  tw('opening a long grouped list leaves the first visible row unobscured', (
+    t,
+  ) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
+    t.view.devicePixelRatio = 2.625;
+    t.view.physicalSize = const Size(1080, 2400);
+    addTearDown(t.view.resetDevicePixelRatio);
+    addTearDown(t.view.resetPhysicalSize);
+    final rows = [
+      for (var i = 0; i < 28; i++)
+        SelectOption(
+          id: '$i',
+          label: 'Option $i',
+          group: SelectOptionGroup(
+            name: '${i ~/ 14}',
+            label: i < 14 ? 'First provider' : 'Second provider',
+          ),
+        ),
+    ];
+    popup.state.set(
+      PopupState(
+        open: true,
+        command: 'model',
+        status: PopupStatus.ready,
+        options: rows,
+      ),
+    );
+    final height = ValueNotifier<double>(41);
+    addTearDown(height.dispose);
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: ValueListenableBuilder<double>(
+            valueListenable: height,
+            builder: (_, value, child) =>
+                SizedBox(width: 380, height: value, child: child),
+            child: PopupSelectOverlay(
+              sessionId: 's1',
+              controller: popup,
+              i18n: const DshI18n(DshLocale.en),
+            ),
+          ),
+        ),
+      ),
+    );
+    height.value = 320;
+    await t.pumpAndSettle();
+    final list = find.byKey(const ValueKey('popup-list'));
+    final scrollable = find.descendant(
+      of: list,
+      matching: find.byType(Scrollable),
+    );
+    expect(t.state<ScrollableState>(scrollable.first).position.pixels, 0);
+    final heading = find.text('First provider');
+    final row = find.byKey(const ValueKey('popup-option-0'));
+    expect(
+      t.getTopLeft(row).dy,
+      greaterThanOrEqualTo(t.getBottomLeft(heading).dy + 2),
+    );
+    debugDefaultTargetPlatformOverride = null;
   });
 
   tw('ungrouped rows do not add the adjacent-group gap', (t) async {

@@ -39,8 +39,12 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
   final FocusNode _focus = FocusNode();
   StreamSubscription<PopupState>? _sub;
   final Map<int, GlobalKey> _rowKeys = {};
+  final Map<String, GlobalKey> _groupKeys = {};
+  final GlobalKey _viewportKey = GlobalKey();
   bool _wasOpen = false;
   int _scrolled = -1;
+  String? _scrolledId;
+  bool _revealScheduled = false;
   bool _confirmShown = false;
 
   PopupSelectController get _c => widget.controller;
@@ -63,6 +67,63 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
 
   String _t(String key, [Map<String, Object?> params = const {}]) =>
       widget.i18n.t('command', key, params: params);
+
+  void _scheduleReveal() {
+    if (_revealScheduled) return;
+    _revealScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _revealScheduled = false;
+      if (!mounted) return;
+      final state = _c.state.value;
+      final rows = filterOptions(state.options, state.search, state.searchMode);
+      final active = state.active;
+      if (!state.open || active < 0 || active >= rows.length) return;
+      final option = rows[active];
+      if (_scrolled == active && _scrolledId == option.id) return;
+      final rowContext = _rowKeys[active]?.currentContext;
+      final rowBox = rowContext?.findRenderObject();
+      final viewport = _viewportKey.currentContext?.findRenderObject();
+      final scroll = rowContext == null ? null : Scrollable.maybeOf(rowContext);
+      if (rowBox is! RenderBox ||
+          !rowBox.hasSize ||
+          viewport is! RenderBox ||
+          !viewport.hasSize ||
+          scroll == null ||
+          !scroll.position.hasContentDimensions ||
+          scroll.position.viewportDimension < rowBox.size.height) {
+        return;
+      }
+      final viewportTop = viewport.localToGlobal(Offset.zero).dy;
+      final viewportBottom = viewportTop + viewport.size.height;
+      var visibleTop = viewportTop;
+      final name = option.group?.name;
+      final heading = name == null
+          ? null
+          : _groupKeys[name]?.currentContext?.findRenderObject();
+      if (heading is RenderBox && heading.hasSize) {
+        final top = heading.localToGlobal(Offset.zero).dy;
+        final bottom =
+            top + heading.size.height + DshMenuGroupRecipe.paddingBottom;
+        if (top <= viewportTop + DshMenuGroupRecipe.paddingTop &&
+            bottom > viewportTop) {
+          visibleTop = bottom;
+        }
+      }
+      final rowTop = rowBox.localToGlobal(Offset.zero).dy;
+      final rowBottom = rowTop + rowBox.size.height;
+      _scrolled = active;
+      _scrolledId = option.id;
+      if (rowTop < visibleTop || rowBottom > viewportBottom) {
+        unawaited(
+          Scrollable.ensureVisible(
+            rowContext!,
+            alignment: 0.5,
+            duration: Duration.zero,
+          ),
+        );
+      }
+    });
+  }
 
   KeyEventResult _onKey(FocusNode node, KeyEvent event) {
     if (event is KeyUpEvent) return KeyEventResult.ignored;
@@ -103,6 +164,7 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
       _wasOpen = false;
       _confirmShown = false;
       _scrolled = -1;
+      _scrolledId = null;
       if (_search.text.isNotEmpty) _search.clear();
       return const SizedBox.shrink();
     }
@@ -121,20 +183,11 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
     final rows = filterOptions(s.options, s.search, s.searchMode);
     final groups = groupOptions(rows);
     var index = 0;
-    if (s.active != _scrolled) {
-      _scrolled = s.active;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final ctx = _rowKeys[s.active]?.currentContext;
-        if (ctx != null && ctx.mounted) {
-          unawaited(
-            Scrollable.ensureVisible(
-              ctx,
-              alignment: 0.5,
-              duration: Duration.zero,
-            ),
-          );
-        }
-      });
+    if (s.active != _scrolled ||
+        (s.active >= 0 &&
+            s.active < rows.length &&
+            rows[s.active].id != _scrolledId)) {
+      _scheduleReveal();
     }
     final emptyLabel = s.searchLabels == null
         ? _t('status.empty')
@@ -193,31 +246,44 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
         _status(theme, emptyLabel),
       if (s.status == PopupStatus.ready)
         Flexible(
-          child: CustomScrollView(
-            key: const ValueKey('popup-list'),
-            shrinkWrap: true,
-            slivers: [
-              for (var i = 0; i < groups.length; i++)
-                if (groups[i].group == null)
-                  SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        for (final option in groups[i].rows)
-                          _optionRow(theme, option, index++, s.active),
-                      ],
-                    ),
-                  )
-                else
-                  DshMenuGroup(
-                    label: groups[i].group!.label,
-                    separated: i > 0 && groups[i - 1].group != null,
-                    children: [
-                      for (final option in groups[i].rows)
-                        _optionRow(theme, option, index++, s.active),
-                    ],
-                  ),
-            ],
+          child: KeyedSubtree(
+            key: _viewportKey,
+            child: NotificationListener<ScrollMetricsNotification>(
+              onNotification: (_) {
+                _scheduleReveal();
+                return false;
+              },
+              child: CustomScrollView(
+                key: const ValueKey('popup-list'),
+                shrinkWrap: true,
+                slivers: [
+                  for (var i = 0; i < groups.length; i++)
+                    if (groups[i].group == null)
+                      SliverToBoxAdapter(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            for (final option in groups[i].rows)
+                              _optionRow(theme, option, index++, s.active),
+                          ],
+                        ),
+                      )
+                    else
+                      DshMenuGroup(
+                        label: groups[i].group!.label,
+                        headingKey: _groupKeys.putIfAbsent(
+                          groups[i].group!.name,
+                          GlobalKey.new,
+                        ),
+                        separated: i > 0 && groups[i - 1].group != null,
+                        children: [
+                          for (final option in groups[i].rows)
+                            _optionRow(theme, option, index++, s.active),
+                        ],
+                      ),
+                ],
+              ),
+            ),
           ),
         ),
     ];

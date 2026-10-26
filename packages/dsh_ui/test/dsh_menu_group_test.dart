@@ -62,25 +62,25 @@ void main() {
                   .decoration
               as ShapeDecoration;
       expect(t.getTopLeft(heading(0)).dy, viewportTop + 4);
-      expect(decoration(0).color, const Color(0x00000000));
+      expect(decoration(0).color, isNull);
       expect(find.bySemanticsLabel('Alpha'), findsOneWidget);
       expect(find.bySemanticsLabel('row-0-0'), findsOneWidget);
 
       controller.jumpTo(10);
       await t.pump();
       expect(t.getTopLeft(heading(0)).dy, viewportTop + 4);
-      expect(decoration(0).color, isNot(const Color(0x00000000)));
+      expect(decoration(0).color, isNotNull);
 
       controller.jumpTo(160);
       await t.pump();
       expect(t.getTopLeft(heading(0)).dy, lessThan(viewportTop + 4));
       expect(t.getTopLeft(heading(1)).dy, greaterThan(viewportTop + 4));
-      expect(decoration(1).color, const Color(0x00000000));
+      expect(decoration(1).color, isNull);
 
       controller.jumpTo(180);
       await t.pump();
       expect(t.getTopLeft(heading(1)).dy, viewportTop + 4);
-      expect(decoration(1).color, isNot(const Color(0x00000000)));
+      expect(decoration(1).color, isNotNull);
       expect(find.bySemanticsLabel('Beta'), findsOneWidget);
       semantics.dispose();
     },

@@ -138,7 +138,7 @@ class _GroupHeading extends SliverPersistentHeaderDelegate {
             : theme.number(DshMenuGroupRecipe.radiusToken),
         color: shrinkOffset > 0
             ? theme.color(DshMenuGroupRecipe.stuckFillToken)
-            : const Color(0x00000000),
+            : null,
       ),
       child: ExcludeSemantics(
         child: DshChromeText(label, key: headingKey, style: style),

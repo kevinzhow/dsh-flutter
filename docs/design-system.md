@@ -120,7 +120,10 @@ header stays within its group and is pushed away by the next group; its fill
 appears only after the group's start passes the viewport. It names the group
 for accessibility, supports wrapped and scaled headings, and retains row
 contexts for keyboard selection. The command popup preserves ungrouped rows
-without inserting an adjacent-group gap. The model sheet uses the same group.
+without inserting an adjacent-group gap. It waits for a usable viewport before
+revealing the active row and leaves already visible rows in place, including
+when a pinned heading would otherwise cover them. The model sheet uses the same
+group.
 
 The reference cases mount the real DSH command popup and model selector over
 synthetic data. A deterministic scroll-position step prepares initial, pinned
