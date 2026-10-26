@@ -1,0 +1,360 @@
+{
+  "cases": [
+    {
+      "id": "plugins.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "plugins"
+        },
+        {
+          "click": [
+            501,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "pdf"
+        },
+        {
+          "expect": {
+            "reference": "plugins",
+            "rect": [
+              0,
+              80,
+              1280,
+              800
+            ],
+            "changed": true
+          }
+        },
+        {
+          "scroll": [
+            640,
+            450,
+            520
+          ]
+        },
+        {
+          "capture": "pdf-scroll"
+        },
+        {
+          "expect": {
+            "reference": "pdf",
+            "rect": [
+              20,
+              140,
+              1260,
+              780
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            554,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "office"
+        },
+        {
+          "click": [
+            610,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "html-static"
+        },
+        {
+          "click": [
+            90,
+            270
+          ]
+        },
+        {
+          "capture": "html-static-click"
+        },
+        {
+          "expect": {
+            "reference": "html-static",
+            "rect": [
+              32,
+              180,
+              1248,
+              225
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            680,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "html-interactive"
+        },
+        {
+          "click": [
+            90,
+            270
+          ]
+        },
+        {
+          "capture": "html-interactive-click"
+        },
+        {
+          "expect": {
+            "reference": "html-interactive",
+            "rect": [
+              32,
+              190,
+              1248,
+              240
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            834,
+            22
+          ]
+        },
+        {
+          "capture": "html-overlay"
+        },
+        {
+          "expect": {
+            "reference": "html-interactive-click",
+            "rect": [
+              500,
+              330,
+              780,
+              470
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            420
+          ]
+        },
+        {
+          "capture": "html-overlay-closed"
+        },
+        {
+          "click": [
+            760,
+            22
+          ]
+        },
+        {
+          "capture": "inventory"
+        }
+      ]
+    },
+    {
+      "id": "plugins.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "plugins"
+        },
+        {
+          "click": [
+            129,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "pdf"
+        },
+        {
+          "expect": {
+            "reference": "plugins",
+            "rect": [
+              0,
+              80,
+              390,
+              844
+            ],
+            "changed": true
+          }
+        },
+        {
+          "scroll": [
+            195,
+            450,
+            520
+          ]
+        },
+        {
+          "capture": "pdf-scroll"
+        },
+        {
+          "expect": {
+            "reference": "pdf",
+            "rect": [
+              20,
+              140,
+              370,
+              824
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            180,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "office"
+        },
+        {
+          "click": [
+            236,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "html-static"
+        },
+        {
+          "click": [
+            90,
+            310
+          ]
+        },
+        {
+          "capture": "html-static-click"
+        },
+        {
+          "expect": {
+            "reference": "html-static",
+            "rect": [
+              32,
+              208,
+              358,
+              250
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            306,
+            22
+          ]
+        },
+        {
+          "wait": 1200
+        },
+        {
+          "capture": "html-interactive"
+        },
+        {
+          "click": [
+            90,
+            310
+          ]
+        },
+        {
+          "capture": "html-interactive-click"
+        },
+        {
+          "expect": {
+            "reference": "html-interactive",
+            "rect": [
+              32,
+              220,
+              358,
+              260
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            150,
+            50
+          ]
+        },
+        {
+          "capture": "html-overlay"
+        },
+        {
+          "expect": {
+            "reference": "html-interactive-click",
+            "rect": [
+              55,
+              352,
+              335,
+              492
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            442
+          ]
+        },
+        {
+          "capture": "html-overlay-closed"
+        },
+        {
+          "click": [
+            80,
+            50
+          ]
+        },
+        {
+          "capture": "inventory"
+        }
+      ]
+    }
+  ]
+}

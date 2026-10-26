@@ -1,0 +1,115 @@
+{
+  "implementationHead": "7432b95766ba5a01ef659de6bb96aa1265f1ba07",
+  "tree": "4ef6819aa0a20b6b94c6ebbc143670a379dccb92",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.6
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.5
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 10.3
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.2
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.3
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.8
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 5.8
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 180.6
+    }
+  },
+  "fullPreflightSourceTree": "4ef6819aa0a20b6b94c6ebbc143670a379dccb92",
+  "buildHead": "03cfe7291d8c350c1937451cda19abb189a87459",
+  "laterChanges": "Only component comparison viewport and the reference Discover tab registration; application runtime unchanged.",
+  "linuxAndAndroidNormalAndFixtureBuilds": "passed",
+  "buildArtifacts": [
+    {
+      "name": "android-normal.apk",
+      "sha256": "25c8cb1383b1bdf007d94ba6eb97be5574749f254a5639cd09b20633bb09d876"
+    },
+    {
+      "name": "android-fixture.apk",
+      "sha256": "dfe171c85eae810952d6e464c5291f2a390c450595c61d4f97e6159bbb7352fa"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "dbe2ce7a9be5b92b4ab7ff59c49b55efcfdfda78beca15447c62f328532c6e65",
+      "applicationLibrarySha256": "445be45c796a9f7c7eb6f8a26cecf4e73f6752be23149e4dc414efc9d1ed9db2"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "dbe2ce7a9be5b92b4ab7ff59c49b55efcfdfda78beca15447c62f328532c6e65",
+      "applicationLibrarySha256": "f0b087d0a7b415828ce0a4a0e56f768ca94a96e4b15731b513a382eeb5e8de39"
+    }
+  ],
+  "nativeGpu": [
+    {
+      "case": "plugins.desktop",
+      "assertions": 5,
+      "allPassed": true
+    },
+    {
+      "case": "plugins.phone",
+      "assertions": 5,
+      "allPassed": true
+    }
+  ],
+  "androidScenes": 18,
+  "androidRenderer": "API36 emulator / SwiftShader, not physical GPU",
+  "officeLive": "real isolated DSH, synthetic DOCX, no model invoked",
+  "visual": {
+    "counts": {
+      "entries": 56,
+      "compared": 56,
+      "same": 0,
+      "strict": 1,
+      "pass": 29,
+      "geometryPass": 29,
+      "fail": 27,
+      "uncovered": 0,
+      "missing": 0
+    },
+    "meanNonTextPct": 95.529,
+    "dimensionsEqual": 56
+  },
+  "cleanup": {
+    "ownedWestonAndAppsStopped": true,
+    "normalAndroidAppRestoredAndStopped": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbRetained": true
+  }
+}
