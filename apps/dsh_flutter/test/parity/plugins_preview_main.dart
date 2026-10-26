@@ -15,7 +15,12 @@ import 'package:flutter/material.dart';
 
 import 'helpers/plugins_preview_fixture.dart';
 
-Future<void> main() async {
+Future<void> main() => runFixture();
+
+Future<void> runFixture({
+  Map<String, Widget> extraPages = const {},
+  String initialPage = 'Plugins',
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadPinnedFontsFromEnvironment();
   await WindowChrome.init();
@@ -38,7 +43,7 @@ Future<void> main() async {
             style: theme
                 .textStyle('--dsw-font-s-14')
                 .copyWith(color: theme.labelPrimary),
-            child: Fixture(),
+            child: Fixture(extraPages: extraPages, initialPage: initialPage),
           ),
         ),
       ),
@@ -47,7 +52,13 @@ Future<void> main() async {
 }
 
 class Fixture extends StatefulWidget {
-  const Fixture({super.key});
+  const Fixture({
+    super.key,
+    this.extraPages = const {},
+    this.initialPage = 'Plugins',
+  });
+  final Map<String, Widget> extraPages;
+  final String initialPage;
   @override
   State<Fixture> createState() => _FixtureState();
 }
@@ -56,7 +67,7 @@ class _FixtureState extends State<Fixture> {
   final fixture = SyntheticPluginsPreview();
   final slots = SlotRegistry();
   final i18n = const DshI18n(DshLocale.en);
-  String page = 'Plugins';
+  late String page = widget.initialPage;
   final documents = <String, DocumentController>{};
   @override
   void initState() {
@@ -107,6 +118,7 @@ class _FixtureState extends State<Fixture> {
   }
 
   Widget body() {
+    if (widget.extraPages[page] case final extra?) return extra;
     if (page == 'Plugins') {
       return PluginManagerPage(
         model: fixture.manager,
@@ -157,6 +169,7 @@ class _FixtureState extends State<Fixture> {
               'HTML',
               'Interactive',
               'Inventory',
+              ...widget.extraPages.keys,
             ])
               DshButton(
                 size: DshButtonSize.sm,

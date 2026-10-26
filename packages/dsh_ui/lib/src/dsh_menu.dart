@@ -5,7 +5,6 @@ import 'dsh_anchored_panel.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_menu_item.dart';
 import 'dsh_menu_surface.dart';
-import 'dsh_pixel_snap.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
@@ -263,7 +262,7 @@ class _Separator extends StatelessWidget {
           : DshMenuRecipe.separatorVerticalMargin,
     ),
     child: DshContainer(
-      height: dshBorderWidthOf(context, DshMenuRecipe.separatorWidth),
+      height: DshMenuRecipe.separatorWidth,
       decoration: BoxDecoration(
         color: context.dsh.color(DshMenuRecipe.separatorToken),
       ),

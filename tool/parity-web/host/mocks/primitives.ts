@@ -64,3 +64,7 @@ export { useDismissOnOutsidePointer } from '@dsh/ui-primitives/src/useDismissOnO
 // Plugin surfaces forward the production pointer tracker and artwork unchanged.
 export { pointerModality } from '@dsh/ui-primitives/src/input-modality.ts'
 export { PluginArtworkTerminal, PluginArtworkLoop, PluginArtworkSubagent, PluginArtworkSearch, PluginArtworkDefault } from '@dsh/ui-primitives/src/plugin-artwork.tsx'
+
+export {focusWithoutRing} from '@dsh/ui-primitives/src/focus.ts'
+export {modalSelector} from '@dsh/ui-primitives/src/useModalLayer.ts'
+export {observeComposition} from '@dsh/ui-primitives/src/keyboard-composition.ts'

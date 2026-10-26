@@ -557,3 +557,8 @@ For Android interaction checks the same entry accepts `--dart-define=PARITY_LOCA
 `--dart-define=PARITY_DARK=true`. The native cases use pixel-region assertions to wait for each expected
 expansion, scroll and collapse before proceeding; they fail on a timeout. Assertion results and attempts are
 recorded in `environment.json`. This fixture performs no host connection or model request.
+
+The native GPU fixture interpreter also accepts `{"secondaryClick": [x, y]}`.
+It sends a real evdev secondary-button press/release through the private Weston
+seat, and requires coordinates inside that fixture output. This exercises the
+actual dock tab context-menu path; a primary click remains `{"click": [x, y]}`.

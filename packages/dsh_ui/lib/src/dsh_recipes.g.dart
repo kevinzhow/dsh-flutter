@@ -3,6 +3,7 @@
 // From @deepseek-ai/dsh-client-ui-plugin-manager 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-theme 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-sidebar-terminal 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-dockkit 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -138,6 +139,13 @@ abstract final class DshMenuRecipe {
   static const String separatorToken = '--dsw-alias-border-l2';
 }
 
+abstract final class DshMenuFooterRecipe {
+  static const double marginTop = 3.0;
+  static const double paddingTop = 3.0;
+  static const double borderWidth = 0.5;
+  static const String borderToken = '--dsw-alias-border-l2';
+}
+
 abstract final class DshMenuSurfaceRecipe {
   static const String radiusToken = '--dsw-radius-lg';
   static const String compactRadiusToken = '--dsw-radius-md';
@@ -162,4 +170,18 @@ abstract final class DshPluginAddMenuRecipe {
   static const double descriptionLineHeight = 18.0;
   static const double descriptionMaxHeight = 36.0;
   static const String descriptionToken = '--dsw-alias-label-secondary';
+}
+
+abstract final class DshDockMenuRecipe {
+  static const double minWidth = 96.0;
+  static const double padding = 4.0;
+  static const double borderWidth = 0.5;
+  static const String borderToken = '--dsw-alias-border-l2';
+  static const double verticalPadding = 4.0;
+  static const double horizontalPadding = 7.0;
+  static const double fontBase = 12.0;
+  static const String fontScale = 'secondary';
+  static const String radiusToken = '--dsw-radius-md';
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
 }

@@ -16,12 +16,11 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_menu.dart",
         "packages/dsh_ui/lib/src/dsh_menu_surface.dart",
-        "packages/dsh_ui/lib/src/dsh_menu_item.dart"
+        "packages/dsh_ui/lib/src/dsh_menu_item.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_footer.dart"
       ],
-      "migrationStatus": "published normal/dense/compact row and common material recipes; plugin-add profile migrated; keyboard walk/selection/dismissal implemented; submenu/footer/sticky groups, shortcuts and macOS material backing remain pending; arbitrary-content bounded blur pending (uniform page-ground material retained; no claim of transparent-window parity)",
-      "pendingDuplicates": [
-        "dsh_dockkit _MenuSurface/_MenuItem -> common material/row with published dock profile (not generic dimensions)"
-      ]
+      "migrationStatus": "published normal/dense/compact and dock row/material recipes; plugin-add and workspace/dock duplicates consolidated; source footer container reserves borders; full submenu/shortcut/sticky groups, generic scrolling footer integration and arbitrary-content/macOS backing remain pending",
+      "pendingDuplicates": []
     },
     {
       "name": "popovers",
@@ -513,8 +512,7 @@
       "manual-metric": 1
     },
     "packages/dsh_dockkit/lib/src/widgets/dock_layout.dart": {
-      "manual-metric": 15,
-      "duplicate-menu": 4
+      "manual-metric": 15
     },
     "packages/dsh_theme/lib/src/dsh_theme_data.dart": {
       "manual-metric": 1

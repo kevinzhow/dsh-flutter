@@ -34,7 +34,7 @@ import 'dsh_pixel_snap.dart';
 double dshBaselineNudge(TextStyle style, [double devicePixelRatio = 1]) {
   final size = style.fontSize;
   final height = style.height;
-  if (size == null || height == null) return 0;
+  if (size == null || height == null || height == kTextHeightNone) return 0;
   final density = dshSnapDensity(devicePixelRatio);
   return (_nudges[style] ??= {})[density] ??= _nudge(
     style,
@@ -107,14 +107,25 @@ double _roundHalfUp(double v) => (v + 0.5).floorToDouble();
 /// half up, where Flutter paints at the fraction. The child is therefore moved
 /// to the pixel it sits at as well ([dshSnapToPixel]).
 class DshChromeBaseline extends SingleChildRenderObjectWidget {
-  const DshChromeBaseline({super.key, required this.style, super.child});
+  const DshChromeBaseline({super.key, required this.style, super.child})
+    : _normalNudge = null;
+
+  const DshChromeBaseline._normal({
+    required this.style,
+    required double nudge,
+    super.child,
+  }) : _normalNudge = nudge;
 
   final TextStyle style;
+  final double? _normalNudge;
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     final dpr = dshDevicePixelRatioOf(context);
-    return _RenderChromeBaseline(dshBaselineNudge(style, dpr), dpr);
+    return _RenderChromeBaseline(
+      _normalNudge ?? dshBaselineNudge(style, dpr),
+      dpr,
+    );
   }
 
   @override
@@ -122,7 +133,7 @@ class DshChromeBaseline extends SingleChildRenderObjectWidget {
     final dpr = dshDevicePixelRatioOf(context);
     (renderObject as _RenderChromeBaseline)
       ..devicePixelRatio = dpr
-      ..nudge = dshBaselineNudge(style, dpr);
+      ..nudge = _normalNudge ?? dshBaselineNudge(style, dpr);
   }
 }
 
@@ -198,10 +209,51 @@ class DshChromeText extends StatelessWidget {
     if (effective == null || effective.inherit) {
       effective = DefaultTextStyle.of(context).style.merge(effective);
     }
-    final fixed = effective.fontSize != null && effective.height != null;
+    double? normalHeight, normalNudge;
+    final normal =
+        effective.height == kTextHeightNone &&
+        effective.fontSize != null &&
+        effective.fontSize! > 0;
+    if (normal) {
+      // CSS normal encloses fractional font spacing in whole layout pixels.
+      // Resolve that line box from the actual face/text, without changing
+      // size or family; the baseline still rounds the ascent separately.
+      final painter = TextPainter(
+        text: TextSpan(text: data.isEmpty ? 'Hg' : data, style: effective),
+        textDirection: textDirection ?? Directionality.of(context),
+        maxLines: 1,
+      )..layout();
+      final metrics = painter.computeLineMetrics();
+      painter.dispose();
+      if (metrics.isNotEmpty) {
+        final density = dshSnapDensity(dshDevicePixelRatioOf(context));
+        final line = metrics.first;
+        final height =
+            ((line.ascent + line.descent) * density).ceil() / density;
+        effective = effective.copyWith(height: height / effective.fontSize!);
+        normalHeight = height;
+        final laidOut = TextPainter(
+          text: TextSpan(text: data.isEmpty ? 'Hg' : data, style: effective),
+          strutStyle: dshStrut(effective),
+          textDirection: textDirection ?? Directionality.of(context),
+          maxLines: 1,
+        )..layout();
+        final actual = laidOut.computeLineMetrics();
+        laidOut.dispose();
+        if (actual.isNotEmpty) {
+          normalNudge =
+              (line.ascent * density).round() / density -
+              _roundHalfUp(actual.first.baseline);
+        }
+      }
+    }
+    final fixed =
+        effective.fontSize != null &&
+        effective.height != null &&
+        effective.height != kTextHeightNone;
     final text = Text(
       data,
-      style: style,
+      style: normal ? effective : style,
       strutStyle: strutStyle ?? (fixed ? dshStrut(effective) : null),
       textAlign: textAlign,
       textDirection: textDirection,
@@ -211,6 +263,27 @@ class DshChromeText extends StatelessWidget {
       textWidthBasis: textWidthBasis,
       semanticsLabel: semanticsLabel,
     );
-    return fixed ? DshChromeBaseline(style: effective, child: text) : text;
+    final result = normalNudge != null
+        ? DshChromeBaseline._normal(
+            style: effective,
+            nudge: normalNudge,
+            child: text,
+          )
+        : fixed
+        ? DshChromeBaseline(style: effective, child: text)
+        : text;
+    // Keep the CSS line box fractional even when Flutter rounds its paragraph
+    // height to a logical pixel. Glyphs may overflow their line box in CSS.
+    return normalHeight != null && maxLines == 1
+        ? SizedBox(
+            height: normalHeight,
+            child: OverflowBox(
+              alignment: Alignment.topLeft,
+              minHeight: 0,
+              maxHeight: double.infinity,
+              child: result,
+            ),
+          )
+        : result;
   }
 }

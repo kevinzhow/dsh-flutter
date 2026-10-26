@@ -79,3 +79,5 @@ export 'src/dsh_segmented_tabs.dart';
 export 'src/dsh_single_line_clamp.dart';
 
 export 'src/dsh_recipes.g.dart';
+
+export 'src/dsh_menu_footer.dart';

@@ -84,6 +84,12 @@ def verify_snapshot(archive, package, folder):
     integrity = 'sha512-' + base64.b64encode(hashlib.sha512(Path(archive).read_bytes()).digest()).decode()
     if integrity != package['integrity']: raise ValueError('published archive integrity mismatch')
     kind = package.get('extractionKind', 'plugin-css')
+    if kind == 'plain-files':
+        with tarfile.open(archive) as tar:
+            for name, member in package['archiveFiles'].items():
+                if (folder / name).read_bytes() != tar.extractfile(member).read():
+                    raise ValueError('published plain-file snapshot mismatch: ' + name)
+        return
     if kind == 'primitive-css':
         with tarfile.open(archive) as tar:
             for name in package['files']:

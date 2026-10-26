@@ -142,7 +142,6 @@ class _PickerMenuState extends State<PickerMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.dsh;
     final screen = MediaQuery.sizeOf(context);
     final menu = TapRegion(
       // The chip that opened the menu shares the group: pressing it again is
@@ -181,36 +180,14 @@ class _PickerMenuState extends State<PickerMenu> {
                       ),
                     ),
                     if (widget.footer.isNotEmpty)
-                      // `margin-top: 3px` above the rule, `padding-top: 3px` below it.
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: widget.rows.isEmpty ? 0 : 3,
-                        ),
-                        child: DshDecoratedBox(
-                          decoration: BoxDecoration(
-                            border: widget.rows.isEmpty
-                                ? null
-                                : Border(
-                                    top: BorderSide(
-                                      color: theme.color(
-                                        '--dsw-alias-border-l2',
-                                      ),
-                                      width: dshHairlineOf(context),
-                                    ),
-                                  ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: widget.rows.isEmpty ? 0 : 3,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                for (final r in widget.footer) _row(r),
-                              ],
-                            ),
-                          ),
+                      DshMenuFooter(
+                        separated: widget.rows.isNotEmpty,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            for (final row in widget.footer) _row(row),
+                          ],
                         ),
                       ),
                   ],

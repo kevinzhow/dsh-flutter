@@ -983,19 +983,28 @@ class _TabStripState extends State<_TabStrip> {
             Positioned(
               left: anchor.left,
               top: anchor.bottom + 4,
-              child: _MenuSurface(
-                children: [
-                  if (closable)
-                    _MenuItem(
-                      key: ValueKey('dock-menu-close-${tab.id}'),
-                      label: w.labels.closeTab,
-                      onTap: () {
-                        dismiss();
-                        host._closeTab(tab.id);
-                      },
-                    ),
-                  ...extras,
-                ],
+              child: DshMenuSurface(
+                profile: DshMenuSurfaceProfile.dock,
+                child: IntrinsicWidth(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (closable)
+                        DshMenuItemButton(
+                          profile: DshMenuItemProfile.dock,
+                          onDismiss: dismiss,
+                          key: ValueKey('dock-menu-close-${tab.id}'),
+                          label: w.labels.closeTab,
+                          onPressed: () {
+                            dismiss();
+                            host._closeTab(tab.id);
+                          },
+                        ),
+                      ...extras,
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -1007,81 +1016,6 @@ class _TabStripState extends State<_TabStrip> {
 }
 
 class _TabMenuState {}
-
-class _MenuSurface extends StatelessWidget {
-  const _MenuSurface({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return DshContainer(
-      constraints: const BoxConstraints(minWidth: 96),
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-alias-bg-layer-2'),
-        borderRadius: BorderRadius.circular(theme.radiusMd),
-        border: Border.all(
-          color: theme.color('--dsw-alias-border-l2'),
-          width: dshHairlineOf(context),
-        ),
-        boxShadow: theme.boxShadow('--dsw-elevation-prominent'),
-      ),
-      child: IntrinsicWidth(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: children,
-        ),
-      ),
-    );
-  }
-}
-
-class _MenuItem extends StatefulWidget {
-  const _MenuItem({super.key, required this.label, required this.onTap});
-
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  State<_MenuItem> createState() => _MenuItemState();
-}
-
-class _MenuItemState extends State<_MenuItem> {
-  bool _hover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      cursor: SystemMouseCursors.click,
-      child: Semantics(
-        button: true,
-        label: widget.label,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: widget.onTap,
-          child: DshContainer(
-            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-            decoration: BoxDecoration(
-              color: _hover ? theme.interactiveBgHover : null,
-              borderRadius: BorderRadius.circular(theme.radiusMd),
-            ),
-            child: DshChromeText(
-              widget.label,
-              style: theme
-                  .textStyle('--dsw-font-xs-13')
-                  .copyWith(color: theme.labelPrimary),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 /// The slot between two chips: a 10px box with a hairline down its centre, or
 /// the drop caret when a drag targets it.
@@ -1319,6 +1253,11 @@ class _TabChipState extends State<_TabChip> {
 
   @override
   Widget build(BuildContext context) {
+    void openMenu() {
+      final box = context.findRenderObject() as RenderBox;
+      widget.onMenu(box.localToGlobal(Offset.zero) & box.size);
+    }
+
     final chip = Focus(
       onFocusChange: (f) => setState(() => _focus = f),
       onKeyEvent: (node, event) {
@@ -1345,11 +1284,8 @@ class _TabChipState extends State<_TabChip> {
             key: ValueKey('dock-chip-${widget.tab.id}'),
             behavior: HitTestBehavior.opaque,
             onTap: widget.onTap,
-            onSecondaryTapDown: (details) {
-              final box = context.findRenderObject() as RenderBox;
-              final origin = box.localToGlobal(Offset.zero);
-              widget.onMenu(origin & box.size);
-            },
+            onSecondaryTapDown: (_) => openMenu(),
+            onLongPress: openMenu,
             child: _chip(context, feedback: false),
           ),
         ),
