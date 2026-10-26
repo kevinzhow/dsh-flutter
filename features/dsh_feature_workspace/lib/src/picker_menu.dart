@@ -48,10 +48,14 @@ class PickerMenu extends StatefulWidget {
 }
 
 class _PickerMenuState extends State<PickerMenu> {
+  final _focusNodes = <String, FocusNode>{};
   final FocusScopeNode _scope = FocusScopeNode(debugLabel: 'workspace-menu');
 
   @override
   void dispose() {
+    for (final node in _focusNodes.values) {
+      node.dispose();
+    }
     _scope.dispose();
     super.dispose();
   }
@@ -107,7 +111,9 @@ class _PickerMenuState extends State<PickerMenu> {
   /// trailing check of the selected row.
   double _width(BuildContext context) {
     final theme = context.dsh;
-    final style = theme.textStyle('--dsw-font-xs-13').copyWith(height: 20 / 13);
+    final style = theme
+        .textStyle(DshMenuRecipe.fontToken)
+        .copyWith(height: DshMenuRecipe.lineHeight / DshMenuRecipe.fontSize);
     var widest = 0.0;
     for (final row in [...widget.rows, ...widget.footer]) {
       final painter = TextPainter(
@@ -115,13 +121,23 @@ class _PickerMenuState extends State<PickerMenu> {
         maxLines: 1,
         textDirection: TextDirection.ltr,
       )..layout();
-      final check = row.id == widget.selectedId ? 6 + 14 : 0;
-      final w = 8 + 14 + 6 + painter.width + check + 8;
+      final check = row.id == widget.selectedId
+          ? DshMenuRecipe.gap + DshMenuRecipe.iconSize
+          : 0;
+      final w =
+          DshMenuRecipe.horizontalPadding * 2 +
+          DshMenuRecipe.iconSize +
+          DshMenuRecipe.gap +
+          painter.width +
+          check;
       painter.dispose();
       if (w > widest) widest = w;
     }
     // A status line has its own natural width as well.
-    return (widest + 8).clamp(144.0, 360.0);
+    return (widest + DshMenuRecipe.padding * 2).clamp(
+      DshMenuRecipe.minWidth,
+      DshMenuRecipe.maxWidth,
+    );
   }
 
   @override
@@ -139,8 +155,8 @@ class _PickerMenuState extends State<PickerMenu> {
         onKeyEvent: _onKey,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minWidth: 144,
-            maxWidth: 360,
+            minWidth: DshMenuRecipe.minWidth,
+            maxWidth: DshMenuRecipe.maxWidth,
             // The card stops 12px short of the window's edges; taller content
             // scrolls and keeps the pinned footer in view.
             maxHeight: (screen.height - 24).clamp(0.0, 520.0),
@@ -219,132 +235,16 @@ class _PickerMenuState extends State<PickerMenu> {
     );
   }
 
-  Widget _row(PickerRow row) => _MenuItem(
+  Widget _row(PickerRow row) => DshMenuItemButton(
     key: ValueKey('workspace-row-${row.id}'),
-    row: row,
+    label: row.label,
+    icon: row.icon,
+    disabled: row.disabled,
     selected: row.id == widget.selectedId,
+    focusNode: _focusNodes.putIfAbsent(
+      row.id,
+      () => FocusNode(debugLabel: 'picker-row-${row.id}'),
+    ),
     onPressed: () => widget.onSelect(row.id),
   );
-}
-
-class _MenuItem extends StatefulWidget {
-  const _MenuItem({
-    super.key,
-    required this.row,
-    required this.selected,
-    required this.onPressed,
-  });
-
-  final PickerRow row;
-  final bool selected;
-  final VoidCallback onPressed;
-
-  @override
-  State<_MenuItem> createState() => _MenuItemState();
-}
-
-class _MenuItemState extends State<_MenuItem> {
-  bool _hover = false;
-  bool _focus = false;
-  late final FocusNode _node = FocusNode(
-    debugLabel: 'picker-row-${widget.row.id}',
-  );
-
-  @override
-  void dispose() {
-    _node.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final row = widget.row;
-    final enabled = !row.disabled;
-    final lit = enabled && (_hover || _focus);
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      selected: widget.selected,
-      label: row.label,
-      excludeSemantics: true,
-      child: Opacity(
-        opacity: enabled ? 1 : 0.4,
-        child: FocusableActionDetector(
-          focusNode: _node,
-          enabled: enabled,
-          mouseCursor: enabled
-              ? SystemMouseCursors.click
-              : SystemMouseCursors.forbidden,
-          onShowHoverHighlight: (v) => setState(() => _hover = v),
-          onShowFocusHighlight: (v) => setState(() => _focus = v),
-          shortcuts: const {
-            SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-            SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-            SingleActivator(LogicalKeyboardKey.tab): ActivateIntent(),
-          },
-          actions: {
-            ActivateIntent: CallbackAction<ActivateIntent>(
-              onInvoke: (_) {
-                widget.onPressed();
-                return null;
-              },
-            ),
-          },
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: enabled ? widget.onPressed : null,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 34),
-              child: DshDecoratedBox(
-                decoration: BoxDecoration(
-                  color: lit
-                      ? theme.color('--dsw-alias-interactive-bg-hover')
-                      : null,
-                  borderRadius: BorderRadius.circular(theme.radiusMd),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 6,
-                  ),
-                  child: Row(
-                    children: [
-                      DshIcon(
-                        row.icon,
-                        size: 14,
-                        color: theme.color('--dsw-alias-menu-icon'),
-                      ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: DshChromeText(
-                          row.label,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme
-                              .textStyle('--dsw-font-xs-13')
-                              .copyWith(
-                                color: theme.labelPrimary,
-                                height: 20 / 13,
-                              ),
-                        ),
-                      ),
-                      if (widget.selected) ...[
-                        const SizedBox(width: 6),
-                        DshIcon(
-                          DshIcons.check,
-                          size: 14,
-                          color: theme.labelPrimary,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

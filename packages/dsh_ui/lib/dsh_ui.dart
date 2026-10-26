@@ -45,6 +45,7 @@ export 'src/dsh_disclosure.dart';
 export 'src/dsh_icon_button.dart';
 export 'src/dsh_anchored_panel.dart';
 export 'src/dsh_menu.dart';
+export 'src/dsh_menu_item.dart';
 export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
 export 'src/dsh_menu_surface.dart';
@@ -76,3 +77,5 @@ export 'src/dsh_reference_chip.dart';
 
 export 'src/dsh_segmented_tabs.dart';
 export 'src/dsh_single_line_clamp.dart';
+
+export 'src/dsh_recipes.g.dart';

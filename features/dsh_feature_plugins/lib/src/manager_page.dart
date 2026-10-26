@@ -250,10 +250,9 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
   }
 
   Widget _toolbar(BuildContext context) {
-    final theme = context.dsh,
-        loaded =
-            model.status == PluginManagerStatus.ready ||
-            model.status == PluginManagerStatus.error;
+    final loaded =
+        model.status == PluginManagerStatus.ready ||
+        model.status == PluginManagerStatus.error;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -276,14 +275,19 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
         const SizedBox(width: 16),
         DshAnchoredPanel(
           align: DshPanelAlign.end,
-          panelWidth: 320,
+          panelWidth: DshPluginAddMenuRecipe.width,
+          viewportMargin: DshPluginAddMenuRecipe.viewportMargin,
           builder: (context, panel) => DshSplitButton(
             icon: const DshIcon(DshShellIcons.plusOutline, size: 13),
             onPressed: loaded ? () => unawaited(_install()) : null,
             showMore: model.installer.requestId == null,
             onMore: loaded ? panel.toggle : null,
             moreLabel: t('chooseAddMethod'),
-            more: const DshIcon(DshShellIcons.chevronDownRegular, size: 12),
+            more: const DshIcon(
+              DshShellIcons.chevronDownRegular,
+              key: ValueKey('plugin-add-more'),
+              size: 12,
+            ),
             child: Text(
               model.installer.requestId == null
                   ? t('addPlugin')
@@ -291,32 +295,18 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
             ),
           ),
           panelBuilder: (context, panel) => DshMenuSurface(
-            child: DshButton(
-              height: 72,
-              horizontalPadding: 12,
+            key: const ValueKey('plugin-add-menu'),
+            child: DshMenuItemButton(
+              profile: DshMenuItemProfile.addPlugin,
+              label: t('installExisting'),
+              description: t('installExistingDescription'),
+              icon: DshIcons.download,
+              autofocus: true,
+              onDismiss: panel.close,
               onPressed: () {
                 panel.close();
                 unawaited(_install());
               },
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    t('installExisting'),
-                    style: theme.textStyle('--dsw-font-s-14'),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    t('installExistingDescription'),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle('--dsw-font-xxs-12')
-                        .copyWith(height: 18 / 12, color: theme.labelSecondary),
-                  ),
-                ],
-              ),
             ),
           ),
         ),

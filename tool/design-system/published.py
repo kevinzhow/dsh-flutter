@@ -84,6 +84,13 @@ def verify_snapshot(archive, package, folder):
     integrity = 'sha512-' + base64.b64encode(hashlib.sha512(Path(archive).read_bytes()).digest()).decode()
     if integrity != package['integrity']: raise ValueError('published archive integrity mismatch')
     kind = package.get('extractionKind', 'plugin-css')
+    if kind == 'primitive-css':
+        with tarfile.open(archive) as tar:
+            for name in package['files']:
+                member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
+                if (folder / name).read_bytes() != tar.extractfile(member).read():
+                    raise ValueError('published primitive snapshot mismatch: ' + name)
+        return
     extract = {'plugin-css': plugin_style_snapshot, 'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
     result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')

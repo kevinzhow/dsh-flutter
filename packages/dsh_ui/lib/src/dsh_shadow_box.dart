@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_snapped_box.dart';
+import 'dsh_corners.dart';
 
 /// A rounded surface with CSS `box-shadow` semantics: [shadows] are painted
 /// outside the border box only, so a translucent [color] (dsh's menu surface)
@@ -15,6 +16,7 @@ class DshShadowBox extends StatelessWidget {
     required this.shadows,
     required this.child,
     this.padding = EdgeInsets.zero,
+    this.shape,
   });
 
   final Color color;
@@ -22,15 +24,18 @@ class DshShadowBox extends StatelessWidget {
   final List<BoxShadow> shadows;
   final EdgeInsetsGeometry padding;
   final Widget child;
+  final DshCornerBorder? shape;
 
   @override
   Widget build(BuildContext context) => CustomPaint(
-    painter: _OuterShadowPainter(shadows, radius),
+    painter: _OuterShadowPainter(shadows, radius, shape),
     child: DshDecoratedBox(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(radius),
-      ),
+      decoration: shape == null
+          ? BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(radius),
+            )
+          : ShapeDecoration(color: color, shape: shape!),
       child: Padding(padding: padding, child: child),
     ),
   );
@@ -44,10 +49,11 @@ class DshShadowBox extends StatelessWidget {
 double _chromiumSigma(double blur) => math.max(0.5, 0.45 * blur - 2.1);
 
 class _OuterShadowPainter extends CustomPainter {
-  _OuterShadowPainter(this.shadows, this.radius);
+  _OuterShadowPainter(this.shadows, this.radius, this.shape);
 
   final List<BoxShadow> shadows;
   final double radius;
+  final DshCornerBorder? shape;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -55,30 +61,41 @@ class _OuterShadowPainter extends CustomPainter {
       Offset.zero & size,
       Radius.circular(radius),
     );
+    final outer =
+        shape?.getOuterPath(Offset.zero & size) ?? (Path()..addRRect(box));
     final outside = Path.combine(
       PathOperation.difference,
       Path()..addRect(
         Rect.fromLTWH(-200, -200, size.width + 400, size.height + 400),
       ),
-      Path()..addRRect(box),
+      outer,
     );
     canvas.save();
     canvas.clipPath(outside);
     for (final s in shadows.reversed) {
       final rrect = box.shift(s.offset).inflate(s.spreadRadius);
-      canvas.drawRRect(
-        rrect,
-        Paint()
-          ..color = s.color
-          ..maskFilter = s.blurRadius > 0
-              ? MaskFilter.blur(BlurStyle.normal, _chromiumSigma(s.blurRadius))
-              : null,
-      );
+      final paint = Paint()
+        ..color = s.color
+        ..maskFilter = s.blurRadius > 0
+            ? MaskFilter.blur(BlurStyle.normal, _chromiumSigma(s.blurRadius))
+            : null;
+      if (shape == null) {
+        canvas.drawRRect(rrect, paint);
+      } else {
+        canvas.drawPath(
+          shape!
+              .copyWith(radius: math.max(0, radius + s.spreadRadius))
+              .getOuterPath(
+                (Offset.zero & size).shift(s.offset).inflate(s.spreadRadius),
+              ),
+          paint,
+        );
+      }
     }
     canvas.restore();
   }
 
   @override
   bool shouldRepaint(_OuterShadowPainter old) =>
-      old.radius != radius || old.shadows != shadows;
+      old.radius != radius || old.shadows != shadows || old.shape != shape;
 }

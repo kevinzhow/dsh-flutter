@@ -79,3 +79,87 @@ abstract final class DshIconActionRecipe {
   static const String focusFallbackToken = '--dsw-alias-state-business-primary';
   static const double focusOffset = 1.0;
 }
+
+abstract final class DshMenuRecipe {
+  static const double padding = 4.0;
+  static const double minWidth = 144.0;
+  static const double maxWidth = 360.0;
+  static const double compactMinWidth = 156.0;
+  static const double compactPadding = 4.0;
+  static const double height = 34.0;
+  static const double denseHeight = 30.0;
+  static const double compactHeight = 24.0;
+  static const double verticalPadding = 6.0;
+  static const double horizontalPadding = 8.0;
+  static const double denseVerticalPadding = 4.0;
+  static const double compactVerticalPadding = 2.0;
+  static const double compactHorizontalPadding = 6.0;
+  static const double fontSize = 13.0;
+  static const double lineHeight = 20.0;
+  static const String fontToken = '--dsw-font-xs-13';
+  static const double compactFontSize = 11.0;
+  static const double compactLineHeight = 17.0;
+  static const String compactFontToken = '--dsw-font-xxxs-11';
+  static const double gap = 6.0;
+  static const double compactGap = 5.0;
+  static const double iconSize = 14.0;
+  static const double compactIconSize = 12.0;
+  static const String radiusToken = '--dsw-radius-md';
+  static const String compactRadiusToken = '--dsw-radius-sm';
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String iconToken = '--dsw-alias-menu-icon';
+  static const String checkToken = '--dsw-alias-label-primary';
+  static const String selectedFillToken = '--dsw-alias-interactive-bg-hover';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const String focusToken = '--dsw-alias-interactive-bg-hover';
+  static const String dangerToken = '--dsw-alias-state-error-primary';
+  static const String dangerHoverToken =
+      '--dsw-alias-interactive-bg-hover-danger';
+  static const String dangerIconToken = '--dsw-alias-state-error-primary';
+  static const String dangerFocusToken =
+      '--dsw-alias-interactive-bg-hover-danger';
+  static const double disabledOpacity = 0.4;
+  static const double headingVerticalPadding = 6.0;
+  static const double headingHorizontalPadding = 8.0;
+  static const double denseHeadingVerticalPadding = 3.0;
+  static const double compactHeadingVerticalPadding = 3.0;
+  static const double compactHeadingHorizontalPadding = 6.0;
+  static const double headingFontSize = 11.0;
+  static const double headingLineHeight = 15.0;
+  static const double compactHeadingFontSize = 10.0;
+  static const double compactHeadingLineHeight = 15.0;
+  static const String headingFontToken = '--dsw-font-xxxs-11';
+  static const String compactHeadingFontToken = '--dsw-font-xxxs-11';
+  static const String headingToken = '--dsw-alias-label-tertiary';
+  static const double separatorWidth = 0.5;
+  static const double separatorVerticalMargin = 3.0;
+  static const double separatorHorizontalMargin = 2.0;
+  static const double compactSeparatorMargin = 2.0;
+  static const String separatorToken = '--dsw-alias-border-l2';
+}
+
+abstract final class DshMenuSurfaceRecipe {
+  static const String radiusToken = '--dsw-radius-lg';
+  static const String compactRadiusToken = '--dsw-radius-md';
+  static const String fillToken = '--dsw-menu-surface-fill';
+  static const String shadowToken = '--dsw-elevation-prominent';
+  static const String strokeToken = '--dsw-alias-border-l1';
+  static const String darkStrokeToken = '--dsw-alias-border-l3';
+  static const double blurSigma = 40.0;
+  static const double saturation = 1.5;
+}
+
+abstract final class DshPluginAddMenuRecipe {
+  static const double width = 320.0;
+  static const double viewportMargin = 24.0;
+  static const double height = 72.0;
+  static const double verticalPadding = 6.0;
+  static const double horizontalPadding = 12.0;
+  static const double gap = 10.0;
+  static const double descriptionGap = 2.0;
+  static const double descriptionFontSize = 12.0;
+  static const String descriptionFontToken = '--dsw-font-xxs-12';
+  static const double descriptionLineHeight = 18.0;
+  static const double descriptionMaxHeight = 36.0;
+  static const String descriptionToken = '--dsw-alias-label-secondary';
+}

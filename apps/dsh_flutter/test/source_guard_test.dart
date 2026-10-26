@@ -126,6 +126,17 @@ void main() {
       if (f.path.endsWith('/queue_dock.dart')) {
         source = source.replaceAll(RegExp(r'fontSize\s*:\s*10\s*,'), '');
       }
+      // Published Menu.module.css has a 10px compact heading, absent from the
+      // typography ladder. Only this exact generated-recipe expression is
+      // allowed; a literal size (including elsewhere in this file) still fails.
+      if (f.path.endsWith('dsh_menu.dart')) {
+        source = source.replaceAll(
+          RegExp(
+            r'fontSize:\s*compact\s*\?\s*DshMenuRecipe\.compactHeadingFontSize\s*:\s*null\s*,',
+          ),
+          '',
+        );
+      }
       expect(
         bad.hasMatch(source),
         isFalse,

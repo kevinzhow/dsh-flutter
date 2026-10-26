@@ -1,43 +1,65 @@
 import 'package:flutter/widgets.dart';
 
+import 'dsh_corners.dart';
 import 'dsh_diff_block.dart' show blendLikeChromium, saturateLikeChromium;
+import 'dsh_recipes.g.dart';
 import 'dsh_shadow_box.dart';
 import 'theme_access.dart';
 
-/// dsh's `MenuSurface`: the translucent menu material (`--dsw-specific-menu`
-/// over the page, `backdrop-filter: saturate(150%)`), the prominent elevation
-/// with its stroke rebound to the l1 hairline, and the large radius. Menus,
-/// candidate lists and popups sit on it.
+/// The one menu material used by cards and contributed menu content. Only
+/// its material is painted; nested overlays and focus outlines stay free.
 class DshMenuSurface extends StatelessWidget {
   const DshMenuSurface({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.all(4),
+    this.padding,
+    this.compact = false,
   });
 
   final Widget child;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
+    final radius = theme.number(
+      compact
+          ? DshMenuSurfaceRecipe.compactRadiusToken
+          : DshMenuSurfaceRecipe.radiusToken,
+    );
+    final shape = theme.cornerBorder(radius);
     return DshShadowBox(
+      // Published MenuSurface's isolated material is uniform over the opaque
+      // page ground on the supported desktop/phone surfaces. Keep that bounded
+      // result: Flutter BackdropFilter samples outside the card and incorrectly
+      // pulls the trigger into it. Arbitrary content backdrops and transparent
+      // macOS windows still need a bounded-backdrop implementation.
       color: blendLikeChromium(
-        theme.color('--dsw-specific-menu'),
-        saturateLikeChromium(theme.bgBase, 1.5),
+        theme.color(DshMenuSurfaceRecipe.fillToken),
+        saturateLikeChromium(theme.bgBase, DshMenuSurfaceRecipe.saturation),
       ),
-      radius: theme.radiusLg,
+      radius: radius,
+      shape: shape,
       shadows: [
-        for (final (i, s)
-            in theme.boxShadow('--dsw-elevation-prominent').indexed)
+        for (final (i, shadow)
+            in theme.boxShadow(DshMenuSurfaceRecipe.shadowToken).indexed)
           i == 0
               ? BoxShadow(
-                  color: theme.color('--dsw-alias-border-l1'),
-                  spreadRadius: s.spreadRadius,
+                  color: theme.color(
+                    theme.brightness == Brightness.dark
+                        ? DshMenuSurfaceRecipe.darkStrokeToken
+                        : DshMenuSurfaceRecipe.strokeToken,
+                  ),
+                  spreadRadius: shadow.spreadRadius,
                 )
-              : s,
+              : shadow,
       ],
-      padding: padding,
+      padding:
+          padding ??
+          EdgeInsets.all(
+            compact ? DshMenuRecipe.compactPadding : DshMenuRecipe.padding,
+          ),
       child: child,
     );
   }
