@@ -130,6 +130,15 @@ SUPPORTED = {
         ".tab[aria-selected='true']": 'font-weight',
         '.tab:focus-visible': 'outline text-decoration text-decoration-thickness text-underline-offset',
     },
+    'ShortcutKeys.module.css': {
+        '.keys': 'display flex align-items gap color font-size line-height white-space',
+        '.key': 'box-sizing display align-items justify-content font',
+        '.tooltip': 'color font-size line-height gap',
+        '.tooltip .key': 'min-width height padding border-radius border background',
+        '.separator': 'font',
+        '.joined': 'box-sizing height padding border-radius background',
+        '.joined .key': 'min-width height padding border background',
+    },
 }
 
 PLUGIN_BUTTON_SCHEMA = {
@@ -178,6 +187,21 @@ def validate_supported(sheets):
         for prop, expected in props.items():
             if value(sheets['Button.module.css'], selector, prop) != expected:
                 raise ValueError('untranslated primitive button value: ' + selector + '/' + prop)
+    # Tooltip keycaps remain a separate family migration; pin every unconsumed
+    # value so a source change cannot silently alter the plain menu shortcut.
+    shortcut_fixed = {
+        '.keys': {'display': 'inline-flex', 'flex': 'none', 'align-items': 'center', 'white-space': 'nowrap'},
+        '.key': {'box-sizing': 'border-box', 'display': 'inline-flex', 'align-items': 'center', 'justify-content': 'center', 'font': 'inherit'},
+        '.tooltip': {'color': 'inherit', 'font-size': '11px', 'line-height': '14px', 'gap': '2px'},
+        '.tooltip .key': {'min-width': '16px', 'height': '16px', 'padding': '0 2px', 'border-radius': '4px', 'border': '0', 'background': 'var(--dsw-alias-tooltip-key-bg)'},
+        '.separator': {'font': 'inherit'},
+        '.joined': {'box-sizing': 'border-box', 'height': '16px', 'padding': '0 4px', 'border-radius': '4px', 'background': 'var(--dsw-alias-tooltip-key-bg)'},
+        '.joined .key': {'min-width': '0', 'height': 'auto', 'padding': '0', 'border': '0', 'background': 'transparent'},
+    }
+    for selector, props in shortcut_fixed.items():
+        for prop, expected in props.items():
+            if value(sheets['ShortcutKeys.module.css'], selector, prop) != expected:
+                raise ValueError('untranslated shortcut value: ' + selector + '/' + prop)
     if value(sheets['Button.module.css'], '.icon', 'width') != value(sheets['Button.module.css'], '.icon', 'height'):
         raise ValueError('untranslated nonsquare button icon')
     # Structural rules not represented by dynamic Dart fields cannot change
@@ -201,6 +225,16 @@ def ladder_token(size, line):
     candidates = [name for name, style in pack['common']['typography'].items() if style['size'] == size and style['line'] == line and style['weight'] == 400 and style['style'] == 'normal' and style['family'] == 'text']
     if len(candidates) != 1:
         raise ValueError('ambiguous typography rung for source recipe size: ' + str(size))
+    return candidates[0]
+
+
+def chrome_size_token(size):
+    pack = json.loads((ROOT / 'packages/dsh_theme/assets/themes/official.theme.json').read_text())
+    candidates = [name for name, style in pack['common']['typography'].items()
+                  if name.startswith('--dsw-font-xx') and style['size'] == size
+                  and style['weight'] == 400 and style['style'] == 'normal' and style['family'] == 'text']
+    if len(candidates) != 1:
+        raise ValueError('ambiguous chrome typography rung for shortcut size: ' + str(size))
     return candidates[0]
 
 
@@ -259,6 +293,14 @@ def render(lock, sheets):
             'outlineToken': token(tab_border[2]), 'outlineWidth': number(tab_border[0]),
             'activeLabelToken': tok(t, ".tab:hover, .tab[aria-selected='true']", 'color'),
         },
+    }
+    shortcut = sheets['ShortcutKeys.module.css']
+    metrics['DshShortcutKeysRecipe'] = {
+        'plainGap': px(shortcut, '.keys', 'gap'),
+        'plainFontSize': px(shortcut, '.keys', 'font-size'),
+        'plainLineHeight': px(shortcut, '.keys', 'line-height'),
+        'plainFontToken': chrome_size_token(px(shortcut, '.keys', 'font-size')),
+        'plainColorToken': tok(shortcut, '.keys', 'color'),
     }
     p = sheets['PluginManagerPage.module.css']
     add = '.addButton, .addPrimary, .addMore'

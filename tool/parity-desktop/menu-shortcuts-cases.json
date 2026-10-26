@@ -1,0 +1,148 @@
+{
+  "cases": [
+    {
+      "id": "menu-shortcuts.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "click": [
+            960,
+            24
+          ]
+        },
+        {
+          "capture": "actions"
+        },
+        {
+          "click": [
+            640,
+            84
+          ]
+        },
+        {
+          "capture": "menu"
+        },
+        {
+          "expect": {
+            "reference": "actions",
+            "rect": [
+              650,
+              95,
+              850,
+              280
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "rename"
+        },
+        {
+          "expect": {
+            "reference": "menu",
+            "rect": [
+              450,
+              250,
+              830,
+              470
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "menu-shortcuts.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "zh",
+      "app": [
+        {
+          "click": [
+            292,
+            24
+          ]
+        },
+        {
+          "capture": "actions"
+        },
+        {
+          "click": [
+            195,
+            84
+          ]
+        },
+        {
+          "capture": "menu"
+        },
+        {
+          "expect": {
+            "reference": "actions",
+            "rect": [
+              195,
+              95,
+              385,
+              290
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "rename"
+        },
+        {
+          "expect": {
+            "reference": "menu",
+            "rect": [
+              24,
+              270,
+              366,
+              560
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

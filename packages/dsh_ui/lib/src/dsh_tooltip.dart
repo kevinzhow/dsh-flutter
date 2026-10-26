@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 
+import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
@@ -195,11 +196,15 @@ class DshShortcutKeys extends StatelessWidget {
     super.key,
     required this.keys,
     this.tooltip = false,
+    this.menu = false,
     this.color,
-  });
+  }) : assert(!tooltip || !menu);
 
   final List<String> keys;
   final bool tooltip;
+
+  /// The published Menu shortcut typography and caption color.
+  final bool menu;
 
   /// Text colour override; defaults to the tertiary label (plain) or the
   /// tooltip's own text.
@@ -213,13 +218,30 @@ class DshShortcutKeys extends StatelessWidget {
         color ??
         (tooltip
             ? theme.color('--dsw-static-neutral-bluish-00')
-            : theme.color('--dsw-alias-label-tertiary'));
+            : theme.color(
+                menu
+                    ? DshMenuRecipe.shortcutColorToken
+                    : DshShortcutKeysRecipe.plainColorToken,
+              ));
+    final size = tooltip
+        ? 11.0
+        : menu
+        ? DshMenuRecipe.shortcutFontSize
+        : DshShortcutKeysRecipe.plainFontSize;
+    final line = tooltip
+        ? 14.0
+        : menu
+        ? DshMenuRecipe.shortcutLineHeight
+        : DshShortcutKeysRecipe.plainLineHeight;
     final style = theme
-        .textStyle(tooltip ? '--dsw-font-xxxs-11' : '--dsw-font-xxs-12')
-        .copyWith(
-          color: ink,
-          height: (tooltip ? 14 : 16) / (tooltip ? 11 : 12),
-        );
+        .textStyle(
+          tooltip
+              ? '--dsw-font-xxxs-11'
+              : menu
+              ? DshMenuRecipe.shortcutFontToken
+              : DshShortcutKeysRecipe.plainFontToken,
+        )
+        .copyWith(color: ink, height: line / size);
     Widget key(String k) => DshChromeText(k, style: style, maxLines: 1);
     Widget cap(Widget child, {double minWidth = 16}) => DshContainer(
       constraints: BoxConstraints(
@@ -235,7 +257,7 @@ class DshShortcutKeys extends StatelessWidget {
       ),
       child: child,
     );
-    final gap = SizedBox(width: tooltip ? 2 : 3);
+    final gap = SizedBox(width: tooltip ? 2 : DshShortcutKeysRecipe.plainGap);
     if (joined) {
       return DshContainer(
         constraints: const BoxConstraints(minHeight: 16, maxHeight: 16),

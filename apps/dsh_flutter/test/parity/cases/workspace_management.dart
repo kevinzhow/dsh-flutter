@@ -28,7 +28,19 @@ Widget browser(ParityContext ctx, {bool group = false}) {
   for (final slot in DshSlots.all) {
     slots.declare(slot);
   }
-  registerSessionRowFeatures(slots, i18n: () => i18n);
+  const bindings = {
+    'session.rename': DshMenuShortcut(keys: ['Ctrl', 'R'], aria: 'Control+R'),
+    'session.fork': DshMenuShortcut(
+      keys: ['Ctrl', 'Shift', 'F'],
+      aria: 'Control+Shift+F',
+    ),
+    'session.archive': DshMenuShortcut(keys: ['Ctrl', 'A'], aria: 'Control+A'),
+  };
+  registerSessionRowFeatures(
+    slots,
+    i18n: () => i18n,
+    shortcutOf: ctx.props['shortcuts'] == true ? (id) => bindings[id] : null,
+  );
   final view = WorkspaceViewState()
     ..setGroupBy(group ? SessionGroupBy.workspace : SessionGroupBy.flat)
     ..setArchivedFilter(ArchivedFilter.show)

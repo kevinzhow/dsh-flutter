@@ -11,9 +11,17 @@ import 'dsh_icons.g.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
+import 'dsh_tooltip.dart';
 import 'theme_access.dart';
 
 enum DshMenuItemProfile { standard, addPlugin, dock }
+
+/// An effective shortcut supplied by the action owner, not a default binding.
+class DshMenuShortcut {
+  const DshMenuShortcut({required this.keys, this.aria});
+  final List<String> keys;
+  final String? aria;
+}
 
 /// One canonical menu row. Source profiles own geometry; callers supply the
 /// label, optional description/icon and action instead of styling a button.
@@ -32,6 +40,7 @@ class DshMenuItemButton extends StatefulWidget {
     this.compact = false,
     this.profile = DshMenuItemProfile.standard,
     this.focusNode,
+    this.shortcut,
     this.autofocus = false,
     this.onDismiss,
   }) : assert(description == null || profile == DshMenuItemProfile.addPlugin);
@@ -42,6 +51,7 @@ class DshMenuItemButton extends StatefulWidget {
   final bool disabled, danger, selected, selectionFill, dense, compact;
   final DshMenuItemProfile profile;
   final FocusNode? focusNode;
+  final DshMenuShortcut? shortcut;
   final bool autofocus;
   final VoidCallback? onDismiss;
   @override
@@ -211,6 +221,10 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
               ],
             ),
           ),
+          if (widget.shortcut case final shortcut?) ...[
+            SizedBox(width: gap),
+            DshShortcutKeys(keys: shortcut.keys, menu: true),
+          ],
           if (widget.selected && !widget.selectionFill) ...[
             SizedBox(width: gap),
             DshIcon(
@@ -232,6 +246,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
           ? _focusNode.requestFocus
           : null,
       selected: widget.selected,
+      hint: widget.shortcut?.aria,
       label: [
         widget.label,
         if (widget.description != null) widget.description!,

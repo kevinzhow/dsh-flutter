@@ -29,7 +29,12 @@ function Row({props,ctx}:any){
  const t=createTranslator(ctx.case.locale,{en,zh})
  const pinned=props.name==='pinned',archived=props.name==='archived'
  const node={id:'s1',title:props.long?'Synthetic session title that continues well beyond the available width':'Synthetic session',blank:false,updatedAt:NOW-300000,running:props.name==='running',runningSubagentCount:0,completed:false,pinned,archived,...props.name==='pending'?{pendingInteraction:'question'}:{}}
- const common={usePinned:(sel:any)=>sel(new Set(pinned?['s1']:[])),useArchived:(sel:any)=>sel(new Set(archived?['s1']:[])),pinSession:()=>{},unpinSession:()=>{},archiveSession:()=>{},unarchiveSession:()=>{},useShortcuts:(sel:any)=>sel([]),useSessionAccess:()=>true,forkSession:()=>{},requestSessionRename:()=>{},copySessionId:async()=>{},t}
+ const shortcuts=props.shortcuts?[
+  {id:'session.rename',keys:['Ctrl','R'],aria:'Control+R'},
+  {id:'session.fork',keys:['Ctrl','Shift','F'],aria:'Control+Shift+F'},
+  {id:'session.archive',keys:['Ctrl','A'],aria:'Control+A'},
+ ]:[]
+ const common={usePinned:(sel:any)=>sel(new Set(pinned?['s1']:[])),useArchived:(sel:any)=>sel(new Set(archived?['s1']:[])),pinSession:()=>{},unpinSession:()=>{},archiveSession:()=>{},unarchiveSession:()=>{},useShortcuts:(sel:any)=>sel(shortcuts),useSessionAccess:()=>true,forkSession:()=>{},requestSessionRename:()=>{},copySessionId:async()=>{},t}
  const renderSlot=(seat:string,owner:any,options:any)=>{
   if(seat==='sidebar.workspaces.session.menu.item'){
    const injected={...common,...owner,useMenuOpenState:()=>options.hookContext}

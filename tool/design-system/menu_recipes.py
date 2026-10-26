@@ -69,6 +69,7 @@ def build(sheets, *, value, number, token, css_rules):
       '.item': {'display':'flex','align-items':'center','width':'100%','border':'none','background':'transparent','cursor':'pointer','text-align':'left'},
       '.item:focus-visible:not(:disabled)': {'outline':'none'}, '.item:disabled': {'cursor':'not-allowed'},
       '.selected': {'background':'transparent'}, '.danger:focus-visible:not(:disabled)': {'outline':'none'},
+      '.shortcut': {'flex':'none', 'margin-inline-start':'auto'},
     }
     for selector, fields in fixed.items():
         for prop, expected in fields.items():
@@ -98,6 +99,10 @@ def build(sheets, *, value, number, token, css_rules):
         'iconSize':px('.itemIcon','width'),'compactIconSize':px('.compactList .itemIcon','width'),
         'radiusToken':tok('.item','border-radius'),'compactRadiusToken':tok('.compactList .item','border-radius'),
         'labelToken':tok('.item','color'),'iconToken':tok('.itemIcon','color'),
+        'shortcutFontSize':px('.shortcut .shortcutKeys','font-size'),
+        'shortcutLineHeight':px('.shortcut .shortcutKeys','line-height'),
+        'shortcutFontToken':font_token(px('.shortcut .shortcutKeys','font-size')),
+        'shortcutColorToken':tok('.shortcut .shortcutKeys','color'),
         'checkToken':tok('.check','color'),'selectedFillToken':tok('.selectedFill','background'),
         'hoverToken':tok('.item:hover:not(:disabled)','background'),'focusToken':tok('.item:focus-visible:not(:disabled)','background'),
         'dangerToken':tok('.danger','color'),'dangerHoverToken':tok('.danger:hover:not(:disabled)','background'),

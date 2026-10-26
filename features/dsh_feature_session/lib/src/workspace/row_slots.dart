@@ -4,9 +4,11 @@ import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
 /// Standard menu and hover actions are ordinary ordered contributions.
+/// [shortcutOf] supplies current effective bindings; null means unbound.
 void registerSessionRowFeatures(
   SlotRegistry slots, {
   required DshI18n Function() i18n,
+  DshMenuShortcut? Function(String commandId)? shortcutOf,
 }) {
   for (final (id, order) in [
     ('pin', 100),
@@ -37,10 +39,17 @@ void registerSessionRowFeatures(
             owner.archived ? DshShellIcons.unarchive : DshShellIcons.archive,
           _ => DshShellIcons.copyOutline,
         };
+        final command = switch (id) {
+          'rename' => 'session.rename',
+          'fork' => 'session.fork',
+          'archive' when !owner.archived => 'session.archive',
+          _ => null,
+        };
         return DshMenuItem(
           id,
           i18n().t('workspace', key),
           icon: icon,
+          shortcut: command == null ? null : shortcutOf?.call(command),
           onSelect: () => owner.onAction(id),
         );
       },
