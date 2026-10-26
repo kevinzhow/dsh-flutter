@@ -1,0 +1,111 @@
+{
+  "implementationHead": "68dfa7a6bb768e638169d218339b5f5a474e45fe",
+  "tree": "f39cd8114da17485ae984255a758646609c7ed06",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.3
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.2
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 0.7
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.3
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 9.1
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.1
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.4
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 3.6
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 159.0
+    }
+  },
+  "fullPreflightSourceTree": "f39cd8114da17485ae984255a758646609c7ed06",
+  "linuxAndAndroidNormalAndFixtureBuilds": "passed",
+  "buildArtifacts": [
+    {
+      "name": "android-normal.apk",
+      "sha256": "f3477b6861c3709d5cae8e664066e533bf01a1dabd422af2a61deaa6e2ef6679"
+    },
+    {
+      "name": "android-fixture.apk",
+      "sha256": "f9390fd2c53355e079ba2392e454bc266997287cfe9b483e58920da572b6bffe"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "76035a0334e9166f8f3746f00126f0ed2472418d82d55476143848cdebdef4fe"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "1b730a63158ad3594330bb9e2375500d8b198926566c1da4d93b9b9dc46d10c2"
+    }
+  ],
+  "nativeGpu": [
+    {
+      "case": "models.desktop",
+      "assertions": 7,
+      "allPassed": true
+    },
+    {
+      "case": "models.phone",
+      "assertions": 7,
+      "allPassed": true
+    }
+  ],
+  "androidScenes": 31,
+  "visual": {
+    "counts": {
+      "entries": 96,
+      "compared": 96,
+      "same": 0,
+      "strict": 0,
+      "pass": 0,
+      "geometryPass": 0,
+      "fail": 96,
+      "uncovered": 0,
+      "missing": 0
+    },
+    "meanNonTextPct": 83.149,
+    "dimensionsEqual": 4
+  },
+  "cleanup": {
+    "ownedWestonAndAppProcessesStopped": true,
+    "normalAndroidAppRestoredAndStopped": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbRetained": true
+  }
+}

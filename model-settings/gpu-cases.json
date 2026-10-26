@@ -1,0 +1,344 @@
+{
+  "cases": [
+    {
+      "id": "models.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 900,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "welcome"
+        },
+        {
+          "click": [
+            889,
+            600
+          ]
+        },
+        {
+          "expect": {
+            "reference": "welcome",
+            "rect": [
+              0,
+              100,
+              1280,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            678,
+            28
+          ]
+        },
+        {
+          "capture": "models"
+        },
+        {
+          "click": [
+            894,
+            212
+          ]
+        },
+        {
+          "capture": "editor"
+        },
+        {
+          "expect": {
+            "reference": "models",
+            "rect": [
+              240,
+              200,
+              910,
+              430
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            400,
+            282
+          ]
+        },
+        {
+          "text": "synthetic-key"
+        },
+        {
+          "capture": "masked"
+        },
+        {
+          "expect": {
+            "reference": "editor",
+            "rect": [
+              246,
+              266,
+              905,
+              298
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            887,
+            282
+          ]
+        },
+        {
+          "capture": "revealed"
+        },
+        {
+          "expect": {
+            "reference": "masked",
+            "rect": [
+              873,
+              268,
+              903,
+              296
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            400,
+            282
+          ]
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "text": "x"
+        },
+        {
+          "capture": "remasked"
+        },
+        {
+          "expect": {
+            "reference": "revealed",
+            "rect": [
+              873,
+              268,
+              903,
+              296
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "masked",
+            "rect": [
+              877,
+              272,
+              899,
+              292
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            766,
+            26
+          ]
+        },
+        {
+          "capture": "general"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              230,
+              140,
+              910,
+              430
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "models.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "welcome"
+        },
+        {
+          "click": [
+            294,
+            683
+          ]
+        },
+        {
+          "expect": {
+            "reference": "welcome",
+            "rect": [
+              0,
+              100,
+              390,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            322,
+            28
+          ]
+        },
+        {
+          "capture": "models"
+        },
+        {
+          "click": [
+            320,
+            270
+          ]
+        },
+        {
+          "capture": "editor"
+        },
+        {
+          "expect": {
+            "reference": "models",
+            "rect": [
+              40,
+              250,
+              348,
+              510
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            130,
+            340
+          ]
+        },
+        {
+          "text": "synthetic-key"
+        },
+        {
+          "capture": "masked"
+        },
+        {
+          "expect": {
+            "reference": "editor",
+            "rect": [
+              58,
+              324,
+              331,
+              357
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            313,
+            340
+          ]
+        },
+        {
+          "capture": "revealed"
+        },
+        {
+          "expect": {
+            "reference": "masked",
+            "rect": [
+              300,
+              326,
+              330,
+              354
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            140,
+            340
+          ]
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "text": "x"
+        },
+        {
+          "capture": "remasked"
+        },
+        {
+          "expect": {
+            "reference": "revealed",
+            "rect": [
+              300,
+              326,
+              330,
+              354
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "masked",
+            "rect": [
+              302,
+              330,
+              326,
+              350
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            69,
+            62
+          ]
+        },
+        {
+          "capture": "general"
+        },
+        {
+          "expect": {
+            "reference": "remasked",
+            "rect": [
+              28,
+              140,
+              360,
+              510
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

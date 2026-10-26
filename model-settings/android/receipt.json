@@ -1,0 +1,171 @@
+{
+  "synthetic": true,
+  "api": 36,
+  "actualTapsAndKeyboard": true,
+  "generatedRemoteAndConfigFormsPath": true,
+  "credentialValuesRetainedByFixture": false,
+  "credentialLabelEditableAndObscuredFrameworkTest": "features/dsh_feature_model_settings/test/model_settings_ui_test.dart",
+  "nativeCredentialPasswordRole": true,
+  "nativeCredentialHintLabel": "API key",
+  "androidLabelMapping": "API36 UIAutomator hint attribute on clickable password EditText",
+  "credentialRevealRemasksOnEdit": true,
+  "sharedSubagentSaveBlocksInvalidAuthorization": true,
+  "normalAppRoutingTest": "apps/dsh_flutter/test/model_settings_flow_test.dart",
+  "scenes": [
+    {
+      "scene": "welcome",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "welcome-accepted",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "model-directory",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "provider-editor",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-format-invalid",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-masked",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-revealed",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-edited-remasked",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-keyboard-hidden",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-save-refused",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "key-save-retried",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "stored-key-blank",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "discovery-choices",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "discovery-adopted",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "catalog-saved",
+      "passed": true,
+      "priorRun": "round4"
+    },
+    {
+      "scene": "general",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "coding-enabled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "upload-saved",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "upload-close",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "plugins",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "parallel-staged",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "parallel-saved",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "subagent-depth-invalid",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "subagent-empty-authorization",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "subagent-authorized",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "web-count-invalid",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "web-count-saved",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "parallel-persisted",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "subagent-depth-persisted",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "web-selection-persisted",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "web-count-persisted",
+      "passed": true,
+      "attempts": 1
+    }
+  ]
+}

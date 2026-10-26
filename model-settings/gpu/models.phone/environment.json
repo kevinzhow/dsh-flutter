@@ -1,0 +1,106 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "welcome",
+      "rect": [
+        0,
+        100,
+        390,
+        700
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "models",
+      "rect": [
+        40,
+        250,
+        348,
+        510
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "editor",
+      "rect": [
+        58,
+        324,
+        331,
+        357
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "masked",
+      "rect": [
+        300,
+        326,
+        330,
+        354
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "revealed",
+      "rect": [
+        300,
+        326,
+        330,
+        354
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "masked",
+      "rect": [
+        302,
+        330,
+        326,
+        350
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "remasked",
+      "rect": [
+        28,
+        140,
+        360,
+        510
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "en",
+  "implementationHead": "68dfa7a6bb768e638169d218339b5f5a474e45fe"
+}
