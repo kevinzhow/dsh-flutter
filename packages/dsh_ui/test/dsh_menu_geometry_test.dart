@@ -102,6 +102,52 @@ void main() {
     });
   }
 
+  testWidgets(
+    'menu rows keep distinct semantic bounds inside grouped scrolling content and footer',
+    (t) async {
+      final semantics = t.ensureSemantics();
+      try {
+        await t.pumpWidget(
+          dshTestApp(
+            Center(
+              child: SizedBox(
+                width: 200,
+                child: DshMenuSurface(
+                  child: Semantics(
+                    container: true,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SingleChildScrollView(
+                          child: DshMenuItemButton(
+                            label: 'Alpha',
+                            onPressed: () {},
+                          ),
+                        ),
+                        DshMenuFooter(
+                          child: DshMenuItemButton(
+                            key: const ValueKey('footer-action'),
+                            label: 'Add workspace',
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        final row = t.getSemantics(find.byKey(const ValueKey('footer-action')));
+        expect(row.label, 'Add workspace');
+        expect(row.rect.height, 34);
+      } finally {
+        semantics.dispose();
+      }
+    },
+  );
+
   testWidgets('dock Tab traverses without activating; Enter selects once', (
     t,
   ) async {

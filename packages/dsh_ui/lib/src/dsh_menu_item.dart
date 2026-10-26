@@ -213,6 +213,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
       ),
     );
     return Semantics(
+      container: true,
       button: true,
       enabled: _enabled,
       selected: widget.selected,
