@@ -110,7 +110,8 @@ void main() {
       expect(find.text('Extra s'), findsOneWidget);
       expect(reads, 1);
       await t.tap(find.byKey(const ValueKey('session-row-menu-s')));
-      await t.pump();
+      // The source portal stays unplaced until the composited anchor is measured.
+      await t.pumpAndSettle();
       expect(find.byKey(const ValueKey('workspace-hover-card')), findsNothing);
       await t.tap(find.byKey(const ValueKey('dsh-menu-fixture')));
       await t.pump();
