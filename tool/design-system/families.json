@@ -6,7 +6,7 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_button.dart"
       ],
-      "migrationStatus": "base recipe generated; variant audit pending",
+      "migrationStatus": "primitive variants and add/icon/info profiles generated from published CSS; local round icon adaptation still pending",
       "pendingDuplicates": [
         "DshIconButton -> DshButton icon-action recipe"
       ]
@@ -377,7 +377,7 @@
       "manual-metric": 4
     },
     "features/dsh_feature_plugins/lib/src/manager_page.dart": {
-      "manual-metric": 65
+      "manual-metric": 47
     },
     "features/dsh_feature_plugins/lib/src/market_page.dart": {
       "manual-metric": 13

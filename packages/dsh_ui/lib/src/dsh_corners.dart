@@ -69,6 +69,80 @@ Path dshSuperellipsePath(Rect rect, double radius, double curvature) {
   return path;
 }
 
+/// The same CSS corner curve with independent elliptical radii. CSS scales
+/// all radii together when adjacent corners overlap an edge.
+Path dshSuperellipseCornersPath(
+  Rect rect,
+  BorderRadius corners,
+  double curvature,
+) {
+  if (rect.isEmpty) return Path();
+  final radii = [
+    for (final r in [
+      corners.topLeft,
+      corners.topRight,
+      corners.bottomRight,
+      corners.bottomLeft,
+    ])
+      if (r.x <= 0 || r.y <= 0) Radius.zero else r,
+  ];
+  var scale = 1.0;
+  void limit(double extent, double sum) {
+    if (sum > 0) scale = math.min(scale, extent / sum);
+  }
+
+  limit(rect.width, radii[0].x + radii[1].x);
+  limit(rect.width, radii[3].x + radii[2].x);
+  limit(rect.height, radii[0].y + radii[3].y);
+  limit(rect.height, radii[1].y + radii[2].y);
+  final normalized = [
+    for (final r in radii)
+      Radius.elliptical(math.max(0, r.x * scale), math.max(0, r.y * scale)),
+  ];
+  if (curvature == 1) {
+    return Path()..addRRect(
+      RRect.fromRectAndCorners(
+        rect,
+        topLeft: normalized[0],
+        topRight: normalized[1],
+        bottomRight: normalized[2],
+        bottomLeft: normalized[3],
+      ),
+    );
+  }
+  final exponent = 2 / math.pow(2, curvature);
+  final path = Path()..moveTo(rect.left + normalized[0].x, rect.top);
+  void corner(int index, double cx, double cy, double startAngle) {
+    final r = normalized[index];
+    if (r.x == 0 || r.y == 0) {
+      path.lineTo(cx, cy);
+      return;
+    }
+    for (var i = 0; i <= 48; i++) {
+      final angle = startAngle + i * math.pi / 96;
+      final x = math.cos(angle), y = math.sin(angle);
+      path.lineTo(
+        cx + x.sign * math.pow(x.abs(), exponent) * r.x,
+        cy + y.sign * math.pow(y.abs(), exponent) * r.y,
+      );
+    }
+  }
+
+  final tl = normalized[0],
+      tr = normalized[1],
+      br = normalized[2],
+      bl = normalized[3];
+  path.lineTo(rect.right - tr.x, rect.top);
+  corner(1, rect.right - tr.x, rect.top + tr.y, -math.pi / 2);
+  path.lineTo(rect.right, rect.bottom - br.y);
+  corner(2, rect.right - br.x, rect.bottom - br.y, 0);
+  path.lineTo(rect.left + bl.x, rect.bottom);
+  corner(3, rect.left + bl.x, rect.bottom - bl.y, math.pi / 2);
+  path.lineTo(rect.left, rect.top + tl.y);
+  corner(0, rect.left + tl.x, rect.top + tl.y, math.pi);
+  return path..close();
+}
+
 /// A rounded rectangle whose corners follow dsh's `corner-shape`
 /// ([dshCornerCurvature]), with an optional border drawn inside the outline
 /// like a CSS border (inner radius = radius - width).
@@ -76,6 +150,7 @@ class DshCornerBorder extends OutlinedBorder {
   const DshCornerBorder({
     required this.radius,
     this.curvature = 1.5,
+    this.corners,
     super.side = BorderSide.none,
   });
 
@@ -85,20 +160,43 @@ class DshCornerBorder extends OutlinedBorder {
   /// The CSS `superellipse()` parameter; 1 is circular.
   final double curvature;
 
+  /// Omitted keeps the original uniform-radius path byte for byte.
+  final BorderRadius? corners;
+
   @override
   EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) =>
-      dshSuperellipsePath(rect, radius, curvature);
+      corners == null
+      ? dshSuperellipsePath(rect, radius, curvature)
+      : dshSuperellipseCornersPath(rect, corners!, curvature);
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) =>
-      dshSuperellipsePath(
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
+    final shape = corners;
+    if (shape == null) {
+      return dshSuperellipsePath(
         rect.deflate(side.width),
         math.max(0, radius - side.width),
         curvature,
       );
+    }
+    Radius inset(Radius r) => Radius.elliptical(
+      math.max(0, r.x - side.width),
+      math.max(0, r.y - side.width),
+    );
+    return dshSuperellipseCornersPath(
+      rect.deflate(side.width),
+      BorderRadius.only(
+        topLeft: inset(shape.topLeft),
+        topRight: inset(shape.topRight),
+        bottomLeft: inset(shape.bottomLeft),
+        bottomRight: inset(shape.bottomRight),
+      ),
+      curvature,
+    );
+  }
 
   @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
@@ -117,15 +215,20 @@ class DshCornerBorder extends OutlinedBorder {
   }
 
   @override
-  DshCornerBorder copyWith({BorderSide? side, double? radius}) =>
-      DshCornerBorder(
-        radius: radius ?? this.radius,
-        curvature: curvature,
-        side: side ?? this.side,
-      );
+  DshCornerBorder copyWith({
+    BorderSide? side,
+    double? radius,
+    BorderRadius? corners,
+  }) => DshCornerBorder(
+    corners: corners ?? this.corners,
+    radius: radius ?? this.radius,
+    curvature: curvature,
+    side: side ?? this.side,
+  );
 
   @override
   ShapeBorder scale(double t) => DshCornerBorder(
+    corners: corners == null ? null : corners! * t,
     radius: radius * t,
     curvature: curvature,
     side: side.scale(t),
@@ -135,11 +238,12 @@ class DshCornerBorder extends OutlinedBorder {
   bool operator ==(Object other) =>
       other is DshCornerBorder &&
       other.radius == radius &&
+      other.corners == corners &&
       other.curvature == curvature &&
       other.side == side;
 
   @override
-  int get hashCode => Object.hash(radius, curvature, side);
+  int get hashCode => Object.hash(radius, curvature, side, corners);
 }
 
 /// Shorthand for the surfaces of the product: a [ShapeDecoration] of [radius]
@@ -150,6 +254,7 @@ extension DshCornerDecoration on DshThemeData {
     double radius, {
     Color? borderColor,
     double? borderWidth,
+    BorderRadius? corners,
   }) {
     assert(
       borderColor == null || borderWidth != null,
@@ -158,6 +263,7 @@ extension DshCornerDecoration on DshThemeData {
     );
     return DshCornerBorder(
       radius: radius,
+      corners: corners,
       curvature: dshCornerCurvature(this),
       side: borderColor == null
           ? BorderSide.none
@@ -171,12 +277,14 @@ extension DshCornerDecoration on DshThemeData {
     Color? color,
     Color? borderColor,
     double? borderWidth,
+    BorderRadius? corners,
   }) => ShapeDecoration(
     color: color,
     shape: cornerBorder(
       radius,
       borderColor: borderColor,
       borderWidth: borderWidth,
+      corners: corners,
     ),
   );
 
