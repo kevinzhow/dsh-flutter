@@ -1,0 +1,320 @@
+{
+  "cases": [
+    {
+      "id": "tooltip-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "move": [
+            54,
+            104
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              110,
+              165
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "copy-hover"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              110,
+              165
+            ],
+            "changed": false
+          }
+        },
+        {
+          "move": [
+            90,
+            104
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              280,
+              165
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "branch-hover"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              280,
+              165
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            90,
+            215
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "pinned"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pinned",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "dismissed"
+        }
+      ]
+    },
+    {
+      "id": "tooltip-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "move": [
+            54,
+            104
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              110,
+              165
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "copy-hover"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              110,
+              165
+            ],
+            "changed": false
+          }
+        },
+        {
+          "move": [
+            90,
+            104
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              280,
+              165
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "branch-hover"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              120,
+              280,
+              165
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            90,
+            215
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "pinned"
+        },
+        {
+          "move": [
+            300,
+            60
+          ]
+        },
+        {
+          "expect": {
+            "reference": "pinned",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              30,
+              237,
+              280,
+              285
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "dismissed"
+        }
+      ]
+    }
+  ]
+}

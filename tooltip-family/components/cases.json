@@ -1,0 +1,678 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.tooltip-family.message-copy-desktop-en.light",
+      "title": "Message copy tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-desktop-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-desktop-en.dark",
+      "title": "Message copy tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-desktop-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-desktop-zh.light",
+      "title": "Message copy tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-desktop-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-desktop-zh.dark",
+      "title": "Message copy tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-desktop-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-phone-en.light",
+      "title": "Message copy tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-phone-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-phone-en.dark",
+      "title": "Message copy tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-phone-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-phone-zh.light",
+      "title": "Message copy tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-phone-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-copy-phone-zh.dark",
+      "title": "Message copy tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-copy-phone-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "copy",
+          "props": {
+            "clock": "start",
+            "branch": false
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-copy"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-desktop-en.light",
+      "title": "Message branch tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-desktop-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-desktop-en.dark",
+      "title": "Message branch tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-desktop-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-desktop-zh.light",
+      "title": "Message branch tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-desktop-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-desktop-zh.dark",
+      "title": "Message branch tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-desktop-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 240,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-phone-en.light",
+      "title": "Message branch tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-phone-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-phone-en.dark",
+      "title": "Message branch tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-phone-en",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-phone-zh.light",
+      "title": "Message branch tooltip (light)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-phone-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tooltip-family.message-branch-phone-zh.dark",
+      "title": "Message branch tooltip (dark)",
+      "kind": "chat.stream.actions",
+      "surface": "message-branch-phone-zh",
+      "category": "extension/tooltip-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 240,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "branch",
+          "props": {
+            "clock": "start",
+            "branch": true
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "message-branch"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[role=\"tooltip\"]",
+        "flutterKey": "dsh-tooltip-bubble",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-chat/src/client/chat/MessageIconActions.tsx",
+      "flutterCaseHint": "features/dsh_feature_chat/test/parity/cases/stream.dart",
+      "theme": "dark"
+    }
+  ]
+}

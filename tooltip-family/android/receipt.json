@@ -1,0 +1,64 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "outside touch",
+    "Escape",
+    "Tab",
+    "Enter"
+  ],
+  "scenes": [
+    {
+      "scene": "cold",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-pin",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-outside",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-repin",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-escape",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-cold",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-copy-focus",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-branch-focus",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-readable-focus",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-pin",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-toggle-off",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-toggle-on",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-tab-dismiss",
+      "attempts": 1
+    }
+  ]
+}

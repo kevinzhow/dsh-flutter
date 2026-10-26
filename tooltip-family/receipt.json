@@ -1,0 +1,182 @@
+{
+  "implementationHead": "12e0ec4bafda75777ca493f07af66887e01d1cfe",
+  "tree": "b7dd931fa9ea4ed555f0d7aaf8223969607c2f22",
+  "runtimeBuildHead": "28a33901a746da391e14c5710061989bb20541a3",
+  "changesSinceRuntimeBuild": [
+    "tool/parity-desktop/tooltip-family-cases.json (neutral initial pointer for replay only)"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 tooltip and keycap CSS and released placement logic",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T21:18:13+00:00",
+    "headTree": "b7dd931fa9ea4ed555f0d7aaf8223969607c2f22",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.2
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 11.0
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.3
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 186.9
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "1463a3746139d9baedc9f7cd71856fe607ae47e101494a165e4b4a9a1f6f76ac"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "46118ce2c186afce60ead591e5acefb47147447f9ff0e83d69dcddcce8d287f4"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "5a58e0eebceed329d9b4ef271b189d2b4bc522413845045490eceba6bd4822a2",
+      "applicationLibrarySha256": "5da794c79cba9df3ea99a5b479d4f99ec5366ebec49506c1b552c0affb456239"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "5a58e0eebceed329d9b4ef271b189d2b4bc522413845045490eceba6bd4822a2",
+      "applicationLibrarySha256": "42ebee9f6117edf360b931cea72cfbfeafb13dfa3eebb68116bbf2a0a10cb0f9"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "tooltip-family.desktop",
+      "assertions": 7
+    },
+    {
+      "case": "tooltip-family.phone",
+      "assertions": 7
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "outside touch",
+      "Escape",
+      "Tab",
+      "Enter"
+    ],
+    "scenes": [
+      {
+        "scene": "cold",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-pin",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-outside",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-repin",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-escape",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-cold",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-copy-focus",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-branch-focus",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-readable-focus",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-pin",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-toggle-off",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-toggle-on",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-tab-dismiss",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "compared": 16,
+    "dimensionsEqual": 16,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 94.38025
+  },
+  "commandRegression": {
+    "cases": 24,
+    "providers": 2,
+    "equal": 48
+  },
+  "initialGpuAttempt": "The initial cursor was over the branch control; the neutral pointer position was added before the baseline capture and all replay assertions passed.",
+  "remaining": "All 16 tooltip comparisons remain below 99.5%; dynamic label resolvers and document-body portal behavior remain to be audited, along with broader design-family and visual work.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}
