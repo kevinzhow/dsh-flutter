@@ -1,0 +1,104 @@
+{
+  "implementationHead": "ae29c2341c451b419d83fd2996d1a83a766fbb63",
+  "tree": "47e9fdf09ff6f4495d87d8f49fc721e7adef74ee",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "referencePackagesVersion": "0.2.1-rc.2",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T06:59:02+00:00",
+    "headTree": "47e9fdf09ff6f4495d87d8f49fc721e7adef74ee",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.5
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 11.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.5
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 5.1
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 195.5
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "7d70ab2409cb1fecd53f30da3004cb88bb9c629a332a85d5a0ef7215ade4e7aa"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "e1f582be727d0efe03b452be3b6b6e225c9233ef7b2be1c991511e9c2b2aa595"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "dbe2ce7a9be5b92b4ab7ff59c49b55efcfdfda78beca15447c62f328532c6e65",
+      "applicationLibrarySha256": "07ac9e2fc2f3e362e7506229308d90f24b7a2d9fdc9489df94faf869209f10a0"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "dbe2ce7a9be5b92b4ab7ff59c49b55efcfdfda78beca15447c62f328532c6e65",
+      "applicationLibrarySha256": "dc5d74d935fc50c3fc2e94ee1f29ae7a8b071b6d48b27f3bcb56d1c46db3c0d8"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "plugin-layout.desktop",
+      "passedAssertions": 4
+    },
+    {
+      "case": "plugin-layout.phone",
+      "passedAssertions": 4
+    }
+  ],
+  "androidPassedScenes": 18,
+  "visual": {
+    "compared": 56,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 10,
+    "dimensionsEqual": 56,
+    "meanNonTextPct": 97.248
+  },
+  "visualCaptureHead": "94a276e868a5102a44d2ba3b36fd94600c070e31",
+  "laterChange": "Only pointer-opened panel focus and its regression test; no at-rest appearance change.",
+  "releaseOrDeployment": false
+}
