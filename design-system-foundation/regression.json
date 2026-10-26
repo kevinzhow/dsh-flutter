@@ -3,6 +3,21 @@
   "cases": 56,
   "rgbaIdentical": 56,
   "allIdentical": true,
-  "baselineCommit": "ae29c2341c451b419d83fd2996d1a83a766fbb63",
-  "currentCommit": "1180151ae3878405cdee48f1bd0e9f4db865b8e1"
+  "currentCommit": "1180151ae3878405cdee48f1bd0e9f4db865b8e1",
+  "baselineImplementationCommit": "ae29c2341c451b419d83fd2996d1a83a766fbb63",
+  "baselineWidgetCaptureCommit": "94a276e868a5102a44d2ba3b36fd94600c070e31",
+  "baselineCaptureEquivalence": "94a276e -> ae29c23 only pointer-opened panel focus and its regression; static appearance unchanged.",
+  "nativeCaptureRgbaIdentical": [
+    "plugin-layout.desktop/install-menu.png",
+    "plugin-layout.desktop/menu-closed.png",
+    "plugin-layout.desktop/manager.png",
+    "plugin-layout.desktop/package-details.png",
+    "plugin-layout.desktop/plugin-info.png",
+    "plugin-layout.phone/install-menu.png",
+    "plugin-layout.phone/menu-closed.png",
+    "plugin-layout.phone/manager.png",
+    "plugin-layout.phone/package-details.png",
+    "plugin-layout.phone/plugin-info.png"
+  ],
+  "nativeCaptureCount": 10
 }
