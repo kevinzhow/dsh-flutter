@@ -63,6 +63,23 @@ class ParityInteractions {
                 .first,
             raw['text'] as String,
           );
+        case 'set-scroll':
+          final scrollable = find.descendant(
+            of: _target(raw),
+            matching: find.byType(Scrollable),
+          );
+          if (scrollable.evaluate().length != 1) {
+            throw StateError(
+              'set-scroll requires one scrollable under ${raw['target']}',
+            );
+          }
+          final position = tester.state<ScrollableState>(scrollable).position;
+          position.jumpTo(
+            (raw['offset'] as num).toDouble().clamp(
+              0,
+              position.maxScrollExtent,
+            ),
+          );
         case 'wait':
           await tester.pump(Duration(milliseconds: (raw['ms'] as num).toInt()));
         default:

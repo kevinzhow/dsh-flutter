@@ -572,6 +572,53 @@ void main() {
       expect(find.text('No matching models.'), findsOneWidget);
     });
 
+    testWidgets(
+      'scrolling the model sheet pins the provider and selects a later group',
+      (t) async {
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            for (final id in ['first', 'second'])
+              {
+                'id': id,
+                'name': id == 'first' ? 'First provider' : 'Second provider',
+                'models': [
+                  for (var i = 0; i < 10; i++) model('$i', '$id model $i'),
+                ],
+              },
+          ],
+          def: {'provider': 'first', 'model': '0'},
+        );
+        host.handlers['session/selectModel'] = (_) => {
+          'selected': {'provider': 'second', 'model': '5'},
+        };
+        await ready(t);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-root-model')));
+        await t.pumpAndSettle();
+        final list = find.byKey(const ValueKey('model-list'));
+        final first = find.byKey(const ValueKey('model-group-first'));
+        await t.drag(list, const Offset(0, -100));
+        await t.pumpAndSettle();
+        expect(t.getTopLeft(first).dy, t.getTopLeft(list).dy + 4);
+        await t.drag(list, const Offset(0, -500));
+        await t.pumpAndSettle();
+        await t.ensureVisible(
+          find.byKey(const ValueKey('model-option-second/5')),
+        );
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-option-second/5')));
+        await t.pump();
+        await t.runAsync(() => flush(8));
+        await t.pumpAndSettle();
+        expect(host.callsTo('session/selectModel').single.args['request'], {
+          'sessionId': 's1',
+          'provider': 'second',
+          'model': '5',
+        });
+      },
+    );
+
     testWidgets('a provider that failed to load is listed with a retry', (
       t,
     ) async {

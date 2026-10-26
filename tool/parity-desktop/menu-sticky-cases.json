@@ -1,0 +1,164 @@
+{
+  "cases": [
+    {
+      "id": "menu-sticky.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "command-initial"
+        },
+        {
+          "scroll": [
+            180,
+            180,
+            150
+          ]
+        },
+        {
+          "expect": {
+            "reference": "command-initial",
+            "rect": [
+              24,
+              115,
+              375,
+              340
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "command-scrolled"
+        },
+        {
+          "click": [
+            130,
+            24
+          ]
+        },
+        {
+          "expect": {
+            "reference": "command-scrolled",
+            "rect": [
+              24,
+              100,
+              375,
+              360
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "model-initial"
+        },
+        {
+          "scroll": [
+            180,
+            230,
+            180
+          ]
+        },
+        {
+          "expect": {
+            "reference": "model-initial",
+            "rect": [
+              24,
+              130,
+              375,
+              400
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "model-scrolled"
+        }
+      ]
+    },
+    {
+      "id": "menu-sticky.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "command-initial"
+        },
+        {
+          "scroll": [
+            180,
+            180,
+            150
+          ]
+        },
+        {
+          "expect": {
+            "reference": "command-initial",
+            "rect": [
+              24,
+              115,
+              375,
+              340
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "command-scrolled"
+        },
+        {
+          "click": [
+            130,
+            24
+          ]
+        },
+        {
+          "expect": {
+            "reference": "command-scrolled",
+            "rect": [
+              24,
+              100,
+              375,
+              360
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "model-initial"
+        },
+        {
+          "scroll": [
+            180,
+            230,
+            180
+          ]
+        },
+        {
+          "expect": {
+            "reference": "model-initial",
+            "rect": [
+              24,
+              130,
+              375,
+              400
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "model-scrolled"
+        }
+      ]
+    }
+  ]
+}

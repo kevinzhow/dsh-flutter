@@ -338,6 +338,6 @@
       }
     }
   },
-  "coverage": "Menu base/dense/compact and dock rows, source surface/footer geometry, scrolling viewport, pinned footer, all-row keyboard walk and effective shortcut presentation. Submenus, sticky groups and arbitrary-content/macOS backdrop remain explicit follow-up.",
+  "coverage": "Menu base/dense/compact and dock rows, source surface/footer geometry, scrolling viewport, sticky groups, pinned footer, all-row keyboard walk and effective shortcut presentation. Submenus and arbitrary-content/macOS backdrop remain explicit follow-up.",
   "portalPlacement": "const MARGIN = $margin; const vw = window.innerWidth; const vh = window.innerHeight; const listEl = listRef.current; const lw = listEl?.offsetWidth ?? 0; const lh = listEl?.offsetHeight ?? 0; let x; let y; if (side === \"right\") { x = r.right + $gap; y = r.top; } else if (align === \"start\") { x = r.left; y = side === \"bottom\" ? r.bottom + $gap : r.top - lh - $gap; } else { x = r.right - lw; y = side === \"bottom\" ? r.bottom + $gap : r.top - lh - $gap; } if (lw > 0) x = Math.min(Math.max(x, MARGIN), vw - lw - MARGIN); if (lh > 0) y = Math.min(Math.max(y, overlayTopMargin(MARGIN)), vh - lh - MARGIN);"
 }

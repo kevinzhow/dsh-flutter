@@ -4,6 +4,8 @@ import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_commands/dsh_feature_commands.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:flutter/foundation.dart'
+    show debugDefaultTargetPlatformOverride;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -191,6 +193,196 @@ void main() {
     await t.pump();
     await t.pump();
     expect(selected, ['b/mini']);
+  });
+
+  tw('keyboard navigation reveals an offscreen grouped option', (t) async {
+    final rows = [
+      for (var i = 0; i < 30; i++)
+        SelectOption(
+          id: 'item-$i',
+          label: 'Option $i',
+          group: i < 15
+              ? const SelectOptionGroup(name: 'a', label: 'First')
+              : const SelectOptionGroup(name: 'b', label: 'Second'),
+        ),
+    ];
+    await t.pumpWidget(app());
+    await open(t, rows: rows);
+    for (var i = 0; i < 24; i++) {
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await t.pump();
+    }
+    await t.pump();
+    final viewport = find.byKey(const ValueKey('popup-list'));
+    final option = find.byKey(const ValueKey('popup-option-item-24'));
+    expect(
+      t.getTopLeft(option).dy,
+      greaterThanOrEqualTo(t.getTopLeft(viewport).dy),
+    );
+    expect(
+      t.getBottomLeft(option).dy,
+      lessThanOrEqualTo(t.getBottomLeft(viewport).dy),
+    );
+    for (var i = 0; i < 8; i++) {
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+      await t.pump();
+    }
+    await t.pump();
+    final earlier = find.byKey(const ValueKey('popup-option-item-16'));
+    final heading = find.text('Second');
+    expect(
+      t.getTopLeft(earlier).dy,
+      greaterThanOrEqualTo(t.getBottomLeft(heading).dy + 2),
+    );
+    await t.sendKeyEvent(LogicalKeyboardKey.enter);
+    await t.pump();
+    expect(selected, ['item-16']);
+  });
+
+  tw('opening a long grouped list leaves the first visible row unobscured', (
+    t,
+  ) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
+    t.view.devicePixelRatio = 2.625;
+    t.view.physicalSize = const Size(1080, 2400);
+    addTearDown(t.view.resetDevicePixelRatio);
+    addTearDown(t.view.resetPhysicalSize);
+    final rows = [
+      for (var i = 0; i < 28; i++)
+        SelectOption(
+          id: '$i',
+          label: 'Option $i',
+          group: SelectOptionGroup(
+            name: '${i ~/ 14}',
+            label: i < 14 ? 'First provider' : 'Second provider',
+          ),
+        ),
+    ];
+    popup.state.set(
+      PopupState(
+        open: true,
+        command: 'model',
+        status: PopupStatus.ready,
+        options: rows,
+      ),
+    );
+    final height = ValueNotifier<double>(41);
+    addTearDown(height.dispose);
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: ValueListenableBuilder<double>(
+            valueListenable: height,
+            builder: (_, value, child) =>
+                SizedBox(width: 380, height: value, child: child),
+            child: PopupSelectOverlay(
+              sessionId: 's1',
+              controller: popup,
+              i18n: const DshI18n(DshLocale.en),
+            ),
+          ),
+        ),
+      ),
+    );
+    height.value = 320;
+    await t.pumpAndSettle();
+    final list = find.byKey(const ValueKey('popup-list'));
+    final scrollable = find.descendant(
+      of: list,
+      matching: find.byType(Scrollable),
+    );
+    expect(t.state<ScrollableState>(scrollable.first).position.pixels, 0);
+    final heading = find.text('First provider');
+    final row = find.byKey(const ValueKey('popup-option-0'));
+    expect(
+      t.getTopLeft(row).dy,
+      greaterThanOrEqualTo(t.getBottomLeft(heading).dy + 2),
+    );
+    debugDefaultTargetPlatformOverride = null;
+  });
+
+  tw('a preselected offscreen row is revealed after the viewport grows', (
+    t,
+  ) async {
+    final rows = [
+      for (var i = 0; i < 28; i++)
+        SelectOption(
+          id: '$i',
+          label: 'Option $i',
+          group: SelectOptionGroup(
+            name: '${i ~/ 14}',
+            label: i < 14 ? 'First provider' : 'Second provider',
+          ),
+        ),
+    ];
+    popup.state.set(
+      PopupState(
+        open: true,
+        command: 'model',
+        status: PopupStatus.ready,
+        options: rows,
+        active: 20,
+      ),
+    );
+    final height = ValueNotifier<double>(41);
+    addTearDown(height.dispose);
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: ValueListenableBuilder<double>(
+            valueListenable: height,
+            builder: (_, value, child) =>
+                SizedBox(width: 380, height: value, child: child),
+            child: PopupSelectOverlay(
+              sessionId: 's1',
+              controller: popup,
+              i18n: const DshI18n(DshLocale.en),
+            ),
+          ),
+        ),
+      ),
+    );
+    height.value = 320;
+    await t.pumpAndSettle();
+    final viewport = find.byKey(const ValueKey('popup-list'));
+    final selected = find.byKey(const ValueKey('popup-option-20'));
+    expect(
+      t.getTopLeft(selected).dy,
+      greaterThanOrEqualTo(t.getTopLeft(viewport).dy),
+    );
+    expect(
+      t.getBottomLeft(selected).dy,
+      lessThanOrEqualTo(t.getBottomLeft(viewport).dy),
+    );
+  });
+
+  tw('ungrouped rows do not add the adjacent-group gap', (t) async {
+    await t.pumpWidget(app());
+    await open(
+      t,
+      rows: const [
+        SelectOption(id: 'plain', label: 'Plain'),
+        SelectOption(
+          id: 'first',
+          label: 'First row',
+          group: SelectOptionGroup(name: 'a', label: 'First group'),
+        ),
+        SelectOption(
+          id: 'second',
+          label: 'Second row',
+          group: SelectOptionGroup(name: 'b', label: 'Second group'),
+        ),
+      ],
+    );
+    final plain = find.byKey(const ValueKey('popup-option-plain'));
+    final firstHeading = find.text('First group');
+    final firstRow = find.byKey(const ValueKey('popup-option-first'));
+    final secondHeading = find.text('Second group');
+    expect(t.getTopLeft(firstHeading).dy - t.getBottomLeft(plain).dy, 4);
+    expect(t.getTopLeft(secondHeading).dy - t.getBottomLeft(firstRow).dy, 7);
   });
 
   tw('a failed load shows the error with a retry that reloads', (t) async {

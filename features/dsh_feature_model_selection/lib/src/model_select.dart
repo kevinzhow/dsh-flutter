@@ -631,45 +631,37 @@ class _ModelSheetState extends State<ModelSheet> {
             _reload,
           ),
         Flexible(
-          child: ListView(
+          child: CustomScrollView(
+            key: const ValueKey('model-list'),
             shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            children: [
-              for (final e in groups) ...[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    DshSpace.lg,
-                    DshSpace.sm,
-                    DshSpace.lg,
-                    DshSpace.xs,
-                  ),
-                  child: DshChromeText(
-                    e.group.id == 'deepseek-account'
-                        ? accountName
-                        : e.group.name,
-                    key: ValueKey('model-group-${e.group.id}'),
-                    style: theme
-                        .textStyle('--dsw-font-xs-strong-13')
-                        .copyWith(
-                          color: theme.color('--dsw-alias-label-tertiary'),
+            slivers: [
+              for (var i = 0; i < groups.length; i++)
+                DshMenuGroup(
+                  label: groups[i].group.id == 'deepseek-account'
+                      ? accountName
+                      : groups[i].group.name,
+                  headingKey: ValueKey('model-group-${groups[i].group.id}'),
+                  separated: i > 0,
+                  children: [
+                    for (final m in groups[i].models)
+                      _row(
+                        theme,
+                        key: ValueKey(
+                          'model-option-${groups[i].group.id}/${m.id}',
                         ),
-                  ),
+                        label: m.name,
+                        selected:
+                            current?.provider == groups[i].group.id &&
+                            current?.model == m.id,
+                        pending:
+                            state.pending?.provider == groups[i].group.id &&
+                            state.pending?.model == m.id,
+                        enabled: !busy,
+                        onTap: () =>
+                            _chooseModel(view, _Choice(groups[i].group, m)),
+                      ),
+                  ],
                 ),
-                for (final m in e.models)
-                  _row(
-                    theme,
-                    key: ValueKey('model-option-${e.group.id}/${m.id}'),
-                    label: m.name,
-                    selected:
-                        current?.provider == e.group.id &&
-                        current?.model == m.id,
-                    pending:
-                        state.pending?.provider == e.group.id &&
-                        state.pending?.model == m.id,
-                    enabled: !busy,
-                    onTap: () => _chooseModel(view, _Choice(e.group, m)),
-                  ),
-              ],
             ],
           ),
         ),

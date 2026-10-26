@@ -79,6 +79,18 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unsupported plugin menu viewport'):
             gen.render(lock, altered)
 
+    def test_menu_group_recipe_tracks_published_values(self):
+        import copy
+        lock, sheets = gen.collect()
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['MenuGroup.module.css'] if r['selector'] == '.group + .group')['declarations']['margin-top'] = '5px'
+        next(r for r in altered['MenuGroup.module.css'] if r['selector'] == '.heading')['declarations']['padding'] = '6px 8px 3px'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('gap = 5.0;', dart)
+        self.assertIn('paddingTop = 6.0;', dart)
+        self.assertIn('paddingHorizontal = 8.0;', dart)
+        self.assertIn('paddingBottom = 3.0;', dart)
+
     def test_shortcut_recipe_tracks_published_values_and_rejects_unknown_rules(self):
         import copy
         lock, sheets = gen.collect()

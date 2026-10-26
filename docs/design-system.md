@@ -107,6 +107,28 @@ the application has not yet wired its shortcut catalog to this lookup and does
 not yet register the rename, fork or archive commands. The real DSH workspace
 session-action menu and the same Flutter workspace screen are compared with
 matching synthetic effective bindings in normal and archived states. Existing
-unbound menus remain regression cases. Tooltip keycaps, submenus, sticky groups,
+unbound menus remain regression cases. Tooltip keycaps, submenus,
 arbitrary-content backdrop filtering and macOS material backing remain separate
 work; this change does not claim whole-family or overall visual parity.
+
+
+### Scrollable menu groups
+
+`DshMenuGroup` compiles its heading padding, font, color, stuck fill, radius and
+adjacent-group gap from the locked published `MenuGroup.module.css`. A pinned
+header stays within its group and is pushed away by the next group; its fill
+appears only after the group's start passes the viewport. It names the group
+for accessibility, supports wrapped and scaled headings, and retains row
+contexts for keyboard selection. The command popup preserves ungrouped rows
+without inserting an adjacent-group gap. It waits for a usable viewport before
+revealing the active row and leaves already visible rows in place, including
+when a pinned heading would otherwise cover them. The model sheet uses the same
+group.
+
+The reference cases mount the real DSH command popup and model selector over
+synthetic data. A deterministic scroll-position step prepares initial, pinned
+and transition views in both capture providers; native touch and keyboard tests
+are reported separately. The model selector still uses a bottom sheet in this
+client, with wider and taller rows than the reference desktop menu; the current
+comparisons do not establish visual parity. Fonts and the 99.5% classifier
+remain unchanged.
