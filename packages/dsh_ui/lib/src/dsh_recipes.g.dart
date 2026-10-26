@@ -246,3 +246,21 @@ abstract final class DshTooltipRecipe {
   static const double rightGap = 10.0;
   static const double viewportMargin = 12.0;
 }
+
+abstract final class DshInputRecipe {
+  static const double height = 32.0;
+  static const double padding = 8.0;
+  static const double gap = 6.0;
+  static const double iconSize = 16.0;
+  static const double borderWidth = 0.5;
+  static const String borderToken = '--dsw-alias-border-l4';
+  static const String radiusToken = '--dsw-radius-md';
+  static const String fillToken = '--dsw-alias-bg-layer-1';
+  static const String focusBorderToken = '--dsw-alias-state-business-primary';
+  static const String iconToken = '--dsw-alias-label-tertiary';
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String placeholderToken = '--dsw-alias-label-dimmed';
+  static const double fontSize = 14.0;
+  static const double lineHeight = 22.0;
+  static const String fontToken = '--dsw-font-s-14';
+}

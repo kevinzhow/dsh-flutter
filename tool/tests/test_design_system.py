@@ -131,6 +131,22 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'untranslated tooltip'):
             gen.render(lock, changed)
 
+    def test_input_recipe_follows_published_css_and_rejects_unknown_states(self):
+        import copy
+        lock, sheets = gen.collect()
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Input.module.css'] if r['selector'] == '.wrap')['declarations']['padding'] = '0 10px'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('padding = 10.0;', dart)
+        changed = copy.deepcopy(sheets)
+        changed['Input.module.css'].append({'selector': '.wrap:disabled', 'conditions': [], 'declarations': {'opacity': '.5'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated input'):
+            gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Input.module.css'] if r['selector'] == '.input')['declarations']['outline'] = 'auto'
+        with self.assertRaisesRegex(ValueError, 'untranslated input'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()

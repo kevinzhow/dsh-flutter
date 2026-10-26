@@ -304,7 +304,7 @@ class _FontSettingsGroupState extends State<FontSettingsGroup> {
     return LayoutBuilder(
       builder: (context, constraints) {
         final wide = constraints.maxWidth >= dshSettingsRowWide;
-        final input = DshFieldInput(
+        final input = DshInput(
           key: ValueKey<String>('font-${role.name}-family'),
           value: service.current.fontFamilies[role],
           placeholder: _t(i18n, 'fontFamily.placeholder'),
