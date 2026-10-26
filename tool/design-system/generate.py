@@ -100,6 +100,12 @@ def collect(source=None):
         original = source / Path(package['sourcePackage']).parent / 'src/client/PluginManagerPage.module.css'
         verify_feature_source(feature, css_rules(original.read_text(), allow_keyframes=True))
 
+    dock = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-dockkit')
+    dock_css = (HERE / 'upstream/ui-dockkit/dockkit.module.css').read_bytes()
+    if source is not None and dock_css != (source / Path(dock['sourcePackage']).parent / 'src/components/dockkit.module.css').read_bytes():
+        raise ValueError('reference dock CSS differs from pinned published package')
+    rules['dockkit.module.css'] = css_rules(dock_css.decode(), allow_keyframes=True)
+
     return lock, rules
 
 

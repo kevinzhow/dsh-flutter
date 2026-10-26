@@ -18,6 +18,8 @@ def build(sheets, *, value, number, token, css_rules):
     contract = json.loads((HERE / 'menu-contract.json').read_text())['rules']
     for name, schema in contract.items():
         current = sheets[name]
+        if name == 'dockkit.module.css':
+            current = [r for r in current if re.search(r'\.(?:menu|menuItem)(?![\w-])', r['selector'])]
         if name == 'PluginManagerPage.module.css':
             current = [r for r in current if '.addMenu' in r['selector']]
         if len(current) != len(schema) or any(r['conditions'] for r in current) or {r['selector'] for r in current} != set(schema):
@@ -62,6 +64,8 @@ def build(sheets, *, value, number, token, css_rules):
     for selector, fields in fixed.items():
         for prop, expected in fields.items():
             if get(selector,prop) != expected: raise ValueError('untranslated menu structural value: ' + selector + '/' + prop)
+    footer_border = re.fullmatch(r'([\d.]+)px solid var\((--[\w-]+)\)', get('.footer', 'border-top'))
+    if footer_border is None: raise ValueError('unsupported menu footer border')
     metrics = {
       'DshMenuRecipe': {
         'padding': px('.list, .submenu','padding'), 'minWidth':px('.list','min-width'), 'maxWidth':px('.list','max-width'),
@@ -92,6 +96,10 @@ def build(sheets, *, value, number, token, css_rules):
         'separatorVerticalMargin':separator[0],'separatorHorizontalMargin':separator[1],
         'compactSeparatorMargin':px('.compactList .separator','margin'),'separatorToken':tok('.separator','background'),
       },
+      'DshMenuFooterRecipe': {
+        'marginTop':px('.footer','margin-top'), 'paddingTop':px('.footer','padding-top'),
+        'borderWidth':float(footer_border[1]), 'borderToken':footer_border[2],
+      },
       'DshMenuSurfaceRecipe': {
         'radiusToken':token(value(surface,'.surface, .backing','border-radius')),
         'compactRadiusToken':token(value(surface,'.compact','border-radius')),
@@ -115,6 +123,20 @@ def build(sheets, *, value, number, token, css_rules):
       'descriptionLineHeight':number(value(plugin,'.addMenuDescription','line-height')),
       'descriptionMaxHeight':number(value(plugin,'.addMenuDescription','max-height')),
       'descriptionToken':token(value(plugin,'.addMenuDescription','color')),
+    }
+    dock = sheets['dockkit.module.css']
+    dp = lambda selector, prop: value(dock, selector, prop)
+    pad = pair(dp('.menuItem', 'padding'))
+    border = re.fullmatch(r'([\d.]+)px solid var\((--[\w-]+)\)', dp('.menu', 'border'))
+    size = re.fullmatch(r'calc\(var\(--dsh-content-font-size-secondary, ([\d.]+)px\) - ([\d.]+)px\)', dp('.menuItem', 'font-size'))
+    if border is None or size is None: raise ValueError('unsupported dock menu border/font expression')
+    metrics['DshDockMenuRecipe'] = {
+      'minWidth':number(dp('.menu','min-width')), 'padding':number(dp('.menu','padding')),
+      'borderWidth':float(border[1]), 'borderToken':border[2],
+      'verticalPadding':pad[0], 'horizontalPadding':pad[1],
+      'fontBase':float(size[1])-float(size[2]), 'fontScale':'secondary',
+      'radiusToken':token(dp('.menuItem','border-radius')),
+      'labelToken':token(dp('.menuItem','color')), 'hoverToken':token(dp('.menuItem:hover','background')),
     }
     # Every value not consumed by a generated field must stay at its explicitly
     # audited value. This includes pending structures; they cannot drift silently.

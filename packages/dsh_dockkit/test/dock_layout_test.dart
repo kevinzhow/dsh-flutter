@@ -357,6 +357,23 @@ void main() {
   );
 
   testWidgets(
+    'touch long press opens the same tab menu and selection closes it',
+    (t) async {
+      final c = controller();
+      final id = c.openContent(
+        const OpenContentInput(contentId: fileA, title: 'a.txt', kind: 'file'),
+      );
+      await t.pumpWidget(host(c));
+      await t.longPress(find.byKey(ValueKey('dock-chip-$id')));
+      await t.pump();
+      expect(find.byKey(ValueKey('dock-menu-close-$id')), findsOneWidget);
+      await t.tap(find.byKey(ValueKey('dock-menu-close-$id')));
+      await t.pump();
+      expect(c.snapshot.state.tabs[id], isNull);
+    },
+  );
+
+  testWidgets(
     'keeps a keepMounted tab body alive while another tab is in front',
     (t) async {
       final c = controller();

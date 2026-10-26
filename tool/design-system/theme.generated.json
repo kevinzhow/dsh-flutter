@@ -103,6 +103,35 @@
         "referenceSourceSha256": {
           "packages/client/ui-sidebar-terminal/src/client/terminal.tsx": "a2504ac85030d3e2a0f9f4cb69cc3a6219a9aefdf4ea7fd7d179e78e00656a95"
         }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-dockkit",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-dockkit/-/dsh-client-ui-dockkit-0.2.1-rc.2.tgz",
+        "integrity": "sha512-PJVoBN2BbmB2PLvGlvEvqN6KzkSDdYe0VtWfyBOxBsPfgN8QFQrk+tYEcl9fyBrP8vaM3Rdnt+ZYI4unzmetrQ==",
+        "extractionKind": "plain-files",
+        "archiveFiles": {
+          "package.json": "package/package.json",
+          "LICENSE": "package/LICENSE",
+          "dockkit.module.css": "package/lib/components/dockkit.module.css"
+        },
+        "sourcePackage": "packages/client/ui-dockkit/package.json",
+        "referenceConsumer": "packages/client/web/package.json",
+        "dependencyField": "devDependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-dockkit",
+        "files": {
+          "package.json": "de5e839bae6121b7793406209fe422f1af732a4206d2b7fe1a9ea6d1ed509c50",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "dockkit.module.css": "aa18d0e2a41bfd99babd9011f1107b26d387c30665fdbcc3d6276ec268750fdf"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-dockkit/src/components/TabMenu.tsx": "20b266cfe69a8081bbc548df383b66067ae3e781f9619f8c16fe4f029607d780",
+          "packages/client/web/src/base.css": "dfaaf04e7498017ef406269ec28b5981566cb07b48eadc0ab92dac48ecbf7a6e",
+          "packages/client/ui-dockkit/src/components/DockSurface.tsx": "437ef9917fdfa29f3461b89b0904f3e91b3b309eaacddfc89baeef4b4142ddc9",
+          "packages/client/ui-dockkit/src/components/TabPanel.tsx": "21d7c1dde24b86f3f165d87af68e1cbe69d9336f1fc5931cb058bee902043c5e",
+          "packages/client/ui-dockkit/src/components/TabLayout.tsx": "ea6305089a7697214a3dba28ca0c364253721b5b67533fc5245bad3036e990be"
+        }
       }
     ]
   },

@@ -145,7 +145,12 @@ Future<Map<String, dynamic>> captureParityCase(
   final d = ctx.density;
   final pixelRect = cropMode == 'element'
       ? enclosingPixelRect(rect, d)
-      : Rect.fromLTWH(0, 0, size.width * d, size.height * d);
+      : Rect.fromLTWH(
+          0,
+          0,
+          (size.width * d).roundToDouble(),
+          (size.height * d).roundToDouble(),
+        );
 
   Color? framePixel;
   final png = await t.runAsync(() async {

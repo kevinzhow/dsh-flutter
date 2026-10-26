@@ -57,6 +57,11 @@ class Input:
         self.send('button 272 1')  # BTN_LEFT
         self.send('button 272 0')
 
+    def secondary_click(self, x, y):
+        self.send(f'move {x} {y}')
+        self.send('button 273 1')  # BTN_RIGHT
+        self.send('button 273 0')
+
     def drag(self, x0, y0, x1, y1):
         self.send(f'move {x0} {y0}')
         self.send('button 272 1')
@@ -282,6 +287,12 @@ def main():
                 for step in c['app']:
                     if 'click' in step:
                         screen.click(*step['click'])
+                        time.sleep(0.8)
+                    elif 'secondaryClick' in step:
+                        point = step['secondaryClick']
+                        if not isinstance(point, list) or len(point) != 2 or any(type(v) is not int for v in point) or not 0 <= point[0] < w or not 0 <= point[1] < h:
+                            raise ValueError('Secondary click must stay within this private output')
+                        screen.secondary_click(*point)
                         time.sleep(0.8)
                     elif 'text' in step:
                         screen.type(step['text'])

@@ -189,6 +189,63 @@ void main() {
       },
     );
 
+    for (final model in DshPixelModel.values) {
+      for (final (width, height, pixelsWide, pixelsHigh) in [
+        (390, 61, 1024, 160),
+        (391, 62, 1026, 163),
+        (390, 60, 1024, 158),
+      ]) {
+        testWidgets(
+          'viewport ${model.name} $width x $height matches Chromium physical dimensions',
+          (t) async {
+            final previous = dshPixelModel;
+            dshPixelModel = model;
+            addTearDown(() => dshPixelModel = previous);
+            final entry = <String, dynamic>{
+              'key':
+                  'components.menu.selftest.viewport-${model.name}-$width-$height.light',
+              'case': {
+                'id': 'components.menu.selftest.viewport.light',
+                'kind': 'test.viewport',
+                'theme': 'light',
+                'locale': 'en',
+                'viewport': {
+                  'width': width,
+                  'height': height,
+                  'density': 2.625,
+                },
+                'capture': {'crop': 'viewport'},
+              },
+              'variant': {
+                'id': 'default',
+                'name': 'Default',
+                'props': <String, dynamic>{},
+              },
+            };
+            await captureParityCase(
+              t,
+              entry: entry,
+              mapping: ParityCase(
+                widgets: const ['selftest'],
+                build: (_) => const SizedBox(width: 40, height: 20),
+              ),
+              fixtures: const {},
+              outputDir: dir,
+              runInfo: const {},
+              fonts: fonts,
+            );
+            final png = File('${dir.path}/${entry['key']}.png')
+                .readAsBytesSync();
+            final header = ByteData.sublistView(png);
+            expect(
+              (header.getUint32(16), header.getUint32(20)),
+              (pixelsWide, pixelsHigh),
+            );
+          },
+        );
+      }
+    }
+
     for (final (theme, density) in [('light', 1), ('dark', 2)]) {
       testWidgets('captures a button row in $theme at ${density}x', (t) async {
         final entry = <String, dynamic>{

@@ -79,6 +79,26 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unsupported plugin menu viewport'):
             gen.render(lock, altered)
 
+    def test_dock_menu_rules_and_dynamic_fields_fail_closed(self):
+        import copy
+        lock, original = gen.collect()
+        altered = copy.deepcopy(original)
+        next(r for r in altered['dockkit.module.css'] if r['selector'] == '.menuItem')['declarations']['font-size'] = 'calc(var(--dsh-content-font-size-secondary, 13px) - 2px)'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('fontBase = 11.0;', dart)
+        for change in [
+          {'selector': '.menuItem:active', 'conditions': [], 'declarations': {'opacity': '.2'}},
+          {'selector': '.menuItem', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}},
+        ]:
+            altered = copy.deepcopy(original)
+            altered['dockkit.module.css'].append(change)
+            with self.assertRaisesRegex(ValueError, 'untranslated menu'):
+                gen.render(lock, altered)
+        altered = copy.deepcopy(original)
+        next(r for r in altered['dockkit.module.css'] if r['selector'] == '.menu')['declarations']['display'] = 'grid'
+        with self.assertRaisesRegex(ValueError, 'untranslated menu structural'):
+            gen.render(lock, altered)
+
     def test_css_parser_preserves_literals_and_conditional_scope(self):
         css = '.x:is(.a, .b) { background: url("data:image/svg+xml;abc"); content: "a;{b}" } @media(max-width:600px) {.x {width:.5px}}'
         parsed = gen.css_rules(css)
