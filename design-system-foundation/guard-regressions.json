@@ -1,0 +1,22 @@
+{
+  "toolRegressionTests": 5,
+  "negativeCases": [
+    "unknown CSS at-rule/nesting/duplicate declaration",
+    "new dark condition, new state and untranslated property",
+    "reference dependency version drift even with matching source CSS",
+    "new per-file bypass even when total decreases",
+    "ratchet baseline increase including initial-bootstrap ceiling"
+  ],
+  "migratedFamilyNamedMetricCounts": {
+    "packages/dsh_ui/lib/src/dsh_button.dart": {
+      "before": 4,
+      "after": 0
+    },
+    "packages/dsh_ui/lib/src/dsh_segmented_tabs.dart": {
+      "before": 3,
+      "after": 0
+    }
+  },
+  "scannerLimit": "Named constructor/metric patterns only; semantic duplication and arbitrary expressions still require review",
+  "sourceDependency": "plugin manager workspace:* resolves ui-primitives 0.2.1-rc.2"
+}

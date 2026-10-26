@@ -1,0 +1,108 @@
+{
+  "implementationHead": "1180151ae3878405cdee48f1bd0e9f4db865b8e1",
+  "tree": "1ea3e217dd134c95519c168dc8236687d694c7b9",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "referencePackagesVersion": "0.2.1-rc.2",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T07:30:53+00:00",
+    "headTree": "1ea3e217dd134c95519c168dc8236687d694c7b9",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.2
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.3
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 13.5
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.6
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.5
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 354.6
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "b64ed9ed86c6d26acdf8b1df21cddbb2aa84940b2d48db0a1d43d3cb15f27f3c"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "73dc553b707fbd3337de075e873711814b451b4b1d855d78a7a6e5a30e37a8e2"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "45eabb1ae395f046ca458795d201da1e3eebf2eea58b60c404c6bd44f83af906",
+      "applicationLibrarySha256": "30215fd4dd5942d0ba7c43eefbf6bb33974131f34697767c27d3ae35b62062c3"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "45eabb1ae395f046ca458795d201da1e3eebf2eea58b60c404c6bd44f83af906",
+      "applicationLibrarySha256": "30802e0275cd5b5ef6af0c63ee56d90fe80643d2aa095a9c520c9e3fa39eacb1"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "plugin-layout.desktop",
+      "passedAssertions": 4
+    },
+    {
+      "case": "plugin-layout.phone",
+      "passedAssertions": 4
+    }
+  ],
+  "androidPassedScenes": 18,
+  "visual": {
+    "compared": 56,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 10,
+    "dimensionsEqual": 56,
+    "meanNonTextPct": 97.248
+  },
+  "visualCaptureHead": "1180151ae3878405cdee48f1bd0e9f4db865b8e1",
+  "laterChange": "None; all final evidence is on the implementation head.",
+  "releaseOrDeployment": false
+}
