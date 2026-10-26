@@ -1,0 +1,155 @@
+{
+  "head": "c6de0886c8bd1d14069a1c6a55fdc805a0f94fe5",
+  "runtimeHead": "6788fc3b4ca86268a81cd054e1daa0d64fa87cde",
+  "laterChanges": "Only native replay manifest keyboard operation and Connect coordinates; all application/feature/package/harness runtime sources unchanged.",
+  "fullPreflight": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 9.7
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.0
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.7
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 2.2
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 237.7
+    }
+  },
+  "finalFastChecks": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 1.0
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 9.6
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.0
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.6
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 2.1
+    }
+  },
+  "nativeBuilds": "Linux normal and Android before/after/normal passed",
+  "artifacts": [
+    {
+      "name": "before.apk",
+      "sha256": "51049543ed5690764f708ba67cbe684642b21f603d95fb3b2a22d78c71a5c0b0"
+    },
+    {
+      "name": "after.apk",
+      "sha256": "94f707cb198af88dd4d83320480855e76dbca302f7247033e5c4b22a2633195b"
+    },
+    {
+      "name": "normal.apk",
+      "sha256": "a25993d4e5301f7265cea4cb02e4b46f8103b0a929d3a3093fcae4f62e236cde"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "268f8fcb27eea5c52be843cf7f9495d2db5b38f3b978fa692b29cd1989c384db",
+      "applicationLibrarySha256": "8b68b2e9b85f9030bfa84a1488cd280a43d6742c2833f4e001b14f44357f6cc4"
+    }
+  ],
+  "androidUpgradePreservedChecks": 8,
+  "realDshTerminalRestoreChecks": 3,
+  "negativeSigningChecks": [
+    "Gradle require-release refuses absent key.properties",
+    "Actual Android Debug APK rejected by production identity check"
+  ],
+  "nativeGpu": [
+    {
+      "case": "platform.desktop",
+      "passedAssertions": 3,
+      "renderer": "Mesa Intel(R) Graphics (LNL)"
+    },
+    {
+      "case": "platform.phone",
+      "passedAssertions": 3,
+      "renderer": "Mesa Intel(R) Graphics (LNL)"
+    }
+  ],
+  "platformResults": {
+    "linux": "native Intel GPU startup, keyboard, invalid pairing and settings",
+    "android": "API36 SwiftShader emulator, actual debug-signed upgrade",
+    "windows": "source runner prepared; native build and device interaction not run",
+    "macOS": "native build/device interaction pending",
+    "iOS": "native build/device interaction pending",
+    "productionAndroidSigning": "owner-selected keystore and signed upgrade pending"
+  },
+  "cleanup": {
+    "normalAndroidRestoredAndStopped": true,
+    "ownedEmulatorsStopped": true,
+    "ownedWestonAndAppsStopped": true,
+    "sharedAdbRetained": true
+  },
+  "syntheticOnly": true,
+  "releaseOrDeployment": false
+}

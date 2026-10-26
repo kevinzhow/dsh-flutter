@@ -1,0 +1,178 @@
+{
+  "cases": [
+    {
+      "id": "platform.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "startup"
+        },
+        {
+          "click": [
+            620,
+            413
+          ]
+        },
+        {
+          "text": "invalid launch input"
+        },
+        {
+          "capture": "typed"
+        },
+        {
+          "expect": {
+            "reference": "startup",
+            "rect": [
+              400,
+              390,
+              880,
+              435
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            440,
+            610
+          ]
+        },
+        {
+          "wait": 300
+        },
+        {
+          "capture": "invalid-link"
+        },
+        {
+          "expect": {
+            "reference": "typed",
+            "rect": [
+              400,
+              560,
+              880,
+              605
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1250,
+            30
+          ]
+        },
+        {
+          "wait": 300
+        },
+        {
+          "capture": "settings"
+        },
+        {
+          "expect": {
+            "reference": "invalid-link",
+            "rect": [
+              300,
+              80,
+              980,
+              740
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "platform.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "zh",
+      "app": [
+        {
+          "capture": "startup"
+        },
+        {
+          "click": [
+            180,
+            435
+          ]
+        },
+        {
+          "text": "invalid launch input"
+        },
+        {
+          "capture": "typed"
+        },
+        {
+          "expect": {
+            "reference": "startup",
+            "rect": [
+              16,
+              390,
+              374,
+              455
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            43,
+            634
+          ]
+        },
+        {
+          "wait": 300
+        },
+        {
+          "capture": "invalid-link"
+        },
+        {
+          "expect": {
+            "reference": "typed",
+            "rect": [
+              16,
+              570,
+              374,
+              660
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            360,
+            30
+          ]
+        },
+        {
+          "wait": 300
+        },
+        {
+          "capture": "settings"
+        },
+        {
+          "expect": {
+            "reference": "invalid-link",
+            "rect": [
+              0,
+              80,
+              390,
+              800
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

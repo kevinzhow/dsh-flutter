@@ -1,0 +1,34 @@
+{
+  "syntheticOnly": true,
+  "actualInstallReplace": true,
+  "preservedChecks": 8,
+  "sameSigner": true,
+  "formalSigningVerified": false,
+  "artifacts": {
+    "before": {
+      "package": "app.kevinzhow.whalee",
+      "versionCode": 1,
+      "versionName": "0.0.1",
+      "certificateSha256": "9b2731472c17598c312bdb9868e578e98e4202baab8e29da401fba78aa04acce",
+      "apkSha256": "51049543ed5690764f708ba67cbe684642b21f603d95fb3b2a22d78c71a5c0b0",
+      "debugCertificate": true
+    },
+    "after": {
+      "package": "app.kevinzhow.whalee",
+      "versionCode": 2,
+      "versionName": "0.0.2",
+      "certificateSha256": "9b2731472c17598c312bdb9868e578e98e4202baab8e29da401fba78aa04acce",
+      "apkSha256": "94f707cb198af88dd4d83320480855e76dbca302f7247033e5c4b22a2633195b",
+      "debugCertificate": true
+    },
+    "restore": {
+      "package": "app.kevinzhow.whalee",
+      "versionCode": 2,
+      "versionName": "0.0.2",
+      "certificateSha256": "9b2731472c17598c312bdb9868e578e98e4202baab8e29da401fba78aa04acce",
+      "apkSha256": "a25993d4e5301f7265cea4cb02e4b46f8103b0a929d3a3093fcae4f62e236cde",
+      "debugCertificate": true
+    }
+  },
+  "normalApkRestoredAndStopped": true
+}
