@@ -9,6 +9,7 @@ export 'src/engine/geometry.dart';
 export 'src/engine/initial.dart';
 export 'src/engine/operations.dart';
 export 'src/engine/planner.dart';
+export 'src/engine/persistence.dart';
 export 'src/engine/sequence.dart';
 export 'src/engine/tree.dart';
 export 'src/engine/types.dart';

@@ -5,6 +5,8 @@ import 'package:dsh_client/dsh_client.dart' show PinStore;
 import 'package:dsh_models/dsh_models.dart'
     show TerminalCloseRequest, TerminalPrefs;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dsh_feature_sidebar_right/dsh_feature_sidebar_right.dart'
+    show SidebarPersistence;
 
 /// What the app keeps on the device itself, apart from the host's settings
 /// document: the interface language and the theme last seen (so the app draws
@@ -33,10 +35,14 @@ abstract interface class LocalPrefs {
   String? get terminalShell;
   Future<void> setTerminalShell(String path);
 
-  /// The workspace browser's viewing state as JSON (dsh's `dsh.workspace.view`).
+  /// The manual plugin installation registry choice.
   String? get pluginInstallRegistry;
   Future<void> setPluginInstallRegistry(String json);
 
+  String? get sidebarLayouts;
+  Future<void> setSidebarLayouts(String json);
+
+  /// The workspace browser's viewing state as JSON (dsh's `dsh.workspace.view`).
   String? get workspaceView;
   Future<void> setWorkspaceView(String json);
 
@@ -62,6 +68,7 @@ class MemoryLocalPrefs implements LocalPrefs {
     this.openInAppChoice,
     this.workspaceView,
     this.pluginInstallRegistry,
+    this.sidebarLayouts,
   }) : certificatePins = {...?certificatePins};
 
   @override
@@ -78,6 +85,10 @@ class MemoryLocalPrefs implements LocalPrefs {
   String? openInAppChoice;
   @override
   String? workspaceView;
+  @override
+  String? sidebarLayouts;
+  @override
+  Future<void> setSidebarLayouts(String json) async => sidebarLayouts = json;
   @override
   String? pluginInstallRegistry;
   @override
@@ -130,6 +141,14 @@ class SharedLocalPrefs implements LocalPrefs {
   static const _terminalCloses = 'whalee.terminalCloses';
   static const _openInApp = 'whalee.openInAppChoice';
   static const _workspaceView = 'whalee.workspaceView';
+  static const _sidebarLayouts = 'whalee.sidebarLayouts.v1';
+  @override
+  String? get sidebarLayouts => _prefs.getString(_sidebarLayouts);
+  @override
+  Future<void> setSidebarLayouts(String json) async {
+    await _prefs.setString(_sidebarLayouts, json);
+  }
+
   static const _pluginRegistry = 'whalee.pluginInstallRegistry';
   @override
   String? get pluginInstallRegistry => _prefs.getString(_pluginRegistry);
@@ -303,4 +322,52 @@ class PrefsPinStore implements PinStore {
     _pins.remove(authority);
     await _prefs.setCertificatePins(_pins);
   }
+}
+
+/// Bounded device-local sidebar layouts. Captured Host scopes prevent a late
+/// write from a retired connection from being assigned to its replacement.
+class PrefsSidebarPersistence implements SidebarPersistence {
+  PrefsSidebarPersistence(this.prefs) {
+    final raw = prefs.sidebarLayouts;
+    if (raw != null && raw.length <= 1024 * 1024) {
+      try {
+        final decoded = jsonDecode(raw);
+        if (decoded is Map<String, Object?>) {
+          for (final e in decoded.entries) {
+            if (e.value is String && (e.value as String).length <= 512 * 1024) {
+              _values[e.key] = e.value as String;
+              if (_values.length > 64) {
+                _values.remove(_values.keys.first);
+              }
+            }
+          }
+        }
+      } on FormatException {
+        /* Invalid device data starts a fresh layout. */
+      }
+    }
+  }
+  final LocalPrefs prefs;
+  final _values = <String, String>{};
+  Future<void> _saving = Future<void>.value();
+  String _key(String scope, String sessionId) => jsonEncode([scope, sessionId]);
+  @override
+  String? read(String scope, String sessionId) =>
+      _values[_key(scope, sessionId)];
+  @override
+  void write(String scope, String sessionId, String value) {
+    if (value.length > 512 * 1024) return;
+    final key = _key(scope, sessionId);
+    _values.remove(key);
+    _values[key] = value;
+    while (_values.length > 64 || jsonEncode(_values).length > 1024 * 1024) {
+      _values.remove(_values.keys.first);
+    }
+    final encoded = jsonEncode(_values);
+    _saving = _saving
+        .then((_) => prefs.setSidebarLayouts(encoded))
+        .catchError((Object _) {});
+  }
+
+  Future<void> flush() => _saving;
 }

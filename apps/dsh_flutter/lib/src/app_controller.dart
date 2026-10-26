@@ -278,6 +278,8 @@ class AppController extends ChangeNotifier {
       slots,
       i18n: () => i18n,
       services: _SidebarBridge(this),
+      persistence: PrefsSidebarPersistence(this.prefs),
+      scope: () => hostOrigin ?? '',
     );
     registerFilesFeature(slots, i18n: () => i18n);
     terminals = ClientTerminals(
@@ -1640,6 +1642,14 @@ class AppController extends ChangeNotifier {
 
   @override
   void dispose() {
+    // Stop root notifications synchronously; async model teardown can yield
+    // while an already requested list refresh finishes.
+    unawaited(_listSub?.cancel());
+    _listSub = null;
+    unawaited(_hostEventSub?.cancel());
+    _hostEventSub = null;
+    unawaited(_projectionSub?.cancel());
+    _projectionSub = null;
     unawaited(chatPreferences.dispose());
     unawaited(deliverablesModel.dispose());
     unawaited(developerTools.dispose());

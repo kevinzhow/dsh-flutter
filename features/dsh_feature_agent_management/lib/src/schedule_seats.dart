@@ -247,7 +247,22 @@ void Function() registerScheduleSeats(
   String? Function(String)? sessionBlock,
 }) {
   final offs = <void Function()>[
-    slots.sidebarTabs.register(const SidebarTabType(kind: 'scheduleTask')),
+    slots.sidebarTabs.register(
+      SidebarTabType(
+        kind: 'scheduleTask',
+        restorable: true,
+        persistParams: (params) {
+          final id = params['id'], session = params['sessionId'];
+          if (id is! String ||
+              id.isEmpty ||
+              session is! String ||
+              session.isEmpty) {
+            return null;
+          }
+          return {'id': id, 'sessionId': session};
+        },
+      ),
+    ),
     slots.register<SessionOwner, Widget>(
       DshSlots.conversationSessionHeaderActions.typed<SessionOwner, Widget>(),
       (owner) => ScheduleCatalogAction(

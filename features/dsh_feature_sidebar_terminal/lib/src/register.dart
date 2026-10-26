@@ -22,6 +22,11 @@ void registerSidebarTerminalFeature(
     SidebarTabType(
       kind: terminalTabKind,
       multiple: true,
+      restorable: true,
+      persistParams: (params) {
+        final id = params['terminalId'];
+        return id is String && id.isNotEmpty ? {'terminalId': id} : null;
+      },
       guideOrder: 20,
       keepMounted: true,
       onClose: (sessionId, tabId, contentId) =>

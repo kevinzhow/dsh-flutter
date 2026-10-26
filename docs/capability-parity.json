@@ -647,7 +647,7 @@
    "whalee": [
     "features/dsh_feature_sidebar_right"
    ],
-   "notes": "Tab kinds not built: review, plan preview, schedule task, browser, subagent chat, session inspector."
+   "notes": "Native docking supports two panes, validated bounded per-Host/original-Session current-layout persistence, fresh undo history and explicit durable task bindings. Durable terminal identities reattach existing Host work; absent identities never create replacement shells, and legacy unbound tabs retire. Transient parameters are not persisted; exact visuals and complete upstream provider lifetime/domain behavior remain partial."
   },
   {
    "id": "package:ui-sidebar-terminal",

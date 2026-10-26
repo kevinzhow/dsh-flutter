@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_layout/dsh_layout.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/widgets.dart';
 
 import 'panel.dart';
 import 'state.dart';
+import 'persistence.dart';
 
 /// What the sidebar needs from the composition root.
 abstract interface class SidebarServices {
@@ -31,7 +33,16 @@ const double phoneWidth = 768;
 
 /// The right sidebar as other features and the app reach it.
 class SidebarRightFeature {
-  SidebarRightFeature._(this._slots, this._i18n, this._services);
+  SidebarRightFeature._(
+    this._slots,
+    this._i18n,
+    this._services,
+    this._persistence,
+    this._scope,
+  );
+
+  final SidebarPersistence? _persistence;
+  final String Function()? _scope;
 
   final SlotRegistry _slots;
   final DshI18n Function() _i18n;
@@ -40,17 +51,29 @@ class SidebarRightFeature {
   Object? _reportingSeat;
 
   /// The sidebar state of [sessionId] (created on first use).
-  SidebarState stateFor(String sessionId) => _states.putIfAbsent(
-    sessionId,
-    () => SidebarState(
-      sessionId,
-      types: _slots.sidebarTabs,
-      guideTitle: () => _i18n().t('sidebarRight', 'tab.guide.title'),
-    ),
-  );
+  SidebarState stateFor(String sessionId) {
+    final scope = _scope?.call() ?? '';
+    return _states.putIfAbsent(
+      jsonEncode([scope, sessionId]),
+      () => SidebarState(
+        sessionId,
+        types: _slots.sidebarTabs,
+        guideTitle: () => _i18n().t('sidebarRight', 'tab.guide.title'),
+        restored: scope.isEmpty ? null : _persistence?.read(scope, sessionId),
+        persist: scope.isEmpty
+            ? null
+            : (value) => _persistence?.write(scope, sessionId, value),
+      ),
+    );
+  }
 
-  /// Forget every session's sidebar (the host was left).
-  void reset() => _states.clear();
+  /// Leave the Host's in-memory views without discarding its durable layouts.
+  void reset() {
+    for (final state in _states.values) {
+      state.dispose();
+    }
+    _states.clear();
+  }
 
   bool _inline(BuildContext context) =>
       DshRightbarHost.owned(context) ||
@@ -285,8 +308,16 @@ SidebarRightFeature registerSidebarRightFeature(
   SlotRegistry slots, {
   required DshI18n Function() i18n,
   required SidebarServices services,
+  SidebarPersistence? persistence,
+  String Function()? scope,
 }) {
-  final feature = SidebarRightFeature._(slots, i18n, services);
+  final feature = SidebarRightFeature._(
+    slots,
+    i18n,
+    services,
+    persistence,
+    scope,
+  );
   feature._registerCommands();
   slots.register<SessionOwner, Widget>(
     DshSlots.conversationSessionHeaderCorner.typed<SessionOwner, Widget>(),
