@@ -1,0 +1,10 @@
+{
+  "syntheticOnly": true,
+  "label": "Add workspace",
+  "beforeBuildHead": "e04a349c721f6e24e13df72f3688fad8815aca3b",
+  "beforeAndroidBounds": "[74,504][431,788]",
+  "afterBuildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+  "afterAndroidBounds": "[74,699][431,788]",
+  "regression": "Grouped scrolling content merged the footer action into its parent menu. The pre-fix widget test reported 74.333 logical pixels instead of the 34px row; a separate semantic container fixes its bounds.",
+  "finalAndroidTapResult": "Selected workspace: add"
+}

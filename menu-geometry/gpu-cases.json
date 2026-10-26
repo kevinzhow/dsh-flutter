@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "id": "menu-geometry.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "click": [
+            300,
+            650
+          ]
+        },
+        {
+          "capture": "dock"
+        },
+        {
+          "secondaryClick": [
+            50,
+            68
+          ]
+        },
+        {
+          "capture": "dock-menu"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              82,
+              190,
+              138
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            300,
+            650
+          ]
+        },
+        {
+          "capture": "dock-menu-closed"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              82,
+              190,
+              138
+            ],
+            "changed": false
+          }
+        },
+        {
+          "secondaryClick": [
+            50,
+            68
+          ]
+        },
+        {
+          "click": [
+            50,
+            104
+          ]
+        },
+        {
+          "capture": "dock-empty"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              42,
+              340,
+              500
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            826,
+            22
+          ]
+        },
+        {
+          "capture": "workspace"
+        },
+        {
+          "click": [
+            105,
+            82
+          ]
+        },
+        {
+          "capture": "workspace-menu"
+        },
+        {
+          "expect": {
+            "reference": "workspace",
+            "rect": [
+              20,
+              95,
+              270,
+              252
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            90,
+            161
+          ]
+        },
+        {
+          "capture": "workspace-selected"
+        },
+        {
+          "expect": {
+            "reference": "workspace",
+            "rect": [
+              20,
+              120,
+              340,
+              162
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            105,
+            82
+          ]
+        },
+        {
+          "capture": "workspace-footer"
+        },
+        {
+          "click": [
+            90,
+            202
+          ]
+        },
+        {
+          "capture": "workspace-footer-selected"
+        },
+        {
+          "expect": {
+            "reference": "workspace-selected",
+            "rect": [
+              20,
+              120,
+              340,
+              162
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "menu-geometry.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "click": [
+            300,
+            650
+          ]
+        },
+        {
+          "capture": "dock"
+        },
+        {
+          "secondaryClick": [
+            50,
+            96
+          ]
+        },
+        {
+          "capture": "dock-menu"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              110,
+              190,
+              166
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            300,
+            650
+          ]
+        },
+        {
+          "capture": "dock-menu-closed"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              110,
+              190,
+              166
+            ],
+            "changed": false
+          }
+        },
+        {
+          "secondaryClick": [
+            50,
+            96
+          ]
+        },
+        {
+          "click": [
+            50,
+            132
+          ]
+        },
+        {
+          "capture": "dock-empty"
+        },
+        {
+          "expect": {
+            "reference": "dock",
+            "rect": [
+              5,
+              70,
+              340,
+              500
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            216,
+            50
+          ]
+        },
+        {
+          "capture": "workspace"
+        },
+        {
+          "click": [
+            105,
+            110
+          ]
+        },
+        {
+          "capture": "workspace-menu"
+        },
+        {
+          "expect": {
+            "reference": "workspace",
+            "rect": [
+              20,
+              123,
+              270,
+              280
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            90,
+            189
+          ]
+        },
+        {
+          "capture": "workspace-selected"
+        },
+        {
+          "expect": {
+            "reference": "workspace",
+            "rect": [
+              20,
+              148,
+              340,
+              190
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            105,
+            110
+          ]
+        },
+        {
+          "capture": "workspace-footer"
+        },
+        {
+          "click": [
+            90,
+            230
+          ]
+        },
+        {
+          "capture": "workspace-footer-selected"
+        },
+        {
+          "expect": {
+            "reference": "workspace-selected",
+            "rect": [
+              20,
+              148,
+              340,
+              190
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

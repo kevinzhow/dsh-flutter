@@ -1,0 +1,166 @@
+{
+  "synthetic": true,
+  "api": 36,
+  "actualTapsAndKeyboard": true,
+  "generatedRemotePath": true,
+  "normalAppRootRegressions": [
+    "plugins_flow_test.dart"
+  ],
+  "scenes": [
+    {
+      "scene": "dock",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "dock-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "dock-empty",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-control",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-selected",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-footer",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "workspace-footer-selected",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "plugins",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "add-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "install-from-menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "install-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "add-menu-reopened",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "add-menu-back-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "bundle-details",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "row-toggled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "uninstall-confirmation",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "uninstall-cancelled",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "pdf",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "pdf-zoom-in",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "pdf-fit-width",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "office",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "office-missing-fonts",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "office-fonts-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "html-static",
+      "passed": true,
+      "attempts": 2
+    },
+    {
+      "scene": "html-static-inert",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "html-interactive",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "html-interactive-count",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "html-overlay",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "html-overlay-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "inventory",
+      "passed": true,
+      "attempts": 1
+    }
+  ]
+}

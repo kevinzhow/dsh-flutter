@@ -1,0 +1,145 @@
+{
+  "implementationHead": "4ba2fdcad33eab2b8d6977f94761bbec5938af13",
+  "tree": "b5d08de94939e2921cbe74130f70b14587366b0b",
+  "captureHead": "4ba2fdcad33eab2b8d6977f94761bbec5938af13",
+  "nativeAndBuildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+  "postNativeChangesOnly": [
+    "docs/design-system.md",
+    "tool/parity_flutter/lib/src/capture.dart",
+    "tool/parity_flutter/test/harness_selftest_test.dart"
+  ],
+  "identicalProductAndNativeFixtureTrees": {
+    "apps": "4738e93dd7fea41b693b18cbebca37a1e7a1b60e",
+    "features": "7460df53567e2d3941830401f446a9596a51a2fa",
+    "packages": "b0a29dd0024f45de77c7df3a81449f0fc848488d"
+  },
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInputs": "ui-dockkit 0.2.1-rc.2 exact published CSS, actual web consumer dependency and source hashes; shared primitive/plugin/theme release inputs remain locked",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T15:50:12+00:00",
+    "headTree": "b5d08de94939e2921cbe74130f70b14587366b0b",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.4
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.8
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 9.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.2
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.5
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.3
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 185.9
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "buildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+      "sha256": "c640fa71b9db8b028f1f500b2759c69b17b3630bd63187c68cc3a30bd2d0253f"
+    },
+    {
+      "name": "android-normal.apk",
+      "buildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+      "sha256": "5bb27fbb54855bf93f6515fb00466d858987d4c86b44ebf4b7dc582d8aafc8ec"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "buildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+      "sha256": "0275b28381f02975f41fcec5353048ec0b39415135c55bc47632385dc12c245a",
+      "applicationLibrarySha256": "3f5c49a0cf72688b2f7e014e0af7e74285db03d551a2f54811d71a7b4ac3baf2"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "buildHead": "a69dd8bd55466d52409b2a78f93000b025bc3f9c",
+      "sha256": "0275b28381f02975f41fcec5353048ec0b39415135c55bc47632385dc12c245a",
+      "applicationLibrarySha256": "ddec0703f7e13696c418e8083b653595e06b7f3a8df73eeec1bd90011e10873b"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "menu-geometry.desktop",
+      "passedAssertions": 6
+    },
+    {
+      "case": "menu-geometry.phone",
+      "passedAssertions": 6
+    }
+  ],
+  "androidPassedScenes": 31,
+  "initialAndroidAttempts": "First lookup selected the large body node containing the tab title; select the smallest tab-labelled node. A subsequent run exposed the real merged footer semantics: its bounds covered the whole popup and the physical tap hit Beta. Added separate menu-row semantic containers and a regression, expanded the native fixture follower parent and tested its touch flow. Final31 scenes passed using actual accessibility bounds and physical input.",
+  "viewportFix": "Direct Chromium native/emulated probes show nearest-pixel viewport rounding. Four phone page captures regain one column; every previously captured pixel remains identical.",
+  "browserReferenceInteraction": "Real DockSurface opens its actual chip context-menu handler through a fixture DOM event; actual pointer/touch input is separately verified in native runs.",
+  "visual": {
+    "compared": 164,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 18,
+    "dimensionsEqual": 160,
+    "meanNonTextPct": 94.03258536585365
+  },
+  "unchangedReactPngs": 88,
+  "unchangedFlutterPngs": 88,
+  "oldWhaleeUsedForRegressionOnly": true,
+  "ratchetTotals": {
+    "duplicate-button": 4,
+    "manual-metric": 963,
+    "platform-control": 11,
+    "duplicate-input": 2
+  },
+  "remainingMenuCoverage": [
+    "generic scrolling-footer integration",
+    "submenus",
+    "shortcuts",
+    "sticky groups",
+    "arbitrary-content bounded blur",
+    "macOS transparent-window backing"
+  ],
+  "remainingVisualDifferences": "Only18/164 reach the fixed99.5 non-text target. Four session-menu phone crops remain one physical pixel apart. Menu material colours, glyph rendering and other component families remain unfinished. Whole-project visual parity is not claimed.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Owned GPU processes and Android emulator stopped; normal APK restored and stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}
