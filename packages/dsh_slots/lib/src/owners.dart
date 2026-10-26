@@ -409,6 +409,12 @@ abstract interface class SidebarTabActions {
   });
 }
 
+/// Optional durable identity reporting by a tab provider. A terminal reports
+/// its existing Host identity; restoration may reattach it, never recreate it.
+abstract interface class SidebarTabBindingActions implements SidebarTabActions {
+  void rememberBinding(String tabId, Map<String, Object?> binding);
+}
+
 /// Owner props of the keyed `sidebar.right.tab.guide.entry` slot: the card of
 /// one tab type on the guide page.
 class SidebarGuideOwner {

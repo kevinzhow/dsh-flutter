@@ -27,6 +27,36 @@ class Storage implements SidebarPersistence {
 }
 
 void main() {
+  test('an explicitly reported terminal binding survives restart', () {
+    final types = SidebarTabTypes()
+      ..register(
+        SidebarTabType(
+          kind: 'terminal',
+          multiple: true,
+          restorable: true,
+          persistParams: (p) => p['terminalId'] is String
+              ? {'terminalId': p['terminalId']}
+              : null,
+        ),
+      );
+    String? saved;
+    final original = SidebarState(
+      'session',
+      types: types,
+      persist: (value) => saved = value,
+    );
+    original.openTab('terminal', params: {'shellPath': '/synthetic/shell'});
+    final id = original.tabs.singleWhere((t) => t.kind == 'terminal').id;
+    original.rememberBinding(id, {'terminalId': 'synthetic-existing'});
+    original.dispose();
+    final restored = SidebarState('session', types: types, restored: saved);
+    expect(restored.tabs.singleWhere((t) => t.kind == 'terminal').params, {
+      'terminalId': 'synthetic-existing',
+    });
+    restored.dispose();
+    // A provider report queued during build may arrive after unmount.
+    original.rememberBinding(id, {'terminalId': 'late'});
+  });
   test(
     'live and restored states stay isolated when Hosts reuse a Session id',
     () {

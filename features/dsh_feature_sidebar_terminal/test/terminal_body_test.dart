@@ -13,7 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:xterm/xterm.dart' as xterm;
 
-class _Actions implements SidebarTabActions {
+class _Actions implements SidebarTabBindingActions {
+  final bindings = <String, Map<String, Object?>>{};
+  @override
+  void rememberBinding(String tabId, Map<String, Object?> binding) {
+    bindings[tabId] = binding;
+  }
+
   final List<({String kind, String? replace, Map<String, Object?> params})>
   opened = [];
 
@@ -108,6 +114,58 @@ void main() {
       .widget<xterm.TerminalView>(find.byKey(const ValueKey('terminal-screen')))
       .terminal;
 
+  test(
+    'a durable Host identity reattaches without creating a replacement shell',
+    () async {
+      final original = terminalViewOf(terminals, owner);
+      await Future<void>.delayed(Duration.zero);
+      expect(actions.bindings[owner.id], {'terminalId': original.id});
+      fake.host.handlers['terminal/list'] = (_) => [
+        terminalInfo(id: original.id),
+      ];
+      final restoredService = ClientTerminals(
+        host: fake.terminalHost,
+        newId: () =>
+            throw StateError('Restoration must not allocate a terminal'),
+      );
+      final restoredOwner = SidebarTabOwner(
+        session: owner.session,
+        id: owner.id,
+        kind: owner.kind,
+        contentId: owner.contentId,
+        params: actions.bindings[owner.id]!,
+        actions: actions,
+      );
+      final restored = terminalViewOf(restoredService, restoredOwner);
+      await restored.refresh();
+      expect(restored.snapshot.info?.id, original.id);
+      expect(fake.host.callsTo('terminal/create'), isEmpty);
+      await restoredService.dispose();
+    },
+  );
+  test(
+    'a missing restored Host terminal never starts a new shell on retry',
+    () async {
+      final restoredService = ClientTerminals(
+        host: fake.terminalHost,
+        newId: () => throw StateError('Unexpected allocation'),
+      );
+      final restoredOwner = SidebarTabOwner(
+        session: owner.session,
+        id: owner.id,
+        kind: owner.kind,
+        contentId: owner.contentId,
+        params: const {'terminalId': 'synthetic-missing'},
+        actions: actions,
+      );
+      final restored = terminalViewOf(restoredService, restoredOwner);
+      await restored.refresh();
+      await restored.refresh();
+      expect(restored.snapshot.issue, TerminalViewIssue.missingTerminal);
+      expect(fake.host.callsTo('terminal/create'), isEmpty);
+      await restoredService.dispose();
+    },
+  );
   testWidgets('shows the reading and starting states before a screen exists', (
     t,
   ) async {

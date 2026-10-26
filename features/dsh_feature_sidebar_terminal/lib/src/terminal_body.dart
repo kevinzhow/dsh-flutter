@@ -14,12 +14,22 @@ import 'terminal_theme.dart';
 /// The view of a terminal tab: created with the shell the guide chose, found
 /// again by every part of the tab (body, title) under the tab's identity.
 TerminalView terminalViewOf(ClientTerminals terminals, SidebarTabOwner owner) {
-  final shell = owner.params['shellPath'];
-  return terminals.view(
+  final shell = owner.params['shellPath'], known = owner.params['terminalId'];
+  final view = terminals.view(
     owner.session.sessionId,
     owner.id,
+    terminalId: known is String ? known : null,
     shellPath: shell is String ? shell : null,
   );
+  final actions = owner.actions;
+  if (actions is SidebarTabBindingActions && known != view.id) {
+    // Providers can be constructed by a slot during build. Report the stable
+    // identity after that build, without publishing Host work or changing it.
+    scheduleMicrotask(
+      () => actions.rememberBinding(owner.id, {'terminalId': view.id}),
+    );
+  }
+  return view;
 }
 
 /// What the strip above the screen says and offers for one view state (dsh

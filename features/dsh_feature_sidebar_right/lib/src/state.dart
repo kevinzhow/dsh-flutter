@@ -60,7 +60,7 @@ class _Extra {
 ///
 /// A session starts collapsed and empty; the expansion that would first show an
 /// empty layout seeds the guide, as in dsh. A collapsed surface keeps its tabs.
-class SidebarState extends ChangeNotifier implements SidebarTabActions {
+class SidebarState extends ChangeNotifier implements SidebarTabBindingActions {
   SidebarState(
     this.sessionId, {
     SidebarTabTypes? types,
@@ -99,6 +99,17 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
 
   final String sessionId;
   final void Function(String)? _persist;
+
+  bool _disposed = false;
+
+  @override
+  void rememberBinding(String tabId, Map<String, Object?> binding) {
+    if (_disposed || !layout.tabs.containsKey(tabId)) return;
+    final extra = _extras.putIfAbsent(tabId, _Extra.new);
+    if (binding.entries.every((e) => extra.params[e.key] == e.value)) return;
+    extra.params = Map.unmodifiable({...extra.params, ...binding});
+    notifyListeners();
+  }
 
   void _dockChanged() {
     // A dock duplicate keeps the same content binding, then owns its own
@@ -378,6 +389,7 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
 
   @override
   void dispose() {
+    _disposed = true;
     _off();
     removeListener(_save);
     super.dispose();
