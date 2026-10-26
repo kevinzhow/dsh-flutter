@@ -11,3 +11,17 @@ Run the pinned environment and `python tool/design-system/generate.py --check` t
 `tool/preflight` runs recipe verification and the family ratchet as a separate check, including CI when other upstream-dependent checks skip. Regenerate recipes with `python tool/design-system/generate.py`, then run the check and full preflight. Do not increase the baseline to make a new violation pass. Retire duplicates by migrating their callers to the family recipe, then lower the baseline.
 
 Acceptance uses real reference components with matching data, viewport, locale, density and theme. Previous Whalee images are only regression evidence, never the source of the desired design. Keep fonts, thresholds and pixel classification fixed. Each subsequent family migration must include reference comparisons, explicit remaining differences and regression evidence for preserved appearances. No automated upstream polling schedule is created by this work; run the checks during every planned upstream synchronization.
+
+## Button family profiles
+
+The add, icon action and info action profiles are generated from the **published** `@deepseek-ai/dsh-client-ui-plugin-manager@0.2.1-rc.2` CSS, layered over the primitive recipe. The actual web-app dependency and package version are locked too. Its release embeds CSS and a static class map in `lib/client.js`; `published.py` decodes the JSON literals without executing JavaScript. To reproduce the snapshot from the downloaded release, run:
+
+```sh
+python tool/design-system/published.py --archive /path/to/dsh-client-ui-plugin-manager-0.2.1-rc.2.tgz
+```
+
+This verifies the npm archive SHA512, bundle SHA256, exact decoded CSS bytes, class map and metadata. Ordinary checks verify the checked-in snapshot hashes. The generator compares affected button rules against the actual reference source after only the observed minifier transformations (class hashes, comma whitespace, decimal zero omission, transparent background spelling). Unknown affected selectors, properties, conditional rules and untranslated structural values fail. Other plugin-manager rules remain an **audit**, not a claim that their families are translated.
+
+`DshButton` owns all primitive/add/icon/info states. The icon action is the source's raw button (28×28, disabled opacity .5, explicit focus outline); the info action is a small primitive override (20×20, disabled opacity .4, primitive focus rules). They deliberately differ. `DshSplitButton` composes two canonical buttons. Each owns its independent superellipse corners, opacity and outline, including the source's left divider on the method-picker half. There is no page-level outer clip or manually assembled divider. A single pending-install action retains all corners.
+
+The base button's previous appearance is regression-checked separately from reference acceptance. The 32-case primitive matrix includes all four variants, two sizes, both brightnesses, default/hover and disabled labels. Real `PluginManagerPage` captures cover the custom profiles at desktop/phone densities, both locales and brightnesses. Fonts, threshold and classifier stay fixed. Remaining family work is explicit: three local round icon-control callers still use the older platform adaptation and must be given an appropriate source-backed or explicitly specified adaptation before consolidation. Their current custom shape is not falsely attributed to the published icon-action recipe. Menus and tooltip styles are also separate pending families; their page-specific numbers are not covered by this button migration.

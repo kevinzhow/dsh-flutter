@@ -33,6 +33,12 @@ enum DshButtonSize {
   sm,
 }
 
+/// Published CSS profiles layered on the common button interaction model.
+enum DshButtonProfile { primitive, addAction, iconAction, infoAction }
+
+/// Physical corners used by DSH's left-to-right compound add control.
+enum DshButtonJoin { none, left, right }
+
 /// Token-styled button, ported from dsh's `Button.tsx` / `Button.module.css`.
 ///
 /// Every colour, radius, focus ring width and text style comes from the
@@ -43,7 +49,7 @@ enum DshButtonSize {
 ///
 /// Component constants that dsh keeps in the component sheet rather than in a
 /// token (heights 36/28, paddings 14/10, icon box 16, gap 4, disabled opacity
-/// 0.4, hairline 0.5) stay here.
+/// 0.4, hairline 0.5) are generated in `dsh_recipes.g.dart`.
 class DshButton extends StatefulWidget {
   /// Creates a button. [onPressed] null disables it.
   const DshButton({
@@ -60,7 +66,19 @@ class DshButton extends StatefulWidget {
     this.horizontalPadding,
     this.labelStyle,
     this.radius,
-  });
+    this.profile = DshButtonProfile.primitive,
+    this.join = DshButtonJoin.none,
+  }) : assert(
+         profile == DshButtonProfile.primitive ||
+             (height == null &&
+                 horizontalPadding == null &&
+                 radius == null &&
+                 labelStyle == null),
+         'Published button profiles own their metrics and typography.',
+       ),
+       assert(
+         join == DshButtonJoin.none || profile == DshButtonProfile.addAction,
+       );
 
   /// Label, usually a `Text`; it inherits the button's text style and colour.
   final Widget child;
@@ -89,6 +107,8 @@ class DshButton extends StatefulWidget {
   /// Component-level CSS overrides; omitted values retain primitive metrics.
   final double? height, horizontalPadding, radius;
   final TextStyle? labelStyle;
+  final DshButtonProfile profile;
+  final DshButtonJoin join;
 
   /// Key of the painted surface (fill, border, radius); for tests.
   static const Key surfaceKey = ValueKey<String>('dshButtonSurface');
@@ -101,6 +121,55 @@ class DshButton extends StatefulWidget {
 
   @override
   State<DshButton> createState() => _DshButtonState();
+}
+
+/// DSH's add action and optional method picker. Each half owns its background,
+/// corner shape, disabled opacity and focus outline; there is no outer clip.
+class DshSplitButton extends StatelessWidget {
+  const DshSplitButton({
+    super.key,
+    required this.child,
+    required this.more,
+    required this.moreLabel,
+    this.icon,
+    this.onPressed,
+    this.onMore,
+    this.showMore = true,
+    this.focusNode,
+    this.moreFocusNode,
+  });
+  final Widget child, more;
+  final Widget? icon;
+  final String moreLabel;
+  final VoidCallback? onPressed, onMore;
+  final bool showMore;
+  final FocusNode? focusNode, moreFocusNode;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      DshButton(
+        profile: DshButtonProfile.addAction,
+        variant: DshButtonVariant.primary,
+        join: showMore ? DshButtonJoin.left : DshButtonJoin.none,
+        icon: icon,
+        focusNode: focusNode,
+        onPressed: onPressed,
+        child: child,
+      ),
+      if (showMore)
+        DshButton(
+          profile: DshButtonProfile.addAction,
+          variant: DshButtonVariant.primary,
+          join: DshButtonJoin.right,
+          semanticLabel: moreLabel,
+          focusNode: moreFocusNode,
+          onPressed: onMore,
+          child: more,
+        ),
+    ],
+  );
 }
 
 class _DshButtonState extends State<DshButton> {
@@ -133,15 +202,38 @@ class _DshButtonState extends State<DshButton> {
         'Build one with resolveTheme() and pass it as ThemeData(extensions: [...]).',
       );
     }
-    final small = widget.size == DshButtonSize.sm;
-    final radius =
-        widget.radius ??
-        theme.number(
-          small
-              ? DshButtonRecipe.smallRadiusToken
-              : DshButtonRecipe.radiusToken,
-        );
-    final rawFill = _fill(theme);
+    final small =
+        widget.size == DshButtonSize.sm ||
+        widget.profile == DshButtonProfile.infoAction;
+    final add = widget.profile == DshButtonProfile.addAction;
+    final iconAction = widget.profile == DshButtonProfile.iconAction;
+    final info = widget.profile == DshButtonProfile.infoAction;
+    final compactAction = iconAction || info;
+    final radiusToken = compactAction
+        ? DshIconActionRecipe.radiusToken
+        : add
+        ? DshAddButtonRecipe.radiusToken
+        : small
+        ? DshButtonRecipe.smallRadiusToken
+        : DshButtonRecipe.radiusToken;
+    final radius = widget.radius ?? theme.number(radiusToken);
+    BorderRadius? corners(double r) => switch (widget.join) {
+      DshButtonJoin.none => null,
+      DshButtonJoin.left => BorderRadius.only(
+        topLeft: Radius.circular(r),
+        bottomLeft: Radius.circular(r),
+      ),
+      DshButtonJoin.right => BorderRadius.only(
+        topRight: Radius.circular(r),
+        bottomRight: Radius.circular(r),
+      ),
+    };
+    final hover = _enabled && (_hovered || _pressed);
+    final rawFill = iconAction
+        ? hover
+              ? theme.color(DshIconActionRecipe.hoverToken)
+              : null
+        : _fill(theme);
     // A disabled button is one translucent group (`opacity: 0.4` on the whole
     // button), so its fill must stay translucent inside the group: the group
     // composites onto the page, not the fill.
@@ -149,12 +241,24 @@ class _DshButtonState extends State<DshButton> {
         ? DshSurface.paint(context, c, over: over)
         : DshSurface.quantizeAlpha(c);
     final fill = rawFill == null ? null : paint(rawFill);
-    final foreground = widget.variant == DshButtonVariant.primary
+    final foreground = iconAction
+        ? theme.color(
+            hover
+                ? DshIconActionRecipe.hoverLabelToken
+                : DshIconActionRecipe.labelToken,
+          )
+        : info
+        ? theme.color(DshIconActionRecipe.infoLabelToken)
+        : widget.variant == DshButtonVariant.primary
         ? theme.color(DshButtonRecipe.primaryLabelToken)
         : theme.color(DshButtonRecipe.labelToken);
     final textStyle = theme
         .textStyle(
-          small ? DshButtonRecipe.smallFontToken : DshButtonRecipe.fontToken,
+          add
+              ? DshAddButtonRecipe.fontToken
+              : small
+              ? DshButtonRecipe.smallFontToken
+              : DshButtonRecipe.fontToken,
         )
         .copyWith(color: foreground, decoration: TextDecoration.none)
         .merge(widget.labelStyle);
@@ -169,67 +273,130 @@ class _DshButtonState extends State<DshButton> {
         : 0.0;
     // Chromium paints the background under the border too, so the hairline
     // lands on the fill when there is one.
-    // Chromium paints the background under the border too, so the hairline
-    // lands on the fill when there is one.
     final borderColor = outlined
         ? paint(
             theme.color(DshButtonRecipe.outlineToken),
             over: fill != null && fill.a >= 1 ? fill : null,
           )
         : null;
+    final dividerWidth = add && widget.join == DshButtonJoin.right
+        ? dshBorderWidthOf(context, DshAddButtonRecipe.dividerWidth)
+        : 0.0;
+    final dividerForeground = theme.color(DshAddButtonRecipe.dividerToken);
+    final dividerColor = paint(
+      dividerForeground.withValues(
+        alpha: dividerForeground.a * DshAddButtonRecipe.dividerAlpha,
+      ),
+      over: fill,
+    );
+    final profileWidth = compactAction
+        ? info
+              ? DshIconActionRecipe.infoWidth
+              : DshIconActionRecipe.width
+        : add && widget.join == DshButtonJoin.right
+        ? DshAddButtonRecipe.moreWidth
+        : null;
 
     final surface = DshDecoratedBox(
       key: DshButton.surfaceKey,
       decoration: theme.cornerDecoration(
         radius,
+        corners: corners(radius),
         color: fill,
         borderColor: borderColor,
         borderWidth: borderWidth,
       ),
       child: Container(
+        width: profileWidth,
         height:
             widget.height ??
-            (small ? DshButtonRecipe.smallHeight : DshButtonRecipe.height),
-        padding: EdgeInsets.symmetric(
-          horizontal:
-              (widget.horizontalPadding ??
-                  (small
-                      ? DshButtonRecipe.smallPadding
-                      : DshButtonRecipe.padding)) +
-              borderWidth,
-        ),
-        child: DefaultTextStyle.merge(
-          style: textStyle,
-          child: IconTheme(
-            data: IconThemeData(
-              color: foreground,
-              size: DshButtonRecipe.iconSize,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (widget.icon != null) ...[
-                  SizedBox(
-                    width: DshButtonRecipe.iconSize,
-                    height: DshButtonRecipe.iconSize,
-                    child: Center(child: widget.icon),
+            (compactAction
+                ? info
+                      ? DshIconActionRecipe.infoHeight
+                      : DshIconActionRecipe.height
+                : add
+                ? DshAddButtonRecipe.height
+                : small
+                ? DshButtonRecipe.smallHeight
+                : DshButtonRecipe.height),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (dividerWidth > 0)
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: dividerWidth,
+                child: ColoredBox(color: dividerColor),
+              ),
+            Padding(
+              padding: EdgeInsets.only(
+                left:
+                    dividerWidth +
+                    (widget.horizontalPadding ??
+                        (compactAction || widget.join == DshButtonJoin.right
+                            ? 0
+                            : add
+                            ? DshAddButtonRecipe.padding
+                            : (small
+                                  ? DshButtonRecipe.smallPadding
+                                  : DshButtonRecipe.padding))) +
+                    borderWidth,
+                right:
+                    (widget.horizontalPadding ??
+                        (compactAction || widget.join == DshButtonJoin.right
+                            ? 0
+                            : add
+                            ? DshAddButtonRecipe.padding
+                            : small
+                            ? DshButtonRecipe.smallPadding
+                            : DshButtonRecipe.padding)) +
+                    borderWidth,
+              ),
+              child: DefaultTextStyle.merge(
+                style: textStyle,
+                child: IconTheme(
+                  data: IconThemeData(
+                    color: foreground,
+                    size: DshButtonRecipe.iconSize,
                   ),
-                  const SizedBox(width: DshButtonRecipe.gap),
-                ],
-                Flexible(child: widget.child),
-              ],
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null) ...[
+                        SizedBox(
+                          width: DshButtonRecipe.iconSize,
+                          height: DshButtonRecipe.iconSize,
+                          child: Center(child: widget.icon),
+                        ),
+                        const SizedBox(width: DshButtonRecipe.gap),
+                      ],
+                      Flexible(child: widget.child),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
 
-    final ringWidth = theme.focusRingWidth;
+    final ringWidth = iconAction
+        ? theme.number(DshIconActionRecipe.focusWidthToken)
+        : theme.focusRingWidth;
+    final ringColor = iconAction
+        ? theme.colors[DshIconActionRecipe.focusToken] ??
+              theme.color(DshIconActionRecipe.focusFallbackToken)
+        : theme.focusRingColor;
     // dsh sets `outline-width` only; the button keeps the UA's `outline-style:
     // auto`, which Chromium draws centred on the border edge (half the width
     // outside, half inside), not outside it as a plain outline would.
-    final ringReach = ringWidth / 2;
+    final ringReach = iconAction
+        ? ringWidth + DshIconActionRecipe.focusOffset
+        : ringWidth / 2;
     final stack = Stack(
       clipBehavior: Clip.none,
       children: [
@@ -245,7 +412,8 @@ class _DshButtonState extends State<DshButton> {
                 key: DshButton.focusRingKey,
                 decoration: theme.cornerDecoration(
                   radius + ringReach,
-                  borderColor: theme.focusRingColor,
+                  corners: corners(radius + ringReach),
+                  borderColor: ringColor,
                   borderWidth: ringWidth,
                 ),
               ),
@@ -271,6 +439,8 @@ class _DshButtonState extends State<DshButton> {
           autofocus: widget.autofocus,
           mouseCursor: _enabled
               ? SystemMouseCursors.click
+              : iconAction
+              ? SystemMouseCursors.basic
               : SystemMouseCursors.forbidden,
           shortcuts: const {
             SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
@@ -292,7 +462,11 @@ class _DshButtonState extends State<DshButton> {
             onTapCancel: _enabled ? () => _set(() => _pressed = false) : null,
             onTap: widget.onPressed,
             child: Opacity(
-              opacity: _enabled ? 1 : DshButton.disabledOpacity,
+              opacity: _enabled
+                  ? 1
+                  : iconAction
+                  ? DshIconActionRecipe.disabledOpacity
+                  : DshButton.disabledOpacity,
               child: stack,
             ),
           ),

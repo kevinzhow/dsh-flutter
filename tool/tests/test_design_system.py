@@ -15,6 +15,39 @@ def module(name):
 gen, guard = module('generate'), module('check')
 
 class DesignSystemTests(unittest.TestCase):
+    def test_plugin_button_states_fail_closed_and_source_drift_is_detected(self):
+        import copy
+        _, sheets = gen.collect()
+        original = sheets['PluginManagerPage.module.css']
+        source = [gen.normalized_rule(r) for r in original]
+        gen.verify_feature_source(original, source)
+        for amendment in [
+            {'selector': '.iconButton:active', 'conditions': [], 'declarations': {'opacity': '.2'}},
+            {'selector': '.addMore', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}},
+        ]:
+            altered = copy.deepcopy(sheets)
+            altered['PluginManagerPage.module.css'].append(amendment)
+            with self.assertRaisesRegex(ValueError, 'untranslated plugin'):
+                gen.validate_supported(altered)
+        altered = copy.deepcopy(source)
+        next(r for r in altered if r['selector'] == '.iconButton')['declarations']['width'] = '29px'
+        with self.assertRaisesRegex(ValueError, 'reference button CSS differs'):
+            gen.verify_feature_source(original, altered)
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['PluginManagerPage.module.css'] if r['selector'] == '.iconButton')['declarations']['display'] = 'block'
+        with self.assertRaisesRegex(ValueError, 'untranslated plugin button value'):
+            gen.validate_supported(altered)
+
+    def test_css_parser_preserves_literals_and_conditional_scope(self):
+        css = '.x:is(.a, .b) { background: url("data:image/svg+xml;abc"); content: "a;{b}" } @media(max-width:600px) {.x {width:.5px}}'
+        parsed = gen.css_rules(css)
+        self.assertEqual(parsed[0]['selector'], '.x:is(.a, .b)')
+        self.assertEqual(parsed[0]['declarations']['content'], '"a;{b}"')
+        self.assertEqual(parsed[1]['conditions'], ['@media (max-width: 600px)'])
+        self.assertEqual(gen.number(parsed[1]['declarations']['width']), .5)
+        with self.assertRaises(ValueError): gen.css_rules('@keyframes spin {to {opacity:0}}')
+        self.assertEqual(gen.css_rules('@keyframes spin {to {opacity:0}}', allow_keyframes=True)[0]['conditions'], ['@keyframes spin'])
+
     def test_conditional_rules_remain_in_recipe_audit(self):
         rules = gen.css_rules('.tab { color: var(--label); } @media (prefers-reduced-motion: reduce) { .tab { transition: none; } }')
         self.assertEqual(rules[1]['conditions'], ['@media (prefers-reduced-motion: reduce)'])

@@ -218,20 +218,11 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                   side: DshTooltipSide.bottom,
                   delay: const Duration(milliseconds: 300),
                   disabled: panel.isOpen,
-                  child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: DshButton(
-                      height: 20,
-                      horizontalPadding: 0,
-                      semanticLabel: t('infoLabel'),
-                      onPressed: panel.toggle,
-                      child: DshIcon(
-                        DshShellIcons.infoOutline,
-                        size: 11,
-                        color: theme.color('--dsw-alias-label-caption'),
-                      ),
-                    ),
+                  child: DshButton(
+                    profile: DshButtonProfile.infoAction,
+                    semanticLabel: t('infoLabel'),
+                    onPressed: panel.toggle,
+                    child: const DshIcon(DshShellIcons.infoOutline, size: 11),
                   ),
                 ),
               ),
@@ -271,84 +262,32 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
           side: DshTooltipSide.bottom,
           delay: const Duration(milliseconds: 500),
           disabled: !loaded || model.refreshing,
-          child: SizedBox(
-            width: 28,
-            height: 28,
-            child: DshButton(
-              height: 28,
-              horizontalPadding: 0,
-              onPressed: !loaded || model.refreshing
-                  ? null
-                  : () => unawaited(model.refresh()),
-              semanticLabel: t('refresh'),
-              child: model.refreshing
-                  ? const DshStateDot(DshStateDotState.ongoing, size: 18)
-                  : DshIcon(
-                      DshIcons.refresh,
-                      size: 16,
-                      color: theme.color('--dsw-alias-label-caption'),
-                    ),
-            ),
+          child: DshButton(
+            profile: DshButtonProfile.iconAction,
+            onPressed: !loaded || model.refreshing
+                ? null
+                : () => unawaited(model.refresh()),
+            semanticLabel: t('refresh'),
+            child: model.refreshing
+                ? const DshStateDot(DshStateDotState.ongoing, size: 18)
+                : const DshIcon(DshIcons.refresh, size: 16),
           ),
         ),
         const SizedBox(width: 16),
         DshAnchoredPanel(
           align: DshPanelAlign.end,
           panelWidth: 320,
-          builder: (context, panel) => ClipRRect(
-            borderRadius: BorderRadius.circular(theme.radiusMd),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DshButton(
-                  variant: DshButtonVariant.primary,
-                  height: 32,
-                  horizontalPadding: 12,
-                  radius: 0,
-                  labelStyle: theme
-                      .textStyle('--dsw-font-xs-13')
-                      .copyWith(height: 20 / 13),
-                  icon: const DshIcon(DshShellIcons.plusOutline, size: 13),
-                  onPressed: loaded ? () => unawaited(_install()) : null,
-                  child: Text(
-                    model.installer.requestId == null
-                        ? t('addPlugin')
-                        : t('installViewTask'),
-                  ),
-                ),
-                if (model.installer.requestId == null) ...[
-                  SizedBox(
-                    width: 32,
-                    height: 32,
-                    child: DshButton(
-                      variant: DshButtonVariant.primary,
-                      height: 32,
-                      horizontalPadding: 0,
-                      radius: 0,
-                      semanticLabel: t('chooseAddMethod'),
-                      onPressed: loaded ? panel.toggle : null,
-                      child: DshContainer(
-                        height: 32,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(
-                              color: theme.labelPrimaryForeground.withValues(
-                                alpha: .3,
-                              ),
-                              width: dshHairlineOf(context),
-                            ),
-                          ),
-                        ),
-                        child: const DshIcon(
-                          DshShellIcons.chevronDownRegular,
-                          size: 12,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ],
+          builder: (context, panel) => DshSplitButton(
+            icon: const DshIcon(DshShellIcons.plusOutline, size: 13),
+            onPressed: loaded ? () => unawaited(_install()) : null,
+            showMore: model.installer.requestId == null,
+            onMore: loaded ? panel.toggle : null,
+            moreLabel: t('chooseAddMethod'),
+            more: const DshIcon(DshShellIcons.chevronDownRegular, size: 12),
+            child: Text(
+              model.installer.requestId == null
+                  ? t('addPlugin')
+                  : t('installViewTask'),
             ),
           ),
           panelBuilder: (context, panel) => DshMenuSurface(

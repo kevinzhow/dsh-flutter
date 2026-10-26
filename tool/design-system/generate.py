@@ -13,37 +13,60 @@ OUT = ROOT / 'packages/dsh_ui/lib/src/dsh_recipes.g.dart'
 AUDIT = HERE / 'recipes.generated.json'
 
 
-def css_rules(text, context=()):
+def split_outside(text, delimiter):
+    parts, start, quote, escaped, parens, brackets = [], 0, None, False, 0, 0
+    for i, char in enumerate(text):
+        if quote is not None:
+            if escaped: escaped = False
+            elif char == '\\': escaped = True
+            elif char == quote: quote = None
+            continue
+        if char in ['"', "'"]: quote = char
+        elif char == '(': parens += 1
+        elif char == ')': parens -= 1
+        elif char == '[': brackets += 1
+        elif char == ']': brackets -= 1
+        elif char == delimiter and parens == brackets == 0:
+            parts.append(text[start:i]); start = i + 1
+        if parens < 0 or brackets < 0: raise ValueError('unbalanced CSS expression')
+    if quote is not None or parens or brackets: raise ValueError('unclosed CSS expression')
+    return [*parts, text[start:]]
+
+
+def css_rules(text, context=(), *, allow_keyframes=False):
     text = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
     rules = []
     while text.strip():
         start = text.find('{')
-        if start < 0:
-            raise ValueError('CSS trailing syntax is not a rule')
-        selector = ', '.join(part.strip() for part in text[:start].strip().split(','))
-        depth, end = 1, start + 1
+        if start < 0: raise ValueError('CSS trailing syntax is not a rule')
+        selector = ', '.join(part.strip() for part in split_outside(text[:start].strip(), ','))
+        depth, end, quote, escaped = 1, start + 1, None, False
         while end < len(text) and depth:
-            depth += (text[end] == '{') - (text[end] == '}')
+            char = text[end]
+            if quote is not None:
+                if escaped: escaped = False
+                elif char == '\\': escaped = True
+                elif char == quote: quote = None
+            elif char in ['"', "'"]: quote = char
+            else: depth += (char == '{') - (char == '}')
             end += 1
-        if depth:
-            raise ValueError('unclosed CSS rule')
+        if depth: raise ValueError('unclosed CSS rule')
         body, text = text[start + 1:end - 1], text[end:]
         if selector.startswith('@'):
-            if not selector.startswith('@media '):
+            if re.match(r'^@media(?:\s|\()', selector):
+                selector = '@media ' + re.sub(r':\s*', ': ', selector[len('@media'):].strip())
+            elif not (allow_keyframes and selector.startswith('@keyframes ')):
                 raise ValueError('unsupported CSS condition: ' + selector)
-            rules.extend(css_rules(body, (*context, selector)))
+            rules.extend(css_rules(body, (*context, selector), allow_keyframes=allow_keyframes))
             continue
-        if not selector or '{' in body or '}' in body:
+        if not selector or len(split_outside(body, '{')) != 1 or len(split_outside(body, '}')) != 1:
             raise ValueError('unsupported nested CSS: ' + selector)
         declarations = {}
-        for declaration in body.split(';'):
-            if not declaration.strip():
-                continue
-            if ':' not in declaration:
-                raise ValueError('invalid CSS declaration')
+        for declaration in split_outside(body, ';'):
+            if not declaration.strip(): continue
+            if ':' not in declaration: raise ValueError('invalid CSS declaration')
             key, value = map(str.strip, declaration.split(':', 1))
-            if key in declarations:
-                raise ValueError('duplicate declaration: ' + key)
+            if key in declarations: raise ValueError('duplicate declaration: ' + key)
             declarations[key] = value
         rules.append({'selector': selector, 'conditions': list(context), 'declarations': declarations})
     return rules
@@ -57,7 +80,7 @@ def value(rules, selector, prop):
 
 
 def number(raw, unit='px'):
-    match = re.fullmatch(r'(-?\d+(?:\.\d+)?)' + unit, raw)
+    match = re.fullmatch(r'(-?(?:\d+(?:\.\d+)?|\.\d+))' + unit, raw)
     if not match:
         raise ValueError('unsupported CSS number: ' + raw)
     return float(match[1])
@@ -70,29 +93,74 @@ def token(raw):
     return match[1]
 
 
+BUTTON_CLASSES = ('addGroup', 'addButton', 'addPrimary', 'addMore', 'iconButton', 'infoButton')
+
+
+def button_rules(rules):
+    return [r for r in rules if any(re.search(r'\.' + name + r'(?![\w-])', r['selector']) for name in BUTTON_CLASSES)]
+
+
+def normalized_rule(rule):
+    # Only the published minifier's observed transformations are accepted.
+    # Do not erase arbitrary syntax, selector combinators or conditional scope.
+    def normalized(text):
+        text = re.sub(r"\[role=['\"]menuitem['\"]\]", '[role=menuitem]', text)
+        text = re.sub(r'(?<![\w.])0\.(\d+)', r'.\1', text)
+        return re.sub(r'\s*,\s*', ',', text.strip())
+    props = {k: normalized(v) for k, v in rule['declarations'].items()}
+    if props.get('background') == '0 0': props['background'] = 'transparent'
+    return {'selector': normalized(rule['selector']), 'conditions': rule['conditions'], 'declarations': props}
+
+
+def verify_feature_source(published, source):
+    if [normalized_rule(r) for r in button_rules(published)] != [normalized_rule(r) for r in button_rules(source)]:
+        raise ValueError('reference button CSS differs from pinned published plugin package')
+
+
 def collect(source=None):
     lock = json.loads((HERE / 'sources.lock.json').read_text())
+    for package in lock['packages']:
+        folder = HERE / 'upstream' / package['snapshotFolder']
+        for name, sha in package['files'].items():
+            if hashlib.sha256((folder / name).read_bytes()).hexdigest() != sha:
+                raise ValueError('published snapshot hash mismatch: ' + name)
+        manifest = json.loads((folder / 'package.json').read_text())
+        if (manifest['name'], manifest['version']) != (package['name'], package['version']):
+            raise ValueError('published package identity mismatch')
+        if source is not None:
+            current = json.loads((source / package['sourcePackage']).read_text())
+            consumer = json.loads((source / package['referenceConsumer']).read_text())
+            if current['version'] != package['version']:
+                raise ValueError('reference dependency version drift: regenerate from its published package')
+            if consumer[package['dependencyField']].get(package['name']) != package['dependencySpecifier']:
+                raise ValueError('reference dependency specifier drift: update the package lock')
     package = lock['packages'][0]
-    folder = HERE / 'upstream/ui-primitives'
-    for name, sha in package['files'].items():
-        if hashlib.sha256((folder / name).read_bytes()).hexdigest() != sha:
-            raise ValueError('published snapshot hash mismatch: ' + name)
-    manifest = json.loads((folder / 'package.json').read_text())
-    if (manifest['name'], manifest['version']) != (package['name'], package['version']):
-        raise ValueError('published package identity mismatch')
+    folder = HERE / 'upstream' / package['snapshotFolder']
     if source is not None:
-        current = json.loads((source / package['sourcePackage']).read_text())
-        consumer = json.loads((source / package['referenceConsumer']).read_text())
-        if current['version'] != package['version']:
-            raise ValueError('reference dependency version drift: regenerate from its published package')
-        if consumer[package['dependencyField']].get(package['name']) != package['dependencySpecifier']:
-            raise ValueError('reference dependency specifier drift: update the package lock')
         for name in package['files']:
             if name.endswith('.css'):
                 original = source / Path(package['sourcePackage']).parent / 'src' / name
                 if original.read_bytes() != (folder / name).read_bytes():
                     raise ValueError('reference CSS differs from pinned published package: ' + name)
     rules = {name: css_rules((folder / name).read_text()) for name in package['files'] if name.endswith('.css')}
+    # The feature package publishes CSS inside its bundle. These are decoded
+    # verbatim CSS bytes and the static class export, never executed JS.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('published', HERE / 'published.py')
+    published = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(published)
+    package = lock['packages'][1]
+    folder = HERE / 'upstream' / package['snapshotFolder']
+    classes = json.loads((folder / 'classes.json').read_text())
+    feature = css_rules((folder / 'PluginManagerPage.module.css').read_text(), allow_keyframes=True)
+    for rule in feature:
+        rule['selector'] = published.unhash_selectors(rule['selector'], classes)
+        rule['selector'] = re.sub(r"\[role=['\"]menuitem['\"]\]", '[role=menuitem]', rule['selector'])
+    rules['PluginManagerPage.module.css'] = feature
+    if source is not None:
+        original = source / Path(package['sourcePackage']).parent / 'src/client/PluginManagerPage.module.css'
+        verify_feature_source(feature, css_rules(original.read_text(), allow_keyframes=True))
+
     return lock, rules
 
 
@@ -119,6 +187,18 @@ SUPPORTED = {
     },
 }
 
+PLUGIN_BUTTON_SCHEMA = {
+    '.addGroup': 'flex align-items display',
+    '.infoButton': 'width height color flex padding',
+    '.iconButton:focus-visible': 'outline outline-offset',
+    '.iconButton': 'border-radius width height color cursor background border justify-content align-items display',
+    '.iconButton:hover:not(:disabled)': 'background color',
+    '.iconButton:disabled': 'opacity cursor',
+    '.addButton, .addPrimary, .addMore': 'border-radius height padding font-size line-height',
+    '.addPrimary': 'border-top-right-radius border-bottom-right-radius',
+    '.addMore': 'border-left border-top-left-radius border-bottom-left-radius width padding',
+}
+
 
 def validate_supported(sheets):
     for name, schema in SUPPORTED.items():
@@ -135,6 +215,40 @@ def validate_supported(sheets):
                 seen.add(selector)
         if seen != set(schema):
             raise ValueError('missing recipe state: ' + name)
+    rules = button_rules(sheets['PluginManagerPage.module.css'])
+    seen = set()
+    for rule in rules:
+        selector, props = rule['selector'], rule['declarations']
+        if rule['conditions'] or selector not in PLUGIN_BUTTON_SCHEMA or set(props) != set(PLUGIN_BUTTON_SCHEMA[selector].split()):
+            raise ValueError('untranslated plugin button state/property: ' + selector)
+        seen.add(selector)
+    if seen != set(PLUGIN_BUTTON_SCHEMA): raise ValueError('missing plugin button state')
+    primitive_fixed = {
+        '.button': {'box-sizing': 'border-box', 'display': 'inline-flex', 'align-items': 'center', 'justify-content': 'center', 'border': 'none', 'cursor': 'pointer', 'background': 'transparent'},
+        '.button:disabled': {'cursor': 'not-allowed'},
+        '.outline': {'background': 'transparent'},
+        '.icon': {'display': 'inline-flex', 'align-items': 'center', 'justify-content': 'center'},
+    }
+    for selector, props in primitive_fixed.items():
+        for prop, expected in props.items():
+            if value(sheets['Button.module.css'], selector, prop) != expected:
+                raise ValueError('untranslated primitive button value: ' + selector + '/' + prop)
+    if value(sheets['Button.module.css'], '.icon', 'width') != value(sheets['Button.module.css'], '.icon', 'height'):
+        raise ValueError('untranslated nonsquare button icon')
+    # Structural rules not represented by dynamic Dart fields cannot change
+    # silently. New values need an intentional renderer implementation.
+    fixed = {
+        '.addGroup': {'flex': 'none', 'align-items': 'stretch', 'display': 'inline-flex'},
+        '.infoButton': {'flex': 'none', 'padding': '0'},
+        '.iconButton': {'cursor': 'pointer', 'background': '0 0', 'border': '0', 'justify-content': 'center', 'align-items': 'center', 'display': 'inline-flex'},
+        '.iconButton:disabled': {'cursor': 'default'},
+        '.addPrimary': {'border-top-right-radius': '0', 'border-bottom-right-radius': '0'},
+        '.addMore': {'border-top-left-radius': '0', 'border-bottom-left-radius': '0', 'padding': '0'},
+    }
+    for selector, values in fixed.items():
+        for prop, expected in values.items():
+            if value(rules, selector, prop) != expected:
+                raise ValueError('untranslated plugin button value: ' + selector + '/' + prop)
 
 
 def ladder_token(size, line):
@@ -201,8 +315,34 @@ def render(lock, sheets):
             'activeLabelToken': tok(t, ".tab:hover, .tab[aria-selected='true']", 'color'),
         },
     }
+    p = sheets['PluginManagerPage.module.css']
+    add = '.addButton, .addPrimary, .addMore'
+    add_padding = get(p, add, 'padding').split()
+    if len(add_padding) != 2 or add_padding[0] != '0': raise ValueError('unsupported add button padding')
+    divider = re.fullmatch(r'([.\d]+px) solid color-mix\(in srgb,\s*var\((--[\w-]+)\) ([\d.]+)%,\s*transparent\)', get(p, '.addMore', 'border-left'))
+    focus = re.fullmatch(r'var\((--[\w-]+)\) solid var\((--[\w-]+),\s*var\((--[\w-]+)\)\)', get(p, '.iconButton:focus-visible', 'outline'))
+    if divider is None or focus is None: raise ValueError('unsupported plugin button divider/focus')
+    metrics['DshAddButtonRecipe'] = {
+        'height': px(p, add, 'height'), 'padding': number(add_padding[1]),
+        'fontToken': ladder_token(px(p, add, 'font-size'), px(p, add, 'line-height')),
+        'radiusToken': tok(p, add, 'border-radius'),
+        'moreWidth': px(p, '.addMore', 'width'), 'dividerWidth': number(divider[1]),
+        'dividerToken': divider[2], 'dividerAlpha': float(divider[3]) / 100,
+    }
+    metrics['DshIconActionRecipe'] = {
+        'width': px(p, '.iconButton', 'width'), 'height': px(p, '.iconButton', 'height'),
+        'infoWidth': px(p, '.infoButton', 'width'), 'infoHeight': px(p, '.infoButton', 'height'),
+        'radiusToken': tok(p, '.iconButton', 'border-radius'),
+        'labelToken': tok(p, '.iconButton', 'color'),
+        'infoLabelToken': tok(p, '.infoButton', 'color'),
+        'hoverLabelToken': tok(p, '.iconButton:hover:not(:disabled)', 'color'),
+        'hoverToken': tok(p, '.iconButton:hover:not(:disabled)', 'background'),
+        'disabledOpacity': number(get(p, '.iconButton:disabled', 'opacity'), ''),
+        'focusWidthToken': focus[1], 'focusToken': focus[2], 'focusFallbackToken': focus[3],
+        'focusOffset': px(p, '.iconButton:focus-visible', 'outline-offset'),
+    }
     package = lock['packages'][0]
-    lines = ['// Generated by tool/design-system/generate.py; do not edit.', '// From ' + package['name'] + ' ' + package['version'] + '.', '']
+    lines = ['// Generated by tool/design-system/generate.py; do not edit.', *['// From ' + p['name'] + ' ' + p['version'] + '.' for p in lock['packages']], '']
     for name, fields in metrics.items():
         lines.append('abstract final class ' + name + ' {')
         for name, v in fields.items():
