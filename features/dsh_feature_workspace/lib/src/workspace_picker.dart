@@ -303,9 +303,7 @@ class _WorkspacePickFlowState extends State<WorkspacePickFlow> {
       overlayChildBuilder: (context) {
         if (link == null) return const SizedBox.shrink();
         final model = _model();
-        return Positioned(
-          left: 0,
-          top: 0,
+        return Positioned.fill(
           child: PickerMenu(
             link: link,
             rows: model.rows,

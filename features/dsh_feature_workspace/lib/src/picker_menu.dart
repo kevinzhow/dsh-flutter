@@ -1,5 +1,4 @@
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// One row of the picker menu.
@@ -24,7 +23,7 @@ class PickerRow {
 ///
 /// Keyboard: Up and Down walk the rows (wrapping), Home and End jump, Enter,
 /// Space and Tab settle the focused row, Escape and Shift+Tab close.
-class PickerMenu extends StatefulWidget {
+class PickerMenu extends StatelessWidget {
   const PickerMenu({
     super.key,
     required this.link,
@@ -44,184 +43,27 @@ class PickerMenu extends StatefulWidget {
   final VoidCallback onClose;
 
   @override
-  State<PickerMenu> createState() => _PickerMenuState();
-}
-
-class _PickerMenuState extends State<PickerMenu> {
-  final _focusNodes = <String, FocusNode>{};
-  final FocusScopeNode _scope = FocusScopeNode(debugLabel: 'workspace-menu');
-
-  @override
-  void dispose() {
-    for (final node in _focusNodes.values) {
-      node.dispose();
-    }
-    _scope.dispose();
-    super.dispose();
-  }
-
-  List<FocusNode> _rowNodes() => [
-    for (final n in _scope.traversalDescendants)
-      if (n.debugLabel?.startsWith('picker-row') ?? false) n,
-  ];
-
-  void _walk(int delta) {
-    final nodes = _rowNodes();
-    if (nodes.isEmpty) return;
-    final at = nodes.indexWhere((n) => n.hasPrimaryFocus);
-    final next = at == -1
-        ? (delta > 0 ? 0 : nodes.length - 1)
-        : (at + delta) % nodes.length;
-    nodes[next].requestFocus();
-  }
-
-  KeyEventResult _onKey(FocusNode node, KeyEvent event) {
-    if (event is KeyUpEvent) return KeyEventResult.ignored;
-    final key = event.logicalKey;
-    if (key == LogicalKeyboardKey.escape) {
-      widget.onClose();
-      return KeyEventResult.handled;
-    }
-    if (key == LogicalKeyboardKey.tab &&
-        HardwareKeyboard.instance.isShiftPressed) {
-      widget.onClose();
-      return KeyEventResult.handled;
-    }
-    if (key == LogicalKeyboardKey.arrowDown) {
-      _walk(1);
-      return KeyEventResult.handled;
-    }
-    if (key == LogicalKeyboardKey.arrowUp) {
-      _walk(-1);
-      return KeyEventResult.handled;
-    }
-    if (key == LogicalKeyboardKey.home) {
-      _rowNodes().firstOrNull?.requestFocus();
-      return KeyEventResult.handled;
-    }
-    if (key == LogicalKeyboardKey.end) {
-      _rowNodes().lastOrNull?.requestFocus();
-      return KeyEventResult.handled;
-    }
-    return KeyEventResult.ignored;
-  }
-
-  /// The card grows with its widest row between 144 and 360 (dsh's `min-width`
-  /// and `max-width`): padding, icon and gap, the label as laid out, and the
-  /// trailing check of the selected row.
-  double _width(BuildContext context) {
-    final theme = context.dsh;
-    final style = theme
-        .textStyle(DshMenuRecipe.fontToken)
-        .copyWith(height: DshMenuRecipe.lineHeight / DshMenuRecipe.fontSize);
-    var widest = 0.0;
-    for (final row in [...widget.rows, ...widget.footer]) {
-      final painter = TextPainter(
-        text: TextSpan(text: row.label, style: style),
-        maxLines: 1,
-        textDirection: TextDirection.ltr,
-      )..layout();
-      final check = row.id == widget.selectedId
-          ? DshMenuRecipe.gap + DshMenuRecipe.iconSize
-          : 0;
-      final w =
-          DshMenuRecipe.horizontalPadding * 2 +
-          DshMenuRecipe.iconSize +
-          DshMenuRecipe.gap +
-          painter.width +
-          check;
-      painter.dispose();
-      if (w > widest) widest = w;
-    }
-    // A status line has its own natural width as well.
-    return (widest + DshMenuRecipe.padding * 2).clamp(
-      DshMenuRecipe.minWidth,
-      DshMenuRecipe.maxWidth,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screen = MediaQuery.sizeOf(context);
-    final menu = TapRegion(
-      // The chip that opened the menu shares the group: pressing it again is
-      // its own toggle, not an outside tap.
-      groupId: widget.link,
-      onTapOutside: (_) => widget.onClose(),
+  Widget build(BuildContext context) => DshMenuFollower(
+    link: link,
+    child: TapRegion(
+      // The trigger owns its toggle, including its outside-tap group.
+      groupId: link,
+      onTapOutside: (_) => onClose(),
       child: FocusScope(
-        node: _scope,
         autofocus: true,
-        onKeyEvent: _onKey,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minWidth: DshMenuRecipe.minWidth,
-            maxWidth: DshMenuRecipe.maxWidth,
-            // The card stops 12px short of the window's edges; taller content
-            // scrolls and keeps the pinned footer in view.
-            maxHeight: (screen.height - 24).clamp(0.0, 520.0),
-          ),
-          child: SizedBox(
-            width: _width(context),
-            child: DshMenuSurface(
-              key: const ValueKey('workspace-menu'),
-              child: Semantics(
-                container: true,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Flexible(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [for (final row in widget.rows) _row(row)],
-                        ),
-                      ),
-                    ),
-                    if (widget.footer.isNotEmpty)
-                      DshMenuFooter(
-                        separated: widget.rows.isNotEmpty,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            for (final row in widget.footer) _row(row),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+        child: DshMenuCard(
+          key: const ValueKey('workspace-menu'),
+          entries: [for (final row in rows) _entry(row)],
+          footer: [for (final row in footer) _entry(row)],
+          selectedIds: [if (selectedId != null) selectedId!],
+          autofocus: true,
+          onSelect: onSelect,
+          onDismiss: onClose,
         ),
       ),
-    );
-    return CompositedTransformFollower(
-      link: widget.link,
-      showWhenUnlinked: false,
-      targetAnchor: Alignment.bottomLeft,
-      followerAnchor: Alignment.topLeft,
-      offset: const Offset(0, 4),
-      child: Align(
-        alignment: Alignment.topLeft,
-        // The menu hangs from the anchor, never wider than the window.
-        child: menu,
-      ),
-    );
-  }
-
-  Widget _row(PickerRow row) => DshMenuItemButton(
-    key: ValueKey('workspace-row-${row.id}'),
-    label: row.label,
-    icon: row.icon,
-    disabled: row.disabled,
-    selected: row.id == widget.selectedId,
-    focusNode: _focusNodes.putIfAbsent(
-      row.id,
-      () => FocusNode(debugLabel: 'picker-row-${row.id}'),
     ),
-    onPressed: () => widget.onSelect(row.id),
   );
+
+  DshMenuItem _entry(PickerRow row) =>
+      DshMenuItem(row.id, row.label, icon: row.icon, disabled: row.disabled);
 }

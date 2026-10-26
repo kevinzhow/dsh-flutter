@@ -562,3 +562,11 @@ The native GPU fixture interpreter also accepts `{"secondaryClick": [x, y]}`.
 It sends a real evdev secondary-button press/release through the private Weston
 seat, and requires coordinates inside that fixture output. This exercises the
 actual dock tab context-menu path; a primary click remains `{"click": [x, y]}`.
+
+Native Chromium's CSS viewport and its requested screenshot size round separately.
+At 390×421 logical pixels / 2.625×, direct Chromium probes report CSS 100vw/100vh
+as approximately 390.09524×421.33334, while the viewport PNG is 1024×1105. The
+Flutter provider therefore encloses native layout dimensions in physical pixels
+but keeps the existing nearest-pixel screenshot contract. Emulated-density layout
+retains the exact requested CSS dimensions. These are harness rules only; product
+widgets read their real view's MediaQuery size.

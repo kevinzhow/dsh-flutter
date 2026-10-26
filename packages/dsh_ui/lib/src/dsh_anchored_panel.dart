@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_menu_follower.dart';
+
 /// Handle an anchor builder uses to open and close its panel.
 class DshPanelController extends ChangeNotifier {
   bool _open = false;
@@ -30,7 +32,7 @@ enum DshPanelAlign { start, end }
 /// the stat dialogs): [builder] draws the anchor, [panelBuilder] the card. It
 /// closes on Escape, a press outside it, or [DshPanelController.close].
 /// Positions come from the anchor's [LayerLink]; a card wider than the room
-/// keeps its own size and is not clamped here.
+/// keeps its own size. Source menu viewport fitting is enabled by [menuViewport].
 class DshAnchoredPanel extends StatefulWidget {
   const DshAnchoredPanel({
     super.key,
@@ -42,6 +44,8 @@ class DshAnchoredPanel extends StatefulWidget {
     this.controller,
     this.panelWidth,
     this.viewportMargin = 12,
+    this.menuViewport = false,
+    this.frameOverlayTop,
   });
 
   final Widget Function(BuildContext context, DshPanelController controller)
@@ -57,6 +61,10 @@ class DshAnchoredPanel extends StatefulWidget {
   /// Omitted keeps the caller's intrinsic layout and anchor alignment.
   final double? panelWidth;
   final double viewportMargin;
+
+  /// Use source menu portal fitting rather than unconstrained popover placement.
+  final bool menuViewport;
+  final double? frameOverlayTop;
 
   @override
   State<DshAnchoredPanel> createState() => _DshAnchoredPanelState();
@@ -158,18 +166,29 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
                 child: const SizedBox.expand(),
               ),
             ),
-            CompositedTransformFollower(
-              link: _link,
-              targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
-              followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
-              offset: Offset(shiftX, top ? -widget.gap : widget.gap),
-              child: width == null
-                  ? widget.panelBuilder(context, _controller)
-                  : SizedBox(
-                      width: width,
-                      child: widget.panelBuilder(context, _controller),
-                    ),
-            ),
+            if (widget.menuViewport)
+              Positioned.fill(
+                child: DshMenuFollower(
+                  link: _link,
+                  alignEnd: end,
+                  above: top,
+                  frameOverlayTop: widget.frameOverlayTop,
+                  child: widget.panelBuilder(context, _controller),
+                ),
+              )
+            else
+              CompositedTransformFollower(
+                link: _link,
+                targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
+                followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
+                offset: Offset(shiftX, top ? -widget.gap : widget.gap),
+                child: width == null
+                    ? widget.panelBuilder(context, _controller)
+                    : SizedBox(
+                        width: width,
+                        child: widget.panelBuilder(context, _controller),
+                      ),
+              ),
           ],
         ),
       ),

@@ -190,6 +190,70 @@ void main() {
     );
 
     for (final model in DshPixelModel.values) {
+      testWidgets(
+        'CSS viewport ${model.name} matches direct Chromium 100vh probe',
+        (t) async {
+          final previous = dshPixelModel;
+          dshPixelModel = model;
+          addTearDown(() => dshPixelModel = previous);
+          Size? observed;
+          final entry = <String, dynamic>{
+            'key': 'components.menu.viewport-layout-${model.name}.light',
+            'case': {
+              'id': 'components.menu.viewport-layout.light',
+              'kind': 'test.viewport',
+              'theme': 'light',
+              'locale': 'en',
+              'viewport': {'width': 390, 'height': 421, 'density': 2.625},
+              'capture': {'crop': 'viewport'},
+            },
+            'variant': {
+              'id': 'default',
+              'name': 'Default',
+              'props': <String, dynamic>{},
+            },
+          };
+          await captureParityCase(
+            t,
+            entry: entry,
+            mapping: ParityCase(
+              widgets: const ['selftest'],
+              build: (_) => Builder(
+                builder: (context) {
+                  observed = MediaQuery.sizeOf(context);
+                  return const SizedBox();
+                },
+              ),
+            ),
+            fixtures: const {},
+            outputDir: dir,
+            runInfo: const {},
+            fonts: fonts,
+            framed: false,
+          );
+          // Values measured from Chromium 145 CSS 100vw/100vh, rather than its
+          // integer innerWidth/innerHeight or its nearest-rounded PNG dimensions.
+          expect(
+            observed!.width,
+            closeTo(
+              model == DshPixelModel.native ? 390.0952453613281 : 390,
+              1e-4,
+            ),
+          );
+          expect(
+            observed!.height,
+            closeTo(
+              model == DshPixelModel.native ? 421.3333435058594 : 421,
+              1e-4,
+            ),
+          );
+          final header = ByteData.sublistView(
+            File('${dir.path}/${entry['key']}.png').readAsBytesSync(),
+          );
+          expect((header.getUint32(16), header.getUint32(20)), (1024, 1105));
+        },
+      );
+
       for (final (width, height, pixelsWide, pixelsHigh) in [
         (390, 61, 1024, 160),
         (391, 62, 1026, 163),

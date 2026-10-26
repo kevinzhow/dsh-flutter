@@ -64,3 +64,30 @@ Acceptance includes the actual upstream DockSurface with its context menu open, 
 Each shared menu row owns a separate semantics node. This keeps a grouped menu from absorbing its footer action and reporting the entire popup as that action’s bounds. A regression test checks the actual semantic row rectangle, and Android verifies physical clicks from those accessibility bounds.
 
 Full-viewport captures round physical dimensions to the nearest pixel, following measured Chromium native/emulated screenshot output. Fractional element crops use enclosing bounds. This prevents a partial display column from being truncated in phone viewport comparisons.
+
+### Shared menu viewport and linked placement
+
+`DshMenu`/`DshMenuCard` own both scrolling items and fixed footer entries. The
+published Menu CSS generates the viewport height expression and anchor gap;
+`menu-portal.json` records the exact placement block extracted from the released
+primitive bundle, including its hash. The generator rejects unknown placement
+expressions instead of assuming the CSS height margin is also the portal margin.
+`DshMenuFollower` measures the composited anchor, keeps the initially unplaced
+card hidden, and fits its visible card inside the overlay. Movement and ancestor
+transforms update placement without scheduling idle frames. A caller can pass the
+frame's computed top reserve through `frameOverlayTop`.
+
+The workspace picker uses the same card and keyboard walk, including its footer,
+rather than a private layout, width calculation and 520px cap. Focus reveals only
+clipped rows; an already visible row and the fixed footer stay still. Actual
+WorkspacePickFlow long-list comparisons cover English/Chinese, light/dark and
+menus with/without the footer. Submenus, shortcut displays, sticky groups,
+arbitrary-content backdrop filtering, macOS backing and full app-frame reserve
+integration remain separate work.
+
+Native linked menus keep the source portal margins inside the Flutter view's OS
+safe bounds. The insets come from FlutterView rather than potentially consumed
+SafeArea padding, and metric updates reach both placement and menu height without
+resetting row focus or scroll state. This prevents a tall Android menu from
+putting its first row underneath the status bar; zero-inset desktop/Web fixture
+geometry is preserved.

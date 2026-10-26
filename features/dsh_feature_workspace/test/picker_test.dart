@@ -70,8 +70,7 @@ void main() {
       (t) async {
         await pump(t, selected: 'b');
         await t.tap(key('chip'));
-        await t.pump();
-        await t.pump();
+        await t.pumpAndSettle();
         expect(key('workspace-menu'), findsOneWidget);
         expect(find.text('alpha'), findsOneWidget);
         expect(find.text('beta'), findsOneWidget);
@@ -79,14 +78,14 @@ void main() {
         // The check trails the selected row only.
         expect(
           find.descendant(
-            of: key('workspace-row-b'),
+            of: key('dsh-menu-b'),
             matching: find.byType(CustomPaint),
           ),
           findsNWidgets(2),
         );
         expect(
           find.descendant(
-            of: key('workspace-row-a'),
+            of: key('dsh-menu-a'),
             matching: find.byType(CustomPaint),
           ),
           findsNWidgets(1),
@@ -97,8 +96,7 @@ void main() {
     tw('hangs 4px below its anchor, left edges aligned', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       final chip = t.getRect(key('chip'));
       final menu = t.getRect(key('workspace-menu'));
       expect(menu.left, chip.left);
@@ -109,11 +107,9 @@ void main() {
     tw('picking a workspace reports it and closes the menu', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-a'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-a'));
+      await t.pumpAndSettle();
       expect(log, ['pick:a']);
       expect(key('workspace-menu'), findsNothing);
     });
@@ -123,54 +119,44 @@ void main() {
     ) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsOneWidget);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.tapAt(const Offset(900, 600));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.sendKeyEvent(LogicalKeyboardKey.escape);
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
     });
 
     tw('arrows walk the rows and Enter settles the focused one', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
       await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
       await t.pump();
       await t.sendKeyEvent(LogicalKeyboardKey.enter);
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(log, ['pick:b']);
     });
 
     tw('arrows wrap past the pinned add action', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       for (var i = 0; i < 3; i++) {
         await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
       }
       await t.sendKeyEvent(LogicalKeyboardKey.enter);
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('flow-state'), findsOneWidget);
     });
 
@@ -178,14 +164,12 @@ void main() {
       services.set(const [], phase: WorkspacePhase.pending);
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu-status'), findsOneWidget);
       expect(find.text('Loading workspaces…'), findsOneWidget);
       // The baseline arrives while it is open.
       services.set([view('a', title: 'alpha')]);
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu-status'), findsNothing);
       expect(find.text('alpha'), findsOneWidget);
     });
@@ -194,8 +178,7 @@ void main() {
       services.set([view('d', title: 'default-workspace')]);
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(find.text('Default workspace'), findsOneWidget);
     });
   });
@@ -206,16 +189,13 @@ void main() {
     ) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
       expect(find.text('flow open'), findsOneWidget);
       await t.tap(key('flow-pick'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(services.created, ['/work/picked']);
       expect(log, contains('pick:new-1'));
       expect(find.text('flow open'), findsNothing);
@@ -227,28 +207,23 @@ void main() {
       services.createGate = Completer<void>();
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       await t.tap(key('flow-pick'));
       await t.pump();
       expect(find.text('flow busy'), findsOneWidget);
       services.createGate!.complete();
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(find.text('flow busy'), findsNothing);
     });
 
     tw('cancelling the flow just closes it', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       await t.tap(key('flow-cancel'));
       await t.pump();
       expect(find.text('flow open'), findsNothing);
@@ -262,14 +237,11 @@ void main() {
         services.createError = refusal('Not a directory');
         await pump(t);
         await t.tap(key('chip'));
-        await t.pump();
-        await t.pump();
-        await t.tap(key('workspace-row-::add-workspace'));
-        await t.pump();
-        await t.pump();
+        await t.pumpAndSettle();
+        await t.tap(key('dsh-menu-::add-workspace'));
+        await t.pumpAndSettle();
         await t.tap(key('flow-pick'));
-        await t.pump();
-        await t.pump();
+        await t.pumpAndSettle();
         await t.pump(const Duration(milliseconds: 100));
         expect(find.text('Couldn’t open folder'), findsOneWidget);
         expect(find.text('Not a directory'), findsOneWidget);
@@ -288,14 +260,11 @@ void main() {
       services.createError = refusal('Not a directory');
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       await t.tap(key('flow-pick'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.pump(const Duration(milliseconds: 100));
       await t.tap(key('folder-error-cancel'));
       await t.pump();
@@ -307,14 +276,11 @@ void main() {
     tw('a failure the flow itself reports reaches the same dialog', (t) async {
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       await t.tap(key('flow-fail'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.pump(const Duration(milliseconds: 100));
       expect(find.text('denied by the host'), findsOneWidget);
     });
@@ -323,8 +289,7 @@ void main() {
       services.set(const []);
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
       expect(find.text('flow open'), findsOneWidget);
     });
@@ -333,12 +298,10 @@ void main() {
       services.set(const [], phase: WorkspacePhase.pending);
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(find.text('flow open'), findsNothing);
       services.set(const []);
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.pump();
       expect(find.text('flow open'), findsOneWidget);
     });
@@ -351,8 +314,7 @@ void main() {
       services.set(const []);
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(key('workspace-menu'), findsNothing);
     });
 
@@ -363,8 +325,7 @@ void main() {
         registerWorkspaceFeature(slots, services: services, i18n: () => i18n());
         await pump(t);
         await t.tap(key('chip'));
-        await t.pump();
-        await t.pump();
+        await t.pumpAndSettle();
         expect(find.text('alpha'), findsOneWidget);
         expect(find.text('Add workspace…'), findsNothing);
       },
@@ -375,14 +336,13 @@ void main() {
     tw('the menu hangs under the chip at 390px, 34px rows', (t) async {
       await pump(t, size: const Size(390, 844));
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       final chip = t.getRect(key('chip'));
       final menu = t.getRect(key('workspace-menu'));
       expect(menu.left, chip.left);
       expect(menu.top, chip.bottom + 4);
-      expect(t.getSize(key('workspace-row-a')).height, 34);
-      await t.tap(key('workspace-row-b'));
+      expect(t.getSize(key('dsh-menu-a')).height, 34);
+      await t.tap(key('dsh-menu-b'));
       await t.pump();
       expect(log, contains('pick:b'));
     });
@@ -393,15 +353,12 @@ void main() {
       services.createError = refusal('Not a directory');
       await pump(t, size: const Size(390, 844));
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       expect(find.text('flow open'), findsOneWidget);
       await t.tap(key('flow-pick'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.pump(const Duration(milliseconds: 100));
       expect(find.text('Not a directory'), findsOneWidget);
       final form = t.getRect(find.byType(DshDialogFrame));
@@ -424,15 +381,12 @@ void main() {
       services.createError = refusal('不是目录');
       await pump(t);
       await t.tap(key('chip'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       expect(find.text('添加工作区…'), findsOneWidget);
-      await t.tap(key('workspace-row-::add-workspace'));
-      await t.pump();
-      await t.pump();
+      await t.tap(key('dsh-menu-::add-workspace'));
+      await t.pumpAndSettle();
       await t.tap(key('flow-pick'));
-      await t.pump();
-      await t.pump();
+      await t.pumpAndSettle();
       await t.pump(const Duration(milliseconds: 100));
       expect(find.text('无法打开文件夹'), findsOneWidget);
       expect(find.text('重新选择'), findsOneWidget);

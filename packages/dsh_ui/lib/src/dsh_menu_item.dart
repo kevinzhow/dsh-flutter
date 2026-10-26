@@ -1,4 +1,6 @@
 import 'package:dsh_theme/dsh_theme.dart' show SizeScale;
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -47,13 +49,21 @@ class DshMenuItemButton extends StatefulWidget {
 }
 
 class _DshMenuItemButtonState extends State<DshMenuItemButton> {
-  bool _hover = false, _focusVisible = false;
+  bool _hover = false, _focusVisible = false, _focused = false;
+  final _ownedFocus = FocusNode();
   bool get _enabled => !widget.disabled && widget.onPressed != null;
+  FocusNode get _focusNode => widget.focusNode ?? _ownedFocus;
 
   @override
   void didUpdateWidget(DshMenuItemButton old) {
     super.didUpdateWidget(old);
-    if (!_enabled) _hover = _focusVisible = false;
+    if (!_enabled) _hover = _focusVisible = _focused = false;
+  }
+
+  @override
+  void dispose() {
+    _ownedFocus.dispose();
+    super.dispose();
   }
 
   @override
@@ -216,6 +226,11 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
       container: true,
       button: true,
       enabled: _enabled,
+      focusable: _enabled,
+      focused: _enabled ? _focused : null,
+      onFocus: _enabled && defaultTargetPlatform != TargetPlatform.iOS
+          ? _focusNode.requestFocus
+          : null,
       selected: widget.selected,
       label: [
         widget.label,
@@ -230,7 +245,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
         onEnter: (_) => setState(() => _hover = true),
         onExit: (_) => setState(() => _hover = false),
         child: FocusableActionDetector(
-          focusNode: widget.focusNode,
+          focusNode: _focusNode,
           autofocus: widget.autofocus,
           enabled: _enabled,
           shortcuts: {
@@ -262,6 +277,9 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
                 return null;
               },
             ),
+          },
+          onFocusChange: (value) {
+            if (mounted && _focused != value) setState(() => _focused = value);
           },
           onShowFocusHighlight: (value) {
             if (mounted) setState(() => _focusVisible = value);

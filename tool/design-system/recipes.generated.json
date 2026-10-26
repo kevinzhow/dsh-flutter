@@ -15,7 +15,8 @@
           "Pill.module.css": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82",
           "Menu.module.css": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
           "MenuSurface.module.css": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
-          "MenuGroup.module.css": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59"
+          "MenuGroup.module.css": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
+          "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -23,7 +24,10 @@
         "dependencySpecifier": "workspace:*",
         "snapshotFolder": "ui-primitives",
         "extractionKind": "primitive-css",
-        "extraction": "Exact stylesheet and metadata bytes from published npm archive; no JavaScript execution"
+        "extraction": "Exact stylesheet and metadata bytes from published npm archive; no JavaScript execution",
+        "referenceSourceSha256": {
+          "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1"
+        }
       },
       {
         "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
@@ -4007,6 +4011,11 @@
       "padding": 4.0,
       "minWidth": 144.0,
       "maxWidth": 360.0,
+      "anchorGap": 4.0,
+      "viewportBottomMargin": 12.0,
+      "viewportTopMargin": 12.0,
+      "frameOverlayTopFallback": 12.0,
+      "portalMargin": 12.0,
       "compactMinWidth": 156.0,
       "compactPadding": 4.0,
       "height": 34.0,
