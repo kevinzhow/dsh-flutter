@@ -6,6 +6,7 @@ import 'dsh_corners.dart';
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
+import 'dsh_recipes.g.dart';
 import 'dsh_settings.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
@@ -366,12 +367,19 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+                  padding: const EdgeInsets.fromLTRB(
+                    24,
+                    DshCheckboxRecipe.riskMarginTop,
+                    24,
+                    20,
+                  ),
                   child: DshCheckbox(
                     key: const ValueKey('risk-acknowledge'),
                     value: _acknowledged,
                     onChanged: (v) => setState(() => _acknowledged = v),
                     label: widget.acknowledgeLabel,
+                    profile: DshCheckboxProfile.riskAcknowledgement,
+                    autofocus: true,
                   ),
                 ),
                 Padding(

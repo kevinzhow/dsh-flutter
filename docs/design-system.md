@@ -186,3 +186,27 @@ and languages, including on, off, disabled and keyboard-focused states. The
 color and antialiasing differences seen in the small switch crops remain
 measured against the unchanged 99.5% target; the whole-page focused captures
 also include surrounding content and are reported separately.
+
+### Checkboxes and risk acknowledgement
+
+The published `Checkbox.module.css` and `RiskConfirmation.module.css` use
+different label layouts and accent tokens. They produce separate profiles of
+the shared controlled `DshCheckbox`; the risk dialog gives the acknowledgement
+initial focus without an outline until navigation, as the reference modal does.
+Space, pointer and accessibility activation work on enabled controls, while
+Enter alone does not toggle a native checkbox.
+
+The source uses a browser-native input rather than defining the square and
+checkmark in CSS. `checkbox-native.json` records the shape and lightness rule
+from Chromium 145.0.7632.6's `ui/native_theme/native_theme_base.cc`, plus the
+browser's light/dark system colors sampled at DPR 1 and 2.625. The snapshot is
+locked separately from the DSH CSS; it is a reference-renderer adaptation,
+not a DSH theme token. `probe_chromium_checkbox.mjs` and
+`checkbox_browser_snapshot.py` reproduce its samples and structural checks.
+The Chromium Authors' license is retained alongside the snapshot. Other
+browsers and platform-native paint conventions may differ.
+
+Reference cases use the actual risk confirmation and model input-type source
+components. The Flutter risk dialog is real; the model checkbox context is a
+fixture because the model editor has not yet been wired to the shared atom.
+The comparison reports isolated controls and whole-dialog focus separately.

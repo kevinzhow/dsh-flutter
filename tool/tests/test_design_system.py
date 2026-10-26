@@ -163,6 +163,33 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'switch thumb geometry'):
             gen.render(lock, changed)
 
+    def test_checkbox_profiles_track_source_and_reject_unknown_states(self):
+        import copy
+        lock, sheets = gen.collect()
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Checkbox.module.css'] if r['selector'] == '.checkbox')['declarations']['gap'] = '8px'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('gap = 8.0;', dart)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['RiskConfirmation.module.css'] if r['selector'] == '.acknowledgement input')['declarations']['margin'] = '4px 0 0'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('riskInputTop = 4.0;', dart)
+        changed = copy.deepcopy(sheets)
+        changed['Checkbox.module.css'].append({'selector': '.checkbox input:hover', 'conditions': [], 'declarations': {'opacity': '.4'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated checkbox'):
+            gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        changed['ChromiumCheckbox']['geometry']['checkStrokeRatio'] = 0.18
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('checkStrokeRatio = 0.18;', dart)
+        changed['ChromiumCheckbox']['geometry']['newShape'] = 1.0
+        with self.assertRaisesRegex(ValueError, 'unrecognized Chromium checkbox geometry'):
+            gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        changed['ChromiumCheckbox']['palette']['light']['hover']['offFill'] = '#010203'
+        with self.assertRaisesRegex(ValueError, 'unsupported Chromium checkbox hover'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()
