@@ -14,17 +14,22 @@ class PlatformServices {
     this.fileActions,
     this.acceptsDrops = false,
     this.touchInput = false,
+    this.timeZone = 'UTC',
   });
 
   /// The real services of the running platform.
-  factory PlatformServices.current() => PlatformServices(
-    picker: PlatformAttachmentPicker(),
-    fileActions: PlatformFileActions(),
-    acceptsDrops:
-        !kIsWeb && (Platform.isLinux || Platform.isMacOS || Platform.isWindows),
-    touchInput: !kIsWeb && (Platform.isAndroid || Platform.isIOS),
-  );
+  factory PlatformServices.current({String timeZone = 'UTC'}) =>
+      PlatformServices(
+        timeZone: timeZone,
+        picker: PlatformAttachmentPicker(),
+        fileActions: PlatformFileActions(),
+        acceptsDrops:
+            !kIsWeb &&
+            (Platform.isLinux || Platform.isMacOS || Platform.isWindows),
+        touchInput: !kIsWeb && (Platform.isAndroid || Platform.isIOS),
+      );
 
+  final String timeZone;
   final AttachmentPicker? picker;
   final HostFileActions? fileActions;
 

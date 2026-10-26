@@ -14,11 +14,15 @@ class ConversationUserText extends StatefulWidget {
     required this.registry,
     required this.slots,
     this.reportFailure,
+    this.additionalFacts,
+    this.factsChanges,
   });
   final UserTextOwner owner;
   final UserTextRegistry registry;
   final SlotRegistry slots;
   final void Function(Object)? reportFailure;
+  final Map<String, Object?> Function(UserTextOwner)? additionalFacts;
+  final Stream<Object?>? factsChanges;
   @override
   State<ConversationUserText> createState() => _ConversationUserTextState();
 }
@@ -26,11 +30,19 @@ class ConversationUserText extends StatefulWidget {
 class _ConversationUserTextState extends State<ConversationUserText> {
   late UserTextDocument document;
   StreamSubscription<int>? subscription;
+  StreamSubscription<Object?>? factsSubscription;
   Object? lastError;
   @override
   void initState() {
     super.initState();
     bind();
+    bindFacts();
+  }
+
+  void bindFacts() {
+    factsSubscription = widget.factsChanges?.listen((_) {
+      if (mounted) setState(() {});
+    });
   }
 
   void bind() {
@@ -43,6 +55,10 @@ class _ConversationUserTextState extends State<ConversationUserText> {
   @override
   void didUpdateWidget(ConversationUserText old) {
     super.didUpdateWidget(old);
+    if (old.factsChanges != widget.factsChanges) {
+      unawaited(factsSubscription?.cancel());
+      bindFacts();
+    }
     if (old.registry != widget.registry) {
       unawaited(subscription?.cancel());
       bind();
@@ -52,6 +68,7 @@ class _ConversationUserTextState extends State<ConversationUserText> {
   @override
   void dispose() {
     unawaited(subscription?.cancel());
+    unawaited(factsSubscription?.cancel());
     super.dispose();
   }
 
@@ -60,7 +77,10 @@ class _ConversationUserTextState extends State<ConversationUserText> {
     final owner = widget.owner;
     List<UserTextNode>? nodes;
     try {
-      nodes = document.evaluate(owner.text, facts: owner.facts);
+      nodes = document.evaluate(
+        owner.text,
+        facts: {...?widget.additionalFacts?.call(owner), ...owner.facts},
+      );
       lastError = null;
     } on Object catch (e) {
       if (!identical(lastError, e)) {
@@ -106,6 +126,8 @@ void registerUserTextFactory(
   SlotRegistry slots,
   UserTextRegistry registry, {
   void Function(Object)? reportFailure,
+  Map<String, Object?> Function(UserTextOwner)? additionalFacts,
+  Stream<Object?>? factsChanges,
 }) {
   slots.register<UserTextOwner, Widget>(
     DshSlots.conversationUserText.typed<UserTextOwner, Widget>(),
@@ -113,6 +135,8 @@ void registerUserTextFactory(
       owner: owner,
       registry: registry,
       slots: slots,
+      additionalFacts: additionalFacts,
+      factsChanges: factsChanges,
       reportFailure:
           reportFailure ??
           (error) => FlutterError.reportError(

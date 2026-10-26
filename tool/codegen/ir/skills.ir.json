@@ -1,0 +1,118 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "skills",
+  "package": "packages/api/session-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/session-controller/src/skill-catalog.ts",
+    "packages/api/session-controller/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "SkillListRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "SkillListValue"
+      },
+      "doc": "List the user-invocable skills visible to one Session composition."
+    }
+  ],
+  "decls": {
+    "SkillEntry": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "path",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute SKILL.md path when supplied by a filesystem provider."
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Kebab-case identifier referenced as `/name`."
+        },
+        {
+          "name": "description",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Short routing description."
+        },
+        {
+          "name": "whenToUse",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Optional extra routing guidance."
+        },
+        {
+          "name": "modelInvocable",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the same skill is also advertised to the model."
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "One skill available to the Session's human-facing composer."
+    },
+    "SkillListRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Session-addressed request for the human-invocable skill catalog."
+    },
+    "SkillListValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "skills",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "SkillEntry"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/session-controller/src/types.ts",
+      "doc": "Human-invocable skills visible through one Session's composition."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

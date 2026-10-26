@@ -25,6 +25,7 @@ class DshDisclosureRow extends StatefulWidget {
     this.children,
     this.titleColor,
     this.chevronColor,
+    this.expandedIcon = DshIcons.chevronUp,
   });
 
   final DshIconData icon;
@@ -44,6 +45,7 @@ class DshDisclosureRow extends StatefulWidget {
   final Widget? children;
   final Color? titleColor;
   final Color? chevronColor;
+  final DshIconData expandedIcon;
 
   @override
   State<DshDisclosureRow> createState() => _DshDisclosureRowState();
@@ -64,7 +66,7 @@ class _DshDisclosureRowState extends State<DshDisclosureRow> {
         .copyWith(color: rowColor, height: 24 / 13);
     final chevron = widget.open || (_hover && widget.expandable);
     final leadingIcon = widget.open
-        ? DshIcons.chevronUp
+        ? widget.expandedIcon
         : chevron
         ? DshIcons.chevronDown
         : widget.icon;

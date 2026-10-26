@@ -250,6 +250,12 @@ abstract final class DshSlots {
   /// The workspace picker of the blank-session hero (dsh `ui-conversation`;
   /// filled by `ui-workspace`), and the hole under it that a directory picker
   /// fills (`ui-directory-picker-browse`).
+  static const conversationHeroAgentPreset = Slot<Object?, Object?>(
+    'conversation.hero.agentPreset',
+    SlotCardinality.single,
+    SlotScope.sessionMaybe,
+  );
+
   static const conversationHeroWorkspace = Slot<Object?, Object?>(
     'conversation.hero.workspace',
     SlotCardinality.single,
@@ -338,6 +344,7 @@ abstract final class DshSlots {
     conversationPlanReviewActions,
     conversationInputModel,
     conversationInputOverlay,
+    conversationHeroAgentPreset,
     conversationHeroWorkspace,
     conversationHeroWorkspaceDirectoryFlow,
     sidebarWorkspaces,

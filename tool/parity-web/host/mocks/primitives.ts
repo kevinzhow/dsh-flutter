@@ -56,3 +56,8 @@ export { SettingsValueField, SettingsSecretField } from '@dsh/ui-primitives/src/
 export { Switch } from '@dsh/ui-primitives/src/Switch.tsx'
 export { Toast } from '@dsh/ui-primitives/src/Toast.tsx'
 export { Checkbox } from '@dsh/ui-primitives/src/Checkbox.tsx'
+// Agent/task surfaces retain the exact production segmented controls and hooks.
+export { Pill } from '@dsh/ui-primitives/src/Pill.tsx'
+export { SegmentedTabs } from '@dsh/ui-primitives/src/SegmentedTabs.tsx'
+export { useAnchoredPosition } from '@dsh/ui-primitives/src/useAnchoredPosition.ts'
+export { useDismissOnOutsidePointer } from '@dsh/ui-primitives/src/useDismissOnOutsidePointer.ts'

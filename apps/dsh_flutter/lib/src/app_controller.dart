@@ -20,6 +20,7 @@ import 'package:dsh_feature_input_trigger/dsh_feature_input_trigger.dart';
 import 'package:dsh_feature_layout/dsh_feature_layout.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
 import 'package:dsh_feature_model_settings/dsh_feature_model_settings.dart';
+import 'package:dsh_feature_agent_management/dsh_feature_agent_management.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
 import 'package:dsh_feature_deliverables/dsh_feature_deliverables.dart';
@@ -42,10 +43,19 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_shortcuts/dsh_shortcuts.dart' show ShortcutService;
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
-import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter;
+import 'package:dsh_ui/dsh_ui.dart' show DshCodeHighlighter, DshReferenceChip;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show MaterialPageRoute;
-import 'package:flutter/widgets.dart' show GlobalKey, NavigatorState, Widget;
+import 'package:flutter/widgets.dart'
+    show
+        GlobalKey,
+        NavigatorState,
+        Widget,
+        ValueKey,
+        InlineSpan,
+        WidgetSpan,
+        PlaceholderAlignment,
+        TextBaseline;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'backend.dart';
@@ -209,6 +219,12 @@ class AppController extends ChangeNotifier {
       workspaces: workspaceServices,
       preferences: conversationPreferences,
       userText: userText,
+      userTextFacts: (owner) {
+        final id = owner.session?.sessionId;
+        final names = id == null ? null : skills?.names(id);
+        return names == null ? const {} : {'skillNames': names};
+      },
+      userTextFactsChanges: _skillFactsChanged.changes,
     );
     registerWorkspaceFeature(
       slots,
@@ -505,6 +521,13 @@ class AppController extends ChangeNotifier {
 
   /// The host-backed services, present while connected.
   ModelSettingsFeature? _modelSettings;
+  AgentPresetsModel? agentPresets;
+  bool _presetLanding = false;
+  int _presetLandingEpoch = 0;
+  JobsService? jobs;
+  ScheduleService? schedules;
+  SkillSource? skills;
+  final _skillFactsChanged = Observable<int>(0);
   HostRemotes? remotes;
   ConfigForms? forms;
   ThemeSettingsService? _theme;
@@ -520,6 +543,7 @@ class AppController extends ChangeNotifier {
   StreamSubscription<ConnectionGeneration?>? _deliverablesGeneration;
   final conversationPreferences = ConversationPreferences();
   final userText = UserTextRegistry()
+    ..register(skillReferenceRule)
     ..register(sessionReferenceRule)
     ..register(trimWhitespaceRule)
     ..register(collapseWhitespaceRule);
@@ -836,6 +860,105 @@ class AppController extends ChangeNotifier {
     chatPreferences.bind(f.get('ui-chat'));
     developerTools.bind(f.get('ui-settings'));
     _hostOffs.add(
+      slots.register<SessionOwner, Widget>(
+        DshSlots.conversationInputDock.typed<SessionOwner, Widget>(),
+        (owner) => GoalDock(
+          key: ValueKey('goal-${owner.sessionId}'),
+          owner: owner,
+          remotes: r,
+          ensureOpen: () =>
+              _sessionPort.ensureOpen(owner.sessionId, AbortSignal.never),
+          i18n: i18n,
+        ),
+        id: 'goal',
+        order: 10,
+      ),
+    );
+    final scheduleService = schedules = ScheduleService(r);
+    _hostOffs.add(
+      registerScheduleSeats(
+        slots,
+        service: scheduleService,
+        deviceZone: platform.timeZone,
+        sessionBlock: scheduledSessionBlock,
+        i18n: () => i18n,
+        openTask: (owner, task) => sidebar.openTab(
+          owner,
+          'scheduleTask',
+          params: {'sessionId': task.sessionId, 'id': task.id},
+        ),
+        openSession: (id) => unawaited(open(id)),
+      ),
+    );
+    final jobService = jobs = JobsService(backend.jobsHost);
+    _hostOffs.add(
+      slots.register<SessionOwner, Widget>(
+        DshSlots.conversationSessionHeaderActions.typed<SessionOwner, Widget>(),
+        (owner) => JobListAction(
+          key: ValueKey('jobs-${owner.sessionId}'),
+          service: jobService,
+          sessionId: owner.sessionId,
+          i18n: i18n,
+        ),
+        id: 'job-list',
+        order: 20,
+      ),
+    );
+    final presets = agentPresets = AgentPresetsModel(
+      remotes: r,
+      settings: f.get(agentPresetNamespace),
+      tools: f.get('ui-settings'),
+      currentSession: () {
+        final id = openSessionId;
+        final m = manager;
+        if (_presetLanding || newSessionPending || id == null || m == null) {
+          return null;
+        }
+        final summary = m.summaryOf(id);
+        if (summary == null) return null;
+        final preset = m.projectionValues(id)['agentPreset'];
+        return (
+          id: id,
+          blank: summary.blank,
+          preset: preset is String ? preset : null,
+        );
+      },
+    );
+    _hostOffs.add(
+      registerAgentPresetFeature(
+        slots,
+        model: presets,
+        i18n: () => i18n,
+        startCreator: () {
+          final landing = ++_presetLandingEpoch;
+          _presetLanding = true;
+          presets.stage('cordis', announce: true);
+          if (desktopShellActive) {
+            desktop.settings.close();
+          } else {
+            final nav = navigatorKey.currentState;
+            if (nav?.canPop() == true) nav!.pop();
+          }
+          unawaited(
+            _startSession(null, agentPreset: 'cordis').whenComplete(() {
+              if (landing != _presetLandingEpoch) return;
+              _presetLanding = false;
+              if (identical(agentPresets, presets)) unawaited(presets.apply());
+            }),
+          );
+        },
+      ),
+    );
+    void applyPreset() => unawaited(presets.apply());
+    addListener(applyPreset);
+    final presetProjectionSub = manager?.projectionChanges.listen(
+      (_) => applyPreset(),
+    );
+    _hostOffs.add(() {
+      removeListener(applyPreset);
+      unawaited(presetProjectionSub?.cancel());
+    });
+    _hostOffs.add(
       slots.register<Object?, Widget>(
         DshShellSlots.shellOverlay.typed<Object?, Widget>(),
         (_) => SettingsOnboarding(
@@ -917,6 +1040,50 @@ class AppController extends ChangeNotifier {
       i18n: () => i18n,
     );
     _hostOffs.add(commands.dispose);
+    final skillSource = skills = SkillSource(
+      remotes: r,
+      sessions: _sessionPort,
+      i18n: () => i18n,
+    );
+    _hostOffs.add(inputTriggers.registerSource(skillSource));
+    _hostOffs.add(
+      slots.register<ToolViewOwner, Widget>(
+        DshSlots.toolCallToolview.typed<ToolViewOwner, Widget>(),
+        (owner) => SkillRow(
+          key: ValueKey('skill-${owner.call.callId}'),
+          call: owner.call,
+          i18n: i18n,
+        ),
+        key: 'skill',
+      ),
+    );
+    final skillChanges = skillSource.changed.changes.listen(
+      (_) => _skillFactsChanged.touch(),
+    );
+    _hostOffs.add(() => unawaited(skillChanges.cancel()));
+    _hostOffs.add(
+      slots.register<UserTextNodeOwner, InlineSpan>(
+        DshSlots.conversationUserTextNode
+            .typed<UserTextNodeOwner, InlineSpan>(),
+        (owner) => WidgetSpan(
+          alignment: PlaceholderAlignment.baseline,
+          baseline: TextBaseline.alphabetic,
+          child: DshReferenceChip(
+            appearance: 'skill',
+            label: owner.node.data['name']! as String,
+            title: owner.raw,
+            onActivate: owner.interactive && owner.session != null
+                ? () => skillSource.openReference(
+                    owner.session!.sessionId,
+                    owner.raw,
+                    'skill',
+                  )
+                : null,
+          ),
+        ),
+        key: 'skill',
+      ),
+    );
     _hostOffs.add(
       registerReferenceFeature(
         triggers: inputTriggers,
@@ -946,6 +1113,21 @@ class AppController extends ChangeNotifier {
     unawaited(_deliverablesGeneration?.cancel());
     _deliverablesGeneration = null;
     deliverablesModel.reset();
+    _presetLandingEpoch++;
+    _presetLanding = false;
+    final skillSource = skills;
+    skills = null;
+    if (skillSource != null) unawaited(skillSource.dispose());
+    _skillFactsChanged.touch();
+    final scheduleService = schedules;
+    schedules = null;
+    if (scheduleService != null) unawaited(scheduleService.dispose());
+    final jobService = jobs;
+    jobs = null;
+    if (jobService != null) unawaited(jobService.dispose());
+    final presets = agentPresets;
+    agentPresets = null;
+    if (presets != null) unawaited(presets.dispose());
     final modelSettings = _modelSettings;
     _modelSettings = null;
     if (modelSettings != null) unawaited(modelSettings.dispose());
@@ -1117,6 +1299,15 @@ class AppController extends ChangeNotifier {
     return controller;
   }
 
+  /// Original-session links require current catalog membership and archive facts.
+  String? scheduledSessionBlock(String id) {
+    if (workspaceState.value.archivedSessionIds.contains(id)) {
+      return 'detail.sessionArchived';
+    }
+    if (manager?.summaryOf(id) == null) return 'detail.sessionUnavailable';
+    return null;
+  }
+
   void closeSession() {
     openSessionId = null;
     newSessionPending = false;
@@ -1218,7 +1409,13 @@ class AppController extends ChangeNotifier {
   /// view, else in the most recent one. With no workspace on a fresh account
   /// the Host's default one is prepared first; with none to choose from the
   /// New session screen asks for one (dsh `UiWorkspaceService.startSession`).
-  Future<void> startSession([String? workspaceId]) async {
+  Future<void> startSession([String? workspaceId]) =>
+      _startSession(workspaceId);
+
+  Future<void> _startSession(String? workspaceId, {String? agentPreset}) async {
+    if (layout.store.panelInfo.activePanelId != null) {
+      layout.controller.selectPanel(null);
+    }
     final nav = _navigation;
     final list = _workspaceList;
     final m = manager;
@@ -1241,7 +1438,11 @@ class AppController extends ChangeNotifier {
       }
     }
     try {
-      await nav.startSession(workspaceId);
+      if (agentPreset == null) {
+        await nav.startSession(workspaceId);
+      } else {
+        await nav.startPresetSession(agentPreset, workspaceId);
+      }
     } on Object {
       // Reported through [createError].
     }
@@ -1391,6 +1592,7 @@ class AppController extends ChangeNotifier {
     unawaited(developerTools.dispose());
     unawaited(conversationPreferences.dispose());
     unawaited(userText.dispose());
+    unawaited(_skillFactsChanged.dispose());
     desktop.dispose();
     layout.dispose();
     _recoveredTimer?.cancel();

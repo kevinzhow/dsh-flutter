@@ -223,7 +223,11 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
         if (replace != null && replace != existing.id) {
           _closeRecord(replace, runHandler: false);
         }
+        final extra = _extras.putIfAbsent(existing.id, _Extra.new);
+        extra.params = Map.unmodifiable(params);
+        extra.revision = ++_revision;
         dock.focusTab(existing.id);
+        notifyListeners();
         return;
       }
     }

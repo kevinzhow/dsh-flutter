@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_client/generated_user_questions.dart';
+import 'package:dsh_client/generated_job.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 
@@ -56,6 +57,8 @@ abstract interface class HostBackend {
   /// streams) over whichever connection is live; calls and attachments made
   /// without one fail with [NotConnected].
   TerminalHost get terminalHost;
+
+  JobsHost get jobsHost;
 
   /// Unary calls through whatever connection is live now (a re-pair replaces
   /// the connection; the caller handed out earlier keeps working). Calls with
@@ -156,6 +159,27 @@ class LiveBackend implements HostBackend {
     },
     generations: _terminalGenerations.stream,
     currentGeneration: () => _connection?.generation,
+  );
+
+  @override
+  late final JobsHost jobsHost = JobsHost(
+    remote: JobRemote(remoteCaller),
+    list: (request) {
+      final connection = _connection;
+      if (connection == null) throw NotConnected();
+      return connection.openStream(
+        JobStreams.list.endpoint,
+        () => JobStreams.list.encodeArgs(request),
+      );
+    },
+    follow: (request) {
+      final connection = _connection;
+      if (connection == null) throw NotConnected();
+      return connection.openStream(
+        JobStreams.follow.endpoint,
+        () => JobStreams.follow.encodeArgs(request()),
+      );
+    },
   );
 
   /// Unary calls through the live generation (used by tools that need host

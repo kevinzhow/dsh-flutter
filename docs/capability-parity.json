@@ -6,7 +6,7 @@
   "npmVersion": "0.2.1-rc.2"
  },
  "whalee": {
-  "reviewedAt": "e8a9797"
+  "reviewedAt": "81aa390"
  },
  "rows": [
   {
@@ -16,9 +16,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-agent-preset",
    "description": "Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition.",
-   "status": "missing",
-   "notes": "The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Settings/default selection, YAML composition, guides, one-shot blank-session choice and Creator landing; native/visual evaluation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_agent_management/lib/src/presets.dart"
+   ]
   },
   {
    "id": "package:ui-approval",
@@ -181,11 +184,10 @@
    "dshSource": "packages/client/ui-goal",
    "description": "See, edit, pause, resume, complete and clear the session goal in a bar above the message box.",
    "status": "partial",
-   "notes": "Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented.",
+   "notes": "Projected versioned goal dock with live activation fencing, edit/pause/resume/clear; actual source behavior and native evaluation tracked in task15.",
    "priority": "P2",
    "whalee": [
-    "features/dsh_feature_chat/lib/src/command_input_view.dart",
-    "packages/dsh_conversation/lib/src/chat/extended_inputs.dart"
+    "features/dsh_feature_agent_management/lib/src/goals.dart"
    ]
   },
   {
@@ -214,9 +216,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-jobs",
    "description": "List the session's background jobs and watch or kill one from its streaming output panel.",
-   "status": "missing",
-   "notes": "job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Refcounted roster/follow streams, byte-cursor output tails, bounded rendering, two-press stop and local settled fold/clear; native/visual evaluation pending.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_agent_management/lib/src/jobs.dart"
+   ]
   },
   {
    "id": "package:ui-layout",
@@ -366,9 +371,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-schedule",
    "description": "List, edit and delete the host's scheduled tasks and a session's reminders.",
-   "status": "missing",
-   "notes": "schedule/* is not generated or called; schedule_* tool rows show raw details only.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Cross-Session manager/search/status, exact-rule editing, cron builder, original Session history/deletion, header and sidebar seats, replay cards. Durable sidebar-layout restore and precise visual alignment remain; time zone picker uses IANA names rather than ICU city labels.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_agent_management/lib/src/schedules.dart"
+   ]
   },
   {
    "id": "package:ui-secret-mask",
@@ -647,9 +655,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-skill",
    "description": "See a skill the agent used as its own row and reference skills in your messages.",
-   "status": "missing",
-   "notes": "skills/list is not generated or called; the skill tool call renders with the generic card.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Session-keyed catalog and literal /skill picks, invalidation, original-Session previews, sent references and durable tool rows. Editable draft spans preserve literal text; visual chip details remain in task6.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_agent_management/lib/src/skills.dart"
+   ]
   },
   {
    "id": "package:ui-slots",
@@ -877,8 +888,11 @@
    "platform": "both",
    "dshSource": "packages/preset/agent-preset-registry/src/index.ts",
    "description": "Read the selection roster.",
-   "status": "missing",
-   "notes": "Agent preset roster (ui-agent-preset); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/presets.dart"
+   ]
   },
   {
    "id": "remote:agentPresets/read",
@@ -887,8 +901,11 @@
    "platform": "both",
    "dshSource": "packages/preset/agent-preset-registry/src/index.ts",
    "description": "Read one declaration's child plugin list as YAML, for viewing only.",
-   "status": "missing",
-   "notes": "Agent preset composition viewer (ui-agent-preset); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/presets.dart"
+   ]
   },
   {
    "id": "remote:agentPresets/select",
@@ -897,8 +914,11 @@
    "platform": "both",
    "dshSource": "packages/preset/agent-preset-registry/src/index.ts",
    "description": "Select a preset before a session starts its first turn.",
-   "status": "missing",
-   "notes": "Agent preset choice (ui-agent-preset); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/presets.dart"
+   ]
   },
   {
    "id": "remote:claudeCodeMods/pressBand",
@@ -1203,8 +1223,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Clear the current goal while retaining a durable tombstone and history.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/complete",
@@ -1213,8 +1236,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Mark a current non-complete goal complete and disarm it.",
-   "status": "na",
-   "reason": "The pinned dsh web client never calls it (the goal tool completes a goal, the GoalBar does not)."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/create",
@@ -1223,8 +1249,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Set a goal for the session.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/edit",
@@ -1233,8 +1262,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Edit objective and/or round cap without changing phase.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/get",
@@ -1243,8 +1275,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Read the session's current goal.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/pause",
@@ -1253,8 +1288,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Pause an active goal and disarm automatic continuation.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:goals/resume",
@@ -1263,8 +1301,11 @@
    "platform": "both",
    "dshSource": "packages/goal/goal/src/index.ts",
    "description": "Resume and arm a stopped goal, or rearm an active goal after a session-start edge, while its round budget still has capacity.",
-   "status": "missing",
-   "notes": "Session goal (ui-goal); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/goals.dart"
+   ]
   },
   {
    "id": "remote:job/follow",
@@ -1273,8 +1314,11 @@
    "platform": "both",
    "dshSource": "packages/api/job-controller/src/index.ts",
    "description": "Watch one background job's output as it streams.",
-   "status": "missing",
-   "notes": "Background jobs (ui-jobs); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/jobs.dart"
+   ]
   },
   {
    "id": "remote:job/kill",
@@ -1283,8 +1327,11 @@
    "platform": "both",
    "dshSource": "packages/api/job-controller/src/index.ts",
    "description": "Kill one background job on a human's behalf.",
-   "status": "missing",
-   "notes": "Background jobs (ui-jobs); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/jobs.dart"
+   ]
   },
   {
    "id": "remote:job/list",
@@ -1293,8 +1340,11 @@
    "platform": "both",
    "dshSource": "packages/api/job-controller/src/index.ts",
    "description": "List the background jobs a session can see.",
-   "status": "missing",
-   "notes": "Background jobs (ui-jobs); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/jobs.dart"
+   ]
   },
   {
    "id": "remote:llm/discoverModels",
@@ -1626,8 +1676,11 @@
    "platform": "both",
    "dshSource": "packages/schedule/schedule/src/index.ts",
    "description": "List every scheduled task on the host with the session it belongs to.",
-   "status": "missing",
-   "notes": "Scheduled tasks and reminders (ui-schedule); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/schedules.dart"
+   ]
   },
   {
    "id": "remote:schedule/delete",
@@ -1636,8 +1689,11 @@
    "platform": "both",
    "dshSource": "packages/schedule/schedule/src/index.ts",
    "description": "Delete one task belonging to the selected Session, leaving queued messages intact.",
-   "status": "missing",
-   "notes": "Scheduled tasks and reminders (ui-schedule); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/schedules.dart"
+   ]
   },
   {
    "id": "remote:schedule/history",
@@ -1646,8 +1702,11 @@
    "platform": "both",
    "dshSource": "packages/schedule/schedule/src/index.ts",
    "description": "Read what scheduled tasks delivered earlier.",
-   "status": "missing",
-   "notes": "Scheduled tasks and reminders (ui-schedule); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/schedules.dart"
+   ]
   },
   {
    "id": "remote:schedule/list",
@@ -1656,8 +1715,11 @@
    "platform": "both",
    "dshSource": "packages/schedule/schedule/src/index.ts",
    "description": "Read the selected Session's active tasks without resuming its Agent.",
-   "status": "missing",
-   "notes": "Scheduled tasks and reminders (ui-schedule); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/schedules.dart"
+   ]
   },
   {
    "id": "remote:schedule/update",
@@ -1666,8 +1728,11 @@
    "platform": "both",
    "dshSource": "packages/schedule/schedule/src/index.ts",
    "description": "Update the name, instruction, and timing of an active task within the original Session binding without activating the Session or changing saved deliveries.",
-   "status": "missing",
-   "notes": "Scheduled tasks and reminders (ui-schedule); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/schedules.dart"
+   ]
   },
   {
    "id": "remote:session/attachment",
@@ -2002,8 +2067,11 @@
    "platform": "both",
    "dshSource": "packages/api/session-controller/src/skill-catalog.ts",
    "description": "List the user-invocable skills visible to one Session composition.",
-   "status": "missing",
-   "notes": "User-invocable skills (ui-skill); not built."
+   "status": "ported",
+   "notes": "Generated pinned Host contract and Session/lifecycle-scoped client owner.",
+   "whalee": [
+    "features/dsh_feature_agent_management/lib/src/skills.dart"
+   ]
   },
   {
    "id": "remote:speech/cancelPreparation",
@@ -2460,8 +2528,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-agent-preset/src/client/settings-store.ts",
    "description": "Which agent preset later sessions start with.",
-   "status": "missing",
-   "notes": "Not read."
+   "status": "ported",
+   "notes": "Shared ConfigForms read and captured-revision default writes; only still-current blank Session synchronizes.",
+   "whalee": [
+    "packages/dsh_models/lib/src/agents/presets.dart"
+   ]
   },
   {
    "id": "settings:bash-sandbox",

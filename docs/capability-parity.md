@@ -14,22 +14,22 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | area | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
 | Sessions and chat | 62 | 17 | 22 | 1 | 102 |
-| Input and commands | 10 | 3 | 12 | 0 | 25 |
+| Input and commands | 14 | 4 | 7 | 0 | 25 |
 | Tools and approvals | 11 | 1 | 0 | 0 | 12 |
-| Plan, goal, jobs, schedule, workflows | 1 | 2 | 16 | 1 | 20 |
+| Plan, goal, jobs, schedule, workflows | 16 | 4 | 0 | 0 | 20 |
 | Files and preview | 8 | 6 | 5 | 0 | 19 |
 | Settings | 32 | 8 | 15 | 2 | 57 |
-| Plugins and skills | 0 | 2 | 28 | 15 | 45 |
+| Plugins and skills | 1 | 3 | 26 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 147 | 42 | 102 | 28 | 319 |
+| **all** | 167 | 46 | 79 | 27 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 19 | 22 | 12 | 3 | 56 |
-| remote | 55 | 5 | 63 | 23 | 146 |
+| package | 19 | 26 | 8 | 3 | 56 |
+| remote | 74 | 5 | 45 | 22 | 146 |
 | slot | 59 | 14 | 25 | 2 | 100 |
-| settings | 14 | 1 | 2 | 0 | 17 |
+| settings | 15 | 1 | 1 | 0 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
 
@@ -37,7 +37,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
 | desktop | 22 | 3 | 4 | 0 | 29 |
-| both | 125 | 39 | 98 | 28 | 290 |
+| both | 145 | 43 | 75 | 27 | 290 |
 
 ## Packages still to do, by priority
 
@@ -55,16 +55,16 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-conversation` (partial, both): The session screen: header with title and actions, message box with send and stop, to-do dock, and the takeover seat for approvals and questions. The composer is dsh's one rounded card (draft on top, attach, permission, model and send in the row inside it) and a blank session shows the centered hero with its workspace chip and the inert no-workspace card. Queue rows support count disclosure, text-only inline edit, remove and steer with durable occurrence ids, disabled pending rows and image/file previews. Busy-Enter preferences are Host-backed; Enter/Send share delivery intent, Ctrl/Cmd+Enter uses its opposite, and empty accelerated Enter steers queued occurrences in order. Missing: the hero's agent preset and options, the DeepSeek brand mark (na), composer toolbar seats (activity, left, right), in-composer plan control.
 - `ui-deliverables` (partial, both): Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. Implemented turn-local successful mutation evidence, declared deliveries, Host-served change summaries and diffs, four-card folds, a stable Review sidebar resource with per-navigation file selection and split/wrap choices, shared cancellable reads/native gesture feedback, and closing-code file mentions resolved only against recorded evidence. Render/transport/application routing tests and actual upstream contract vectors pass. Native capture and visual alignment are being evaluated; optional tool inspector integration belongs to the diagnostic views work.
 - `ui-dockkit` (partial, desktop): Arrange panels in a draggable split-tree docking layout. The split-tree engine with invertible operations (ported with its vectors) and the docking surface of the right sidebar (tabs, splits, drag between panes, 4-pane cap). The drop-zone preview animation of the web client is simplified.
-- `ui-goal` (partial, both): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented.
+- `ui-goal` (partial, both): See, edit, pause, resume, complete and clear the session goal in a bar above the message box. Projected versioned goal dock with live activation fencing, edit/pause/resume/clear; actual source behavior and native evaluation tracked in task15.
 - `ui-reference` (partial, both): Mention a workspace file or another session with "@" so the agent reads it. Composer file/folder/session/direct-subagent source, serialization and preview are implemented. Sent file/folder labels render through keyed user-text seats; files preserve the originating Session authority with local retry/close feedback. Session labels use only the immediately sourced recall record. Remaining visual detail: long sent chips are atomic WidgetSpans instead of upstream plain inline wrapping; tracked by visual task6.
 
 **P3**
 
-- `ui-agent-preset` (missing, both): Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice.
-- `ui-jobs` (missing, both): List the session's background jobs and watch or kill one from its streaming output panel. job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only.
+- `ui-agent-preset` (partial, both): Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. Settings/default selection, YAML composition, guides, one-shot blank-session choice and Creator landing; native/visual evaluation pending.
+- `ui-jobs` (partial, both): List the session's background jobs and watch or kill one from its streaming output panel. Refcounted roster/follow streams, byte-cursor output tails, bounded rendering, two-press stop and local settled fold/clear; native/visual evaluation pending.
 - `ui-open-in-app` (partial, desktop): Open the workspace folder or a previewed file in an application installed on the host. The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported.
 - `ui-plugin-manager` (missing, both): Install, enable, disable, retry and remove plugin packages on the host. pluginManager/* is not generated; only listBundles is called, to read the host version.
-- `ui-schedule` (missing, both): List, edit and delete the host's scheduled tasks and a session's reminders. schedule/* is not generated or called; schedule_* tool rows show raw details only.
+- `ui-schedule` (partial, both): List, edit and delete the host's scheduled tasks and a session's reminders. Cross-Session manager/search/status, exact-rule editing, cron builder, original Session history/deletion, header and sidebar seats, replay cards. Durable sidebar-layout restore and precise visual alignment remain; time zone picker uses IANA names rather than ICU city labels.
 - `ui-settings-agent-loop` (partial, both): Set how many tool calls the agent may run in parallel. Served staged maxParallelToolCalls, revision-fenced save/reset; native/visual validation pending.
 - `ui-settings-models` (partial, both): Add and edit model providers and their API keys, discover models, and pick the default. Provider directory, write-only credentials, discovery, custom routes, catalog models and versioned welcome are implemented. Composer selection already calls session/selectModel, which saves the Host default in the background. Native/visual validation continues; native account credential onboarding is separate.
 - `ui-settings-plugins` (missing, both): The Plugins section of settings, with the tabs plugin features add to it. No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied.
@@ -72,7 +72,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-settings-subagent` (partial, both): Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. Staged safe-integer depth/capacity and exact provider/model allowlist; unavailable routes retained, revision conflicts and reconnect resets checked. Native/visual validation pending.
 - `ui-settings-web-search` (partial, both): Set the DeepSeek web-search API key, endpoint and per-request search budget. Three staged namespaces, API switch, endpoint/limits, write-only key and credential facts, ordered section-before-selection save. Actual upstream controller traces match; native/visual validation pending.
 - `ui-sidebar-documentpreview` (partial, both): Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview.
-- `ui-skill` (missing, both): See a skill the agent used as its own row and reference skills in your messages. skills/list is not generated or called; the skill tool call renders with the generic card.
+- `ui-skill` (partial, both): See a skill the agent used as its own row and reference skills in your messages. Session-keyed catalog and literal /skill picks, invalidation, original-Session previews, sent references and durable tool rows. Editable draft spans preserve literal text; visual chip details remain in task6.
 - `ui-subagent` (partial, both): See the subagents a session started, read each child's transcript, continue a child and mention one with "@". Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab.
 - `ui-workflow-run` (partial, both): Follow a durable workflow run in the conversation, with its member agents expandable. Durable workflow lifecycle projection, exact phase grouping, status counts and run/member disclosure are implemented. Clean completion collapses after keyboard focus leaves; abnormal/new cycles reopen. Current direct-child/session identity facts gate navigation. Visual alignment is still being verified and remains partial.
 
@@ -215,13 +215,13 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Input and commands
 
-10 ported, 3 partial, 12 missing, 0 na.
+14 ported, 4 partial, 7 missing, 0 na.
 
 ### package (8)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `ui-agent-preset` | missing | both | Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. | The new-session call accepts an agentPreset id (packages/dsh_models/lib/src/session_manager.dart) but no screen offers the choice. |
+| `ui-agent-preset` | partial | both | Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. | `features/dsh_feature_agent_management/lib/src/presets.dart`; Settings/default selection, YAML composition, guides, one-shot blank-session choice and Creator landing; native/visual evaluation pending. |
 | `ui-attachment` | ported | both | Attach photos, camera shots and files to a message with upload progress, cancel and retry, and view images in messages. | `features/dsh_feature_attachment`, `packages/dsh_models/lib/src/attachments.dart`, `packages/dsh_client/lib/src/file_upload.dart` |
 | `ui-commands` | partial | both | Type "/" to see and run the host's slash commands (for example /compact, /goal, /plan) from the message box. | `features/dsh_feature_commands`, `packages/dsh_conversation/lib/src/input/command_ui.dart`; Directory cache, the `/` source with the decision tables, popupSelect and action kinds, contributions (File, Model) and the Permission decoration are ported. Missing: sticky group headings in the popup; `/feedback` has no dialog and `/export` no download (their client halves ui-message-feedback and ui-settings-session-log are not ported), so both are listed and run as plain Host commands. |
 | `ui-input-trigger` | partial | both | Type "/" or "@" in the message box to open a candidate menu and insert the pick. | `features/dsh_feature_input_trigger`, `packages/dsh_conversation/lib/src/input/trigger_controller.dart`, `packages/dsh_conversation/lib/src/input/trigger_detect.dart`, `packages/dsh_conversation/lib/src/input/trigger_menu.dart`, `packages/dsh_conversation/lib/src/input/composer_input.dart`, `features/dsh_feature_conversation/lib/src/composer.dart`; The slash/@ pipeline and programmatic plus launcher are implemented. Plus restores composer focus and opens the leading or inline command source without inserting text; selection-aware command picks retain remaining draft text. Actual reducer vectors and keyboard/application flows pass. Skill decorations and chip persistence remain in the subsequent Skill/settings scope. |
@@ -234,9 +234,9 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `agentPresets/list` | missing | both | Read the selection roster. | Agent preset roster (ui-agent-preset); not built. |
-| `agentPresets/read` | missing | both | Read one declaration's child plugin list as YAML, for viewing only. | Agent preset composition viewer (ui-agent-preset); not built. |
-| `agentPresets/select` | missing | both | Select a preset before a session starts its first turn. | Agent preset choice (ui-agent-preset); not built. |
+| `agentPresets/list` | ported | both | Read the selection roster. | `packages/dsh_models/lib/src/agents/presets.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `agentPresets/read` | ported | both | Read one declaration's child plugin list as YAML, for viewing only. | `packages/dsh_models/lib/src/agents/presets.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `agentPresets/select` | ported | both | Select a preset before a session starts its first turn. | `packages/dsh_models/lib/src/agents/presets.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
 | `commands/execute` | ported | both | Run a slash command (for example /permission) without sending it to the model. | `features/dsh_feature_commands/lib/src/command_source.dart`, `features/dsh_feature_permission_presets/lib/src/permission_widgets.dart` |
 | `commands/list` | ported | both | List the slash commands the session offers. | `features/dsh_feature_commands/lib/src/directory.dart` |
 | `fileReferences/list` | ported | both | List file and directory candidates for one Agent's working directory. | `features/dsh_feature_reference/lib/src/reference_source.dart`, `packages/dsh_client/lib/src/generated/file_references_remote.g.dart` |
@@ -259,7 +259,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `agent-preset-registry` | missing | both | Which agent preset later sessions start with. | Not read. |
+| `agent-preset-registry` | ported | both | Which agent preset later sessions start with. | `packages/dsh_models/lib/src/agents/presets.dart`; Shared ConfigForms read and captured-revision default writes; only still-current blank Session synchronizes. |
 | `ui-conversation` | ported | both | What plain Enter does while the agent is busy: queue the message or steer the running turn. | `features/dsh_feature_conversation/lib/src/submission_policy.dart`, `features/dsh_feature_conversation/lib/src/enter_settings.dart`; Host ui-conversation.busyEnter read/write with queue default, settings menu, live cross-client adoption and independent gesture intent capture. IME and Shift+Enter remain editing gestures. |
 
 ## Tools and approvals
@@ -300,37 +300,37 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Plan, goal, jobs, schedule, workflows
 
-1 ported, 2 partial, 16 missing, 1 na.
+16 ported, 4 partial, 0 missing, 0 na.
 
 ### package (5)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `ui-goal` | partial | both | See, edit, pause, resume, complete and clear the session goal in a bar above the message box. | `features/dsh_feature_chat/lib/src/command_input_view.dart`, `packages/dsh_conversation/lib/src/chat/extended_inputs.dart`; Goal-owned command-input bubbles are ported, including a confirmed leading /goal token; other mentions stay plain. The goal dock, mutations and lifecycle controls remain unimplemented. |
-| `ui-jobs` | missing | both | List the session's background jobs and watch or kill one from its streaming output panel. | job/list, follow and kill are not generated; job_list, job_output and job_kill tool rows show raw details only. |
+| `ui-goal` | partial | both | See, edit, pause, resume, complete and clear the session goal in a bar above the message box. | `features/dsh_feature_agent_management/lib/src/goals.dart`; Projected versioned goal dock with live activation fencing, edit/pause/resume/clear; actual source behavior and native evaluation tracked in task15. |
+| `ui-jobs` | partial | both | List the session's background jobs and watch or kill one from its streaming output panel. | `features/dsh_feature_agent_management/lib/src/jobs.dart`; Refcounted roster/follow streams, byte-cursor output tails, bounded rendering, two-press stop and local settled fold/clear; native/visual evaluation pending. |
 | `ui-plan` | ported | both | Use plan mode: see the plan-mode state, read each submitted plan as a card, and open the full plan. | `features/dsh_feature_plan`, `packages/dsh_conversation/lib/src/plan`; Interactive input plan chip exits through /plan off and waits for Host projection. Submitted plans and exact review calls open a shared, cancelable history resource in the right sidebar (phone sheet); temporary reviews use navigation-only Markdown params. Review auto-opens once and supports manual reopen. Functional port; screenshot paint/font parity remains incomplete. |
-| `ui-schedule` | missing | both | List, edit and delete the host's scheduled tasks and a session's reminders. | schedule/* is not generated or called; schedule_* tool rows show raw details only. |
+| `ui-schedule` | partial | both | List, edit and delete the host's scheduled tasks and a session's reminders. | `features/dsh_feature_agent_management/lib/src/schedules.dart`; Cross-Session manager/search/status, exact-rule editing, cron builder, original Session history/deletion, header and sidebar seats, replay cards. Durable sidebar-layout restore and precise visual alignment remain; time zone picker uses IANA names rather than ICU city labels. |
 | `ui-workflow-run` | partial | both | Follow a durable workflow run in the conversation, with its member agents expandable. | `features/dsh_feature_workflow_run`, `packages/dsh_conversation/lib/src/chat/workflow_run.dart`; Durable workflow lifecycle projection, exact phase grouping, status counts and run/member disclosure are implemented. Clean completion collapses after keyboard focus leaves; abnormal/new cycles reopen. Current direct-child/session identity facts gate navigation. Visual alignment is still being verified and remains partial. |
 
 ### remote (15)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `goals/clear` | missing | both | Clear the current goal while retaining a durable tombstone and history. | Session goal (ui-goal); not built. |
-| `goals/complete` | na | both | Mark a current non-complete goal complete and disarm it. | The pinned dsh web client never calls it (the goal tool completes a goal, the GoalBar does not). |
-| `goals/create` | missing | both | Set a goal for the session. | Session goal (ui-goal); not built. |
-| `goals/edit` | missing | both | Edit objective and/or round cap without changing phase. | Session goal (ui-goal); not built. |
-| `goals/get` | missing | both | Read the session's current goal. | Session goal (ui-goal); not built. |
-| `goals/pause` | missing | both | Pause an active goal and disarm automatic continuation. | Session goal (ui-goal); not built. |
-| `goals/resume` | missing | both | Resume and arm a stopped goal, or rearm an active goal after a session-start edge, while its round budget still has capacity. | Session goal (ui-goal); not built. |
-| `job/follow` | missing | both | Watch one background job's output as it streams. | Background jobs (ui-jobs); not built. |
-| `job/kill` | missing | both | Kill one background job on a human's behalf. | Background jobs (ui-jobs); not built. |
-| `job/list` | missing | both | List the background jobs a session can see. | Background jobs (ui-jobs); not built. |
-| `schedule/catalog` | missing | both | List every scheduled task on the host with the session it belongs to. | Scheduled tasks and reminders (ui-schedule); not built. |
-| `schedule/delete` | missing | both | Delete one task belonging to the selected Session, leaving queued messages intact. | Scheduled tasks and reminders (ui-schedule); not built. |
-| `schedule/history` | missing | both | Read what scheduled tasks delivered earlier. | Scheduled tasks and reminders (ui-schedule); not built. |
-| `schedule/list` | missing | both | Read the selected Session's active tasks without resuming its Agent. | Scheduled tasks and reminders (ui-schedule); not built. |
-| `schedule/update` | missing | both | Update the name, instruction, and timing of an active task within the original Session binding without activating the Session or changing saved deliveries. | Scheduled tasks and reminders (ui-schedule); not built. |
+| `goals/clear` | ported | both | Clear the current goal while retaining a durable tombstone and history. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/complete` | ported | both | Mark a current non-complete goal complete and disarm it. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/create` | ported | both | Set a goal for the session. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/edit` | ported | both | Edit objective and/or round cap without changing phase. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/get` | ported | both | Read the session's current goal. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/pause` | ported | both | Pause an active goal and disarm automatic continuation. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `goals/resume` | ported | both | Resume and arm a stopped goal, or rearm an active goal after a session-start edge, while its round budget still has capacity. | `packages/dsh_models/lib/src/agents/goals.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `job/follow` | ported | both | Watch one background job's output as it streams. | `packages/dsh_models/lib/src/agents/jobs.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `job/kill` | ported | both | Kill one background job on a human's behalf. | `packages/dsh_models/lib/src/agents/jobs.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `job/list` | ported | both | List the background jobs a session can see. | `packages/dsh_models/lib/src/agents/jobs.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `schedule/catalog` | ported | both | List every scheduled task on the host with the session it belongs to. | `packages/dsh_models/lib/src/agents/schedules.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `schedule/delete` | ported | both | Delete one task belonging to the selected Session, leaving queued messages intact. | `packages/dsh_models/lib/src/agents/schedules.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `schedule/history` | ported | both | Read what scheduled tasks delivered earlier. | `packages/dsh_models/lib/src/agents/schedules.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `schedule/list` | ported | both | Read the selected Session's active tasks without resuming its Agent. | `packages/dsh_models/lib/src/agents/schedules.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
+| `schedule/update` | ported | both | Update the name, instruction, and timing of an active task within the original Session binding without activating the Session or changing saved deliveries. | `packages/dsh_models/lib/src/agents/schedules.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
 
 ## Files and preview
 
@@ -453,7 +453,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Plugins and skills
 
-0 ported, 2 partial, 28 missing, 15 na.
+1 ported, 3 partial, 26 missing, 15 na.
 
 ### package (5)
 
@@ -463,7 +463,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `ui-plugin-market` | missing | both | Browse the configured plugin market indexes and install a bundle from the Discover tab. | pluginMarket/* is not generated or called. |
 | `ui-settings-plugin-inventory` | missing | both | Read the host's loaded plugin inventory in a read-only tab. | pluginInventory/list is not generated or called. |
 | `ui-settings-plugins` | missing | both | The Plugins section of settings, with the tabs plugin features add to it. | No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied. |
-| `ui-skill` | missing | both | See a skill the agent used as its own row and reference skills in your messages. | skills/list is not generated or called; the skill tool call renders with the generic card. |
+| `ui-skill` | partial | both | See a skill the agent used as its own row and reference skills in your messages. | `features/dsh_feature_agent_management/lib/src/skills.dart`; Session-keyed catalog and literal /skill picks, invalidation, original-Session previews, sent references and durable tool rows. Editable draft spans preserve literal text; visual chip details remain in task6. |
 
 ### remote (30)
 
@@ -498,7 +498,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `pluginMarket/search` | missing | both | Return one page of the plugins of a configured index that match a query. | Plugin market (ui-plugin-market); not built. |
 | `pluginMarket/setIndexes` | missing | both | Replace the configured index sources through Settings, without remounting this service. | Plugin market (ui-plugin-market); not built. |
 | `pluginRegistryProbe/fastest` | missing | both | Pick the faster of two npm registries for installs. | Part of the plugin manager (picks the fastest npm registry). |
-| `skills/list` | missing | both | List the user-invocable skills visible to one Session composition. | User-invocable skills (ui-skill); not built. |
+| `skills/list` | ported | both | List the user-invocable skills visible to one Session composition. | `features/dsh_feature_agent_management/lib/src/skills.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
 
 ### slot (10)
 

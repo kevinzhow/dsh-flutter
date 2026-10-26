@@ -3,6 +3,8 @@
 /// composer to do, and the menu state the view renders.
 library;
 
+import 'dart:async';
+
 /// The character a source binds to.
 enum TriggerChar {
   slash('/'),
@@ -368,6 +370,20 @@ abstract interface class ReferenceCodec {
   Future<String> serialize(String ref, AbortSignal signal);
 }
 
+/// A catalog-confirmed literal reference; it remains ordinary editable text.
+class InputLexiconEntry {
+  const InputLexiconEntry(this.token, this.ref, {this.appearance});
+  final String token, ref;
+  final String? appearance;
+}
+
+class InputLexeme {
+  const InputLexeme(this.start, this.end, this.source, this.entry);
+  final int start, end;
+  final String source;
+  final InputLexiconEntry entry;
+}
+
 /// One trigger source. Only [candidates] and [onPick] are required; the other
 /// hooks are participation claims, as in dsh.
 abstract class InputTriggerSource {
@@ -426,6 +442,10 @@ abstract class InputTriggerSource {
 
   /// Open a reference preview without touching the draft.
   bool openReference(String sessionId, String ref, String? appearance) => false;
+
+  /// Settled catalog facts; never turn an unconfirmed word into a reference.
+  List<InputLexiconEntry> lexicon(String sessionId) => const [];
+  Stream<Object?>? get lexiconChanges => null;
 
   ReferenceCodec? get codec => null;
 }

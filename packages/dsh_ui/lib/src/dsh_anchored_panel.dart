@@ -39,6 +39,8 @@ class DshAnchoredPanel extends StatefulWidget {
     this.align = DshPanelAlign.start,
     this.gap = 4,
     this.controller,
+    this.panelWidth,
+    this.viewportMargin = 12,
   });
 
   final Widget Function(BuildContext context, DshPanelController controller)
@@ -49,6 +51,11 @@ class DshAnchoredPanel extends StatefulWidget {
   final DshPanelAlign align;
   final double gap;
   final DshPanelController? controller;
+
+  /// A known popover width permits horizontal placement within the viewport.
+  /// Omitted keeps the caller's intrinsic layout and anchor alignment.
+  final double? panelWidth;
+  final double viewportMargin;
 
   @override
   State<DshAnchoredPanel> createState() => _DshAnchoredPanelState();
@@ -97,13 +104,38 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     final overlay = Overlay.of(context, rootOverlay: true);
     final end = widget.align == DshPanelAlign.end;
     final top = widget.side == DshPanelSide.top;
+    double shiftX = 0;
+    double? width;
+    final requested = widget.panelWidth;
+    if (requested != null) {
+      final screen = MediaQuery.sizeOf(context);
+      final margin = widget.viewportMargin;
+      width = requested.clamp(
+        0,
+        (screen.width - margin * 2).clamp(0, screen.width),
+      );
+      final box = context.findRenderObject()! as RenderBox;
+      final anchor = box.localToGlobal(Offset.zero);
+      final left = end ? anchor.dx + box.size.width - width : anchor.dx;
+      final clamped = left.clamp(
+        margin,
+        (screen.width - margin - width).clamp(margin, screen.width),
+      );
+      shiftX = clamped - left;
+    }
     _entry = OverlayEntry(
       builder: (context) => Stack(
         children: [
           Positioned.fill(
             child: Listener(
               behavior: HitTestBehavior.translucent,
-              onPointerDown: (_) => _close(),
+              onPointerDown: (event) {
+                final box = this.context.findRenderObject()! as RenderBox;
+                final anchor = box.localToGlobal(Offset.zero) & box.size;
+                // The trigger owns its toggle. Closing on its pointer-down
+                // would make its subsequent tap reopen the same panel.
+                if (!anchor.contains(event.position)) _close();
+              },
               child: const SizedBox.expand(),
             ),
           ),
@@ -111,8 +143,13 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
             link: _link,
             targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
             followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
-            offset: Offset(0, top ? -widget.gap : widget.gap),
-            child: widget.panelBuilder(context, _controller),
+            offset: Offset(shiftX, top ? -widget.gap : widget.gap),
+            child: width == null
+                ? widget.panelBuilder(context, _controller)
+                : SizedBox(
+                    width: width,
+                    child: widget.panelBuilder(context, _controller),
+                  ),
           ),
         ],
       ),

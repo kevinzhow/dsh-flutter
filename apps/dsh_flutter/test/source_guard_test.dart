@@ -26,6 +26,7 @@ void main() {
     '../../features/dsh_feature_session/lib',
     '../../features/dsh_feature_settings/lib',
     '../../features/dsh_feature_model_settings/lib',
+    '../../features/dsh_feature_agent_management/lib',
     '../../features/dsh_feature_shortcuts/lib',
     '../../features/dsh_feature_sidebar/lib',
     '../../features/dsh_feature_sidebar_right/lib',

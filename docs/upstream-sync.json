@@ -9,6 +9,100 @@
   },
   "generated": [
     {
+      "output": "packages/dsh_client/lib/src/generated/agent_presets_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/agentPresets.ir.json",
+      "irSha256": "b7a9c5e9dbabaec1e324d16e943d625966c6504de52fc2b85bc09f9a4b3baf1a",
+      "inputs": [
+        {
+          "path": "packages/preset/agent-preset-registry/src/index.ts",
+          "sha256": "f03d070aee4ec58eefdeab5ea128ca71e12108512997525672b0ad1c516205ec"
+        },
+        {
+          "path": "packages/preset/agent-preset-registry/src/types.ts",
+          "sha256": "6268655505d96c2f818dcd05fb3335e30e653de1ac4206b26a9acca2d5b39089"
+        }
+      ],
+      "rawSha256": "4fc737459e2a70ebae843c8b32d1a9f455ac6ef01e8f279a65121bab13817c3b",
+      "outputSha256": "5a8740c5df3a75755564a2a675e658f87f413ed573dbad00bbd994e828891dfb"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/skills_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/skills.ir.json",
+      "irSha256": "20a80313c9e6ecb92f5784751932a68e3b023ca783185d9d21b0821874325be8",
+      "inputs": [
+        {
+          "path": "packages/api/session-controller/src/skill-catalog.ts",
+          "sha256": "fb5cfc3c36fb36156a7be51c48b88bca841a43e11b9265cc94974a9074979d6e"
+        },
+        {
+          "path": "packages/api/session-controller/src/types.ts",
+          "sha256": "72a35c7df913a2a2d0548b40aa8a7abbbbc7807e55f4f9f5fb236a9a2550a042"
+        }
+      ],
+      "rawSha256": "4455c87b5e4f74db7f6e841df57680b116428ef7b68cbdcdd83b28633b70bba1",
+      "outputSha256": "24eb33e5783bd9924b8ffb5396334e5d74836ae858ea557e4b084c89aaec894c"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/goals_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/goals.ir.json",
+      "irSha256": "397e21983bb454d73440ccc373bd9d11e2cb9f61690d05432f5b569fe25cc3de",
+      "inputs": [
+        {
+          "path": "packages/goal/goal/src/index.ts",
+          "sha256": "333ebc31489619ee083235c5f5ceeb38ac3c6c844b2a0179458058401a6ebf9a"
+        },
+        {
+          "path": "packages/goal/goal/src/types.ts",
+          "sha256": "a33a493854f86cfa1bb959d257e1d5b1237f1666dec617633a2af1fe28cd5719"
+        }
+      ],
+      "rawSha256": "fd9b491f112e8e9d533eb7a89149737ae52419d7c84a8ecf32bb7fc01541cdfd",
+      "outputSha256": "cd3d52bd237a6ce1dacf282cb0e3b9f3a656d9e97d7035640353accf26bbccd0"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/job_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/job.ir.json",
+      "irSha256": "1fd75a8414294965098a0d38d61b4731549a7ccfbbf23608ecb4097221094dd3",
+      "inputs": [
+        {
+          "path": "packages/api/job-controller/src/index.ts",
+          "sha256": "e525e3ff9eaf15d92c613db41d65be9d2eb6c287c579e3f5b117bb520d58338e"
+        },
+        {
+          "path": "packages/api/job-controller/src/types.ts",
+          "sha256": "4de684ca46ec67aafc81db0175019a67c921d5d9834e20196d5a736a78cc9f43"
+        },
+        {
+          "path": "packages/jobs/jobs/src/view.ts",
+          "sha256": "6e5a2953e4490a4a1fb3aad0d6fbcb2411465e1e0a93a19d0ded83f89f80a6e1"
+        }
+      ],
+      "rawSha256": "50b759aa6424d120a2b1a8ef2b7a5cbb85bb10aca96259bd2a22e220b7f78483",
+      "outputSha256": "b58c091a9f8ac103585502febb3ef796c01c04d5bb2f28f3e1e43428ed7ba41e"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/schedule_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/schedule.ir.json",
+      "irSha256": "0c1777235b99d2fa78d526b9e297aa6550651a035e61bcc6118937edb290ff03",
+      "inputs": [
+        {
+          "path": "packages/schedule/schedule/src/index.ts",
+          "sha256": "23e748d6e7e95a50169ed576f3cb7e559284a9912ddeb1cc3bd1eda1a4adc4ec"
+        },
+        {
+          "path": "packages/schedule/schedule/src/types.ts",
+          "sha256": "995e067824c7f6b848e29e3aac968debcc9d68da24a512eb7d732cb693546bff"
+        }
+      ],
+      "rawSha256": "e3d34e298d94b99db2c1a2ada3bad6cc2db069b24ffbc94a10ec0f9cd66f38e0",
+      "outputSha256": "75936796edfaf26d7a964e4502235a194e21d4bf9ba8fad06e89f40fb4ce9b8b"
+    },
+    {
       "output": "packages/dsh_client/lib/src/generated/credentials_remote.g.dart",
       "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
       "ir": "tool/codegen/ir/credentials.ir.json",
@@ -298,10 +392,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "30e3f634231ca9de8e493761ae2925c712c685746ca92b0c9bdaab667086708a",
+      "irSha256": "a06deff21f9512c91237b3746540374ddfaebfe7a3507b0a851f0734684b35a1",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "ed879398e7d1699f142bb2964990bf3d4c12c95d7518b222091a3367118712f4"
+        "sha256": "716e5c04811ae5684c51ee825526144fcbcd6f6a30e506b74089ac8316e8c202"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -319,6 +413,14 @@
         {
           "path": "packages/client/locale/src/locales/zh.ts",
           "sha256": "df60768badc3c483478f5a57e48aee8219bd48f51764876a1d722432140d0e26"
+        },
+        {
+          "path": "packages/client/ui-agent-preset/src/client/guide-locales.ts",
+          "sha256": "631c5399a35288cd9006232ca34c0558d888cc8a6e1519950060bf5817f8d14a"
+        },
+        {
+          "path": "packages/client/ui-agent-preset/src/client/locales.ts",
+          "sha256": "e9f6ab2f0aabf8cda2ac4ee638604437f12ebba8e0e981bb5d8495e1873be142"
         },
         {
           "path": "packages/client/ui-approval/src/client/locales.ts",
@@ -497,8 +599,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "9fa2db70923d0faee81882ac8ac6d1a094948699b7be59374a1a13dcc84880c5",
-      "outputSha256": "bdd00c3a2c5aaa774b21e98cc994a8bbc835216bfe8a4e29b817b42c765034fa"
+      "rawSha256": "ce28c373ba97e5b698966bc251c35aa6d58a98317876005f3f73eba9ee44644c",
+      "outputSha256": "908a50b437309ca38bd382022026134fa2d4512e709cff039382959144fa108b"
     }
   ]
 }
