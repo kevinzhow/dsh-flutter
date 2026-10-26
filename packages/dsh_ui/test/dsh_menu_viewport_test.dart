@@ -121,7 +121,7 @@ void main() {
     try {
       await pump(t);
       final first = t.getSemantics(row('0'));
-      t.binding.pipelineOwner.semanticsOwner!.performAction(
+      t.renderObject(row('0')).owner!.semanticsOwner!.performAction(
         first.id,
         SemanticsAction.focus,
       );
@@ -177,7 +177,7 @@ void main() {
         ),
       );
       final item = find.byKey(const ValueKey('standalone'));
-      t.binding.pipelineOwner.semanticsOwner!.performAction(
+      t.renderObject(item).owner!.semanticsOwner!.performAction(
         t.getSemantics(item).id,
         SemanticsAction.focus,
       );
