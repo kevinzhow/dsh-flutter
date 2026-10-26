@@ -114,6 +114,9 @@ function convert(type, hint) {
     return { k: 'json' }
   }
   if (isJsonValueAlias(type)) return { k: 'json' }
+  // The transport transfers typed byte buffers as multipart attachments. Their
+  // JavaScript methods and ArrayBuffer properties are not a JSON record.
+  if (type.getSymbol()?.name === 'Uint8Array' && isLibSymbol(type.getSymbol())) return { k: 'bytes' }
   if (type.flags & F.Void) return { k: 'void' }
   if (type.flags & F.Never) return { k: 'never' }
   if (type.flags & F.Null) return { k: 'null' }

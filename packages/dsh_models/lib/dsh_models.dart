@@ -42,3 +42,7 @@ export 'src/agents/jobs.dart';
 export 'src/agents/goals.dart';
 export 'src/agents/schedules.dart';
 export 'src/agents/task_timing.dart';
+export 'src/plugins/installer.dart';
+export 'src/plugins/manager.dart';
+export 'src/plugins/market.dart';
+export 'src/documents/office.dart';

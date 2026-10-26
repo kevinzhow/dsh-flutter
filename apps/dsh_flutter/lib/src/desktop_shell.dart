@@ -17,6 +17,7 @@ import 'package:dsh_client/generated.dart'
     show SessionRemote, SessionSearchRequest;
 import 'package:dsh_client/generated_settings.dart' show SettingsRemote;
 import 'package:dsh_feature_agent_management/dsh_feature_agent_management.dart';
+import 'package:dsh_feature_plugins/dsh_feature_plugins.dart';
 import 'package:dsh_feature_conversation/dsh_feature_conversation.dart'
     show ConversationHero;
 import 'package:dsh_feature_directory_picker_native/dsh_feature_directory_picker_native.dart';
@@ -140,7 +141,17 @@ class DesktopShell {
       _offs.add(
         slots.register<Object?, Widget>(
           DshShellSlots.main.typed<Object?, Widget>(),
-          (_) => panel.id == 'schedules' && app.schedules != null
+          (_) =>
+              panel.id == 'plugins' &&
+                  app.plugins != null &&
+                  app.pluginMarket != null
+              ? PluginManagerPage(
+                  model: app.plugins!,
+                  market: app.pluginMarket!,
+                  slots: slots,
+                  i18n: app.i18n,
+                )
+              : panel.id == 'schedules' && app.schedules != null
               ? TaskManagerPage(
                   service: app.schedules!,
                   i18n: app.i18n,

@@ -6,6 +6,9 @@ environment:
   sdk: ^3.13.5
 resolution: workspace
 dependencies:
+  html: ^0.15.6
+  pdfrx: 2.10.1
+  flutter_inappwebview: 6.1.5
   flutter:
     sdk: flutter
   dsh_client: ^0.0.1

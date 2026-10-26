@@ -5,6 +5,8 @@ analyzer:
     strict-casts: true
     strict-raw-types: true
   exclude:
+    # Unmodified third-party plugin runtime plus the documented Gradle compatibility patch.
+    - "third_party/flutter_inappwebview_android/**"
     - "**/*.g.dart"
     - "**/build/**"
     - "**/linux/**"

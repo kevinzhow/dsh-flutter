@@ -1,3 +1,10 @@
+import 'package:dsh_client/generated_plugin_manager.dart' as plugin_manager_ns;
+import 'package:dsh_client/generated_plugin_market.dart' as plugin_market_ns;
+import 'package:dsh_client/generated_plugin_inventory.dart'
+    as plugin_inventory_ns;
+import 'package:dsh_client/generated_plugin_registry_probe.dart'
+    as plugin_registry_probe_ns;
+import 'package:dsh_client/generated_office_to_pdf.dart' as office_to_pdf_ns;
 import 'package:dsh_client/generated_schedule.dart' as schedule_ns;
 import 'package:dsh_client/generated_job.dart' as job_ns;
 import 'package:dsh_client/generated_goals.dart' as goals_ns;
@@ -46,6 +53,13 @@ class HostRemotes {
        goals = goals_ns.GoalsRemote(caller),
        job = job_ns.JobRemote(caller),
        schedule = schedule_ns.ScheduleRemote(caller),
+       pluginManager = plugin_manager_ns.PluginManagerRemote(caller),
+       pluginMarket = plugin_market_ns.PluginMarketRemote(caller),
+       pluginInventory = plugin_inventory_ns.PluginInventoryRemote(caller),
+       pluginRegistryProbe = plugin_registry_probe_ns.PluginRegistryProbeRemote(
+         caller,
+       ),
+       officeToPdf = office_to_pdf_ns.OfficeToPdfRemote(caller),
        caller = caller;
 
   /// `session` (model catalog, `selectModel`).
@@ -86,6 +100,16 @@ class HostRemotes {
   final job_ns.JobRemote job;
 
   final schedule_ns.ScheduleRemote schedule;
+
+  final plugin_manager_ns.PluginManagerRemote pluginManager;
+
+  final plugin_market_ns.PluginMarketRemote pluginMarket;
+
+  final plugin_inventory_ns.PluginInventoryRemote pluginInventory;
+
+  final plugin_registry_probe_ns.PluginRegistryProbeRemote pluginRegistryProbe;
+
+  final office_to_pdf_ns.OfficeToPdfRemote officeToPdf;
 
   final RemoteCaller caller;
 

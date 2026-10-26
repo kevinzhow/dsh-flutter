@@ -200,6 +200,13 @@ abstract final class DshSlots {
 
   /// One preference row of the General section (dsh `ui-settings`): the
   /// owner passes nothing, a row draws its own label and write path.
+  /// Feature-owned tabs in the built-in Plugins settings section.
+  static const settingsPluginsTab = Slot<Object?, Object?>(
+    'settings.plugins.tab',
+    SlotCardinality.list,
+    SlotScope.root,
+  );
+
   static const settingsGeneralItem = Slot<Object?, Object?>(
     'settings.general.item',
     SlotCardinality.list,
@@ -338,6 +345,7 @@ abstract final class DshSlots {
     modelsFooter,
     settingsSection,
     settingsGeneralItem,
+    settingsPluginsTab,
     pluginsItem,
     conversationInputPermission,
     conversationInputPlan,

@@ -183,6 +183,8 @@ class Emitter:
             return T("num", "_num", "{}")
         if k == "bool":
             return T("bool", "_bool", "{}")
+        if k == "bytes":
+            return T("Uint8List", "_bytes", "{}")
         if k in ("json", "null", "never", "undefined"):
             return T("Object?", "_json", "{}")
         if k == "void":
@@ -481,6 +483,8 @@ class Emitter:
         for f in c.fields:
             if f.optional:
                 params.append(f"this.{f.name}")
+                if f.t.nullable:
+                    params.append(f"this.{f.name}Present = false")
             else:
                 params.append(f"required this.{f.name}")
         if c.extras:
@@ -502,6 +506,8 @@ class Emitter:
             for f in c.fields:
                 fn = "_opt" if f.optional else "_req"
                 L.append(f"      {f.name}: {fn}<{f.t.dart}>(m, {q(f.json)}, path, {f.t.dec}),")
+                if f.optional and f.t.nullable:
+                    L.append(f"      {f.name}Present: m.containsKey({q(f.json)}),")
             if c.extras:
                 keys = ", ".join(q(f.json) for f in c.fields)
                 L.append(f"      extra: _rest(m, const {{{keys}}}),")
@@ -512,6 +518,9 @@ class Emitter:
         for f in c.fields:
             L.extend(doc_lines(f.doc, "  "))
             L.append(f"  final {field_dart(f)} {f.name};")
+            if f.optional and f.t.nullable:
+                L.append(f"  /// Send an explicit null when `{f.name}` is null; false omits it.")
+                L.append(f"  final bool {f.name}Present;")
         if c.extras:
             L.append("  /// Keys this generation does not model, kept verbatim.")
             L.append("  final Map<String, Object?> extra;")
@@ -526,6 +535,8 @@ class Emitter:
         for f in c.fields:
             if f.optional:
                 L.append(f"    if ({f.name} case final v?) {q(f.json)}: {f.t.enc_nn('v')},")
+                if f.t.nullable:
+                    L.append(f"    if ({f.name} == null && {f.name}Present) {q(f.json)}: null,")
             else:
                 L.append(f"    {q(f.json)}: {f.t.enc_expr(f.name)},")
         L.append("  };")
@@ -739,9 +750,17 @@ def emit_remote(ir: dict, meta: dict, skipped: list[str]) -> str:
     for n in sorted(set(ir.get("notes", [])) | set(em.notes)):
         extra.append("Note: " + n)
     body = em.render_all()
+    binary = 'Uint8List' in body or any('Uint8List' in line for line in method_src)
+    binary_helpers = """
+Uint8List _bytes(Object? value, String path) {
+  if (value is Uint8List) return value;
+  throw FormatException('$path: expected a multipart byte attachment');
+}
+""" if binary else ""
     out = [header(meta, f"Dart client for the dsh `{ns}` Remote namespace.", extra),
+           *( ["import 'dart:typed_data';"] if binary else [] ),
            "import '../remote_caller.dart';", "",
-           HELPERS, "",
+           HELPERS + binary_helpers, "",
            "/// Describes one multiplexed stream method (`/api/remote.mux`). Streams are not",
            "/// callable through [RemoteCaller]; the transport opens `endpoint` with",
            "/// `payload: {args: encodeArgs(arg)}` and decodes every item with `decodeFrame`.",

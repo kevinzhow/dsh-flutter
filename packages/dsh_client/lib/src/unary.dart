@@ -15,7 +15,7 @@ class UnauthorizedException extends RemoteException {
 }
 
 /// `POST /api/<namespace>/<method>` with dsh's `client-request` envelope.
-class HttpRemoteCaller implements RemoteCaller {
+class HttpRemoteCaller implements CancellableRemoteCaller {
   HttpRemoteCaller(this.credential, {HttpClient? httpClient})
     : _http = httpClient ?? HttpClient(),
       _owns = httpClient == null;
@@ -29,72 +29,98 @@ class HttpRemoteCaller implements RemoteCaller {
     String namespace,
     String method,
     Map<String, Object?> args,
+  ) => _call(namespace, method, args, null);
+
+  @override
+  Future<Object?> callWithCancellation(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+    RemoteCancellation cancellation,
+  ) => _call(namespace, method, args, cancellation);
+
+  Future<Object?> _call(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+    RemoteCancellation? cancellation,
   ) async {
+    cancellation?.throwIfCancelled();
     final rpcId = randomUuid();
     final uri = credential.origin.replace(path: '/api/$namespace/$method');
     final request = await _http.postUrl(uri);
-    request.headers
-      ..set(HttpHeaders.contentTypeHeader, 'application/json')
-      ..set(HttpHeaders.cookieHeader, credential.cookieHeader);
-    request.add(
-      utf8.encode(
-        jsonEncode({
-          'type': 'client-request',
-          'rpcId': rpcId,
-          'method': '$namespace/$method',
-          'payload': {'args': args},
-        }),
-      ),
-    );
-    final response = await request.close();
-    final builder = BytesBuilder(copy: false);
-    await for (final chunk in response) {
-      builder.add(chunk);
-    }
-    final bytes = builder.takeBytes();
-    if (response.statusCode == HttpStatus.unauthorized) {
-      throw UnauthorizedException('$namespace/$method');
-    }
-    if (response.statusCode != HttpStatus.ok) {
-      throw RemoteException(
-        'transport/http-${response.statusCode}',
-        'transport failure for $namespace/$method: HTTP ${response.statusCode}',
+    final off = cancellation?.listen(() => request.abort(cancellation.reason));
+    try {
+      cancellation?.throwIfCancelled();
+      request.headers
+        ..set(HttpHeaders.contentTypeHeader, 'application/json')
+        ..set(HttpHeaders.cookieHeader, credential.cookieHeader);
+      request.add(
+        utf8.encode(
+          jsonEncode({
+            'type': 'client-request',
+            'rpcId': rpcId,
+            'method': '$namespace/$method',
+            'payload': {'args': args},
+          }),
+        ),
       );
+      final response = await request.close();
+      final builder = BytesBuilder(copy: false);
+      await for (final chunk in response) {
+        builder.add(chunk);
+      }
+      final bytes = builder.takeBytes();
+      if (response.statusCode == HttpStatus.unauthorized) {
+        throw UnauthorizedException('$namespace/$method');
+      }
+      if (response.statusCode != HttpStatus.ok) {
+        throw RemoteException(
+          'transport/http-${response.statusCode}',
+          'transport failure for $namespace/$method: HTTP ${response.statusCode}',
+        );
+      }
+      final mime = response.headers.contentType?.mimeType;
+      final Object? decoded;
+      if (mime == 'multipart/form-data') {
+        // A binary result (docs: connection README, binary Remote transfer):
+        // JSON metadata plus raw byte parts; `Uint8Array` fields come back as
+        // [Uint8List] values inside `value`.
+        decoded = decodeBinaryResponse(
+          response.headers.value(HttpHeaders.contentTypeHeader) ?? '',
+          bytes,
+        );
+      } else {
+        decoded = jsonDecode(utf8.decode(bytes));
+      }
+      if (decoded is! Map<String, Object?> || decoded['rpcId'] != rpcId) {
+        throw RemoteException(
+          'transport/bad-envelope',
+          'unexpected response envelope for $namespace/$method',
+        );
+      }
+      final result = decoded['result'];
+      if (result is! Map<String, Object?>) {
+        throw RemoteException('transport/bad-envelope', 'missing result');
+      }
+      cancellation?.throwIfCancelled();
+      if (result['ok'] == true) return result['value'];
+      final error = result['error'];
+      if (error is Map<String, Object?>) {
+        final details = error['details'];
+        throw RemoteException(
+          '${error['code']}',
+          '${error['message']}',
+          details is Map<String, Object?> ? details : const {},
+        );
+      }
+      throw RemoteException('transport/bad-envelope', 'malformed error result');
+    } catch (e) {
+      cancellation?.throwIfCancelled();
+      rethrow;
+    } finally {
+      off?.call();
     }
-    final mime = response.headers.contentType?.mimeType;
-    final Object? decoded;
-    if (mime == 'multipart/form-data') {
-      // A binary result (docs: connection README, binary Remote transfer):
-      // JSON metadata plus raw byte parts; `Uint8Array` fields come back as
-      // [Uint8List] values inside `value`.
-      decoded = decodeBinaryResponse(
-        response.headers.value(HttpHeaders.contentTypeHeader) ?? '',
-        bytes,
-      );
-    } else {
-      decoded = jsonDecode(utf8.decode(bytes));
-    }
-    if (decoded is! Map<String, Object?> || decoded['rpcId'] != rpcId) {
-      throw RemoteException(
-        'transport/bad-envelope',
-        'unexpected response envelope for $namespace/$method',
-      );
-    }
-    final result = decoded['result'];
-    if (result is! Map<String, Object?>) {
-      throw RemoteException('transport/bad-envelope', 'missing result');
-    }
-    if (result['ok'] == true) return result['value'];
-    final error = result['error'];
-    if (error is Map<String, Object?>) {
-      final details = error['details'];
-      throw RemoteException(
-        '${error['code']}',
-        '${error['message']}',
-        details is Map<String, Object?> ? details : const {},
-      );
-    }
-    throw RemoteException('transport/bad-envelope', 'malformed error result');
   }
 
   void close() {

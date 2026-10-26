@@ -1,0 +1,1348 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "pluginManager",
+  "package": "packages/boot/plugin-manager",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/boot/plugin-manager/src/index.ts",
+    "packages/boot/plugin-manager/src/types.ts",
+    "packages/host/plugin-inventory/src/types.ts",
+    "packages/util/package-manifest/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "listVersionExemptions",
+      "hostName": "listVersionExemptions",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "obj",
+        "props": [
+          {
+            "name": "exemptions",
+            "optional": false,
+            "type": {
+              "k": "rec",
+              "of": {
+                "k": "arr",
+                "of": {
+                  "k": "str"
+                }
+              }
+            }
+          },
+          {
+            "name": "warnings",
+            "optional": false,
+            "type": {
+              "k": "arr",
+              "of": {
+                "k": "str"
+              }
+            }
+          }
+        ]
+      },
+      "doc": "Read exact plugin-version exemptions saved in this profile."
+    },
+    {
+      "name": "setVersionExemption",
+      "hostName": "setVersionExemption",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "packageVersion",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "runtimeVersion",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "acceptRisk",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ChangeResult"
+      },
+      "doc": "Grant or revoke one exact plugin/runtime exemption and reevaluate live plugins."
+    },
+    {
+      "name": "listPlugins",
+      "hostName": "listPlugins",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "PluginInfo"
+        }
+      },
+      "doc": "Read current plugins, including why a row cannot be changed through the profile patch."
+    },
+    {
+      "name": "listBundles",
+      "hostName": "listBundles",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "BundleInfo"
+        }
+      },
+      "doc": "Read installed, installation-provided, and offline Official catalog bundles, plus selected non-bundle names. A dependency without a bundle patch is listed, as a `not-bundle` problem, only while it is selected."
+    },
+    {
+      "name": "registries",
+      "hostName": "registries",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "PluginRegistries"
+      },
+      "doc": "Read the registries this manager asks: the configured first one, its fallbacks in order, and what pnpm's own configuration names."
+    },
+    {
+      "name": "inspect",
+      "hostName": "inspect",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "spec",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "options",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "InspectOptions"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "PluginSpecInspection"
+      },
+      "doc": "Read what a spec names before installing it."
+    },
+    {
+      "name": "setPluginEnabled",
+      "hostName": "setPluginEnabled",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ChangeResult"
+      },
+      "doc": "Persist a plugin entry's desired enablement and apply it on live profiles."
+    },
+    {
+      "name": "setBundleEnabled",
+      "hostName": "setBundleEnabled",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ChangeResult"
+      },
+      "doc": "Select or remove a bundle layer while retaining installed dependencies."
+    },
+    {
+      "name": "installBundle",
+      "hostName": "installBundle",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "spec",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "options",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "InstallBundleOptions"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ChangeResult"
+      },
+      "doc": "Install a package using the same pnpm implementation as dsh plugin. GitHub repositories get a connection check bounded by githubConnectionTimeoutMs before pnpm starts; only network failures or timeouts stop installation, while pnpm owns authentication and transport fallback. A run that fails, is cancelled, or adds a package without a bundle patch restores `package.json` and `pnpm-lock.yaml` as they were; downloaded files can stay."
+    },
+    {
+      "name": "waitForInstall",
+      "hostName": "waitForInstall",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "requestId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "ref",
+          "name": "ChangeResult"
+        }
+      },
+      "doc": "Recover the result of an active installation without cancelling it."
+    },
+    {
+      "name": "cancelInstall",
+      "hostName": "cancelInstall",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "requestId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "PluginInstallCancellation"
+      },
+      "doc": "Stop an installation this manager owns and wait until its files are back."
+    },
+    {
+      "name": "removeBundle",
+      "hostName": "removeBundle",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ChangeResult"
+      },
+      "doc": "Unload and remove a profile-owned bundle dependency through dsh plugin's pnpm path; a selected name no dependency holds is only deselected."
+    }
+  ],
+  "decls": {
+    "BundleInfo": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "official",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Project-maintained shipped optional bundle or on-demand catalog entry, independent of installation and selection."
+        },
+        {
+          "name": "availability",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "installation",
+              "missing",
+              "profile"
+            ]
+          },
+          "doc": "Readable package location; on-demand catalog entries exclude undeclared transitive copies, and declared files may be missing."
+        },
+        {
+          "name": "installTarget",
+          "optional": true,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "spec",
+                "optional": false,
+                "type": {
+                  "k": "str"
+                }
+              },
+              {
+                "name": "version",
+                "optional": false,
+                "type": {
+                  "k": "str"
+                }
+              }
+            ]
+          },
+          "doc": "Exact released Host version or same-checkout development link offered for an on-demand catalog entry."
+        },
+        {
+          "name": "version",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "meta",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PluginLocalizedMeta"
+          },
+          "doc": "Local display text with available translations or literal fallbacks, or a metadata diagnostic."
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Untranslated `description` of this bundle's package manifest."
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Selected in the profile manifest; a load error means its layer was skipped."
+        },
+        {
+          "name": "installed",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the profile declares this dependency; availability separately reports whether its files can be read."
+        },
+        {
+          "name": "source",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Present for a profile dependency the installation does not also supply: the spec `pnpm add` accepts, with local paths made absolute and the user information of an http(s) URL removed."
+        },
+        {
+          "name": "optional",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the installation ships the bundle for the person to switch on: named by the launcher's `OPTIONAL_BUNDLES`, held by the installation's dependencies, selected by no shipped template, and never removable."
+        },
+        {
+          "name": "removable",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "readOnlyReason",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ReadOnlyReason"
+          }
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ManagementError"
+          }
+        },
+        {
+          "name": "rows",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "BundleRowInfo"
+            }
+          },
+          "doc": "The rows the bundle's patch inserts, in declaration order; empty when the patch cannot be read."
+        },
+        {
+          "name": "overrides",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Ids of rows the bundle's patch changes without declaring them: the built-in rows it configures or disables."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "One shipped, profile-installed, or discoverable on-demand bundle."
+    },
+    "BundleRowInfo": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "rowId",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The row id as the patch declares it."
+        },
+        {
+          "name": "moduleName",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The module the row names."
+        },
+        {
+          "name": "meta",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PluginLocalizedMeta"
+          },
+          "doc": "Local package display metadata, including rows whose bundle is disabled."
+        },
+        {
+          "name": "entryId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "The Loader entry carrying this row, when exactly one live entry has its id."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "One row a bundle's patch declares, with its live entry while the bundle contributes it."
+    },
+    "ChangeResult": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "changed",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "application",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "applied",
+              "cancelled",
+              "failed",
+              "overridden",
+              "restart-required"
+            ]
+          },
+          "doc": "`cancelled` is an installation the caller stopped, its files restored."
+        },
+        {
+          "name": "restartReason",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "RestartReason"
+          },
+          "doc": "Present with `restart-required`: why the change takes effect only at the next start."
+        },
+        {
+          "name": "stage",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "enable",
+              "install",
+              "remove"
+            ]
+          },
+          "doc": "Last attempted step; successful installation can proceed to enablement."
+        },
+        {
+          "name": "target",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "enabled",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ManagementError"
+          }
+        },
+        {
+          "name": "warnings",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Pre-existing inactive entries the operation left as they were."
+        },
+        {
+          "name": "packageResult",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PackageResult"
+          }
+        },
+        {
+          "name": "bundle",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The bundle an installation added, once pnpm and the bundle check accepted it."
+        },
+        {
+          "name": "version",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The installed bundle's manifest version, when declared; pnpm's `minimumReleaseAge` can make it older than the newest release."
+        },
+        {
+          "name": "pendingBuilds",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Exact package names awaiting explicit script approval in the profile's pnpm settings, read after a failed run."
+        },
+        {
+          "name": "approvedBuilds",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Package script permissions saved before this installation attempt."
+        },
+        {
+          "name": "registries",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "nullable",
+              "of": {
+                "k": "str"
+              }
+            }
+          },
+          "doc": "The registries the installation asked, in order; `packageResult` is the last one's run."
+        },
+        {
+          "name": "failedAt",
+          "optional": true,
+          "type": {
+            "k": "enum",
+            "values": [
+              "registry",
+              "spec-host"
+            ]
+          },
+          "doc": "What the last failed run could not reach or get an answer from: the registry it asked, or the host a git or tarball spec is fetched from, which no registry stands in for; absent for a failure neither explains."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Persisted change and independently observed application outcome."
+    },
+    "IncompatiblePlugin": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "version",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "runtimeVersion",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "requirements",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Only the requirements the running version does not satisfy, keyed `engines.dsh` or by DSH peer package name."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "A package whose declared DSH requirements reject the running DSH version, without an exemption for the exact pair."
+    },
+    "InspectOptions": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "registry",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "The registry asked first; absent, the configured one."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Where an inspection asks."
+    },
+    "InstallBundleOptions": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "enabled",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "saveExact",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Save the resolved dependency version without a range; applies to any bundle installation."
+        },
+        {
+          "name": "requestId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "approvedBuilds",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Explicitly allow these pending packages' scripts for this profile, then install; a name no longer pending refuses the call."
+        },
+        {
+          "name": "registry",
+          "optional": true,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "The registry asked first; absent, the configured one. The configured fallbacks follow while a registry is unreachable or stale."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Bundle installation defaults to activation; callers that offer cancellation supply their request id."
+    },
+    "InstallSpecKind": {
+      "k": "enum",
+      "values": [
+        "git",
+        "path",
+        "registry",
+        "tarball"
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "The form one install spec takes, in pnpm's vocabulary."
+    },
+    "LocalizedText": {
+      "k": "union",
+      "members": [
+        {
+          "k": "str"
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "en",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ],
+          "extras": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/util/package-manifest/src/types.ts",
+      "doc": "Literal text or translations indexed by lowercase language id, with a required English fallback."
+    },
+    "ManagementError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "already-installed",
+              "ambiguous-install",
+              "bundle-in-use",
+              "incompatible-version",
+              "invalid-spec",
+              "management-required",
+              "not-bundle",
+              "not-removable",
+              "operation-error",
+              "stale-approval",
+              "stop-profile",
+              "unaddressable",
+              "unknown-plugin"
+            ]
+          }
+        },
+        {
+          "name": "diagnostic",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "incompatible",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "IncompatiblePlugin"
+            }
+          },
+          "doc": "Present with `incompatible-version`: the packages the running DSH version rejects."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Localizable management failure and optional external diagnostic."
+    },
+    "PackageResult": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "exitCode",
+          "optional": false,
+          "type": {
+            "k": "num"
+          }
+        },
+        {
+          "name": "output",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "truncated",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          }
+        },
+        {
+          "name": "logPath",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "kind",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PluginInstallFailureKind"
+          },
+          "doc": "Present when the run failed: what kind of failure its exit and output describe."
+        },
+        {
+          "name": "timedOut",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "The manager terminated the run after it printed nothing for its silence bound; `exitCode` still reports how it ended."
+        },
+        {
+          "name": "incompatible",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "IncompatiblePlugin"
+            }
+          },
+          "doc": "Present when a compatibility check refused the run: the packages the running DSH version rejects."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Package operation completion, including Git checks and a retrieval path for unabridged diagnostics."
+    },
+    "PluginFiberPhase": {
+      "k": "enum",
+      "values": [
+        "active",
+        "failed",
+        "loading",
+        "pending",
+        "unloading"
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "Lifecycle state of an entry's root Fiber, or null when it has no live root Fiber."
+    },
+    "PluginInfo": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "entryId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "moduleName",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Exact module specifier imported by the Loader entry."
+            },
+            {
+              "name": "meta",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "PluginLocalizedMeta"
+              },
+              "doc": "Local package display metadata, independent of whether the entry is enabled."
+            },
+            {
+              "name": "enabled",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              },
+              "doc": "Effective Loader enablement, including disabled ancestor groups."
+            },
+            {
+              "name": "fiberPhase",
+              "optional": false,
+              "type": {
+                "k": "nullable",
+                "of": {
+                  "k": "ref",
+                  "name": "PluginFiberPhase"
+                }
+              }
+            },
+            {
+              "name": "patchId",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "readOnlyReason",
+              "optional": true,
+              "type": {
+                "k": "never"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "entryId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "moduleName",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Exact module specifier imported by the Loader entry."
+            },
+            {
+              "name": "meta",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "PluginLocalizedMeta"
+              },
+              "doc": "Local package display metadata, independent of whether the entry is enabled."
+            },
+            {
+              "name": "enabled",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              },
+              "doc": "Effective Loader enablement, including disabled ancestor groups."
+            },
+            {
+              "name": "fiberPhase",
+              "optional": false,
+              "type": {
+                "k": "nullable",
+                "of": {
+                  "k": "ref",
+                  "name": "PluginFiberPhase"
+                }
+              }
+            },
+            {
+              "name": "patchId",
+              "optional": true,
+              "type": {
+                "k": "never"
+              }
+            },
+            {
+              "name": "readOnlyReason",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "ReadOnlyReason"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "One running-profile entry and its persistent control availability."
+    },
+    "PluginInspectProblem": {
+      "k": "enum",
+      "values": [
+        "already-installed",
+        "invalid-spec",
+        "network",
+        "not-a-bundle",
+        "not-a-package",
+        "not-found",
+        "unknown"
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Why a spec was refused before anything installed."
+    },
+    "PluginInstallCancellation": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "status",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "cancelled",
+              "not-running",
+              "too-late"
+            ]
+          }
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Cancellation is confirmed only after process exit and file restoration."
+    },
+    "PluginInstallFailureKind": {
+      "k": "enum",
+      "values": [
+        "build-blocked",
+        "disk-full",
+        "integrity",
+        "network",
+        "no-matching-version",
+        "not-found",
+        "permission",
+        "pnpm-missing",
+        "timeout",
+        "unknown"
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "How a package operation failed, read off how it ended and what it printed."
+    },
+    "PluginLocalizedMeta": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          },
+          "doc": "Display title; omission preserves the consumer's technical-name fallback."
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          },
+          "doc": "Display introduction after locale and package-field fallback."
+        },
+        {
+          "name": "icon",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Base64 image data URL from a package root's manifest icon or an exported `<specifier>/icon`; render as an image, not inline markup."
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Unmodified local metadata diagnostic; the plugin remains manageable."
+        }
+      ],
+      "source": "packages/util/package-manifest/src/types.ts",
+      "doc": "Validated plugin display fields and diagnostics from exported locales, manifests, or icon files."
+    },
+    "PluginRegistries": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "registry",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          }
+        },
+        {
+          "name": "fallbackRegistries",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          }
+        },
+        {
+          "name": "resolved",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "The URL pnpm's own configuration names in the profile, read from pnpm; null when it could not be read."
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "The registries the manager asks: the configured first one, its fallbacks in order, and what pnpm's own configuration names."
+    },
+    "PluginSpecInspection": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "accepted"
+              }
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "InstallSpecKind"
+              }
+            },
+            {
+              "name": "name",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "version",
+              "optional": true,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "description",
+              "optional": true,
+              "type": {
+                "k": "str"
+              },
+              "doc": "`description` of the package manifest."
+            },
+            {
+              "name": "bundle",
+              "optional": false,
+              "type": {
+                "k": "nullable",
+                "of": {
+                  "k": "bool"
+                }
+              },
+              "doc": "Whether the package declares a bundle patch; null when the spec's form does not say."
+            },
+            {
+              "name": "registry",
+              "optional": false,
+              "type": {
+                "k": "nullable",
+                "of": {
+                  "k": "str"
+                }
+              },
+              "doc": "The registry that answered for a name, and for the other forms the one an install of the spec asks first."
+            },
+            {
+              "name": "host",
+              "optional": true,
+              "type": {
+                "k": "str"
+              },
+              "doc": "The host a git spec or a tarball URL is fetched from, which no registry stands in for."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "refused"
+              }
+            },
+            {
+              "name": "problem",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "PluginInspectProblem"
+              }
+            },
+            {
+              "name": "reason",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "What pnpm, the registry, or the file system said."
+            },
+            {
+              "name": "registries",
+              "optional": true,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "nullable",
+                  "of": {
+                    "k": "str"
+                  }
+                }
+              },
+              "doc": "The registries asked, in order, when the refusal came from asking them; `reason` is the last one's."
+            }
+          ]
+        }
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "What a spec names, read before installing it: the registry's answer for a name, a directory's manifest for a path, and only the form for a git or tarball spec, whose package is known once pnpm has fetched it."
+    },
+    "ReadOnlyReason": {
+      "k": "enum",
+      "values": [
+        "management-required",
+        "unaddressable"
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Reasons a profile control cannot modify its target."
+    },
+    "RestartReason": {
+      "k": "enum",
+      "values": [
+        "host-module",
+        "module-comparison",
+        "no-hmr",
+        "package-moved",
+        "unmanaged-plugin"
+      ],
+      "source": "packages/boot/plugin-manager/src/types.ts",
+      "doc": "Why a change waits for the next start: `no-hmr` profiles apply changes only at startup; `package-moved` changes map an installed package to another directory without removing it first, or change or locally override a package the DSH installation provides; `host-module` changes reach modules the running process itself imports; `unmanaged-plugin` changes reach a plugin running outside a Loader entry; `module-comparison` means loaded modules could not be compared with disk."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

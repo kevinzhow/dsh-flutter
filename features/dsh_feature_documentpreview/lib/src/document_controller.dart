@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_office_to_pdf.dart';
 import 'package:flutter/foundation.dart';
 
 import 'renderers.dart';
@@ -21,12 +22,19 @@ class TextPage {
 /// shows, the failure that stopped it, and the watch that tells a changed
 /// file. Pure Dart over [WorkspaceFilesRemote], so it is tested with a
 /// scripted remote.
+typedef OfficePreviewReader = Future<RenderedDocumentBytes> Function(
+  String sessionId,
+  String path,
+  RemoteCancellation cancellation,
+);
+
 class DocumentController extends ChangeNotifier {
   DocumentController({
     required this.sessionId,
     required this.path,
     required this.files,
     this.autoRefresh = true,
+    this.renderOffice,
   }) : candidates = rendererCandidates(path) {
     if (candidates.isNotEmpty) {
       _selected = candidates.first;
@@ -41,6 +49,10 @@ class DocumentController extends ChangeNotifier {
   final String path;
   final WorkspaceFilesRemote files;
   final bool autoRefresh;
+  final OfficePreviewReader? renderOffice;
+  RemoteCancellation? _officeCancellation;
+  List<String> missingFonts = const [];
+  String? officeGeneration;
   final List<DocumentRenderer> candidates;
 
   DocumentRenderer? _selected;
@@ -81,7 +93,7 @@ class DocumentController extends ChangeNotifier {
   int get loadedThrough =>
       pages.isEmpty ? 0 : pages.last.offset + pages.last.lines.length - 1;
 
-  bool get hasContent => selected?.loading == DocumentLoad.bytesComplete
+  bool get hasContent => selected?.loading != DocumentLoad.textPages
       ? bytes != null
       : pages.isNotEmpty;
 
@@ -134,6 +146,10 @@ class DocumentController extends ChangeNotifier {
   }
 
   void _reset() {
+    _officeCancellation?.cancel();
+    _officeCancellation = null;
+    missingFonts = const [];
+    officeGeneration = null;
     _generation++;
     pages.clear();
     bytes = null;
@@ -146,7 +162,9 @@ class DocumentController extends ChangeNotifier {
   Future<void> _start() async {
     final renderer = _selected;
     if (renderer == null) return;
-    if (renderer.loading == DocumentLoad.bytesComplete) {
+    if (renderer.loading == DocumentLoad.renderer) {
+      await _loadOffice();
+    } else if (renderer.loading == DocumentLoad.bytesComplete) {
       await _loadBytes();
     } else {
       await loadNext();
@@ -203,6 +221,46 @@ class DocumentController extends ChangeNotifier {
     _changed();
   }
 
+  Future<void> _loadOffice() async {
+    loading = true;
+    failure = null;
+    final generation = _generation;
+    final cancellation = RemoteCancellation();
+    _officeCancellation = cancellation;
+    _changed();
+    try {
+      final reader = renderOffice;
+      if (reader == null) {
+        throw RemoteException(
+          'document-render/failed',
+          'Office preview unavailable',
+          {'reason': 'unavailable'},
+        );
+      }
+      final file = await reader(sessionId, path, cancellation);
+      if (_disposed || generation != _generation) return;
+      if (!file.eof || file.offset != 0) {
+        throw RemoteException(
+          'document-render/failed',
+          'Incomplete PDF output',
+          {'reason': 'invalid-output'},
+        );
+      }
+      bytes = file.data;
+      version = file.version;
+      absolutePath = file.absolutePath;
+      missingFonts = file.missingFonts;
+      officeGeneration = file.generation;
+      eof = true;
+      metaFailure = null;
+    } catch (e) {
+      if (_disposed || generation != _generation) return;
+      failure = e;
+    }
+    loading = false;
+    _changed();
+  }
+
   /// Read the file again from its start, keeping what is shown until the new
   /// content arrives would flicker; dsh rebuilds the pages, so do we.
   Future<void> reload() async {
@@ -222,6 +280,7 @@ class DocumentController extends ChangeNotifier {
           case WatchReady():
             break;
           case WatchReopened():
+            if (autoRefresh) unawaited(reload());
             break;
           case WatchChanged(absent: true):
             metaFailure = RemoteException(
@@ -252,6 +311,7 @@ class DocumentController extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
+    _officeCancellation?.cancel();
     _generation++;
     unawaited(_watchSub?.cancel());
     super.dispose();

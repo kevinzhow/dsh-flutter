@@ -9,6 +9,116 @@
   },
   "generated": [
     {
+      "output": "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/pluginManager.ir.json",
+      "irSha256": "1e2ab2f43dbb6bb84951f4140aa4921bc883cad1cc5c544fba47f62b9d14621f",
+      "inputs": [
+        {
+          "path": "packages/boot/plugin-manager/src/index.ts",
+          "sha256": "11f14c578780f8fa4e40f84a9c10c2face9806a733b76979885e2d0a92ec396e"
+        },
+        {
+          "path": "packages/boot/plugin-manager/src/types.ts",
+          "sha256": "9a4e29b21a9a13d7571472bbcf46010525a0d9085c69c3435169dc5204b0b6c4"
+        },
+        {
+          "path": "packages/host/plugin-inventory/src/types.ts",
+          "sha256": "4e2e2f79e7605f8b2f36c104d9c295df8035a931710ea2dcdbfc99d6fe4980f8"
+        },
+        {
+          "path": "packages/util/package-manifest/src/types.ts",
+          "sha256": "2e0d7bfb9e1f94451c684ce1c61d4e640e67f78879514e5baff0a1df620d566e"
+        }
+      ],
+      "rawSha256": "f37e50e1d6225aca617188930c6e9df64d63166c93636900f58b50b8843a9b6c",
+      "outputSha256": "7a418b850c3aec831c5fd08453c3b44140178d5e6909324bbb96d7bd8fd0ec14"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/pluginMarket.ir.json",
+      "irSha256": "dbb1491031feaeb202d7b48d3342eff51252d826150d27bc7f32bbe1145e9a9f",
+      "inputs": [
+        {
+          "path": "packages/boot/plugin-market/src/index.ts",
+          "sha256": "594b88614f07703692f8496f39f0c59974c6c12940556b316314eedcae127aa3"
+        },
+        {
+          "path": "packages/boot/plugin-market/src/types.ts",
+          "sha256": "9a8cd89beb85914c6bbe4cf6ac32c316174212549db593c5d7135c7dfce52815"
+        },
+        {
+          "path": "packages/util/package-manifest/src/types.ts",
+          "sha256": "2e0d7bfb9e1f94451c684ce1c61d4e640e67f78879514e5baff0a1df620d566e"
+        },
+        {
+          "path": "packages/util/plugin-market-index/src/types.ts",
+          "sha256": "a6f18d808c59dc212e680ff54085f7a8e9adadb7b0a041960fd363e77e45b02a"
+        }
+      ],
+      "rawSha256": "7d2bcd86d5555caf899b473bc4a995c6498f6462b62ebaa8b52ee0ce291c1f73",
+      "outputSha256": "50f4a30fb170d301ba4e11981da37b4a84e65689693d443381fca8ba9166d859"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/plugin_inventory_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/pluginInventory.ir.json",
+      "irSha256": "a4146641f4548d5914b29eea1290147c3225a9d6ab0968f79e0b725e30ee3efc",
+      "inputs": [
+        {
+          "path": "packages/host/plugin-inventory/src/index.ts",
+          "sha256": "bc1dafdb2e6303b7219762fd4df42f6097d61843c282c9f51591462d75ae6c87"
+        },
+        {
+          "path": "packages/host/plugin-inventory/src/types.ts",
+          "sha256": "4e2e2f79e7605f8b2f36c104d9c295df8035a931710ea2dcdbfc99d6fe4980f8"
+        },
+        {
+          "path": "packages/util/package-manifest/src/types.ts",
+          "sha256": "2e0d7bfb9e1f94451c684ce1c61d4e640e67f78879514e5baff0a1df620d566e"
+        }
+      ],
+      "rawSha256": "139e518719e14450d44427b7d77cc8a618fd2e97afc722e68c7d2a597a236a9b",
+      "outputSha256": "bb55bb9e68a4d097081404ba831b1e3369a26bf1cef8269d824126b55f494692"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/plugin_registry_probe_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/pluginRegistryProbe.ir.json",
+      "irSha256": "dc66300c9e80bd1faf943ad5a67afb5730fe5c143c3efdece88cbb7d9e2c4e0d",
+      "inputs": [
+        {
+          "path": "packages/client/ui-plugin-manager/src/index.ts",
+          "sha256": "2c495cb8e45c2a581c0ca2263b8731993fd14fb851bff04a33f4fde218c7e336"
+        }
+      ],
+      "rawSha256": "ecac663417b6ca8e2eced70288e6a33bc4ec7084bf0abc3b33924b1b158f84fc",
+      "outputSha256": "d542840d635821a6594373168a9485b873bf3207144e20369fc43dcf4774b671"
+    },
+    {
+      "output": "packages/dsh_client/lib/src/generated/office_to_pdf_remote.g.dart",
+      "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
+      "ir": "tool/codegen/ir/officeToPdf.ir.json",
+      "irSha256": "3c910eac93ecc54d981006a59f06e60c9343f41354de7f6967bed46d14e3ff03",
+      "inputs": [
+        {
+          "path": "packages/api/workspace-files/src/types.ts",
+          "sha256": "da12283c56ae3eee774dd8d2ae35ec512131029ba273ae955e2fb23e8bc3ada0"
+        },
+        {
+          "path": "packages/document/office-to-pdf/src/index.ts",
+          "sha256": "5e7030469a5ec1f432c6a2e8a2de10b5fb3b02d76bf27d3c8c59da00e913fbfb"
+        },
+        {
+          "path": "packages/document/office-to-pdf/src/types.ts",
+          "sha256": "08789e3cea45aa65f955da06ee04bc380377dfea0eed90cf6bdd422ca4116802"
+        }
+      ],
+      "rawSha256": "a99b2b48c22c259f3231d9a57363d54310695d528b38cff7bcf74a54ae772c84",
+      "outputSha256": "4e2a43f148458cda12392180b6fd49f7e77929fdc2b64562ed152965d984a89d"
+    },
+    {
       "output": "packages/dsh_client/lib/src/generated/agent_presets_remote.g.dart",
       "generator": "tool/codegen/gen.py (tool/codegen/extract/extract_remote.mjs + dart_emit.py)",
       "ir": "tool/codegen/ir/agentPresets.ir.json",
@@ -193,8 +303,8 @@
           "sha256": "54d8b9ce4a69353ee43b85a4d47504628fbc94688eb3983b6cf3273afc1d9097"
         }
       ],
-      "rawSha256": "febfa8181ebe50b7617baf01f37737843f024e55da83f181281440de708e7e7c",
-      "outputSha256": "5ad8913f2ba3f67acb01ae0eb02b015191629816aca5edabe421487abb76af79"
+      "rawSha256": "7f5b4aae982972a807e81c7e73e48f0341d93a3e09e253ff38dfab44a681dac4",
+      "outputSha256": "e7c7aa00effbfb7b334af3069ed05b924717e56c447acdbb4668654233ff936f"
     },
     {
       "output": "packages/dsh_client/lib/src/generated/settings_remote.g.dart",
@@ -392,10 +502,10 @@
       "output": "packages/dsh_i18n/lib/src/catalog.g.dart",
       "generator": "tool/i18n/gen_catalog.py (tool/i18n/extract_locales.mjs)",
       "ir": "tool/i18n/ir/locales.ir.json",
-      "irSha256": "a06deff21f9512c91237b3746540374ddfaebfe7a3507b0a851f0734684b35a1",
+      "irSha256": "72fef71499f71bef8221eebec1ffb367538a46ae5914e89d30b884d9da3b5b64",
       "config": {
         "path": "tool/i18n/packages.json",
-        "sha256": "716e5c04811ae5684c51ee825526144fcbcd6f6a30e506b74089ac8316e8c202"
+        "sha256": "939faa6a94d8d8ac9d40a56282f701247312a29542b216c1a478879c1a3813fb"
       },
       "knownGaps": {
         "path": "tool/i18n/known-gaps.json",
@@ -487,6 +597,10 @@
           "sha256": "739949355102f5c9dad9cb728ea0b08ec7f11a4cf054cc4552480a6c448f2a5a"
         },
         {
+          "path": "packages/client/ui-plugin-market/src/client/locales.ts",
+          "sha256": "d28857dddb6448ad703353c6bb5886e94fcac1c36f3f67ced93dd31c22022346"
+        },
+        {
           "path": "packages/client/ui-reference/src/client/locales.ts",
           "sha256": "b438b5657173a97434f8fe91df7266013d1ac045155a96f90acd56b58e7b082b"
         },
@@ -515,6 +629,14 @@
           "sha256": "b601b6c1b358dcc79a4576f3b674d5d0de92ebea1eab5772c1216beaec64ca5b"
         },
         {
+          "path": "packages/client/ui-settings-plugin-inventory/src/client/locales.ts",
+          "sha256": "42cef9fb6d6ddf43d005e4795bc15771beb8d380f369eb2473a478ceb854b49f"
+        },
+        {
+          "path": "packages/client/ui-settings-plugins/src/client/locales.ts",
+          "sha256": "5360bd093034d6d90e31aa330934f66987f82afda73bd3d2b96290bd1c0c0feb"
+        },
+        {
           "path": "packages/client/ui-settings-session-log/src/client/locales.ts",
           "sha256": "ae3ab6c5c2f0ed34d1320f396aae8a00514ea240b43a1e6a9d873396172cf898"
         },
@@ -539,6 +661,10 @@
           "sha256": "0a1b8d422527804117c8f2ecbf098e5b7ff7429ca97108479f393c2d6423188e"
         },
         {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/html/locales.ts",
+          "sha256": "d528547e8aa3aa17256f19e3ee17a98a86597b5eb1385e374d053696f77da28c"
+        },
+        {
           "path": "packages/client/ui-sidebar-documentpreview/src/client/image/locales.ts",
           "sha256": "a5b74c49083547fa4a6c89cfa8e424e1f109403f03cd5eac23fa71e9e4afb606"
         },
@@ -549,6 +675,14 @@
         {
           "path": "packages/client/ui-sidebar-documentpreview/src/client/markdown/locales.ts",
           "sha256": "ef908eca03863203f18635d56f76a77ce130051060b6d3b4a1640007a2679903"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/office/locales.ts",
+          "sha256": "9e5aa9cad4386817cb6f9c6e5a07d8ec34965774b4aafd88fe9b689391f86efa"
+        },
+        {
+          "path": "packages/client/ui-sidebar-documentpreview/src/client/pdf/locales.ts",
+          "sha256": "2cc6bf377485ed2b08decff62959f761fc759426f1fc69e4d2b58a03158fa0c4"
         },
         {
           "path": "packages/client/ui-sidebar-documentpreview/src/client/zoom/locales.ts",
@@ -599,8 +733,8 @@
           "sha256": "3f30bd4a0959f1b183747b0963669ebbaa3e10f0737d393abbb47b27802736b9"
         }
       ],
-      "rawSha256": "ce28c373ba97e5b698966bc251c35aa6d58a98317876005f3f73eba9ee44644c",
-      "outputSha256": "908a50b437309ca38bd382022026134fa2d4512e709cff039382959144fa108b"
+      "rawSha256": "1829ab6f332fb4301d35aa8d4a026b8b01e92e5d7f41ece7663577abaddba9d2",
+      "outputSha256": "edac868620cbbddd03c0a9320599ac0021936c6e09d6645beabc13c46a7474cc"
     }
   ]
 }

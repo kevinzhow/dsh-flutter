@@ -1,7 +1,7 @@
 import 'package:dsh_ui/dsh_ui.dart';
 
 /// How a renderer gets its content (dsh `DocumentLoadMode`).
-enum DocumentLoad { textPages, bytesComplete }
+enum DocumentLoad { textPages, bytesComplete, renderer }
 
 /// One registered way to show a file (dsh `DocumentPreviewDefinition`).
 class DocumentRenderer {
@@ -37,11 +37,36 @@ const String imageRendererId = 'image';
 const String markdownRendererId = 'markdown';
 const String codeRendererId = 'code';
 const String plainRendererId = 'text';
+const String pdfRendererId = 'pdf';
+const String officeRendererId = 'office';
+const String htmlRendererId = 'html';
 
 /// The renderers of this client, in registration order (dsh registers
-/// image, markdown, code and the plain fallback; PDF, spreadsheet, Office and
-/// HTML viewers are not ported: those files offer open and save instead).
+/// PDF, Office, HTML, image, Markdown and code; readable files also offer text).
 final List<DocumentRenderer> documentRenderers = [
+  const DocumentRenderer(
+    id: pdfRendererId,
+    titleNamespace: 'sidebarPdf',
+    titleKey: 'title',
+    extensions: ['pdf'],
+    binaryExtensions: ['pdf'],
+    loading: DocumentLoad.bytesComplete,
+  ),
+  const DocumentRenderer(
+    id: officeRendererId,
+    titleNamespace: 'sidebarOffice',
+    titleKey: 'title',
+    extensions: ['doc', 'docx', 'ppt', 'pptx'],
+    binaryExtensions: ['doc', 'docx', 'ppt', 'pptx'],
+    loading: DocumentLoad.renderer,
+  ),
+  const DocumentRenderer(
+    id: htmlRendererId,
+    titleNamespace: 'documentHtml',
+    titleKey: 'title',
+    extensions: ['html', 'htm'],
+    loading: DocumentLoad.bytesComplete,
+  ),
   const DocumentRenderer(
     id: imageRendererId,
     titleNamespace: 'sidebarImage',

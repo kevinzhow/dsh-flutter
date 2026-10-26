@@ -2179,9 +2179,13 @@ final class SessionProjectionValues {
   const SessionProjectionValues({
     this.inbox,
     this.title,
+    this.titlePresent = false,
     this.workingDirectory,
+    this.workingDirectoryPresent = false,
     this.todos,
+    this.todosPresent = false,
     this.agentPreset,
+    this.agentPresetPresent = false,
     this.sessionListMetadata,
     this.imageLimits,
     this.modelSelection,
@@ -2189,6 +2193,7 @@ final class SessionProjectionValues {
     this.subagentCatalog,
     this.subagentTiming,
     this.subagent,
+    this.subagentPresent = false,
     this.extra = const {},
   });
   factory SessionProjectionValues.fromJson(Object? json, [String path = r'$']) {
@@ -2196,19 +2201,23 @@ final class SessionProjectionValues {
     return SessionProjectionValues(
       inbox: _opt<InboxWireState>(m, 'inbox', path, InboxWireState.fromJson),
       title: _opt<String?>(m, 'title', path, _nullable(_str)),
+      titlePresent: m.containsKey('title'),
       workingDirectory: _opt<String?>(
         m,
         'workingDirectory',
         path,
         _nullable(_str),
       ),
+      workingDirectoryPresent: m.containsKey('workingDirectory'),
       todos: _opt<List<TodoItem>?>(
         m,
         'todos',
         path,
         _nullable(_listOf(TodoItem.fromJson)),
       ),
+      todosPresent: m.containsKey('todos'),
       agentPreset: _opt<String?>(m, 'agentPreset', path, _nullable(_str)),
+      agentPresetPresent: m.containsKey('agentPreset'),
       sessionListMetadata: _opt<SessionListMetadata>(
         m,
         'sessionListMetadata',
@@ -2251,6 +2260,7 @@ final class SessionProjectionValues {
         path,
         _nullable(SessionProjectionValuesSubagent.fromJson),
       ),
+      subagentPresent: m.containsKey('subagent'),
       extra: _rest(m, const {
         'inbox',
         'title',
@@ -2276,17 +2286,29 @@ final class SessionProjectionValues {
   /// string: the shape the client list rows consume.
   final String? title;
 
+  /// Send an explicit null when `title` is null; false omits it.
+  final bool titlePresent;
+
   /// Recorded current directory for Session observations, or null when none is
   /// recorded.
   final String? workingDirectory;
+
+  /// Send an explicit null when `workingDirectory` is null; false omits it.
+  final bool workingDirectoryPresent;
 
   /// The agent's current whole todo list (the latest `todo/write` snapshot), or
   /// `null` before the first write. Whole-value rule: every `todo/write`
   /// carries the complete replacement list, so the fold is last-wins.
   final List<TodoItem>? todos;
 
+  /// Send an explicit null when `todos` is null; false omits it.
+  final bool todosPresent;
+
   /// Preset the Session runs, or null when the deployment composes none.
   final String? agentPreset;
+
+  /// Send an explicit null when `agentPreset` is null; false omits it.
+  final bool agentPresetPresent;
 
   /// Persisted facts used to summarize a Session without activating it.
   final SessionListMetadata? sessionListMetadata;
@@ -2320,15 +2342,23 @@ final class SessionProjectionValues {
   /// survive on the receiving side. The entry itself stays non-optional.
   final SessionProjectionValuesSubagent? subagent;
 
+  /// Send an explicit null when `subagent` is null; false omits it.
+  final bool subagentPresent;
+
   /// Keys this generation does not model, kept verbatim.
   final Map<String, Object?> extra;
   Map<String, Object?> toJson() => {
     ...extra,
     if (inbox case final v?) 'inbox': v.toJson(),
     if (title case final v?) 'title': v,
+    if (title == null && titlePresent) 'title': null,
     if (workingDirectory case final v?) 'workingDirectory': v,
+    if (workingDirectory == null && workingDirectoryPresent)
+      'workingDirectory': null,
     if (todos case final v?) 'todos': [for (final e in v) e.toJson()],
+    if (todos == null && todosPresent) 'todos': null,
     if (agentPreset case final v?) 'agentPreset': v,
+    if (agentPreset == null && agentPresetPresent) 'agentPreset': null,
     if (sessionListMetadata case final v?) 'sessionListMetadata': v.toJson(),
     if (imageLimits case final v?) 'imageLimits': v.toJson(),
     if (modelSelection case final v?) 'modelSelection': v.toJson(),
@@ -2337,6 +2367,7 @@ final class SessionProjectionValues {
       'subagentCatalog': [for (final e in v) e.toJson()],
     if (subagentTiming case final v?) 'subagentTiming': v.toJson(),
     if (subagent case final v?) 'subagent': v.toJson(),
+    if (subagent == null && subagentPresent) 'subagent': null,
   };
 }
 

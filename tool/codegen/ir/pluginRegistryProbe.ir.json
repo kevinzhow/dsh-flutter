@@ -1,0 +1,29 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "pluginRegistryProbe",
+  "package": "packages/client/ui-plugin-manager",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/client/ui-plugin-manager/src/index.ts"
+  ],
+  "methods": [
+    {
+      "name": "fastest",
+      "hostName": "fastest",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "nullable",
+        "of": {
+          "k": "str"
+        }
+      },
+      "doc": "Race npm and npmmirror HTTPS ping responses through the Host's fetch proxy. Concurrent readers share a probe; a winner cancels and awaits the other request."
+    }
+  ],
+  "decls": {},
+  "notes": [],
+  "skipped": []
+}
