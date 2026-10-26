@@ -68,6 +68,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
   OverlayEntry? _entry;
   LocalHistoryEntry? _history;
   FocusNode? _previousFocus;
+  final _panelFocus = FocusScopeNode(debugLabel: 'anchored panel');
 
   @override
   void initState() {
@@ -86,6 +87,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     final history = _history;
     _history = null;
     history?.remove();
+    _panelFocus.dispose();
     if (widget.controller == null) _controller.dispose();
     super.dispose();
   }
@@ -133,7 +135,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     }
     _entry = OverlayEntry(
       builder: (context) => FocusScope(
-        autofocus: true,
+        node: _panelFocus,
         onKeyEvent: (_, event) {
           if (event.logicalKey != LogicalKeyboardKey.escape) {
             return KeyEventResult.ignored;
@@ -173,6 +175,11 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
       ),
     );
     overlay.insert(_entry!);
+    // A FocusScopeNode cannot defer a request made before it is attached.
+    // Pointer-opened panels may start with only the route scope focused.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && _entry != null) _panelFocus.requestFocus();
+    });
     _history = LocalHistoryEntry(
       onRemove: () {
         _history = null;

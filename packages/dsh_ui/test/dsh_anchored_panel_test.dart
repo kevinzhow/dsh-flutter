@@ -28,6 +28,12 @@ void main() {
           ),
         ),
       );
+      await t.tap(find.text('Open'));
+      await t.pumpAndSettle();
+      expect(find.text('Panel action'), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.text('Panel action'), findsNothing);
       focus.requestFocus();
       await t.pump();
       await t.sendKeyEvent(LogicalKeyboardKey.enter);
