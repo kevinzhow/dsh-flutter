@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_corners.dart' show DshCornerDecoration, DshSurface;
 import 'dsh_pixel_snap.dart';
+import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 
 /// Visual family of a [DshButton], as dsh's `ButtonVariant`.
@@ -96,7 +97,7 @@ class DshButton extends StatefulWidget {
   static const Key focusRingKey = ValueKey<String>('dshButtonFocusRing');
 
   /// Opacity of a disabled button (`Button.module.css` `.button:disabled`).
-  static const double disabledOpacity = 0.4;
+  static const double disabledOpacity = DshButtonRecipe.disabledOpacity;
 
   @override
   State<DshButton> createState() => _DshButtonState();
@@ -133,7 +134,13 @@ class _DshButtonState extends State<DshButton> {
       );
     }
     final small = widget.size == DshButtonSize.sm;
-    final radius = widget.radius ?? (small ? theme.radiusSm : theme.radiusMd);
+    final radius =
+        widget.radius ??
+        theme.number(
+          small
+              ? DshButtonRecipe.smallRadiusToken
+              : DshButtonRecipe.radiusToken,
+        );
     final rawFill = _fill(theme);
     // A disabled button is one translucent group (`opacity: 0.4` on the whole
     // button), so its fill must stay translucent inside the group: the group
@@ -143,10 +150,12 @@ class _DshButtonState extends State<DshButton> {
         : DshSurface.quantizeAlpha(c);
     final fill = rawFill == null ? null : paint(rawFill);
     final foreground = widget.variant == DshButtonVariant.primary
-        ? theme.labelPrimaryForeground
-        : theme.labelPrimary;
+        ? theme.color(DshButtonRecipe.primaryLabelToken)
+        : theme.color(DshButtonRecipe.labelToken);
     final textStyle = theme
-        .textStyle(small ? '--dsw-font-xxs-12' : '--dsw-font-s-14')
+        .textStyle(
+          small ? DshButtonRecipe.smallFontToken : DshButtonRecipe.fontToken,
+        )
         .copyWith(color: foreground, decoration: TextDecoration.none)
         .merge(widget.labelStyle);
     // `.outline { border: 0.5px solid }` on a border-box button of fixed
@@ -155,13 +164,18 @@ class _DshButtonState extends State<DshButton> {
     // emulated capture) and it widens the box (the content width is padding +
     // label + both borders).
     final outlined = widget.variant == DshButtonVariant.outline;
-    final borderWidth = outlined ? dshHairlineOf(context) : 0.0;
+    final borderWidth = outlined
+        ? dshBorderWidthOf(context, DshButtonRecipe.outlineWidth)
+        : 0.0;
     // Chromium paints the background under the border too, so the hairline
     // lands on the fill when there is one.
     // Chromium paints the background under the border too, so the hairline
     // lands on the fill when there is one.
     final borderColor = outlined
-        ? paint(theme.borderL3, over: fill != null && fill.a >= 1 ? fill : null)
+        ? paint(
+            theme.color(DshButtonRecipe.outlineToken),
+            over: fill != null && fill.a >= 1 ? fill : null,
+          )
         : null;
 
     final surface = DshDecoratedBox(
@@ -173,26 +187,35 @@ class _DshButtonState extends State<DshButton> {
         borderWidth: borderWidth,
       ),
       child: Container(
-        height: widget.height ?? (small ? 28 : 36),
+        height:
+            widget.height ??
+            (small ? DshButtonRecipe.smallHeight : DshButtonRecipe.height),
         padding: EdgeInsets.symmetric(
           horizontal:
-              (widget.horizontalPadding ?? (small ? 10 : 14)) + borderWidth,
+              (widget.horizontalPadding ??
+                  (small
+                      ? DshButtonRecipe.smallPadding
+                      : DshButtonRecipe.padding)) +
+              borderWidth,
         ),
         child: DefaultTextStyle.merge(
           style: textStyle,
           child: IconTheme(
-            data: IconThemeData(color: foreground, size: 16),
+            data: IconThemeData(
+              color: foreground,
+              size: DshButtonRecipe.iconSize,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (widget.icon != null) ...[
                   SizedBox(
-                    width: 16,
-                    height: 16,
+                    width: DshButtonRecipe.iconSize,
+                    height: DshButtonRecipe.iconSize,
                     child: Center(child: widget.icon),
                   ),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: DshButtonRecipe.gap),
                 ],
                 Flexible(child: widget.child),
               ],
@@ -285,19 +308,19 @@ class _DshButtonState extends State<DshButton> {
       case DshButtonVariant.primary:
         return theme.color(
           hover
-              ? '--dsw-alias-button-primary-hover'
-              : '--dsw-alias-button-primary-fill',
+              ? DshButtonRecipe.primaryHoverToken
+              : DshButtonRecipe.primaryToken,
         );
       case DshButtonVariant.ghost:
-        if (active) return theme.interactiveBgActive;
-        return hover ? theme.interactiveBgHover : null;
+        if (active) return theme.color(DshButtonRecipe.activeToken);
+        return hover ? theme.color(DshButtonRecipe.hoverToken) : null;
       case DshButtonVariant.outline:
-        return hover ? theme.interactiveBgHover : null;
+        return hover ? theme.color(DshButtonRecipe.outlineHoverToken) : null;
       case DshButtonVariant.toolbar:
         return theme.color(
           hover
-              ? '--dsw-alias-button-tool-bar-hover'
-              : '--dsw-alias-button-tool-bar-fill',
+              ? DshButtonRecipe.toolbarHoverToken
+              : DshButtonRecipe.toolbarToken,
         );
     }
   }

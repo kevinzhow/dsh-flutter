@@ -1,0 +1,309 @@
+{
+  "source": {
+    "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "packages": [
+      {
+        "name": "@deepseek-ai/dsh-client-ui-primitives",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-primitives/-/dsh-client-ui-primitives-0.2.1-rc.2.tgz",
+        "integrity": "sha512-3K6W2ID4sbDUDHhZHs8cNO15XDXBWAYFnEzJ/iD8ZASqidazcJActxlEf8GO6NHmbbeX0lEq0P20Ftwhovt+Mw==",
+        "files": {
+          "package.json": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "Button.module.css": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+          "SegmentedTabs.module.css": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+          "Pill.module.css": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82"
+        },
+        "sourcePackage": "packages/client/ui-primitives/package.json",
+        "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+        "dependencyField": "devDependencies",
+        "dependencySpecifier": "workspace:*"
+      }
+    ]
+  },
+  "sheets": {
+    "Button.module.css": [
+      {
+        "selector": ".button",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "gap": "4px",
+          "border": "none",
+          "border-radius": "var(--dsw-radius-md)",
+          "cursor": "pointer",
+          "font-size": "14px",
+          "line-height": "22px",
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "transparent",
+          "padding": "0 14px"
+        }
+      },
+      {
+        "selector": ".button:disabled",
+        "conditions": [],
+        "declarations": {
+          "cursor": "not-allowed",
+          "opacity": "0.4"
+        }
+      },
+      {
+        "selector": ".md",
+        "conditions": [],
+        "declarations": {
+          "height": "36px"
+        }
+      },
+      {
+        "selector": ".sm",
+        "conditions": [],
+        "declarations": {
+          "height": "28px",
+          "font-size": "12px",
+          "line-height": "18px",
+          "padding": "0 10px",
+          "border-radius": "var(--dsw-radius-sm)"
+        }
+      },
+      {
+        "selector": ".primary",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-button-primary-fill)",
+          "color": "var(--dsw-alias-label-primary-foreground)"
+        }
+      },
+      {
+        "selector": ".primary:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-button-primary-hover)"
+        }
+      },
+      {
+        "selector": ".ghost:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".ghost:active:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-active)"
+        }
+      },
+      {
+        "selector": ".outline",
+        "conditions": [],
+        "declarations": {
+          "border": "0.5px solid var(--dsw-alias-border-l3)",
+          "background": "transparent"
+        }
+      },
+      {
+        "selector": ".outline:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".toolbar",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-button-tool-bar-fill)"
+        }
+      },
+      {
+        "selector": ".toolbar:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-button-tool-bar-hover)"
+        }
+      },
+      {
+        "selector": ".icon",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex",
+          "width": "16px",
+          "height": "16px",
+          "align-items": "center",
+          "justify-content": "center"
+        }
+      }
+    ],
+    "SegmentedTabs.module.css": [
+      {
+        "selector": ".tabs",
+        "conditions": [],
+        "declarations": {
+          "position": "relative",
+          "display": "grid",
+          "padding": "4px",
+          "border-radius": "var(--dsw-radius-lg)",
+          "background": "var(--dsw-alias-bg-module-platform)"
+        }
+      },
+      {
+        "selector": ".indicator",
+        "conditions": [],
+        "declarations": {
+          "position": "absolute",
+          "inset": "4px auto 4px 4px",
+          "box-sizing": "border-box",
+          "border": "0.5px solid var(--dsw-alias-border-l3)",
+          "border-radius": "var(--dsw-radius-md)",
+          "background": "var(--dsw-alias-bg-layer-3)",
+          "transition": "transform 180ms ease",
+          "pointer-events": "none"
+        }
+      },
+      {
+        "selector": ".tab",
+        "conditions": [],
+        "declarations": {
+          "position": "relative",
+          "justify-content": "center",
+          "height": "34px",
+          "padding": "0 12px",
+          "border-radius": "var(--dsw-radius-md)",
+          "font-size": "14px",
+          "line-height": "20px",
+          "background": "transparent",
+          "color": "var(--dsw-alias-label-secondary)",
+          "transition": "color 180ms ease"
+        }
+      },
+      {
+        "selector": ".tab:hover, .tab[aria-selected='true']",
+        "conditions": [],
+        "declarations": {
+          "background": "transparent",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".tab[aria-selected='true']",
+        "conditions": [],
+        "declarations": {
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": ".tab:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "none",
+          "text-decoration": "underline",
+          "text-decoration-thickness": "1px",
+          "text-underline-offset": "4px"
+        }
+      },
+      {
+        "selector": ".indicator, .tab",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "transition": "none"
+        }
+      }
+    ],
+    "Pill.module.css": [
+      {
+        "selector": ".pill",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "gap": "4px",
+          "height": "24px",
+          "padding": "0 8px",
+          "border": "none",
+          "border-radius": "999px",
+          "corner-shape": "round",
+          "font-size": "12px",
+          "line-height": "18px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "background": "var(--dsw-alias-bg-layer-2)"
+        }
+      },
+      {
+        "selector": ".interactive",
+        "conditions": [],
+        "declarations": {
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": ".interactive:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".active",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "var(--dsw-alias-button-ghost-active-fill)",
+          "box-shadow": "inset 0 0 0 1px var(--dsw-alias-button-ghost-active-border)"
+        }
+      }
+    ]
+  },
+  "metrics": {
+    "DshButtonRecipe": {
+      "height": 36.0,
+      "smallHeight": 28.0,
+      "padding": 14.0,
+      "smallPadding": 10.0,
+      "fontSize": 14.0,
+      "lineHeight": 22.0,
+      "fontToken": "--dsw-font-s-14",
+      "smallFontToken": "--dsw-font-xxs-12",
+      "smallFontSize": 12.0,
+      "smallLineHeight": 18.0,
+      "gap": 4.0,
+      "iconSize": 16.0,
+      "disabledOpacity": 0.4,
+      "outlineWidth": 0.5,
+      "outlineToken": "--dsw-alias-border-l3",
+      "labelToken": "--dsw-alias-label-primary",
+      "primaryLabelToken": "--dsw-alias-label-primary-foreground",
+      "primaryToken": "--dsw-alias-button-primary-fill",
+      "primaryHoverToken": "--dsw-alias-button-primary-hover",
+      "hoverToken": "--dsw-alias-interactive-bg-hover",
+      "outlineHoverToken": "--dsw-alias-interactive-bg-hover",
+      "activeToken": "--dsw-alias-interactive-bg-active",
+      "toolbarToken": "--dsw-alias-button-tool-bar-fill",
+      "toolbarHoverToken": "--dsw-alias-button-tool-bar-hover",
+      "radiusToken": "--dsw-radius-md",
+      "smallRadiusToken": "--dsw-radius-sm"
+    },
+    "DshSegmentedTabRecipe": {
+      "padding": 4.0,
+      "height": 34.0,
+      "fontSize": 14.0,
+      "lineHeight": 20.0,
+      "selectedWeight": 600.0,
+      "transitionMs": 180.0,
+      "focusLineWidth": 1.0,
+      "backgroundToken": "--dsw-alias-bg-module-platform",
+      "radiusToken": "--dsw-radius-lg",
+      "indicatorBackgroundToken": "--dsw-alias-bg-layer-3",
+      "indicatorRadiusToken": "--dsw-radius-md",
+      "labelToken": "--dsw-alias-label-secondary",
+      "outlineToken": "--dsw-alias-border-l3",
+      "outlineWidth": 0.5,
+      "activeLabelToken": "--dsw-alias-label-primary"
+    }
+  }
+}

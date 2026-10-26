@@ -359,6 +359,32 @@ void main() {
       },
     );
 
+    testWidgets(
+      'generated button recipe preserves user typography ladder overrides',
+      (tester) async {
+        final base = official(Brightness.light);
+        final altered = base.copyWith(
+          typography: {
+            ...base.typography,
+            '--dsw-font-s-14': const TypeStyleValue(
+              role: FontRole.text,
+              size: SizeExpr(19),
+              line: SizeExpr(27),
+              weight: 500,
+            ),
+          },
+        );
+        await tester.pumpWidget(
+          host(altered, DshButton(onPressed: () {}, child: const Text('Go'))),
+        );
+        final style = DefaultTextStyle.of(tester.element(find.text('Go')))
+            .style;
+        expect(style.fontSize, 19);
+        expect(style.height, 27 / 19);
+        expect(style.fontWeight, FontWeight.w500);
+      },
+    );
+
     testWidgets('the focus ring follows the user pack too', (tester) async {
       final synthetic = resolveTheme(
         ThemePack.parse(syntheticSource),

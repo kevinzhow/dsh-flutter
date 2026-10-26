@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_pixel_snap.dart';
+import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'theme_access.dart';
 
@@ -103,15 +104,22 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
       label: widget.label,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final width = math.min(widget.minWidth + 8, constraints.maxWidth);
+          final width = math.min(
+            widget.minWidth + 2 * DshSegmentedTabRecipe.padding,
+            constraints.maxWidth,
+          );
           return SizedBox(
             width: width,
-            height: 42,
+            height:
+                DshSegmentedTabRecipe.height +
+                2 * DshSegmentedTabRecipe.padding,
             child: DshContainer(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(DshSegmentedTabRecipe.padding),
               decoration: BoxDecoration(
-                color: theme.color('--dsw-alias-bg-module-platform'),
-                borderRadius: BorderRadius.circular(theme.radiusLg),
+                color: theme.color(DshSegmentedTabRecipe.backgroundToken),
+                borderRadius: BorderRadius.circular(
+                  theme.number(DshSegmentedTabRecipe.radiusToken),
+                ),
               ),
               child: Focus(
                 canRequestFocus: false,
@@ -120,19 +128,35 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                 child: Stack(
                   children: [
                     Positioned(
-                      left: (width - 8) / widget.items.length * selected,
+                      left:
+                          (width - 2 * DshSegmentedTabRecipe.padding) /
+                          widget.items.length *
+                          selected,
                       top: 0,
                       bottom: 0,
-                      width: (width - 8) / widget.items.length,
+                      width:
+                          (width - 2 * DshSegmentedTabRecipe.padding) /
+                          widget.items.length,
                       child: IgnorePointer(
                         child: DshContainer(
                           decoration: BoxDecoration(
-                            color: theme.color('--dsw-alias-bg-layer-3'),
-                            border: Border.all(
-                              color: theme.borderL3,
-                              width: dshHairlineOf(context),
+                            color: theme.color(
+                              DshSegmentedTabRecipe.indicatorBackgroundToken,
                             ),
-                            borderRadius: BorderRadius.circular(theme.radiusMd),
+                            border: Border.all(
+                              color: theme.color(
+                                DshSegmentedTabRecipe.outlineToken,
+                              ),
+                              width: dshBorderWidthOf(
+                                context,
+                                DshSegmentedTabRecipe.outlineWidth,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              theme.number(
+                                DshSegmentedTabRecipe.indicatorRadiusToken,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -192,19 +216,35 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                                         style: theme
                                             .textStyle('--dsw-font-s-14')
                                             .copyWith(
-                                              height: 20 / 14,
+                                              height:
+                                                  DshSegmentedTabRecipe
+                                                      .lineHeight /
+                                                  DshSegmentedTabRecipe
+                                                      .fontSize,
                                               fontWeight: i == selected
-                                                  ? FontWeight.w600
+                                                  ? FontWeight
+                                                        .values[DshSegmentedTabRecipe
+                                                                .selectedWeight ~/
+                                                            100 -
+                                                        1]
                                                   : FontWeight.w400,
                                               color:
                                                   i == selected ||
                                                       i == hoverIndex
-                                                  ? theme.labelPrimary
-                                                  : theme.labelSecondary,
+                                                  ? theme.color(
+                                                      DshSegmentedTabRecipe
+                                                          .activeLabelToken,
+                                                    )
+                                                  : theme.color(
+                                                      DshSegmentedTabRecipe
+                                                          .labelToken,
+                                                    ),
                                               decoration: focusIndex == i
                                                   ? TextDecoration.underline
                                                   : TextDecoration.none,
-                                              decorationThickness: 1,
+                                              decorationThickness:
+                                                  DshSegmentedTabRecipe
+                                                      .focusLineWidth,
                                             ),
                                       ),
                                     ),
