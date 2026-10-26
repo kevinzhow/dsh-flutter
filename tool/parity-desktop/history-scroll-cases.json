@@ -1,0 +1,270 @@
+{
+  "cases": [
+    {
+      "id": "history.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "click": [
+            5,
+            5
+          ]
+        },
+        {
+          "capture": "latest"
+        },
+        {
+          "scroll": [
+            640,
+            400,
+            -600
+          ]
+        },
+        {
+          "click": [
+            5,
+            5
+          ]
+        },
+        {
+          "capture": "reading"
+        },
+        {
+          "expect": {
+            "reference": "latest",
+            "rect": [
+              200,
+              80,
+              1100,
+              740
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            464,
+            18
+          ]
+        },
+        {
+          "capture": "running-update"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              200,
+              80,
+              1100,
+              740
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            590,
+            18
+          ]
+        },
+        {
+          "capture": "remote-update"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              200,
+              80,
+              1100,
+              740
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            713,
+            18
+          ]
+        },
+        {
+          "capture": "older-history"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              200,
+              80,
+              1100,
+              740
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            820,
+            18
+          ]
+        },
+        {
+          "capture": "local-send"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              200,
+              80,
+              1100,
+              740
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "history.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "click": [
+            5,
+            5
+          ]
+        },
+        {
+          "capture": "latest"
+        },
+        {
+          "scroll": [
+            190,
+            400,
+            -600
+          ]
+        },
+        {
+          "click": [
+            5,
+            5
+          ]
+        },
+        {
+          "capture": "reading"
+        },
+        {
+          "expect": {
+            "reference": "latest",
+            "rect": [
+              20,
+              110,
+              365,
+              775
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            74,
+            18
+          ]
+        },
+        {
+          "capture": "running-update"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              20,
+              110,
+              365,
+              775
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            197,
+            18
+          ]
+        },
+        {
+          "capture": "remote-update"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              20,
+              110,
+              365,
+              775
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            321,
+            18
+          ]
+        },
+        {
+          "capture": "older-history"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              20,
+              110,
+              365,
+              775
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            72,
+            54
+          ]
+        },
+        {
+          "capture": "local-send"
+        },
+        {
+          "expect": {
+            "reference": "reading",
+            "rect": [
+              20,
+              110,
+              365,
+              775
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

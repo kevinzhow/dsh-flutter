@@ -508,8 +508,17 @@ class ChatViewState extends State<ChatView> {
   }
 
   void _refresh() {
-    final next = _computeRows();
     final session = widget.owner.session.snapshot.value;
+    // Row changes also include server inbox echoes and already pending sends.
+    // Only a newly observed local submission is an explicit request to leave
+    // the reader's history position. Capture it before _computeRows records
+    // the current pending ids for the process-collapse policy.
+    final ownMessage = session.pendingSubmissions.any(
+      (pending) =>
+          pending.placement != SubmissionPlacement.queued &&
+          !_pendingIds.contains(pending.requestId),
+    );
+    final next = _computeRows();
     if (!_opened) {
       // Rows published before the open call returns count as open.
       if (session.openState == OpenState.open || next.isNotEmpty) {
@@ -519,7 +528,7 @@ class ChatViewState extends State<ChatView> {
       }
       return;
     }
-    _applyRows(next);
+    _applyRows(next, ownMessage: ownMessage);
   }
 
   void _reindex() {
@@ -572,7 +581,7 @@ class ChatViewState extends State<ChatView> {
     });
   }
 
-  void _applyRows(List<_Row> next) {
+  void _applyRows(List<_Row> next, {required bool ownMessage}) {
     final current = _rows;
     final wanted = {for (final r in next) r.id};
     final currentIds = [for (final r in current) r.id];
@@ -587,7 +596,8 @@ class ChatViewState extends State<ChatView> {
     final lostCenter =
         (_centerFirst != null && !wanted.contains(_centerFirst)) ||
         (_centerAfter != null && !wanted.contains(_centerAfter));
-    if (!same &&
+    if (!ownMessage &&
+        !same &&
         ((!_atBottom &&
                 // Echoes and the status row come and go at the end; only
                 // real rows appearing inside the history move the reader.
@@ -610,12 +620,10 @@ class ChatViewState extends State<ChatView> {
       }
     }
     if (!same) _retainCenter(current, wanted);
-    var ownMessage = false;
     if (!same) {
       final from = previousLast == null ? 0 : nextIds.indexOf(previousLast) + 1;
       if (from > 0 || previousLast == null) {
         for (final row in next.skip(from)) {
-          if (row.id.startsWith('pending-')) ownMessage = true;
           if (!_atBottom && _countsAsNew(row)) _newCount++;
         }
       }
@@ -623,7 +631,14 @@ class ChatViewState extends State<ChatView> {
     _rows = next;
     _reindex();
     setState(() {});
-    if (ownMessage) _showLatest();
+    if (ownMessage) {
+      final scroll = _scroll;
+      // The pending row must contribute its height before measuring the new
+      // tail. Do not carry the action into another session's controller.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && identical(_scroll, scroll)) _showLatest();
+      });
+    }
     _scheduleFillCheck();
   }
 
