@@ -4,7 +4,6 @@ import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_feature_agent_management/dsh_feature_agent_management.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
-import 'package:dsh_models/testing.dart';
 import 'package:dsh_parity/dsh_parity.dart';
 import 'package:flutter/widgets.dart';
 import 'package:dsh_ui/dsh_ui.dart';
@@ -45,7 +44,7 @@ class _SurfaceState extends State<_Surface> {
   @override
   void initState() {
     super.initState();
-    if (widget.name == 'basic')
+    if (widget.name == 'basic') {
       fixture.tools.publish(
         const ConfigFormSnapshot(
           status: ConfigFormStatus.ready,
@@ -54,6 +53,7 @@ class _SurfaceState extends State<_Surface> {
           revision: 2,
         ),
       );
+    }
     if (widget.name == 'empty') fixture.tasks.clear();
     if (widget.family == 'goal') {
       fixture.goal = {
