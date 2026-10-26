@@ -42,7 +42,7 @@ def main():
             run('shell', 'uiautomator', 'dump', '/sdcard/whalee-upgrade.xml')
             xml = run('exec-out', 'cat', '/sdcard/whalee-upgrade.xml')
             root = ET.fromstring(xml)
-            texts = [n.get('text', '') for n in root.iter('node')]
+            texts = [n.get('text') or n.get('content-desc') or '' for n in root.iter('node')]
             if all(t in texts for t in expected):
                 (a.out / (name + '.xml')).write_bytes(xml)
                 (a.out / (name + '.png')).write_bytes(run('exec-out', 'screencap', '-p'))
@@ -53,7 +53,7 @@ def main():
     try:
         launch(a.before)
         root = scene('before', ['Stage: before', 'Write synthetic upgrade state'])
-        button = next(n for n in root.iter('node') if n.get('text') == 'Write synthetic upgrade state')
+        button = next(n for n in root.iter('node') if (n.get('text') or n.get('content-desc')) == 'Write synthetic upgrade state')
         x1, y1, x2, y2 = map(int, re.findall(r'\d+', button.get('bounds')))
         run('shell', 'input', 'tap', (x1 + x2) // 2, (y1 + y2) // 2)
         scene('seeded', ['All 8 persisted checks passed'])

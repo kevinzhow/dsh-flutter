@@ -71,13 +71,14 @@ class _UpgradeFixtureState extends State<UpgradeFixture> {
           storage.read('https://other.synthetic.invalid', sessionId) == null,
     };
     sidebar.dispose();
-    if (mounted)
+    if (mounted) {
       setState(() {
         checks = next;
         status = next.values.every((ok) => ok)
             ? 'All 8 persisted checks passed'
             : 'Synthetic state not seeded';
       });
+    }
   }
 
   Future<void> seed() async {
