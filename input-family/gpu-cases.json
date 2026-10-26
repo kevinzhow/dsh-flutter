@@ -1,0 +1,176 @@
+{
+  "cases": [
+    {
+      "id": "input-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            40
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            568,
+            98
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              15,
+              135,
+              580,
+              235
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "expanded"
+        },
+        {
+          "click": [
+            430,
+            194
+          ]
+        },
+        {
+          "text": "Inter"
+        },
+        {
+          "expect": {
+            "reference": "expanded",
+            "rect": [
+              320,
+              172,
+              580,
+              215
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "typed"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "expanded",
+            "rect": [
+              245,
+              10,
+              450,
+              40
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "saved"
+        }
+      ]
+    },
+    {
+      "id": "input-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            300,
+            40
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            132,
+            150
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              15,
+              184,
+              375,
+              320
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "expanded"
+        },
+        {
+          "click": [
+            150,
+            292
+          ]
+        },
+        {
+          "text": "Inter"
+        },
+        {
+          "expect": {
+            "reference": "expanded",
+            "rect": [
+              15,
+              270,
+              375,
+              315
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "typed"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "expanded",
+            "rect": [
+              135,
+              10,
+              320,
+              40
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "saved"
+        }
+      ]
+    }
+  ]
+}

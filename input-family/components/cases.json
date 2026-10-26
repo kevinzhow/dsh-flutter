@@ -1,0 +1,1406 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.input-family.font-desktop-en-placeholder.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-en-placeholder.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-desktop-en-value.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-en-value.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-desktop-en-focused.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-en-focused.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-en-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-placeholder.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-placeholder.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-value.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-value.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-focused.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-desktop-zh-focused.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-desktop-zh-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 596,
+        "height": 720,
+        "density": 2
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-en-placeholder.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-en-placeholder.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-en-value.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-en-value.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-en-focused.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-en-focused.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-en-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-placeholder.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-placeholder.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-placeholder",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "placeholder",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-value.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-value.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-value",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "value",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-focused.light",
+      "title": "Font family input (light)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.input-family.font-phone-zh-focused.dark",
+      "title": "Font family input (dark)",
+      "kind": "settings.font",
+      "surface": "font-phone-zh-focused",
+      "category": "extension/input-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focused",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 0,
+              "align": "stretch"
+            },
+            "preference": "system",
+            "fontSizes": {
+              "text": 14,
+              "code": 11,
+              "terminal": 13
+            },
+            "fontFamilies": {
+              "text": "\"Inter\", sans-serif",
+              "code": "",
+              "terminal": ""
+            },
+            "inputCapture": true
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "font-expander"
+            },
+            {
+              "type": "click",
+              "target": "font-text-family"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "span:has(> input[data-parity-id=\"font-text-family\"])",
+        "flutterKey": "font-text-family",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-theme/src/client/FontFamilyRow.tsx",
+      "flutterCaseHint": "features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "theme": "dark"
+    }
+  ]
+}

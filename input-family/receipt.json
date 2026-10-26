@@ -1,0 +1,169 @@
+{
+  "implementationHead": "c7495c614f0106c68221f52f1df33b34a5050f26",
+  "tree": "75915cf1e6e017dc970aea770610a247ab802efd",
+  "runtimeBuildHead": "5721e25a5eb4daea52136baaa76b30dba218a0c1",
+  "changesSinceRuntimeBuild": [
+    "tool/parity-desktop/input-family-cases.json (native replay manifest only)"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 Input.module.css and locked Input.tsx",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T21:44:10+00:00",
+    "headTree": "75915cf1e6e017dc970aea770610a247ab802efd",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.0
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.5
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 185.4
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "5cd7975bed1c3127cfdd23751d0076f0ca30e50acb0f3ef91ce2746b858b56ae"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "64c5b9d3a84d7f117b2145acfbcaef6e32d2c73db32574a08396f3aeab4c442b"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "575f3f15c3208ccf9f316c87439c5ea6fcdc364997f8a02751075b927764a277",
+      "applicationLibrarySha256": "5bf75fe235e96dddf5dec1398808056ba67d7918a5efdcd82fb28a7684815b58"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "575f3f15c3208ccf9f316c87439c5ea6fcdc364997f8a02751075b927764a277",
+      "applicationLibrarySha256": "28dc376c6b99aa308a7eee3db2f32c860d90480f0fdc0b76b1d18c591f3834e2"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "input-family.desktop",
+      "assertions": 3
+    },
+    {
+      "case": "input-family.phone",
+      "assertions": 3
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "Android text input",
+      "Enter",
+      "blur",
+      "collapse and reopen"
+    ],
+    "scenes": [
+      {
+        "scene": "cold",
+        "attempts": 1
+      },
+      {
+        "scene": "expanded",
+        "attempts": 1
+      },
+      {
+        "scene": "typed",
+        "attempts": 1
+      },
+      {
+        "scene": "enter-commit",
+        "attempts": 1
+      },
+      {
+        "scene": "edited-again",
+        "attempts": 1
+      },
+      {
+        "scene": "blur-commit",
+        "attempts": 1
+      },
+      {
+        "scene": "collapsed",
+        "attempts": 1
+      },
+      {
+        "scene": "reopened",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "compared": 24,
+    "dimensionsEqual": 12,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 89.12391666666667
+  },
+  "settingsRegression": {
+    "cases": 10,
+    "providers": 2,
+    "equal": 20
+  },
+  "browserMaxLengthProbe": [
+    {
+      "ascii": "aXYb"
+    },
+    {
+      "emoji": "a\ud83d\ude00"
+    }
+  ],
+  "remaining": "The phone settings row uses a wider stacked field than the source; all 24 input crops remain below 99.5%. The major field and feature-specific input overrides remain to be audited.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

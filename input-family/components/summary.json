@@ -1,0 +1,441 @@
+{
+  "compared": 24,
+  "dimensionsEqual": 12,
+  "nonTextThresholdPct": 99.5,
+  "nonTextPassing": 0,
+  "meanNonTextPct": 89.12391666666667,
+  "cases": [
+    {
+      "key": "components.input-family.font-desktop-en-placeholder.light",
+      "caseId": "components.input-family.font-desktop-en-placeholder.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 97.763,
+      "pixelPerfectPct": 97.763,
+      "rgbPct": 99.969,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-placeholder.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-en-placeholder.dark",
+      "caseId": "components.input-family.font-desktop-en-placeholder.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 97.945,
+      "pixelPerfectPct": 97.559,
+      "rgbPct": 99.967,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-placeholder.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-en-value.light",
+      "caseId": "components.input-family.font-desktop-en-value.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 97.692,
+      "pixelPerfectPct": 94.774,
+      "rgbPct": 98.462,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-value.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-en-value.dark",
+      "caseId": "components.input-family.font-desktop-en-value.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 97.981,
+      "pixelPerfectPct": 94.679,
+      "rgbPct": 98.526,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-value.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-en-focused.light",
+      "caseId": "components.input-family.font-desktop-en-focused.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 98.043,
+      "pixelPerfectPct": 94.606,
+      "rgbPct": 98.446,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-focused.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-en-focused.dark",
+      "caseId": "components.input-family.font-desktop-en-focused.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 98.054,
+      "pixelPerfectPct": 94.617,
+      "rgbPct": 98.507,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-en-focused.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-placeholder.light",
+      "caseId": "components.input-family.font-desktop-zh-placeholder.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 97.2,
+      "pixelPerfectPct": 97.2,
+      "rgbPct": 99.97,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-placeholder.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-placeholder.dark",
+      "caseId": "components.input-family.font-desktop-zh-placeholder.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 97.506,
+      "pixelPerfectPct": 97.117,
+      "rgbPct": 99.976,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-placeholder.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-value.light",
+      "caseId": "components.input-family.font-desktop-zh-value.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 96.914,
+      "pixelPerfectPct": 93.995,
+      "rgbPct": 98.459,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-value.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-value.dark",
+      "caseId": "components.input-family.font-desktop-zh-value.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 97.214,
+      "pixelPerfectPct": 93.91,
+      "rgbPct": 98.525,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-value.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-focused.light",
+      "caseId": "components.input-family.font-desktop-zh-focused.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 98.034,
+      "pixelPerfectPct": 94.591,
+      "rgbPct": 98.445,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-focused.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-desktop-zh-focused.dark",
+      "caseId": "components.input-family.font-desktop-zh-focused.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 98.054,
+      "pixelPerfectPct": 94.611,
+      "rgbPct": 98.505,
+      "sizeReact": [
+        514,
+        66
+      ],
+      "sizeFlutter": [
+        514,
+        66
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-desktop-zh-focused.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-placeholder.light",
+      "caseId": "components.input-family.font-phone-en-placeholder.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.556,
+      "pixelPerfectPct": 93.556,
+      "rgbPct": 99.444,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-placeholder.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-placeholder.dark",
+      "caseId": "components.input-family.font-phone-en-placeholder.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 67.398,
+      "pixelPerfectPct": 66.564,
+      "rgbPct": 99.229,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-placeholder.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-value.light",
+      "caseId": "components.input-family.font-phone-en-value.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.372,
+      "pixelPerfectPct": 92.136,
+      "rgbPct": 95.713,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-value.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-value.dark",
+      "caseId": "components.input-family.font-phone-en-value.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 67.251,
+      "pixelPerfectPct": 65.219,
+      "rgbPct": 95.646,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-value.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-focused.light",
+      "caseId": "components.input-family.font-phone-en-focused.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.632,
+      "pixelPerfectPct": 92.134,
+      "rgbPct": 95.083,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-focused.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-en-focused.dark",
+      "caseId": "components.input-family.font-phone-en-focused.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 67.808,
+      "pixelPerfectPct": 65.215,
+      "rgbPct": 94.716,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-en-focused.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-placeholder.light",
+      "caseId": "components.input-family.font-phone-zh-placeholder.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.632,
+      "pixelPerfectPct": 93.632,
+      "rgbPct": 99.475,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-placeholder.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-placeholder.dark",
+      "caseId": "components.input-family.font-phone-zh-placeholder.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 67.565,
+      "pixelPerfectPct": 66.707,
+      "rgbPct": 99.277,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-placeholder.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-value.light",
+      "caseId": "components.input-family.font-phone-zh-value.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.37,
+      "pixelPerfectPct": 92.134,
+      "rgbPct": 95.688,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-value.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-value.dark",
+      "caseId": "components.input-family.font-phone-zh-value.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 67.267,
+      "pixelPerfectPct": 65.21,
+      "rgbPct": 95.611,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-value.dark.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-focused.light",
+      "caseId": "components.input-family.font-phone-zh-focused.light",
+      "kind": "settings.font",
+      "theme": "light",
+      "nonTextPct": 93.639,
+      "pixelPerfectPct": 92.131,
+      "rgbPct": 95.023,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-focused.light.side-by-side.png"
+    },
+    {
+      "key": "components.input-family.font-phone-zh-focused.dark",
+      "caseId": "components.input-family.font-phone-zh-focused.dark",
+      "kind": "settings.font",
+      "theme": "dark",
+      "nonTextPct": 68.084,
+      "pixelPerfectPct": 65.207,
+      "rgbPct": 94.657,
+      "sizeReact": [
+        675,
+        87
+      ],
+      "sizeFlutter": [
+        940,
+        87
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.input-family.font-phone-zh-focused.dark.side-by-side.png"
+    }
+  ]
+}

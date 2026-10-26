@@ -1,0 +1,44 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "Android text input",
+    "Enter",
+    "blur",
+    "collapse and reopen"
+  ],
+  "scenes": [
+    {
+      "scene": "cold",
+      "attempts": 1
+    },
+    {
+      "scene": "expanded",
+      "attempts": 1
+    },
+    {
+      "scene": "typed",
+      "attempts": 1
+    },
+    {
+      "scene": "enter-commit",
+      "attempts": 1
+    },
+    {
+      "scene": "edited-again",
+      "attempts": 1
+    },
+    {
+      "scene": "blur-commit",
+      "attempts": 1
+    },
+    {
+      "scene": "collapsed",
+      "attempts": 1
+    },
+    {
+      "scene": "reopened",
+      "attempts": 1
+    }
+  ]
+}

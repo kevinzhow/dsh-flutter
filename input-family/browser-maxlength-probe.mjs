@@ -1,0 +1,13 @@
+import { chromium } from '../tool/parity-web/node_modules/playwright-core/index.mjs';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage();
+await page.setContent('<input maxlength="4" value="ab">');
+const field = page.locator('input');
+await field.focus();
+await field.evaluate(e => e.setSelectionRange(1, 1));
+await page.keyboard.insertText('XYZ');
+console.log(JSON.stringify({ ascii: await field.inputValue() }));
+await field.evaluate(e => { e.value = 'a'; e.setSelectionRange(1,1); });
+await page.keyboard.insertText('😀😀');
+console.log(JSON.stringify({ emoji: await field.inputValue() }));
+await browser.close();
