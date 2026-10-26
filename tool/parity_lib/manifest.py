@@ -49,6 +49,7 @@ from __future__ import annotations
 
 import fnmatch
 import json
+import math
 import pathlib
 import re
 
@@ -73,6 +74,7 @@ INTERACTIONS = {
     'tab': set(),               # real Tab key; optional `count` (default 1): keyboard focus-visible
     'type': {'target', 'text'}, # type into the field under the target
     'wait': {'ms'},             # advance time
+    'set-scroll': {'target', 'offset'},  # prepare a scroll position for capture
 }
 INTERACTION_OPTIONAL = {'tab': {'count'}}
 
@@ -133,6 +135,8 @@ def _validate_interaction(step, where, errors):
         errors.append('%s: wait.ms must be a number' % where)
     if kind == 'tab' and 'count' in step and not (isinstance(step['count'], int) and step['count'] > 0):
         errors.append('%s: tab.count must be a positive integer' % where)
+    if kind == 'set-scroll' and 'offset' in step and (not _num(step['offset'], positive=False) or not math.isfinite(step['offset']) or step['offset'] < 0):
+        errors.append('%s: set-scroll.offset must be a finite nonnegative number' % where)
 
 
 def validate_case(case, where='case'):

@@ -75,6 +75,9 @@ class ValidateCase(unittest.TestCase):
         self.assertTrue(with_steps({'type': 'hover'}))                       # missing target
         self.assertTrue(with_steps({'type': 'hover', 'target': 'a', 'x': 1}))  # unknown key
         self.assertTrue(with_steps({'type': 'tab', 'count': 0}))
+        self.assertEqual(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': 14.5}), [])
+        self.assertTrue(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': -1}))
+        self.assertTrue(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': float('nan')}))
 
     def test_capture_and_regions(self):
         self.assertTrue(self.errors(capture={'selector': 'x', 'bogus': 1}))

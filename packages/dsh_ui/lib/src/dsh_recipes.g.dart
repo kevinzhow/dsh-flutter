@@ -163,6 +163,20 @@ abstract final class DshMenuFooterRecipe {
   static const String borderToken = '--dsw-alias-border-l2';
 }
 
+abstract final class DshMenuGroupRecipe {
+  static const double gap = 3.0;
+  static const double fontSize = 11.0;
+  static const double lineHeight = 16.0;
+  static const double fontWeight = 500.0;
+  static const String fontToken = '--dsw-font-xxxs-11';
+  static const String labelToken = '--dsw-alias-label-tertiary';
+  static const String stuckFillToken = '--dsw-alias-menu-group-header-fill';
+  static const String radiusToken = '--dsw-radius-md';
+  static const double paddingTop = 4.0;
+  static const double paddingHorizontal = 7.0;
+  static const double paddingBottom = 2.0;
+}
+
 abstract final class DshMenuSurfaceRecipe {
   static const String radiusToken = '--dsw-radius-lg';
   static const String compactRadiusToken = '--dsw-radius-md';

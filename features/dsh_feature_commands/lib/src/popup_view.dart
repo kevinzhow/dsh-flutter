@@ -141,7 +141,6 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
         : s.options.isEmpty
         ? s.searchLabels!.empty
         : s.searchLabels!.noResults;
-    final tertiary = theme.color('--dsw-alias-label-tertiary');
     final body = <Widget>[
       if (s.error != null)
         Padding(
@@ -194,37 +193,31 @@ class _PopupSelectOverlayState extends State<PopupSelectOverlay> {
         _status(theme, emptyLabel),
       if (s.status == PopupStatus.ready)
         Flexible(
-          child: SingleChildScrollView(
+          child: CustomScrollView(
             key: const ValueKey('popup-list'),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (final g in groups) ...[
-                  if (g.group != null)
-                    Padding(
-                      // `.group + .group { margin-top: 3px }`.
-                      padding: EdgeInsets.only(
-                        top: identical(g, groups.first) ? 0 : 3,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(7, 4, 7, 2),
-                        child: DshChromeText(
-                          g.group!.label,
-                          style: theme
-                              .textStyle('--dsw-font-xxxs-11')
-                              .copyWith(
-                                color: tertiary,
-                                height: 16 / 11,
-                                fontWeight: FontWeight.w500,
-                              ),
-                        ),
-                      ),
+            shrinkWrap: true,
+            slivers: [
+              for (var i = 0; i < groups.length; i++)
+                if (groups[i].group == null)
+                  SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        for (final option in groups[i].rows)
+                          _optionRow(theme, option, index++, s.active),
+                      ],
                     ),
-                  for (final option in g.rows)
-                    _optionRow(theme, option, index++, s.active),
-                ],
-              ],
-            ),
+                  )
+                else
+                  DshMenuGroup(
+                    label: groups[i].group!.label,
+                    separated: i > 0 && groups[i - 1].group != null,
+                    children: [
+                      for (final option in groups[i].rows)
+                        _optionRow(theme, option, index++, s.active),
+                    ],
+                  ),
+            ],
           ),
         ),
     ];

@@ -7,6 +7,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dsh_parity/dsh_parity.dart';
+import 'package:dsh_parity/src/interactions.dart';
 import 'package:dsh_ui/dsh_ui.dart' show DshPixelModel, dshPixelModel;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'parity/case_map.dart';
 
 void main() {
+  testWidgets(
+    'set-scroll prepares the requested position and clamps at the end',
+    (t) async {
+      await t.pumpWidget(
+        const Directionality(
+          textDirection: TextDirection.ltr,
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+              width: 100,
+              height: 100,
+              child: SingleChildScrollView(
+                key: ValueKey('scroll-list'),
+                child: SizedBox(height: 400),
+              ),
+            ),
+          ),
+        ),
+      );
+      final interactions = ParityInteractions(t);
+      final scrollable = t.state<ScrollableState>(find.byType(Scrollable));
+      await interactions.apply([
+        {'type': 'set-scroll', 'target': 'scroll-list', 'offset': 125},
+      ]);
+      expect(scrollable.position.pixels, 125);
+      await interactions.apply([
+        {'type': 'set-scroll', 'target': 'scroll-list', 'offset': 999},
+      ]);
+      expect(scrollable.position.pixels, scrollable.position.maxScrollExtent);
+    },
+  );
+
   group('theme self-test', () {
     test('resolveParityTheme honours the requested mode, not the platform', () {
       expect(resolveParityTheme('light').brightness, Brightness.light);

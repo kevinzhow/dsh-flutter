@@ -134,6 +134,7 @@ async function applyInteractions(page, steps) {
       case 'click': await target.click(); break
       case 'tab': for (let i = 0; i < (step.count ?? 1); i++) await page.keyboard.press('Tab'); break
       case 'type': await target.pressSequentially(step.text); break
+      case 'set-scroll': await target.evaluate((el, offset) => { el.scrollTop = offset }, step.offset); break
       case 'wait': await page.waitForTimeout(step.ms); break
       default: throw new Error(`unknown interaction ${step.type}`)
     }

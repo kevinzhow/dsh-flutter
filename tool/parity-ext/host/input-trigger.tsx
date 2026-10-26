@@ -9,7 +9,7 @@
 // The menu is `position: absolute; bottom: calc(100% + 4px)` in the composer card; the host gives it a card-sized
 // relative frame and the capture crops to the menu surface itself (`data-parity-id="menu"`), so the composer is not in
 // the picture. Icons the commands pass as components are mapped from the same glyph keys the Flutter menu uses.
-import { useMemo } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 import { MenuView } from '@dsh/ui-input-trigger/src/client/MenuView.tsx'
 import { en as menuEn, zh as menuZh } from '@dsh/ui-input-trigger/src/client/locales.ts'
 import { PopupSelectView } from '@dsh/ui-commands/src/client/PopupSelectView.tsx'
@@ -53,6 +53,11 @@ function Menu({ props, locale }: { props: any; locale: string }) {
 }
 
 function Popup({ props, locale }: { props: any; locale: string }) {
+  const host = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const list = host.current?.querySelector('[role="listbox"]')
+    if (list) list.setAttribute('data-parity-id', 'popup-list')
+  }, [props])
   const t = useMemo(() => createTranslator(locale, { en: commandEn, zh: commandZh }), [locale])
   const popup = useMemo(() => {
     const state = {
@@ -65,7 +70,7 @@ function Popup({ props, locale }: { props: any; locale: string }) {
       acknowledge: none, cancelConfirmation: none, confirm: none }
   }, [props])
   return (
-    <div style={{ position: 'relative', width: props.width ?? 380, height: props.height ?? 360 }}>
+    <div ref={host} style={{ position: 'relative', width: props.width ?? 380, height: props.height ?? 360 }}>
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 0 }}>
         <PopupSelectView {...({ popup, t } as any)} />
       </div>

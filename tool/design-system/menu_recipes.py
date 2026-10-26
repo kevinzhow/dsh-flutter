@@ -37,6 +37,7 @@ def build(sheets, *, value, number, token, css_rules):
             if set(rule['declarations']) != set(schema[rule['selector']]):
                 raise ValueError('untranslated menu property: ' + name + ' ' + rule['selector'])
     menu, surface, plugin = (sheets[n] for n in ['Menu.module.css', 'MenuSurface.module.css', 'PluginManagerPage.module.css'])
+    group = sheets['MenuGroup.module.css']
     get = lambda selector, prop: value(menu, selector, prop)
     px = lambda selector, prop: number(get(selector, prop))
     tok = lambda selector, prop: token(get(selector, prop))
@@ -122,6 +123,16 @@ def build(sheets, *, value, number, token, css_rules):
         'marginTop':px('.footer','margin-top'), 'paddingTop':px('.footer','padding-top'),
         'borderWidth':float(footer_border[1]), 'borderToken':footer_border[2],
       },
+      'DshMenuGroupRecipe': {
+        'gap': number(value(group, '.group + .group', 'margin-top')),
+        'fontSize': number(value(group, '.heading', 'font-size')),
+        'lineHeight': number(value(group, '.heading', 'line-height')),
+        'fontWeight': number(value(group, '.heading', 'font-weight'), ''),
+        'fontToken': font_token(number(value(group, '.heading', 'font-size'))),
+        'labelToken': token(value(group, '.heading', 'color')),
+        'stuckFillToken': token(value(group, '.heading[data-stuck]', 'background')),
+        'radiusToken': token(value(group, ":global(html:not([data-platform='darwin'])) .heading", 'border-radius')),
+      },
       'DshMenuSurfaceRecipe': {
         'radiusToken':token(value(surface,'.surface, .backing','border-radius')),
         'compactRadiusToken':token(value(surface,'.compact','border-radius')),
@@ -132,6 +143,14 @@ def build(sheets, *, value, number, token, css_rules):
         'blurSigma':float(match[1]),'saturation':float(match[2])/100,
       },
     }
+    group_pad = value(group, '.heading', 'padding').split()
+    if len(group_pad) != 3: raise ValueError('unsupported menu group padding')
+    weight = metrics['DshMenuGroupRecipe']['fontWeight']
+    if weight not in range(100, 1000, 100): raise ValueError('unsupported menu group font weight')
+    metrics['DshMenuGroupRecipe'].update({
+      'paddingTop': number(group_pad[0]), 'paddingHorizontal': number(group_pad[1]),
+      'paddingBottom': number(group_pad[2]),
+    })
     width_limit = value(plugin, '.addMenu', 'max-width')
     limit = re.fullmatch(r'calc\(100vw - ([\d.]+)px\)', width_limit)
     if limit is None: raise ValueError('unsupported plugin menu viewport width')

@@ -193,6 +193,65 @@ void main() {
     expect(selected, ['b/mini']);
   });
 
+  tw('keyboard navigation reveals an offscreen grouped option', (t) async {
+    final rows = [
+      for (var i = 0; i < 30; i++)
+        SelectOption(
+          id: 'item-$i',
+          label: 'Option $i',
+          group: i < 15
+              ? const SelectOptionGroup(name: 'a', label: 'First')
+              : const SelectOptionGroup(name: 'b', label: 'Second'),
+        ),
+    ];
+    await t.pumpWidget(app());
+    await open(t, rows: rows);
+    for (var i = 0; i < 24; i++) {
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await t.pump();
+    }
+    await t.pump();
+    final viewport = find.byKey(const ValueKey('popup-list'));
+    final option = find.byKey(const ValueKey('popup-option-item-24'));
+    expect(
+      t.getTopLeft(option).dy,
+      greaterThanOrEqualTo(t.getTopLeft(viewport).dy),
+    );
+    expect(
+      t.getBottomLeft(option).dy,
+      lessThanOrEqualTo(t.getBottomLeft(viewport).dy),
+    );
+    await t.sendKeyEvent(LogicalKeyboardKey.enter);
+    await t.pump();
+    expect(selected, ['item-24']);
+  });
+
+  tw('ungrouped rows do not add the adjacent-group gap', (t) async {
+    await t.pumpWidget(app());
+    await open(
+      t,
+      rows: const [
+        SelectOption(id: 'plain', label: 'Plain'),
+        SelectOption(
+          id: 'first',
+          label: 'First row',
+          group: SelectOptionGroup(name: 'a', label: 'First group'),
+        ),
+        SelectOption(
+          id: 'second',
+          label: 'Second row',
+          group: SelectOptionGroup(name: 'b', label: 'Second group'),
+        ),
+      ],
+    );
+    final plain = find.byKey(const ValueKey('popup-option-plain'));
+    final firstHeading = find.text('First group');
+    final firstRow = find.byKey(const ValueKey('popup-option-first'));
+    final secondHeading = find.text('Second group');
+    expect(t.getTopLeft(firstHeading).dy - t.getBottomLeft(plain).dy, 4);
+    expect(t.getTopLeft(secondHeading).dy - t.getBottomLeft(firstRow).dy, 7);
+  });
+
   tw('a failed load shows the error with a retry that reloads', (t) async {
     await t.pumpWidget(app());
     popup.open('model', spec(), 's1', EnterSegment('/model'));
