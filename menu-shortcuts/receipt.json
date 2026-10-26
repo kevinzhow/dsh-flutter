@@ -1,0 +1,136 @@
+{
+  "implementationHead": "60571a47196d694416e0f80a25ec21c90f42b8a5",
+  "tree": "4038eee0caea637af4e37111eef72c2e125af5bc",
+  "preflightHeadTree": "4038eee0caea637af4e37111eef72c2e125af5bc",
+  "captureAndBuildHeadBeforeRebase": "e9e42c449ad8b8118beb467c0d69210bd0c22a37",
+  "postRuntimeChangesOnly": [
+    "tool/design-system/theme.generated.json",
+    "tool/parity-desktop/menu-shortcuts-cases.json"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "@deepseek-ai/dsh-client-ui-primitives 0.2.1-rc.2 archive verified, ShortcutKeys.module.css identical to pinned DSH source",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T19:53:55+00:00",
+    "headTree": "4038eee0caea637af4e37111eef72c2e125af5bc",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.0
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 11.2
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.4
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 184.6
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "buildHead": "e9e42c449ad8b8118beb467c0d69210bd0c22a37",
+      "sha256": "0fe8f9bc689ef2a969a441e039516cff4e679cc279c25f5d50bf1eea99a2ba65"
+    },
+    {
+      "name": "android-normal.apk",
+      "buildHead": "e9e42c449ad8b8118beb467c0d69210bd0c22a37",
+      "sha256": "48c213452603003791ae19b49bf0a6e79de6584c5622354a7feacec30c304867"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "buildHead": "e9e42c449ad8b8118beb467c0d69210bd0c22a37",
+      "sha256": "e83850ff69512e96ec7013b8a54da07ab98f3aa3d68cf233de36762df95442ea",
+      "applicationLibrarySha256": "cee12ac76c76308d1514990c22cf82488f9c41e321c14f0c76d294bed849052b"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "buildHead": "e9e42c449ad8b8118beb467c0d69210bd0c22a37",
+      "sha256": "e83850ff69512e96ec7013b8a54da07ab98f3aa3d68cf233de36762df95442ea",
+      "applicationLibrarySha256": "c730c1b41d23339bcd6972a123009fecbe9027704e7701d2204d71344775b04b"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "menu-shortcuts.desktop",
+      "assertions": 2
+    },
+    {
+      "case": "menu-shortcuts.phone",
+      "assertions": 2
+    }
+  ],
+  "androidScenes": 6,
+  "shortcutAccessibilityAndKeyboardPassed": true,
+  "visual": {
+    "compared": 196,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 18,
+    "dimensionsEqual": 184,
+    "meanNonTextPct": 93.19804591836734
+  },
+  "newShortcutComparisons": {
+    "count": 16,
+    "equalDimensions": 12,
+    "pass995": 0,
+    "mean": 81.1856875
+  },
+  "unchangedReactPngs": 180,
+  "unchangedFlutterPngs": 180,
+  "shortcutTypographyMatchingCases": 16,
+  "oldWhaleeUsedForRegressionOnly": true,
+  "ratchetTotals": {
+    "duplicate-button": 4,
+    "manual-metric": 963,
+    "platform-control": 11,
+    "duplicate-input": 2
+  },
+  "remaining": "Live application shortcut catalog wiring and registration of session rename/fork/archive commands are pending; no default shortcuts were invented. Submenus, sticky groups, arbitrary-content bounded blur, macOS backing and broader 99.5% visual parity remain unfinished.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

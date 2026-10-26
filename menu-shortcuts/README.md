@@ -1,0 +1,7 @@
+# Published menu shortcuts: reference and native evidence
+
+Menu rows can display caller-supplied effective shortcut labels and expose their accessible description. The existing shared keycap component uses plain spacing and menu-specific typography/color generated from the actual pinned published CSS. Session action contributions accept an effective-binding lookup; the running app has not yet wired that catalog or registered its rename, fork and archive commands, so no default keys are invented.
+
+The 16 new comparisons render the real DSH workspace session menu and the corresponding Flutter workspace with identical synthetic bindings, in normal/archived states, desktop/phone, English/Chinese and light/dark. 12 have equal dimensions and none meets the unchanged 99.5% non-text threshold; menu background and a phone width pixel remain different. All 96 shortcut text fragments have matching measured size, weight, line-height, spacing and color. These screenshots are acceptance evidence against DSH, not a claim of overall parity. The 180 existing reference and Flutter screenshots are pixel-identical to the previous run.
+
+All 13 local checks passed on the final code tree. Linux/Android normal and fixture builds passed; desktop and phone GPU replays opened the actual menu and keyboard-selected the rename dialog; Android verified the shortcut's accessibility description and keyboard selection. Receipt.json records exact source/build provenance, artifact hashes and remaining work. No deployment or release.
