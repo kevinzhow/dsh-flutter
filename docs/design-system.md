@@ -150,3 +150,22 @@ cases in both themes and languages at desktop and phone densities. These are
 evidence of the current differences, not a claim of visual parity. Dynamic label
 resolver callbacks and the source's optional document-body portal need further
 audit; the Flutter implementation accepts a string and uses its nearest overlay.
+
+### Single-line input atom
+
+`Input.module.css` and the reference component are locked to the published
+primitive package. The generator rejects unknown input states and emits the
+wrapper, icon, typography, border and focus tokens. `DshInput` is the shared
+single-line atom for controlled values and for settings that commit on blur or
+Enter; it preserves the Chromium input's measured inline inset. It supports an
+optional icon, disabled semantics and input length limits. Length limits retain
+the part of an insertion that fits and avoid splitting a surrogate pair, as in
+the reference browser.
+
+The real font-settings family row uses this atom. Its previous desktop captures
+remain pixel-identical, and focused, populated and placeholder fields are
+compared separately against the actual DSH component. The phone settings row
+currently uses a wider stacked field than the web reference, so those crops do
+not have matching widths. The major text field and feature-specific variants
+remain a separate audit; in particular, the model selector overrides the source
+input's padding, border and type rather than using the base atom unchanged.

@@ -54,10 +54,8 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_text_field.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
-      "pendingDuplicates": [
-        "DshFieldInput -> DshTextField settings variant"
-      ]
+      "migrationStatus": "published single-line Input atom and font settings consolidated; major and feature-specific input variants remain to be audited",
+      "pendingDuplicates": []
     },
     {
       "name": "selection-and-checkbox",
@@ -146,7 +144,7 @@
   "remediation": {
     "platform-control": "use the canonical Dsh family wrapper; allowlisted wrappers need a source-backed reason",
     "duplicate-button": "migrate to DshButton with the source icon-action recipe",
-    "duplicate-input": "consolidate through the canonical DshTextField settings recipe",
+    "duplicate-input": "consolidate through the canonical DshInput atom",
     "manual-metric": "generate a source recipe or use its theme token; avoid page overrides",
     "duplicate-menu": "use DshMenuSurface/DshMenuItemButton with the published dock profile; do not copy generic row geometry"
   },
@@ -468,7 +466,6 @@
       "manual-metric": 2
     },
     "features/dsh_feature_theme/lib/src/theme_rows.dart": {
-      "duplicate-input": 1,
       "manual-metric": 6
     },
     "features/dsh_feature_tool/lib/src/register.dart": {
@@ -572,8 +569,7 @@
       "manual-metric": 2
     },
     "packages/dsh_ui/lib/src/dsh_settings.dart": {
-      "duplicate-input": 1,
-      "manual-metric": 26
+      "manual-metric": 25
     },
     "packages/dsh_ui/lib/src/dsh_settings_form.dart": {
       "manual-metric": 10

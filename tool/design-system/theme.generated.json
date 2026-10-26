@@ -19,7 +19,8 @@
           "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
           "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
           "Tooltip.module.css": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
-          "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf"
+          "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
+          "Input.module.css": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -30,7 +31,8 @@
         "extraction": "Exact stylesheet and metadata bytes from published npm archive; no JavaScript execution",
         "referenceSourceSha256": {
           "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1",
-          "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695"
+          "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695",
+          "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67"
         }
       },
       {

@@ -61,7 +61,7 @@ function permissionStore(permission: PermissionState) {
  * Tags the real elements the interactions target and checks that the content fills the case frame. The font region
  * mounts after a click inside the rows, so a mutation observer re-tags whenever the subtree changes.
  */
-function Tagged({ locale, ctx, children }: { locale: string; ctx: ParityContext; children: React.ReactNode }) {
+function Tagged({ locale, ctx, children, skipFrameCheck = false }: { locale: string; ctx: ParityContext; children: React.ReactNode; skipFrameCheck?: boolean }) {
   const height = ctx.case.viewport.height
   // The variant's own click on the expander: until the region (its text fields) exists the content is still collapsed.
   const expands = ((ctx.variant as { interactions?: { type: string; target?: string }[] }).interactions ?? [])
@@ -101,6 +101,7 @@ function Tagged({ locale, ctx, children }: { locale: string; ctx: ParityContext;
       return window.devicePixelRatio > 1 && border < 1
     }
     const check = () => {
+      if (skipFrameCheck) return // An element crop can live in a taller viewport than its content.
       if (document.fonts.status !== 'loaded') return // text still being laid out with a fallback face
       if (expands && host.querySelector('input') === null) return // the click has not expanded the region yet
       const measured = column.getBoundingClientRect().height
@@ -114,7 +115,7 @@ function Tagged({ locale, ctx, children }: { locale: string; ctx: ParityContext;
     fit.observe(column)
     document.fonts.addEventListener('loadingdone', check)
     return () => { observer.disconnect(); fit.disconnect(); document.fonts.removeEventListener('loadingdone', check) }
-  }, [locale, height, expands])
+  }, [locale, height, expands, skipFrameCheck])
   // display: contents keeps the wrapper out of layout: the rows stay direct children of the case's stack.
   return <div ref={ref} style={{ display: 'contents' }}>{children}</div>
 }
@@ -152,7 +153,7 @@ export const kinds: Record<string, KindRenderer> = {
    */
   'settings.font': (props, ctx) => (
     <Stack layout={props.layout}>
-      <Tagged locale={ctx.case.locale} ctx={ctx}>{fontRow(props as ThemeProps, ctx.case.locale)}</Tagged>
+      <Tagged locale={ctx.case.locale} ctx={ctx} skipFrameCheck={props.inputCapture === true}>{fontRow(props as ThemeProps, ctx.case.locale)}</Tagged>
     </Stack>
   ),
   /** props {layout, state}; parity id `permission-selector`. */
