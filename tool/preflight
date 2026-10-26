@@ -9,6 +9,7 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   tool-tests       python unit tests under tool/tests
   codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
   theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
+  design-system    published source recipes, dependency drift and per-file family ratchets
   i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
   icons            tool/icons/gen_icons.py, gen_code_language.py and gen_file_types.py --check: icon paths and code-language tables are
                    fresh against the pinned dsh checkout
@@ -129,6 +130,17 @@ def c_theme_pack():
     return run([sys.executable, '-I', 'tool/theme-adapters/build_official_pack.py', '--check', '--quiet'])
 
 
+def c_design_system():
+    src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local/dsh-src')))
+    command = [sys.executable, '-I', 'tool/design-system/generate.py', '--check']
+    if not (src / 'packages/client/ui-primitives/package.json').is_file():
+        command.append('--snapshot-only')
+    result = run(command)
+    if result[0] != 0:
+        return result
+    return run([sys.executable, '-I', 'tool/design-system/check.py'])
+
+
 def c_i18n():
     return run([sys.executable, '-I', 'tool/i18n/gen_catalog.py', '--check'])
 
@@ -243,7 +255,7 @@ CHECKS = [
     ('check-deps', c_check_deps),
     ('tool-tests', c_tool_tests),
     ('codegen', c_codegen),
-    ('theme-pack', c_theme_pack),
+    ('theme-pack', c_theme_pack), ('design-system', c_design_system),
     ('i18n', c_i18n),
     ('icons', c_icons),
     ('vector', c_vector),

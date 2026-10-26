@@ -1,0 +1,22 @@
+{
+  "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "packages": [
+    {
+      "name": "@deepseek-ai/dsh-client-ui-primitives",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-primitives/-/dsh-client-ui-primitives-0.2.1-rc.2.tgz",
+      "integrity": "sha512-3K6W2ID4sbDUDHhZHs8cNO15XDXBWAYFnEzJ/iD8ZASqidazcJActxlEf8GO6NHmbbeX0lEq0P20Ftwhovt+Mw==",
+      "files": {
+        "package.json": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "Button.module.css": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+        "SegmentedTabs.module.css": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+        "Pill.module.css": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82"
+      },
+      "sourcePackage": "packages/client/ui-primitives/package.json",
+      "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+      "dependencyField": "devDependencies",
+      "dependencySpecifier": "workspace:*"
+    }
+  ]
+}
