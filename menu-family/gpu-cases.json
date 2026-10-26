@@ -1,0 +1,318 @@
+{
+  "cases": [
+    {
+      "id": "plugin-layout.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 800,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "manager"
+        },
+        {
+          "click": [
+            1104,
+            88
+          ]
+        },
+        {
+          "capture": "install-menu"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              800,
+              110,
+              1140,
+              360
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "install-dialog-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              300,
+              180,
+              980,
+              650
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "capture": "install-dialog-closed"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              300,
+              180,
+              980,
+              650
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1104,
+            88
+          ]
+        },
+        {
+          "capture": "menu-reopened"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "capture": "menu-closed"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              800,
+              110,
+              1140,
+              360
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            396,
+            114
+          ]
+        },
+        {
+          "capture": "plugin-info"
+        },
+        {
+          "expect": {
+            "reference": "menu-closed",
+            "rect": [
+              160,
+              118,
+              610,
+              240
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            310,
+            277
+          ]
+        },
+        {
+          "capture": "package-details"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              160,
+              210,
+              1120,
+              700
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "plugin-layout.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "capture": "manager"
+        },
+        {
+          "click": [
+            195,
+            184
+          ]
+        },
+        {
+          "capture": "install-menu"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              20,
+              216,
+              370,
+              520
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            108
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "install-dialog-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              10,
+              160,
+              380,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "capture": "install-dialog-closed"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              10,
+              210,
+              380,
+              700
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            195,
+            184
+          ]
+        },
+        {
+          "capture": "menu-reopened"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "capture": "menu-closed"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              20,
+              216,
+              370,
+              520
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            260,
+            142
+          ]
+        },
+        {
+          "capture": "plugin-info"
+        },
+        {
+          "expect": {
+            "reference": "menu-closed",
+            "rect": [
+              20,
+              150,
+              370,
+              270
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            150,
+            352
+          ]
+        },
+        {
+          "capture": "package-details"
+        },
+        {
+          "expect": {
+            "reference": "manager",
+            "rect": [
+              20,
+              280,
+              370,
+              760
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

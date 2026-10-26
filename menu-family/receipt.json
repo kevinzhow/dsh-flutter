@@ -1,0 +1,135 @@
+{
+  "implementationHead": "1b5a891de380d8bd0b047efb92aef7fa1435a7e0",
+  "tree": "0483705702f013b9a867977f48c68d4a13380770",
+  "captureAndBuildHead": "595dfab2cb43c6980de688d53253d756667d31e8",
+  "subsequentChangesOnly": [
+    "apps/dsh_flutter/test/source_guard_test.dart",
+    "tool/design-system/theme.generated.json",
+    "tool/theme-adapters/build_official_pack.py"
+  ],
+  "runtimeSourcesAndGeneratedThemeUnchangedAfterCapture": true,
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInputs": "ui-primitives and ui-plugin-manager 0.2.1-rc.2; archive/snapshot integrity and reference dependency/source drift verified",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T13:52:59+00:00",
+    "headTree": "0483705702f013b9a867977f48c68d4a13380770",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.2
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.9
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.1
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.1
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.6
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 2.9
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 177.7
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "14fe13a86f9cd4aa26285342624f732faa2c77b7981dee33c9626b261e63cfc1"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "63ef4c68a720254b7df8ddfc32427a1dbcc447a5392c23f672f64cd6d18dfdf9"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "78ee3dd9830377cc380df72743925edc08080fc6a91aca06b78b94f7fb728ea1",
+      "applicationLibrarySha256": "935ee662d2293f671cc622fabe8ea0a9358a8716133509d85930e51ded6cc6bd"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "78ee3dd9830377cc380df72743925edc08080fc6a91aca06b78b94f7fb728ea1",
+      "applicationLibrarySha256": "3702d7ebe6e0dfef0d7c08068f5849b198ceecd3e98d6038bb510af900e3c866"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "plugin-layout.desktop",
+      "passedAssertions": 6
+    },
+    {
+      "case": "plugin-layout.phone",
+      "passedAssertions": 6
+    }
+  ],
+  "androidPassedScenes": 23,
+  "nativeScenarioNote": "Initial keyboard test compared the dismissed phone dialog against a region including the restored trigger highlight. Difference was confined to the method-picker button (x178..210,y168..200); the final assertion covers the former dialog region below that trigger. Product code unchanged. Android menu keyboard selection and Back dismissal passed.",
+  "visual": {
+    "compared": 132,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 12,
+    "dimensionsEqual": 106,
+    "meanNonTextPct": 96.45189393939394
+  },
+  "oldWhaleeUsedForRegressionOnly": true,
+  "unchangedReactPngs": 88,
+  "unchangedFlutterPngs": 88,
+  "ratchetTotals": {
+    "duplicate-button": 4,
+    "manual-metric": 963,
+    "platform-control": 11,
+    "duplicate-input": 2,
+    "duplicate-menu": 4
+  },
+  "remainingMenuCoverage": [
+    "submenus",
+    "shortcuts",
+    "pinned footers and sticky groups",
+    "dock-specific profiles",
+    "arbitrary-content bounded backdrop blur",
+    "macOS transparent-window backing"
+  ],
+  "remainingVisualDifferences": "132 comparisons, 106 equal dimensions; 12 reach the unchanged 99.5% non-text target. Phone hairline/crop boundaries and workspace/footer geometry remain. No claim of complete visual parity.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Owned GPU processes stopped; normal Android APK restored/stopped, owned emulator stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}
