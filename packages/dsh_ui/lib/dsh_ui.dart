@@ -73,3 +73,6 @@ export 'src/dsh_json_block.dart';
 export 'src/dsh_markdown_plain_text.dart';
 
 export 'src/dsh_reference_chip.dart';
+
+export 'src/dsh_segmented_tabs.dart';
+export 'src/dsh_single_line_clamp.dart';
