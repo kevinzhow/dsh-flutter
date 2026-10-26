@@ -69,8 +69,9 @@ class ParityInteractions {
               return true;
             });
           }
-          if (!reached)
+          if (!reached) {
             throw StateError('keyboard focus did not reach ${raw['target']}');
+          }
         case 'type':
           await tester.enterText(
             find
