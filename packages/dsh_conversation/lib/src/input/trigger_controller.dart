@@ -135,12 +135,31 @@ void _log(String message) {
 class InputTriggerController {
   InputTriggerController._(this.sessionId, this._registry, this.port) {
     for (final s in _registry.all) {
-      s.warm(sessionId);
+      _sourceAdded(s);
     }
   }
 
   final String sessionId;
   final InputTriggerRegistry _registry;
+  final lexiconRevision = Observable(0);
+  final _lexiconSubscriptions =
+      <InputTriggerSource, StreamSubscription<Object?>>{};
+  List<InputLexeme> lexemes(String text) {
+    final found = <InputLexeme>[];
+    for (final source in _registry.all) {
+      for (final entry in source.lexicon(sessionId)) {
+        if (entry.token.isEmpty) continue;
+        final pattern = RegExp('(?<!\\S)${RegExp.escape(entry.token)}(?!\\S)');
+        for (final match in pattern.allMatches(text)) {
+          if (found.any((r) => match.start < r.end && match.end > r.start)) {
+            continue;
+          }
+          found.add(InputLexeme(match.start, match.end, source.name, entry));
+        }
+      }
+    }
+    return found..sort((a, b) => a.start.compareTo(b.start));
+  }
 
   /// The composer the picks are applied to.
   final TriggerEditorPort port;
@@ -436,6 +455,11 @@ class InputTriggerController {
   /// Teardown: close and abort.
   void dispose() {
     _disposed = true;
+    for (final sub in _lexiconSubscriptions.values) {
+      unawaited(sub.cancel());
+    }
+    _lexiconSubscriptions.clear();
+    unawaited(lexiconRevision.dispose());
     _stopFetch();
     _reduce(const MenuClose());
     _hit = null;
@@ -447,9 +471,20 @@ class InputTriggerController {
     for (final s in sources) (name: s.name, showGroupTitle: s.showGroupTitle),
   ];
 
-  void _sourceAdded(InputTriggerSource source) => source.warm(sessionId);
+  void _sourceAdded(InputTriggerSource source) {
+    final stream = source.lexiconChanges;
+    if (stream != null) {
+      _lexiconSubscriptions[source] = stream.listen((_) {
+        if (!_disposed) lexiconRevision.set(lexiconRevision.value + 1);
+      });
+    }
+    source.warm(sessionId);
+    if (!_disposed) lexiconRevision.set(lexiconRevision.value + 1);
+  }
 
   void _sourceRemoved(InputTriggerSource source) {
+    unawaited(_lexiconSubscriptions.remove(source)?.cancel());
+    if (!_disposed) lexiconRevision.set(lexiconRevision.value + 1);
     final state = menu.value;
     final hit = state.hit;
     if (state.open && hit != null && hit.trigger == source.trigger) {

@@ -1,3 +1,8 @@
+import 'package:dsh_client/generated_schedule.dart' as schedule_ns;
+import 'package:dsh_client/generated_job.dart' as job_ns;
+import 'package:dsh_client/generated_goals.dart' as goals_ns;
+import 'package:dsh_client/generated_skills.dart' as skills_ns;
+import 'package:dsh_client/generated_agent_presets.dart' as presets_ns;
 import 'package:dsh_client/dsh_client.dart';
 import 'package:dsh_client/generated_credentials.dart' as credentials_ns;
 import 'package:dsh_client/generated_llm.dart' as llm_ns;
@@ -36,6 +41,11 @@ class HostRemotes {
        ),
        workspace = workspace_ns.WorkspaceRemote(caller),
        directoryPicker = directory_ns.DirectoryPickerRemote(caller),
+       agentPresets = presets_ns.AgentPresetsRemote(caller),
+       skills = skills_ns.SkillsRemote(caller),
+       goals = goals_ns.GoalsRemote(caller),
+       job = job_ns.JobRemote(caller),
+       schedule = schedule_ns.ScheduleRemote(caller),
        caller = caller;
 
   /// `session` (model catalog, `selectModel`).
@@ -67,6 +77,16 @@ class HostRemotes {
 
   /// The caller the namespaces above run over (streams open on the connection
   /// through the composition root).
+  final presets_ns.AgentPresetsRemote agentPresets;
+
+  final skills_ns.SkillsRemote skills;
+
+  final goals_ns.GoalsRemote goals;
+
+  final job_ns.JobRemote job;
+
+  final schedule_ns.ScheduleRemote schedule;
+
   final RemoteCaller caller;
 
   /// Every forwarded host event (`settings/document-updated`, ...).

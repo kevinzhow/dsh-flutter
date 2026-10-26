@@ -42,6 +42,25 @@ void main() {
       isEmpty,
     ); // no stale temporary document resurrection
   });
+  test('reopening a singleton page replaces its captured original binding', () {
+    final types = SidebarTabTypes()
+      ..register(const SidebarTabType(kind: 'scheduleTask'));
+    final state = SidebarState('container', types: types);
+    addTearDown(state.dispose);
+    state.openTab(
+      'scheduleTask',
+      params: {'sessionId': 'original-a', 'id': 'task-a'},
+    );
+    final id = state.active.id, revision = state.active.revision;
+    state.openTab(
+      'scheduleTask',
+      params: {'sessionId': 'original-b', 'id': 'task-b'},
+    );
+    expect(state.active.id, id);
+    expect(state.active.revision, greaterThan(revision));
+    expect(state.active.params, {'sessionId': 'original-b', 'id': 'task-b'});
+    expect(state.tabs.where((t) => t.kind == 'scheduleTask'), hasLength(1));
+  });
   test('unregistered resources cannot create a tab', () {
     final state = SidebarState('s');
     addTearDown(state.dispose);

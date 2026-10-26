@@ -536,7 +536,7 @@ void main() {
     });
 
     testWidgets(
-      'the sidebar lists the panels dsh has, and says what is missing',
+      'the sidebar opens implemented Automation tasks and identifies pending panels',
       (t) async {
         await start(t, size: const Size(1200, 800));
         await connectWith(t, [listRow('s1', title: 'Wide task')]);
@@ -550,9 +550,17 @@ void main() {
           find.textContaining('is not part of Whalee yet'),
           findsOneWidget,
         );
+        backend.host.handlers['schedule/catalog'] = (_) => <Object?>[];
         await t.tap(find.text('Automation tasks'));
         await settle(t);
-        expect(find.byKey(const ValueKey('panel-unavailable')), findsOneWidget);
+        expect(find.byKey(const ValueKey('panel-unavailable')), findsNothing);
+        expect(find.byKey(const ValueKey('task-manager-list')), findsOneWidget);
+        expect(
+          find.text(
+            'No tasks yet. Tasks created in your sessions appear here.',
+          ),
+          findsOneWidget,
+        );
       },
     );
 

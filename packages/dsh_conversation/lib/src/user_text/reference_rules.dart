@@ -113,3 +113,23 @@ final collapseWhitespaceRule = UserTextRule(
     return null;
   },
 );
+
+final skillReferenceRule = UserTextRule(
+  id: 'skill',
+  order: 20,
+  match: (text, from, context) {
+    List<String>? names;
+    for (final token in RegExp(
+      r'(?<!\S)/([\w-]+)(?!\S)',
+      unicode: true,
+    ).allMatches(text, from)) {
+      names ??= (context.read('skillNames') as List?)?.cast<String>();
+      if (names == null || names.isEmpty) return null;
+      final name = token.group(1)!;
+      if (names.contains(name)) {
+        return UserTextNode('skill', token.start, token.end, {'name': name});
+      }
+    }
+    return null;
+  },
+);

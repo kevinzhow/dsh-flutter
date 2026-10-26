@@ -71,7 +71,15 @@ class WorkspaceNavigation {
   /// New session ("+"): a fresh session in [workspaceId], else in the workspace
   /// of the session in view, else in the most recent workspace. With none to
   /// choose from the view clears, which shows the workspace chooser.
-  Future<void> startSession([String? workspaceId]) async {
+  Future<void> startSession([String? workspaceId]) =>
+      _startSession(workspaceId);
+
+  /// Compose a new session under an explicit preset, including the Host-side
+  /// creation transaction rather than switching the previously viewed one.
+  Future<void> startPresetSession(String agentPreset, [String? workspaceId]) =>
+      _startSession(workspaceId, agentPreset: agentPreset);
+
+  Future<void> _startSession(String? workspaceId, {String? agentPreset}) async {
     final snapshot = _workspaces.value;
     final current = _current();
     final currentWorkspace = current == null
@@ -87,7 +95,7 @@ class WorkspaceNavigation {
       _clear();
       return;
     }
-    await _open(target, reuse: false);
+    await _open(target, reuse: false, agentPreset: agentPreset);
   }
 
   /// Pick a workspace for the conversation being prepared: its first reusable
@@ -105,12 +113,17 @@ class WorkspaceNavigation {
   Future<void> _open(
     String workspaceId, {
     required bool reuse,
+    String? agentPreset,
     void Function(String sessionId)? beforeOpen,
   }) async {
     final navigation = ++_navigation;
     final String sessionId;
     try {
-      sessionId = await _connect(workspaceId, reuse: reuse);
+      sessionId = await _connect(
+        workspaceId,
+        reuse: reuse,
+        agentPreset: agentPreset,
+      );
     } on Object catch (error) {
       if (navigation == _navigation) _onFailure(error);
       rethrow;
@@ -120,14 +133,18 @@ class WorkspaceNavigation {
     await _show(sessionId);
   }
 
-  Future<String> _connect(String workspaceId, {required bool reuse}) {
+  Future<String> _connect(
+    String workspaceId, {
+    required bool reuse,
+    String? agentPreset,
+  }) {
     final workspace = _workspaces.value.byId(workspaceId);
     if (workspace == null) {
       return Future.error(
         StateError('workspace navigation: unknown workspace $workspaceId'),
       );
     }
-    if (!reuse) return _create(workspaceId);
+    if (!reuse) return _create(workspaceId, agentPreset: agentPreset);
     return _connecting[workspaceId] ??=
         _create(workspaceId, blank: _blankOf(workspace)).whenComplete(() {
           // A block body: returning the removed future would make it wait on itself.
@@ -149,10 +166,15 @@ class WorkspaceNavigation {
     return null;
   }
 
-  Future<String> _create(String workspaceId, {String? blank}) async {
+  Future<String> _create(
+    String workspaceId, {
+    String? blank,
+    String? agentPreset,
+  }) async {
     final session = await _sessions.create(
       workspaceId: workspaceId,
       sessionId: blank,
+      agentPreset: agentPreset,
       placeholderCwd: _workspaces.value.byId(workspaceId)?.path,
     );
     return session.sessionId;

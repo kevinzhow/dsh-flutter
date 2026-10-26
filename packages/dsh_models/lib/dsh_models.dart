@@ -36,3 +36,9 @@ export 'src/deliverables.dart';
 export 'src/settings/developer_tools.dart';
 
 export 'src/settings/model_providers.dart';
+
+export 'src/agents/presets.dart';
+export 'src/agents/jobs.dart';
+export 'src/agents/goals.dart';
+export 'src/agents/schedules.dart';
+export 'src/agents/task_timing.dart';

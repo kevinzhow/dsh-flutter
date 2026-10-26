@@ -44,8 +44,17 @@ void registerConversationFeature(
   WorkspaceServices? workspaces,
   ConversationPreferences? preferences,
   UserTextRegistry? userText,
+  Map<String, Object?> Function(UserTextOwner)? userTextFacts,
+  Stream<Object?>? userTextFactsChanges,
 }) {
-  if (userText != null) registerUserTextFactory(slots, userText);
+  if (userText != null) {
+    registerUserTextFactory(
+      slots,
+      userText,
+      additionalFacts: userTextFacts,
+      factsChanges: userTextFactsChanges,
+    );
+  }
   if (commandUi != null && inputOf != null) {
     commandUi.register(
       CommandContribution(

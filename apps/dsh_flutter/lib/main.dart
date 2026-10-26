@@ -17,6 +17,7 @@ import 'src/platform/camera_scanner.dart';
 import 'src/platform/notifications.dart';
 import 'src/platform/pinned_fonts.dart';
 import 'src/platform/platform_services.dart';
+import 'src/platform/time_zone.dart';
 import 'src/platform/shortcut_storage.dart';
 import 'src/platform/window_chrome.dart';
 
@@ -51,7 +52,7 @@ Future<void> main() async {
           )
         : const NoScanner(),
     store: secure ? SecureConnectionStore() : MemoryConnectionStore(),
-    platform: PlatformServices.current(),
+    platform: PlatformServices.current(timeZone: await readDeviceTimeZone()),
     highlighter: highlighter,
     prefs: prefs,
     shortcuts: shortcuts,

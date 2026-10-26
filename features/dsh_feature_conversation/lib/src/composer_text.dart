@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 /// A text controller that draws the composer draft: every atomic chip (a
@@ -19,6 +20,9 @@ class ComposerTextController extends TextEditingController {
       selection: TextSelection(baseOffset: s.selStart, extentOffset: s.selEnd),
     );
     _sub = input.state.changes.listen((_) => _fromModel());
+    _lexiconSub = input.triggers?.lexiconRevision.changes.listen(
+      (_) => notifyListeners(),
+    );
     addListener(_toModel);
   }
 
@@ -28,6 +32,39 @@ class ComposerTextController extends TextEditingController {
   final void Function(DraftChip chip)? onOpenChip;
 
   StreamSubscription<InputSnapshot>? _sub;
+  StreamSubscription<int>? _lexiconSub;
+  List<InlineSpan> _literalSpans(
+    String text,
+    int base,
+    TextStyle? style,
+    BuildContext context,
+  ) {
+    final lexemes =
+        input.triggers
+            ?.lexemes(value.text)
+            .where((l) => l.start >= base && l.end <= base + text.length)
+            .toList() ??
+        const <InputLexeme>[];
+    if (lexemes.isEmpty) return [TextSpan(text: text)];
+    final result = <InlineSpan>[];
+    var at = 0;
+    for (final lexeme in lexemes) {
+      final start = lexeme.start - base, end = lexeme.end - base;
+      if (at < start) result.add(TextSpan(text: text.substring(at, start)));
+      result.add(
+        TextSpan(
+          text: text.substring(start, end),
+          style: (style ?? const TextStyle()).copyWith(
+            color: context.dsh.color('--dsw-alias-state-business-primary'),
+          ),
+        ),
+      );
+      at = end;
+    }
+    if (at < text.length) result.add(TextSpan(text: text.substring(at)));
+    return result;
+  }
+
   bool _syncing = false;
 
   void _toModel() {
@@ -67,6 +104,7 @@ class ComposerTextController extends TextEditingController {
   @override
   void dispose() {
     unawaited(_sub?.cancel());
+    unawaited(_lexiconSub?.cancel());
     super.dispose();
   }
 
@@ -77,7 +115,8 @@ class ComposerTextController extends TextEditingController {
     required bool withComposing,
   }) {
     final text = value.text;
-    if (!text.contains(atomicChar)) {
+    final hasLexemes = input.triggers?.lexemes(text).isNotEmpty ?? false;
+    if (!text.contains(atomicChar) && !hasLexemes) {
       return super.buildTextSpan(
         context: context,
         style: style,
@@ -90,7 +129,11 @@ class ComposerTextController extends TextEditingController {
     var run = 0;
     for (var i = 0; i < text.length; i++) {
       if (text[i] != atomicChar) continue;
-      if (i > run) children.add(TextSpan(text: text.substring(run, i)));
+      if (i > run) {
+        children.addAll(
+          _literalSpans(text.substring(run, i), run, style, context),
+        );
+      }
       run = i + 1;
       if (i == 0 && s.claim != null) {
         children.add(
@@ -120,7 +163,9 @@ class ComposerTextController extends TextEditingController {
         children.add(const TextSpan(text: atomicChar));
       }
     }
-    if (run < text.length) children.add(TextSpan(text: text.substring(run)));
+    if (run < text.length) {
+      children.addAll(_literalSpans(text.substring(run), run, style, context));
+    }
     return TextSpan(style: style, children: children);
   }
 }
@@ -160,6 +205,7 @@ class ComposerChip extends StatelessWidget {
       'session' => DshIcons.chatLines,
       'file' => DshIcons.browse,
       'folder' => DshIcons.folderClose,
+      'skill' => DshIcons.skill,
       _ => null,
     };
     final chip = Padding(
@@ -202,4 +248,67 @@ class ComposerChip extends StatelessWidget {
             ),
     );
   }
+}
+
+/// EditableText requires plain semantics spans. Preview taps use its actual
+/// glyph geometry so literal references keep their full text/cursor offsets.
+class ComposerLiteralPreview extends StatefulWidget {
+  const ComposerLiteralPreview({
+    super.key,
+    required this.controller,
+    required this.child,
+  });
+  final ComposerTextController controller;
+  final Widget child;
+  @override
+  State<ComposerLiteralPreview> createState() => _ComposerLiteralPreviewState();
+}
+
+class _ComposerLiteralPreviewState extends State<ComposerLiteralPreview> {
+  PointerDownEvent? down;
+  @override
+  Widget build(BuildContext context) => Listener(
+    onPointerDown: (event) => down = event,
+    onPointerCancel: (_) => down = null,
+    onPointerUp: (event) {
+      final start = down;
+      down = null;
+      if (start == null ||
+          start.pointer != event.pointer ||
+          (event.position - start.position).distance > 5 ||
+          event.timeStamp - start.timeStamp >
+              const Duration(milliseconds: 400)) {
+        return;
+      }
+      RenderEditable? editable;
+      void visit(RenderObject child) {
+        if (child is RenderEditable) {
+          editable = child;
+        } else {
+          child.visitChildren(visit);
+        }
+      }
+
+      context.findRenderObject()?.visitChildren(visit);
+      final render = editable;
+      if (render == null) return;
+      final local = render.globalToLocal(event.position);
+      final lexemes =
+          widget.controller.input.triggers?.lexemes(widget.controller.text) ??
+          const <InputLexeme>[];
+      for (final lexeme in lexemes) {
+        final boxes = render.getBoxesForSelection(
+          TextSelection(baseOffset: lexeme.start, extentOffset: lexeme.end),
+        );
+        if (!boxes.any((box) => box.toRect().contains(local))) continue;
+        widget.controller.input.triggers?.openReference(
+          lexeme.source,
+          lexeme.entry.ref,
+          lexeme.entry.appearance,
+        );
+        break;
+      }
+    },
+    child: widget.child,
+  );
 }

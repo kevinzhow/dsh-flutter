@@ -95,6 +95,23 @@ class SidebarRightFeature {
     }
   }
 
+  /// Open a feature-owned page with its original binding, on desktop or phone.
+  void openTab(
+    SessionOwner owner,
+    String kind, {
+    Map<String, Object?> params = const {},
+  }) {
+    final state = stateFor(owner.sessionId);
+    state.openTab(kind, params: params);
+    final context = _services.navigatorKey.currentContext;
+    if (context == null) return;
+    if (_inline(context)) {
+      state.setExpanded(true);
+    } else if (!_sheetOpen.contains(owner.sessionId)) {
+      unawaited(_sheet(context, owner));
+    }
+  }
+
   final Set<String> _sheetOpen = {};
 
   Future<void> _sheet(BuildContext context, SessionOwner owner) async {

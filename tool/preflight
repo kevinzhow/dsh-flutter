@@ -59,6 +59,7 @@ FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'packages/dsh_dockk
                     'features/dsh_feature_files', 'features/dsh_feature_input_trigger', 'features/dsh_feature_layout',
                     'features/dsh_feature_open_in_app', 'features/dsh_feature_shortcuts', 'features/dsh_feature_sidebar',
                     'features/dsh_feature_model_selection', 'features/dsh_feature_model_settings',
+                    'features/dsh_feature_agent_management',
                     'features/dsh_feature_permission_presets', 'features/dsh_feature_plan', 'features/dsh_feature_reference',
                     'features/dsh_feature_deliverables', 'features/dsh_feature_secret_mask', 'features/dsh_feature_session', 'features/dsh_feature_settings',
                     'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
@@ -178,6 +179,7 @@ def c_vector():
         + [('gen_user_text_expected.py', 'packages/dsh_conversation/test/fixtures/user_text_behavior.json')] \
         + [('gen_common_settings_expected.py', 'features/dsh_feature_settings/test/fixtures/common_settings_behavior.json')] \
         + [('gen_model_settings_expected.py', 'packages/dsh_models/test/fixtures/model_settings_behavior.json')] \
+        + [('gen_agents_tasks_expected.py', 'packages/dsh_models/test/fixtures/agents_tasks.json')] \
         + [('gen_deliverables_expected.py', 'packages/dsh_conversation/test/fixtures/deliverables_behavior.json')]
     for driver, fixture in checks:
         code, out, _ = run([sys.executable, '-I', 'tool/vectors/' + driver, '--check', fixture])

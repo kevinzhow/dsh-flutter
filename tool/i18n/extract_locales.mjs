@@ -68,6 +68,16 @@ function evalStr(n, sf, where) {
   if (ts.isBinaryExpression(n) && n.operatorToken.kind === ts.SyntaxKind.PlusToken) {
     return evalStr(n.left, sf, where) + evalStr(n.right, sf, where)
   }
+  // Curated preset guides are literal paragraphs joined with a literal separator.
+  // Fold only that static expression; arbitrary calls remain rejected.
+  if (ts.isCallExpression(n) && ts.isPropertyAccessExpression(n.expression)
+      && n.expression.name.text === 'join' && n.arguments.length === 1) {
+    const paragraphs = unwrap(n.expression.expression)
+    if (ts.isArrayLiteralExpression(paragraphs)) {
+      const separator = evalStr(n.arguments[0], sf, where)
+      return paragraphs.elements.map(part => evalStr(part, sf, where)).join(separator)
+    }
+  }
   if (ts.isTemplateExpression(n)) {
     let s = n.head.text
     for (const span of n.templateSpans) s += evalStr(span.expression, sf, where) + span.literal.text

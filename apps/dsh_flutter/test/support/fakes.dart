@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:async';
 
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_job.dart' as job_ns;
 import 'package:dsh_conversation/dsh_conversation.dart';
 import 'package:dsh_flutter/src/app_controller.dart';
 import 'package:dsh_flutter/src/backend.dart';
@@ -105,6 +106,15 @@ class FakeBackend implements HostBackend {
   final FakeTerminalHost terminals = FakeTerminalHost();
   @override
   TerminalHost get terminalHost => terminals.terminalHost;
+  Stream<GenerationFrame> Function(job_ns.JobListRequest)? jobList;
+  Stream<GenerationFrame> Function(job_ns.JobFollowRequest Function())?
+  jobFollow;
+  @override
+  JobsHost get jobsHost => JobsHost(
+    remote: job_ns.JobRemote(host),
+    list: (request) => jobList?.call(request) ?? const Stream.empty(),
+    follow: (request) => jobFollow?.call(request) ?? const Stream.empty(),
+  );
   @override
   final FakeUploadClient uploader = FakeUploadClient();
   @override

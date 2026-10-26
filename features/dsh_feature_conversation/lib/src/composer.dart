@@ -664,25 +664,29 @@ class _DefaultComposerState extends State<DefaultComposer> {
       ),
       draft: Focus(
         onKeyEvent: _onKey,
-        child: TextField(
-          key: const ValueKey('composer-field'),
+        child: ComposerLiteralPreview(
           controller: _text,
-          focusNode: _focus,
-          enabled: !locked,
-          minLines: 1,
-          // dsh caps the draft at 14 lines.
-          maxLines: 14,
-          keyboardType: TextInputType.multiline,
-          textInputAction: TextInputAction.newline,
-          style: draft,
-          cursorColor: theme.color('--dsw-alias-state-business-primary'),
-          decoration: InputDecoration(
-            isCollapsed: true,
-            border: InputBorder.none,
-            hintText: widget.placeholder ?? _a('session.composer.placeholder'),
-            hintMaxLines: widget.hero ? 2 : 1,
-            hintStyle: draft.copyWith(
-              color: theme.color('--dsw-alias-label-caption'),
+          child: TextField(
+            key: const ValueKey('composer-field'),
+            controller: _text,
+            focusNode: _focus,
+            enabled: !locked,
+            minLines: 1,
+            // dsh caps the draft at 14 lines.
+            maxLines: 14,
+            keyboardType: TextInputType.multiline,
+            textInputAction: TextInputAction.newline,
+            style: draft,
+            cursorColor: theme.color('--dsw-alias-state-business-primary'),
+            decoration: InputDecoration(
+              isCollapsed: true,
+              border: InputBorder.none,
+              hintText:
+                  widget.placeholder ?? _a('session.composer.placeholder'),
+              hintMaxLines: widget.hero ? 2 : 1,
+              hintStyle: draft.copyWith(
+                color: theme.color('--dsw-alias-label-caption'),
+              ),
             ),
           ),
         ),

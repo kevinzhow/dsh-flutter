@@ -1,0 +1,481 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "job",
+  "package": "packages/api/job-controller",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/job-controller/src/index.ts",
+    "packages/api/job-controller/src/types.ts",
+    "packages/jobs/jobs/src/view.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "JobListRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "JobListFrame"
+      },
+      "doc": "Stream the jobs one session can see — its own plus every unowned job — as whole-set frames: one on open, then one after each coalesced burst of lifecycle commits. The stream has no natural end; the carrier closes it."
+    },
+    {
+      "name": "follow",
+      "hostName": "follow",
+      "mode": "stream",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "JobFollowRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "JobFollowFrame"
+      },
+      "doc": "Stream one job's retained output from an absolute byte offset, then its terminal projection once settled and drained. Non-consuming: the model-facing cursor and notice state never observe these reads. The request's session is the fenced read's caller; the registry rejects a job the session cannot see and an unknown job."
+    },
+    {
+      "name": "kill",
+      "hostName": "kill",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "JobKillRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "JobKillValue"
+      },
+      "doc": "Kill one background job on a human's behalf. The request's session is the fenced read's caller, so the job must be one that session can see: the registry's owner fence is the only access rule, and a child session's own jobs are killable from its list like any other. The kill records `cancelled by the user` as its reason; it is not one the model requested, so the owning agent still receives the completion notice, and a shell tool waiting on that job reads the reason in its own result."
+    }
+  ],
+  "decls": {
+    "JobChannel": {
+      "k": "enum",
+      "values": [
+        "log",
+        "stderr",
+        "stdout"
+      ],
+      "source": "packages/jobs/jobs/src/view.ts",
+      "doc": "Stream label of one output chunk. `stdout` and `stderr` reach the model's consuming read; `log` marks producer narration (a workflow's phase lines) that only observers see. Consumers treat an unrecognized label like an absent one."
+    },
+    "JobChunk": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "at",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Absolute offset of the chunk's first byte; offsets never move once assigned."
+        },
+        {
+          "name": "text",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Chunk text exactly as appended (possibly tail-trimmed by retention)."
+        },
+        {
+          "name": "channel",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "JobChannel"
+          },
+          "doc": "Stream label, when the producer supplied one."
+        },
+        {
+          "name": "gapBefore",
+          "optional": true,
+          "type": {
+            "k": "lit",
+            "v": true
+          },
+          "doc": "Bytes immediately before this chunk were lost, at the producer or to retention."
+        }
+      ],
+      "source": "packages/jobs/jobs/src/view.ts",
+      "doc": "One chunk of a job's output ring: absolute offset, text, channel, and loss marker."
+    },
+    "JobFollowFrame": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "opened"
+              }
+            },
+            {
+              "name": "job",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "JobView"
+              }
+            },
+            {
+              "name": "from",
+              "optional": false,
+              "type": {
+                "k": "num"
+              },
+              "doc": "Offset the first `output` frame continues from."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "output"
+              }
+            },
+            {
+              "name": "chunks",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "ref",
+                  "name": "JobChunk"
+                }
+              }
+            },
+            {
+              "name": "next",
+              "optional": false,
+              "type": {
+                "k": "num"
+              },
+              "doc": "Offset to resume from after this frame."
+            },
+            {
+              "name": "lossy",
+              "optional": true,
+              "type": {
+                "k": "lit",
+                "v": true
+              },
+              "doc": "Bytes between the requested offset and `chunks` were already evicted."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "status"
+              }
+            },
+            {
+              "name": "job",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "JobView"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "Job observation stream frames: one `opened` anchor carrying the job's projection (its `output.earliest` and `output.total` at open time) and the offset the first `output` frame continues from, then coalesced `output` batches, then — once the job has settled and its ring is drained — one terminal `status` carrying the settled projection, after which the stream closes normally. Status rides the same stream as output so settlement can never race a still-open output channel."
+    },
+    "JobFollowRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Owning session for the fenced read. Omitted for an unowned job, which any caller may observe."
+        },
+        {
+          "name": "jobId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "from",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Absolute byte offset to resume from (a prior frame's `next`). Omitted, the stream starts at the oldest retained byte."
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "Target of one `job.follow` stream: the job, its owning session, and an optional resume offset."
+    },
+    "JobKillRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Session whose job list carries the job; the fenced lookup reads as it."
+        },
+        {
+          "name": "jobId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "Human-initiated cancellation of one background job visible to a session."
+    },
+    "JobKillValue": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "outcome",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "already-finished",
+              "requested"
+            ]
+          }
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "Receipt after the registry accepted the human kill request."
+    },
+    "JobListFrame": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "type",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "rows"
+          }
+        },
+        {
+          "name": "jobs",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "JobView"
+            }
+          }
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "One `job.list` frame: the complete set the session can see — its own jobs plus every unowned job — after a lifecycle change. Whole-set replacement, so a reconnect's first frame is already the truth."
+    },
+    "JobListRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        }
+      ],
+      "source": "packages/api/job-controller/src/types.ts",
+      "doc": "Target of one `job.list` stream: the session whose visible jobs the stream mirrors."
+    },
+    "JobStatus": {
+      "k": "enum",
+      "values": [
+        "completed",
+        "failed",
+        "killed",
+        "running",
+        "stopping"
+      ],
+      "source": "packages/jobs/jobs/src/view.ts",
+      "doc": "Job lifecycle: `running`, optionally `stopping`, then exactly one terminal status. Producer-specific facts belong in {@link JobView.progress} and {@link JobView.detail}."
+    },
+    "JobView": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "The registry-issued id (`<kind>-<short-uuid>`)."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The producer kind the job was registered with: a Host-registered `JobKind`, carried as an open string because a browser bundle or a Remote codec sees only the `JobKindMap` merges its own program compiles."
+        },
+        {
+          "name": "label",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The producer-supplied one-line label."
+        },
+        {
+          "name": "owner",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Owning session; absent for an unowned job, which every caller can see."
+        },
+        {
+          "name": "outputLimitBytes",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Producer-owned cap for complete model-facing notices and reads, in UTF-8 bytes."
+        },
+        {
+          "name": "status",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "JobStatus"
+          },
+          "doc": "Current lifecycle state."
+        },
+        {
+          "name": "progress",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The producer's live progress line (`3/10`, the current phase); cleared at settlement."
+        },
+        {
+          "name": "detail",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Terminal reason (`exit code: 3`); a recorded kill reason is merged in."
+        },
+        {
+          "name": "startedAt",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Epoch ms when the job was registered."
+        },
+        {
+          "name": "finishedAt",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Epoch ms when the job settled; absent while live."
+        },
+        {
+          "name": "output",
+          "optional": false,
+          "type": {
+            "k": "obj",
+            "props": [
+              {
+                "name": "total",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                }
+              },
+              {
+                "name": "earliest",
+                "optional": false,
+                "type": {
+                  "k": "num"
+                }
+              },
+              {
+                "name": "spillPaths",
+                "optional": true,
+                "type": {
+                  "k": "arr",
+                  "of": {
+                    "k": "str"
+                  }
+                }
+              }
+            ]
+          },
+          "doc": "The output ring's absolute coordinates and the complete-stream files behind it. `total` is the offset the next chunk starts at (0 while nothing was written); `earliest` is the oldest retained byte, greater than zero exactly when retention dropped the head. `spillPaths` lists the spill files the job's pull sources currently keep, in source order and deduplicated, and is absent while no source keeps one: it outlives any chunk, so a reader below `earliest` can still name where the bytes went."
+        }
+      ],
+      "source": "packages/jobs/jobs/src/view.ts",
+      "doc": "Read-only projection of one job — a fresh object per call, never live registry state. The model tools, the browser roster, and the observation stream all consume this one shape."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

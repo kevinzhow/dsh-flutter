@@ -1,0 +1,1990 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "schedule",
+  "package": "packages/schedule/schedule",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/schedule/schedule/src/index.ts",
+    "packages/schedule/schedule/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleListRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "ScheduleRecord"
+        }
+      },
+      "doc": "Read the selected Session's active tasks without resuming its Agent."
+    },
+    {
+      "name": "catalog",
+      "hostName": "catalog",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "ScheduleCatalogEntry"
+        }
+      },
+      "doc": "Read all active and inactive Host reminders with their original Session bindings. A deleted reminder has no row, so it is absent here. Does not activate Sessions or read Session history."
+    },
+    {
+      "name": "history",
+      "hostName": "history",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleDeliveryHistoryRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ScheduleDeliveryHistoryResult"
+      },
+      "doc": "Read saved inbox deliveries without activating or reading the original Session. The task's own row supplies its binding, so its records stay readable through this lookup."
+    },
+    {
+      "name": "delete",
+      "hostName": "delete",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleDeleteRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ScheduleDeleteResult"
+      },
+      "doc": "Delete one task belonging to the selected Session, leaving queued messages intact. The row is removed: the task no longer schedules, leaves `list` and `catalog`, and its saved delivery records go with it. A task bound to a Session a delegated child owns stays deletable even though creation and timing edits refuse that binding, so a task stored before that rule existed remains removable."
+    },
+    {
+      "name": "update",
+      "hostName": "update",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "request",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleUpdateRequest"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "ScheduleUpdateResult"
+      },
+      "doc": "Update the name, instruction, and timing of an active task within the original Session binding without activating the Session or changing saved deliveries. Each supplied field replaces its stored value; an omitted field keeps it. A name or instruction change alone does not reset the committed target. A Session a delegated child owns returns the non-mutating `subagent_session` result, so an edit cannot re-arm a task bound to a Session delivery can never reach, and the Web editor can explain the refusal through the ordinary result it already renders."
+    }
+  ],
+  "decls": {
+    "AfterScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "after"
+          },
+          "doc": "Rule discriminator for a delayed one-shot reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "afterSeconds",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Positive safe-integer delay accepted at creation."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Four-digit-year RFC 3339 UTC target."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable one-shot reminder created from a positive delay."
+    },
+    "AtInput": {
+      "k": "union",
+      "members": [
+        {
+          "k": "str"
+        },
+        {
+          "k": "ref",
+          "name": "LocalAtInput"
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Absolute selector accepted by creation and timing edits."
+    },
+    "AtScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "at"
+          },
+          "doc": "Rule discriminator for an absolute one-shot reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Four-digit-year RFC 3339 UTC target."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable one-shot reminder created from an absolute instant."
+    },
+    "CronInput": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "expression",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Five-field Vixie cron expression: minute hour day-of-month month day-of-week."
+        },
+        {
+          "name": "time_zone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit UTC or IANA Area/Location zone."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Five-field cron selector accepted by creation and timing edits."
+    },
+    "CronScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "cron"
+          },
+          "doc": "Rule discriminator for a five-field cron wall-clock reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "expression",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical five-field cron expression: minute hour day-of-month month day-of-week."
+        },
+        {
+          "name": "timeZone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit IANA zone; equivalent timing edits retain the stored spelling."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable cron wall-clock reminder; gaps skip a date and overlaps use the earlier instant."
+    },
+    "DailyInput": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Local HH:mm:ss time with optional one-to-three fractional digits."
+        },
+        {
+          "name": "time_zone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit UTC or IANA Area/Location zone."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Daily local-time selector accepted by creation and timing edits."
+    },
+    "DailyScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "daily"
+          },
+          "doc": "Rule discriminator for a daily wall-clock reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Local time normalized to HH:mm:ss.SSS."
+        },
+        {
+          "name": "timeZone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit IANA zone; equivalent timing edits retain the stored spelling."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable daily wall-clock reminder; gaps skip a date and overlaps use the earlier instant."
+    },
+    "DeliveryRetentionBounds": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "days",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Retained window in days, measured back from the acknowledgment being appended."
+        },
+        {
+          "name": "records",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Maximum retained records per task; the newest survive."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Configured limits applied when appending one task's delivery receipt."
+    },
+    "EveryScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "every"
+          },
+          "doc": "Rule discriminator for a fixed-rate recurring reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "everySeconds",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Fixed safe-integer interval, never below one minute."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Next anchor-aligned occurrence while active, or final occurrence when inactive."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable fixed-rate reminder aligned to creation or its most recent interval edit."
+    },
+    "FrequencyTooHighError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "frequency_too_high"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned when a fixed-rate rule runs more often than supported."
+    },
+    "InternalScheduleError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "internal_error"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable fallback that does not disclose an internal exception."
+    },
+    "InvalidPromptError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "invalid_prompt"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned for an empty, over-long, or untrimmed reminder prompt or title."
+    },
+    "InvalidRuleError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "invalid_rule"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned for an invalid rule or management argument."
+    },
+    "InvalidSelectorError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "invalid_selector"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned for a missing, conflicting, or unsupported rule selector."
+    },
+    "InvalidTimeZoneError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "invalid_time_zone"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned for an invalid or unsupported IANA time zone."
+    },
+    "LocalAtInput": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "date",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Four-digit ISO calendar date."
+        },
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Local wall-clock time with optional one-to-three digit milliseconds."
+        },
+        {
+          "name": "time_zone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit UTC or IANA Area/Location zone."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Structured local-calendar input accepted by creation and timing edits."
+    },
+    "NotFutureError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "not_future"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned when an absolute target is not strictly future."
+    },
+    "ScheduleCatalogEntry": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "after"
+              },
+              "doc": "Rule discriminator for a delayed one-shot reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "afterSeconds",
+              "optional": false,
+              "type": {
+                "k": "num"
+              },
+              "doc": "Positive safe-integer delay accepted at creation."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Four-digit-year RFC 3339 UTC target."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "at"
+              },
+              "doc": "Rule discriminator for an absolute one-shot reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Four-digit-year RFC 3339 UTC target."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "every"
+              },
+              "doc": "Rule discriminator for a fixed-rate recurring reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "everySeconds",
+              "optional": false,
+              "type": {
+                "k": "num"
+              },
+              "doc": "Fixed safe-integer interval, never below one minute."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Next anchor-aligned occurrence while active, or final occurrence when inactive."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "daily"
+              },
+              "doc": "Rule discriminator for a daily wall-clock reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "time",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Local time normalized to HH:mm:ss.SSS."
+            },
+            {
+              "name": "timeZone",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Explicit IANA zone; equivalent timing edits retain the stored spelling."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "weekly"
+              },
+              "doc": "Rule discriminator for a weekly wall-clock reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "time",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Local time normalized to HH:mm:ss.SSS."
+            },
+            {
+              "name": "timeZone",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Explicit canonical IANA zone; equivalent timing edits retain the stored spelling."
+            },
+            {
+              "name": "weekdays",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "num"
+                }
+              },
+              "doc": "Unique ascending ISO weekdays, Monday 1 through Sunday 7."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Globally unique task identity."
+            },
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "cron"
+              },
+              "doc": "Rule discriminator for a five-field cron wall-clock reminder."
+            },
+            {
+              "name": "title",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+            },
+            {
+              "name": "prompt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Trimmed reminder content supplied at creation."
+            },
+            {
+              "name": "expression",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Canonical five-field cron expression: minute hour day-of-month month day-of-week."
+            },
+            {
+              "name": "timeZone",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Explicit IANA zone; equivalent timing edits retain the stored spelling."
+            },
+            {
+              "name": "scheduledAt",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+            },
+            {
+              "name": "sessionId",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Session receiving this reminder when it becomes due."
+            },
+            {
+              "name": "status",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "active",
+                  "inactive"
+                ]
+              },
+              "doc": "Inactive reminders remain visible but never schedule another delivery."
+            },
+            {
+              "name": "lastDelivery",
+              "optional": true,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleDeliveryReceipt"
+              },
+              "doc": "Most recent durably acknowledged inbox delivery, when available."
+            }
+          ]
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Browser-safe retained reminder with its original Session binding."
+    },
+    "ScheduleDeleteRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Task to remove."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Original Session binding."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Delete request identifying a task within its original Session binding."
+    },
+    "ScheduleDeleteResult": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "deleted",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": true
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "deleted",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": false
+              }
+            },
+            {
+              "name": "code",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "schedule_not_found"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Successful `schedule_delete` value, including the non-mutating not-found result."
+    },
+    "ScheduleDeliveryHistoryRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "limit",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Required safe-integer page size from 1 through 100."
+        },
+        {
+          "name": "before",
+          "optional": true,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Message identity of the oldest entry in the previous page; excluded from this page."
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Task to remove."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Original Session binding."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Explicitly bounded saved-delivery query within one Session binding."
+    },
+    "ScheduleDeliveryHistoryResult": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "records",
+              "optional": false,
+              "type": {
+                "k": "arr",
+                "of": {
+                  "k": "ref",
+                  "name": "ScheduleDeliveryRecord"
+                }
+              }
+            },
+            {
+              "name": "earlierRecordsUnavailable",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              },
+              "doc": "Whether earlier delivery records may be unavailable; missing receipts are never reconstructed."
+            },
+            {
+              "name": "earlierRecordsPruned",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              },
+              "doc": "True only after an append removed saved records; absent legacy evidence is false."
+            },
+            {
+              "name": "retention",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "DeliveryRetentionBounds"
+              },
+              "doc": "Current Host retention configuration, also used by the delivery writer."
+            },
+            {
+              "name": "nextBefore",
+              "optional": true,
+              "type": {
+                "k": "str",
+                "brand": true
+              },
+              "doc": "Oldest returned message identity, present only when older saved records remain."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "code",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "delivery_cursor_not_found",
+                  "schedule_not_found"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Newest-first saved deliveries, or a non-mutating task/cursor lookup failure."
+    },
+    "ScheduleDeliveryReceipt": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical UTC target of the delivered occurrence."
+        },
+        {
+          "name": "deliveredAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical UTC time sampled after Session persistence acknowledged delivery."
+        },
+        {
+          "name": "messageId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Identity of the delivered message, shared by tasks in one recurring batch."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable Session inbox delivery acknowledgment, not model execution completion."
+    },
+    "ScheduleDeliveryRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "prompt",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Prompt sent for this occurrence; unavailable for legacy receipts."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical UTC target of the delivered occurrence."
+        },
+        {
+          "name": "deliveredAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Canonical UTC time sampled after Session persistence acknowledged delivery."
+        },
+        {
+          "name": "messageId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Identity of the delivered message, shared by tasks in one recurring batch."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Saved inbox delivery with its immutable sent prompt when recorded by this Host."
+    },
+    "ScheduleListRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Original Session binding."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Session-scoped task list, without Agent activation."
+    },
+    "ScheduleRecord": {
+      "k": "union",
+      "members": [
+        {
+          "k": "ref",
+          "name": "AfterScheduleRecord"
+        },
+        {
+          "k": "ref",
+          "name": "AtScheduleRecord"
+        },
+        {
+          "k": "ref",
+          "name": "EveryScheduleRecord"
+        },
+        {
+          "k": "ref",
+          "name": "DailyScheduleRecord"
+        },
+        {
+          "k": "ref",
+          "name": "WeeklyScheduleRecord"
+        },
+        {
+          "k": "ref",
+          "name": "CronScheduleRecord"
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Reminder rule and target, stored with its original Session binding."
+    },
+    "ScheduleTimingChange": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "at"
+              }
+            },
+            {
+              "name": "at",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "AtInput"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "every"
+              }
+            },
+            {
+              "name": "every_seconds",
+              "optional": false,
+              "type": {
+                "k": "num"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "daily"
+              }
+            },
+            {
+              "name": "daily",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "DailyInput"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "weekly"
+              }
+            },
+            {
+              "name": "weekly",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "WeeklyInput"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "cron"
+              }
+            },
+            {
+              "name": "cron",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "CronInput"
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Timing-only edit; it may select a different recurrence kind than the stored record, and one-shot targets use an absolute `at`."
+    },
+    "ScheduleUpdateMiss": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "updated",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": false
+          }
+        },
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "schedule_conflict",
+              "schedule_ended",
+              "schedule_not_found"
+            ]
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Non-mutating compare-and-update outcome: unknown, inactive, or changed since the read."
+    },
+    "ScheduleUpdateRequest": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "expected",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleRecord"
+          },
+          "doc": "Complete record observed when editing began, including the committed target."
+        },
+        {
+          "name": "change",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "ScheduleTimingChange"
+          },
+          "doc": "New timing; its kind may differ from the stored record's kind, and an omitted value keeps the committed target."
+        },
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Task to remove."
+        },
+        {
+          "name": "sessionId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Original Session binding."
+        },
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Task name of at most 120 characters, non-empty after trimming; omitted keeps the stored name."
+        },
+        {
+          "name": "prompt",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Reminder instruction, non-empty after trimming; omitted keeps the stored instruction."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Compare-and-update request within the original Session binding."
+    },
+    "ScheduleUpdateResult": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str",
+                "brand": true
+              }
+            },
+            {
+              "name": "updated",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              }
+            },
+            {
+              "name": "record",
+              "optional": false,
+              "type": {
+                "k": "ref",
+                "name": "ScheduleRecord"
+              }
+            }
+          ]
+        },
+        {
+          "k": "ref",
+          "name": "ScheduleUpdateMiss"
+        },
+        {
+          "k": "ref",
+          "name": "InvalidPromptError"
+        },
+        {
+          "k": "ref",
+          "name": "InvalidSelectorError"
+        },
+        {
+          "k": "ref",
+          "name": "InvalidRuleError"
+        },
+        {
+          "k": "ref",
+          "name": "InvalidTimeZoneError"
+        },
+        {
+          "k": "ref",
+          "name": "NotFutureError"
+        },
+        {
+          "k": "ref",
+          "name": "TimeOutOfRangeError"
+        },
+        {
+          "k": "ref",
+          "name": "FrequencyTooHighError"
+        },
+        {
+          "k": "ref",
+          "name": "SubagentSessionError"
+        },
+        {
+          "k": "ref",
+          "name": "InternalScheduleError"
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Successful current record, non-mutating lookup/conflict failure, or invalid name/instruction/timing."
+    },
+    "SubagentSessionError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "subagent_session"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned when the target Session belongs to subagent routing, which never receives reminder delivery."
+    },
+    "TimeOutOfRangeError": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "code",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "time_out_of_range"
+          }
+        },
+        {
+          "name": "message",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Stable error returned when the computed instant cannot use a four-digit UTC year."
+    },
+    "WeeklyInput": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Local HH:mm:ss time with optional one-to-three fractional digits."
+        },
+        {
+          "name": "time_zone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit UTC or IANA Area/Location zone."
+        },
+        {
+          "name": "weekdays",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "num"
+            }
+          },
+          "doc": "Non-empty ISO weekday set, Monday 1 through Sunday 7, without repetitions."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Weekly local-time and weekday selector accepted by creation and timing edits."
+    },
+    "WeeklyScheduleRecord": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "doc": "Globally unique task identity."
+        },
+        {
+          "name": "kind",
+          "optional": false,
+          "type": {
+            "k": "lit",
+            "v": "weekly"
+          },
+          "doc": "Rule discriminator for a weekly wall-clock reminder."
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Required stored task name; already trimmed, non-empty, and at most 120 characters."
+        },
+        {
+          "name": "prompt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Trimmed reminder content supplied at creation."
+        },
+        {
+          "name": "time",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Local time normalized to HH:mm:ss.SSS."
+        },
+        {
+          "name": "timeZone",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Explicit canonical IANA zone; equivalent timing edits retain the stored spelling."
+        },
+        {
+          "name": "weekdays",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "num"
+            }
+          },
+          "doc": "Unique ascending ISO weekdays, Monday 1 through Sunday 7."
+        },
+        {
+          "name": "scheduledAt",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Committed next UTC instant while active, or final occurrence when inactive."
+        }
+      ],
+      "source": "packages/schedule/schedule/src/types.ts",
+      "doc": "Durable weekly wall-clock reminder; gaps skip a date and overlaps use the earlier instant."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

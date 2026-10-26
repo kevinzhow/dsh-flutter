@@ -27,6 +27,7 @@ class DshReferenceChip extends StatelessWidget {
     final icon = switch (appearance) {
       'session' => DshIcons.chatLines,
       'file' => DshIcons.browse,
+      'skill' => DshIcons.skill,
       _ => DshIcons.folderClose,
     };
     final content = Padding(

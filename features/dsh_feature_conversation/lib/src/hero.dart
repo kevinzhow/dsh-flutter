@@ -170,6 +170,10 @@ class _ConversationHeroState extends State<ConversationHero> {
       child: Row(
         children: [
           Flexible(flex: 0, child: chip),
+          ?widget.slots.renderSingle(
+            DshSlots.conversationHeroAgentPreset.typed<SessionOwner?, Widget>(),
+            widget.owner,
+          ),
           // The picker draws nothing in place: its menu, sheet and dialogs
           // are overlays and routes.
           ?picker,
