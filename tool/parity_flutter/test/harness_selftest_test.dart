@@ -146,6 +146,49 @@ void main() {
     });
     tearDownAll(() => dir.deleteSync(recursive: true));
 
+    testWidgets(
+      'coloured element crops validate the surrounding frame, not the element fill',
+      (t) async {
+        final entry = <String, dynamic>{
+          'key': 'components.menu.selftest.crop.light',
+          'case': {
+            'id': 'components.menu.selftest.crop.light',
+            'kind': 'test.coloured-crop',
+            'theme': 'light',
+            'locale': 'en',
+            'viewport': {'width': 160, 'height': 100, 'density': 1},
+            'capture': {'flutterKey': 'coloured-crop', 'crop': 'element'},
+          },
+          'variant': {
+            'id': 'default',
+            'name': 'Default',
+            'props': <String, dynamic>{},
+          },
+        };
+        final meta = await captureParityCase(
+          t,
+          entry: entry,
+          mapping: ParityCase(
+            widgets: const ['selftest'],
+            build: (_) => const SizedBox(
+              key: ValueKey('coloured-crop'),
+              width: 80,
+              height: 40,
+              child: ColoredBox(color: Color(0xff112233)),
+            ),
+          ),
+          fixtures: const {},
+          outputDir: dir,
+          runInfo: const {},
+          fonts: fonts,
+        );
+        final png = File('${dir.path}/${entry['key']}.png').readAsBytesSync();
+        final header = ByteData.sublistView(png);
+        expect((header.getUint32(16), header.getUint32(20)), (80, 40));
+        expect((meta['themeResolved'] as Map)['brightness'], 'light');
+      },
+    );
+
     for (final (theme, density) in [('light', 1), ('dark', 2)]) {
       testWidgets('captures a button row in $theme at ${density}x', (t) async {
         final entry = <String, dynamic>{

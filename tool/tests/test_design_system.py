@@ -21,6 +21,10 @@ class DesignSystemTests(unittest.TestCase):
         original = sheets['PluginManagerPage.module.css']
         source = [gen.normalized_rule(r) for r in original]
         gen.verify_feature_source(original, source)
+        menu_drift = copy.deepcopy(source)
+        next(r for r in menu_drift if r['selector'] == '.addMenu')['declarations']['width'] = '322px'
+        with self.assertRaisesRegex(ValueError, 'reference menu CSS differs'):
+            gen.verify_feature_source(original, menu_drift)
         for amendment in [
             {'selector': '.iconButton:active', 'conditions': [], 'declarations': {'opacity': '.2'}},
             {'selector': '.addMore', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}},
@@ -37,6 +41,43 @@ class DesignSystemTests(unittest.TestCase):
         next(r for r in altered['PluginManagerPage.module.css'] if r['selector'] == '.iconButton')['declarations']['display'] = 'block'
         with self.assertRaisesRegex(ValueError, 'untranslated plugin button value'):
             gen.validate_supported(altered)
+
+    def test_menu_rejects_new_states_conditions_and_untranslated_values(self):
+        import copy
+        lock, sheets = gen.collect()
+        mutations = [
+            ('Menu.module.css', '.item', 'display', 'grid'),
+            ('Menu.module.css', '.itemIcon svg, .check', 'height', '15px'),
+            ('Menu.module.css', '.submenu', 'left', 'calc(100% + 12px)'),
+            ('MenuSurface.module.css', '.material', 'pointer-events', 'auto'),
+            ('MenuGroup.module.css', '.heading', 'position', 'relative'),
+            ('PluginManagerPage.module.css', '.addMenuItem', 'display', 'block'),
+        ]
+        for sheet, selector, prop, change in mutations:
+            altered = copy.deepcopy(sheets)
+            next(r for r in altered[sheet] if r['selector'] == selector)['declarations'][prop] = change
+            with self.subTest(sheet=sheet, selector=selector, prop=prop), self.assertRaisesRegex(ValueError, 'untranslated'):
+                gen.render(lock, altered)
+        for rule in [
+            {'selector': '.item:active', 'conditions': [], 'declarations': {'opacity': '.2'}},
+            {'selector': '.item', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}},
+        ]:
+            altered = copy.deepcopy(sheets)
+            altered['Menu.module.css'].append(rule)
+            with self.assertRaisesRegex(ValueError, 'untranslated menu'):
+                gen.render(lock, altered)
+
+    def test_menu_generated_fields_follow_source_not_a_frozen_local_copy(self):
+        import copy
+        lock, sheets = gen.collect()
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['Menu.module.css'] if r['selector'] == '.compactList .item')['declarations']['min-height'] = '26px'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('compactHeight = 26.0;', dart)
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['PluginManagerPage.module.css'] if r['selector'] == '.addMenu')['declarations']['max-width'] = 'none'
+        with self.assertRaisesRegex(ValueError, 'unsupported plugin menu viewport'):
+            gen.render(lock, altered)
 
     def test_css_parser_preserves_literals_and_conditional_scope(self):
         css = '.x:is(.a, .b) { background: url("data:image/svg+xml;abc"); content: "a;{b}" } @media(max-width:600px) {.x {width:.5px}}'

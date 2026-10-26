@@ -1,12 +1,12 @@
-import 'dart:ui' show ImageFilter;
-
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_anchored_panel.dart';
-import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
-import 'dsh_icons.g.dart';
+import 'dsh_menu_item.dart';
+import 'dsh_menu_surface.dart';
 import 'dsh_pixel_snap.dart';
+import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
@@ -68,7 +68,9 @@ class DshMenu extends StatelessWidget {
     this.selectedIds = const [],
     this.align = DshMenuAlign.start,
     this.dense = false,
-    this.minWidth = 144,
+    this.minWidth = DshMenuRecipe.minWidth,
+    this.compact = false,
+    this.selectionFill = false,
     this.controller,
   });
 
@@ -79,7 +81,7 @@ class DshMenu extends StatelessWidget {
   final ValueChanged<String> onSelect;
   final List<String> selectedIds;
   final DshMenuAlign align;
-  final bool dense;
+  final bool dense, compact, selectionFill;
   final double minWidth;
   final DshPanelController? controller;
 
@@ -93,6 +95,10 @@ class DshMenu extends StatelessWidget {
       entries: entries,
       selectedIds: selectedIds,
       dense: dense,
+      compact: compact,
+      selectionFill: selectionFill,
+      autofocus: true,
+      onDismiss: panel.close,
       minWidth: minWidth,
       onSelect: (id) {
         panel.close();
@@ -102,224 +108,207 @@ class DshMenu extends StatelessWidget {
   );
 }
 
-/// The card itself, for callers that place it on their own (tests, the dock).
-class DshMenuCard extends StatelessWidget {
+/// Cards and contributed rows share the same material and row implementation.
+class DshMenuCard extends StatefulWidget {
   const DshMenuCard({
     super.key,
     required this.entries,
     required this.onSelect,
     this.selectedIds = const [],
     this.dense = false,
-    this.minWidth = 144,
+    this.compact = false,
+    this.selectionFill = false,
+    this.autofocus = false,
+    this.minWidth = DshMenuRecipe.minWidth,
+    this.onDismiss,
   });
-
   final List<DshMenuEntry> entries;
   final ValueChanged<String> onSelect;
   final List<String> selectedIds;
-  final bool dense;
+  final bool dense, compact, selectionFill, autofocus;
   final double minWidth;
+  final VoidCallback? onDismiss;
+  @override
+  State<DshMenuCard> createState() => _DshMenuCardState();
+}
+
+class _DshMenuCardState extends State<DshMenuCard> {
+  final _containerFocus = FocusNode(skipTraversal: true);
+  final _rowFocus = <String, FocusNode>{};
+  int? _walkIndex;
+  List<DshMenuItem> get enabled => widget.entries
+      .whereType<DshMenuItem>()
+      .where((e) => !e.disabled)
+      .toList();
+  FocusNode node(String id) => _rowFocus.putIfAbsent(id, () => FocusNode());
+  @override
+  void dispose() {
+    _containerFocus.dispose();
+    for (final n in _rowFocus.values) {
+      n.dispose();
+    }
+    super.dispose();
+  }
+
+  void select(DshMenuItem item) {
+    widget.onSelect(item.id);
+    item.onSelect?.call();
+  }
+
+  KeyEventResult key(KeyEvent event) {
+    if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
+      return KeyEventResult.ignored;
+    }
+    final hardware = HardwareKeyboard.instance;
+    if (hardware.isControlPressed ||
+        hardware.isAltPressed ||
+        hardware.isMetaPressed) {
+      return KeyEventResult.ignored;
+    }
+    final rows = enabled;
+    final focused = rows.indexWhere((row) => node(row.id).hasFocus);
+    final key = event.logicalKey;
+    if ((key == LogicalKeyboardKey.escape && !hardware.isShiftPressed) ||
+        (key == LogicalKeyboardKey.tab && hardware.isShiftPressed)) {
+      if (widget.onDismiss == null) return KeyEventResult.ignored;
+      widget.onDismiss!();
+      return KeyEventResult.handled;
+    }
+    if (rows.isEmpty) return KeyEventResult.ignored;
+    if (key == LogicalKeyboardKey.tab && focused >= 0) {
+      select(rows[focused]);
+      return KeyEventResult.handled;
+    }
+    final from = focused >= 0 ? focused : _walkIndex;
+    final next = switch (key) {
+      LogicalKeyboardKey.home => 0,
+      LogicalKeyboardKey.end => rows.length - 1,
+      LogicalKeyboardKey.arrowDown =>
+        from == null ? 0 : (from + 1) % rows.length,
+      LogicalKeyboardKey.arrowUp =>
+        from == null ? rows.length - 1 : (from + rows.length - 1) % rows.length,
+      LogicalKeyboardKey.tab => 0,
+      _ => null,
+    };
+    if (next == null) return KeyEventResult.ignored;
+    _walkIndex = next;
+    node(rows[next].id).requestFocus();
+    return KeyEventResult.handled;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final radius = BorderRadius.circular(theme.radiusLg);
-    return DshContainer(
-      constraints: BoxConstraints(minWidth: minWidth, maxWidth: 360),
-      decoration: BoxDecoration(
-        borderRadius: radius,
-        boxShadow: theme.boxShadow('--dsw-elevation-prominent'),
-      ),
-      child: ClipRRect(
-        borderRadius: radius,
-        child: BackdropFilter(
-          filter: ImageFilter.compose(
-            outer: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
-            // CSS `saturate(150%)`.
-            inner: const ColorFilter.matrix(<double>[
-              1.3935, -0.3575, -0.0360, 0, 0, //
-              -0.1065, 1.1425, -0.0360, 0, 0, //
-              -0.1065, -0.3575, 1.4640, 0, 0, //
-              0, 0, 0, 1, 0, //
-            ]),
-          ),
-          child: DshContainer(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: theme.color('--dsw-menu-surface-fill'),
-              borderRadius: radius,
-            ),
-            child: IntrinsicWidth(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (var i = 0; i < entries.length; i++)
-                    switch (entries[i]) {
-                      DshMenuSeparator() =>
-                        i == 0 || entries[i - 1] is DshMenuSeparator
-                            ? const SizedBox.shrink()
-                            : const _Separator(),
-                      DshMenuLabel(:final id, :final text) => _Heading(
-                        key: ValueKey('dsh-menu-label-$id'),
-                        text: text,
-                        dense: dense,
-                      ),
-                      final DshMenuItem item => _Row(
-                        key: ValueKey('dsh-menu-${item.id}'),
-                        item: item,
-                        selected: selectedIds.contains(item.id),
-                        dense: dense,
-                        onTap: () {
-                          onSelect(item.id);
-                          item.onSelect?.call();
-                        },
-                      ),
-                    },
-                ],
-              ),
-            ),
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: BoxConstraints(
+      minWidth: widget.compact && widget.minWidth == DshMenuRecipe.minWidth
+          ? DshMenuRecipe.compactMinWidth
+          : widget.minWidth,
+      maxWidth: DshMenuRecipe.maxWidth,
+    ),
+    child: DshMenuSurface(
+      compact: widget.compact,
+      child: Focus(
+        focusNode: _containerFocus,
+        autofocus: widget.autofocus,
+        onKeyEvent: (_, event) => key(event),
+        child: IntrinsicWidth(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var i = 0; i < widget.entries.length; i++)
+                switch (widget.entries[i]) {
+                  DshMenuSeparator() =>
+                    i == 0 || widget.entries[i - 1] is DshMenuSeparator
+                        ? const SizedBox.shrink()
+                        : _Separator(compact: widget.compact),
+                  DshMenuLabel(:final id, :final text) => _Heading(
+                    key: ValueKey('dsh-menu-label-$id'),
+                    text: text,
+                    dense: widget.dense,
+                    compact: widget.compact,
+                  ),
+                  final DshMenuItem item => DshMenuItemButton(
+                    key: ValueKey('dsh-menu-${item.id}'),
+                    label: item.label,
+                    icon: item.icon,
+                    disabled: item.disabled,
+                    danger: item.danger,
+                    selected: widget.selectedIds.contains(item.id),
+                    selectionFill: widget.selectionFill,
+                    dense: widget.dense,
+                    compact: widget.compact,
+                    focusNode: node(item.id),
+                    onPressed: () => select(item),
+                  ),
+                },
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 class _Separator extends StatelessWidget {
-  const _Separator();
-
+  const _Separator({required this.compact});
+  final bool compact;
   @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-      child: DshContainer(
-        height: dshHairlineOf(context),
-        decoration: BoxDecoration(color: theme.color('--dsw-alias-border-l2')),
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.symmetric(
+      horizontal: compact
+          ? DshMenuRecipe.compactSeparatorMargin
+          : DshMenuRecipe.separatorHorizontalMargin,
+      vertical: compact
+          ? DshMenuRecipe.compactSeparatorMargin
+          : DshMenuRecipe.separatorVerticalMargin,
+    ),
+    child: DshContainer(
+      height: dshBorderWidthOf(context, DshMenuRecipe.separatorWidth),
+      decoration: BoxDecoration(
+        color: context.dsh.color(DshMenuRecipe.separatorToken),
       ),
-    );
-  }
+    ),
+  );
 }
 
 class _Heading extends StatelessWidget {
-  const _Heading({super.key, required this.text, required this.dense});
-
-  final String text;
-  final bool dense;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: dense ? 3 : 6),
-      child: DshChromeText(
-        text,
-        style: theme
-            .textStyle('--dsw-font-xxxs-11')
-            .copyWith(
-              color: theme.color('--dsw-alias-label-tertiary'),
-              height: 15 / 11,
-            ),
-      ),
-    );
-  }
-}
-
-class _Row extends StatefulWidget {
-  const _Row({
+  const _Heading({
     super.key,
-    required this.item,
-    required this.selected,
+    required this.text,
     required this.dense,
-    required this.onTap,
+    required this.compact,
   });
-
-  final DshMenuItem item;
-  final bool selected;
-  final bool dense;
-  final VoidCallback onTap;
-
+  final String text;
+  final bool dense, compact;
   @override
-  State<_Row> createState() => _RowState();
-}
-
-class _RowState extends State<_Row> {
-  bool _hover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final item = widget.item;
-    final ink = item.danger
-        ? theme.color('--dsw-alias-state-error-primary')
-        : theme.labelPrimary;
-    final iconInk = item.danger
-        ? theme.color('--dsw-alias-state-error-primary')
-        : theme.color('--dsw-alias-menu-icon');
-    final hover = _hover && !item.disabled;
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      cursor: item.disabled
-          ? SystemMouseCursors.forbidden
-          : SystemMouseCursors.click,
-      child: Semantics(
-        button: true,
-        enabled: !item.disabled,
-        selected: widget.selected,
-        label: item.label,
-        excludeSemantics: true,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: item.disabled ? null : widget.onTap,
-          child: Opacity(
-            opacity: item.disabled ? 0.4 : 1,
-            child: DshContainer(
-              constraints: BoxConstraints(minHeight: widget.dense ? 30 : 34),
-              padding: EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: widget.dense ? 4 : 6,
-              ),
-              decoration: BoxDecoration(
-                color: hover
-                    ? (item.danger
-                          ? theme.color(
-                              '--dsw-alias-interactive-bg-hover-danger',
-                            )
-                          : theme.interactiveBgHover)
-                    : null,
-                borderRadius: BorderRadius.circular(theme.radiusMd),
-              ),
-              child: Row(
-                children: [
-                  if (item.icon != null) ...[
-                    DshIcon(item.icon!, size: 14, color: iconInk),
-                    const SizedBox(width: 6),
-                  ],
-                  Expanded(
-                    child: DshChromeText(
-                      item.label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme
-                          .textStyle('--dsw-font-xs-13')
-                          .copyWith(color: ink, height: 20 / 13),
-                    ),
-                  ),
-                  if (widget.selected) ...[
-                    const SizedBox(width: 6),
-                    DshIcon(
-                      DshIcons.check,
-                      size: 14,
-                      color: theme.labelPrimary,
-                    ),
-                  ],
-                ],
-              ),
-            ),
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.symmetric(
+      horizontal: compact
+          ? DshMenuRecipe.compactHeadingHorizontalPadding
+          : DshMenuRecipe.headingHorizontalPadding,
+      vertical: compact
+          ? DshMenuRecipe.compactHeadingVerticalPadding
+          : dense
+          ? DshMenuRecipe.denseHeadingVerticalPadding
+          : DshMenuRecipe.headingVerticalPadding,
+    ),
+    child: DshChromeText(
+      text,
+      style: context.dsh
+          .textStyle(
+            compact
+                ? DshMenuRecipe.compactHeadingFontToken
+                : DshMenuRecipe.headingFontToken,
+          )
+          .copyWith(
+            color: context.dsh.color(DshMenuRecipe.headingToken),
+            fontSize: compact ? DshMenuRecipe.compactHeadingFontSize : null,
+            height: compact
+                ? DshMenuRecipe.compactHeadingLineHeight /
+                      DshMenuRecipe.compactHeadingFontSize
+                : DshMenuRecipe.headingLineHeight /
+                      DshMenuRecipe.headingFontSize,
           ),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

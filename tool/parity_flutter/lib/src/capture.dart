@@ -166,7 +166,9 @@ Future<Map<String, dynamic>> captureParityCase(
       pixelRect.width.toInt(),
       pixelRect.height.toInt(),
     );
-    final raw = await cropped.toByteData(format: ui.ImageByteFormat.rawRgba);
+    // Check the frame's own corner, not the selected element's corner.
+    // A menu/card crop may correctly start with a shadow or coloured fill.
+    final raw = await full.toByteData(format: ui.ImageByteFormat.rawRgba);
     if (raw != null) {
       framePixel = Color.fromARGB(
         raw.getUint8(3),
@@ -187,7 +189,7 @@ Future<Map<String, dynamic>> captureParityCase(
     requested: themeName,
     inTree: live,
     expected: theme,
-    framePixel: framed && cropMode == 'element' ? framePixel : null,
+    framePixel: framed ? framePixel : null,
   );
   await interactions.release();
 
