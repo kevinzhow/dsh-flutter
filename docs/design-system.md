@@ -91,3 +91,22 @@ SafeArea padding, and metric updates reach both placement and menu height withou
 resetting row focus or scroll state. This prevents a tall Android menu from
 putting its first row underneath the status bar; zero-inset desktop/Web fixture
 geometry is preserved.
+
+### Menu shortcut presentation
+
+`ShortcutKeys.module.css` is verified byte-for-byte against the pinned published
+primitive archive and the reference source. Its plain key spacing and typography,
+and the menu's caption color and 11px/16px override, generate shared recipe
+fields. Unknown shortcut states, properties and untranslated tooltip structures
+fail the generator. `DshShortcutKeys` remains the single keycap renderer; the
+menu variant supplies its source styling, and `DshMenuShortcut` carries the
+caller-provided effective key labels and accessible shortcut description.
+
+Session action contributions can receive a current effective-binding lookup;
+the application has not yet wired its shortcut catalog to this lookup and does
+not yet register the rename, fork or archive commands. The real DSH workspace
+session-action menu and the same Flutter workspace screen are compared with
+matching synthetic effective bindings in normal and archived states. Existing
+unbound menus remain regression cases. Tooltip keycaps, submenus, sticky groups,
+arbitrary-content backdrop filtering and macOS material backing remain separate
+work; this change does not claim whole-family or overall visual parity.

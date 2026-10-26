@@ -28,6 +28,7 @@ class DshMenuItem extends DshMenuEntry {
     this.icon,
     this.danger = false,
     this.disabled = false,
+    this.shortcut,
     this.onSelect,
   });
 
@@ -35,6 +36,7 @@ class DshMenuItem extends DshMenuEntry {
   final DshIconData? icon;
   final bool danger;
   final bool disabled;
+  final DshMenuShortcut? shortcut;
 
   /// A contributed row may own its action; the enclosing menu still closes.
   final VoidCallback? onSelect;
@@ -315,6 +317,7 @@ class _DshMenuCardState extends State<DshMenuCard> {
           selectionFill: widget.selectionFill,
           dense: widget.dense,
           compact: widget.compact,
+          shortcut: item.shortcut,
           focusNode: node(item.id),
           onPressed: () => select(item),
         ),

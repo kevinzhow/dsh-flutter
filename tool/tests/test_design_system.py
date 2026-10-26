@@ -79,6 +79,28 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unsupported plugin menu viewport'):
             gen.render(lock, altered)
 
+    def test_shortcut_recipe_tracks_published_values_and_rejects_unknown_rules(self):
+        import copy
+        lock, sheets = gen.collect()
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['ShortcutKeys.module.css'] if r['selector'] == '.keys')['declarations']['gap'] = '4px'
+        next(r for r in altered['Menu.module.css'] if r['selector'] == '.shortcut .shortcutKeys')['declarations']['line-height'] = '17px'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('plainGap = 4.0;', dart)
+        self.assertIn('shortcutLineHeight = 17.0;', dart)
+        for rule in [
+            {'selector': '.key:hover', 'conditions': [], 'declarations': {'color': 'red'}},
+            {'selector': '.keys', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}},
+        ]:
+            changed = copy.deepcopy(sheets)
+            changed['ShortcutKeys.module.css'].append(rule)
+            with self.assertRaisesRegex(ValueError, 'untranslated'):
+                gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['ShortcutKeys.module.css'] if r['selector'] == '.tooltip .key')['declarations']['padding'] = '0 3px'
+        with self.assertRaisesRegex(ValueError, 'untranslated shortcut value'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()

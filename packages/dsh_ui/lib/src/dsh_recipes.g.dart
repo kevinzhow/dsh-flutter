@@ -53,6 +53,14 @@ abstract final class DshSegmentedTabRecipe {
   static const String activeLabelToken = '--dsw-alias-label-primary';
 }
 
+abstract final class DshShortcutKeysRecipe {
+  static const double plainGap = 3.0;
+  static const double plainFontSize = 12.0;
+  static const double plainLineHeight = 16.0;
+  static const String plainFontToken = '--dsw-font-xxs-12';
+  static const String plainColorToken = '--dsw-alias-label-tertiary';
+}
+
 abstract final class DshAddButtonRecipe {
   static const double height = 32.0;
   static const double padding = 12.0;
@@ -114,6 +122,10 @@ abstract final class DshMenuRecipe {
   static const String compactRadiusToken = '--dsw-radius-sm';
   static const String labelToken = '--dsw-alias-label-primary';
   static const String iconToken = '--dsw-alias-menu-icon';
+  static const double shortcutFontSize = 11.0;
+  static const double shortcutLineHeight = 16.0;
+  static const String shortcutFontToken = '--dsw-font-xxxs-11';
+  static const String shortcutColorToken = '--dsw-alias-label-caption';
   static const String checkToken = '--dsw-alias-label-primary';
   static const String selectedFillToken = '--dsw-alias-interactive-bg-hover';
   static const String hoverToken = '--dsw-alias-interactive-bg-hover';

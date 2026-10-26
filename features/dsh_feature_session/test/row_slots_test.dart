@@ -23,6 +23,49 @@ class Actions implements WorkspaceManagement {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() => loadParityFonts(findParityFontsManifest()));
+  test('session menu reads current effective bindings and hides archive binding for restore', () {
+    final slots = SlotRegistry();
+    for (final slot in DshSlots.all) {
+      slots.declare(slot);
+    }
+    final bindings = <String, DshMenuShortcut>{
+      'session.rename': const DshMenuShortcut(
+        keys: ['Ctrl', 'R'],
+        aria: 'Control+R',
+      ),
+      'session.archive': const DshMenuShortcut(
+        keys: ['Ctrl', 'A'],
+        aria: 'Control+A',
+      ),
+    };
+    registerSessionRowFeatures(
+      slots,
+      i18n: () => const DshI18n(DshLocale.en),
+      shortcutOf: (id) => bindings[id],
+    );
+    List<DshMenuItem> rows({bool archived = false}) => slots
+        .renderList(
+          DshSlots.sidebarWorkspacesSessionMenuItem
+              .typed<SessionRowOwner, DshMenuEntry?>(),
+          SessionRowOwner(
+            sessionId: 's',
+            displayTitle: 'Synthetic',
+            pinned: false,
+            archived: archived,
+            onAction: (_) {},
+          ),
+        )
+        .whereType<DshMenuItem>()
+        .toList();
+    DshMenuShortcut? shortcut(String id, {bool archived = false}) =>
+        rows(archived: archived).firstWhere((item) => item.id == id).shortcut;
+    expect(shortcut('rename')!.keys, ['Ctrl', 'R']);
+    expect(shortcut('fork'), isNull);
+    expect(shortcut('archive')!.aria, 'Control+A');
+    expect(shortcut('archive', archived: true), isNull);
+    bindings['session.rename'] = const DshMenuShortcut(keys: ['Alt', 'N']);
+    expect(shortcut('rename')!.keys, ['Alt', 'N']);
+  });
   testWidgets(
     'row slots render lazily, menus suppress hover and contributed actions run once',
     (t) async {

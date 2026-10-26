@@ -7,6 +7,95 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets(
+    'menu shortcut is visible, accessible, and preserves activation',
+    (t) async {
+      final semantics = t.ensureSemantics();
+      try {
+        final picked = <String>[];
+        await t.pumpWidget(
+          dshTestApp(
+            Center(
+              child: SizedBox(
+                width: 240,
+                child: DshMenuCard(
+                  autofocus: true,
+                  entries: const [
+                    DshMenuItem(
+                      'rename',
+                      'Rename session',
+                      shortcut: DshMenuShortcut(
+                        keys: ['Ctrl', 'R'],
+                        aria: 'Control+R',
+                      ),
+                    ),
+                    DshMenuItem('plain', 'Plain row'),
+                  ],
+                  onSelect: picked.add,
+                ),
+              ),
+            ),
+          ),
+        );
+        await t.pumpAndSettle();
+        final shortcut = find.byType(DshShortcutKeys);
+        expect(shortcut, findsOneWidget);
+        expect(t.widget<Text>(find.text('Ctrl')).style!.fontSize, 11);
+        expect(t.widget<Text>(find.text('Ctrl')).style!.height, 16 / 11);
+        final menuRow = find.byKey(const ValueKey('dsh-menu-rename'));
+        expect(t.getSize(menuRow).height, 34);
+        expect(
+          t.getRect(shortcut).right,
+          lessThanOrEqualTo(t.getRect(menuRow).right),
+        );
+        expect(t.getSemantics(menuRow).getSemanticsData().hint, 'Control+R');
+        await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await t.sendKeyEvent(LogicalKeyboardKey.enter);
+        await t.pump();
+        expect(picked, ['rename']);
+      } finally {
+        semantics.dispose();
+      }
+    },
+  );
+
+  testWidgets('a narrow menu truncates its label and keeps the shortcut', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    try {
+      await t.pumpWidget(
+        dshTestApp(
+          Center(
+            child: SizedBox(
+              width: 144,
+              child: DshMenuItemButton(
+                label: 'A long synthetic action name',
+                shortcut: const DshMenuShortcut(
+                  keys: ['Ctrl', 'Shift', 'F'],
+                  aria: 'Control+Shift+F',
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      expect(t.takeException(), isNull);
+      expect(
+        t.widget<Text>(find.text('A long synthetic action name')).overflow,
+        TextOverflow.ellipsis,
+      );
+      expect(find.text('F'), findsOneWidget);
+      final row = t.getSemantics(find.byType(DshMenuItemButton));
+      expect(row.getSemanticsData().label, 'A long synthetic action name');
+      expect(row.getSemanticsData().hint, 'Control+Shift+F');
+    } finally {
+      semantics.dispose();
+    }
+  });
+
   testWidgets('keyboard walks enabled rows, wraps, and selects exactly once', (
     t,
   ) async {

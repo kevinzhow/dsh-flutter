@@ -16,7 +16,8 @@
           "Menu.module.css": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
           "MenuSurface.module.css": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
           "MenuGroup.module.css": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
-          "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b"
+          "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
+          "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -864,6 +865,84 @@
         "conditions": [],
         "declarations": {
           "border-radius": "var(--dsw-radius-md)"
+        }
+      }
+    ],
+    "ShortcutKeys.module.css": [
+      {
+        "selector": ".keys",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex",
+          "flex": "none",
+          "align-items": "center",
+          "gap": "3px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "font-size": "12px",
+          "line-height": "16px",
+          "white-space": "nowrap"
+        }
+      },
+      {
+        "selector": ".key",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "font": "inherit"
+        }
+      },
+      {
+        "selector": ".tooltip",
+        "conditions": [],
+        "declarations": {
+          "color": "inherit",
+          "font-size": "11px",
+          "line-height": "14px",
+          "gap": "2px"
+        }
+      },
+      {
+        "selector": ".tooltip .key",
+        "conditions": [],
+        "declarations": {
+          "min-width": "16px",
+          "height": "16px",
+          "padding": "0 2px",
+          "border-radius": "4px",
+          "border": "0",
+          "background": "var(--dsw-alias-tooltip-key-bg)"
+        }
+      },
+      {
+        "selector": ".separator",
+        "conditions": [],
+        "declarations": {
+          "font": "inherit"
+        }
+      },
+      {
+        "selector": ".joined",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "height": "16px",
+          "padding": "0 4px",
+          "border-radius": "4px",
+          "background": "var(--dsw-alias-tooltip-key-bg)"
+        }
+      },
+      {
+        "selector": ".joined .key",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "height": "auto",
+          "padding": "0",
+          "border": "0",
+          "background": "transparent"
         }
       }
     ],
@@ -3981,6 +4060,13 @@
       "outlineWidth": 0.5,
       "activeLabelToken": "--dsw-alias-label-primary"
     },
+    "DshShortcutKeysRecipe": {
+      "plainGap": 3.0,
+      "plainFontSize": 12.0,
+      "plainLineHeight": 16.0,
+      "plainFontToken": "--dsw-font-xxs-12",
+      "plainColorToken": "--dsw-alias-label-tertiary"
+    },
     "DshAddButtonRecipe": {
       "height": 32.0,
       "padding": 12.0,
@@ -4040,6 +4126,10 @@
       "compactRadiusToken": "--dsw-radius-sm",
       "labelToken": "--dsw-alias-label-primary",
       "iconToken": "--dsw-alias-menu-icon",
+      "shortcutFontSize": 11.0,
+      "shortcutLineHeight": 16.0,
+      "shortcutFontToken": "--dsw-font-xxxs-11",
+      "shortcutColorToken": "--dsw-alias-label-caption",
       "checkToken": "--dsw-alias-label-primary",
       "selectedFillToken": "--dsw-alias-interactive-bg-hover",
       "hoverToken": "--dsw-alias-interactive-bg-hover",

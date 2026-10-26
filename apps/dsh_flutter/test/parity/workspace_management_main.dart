@@ -8,6 +8,7 @@ import 'package:dsh_flutter/src/platform/window_chrome.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/dsh_theme.dart';
+import 'package:dsh_ui/dsh_ui.dart' show DshMenuShortcut;
 import 'package:flutter/material.dart';
 
 import 'helpers/workspace_fixture.dart';
@@ -58,7 +59,22 @@ class _FixtureState extends State<Fixture> {
     for (final slot in DshSlots.all) {
       slots.declare(slot);
     }
-    registerSessionRowFeatures(slots, i18n: () => widget.i18n);
+    const bindings = {
+      'session.rename': DshMenuShortcut(keys: ['Ctrl', 'R'], aria: 'Control+R'),
+      'session.fork': DshMenuShortcut(
+        keys: ['Ctrl', 'Shift', 'F'],
+        aria: 'Control+Shift+F',
+      ),
+      'session.archive': DshMenuShortcut(
+        keys: ['Ctrl', 'A'],
+        aria: 'Control+A',
+      ),
+    };
+    registerSessionRowFeatures(
+      slots,
+      i18n: () => widget.i18n,
+      shortcutOf: (id) => bindings[id],
+    );
   }
 
   @override
