@@ -11,10 +11,19 @@ class SidebarTabType {
     this.onClose,
     this.acceptsResource,
     this.titleForResource,
+    this.restorable = false,
+    this.persistParams,
   });
 
   /// The tab kind (`files`, `text`, `terminal`).
   final String kind;
+
+  /// Opt-in: restoring this page must not create Host work (such as a shell).
+  final bool restorable;
+
+  /// Only explicitly declared durable bindings survive an application restart.
+  /// Returning null rejects the record; transient navigation parameters stay in memory.
+  final Map<String, Object?>? Function(Map<String, Object?>)? persistParams;
 
   /// A feature-owned address predicate; the sidebar stays independent of
   /// each resource protocol (plans, files and future preview providers).

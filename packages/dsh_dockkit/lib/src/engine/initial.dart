@@ -12,6 +12,8 @@ class IdMinter {
 
   int _counter;
 
+  int get minted => _counter;
+
   String _next(String prefix) {
     _counter += 1;
     return '$prefix$_counter';

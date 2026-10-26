@@ -180,6 +180,7 @@ def c_vector():
         + [('gen_common_settings_expected.py', 'features/dsh_feature_settings/test/fixtures/common_settings_behavior.json')] \
         + [('gen_model_settings_expected.py', 'packages/dsh_models/test/fixtures/model_settings_behavior.json')] \
         + [('gen_agents_tasks_expected.py', 'packages/dsh_models/test/fixtures/agents_tasks.json')] \
+        + [('gen_sidebar_persistence_expected.py', 'packages/dsh_dockkit/test/fixtures/sidebar_layouts.json')] \
         + [('gen_plugins_preview_expected.py', 'packages/dsh_models/test/fixtures/plugins_preview.json')] \
         + [('gen_deliverables_expected.py', 'packages/dsh_conversation/test/fixtures/deliverables_behavior.json')]
     for driver, fixture in checks:

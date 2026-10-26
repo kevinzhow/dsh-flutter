@@ -11,8 +11,21 @@ plugins {
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
 val hasReleaseKeystore = keystorePropertiesFile.isFile
+val requireReleaseSigning = providers.gradleProperty("whaleeRequireReleaseSigning")
+    .map(String::toBoolean).getOrElse(false)
+if (requireReleaseSigning && !hasReleaseKeystore) {
+    throw GradleException("Release signing requested but android/key.properties is missing")
+}
 if (hasReleaseKeystore) {
     keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
+    for (name in listOf("storeFile", "storePassword", "keyAlias", "keyPassword")) {
+        if (keystoreProperties.getProperty(name).isNullOrBlank()) {
+            throw GradleException("android/key.properties is missing required signing field: $name")
+        }
+    }
+    if (!rootProject.file(keystoreProperties.getProperty("storeFile")).isFile) {
+        throw GradleException("The configured release keystore file does not exist")
+    }
 }
 
 android {

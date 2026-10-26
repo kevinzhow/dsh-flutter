@@ -3,6 +3,10 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:flutter/foundation.dart';
 
+import 'dart:convert';
+
+import 'persistence.dart';
+
 /// One open tab of a session's sidebar.
 class SidebarTab {
   const SidebarTab({
@@ -61,15 +65,95 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
     this.sessionId, {
     SidebarTabTypes? types,
     String Function()? guideTitle,
+    String? restored,
+    void Function(String)? persist,
   }) : _types = types ?? SidebarTabTypes(),
-       _guideTitle = guideTitle ?? (() => '') {
+       _guideTitle = guideTitle ?? (() => ''),
+       _persist = persist {
+    final saved = restoreSidebar(restored, _types);
     dock = DockController(
-      DockControllerOptions(makePaneTab: _guide, maxPanes: 2),
+      DockControllerOptions(
+        makePaneTab: _guide,
+        maxPanes: 2,
+        restored: saved?.surface,
+      ),
     );
-    _off = dock.subscribe(notifyListeners);
+    if (saved != null) {
+      for (final entry in saved.extras.entries) {
+        _extras[entry.key] = _Extra(
+          params: entry.value['params'] as Map<String, Object?>,
+          line: entry.value['line'] as int?,
+        );
+      }
+      for (final record in dock.snapshot.state.tabs.values) {
+        final uri = Uri.tryParse(record.contentId);
+        final page = uri == null
+            ? null
+            : int.tryParse(uri.pathSegments.lastOrNull ?? '');
+        if (page != null && page > _pages) _pages = page;
+      }
+    }
+    addListener(_save);
+    _off = dock.subscribe(_dockChanged);
   }
 
   final String sessionId;
+  final void Function(String)? _persist;
+
+  void _dockChanged() {
+    // A dock duplicate keeps the same content binding, then owns its own
+    // navigation fields even after the original tab closes.
+    for (final record in layout.tabs.values) {
+      if (_extras.containsKey(record.id)) continue;
+      final source = layout.tabs.values
+          .where(
+            (t) =>
+                t.id != record.id &&
+                t.contentId == record.contentId &&
+                _extras.containsKey(t.id),
+          )
+          .firstOrNull;
+      if (source != null) {
+        final extra = _extras[source.id]!;
+        _extras[record.id] = _Extra(
+          params: extra.params,
+          line: extra.line,
+          revision: ++_revision,
+        );
+      }
+    }
+    _extras.removeWhere((id, _) => !layout.tabs.containsKey(id));
+    notifyListeners();
+  }
+
+  void _save() {
+    final persist = _persist;
+    if (persist == null) return;
+    try {
+      persist(
+        jsonEncode({
+          'version': 1,
+          'surface': dock.savedLayout.toJson(),
+          'extras': {
+            for (final entry in _extras.entries)
+              if (layout.tabs.containsKey(entry.key))
+                entry.key: {
+                  'params':
+                      _types
+                          .typeOf(layout.tabs[entry.key]!.kind)
+                          ?.persistParams
+                          ?.call(entry.value.params) ??
+                      <String, Object?>{},
+                  if (entry.value.line != null) 'line': entry.value.line,
+                },
+          },
+        }),
+      );
+    } on Object {
+      /* Persistence never retires a live tab. */
+    }
+  }
+
   final SidebarTabTypes _types;
   final String Function() _guideTitle;
 
@@ -295,6 +379,7 @@ class SidebarState extends ChangeNotifier implements SidebarTabActions {
   @override
   void dispose() {
     _off();
+    removeListener(_save);
     super.dispose();
   }
 }

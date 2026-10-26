@@ -1,0 +1,338 @@
+{
+  "cases": [
+    {
+      "name": "valid",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "underallocated",
+      "value": {
+        "minted": 1,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "noactive",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane999",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "foreigntab",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab3"
+              ],
+              "activeTabId": "tab3"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "duplicate-seats",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2",
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "identity-key-mismatch",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab3",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "badmode",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "other"
+        }
+      }
+    },
+    {
+      "name": "orphan-pane",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            },
+            "pane3": {
+              "kind": "pane",
+              "id": "pane3",
+              "host": "dock",
+              "tabs": []
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "empty",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "dock",
+              "tabs": []
+            }
+          },
+          "tabs": {},
+          "rootId": "pane1",
+          "floats": [],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    },
+    {
+      "name": "float-without-rect",
+      "value": {
+        "minted": 4,
+        "layout": {
+          "nodes": {
+            "pane1": {
+              "kind": "pane",
+              "id": "pane1",
+              "host": "float",
+              "tabs": [
+                "tab2"
+              ],
+              "activeTabId": "tab2"
+            }
+          },
+          "tabs": {
+            "tab2": {
+              "id": "tab2",
+              "kind": "text",
+              "contentId": "synthetic://document",
+              "title": "Synthetic"
+            }
+          },
+          "rootId": "pane1",
+          "floats": [
+            "pane1"
+          ],
+          "activePaneId": "pane1",
+          "expanded": true,
+          "mode": "push"
+        }
+      }
+    }
+  ],
+  "expected": {
+    "accepted": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

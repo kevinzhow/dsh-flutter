@@ -24,6 +24,7 @@ PlanFeature registerPlanFeature(
   final feature = PlanFeature(services);
   slots.sidebarTabs.register(
     SidebarTabType(
+      restorable: true,
       kind: 'plan',
       multiple: true,
       acceptsResource: (address) =>

@@ -105,6 +105,7 @@ DeliverablesFeature registerDeliverablesFeature(
   );
   slots.sidebarTabs.register(
     SidebarTabType(
+      restorable: true,
       kind: 'changes-review',
       multiple: true,
       acceptsResource: (address) => ChangesReviewAddress.parse(address) != null,

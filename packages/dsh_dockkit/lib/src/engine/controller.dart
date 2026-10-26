@@ -9,6 +9,7 @@ library;
 
 import 'constraints.dart';
 import 'initial.dart';
+import 'persistence.dart';
 import 'planner.dart';
 import 'planner.dart' as planner show activeDockPaneId;
 import 'sequence.dart';
@@ -48,6 +49,7 @@ class DockControllerOptions {
     this.makePaneTab,
     this.mode = DockMode.push,
     this.maxPanes = maxDockPanes,
+    this.restored,
   });
 
   /// Builds the tab the starting pane holds; omit to start empty.
@@ -62,6 +64,8 @@ class DockControllerOptions {
   /// How many docked panes the surface allows (dsh's embedder store enforces
   /// its own limit; the right sidebar allows two).
   final int maxPanes;
+
+  final SavedDockLayout? restored;
 }
 
 /// The net gesture results a rendering layer reports. [DockController]
@@ -90,13 +94,17 @@ class DockController implements DockIntents {
     DockControllerOptions options = const DockControllerOptions(),
   ]) : _makePaneTab = options.makePaneTab,
        _maxPanes = options.maxPanes {
+    _minter = IdMinter(options.restored?.minted ?? 0);
     _sequencer = Sequencer(
-      createInitialState(_minter, options.makeInitialTab, options.mode),
+      options.restored?.layout ??
+          createInitialState(_minter, options.makeInitialTab, options.mode),
     );
     _snapshot = _buildSnapshot();
   }
 
-  final IdMinter _minter = IdMinter();
+  late final IdMinter _minter;
+
+  SavedDockLayout get savedLayout => SavedDockLayout(_state, _minter.minted);
   late final Sequencer _sequencer;
   final Set<void Function()> _listeners = {};
   final TabFactory? _makePaneTab;

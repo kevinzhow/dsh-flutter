@@ -9,3 +9,5 @@ export 'src/guide.dart';
 export 'src/panel.dart';
 export 'src/register.dart';
 export 'src/state.dart';
+
+export 'src/persistence.dart';
