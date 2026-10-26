@@ -303,6 +303,62 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
   });
 
+  tw('a preselected offscreen row is revealed after the viewport grows', (
+    t,
+  ) async {
+    final rows = [
+      for (var i = 0; i < 28; i++)
+        SelectOption(
+          id: '$i',
+          label: 'Option $i',
+          group: SelectOptionGroup(
+            name: '${i ~/ 14}',
+            label: i < 14 ? 'First provider' : 'Second provider',
+          ),
+        ),
+    ];
+    popup.state.set(
+      PopupState(
+        open: true,
+        command: 'model',
+        status: PopupStatus.ready,
+        options: rows,
+        active: 20,
+      ),
+    );
+    final height = ValueNotifier<double>(41);
+    addTearDown(height.dispose);
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: ValueListenableBuilder<double>(
+            valueListenable: height,
+            builder: (_, value, child) =>
+                SizedBox(width: 380, height: value, child: child),
+            child: PopupSelectOverlay(
+              sessionId: 's1',
+              controller: popup,
+              i18n: const DshI18n(DshLocale.en),
+            ),
+          ),
+        ),
+      ),
+    );
+    height.value = 320;
+    await t.pumpAndSettle();
+    final viewport = find.byKey(const ValueKey('popup-list'));
+    final selected = find.byKey(const ValueKey('popup-option-20'));
+    expect(
+      t.getTopLeft(selected).dy,
+      greaterThanOrEqualTo(t.getTopLeft(viewport).dy),
+    );
+    expect(
+      t.getBottomLeft(selected).dy,
+      lessThanOrEqualTo(t.getBottomLeft(viewport).dy),
+    );
+  });
+
   tw('ungrouped rows do not add the adjacent-group gap', (t) async {
     await t.pumpWidget(app());
     await open(
