@@ -125,9 +125,10 @@ def c_codegen():
 
 def c_theme_pack():
     src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local' / 'dsh-src')))
+    command = [sys.executable, '-I', 'tool/theme-adapters/build_official_pack.py', '--check', '--quiet']
     if not (src / 'packages' / 'client' / 'ui-theme').is_dir():
-        return 'skip', 'dsh checkout not found at %s (set DSH_SRC or link .local/dsh-src)' % src, 0.0
-    return run([sys.executable, '-I', 'tool/theme-adapters/build_official_pack.py', '--check', '--quiet'])
+        command.append('--snapshot-only')
+    return run(command)
 
 
 def c_design_system():

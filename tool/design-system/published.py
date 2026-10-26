@@ -22,23 +22,93 @@ def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
 
+THEME_SHEETS = ('base', 'corner_shape', 'design_platform', 'focus', 'onboarding', 'scrollbar', 'gradient_shadow_text', 'shiki')
+
+def theme_injection_order(text):
+    arrays = re.findall(r'const STYLES = \[(.*?)\];', text, re.S)
+    if len(arrays) != 1: raise ValueError('published theme injection array missing/ambiguous')
+    pair = r'\["([\w.-]+\.css)",\s*(\w+)_css_default\]'
+    entries = re.findall(pair, arrays[0])
+    # Static pairs separated by one comma; no holes or expressions.
+    if not re.fullmatch(r'\s*' + pair + r'(?:\s*,\s*' + pair + r')*\s*,?\s*', arrays[0]):
+        raise ValueError('unrecognized published theme injection syntax')
+    expected = [(name.replace('_', '-') + '.css', name) for name in THEME_SHEETS]
+    if entries != expected: raise ValueError('published theme injection order requires classification')
+    return [name for name, _ in entries]
+
+def theme_style_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        css = {}
+        for name in THEME_SHEETS:
+            literals = re.findall(r'var ' + name + r'_css_default = ("(?:\\.|[^"\\])*");', bundle.decode())
+            if len(literals) != 1: raise ValueError('published theme CSS literal missing/ambiguous: ' + name)
+            css[name.replace('_', '-') + '.css'] = json.loads(literals[0])
+        exported = re.findall(r'var (\w+)_css_default = \"', bundle.decode())
+        if tuple(exported) != THEME_SHEETS: raise ValueError('published theme stylesheet set/order requires classification')
+        return {'css': css, 'order': theme_injection_order(bundle.decode()), 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'manifest': tar.extractfile('package/package.json').read(), 'license': tar.extractfile('package/LICENSE').read()}
+
+def terminal_font_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.terminal.js').read()
+        literals = re.findall(r'const TERMINAL_FONT_STACK = ("(?:\\.|[^"\\])*");', bundle.decode())
+        if len(literals) != 1: raise ValueError('published terminal font literal missing/ambiguous')
+        return {'font': json.loads(literals[0]), 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'manifest': tar.extractfile('package/package.json').read(), 'license': tar.extractfile('package/LICENSE').read()}
+
+def verify_packages(source=None):
+    here = Path(__file__).resolve().parent
+    lock = json.loads((here / 'sources.lock.json').read_text())
+    for package in lock['packages']:
+        folder = here / 'upstream' / package['snapshotFolder']
+        for name, sha in package['files'].items():
+            if hashlib.sha256((folder / name).read_bytes()).hexdigest() != sha:
+                raise ValueError('published snapshot hash mismatch: ' + package['name'] + '/' + name)
+        manifest = json.loads((folder / 'package.json').read_text())
+        if (manifest['name'], manifest['version']) != (package['name'], package['version']):
+            raise ValueError('published package identity mismatch')
+        if source is not None:
+            current = json.loads((source / package['sourcePackage']).read_text())
+            consumer = json.loads((source / package['referenceConsumer']).read_text())
+            if current['version'] != package['version']:
+                raise ValueError('reference dependency version drift: regenerate from its published package')
+            if consumer[package['dependencyField']].get(package['name']) != package['dependencySpecifier']:
+                raise ValueError('reference dependency specifier drift: update the package lock')
+            for name, sha in package.get('referenceSourceSha256', {}).items():
+                if hashlib.sha256((source / name).read_bytes()).hexdigest() != sha:
+                    raise ValueError('reference source drift: review the corresponding published package: ' + name)
+    return lock
+
 def verify_snapshot(archive, package, folder):
     integrity = 'sha512-' + base64.b64encode(hashlib.sha512(Path(archive).read_bytes()).digest()).decode()
     if integrity != package['integrity']: raise ValueError('published archive integrity mismatch')
-    result = plugin_style_snapshot(archive)
+    kind = package.get('extractionKind', 'plugin-css')
+    extract = {'plugin-css': plugin_style_snapshot, 'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
+    result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
-    if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
-    if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
+    if kind == 'plugin-css':
+        if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
+        if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
+    elif kind == 'theme-css':
+        for name, css in result['css'].items():
+            if (folder / name).read_text() != css: raise ValueError('decoded theme CSS snapshot mismatch: ' + name)
+        if json.loads((folder / 'styles-order.json').read_text()) != result['order']:
+            raise ValueError('published theme injection order snapshot mismatch')
+    else:
+        if json.loads((folder / 'terminal-font.json').read_text()) != {'terminalFontStack': result['font']}:
+            raise ValueError('decoded terminal font snapshot mismatch')
     for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
         if (folder / name).read_bytes() != result[key]: raise ValueError('package metadata snapshot mismatch')
 
 def main():
-    parser = argparse.ArgumentParser(description='Verify reproducible CSS extraction from the locked published plugin archive (no JS execution).')
+    parser = argparse.ArgumentParser(description='Verify reproducible inputs from a locked published package archive (no JS execution).')
     parser.add_argument('--archive', type=Path, required=True)
+    parser.add_argument('--package', default='@deepseek-ai/dsh-client-ui-plugin-manager')
     args = parser.parse_args()
     here = Path(__file__).resolve().parent
-    package = json.loads((here / 'sources.lock.json').read_text())['packages'][1]
+    package = next(p for p in json.loads((here / 'sources.lock.json').read_text())['packages'] if p['name'] == args.package)
     verify_snapshot(args.archive, package, here / 'upstream' / package['snapshotFolder'])
-    print('design-system: published archive integrity and decoded CSS/class snapshots agree')
+    print('design-system: published archive integrity and decoded input snapshots agree')
 
 if __name__ == '__main__': main()

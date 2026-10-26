@@ -13,63 +13,12 @@ OUT = ROOT / 'packages/dsh_ui/lib/src/dsh_recipes.g.dart'
 AUDIT = HERE / 'recipes.generated.json'
 
 
-def split_outside(text, delimiter):
-    parts, start, quote, escaped, parens, brackets = [], 0, None, False, 0, 0
-    for i, char in enumerate(text):
-        if quote is not None:
-            if escaped: escaped = False
-            elif char == '\\': escaped = True
-            elif char == quote: quote = None
-            continue
-        if char in ['"', "'"]: quote = char
-        elif char == '(': parens += 1
-        elif char == ')': parens -= 1
-        elif char == '[': brackets += 1
-        elif char == ']': brackets -= 1
-        elif char == delimiter and parens == brackets == 0:
-            parts.append(text[start:i]); start = i + 1
-        if parens < 0 or brackets < 0: raise ValueError('unbalanced CSS expression')
-    if quote is not None or parens or brackets: raise ValueError('unclosed CSS expression')
-    return [*parts, text[start:]]
-
-
-def css_rules(text, context=(), *, allow_keyframes=False):
-    text = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
-    rules = []
-    while text.strip():
-        start = text.find('{')
-        if start < 0: raise ValueError('CSS trailing syntax is not a rule')
-        selector = ', '.join(part.strip() for part in split_outside(text[:start].strip(), ','))
-        depth, end, quote, escaped = 1, start + 1, None, False
-        while end < len(text) and depth:
-            char = text[end]
-            if quote is not None:
-                if escaped: escaped = False
-                elif char == '\\': escaped = True
-                elif char == quote: quote = None
-            elif char in ['"', "'"]: quote = char
-            else: depth += (char == '{') - (char == '}')
-            end += 1
-        if depth: raise ValueError('unclosed CSS rule')
-        body, text = text[start + 1:end - 1], text[end:]
-        if selector.startswith('@'):
-            if re.match(r'^@media(?:\s|\()', selector):
-                selector = '@media ' + re.sub(r':\s*', ': ', selector[len('@media'):].strip())
-            elif not (allow_keyframes and selector.startswith('@keyframes ')):
-                raise ValueError('unsupported CSS condition: ' + selector)
-            rules.extend(css_rules(body, (*context, selector), allow_keyframes=allow_keyframes))
-            continue
-        if not selector or len(split_outside(body, '{')) != 1 or len(split_outside(body, '}')) != 1:
-            raise ValueError('unsupported nested CSS: ' + selector)
-        declarations = {}
-        for declaration in split_outside(body, ';'):
-            if not declaration.strip(): continue
-            if ':' not in declaration: raise ValueError('invalid CSS declaration')
-            key, value = map(str.strip, declaration.split(':', 1))
-            if key in declarations: raise ValueError('duplicate declaration: ' + key)
-            declarations[key] = value
-        rules.append({'selector': selector, 'conditions': list(context), 'declarations': declarations})
-    return rules
+# File loading also works under python -I and when imported by tool tests.
+import importlib.util
+_css_spec = importlib.util.spec_from_file_location('design_css', HERE / 'css.py')
+_css = importlib.util.module_from_spec(_css_spec)
+_css_spec.loader.exec_module(_css)
+split_outside, css_rules = _css.split_outside, _css.css_rules
 
 
 def value(rules, selector, prop):
@@ -118,22 +67,10 @@ def verify_feature_source(published, source):
 
 
 def collect(source=None):
-    lock = json.loads((HERE / 'sources.lock.json').read_text())
-    for package in lock['packages']:
-        folder = HERE / 'upstream' / package['snapshotFolder']
-        for name, sha in package['files'].items():
-            if hashlib.sha256((folder / name).read_bytes()).hexdigest() != sha:
-                raise ValueError('published snapshot hash mismatch: ' + name)
-        manifest = json.loads((folder / 'package.json').read_text())
-        if (manifest['name'], manifest['version']) != (package['name'], package['version']):
-            raise ValueError('published package identity mismatch')
-        if source is not None:
-            current = json.loads((source / package['sourcePackage']).read_text())
-            consumer = json.loads((source / package['referenceConsumer']).read_text())
-            if current['version'] != package['version']:
-                raise ValueError('reference dependency version drift: regenerate from its published package')
-            if consumer[package['dependencyField']].get(package['name']) != package['dependencySpecifier']:
-                raise ValueError('reference dependency specifier drift: update the package lock')
+    spec = importlib.util.spec_from_file_location('published', HERE / 'published.py')
+    published = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(published)
+    lock = published.verify_packages(source)
     package = lock['packages'][0]
     folder = HERE / 'upstream' / package['snapshotFolder']
     if source is not None:
@@ -145,7 +82,6 @@ def collect(source=None):
     rules = {name: css_rules((folder / name).read_text()) for name in package['files'] if name.endswith('.css')}
     # The feature package publishes CSS inside its bundle. These are decoded
     # verbatim CSS bytes and the static class export, never executed JS.
-    import importlib.util
     spec = importlib.util.spec_from_file_location('published', HERE / 'published.py')
     published = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(published)
