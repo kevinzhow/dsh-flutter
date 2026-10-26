@@ -1,3 +1,7 @@
+import 'package:flutter/gestures.dart'
+    show GestureBinding, PointerDownEvent, PointerEvent;
+import 'package:flutter/services.dart'
+    show HardwareKeyboard, KeyDownEvent, KeyEvent, LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_corners.dart';
@@ -6,6 +10,7 @@ import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_pixel_snap.dart';
+import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
@@ -406,8 +411,8 @@ class _DshStepperState extends State<DshStepper> {
   }
 }
 
-/// A two-state toggle (dsh `Switch`): a 36x20 capsule with a 16px thumb.
-class DshSwitch extends StatelessWidget {
+/// A controlled two-state toggle using the published dsh `Switch` recipe.
+class DshSwitch extends StatefulWidget {
   const DshSwitch({
     super.key,
     required this.value,
@@ -424,38 +429,215 @@ class DshSwitch extends StatelessWidget {
   final String label;
 
   @override
+  State<DshSwitch> createState() => _DshSwitchState();
+}
+
+// dsh's focus-visible styling remains pointer-owned until a navigation key,
+// or a key followed by focus moving to a different control. Ordinary keys on
+// the same switch do not bring the outline back after a pointer click.
+class _SwitchFocusModality extends ChangeNotifier {
+  static final _SwitchFocusModality instance = _SwitchFocusModality();
+  static final _navigation = {
+    LogicalKeyboardKey.tab,
+    LogicalKeyboardKey.home,
+    LogicalKeyboardKey.end,
+    LogicalKeyboardKey.pageUp,
+    LogicalKeyboardKey.pageDown,
+    LogicalKeyboardKey.arrowUp,
+    LogicalKeyboardKey.arrowDown,
+    LogicalKeyboardKey.arrowLeft,
+    LogicalKeyboardKey.arrowRight,
+  };
+  int _users = 0;
+  bool pointerOwnsFocus = false;
+  FocusNode? _keyOrigin;
+
+  void acquire(VoidCallback listener) {
+    addListener(listener);
+    if (_users++ != 0) return;
+    pointerOwnsFocus = false;
+    _keyOrigin = null;
+    GestureBinding.instance.pointerRouter.addGlobalRoute(_onPointer);
+    HardwareKeyboard.instance.addHandler(_onKey);
+    FocusManager.instance.addListener(_onFocusChange);
+  }
+
+  void release(VoidCallback listener) {
+    removeListener(listener);
+    if (--_users != 0) return;
+    GestureBinding.instance.pointerRouter.removeGlobalRoute(_onPointer);
+    HardwareKeyboard.instance.removeHandler(_onKey);
+    FocusManager.instance.removeListener(_onFocusChange);
+  }
+
+  void _setPointerOwnsFocus(bool value) {
+    if (pointerOwnsFocus == value) return;
+    pointerOwnsFocus = value;
+    notifyListeners();
+  }
+
+  void _onPointer(PointerEvent event) {
+    if (event is! PointerDownEvent) return;
+    _keyOrigin = null;
+    _setPointerOwnsFocus(true);
+  }
+
+  bool _onKey(KeyEvent event) {
+    if (event is! KeyDownEvent) return false;
+    _keyOrigin = FocusManager.instance.primaryFocus;
+    if (_navigation.contains(event.logicalKey)) _setPointerOwnsFocus(false);
+    return false;
+  }
+
+  void _onFocusChange() {
+    if (_keyOrigin == null ||
+        _keyOrigin == FocusManager.instance.primaryFocus) {
+      return;
+    }
+    _keyOrigin = null;
+    _setPointerOwnsFocus(false);
+  }
+}
+
+class _DshSwitchState extends State<DshSwitch> {
+  final FocusNode _focus = FocusNode(debugLabel: 'dsh switch');
+  bool _focused = false;
+  bool _focusVisible = false;
+
+  bool get _enabled => widget.onChanged != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _SwitchFocusModality.instance.acquire(_modalityChanged);
+  }
+
+  void _modalityChanged() {
+    if (mounted) setState(() {});
+  }
+
+  void _activate() => widget.onChanged?.call(!widget.value);
+
+  @override
+  void didUpdateWidget(DshSwitch old) {
+    super.didUpdateWidget(old);
+    if (!_enabled) _focusVisible = false;
+  }
+
+  @override
+  void dispose() {
+    _SwitchFocusModality.instance.release(_modalityChanged);
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    final enabled = onChanged != null;
-    final track = value
-        ? theme.color('--dsw-alias-brand-primary')
-        : theme.color('--dsw-alias-border-l3');
-    final thumb = value
-        ? theme.color('--dsw-alias-label-primary-foreground')
-        : theme.color('--dsw-alias-switch-thumb');
+    final track = theme.color(
+      widget.value
+          ? DshSwitchRecipe.onTrackToken
+          : DshSwitchRecipe.offTrackToken,
+    );
+    final thumb = theme.color(
+      widget.value
+          ? DshSwitchRecipe.onThumbToken
+          : DshSwitchRecipe.offThumbToken,
+    );
+    final ringWidth = theme.number(DshSwitchRecipe.focusWidthToken);
+    final ringColor =
+        theme.colors[DshSwitchRecipe.focusToken] ??
+        theme.color(DshSwitchRecipe.focusFallbackToken);
+    final ringReach = ringWidth + DshSwitchRecipe.focusOffset;
+    final duration = MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : Duration(milliseconds: DshSwitchRecipe.transitionMs.round());
     return Semantics(
-      toggled: value,
-      enabled: enabled,
-      label: label,
+      container: true,
+      toggled: widget.value,
+      enabled: _enabled,
+      focused: _focused,
+      label: widget.label,
+      onTap: _enabled ? _activate : null,
+      onFocus: _enabled ? _focus.requestFocus : null,
       excludeSemantics: true,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: enabled ? () => onChanged!(!value) : null,
-        child: Opacity(
-          opacity: enabled ? 1 : 0.5,
-          child: DshContainer(
-            width: 36,
-            height: 20,
-            padding: const EdgeInsets.all(2),
-            alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-            decoration: BoxDecoration(
-              color: track,
-              borderRadius: BorderRadius.circular(999),
-            ),
-            child: DshContainer(
-              width: 16,
-              height: 16,
-              decoration: BoxDecoration(color: thumb, shape: BoxShape.circle),
+      child: FocusableActionDetector(
+        enabled: _enabled,
+        focusNode: _focus,
+        mouseCursor: _enabled
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        onFocusChange: (value) => setState(() => _focused = value),
+        onShowFocusHighlight: (value) => setState(() => _focusVisible = value),
+        shortcuts: const {
+          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+        },
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              _activate();
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: _enabled ? _activate : null,
+          child: Opacity(
+            opacity: _enabled ? 1 : DshSwitchRecipe.disabledOpacity,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                DshContainer(
+                  width: DshSwitchRecipe.width,
+                  height: DshSwitchRecipe.height,
+                  padding: const EdgeInsets.all(DshSwitchRecipe.padding),
+                  decoration: BoxDecoration(
+                    color: track,
+                    borderRadius: BorderRadius.circular(DshSwitchRecipe.radius),
+                  ),
+                  child: AnimatedAlign(
+                    alignment: widget.value
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    duration: duration,
+                    curve: Curves.ease,
+                    child: DshContainer(
+                      key: const ValueKey('dsh-switch-thumb'),
+                      width: DshSwitchRecipe.thumbSize,
+                      height: DshSwitchRecipe.thumbSize,
+                      decoration: BoxDecoration(
+                        color: thumb,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ),
+                if (_focusVisible &&
+                    _enabled &&
+                    !_SwitchFocusModality.instance.pointerOwnsFocus)
+                  Positioned(
+                    left: -ringReach,
+                    top: -ringReach,
+                    right: -ringReach,
+                    bottom: -ringReach,
+                    child: IgnorePointer(
+                      child: DecoratedBox(
+                        key: const ValueKey('dsh-switch-focus-ring'),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            DshSwitchRecipe.radius,
+                          ),
+                          border: Border.all(
+                            color: ringColor,
+                            width: ringWidth,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),

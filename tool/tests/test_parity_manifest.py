@@ -76,6 +76,8 @@ class ValidateCase(unittest.TestCase):
         self.assertTrue(with_steps({'type': 'hover', 'target': 'a', 'x': 1}))  # unknown key
         self.assertTrue(with_steps({'type': 'tab', 'count': 0}))
         self.assertEqual(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': 14.5}), [])
+        self.assertEqual(with_steps({'type': 'focus-by-tab', 'target': 'switch'}), [])
+        self.assertTrue(with_steps({'type': 'focus-by-tab'}))
         self.assertTrue(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': -1}))
         self.assertTrue(with_steps({'type': 'set-scroll', 'target': 'list', 'offset': float('nan')}))
 

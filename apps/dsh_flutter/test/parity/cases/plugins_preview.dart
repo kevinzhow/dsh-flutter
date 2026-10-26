@@ -18,6 +18,8 @@ final Map<String, ParityCase> pluginsPreviewCases = {
         name: ctx.props['name'] as String,
         width: (ctx.props['width'] as num).toDouble(),
         height: (ctx.props['height'] as num).toDouble(),
+        switchEnabled: ctx.props['switchEnabled'] as bool? ?? true,
+        switchLocked: ctx.props['switchLocked'] as bool? ?? false,
         i18n: DshI18n(DshLocale.fromTag(ctx.locale)),
       ),
     ),
@@ -29,10 +31,14 @@ class _Surface extends StatefulWidget {
     required this.name,
     required this.width,
     required this.height,
+    required this.switchEnabled,
+    required this.switchLocked,
     required this.i18n,
   });
   final String family, name;
   final double width, height;
+  final bool switchEnabled;
+  final bool switchLocked;
   final DshI18n i18n;
   @override
   State<_Surface> createState() => _SurfaceState();
@@ -44,6 +50,8 @@ class _SurfaceState extends State<_Surface> {
   @override
   void initState() {
     super.initState();
+    fixture.enabled = widget.switchEnabled;
+    fixture.locked = widget.switchLocked;
     for (final slot in DshSlots.all) {
       slots.declare(slot);
     }

@@ -634,6 +634,7 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
               ),
               const SizedBox(width: 14),
               DshSwitch(
+                key: ValueKey('plugin-switch-${b.name}'),
                 value: b.enabled,
                 label: t('enableToggle', {'name': title}),
                 onChanged:

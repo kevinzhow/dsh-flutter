@@ -133,6 +133,15 @@ async function applyInteractions(page, steps) {
       case 'press': await target.hover(); await page.mouse.down(); break
       case 'click': await target.click(); break
       case 'tab': for (let i = 0; i < (step.count ?? 1); i++) await page.keyboard.press('Tab'); break
+      case 'focus-by-tab': {
+        let reached = false
+        for (let i = 0; i < 40 && !reached; i++) {
+          await page.keyboard.press('Tab')
+          reached = await target.evaluate((el) => el === document.activeElement || el.contains(document.activeElement))
+        }
+        if (!reached) throw new Error(`keyboard focus did not reach ${step.target}`)
+        break
+      }
       case 'type': await target.pressSequentially(step.text); break
       case 'set-scroll': await target.evaluate((el, offset) => { el.scrollTop = offset }, step.offset); break
       case 'wait': await page.waitForTimeout(step.ms); break

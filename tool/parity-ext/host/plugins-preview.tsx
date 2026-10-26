@@ -12,13 +12,16 @@ const pkg={name:'@synthetic/preview-bundle',official:false,availability:'profile
 const entry={entryId:'synthetic-entry',moduleName:'@synthetic/reader',enabled:true,fiberPhase:'active'}
 function Surface({family,props,ctx}:any){
  const surface=useRef<HTMLDivElement>(null)
- useLayoutEffect(()=>{surface.current?.querySelector('[aria-haspopup="menu"]')?.setAttribute('data-parity-id','plugin-add-more')},[])
+ useLayoutEffect(()=>{
+  surface.current?.querySelector('[aria-haspopup="menu"]')?.setAttribute('data-parity-id','plugin-add-more')
+  surface.current?.querySelector('[role="switch"]')?.setAttribute('data-parity-id','plugin-switch-@synthetic/preview-bundle')
+ },[])
  const dictionaries:any={manager:[managerEn,managerZh],inventory:[inventoryEn,inventoryZh],market:[marketEn,marketZh]}
  const [en,zh]=dictionaries[family],t=createTranslator(ctx.case.locale,{en,zh}),name=props.name
  let body:any
  if(family==='manager'){
   const install={open:name==='install',spec:'',registries:{registry:null,resolved:'https://registry.npmjs.org/',fallbackRegistries:[]},registry:{kind:'offered',registry:null},registryOpen:false,registryError:false,attempts:null,phase:'idle',inputError:null,subject:null,runs:[],detailsOpen:false,installed:null,installedVersion:null,restartRequired:false,failure:null,approvedBuilds:[],enabling:false}
-  const state={status:name==='unavailable'?'unavailable':'ready',refreshStatus:'idle',packages:['populated','add-menu'].includes(name)?[pkg]:[],busy:[],notice:null,install,confirm:null,highlight:null}
+  const state={status:name==='unavailable'?'unavailable':'ready',refreshStatus:'idle',packages:['populated','add-menu'].includes(name)?[{...pkg,enabled:props.switchEnabled!==false,...(props.switchLocked?{readOnlyReason:'management-required'}:{})}]:[],busy:[],notice:null,install,confirm:null,highlight:null}
   const actions=Object.fromEntries(['ensure','refresh','openInstall','installFrom','closeInstall','editInstallSpec','runInstall','update','cancelInstall','reconcileInstall','toggleInstallDetails','toggleRegistryOptions','chooseRegistry','changeRegistry','useGithubMirror','approveBuildsAndRetry','enableInstalled','clearHighlight','setEnabled','uninstall','confirm','cancelConfirm','setRowEnabled','dismissNotice'].map(key=>[key,noop]))
   body=<PluginManagerPage {...{...actions,t,resolveText,renderSlot:()=>null,usePluginManager:(s:any)=>s(state),useConfigLedger:(s:any)=>s({items:[],bundles:new Set(),rows:new Set()}),useConfigurations:(s:any)=>s({view:null}),usePluginTabs:(s:any)=>s([{id:'discover',label:createTranslator(ctx.case.locale,{en:marketEn,zh:marketZh})('title')}]),useStore:(s:any)=>s({view:{kind:'list'},tab:'installed'}),actions:{setView:noop,setTab:noop}} as any}/>
  }

@@ -169,3 +169,20 @@ currently uses a wider stacked field than the web reference, so those crops do
 not have matching widths. The major text field and feature-specific variants
 remain a separate audit; in particular, the model selector overrides the source
 input's padding, border and type rather than using the base atom unchanged.
+
+### Switches
+
+`Switch.module.css` and the component source are locked to the published
+primitive. The generated recipe supplies the track and thumb geometry, colors,
+disabled opacity, focus outline and transition. `DshSwitch` remains controlled
+by its caller and supports pointer, Space/Enter and accessibility activation;
+disabled switches refuse input. The thumb respects reduced motion. Focus rings
+follow the source's pointer and keyboard modality rules. A parent `DshButton`
+only draws its own ring when it has primary focus, so a nested switch does not
+also highlight its surrounding card.
+
+Acceptance uses the actual plugin manager bundle switch at both sizes, themes
+and languages, including on, off, disabled and keyboard-focused states. The
+color and antialiasing differences seen in the small switch crops remain
+measured against the unchanged 99.5% target; the whole-page focused captures
+also include surrounding content and are reported separately.

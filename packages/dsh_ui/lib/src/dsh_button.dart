@@ -173,20 +173,47 @@ class DshSplitButton extends StatelessWidget {
 }
 
 class _DshButtonState extends State<DshButton> {
+  final FocusNode _ownedFocus = FocusNode(debugLabel: 'dsh button');
   bool _hovered = false;
   bool _pressed = false;
   bool _focusVisible = false;
+  bool _primaryFocus = false;
 
   bool get _enabled => widget.onPressed != null;
+  FocusNode get _focusNode => widget.focusNode ?? _ownedFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    _primaryFocus = _focusNode.hasPrimaryFocus;
+    _focusNode.addListener(_focusChanged);
+  }
+
+  void _focusChanged() {
+    final primary = _focusNode.hasPrimaryFocus;
+    if (primary != _primaryFocus) _set(() => _primaryFocus = primary);
+  }
 
   @override
   void didUpdateWidget(DshButton oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.focusNode != widget.focusNode) {
+      (oldWidget.focusNode ?? _ownedFocus).removeListener(_focusChanged);
+      _primaryFocus = _focusNode.hasPrimaryFocus;
+      _focusNode.addListener(_focusChanged);
+    }
     if (!_enabled) {
       _hovered = false;
       _pressed = false;
       _focusVisible = false;
     }
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_focusChanged);
+    _ownedFocus.dispose();
+    super.dispose();
   }
 
   void _set(VoidCallback change) {
@@ -401,7 +428,7 @@ class _DshButtonState extends State<DshButton> {
       clipBehavior: Clip.none,
       children: [
         surface,
-        if (_focusVisible && _enabled)
+        if (_focusVisible && _enabled && _primaryFocus)
           Positioned(
             left: -ringReach,
             top: -ringReach,
@@ -435,7 +462,7 @@ class _DshButtonState extends State<DshButton> {
         onExit: (_) => _set(() => _hovered = false),
         child: FocusableActionDetector(
           enabled: _enabled,
-          focusNode: widget.focusNode,
+          focusNode: _focusNode,
           autofocus: widget.autofocus,
           mouseCursor: _enabled
               ? SystemMouseCursors.click

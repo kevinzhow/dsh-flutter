@@ -147,6 +147,22 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'untranslated input'):
             gen.render(lock, changed)
 
+    def test_switch_recipe_tracks_geometry_and_rejects_unknown_states(self):
+        import copy
+        lock, sheets = gen.collect()
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Switch.module.css'] if r['selector'] == '.switch:disabled')['declarations']['opacity'] = '0.4'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('disabledOpacity = 0.4;', dart)
+        changed = copy.deepcopy(sheets)
+        changed['Switch.module.css'].append({'selector': '.switch:hover', 'conditions': [], 'declarations': {'background': 'red'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated switch'):
+            gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Switch.module.css'] if r['selector'] == ".switch[aria-checked='true'] .thumb")['declarations']['transform'] = 'translateX(15px)'
+        with self.assertRaisesRegex(ValueError, 'switch thumb geometry'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()

@@ -53,6 +53,24 @@ class ParityInteractions {
           for (var i = 0; i < ((raw['count'] as num?) ?? 1); i++) {
             await tester.sendKeyEvent(LogicalKeyboardKey.tab);
           }
+        case 'focus-by-tab':
+          final target = tester.element(_target(raw));
+          var reached = false;
+          for (var i = 0; i < 40 && !reached; i++) {
+            await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+            await tester.pump();
+            final focused = FocusManager.instance.primaryFocus?.context;
+            if (focused == target) reached = true;
+            focused?.visitAncestorElements((element) {
+              if (element == target) {
+                reached = true;
+                return false;
+              }
+              return true;
+            });
+          }
+          if (!reached)
+            throw StateError('keyboard focus did not reach ${raw['target']}');
         case 'type':
           await tester.enterText(
             find
