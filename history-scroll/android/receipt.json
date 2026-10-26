@@ -1,0 +1,52 @@
+{
+  "syntheticOnly": true,
+  "api": 36,
+  "actualTapsAndTouchScroll": true,
+  "unchangedReadingAnchor": {
+    "text": "Synthetic question 296",
+    "bounds": [
+      0,
+      678,
+      1080,
+      951
+    ]
+  },
+  "historyUpdateCases": [
+    "running-update",
+    "remote-update",
+    "older-page"
+  ],
+  "scenes": [
+    {
+      "scene": "latest",
+      "passed": true,
+      "attempts": 2
+    },
+    {
+      "scene": "reading-history",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "running-update",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "remote-update",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "older-page",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "local-send",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "localSendReturnsToTail": true
+}

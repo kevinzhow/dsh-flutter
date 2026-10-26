@@ -1,0 +1,117 @@
+{
+  "implementationHead": "0400a2ec076c63447e20a753cf5a82c7fd611cef",
+  "tree": "20c2a5d79195b11ded266ff585e3ba317a1b8898",
+  "syntheticOnly": true,
+  "fullPreflight": {
+    "when": "2026-10-26T08:15:55+00:00",
+    "headTree": "20c2a5d79195b11ded266ff585e3ba317a1b8898",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 11.7
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.5
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 2.0
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 372.7
+      }
+    }
+  },
+  "normalAndFixtureLinuxReleaseAndroidDebugBuilds": "passed",
+  "buildArtifacts": [
+    {
+      "name": "android-normal.apk",
+      "sha256": "44b4ab65c17189f298470a2de56a8ecacd34d087addbf9b5dec1972c5adffb87"
+    },
+    {
+      "name": "android-fixture.apk",
+      "sha256": "b955ed6cb4f66f1d1edc9009bd764cc28db598f33b00c15c17c7432b1fad3a66"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "19ab4152d72908ff09574ff9d4054e623c1308082f4ecaa88be8a045cc17dc2f",
+      "applicationLibrarySha256": "e34e622374f6feb00e539b549e065d00aa21bd1ed2738b0265a7aae47e92a363"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "19ab4152d72908ff09574ff9d4054e623c1308082f4ecaa88be8a045cc17dc2f",
+      "applicationLibrarySha256": "116f557edeef818b87c6579e472f972b34ef78a4466c2cc856a70587bf745d76"
+    }
+  ],
+  "nativeGpu": [
+    {
+      "case": "history.phone",
+      "passedAssertions": 5
+    },
+    {
+      "case": "history.desktop",
+      "passedAssertions": 5
+    }
+  ],
+  "androidScenes": 6,
+  "androidReadingAnchorPreserved": true,
+  "newLocalSendReachesTail": true,
+  "baselineReproductions": {
+    "implementation": "4ae30432a74fd21b237481726f36e377219fb00a",
+    "existingPendingThenRunningUpdate": {
+      "expectedOffset": -1122,
+      "actualBeforeFix": -742
+    },
+    "remoteNextStepWhileReading": {
+      "expectedOffset": -1176,
+      "actualBeforeFix": -796
+    }
+  },
+  "chatTimelineTestsPassed": 33,
+  "newRegressionTests": 4,
+  "cleanup": {
+    "ownedRuntimeStopped": true,
+    "normalAndroidAppRestoredAndStopped": true,
+    "sharedAdbRetained": true
+  },
+  "releaseOrDeployment": false
+}
