@@ -1,0 +1,55 @@
+{
+  "when": "2026-10-26T03:10:36+00:00",
+  "headTree": "3664865047f06ea8b4b52293c705040636d834de",
+  "fast": false,
+  "results": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.1
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 0.8
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.3
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 9.4
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.0
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.4
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 3.4
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 157.6
+    }
+  }
+}

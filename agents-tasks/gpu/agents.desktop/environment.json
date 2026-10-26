@@ -1,0 +1,120 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "live",
+      "rect": [
+        32,
+        104,
+        1248,
+        140
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "live",
+      "rect": [
+        32,
+        104,
+        1248,
+        140
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "live",
+      "rect": [
+        12,
+        214,
+        652,
+        292
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "job-list",
+      "rect": [
+        12,
+        292,
+        652,
+        390
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "job-output",
+      "rect": [
+        12,
+        214,
+        652,
+        390
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "job-closed",
+      "rect": [
+        32,
+        230,
+        1248,
+        330
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "presets",
+      "rect": [
+        24,
+        100,
+        1256,
+        600
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "tasks",
+      "rect": [
+        24,
+        100,
+        1256,
+        600
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    1280,
+    800
+  ],
+  "theme": "light",
+  "locale": "en",
+  "implementationHead": "cd77e2060a42bce2d0505141b4c366d92d41743d",
+  "nativeAndBuildSourceHead": "9a25713ccda4af2dca0a459214c23e3ec4b64436",
+  "laterSourceChanges": "Only unused import and brace cleanup in the component parity test fixture. Runtime sources are identical."
+}

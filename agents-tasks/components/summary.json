@@ -1,0 +1,1874 @@
+{
+  "counts": {
+    "entries": 88,
+    "compared": 88,
+    "same": 0,
+    "strict": 8,
+    "pass": 29,
+    "geometryPass": 29,
+    "fail": 59,
+    "uncovered": 0,
+    "missing": 0
+  },
+  "meanPixelPerfectPct": 81.632,
+  "meanRgbPct": 96.541,
+  "meanNonTextPct": 85.616,
+  "thresholds": {
+    "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
+    "geometry": 99.5
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "flutterVersion": "3.47.6",
+  "dimensionsEqual": 88,
+  "cases": [
+    {
+      "key": "components.agents-tasks.preset-coding-desktop-en.light",
+      "caseId": "components.agents-tasks.preset-coding-desktop-en.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (light)",
+      "theme": "light",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.29,
+      "rgbPct": 93.426,
+      "nonTextPct": 91.559,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-desktop-en.dark",
+      "caseId": "components.agents-tasks.preset-coding-desktop-en.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (dark)",
+      "theme": "dark",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 67.463,
+      "rgbPct": 91.776,
+      "nonTextPct": 76.737,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-desktop-zh.light",
+      "caseId": "components.agents-tasks.preset-coding-desktop-zh.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (light)",
+      "theme": "light",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 88.384,
+      "rgbPct": 95.594,
+      "nonTextPct": 93.317,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-desktop-zh.dark",
+      "caseId": "components.agents-tasks.preset-coding-desktop-zh.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (dark)",
+      "theme": "dark",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 74.816,
+      "rgbPct": 93.934,
+      "nonTextPct": 82.4,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-phone-en.light",
+      "caseId": "components.agents-tasks.preset-coding-phone-en.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (light)",
+      "theme": "light",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.996,
+      "rgbPct": 87.293,
+      "nonTextPct": 82.331,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-phone-en.dark",
+      "caseId": "components.agents-tasks.preset-coding-phone-en.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (dark)",
+      "theme": "dark",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 50.09,
+      "rgbPct": 85.679,
+      "nonTextPct": 58.46,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-phone-zh.light",
+      "caseId": "components.agents-tasks.preset-coding-phone-zh.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (light)",
+      "theme": "light",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 80.733,
+      "rgbPct": 91.47,
+      "nonTextPct": 86.023,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-coding-phone-zh.dark",
+      "caseId": "components.agents-tasks.preset-coding-phone-zh.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset coding (dark)",
+      "theme": "dark",
+      "variantName": "coding",
+      "officialStatus": "different",
+      "pixelPerfectPct": 53.709,
+      "rgbPct": 89.102,
+      "nonTextPct": 62.257,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-coding-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-desktop-en.light",
+      "caseId": "components.agents-tasks.preset-basic-desktop-en.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (light)",
+      "theme": "light",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 87.586,
+      "rgbPct": 94.662,
+      "nonTextPct": 92.703,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-desktop-en.dark",
+      "caseId": "components.agents-tasks.preset-basic-desktop-en.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (dark)",
+      "theme": "dark",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.823,
+      "rgbPct": 93.396,
+      "nonTextPct": 83.019,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-desktop-zh.light",
+      "caseId": "components.agents-tasks.preset-basic-desktop-zh.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (light)",
+      "theme": "light",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 90.158,
+      "rgbPct": 96.253,
+      "nonTextPct": 94.372,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-desktop-zh.dark",
+      "caseId": "components.agents-tasks.preset-basic-desktop-zh.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (dark)",
+      "theme": "dark",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 81.365,
+      "rgbPct": 95.066,
+      "nonTextPct": 87.475,
+      "sizeReact": [
+        600,
+        1250
+      ],
+      "sizeFlutter": [
+        600,
+        1250
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-phone-en.light",
+      "caseId": "components.agents-tasks.preset-basic-phone-en.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (light)",
+      "theme": "light",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.318,
+      "rgbPct": 89.504,
+      "nonTextPct": 84.807,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-phone-en.dark",
+      "caseId": "components.agents-tasks.preset-basic-phone-en.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (dark)",
+      "theme": "dark",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 54.774,
+      "rgbPct": 87.79,
+      "nonTextPct": 62.513,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-phone-zh.light",
+      "caseId": "components.agents-tasks.preset-basic-phone-zh.light",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (light)",
+      "theme": "light",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 83.22,
+      "rgbPct": 92.84,
+      "nonTextPct": 87.672,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.preset-basic-phone-zh.dark",
+      "caseId": "components.agents-tasks.preset-basic-phone-zh.dark",
+      "kind": "agents-tasks.preset",
+      "title": "preset basic (dark)",
+      "theme": "dark",
+      "variantName": "basic",
+      "officialStatus": "different",
+      "pixelPerfectPct": 59.18,
+      "rgbPct": 90.71,
+      "nonTextPct": 66.597,
+      "sizeReact": [
+        856,
+        3282
+      ],
+      "sizeFlutter": [
+        856,
+        3282
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.preset-basic-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-desktop-en.light",
+      "caseId": "components.agents-tasks.goal-active-desktop-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (light)",
+      "theme": "light",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.06,
+      "rgbPct": 96.19,
+      "nonTextPct": 63.353,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-desktop-en.dark",
+      "caseId": "components.agents-tasks.goal-active-desktop-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (dark)",
+      "theme": "dark",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.06,
+      "rgbPct": 95.51,
+      "nonTextPct": 63.572,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-desktop-zh.light",
+      "caseId": "components.agents-tasks.goal-active-desktop-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (light)",
+      "theme": "light",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.062,
+      "rgbPct": 96.112,
+      "nonTextPct": 63.178,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-desktop-zh.dark",
+      "caseId": "components.agents-tasks.goal-active-desktop-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (dark)",
+      "theme": "dark",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.057,
+      "rgbPct": 95.412,
+      "nonTextPct": 63.377,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-phone-en.light",
+      "caseId": "components.agents-tasks.goal-active-phone-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (light)",
+      "theme": "light",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.395,
+      "rgbPct": 95.799,
+      "nonTextPct": 63.003,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-phone-en.dark",
+      "caseId": "components.agents-tasks.goal-active-phone-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (dark)",
+      "theme": "dark",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.459,
+      "rgbPct": 95.113,
+      "nonTextPct": 63.256,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-phone-zh.light",
+      "caseId": "components.agents-tasks.goal-active-phone-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (light)",
+      "theme": "light",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.396,
+      "rgbPct": 95.598,
+      "nonTextPct": 63.014,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-active-phone-zh.dark",
+      "caseId": "components.agents-tasks.goal-active-phone-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal active (dark)",
+      "theme": "dark",
+      "variantName": "active",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.465,
+      "rgbPct": 94.92,
+      "nonTextPct": 63.263,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-active-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-desktop-en.light",
+      "caseId": "components.agents-tasks.goal-paused-desktop-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (light)",
+      "theme": "light",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.062,
+      "rgbPct": 96.225,
+      "nonTextPct": 63.018,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-desktop-en.dark",
+      "caseId": "components.agents-tasks.goal-paused-desktop-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (dark)",
+      "theme": "dark",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.057,
+      "rgbPct": 95.538,
+      "nonTextPct": 63.223,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-desktop-zh.light",
+      "caseId": "components.agents-tasks.goal-paused-desktop-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (light)",
+      "theme": "light",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.062,
+      "rgbPct": 96.096,
+      "nonTextPct": 63.083,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-desktop-zh.dark",
+      "caseId": "components.agents-tasks.goal-paused-desktop-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (dark)",
+      "theme": "dark",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.057,
+      "rgbPct": 95.397,
+      "nonTextPct": 63.28,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-phone-en.light",
+      "caseId": "components.agents-tasks.goal-paused-phone-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (light)",
+      "theme": "light",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.402,
+      "rgbPct": 95.809,
+      "nonTextPct": 62.73,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-phone-en.dark",
+      "caseId": "components.agents-tasks.goal-paused-phone-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (dark)",
+      "theme": "dark",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.473,
+      "rgbPct": 95.128,
+      "nonTextPct": 62.998,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-phone-zh.light",
+      "caseId": "components.agents-tasks.goal-paused-phone-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (light)",
+      "theme": "light",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.396,
+      "rgbPct": 95.578,
+      "nonTextPct": 62.766,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-paused-phone-zh.dark",
+      "caseId": "components.agents-tasks.goal-paused-phone-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal paused (dark)",
+      "theme": "dark",
+      "variantName": "paused",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.471,
+      "rgbPct": 94.903,
+      "nonTextPct": 63.028,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-paused-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-desktop-en.light",
+      "caseId": "components.agents-tasks.goal-blocked-desktop-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (light)",
+      "theme": "light",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.06,
+      "rgbPct": 96.253,
+      "nonTextPct": 62.497,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-desktop-en.dark",
+      "caseId": "components.agents-tasks.goal-blocked-desktop-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (dark)",
+      "theme": "dark",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.057,
+      "rgbPct": 95.572,
+      "nonTextPct": 62.782,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-desktop-zh.light",
+      "caseId": "components.agents-tasks.goal-blocked-desktop-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (light)",
+      "theme": "light",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.062,
+      "rgbPct": 96.198,
+      "nonTextPct": 62.1,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-desktop-zh.dark",
+      "caseId": "components.agents-tasks.goal-blocked-desktop-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (dark)",
+      "theme": "dark",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.057,
+      "rgbPct": 95.49,
+      "nonTextPct": 62.297,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-phone-en.light",
+      "caseId": "components.agents-tasks.goal-blocked-phone-en.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (light)",
+      "theme": "light",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.431,
+      "rgbPct": 95.62,
+      "nonTextPct": 63.308,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-phone-en.dark",
+      "caseId": "components.agents-tasks.goal-blocked-phone-en.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (dark)",
+      "theme": "dark",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.503,
+      "rgbPct": 94.984,
+      "nonTextPct": 63.602,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-phone-zh.light",
+      "caseId": "components.agents-tasks.goal-blocked-phone-zh.light",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (light)",
+      "theme": "light",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.446,
+      "rgbPct": 95.439,
+      "nonTextPct": 63.177,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.goal-blocked-phone-zh.dark",
+      "caseId": "components.agents-tasks.goal-blocked-phone-zh.dark",
+      "kind": "agents-tasks.goal",
+      "title": "goal blocked (dark)",
+      "theme": "dark",
+      "variantName": "blocked",
+      "officialStatus": "different",
+      "pixelPerfectPct": 56.525,
+      "rgbPct": 94.798,
+      "nonTextPct": 63.471,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.goal-blocked-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-desktop-en.light",
+      "caseId": "components.agents-tasks.skill-ok-desktop-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (light)",
+      "theme": "light",
+      "variantName": "ok",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.363,
+      "rgbPct": 99.982,
+      "nonTextPct": 99.878,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-desktop-en.dark",
+      "caseId": "components.agents-tasks.skill-ok-desktop-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (dark)",
+      "theme": "dark",
+      "variantName": "ok",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.328,
+      "rgbPct": 99.966,
+      "nonTextPct": 99.87,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-desktop-zh.light",
+      "caseId": "components.agents-tasks.skill-ok-desktop-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (light)",
+      "theme": "light",
+      "variantName": "ok",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.917,
+      "rgbPct": 99.976,
+      "nonTextPct": 99.893,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-desktop-zh.dark",
+      "caseId": "components.agents-tasks.skill-ok-desktop-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (dark)",
+      "theme": "dark",
+      "variantName": "ok",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.838,
+      "rgbPct": 99.947,
+      "nonTextPct": 99.88,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-phone-en.light",
+      "caseId": "components.agents-tasks.skill-ok-phone-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (light)",
+      "theme": "light",
+      "variantName": "ok",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.365,
+      "rgbPct": 99.942,
+      "nonTextPct": 99.672,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-phone-en.dark",
+      "caseId": "components.agents-tasks.skill-ok-phone-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (dark)",
+      "theme": "dark",
+      "variantName": "ok",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.339,
+      "rgbPct": 99.92,
+      "nonTextPct": 99.678,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-phone-zh.light",
+      "caseId": "components.agents-tasks.skill-ok-phone-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (light)",
+      "theme": "light",
+      "variantName": "ok",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.932,
+      "rgbPct": 99.923,
+      "nonTextPct": 99.56,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-ok-phone-zh.dark",
+      "caseId": "components.agents-tasks.skill-ok-phone-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill ok (dark)",
+      "theme": "dark",
+      "variantName": "ok",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.893,
+      "rgbPct": 99.892,
+      "nonTextPct": 99.551,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-ok-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-desktop-en.light",
+      "caseId": "components.agents-tasks.skill-error-desktop-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (light)",
+      "theme": "light",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.875,
+      "rgbPct": 99.935,
+      "nonTextPct": 99.818,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-desktop-en.dark",
+      "caseId": "components.agents-tasks.skill-error-desktop-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (dark)",
+      "theme": "dark",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.845,
+      "rgbPct": 99.961,
+      "nonTextPct": 99.802,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-desktop-zh.light",
+      "caseId": "components.agents-tasks.skill-error-desktop-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (light)",
+      "theme": "light",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.395,
+      "rgbPct": 99.927,
+      "nonTextPct": 99.8,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-desktop-zh.dark",
+      "caseId": "components.agents-tasks.skill-error-desktop-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (dark)",
+      "theme": "dark",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.327,
+      "rgbPct": 99.938,
+      "nonTextPct": 99.78,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-phone-en.light",
+      "caseId": "components.agents-tasks.skill-error-phone-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (light)",
+      "theme": "light",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.894,
+      "rgbPct": 99.848,
+      "nonTextPct": 99.413,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-phone-en.dark",
+      "caseId": "components.agents-tasks.skill-error-phone-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (dark)",
+      "theme": "dark",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.867,
+      "rgbPct": 99.878,
+      "nonTextPct": 99.397,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-phone-zh.light",
+      "caseId": "components.agents-tasks.skill-error-phone-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (light)",
+      "theme": "light",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.465,
+      "rgbPct": 99.825,
+      "nonTextPct": 99.273,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-error-phone-zh.dark",
+      "caseId": "components.agents-tasks.skill-error-phone-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill error (dark)",
+      "theme": "dark",
+      "variantName": "error",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.428,
+      "rgbPct": 99.845,
+      "nonTextPct": 99.257,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-error-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-desktop-en.light",
+      "caseId": "components.agents-tasks.skill-running-desktop-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (light)",
+      "theme": "light",
+      "variantName": "running",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.363,
+      "rgbPct": 99.982,
+      "nonTextPct": 99.878,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-desktop-en.dark",
+      "caseId": "components.agents-tasks.skill-running-desktop-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (dark)",
+      "theme": "dark",
+      "variantName": "running",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.328,
+      "rgbPct": 99.966,
+      "nonTextPct": 99.87,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-desktop-zh.light",
+      "caseId": "components.agents-tasks.skill-running-desktop-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (light)",
+      "theme": "light",
+      "variantName": "running",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.917,
+      "rgbPct": 99.976,
+      "nonTextPct": 99.893,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-desktop-zh.dark",
+      "caseId": "components.agents-tasks.skill-running-desktop-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (dark)",
+      "theme": "dark",
+      "variantName": "running",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.838,
+      "rgbPct": 99.947,
+      "nonTextPct": 99.88,
+      "sizeReact": [
+        600,
+        100
+      ],
+      "sizeFlutter": [
+        600,
+        100
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-phone-en.light",
+      "caseId": "components.agents-tasks.skill-running-phone-en.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (light)",
+      "theme": "light",
+      "variantName": "running",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.365,
+      "rgbPct": 99.942,
+      "nonTextPct": 99.672,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-phone-en.dark",
+      "caseId": "components.agents-tasks.skill-running-phone-en.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (dark)",
+      "theme": "dark",
+      "variantName": "running",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.339,
+      "rgbPct": 99.92,
+      "nonTextPct": 99.678,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-phone-zh.light",
+      "caseId": "components.agents-tasks.skill-running-phone-zh.light",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (light)",
+      "theme": "light",
+      "variantName": "running",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.932,
+      "rgbPct": 99.923,
+      "nonTextPct": 99.56,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.skill-running-phone-zh.dark",
+      "caseId": "components.agents-tasks.skill-running-phone-zh.dark",
+      "kind": "agents-tasks.skill",
+      "title": "skill running (dark)",
+      "theme": "dark",
+      "variantName": "running",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.893,
+      "rgbPct": 99.892,
+      "nonTextPct": 99.551,
+      "sizeReact": [
+        856,
+        263
+      ],
+      "sizeFlutter": [
+        856,
+        263
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.skill-running-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-desktop-en.light",
+      "caseId": "components.agents-tasks.jobs-closed-desktop-en.light",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (light)",
+      "theme": "light",
+      "variantName": "closed",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.664,
+      "rgbPct": 99.127,
+      "nonTextPct": 99.189,
+      "sizeReact": [
+        600,
+        60
+      ],
+      "sizeFlutter": [
+        600,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-desktop-en.dark",
+      "caseId": "components.agents-tasks.jobs-closed-desktop-en.dark",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (dark)",
+      "theme": "dark",
+      "variantName": "closed",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.667,
+      "rgbPct": 98.756,
+      "nonTextPct": 99.206,
+      "sizeReact": [
+        600,
+        60
+      ],
+      "sizeFlutter": [
+        600,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-desktop-zh.light",
+      "caseId": "components.agents-tasks.jobs-closed-desktop-zh.light",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (light)",
+      "theme": "light",
+      "variantName": "closed",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.878,
+      "rgbPct": 99.259,
+      "nonTextPct": 99.261,
+      "sizeReact": [
+        600,
+        60
+      ],
+      "sizeFlutter": [
+        600,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-desktop-zh.dark",
+      "caseId": "components.agents-tasks.jobs-closed-desktop-zh.dark",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (dark)",
+      "theme": "dark",
+      "variantName": "closed",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.883,
+      "rgbPct": 98.848,
+      "nonTextPct": 99.267,
+      "sizeReact": [
+        600,
+        60
+      ],
+      "sizeFlutter": [
+        600,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-phone-en.light",
+      "caseId": "components.agents-tasks.jobs-closed-phone-en.light",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (light)",
+      "theme": "light",
+      "variantName": "closed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.549,
+      "rgbPct": 98.181,
+      "nonTextPct": 98.871,
+      "sizeReact": [
+        856,
+        158
+      ],
+      "sizeFlutter": [
+        856,
+        158
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-phone-en.dark",
+      "caseId": "components.agents-tasks.jobs-closed-phone-en.dark",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (dark)",
+      "theme": "dark",
+      "variantName": "closed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.552,
+      "rgbPct": 97.873,
+      "nonTextPct": 98.884,
+      "sizeReact": [
+        856,
+        158
+      ],
+      "sizeFlutter": [
+        856,
+        158
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-phone-zh.light",
+      "caseId": "components.agents-tasks.jobs-closed-phone-zh.light",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (light)",
+      "theme": "light",
+      "variantName": "closed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 96.0,
+      "rgbPct": 98.464,
+      "nonTextPct": 97.737,
+      "sizeReact": [
+        856,
+        158
+      ],
+      "sizeFlutter": [
+        856,
+        158
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.jobs-closed-phone-zh.dark",
+      "caseId": "components.agents-tasks.jobs-closed-phone-zh.dark",
+      "kind": "agents-tasks.jobs",
+      "title": "jobs closed (dark)",
+      "theme": "dark",
+      "variantName": "closed",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.003,
+      "rgbPct": 98.143,
+      "nonTextPct": 97.746,
+      "sizeReact": [
+        856,
+        158
+      ],
+      "sizeFlutter": [
+        856,
+        158
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.jobs-closed-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-desktop-en.light",
+      "caseId": "components.agents-tasks.manager-populated-desktop-en.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (light)",
+      "theme": "light",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.626,
+      "rgbPct": 97.731,
+      "nonTextPct": 97.75,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-desktop-en.dark",
+      "caseId": "components.agents-tasks.manager-populated-desktop-en.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (dark)",
+      "theme": "dark",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.626,
+      "rgbPct": 97.471,
+      "nonTextPct": 97.701,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-desktop-zh.light",
+      "caseId": "components.agents-tasks.manager-populated-desktop-zh.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (light)",
+      "theme": "light",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.232,
+      "rgbPct": 98.267,
+      "nonTextPct": 97.789,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-desktop-zh.dark",
+      "caseId": "components.agents-tasks.manager-populated-desktop-zh.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (dark)",
+      "theme": "dark",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.232,
+      "rgbPct": 97.991,
+      "nonTextPct": 97.765,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-phone-en.light",
+      "caseId": "components.agents-tasks.manager-populated-phone-en.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (light)",
+      "theme": "light",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.721,
+      "rgbPct": 96.103,
+      "nonTextPct": 96.213,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-phone-en.dark",
+      "caseId": "components.agents-tasks.manager-populated-phone-en.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (dark)",
+      "theme": "dark",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.695,
+      "rgbPct": 95.928,
+      "nonTextPct": 96.178,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-phone-zh.light",
+      "caseId": "components.agents-tasks.manager-populated-phone-zh.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (light)",
+      "theme": "light",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 93.917,
+      "rgbPct": 97.105,
+      "nonTextPct": 96.669,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-populated-phone-zh.dark",
+      "caseId": "components.agents-tasks.manager-populated-phone-zh.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager populated (dark)",
+      "theme": "dark",
+      "variantName": "populated",
+      "officialStatus": "different",
+      "pixelPerfectPct": 93.887,
+      "rgbPct": 96.916,
+      "nonTextPct": 96.634,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-populated-phone-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-desktop-en.light",
+      "caseId": "components.agents-tasks.manager-empty-desktop-en.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (light)",
+      "theme": "light",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 93.653,
+      "rgbPct": 96.11,
+      "nonTextPct": 96.683,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-desktop-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-desktop-en.dark",
+      "caseId": "components.agents-tasks.manager-empty-desktop-en.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (dark)",
+      "theme": "dark",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 93.652,
+      "rgbPct": 96.215,
+      "nonTextPct": 96.409,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-desktop-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-desktop-zh.light",
+      "caseId": "components.agents-tasks.manager-empty-desktop-zh.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (light)",
+      "theme": "light",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.844,
+      "rgbPct": 98.273,
+      "nonTextPct": 97.667,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-desktop-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-desktop-zh.dark",
+      "caseId": "components.agents-tasks.manager-empty-desktop-zh.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (dark)",
+      "theme": "dark",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.842,
+      "rgbPct": 98.153,
+      "nonTextPct": 97.645,
+      "sizeReact": [
+        600,
+        600
+      ],
+      "sizeFlutter": [
+        600,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-desktop-zh.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-phone-en.light",
+      "caseId": "components.agents-tasks.manager-empty-phone-en.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (light)",
+      "theme": "light",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 89.933,
+      "rgbPct": 92.938,
+      "nonTextPct": 93.814,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-phone-en.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-phone-en.dark",
+      "caseId": "components.agents-tasks.manager-empty-phone-en.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (dark)",
+      "theme": "dark",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 89.907,
+      "rgbPct": 93.348,
+      "nonTextPct": 93.545,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-phone-en.dark.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-phone-zh.light",
+      "caseId": "components.agents-tasks.manager-empty-phone-zh.light",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (light)",
+      "theme": "light",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.337,
+      "rgbPct": 96.987,
+      "nonTextPct": 96.752,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-phone-zh.light.side-by-side.png"
+    },
+    {
+      "key": "components.agents-tasks.manager-empty-phone-zh.dark",
+      "caseId": "components.agents-tasks.manager-empty-phone-zh.dark",
+      "kind": "agents-tasks.manager",
+      "title": "manager empty (dark)",
+      "theme": "dark",
+      "variantName": "empty",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.306,
+      "rgbPct": 97.009,
+      "nonTextPct": 96.712,
+      "sizeReact": [
+        856,
+        1575
+      ],
+      "sizeFlutter": [
+        856,
+        1575
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.agents-tasks.manager-empty-phone-zh.dark.side-by-side.png"
+    }
+  ],
+  "laterSourceChanges": "Only parity fixture lint cleanup after the captures/builds. Runtime sources, fonts, thresholds and classification are unchanged."
+}

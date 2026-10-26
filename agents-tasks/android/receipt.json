@@ -1,0 +1,105 @@
+{
+  "synthetic": true,
+  "api": 36,
+  "actualTapsAndKeyboard": true,
+  "generatedRemotePath": true,
+  "normalAppRootRegressions": [
+    "agents_tasks_flow_test.dart",
+    "skill_draft_flow_test.dart"
+  ],
+  "scenes": [
+    {
+      "scene": "live",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "goal-paused",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "goal-resumed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "job-list",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "job-output",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "job-stopping",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "job-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "skill-expanded",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "preset-roster",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "preset-view",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "preset-view-closed",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-manager",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-detail",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-title-saved",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-history",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-retention",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "delete-confirmation",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "task-deleted",
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "installedFinalBuild4Sha256": "f4c11911b7509ad3733c46cea3e4bbda9495b631b1ef4afdf5354a386fb39d00",
+  "buildSourceHead": "9a25713ccda4af2dca0a459214c23e3ec4b64436",
+  "laterChanges": "Only parity fixture lint cleanup."
+}

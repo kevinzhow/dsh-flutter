@@ -1,0 +1,113 @@
+{
+  "implementationHead": "cd77e2060a42bce2d0505141b4c366d92d41743d",
+  "tree": "3664865047f06ea8b4b52293c705040636d834de",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "check-deps": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "tool-tests": {
+      "state": "ok",
+      "secs": 1.1
+    },
+    "codegen": {
+      "state": "ok",
+      "secs": 0.8
+    },
+    "theme-pack": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "i18n": {
+      "state": "ok",
+      "secs": 0.3
+    },
+    "icons": {
+      "state": "ok",
+      "secs": 0.1
+    },
+    "vector": {
+      "state": "ok",
+      "secs": 9.4
+    },
+    "parity": {
+      "state": "ok",
+      "secs": 2.0
+    },
+    "capability": {
+      "state": "ok",
+      "secs": 0.2
+    },
+    "format": {
+      "state": "ok",
+      "secs": 2.4
+    },
+    "analyze": {
+      "state": "ok",
+      "secs": 3.4
+    },
+    "tests": {
+      "state": "ok",
+      "secs": 157.6
+    }
+  },
+  "fullPreflightSourceTree": "3664865047f06ea8b4b52293c705040636d834de",
+  "linuxAndAndroidNormalAndFixtureBuilds": "passed",
+  "buildArtifacts": [
+    {
+      "name": "android-normal.apk",
+      "sha256": "21c65bec5015fca943224c7a2bc576f8e80c3adbab4b0f825fc04a766645cb4c"
+    },
+    {
+      "name": "android-fixture.apk",
+      "sha256": "f4c11911b7509ad3733c46cea3e4bbda9495b631b1ef4afdf5354a386fb39d00"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "8281959e249c0d3d6e850c67a141aeffcd9c357151fd4c6e37f9c2b1d29a0227"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "31d09c23edfe7251f3bfe2bf7d2f93016dcda600eeb75e0da85cf5b8411de4c9",
+      "applicationLibrarySha256": "ed4b27f0c75c9492514fa65b5ee1226977440526cc5166e0cdb2df01b59e0d7e"
+    }
+  ],
+  "nativeGpu": [
+    {
+      "case": "agents.desktop",
+      "assertions": 8,
+      "allPassed": true
+    },
+    {
+      "case": "agents.phone",
+      "assertions": 8,
+      "allPassed": true
+    }
+  ],
+  "androidScenes": 18,
+  "visual": {
+    "counts": {
+      "entries": 88,
+      "compared": 88,
+      "same": 0,
+      "strict": 8,
+      "pass": 29,
+      "geometryPass": 29,
+      "fail": 59,
+      "uncovered": 0,
+      "missing": 0
+    },
+    "meanNonTextPct": 85.616,
+    "dimensionsEqual": 88
+  },
+  "cleanup": {
+    "ownedWestonAndAppProcessesStopped": true,
+    "normalAndroidAppRestoredAndStopped": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbRetained": true
+  },
+  "nativeAndBuildSourceHead": "9a25713ccda4af2dca0a459214c23e3ec4b64436",
+  "laterSourceChanges": "Only unused import and brace cleanup in the component parity test fixture. Runtime sources are identical."
+}
