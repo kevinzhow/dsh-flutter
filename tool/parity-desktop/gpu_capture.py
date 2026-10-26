@@ -285,7 +285,13 @@ def main():
                     screen.click(*connect)
                     time.sleep(7)
                 for step in c['app']:
-                    if 'click' in step:
+                    if 'move' in step:
+                        point = step['move']
+                        if not isinstance(point, list) or len(point) != 2 or any(type(v) is not int for v in point) or not 0 <= point[0] < w or not 0 <= point[1] < h:
+                            raise ValueError('Pointer move must stay within this private output')
+                        screen.send(f'move {point[0]} {point[1]}')
+                        time.sleep(0.3)
+                    elif 'click' in step:
                         screen.click(*step['click'])
                         time.sleep(0.8)
                     elif 'secondaryClick' in step:

@@ -11,6 +11,7 @@
 // ChatView itself needs the whole host (sessions, conversation store); these are the pieces it renders from its own
 // stylesheet and the real actions component, mounted alone. Host services mocked: the locale seat `t` (the real chat
 // dictionary) and the wall clock (so `HH:mm` / date forms do not depend on today).
+import { useLayoutEffect, useRef } from 'react'
 import { MessageIconActions } from '@dsh/ui-chat/src/client/chat/MessageIconActions.tsx'
 import css from '@dsh/ui-chat/src/client/chat/ChatView.module.css'
 import { en, zh } from '@dsh/ui-chat/src/client/locale.ts'
@@ -20,6 +21,20 @@ import type { KindRenderer } from '../../parity-web/host/types.ts'
 
 /** 2020-03-04 10:05 local time: an earlier year, so the clock shows the date form. */
 const MESSAGE_TIME = new Date(2020, 2, 4, 10, 5, 0).getTime()
+
+function ActionFixture({ props, locale }: { props: any; locale: string }) {
+  const root = useRef<HTMLDivElement>(null)
+  const t = createTranslator(locale, { en, zh })
+  useLayoutEffect(() => {
+    const buttons = root.current?.querySelectorAll('button')
+    buttons?.[0]?.setAttribute('data-parity-id', 'message-copy')
+    buttons?.[1]?.setAttribute('data-parity-id', 'message-branch')
+  }, [props])
+  return <div ref={root} data-parity-id="stream-el" style={{ display: 'inline-block' }}>
+    <MessageIconActions text="Copy me" time={MESSAGE_TIME} clock={props.clock ?? 'start'}
+      onBranch={props.branch ? () => {} : undefined} t={t as any} />
+  </div>
+}
 
 export const kinds: Record<string, KindRenderer> = {
   'chat.stream.control': (props, ctx) => {
@@ -52,11 +67,6 @@ export const kinds: Record<string, KindRenderer> = {
     }
   },
   'chat.stream.actions': (props, ctx) => {
-    const t = createTranslator(ctx.case.locale, { en, zh })
-    return (
-      <div data-parity-id="stream-el" style={{ display: 'inline-block' }}>
-        <MessageIconActions text="Copy me" time={MESSAGE_TIME} clock={props.clock ?? 'start'} t={t as any} />
-      </div>
-    )
+    return <ActionFixture props={props} locale={ctx.case.locale} />
   },
 }

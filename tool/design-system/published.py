@@ -11,6 +11,23 @@ def menu_portal_snapshot(archive):
     if match is None: raise ValueError('published menu portal placement is not recognized')
     return {'bundleSha256': hashlib.sha256(bundle).hexdigest(), 'placement': match[0]}
 
+def tooltip_placement_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/index.js').read()
+    text = bundle.decode()
+    start = text.index('function Tooltip(')
+    patterns = {
+        'signature': r'function Tooltip\([^\n]+',
+        'anchor': r'setPos\(\{\s*x: side === "right".*?\}\);',
+        'fit': r'const edgeMargin = .*?el\.style\.visibility = "visible";',
+    }
+    snippets = {}
+    for name, pattern in patterns.items():
+        match = re.search(pattern, text[start:], re.S)
+        if match is None: raise ValueError('published tooltip placement is not recognized: ' + name)
+        snippets[name] = ' '.join(match[0].split())
+    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(), **snippets}
+
 def plugin_style_snapshot(archive):
     with tarfile.open(archive) as tar:
         bundle=tar.extractfile('package/lib/client.js').read()
@@ -105,6 +122,10 @@ def verify_snapshot(archive, package, folder):
                 if name == 'menu-portal.json':
                     if json.loads((folder / name).read_text()) != menu_portal_snapshot(archive):
                         raise ValueError('published menu portal snapshot mismatch')
+                    continue
+                if name == 'tooltip-placement.json':
+                    if json.loads((folder / name).read_text()) != tooltip_placement_snapshot(archive):
+                        raise ValueError('published tooltip placement snapshot mismatch')
                     continue
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():

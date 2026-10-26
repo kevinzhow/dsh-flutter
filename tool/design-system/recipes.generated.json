@@ -17,7 +17,9 @@
           "MenuSurface.module.css": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
           "MenuGroup.module.css": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
           "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
-          "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139"
+          "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
+          "Tooltip.module.css": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
+          "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -27,7 +29,8 @@
         "extractionKind": "primitive-css",
         "extraction": "Exact stylesheet and metadata bytes from published npm archive; no JavaScript execution",
         "referenceSourceSha256": {
-          "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1"
+          "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1",
+          "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695"
         }
       },
       {
@@ -943,6 +946,119 @@
           "padding": "0",
           "border": "0",
           "background": "transparent"
+        }
+      }
+    ],
+    "Tooltip.module.css": [
+      {
+        "selector": ".bubble",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "gap": "8px",
+          "position": "fixed",
+          "z-index": "100",
+          "width": "max-content",
+          "max-width": "50vw",
+          "padding": "3px 7px",
+          "border-radius": "var(--dsw-radius-sm)",
+          "background": "var(--dsw-alias-tooltip-bg)",
+          "color": "var(--dsw-static-neutral-bluish-00)",
+          "font-size": "13px",
+          "line-height": "20px",
+          "white-space": "pre-line",
+          "overflow-wrap": "break-word",
+          "pointer-events": "none",
+          "animation": "tooltip-in 150ms var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": ".bubble[data-portal]",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1100"
+        }
+      },
+      {
+        "selector": ".bubble[data-pinned]",
+        "conditions": [],
+        "declarations": {
+          "pointer-events": "auto"
+        }
+      },
+      {
+        "selector": ".label",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0"
+        }
+      },
+      {
+        "selector": ".bubble[data-has-shortcut]",
+        "conditions": [],
+        "declarations": {
+          "padding-inline-end": "5px"
+        }
+      },
+      {
+        "selector": ".bubble[data-has-shortcut]:not(:has(.label))",
+        "conditions": [],
+        "declarations": {
+          "padding": "3px"
+        }
+      },
+      {
+        "selector": ".bubble[data-side='right']",
+        "conditions": [],
+        "declarations": {
+          "transform": "translateY(-50%)"
+        }
+      },
+      {
+        "selector": ".bubble[data-side='bottom']",
+        "conditions": [],
+        "declarations": {
+          "transform": "translateX(-50%)"
+        }
+      },
+      {
+        "selector": ".bubble[data-side='top']",
+        "conditions": [],
+        "declarations": {
+          "transform": "translate(-50%, -100%)"
+        }
+      },
+      {
+        "selector": ".bubble[data-side='bottom'][data-align='end']",
+        "conditions": [],
+        "declarations": {
+          "transform": "translateX(-100%)"
+        }
+      },
+      {
+        "selector": ".bubble[data-side='top'][data-align='end']",
+        "conditions": [],
+        "declarations": {
+          "transform": "translate(-100%, -100%)"
+        }
+      },
+      {
+        "selector": "from",
+        "conditions": [
+          "@keyframes tooltip-in"
+        ],
+        "declarations": {
+          "opacity": "0"
+        }
+      },
+      {
+        "selector": ".bubble",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "animation": "none"
         }
       }
     ],
@@ -4065,7 +4181,17 @@
       "plainFontSize": 12.0,
       "plainLineHeight": 16.0,
       "plainFontToken": "--dsw-font-xxs-12",
-      "plainColorToken": "--dsw-alias-label-tertiary"
+      "plainColorToken": "--dsw-alias-label-tertiary",
+      "tooltipGap": 2.0,
+      "tooltipFontSize": 11.0,
+      "tooltipLineHeight": 14.0,
+      "tooltipFontToken": "--dsw-font-xxxs-11",
+      "keyMinWidth": 16.0,
+      "keyHeight": 16.0,
+      "keyRadius": 4.0,
+      "keyFillToken": "--dsw-alias-tooltip-key-bg",
+      "keyPadding": 2.0,
+      "joinedPadding": 4.0
     },
     "DshAddButtonRecipe": {
       "height": 32.0,
@@ -4212,6 +4338,25 @@
       "radiusToken": "--dsw-radius-md",
       "labelToken": "--dsw-alias-label-primary",
       "hoverToken": "--dsw-alias-interactive-bg-hover"
+    },
+    "DshTooltipRecipe": {
+      "gap": 8.0,
+      "maxViewportFraction": 0.5,
+      "paddingVertical": 3.0,
+      "paddingHorizontal": 7.0,
+      "shortcutEndPadding": 5.0,
+      "shortcutOnlyPadding": 3.0,
+      "radiusToken": "--dsw-radius-sm",
+      "fillToken": "--dsw-alias-tooltip-bg",
+      "labelToken": "--dsw-static-neutral-bluish-00",
+      "fontSize": 13.0,
+      "lineHeight": 20.0,
+      "fontToken": "--dsw-font-xs-13",
+      "animationMs": 150.0,
+      "easingToken": "--ds-ease-in-out",
+      "defaultGap": 8.0,
+      "rightGap": 10.0,
+      "viewportMargin": 12.0
     }
   }
 }

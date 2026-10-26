@@ -54,6 +54,7 @@ final Map<String, ParityCase> chatStreamCases = {
           time: DateTime(2020, 3, 4, 10, 5).millisecondsSinceEpoch,
           clockFirst: ctx.props['clock'] != 'end',
           touchTarget: false,
+          onBranch: ctx.props['branch'] == true ? () async {} : null,
         ),
       ),
     ),

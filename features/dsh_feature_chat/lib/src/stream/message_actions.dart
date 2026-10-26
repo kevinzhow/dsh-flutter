@@ -134,33 +134,37 @@ class _MessageActionsState extends State<MessageActions>
                 )
                 .copyWith(color: tertiary),
           );
-    final copy = Semantics(
-      button: true,
+    final copy = DshTooltip(
       label: label,
-      excludeSemantics: true,
-      onTap: () => copyText(widget.text),
-      child: Focus(
-        onFocusChange: (v) => setState(() => _focused = v),
-        child: GestureDetector(
-          key: const ValueKey('message-copy'),
-          behavior: HitTestBehavior.opaque,
-          onTap: () => copyText(widget.text),
-          // 28px visual (dsh), grown to the 44px touch target on phones.
-          // The glyph stays flush with the row's edge (the clock side is the
-          // inner one); the extra touch area grows inward.
-          child: SizedBox.square(
-            dimension: _big ? DshSpace.touch : 28,
-            child: Align(
-              alignment: !_big
-                  ? Alignment.center
-                  : widget.clockFirst
-                  ? AlignmentDirectional.centerEnd
-                  : AlignmentDirectional.centerStart,
-              child: DshIcon(
-                copied ? DshIcons.check : DshIcons.copy,
-                // `.action svg` 15px; 17px on the assistant tail.
-                size: widget.clockFirst ? 15 : 17,
-                color: copied ? secondary : tertiary,
+      side: DshTooltipSide.bottom,
+      child: Semantics(
+        button: true,
+        label: label,
+        excludeSemantics: true,
+        onTap: () => copyText(widget.text),
+        child: Focus(
+          onFocusChange: (v) => setState(() => _focused = v),
+          child: GestureDetector(
+            key: const ValueKey('message-copy'),
+            behavior: HitTestBehavior.opaque,
+            onTap: () => copyText(widget.text),
+            // 28px visual (dsh), grown to the 44px touch target on phones.
+            // The glyph stays flush with the row's edge (the clock side is the
+            // inner one); the extra touch area grows inward.
+            child: SizedBox.square(
+              dimension: _big ? DshSpace.touch : 28,
+              child: Align(
+                alignment: !_big
+                    ? Alignment.center
+                    : widget.clockFirst
+                    ? AlignmentDirectional.centerEnd
+                    : AlignmentDirectional.centerStart,
+                child: DshIcon(
+                  copied ? DshIcons.check : DshIcons.copy,
+                  // `.action svg` 15px; 17px on the assistant tail.
+                  size: widget.clockFirst ? 15 : 17,
+                  color: copied ? secondary : tertiary,
+                ),
               ),
             ),
           ),
@@ -179,6 +183,7 @@ class _MessageActionsState extends State<MessageActions>
         if (widget.onBranch != null) ...[
           const SizedBox(width: 8),
           DshTooltip(
+            side: DshTooltipSide.bottom,
             label: widget.i18n.t(
               'chat',
               widget.branchUnavailable
