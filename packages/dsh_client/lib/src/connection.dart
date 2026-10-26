@@ -567,9 +567,24 @@ class GenerationStream {
   void end() => _end();
 }
 
-class _GenerationCaller implements RemoteCaller {
+class _GenerationCaller implements CancellableRemoteCaller {
   _GenerationCaller(this._connection);
   final DshConnection _connection;
+
+  @override
+  Future<Object?> callWithCancellation(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+    RemoteCancellation cancellation,
+  ) {
+    final g = _connection.generation;
+    if (g == null) throw NotConnected();
+    return ScopedRemoteCaller(
+      g.caller,
+      cancellation,
+    ).call(namespace, method, args);
+  }
 
   @override
   Future<Object?> call(

@@ -286,21 +286,24 @@ void Function() registerCommonSettings(
   required DshI18n Function() i18n,
   required HostRemotes remotes,
   ValueChanged<Uri>? openUrl,
+  bool registerPluginsSection = true,
 }) {
   final offs = <void Function()>[];
   final general = DshSlots.settingsGeneralItem.typed<SettingsOwner, Widget>();
   final plugin = DshSlots.pluginsItem.typed<SettingsOwner, Widget>();
   final developer = AcceptedToggle(forms.get('ui-settings'));
   final upload = AcceptedToggle(forms.get('session-log-deepseek'));
-  offs.add(
-    slots.register<SettingsOwner, Widget>(
-      DshSlots.settingsSection.typed<SettingsOwner, Widget>(),
-      (_) => PluginSettingsSection(slots: slots),
-      id: 'plugins',
-      order: 20,
-      label: () => i18n().t('pluginManager', 'title'),
-    ),
-  );
+  if (registerPluginsSection) {
+    offs.add(
+      slots.register<SettingsOwner, Widget>(
+        DshSlots.settingsSection.typed<SettingsOwner, Widget>(),
+        (_) => PluginSettingsSection(slots: slots),
+        id: 'plugins',
+        order: 20,
+        label: () => i18n().t('pluginManager', 'title'),
+      ),
+    );
+  }
   for (final spec in [
     (
       ns: 'ui-settings',
@@ -403,6 +406,7 @@ void Function() registerCommonSettings(
             fields: spec.fields,
           ),
           id: spec.ns,
+          label: () => i18n().t(spec.locale, spec.titleKey),
           order: spec.ns == 'subagent'
               ? 10
               : spec.ns == 'agent-loop'
@@ -428,6 +432,7 @@ void Function() registerCommonSettings(
           i18n: i18n(),
         ),
         id: 'subagent',
+        label: () => i18n().t('settings.subagent', 'title'),
         order: 10,
       ),
     ),
@@ -439,6 +444,7 @@ void Function() registerCommonSettings(
         plugin,
         (_) => WebSearchCard(controller: web, i18n: i18n(), openUrl: openUrl),
         id: 'web-search',
+        label: () => i18n().t('settings.webSearch', 'title'),
         order: 20,
       ),
     ),

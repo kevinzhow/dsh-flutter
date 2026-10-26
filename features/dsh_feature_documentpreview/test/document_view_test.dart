@@ -218,8 +218,8 @@ void main() {
   testWidgets('a binary container is unsupported and offers open and save', (
     t,
   ) async {
-    files.binaries['report.pdf'] = Uint8List.fromList(List.filled(2000, 7));
-    await t.pumpWidget(view('report.pdf'));
+    files.binaries['report.zip'] = Uint8List.fromList(List.filled(2000, 7));
+    await t.pumpWidget(view('report.zip'));
     await t.pump();
     expect(find.byKey(const ValueKey('document-unsupported')), findsOneWidget);
     expect(
@@ -231,8 +231,8 @@ void main() {
     await t.tap(find.byKey(const ValueKey('file-open')));
     await settle(t);
     await settle(t);
-    expect(actions.began, ['report.pdf']);
-    expect(actions.opened, ['report.pdf']);
+    expect(actions.began, ['report.zip']);
+    expect(actions.opened, ['report.zip']);
   });
 
   testWidgets('without file handling the unsupported face offers no actions', (
@@ -349,8 +349,8 @@ void main() {
 
   testWidgets('zh copy', (t) async {
     i18n = const DshI18n(DshLocale.zh);
-    files.binaries['x.pdf'] = Uint8List(1);
-    await t.pumpWidget(view('x.pdf'));
+    files.binaries['x.zip'] = Uint8List(1);
+    await t.pumpWidget(view('x.zip'));
     await t.pump();
     expect(find.text('该格式文件暂时无法预览'), findsOneWidget);
   });

@@ -336,10 +336,25 @@ class _LiveFiles implements WorkspaceFilesRemote {
 }
 
 /// [RemoteCaller] over whichever [DshConnection] is current.
-class _LiveCaller implements RemoteCaller {
+class _LiveCaller implements CancellableRemoteCaller {
   _LiveCaller(this._connection);
 
   final DshConnection? Function() _connection;
+
+  @override
+  Future<Object?> callWithCancellation(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+    RemoteCancellation cancellation,
+  ) {
+    final c = _connection();
+    if (c == null) throw NotConnected();
+    return ScopedRemoteCaller(
+      c.caller,
+      cancellation,
+    ).call(namespace, method, args);
+  }
 
   @override
   Future<Object?> call(

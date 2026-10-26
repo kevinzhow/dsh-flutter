@@ -1,0 +1,311 @@
+{
+  "names": [
+    "@demo/dsh-host-alpha",
+    "@demo/dsh-client-beta",
+    "dsh-gamma",
+    "plain",
+    "cordis:plugin"
+  ],
+  "keys": [
+    {
+      "registry": null,
+      "resolved": null
+    },
+    {
+      "registry": "https://REGISTRY.NPMJS.ORG",
+      "resolved": null
+    },
+    {
+      "registry": null,
+      "resolved": "https://private.example/sub"
+    },
+    {
+      "registry": "not-url",
+      "resolved": null
+    },
+    {
+      "registry": "ftp://example.com/",
+      "resolved": null
+    }
+  ],
+  "registries": [
+    null,
+    {
+      "registry": null,
+      "resolved": "https://registry.npmjs.org/",
+      "fallbackRegistries": [
+        "https://registry.npmjs.org/",
+        "https://registry.npmmirror.com/"
+      ]
+    },
+    {
+      "registry": "https://private.example/",
+      "resolved": null,
+      "fallbackRegistries": [
+        "https://private.example",
+        "https://mirror.example"
+      ]
+    }
+  ],
+  "bundles": [
+    {
+      "name": "@demo/dsh-beta",
+      "official": true,
+      "availability": "profile",
+      "enabled": false,
+      "installed": true,
+      "optional": false,
+      "removable": true,
+      "rows": [
+        {
+          "rowId": "reader",
+          "moduleName": "module",
+          "entryId": "active"
+        }
+      ],
+      "overrides": []
+    },
+    {
+      "name": "@demo/dsh-host-alpha",
+      "official": true,
+      "availability": "profile",
+      "enabled": false,
+      "installed": true,
+      "optional": false,
+      "removable": true,
+      "rows": [
+        {
+          "rowId": "reader",
+          "moduleName": "module",
+          "entryId": "active"
+        }
+      ],
+      "overrides": []
+    }
+  ],
+  "plugins": [
+    {
+      "entryId": "active",
+      "moduleName": "module",
+      "enabled": true,
+      "fiberPhase": "active",
+      "patchId": "reader"
+    }
+  ],
+  "metadata": {
+    "categories": {
+      "known": {
+        "title": "Known"
+      }
+    },
+    "labels": {
+      "known": {
+        "title": "Known"
+      }
+    },
+    "sortKeys": {}
+  },
+  "queries": [
+    {
+      "query": {
+        "text": "",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "index"
+        }
+      },
+      "text": "word"
+    },
+    {
+      "query": {
+        "text": "word",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "relevance"
+        }
+      },
+      "text": " "
+    },
+    {
+      "query": {
+        "text": "word",
+        "category": "removed",
+        "labels": [
+          "known",
+          "removed"
+        ],
+        "sort": {
+          "kind": "key",
+          "id": "removed",
+          "direction": "desc"
+        }
+      },
+      "text": "new"
+    }
+  ],
+  "phases": [
+    "idle",
+    "checking",
+    "starting",
+    "running",
+    "cancelling",
+    "applying",
+    "unconfirmed",
+    "unknown",
+    "done",
+    "failed"
+  ],
+  "expected": {
+    "shortNames": [
+      "alpha",
+      "beta",
+      "gamma",
+      "plain",
+      "cordis:plugin"
+    ],
+    "registryKeys": [
+      "",
+      "https://registry.npmjs.org/",
+      "https://private.example/sub/",
+      "not-url",
+      "ftp://example.com/"
+    ],
+    "offers": [
+      [
+        null
+      ],
+      [
+        null,
+        "https://registry.npmmirror.com/"
+      ],
+      [
+        "https://private.example/",
+        "https://mirror.example",
+        null
+      ]
+    ],
+    "packages": [
+      {
+        "name": "@demo/dsh-host-alpha",
+        "official": true,
+        "availability": "profile",
+        "installed": true,
+        "optional": false,
+        "removable": true,
+        "enabled": false,
+        "rows": [
+          {
+            "rowId": "reader",
+            "moduleName": "module",
+            "enabled": true,
+            "phase": "active",
+            "entryId": "active"
+          }
+        ]
+      },
+      {
+        "name": "@demo/dsh-beta",
+        "official": true,
+        "availability": "profile",
+        "installed": true,
+        "optional": false,
+        "removable": true,
+        "enabled": false,
+        "rows": [
+          {
+            "rowId": "reader",
+            "moduleName": "module",
+            "enabled": true,
+            "phase": "active",
+            "entryId": "active"
+          }
+        ]
+      }
+    ],
+    "queries": [
+      {
+        "text": "word",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "relevance"
+        }
+      },
+      {
+        "text": " ",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "index"
+        }
+      },
+      {
+        "text": "new",
+        "category": "removed",
+        "labels": [
+          "known",
+          "removed"
+        ],
+        "sort": {
+          "kind": "key",
+          "id": "removed",
+          "direction": "desc"
+        }
+      }
+    ],
+    "declared": [
+      {
+        "text": "",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "index"
+        }
+      },
+      {
+        "text": "word",
+        "category": null,
+        "labels": [],
+        "sort": {
+          "kind": "relevance"
+        }
+      },
+      {
+        "text": "word",
+        "category": null,
+        "labels": [
+          "known"
+        ],
+        "sort": {
+          "kind": "index"
+        }
+      }
+    ],
+    "pending": [
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false
+    ],
+    "cancellation": {
+      "phases": [
+        "starting",
+        "unconfirmed",
+        "applying",
+        "applying",
+        "done"
+      ],
+      "calls": 2
+    },
+    "lostPhase": "unknown"
+  },
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317"
+}

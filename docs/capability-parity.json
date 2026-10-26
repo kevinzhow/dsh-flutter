@@ -311,9 +311,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-plugin-manager",
    "description": "Install, enable, disable, retry and remove plugin packages on the host.",
-   "status": "missing",
-   "notes": "pluginManager/* is not generated; only listBundles is called, to read the host version.",
-   "priority": "P3"
+   "status": "partial",
+   "notes": "Host-derived bundle/row controls, request-owned installation/cancellation/recovery, explicit script approval and registry selection. Exact component styling and arbitrary browser-plugin UI modules remain separate work.",
+   "priority": "P3",
+   "whalee": [
+    "features/dsh_feature_plugins",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "package:ui-plugin-market",
@@ -322,9 +326,13 @@
    "platform": "both",
    "dshSource": "packages/client/ui-plugin-market",
    "description": "Browse the configured plugin market indexes and install a bundle from the Discover tab.",
-   "status": "missing",
-   "notes": "pluginMarket/* is not generated or called.",
-   "priority": "P4"
+   "status": "partial",
+   "notes": "Configured indexes, pinned-document paging, search/declared filters, version/source confirmation and exact Host installation targets. Detail artwork, sort toolbar and strict visual alignment remain incomplete.",
+   "priority": "P4",
+   "whalee": [
+    "features/dsh_feature_plugins/lib/src/market_page.dart",
+    "packages/dsh_models/lib/src/plugins/market.dart"
+   ]
   },
   {
    "id": "package:ui-primitives",
@@ -483,9 +491,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-plugin-inventory",
    "description": "Read the host's loaded plugin inventory in a read-only tab.",
-   "status": "missing",
-   "notes": "pluginInventory/list is not generated or called.",
-   "priority": "P4"
+   "status": "partial",
+   "notes": "Read-only global/preset inventory, search, conditional enablement and runtime states. Browser module graph synchronization has no equivalent in the native client.",
+   "priority": "P4",
+   "whalee": [
+    "features/dsh_feature_plugins/lib/src/inventory.dart"
+   ]
   },
   {
    "id": "package:ui-settings-plugins",
@@ -494,9 +505,11 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings-plugins",
    "description": "The Plugins section of settings, with the tabs plugin features add to it.",
-   "status": "missing",
-   "notes": "No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied.",
-   "priority": "P3"
+   "status": "ported",
+   "notes": "Built-in Plugins Settings section follows the settings.plugins.tab ledger with the read-only inventory occupant.",
+   "whalee": [
+    "features/dsh_feature_plugins/lib/src/register.dart"
+   ]
   },
   {
    "id": "package:ui-settings-session-log",
@@ -605,9 +618,10 @@
    "description": "Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML.",
    "status": "partial",
    "whalee": [
-    "features/dsh_feature_documentpreview"
+    "features/dsh_feature_documentpreview",
+    "packages/dsh_models/lib/src/documents/office.dart"
    ],
-   "notes": "Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview.",
+   "notes": "Code/Markdown/image/text plus PDFium, opaque static/interactive HTML with authorized finite assets, and Session-authorized Office PDF conversion. Dedicated spreadsheet viewer, exact PDF controls and native modal-background capture parity remain incomplete.",
    "priority": "P3"
   },
   {
@@ -1431,8 +1445,12 @@
    "platform": "both",
    "dshSource": "packages/document/office-to-pdf/src/index.ts",
    "description": "Check whether a converted PDF of an Office file is still current.",
-   "status": "missing",
-   "notes": "Office-to-PDF conversion for the document preview; not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/office_to_pdf_remote.g.dart",
+    "packages/dsh_models/lib/src/documents/office.dart"
+   ]
   },
   {
    "id": "remote:officeToPdf/render",
@@ -1441,8 +1459,12 @@
    "platform": "both",
    "dshSource": "packages/document/office-to-pdf/src/index.ts",
    "description": "Convert an Office file to PDF so it can be previewed.",
-   "status": "missing",
-   "notes": "Office-to-PDF conversion for the document preview; not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/office_to_pdf_remote.g.dart",
+    "packages/dsh_models/lib/src/documents/office.dart"
+   ]
   },
   {
    "id": "remote:permissionPresets/catalog",
@@ -1463,8 +1485,12 @@
    "platform": "both",
    "dshSource": "packages/host/plugin-inventory/src/index.ts",
    "description": "List every plugin the host has loaded.",
-   "status": "missing",
-   "notes": "Loader inventory tab (ui-settings-plugin-inventory); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_inventory_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/cancelInstall",
@@ -1473,8 +1499,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Stop an installation this manager owns and wait until its files are back.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/inspect",
@@ -1483,8 +1513,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Look up a plugin package before installing it.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/installBundle",
@@ -1493,8 +1527,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Install a plugin bundle on the host.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/listBundles",
@@ -1503,11 +1541,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "List installed and official plugin bundles (Whalee reads the host version from it).",
-   "status": "partial",
+   "status": "ported",
    "whalee": [
-    "packages/dsh_client/lib/src/host_info.dart"
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
    ],
-   "notes": "Only used to read the host version (the web-app bundle); the bundle list is not shown."
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning."
   },
   {
    "id": "remote:pluginManager/listPlugins",
@@ -1516,8 +1555,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "List the host's plugins and whether each can be changed.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/listVersionExemptions",
@@ -1536,8 +1579,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Read the registries this manager asks: the configured first one, its fallbacks in order, and what pnpm's own configuration names.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/removeBundle",
@@ -1546,8 +1593,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Unload and remove a profile-owned bundle dependency through dsh plugin's pnpm path; a selected name no dependency holds is only deselected.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/setBundleEnabled",
@@ -1556,8 +1607,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Select or remove a bundle layer while retaining installed dependencies.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/setPluginEnabled",
@@ -1566,8 +1621,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Persist a plugin entry's desired enablement and apply it on live profiles.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginManager/setVersionExemption",
@@ -1586,8 +1645,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-manager/src/index.ts",
    "description": "Reconnect to an installation that is still running.",
-   "status": "missing",
-   "notes": "Plugin management (ui-plugin-manager); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginMarket/listIndexes",
@@ -1596,8 +1659,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-market/src/index.ts",
    "description": "List the configured index sources without fetching them.",
-   "status": "missing",
-   "notes": "Plugin market (ui-plugin-market); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginMarket/search",
@@ -1606,8 +1673,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-market/src/index.ts",
    "description": "Return one page of the plugins of a configured index that match a query.",
-   "status": "missing",
-   "notes": "Plugin market (ui-plugin-market); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginMarket/setIndexes",
@@ -1616,8 +1687,12 @@
    "platform": "both",
    "dshSource": "packages/boot/plugin-market/src/index.ts",
    "description": "Replace the configured index sources through Settings, without remounting this service.",
-   "status": "missing",
-   "notes": "Plugin market (ui-plugin-market); not built."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:pluginRegistryProbe/fastest",
@@ -1626,8 +1701,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-plugin-manager/src/index.ts",
    "description": "Pick the faster of two npm registries for installs.",
-   "status": "missing",
-   "notes": "Part of the plugin manager (picks the fastest npm registry)."
+   "status": "ported",
+   "notes": "Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning.",
+   "whalee": [
+    "packages/dsh_client/lib/src/generated/plugin_registry_probe_remote.g.dart",
+    "packages/dsh_models/lib/src/plugins"
+   ]
   },
   {
    "id": "remote:productAnalytics/enabled",
@@ -3539,7 +3618,12 @@
    "platform": "both",
    "dshSource": "packages/client/ui-settings/src/client/contract/slots.ts",
    "description": "One page inside the Plugins settings section.",
-   "status": "missing"
+   "status": "ported",
+   "whalee": [
+    "packages/dsh_slots/lib/src/declarations.dart",
+    "features/dsh_feature_plugins/lib/src/register.dart"
+   ],
+   "notes": "Live list ledger with selected-tab fallback and a read-only inventory occupant."
   },
   {
    "id": "slot:settings.section",

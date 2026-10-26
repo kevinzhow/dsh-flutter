@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io' show InternetAddress, SocketException;
 
 import 'package:dsh_client/dsh_client.dart';
@@ -21,6 +22,7 @@ import 'package:dsh_feature_layout/dsh_feature_layout.dart';
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
 import 'package:dsh_feature_model_settings/dsh_feature_model_settings.dart';
 import 'package:dsh_feature_agent_management/dsh_feature_agent_management.dart';
+import 'package:dsh_feature_plugins/dsh_feature_plugins.dart';
 import 'package:dsh_feature_permission_presets/dsh_feature_permission_presets.dart';
 import 'package:dsh_feature_plan/dsh_feature_plan.dart';
 import 'package:dsh_feature_deliverables/dsh_feature_deliverables.dart';
@@ -287,7 +289,22 @@ class AppController extends ChangeNotifier {
       i18n: () => i18n,
       terminals: terminals,
     );
-    registerDocumentPreviewFeature(slots, i18n: () => i18n);
+    registerDocumentPreviewFeature(
+      slots,
+      i18n: () => i18n,
+      interactivePreview: developerTools.enabled,
+      renderOffice: (sessionId, path, cancellation) async {
+        final service = officePreview;
+        if (service == null) {
+          throw RemoteException(
+            'document-render/failed',
+            'Office preview unavailable',
+            {'reason': 'unavailable'},
+          );
+        }
+        return service.read(sessionId, path, cancellation: cancellation);
+      },
+    );
     registerToolFeature(slots, i18n: () => i18n, actions: hostActions);
     deliverablesModel = DeliverablesModel(backend.deliverables);
     deliverables = registerDeliverablesFeature(
@@ -530,6 +547,9 @@ class AppController extends ChangeNotifier {
   final _skillFactsChanged = Observable<int>(0);
   HostRemotes? remotes;
   ConfigForms? forms;
+  OfficePreviewService? officePreview;
+  PluginManagerModel? plugins;
+  PluginMarketModel? pluginMarket;
   ThemeSettingsService? _theme;
   HostLocale? _hostLocale;
   PermissionPresetsFeature? _permissions;
@@ -857,6 +877,29 @@ class AppController extends ChangeNotifier {
       currentGeneration: () => transport.generation,
     );
     final f = forms = ConfigForms(r);
+    officePreview = OfficePreviewService(remotes: r, files: backend.files);
+    plugins = PluginManagerModel(
+      remotes: r,
+      readRegistry: () {
+        final raw = prefs.pluginInstallRegistry;
+        if (raw == null) return null;
+        try {
+          final value = jsonDecode(raw) as Map<String, dynamic>;
+          return value['custom'] == true
+              ? PluginRegistryChoice.custom(value['registry'] as String?)
+              : PluginRegistryChoice.offered(value['registry'] as String?);
+        } catch (_) {
+          return null;
+        }
+      },
+      rememberRegistry: (choice) => unawaited(
+        prefs.setPluginInstallRegistry(
+          jsonEncode({'custom': choice.custom, 'registry': choice.registry}),
+        ),
+      ),
+    );
+    pluginMarket = PluginMarketModel(r);
+    _hostOffs.add(registerPluginSettings(slots, remotes: r, i18n: () => i18n));
     chatPreferences.bind(f.get('ui-chat'));
     developerTools.bind(f.get('ui-settings'));
     _hostOffs.add(
@@ -977,6 +1020,7 @@ class AppController extends ChangeNotifier {
     _hostOffs.add(
       registerCommonSettings(
         slots,
+        registerPluginsSection: false,
         forms: f,
         remotes: r,
         i18n: () => i18n,
@@ -1119,6 +1163,15 @@ class AppController extends ChangeNotifier {
     skills = null;
     if (skillSource != null) unawaited(skillSource.dispose());
     _skillFactsChanged.touch();
+    final officeService = officePreview;
+    officePreview = null;
+    if (officeService != null) unawaited(officeService.dispose());
+    final pluginsModel = plugins;
+    plugins = null;
+    if (pluginsModel != null) unawaited(pluginsModel.dispose());
+    final marketModel = pluginMarket;
+    pluginMarket = null;
+    if (marketModel != null) unawaited(marketModel.dispose());
     final scheduleService = schedules;
     schedules = null;
     if (scheduleService != null) unawaited(scheduleService.dispose());

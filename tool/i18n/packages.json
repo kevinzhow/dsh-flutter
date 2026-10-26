@@ -234,6 +234,36 @@
       "package": "client/ui-agent-preset",
       "namespace": "settings.agentPreset",
       "file": "packages/client/ui-agent-preset/src/client/locales.ts"
+    },
+    {
+      "package": "client/ui-plugin-market",
+      "namespace": "pluginMarket",
+      "file": "packages/client/ui-plugin-market/src/client/locales.ts"
+    },
+    {
+      "package": "client/ui-settings-plugins",
+      "namespace": "settings.plugins",
+      "file": "packages/client/ui-settings-plugins/src/client/locales.ts"
+    },
+    {
+      "package": "client/ui-settings-plugin-inventory",
+      "namespace": "settings.pluginInventory",
+      "file": "packages/client/ui-settings-plugin-inventory/src/client/locales.ts"
+    },
+    {
+      "package": "client/ui-sidebar-documentpreview",
+      "namespace": "sidebarPdf",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/pdf/locales.ts"
+    },
+    {
+      "package": "client/ui-sidebar-documentpreview",
+      "namespace": "sidebarOffice",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/office/locales.ts"
+    },
+    {
+      "package": "client/ui-sidebar-documentpreview",
+      "namespace": "documentHtml",
+      "file": "packages/client/ui-sidebar-documentpreview/src/client/html/locales.ts"
     }
   ],
   "noDictionary": [

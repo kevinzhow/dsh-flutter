@@ -1,0 +1,326 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "pluginInventory",
+  "package": "packages/host/plugin-inventory",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/host/plugin-inventory/src/index.ts",
+    "packages/host/plugin-inventory/src/types.ts",
+    "packages/util/package-manifest/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "list",
+      "hostName": "list",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "ref",
+        "name": "PluginInventorySnapshot"
+      },
+      "doc": "Read the Loader directly on every call. Cordis's internal plugin/status events already maintain Entry.fiber and Fiber.state, so a second cache would only add another lifecycle truth to keep synchronized. When an agent-preset roster is composed, the snapshot also carries each preset's composition rows, because those rows — not the Loader's own entries — are where a deployment that mounts the roster runs its model-facing plugins."
+    }
+  ],
+  "decls": {
+    "AgentPresetPluginGroup": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "id",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Stable preset id."
+        },
+        {
+          "name": "name",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Display name the preset published; a reader falls back to the id."
+        },
+        {
+          "name": "isDefault",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether a session naming no preset composes this one."
+        },
+        {
+          "name": "broken",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Why this preset's composition cannot be read; absent when rows answer."
+        },
+        {
+          "name": "rows",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "AgentPresetPluginRow"
+            }
+          },
+          "doc": "Plugin rows in composition order; empty when the preset is broken."
+        }
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "One agent preset's identity and flattened composition in the inventory."
+    },
+    "AgentPresetPluginRow": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "entryId",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Composition row id, or null when the row declares none."
+        },
+        {
+          "name": "moduleName",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Module specifier the row names."
+        },
+        {
+          "name": "meta",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PluginLocalizedMeta"
+          },
+          "doc": "Local package display metadata, independent of whether the preset is mounted."
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "PresetPluginEnablement"
+          },
+          "doc": "Effective enablement, including disabled ancestor groups. `'conditional'` marks a `!!js` disabled expression on a composition no session has mounted, which only a Loader context can decide."
+        },
+        {
+          "name": "condition",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The row's own `!!js` disabled expression, when it carries one."
+        },
+        {
+          "name": "fiberPhase",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "ref",
+              "name": "PluginFiberPhase"
+            }
+          },
+          "doc": "Root-fiber phase when the composition is live; null otherwise."
+        }
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "One plugin row an agent preset's composition names."
+    },
+    "LocalizedText": {
+      "k": "union",
+      "members": [
+        {
+          "k": "str"
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "en",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ],
+          "extras": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/util/package-manifest/src/types.ts",
+      "doc": "Literal text or translations indexed by lowercase language id, with a required English fallback."
+    },
+    "PluginFiberPhase": {
+      "k": "enum",
+      "values": [
+        "active",
+        "failed",
+        "loading",
+        "pending",
+        "unloading"
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "Lifecycle state of an entry's root Fiber, or null when it has no live root Fiber."
+    },
+    "PluginInventoryEntry": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "entryId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "moduleName",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Exact module specifier imported by the Loader entry."
+        },
+        {
+          "name": "meta",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "PluginLocalizedMeta"
+          },
+          "doc": "Local package display metadata, independent of whether the entry is enabled."
+        },
+        {
+          "name": "enabled",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Effective Loader enablement, including disabled ancestor groups."
+        },
+        {
+          "name": "fiberPhase",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "ref",
+              "name": "PluginFiberPhase"
+            }
+          }
+        }
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "One non-group Loader entry exposed to trusted clients."
+    },
+    "PluginInventorySnapshot": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "managementAvailable",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether this Host exposes persistent current-profile management."
+        },
+        {
+          "name": "entries",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "PluginInventoryEntry"
+            }
+          }
+        },
+        {
+          "name": "agentPresets",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "AgentPresetPluginGroup"
+            }
+          },
+          "doc": "Per-preset compositions, present only when an agent-preset roster is composed in this deployment."
+        }
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "Point-in-time inventory returned by the plugin inventory Remote."
+    },
+    "PluginLocalizedMeta": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          },
+          "doc": "Display title; omission preserves the consumer's technical-name fallback."
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          },
+          "doc": "Display introduction after locale and package-field fallback."
+        },
+        {
+          "name": "icon",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Base64 image data URL from a package root's manifest icon or an exported `<specifier>/icon`; render as an image, not inline markup."
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Unmodified local metadata diagnostic; the plugin remains manageable."
+        }
+      ],
+      "source": "packages/util/package-manifest/src/types.ts",
+      "doc": "Validated plugin display fields and diagnostics from exported locales, manifests, or icon files."
+    },
+    "PresetPluginEnablement": {
+      "k": "union",
+      "members": [
+        {
+          "k": "lit",
+          "v": "conditional"
+        },
+        {
+          "k": "bool"
+        }
+      ],
+      "source": "packages/host/plugin-inventory/src/types.ts",
+      "doc": "Effective enablement of one preset composition row."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

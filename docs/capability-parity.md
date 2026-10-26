@@ -17,18 +17,18 @@ row comes from reading the Whalee code at the path in its `whalee` field. `tool/
 | Input and commands | 14 | 4 | 7 | 0 | 25 |
 | Tools and approvals | 11 | 1 | 0 | 0 | 12 |
 | Plan, goal, jobs, schedule, workflows | 16 | 4 | 0 | 0 | 20 |
-| Files and preview | 8 | 6 | 5 | 0 | 19 |
-| Settings | 32 | 8 | 15 | 2 | 57 |
-| Plugins and skills | 1 | 3 | 26 | 15 | 45 |
+| Files and preview | 10 | 6 | 3 | 0 | 19 |
+| Settings | 33 | 8 | 14 | 2 | 57 |
+| Plugins and skills | 17 | 5 | 8 | 15 | 45 |
 | Sidebar and browser | 20 | 3 | 2 | 0 | 25 |
 | Misc | 3 | 0 | 2 | 9 | 14 |
-| **all** | 167 | 46 | 79 | 27 | 319 |
+| **all** | 186 | 48 | 58 | 27 | 319 |
 
 | kind | ported | partial | missing | na | total |
 |---|---:|---:|---:|---:|---:|
-| package | 19 | 26 | 8 | 3 | 56 |
-| remote | 74 | 5 | 45 | 22 | 146 |
-| slot | 59 | 14 | 25 | 2 | 100 |
+| package | 20 | 29 | 4 | 3 | 56 |
+| remote | 91 | 4 | 29 | 22 | 146 |
+| slot | 60 | 14 | 24 | 2 | 100 |
 | settings | 15 | 1 | 1 | 0 | 17 |
 
 By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `both`):
@@ -37,7 +37,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---:|---:|---:|---:|---:|
 | phone | 0 | 0 | 0 | 0 | 0 |
 | desktop | 22 | 3 | 4 | 0 | 29 |
-| both | 145 | 43 | 75 | 27 | 290 |
+| both | 164 | 45 | 54 | 27 | 290 |
 
 ## Packages still to do, by priority
 
@@ -63,15 +63,14 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 - `ui-agent-preset` (partial, both): Choose the agent preset (which plugin set an agent runs with) for later sessions and for this session, and edit the preset composition. Settings/default selection, YAML composition, guides, one-shot blank-session choice and Creator landing; native/visual evaluation pending.
 - `ui-jobs` (partial, both): List the session's background jobs and watch or kill one from its streaming output panel. Refcounted roster/follow streams, byte-cursor output tails, bounded rendering, two-press stop and local settled fold/clear; native/visual evaluation pending.
 - `ui-open-in-app` (partial, desktop): Open the workspace folder or a previewed file in an application installed on the host. The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported.
-- `ui-plugin-manager` (missing, both): Install, enable, disable, retry and remove plugin packages on the host. pluginManager/* is not generated; only listBundles is called, to read the host version.
+- `ui-plugin-manager` (partial, both): Install, enable, disable, retry and remove plugin packages on the host. Host-derived bundle/row controls, request-owned installation/cancellation/recovery, explicit script approval and registry selection. Exact component styling and arbitrary browser-plugin UI modules remain separate work.
 - `ui-schedule` (partial, both): List, edit and delete the host's scheduled tasks and a session's reminders. Cross-Session manager/search/status, exact-rule editing, cron builder, original Session history/deletion, header and sidebar seats, replay cards. Durable sidebar-layout restore and precise visual alignment remain; time zone picker uses IANA names rather than ICU city labels.
 - `ui-settings-agent-loop` (partial, both): Set how many tool calls the agent may run in parallel. Served staged maxParallelToolCalls, revision-fenced save/reset; native/visual validation pending.
 - `ui-settings-models` (partial, both): Add and edit model providers and their API keys, discover models, and pick the default. Provider directory, write-only credentials, discovery, custom routes, catalog models and versioned welcome are implemented. Composer selection already calls session/selectModel, which saves the Host default in the background. Native/visual validation continues; native account credential onboarding is separate.
-- `ui-settings-plugins` (missing, both): The Plugins section of settings, with the tabs plugin features add to it. No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied.
 - `ui-settings-shell` (partial, both): Set the shell command timeout and the per-stream output cap. Both bash-sandbox and pwsh-sandbox are selected from served namespaces; staged timeoutMs and maxOutputBytes save/reset. Native/visual validation pending.
 - `ui-settings-subagent` (partial, both): Set subagent recursion depth, parallel capacity and which models agents may choose for subagents. Staged safe-integer depth/capacity and exact provider/model allowlist; unavailable routes retained, revision conflicts and reconnect resets checked. Native/visual validation pending.
 - `ui-settings-web-search` (partial, both): Set the DeepSeek web-search API key, endpoint and per-request search budget. Three staged namespaces, API switch, endpoint/limits, write-only key and credential facts, ordered section-before-selection save. Actual upstream controller traces match; native/visual validation pending.
-- `ui-sidebar-documentpreview` (partial, both): Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview.
+- `ui-sidebar-documentpreview` (partial, both): Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. Code/Markdown/image/text plus PDFium, opaque static/interactive HTML with authorized finite assets, and Session-authorized Office PDF conversion. Dedicated spreadsheet viewer, exact PDF controls and native modal-background capture parity remain incomplete.
 - `ui-skill` (partial, both): See a skill the agent used as its own row and reference skills in your messages. Session-keyed catalog and literal /skill picks, invalidation, original-Session previews, sent references and durable tool rows. Editable draft spans preserve literal text; visual chip details remain in task6.
 - `ui-subagent` (partial, both): See the subagents a session started, read each child's transcript, continue a child and mention one with "@". Header catalog with status and read-only child transcripts. Missing: sending a message to a child (subagents/prompt), interrupt from the parent, "@" reference source, sidebar chat tab.
 - `ui-workflow-run` (partial, both): Follow a durable workflow run in the conversation, with its member agents expandable. Durable workflow lifecycle projection, exact phase grouping, status counts and run/member disclosure are implemented. Clean completion collapses after keyboard focus leaves; abnormal/new cycles reopen. Current direct-child/session identity facts gate navigation. Visual alignment is still being verified and remains partial.
@@ -79,10 +78,10 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 **P4**
 
 - `ui-message-feedback` (missing, both): Like or dislike an answer and send a written remark about a message or the session. messageFeedback/* and sessionFeedback/record are not generated or called.
-- `ui-plugin-market` (missing, both): Browse the configured plugin market indexes and install a bundle from the Discover tab. pluginMarket/* is not generated or called.
+- `ui-plugin-market` (partial, both): Browse the configured plugin market indexes and install a bundle from the Discover tab. Configured indexes, pinned-document paging, search/declared filters, version/source confirmation and exact Host installation targets. Detail artwork, sort toolbar and strict visual alignment remain incomplete.
 - `ui-settings-account` (missing, both): Sign in to a DeepSeek account, see balance and bonuses, and open Platform billing. Not yet generated or rendered. Pinned account/controller supports safe state/profile/balance and browser authorization; client metadata is build version, locale and timezone. Native sign-in needs an actual browser-accessible loopback callback origin. No unofficial-client approval hold is inferred; native account integration belongs with platform authentication work.
 - `ui-settings-general` (partial, both): The General settings section: language, appearance, permissions default, host details and version. Has language, appearance and font size, permission default, notifications (device), host and certificate, host version. Missing: developer-tools switch, the versioned welcome notice and onboarding.
-- `ui-settings-plugin-inventory` (missing, both): Read the host's loaded plugin inventory in a read-only tab. pluginInventory/list is not generated or called.
+- `ui-settings-plugin-inventory` (partial, both): Read the host's loaded plugin inventory in a read-only tab. Read-only global/preset inventory, search, conditional enablement and runtime states. Browser module graph synchronization has no equivalent in the native client.
 - `ui-settings-session-log` (partial, both): Choose whether session logs are uploaded with DeepSeek API requests. Accepted Host upload toggle and persistent keyed shell notice; native/visual validation pending.
 - `ui-sidebar-browser` (missing, both): Open a sandboxed web page in a right-sidebar tab. No browser tab kind.
 - `ui-trajectory` (missing, both): Read the full event ledger of a session with a timing overview (a developer view). No trajectory conversation view.
@@ -334,7 +333,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Files and preview
 
-8 ported, 6 partial, 5 missing, 0 na.
+10 ported, 6 partial, 3 missing, 0 na.
 
 ### package (4)
 
@@ -342,15 +341,15 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 |---|---|---|---|---|
 | `ui-deliverables` | partial | both | Review everything the agent changed in one place: a changed-files card with per-file diffs, delivery cards and clickable file references in the final answer. | `features/dsh_feature_deliverables`, `packages/dsh_client/lib/src/deliverables.dart`, `packages/dsh_models/lib/src/deliverables.dart`, `packages/dsh_conversation/lib/src/deliverables/turn_deliverables.dart`; Implemented turn-local successful mutation evidence, declared deliveries, Host-served change summaries and diffs, four-card folds, a stable Review sidebar resource with per-navigation file selection and split/wrap choices, shared cancellable reads/native gesture feedback, and closing-code file mentions resolved only against recorded evidence. Render/transport/application routing tests and actual upstream contract vectors pass. Native capture and visual alignment are being evaluated; optional tool inspector integration belongs to the diagnostic views work. |
 | `ui-open-in-app` | partial | desktop | Open the workspace folder or a previewed file in an application installed on the host. | `features/dsh_feature_open_in_app/lib/src/target_button.dart`, `packages/dsh_client/lib/src/open_in_app.dart`; The Session header split button and the workspace.openLocal command over the host routes; offered only where the host is this machine. The document and file actions are not ported. |
-| `ui-sidebar-documentpreview` | partial | both | Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. | `features/dsh_feature_documentpreview`; Highlighted text and code, rendered or raw Markdown, images, and open or save for any other type. No PDF, HTML or Office (officeToPdf) preview. |
+| `ui-sidebar-documentpreview` | partial | both | Preview files in the sidebar: code, Markdown, images, and also Office documents, spreadsheets, PDF and HTML. | `features/dsh_feature_documentpreview`, `packages/dsh_models/lib/src/documents/office.dart`; Code/Markdown/image/text plus PDFium, opaque static/interactive HTML with authorized finite assets, and Session-authorized Office PDF conversion. Dedicated spreadsheet viewer, exact PDF controls and native modal-background capture parity remain incomplete. |
 | `ui-sidebar-files` | ported | both | Browse the session's workspace as a live-updating file tree and open files. | `features/dsh_feature_files` |
 
 ### remote (7)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `officeToPdf/generation` | missing | both | Check whether a converted PDF of an Office file is still current. | Office-to-PDF conversion for the document preview; not built. |
-| `officeToPdf/render` | missing | both | Convert an Office file to PDF so it can be previewed. | Office-to-PDF conversion for the document preview; not built. |
+| `officeToPdf/generation` | ported | both | Check whether a converted PDF of an Office file is still current. | `packages/dsh_client/lib/src/generated/office_to_pdf_remote.g.dart`, `packages/dsh_models/lib/src/documents/office.dart`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `officeToPdf/render` | ported | both | Convert an Office file to PDF so it can be previewed. | `packages/dsh_client/lib/src/generated/office_to_pdf_remote.g.dart`, `packages/dsh_models/lib/src/documents/office.dart`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
 | `workspaceFiles/changes` | ported | both | Watch one file or a directory's direct entries in the Session's filesystem. | `packages/dsh_client/lib/src/workspace_files.dart` |
 | `workspaceFiles/list` | ported | both | List the direct children of one directory inside the Session's workspace. | `packages/dsh_client/lib/src/workspace_files.dart` |
 | `workspaceFiles/read` | ported | both | Read one page of lines from a UTF-8 file readable by the filesystem backend. | `packages/dsh_client/lib/src/workspace_files.dart` |
@@ -372,7 +371,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Settings
 
-32 ported, 8 partial, 15 missing, 2 na.
+33 ported, 8 partial, 14 missing, 2 na.
 
 ### package (10)
 
@@ -429,7 +428,7 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `settings.models.provider-card` | ported | both | One provider card's adapter extension area, dispatched with `entryKey = settingsNs` on every card that renders a directory row: a saved row's card (its first-run setup posture included) and the add-provider draft card. | `features/dsh_feature_model_settings/lib/src/models_section.dart`, `features/dsh_feature_model_settings/lib/src/provider_editor.dart`, `packages/dsh_models/lib/src/settings/model_providers.dart`; Keyed by owning namespace for saved/setup/add-catalog cards, with configured and redacted key facts. Late registrations invalidate the page. |
 | `settings.models.sign-in` | missing | both | Optional account login choice before the credential editor. |  |
 | `settings.onboarding` | partial | both | Root-scoped onboarding steps contributed by settings features. | `features/dsh_feature_settings/lib/src/onboarding.dart`; One root step at a time; deciding steps render no blocking chrome. Versioned welcome implemented; explicit native account onboarding is later platform work. |
-| `settings.plugins.tab` | missing | both | One page inside the Plugins settings section. |  |
+| `settings.plugins.tab` | ported | both | One page inside the Plugins settings section. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_plugins/lib/src/register.dart`; Live list ledger with selected-tab fallback and a read-only inventory occupant. |
 | `settings.section` | ported | both | One settings page per list entry. | `packages/dsh_slots/lib/src/declarations.dart`, `features/dsh_feature_settings/lib/src/register.dart`; Only the General section occupies it. |
 | `settings.trigger` | ported | desktop | The sidebar-foot trigger row content: icon + label, supplied as slot content (the accessible name comes from the content — rail state renders the label visually hidden). | `features/dsh_feature_settings/lib/src/settings_shell.dart`; The settings dialog seats of the sidebar foot. |
 
@@ -453,16 +452,16 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 
 ## Plugins and skills
 
-1 ported, 3 partial, 26 missing, 15 na.
+17 ported, 5 partial, 8 missing, 15 na.
 
 ### package (5)
 
 | item | status | platform | what the user can do | Whalee |
 |---|---|---|---|---|
-| `ui-plugin-manager` | missing | both | Install, enable, disable, retry and remove plugin packages on the host. | pluginManager/* is not generated; only listBundles is called, to read the host version. |
-| `ui-plugin-market` | missing | both | Browse the configured plugin market indexes and install a bundle from the Discover tab. | pluginMarket/* is not generated or called. |
-| `ui-settings-plugin-inventory` | missing | both | Read the host's loaded plugin inventory in a read-only tab. | pluginInventory/list is not generated or called. |
-| `ui-settings-plugins` | missing | both | The Plugins section of settings, with the tabs plugin features add to it. | No Plugins section; the plugins.item and settings.plugins.tab seats are not occupied. |
+| `ui-plugin-manager` | partial | both | Install, enable, disable, retry and remove plugin packages on the host. | `features/dsh_feature_plugins`, `packages/dsh_models/lib/src/plugins`; Host-derived bundle/row controls, request-owned installation/cancellation/recovery, explicit script approval and registry selection. Exact component styling and arbitrary browser-plugin UI modules remain separate work. |
+| `ui-plugin-market` | partial | both | Browse the configured plugin market indexes and install a bundle from the Discover tab. | `features/dsh_feature_plugins/lib/src/market_page.dart`, `packages/dsh_models/lib/src/plugins/market.dart`; Configured indexes, pinned-document paging, search/declared filters, version/source confirmation and exact Host installation targets. Detail artwork, sort toolbar and strict visual alignment remain incomplete. |
+| `ui-settings-plugin-inventory` | partial | both | Read the host's loaded plugin inventory in a read-only tab. | `features/dsh_feature_plugins/lib/src/inventory.dart`; Read-only global/preset inventory, search, conditional enablement and runtime states. Browser module graph synchronization has no equivalent in the native client. |
+| `ui-settings-plugins` | ported | both | The Plugins section of settings, with the tabs plugin features add to it. | `features/dsh_feature_plugins/lib/src/register.dart`; Built-in Plugins Settings section follows the settings.plugins.tab ledger with the read-only inventory occupant. |
 | `ui-skill` | partial | both | See a skill the agent used as its own row and reference skills in your messages. | `features/dsh_feature_agent_management/lib/src/skills.dart`; Session-keyed catalog and literal /skill picks, invalidation, original-Session previews, sent references and durable tool rows. Editable draft spans preserve literal text; visual chip details remain in task6. |
 
 ### remote (30)
@@ -481,23 +480,23 @@ By platform (where Whalee is meant to offer the item: `phone`, `desktop`, or `bo
 | `dynamicCordisRunner/stopFromPanel` | na | both | Stop a Plugin from the user panel and queue the resulting state change for the model's next step. | Runs model-written browser-half JavaScript inside the web client; Flutter has no equivalent sandbox, and the feature is for dsh plugin authors. |
 | `dynamicCordisRunner/syncInspectManifest` | na | both | Replace the Host mirror of the Client inspect provider directory. | Runs model-written browser-half JavaScript inside the web client; Flutter has no equivalent sandbox, and the feature is for dsh plugin authors. |
 | `dynamicCordisRunner/undefineFromPanel` | na | both | Remove a Plugin from the user panel and queue the resulting state change for the model's next step. | Runs model-written browser-half JavaScript inside the web client; Flutter has no equivalent sandbox, and the feature is for dsh plugin authors. |
-| `pluginInventory/list` | missing | both | List every plugin the host has loaded. | Loader inventory tab (ui-settings-plugin-inventory); not built. |
-| `pluginManager/cancelInstall` | missing | both | Stop an installation this manager owns and wait until its files are back. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/inspect` | missing | both | Look up a plugin package before installing it. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/installBundle` | missing | both | Install a plugin bundle on the host. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/listBundles` | partial | both | List installed and official plugin bundles (Whalee reads the host version from it). | `packages/dsh_client/lib/src/host_info.dart`; Only used to read the host version (the web-app bundle); the bundle list is not shown. |
-| `pluginManager/listPlugins` | missing | both | List the host's plugins and whether each can be changed. | Plugin management (ui-plugin-manager); not built. |
+| `pluginInventory/list` | ported | both | List every plugin the host has loaded. | `packages/dsh_client/lib/src/generated/plugin_inventory_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/cancelInstall` | ported | both | Stop an installation this manager owns and wait until its files are back. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/inspect` | ported | both | Look up a plugin package before installing it. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/installBundle` | ported | both | Install a plugin bundle on the host. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/listBundles` | ported | both | List installed and official plugin bundles (Whalee reads the host version from it). | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/listPlugins` | ported | both | List the host's plugins and whether each can be changed. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
 | `pluginManager/listVersionExemptions` | na | both | Read exact plugin-version exemptions saved in this profile. | The pinned dsh web client never calls it (used by the plugin-manager tools on the host). |
-| `pluginManager/registries` | missing | both | Read the registries this manager asks: the configured first one, its fallbacks in order, and what pnpm's own configuration names. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/removeBundle` | missing | both | Unload and remove a profile-owned bundle dependency through dsh plugin's pnpm path; a selected name no dependency holds is only deselected. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/setBundleEnabled` | missing | both | Select or remove a bundle layer while retaining installed dependencies. | Plugin management (ui-plugin-manager); not built. |
-| `pluginManager/setPluginEnabled` | missing | both | Persist a plugin entry's desired enablement and apply it on live profiles. | Plugin management (ui-plugin-manager); not built. |
+| `pluginManager/registries` | ported | both | Read the registries this manager asks: the configured first one, its fallbacks in order, and what pnpm's own configuration names. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/removeBundle` | ported | both | Unload and remove a profile-owned bundle dependency through dsh plugin's pnpm path; a selected name no dependency holds is only deselected. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/setBundleEnabled` | ported | both | Select or remove a bundle layer while retaining installed dependencies. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginManager/setPluginEnabled` | ported | both | Persist a plugin entry's desired enablement and apply it on live profiles. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
 | `pluginManager/setVersionExemption` | na | both | Grant or revoke one exact plugin/runtime exemption and reevaluate live plugins. | The pinned dsh web client never calls it (used by the plugin-manager tools on the host). |
-| `pluginManager/waitForInstall` | missing | both | Reconnect to an installation that is still running. | Plugin management (ui-plugin-manager); not built. |
-| `pluginMarket/listIndexes` | missing | both | List the configured index sources without fetching them. | Plugin market (ui-plugin-market); not built. |
-| `pluginMarket/search` | missing | both | Return one page of the plugins of a configured index that match a query. | Plugin market (ui-plugin-market); not built. |
-| `pluginMarket/setIndexes` | missing | both | Replace the configured index sources through Settings, without remounting this service. | Plugin market (ui-plugin-market); not built. |
-| `pluginRegistryProbe/fastest` | missing | both | Pick the faster of two npm registries for installs. | Part of the plugin manager (picks the fastest npm registry). |
+| `pluginManager/waitForInstall` | ported | both | Reconnect to an installation that is still running. | `packages/dsh_client/lib/src/generated/plugin_manager_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginMarket/listIndexes` | ported | both | List the configured index sources without fetching them. | `packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginMarket/search` | ported | both | Return one page of the plugins of a configured index that match a query. | `packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginMarket/setIndexes` | ported | both | Replace the configured index sources through Settings, without remounting this service. | `packages/dsh_client/lib/src/generated/plugin_market_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
+| `pluginRegistryProbe/fastest` | ported | both | Pick the faster of two npm registries for installs. | `packages/dsh_client/lib/src/generated/plugin_registry_probe_remote.g.dart`, `packages/dsh_models/lib/src/plugins`; Generated from pinned Host signatures and called by the native feature; binary attachments and explicit nullable registry choices retain their wire meaning. |
 | `skills/list` | ported | both | List the user-invocable skills visible to one Session composition. | `features/dsh_feature_agent_management/lib/src/skills.dart`; Generated pinned Host contract and Session/lifecycle-scoped client owner. |
 
 ### slot (10)

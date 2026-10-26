@@ -536,18 +536,25 @@ void main() {
     });
 
     testWidgets(
-      'the sidebar opens implemented Automation tasks and identifies pending panels',
+      'the sidebar opens Plugins and Automation tasks with Host availability',
       (t) async {
         await start(t, size: const Size(1200, 800));
         await connectWith(t, [listRow('s1', title: 'Wide task')]);
         expect(find.text('Plugins'), findsOneWidget);
         expect(find.text('Automation tasks'), findsOneWidget);
+        backend.host.handlers['pluginInventory/list'] = (_) => {
+          'entries': <Object?>[],
+          'managementAvailable': false,
+        };
         await t.tap(find.text('Plugins'));
         await settle(t);
-        expect(find.byKey(const ValueKey('panel-unavailable')), findsOneWidget);
-        expect(find.text('Not available yet'), findsNothing);
         expect(
-          find.textContaining('is not part of Whalee yet'),
+          find.byKey(const ValueKey('plugin-manager-page')),
+          findsOneWidget,
+        );
+        expect(find.byKey(const ValueKey('panel-unavailable')), findsNothing);
+        expect(
+          find.text(controller.i18n.t('pluginManager', 'unavailable')),
           findsOneWidget,
         );
         backend.host.handlers['schedule/catalog'] = (_) => <Object?>[];

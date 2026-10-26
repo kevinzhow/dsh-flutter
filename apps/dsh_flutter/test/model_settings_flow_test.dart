@@ -46,7 +46,15 @@ void main() {
       expect(fixture.value('ui-settings')['enabled'], true);
       Navigator.of(controller.navigatorKey.currentContext!).pop();
       await settle(t);
-      controller.openSettings(section: 'plugins');
+      backend.host.handlers['pluginInventory/list'] = (_) => {
+        'managementAvailable': true,
+        'entries': <Object?>[],
+      };
+      backend.host.handlers['pluginManager/listBundles'] = (_) => <Object?>[];
+      backend.host.handlers['pluginManager/listPlugins'] = (_) => <Object?>[];
+      controller.layout.controller.selectPanel('plugins');
+      await settle(t);
+      await t.tap(find.text(controller.i18n.t('settings.agentLoop', 'title')));
       await settle(t);
       final numeric = find.byKey(
         DshSettingsValueField.inputKey('maxParallelToolCalls'),
@@ -60,7 +68,6 @@ void main() {
       await t.tap(save);
       await settle(t);
       expect(fixture.value('agent-loop')['maxParallelToolCalls'], 6);
-      Navigator.of(controller.navigatorKey.currentContext!).pop();
       await settle(t);
       controller.openSettings(section: 'models');
       await settle(t);

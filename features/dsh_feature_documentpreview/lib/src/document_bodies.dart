@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 
 import 'document_controller.dart';
 import 'renderers.dart';
+import 'pdf_body.dart';
+import 'html_body.dart';
 
 /// The content of a preview in its selected viewer: highlighted source, plain
 /// text, rendered Markdown or an image. [footer] is the load-more or failure
@@ -19,6 +21,7 @@ class DocumentBody extends StatelessWidget {
     required this.i18n,
     required this.name,
     this.footer,
+    this.interactiveHtml = false,
   });
 
   final DocumentController controller;
@@ -26,9 +29,17 @@ class DocumentBody extends StatelessWidget {
   final DshI18n i18n;
   final String name;
   final Widget? footer;
+  final bool interactiveHtml;
 
   @override
   Widget build(BuildContext context) => switch (renderer.id) {
+    htmlRendererId => HtmlBody(
+      document: controller,
+      i18n: i18n,
+      interactive: interactiveHtml,
+    ),
+    pdfRendererId ||
+    officeRendererId => PdfBody(document: controller, i18n: i18n),
     imageRendererId => ImageBody(
       controller: controller,
       i18n: i18n,

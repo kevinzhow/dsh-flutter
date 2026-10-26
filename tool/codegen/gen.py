@@ -44,6 +44,11 @@ OUT_EVENTS = "packages/dsh_models/lib/src/generated/session_events.g.dart"
 # The Remote namespaces generated into packages/dsh_client (one IR and one Dart library each). `entry` is the source file
 # of the Host class that carries the @Remote methods, `cls` that class (tool/codegen/extract/extract_remote.mjs).
 REMOTES = [
+    {"ns": "pluginManager", "cls": "PluginManager", "entry": "packages/boot/plugin-manager/src/index.ts"},
+    {"ns": "pluginMarket", "cls": "PluginMarket", "entry": "packages/boot/plugin-market/src/index.ts"},
+    {"ns": "pluginInventory", "cls": "PluginInventoryGateway", "entry": "packages/host/plugin-inventory/src/index.ts"},
+    {"ns": "pluginRegistryProbe", "cls": "PluginRegistryProbe", "entry": "packages/client/ui-plugin-manager/src/index.ts"},
+    {"ns": "officeToPdf", "cls": "OfficeToPdf", "entry": "packages/document/office-to-pdf/src/index.ts"},
     {"ns": "agentPresets", "cls": "AgentPresetRegistry", "entry": "packages/preset/agent-preset-registry/src/index.ts"},
     {"ns": "skills", "cls": "SessionSkillCatalog", "entry": "packages/api/session-controller/src/skill-catalog.ts"},
     {"ns": "goals", "cls": "GoalService", "entry": "packages/goal/goal/src/index.ts"},

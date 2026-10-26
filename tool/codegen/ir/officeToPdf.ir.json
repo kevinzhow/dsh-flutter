@@ -1,0 +1,149 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "officeToPdf",
+  "package": "packages/document/office-to-pdf",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/api/workspace-files/src/types.ts",
+    "packages/document/office-to-pdf/src/index.ts",
+    "packages/document/office-to-pdf/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "render",
+      "hostName": "render",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [
+        {
+          "name": "workspaceFileScopeId",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          },
+          "lookup": "workspaceFileScope"
+        },
+        {
+          "name": "path",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "priority",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "OfficeToPdfPriority"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "RenderedDocumentBytes"
+      },
+      "doc": "Read and convert one Office file using the Session's ordinary filesystem authorization."
+    },
+    {
+      "name": "generation",
+      "hostName": "getGeneration",
+      "mode": "unary",
+      "cancellable": true,
+      "params": [],
+      "result": {
+        "k": "str",
+        "brand": true
+      },
+      "doc": "Read the current rendering generation before reusing a Client PDF."
+    }
+  ],
+  "decls": {
+    "OfficeToPdfPriority": {
+      "k": "enum",
+      "values": [
+        "background",
+        "foreground"
+      ],
+      "source": "packages/document/office-to-pdf/src/types.ts",
+      "doc": "Foreground previews and explicit QA precede speculative background conversion."
+    },
+    "RenderedDocumentBytes": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "missingFonts",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          }
+        },
+        {
+          "name": "generation",
+          "optional": false,
+          "type": {
+            "k": "str",
+            "brand": true
+          }
+        },
+        {
+          "name": "offset",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "First byte of the window, as requested."
+        },
+        {
+          "name": "data",
+          "optional": false,
+          "type": {
+            "k": "bytes"
+          },
+          "doc": "Native file bytes; empty at or past EOF."
+        },
+        {
+          "name": "eof",
+          "optional": false,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Whether the window includes the file's last byte."
+        },
+        {
+          "name": "absolutePath",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute path of the file in the filesystem's execution world, symlinks resolved: `/`-separated on POSIX, drive-rooted with the platform separator on Windows. What a `dsh-resource://file/absolute/…` address carries, and what a `dsh-resource://file/session/<sessionId>/…` address's workspace-relative path resolves to against that Session's root."
+        },
+        {
+          "name": "version",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Opaque freshness token at the time of the stat; never parsed."
+        },
+        {
+          "name": "bytes",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Byte size of the complete file, when the backend reports it."
+        }
+      ],
+      "source": "packages/document/office-to-pdf/src/types.ts",
+      "doc": "PDF content carries the original Office file's identity and multipart-transferred bytes."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 /// The one seam generated Remote namespaces (and tests) use to reach a host.
 ///
 /// Mirrors dsh's `connection.rpc.call('/api', '<namespace>/<method>', {args})`.
@@ -25,4 +27,84 @@ class RemoteException implements Exception {
 
   @override
   String toString() => 'RemoteException($code): $message';
+}
+
+/// Lifetime of one cancellable HTTP call. Aborting terminates its request;
+/// application-level cancellation (for example pnpm installation) is separate.
+class RemoteCancellation {
+  Object? _reason;
+  final List<void Function()> _listeners = [];
+  bool get cancelled => _reason != null;
+  Object get reason =>
+      _reason ??
+      RemoteException('transport/cancelled', 'Remote call cancelled');
+  void throwIfCancelled() {
+    if (cancelled) throw reason;
+  }
+
+  void cancel([Object? cause]) {
+    if (cancelled) return;
+    _reason =
+        cause ??
+        RemoteException('transport/cancelled', 'Remote call cancelled');
+    final callbacks = [..._listeners];
+    _listeners.clear();
+    for (final callback in callbacks) {
+      callback();
+    }
+  }
+
+  void Function() listen(void Function() callback) {
+    if (cancelled) {
+      callback();
+      return () {};
+    }
+    _listeners.add(callback);
+    return () => _listeners.remove(callback);
+  }
+}
+
+abstract interface class CancellableRemoteCaller implements RemoteCaller {
+  Future<Object?> callWithCancellation(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+    RemoteCancellation cancellation,
+  );
+}
+
+/// Binds generated calls to one reader lifetime without changing their wire
+/// arguments. Legacy test callers are fenced, real HTTP callers abort on wire.
+class ScopedRemoteCaller implements RemoteCaller {
+  ScopedRemoteCaller(this.caller, this.cancellation);
+  final RemoteCaller caller;
+  final RemoteCancellation cancellation;
+  @override
+  Future<Object?> call(
+    String namespace,
+    String method,
+    Map<String, Object?> args,
+  ) async {
+    cancellation.throwIfCancelled();
+    if (caller is CancellableRemoteCaller) {
+      return (caller as CancellableRemoteCaller).callWithCancellation(
+        namespace,
+        method,
+        args,
+        cancellation,
+      );
+    }
+    final cancelled = Completer<Object?>();
+    final off = cancellation.listen(
+      () => cancelled.completeError(cancellation.reason),
+    );
+    try {
+      return await Future.any([
+        caller.call(namespace, method, args),
+        cancelled.future,
+      ]);
+    } finally {
+      off();
+    }
+  }
 }

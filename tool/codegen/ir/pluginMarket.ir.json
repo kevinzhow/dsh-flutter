@@ -1,0 +1,886 @@
+{
+  "irVersion": 1,
+  "kind": "remote-namespace",
+  "namespace": "pluginMarket",
+  "package": "packages/boot/plugin-market",
+  "typescript": "6.0.3",
+  "inputs": [
+    "packages/boot/plugin-market/src/index.ts",
+    "packages/boot/plugin-market/src/types.ts",
+    "packages/util/package-manifest/src/types.ts",
+    "packages/util/plugin-market-index/src/types.ts"
+  ],
+  "methods": [
+    {
+      "name": "listIndexes",
+      "hostName": "listIndexes",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [],
+      "result": {
+        "k": "arr",
+        "of": {
+          "k": "ref",
+          "name": "MarketIndexSummary"
+        }
+      },
+      "doc": "List the configured index sources without fetching them."
+    },
+    {
+      "name": "setIndexes",
+      "hostName": "setIndexes",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "urls",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          }
+        }
+      ],
+      "result": {
+        "k": "void"
+      },
+      "doc": "Replace the configured index sources through Settings, without remounting this service. `plugin-market/changed` announces the committed list. A URL already configured is kept as written, so a client can add or remove sources beside one that `listIndexes` reports as unusable."
+    },
+    {
+      "name": "search",
+      "hostName": "search",
+      "mode": "unary",
+      "cancellable": false,
+      "params": [
+        {
+          "name": "url",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "query",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketQuery"
+          }
+        }
+      ],
+      "result": {
+        "k": "ref",
+        "name": "MarketSearchResult"
+      },
+      "doc": "Return one page of the plugins of a configured index that match a query. Concurrent reads of a URL share one fetch; a successful document is reused for `cacheTtlMs` unless `refresh` is set. Matching and ordering read only the document; installation status and compatibility are computed for the returned page on every call."
+    }
+  ],
+  "decls": {
+    "LocalizedText": {
+      "k": "union",
+      "members": [
+        {
+          "k": "str"
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "en",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            }
+          ],
+          "extras": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/util/package-manifest/src/types.ts",
+      "doc": "Literal text or translations indexed by lowercase language id, with a required English fallback."
+    },
+    "MarketCompatibility": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "compatible",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": true
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "compatible",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": false
+              }
+            },
+            {
+              "name": "runtimeVersion",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "requirements",
+              "optional": false,
+              "type": {
+                "k": "rec",
+                "of": {
+                  "k": "str"
+                }
+              },
+              "doc": "The unmet requirement, keyed `engines.dsh`."
+            },
+            {
+              "name": "exempted",
+              "optional": false,
+              "type": {
+                "k": "bool"
+              },
+              "doc": "Whether the profile holds a version exemption for this exact package and runtime version."
+            }
+          ]
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "Whether the running DSH version satisfies a version's `engines.dsh`, as DSH's installation check evaluates it."
+    },
+    "MarketDeclaration": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "A market-declared category or label: an opaque id's display title."
+    },
+    "MarketEngines": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "dsh",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "SemVer range of DSH versions the version runs on; absent means any DSH version."
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "Runtime requirements of one version."
+    },
+    "MarketIndexMetadata": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "categories",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "ref",
+              "name": "MarketDeclaration"
+            }
+          }
+        },
+        {
+          "name": "labels",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "ref",
+              "name": "MarketDeclaration"
+            }
+          }
+        },
+        {
+          "name": "sortKeys",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "ref",
+              "name": "MarketSortKeyDeclaration"
+            }
+          }
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "Market-defined declarations; absent groups are empty records."
+    },
+    "MarketIndexSummary": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "url",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          },
+          "doc": "Market title from the last successful read."
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "error",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Failure message of the last read when it failed."
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "One configured index source and what the last read learned about it."
+    },
+    "MarketInstallTarget": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "spec",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Install spec accepted by `pnpm add`."
+        },
+        {
+          "name": "registry",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Registry to ask first; absent means the installing client's configured registry."
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "The arguments that install one exact version."
+    },
+    "MarketInstallation": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "status",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketInstallationStatus"
+          }
+        },
+        {
+          "name": "installedVersion",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "A plugin's installation status and the installed version when the profile reports one."
+    },
+    "MarketInstallationStatus": {
+      "k": "enum",
+      "values": [
+        "different-version",
+        "installed",
+        "not-installed",
+        "provided",
+        "update-available"
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "How a plugin relates to the profile's bundles, matched by package name and measured against its default version, or its highest version when it has no default: `provided` when the DSH installation ships the package, `update-available` when that version is greater than the installed one, `different-version` when the installed version is unknown, not valid SemVer, or greater."
+    },
+    "MarketListingEntry": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "versions",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "MarketListingVersion"
+            }
+          },
+          "doc": "Non-empty, in descending SemVer precedence."
+        },
+        {
+          "name": "defaultVersion",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "The version installed by default: the highest compatible version without a prerelease tag, or the highest compatible prerelease when the plugin lists no version without one. Absent when no such version is compatible."
+        },
+        {
+          "name": "installation",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketInstallation"
+          }
+        },
+        {
+          "name": "name",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "npm package name, unique within its index."
+        },
+        {
+          "name": "title",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "icon",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Base64 `data:` URL or absolute URL; a relative index reference is already resolved against the index URL."
+        },
+        {
+          "name": "author",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "homepage",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute http(s) URL of a page about the plugin."
+        },
+        {
+          "name": "repository",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "MarketRepository"
+          },
+          "doc": "Web page of the plugin's source repository and its package directory; display only."
+        },
+        {
+          "name": "metadata",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketPluginMetadata"
+          }
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "One index plugin with the profile-specific facts a market list displays."
+    },
+    "MarketListingVersion": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "install",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketInstallTarget"
+          }
+        },
+        {
+          "name": "compatibility",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketCompatibility"
+          }
+        },
+        {
+          "name": "version",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Exact SemVer version, unique within its plugin."
+        },
+        {
+          "name": "publishTimestamp",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Publish time of `version` in Unix seconds."
+        },
+        {
+          "name": "source",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketSource"
+          }
+        },
+        {
+          "name": "engines",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketEngines"
+          }
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "One listed version with its compatibility and the arguments that install it."
+    },
+    "MarketPluginMetadata": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "category",
+          "optional": true,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "keywords",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Free-form strings, conventionally from package keywords; absent input becomes an empty array."
+        },
+        {
+          "name": "labels",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          }
+        },
+        {
+          "name": "sortKeys",
+          "optional": false,
+          "type": {
+            "k": "rec",
+            "of": {
+              "k": "num"
+            }
+          }
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "Market-defined values of one plugin; category, label, and sort-key ids require index declarations."
+    },
+    "MarketQuery": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "text",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Fuzzy text matched against the package name, author, keywords, and every language of the title, description, and category and label titles. Every word must match a word in some field, as a prefix or within an edit distance of at most 2. Text without letters or digits matches every plugin."
+        },
+        {
+          "name": "category",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Category id the plugin must have."
+        },
+        {
+          "name": "labels",
+          "optional": true,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "str"
+            }
+          },
+          "doc": "Label ids the plugin must all have."
+        },
+        {
+          "name": "sort",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketSort"
+          }
+        },
+        {
+          "name": "offset",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Number of matching plugins to skip; a non-negative integer."
+        },
+        {
+          "name": "limit",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Largest number of plugins returned; an integer from 1 to 100."
+        },
+        {
+          "name": "refresh",
+          "optional": true,
+          "type": {
+            "k": "bool"
+          },
+          "doc": "Fetch again instead of using a cached document."
+        },
+        {
+          "name": "fetchedAt",
+          "optional": true,
+          "type": {
+            "k": "num"
+          },
+          "doc": "`fetchedAt` of an earlier page: answer from that document while it is still cached, even after `cacheTtlMs`, so later pages continue the same results. Without `refresh`, a replaced document is answered as without this field."
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "One page request over one index; an id the index does not declare matches no plugin."
+    },
+    "MarketRepository": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "url",
+          "optional": false,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Absolute http(s) URL of the repository's web page, without credentials, query, or fragment."
+        },
+        {
+          "name": "directory",
+          "optional": true,
+          "type": {
+            "k": "str"
+          },
+          "doc": "Relative POSIX directory of the package inside the repository; absent means the repository root."
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "Where a plugin's source code is published; display only, never an install source."
+    },
+    "MarketSearchResult": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "url",
+          "optional": false,
+          "type": {
+            "k": "str"
+          }
+        },
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "description",
+          "optional": true,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "metadata",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "MarketIndexMetadata"
+          }
+        },
+        {
+          "name": "fetchedAt",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Fetch time of the document answering this page, in Unix milliseconds; a different value means a different document."
+        },
+        {
+          "name": "entries",
+          "optional": false,
+          "type": {
+            "k": "arr",
+            "of": {
+              "k": "ref",
+              "name": "MarketListingEntry"
+            }
+          },
+          "doc": "Matching plugins of this page, in result order."
+        },
+        {
+          "name": "total",
+          "optional": false,
+          "type": {
+            "k": "num"
+          },
+          "doc": "Number of matching plugins across all pages."
+        },
+        {
+          "name": "nextOffset",
+          "optional": false,
+          "type": {
+            "k": "nullable",
+            "of": {
+              "k": "num"
+            }
+          },
+          "doc": "`offset` of the next page, or null after the last."
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "One page of matching plugins with the index facts a market view displays."
+    },
+    "MarketSort": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "index"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "relevance"
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "published"
+              }
+            },
+            {
+              "name": "direction",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "asc",
+                  "desc"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "kind",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "key"
+              }
+            },
+            {
+              "name": "id",
+              "optional": false,
+              "type": {
+                "k": "str"
+              }
+            },
+            {
+              "name": "direction",
+              "optional": false,
+              "type": {
+                "k": "enum",
+                "values": [
+                  "asc",
+                  "desc"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "source": "packages/boot/plugin-market/src/types.ts",
+      "doc": "Order of search results; ties keep index order. `relevance` ranks by text match, best first, and is index order without `text`. `published` uses each plugin's latest publish time. `key` uses a declared sort key; plugins without a value follow all others in either direction."
+    },
+    "MarketSortKeyDeclaration": {
+      "k": "obj",
+      "props": [
+        {
+          "name": "title",
+          "optional": false,
+          "type": {
+            "k": "ref",
+            "name": "LocalizedText"
+          }
+        },
+        {
+          "name": "order",
+          "optional": false,
+          "type": {
+            "k": "enum",
+            "values": [
+              "asc",
+              "desc"
+            ]
+          }
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "A market-declared sort key: its display title and initial direction."
+    },
+    "MarketSource": {
+      "k": "union",
+      "members": [
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "npm"
+              }
+            },
+            {
+              "name": "registry",
+              "optional": true,
+              "type": {
+                "k": "str"
+              },
+              "doc": "http(s) registry URL; absent means the installing client's configured registry."
+            }
+          ]
+        },
+        {
+          "k": "obj",
+          "props": [
+            {
+              "name": "type",
+              "optional": false,
+              "type": {
+                "k": "lit",
+                "v": "git"
+              }
+            },
+            {
+              "name": "url",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Canonical https repository URL without credentials, query, or fragment."
+            },
+            {
+              "name": "commit",
+              "optional": false,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Lowercase 40-hex-digit commit SHA."
+            },
+            {
+              "name": "path",
+              "optional": true,
+              "type": {
+                "k": "str"
+              },
+              "doc": "Relative POSIX package directory; absent means the repository root."
+            }
+          ]
+        }
+      ],
+      "source": "packages/util/plugin-market-index/src/types.ts",
+      "doc": "Where one exact version is installed from."
+    }
+  },
+  "notes": [],
+  "skipped": []
+}

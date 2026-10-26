@@ -34,6 +34,9 @@ abstract interface class LocalPrefs {
   Future<void> setTerminalShell(String path);
 
   /// The workspace browser's viewing state as JSON (dsh's `dsh.workspace.view`).
+  String? get pluginInstallRegistry;
+  Future<void> setPluginInstallRegistry(String json);
+
   String? get workspaceView;
   Future<void> setWorkspaceView(String json);
 
@@ -58,6 +61,7 @@ class MemoryLocalPrefs implements LocalPrefs {
     this.terminalShell,
     this.openInAppChoice,
     this.workspaceView,
+    this.pluginInstallRegistry,
   }) : certificatePins = {...?certificatePins};
 
   @override
@@ -74,6 +78,11 @@ class MemoryLocalPrefs implements LocalPrefs {
   String? openInAppChoice;
   @override
   String? workspaceView;
+  @override
+  String? pluginInstallRegistry;
+  @override
+  Future<void> setPluginInstallRegistry(String json) async =>
+      pluginInstallRegistry = json;
   @override
   List<Map<String, Object?>> terminalCloses = [];
 
@@ -121,6 +130,13 @@ class SharedLocalPrefs implements LocalPrefs {
   static const _terminalCloses = 'whalee.terminalCloses';
   static const _openInApp = 'whalee.openInAppChoice';
   static const _workspaceView = 'whalee.workspaceView';
+  static const _pluginRegistry = 'whalee.pluginInstallRegistry';
+  @override
+  String? get pluginInstallRegistry => _prefs.getString(_pluginRegistry);
+  @override
+  Future<void> setPluginInstallRegistry(String json) async {
+    await _prefs.setString(_pluginRegistry, json);
+  }
 
   @override
   String? get locale => _prefs.getString(_locale);

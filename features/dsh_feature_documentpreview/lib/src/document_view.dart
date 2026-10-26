@@ -18,6 +18,17 @@ String failureLine(DshI18n i18n, Object failure) {
   String t(String key, [Map<String, Object?> params = const {}]) =>
       i18n.t('sidebarDocumentPreview', key, params: params);
   if (failure is RemoteException) {
+    if (failure.code == 'document-render/failed') {
+      return i18n.t('sidebarOffice', switch (failure.details['reason']) {
+        'input-too-large' || 'output-too-large' => 'tooLarge',
+        'invalid-document' || 'unsupported-format' => 'invalid',
+        'timeout' => 'timeout',
+        'unavailable' => 'unavailable',
+        'busy' => 'busy',
+        'source-changed' => 'changed',
+        _ => 'failed',
+      });
+    }
     switch (failure.code) {
       case 'workspace-file/not-found':
         return t('error.notFound');
@@ -66,10 +77,18 @@ EmptyRecourse emptyFailureRecourse(Object failure) {
 /// reload controls, then the content in the selected viewer, or the reason it
 /// is not showing.
 class DocumentView extends StatefulWidget {
-  const DocumentView({super.key, required this.owner, required this.i18n});
+  const DocumentView({
+    super.key,
+    required this.owner,
+    required this.i18n,
+    this.renderOffice,
+    this.interactiveHtml = false,
+  });
 
   final SidebarTabOwner owner;
   final DshI18n i18n;
+  final OfficePreviewReader? renderOffice;
+  final bool interactiveHtml;
 
   @override
   State<DocumentView> createState() => _DocumentViewState();
@@ -91,6 +110,7 @@ class _DocumentViewState extends State<DocumentView> {
         sessionId: address.sessionId,
         path: address.path,
         files: files.remote,
+        renderOffice: widget.renderOffice,
       )..navigate(widget.owner.line, widget.owner.revision);
     }
   }
@@ -216,6 +236,7 @@ class _DocumentViewState extends State<DocumentView> {
       i18n: widget.i18n,
       name: name,
       footer: _footer(c),
+      interactiveHtml: widget.interactiveHtml,
     );
   }
 

@@ -32,7 +32,7 @@ void main() {
   });
 
   test('binary containers have no viewer at all', () {
-    for (final p in ['a.pdf', 'b.docx', 'c.zip', 'd.mp4', 'e.xlsx', 'f.heic']) {
+    for (final p in ['c.zip', 'd.mp4', 'e.xlsx', 'f.heic']) {
       expect(rendererCandidates(p), isEmpty, reason: p);
       expect(unviewableBinaryPath(p), isTrue, reason: p);
     }

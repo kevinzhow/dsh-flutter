@@ -16,6 +16,7 @@ workspace:
   - features/dsh_feature_input_trigger
   - features/dsh_feature_layout
   - features/dsh_feature_open_in_app
+  - features/dsh_feature_plugins
   - features/dsh_feature_agent_management
   - features/dsh_feature_model_settings
   - features/dsh_feature_model_selection
@@ -49,3 +50,7 @@ workspace:
   - packages/dsh_ui
   - tool/live_spike
   - tool/parity_flutter
+
+dependency_overrides:
+  flutter_inappwebview_android:
+    path: third_party/flutter_inappwebview_android

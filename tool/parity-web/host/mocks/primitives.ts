@@ -61,3 +61,6 @@ export { Pill } from '@dsh/ui-primitives/src/Pill.tsx'
 export { SegmentedTabs } from '@dsh/ui-primitives/src/SegmentedTabs.tsx'
 export { useAnchoredPosition } from '@dsh/ui-primitives/src/useAnchoredPosition.ts'
 export { useDismissOnOutsidePointer } from '@dsh/ui-primitives/src/useDismissOnOutsidePointer.ts'
+// Plugin surfaces forward the production pointer tracker and artwork unchanged.
+export { pointerModality } from '@dsh/ui-primitives/src/input-modality.ts'
+export { PluginArtworkTerminal, PluginArtworkLoop, PluginArtworkSubagent, PluginArtworkSearch, PluginArtworkDefault } from '@dsh/ui-primitives/src/plugin-artwork.tsx'

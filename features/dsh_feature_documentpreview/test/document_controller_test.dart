@@ -82,7 +82,7 @@ void main() {
   });
 
   test('a binary container has no renderer and reads nothing', () async {
-    final c = DocumentController(sessionId: 's', path: 'a.pdf', files: files);
+    final c = DocumentController(sessionId: 's', path: 'a.zip', files: files);
     addTearDown(c.dispose);
     await settle();
     expect(c.candidates, isEmpty);
