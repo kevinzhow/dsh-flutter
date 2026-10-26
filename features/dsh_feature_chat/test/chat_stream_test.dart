@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_feature_chat/src/stream/extras.dart';
 import 'package:dsh_feature_chat/src/stream/skeleton.dart' show StreamSkeleton;
@@ -7,6 +9,7 @@ import 'package:dsh_feature_chat/src/stream/reading_anchor.dart' show RowKey;
 import 'package:dsh_feature_chat/src/stream/timeline.dart'
     show DshStreamTimeline;
 import 'package:flutter/widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/stream_fixture.dart';
@@ -258,6 +261,129 @@ void main() {
         await settleFrames(t, 5);
         expect(scroll.position.pixels, at);
         expect(paintedText(t, 'Question'), reading);
+      },
+    );
+
+    testWidgets(
+      'an existing local echo does not pull an idle desktop reader back to the tail',
+      (t) async {
+        phone(t, const Size(1280, 800));
+        await mount(t, fx);
+        await t.runAsync(() => fx.session.prompt('Awaiting admission'));
+        await t.pumpAndSettle();
+        final state = chatState(t);
+        final scroll = state.scrollController!;
+        await dragUp(t, 400);
+        await t.pumpAndSettle();
+        final at = scroll.position.pixels;
+        final reading = paintedText(t, 'Question');
+        expect(state.atBottom, isFalse);
+        expect(reading, isNotNull);
+        fx.session.handleRunning(true);
+        await t.pumpAndSettle();
+        expect(
+          scroll.position.pixels,
+          at,
+          reason: 'a running-state update repeated the old send jump',
+        );
+        expect(paintedText(t, 'Question'), reading);
+        appendTurn(fx, 300);
+        await t.pumpAndSettle();
+        expect(
+          scroll.position.pixels,
+          at,
+          reason: 'a remote turn repeated the old send jump',
+        );
+      },
+    );
+
+    testWidgets(
+      'a remote next-step inbox echo does not count as a new local send',
+      (t) async {
+        phone(t, const Size(1280, 800));
+        await mount(t, fx);
+        await dragUp(t, 400);
+        await t.pumpAndSettle();
+        final state = chatState(t);
+        final scroll = state.scrollController!;
+        final at = scroll.position.pixels;
+        final reading = paintedText(t, 'Question');
+        fx.session.projections.apply('inbox', {
+          'next-turn': <Object?>[],
+          'next-step': [
+            {
+              'id': 'remote-instruction',
+              'source': {'kind': 'user', 'rpcId': 'other-client-request'},
+              'content': [
+                {'type': 'text', 'text': 'Remote steering instruction'},
+              ],
+            },
+          ],
+        }, 2);
+        await t.pumpAndSettle();
+        expect(
+          scroll.position.pixels,
+          at,
+          reason: 'a remote inbox update moved the reader',
+        );
+        expect(paintedText(t, 'Question'), reading);
+        expect(state.atBottom, isFalse);
+      },
+    );
+
+    testWidgets(
+      'a history page preserves a desktop wheel reader with a pending echo',
+      (t) async {
+        phone(t, const Size(1280, 800));
+        await mount(t, fx);
+        await t.runAsync(() => fx.session.prompt('Awaiting history read'));
+        await t.pumpAndSettle();
+        await t.sendEventToBinding(
+          PointerScrollEvent(
+            position: t.getCenter(find.byType(DshStreamTimeline)),
+            scrollDelta: const Offset(0, -400),
+          ),
+        );
+        await t.pumpAndSettle();
+        final state = chatState(t);
+        final scroll = state.scrollController!;
+        final at = scroll.position.pixels;
+        final question = find
+            .textContaining('Question', findRichText: true)
+            .first;
+        final text = t.widget<RichText>(question).text.toPlainText();
+        final reading = paintedText(t, text);
+        expect(state.atBottom, isFalse);
+        expect(reading, isNotNull);
+        await t.runAsync(() async {
+          unawaited(fx.session.loadOlder());
+          await Future<void>.delayed(Duration.zero);
+        });
+        expect(fx.pages, hasLength(1));
+        await fx.landPage(t);
+        await t.pumpAndSettle();
+        expect(
+          scroll.position.pixels,
+          at,
+          reason: 'loading older history repeated the pending send jump',
+        );
+        expect(paintedText(t, text), reading);
+        expect(state.atBottom, isFalse);
+      },
+    );
+
+    testWidgets(
+      'a new local send from less than one viewport still reaches the new tail',
+      (t) async {
+        phone(t, const Size(1280, 800));
+        await mount(t, fx);
+        await dragUp(t, 400);
+        await t.pumpAndSettle();
+        final scroll = chatState(t).scrollController!;
+        await t.runAsync(() => fx.session.prompt('A new short-distance send'));
+        await t.pumpAndSettle();
+        expect(scroll.position.pixels, scroll.position.maxScrollExtent);
+        expect(chatState(t).atBottom, isTrue);
       },
     );
 
