@@ -1,0 +1,124 @@
+{
+  "implementationHead": "43d8006e11c898b43a42efb3123ee8ecd77fbeb0",
+  "tree": "d10eef6023a606fda85c5de21d14728d3bc3d7ca",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedPackagesVersion": "0.2.1-rc.2",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T09:24:42+00:00",
+    "headTree": "d10eef6023a606fda85c5de21d14728d3bc3d7ca",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.1
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.5
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.6
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 331.4
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "7dac35530e3bec2188699b6bca93145e20b2ff53a0a0095cbca99e56704a809a"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "4f86754183255f7d18bdb60acc0a7c999d2e11d3c5746d14687b44fedba2a37e"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "f2ba3413138df5d578765fb20ce516441c2432c7366cea298fcb29fd9fe4c72b",
+      "applicationLibrarySha256": "5a7aefa022980e07963b2c83d3a0b1e8b79c77c1ad5d3bfa77c2df56fedc2697"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "f2ba3413138df5d578765fb20ce516441c2432c7366cea298fcb29fd9fe4c72b",
+      "applicationLibrarySha256": "8a7e85ba79ac6065f84fcd3096c1934289f80e115fd914df76ab25b6255be061"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "plugin-layout.desktop",
+      "passedAssertions": 4
+    },
+    {
+      "case": "plugin-layout.phone",
+      "passedAssertions": 4
+    }
+  ],
+  "androidPassedScenes": 18,
+  "visual": [
+    {
+      "suite": "reference-pages",
+      "compared": 56,
+      "nonTextThresholdPct": 99.5,
+      "nonTextPassing": 12,
+      "dimensionsEqual": 56,
+      "meanNonTextPct": 97.31701785714286
+    },
+    {
+      "suite": "primitive-matrix",
+      "compared": 32,
+      "nonTextThresholdPct": 99.5,
+      "nonTextPassing": 0,
+      "dimensionsEqual": 32,
+      "meanNonTextPct": 98.45649999999999
+    }
+  ],
+  "captureHead": "43d8006e11c898b43a42efb3123ee8ecd77fbeb0",
+  "captureNote": "Final captures on the same product tree. Later assertions only guard profile construction; divider foreground alpha multiplication is identical for these opaque source tokens.",
+  "previousPrimitiveReference": "main267d215 (regression only; DSH is the acceptance reference)",
+  "primitiveRgbaUnchanged": 32,
+  "manualMetricCountBefore": 997,
+  "manualMetricCountAfter": 979,
+  "localRoundIconAdaptationCallersStillPending": 3,
+  "releaseOrDeployment": false
+}

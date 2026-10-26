@@ -1,0 +1,1574 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.button.matrix.primary-md.light",
+      "title": "Button primary md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.primary-md.dark",
+      "title": "Button primary md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.primary-sm.light",
+      "title": "Button primary sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.primary-sm.dark",
+      "title": "Button primary sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "primary",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "primary",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "primary",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.ghost-md.light",
+      "title": "Button ghost md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.ghost-md.dark",
+      "title": "Button ghost md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.ghost-sm.light",
+      "title": "Button ghost sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.ghost-sm.dark",
+      "title": "Button ghost sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "ghost",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "ghost",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "ghost",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.outline-md.light",
+      "title": "Button outline md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.outline-md.dark",
+      "title": "Button outline md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.outline-sm.light",
+      "title": "Button outline sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.outline-sm.dark",
+      "title": "Button outline sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "outline",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "outline",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "outline",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.toolbar-md.light",
+      "title": "Button toolbar md (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.toolbar-md.dark",
+      "title": "Button toolbar md (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 68,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "md"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "md",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "md"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    },
+    {
+      "id": "components.button.matrix.toolbar-sm.light",
+      "title": "Button toolbar sm (light)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "light"
+    },
+    {
+      "id": "components.button.matrix.toolbar-sm.dark",
+      "title": "Button toolbar sm (dark)",
+      "kind": "button.items",
+      "surface": "matrix",
+      "category": "extension/button",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 480,
+        "height": 60,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Default",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hover",
+          "name": "Hover on the normal button",
+          "props": {
+            "layout": {
+              "direction": "row",
+              "gap": 12,
+              "align": "start"
+            },
+            "items": [
+              {
+                "id": "btn-normal",
+                "label": "Continue",
+                "variant": "toolbar",
+                "size": "sm"
+              },
+              {
+                "id": "btn-disabled",
+                "label": "Disabled",
+                "variant": "toolbar",
+                "size": "sm",
+                "disabled": true
+              },
+              {
+                "id": "btn-long",
+                "label": "A considerably longer label",
+                "variant": "toolbar",
+                "size": "sm"
+              }
+            ]
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "btn-normal"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/Button.tsx",
+      "flutterCaseHint": "tool/parity_flutter/test/parity/cases/button.dart buttonCases[button.items]",
+      "theme": "dark"
+    }
+  ]
+}

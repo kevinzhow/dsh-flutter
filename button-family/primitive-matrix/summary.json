@@ -1,0 +1,553 @@
+{
+  "compared": 32,
+  "nonTextThresholdPct": 99.5,
+  "nonTextPassing": 0,
+  "dimensionsEqual": 32,
+  "meanNonTextPct": 98.45649999999999,
+  "cases": [
+    {
+      "key": "components.button.matrix.primary-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.333,
+      "pixelPerfectPct": 94.311,
+      "rgbPct": 99.196,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.33,
+      "pixelPerfectPct": 94.314,
+      "rgbPct": 99.235,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.309,
+      "pixelPerfectPct": 94.301,
+      "rgbPct": 99.353,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.309,
+      "pixelPerfectPct": 94.301,
+      "rgbPct": 99.36,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.743,
+      "pixelPerfectPct": 94.74,
+      "rgbPct": 99.222,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.743,
+      "pixelPerfectPct": 94.74,
+      "rgbPct": 99.261,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.747,
+      "pixelPerfectPct": 94.774,
+      "rgbPct": 99.421,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.primary-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.747,
+      "pixelPerfectPct": 94.774,
+      "rgbPct": 99.427,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.primary-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.689,
+      "pixelPerfectPct": 94.948,
+      "rgbPct": 99.364,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.554,
+      "pixelPerfectPct": 94.813,
+      "rgbPct": 99.371,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.689,
+      "pixelPerfectPct": 94.942,
+      "rgbPct": 99.251,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.508,
+      "pixelPerfectPct": 94.77,
+      "rgbPct": 99.263,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 99.094,
+      "pixelPerfectPct": 95.24,
+      "rgbPct": 99.419,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.993,
+      "pixelPerfectPct": 95.139,
+      "rgbPct": 99.425,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 99.122,
+      "pixelPerfectPct": 95.226,
+      "rgbPct": 99.262,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.ghost-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.986,
+      "pixelPerfectPct": 95.087,
+      "rgbPct": 99.275,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.ghost-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 97.776,
+      "pixelPerfectPct": 94.035,
+      "rgbPct": 99.357,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 97.739,
+      "pixelPerfectPct": 93.998,
+      "rgbPct": 99.363,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 97.647,
+      "pixelPerfectPct": 93.9,
+      "rgbPct": 99.241,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 97.328,
+      "pixelPerfectPct": 93.379,
+      "rgbPct": 99.252,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.552,
+      "pixelPerfectPct": 94.698,
+      "rgbPct": 99.417,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.521,
+      "pixelPerfectPct": 94.667,
+      "rgbPct": 99.422,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.556,
+      "pixelPerfectPct": 94.66,
+      "rgbPct": 99.259,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.outline-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.062,
+      "pixelPerfectPct": 94.118,
+      "rgbPct": 99.27,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.outline-sm.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.238,
+      "pixelPerfectPct": 94.329,
+      "rgbPct": 99.58,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.238,
+      "pixelPerfectPct": 94.332,
+      "rgbPct": 99.589,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.082,
+      "pixelPerfectPct": 94.347,
+      "rgbPct": 99.35,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-md.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.088,
+      "pixelPerfectPct": 94.36,
+      "rgbPct": 99.354,
+      "sizeReact": [
+        480,
+        68
+      ],
+      "sizeFlutter": [
+        480,
+        68
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-md.dark~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.light",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.799,
+      "rgbPct": 99.621,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.light.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.light~hover",
+      "kind": "button.items",
+      "theme": "light",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.802,
+      "rgbPct": 99.629,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.light~hover.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.dark",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.722,
+      "pixelPerfectPct": 94.826,
+      "rgbPct": 99.362,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.dark.side-by-side.png"
+    },
+    {
+      "key": "components.button.matrix.toolbar-sm.dark~hover",
+      "kind": "button.items",
+      "theme": "dark",
+      "nonTextPct": 98.719,
+      "pixelPerfectPct": 94.826,
+      "rgbPct": 99.366,
+      "sizeReact": [
+        480,
+        60
+      ],
+      "sizeFlutter": [
+        480,
+        60
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.button.matrix.toolbar-sm.dark~hover.side-by-side.png"
+    }
+  ]
+}
