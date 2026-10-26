@@ -264,3 +264,21 @@ abstract final class DshInputRecipe {
   static const double lineHeight = 22.0;
   static const String fontToken = '--dsw-font-s-14';
 }
+
+abstract final class DshSwitchRecipe {
+  static const double width = 36.0;
+  static const double height = 20.0;
+  static const double padding = 2.0;
+  static const double thumbSize = 16.0;
+  static const double radius = 999.0;
+  static const double disabledOpacity = 0.5;
+  static const double transitionMs = 120.0;
+  static const double focusOffset = 2.0;
+  static const String focusWidthToken = '--dsw-focus-ring-width';
+  static const String focusToken = '--dsw-focus-ring-color';
+  static const String focusFallbackToken = '--dsw-alias-state-business-primary';
+  static const String offTrackToken = '--dsw-alias-border-l3';
+  static const String onTrackToken = '--dsw-alias-brand-primary';
+  static const String offThumbToken = '--dsw-alias-switch-thumb';
+  static const String onThumbToken = '--dsw-alias-label-primary-foreground';
+}

@@ -20,7 +20,8 @@
           "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
           "Tooltip.module.css": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
           "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
-          "Input.module.css": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632"
+          "Input.module.css": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
+          "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -32,7 +33,8 @@
         "referenceSourceSha256": {
           "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1",
           "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695",
-          "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67"
+          "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67",
+          "packages/client/ui-primitives/src/Switch.tsx": "9f0f6db0de338793711b4333e87dcd2b82d06d8ad43aa362eb67efc63573ccb1"
         }
       },
       {
@@ -1117,6 +1119,75 @@
         "conditions": [],
         "declarations": {
           "color": "var(--dsw-alias-label-dimmed)"
+        }
+      }
+    ],
+    "Switch.module.css": [
+      {
+        "selector": ".switch",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "position": "relative",
+          "flex": "0 0 auto",
+          "width": "36px",
+          "height": "20px",
+          "padding": "2px",
+          "border": "0",
+          "border-radius": "999px",
+          "corner-shape": "round",
+          "background": "var(--dsw-alias-border-l3)",
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": ".switch[aria-checked='true']",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-brand-primary)"
+        }
+      },
+      {
+        "selector": ".switch:disabled",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default",
+          "opacity": "0.5"
+        }
+      },
+      {
+        "selector": ".switch:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color, var(--dsw-alias-state-business-primary))",
+          "outline-offset": "2px"
+        }
+      },
+      {
+        "selector": ".thumb",
+        "conditions": [],
+        "declarations": {
+          "display": "block",
+          "width": "16px",
+          "height": "16px",
+          "border-radius": "50%",
+          "corner-shape": "round",
+          "background": "var(--dsw-alias-label-primary-foreground)",
+          "transition": "transform 120ms ease"
+        }
+      },
+      {
+        "selector": ".switch[aria-checked='false'] .thumb",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-switch-thumb)"
+        }
+      },
+      {
+        "selector": ".switch[aria-checked='true'] .thumb",
+        "conditions": [],
+        "declarations": {
+          "transform": "translateX(16px)"
         }
       }
     ],
@@ -4432,6 +4503,23 @@
       "fontSize": 14.0,
       "lineHeight": 22.0,
       "fontToken": "--dsw-font-s-14"
+    },
+    "DshSwitchRecipe": {
+      "width": 36.0,
+      "height": 20.0,
+      "padding": 2.0,
+      "thumbSize": 16.0,
+      "radius": 999.0,
+      "disabledOpacity": 0.5,
+      "transitionMs": 120.0,
+      "focusOffset": 2.0,
+      "focusWidthToken": "--dsw-focus-ring-width",
+      "focusToken": "--dsw-focus-ring-color",
+      "focusFallbackToken": "--dsw-alias-state-business-primary",
+      "offTrackToken": "--dsw-alias-border-l3",
+      "onTrackToken": "--dsw-alias-brand-primary",
+      "offThumbToken": "--dsw-alias-switch-thumb",
+      "onThumbToken": "--dsw-alias-label-primary-foreground"
     }
   }
 }

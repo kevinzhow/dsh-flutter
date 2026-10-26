@@ -93,6 +93,7 @@ try{parent.document.body;document.getElementById('status').textContent='Unexpect
         'availability': 'profile',
         'installed': true,
         'enabled': enabled,
+        if (locked) 'readOnlyReason': 'management-required',
         'optional': false,
         'removable': true,
         'version': '1.0.0',
@@ -168,6 +169,7 @@ try{parent.document.body;document.getElementById('status').textContent='Unexpect
   final files = FakeWorkspaceFiles();
   final host = FakeHost();
   bool enabled = true;
+  bool locked = false;
   int installs = 0;
   late final PluginManagerModel manager;
   late final PluginMarketModel market;

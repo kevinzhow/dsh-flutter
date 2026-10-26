@@ -9,12 +9,49 @@ import 'dart:typed_data';
 import 'package:dsh_parity/dsh_parity.dart';
 import 'package:dsh_parity/src/interactions.dart';
 import 'package:dsh_ui/dsh_ui.dart' show DshPixelModel, dshPixelModel;
+import 'package:flutter/material.dart' show MaterialApp;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'parity/case_map.dart';
 
 void main() {
+  testWidgets('focus-by-tab reaches the requested control by keyboard', (
+    t,
+  ) async {
+    final first = FocusNode();
+    final target = FocusNode();
+    addTearDown(first.dispose);
+    addTearDown(target.dispose);
+    await t.pumpWidget(
+      MaterialApp(
+        home: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Column(
+            children: [
+              Focus(
+                focusNode: first,
+                child: const SizedBox(width: 20, height: 20),
+              ),
+              KeyedSubtree(
+                key: const ValueKey('target'),
+                child: Focus(
+                  focusNode: target,
+                  child: const SizedBox(width: 20, height: 20),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await ParityInteractions(t).apply([
+      {'type': 'focus-by-tab', 'target': 'target'},
+    ]);
+    expect(target.hasPrimaryFocus, isTrue);
+    expect(first.hasFocus, isFalse);
+  });
+
   testWidgets(
     'set-scroll prepares the requested position and clamps at the end',
     (t) async {

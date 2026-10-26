@@ -72,6 +72,7 @@ INTERACTIONS = {
     'press': {'target'},        # mouse down on the target and hold
     'click': {'target'},        # mouse down + up
     'tab': set(),               # real Tab key; optional `count` (default 1): keyboard focus-visible
+    'focus-by-tab': {'target'}, # real Tab navigation until the named control is focused
     'type': {'target', 'text'}, # type into the field under the target
     'wait': {'ms'},             # advance time
     'set-scroll': {'target', 'offset'},  # prepare a scroll position for capture
