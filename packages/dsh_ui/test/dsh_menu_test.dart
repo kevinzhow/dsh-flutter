@@ -76,10 +76,10 @@ void main() {
     await t.pumpAndSettle();
     expect(find.text('Group by'), findsOneWidget);
     expect(find.text('Alpha'), findsOneWidget);
-    // The card's right edge meets the anchor's: it opens to the left.
+    // Source portal fitting preserves twelve pixels at the viewport edge.
     final card = t.getRect(find.byKey(const ValueKey('dsh-menu')));
     final anchor = t.getRect(find.byKey(const ValueKey('anchor')));
-    expect(card.right, anchor.right);
+    expect(card.right, anchor.right - 12);
     expect(card.top, anchor.bottom + 4);
     // One check, on the selected row.
     expect(

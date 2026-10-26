@@ -2,6 +2,15 @@
 from pathlib import Path
 import argparse,base64,hashlib,json,re,tarfile
 
+def menu_portal_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/index.js').read()
+    text = bundle.decode()
+    start = text.index('function Menu(')
+    match = re.search(r'const MARGIN = .*?if \(lh > 0\) y = [^;]+;', text[start:], re.S)
+    if match is None: raise ValueError('published menu portal placement is not recognized')
+    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(), 'placement': match[0]}
+
 def plugin_style_snapshot(archive):
     with tarfile.open(archive) as tar:
         bundle=tar.extractfile('package/lib/client.js').read()
@@ -93,6 +102,10 @@ def verify_snapshot(archive, package, folder):
     if kind == 'primitive-css':
         with tarfile.open(archive) as tar:
             for name in package['files']:
+                if name == 'menu-portal.json':
+                    if json.loads((folder / name).read_text()) != menu_portal_snapshot(archive):
+                        raise ValueError('published menu portal snapshot mismatch')
+                    continue
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published primitive snapshot mismatch: ' + name)

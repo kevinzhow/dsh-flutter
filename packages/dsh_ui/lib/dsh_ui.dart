@@ -44,6 +44,7 @@ export 'src/dsh_corners.dart';
 export 'src/dsh_disclosure.dart';
 export 'src/dsh_icon_button.dart';
 export 'src/dsh_anchored_panel.dart';
+export 'src/dsh_menu_follower.dart';
 export 'src/dsh_menu.dart';
 export 'src/dsh_menu_item.dart';
 export 'src/dsh_lightbox.dart';

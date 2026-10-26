@@ -22,8 +22,9 @@ final Map<String, ParityCase> workspaceCases = {
         label: i18n.t('workspace', 'menu.addWorkspace'),
         icon: DshIcons.plus,
       );
-      final pinAdd = workspaces.isNotEmpty;
-      final rows = pinAdd
+      final addAvailable = (props['flow'] as bool?) ?? true;
+      final pinAdd = workspaces.isNotEmpty && addAvailable;
+      final rows = workspaces.isNotEmpty
           ? [
               for (final w in workspaces)
                 PickerRow(
@@ -35,23 +36,23 @@ final Map<String, ParityCase> workspaceCases = {
                   icon: DshIcons.folderClose,
                 ),
             ]
-          : [add];
+          : addAvailable
+          ? [add]
+          : <PickerRow>[];
       final link = LayerLink();
       return ColoredBox(
         color: ctx.theme.bgBase,
         child: Stack(
           children: [
             Positioned(
-              left: 0,
-              top: 0,
+              left: 16,
+              top: 16,
               child: CompositedTransformTarget(
                 link: link,
                 child: const SizedBox(width: 160, height: 28),
               ),
             ),
-            Positioned(
-              left: 0,
-              top: 0,
+            Positioned.fill(
               child: PickerMenu(
                 link: link,
                 rows: rows,

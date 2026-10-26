@@ -79,6 +79,31 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unsupported plugin menu viewport'):
             gen.render(lock, altered)
 
+    def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
+        import copy
+        lock, original = gen.collect()
+        altered = copy.deepcopy(original)
+        rule = next(r for r in altered['Menu.module.css'] if r['selector'] == '.scrollable')
+        rule['declarations']['max-height'] = 'calc(100vh - 15px - max(14px, var(--dsh-frame-overlay-top, 13px)))'
+        dart, _ = gen.render(lock, altered)
+        for field, expected in [('viewportBottomMargin', 15), ('viewportTopMargin', 14), ('frameOverlayTopFallback', 13)]:
+            self.assertIn(f'{field} = {expected}.0;', dart)
+        for unknown in ['100vh', 'calc(100vh - 20px)', 'min(520px, 100vh)']:
+            rule['declarations']['max-height'] = unknown
+            with self.assertRaisesRegex(ValueError, 'unsupported menu viewport height'):
+                gen.render(lock, altered)
+
+    def test_published_menu_portal_structure_fails_closed(self):
+        spec = importlib.util.spec_from_file_location('menu_recipes', ROOT / 'tool/design-system/menu_recipes.py')
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        snapshot = json.loads((ROOT / 'tool/design-system/upstream/ui-primitives/menu-portal.json').read_text())
+        contract = json.loads((ROOT / 'tool/design-system/menu-contract.json').read_text())['portalPlacement']
+        self.assertEqual(module.portal_margin(snapshot['placement'], 4, contract), 12)
+        self.assertEqual(module.portal_margin(snapshot['placement'].replace('MARGIN = 12', 'MARGIN = 16'), 4, contract), 16)
+        for changed in [snapshot['placement'].replace('Math.min(Math.max(x, MARGIN)', 'Math.max(Math.min(x, MARGIN)'), snapshot['placement'].replace('r.right + 4', 'r.right + 5')]:
+            with self.assertRaisesRegex(ValueError, 'untranslated menu portal placement'):
+                module.portal_margin(changed, 4, contract)
+
     def test_dock_menu_rules_and_dynamic_fields_fail_closed(self):
         import copy
         lock, original = gen.collect()

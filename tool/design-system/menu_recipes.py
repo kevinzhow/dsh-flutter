@@ -7,6 +7,14 @@ from pathlib import Path
 import json,re
 HERE = Path(__file__).resolve().parent
 
+def portal_margin(placement, gap, contract):
+    margin = re.search(r'const MARGIN = ([\d.]+);', placement)
+    if margin is None: raise ValueError('unsupported menu portal margin')
+    expected = contract.replace('$margin', margin[1]).replace('$gap', format(gap, 'g'))
+    if re.sub(r'\s+', ' ', placement).strip() != expected:
+        raise ValueError('untranslated menu portal placement')
+    return float(margin[1])
+
 
 def build(sheets, *, value, number, token, css_rules):
     consumed = set()
@@ -15,7 +23,8 @@ def build(sheets, *, value, number, token, css_rules):
         consumed.add((id(rules), selector, prop))
         return original_value(rules, selector, prop)
     value = tracked
-    contract = json.loads((HERE / 'menu-contract.json').read_text())['rules']
+    full_contract = json.loads((HERE / 'menu-contract.json').read_text())
+    contract = full_contract['rules']
     for name, schema in contract.items():
         current = sheets[name]
         if name == 'dockkit.module.css':
@@ -66,9 +75,17 @@ def build(sheets, *, value, number, token, css_rules):
             if get(selector,prop) != expected: raise ValueError('untranslated menu structural value: ' + selector + '/' + prop)
     footer_border = re.fullmatch(r'([\d.]+)px solid var\((--[\w-]+)\)', get('.footer', 'border-top'))
     if footer_border is None: raise ValueError('unsupported menu footer border')
+    viewport = re.fullmatch(r'calc\(100vh - ([\d.]+)px - max\(([\d.]+)px, var\(--dsh-frame-overlay-top, ([\d.]+)px\)\)\)', get('.scrollable', 'max-height'))
+    if viewport is None: raise ValueError('unsupported menu viewport height')
+    anchor_gap = re.fullmatch(r'calc\(100% \+ ([\d.]+)px\)', get('.list', 'top'))
+    if anchor_gap is None: raise ValueError('unsupported menu anchor gap')
+    portal = json.loads((HERE / 'upstream/ui-primitives/menu-portal.json').read_text())
     metrics = {
       'DshMenuRecipe': {
         'padding': px('.list, .submenu','padding'), 'minWidth':px('.list','min-width'), 'maxWidth':px('.list','max-width'),
+        'anchorGap':float(anchor_gap[1]), 'viewportBottomMargin':float(viewport[1]),
+        'viewportTopMargin':float(viewport[2]), 'frameOverlayTopFallback':float(viewport[3]),
+        'portalMargin':portal_margin(portal['placement'], float(anchor_gap[1]), full_contract['portalPlacement']),
         'compactMinWidth': px('.list.compactList, .submenu.compactList','min-width'),
         'compactPadding':px('.list.compactList, .submenu.compactList','padding'),
         'height':height,'denseHeight':px('.denseList .item','min-height'),'compactHeight':px('.compactList .item','min-height'),

@@ -32,6 +32,21 @@ void main() {
         await t.tap(find.text('Add workspace'));
         await t.pumpAndSettle();
         expect(find.text('Selected workspace: add'), findsOneWidget);
+        await t.tap(find.text('Long list'));
+        await t.pumpAndSettle();
+        await t.tap(find.text('Choose workspace'));
+        await t.pumpAndSettle();
+        final footer = t.getRect(find.text('Add workspace'));
+        expect(footer.bottom, lessThan(844));
+        await t.drag(
+          find.byType(SingleChildScrollView).last,
+          const Offset(0, -400),
+        );
+        await t.pumpAndSettle();
+        expect(t.getRect(find.text('Add workspace')), footer);
+        await t.tap(find.text('Add workspace'));
+        await t.pumpAndSettle();
+        expect(find.text('Selected workspace: add'), findsOneWidget);
         await t.pumpWidget(const SizedBox());
         await t.pump();
         expect(t.takeException(), isNull);

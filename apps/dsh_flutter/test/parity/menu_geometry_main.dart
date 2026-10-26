@@ -64,50 +64,81 @@ class _WorkspaceScene extends StatefulWidget {
 
 class _WorkspaceSceneState extends State<_WorkspaceScene> {
   final link = LayerLink();
-  bool open = false;
+  final portal = OverlayPortalController();
+  bool open = false, longList = false;
+  void show(bool value) {
+    setState(() => open = value);
+    if (value) {
+      portal.show();
+    } else {
+      portal.hide();
+    }
+  }
+
   String selected = 'alpha';
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      Positioned(
-        left: 24,
-        top: 24,
-        child: CompositedTransformTarget(
-          link: link,
-          child: DshButton(
-            onPressed: () => setState(() => open = !open),
-            child: const Text('Choose workspace'),
+  Widget build(BuildContext context) => OverlayPortal(
+    controller: portal,
+    overlayChildBuilder: (context) => Positioned.fill(
+      child: PickerMenu(
+        link: link,
+        rows: [
+          const PickerRow(
+            id: 'alpha',
+            label: 'Alpha',
+            icon: DshIcons.folderClose,
           ),
-        ),
-      ),
-      Positioned(
-        left: 24,
-        top: 82,
-        child: Text('Selected workspace: $selected'),
-      ),
-      if (open)
-        Positioned.fill(
-          child: PickerMenu(
-            link: link,
-            rows: const [
+          const PickerRow(
+            id: 'beta',
+            label: 'Beta',
+            icon: DshIcons.folderClose,
+          ),
+          if (longList)
+            for (var i = 0; i < 40; i++)
               PickerRow(
-                id: 'alpha',
-                label: 'Alpha',
+                id: 'w$i',
+                label: 'Workspace ${i.toString().padLeft(2, '0')}',
                 icon: DshIcons.folderClose,
               ),
-              PickerRow(id: 'beta', label: 'Beta', icon: DshIcons.folderClose),
-            ],
-            footer: const [
-              PickerRow(id: 'add', label: 'Add workspace', icon: DshIcons.plus),
-            ],
-            selectedId: selected,
-            onSelect: (id) => setState(() {
-              selected = id;
-              open = false;
-            }),
-            onClose: () => setState(() => open = false),
+        ],
+        footer: const [
+          PickerRow(id: 'add', label: 'Add workspace', icon: DshIcons.plus),
+        ],
+        selectedId: selected,
+        onSelect: (id) {
+          setState(() => selected = id);
+          show(false);
+        },
+        onClose: () => show(false),
+      ),
+    ),
+    child: Stack(
+      children: [
+        Positioned(
+          left: 24,
+          top: 24,
+          child: CompositedTransformTarget(
+            link: link,
+            child: DshButton(
+              onPressed: () => show(!open),
+              child: const Text('Choose workspace'),
+            ),
           ),
         ),
-    ],
+        Positioned(
+          left: 24,
+          top: 82,
+          child: Text('Selected workspace: $selected'),
+        ),
+        Positioned(
+          left: 220,
+          top: 24,
+          child: DshButton(
+            onPressed: () => setState(() => longList = !longList),
+            child: const Text('Long list'),
+          ),
+        ),
+      ],
+    ),
   );
 }

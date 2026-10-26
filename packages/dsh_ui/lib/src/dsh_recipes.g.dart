@@ -85,6 +85,11 @@ abstract final class DshMenuRecipe {
   static const double padding = 4.0;
   static const double minWidth = 144.0;
   static const double maxWidth = 360.0;
+  static const double anchorGap = 4.0;
+  static const double viewportBottomMargin = 12.0;
+  static const double viewportTopMargin = 12.0;
+  static const double frameOverlayTopFallback = 12.0;
+  static const double portalMargin = 12.0;
   static const double compactMinWidth = 156.0;
   static const double compactPadding = 4.0;
   static const double height = 34.0;

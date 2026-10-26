@@ -69,7 +69,16 @@ Future<Map<String, dynamic>> captureParityCase(
     fixtures: fixtures,
   );
   final size = Size(ctx.width, ctx.height);
-  t.view.physicalSize = size * ctx.density;
+  final requestedPhysical = size * ctx.density;
+  // Native Chromium lays out its viewport on enclosing physical pixels, even
+  // though the screenshot API rounds the requested raster size to nearest.
+  // At 390x421 / 2.625x, CSS 100vh is 421.3333, while the PNG is 1105px tall.
+  t.view.physicalSize = dshPixelModel == DshPixelModel.native
+      ? Size(
+          requestedPhysical.width.ceilToDouble(),
+          requestedPhysical.height.ceilToDouble(),
+        )
+      : requestedPhysical;
   t.view.devicePixelRatio = ctx.density;
   addTearDown(t.view.reset);
 
@@ -232,6 +241,10 @@ Future<Map<String, dynamic>> captureParityCase(
     },
     'flutter': {
       'widgets': mapping.widgets,
+      'layoutViewport': {
+        'width': t.view.physicalSize.width / ctx.density,
+        'height': t.view.physicalSize.height / ctx.density,
+      },
       if (mapping.notes.isNotEmpty) 'notes': mapping.notes,
       'targetPlatform': 'linux',
       'density': 'pointer',

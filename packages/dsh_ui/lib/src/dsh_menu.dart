@@ -1,9 +1,12 @@
+import 'dart:math' as math;
+
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_anchored_panel.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_menu_item.dart';
+import 'dsh_menu_footer.dart';
 import 'dsh_menu_surface.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
@@ -65,18 +68,23 @@ class DshMenu extends StatelessWidget {
     required this.entries,
     required this.onSelect,
     this.selectedIds = const [],
+    this.footer = const [],
     this.align = DshMenuAlign.start,
     this.dense = false,
     this.minWidth = DshMenuRecipe.minWidth,
     this.compact = false,
     this.selectionFill = false,
     this.controller,
+    this.frameOverlayTop,
   });
 
   /// Draws the anchor; call [DshPanelController.toggle] to open the card.
   final Widget Function(BuildContext context, DshPanelController controller)
   builder;
   final List<DshMenuEntry> entries;
+
+  /// Entries pinned outside the scrolling items, as in the source Menu.
+  final List<DshMenuEntry> footer;
   final ValueChanged<String> onSelect;
   final List<String> selectedIds;
   final DshMenuAlign align;
@@ -84,14 +92,22 @@ class DshMenu extends StatelessWidget {
   final double minWidth;
   final DshPanelController? controller;
 
+  /// The source `--dsh-frame-overlay-top`, when a desktop frame reserves space.
+  final double? frameOverlayTop;
+
   @override
   Widget build(BuildContext context) => DshAnchoredPanel(
     controller: controller,
+    gap: DshMenuRecipe.anchorGap,
+    menuViewport: true,
+    frameOverlayTop: frameOverlayTop,
     align: align == DshMenuAlign.end ? DshPanelAlign.end : DshPanelAlign.start,
     builder: builder,
     panelBuilder: (context, panel) => DshMenuCard(
       key: const ValueKey('dsh-menu'),
       entries: entries,
+      footer: footer,
+      frameOverlayTop: frameOverlayTop,
       selectedIds: selectedIds,
       dense: dense,
       compact: compact,
@@ -114,19 +130,23 @@ class DshMenuCard extends StatefulWidget {
     required this.entries,
     required this.onSelect,
     this.selectedIds = const [],
+    this.footer = const [],
     this.dense = false,
     this.compact = false,
     this.selectionFill = false,
     this.autofocus = false,
     this.minWidth = DshMenuRecipe.minWidth,
     this.onDismiss,
+    this.frameOverlayTop,
   });
   final List<DshMenuEntry> entries;
+  final List<DshMenuEntry> footer;
   final ValueChanged<String> onSelect;
   final List<String> selectedIds;
   final bool dense, compact, selectionFill, autofocus;
   final double minWidth;
   final VoidCallback? onDismiss;
+  final double? frameOverlayTop;
   @override
   State<DshMenuCard> createState() => _DshMenuCardState();
 }
@@ -135,11 +155,31 @@ class _DshMenuCardState extends State<DshMenuCard> {
   final _containerFocus = FocusNode(skipTraversal: true);
   final _rowFocus = <String, FocusNode>{};
   int? _walkIndex;
-  List<DshMenuItem> get enabled => widget.entries
-      .whereType<DshMenuItem>()
-      .where((e) => !e.disabled)
-      .toList();
-  FocusNode node(String id) => _rowFocus.putIfAbsent(id, () => FocusNode());
+  List<DshMenuItem> get enabled => [
+    ...widget.entries,
+    ...widget.footer,
+  ].whereType<DshMenuItem>().where((e) => !e.disabled).toList();
+  FocusNode node(String id) => _rowFocus.putIfAbsent(id, () {
+    final focus = FocusNode();
+    focus.addListener(() {
+      if (!focus.hasFocus) return;
+      final context = focus.context;
+      final object = context?.findRenderObject();
+      if (context == null || object == null) return;
+      final position = Scrollable.maybeOf(context)?.position;
+      // Browser focus reveals a row in either direction, without moving an
+      // already visible row or scrolling the pinned footer's siblings.
+      position?.ensureVisible(
+        object,
+        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+      );
+      position?.ensureVisible(
+        object,
+        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+      );
+    });
+    return focus;
+  });
   @override
   void dispose() {
     _containerFocus.dispose();
@@ -202,6 +242,15 @@ class _DshMenuCardState extends State<DshMenuCard> {
           ? DshMenuRecipe.compactMinWidth
           : widget.minWidth,
       maxWidth: DshMenuRecipe.maxWidth,
+      maxHeight: math.max(
+        0,
+        MediaQuery.sizeOf(context).height -
+            DshMenuRecipe.viewportBottomMargin -
+            math.max(
+              DshMenuRecipe.viewportTopMargin,
+              widget.frameOverlayTop ?? DshMenuRecipe.frameOverlayTopFallback,
+            ),
+      ),
     ),
     child: DshMenuSurface(
       compact: widget.compact,
@@ -209,43 +258,66 @@ class _DshMenuCardState extends State<DshMenuCard> {
         focusNode: _containerFocus,
         autofocus: widget.autofocus,
         onKeyEvent: (_, event) => key(event),
-        child: IntrinsicWidth(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (var i = 0; i < widget.entries.length; i++)
-                switch (widget.entries[i]) {
-                  DshMenuSeparator() =>
-                    i == 0 || widget.entries[i - 1] is DshMenuSeparator
-                        ? const SizedBox.shrink()
-                        : _Separator(compact: widget.compact),
-                  DshMenuLabel(:final id, :final text) => _Heading(
-                    key: ValueKey('dsh-menu-label-$id'),
-                    text: text,
-                    dense: widget.dense,
-                    compact: widget.compact,
+        child: Semantics(
+          container: true,
+          child: IntrinsicWidth(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: entries(widget.entries),
+                    ),
                   ),
-                  final DshMenuItem item => DshMenuItemButton(
-                    key: ValueKey('dsh-menu-${item.id}'),
-                    label: item.label,
-                    icon: item.icon,
-                    disabled: item.disabled,
-                    danger: item.danger,
-                    selected: widget.selectedIds.contains(item.id),
-                    selectionFill: widget.selectionFill,
-                    dense: widget.dense,
-                    compact: widget.compact,
-                    focusNode: node(item.id),
-                    onPressed: () => select(item),
+                ),
+                if (widget.footer.isNotEmpty)
+                  DshMenuFooter(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: entries(widget.footer),
+                    ),
                   ),
-                },
-            ],
+              ],
+            ),
           ),
         ),
       ),
     ),
   );
+
+  List<Widget> entries(List<DshMenuEntry> items) => [
+    for (var i = 0; i < items.length; i++)
+      switch (items[i]) {
+        DshMenuSeparator() =>
+          i == 0 || items[i - 1] is DshMenuSeparator
+              ? const SizedBox.shrink()
+              : _Separator(compact: widget.compact),
+        DshMenuLabel(:final id, :final text) => _Heading(
+          key: ValueKey('dsh-menu-label-$id'),
+          text: text,
+          dense: widget.dense,
+          compact: widget.compact,
+        ),
+        final DshMenuItem item => DshMenuItemButton(
+          key: ValueKey('dsh-menu-${item.id}'),
+          label: item.label,
+          icon: item.icon,
+          disabled: item.disabled,
+          danger: item.danger,
+          selected: widget.selectedIds.contains(item.id),
+          selectionFill: widget.selectionFill,
+          dense: widget.dense,
+          compact: widget.compact,
+          focusNode: node(item.id),
+          onPressed: () => select(item),
+        ),
+      },
+  ];
 }
 
 class _Separator extends StatelessWidget {
