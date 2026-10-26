@@ -59,6 +59,16 @@ abstract final class DshShortcutKeysRecipe {
   static const double plainLineHeight = 16.0;
   static const String plainFontToken = '--dsw-font-xxs-12';
   static const String plainColorToken = '--dsw-alias-label-tertiary';
+  static const double tooltipGap = 2.0;
+  static const double tooltipFontSize = 11.0;
+  static const double tooltipLineHeight = 14.0;
+  static const String tooltipFontToken = '--dsw-font-xxxs-11';
+  static const double keyMinWidth = 16.0;
+  static const double keyHeight = 16.0;
+  static const double keyRadius = 4.0;
+  static const String keyFillToken = '--dsw-alias-tooltip-key-bg';
+  static const double keyPadding = 2.0;
+  static const double joinedPadding = 4.0;
 }
 
 abstract final class DshAddButtonRecipe {
@@ -215,4 +225,24 @@ abstract final class DshDockMenuRecipe {
   static const String radiusToken = '--dsw-radius-md';
   static const String labelToken = '--dsw-alias-label-primary';
   static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+}
+
+abstract final class DshTooltipRecipe {
+  static const double gap = 8.0;
+  static const double maxViewportFraction = 0.5;
+  static const double paddingVertical = 3.0;
+  static const double paddingHorizontal = 7.0;
+  static const double shortcutEndPadding = 5.0;
+  static const double shortcutOnlyPadding = 3.0;
+  static const String radiusToken = '--dsw-radius-sm';
+  static const String fillToken = '--dsw-alias-tooltip-bg';
+  static const String labelToken = '--dsw-static-neutral-bluish-00';
+  static const double fontSize = 13.0;
+  static const double lineHeight = 20.0;
+  static const String fontToken = '--dsw-font-xs-13';
+  static const double animationMs = 150.0;
+  static const String easingToken = '--ds-ease-in-out';
+  static const double defaultGap = 8.0;
+  static const double rightGap = 10.0;
+  static const double viewportMargin = 12.0;
 }

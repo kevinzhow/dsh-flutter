@@ -132,3 +132,21 @@ are reported separately. The model selector still uses a bottom sheet in this
 client, with wider and taller rows than the reference desktop menu; the current
 comparisons do not establish visual parity. Fonts and the 99.5% classifier
 remain unchanged.
+
+### Tooltips and their keycaps
+
+The pinned primitive archive supplies `Tooltip.module.css`, the shortcut-key
+stylesheet and the placement logic snapshot. The generator checks their
+structure and emits the bubble, keycap, animation and placement values;
+untranslated states and conditions fail the source audit. The tooltip width cap
+applies to content before padding, as in the published CSS. `DshTooltip` uses
+the shared overlay, tracks its anchor, fits the viewport, flips above or below,
+and supports hover and keyboard focus delays, nested suppression, click
+pinning and dismissal. Pointer-driven refocus does not reopen a keyboard hint.
+The shortcut-only variant exposes its key labels to accessibility.
+
+The message copy and branch controls provide real source and Flutter comparison
+cases in both themes and languages at desktop and phone densities. These are
+evidence of the current differences, not a claim of visual parity. Dynamic label
+resolver callbacks and the source's optional document-body portal need further
+audit; the Flutter implementation accepts a string and uses its nearest overlay.

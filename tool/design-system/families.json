@@ -37,7 +37,7 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_tooltip.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
+      "migrationStatus": "published tooltip and keycap recipes, anchor fitting, focus/hover and click dismissal; dynamic label resolvers and document-level portal behavior remain to be audited",
       "pendingDuplicates": []
     },
     {
@@ -583,9 +583,6 @@
     },
     "packages/dsh_ui/lib/src/dsh_toast.dart": {
       "manual-metric": 3
-    },
-    "packages/dsh_ui/lib/src/dsh_tooltip.dart": {
-      "manual-metric": 4
     },
     "packages/dsh_ui/lib/src/dsh_web_block.dart": {
       "manual-metric": 8

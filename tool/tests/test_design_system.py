@@ -110,7 +110,25 @@ class DesignSystemTests(unittest.TestCase):
                 gen.render(lock, changed)
         changed = copy.deepcopy(sheets)
         next(r for r in changed['ShortcutKeys.module.css'] if r['selector'] == '.tooltip .key')['declarations']['padding'] = '0 3px'
-        with self.assertRaisesRegex(ValueError, 'untranslated shortcut value'):
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('keyPadding = 3.0;', dart)
+
+    def test_tooltip_recipe_follows_published_geometry_and_rejects_new_states(self):
+        import copy
+        lock, sheets = gen.collect()
+        altered = copy.deepcopy(sheets)
+        bubble = next(r for r in altered['Tooltip.module.css'] if r['selector'] == '.bubble' and not r['conditions'])
+        bubble['declarations']['padding'] = '4px 9px'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('paddingVertical = 4.0;', dart)
+        self.assertIn('paddingHorizontal = 9.0;', dart)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Tooltip.module.css'] if r['selector'] == '.bubble' and r['conditions'])['declarations']['animation'] = 'opacity 1s'
+        with self.assertRaisesRegex(ValueError, 'untranslated tooltip'):
+            gen.render(lock, changed)
+        changed = copy.deepcopy(sheets)
+        changed['Tooltip.module.css'].append({'selector': '.bubble:hover', 'conditions': [], 'declarations': {'opacity': '.5'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated tooltip'):
             gen.render(lock, changed)
 
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):

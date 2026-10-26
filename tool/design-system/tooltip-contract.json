@@ -1,0 +1,118 @@
+{
+  "rules": [
+    {
+      "selector": ".bubble",
+      "conditions": [],
+      "declarations": {
+        "display": "inline-flex",
+        "align-items": "center",
+        "gap": "8px",
+        "position": "fixed",
+        "z-index": "100",
+        "width": "max-content",
+        "max-width": "50vw",
+        "padding": "3px 7px",
+        "border-radius": "var(--dsw-radius-sm)",
+        "background": "var(--dsw-alias-tooltip-bg)",
+        "color": "var(--dsw-static-neutral-bluish-00)",
+        "font-size": "13px",
+        "line-height": "20px",
+        "white-space": "pre-line",
+        "overflow-wrap": "break-word",
+        "pointer-events": "none",
+        "animation": "tooltip-in 150ms var(--ds-ease-in-out)"
+      }
+    },
+    {
+      "selector": ".bubble[data-portal]",
+      "conditions": [],
+      "declarations": {
+        "z-index": "1100"
+      }
+    },
+    {
+      "selector": ".bubble[data-pinned]",
+      "conditions": [],
+      "declarations": {
+        "pointer-events": "auto"
+      }
+    },
+    {
+      "selector": ".label",
+      "conditions": [],
+      "declarations": {
+        "min-width": "0"
+      }
+    },
+    {
+      "selector": ".bubble[data-has-shortcut]",
+      "conditions": [],
+      "declarations": {
+        "padding-inline-end": "5px"
+      }
+    },
+    {
+      "selector": ".bubble[data-has-shortcut]:not(:has(.label))",
+      "conditions": [],
+      "declarations": {
+        "padding": "3px"
+      }
+    },
+    {
+      "selector": ".bubble[data-side='right']",
+      "conditions": [],
+      "declarations": {
+        "transform": "translateY(-50%)"
+      }
+    },
+    {
+      "selector": ".bubble[data-side='bottom']",
+      "conditions": [],
+      "declarations": {
+        "transform": "translateX(-50%)"
+      }
+    },
+    {
+      "selector": ".bubble[data-side='top']",
+      "conditions": [],
+      "declarations": {
+        "transform": "translate(-50%, -100%)"
+      }
+    },
+    {
+      "selector": ".bubble[data-side='bottom'][data-align='end']",
+      "conditions": [],
+      "declarations": {
+        "transform": "translateX(-100%)"
+      }
+    },
+    {
+      "selector": ".bubble[data-side='top'][data-align='end']",
+      "conditions": [],
+      "declarations": {
+        "transform": "translate(-100%, -100%)"
+      }
+    },
+    {
+      "selector": "from",
+      "conditions": [
+        "@keyframes tooltip-in"
+      ],
+      "declarations": {
+        "opacity": "0"
+      }
+    },
+    {
+      "selector": ".bubble",
+      "conditions": [
+        "@media (prefers-reduced-motion: reduce)"
+      ],
+      "declarations": {
+        "animation": "none"
+      }
+    }
+  ],
+  "signature": "function Tooltip({ label, shortcutKeys, side = \"right\", align = \"center\", delayMs = 0, focusDelayMs = 0, gap = $gap, disabled = false, portal = false, maxWidth, openOnClick = false, children }) {",
+  "anchor": "setPos({ x: side === \"right\" ? r.right + $rightGap : align === \"end\" ? r.right : r.left + r.width / 2, top: r.top, bottom: r.bottom });",
+  "fit": "const edgeMargin = $margin; let size; let placement = side; const fit = () => { if (size === void 0) return; const { inlineSize: width, blockSize: height } = size; const offset = side === \"right\" ? 0 : align === \"end\" ? width : width / 2; const left = Math.max(edgeMargin, Math.min(pos.x - offset, window.innerWidth - edgeMargin - width)); const fitsBelow = pos.bottom + gap + height <= window.innerHeight - edgeMargin; const fitsAbove = pos.top - gap - height >= edgeMargin; if (placement === \"bottom\" && !fitsBelow && fitsAbove) placement = \"top\"; else if (placement === \"top\" && !fitsAbove && fitsBelow) placement = \"bottom\"; el.style.left = `${left + offset}px`; el.style.top = `${placement === \"right\" ? (pos.top + pos.bottom) / 2 : placement === \"top\" ? pos.top - gap : pos.bottom + gap}px`; el.dataset.side = placement; el.style.visibility = \"visible\";"
+}
