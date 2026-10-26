@@ -1,0 +1,156 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "dock",
+      "rect": [
+        5,
+        82,
+        190,
+        138
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "dock",
+      "rect": [
+        5,
+        82,
+        190,
+        138
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "dock",
+      "rect": [
+        5,
+        42,
+        340,
+        500
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workspace",
+      "rect": [
+        20,
+        95,
+        270,
+        252
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workspace",
+      "rect": [
+        20,
+        120,
+        340,
+        162
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "workspace-selected",
+      "rect": [
+        20,
+        120,
+        340,
+        162
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-menu",
+      "rect": [
+        24,
+        180,
+        200,
+        500
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-menu",
+      "rect": [
+        24,
+        750,
+        200,
+        784
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-control",
+      "rect": [
+        20,
+        120,
+        340,
+        162
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-control",
+      "rect": [
+        24,
+        750,
+        200,
+        784
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-selected",
+      "rect": [
+        20,
+        120,
+        340,
+        162
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    1280,
+    800
+  ],
+  "theme": "light",
+  "locale": "en"
+}

@@ -1,0 +1,32 @@
+{
+  "syntheticOnly": true,
+  "actualAndroidTextInput": true,
+  "value": "synthetic.package",
+  "scenes": [
+    {
+      "scene": "plugin-list",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "menu",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "form",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "text-entered",
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "scene": "closed",
+      "passed": true,
+      "attempts": 1
+    }
+  ]
+}

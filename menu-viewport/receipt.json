@@ -1,0 +1,139 @@
+{
+  "implementationHead": "0be4d584fdab5ccc901c016e11f2245656b075e6",
+  "tree": "c29e3bcdd58fdc89a7107cda1138567246c617c7",
+  "captureHead": "736c23cedcd801f0d83ab2e667ff5f0dbc5b684a",
+  "linuxNativeAndBuildHead": "192142ed0c3c759751921b440b9cc9bb71e4630d",
+  "androidNativeAndBuildHead": "0be4d584fdab5ccc901c016e11f2245656b075e6",
+  "subsequentChanges": [
+    "apps/dsh_flutter/android/app/src/main/kotlin/app/kevinzhow/whalee/MainActivity.kt",
+    "packages/dsh_ui/test/dsh_menu_viewport_test.dart"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInputs": "ui-primitives 0.2.1-rc.2 CSS and released menu portal bundle; dependency and source hashes locked",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-26T19:20:18+00:00",
+    "headTree": "c29e3bcdd58fdc89a7107cda1138567246c617c7",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 1.8
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.2
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 11.8
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.8
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 193.4
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "buildHead": "0be4d584fdab5ccc901c016e11f2245656b075e6",
+      "sha256": "54213d24b12cd9a768c59af2154dad0ffaf406433740cbb21eaab5e3b7421491"
+    },
+    {
+      "name": "android-normal.apk",
+      "buildHead": "0be4d584fdab5ccc901c016e11f2245656b075e6",
+      "sha256": "0ec8f96ff6482035913e622db7483b4095cf6827f8eee22d5a8fac52d7355c56"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "buildHead": "192142ed0c3c759751921b440b9cc9bb71e4630d",
+      "sha256": "430b28768fde2e5e7b56bd6bee6f639ef9c0c4e5e3a51809168f082ae67ec4a8",
+      "applicationLibrarySha256": "80da6605f032eb453decdbc20e56330149bf634327911d93095eecca20296751"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "buildHead": "192142ed0c3c759751921b440b9cc9bb71e4630d",
+      "sha256": "430b28768fde2e5e7b56bd6bee6f639ef9c0c4e5e3a51809168f082ae67ec4a8",
+      "applicationLibrarySha256": "2fd3ca1d30398d353577cd1977e1a86d17247b4bc53cc21ececf13d1d7d865fc"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "menu-viewport.desktop",
+      "passedAssertions": 11
+    },
+    {
+      "case": "menu-viewport.phone",
+      "passedAssertions": 11
+    }
+  ],
+  "androidPassedScenes": 41,
+  "androidColdStarts": 3,
+  "androidTextInputPassed": true,
+  "androidFocusDiagnosis": "Before the native-view focus fix, the menu reported logical focus but the Android FlutterView was unfocused. A first End key acquired native focus without reaching the Flutter global key handler. Cold-start regression failed before the fix and passed three times after it, checking the first End, Up and Enter without retries.",
+  "visual": {
+    "compared": 180,
+    "nonTextThresholdPct": 99.5,
+    "nonTextPassing": 18,
+    "dimensionsEqual": 172,
+    "meanNonTextPct": 94.26581111111112
+  },
+  "unchangedReactPngs": 180,
+  "unchangedFlutterPngs": 180,
+  "oldWhaleeUsedForRegressionOnly": true,
+  "ratchetTotals": {
+    "duplicate-button": 4,
+    "manual-metric": 963,
+    "platform-control": 11,
+    "duplicate-input": 2
+  },
+  "remainingMenuCoverage": [
+    "submenus",
+    "shortcuts",
+    "sticky groups",
+    "arbitrary-content bounded blur",
+    "macOS transparent-window backing"
+  ],
+  "remainingVisualDifferences": "18/180 meet the unchanged 99.5% non-text target and 172/180 match dimensions. Other menu materials, text, and unported component families remain unfinished.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}
