@@ -4,7 +4,6 @@ import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
