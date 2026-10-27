@@ -7,10 +7,11 @@
 library;
 
 import 'package:flutter/material.dart' show Material, MaterialType;
-import 'package:flutter/services.dart' show TextInputAction;
+import 'package:flutter/services.dart' show LogicalKeyboardKey, TextInputAction;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_button.dart';
+import 'dsh_control_focus_modality.dart';
 import 'dsh_corners.dart';
 import 'dsh_pixel_snap.dart';
 import 'dsh_settings.dart';
@@ -281,6 +282,10 @@ class DshSettingsValueField extends StatefulWidget {
   /// Key of the information button of field [id].
   static Key helpKey(String id) => ValueKey<String>('$id-help');
 
+  /// Keys of visible keyboard focus outlines on the field actions.
+  static Key actionFocusRingKey(String id, String action) =>
+      ValueKey<String>('$id-$action-focus-ring');
+
   /// Key of the hint or invalid message of field [id].
   static Key messageKey(String id) => ValueKey<String>('$id-message');
 
@@ -345,24 +350,25 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
           child: DshTag.text(widget.overriddenLabel, tone: DshTagTone.neutral),
         ),
         const SizedBox(width: 8),
-        Semantics(
-          button: true,
-          enabled: !widget.disabled,
+        _SettingsFieldAction(
+          key: DshSettingsValueField.resetKey(id),
           label: widget.resetLabel,
-          excludeSemantics: true,
-          onTap: widget.disabled ? null : widget.onReset,
-          child: GestureDetector(
-            key: DshSettingsValueField.resetKey(id),
-            behavior: HitTestBehavior.opaque,
-            onTap: widget.disabled ? null : widget.onReset,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: 24),
-              child: Center(
-                widthFactor: 1,
-                child: DshLineText(
-                  widget.resetLabel,
-                  maxLines: 1,
-                  style: small.copyWith(color: theme.labelSecondary),
+          onPressed: widget.disabled ? null : widget.onReset,
+          focusRingKey: DshSettingsValueField.actionFocusRingKey(id, 'reset'),
+          // The visual button is 18px high in the source; keep its existing
+          // 24px touch target without enlarging the keyboard outline.
+          ringVerticalInset: 3,
+          child: (hovered) => ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 24),
+            child: Center(
+              widthFactor: 1,
+              child: DshLineText(
+                widget.resetLabel,
+                maxLines: 1,
+                style: small.copyWith(
+                  color: hovered && !widget.disabled
+                      ? theme.labelPrimary
+                      : theme.labelSecondary,
                 ),
               ),
             ),
@@ -382,23 +388,22 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
         ),
         if (help != null) ...[
           const SizedBox(width: 4),
-          Semantics(
-            button: true,
+          _SettingsFieldAction(
+            key: DshSettingsValueField.helpKey(id),
             expanded: _helpOpen,
             label: help.label,
-            excludeSemantics: true,
-            onTap: () => setState(() => _helpOpen = !_helpOpen),
-            child: GestureDetector(
-              key: DshSettingsValueField.helpKey(id),
-              behavior: HitTestBehavior.opaque,
-              onTap: () => setState(() => _helpOpen = !_helpOpen),
-              child: SizedBox(
-                width: 24,
-                height: 24,
-                child: Center(
-                  child: _InfoGlyph(
-                    color: _helpOpen ? theme.labelSecondary : tertiary,
-                  ),
+            onPressed: () => setState(() => _helpOpen = !_helpOpen),
+            focusRingKey: DshSettingsValueField.actionFocusRingKey(id, 'help'),
+            focusOffset: 1,
+            radius: theme.radiusSm,
+            // The source hover fill references --dsw-alias-bg-layer-4,
+            // which the pinned theme does not define, so it paints no fill.
+            child: (hovered) => SizedBox(
+              width: 24,
+              height: 24,
+              child: Center(
+                child: _InfoGlyph(
+                  color: hovered || _helpOpen ? theme.labelSecondary : tertiary,
                 ),
               ),
             ),
@@ -525,6 +530,134 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
                 ),
               ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Native equivalents of the source field's help and reset HTML buttons.
+class _SettingsFieldAction extends StatefulWidget {
+  const _SettingsFieldAction({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    required this.focusRingKey,
+    required this.child,
+    this.expanded,
+    this.focusOffset = 0,
+    this.radius = 0,
+    this.ringVerticalInset = 0,
+  });
+
+  final String label;
+  final VoidCallback? onPressed;
+  final Key focusRingKey;
+  final Widget Function(bool hovered) child;
+  final bool? expanded;
+  final double focusOffset, radius, ringVerticalInset;
+
+  @override
+  State<_SettingsFieldAction> createState() => _SettingsFieldActionState();
+}
+
+class _SettingsFieldActionState extends State<_SettingsFieldAction> {
+  final _focus = FocusNode(debugLabel: 'settings field action');
+  bool _hovered = false, _focused = false, _focusVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    DshControlFocusModality.instance.acquire(_modalityChanged);
+  }
+
+  void _modalityChanged() => _set(() {});
+  void _set(VoidCallback change) {
+    if (mounted) setState(change);
+  }
+
+  @override
+  void dispose() {
+    DshControlFocusModality.instance.release(_modalityChanged);
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = widget.onPressed != null;
+    final theme = context.dsh;
+    final width = dshBorderWidthOf(context, theme.focusRingWidth);
+    // The reset uses the browser's centred auto outline. The help button's
+    // stylesheet instead specifies a one-pixel offset from its border.
+    final reach = widget.focusOffset == 0
+        ? width / 2
+        : width + widget.focusOffset;
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      focused: _focused,
+      expanded: widget.expanded,
+      label: widget.label,
+      excludeSemantics: true,
+      onTap: widget.onPressed,
+      onFocus: enabled ? _focus.requestFocus : null,
+      child: MouseRegion(
+        cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        onEnter: (_) => _set(() => _hovered = true),
+        onExit: (_) => _set(() => _hovered = false),
+        child: FocusableActionDetector(
+          enabled: enabled,
+          focusNode: _focus,
+          onFocusChange: (value) => _set(() => _focused = value),
+          onShowFocusHighlight: (value) => _set(() => _focusVisible = value),
+          shortcuts: const {
+            SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+            SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+          },
+          actions: {
+            ActivateIntent: CallbackAction<ActivateIntent>(
+              onInvoke: (_) {
+                widget.onPressed?.call();
+                return null;
+              },
+            ),
+          },
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            excludeFromSemantics: true,
+            onTap: widget.onPressed,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                widget.child(_hovered),
+                if (enabled &&
+                    _focusVisible &&
+                    _focus.hasPrimaryFocus &&
+                    !DshControlFocusModality.instance.pointerOwnsFocus)
+                  Positioned(
+                    left: -reach,
+                    top: -reach + widget.ringVerticalInset,
+                    right: -reach,
+                    bottom: -reach + widget.ringVerticalInset,
+                    child: IgnorePointer(
+                      child: DshDecoratedBox(
+                        key: widget.focusRingKey,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            widget.radius + reach,
+                          ),
+                          border: Border.all(
+                            color: theme.focusRingColor,
+                            width: width,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );

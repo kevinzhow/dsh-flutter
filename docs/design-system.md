@@ -242,8 +242,11 @@ inventory page still has a different row layout and retains its enabled-state
 text; other source Tag consumers remain to be migrated. The family ratchet
 prevents the retired private components from returning.
 
-The settings field also exposes accessibility activation for its reset and
-help buttons; disabled reset remains unavailable.
+The settings field exposes accessibility focus and activation for its reset
+and help buttons, and supports Tab, Enter and Space in source order; disabled
+reset remains unavailable. `probe_settings_reset.mjs` records the actual shell
+reset's keyboard outline at both capture densities. The 24px native touch target
+retains the source's 18px visual outline height.
 
 Reference captures use the actual DSH shell settings, agent-preset section and
 plugin inventory components. Crop dimensions can differ when the surrounding

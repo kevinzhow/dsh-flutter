@@ -1,8 +1,11 @@
+import 'dart:ui' show Tristate;
+
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const labels = DshSettingsFormLabels(
@@ -189,6 +192,77 @@ void main() {
   });
 
   group('DshSettingsValueField', () {
+    testWidgets('help and reset work with the keyboard in source order', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      var resets = 0;
+      await t.pumpWidget(
+        app(
+          field(
+            overridden: true,
+            onReset: () => resets++,
+            help: const DshSettingsFieldHelp(
+              label: 'About timeout',
+              content: Text('Rules go here'),
+            ),
+          ),
+        ),
+      );
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.pump();
+      expect(
+        t
+            .getSemantics(find.bySemanticsLabel('About timeout'))
+            .getSemanticsData()
+            .flagsCollection
+            .isFocused,
+        Tristate.isTrue,
+      );
+      expect(
+        find.byKey(DshSettingsValueField.actionFocusRingKey('f', 'help')),
+        findsOneWidget,
+      );
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await t.pump();
+      expect(find.text('Rules go here'), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.pump();
+      expect(
+        t
+            .getSemantics(find.bySemanticsLabel('Reset to default'))
+            .getSemanticsData()
+            .flagsCollection
+            .isFocused,
+        Tristate.isTrue,
+      );
+      expect(
+        find.byKey(DshSettingsValueField.actionFocusRingKey('f', 'reset')),
+        findsOneWidget,
+      );
+      await t.sendKeyEvent(LogicalKeyboardKey.space);
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await t.pump();
+      expect(resets, 2);
+      await t.tap(find.byKey(DshSettingsValueField.resetKey('f')));
+      await t.pump();
+      expect(resets, 3);
+      expect(
+        find.byKey(DshSettingsValueField.actionFocusRingKey('f', 'reset')),
+        findsNothing,
+      );
+      await t.pumpWidget(
+        app(field(overridden: true, disabled: true, onReset: () => resets++)),
+      );
+      await t.sendKeyEvent(LogicalKeyboardKey.space);
+      await t.pump();
+      expect(resets, 3);
+      expect(
+        find.byKey(DshSettingsValueField.actionFocusRingKey('f', 'reset')),
+        findsNothing,
+      );
+      semantics.dispose();
+    });
     testWidgets('reset and help expose accessibility activation', (t) async {
       final semantics = t.ensureSemantics();
       var resets = 0;
@@ -206,10 +280,12 @@ void main() {
       );
       final reset = t.getSemantics(find.bySemanticsLabel('Reset to default'));
       expect(reset.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      expect(reset.getSemanticsData().hasAction(SemanticsAction.focus), isTrue);
       reset.owner!.performAction(reset.id, SemanticsAction.tap);
       expect(resets, 1);
       final help = t.getSemantics(find.bySemanticsLabel('About timeout'));
       expect(help.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      expect(help.getSemanticsData().hasAction(SemanticsAction.focus), isTrue);
       help.owner!.performAction(help.id, SemanticsAction.tap);
       await t.pump();
       expect(find.text('Rules go here'), findsOneWidget);
