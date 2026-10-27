@@ -293,6 +293,108 @@ void main() {
   }
 
   testWidgets(
+    'overflow measurement retains the visible acknowledgement through relayout',
+    (tester) async {
+      const acknowledgementKey = ValueKey('relayout-acknowledgement');
+      DshHeadedDialogContent content({
+        String title = 'Danger',
+        bool short = false,
+        int paragraphs = 8,
+      }) => DshHeadedDialogContent(
+        title: title,
+        closeLabel: 'Close confirmation',
+        onClose: () {},
+        scrollContent: true,
+        headerKey: headerKey,
+        contentKey: contentKey,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              short
+                  ? 'Short warning'
+                  : List.filled(
+                      paragraphs,
+                      'aaaaaaaaaaaaa aaaaaaaaaaaaaa',
+                    ).join('\n'),
+              style: const TextStyle(
+                fontFamily: 'Ahem',
+                fontSize: 14,
+                height: 22 / 14,
+                letterSpacing: 0,
+              ),
+            ),
+            const DshCheckbox(
+              key: acknowledgementKey,
+              value: false,
+              onChanged: null,
+              label: 'Acknowledgement',
+            ),
+          ],
+        ),
+        footer: const [SizedBox(width: 136, height: 36)],
+      );
+
+      await pumpDialog(tester, content(), maxHeight: 260);
+      final position = tester
+          .state<ScrollableState>(find.byType(Scrollable))
+          .position;
+      expect(position.maxScrollExtent, greaterThan(0));
+      position.jumpTo(position.maxScrollExtent);
+      await tester.pumpAndSettle();
+      final maximum = position.maxScrollExtent;
+      final acknowledgement = tester.getRect(find.byKey(acknowledgementKey));
+      expect(
+        acknowledgement.bottom,
+        lessThanOrEqualTo(tester.getRect(find.byKey(contentKey)).bottom),
+      );
+
+      // At full width each Ahem line fits exactly; the real overflow gutter
+      // wraps each into two. A one-pixel resize forces another measurement;
+      // only that one pixel may be removed from the actual bottom offset.
+      await pumpDialog(
+        tester,
+        content(title: 'Danger updated'),
+        maxHeight: 261,
+      );
+      expect(position.maxScrollExtent, closeTo(maximum - 1, 0.01));
+      expect(position.pixels, closeTo(position.maxScrollExtent, 0.01));
+      expect(
+        tester.getRect(find.byKey(acknowledgementKey)).bottom,
+        lessThanOrEqualTo(tester.getRect(find.byKey(contentKey)).bottom),
+      );
+
+      // Genuine resizing must still clamp to the final, gutter-aware extent.
+      await pumpDialog(
+        tester,
+        content(title: 'Danger updated'),
+        maxHeight: 320,
+      );
+      expect(position.maxScrollExtent, greaterThan(0));
+      expect(position.maxScrollExtent, lessThan(maximum));
+      expect(position.pixels, closeTo(position.maxScrollExtent, 0.01));
+      expect(
+        tester.getRect(find.byKey(acknowledgementKey)).bottom,
+        lessThanOrEqualTo(tester.getRect(find.byKey(contentKey)).bottom),
+      );
+      final previousMaximum = position.maxScrollExtent;
+      await pumpDialog(tester, content(paragraphs: 7), maxHeight: 320);
+      expect(position.maxScrollExtent, greaterThan(0));
+      expect(position.maxScrollExtent, lessThan(previousMaximum));
+      expect(position.pixels, closeTo(position.maxScrollExtent, 0.01));
+      expect(
+        tester.getRect(find.byKey(acknowledgementKey)).bottom,
+        lessThanOrEqualTo(tester.getRect(find.byKey(contentKey)).bottom),
+      );
+      await pumpDialog(tester, content(short: true), maxHeight: 320);
+      expect(position.maxScrollExtent, 0);
+      expect(position.pixels, 0);
+      expect(tester.getSize(find.byKey(headerKey)).width, 440);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
     'Close is named and supports Enter Space and pointer activation',
     (tester) async {
       final semantics = tester.ensureSemantics();

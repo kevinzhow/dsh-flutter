@@ -467,11 +467,20 @@ class _RenderScrollbarViewport extends RenderProxyBox {
 
   @override
   void performLayout() {
+    final position = _controller.hasClients ? _controller.position : null;
+    final pixels = position?.hasPixels == true ? position!.pixels : null;
     child!.layout(constraints, parentUsesSize: true);
     final width = child!.size.width;
-    if (_controller.hasClients &&
-        _controller.position.hasContentDimensions &&
-        _controller.position.maxScrollExtent > 0) {
+    if (position != null &&
+        position.hasContentDimensions &&
+        position.maxScrollExtent > 0) {
+      if (pixels != null && pixels != position.pixels) {
+        // Full width is only a gutter probe. It may wrap fewer lines and
+        // temporarily clamp the real offset. Restore that offset without
+        // notifications before the final viewport lays out at gutter width;
+        // that layout applies any genuine resize/content boundary clamp.
+        position.correctBy(pixels - position.pixels);
+      }
       child!.layout(
         constraints.copyWith(
           minWidth: math.max(0, constraints.minWidth - _gutter),
