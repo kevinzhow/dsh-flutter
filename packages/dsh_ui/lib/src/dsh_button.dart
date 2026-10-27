@@ -65,6 +65,7 @@ class DshButton extends StatefulWidget {
     this.autofocus = false,
     this.semanticLabel,
     this.height,
+    this.minWidth,
     this.horizontalPadding,
     this.labelStyle,
     this.radius,
@@ -73,6 +74,7 @@ class DshButton extends StatefulWidget {
   }) : assert(
          profile == DshButtonProfile.primitive ||
              (height == null &&
+                 minWidth == null &&
                  horizontalPadding == null &&
                  radius == null &&
                  labelStyle == null),
@@ -107,7 +109,7 @@ class DshButton extends StatefulWidget {
   final String? semanticLabel;
 
   /// Component-level CSS overrides; omitted values retain primitive metrics.
-  final double? height, horizontalPadding, radius;
+  final double? height, minWidth, horizontalPadding, radius;
   final TextStyle? labelStyle;
   final DshButtonProfile profile;
   final DshButtonJoin join;
@@ -356,6 +358,9 @@ class _DshButtonState extends State<DshButton> {
         borderWidth: borderWidth,
       ),
       child: Container(
+        constraints: widget.minWidth == null
+            ? null
+            : BoxConstraints(minWidth: widget.minWidth!),
         width: profileWidth,
         height:
             widget.height ??

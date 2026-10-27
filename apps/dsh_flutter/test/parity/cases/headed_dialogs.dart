@@ -1,6 +1,8 @@
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_parity/dsh_parity.dart';
+import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
 
 final Map<String, ParityCase> headedDialogsCases = {
@@ -58,7 +60,10 @@ class _RiskFixtureState extends State<_RiskFixture> {
   }
 
   @override
-  Widget build(BuildContext context) => const SizedBox.expand();
+  Widget build(BuildContext context) => ColoredBox(
+    color: Theme.of(context).extension<DshThemeData>()!.bgBase,
+    child: const SizedBox.expand(),
+  );
 }
 
 class _RiskContent extends StatefulWidget {

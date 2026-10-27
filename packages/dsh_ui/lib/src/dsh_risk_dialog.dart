@@ -225,32 +225,21 @@ class _DshRiskDialogState extends State<DshRiskDialog> {
         ],
       ),
       footer: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: DshRiskDialogRecipe.actionMinWidth,
-          ),
-          child: DshButton(
-            key: const ValueKey('risk-cancel'),
-            variant: DshButtonVariant.outline,
-            onPressed: _cancel,
-            child: DshChromeText(
-              widget.cancelLabel,
-              textAlign: TextAlign.center,
-            ),
-          ),
+        DshButton(
+          key: const ValueKey('risk-cancel'),
+          minWidth: DshRiskDialogRecipe.actionMinWidth,
+          variant: DshButtonVariant.outline,
+          onPressed: _cancel,
+          child: DshChromeText(widget.cancelLabel, textAlign: TextAlign.center),
         ),
-        ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: DshRiskDialogRecipe.confirmMinWidth,
-          ),
-          child: DshButton(
-            key: const ValueKey('risk-confirm'),
-            variant: DshButtonVariant.primary,
-            onPressed: widget.disabled || !_checked ? null : _confirm,
-            child: DshChromeText(
-              widget.confirmLabel,
-              textAlign: TextAlign.center,
-            ),
+        DshButton(
+          key: const ValueKey('risk-confirm'),
+          minWidth: DshRiskDialogRecipe.confirmMinWidth,
+          variant: DshButtonVariant.primary,
+          onPressed: widget.disabled || !_checked ? null : _confirm,
+          child: DshChromeText(
+            widget.confirmLabel,
+            textAlign: TextAlign.center,
           ),
         ),
       ],

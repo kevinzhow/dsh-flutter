@@ -93,6 +93,32 @@ void main() {
     await t.pumpAndSettle();
   }
 
+  testWidgets('short labels paint the full source action minimum widths', (
+    t,
+  ) async {
+    await pumpCard(
+      t,
+      DshRiskDialog(
+        title: _title,
+        description: _description,
+        acknowledgeLabel: _acknowledgeLabel,
+        cancelLabel: '取消',
+        closeLabel: _closeLabel,
+        confirmLabel: '确认',
+        onCancel: () {},
+      ),
+    );
+    for (final entry in {_cancelKey: 72.0, _confirmKey: 136.0}.entries) {
+      final button = find.byKey(entry.key);
+      final painted = find.descendant(
+        of: button,
+        matching: find.byKey(DshButton.surfaceKey),
+      );
+      expect(t.getSize(painted).width, greaterThanOrEqualTo(entry.value));
+      expect(t.getRect(painted), t.getRect(button));
+    }
+  });
+
   void confirmEnabled(WidgetTester t, bool enabled) {
     expect(find.bySemanticsLabel(_confirmLabel), findsOneWidget);
     expect(
