@@ -206,6 +206,19 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'untranslated pill'):
             gen.render(lock, changed)
 
+    def test_tag_tints_follow_source_and_unknown_tones_fail(self):
+        import copy
+        lock, sheets = gen.collect()
+        changed = copy.deepcopy(sheets)
+        rule = next(r for r in changed['Tag.module.css'] if r['selector'] == ".tag[data-tone='warning']")
+        rule['declarations']['background'] = 'color-mix(in srgb, var(--dsw-alias-state-warn-primary) 15%, transparent)'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('warningAlpha = 0.15;', dart)
+        changed = copy.deepcopy(sheets)
+        changed['Tag.module.css'].append({'selector': ".tag[data-tone='new']", 'conditions': [], 'declarations': {'color': 'red'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated tag'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()

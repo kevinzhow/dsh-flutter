@@ -35,18 +35,23 @@ Widget pluginCard(
   BuildContext context, {
   required Widget child,
   VoidCallback? onTap,
-}) => Container(
-  padding: const EdgeInsets.all(16),
-  decoration: BoxDecoration(
-    color: context.dsh.color('--dsw-alias-bg-layer-2'),
-    border: Border.all(
-      color: context.dsh.color('--dsw-alias-border-l3'),
-      width: .5,
+}) {
+  final fill = context.dsh.color('--dsw-alias-bg-layer-2');
+  return Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: fill,
+      border: Border.all(
+        color: context.dsh.color('--dsw-alias-border-l3'),
+        width: .5,
+      ),
+      borderRadius: BorderRadius.circular(12),
     ),
-    borderRadius: BorderRadius.circular(12),
-  ),
-  child: child,
-);
+    // Descendants that pre-composite translucent colours must use this card's
+    // opaque fill, rather than an inherited surface behind the card.
+    child: DshSurface(color: fill, child: child),
+  );
+}
 
 class PluginInput extends StatefulWidget {
   const PluginInput({

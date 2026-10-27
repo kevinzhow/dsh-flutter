@@ -67,6 +67,85 @@ Future<void> pump(WidgetTester t) async {
 }
 
 void main() {
+  testWidgets('inventory status uses the source tag tones', (t) async {
+    final host = FakeHost();
+    host.handlers['pluginInventory/list'] = (_) => {
+      'managementAvailable': true,
+      'entries': <Object?>[],
+      'agentPresets': [
+        {
+          'id': 'standard',
+          'isDefault': true,
+          'rows': [
+            {
+              'entryId': 'conditional',
+              'moduleName': 'conditional',
+              'enabled': 'conditional',
+              'fiberPhase': null,
+            },
+            {
+              'entryId': 'disabled',
+              'moduleName': 'disabled',
+              'enabled': false,
+              'fiberPhase': null,
+            },
+            {
+              'entryId': 'failed',
+              'moduleName': 'failed',
+              'enabled': true,
+              'fiberPhase': 'failed',
+            },
+          ],
+        },
+      ],
+    };
+    await t.pumpWidget(
+      dshTestApp(
+        Builder(
+          builder: (context) => DshSurface(
+            color: context.dsh.bgBase,
+            child: PluginInventorySection(remotes: host.remotes, i18n: i18n),
+          ),
+        ),
+        brightness: Brightness.dark,
+      ),
+    );
+    await t.pumpAndSettle();
+    expect(
+      t
+          .widget<DshTag>(
+            find.byKey(const ValueKey('inventory-tag-conditional')),
+          )
+          .tone,
+      DshTagTone.warning,
+    );
+    expect(
+      t
+          .widget<DshTag>(find.byKey(const ValueKey('inventory-tag-disabled')))
+          .tone,
+      DshTagTone.neutral,
+    );
+    expect(
+      t.widget<DshTag>(find.byKey(const ValueKey('inventory-tag-failed'))).tone,
+      DshTagTone.danger,
+    );
+    Color? tagFill(String id) =>
+        (t
+                    .widget<DshContainer>(
+                      find.descendant(
+                        of: find.byKey(ValueKey('inventory-tag-$id')),
+                        matching: find.byType(DshContainer),
+                      ),
+                    )
+                    .decoration
+                as BoxDecoration)
+            .color;
+    // Opaque pixels measured from the actual pinned Chromium inventory card.
+    expect(tagFill('conditional'), const Color(0xff443929));
+    expect(tagFill('failed'), const Color(0xff403032));
+    await t.pumpWidget(const SizedBox());
+    await t.runAsync(host.close);
+  });
   testWidgets('market categories use pills only when declarations exist', (
     t,
   ) async {

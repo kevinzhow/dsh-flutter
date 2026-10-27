@@ -63,7 +63,7 @@ class _SurfaceState extends State<_Surface> {
               : ConfigFormStatus.unavailable,
           value: value,
           base: Map.of(value),
-          user: {},
+          user: widget.name == 'overridden' ? {'timeoutMs': 30000} : {},
           revision: 1,
           writable: widget.name != 'readonly',
         ),

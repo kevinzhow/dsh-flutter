@@ -27,6 +27,7 @@ export 'src/charcoal_icons.g.dart';
 export 'src/dsh_image_size.dart';
 export 'src/dsh_option_sheet.dart';
 export 'src/dsh_pill.dart';
+export 'src/dsh_tag.dart';
 export 'src/dsh_presentation.dart';
 export 'src/dsh_rank_by_name.dart';
 export 'src/dsh_read_block.dart';

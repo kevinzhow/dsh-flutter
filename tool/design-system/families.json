@@ -92,9 +92,10 @@
     {
       "name": "badges-and-pills",
       "canonical": [
-        "packages/dsh_ui/lib/src/dsh_pill.dart"
+        "packages/dsh_ui/lib/src/dsh_pill.dart",
+        "packages/dsh_ui/lib/src/dsh_tag.dart"
       ],
-      "migrationStatus": "published Pill recipe and market category filters use the shared static/interactive capsule; Tag badges and schedule-specific overrides remain to be audited",
+      "migrationStatus": "published Pill and Tag recipes; market categories, settings override, agent preset and plugin inventory status tags use the shared components; schedule overrides and other badge consumers remain to be audited",
       "pendingDuplicates": []
     },
     {
@@ -138,6 +139,7 @@
     "platform-control": "\\b(?:TextButton|ElevatedButton|OutlinedButton|IconButton|PopupMenuButton|DropdownButton|DropdownMenu|Checkbox|Switch|Radio|Slider|AlertDialog|SimpleDialog|Drawer|NavigationRail|NavigationBar|TabBar|Tooltip|SnackBar|TextField|TextFormField|CupertinoButton|CupertinoTextField|CupertinoSwitch)\\s*\\(",
     "duplicate-button": "\\bDshIconButton\\s*\\(",
     "duplicate-input": "\\bDshFieldInput\\s*\\(",
+    "duplicate-tag": "\\b(?:_Tag|_PresetTag)\\s*\\(",
     "manual-metric": "\\b(?:height|width|fontSize|radius|horizontalPadding|size|gap|decorationThickness)\\s*:\\s*(?:\\d+\\.?\\d*)\\b|\\bBorderRadius\\.circular\\(\\s*\\d",
     "duplicate-menu": "\\b(?:_MenuSurface|_MenuItem)\\s*\\("
   },
@@ -145,6 +147,7 @@
     "platform-control": "use the canonical Dsh family wrapper; allowlisted wrappers need a source-backed reason",
     "duplicate-button": "migrate to DshButton with the source icon-action recipe",
     "duplicate-input": "consolidate through the canonical DshInput atom",
+    "duplicate-tag": "use DshTag with its published tone recipe",
     "manual-metric": "generate a source recipe or use its theme token; avoid page overrides",
     "duplicate-menu": "use DshMenuSurface/DshMenuItemButton with the published dock profile; do not copy generic row geometry"
   },
@@ -185,7 +188,7 @@
       "manual-metric": 6
     },
     "features/dsh_feature_agent_management/lib/src/presets.dart": {
-      "manual-metric": 14
+      "manual-metric": 13
     },
     "features/dsh_feature_agent_management/lib/src/register.dart": {
       "manual-metric": 2
@@ -569,7 +572,7 @@
       "manual-metric": 20
     },
     "packages/dsh_ui/lib/src/dsh_settings_form.dart": {
-      "manual-metric": 10
+      "manual-metric": 8
     },
     "packages/dsh_ui/lib/src/dsh_terminal_block.dart": {
       "manual-metric": 7

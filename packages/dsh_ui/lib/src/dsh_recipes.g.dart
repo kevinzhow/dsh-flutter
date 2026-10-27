@@ -356,3 +356,28 @@ abstract final class DshPillRecipe {
       '--dsw-alias-button-ghost-active-border';
   static const double categoryGap = 6.0;
 }
+
+abstract final class DshTagRecipe {
+  static const double verticalPadding = 1.0;
+  static const double horizontalPadding = 8.0;
+  static const double radius = 999.0;
+  static const double fontSize = 11.0;
+  static const double lineHeight = 17.0;
+  static const double fontWeight = 500.0;
+  static const double outlineWidth = 0.5;
+  static const String outlineBorderToken = '--dsw-alias-border-l4';
+  static const String outlineLabelToken = '--dsw-alias-label-tertiary';
+  static const String solidFillToken = '--dsw-alias-label-primary';
+  static const String solidLabelToken = '--dsw-alias-bg-layer-3';
+  static const String neutralFillToken = '--dsw-alias-bg-module-platform';
+  static const String neutralLabelToken = '--dsw-alias-label-secondary';
+  static const String quietLabelToken = '--dsw-alias-label-tertiary';
+  static const String successToken = '--dsw-alias-state-success-primary';
+  static const double successAlpha = 0.1;
+  static const String infoToken = '--dsw-alias-state-business-primary';
+  static const double infoAlpha = 0.1;
+  static const String warningToken = '--dsw-alias-state-warn-primary';
+  static const double warningAlpha = 0.12;
+  static const String dangerToken = '--dsw-alias-state-error-primary';
+  static const double dangerAlpha = 0.1;
+}

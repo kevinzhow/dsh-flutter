@@ -29,7 +29,10 @@ function Surface({family,props,ctx}:any){
   const actions=Object.fromEntries(['ensure','refresh','openInstall','installFrom','closeInstall','editInstallSpec','runInstall','update','cancelInstall','reconcileInstall','toggleInstallDetails','toggleRegistryOptions','chooseRegistry','changeRegistry','useGithubMirror','approveBuildsAndRetry','enableInstalled','clearHighlight','setEnabled','uninstall','confirm','cancelConfirm','setRowEnabled','dismissNotice'].map(key=>[key,noop]))
   body=<PluginManagerPage {...{...actions,t,resolveText,renderSlot:()=>null,usePluginManager:(s:any)=>s(state),useConfigLedger:(s:any)=>s({items:[],bundles:new Set(),rows:new Set()}),useConfigurations:(s:any)=>s({view:null}),usePluginTabs:(s:any)=>s([{id:'discover',label:createTranslator(ctx.case.locale,{en:marketEn,zh:marketZh})('title')}]),useStore:(s:any)=>s({view:{kind:'list'},tab:'installed'}),actions:{setView:noop,setTab:noop}} as any}/>
  }
- if(family==='inventory')body=<PluginInventorySettingsTab {...{t,resolveText,list:async()=>({managementAvailable:true,entries:name==='empty'?[]:[entry],agentPresets:[]}),presetName:(p:any)=>p.id,useClientSync:(s:any)=>s({syncing:false,failures:[],entries:[]}),retryClient:noop} as any}/>
+ if(family==='inventory'){
+  const rows=['conditional','disabled','failed'].map(kind=>({entryId:`synthetic-${kind}`,moduleName:`@synthetic/${kind}`,enabled:kind==='conditional'?'conditional':kind==='failed',fiberPhase:kind==='failed'?'failed':null,...(kind==='conditional'?{condition:'synthetic flag'}:{})}))
+  body=<PluginInventorySettingsTab {...{t,resolveText,list:async()=>({managementAvailable:true,entries:name==='empty'?[]:[entry],agentPresets:name==='tags'?[{id:'standard',isDefault:true,rows}]:[]}),presetName:(p:any)=>p.id,useClientSync:(s:any)=>s({syncing:false,failures:[],entries:[]}),retryClient:noop} as any}/>
+ }
  if(family==='market'){
   const index={url:'https://synthetic.example/index.json',status:'ready',name:'Synthetic market',title:'Synthetic market',description:'Synthetic index',entryCount:0,fetchedAt:1000}
   const query={text:'',category,labels:[],sort:{kind:'index'}}

@@ -3,6 +3,7 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -59,6 +60,23 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+      final currentTag = find.widgetWithText(
+        DshTag,
+        i18n.t('settings.agentPreset', 'inUse'),
+      );
+      final customTag = find.widgetWithText(
+        DshTag,
+        i18n.t('settings.agentPreset', 'customGroup'),
+      );
+      expect(currentTag, findsOneWidget);
+      expect(customTag, findsWidgets);
+      expect(tester.widget<DshTag>(currentTag).tone, DshTagTone.solid);
+      expect(
+        tester
+            .widgetList<DshTag>(customTag)
+            .every((tag) => tag.tone == DshTagTone.outline),
+        isTrue,
+      );
       expect(find.text('Custom Named'), findsOneWidget);
       expect(find.text('ptc'), findsNothing);
       expect(find.text('Broken preset'), findsOneWidget);

@@ -1,3 +1,4 @@
+import {useLayoutEffect,useRef} from 'react'
 import {AgentPresetSection} from '@dsh/ui-agent-preset/src/client/AgentPresetSection.tsx'
 import {en as presetEn,zh as presetZh} from '@dsh/ui-agent-preset/src/client/locales.ts'
 import {GoalBar} from '@dsh/ui-goal/src/client/GoalBar.tsx'
@@ -14,6 +15,8 @@ const noop=()=>{},asyncNoop=async()=>{},release=()=>noop
 const presets=[{id:'standard',isDefault:true},{id:'ptc',isDefault:false},{id:'cordis',isDefault:false},{id:'reviewer',name:'Synthetic reviewer',description:'Synthetic review preset',isDefault:false},{id:'broken',broken:'Synthetic dependency missing',isDefault:false}]
 const tasks=[{id:'synthetic-daily',sessionId:'synthetic-session',title:'Synthetic daily task',prompt:'Review the synthetic project each morning.',kind:'daily',time:'09:00:00.123',timeZone:'Asia/Tokyo',scheduledAt:'2026-10-27T00:00:00.123Z',status:'active'},{id:'synthetic-ended',sessionId:'second-session',title:'Synthetic ended task',prompt:'Retained inactive instruction',kind:'at',scheduledAt:'2026-10-25T00:00:00.000Z',status:'inactive'}]
 function Surface({family,props,ctx}:any){
+ const ref=useRef<HTMLDivElement>(null)
+ useLayoutEffect(()=>{for(const id of ['standard','ptc','reviewer'])ref.current?.querySelector(`[data-agent-preset-id="${id}"] [data-tone]`)?.setAttribute('data-parity-id',`preset-tag-${id}`)})
  const dictionaries:any={preset:[presetEn,presetZh],goal:[goalEn,goalZh],skill:[skillEn,skillZh],jobs:[jobEn,jobZh],manager:[taskEn,taskZh]}
  const [en,zh]=dictionaries[family],t=createTranslator(ctx.case.locale,{en,zh})
  let body:any
@@ -26,6 +29,6 @@ function Surface({family,props,ctx}:any){
  }
  if(family==='jobs')body=<JobListAction {...{sessionId:'synthetic-session',useJobs:(s:any)=>s({rows:{'synthetic-session':[{id:'synthetic-job',kind:'shell',label:'synthetic command',status:'running',startedAt:1000,output:{earliest:0,total:39}}]},observed:{}}),watchRows:release,observe:release,killJob:async()=>true,t} as any}/>
  if(family==='manager')body=<TaskManagerPage {...{useCatalog:(s:any)=>s({records:props.name==='empty'?[]:tasks,status:'ready',deleting:[],settled:true,readRequest:1,readSettled:1}),onNewTask:noop,onRetry:asyncNoop,onUpdateTiming:asyncNoop,onDelete:async()=> 'deleted',loadHistory:asyncNoop,onOpenSession:noop,useSessions:(s:any)=>s({phase:'ready',ids:[],byId:{}}),useWorkspaces:(s:any)=>s({phase:'ready',state:'ready',items:[],archivedSessionIds:[]}),t} as any}/>
- return <div data-parity-id="agents-tasks-surface" style={{width:props.width,height:props.height,overflow:family==='preset'?'auto':undefined,color:'var(--dsw-alias-label-primary)'}}>{body}</div>
+ return <div ref={ref} data-parity-id="agents-tasks-surface" style={{width:props.width,height:props.height,overflow:family==='preset'?'auto':undefined,color:'var(--dsw-alias-label-primary)'}}>{body}</div>
 }
 export const kinds:Record<string,KindRenderer>=Object.fromEntries(['preset','goal','skill','jobs','manager'].map(f=>[`agents-tasks.${f}`,(props:any,ctx:any)=><Surface family={f} props={props} ctx={ctx}/>]))

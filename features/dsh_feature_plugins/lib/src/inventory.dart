@@ -204,16 +204,26 @@ class _PluginInventorySectionState extends State<PluginInventorySection> {
           pluginStatus(context, pluginText(description, widget.i18n)),
           if (entry != null) pluginStatus(context, entry),
           pluginStatus(context, module),
-          pluginStatus(
-            context,
-            t(
-              enabled == 'conditional'
-                  ? 'conditionalTag'
-                  : enabled == true
-                  ? 'enabledTag'
-                  : 'disabledTag',
-            ),
-          ),
+          if (phase == 'failed')
+            DshTag.text(
+              t('failedTag'),
+              key: ValueKey('inventory-tag-$module'),
+              tone: DshTagTone.danger,
+            )
+          else if (enabled == 'conditional')
+            DshTag.text(
+              t('conditionalTag'),
+              key: ValueKey('inventory-tag-$module'),
+              tone: DshTagTone.warning,
+            )
+          else if (enabled != true)
+            DshTag.text(
+              t('disabledTag'),
+              key: ValueKey('inventory-tag-$module'),
+              tone: DshTagTone.neutral,
+            )
+          else
+            pluginStatus(context, t('enabledTag')),
           pluginStatus(
             context,
             t(switch (phase) {

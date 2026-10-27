@@ -86,7 +86,27 @@ class _SurfaceState extends State<_Surface> {
                   'fiberPhase': 'active',
                 },
               ],
-        'agentPresets': <Object?>[],
+        'agentPresets': widget.name == 'tags'
+            ? [
+                {
+                  'id': 'standard',
+                  'isDefault': true,
+                  'rows': [
+                    for (final kind in ['conditional', 'disabled', 'failed'])
+                      {
+                        'entryId': 'synthetic-$kind',
+                        'moduleName': '@synthetic/$kind',
+                        'enabled': kind == 'conditional'
+                            ? 'conditional'
+                            : kind == 'failed',
+                        'fiberPhase': kind == 'failed' ? 'failed' : null,
+                        if (kind == 'conditional')
+                          'condition': 'synthetic flag',
+                      },
+                  ],
+                },
+              ]
+            : <Object?>[],
       };
     }
     if (widget.family == 'market' && widget.name == 'empty') {

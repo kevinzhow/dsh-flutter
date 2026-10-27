@@ -226,7 +226,34 @@ Flutter's toggled flag maps to a switch on Android.
 
 The segmented-tab source uses Pill as an underlying button but overrides its
 geometry, focus decoration and keyboard model; it remains the separate
-`DshSegmentedTabs` profile. Tag badges, schedule-specific overrides, and the
+`DshSegmentedTabs` profile. Schedule-specific overrides and the
 market's locale-aware category ordering remain to be audited. The real market
 and terminal screenshots measure the remaining visual differences; focused
 whole-page captures are reported separately from the cropped controls.
+
+### Read-only tags
+
+The published Tag stylesheet generates the capsule's content-box geometry,
+typography and eight tones, including the source's `color-mix` percentages.
+`DshTag` is the shared non-interactive component. Settings override labels,
+agent-preset selection labels and plugin inventory warning, disabled and
+failure states now use it. The first two replace separate private tags. The
+inventory page still has a different row layout and retains its enabled-state
+text; other source Tag consumers remain to be migrated. The family ratchet
+prevents the retired private components from returning.
+
+Plugin cards declare their own opaque surface to descendants, so translucent
+status tints composite over the card instead of a more distant page surface.
+The dark inventory warning and error fills are checked against the original
+browser's card pixels.
+
+The settings field exposes accessibility focus and activation for its reset
+and help buttons, and supports Tab, Enter and Space in source order; disabled
+reset remains unavailable. `probe_settings_reset.mjs` records the actual shell
+reset's keyboard outline at both capture densities. The 24px native touch target
+retains the source's 18px visual outline height.
+
+Reference captures use the actual DSH shell settings, agent-preset section and
+plugin inventory components. Crop dimensions can differ when the surrounding
+page positions a tag at a different fraction of a device pixel; the reference
+comparison retains those differences and the unchanged 99.5% target.
