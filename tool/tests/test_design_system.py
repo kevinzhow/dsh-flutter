@@ -23,6 +23,8 @@ class DesignSystemTests(unittest.TestCase):
         dart, _ = gen.render(lock, altered)
         self.assertIn('labelTransitionMs = 220.0;', dart)
         self.assertIn('transitionMs = 180.0;', dart)
+        self.assertIn('focusLineOffset = 4.0;', dart)
+        self.assertIn('labelPadding = 12.0;', dart)
         for selector, value in [('.indicator', 'transform 180ms linear'), ('.tab', 'color 180ms linear'), ('.tab', 'opacity 180ms ease')]:
             altered = copy.deepcopy(sheets)
             next(r for r in altered['SegmentedTabs.module.css'] if r['selector'] == selector)['declarations']['transition'] = value

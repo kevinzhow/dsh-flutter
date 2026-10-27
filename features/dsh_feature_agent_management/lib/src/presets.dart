@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show SemanticsRole;
 
 import 'package:dsh_client/generated_agent_presets.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -219,11 +220,13 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
               children: [
                 if (builtInPreset(row)) ...[
                   DshButton(
+                    key: ValueKey('preset-guide-${row.id}-details'),
                     size: DshButtonSize.sm,
                     onPressed: () => unawaited(_guide(row, false)),
                     child: Text(t('modeExplanation')),
                   ),
                   DshButton(
+                    key: ValueKey('preset-guide-${row.id}-usage'),
                     size: DshButtonSize.sm,
                     onPressed: () => unawaited(_guide(row, true)),
                     child: Text(t('howToUse')),
@@ -339,24 +342,44 @@ class _PresetGuideState extends State<_PresetGuide> {
         const SizedBox(height: 12),
         Text(t('guide${widget.stem}Intro')),
         const SizedBox(height: 12),
-        Wrap(
-          spacing: 8,
-          children: [
-            DshButton(
-              onPressed: () => setState(() => usage = false),
-              child: Text(t('modeExplanation')),
+        DshSegmentedTabs(
+          key: const ValueKey('preset-guide-tabs'),
+          items: [
+            DshSegmentedTab(
+              'explanation',
+              t('modeExplanation'),
+              key: const ValueKey('preset-guide-tab-explanation'),
+              id: 'preset-guide-tab-explanation',
+              panelId: 'preset-guide-panel-explanation',
             ),
-            DshButton(
-              onPressed: () => setState(() => usage = true),
-              child: Text(t('howToUse')),
+            DshSegmentedTab(
+              'usage',
+              t('howToUse'),
+              key: const ValueKey('preset-guide-tab-usage'),
+              id: 'preset-guide-tab-usage',
+              panelId: 'preset-guide-panel-usage',
             ),
           ],
+          value: usage ? 'usage' : 'explanation',
+          label: t('guideSections'),
+          expand: true,
+          autofocus: true,
+          onChanged: (value) => setState(() => usage = value == 'usage'),
         ),
         Flexible(
-          child: SingleChildScrollView(
-            key: ValueKey(usage),
-            child: DshMarkdown(
-              t('guide${widget.stem}${usage ? 'Usage' : 'Explanation'}'),
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            role: SemanticsRole.tabPanel,
+            identifier: 'preset-guide-panel-${usage ? 'usage' : 'explanation'}',
+            label: t(usage ? 'howToUse' : 'modeExplanation'),
+            child: Focus(
+              child: SingleChildScrollView(
+                key: ValueKey(usage),
+                child: DshMarkdown(
+                  t('guide${widget.stem}${usage ? 'Usage' : 'Explanation'}'),
+                ),
+              ),
             ),
           ),
         ),

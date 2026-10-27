@@ -1,5 +1,16 @@
 # Design system replication
 
+The shared segmented tabs now consume both published 180ms transitions,
+horizontal label padding and focus underline metrics. The named tab list uses
+roving keyboard selection and links tabs to caller-owned semantic panels. The
+plugin manager and preset guide use this component. Reduced motion removes both
+transitions. Real pinned-browser probes record same-tab pointer focus retention,
+new pointer focus and subsequent Space/arrow behavior; this underline differs
+from the global outline-color suppression rule. Underline raster bounds use the
+existing primary-font baseline/strut helpers and native density snapping.
+Preset dialog width, its surrounding layout and independent panel scroll-state
+retention remain follow-up work in their respective families.
+
 The reference is DSH commit `687f282e8625c6b8d11ff58211a90524be2e4317`. Its plugin manager declares `@deepseek-ai/dsh-client-ui-primitives` as `workspace:*`; the actual referenced package version is `0.2.1-rc.2`. `tool/design-system/sources.lock.json` records that dependency, published npm tarball integrity and the hashes of the consumed published files. The checked-in CSS files are extracted from that release and checked against the pinned reference checkout.
 
 `tool/design-system/generate.py` produces component recipes and a complete CSS rule audit for the published sources recorded in the lock. Components consume the generated recipes; colours and radii resolve through the current theme. Typography resolves to the corresponding generated theme ladder rung so user theme overrides remain effective. Unsupported states, properties or conditional rules fail generation. Reduced-motion rules are retained. The family inventory records which variants and families still need migration.

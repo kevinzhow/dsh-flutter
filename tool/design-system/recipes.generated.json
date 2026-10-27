@@ -41,7 +41,8 @@
           "packages/client/ui-primitives/src/Checkbox.tsx": "2a1b1d5b04cfff9a5494e19b1d8fb16a172bacb3094e360d7f5b5dc2a4930151",
           "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868",
           "packages/client/ui-primitives/src/Pill.tsx": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f",
-          "packages/client/ui-primitives/src/Tag.tsx": "2f4845c6b5c7d6f06304de6b972127692a909c775bae72c14799acfd2dc56289"
+          "packages/client/ui-primitives/src/Tag.tsx": "2f4845c6b5c7d6f06304de6b972127692a909c775bae72c14799acfd2dc56289",
+          "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd"
         }
       },
       {
@@ -5294,7 +5295,9 @@
       "selectedWeight": 600.0,
       "transitionMs": 180.0,
       "labelTransitionMs": 180.0,
+      "labelPadding": 12.0,
       "focusLineWidth": 1.0,
+      "focusLineOffset": 4.0,
       "backgroundToken": "--dsw-alias-bg-module-platform",
       "radiusToken": "--dsw-radius-lg",
       "indicatorBackgroundToken": "--dsw-alias-bg-layer-3",

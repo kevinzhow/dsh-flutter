@@ -2,12 +2,88 @@ import 'dart:ui' show SemanticsRole, Tristate;
 
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:dsh_theme/testing.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets(
+    'source focus-visible distinguishes same-tab and new pointer focus',
+    (t) async {
+      final boundary = GlobalKey();
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.topLeft,
+            child: RepaintBoundary(
+              key: boundary,
+              child: DshSegmentedTabs(
+                items: const [
+                  DshSegmentedTab('first', 'First'),
+                  DshSegmentedTab('second', 'Second'),
+                ],
+                value: 'first',
+                label: 'Views',
+                onChanged: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      Future<List<int>> pixels() async => (await t.runAsync(() async {
+        final image =
+            await (boundary.currentContext!.findRenderObject()!
+                    as RenderRepaintBoundary)
+                .toImage();
+        final data = (await image.toByteData())!.buffer.asUint8List().toList();
+        image.dispose();
+        return data;
+      }))!;
+
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.pumpAndSettle();
+      final keyboard = await pixels();
+      await t.tap(find.text('First'));
+      await t.pumpAndSettle();
+      final pointer = await pixels();
+      expect(pointer, keyboard);
+      await t.tap(find.text('Second'));
+      await t.pumpAndSettle();
+      final otherPointer = await pixels();
+      await t.sendKeyEvent(LogicalKeyboardKey.space);
+      await t.pumpAndSettle();
+      expect(await pixels(), isNot(otherPointer));
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
+      await t.pumpAndSettle();
+      expect(await pixels(), keyboard);
+    },
+  );
+  testWidgets('a guide tab row fills the width offered by its container', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            width: 400,
+            child: DshSegmentedTabs(
+              items: const [
+                DshSegmentedTab('first', 'First'),
+                DshSegmentedTab('second', 'Second'),
+              ],
+              value: 'first',
+              label: 'Guide',
+              expand: true,
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(t.getSize(find.byType(DshSegmentedTabs)).width, 400);
+  });
   testWidgets('announces a named tab list with selectable focused tabs', (
     t,
   ) async {
@@ -18,8 +94,18 @@ void main() {
         StatefulBuilder(
           builder: (context, set) => DshSegmentedTabs(
             items: const [
-              DshSegmentedTab('first', 'First'),
-              DshSegmentedTab('second', 'Second'),
+              DshSegmentedTab(
+                'first',
+                'First',
+                id: 'first-tab',
+                panelId: 'first-panel',
+              ),
+              DshSegmentedTab(
+                'second',
+                'Second',
+                id: 'second-tab',
+                panelId: 'second-panel',
+              ),
             ],
             value: selected,
             label: 'Synthetic views',
@@ -32,6 +118,8 @@ void main() {
     expect(group.getSemanticsData().role, SemanticsRole.tabBar);
     final first = t.getSemantics(find.bySemanticsLabel('First'));
     expect(first.getSemanticsData().role, SemanticsRole.tab);
+    expect(first.getSemanticsData().identifier, 'first-tab');
+    expect(first.getSemanticsData().controlsNodes, {'first-panel'});
     expect(
       first.getSemanticsData().flagsCollection.isSelected,
       Tristate.isTrue,
@@ -59,6 +147,20 @@ void main() {
           .isSelected,
       Tristate.isTrue,
     );
+    final firstAgain = t.getSemantics(find.bySemanticsLabel('First'));
+    firstAgain.owner!.performAction(firstAgain.id, SemanticsAction.focus);
+    await t.pump();
+    expect(
+      t
+          .getSemantics(find.bySemanticsLabel('First'))
+          .getSemanticsData()
+          .flagsCollection
+          .isFocused,
+      Tristate.isTrue,
+    );
+    firstAgain.owner!.performAction(firstAgain.id, SemanticsAction.tap);
+    await t.pump();
+    expect(selected, 'first');
     semantics.dispose();
   });
 

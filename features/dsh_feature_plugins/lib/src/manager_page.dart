@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show SemanticsRole;
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
@@ -369,11 +370,21 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: DshSegmentedTabs(
+                      key: const ValueKey('plugin-manager-tabs'),
                       items: [
-                        DshSegmentedTab('installed', t('installedTab')),
+                        DshSegmentedTab(
+                          'installed',
+                          t('installedTab'),
+                          key: const ValueKey('plugin-manager-tab-installed'),
+                          id: 'plugin-manager-tab-installed',
+                          panelId: 'plugin-manager-panel-installed',
+                        ),
                         DshSegmentedTab(
                           'discover',
                           widget.i18n.t('pluginMarket', 'title'),
+                          key: const ValueKey('plugin-manager-tab-discover'),
+                          id: 'plugin-manager-tab-discover',
+                          panelId: 'plugin-manager-panel-discover',
                         ),
                       ],
                       value: discover ? 'discover' : 'installed',
@@ -397,36 +408,56 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                   configuration
                 else if (package != null)
                   _detail(context, package)
-                else if (discover && !more && selected == null)
-                  PluginMarketPage(
-                    model: widget.market,
-                    manager: model,
-                    i18n: widget.i18n,
-                    onInstall: () => unawaited(_install(newDialog: false)),
-                  )
-                else if (model.status == PluginManagerStatus.loading ||
-                    model.status == PluginManagerStatus.idle)
-                  _pageStatus(context, t('loading'))
-                else if (model.status == PluginManagerStatus.unavailable)
-                  Row(
-                    children: [
-                      const DshStateDot(DshStateDotState.idle),
-                      const SizedBox(width: 6),
-                      Expanded(child: _pageStatus(context, t('unavailable'))),
-                    ],
-                  )
-                else if (model.status == PluginManagerStatus.error)
-                  Column(
-                    children: [
-                      pluginStatus(context, t('error')),
-                      DshButton(
-                        onPressed: () => unawaited(model.load()),
-                        child: Text(t('retry')),
-                      ),
-                    ],
-                  )
                 else
-                  _list(context, more, widget.slots.entries(pluginSlot)),
+                  Semantics(
+                    container: true,
+                    explicitChildNodes: true,
+                    role: more ? null : SemanticsRole.tabPanel,
+                    identifier: more
+                        ? null
+                        : 'plugin-manager-panel-${discover ? 'discover' : 'installed'}',
+                    label: more
+                        ? null
+                        : discover
+                        ? widget.i18n.t('pluginMarket', 'title')
+                        : t('installedTab'),
+                    child: discover && !more && selected == null
+                        ? PluginMarketPage(
+                            model: widget.market,
+                            manager: model,
+                            i18n: widget.i18n,
+                            onInstall: () =>
+                                unawaited(_install(newDialog: false)),
+                          )
+                        : model.status == PluginManagerStatus.loading ||
+                              model.status == PluginManagerStatus.idle
+                        ? _pageStatus(context, t('loading'))
+                        : model.status == PluginManagerStatus.unavailable
+                        ? Row(
+                            children: [
+                              const DshStateDot(DshStateDotState.idle),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: _pageStatus(context, t('unavailable')),
+                              ),
+                            ],
+                          )
+                        : model.status == PluginManagerStatus.error
+                        ? Column(
+                            children: [
+                              pluginStatus(context, t('error')),
+                              DshButton(
+                                onPressed: () => unawaited(model.load()),
+                                child: Text(t('retry')),
+                              ),
+                            ],
+                          )
+                        : _list(
+                            context,
+                            more,
+                            widget.slots.entries(pluginSlot),
+                          ),
+                  ),
               ],
             ),
           ),

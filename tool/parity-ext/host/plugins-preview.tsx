@@ -13,12 +13,16 @@ const entry={entryId:'synthetic-entry',moduleName:'@synthetic/reader',enabled:tr
 function Surface({family,props,ctx}:any){
  const surface=useRef<HTMLDivElement>(null)
  const [category,setCategory]=useState(props.category??null)
+ const [tab,setTab]=useState('installed')
  useLayoutEffect(()=>{
   surface.current?.querySelector('[aria-haspopup="menu"]')?.setAttribute('data-parity-id','plugin-add-more')
   surface.current?.querySelector('[role="switch"]')?.setAttribute('data-parity-id','plugin-switch-@synthetic/preview-bundle')
   const categoryButtons=surface.current?.querySelectorAll('[role="group"] button')
   categoryButtons?.[0]?.setAttribute('data-parity-id','market-category-all')
   categoryButtons?.[1]?.setAttribute('data-parity-id','market-category-tools')
+  const tabs=surface.current?.querySelector('[role="tablist"]')
+  tabs?.setAttribute('data-parity-id','plugin-manager-tabs')
+  tabs?.querySelectorAll('[role="tab"]').forEach((el,i)=>el.setAttribute('data-parity-id',`plugin-manager-tab-${i===0?'installed':'discover'}`))
  },[])
  const dictionaries:any={manager:[managerEn,managerZh],inventory:[inventoryEn,inventoryZh],market:[marketEn,marketZh]}
  const [en,zh]=dictionaries[family],t=createTranslator(ctx.case.locale,{en,zh}),name=props.name
@@ -27,7 +31,7 @@ function Surface({family,props,ctx}:any){
   const install={open:name==='install',spec:'',registries:{registry:null,resolved:'https://registry.npmjs.org/',fallbackRegistries:[]},registry:{kind:'offered',registry:null},registryOpen:false,registryError:false,attempts:null,phase:'idle',inputError:null,subject:null,runs:[],detailsOpen:false,installed:null,installedVersion:null,restartRequired:false,failure:null,approvedBuilds:[],enabling:false}
   const state={status:name==='unavailable'?'unavailable':'ready',refreshStatus:'idle',packages:['populated','add-menu'].includes(name)?[{...pkg,enabled:props.switchEnabled!==false,...(props.switchLocked?{readOnlyReason:'management-required'}:{})}]:[],busy:[],notice:null,install,confirm:null,highlight:null}
   const actions=Object.fromEntries(['ensure','refresh','openInstall','installFrom','closeInstall','editInstallSpec','runInstall','update','cancelInstall','reconcileInstall','toggleInstallDetails','toggleRegistryOptions','chooseRegistry','changeRegistry','useGithubMirror','approveBuildsAndRetry','enableInstalled','clearHighlight','setEnabled','uninstall','confirm','cancelConfirm','setRowEnabled','dismissNotice'].map(key=>[key,noop]))
-  body=<PluginManagerPage {...{...actions,t,resolveText,renderSlot:()=>null,usePluginManager:(s:any)=>s(state),useConfigLedger:(s:any)=>s({items:[],bundles:new Set(),rows:new Set()}),useConfigurations:(s:any)=>s({view:null}),usePluginTabs:(s:any)=>s([{id:'discover',label:createTranslator(ctx.case.locale,{en:marketEn,zh:marketZh})('title')}]),useStore:(s:any)=>s({view:{kind:'list'},tab:'installed'}),actions:{setView:noop,setTab:noop}} as any}/>
+  body=<PluginManagerPage {...{...actions,t,resolveText,renderSlot:()=>null,usePluginManager:(s:any)=>s(state),useConfigLedger:(s:any)=>s({items:[],bundles:new Set(),rows:new Set()}),useConfigurations:(s:any)=>s({view:null}),usePluginTabs:(s:any)=>s([{id:'discover',label:createTranslator(ctx.case.locale,{en:marketEn,zh:marketZh})('title')}]),useStore:(s:any)=>s({view:{kind:'list'},tab}),actions:{setView:noop,setTab}} as any}/>
  }
  if(family==='inventory'){
   const rows=['conditional','disabled','failed'].map(kind=>({entryId:`synthetic-${kind}`,moduleName:`@synthetic/${kind}`,enabled:kind==='conditional'?'conditional':kind==='failed',fiberPhase:kind==='failed'?'failed':null,...(kind==='conditional'?{condition:'synthetic flag'}:{})}))

@@ -285,6 +285,9 @@ def render(lock, sheets):
     tab_border = get(t, '.indicator', 'border').split()
     if len(tab_border) != 3 or tab_border[1] != 'solid':
         raise ValueError('unsupported tab border')
+    tab_padding = get(t, '.tab', 'padding').split()
+    if len(tab_padding) != 2 or tab_padding[0] != '0':
+        raise ValueError('unsupported tab padding')
     weight_selector = '.tab[aria-selected=\'true\']'
     metrics = {
         'DshButtonRecipe': {
@@ -314,7 +317,9 @@ def render(lock, sheets):
             'selectedWeight': number(get(t, weight_selector, 'font-weight'), ''),
             'transitionMs': number(transition[1], 'ms'),
             'labelTransitionMs': number(label_transition[1], 'ms'),
+            'labelPadding': number(tab_padding[1]),
             'focusLineWidth': px(t, '.tab:focus-visible', 'text-decoration-thickness'),
+            'focusLineOffset': px(t, '.tab:focus-visible', 'text-underline-offset'),
             'backgroundToken': tok(t, '.tabs', 'background'), 'radiusToken': tok(t, '.tabs', 'border-radius'),
             'indicatorBackgroundToken': tok(t, '.indicator', 'background'),
             'indicatorRadiusToken': tok(t, '.indicator', 'border-radius'),
