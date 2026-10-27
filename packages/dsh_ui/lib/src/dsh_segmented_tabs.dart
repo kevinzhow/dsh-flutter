@@ -1,16 +1,27 @@
 import 'dart:math' as math;
+import 'dart:ui' show SemanticsRole;
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'dsh_control_focus_modality.dart';
 import 'dsh_pixel_snap.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
+import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
 class DshSegmentedTab {
-  const DshSegmentedTab(this.value, this.label);
+  const DshSegmentedTab(
+    this.value,
+    this.label, {
+    this.key,
+    this.id,
+    this.panelId,
+  });
   final String value, label;
+  final Key? key;
+  final String? id, panelId;
 }
 
 /// Controlled equal-width tabs from ui-primitives/SegmentedTabs. Only the
@@ -23,18 +34,34 @@ class DshSegmentedTabs extends StatefulWidget {
     required this.onChanged,
     required this.label,
     this.minWidth = 240,
+    this.expand = false,
+    this.autofocus = false,
+    this.autofocusHighlight,
   }) : assert(items.length > 0);
   final List<DshSegmentedTab> items;
   final String value, label;
   final ValueChanged<String> onChanged;
   final double minWidth;
+
+  /// Fill the caller's available width, as the preset guide's tab row does.
+  final bool expand;
+
+  /// Initially focus the selected tab, as the preset guide does on opening.
+  final bool autofocus;
+
+  /// Inherit the triggering control's visible focus when a new reader opens.
+  /// Null keeps the ambient input-modality behavior for ordinary tab lists.
+  final bool? autofocusHighlight;
   @override
   State<DshSegmentedTabs> createState() => _DshSegmentedTabsState();
 }
 
 class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
+  final modality = DshControlFocusModality.instance;
   final nodes = <FocusNode>[];
   int? focusIndex, hoverIndex;
+  int? _pointerTarget;
+  late bool _autofocusPending = widget.autofocus;
   int get selected => math.max(
     0,
     widget.items.indexWhere((item) => item.value == widget.value),
@@ -42,7 +69,12 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
   @override
   void initState() {
     super.initState();
+    modality.acquire(_refresh);
     _nodes();
+  }
+
+  void _refresh() {
+    if (mounted) setState(() {});
   }
 
   @override
@@ -65,15 +97,37 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
 
   @override
   void dispose() {
+    modality.release(_refresh);
     for (final node in nodes) {
       node.dispose();
     }
     super.dispose();
   }
 
-  void select(int index) {
+  void _focus(int index) {
+    _autofocusPending = false;
+    _pointerTarget = null;
+    focusIndex = index;
+    nodes[index].requestFocus();
+    _refresh();
+  }
+
+  void select(int index, {bool pointer = false}) {
+    _autofocusPending = false;
+    // Native :focus-visible preserves an existing keyboard underline when
+    // clicking the same focused tab, but a newly pointer-focused tab has none.
+    if (pointer) {
+      focusIndex = nodes[index].hasFocus && focusIndex == index ? index : null;
+      // Already-focused nodes do not emit another focus-change notification.
+      // Leave no pending pointer transfer to suppress a later keyboard entry.
+      _pointerTarget = nodes[index].hasFocus ? null : index;
+    } else {
+      focusIndex = index;
+      _pointerTarget = null;
+    }
     widget.onChanged(widget.items[index].value);
     nodes[index].requestFocus();
+    _refresh();
   }
 
   KeyEventResult key(KeyEvent event) {
@@ -82,6 +136,11 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
     }
     final focused = nodes.indexWhere((node) => node.hasFocus),
         current = focused < 0 ? selected : focused;
+    if (focused >= 0) {
+      _autofocusPending = false;
+      _pointerTarget = null;
+      setState(() => focusIndex = focused);
+    }
     final next = switch (event.logicalKey) {
       LogicalKeyboardKey.arrowLeft =>
         (current + nodes.length - 1) % nodes.length,
@@ -98,16 +157,26 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
+    final duration = MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : Duration(milliseconds: DshSegmentedTabRecipe.transitionMs.round());
+    final labelDuration = MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : Duration(
+            milliseconds: DshSegmentedTabRecipe.labelTransitionMs.round(),
+          );
     return Semantics(
       container: true,
       explicitChildNodes: true,
+      role: SemanticsRole.tabBar,
       label: widget.label,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final width = math.min(
-            widget.minWidth + 2 * DshSegmentedTabRecipe.padding,
-            constraints.maxWidth,
-          );
+          final intrinsicMinimum =
+              widget.minWidth + 2 * DshSegmentedTabRecipe.padding;
+          final width = widget.expand && constraints.maxWidth.isFinite
+              ? constraints.maxWidth
+              : math.min(intrinsicMinimum, constraints.maxWidth);
           return SizedBox(
             width: width,
             height:
@@ -124,37 +193,40 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
               child: Focus(
                 canRequestFocus: false,
                 skipTraversal: true,
+                includeSemantics: false,
                 onKeyEvent: (_, event) => key(event),
                 child: Stack(
                   children: [
                     Positioned(
-                      left:
-                          (width - 2 * DshSegmentedTabRecipe.padding) /
-                          widget.items.length *
-                          selected,
+                      left: 0,
                       top: 0,
                       bottom: 0,
                       width:
                           (width - 2 * DshSegmentedTabRecipe.padding) /
                           widget.items.length,
-                      child: IgnorePointer(
-                        child: DshContainer(
-                          decoration: BoxDecoration(
-                            color: theme.color(
-                              DshSegmentedTabRecipe.indicatorBackgroundToken,
-                            ),
-                            border: Border.all(
+                      child: AnimatedSlide(
+                        offset: Offset(selected.toDouble(), 0),
+                        duration: duration,
+                        curve: Curves.ease,
+                        child: IgnorePointer(
+                          child: DshContainer(
+                            decoration: BoxDecoration(
                               color: theme.color(
-                                DshSegmentedTabRecipe.outlineToken,
+                                DshSegmentedTabRecipe.indicatorBackgroundToken,
                               ),
-                              width: dshBorderWidthOf(
-                                context,
-                                DshSegmentedTabRecipe.outlineWidth,
+                              border: Border.all(
+                                color: theme.color(
+                                  DshSegmentedTabRecipe.outlineToken,
+                                ),
+                                width: dshBorderWidthOf(
+                                  context,
+                                  DshSegmentedTabRecipe.outlineWidth,
+                                ),
                               ),
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              theme.number(
-                                DshSegmentedTabRecipe.indicatorRadiusToken,
+                              borderRadius: BorderRadius.circular(
+                                theme.number(
+                                  DshSegmentedTabRecipe.indicatorRadiusToken,
+                                ),
                               ),
                             ),
                           ),
@@ -166,24 +238,46 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                         for (var i = 0; i < widget.items.length; i++)
                           Expanded(
                             child: Semantics(
-                              button: true,
+                              key: widget.items[i].key,
+                              container: true,
+                              role: SemanticsRole.tab,
+                              identifier: widget.items[i].id,
+                              controlsNodes: widget.items[i].panelId == null
+                                  ? null
+                                  : {widget.items[i].panelId!},
                               selected: i == selected,
+                              focused: nodes[i].hasFocus,
+                              focusable: true,
                               label: widget.items[i].label,
                               excludeSemantics: true,
                               onTap: () => select(i),
+                              onFocus: () => _focus(i),
                               child: FocusableActionDetector(
                                 focusNode: nodes[i],
+                                autofocus: widget.autofocus && i == selected,
                                 mouseCursor: SystemMouseCursors.click,
-                                onShowFocusHighlight: (on) {
-                                  if (mounted) {
-                                    setState(
-                                      () => focusIndex = on
-                                          ? i
-                                          : (focusIndex == i
-                                                ? null
-                                                : focusIndex),
-                                    );
+                                onFocusChange: (focused) {
+                                  final initial = focused && _autofocusPending;
+                                  if (focused) _autofocusPending = false;
+                                  if (initial &&
+                                      widget.autofocusHighlight != null) {
+                                    focusIndex = widget.autofocusHighlight!
+                                        ? i
+                                        : null;
+                                  } else if (focused && _pointerTarget == i) {
+                                    _pointerTarget = null;
+                                  } else if (focused &&
+                                      !modality.pointerOwnsFocus &&
+                                      FocusManager.instance.highlightMode ==
+                                          FocusHighlightMode.traditional) {
+                                    focusIndex = i;
+                                  } else if (!focused && focusIndex == i) {
+                                    focusIndex = null;
                                   }
+                                  if (!focused && _pointerTarget == i) {
+                                    _pointerTarget = null;
+                                  }
+                                  _refresh();
                                 },
                                 shortcuts: const {
                                   SingleActivator(LogicalKeyboardKey.enter):
@@ -207,45 +301,47 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                                       setState(() => hoverIndex = null),
                                   child: GestureDetector(
                                     behavior: HitTestBehavior.opaque,
-                                    onTap: () => select(i),
-                                    child: Center(
-                                      child: Text(
-                                        widget.items[i].label,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: theme
-                                            .textStyle('--dsw-font-s-14')
-                                            .copyWith(
-                                              height:
-                                                  DshSegmentedTabRecipe
-                                                      .lineHeight /
-                                                  DshSegmentedTabRecipe
-                                                      .fontSize,
-                                              fontWeight: i == selected
-                                                  ? FontWeight
-                                                        .values[DshSegmentedTabRecipe
-                                                                .selectedWeight ~/
-                                                            100 -
-                                                        1]
-                                                  : FontWeight.w400,
-                                              color:
-                                                  i == selected ||
-                                                      i == hoverIndex
-                                                  ? theme.color(
-                                                      DshSegmentedTabRecipe
-                                                          .activeLabelToken,
-                                                    )
-                                                  : theme.color(
-                                                      DshSegmentedTabRecipe
-                                                          .labelToken,
-                                                    ),
-                                              decoration: focusIndex == i
-                                                  ? TextDecoration.underline
-                                                  : TextDecoration.none,
-                                              decorationThickness:
-                                                  DshSegmentedTabRecipe
-                                                      .focusLineWidth,
+                                    onTap: () => select(i, pointer: true),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal:
+                                            DshSegmentedTabRecipe.labelPadding,
+                                      ),
+                                      child: Center(
+                                        child: TweenAnimationBuilder<Color?>(
+                                          tween: ColorTween(
+                                            end: theme.color(
+                                              i == selected || i == hoverIndex
+                                                  ? DshSegmentedTabRecipe
+                                                        .activeLabelToken
+                                                  : DshSegmentedTabRecipe
+                                                        .labelToken,
                                             ),
+                                          ),
+                                          duration: labelDuration,
+                                          curve: Curves.ease,
+                                          builder: (context, color, _) => _TabLabel(
+                                            widget.items[i].label,
+                                            underline: focusIndex == i,
+                                            style: theme
+                                                .textStyle('--dsw-font-s-14')
+                                                .copyWith(
+                                                  height:
+                                                      DshSegmentedTabRecipe
+                                                          .lineHeight /
+                                                      DshSegmentedTabRecipe
+                                                          .fontSize,
+                                                  fontWeight: i == selected
+                                                      ? FontWeight
+                                                            .values[DshSegmentedTabRecipe
+                                                                    .selectedWeight ~/
+                                                                100 -
+                                                            1]
+                                                      : FontWeight.w400,
+                                                  color: color,
+                                                ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -264,4 +360,87 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
       ),
     );
   }
+}
+
+// TextStyle has no CSS text-underline-offset counterpart. Paint the source
+// underline relative to the same laid-out text's alphabetic baseline.
+class _TabLabel extends StatelessWidget {
+  const _TabLabel(this.label, {required this.style, required this.underline});
+  final String label;
+  final TextStyle style;
+  final bool underline;
+
+  @override
+  Widget build(BuildContext context) => DshChromeBaseline(
+    style: style,
+    child: CustomPaint(
+      foregroundPainter: underline
+          ? _TabUnderline(
+              label,
+              style,
+              Directionality.of(context),
+              MediaQuery.textScalerOf(context),
+              dshSnapDensity(dshDevicePixelRatioOf(context)),
+            )
+          : null,
+      child: Text(
+        label,
+        style: style,
+        strutStyle: dshStrut(style),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+    ),
+  );
+}
+
+class _TabUnderline extends CustomPainter {
+  const _TabUnderline(
+    this.label,
+    this.style,
+    this.direction,
+    this.scaler,
+    this.density,
+  );
+  final String label;
+  final TextStyle style;
+  final TextDirection direction;
+  final TextScaler scaler;
+  final double density;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final text = TextPainter(
+      text: TextSpan(text: label, style: style),
+      textDirection: direction,
+      textScaler: scaler,
+      strutStyle: dshStrut(style),
+      maxLines: 1,
+      ellipsis: '\u2026',
+    )..layout(maxWidth: size.width);
+    final y =
+        text
+            .computeDistanceToActualBaseline(TextBaseline.alphabetic)
+            .roundToDouble() +
+        (DshSegmentedTabRecipe.focusLineOffset * density).round() / density;
+    canvas.drawRect(
+      Rect.fromLTWH(
+        0,
+        y,
+        text.width,
+        math.max(1, (DshSegmentedTabRecipe.focusLineWidth * density).round()) /
+            density,
+      ),
+      Paint()..color = style.color!,
+    );
+    text.dispose();
+  }
+
+  @override
+  bool shouldRepaint(_TabUnderline old) =>
+      old.label != label ||
+      old.style != style ||
+      old.direction != direction ||
+      old.scaler != scaler ||
+      old.density != density;
 }

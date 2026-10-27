@@ -17,6 +17,22 @@ const tasks=[{id:'synthetic-daily',sessionId:'synthetic-session',title:'Syntheti
 function Surface({family,props,ctx}:any){
  const ref=useRef<HTMLDivElement>(null)
  useLayoutEffect(()=>{for(const id of ['standard','ptc','reviewer'])ref.current?.querySelector(`[data-agent-preset-id="${id}"] [data-tone]`)?.setAttribute('data-parity-id',`preset-tag-${id}`)})
+ useLayoutEffect(()=>{
+  if(family!=='preset')return
+  const tag=()=>{
+   const buttons=ref.current?.querySelector('[data-agent-preset-id="standard"]')?.querySelectorAll('button')
+   const help=Array.from(buttons??[]).filter(el=>el.getAttribute('aria-label')?.includes(':'))
+   help.find(el=>el.textContent===t('modeExplanation'))?.setAttribute('data-parity-id','preset-guide-standard-details')
+   help.find(el=>el.textContent===t('howToUse'))?.setAttribute('data-parity-id','preset-guide-standard-usage')
+   const tabs=document.querySelector('[role="dialog"] [role="tablist"]')
+   tabs?.setAttribute('data-parity-id','preset-guide-tabs')
+   tabs?.querySelectorAll('[role="tab"]').forEach((el,i)=>el.setAttribute('data-parity-id',`preset-guide-tab-${i===0?'explanation':'usage'}`))
+  }
+  tag()
+  const observer=new MutationObserver(tag)
+  observer.observe(document.body,{childList:true,subtree:true})
+  return()=>observer.disconnect()
+ },[])
  const dictionaries:any={preset:[presetEn,presetZh],goal:[goalEn,goalZh],skill:[skillEn,skillZh],jobs:[jobEn,jobZh],manager:[taskEn,taskZh]}
  const [en,zh]=dictionaries[family],t=createTranslator(ctx.case.locale,{en,zh})
  let body:any
@@ -32,3 +48,4 @@ function Surface({family,props,ctx}:any){
  return <div ref={ref} data-parity-id="agents-tasks-surface" style={{width:props.width,height:props.height,overflow:family==='preset'?'auto':undefined,color:'var(--dsw-alias-label-primary)'}}>{body}</div>
 }
 export const kinds:Record<string,KindRenderer>=Object.fromEntries(['preset','goal','skill','jobs','manager'].map(f=>[`agents-tasks.${f}`,(props:any,ctx:any)=><Surface family={f} props={props} ctx={ctx}/>]))
+kinds['agents-tasks.guide']=(props:any,ctx:any)=><Surface family="preset" props={props} ctx={ctx}/>

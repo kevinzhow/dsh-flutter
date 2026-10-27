@@ -11,6 +11,25 @@ import 'package:dsh_ui/dsh_ui.dart';
 import '../helpers/agents_tasks_fixture.dart';
 
 final Map<String, ParityCase> agentsTasksCases = {
+  'agents-tasks.guide': ParityCase(
+    widgets: const [
+      'dsh_feature_agent_management:AgentPresetSection',
+      'dsh_ui:DshSegmentedTabs',
+    ],
+    // This opens the real modal above the frame. Its barrier intentionally
+    // dims the viewport corner used by the frame's background-pixel check.
+    framed: false,
+    notes: 'Real guide opened through its preset row. The modal barrier covers the frame corner; in-tree theme validation remains active.',
+    build: (ctx) => ctx.frame(
+      _Surface(
+        family: 'preset',
+        name: ctx.props['name'] as String,
+        width: (ctx.props['width'] as num).toDouble(),
+        height: (ctx.props['height'] as num).toDouble(),
+        i18n: DshI18n(DshLocale.fromTag(ctx.locale)),
+      ),
+    ),
+  ),
   for (final family in ['preset', 'goal', 'skill', 'jobs', 'manager'])
     'agents-tasks.$family': ParityCase(
       widgets: ['dsh_feature_agent_management:$family'],

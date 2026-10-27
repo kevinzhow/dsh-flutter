@@ -43,7 +43,10 @@ abstract final class DshSegmentedTabRecipe {
   static const double lineHeight = 20.0;
   static const double selectedWeight = 600.0;
   static const double transitionMs = 180.0;
+  static const double labelTransitionMs = 180.0;
+  static const double labelPadding = 12.0;
   static const double focusLineWidth = 1.0;
+  static const double focusLineOffset = 4.0;
   static const String backgroundToken = '--dsw-alias-bg-module-platform';
   static const String radiusToken = '--dsw-radius-lg';
   static const String indicatorBackgroundToken = '--dsw-alias-bg-layer-3';

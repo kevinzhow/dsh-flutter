@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show SemanticsRole;
 
 import 'package:dsh_client/generated_agent_presets.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -50,6 +51,9 @@ class AgentPresetSection extends StatefulWidget {
 
 class _AgentPresetSectionState extends State<AgentPresetSection> {
   StreamSubscription<int>? _sub;
+  final _guideTriggers = <String, FocusNode>{};
+  FocusNode _guideTrigger(AgentPresetRow row, bool usage) =>
+      _guideTriggers.putIfAbsent('${row.id}:$usage', () => FocusNode());
   @override
   void initState() {
     super.initState();
@@ -65,6 +69,9 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
   void dispose() {
     unawaited(_sub?.cancel());
     widget.model.closeView(announce: false);
+    for (final node in _guideTriggers.values) {
+      node.dispose();
+    }
     super.dispose();
   }
 
@@ -111,11 +118,16 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
   Future<void> _guide(AgentPresetRow row, bool usage) async {
     final stem = _copyStem(row);
     if (stem == null) return;
+    final initialHighlight = _guideTrigger(row, usage).hasPrimaryFocus;
     await showDshDialog<void>(
       context,
       label: presetName(row, widget.i18n),
-      builder: (context) =>
-          _PresetGuide(stem: stem, i18n: widget.i18n, usage: usage),
+      builder: (context) => _PresetGuide(
+        stem: stem,
+        i18n: widget.i18n,
+        usage: usage,
+        initialHighlight: initialHighlight,
+      ),
     );
   }
 
@@ -219,11 +231,15 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
               children: [
                 if (builtInPreset(row)) ...[
                   DshButton(
+                    key: ValueKey('preset-guide-${row.id}-details'),
+                    focusNode: _guideTrigger(row, false),
                     size: DshButtonSize.sm,
                     onPressed: () => unawaited(_guide(row, false)),
                     child: Text(t('modeExplanation')),
                   ),
                   DshButton(
+                    key: ValueKey('preset-guide-${row.id}-usage'),
+                    focusNode: _guideTrigger(row, true),
                     size: DshButtonSize.sm,
                     onPressed: () => unawaited(_guide(row, true)),
                     child: Text(t('howToUse')),
@@ -317,10 +333,12 @@ class _PresetGuide extends StatefulWidget {
     required this.stem,
     required this.i18n,
     required this.usage,
+    required this.initialHighlight,
   });
   final String stem;
   final DshI18n i18n;
   final bool usage;
+  final bool initialHighlight;
   @override
   State<_PresetGuide> createState() => _PresetGuideState();
 }
@@ -339,24 +357,45 @@ class _PresetGuideState extends State<_PresetGuide> {
         const SizedBox(height: 12),
         Text(t('guide${widget.stem}Intro')),
         const SizedBox(height: 12),
-        Wrap(
-          spacing: 8,
-          children: [
-            DshButton(
-              onPressed: () => setState(() => usage = false),
-              child: Text(t('modeExplanation')),
+        DshSegmentedTabs(
+          key: const ValueKey('preset-guide-tabs'),
+          items: [
+            DshSegmentedTab(
+              'explanation',
+              t('modeExplanation'),
+              key: const ValueKey('preset-guide-tab-explanation'),
+              id: 'preset-guide-tab-explanation',
+              panelId: 'preset-guide-panel-explanation',
             ),
-            DshButton(
-              onPressed: () => setState(() => usage = true),
-              child: Text(t('howToUse')),
+            DshSegmentedTab(
+              'usage',
+              t('howToUse'),
+              key: const ValueKey('preset-guide-tab-usage'),
+              id: 'preset-guide-tab-usage',
+              panelId: 'preset-guide-panel-usage',
             ),
           ],
+          value: usage ? 'usage' : 'explanation',
+          label: t('guideSections'),
+          expand: true,
+          autofocus: true,
+          autofocusHighlight: widget.initialHighlight,
+          onChanged: (value) => setState(() => usage = value == 'usage'),
         ),
         Flexible(
-          child: SingleChildScrollView(
-            key: ValueKey(usage),
-            child: DshMarkdown(
-              t('guide${widget.stem}${usage ? 'Usage' : 'Explanation'}'),
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            role: SemanticsRole.tabPanel,
+            identifier: 'preset-guide-panel-${usage ? 'usage' : 'explanation'}',
+            label: t(usage ? 'howToUse' : 'modeExplanation'),
+            child: Focus(
+              child: SingleChildScrollView(
+                key: ValueKey(usage),
+                child: DshMarkdown(
+                  t('guide${widget.stem}${usage ? 'Usage' : 'Explanation'}'),
+                ),
+              ),
             ),
           ),
         ),

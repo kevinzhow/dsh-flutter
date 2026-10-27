@@ -1,10 +1,318 @@
+import 'dart:ui' show SemanticsRole, Tristate;
+
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  for (final highlight in [false, true]) {
+    testWidgets('reader autofocus inherits visible focus=$highlight', (
+      t,
+    ) async {
+      final boundary = GlobalKey();
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.topLeft,
+            child: RepaintBoundary(
+              key: boundary,
+              child: DshSegmentedTabs(
+                items: const [
+                  DshSegmentedTab('first', 'First'),
+                  DshSegmentedTab('second', 'Second'),
+                ],
+                value: 'first',
+                label: 'Reader',
+                autofocus: true,
+                autofocusHighlight: highlight,
+                onChanged: (_) {},
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      expect(
+        t
+            .widgetList<FocusableActionDetector>(
+              find.byType(FocusableActionDetector),
+            )
+            .first
+            .focusNode!
+            .hasPrimaryFocus,
+        isTrue,
+      );
+      Future<List<int>> pixels() async => (await t.runAsync(() async {
+        final image =
+            await (boundary.currentContext!.findRenderObject()!
+                    as RenderRepaintBoundary)
+                .toImage();
+        final bytes = (await image.toByteData())!.buffer.asUint8List().toList();
+        image.dispose();
+        return bytes;
+      }))!;
+      final initial = await pixels();
+      await t.sendKeyEvent(LogicalKeyboardKey.home);
+      await t.pumpAndSettle();
+      final keyboard = await pixels();
+      expect(initial, highlight ? keyboard : isNot(keyboard));
+    });
+  }
+  testWidgets(
+    'source focus-visible distinguishes same-tab and new pointer focus',
+    (t) async {
+      final boundary = GlobalKey();
+      final outsideFocus = FocusNode(debugLabel: 'outside tab group');
+      addTearDown(outsideFocus.dispose);
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.topLeft,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RepaintBoundary(
+                  key: boundary,
+                  child: DshSegmentedTabs(
+                    items: const [
+                      DshSegmentedTab('first', 'First'),
+                      DshSegmentedTab('second', 'Second'),
+                    ],
+                    value: 'first',
+                    label: 'Views',
+                    onChanged: (_) {},
+                  ),
+                ),
+                DshButton(
+                  focusNode: outsideFocus,
+                  onPressed: outsideFocus.requestFocus,
+                  child: const Text('Outside'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      Future<List<int>> pixels() async => (await t.runAsync(() async {
+        final image =
+            await (boundary.currentContext!.findRenderObject()!
+                    as RenderRepaintBoundary)
+                .toImage();
+        final data = (await image.toByteData())!.buffer.asUint8List().toList();
+        image.dispose();
+        return data;
+      }))!;
+
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.pumpAndSettle();
+      final keyboard = await pixels();
+      await t.tap(find.text('First'));
+      await t.pumpAndSettle();
+      final pointer = await pixels();
+      expect(pointer, keyboard);
+      await t.tap(find.text('Second'));
+      await t.pumpAndSettle();
+      final otherPointer = await pixels();
+      await t.sendKeyEvent(LogicalKeyboardKey.space);
+      await t.pumpAndSettle();
+      expect(await pixels(), isNot(otherPointer));
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
+      await t.pumpAndSettle();
+      expect(await pixels(), keyboard);
+      await t.tap(find.text('First'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('Outside'));
+      await t.pumpAndSettle();
+      expect(outsideFocus.hasPrimaryFocus, isTrue);
+      await t.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+      await t.pumpAndSettle();
+      final firstDetector = t.widget<FocusableActionDetector>(
+        find
+            .descendant(
+              of: find.byType(DshSegmentedTabs),
+              matching: find.byType(FocusableActionDetector),
+            )
+            .first,
+      );
+      expect(firstDetector.focusNode!.hasPrimaryFocus, isTrue);
+      expect(await pixels(), keyboard);
+    },
+  );
+  testWidgets('a guide tab row fills the width offered by its container', (
+    t,
+  ) async {
+    await t.pumpWidget(
+      dshTestApp(
+        Align(
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            width: 400,
+            child: DshSegmentedTabs(
+              items: const [
+                DshSegmentedTab('first', 'First'),
+                DshSegmentedTab('second', 'Second'),
+              ],
+              value: 'first',
+              label: 'Guide',
+              expand: true,
+              onChanged: (_) {},
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(t.getSize(find.byType(DshSegmentedTabs)).width, 400);
+  });
+  testWidgets('announces a named tab list with selectable focused tabs', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    var selected = 'first';
+    await t.pumpWidget(
+      dshTestApp(
+        StatefulBuilder(
+          builder: (context, set) => DshSegmentedTabs(
+            items: const [
+              DshSegmentedTab(
+                'first',
+                'First',
+                id: 'first-tab',
+                panelId: 'first-panel',
+              ),
+              DshSegmentedTab(
+                'second',
+                'Second',
+                id: 'second-tab',
+                panelId: 'second-panel',
+              ),
+            ],
+            value: selected,
+            label: 'Synthetic views',
+            onChanged: (value) => set(() => selected = value),
+          ),
+        ),
+      ),
+    );
+    final group = t.getSemantics(find.bySemanticsLabel('Synthetic views'));
+    expect(group.getSemanticsData().role, SemanticsRole.tabBar);
+    final first = t.getSemantics(find.bySemanticsLabel('First'));
+    expect(first.getSemanticsData().role, SemanticsRole.tab);
+    expect(first.getSemanticsData().identifier, 'first-tab');
+    expect(first.getSemanticsData().controlsNodes, {'first-panel'});
+    expect(
+      first.getSemanticsData().flagsCollection.isSelected,
+      Tristate.isTrue,
+    );
+    expect(first.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+    expect(first.getSemanticsData().hasAction(SemanticsAction.focus), isTrue);
+    await t.sendKeyEvent(LogicalKeyboardKey.tab);
+    await t.pump();
+    expect(
+      t
+          .getSemantics(find.bySemanticsLabel('First'))
+          .getSemanticsData()
+          .flagsCollection
+          .isFocused,
+      Tristate.isTrue,
+    );
+    await t.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+    await t.pump();
+    expect(selected, 'second');
+    expect(
+      t
+          .getSemantics(find.bySemanticsLabel('Second'))
+          .getSemanticsData()
+          .flagsCollection
+          .isSelected,
+      Tristate.isTrue,
+    );
+    final firstAgain = t.getSemantics(find.bySemanticsLabel('First'));
+    firstAgain.owner!.performAction(firstAgain.id, SemanticsAction.focus);
+    await t.pump();
+    expect(
+      t
+          .getSemantics(find.bySemanticsLabel('First'))
+          .getSemanticsData()
+          .flagsCollection
+          .isFocused,
+      Tristate.isTrue,
+    );
+    firstAgain.owner!.performAction(firstAgain.id, SemanticsAction.tap);
+    await t.pump();
+    expect(selected, 'first');
+    semantics.dispose();
+  });
+
+  for (final reduceMotion in [false, true]) {
+    testWidgets('selection indicator respects reduced motion=$reduceMotion', (
+      t,
+    ) async {
+      var selected = 'first';
+      await t.pumpWidget(
+        dshTestApp(
+          MediaQuery(
+            data: MediaQueryData(disableAnimations: reduceMotion),
+            child: StatefulBuilder(
+              builder: (context, set) => Align(
+                alignment: Alignment.topLeft,
+                child: DshSegmentedTabs(
+                  items: const [
+                    DshSegmentedTab('first', 'First'),
+                    DshSegmentedTab('second', 'Second'),
+                  ],
+                  value: selected,
+                  label: 'Synthetic views',
+                  onChanged: (value) => set(() => selected = value),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      final indicator = find
+          .descendant(
+            of: find.byType(DshSegmentedTabs),
+            matching: find.byType(IgnorePointer),
+          )
+          .first;
+      final start = t.getTopLeft(indicator).dx;
+      Color? labelColor() => t.widget<Text>(find.text('Second')).style!.color;
+      final colorStart = labelColor();
+      await t.tap(find.text('Second'));
+      await t.pump();
+      final immediate = t.getTopLeft(indicator).dx;
+      final colorImmediate = labelColor();
+      expect(
+        t.widget<Text>(find.text('Second')).style!.fontWeight,
+        FontWeight.w600,
+      );
+      await t.pump(const Duration(milliseconds: 90));
+      final midpoint = t.getTopLeft(indicator).dx;
+      final colorMidpoint = labelColor();
+      await t.pump(const Duration(milliseconds: 110));
+      final end = t.getTopLeft(indicator).dx;
+      final colorEnd = labelColor();
+      expect(end, greaterThan(start));
+      expect(colorEnd, isNot(colorStart));
+      if (reduceMotion) {
+        expect(immediate, end);
+        expect(colorImmediate, colorEnd);
+      } else {
+        expect(immediate, start);
+        expect(midpoint, greaterThan(start));
+        expect(midpoint, lessThan(end));
+        expect(colorImmediate, colorStart);
+        expect(colorMidpoint, isNot(colorStart));
+        expect(colorMidpoint, isNot(colorEnd));
+      }
+    });
+  }
+
   testWidgets(
     'arrow/Home/End selection moves focus and preserves a single tab stop',
     (t) async {
