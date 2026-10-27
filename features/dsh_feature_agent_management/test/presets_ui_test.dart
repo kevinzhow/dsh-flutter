@@ -126,7 +126,7 @@ void main() {
           .singleWhere((item) => item.focusNode?.hasFocus == true);
       expect(focusedTab.focusNode!.skipTraversal, isFalse);
       expect(
-        tester.widget<DshMarkdown>(find.byType(DshMarkdown)).data,
+        tester.widget<DshReaderMarkdown>(find.byType(DshReaderMarkdown)).data,
         i18n.t('settings.agentPreset', 'guideStandardExplanation'),
       );
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
@@ -141,7 +141,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        tester.widget<DshMarkdown>(find.byType(DshMarkdown)).data,
+        tester.widget<DshReaderMarkdown>(find.byType(DshReaderMarkdown)).data,
         i18n.t('settings.agentPreset', 'guideStandardUsage'),
       );
       await tester.tap(find.byKey(const ValueKey('preset-guide-close')));

@@ -36,7 +36,7 @@ Future<T?> showDshDialog<T>(
       barrierLabel: label ?? '',
       // Paint the source mask inside the page so native caption paint can be
       // excluded while the entire modal route continues to block input.
-      barrierColor: const Color(0x00000000),
+      barrierColor: theme.color(DshModalRecipe.maskToken).withValues(alpha: 0),
       transitionDuration: duration,
       transitionBuilder: (context, animation, _, child) => FadeTransition(
         opacity: animation.drive(
@@ -194,7 +194,9 @@ class _DialogLayerState extends State<_DialogLayer> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          const ColoredBox(color: Color(0x00000000)),
+          ColoredBox(
+            color: theme.color(DshModalRecipe.maskToken).withValues(alpha: 0),
+          ),
           Positioned.fill(
             top: frame.chromeTop,
             child: GestureDetector(
