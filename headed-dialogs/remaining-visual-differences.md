@@ -1,0 +1,23 @@
+# Headed risk visual review — 2026-10-27
+
+Reviewed the actual React/Flutter PNGs and metadata in `scratch/whalee-headed-dialogs/build/parity-headed-final` at head **42d0c1d2c848daf65fd883c8c915f2b5c3b115db**, tree **60f230e0cbf06cfdcdcf6e25aec7faf8654b023c**. The earlier preliminary probe is retained separately in `build/parity-headed-probe`.
+
+The final clean-head recapture is RGBA-identical to the preceding 96f48f captures in all 64 cases per provider after the scroll-position correction. The final cohort has 64/64 matching dimensions, 0/64 at the unchanged 99.5% non-text threshold, and mean non-text agreement **96.3078125%**. Means by group: normal cards32 **95.85553125%**, long cards16 **95.8305625%**, footer crops16 **97.689625%**. Independently recomputed all eight top/bottom footer pairs per provider: RGBA-identical. That proves footer retention, not cross-provider acceptance. The preliminary overall mean was95.076109375%.
+
+| Family / context | Observed evidence | Implication and next action |
+| --- | --- | --- |
+| Canonical buttons: short ZH labels — corrected | Final `risk-desktop-zh-card-on.dark` raw row220 now paints Confirm x280..415,136px, and Cancel borders x200..271,72px, in both providers. The preliminary Flutter spans were112/58px. | Painted surfaces now honor the source minima. Remaining label and outline edge differences belong to button/text rendering. Final phone ZH footer agreement is97.841% light and97.806% dark, versus about88.6% before correction. |
+| Modal capture underlay — corrected | Final dark raw pixel(0,0) is(10,10,11) in both providers; interior fill is(44,44,46) in both. Preliminary Flutter corner was(127,127,127) because a transparent fixture page flattened over white. | The headed fixture now paints its themed page before opening the real Modal. This removes the mismatched context. Remaining curved-edge/shadow coverage should be assessed as frame rendering, without changing the page or mask to compensate. |
+| Overflow scrollbar / text wrapping | `risk-phone-en-long-card-bottom.dark`: Flutter shows its l1 thumb and narrower content; source acceptance hides the scrollbar. At the bottom, source begins with “you trust the current task. Full access”, while Flutter begins “the current task. Full access reduces”. Actual-source no-hide diagnostics measure a13-physical-pixel gutter at DPR2.625 and one extra22px English line. | This is the documented renderer-context discrepancy. Keep source acceptance's original implicit `--hide-scrollbars`; retain the actual conditional gutter in product. Diagnostic no-hide images explain wrapping and must not replace acceptance images. |
+| Typography / rasterization | Normal desktop/phone EN line breaks and major text positions agree in the inspected pairs. CJK glyphs appear heavier in Flutter, and glyph edges differ in both locales. Compared metadata agrees on title16/24 weight500 and warning/ack/action14/22 weight400, letter-spacing0 and declared colors. | Continue review in the canonical text/font-rendering family. Do not explain a numerical width or surface defect as rasterization. Matching declared stacks alone does not prove identical resolved glyph faces or shaping; preserve pinned fonts and evidence before drawing that conclusion. |
+| Frame edges and controls | With button minima and background corrected, footer surfaces align in the inspected ZH/dark pair. Normal EN outlines, Close and warning icons occupy matching visible positions. Antialias coverage remains along outlines, checkbox/checkmark, icon strokes, corners and shadow edges. | Assign remaining measured geometry or paint differences to the frame/button/checkbox/icon component itself. No new functional blocker was identified in this visual follow-up; do not compensate in the permission page or alter the classifier. |
+
+Representative side-by-side PNGs, under `build/parity-headed-final/visual-testing-results/diff/react__flutter/` (the earlier five probe images were also inspected; final ZH/dark and phone EN/long/dark were re-inspected after correction):
+
+- `components.headed-dialogs.risk-desktop-en-card-off.light.side-by-side.png`
+- `components.headed-dialogs.risk-phone-en-card-off.light.side-by-side.png`
+- `components.headed-dialogs.risk-desktop-zh-card-on.dark.side-by-side.png`
+- `components.headed-dialogs.risk-phone-en-long-card-bottom.dark.side-by-side.png`
+- `components.headed-dialogs.risk-phone-en-long-footer-bottom.dark.side-by-side.png`
+
+Source sizing evidence is `.local/headed-source-measurements.json`; scrollbar/font diagnostics are `.local/headed-tiny-gutter/receipt.md` and `.local/headed-open-scroll.json`. Overall visual completion remains unfinished.

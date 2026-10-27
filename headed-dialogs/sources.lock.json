@@ -1,0 +1,231 @@
+{
+  "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "packages": [
+    {
+      "name": "@deepseek-ai/dsh-client-ui-primitives",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-primitives/-/dsh-client-ui-primitives-0.2.1-rc.2.tgz",
+      "integrity": "sha512-3K6W2ID4sbDUDHhZHs8cNO15XDXBWAYFnEzJ/iD8ZASqidazcJActxlEf8GO6NHmbbeX0lEq0P20Ftwhovt+Mw==",
+      "files": {
+        "package.json": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "Button.module.css": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+        "SegmentedTabs.module.css": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+        "Pill.module.css": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82",
+        "Menu.module.css": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
+        "MenuSurface.module.css": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
+        "MenuGroup.module.css": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
+        "menu-portal.json": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
+        "ShortcutKeys.module.css": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
+        "Tooltip.module.css": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
+        "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
+        "Input.module.css": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
+        "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
+        "Checkbox.module.css": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
+        "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+        "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+        "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+        "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340"
+      },
+      "sourcePackage": "packages/client/ui-primitives/package.json",
+      "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+      "dependencyField": "devDependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-primitives",
+      "extractionKind": "primitive-css",
+      "extraction": "Exact stylesheet and metadata bytes from published npm archive; no JavaScript execution",
+      "referenceSourceSha256": {
+        "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1",
+        "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695",
+        "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67",
+        "packages/client/ui-primitives/src/Switch.tsx": "9f0f6db0de338793711b4333e87dcd2b82d06d8ad43aa362eb67efc63573ccb1",
+        "packages/client/ui-primitives/src/Checkbox.tsx": "2a1b1d5b04cfff9a5494e19b1d8fb16a172bacb3094e360d7f5b5dc2a4930151",
+        "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868",
+        "packages/client/ui-primitives/src/Pill.tsx": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f",
+        "packages/client/ui-primitives/src/Tag.tsx": "2f4845c6b5c7d6f06304de6b972127692a909c775bae72c14799acfd2dc56289",
+        "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd",
+        "packages/client/ui-primitives/src/Modal.tsx": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f",
+        "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+        "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+        "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+      },
+      "referenceConsumers": [
+        {
+          "path": "packages/client/ui-agent-preset/package.json",
+          "dependencyField": "devDependencies",
+          "dependencySpecifier": "workspace:*"
+        }
+      ]
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-plugin-manager/-/dsh-client-ui-plugin-manager-0.2.1-rc.2.tgz",
+      "integrity": "sha512-T/FfDjKRwjFIdBQTtN9BHSVquuMJ970ICzE//oKqaa5ZU0bRG0RVllwVatL6FIKu7F1M1wzgt3tW+b6vstd2eg==",
+      "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9",
+      "extraction": "JSON CSS string and static JSON class export from PluginManagerPage.module.css.mjs; no JavaScript execution",
+      "sourcePackage": "packages/client/ui-plugin-manager/package.json",
+      "files": {
+        "package.json": "b18af71d36fa3614fa2e358a08d2afd635c82928d00cd8ae613184ec18098f51",
+        "PluginManagerPage.module.css": "45966a0e6822bbbb4beb617862815ddd4478b62fa4563ae6cfc45925caff982d",
+        "classes.json": "fdbb0d7cc8dea100112a9c70e152d6992f81a0cda38fa8f1c56ed6d7356432d2",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      },
+      "snapshotFolder": "ui-plugin-manager",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-theme",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-theme/-/dsh-client-ui-theme-0.2.1-rc.2.tgz",
+      "integrity": "sha512-WO9hMC9BnxhkOnJNoEHi28DHlDimAoQsykWu5I+1rjkap7U/TgkSEPshzMg6nagUxJ4eFotH//IIZVMacJMU1w==",
+      "publishedBundleSha256": "f9915fb53d5f156e75291e63be66c80e607a82bfd03c7d583e0a12ebef5a6cb8",
+      "extractionKind": "theme-css",
+      "extraction": "Decode static JSON literals without executing JavaScript",
+      "sourcePackage": "packages/client/ui-theme/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-theme",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "base.css": "77d5487e7f9cf7597d8b15f1b598598658d970f0cdb4a513c9a93c2f450aa77e",
+        "corner-shape.css": "b3ef70d30ee48289413e753be96b56a1e3273115d8123cc22105504dbd38ebe7",
+        "design-platform.css": "f04a03df7d266e4859959ceddcff12c5a58ff9c9972e80c8b10d2184376a833e",
+        "focus.css": "77bcbea3e42c33667afa8e835bf798cc9bbc4bdcd0d37e796423af9dbd9bbded",
+        "gradient-shadow-text.css": "814dee95539b2f719e22e6e22812d5b9d22fe620ad6ddd457b0303ea2e69d2c8",
+        "onboarding.css": "d321e1903c77ba69cfc2ba7c077504efda2fc2b3ee3d8cf4797a6746fe23224e",
+        "package.json": "dc7d7ea3f8ccb0a0001178af61dd4eb1b3d7032bd5af86af21b3bad6ee4971c9",
+        "scrollbar.css": "7457fa7bcde76d19981125c94c0a8afd7d83b1dac3f72bd418597bda35297c5b",
+        "shiki.css": "71deb2de951ab101ef23e584e4ea588c27d5cbfc4f3cdc8707bcf99243dac7e7",
+        "styles-order.json": "5636a6bb26c22a2ae2158b3e508d885ca40d8019484ada5c67acd2fb987d347e"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-theme/src/styles/base.css": "803926ce39f5ea48b652021d06b6ca65c4acc7be2c5c4e19bd904ab1dabf0b67",
+        "packages/client/ui-theme/src/styles/corner-shape.css": "d94f82e1332b6d37e8345aafe1b6b4129faed65891edd3861c00b88940ec4d3f",
+        "packages/client/ui-theme/src/styles/design-platform.css": "809b20ae477324fdf5181a2d338655a19919cabbf1b0e60adc149908462c5a66",
+        "packages/client/ui-theme/src/styles/focus.css": "f7398e7730415592ab1e81cec36f8c5e23065becd06c050f0129a6fa44d247e8",
+        "packages/client/ui-theme/src/styles/onboarding.css": "9b3a0541c9639e73aa52f001d9b2e8056d3e9ffb55ea69c5ba95989706c92ddb",
+        "packages/client/ui-theme/src/styles/scrollbar.css": "673450184fe82a679b5759a7f93ceab17895b9f12e1196f7efb281304afd8398",
+        "packages/client/ui-theme/src/styles/gradient-shadow-text.css": "b6e1e8387edbfa60ec03bb29aad7c01245c0adbd22229d5a6f2916caa7e7b427",
+        "packages/client/ui-theme/src/styles/shiki.css": "14f2b00083b035d8f92e26243a669d1b04a8d564c20d91856b20706cc79b8828",
+        "packages/client/ui-theme/src/client/styles.ts": "75c74517ebda2ea564d0dca53e3c5bdacd250673d49dbdbc4a15bdfc3fafa4cc"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-sidebar-terminal",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-sidebar-terminal/-/dsh-client-ui-sidebar-terminal-0.2.1-rc.2.tgz",
+      "integrity": "sha512-tMaVRci5IcqpJaBp/KFZHICJ9ff3nL5Z4m/7yeB31o0YqhhYhJO4LFRkkwSnzW9+EKOgPfMVoV032PgXQdK+Gg==",
+      "publishedBundleSha256": "0821b155ce820424ff788474fedea3e6f606d95cea6ebe03b580660e7701eb6f",
+      "extractionKind": "terminal-font",
+      "extraction": "Decode static JSON literals without executing JavaScript",
+      "sourcePackage": "packages/client/ui-sidebar-terminal/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-sidebar-terminal",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "package.json": "a4093117e6687d4fcc7ebf91be445393dc04be3c4c5f6b8aab35a7082ae977f5",
+        "terminal-font.json": "bd309601d61d0efd54fe3dfac862b1539d5e16881cd4f956a0c0cda97a884640"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-sidebar-terminal/src/client/terminal.tsx": "a2504ac85030d3e2a0f9f4cb69cc3a6219a9aefdf4ea7fd7d179e78e00656a95"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-dockkit",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-dockkit/-/dsh-client-ui-dockkit-0.2.1-rc.2.tgz",
+      "integrity": "sha512-PJVoBN2BbmB2PLvGlvEvqN6KzkSDdYe0VtWfyBOxBsPfgN8QFQrk+tYEcl9fyBrP8vaM3Rdnt+ZYI4unzmetrQ==",
+      "extractionKind": "plain-files",
+      "archiveFiles": {
+        "package.json": "package/package.json",
+        "LICENSE": "package/LICENSE",
+        "dockkit.module.css": "package/lib/components/dockkit.module.css"
+      },
+      "sourcePackage": "packages/client/ui-dockkit/package.json",
+      "referenceConsumer": "packages/client/web/package.json",
+      "dependencyField": "devDependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-dockkit",
+      "files": {
+        "package.json": "de5e839bae6121b7793406209fe422f1af732a4206d2b7fe1a9ea6d1ed509c50",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "dockkit.module.css": "aa18d0e2a41bfd99babd9011f1107b26d387c30665fdbcc3d6276ec268750fdf"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-dockkit/src/components/TabMenu.tsx": "20b266cfe69a8081bbc548df383b66067ae3e781f9619f8c16fe4f029607d780",
+        "packages/client/web/src/base.css": "dfaaf04e7498017ef406269ec28b5981566cb07b48eadc0ab92dac48ecbf7a6e",
+        "packages/client/ui-dockkit/src/components/DockSurface.tsx": "437ef9917fdfa29f3461b89b0904f3e91b3b309eaacddfc89baeef4b4142ddc9",
+        "packages/client/ui-dockkit/src/components/TabPanel.tsx": "21d7c1dde24b86f3f165d87af68e1cbe69d9336f1fc5931cb058bee902043c5e",
+        "packages/client/ui-dockkit/src/components/TabLayout.tsx": "ea6305089a7697214a3dba28ca0c364253721b5b67533fc5245bad3036e990be"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-plugin-market",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-plugin-market/-/dsh-client-ui-plugin-market-0.2.1-rc.2.tgz",
+      "integrity": "sha512-vxf6BzUqEA8YRemGJRGC5lcP8vU9xlSjO92wSACMPHYHcbJdJmUybPLJH5lu4/ZU2UNXvD4K/NxNnpWyecuJzw==",
+      "publishedBundleSha256": "e961988dd984dc527b0bfeed37f6ae45b4a72392a2eb21676350359d8a127a60",
+      "extractionKind": "market-css",
+      "extraction": "Decode static JSON CSS and class export without executing JavaScript",
+      "sourcePackage": "packages/client/ui-plugin-market/package.json",
+      "referenceConsumer": "packages/experimental/plugin-market-bundle/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-plugin-market",
+      "files": {
+        "package.json": "74e97be85662285e22e04172d7ab8740c8fb16549a1802fc2a129598150b9138",
+        "classes.json": "58e41f237101bb85eda13d207aca0935e196d9e951073824d96b98731dd58aa8",
+        "DiscoverSection.module.css": "83d43d3fc71453b1a8b96d15d2670c37b11cf3eae54769e6438c7b39c602c718",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx": "f702e5b72028a37cf9bc5c8e855eed935d7a4e6d26d2d6b9059196ada2539c06"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-agent-preset",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-agent-preset/-/dsh-client-ui-agent-preset-0.2.1-rc.2.tgz",
+      "integrity": "sha512-Tp3CI/LpwykU3ttjG7MfLHk+5jep/qgwL982MAyYuoRHItuj/zvGLH/fXX0X8VAWW9OtRyv7gs/yFffkfXZ5dQ==",
+      "publishedBundleSha256": "6ecdf173de66fce620e588f10ed1e3b624725febab059fb867beefef9ae4ddb8",
+      "extractionKind": "agent-preset-css",
+      "extraction": "Decode separate guide and roster CSS literals, static class maps, and reader region from named release regions without executing JavaScript",
+      "sourcePackage": "packages/client/ui-agent-preset/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-agent-preset",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "PresetGuideDialog.module.css": "66f8d99bef244fe2de94506c1c6142207f93713708f9aeb5c9fe9052f8f47817",
+        "guide-classes.json": "96ff147637c8e0724b7233def3d2f343a5f5cb3d026ce2d2f1e148c6501c46b1",
+        "package.json": "d2a6fbce35d6fa9dc4b5f330889791d466b37c97df277c76074020d4988cfdb4",
+        "reader-behavior.json": "6bcfa990163e2fdadb0e669a75799072175626f69c6b2837dd9f32be79b3fcae",
+        "roster-classes.json": "a37292f6e720da3f4e9564f546a14ddbca947d4edaf05c2e28040bb78862d608",
+        "styles.css": "d841924d9dcbab7ef9cc641be98d0d1832ae3a77449bfe5af40c6d412a87d3a0"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx": "fb2abf1a26ea0748526f32d5c271ce2c510d1867fc67db5fb3bc075f55d76822",
+        "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
+        "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2",
+        "packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea"
+      }
+    }
+  ],
+  "rendererSnapshots": {
+    "chromiumCheckbox": {
+      "path": "upstream/chromium/checkbox-native.json",
+      "sha256": "72b56ce1b621ac23f481137c4e6ec2bc09b42ea25ccd06b6f8038a8897e12167",
+      "browser": "145.0.7632.6",
+      "sourceSha256": "bc7f19f1b86b74ff20f138e68f5807e288e9443ab48b9ac7be2b85e56fbcd738",
+      "license": "upstream/chromium/LICENSE",
+      "licenseSha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+    }
+  }
+}

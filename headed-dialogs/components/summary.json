@@ -1,0 +1,1183 @@
+{
+  "thresholdPct": 99.5,
+  "allCaptures": {
+    "compared": 64,
+    "dimensionsEqual": 64,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 96.3078125
+  },
+  "groups": {
+    "cards": {
+      "compared": 32,
+      "dimensionsEqual": 32,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 95.85553125
+    },
+    "long-cards": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 95.8305625
+    },
+    "footers": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.689625
+    }
+  },
+  "cases": [
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-off.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-off.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.165,
+      "pixelPerfectPct": 89.084,
+      "rgbPct": 99.294,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-off.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-off.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.207,
+      "pixelPerfectPct": 90.52,
+      "rgbPct": 99.131,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-on.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-on.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.766,
+      "pixelPerfectPct": 92.261,
+      "rgbPct": 99.251,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-on.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-on.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.812,
+      "pixelPerfectPct": 92.478,
+      "rgbPct": 99.095,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-off-disabled.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-off-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.155,
+      "pixelPerfectPct": 89.074,
+      "rgbPct": 99.294,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-off-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-off-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.218,
+      "pixelPerfectPct": 90.532,
+      "rgbPct": 99.131,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-on-disabled.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-on-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.037,
+      "pixelPerfectPct": 88.956,
+      "rgbPct": 99.293,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-card-on-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-card-on-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.221,
+      "pixelPerfectPct": 90.513,
+      "rgbPct": 99.131,
+      "sizeReact": [
+        440,
+        314
+      ],
+      "sizeFlutter": [
+        440,
+        314
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-card-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-card-top.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-card-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.232,
+      "pixelPerfectPct": 90.768,
+      "rgbPct": 99.164,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-card-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-card-top.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-card-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.302,
+      "pixelPerfectPct": 91.034,
+      "rgbPct": 98.959,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-card-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-card-bottom.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-card-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 96.643,
+      "pixelPerfectPct": 88.712,
+      "rgbPct": 98.97,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-card-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-card-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-card-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.706,
+      "pixelPerfectPct": 89.015,
+      "rgbPct": 98.708,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-card-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-footer-top.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-footer-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.582,
+      "pixelPerfectPct": 93.371,
+      "rgbPct": 99.031,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-footer-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-footer-top.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-footer-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.557,
+      "pixelPerfectPct": 93.346,
+      "rgbPct": 99.19,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-footer-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.light",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.582,
+      "pixelPerfectPct": 93.371,
+      "rgbPct": 99.031,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-footer-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.557,
+      "pixelPerfectPct": 93.346,
+      "rgbPct": 99.19,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-off.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-off.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.02,
+      "pixelPerfectPct": 87.47,
+      "rgbPct": 99.565,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-off.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-off.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.194,
+      "pixelPerfectPct": 88.832,
+      "rgbPct": 99.25,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-on.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-on.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.919,
+      "pixelPerfectPct": 90.871,
+      "rgbPct": 99.525,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-on.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-on.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.98,
+      "pixelPerfectPct": 90.976,
+      "rgbPct": 99.216,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.008,
+      "pixelPerfectPct": 87.458,
+      "rgbPct": 99.565,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.207,
+      "pixelPerfectPct": 88.845,
+      "rgbPct": 99.25,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.871,
+      "pixelPerfectPct": 87.321,
+      "rgbPct": 99.564,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.21,
+      "pixelPerfectPct": 88.823,
+      "rgbPct": 99.25,
+      "sizeReact": [
+        440,
+        270
+      ],
+      "sizeFlutter": [
+        440,
+        270
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-card-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-card-top.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-card-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 95.985,
+      "pixelPerfectPct": 83.014,
+      "rgbPct": 96.859,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-card-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-card-top.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-card-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.052,
+      "pixelPerfectPct": 83.221,
+      "rgbPct": 96.207,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-card-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.688,
+      "pixelPerfectPct": 76.4,
+      "rgbPct": 94.659,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-card-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 94.79,
+      "pixelPerfectPct": 76.678,
+      "rgbPct": 93.719,
+      "sizeReact": [
+        440,
+        272
+      ],
+      "sizeFlutter": [
+        440,
+        272
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-card-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-footer-top.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-footer-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.443,
+      "pixelPerfectPct": 93.005,
+      "rgbPct": 99.247,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-footer-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-footer-top.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-footer-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.468,
+      "pixelPerfectPct": 92.955,
+      "rgbPct": 99.325,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-footer-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.443,
+      "pixelPerfectPct": 93.005,
+      "rgbPct": 99.247,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.468,
+      "pixelPerfectPct": 92.955,
+      "rgbPct": 99.325,
+      "sizeReact": [
+        440,
+        36
+      ],
+      "sizeFlutter": [
+        440,
+        36
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-off.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-off.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.279,
+      "pixelPerfectPct": 92.167,
+      "rgbPct": 99.659,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-off.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-off.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.213,
+      "pixelPerfectPct": 95.22,
+      "rgbPct": 99.604,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-on.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-on.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.779,
+      "pixelPerfectPct": 95.984,
+      "rgbPct": 99.651,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-on.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-on.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 98.126,
+      "pixelPerfectPct": 96.335,
+      "rgbPct": 99.587,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-off-disabled.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-off-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.251,
+      "pixelPerfectPct": 92.139,
+      "rgbPct": 99.661,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-off-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-off-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.212,
+      "pixelPerfectPct": 95.22,
+      "rgbPct": 99.605,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-on-disabled.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-on-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.123,
+      "pixelPerfectPct": 92.011,
+      "rgbPct": 99.66,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-card-on-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-card-on-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.219,
+      "pixelPerfectPct": 95.217,
+      "rgbPct": 99.605,
+      "sizeReact": [
+        898,
+        941
+      ],
+      "sizeFlutter": [
+        898,
+        941
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-card-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-card-top.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-card-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.485,
+      "pixelPerfectPct": 95.334,
+      "rgbPct": 99.418,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-card-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-card-top.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-card-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.904,
+      "pixelPerfectPct": 95.654,
+      "rgbPct": 99.34,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-card-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-card-bottom.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-card-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 96.333,
+      "pixelPerfectPct": 91.99,
+      "rgbPct": 97.765,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-card-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-card-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-card-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 96.77,
+      "pixelPerfectPct": 92.331,
+      "rgbPct": 97.532,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-card-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-footer-top.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-footer-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.926,
+      "pixelPerfectPct": 96.537,
+      "rgbPct": 99.558,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-footer-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-footer-top.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-footer-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.894,
+      "pixelPerfectPct": 96.506,
+      "rgbPct": 99.609,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-footer-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-footer-bottom.light",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-footer-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.926,
+      "pixelPerfectPct": 96.537,
+      "rgbPct": 99.558,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-footer-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-en-long-footer-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-phone-en-long-footer-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.894,
+      "pixelPerfectPct": 96.506,
+      "rgbPct": 99.609,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-en-long-footer-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-off.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-off.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 92.583,
+      "pixelPerfectPct": 90.215,
+      "rgbPct": 99.287,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-off.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-off.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-off.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 95.571,
+      "pixelPerfectPct": 92.802,
+      "rgbPct": 99.18,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-off.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-on.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-on.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 96.569,
+      "pixelPerfectPct": 94.567,
+      "rgbPct": 99.277,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-on.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-on.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-on.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.381,
+      "pixelPerfectPct": 94.851,
+      "rgbPct": 99.164,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-on.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-off-disabled.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-off-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 92.543,
+      "pixelPerfectPct": 90.176,
+      "rgbPct": 99.288,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-off-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-off-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-off-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 95.571,
+      "pixelPerfectPct": 92.802,
+      "rgbPct": 99.18,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-off-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-on-disabled.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-on-disabled.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 92.386,
+      "pixelPerfectPct": 90.019,
+      "rgbPct": 99.287,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-on-disabled.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-card-on-disabled.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-card-on-disabled.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 95.581,
+      "pixelPerfectPct": 92.801,
+      "rgbPct": 99.18,
+      "sizeReact": [
+        898,
+        767
+      ],
+      "sizeFlutter": [
+        898,
+        767
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-card-on-disabled.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-card-top.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-card-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 94.729,
+      "pixelPerfectPct": 89.38,
+      "rgbPct": 96.726,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-card-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-card-top.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-card-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 94.944,
+      "pixelPerfectPct": 89.691,
+      "rgbPct": 96.333,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-card-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-card-bottom.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-card-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 92.748,
+      "pixelPerfectPct": 84.657,
+      "rgbPct": 94.539,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-card-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-card-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-card-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 92.978,
+      "pixelPerfectPct": 84.986,
+      "rgbPct": 93.989,
+      "sizeReact": [
+        898,
+        714
+      ],
+      "sizeFlutter": [
+        898,
+        714
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-card-bottom.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-footer-top.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-footer-top.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.841,
+      "pixelPerfectPct": 96.345,
+      "rgbPct": 99.601,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-footer-top.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-footer-top.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-footer-top.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.806,
+      "pixelPerfectPct": 96.304,
+      "rgbPct": 99.652,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-footer-top.dark.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.light",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.light",
+      "kind": "headed-dialogs.risk",
+      "theme": "light",
+      "nonTextPct": 97.841,
+      "pixelPerfectPct": 96.345,
+      "rgbPct": 99.601,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-footer-bottom.light.side-by-side.png"
+    },
+    {
+      "key": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark",
+      "caseId": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark",
+      "kind": "headed-dialogs.risk",
+      "theme": "dark",
+      "nonTextPct": 97.806,
+      "pixelPerfectPct": 96.304,
+      "rgbPct": 99.652,
+      "sizeReact": [
+        898,
+        95
+      ],
+      "sizeFlutter": [
+        898,
+        95
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark.side-by-side.png"
+    }
+  ]
+}

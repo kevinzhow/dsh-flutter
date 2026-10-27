@@ -1,0 +1,4787 @@
+{
+  "implementationHead": "42d0c1d2c848daf65fd883c8c915f2b5c3b115db",
+  "tree": "60f230e0cbf06cfdcdcf6e25aec7faf8654b023c",
+  "runtimeBuildHead": "42d0c1d2c848daf65fd883c8c915f2b5c3b115db",
+  "runtimeBuildTree": "60f230e0cbf06cfdcdcf6e25aec7faf8654b023c",
+  "runtimeHeadDeclaredByOperator": true,
+  "productAndNativeFixtureInputsEqualToBuildHead": true,
+  "changesSinceRuntimeBuild": [],
+  "protectedInputsComparedAgainst": "942090b4c2eded5991a92209a101fd20de787c99",
+  "fontClassifierAndThresholdChanged": false,
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-27T07:42:39+00:00",
+    "headTree": "60f230e0cbf06cfdcdcf6e25aec7faf8654b023c",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.9
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.4
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 2.4
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 191.5
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "e969a5e6ed6452bcde8e725700080179cc8a02ab1fa81fd3a5bec3f0a04e5b1a"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "fcad406aa234454a89157158ce090b43778b9e95ed637ae34d8b96f8a8874b07"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "be3e28dad75192146f2c3e4fefa2c0abd885deb7942d1b16946ead8111f51913",
+      "applicationLibrarySha256": "1dbfb1ff8f6af4bfc9be03515edbe5f1e0d51955dce5d37b9466c9da27a47d3c"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "be3e28dad75192146f2c3e4fefa2c0abd885deb7942d1b16946ead8111f51913",
+      "applicationLibrarySha256": "f4a4e2e55ea1af0639af1d77b38f2d3c606f07e7e30c0d966c6771d924015a21"
+    }
+  ],
+  "visual": {
+    "compared": 64,
+    "dimensionsEqual": 64,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 96.3078125
+  },
+  "visualGroups": {
+    "cards": {
+      "compared": 32,
+      "dimensionsEqual": 32,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 95.85553125
+    },
+    "long-cards": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 95.8305625
+    },
+    "footers": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.689625
+    }
+  },
+  "footerPairs": [
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-desktop-en-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-desktop-en-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-desktop-en-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-desktop-en-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-desktop-zh-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-desktop-zh-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-desktop-zh-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-desktop-zh-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        36
+      ],
+      "sizeAfter": [
+        440,
+        36
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-phone-en-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-phone-en-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-phone-en-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-phone-en-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-phone-en-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-phone-en-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-phone-en-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-phone-en-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-phone-zh-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-phone-zh-long-footer-top.dark",
+      "bottom": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "top": "components.headed-dialogs.risk-phone-zh-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "top": "components.headed-dialogs.risk-phone-zh-long-footer-top.light",
+      "bottom": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        95
+      ],
+      "sizeAfter": [
+        898,
+        95
+      ],
+      "changedPixelBounds": null
+    }
+  ],
+  "preservation": [
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-en-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-en-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        66,
+        20
+      ],
+      "sizeAfter": [
+        66,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-desktop-zh-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        50,
+        20
+      ],
+      "sizeAfter": [
+        50,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-desktop-zh-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        51,
+        20
+      ],
+      "sizeAfter": [
+        51,
+        20
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-en-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        53
+      ],
+      "sizeAfter": [
+        169,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-en-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        169,
+        54
+      ],
+      "sizeAfter": [
+        169,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-off.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-off.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-on.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-on.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-off-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-off-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-on-disabled.light",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.model-phone-zh-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        53
+      ],
+      "sizeAfter": [
+        132,
+        53
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.model-phone-zh-on-disabled.dark",
+      "group": "model-checkbox",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        132,
+        54
+      ],
+      "sizeAfter": [
+        132,
+        54
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        600
+      ],
+      "sizeAfter": [
+        640,
+        600
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        584,
+        42
+      ],
+      "sizeAfter": [
+        584,
+        42
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.reader-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.reader-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        1576
+      ],
+      "sizeAfter": [
+        898,
+        1576
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.tabs-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.tabs-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        752,
+        111
+      ],
+      "sizeAfter": [
+        752,
+        111
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "group": "reader",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    }
+  ],
+  "preservationCounts": {
+    "reader": 64,
+    "model-checkbox": 32
+  },
+  "sourceLayout": {
+    "contexts": 48,
+    "disabledBodyFocusContexts": 16,
+    "fixedFooterContexts": 16,
+    "disabledFirstTabCloseContexts": 2,
+    "browser": "145.0.7632.6",
+    "implicitScrollbarHidden": true
+  },
+  "sourceInitialScroll": {
+    "contexts": 16,
+    "fontsReadyContexts": 8,
+    "coldFontCheckboxNotFullyVisible": 4,
+    "explicitScrollActionsApplied": false,
+    "limitation": "Cold fonts can change text height after native focus scrolls; explicit parity offsets do not prove Flutter default-open scroll."
+  },
+  "sourceTinyAndGutter": {
+    "contexts": 18,
+    "diagnosticOnly": true,
+    "rows": [
+      {
+        "device": "desktop",
+        "theme": "light",
+        "scenario": "short",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "light",
+        "scenario": "short",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "light",
+        "scenario": "long",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "light",
+        "scenario": "long",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 5,
+        "gutterCssPx": 5,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "light",
+        "scenario": "tiny",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 12
+      },
+      {
+        "device": "desktop",
+        "theme": "dark",
+        "scenario": "short",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "dark",
+        "scenario": "short",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "dark",
+        "scenario": "long",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "desktop",
+        "theme": "dark",
+        "scenario": "long",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 5,
+        "gutterCssPx": 5,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "light",
+        "scenario": "short",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "light",
+        "scenario": "short",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "light",
+        "scenario": "long",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "light",
+        "scenario": "long",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 13,
+        "gutterCssPx": 4.952392578125,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "light",
+        "scenario": "tiny",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(229, 229, 229)",
+        "footerIntersection": 12
+      },
+      {
+        "device": "phone",
+        "theme": "dark",
+        "scenario": "short",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "dark",
+        "scenario": "short",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "dark",
+        "scenario": "long",
+        "mode": "parity-default",
+        "gutterDevicePx": 0,
+        "gutterCssPx": 0,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      },
+      {
+        "device": "phone",
+        "theme": "dark",
+        "scenario": "long",
+        "mode": "diagnostic-visible",
+        "gutterDevicePx": 13,
+        "gutterCssPx": 4.952392578125,
+        "thumbColor": "rgb(60, 60, 61)",
+        "footerIntersection": 36
+      }
+    ]
+  },
+  "sourceWideLabelDiagnostic": {
+    "cancelWidth": 72,
+    "confirmWidth": 312,
+    "acceptanceUnchanged": true
+  },
+  "sourceProofSha256": {
+    "layout": "a6ca4b06d4ba7a289ba83bfa1c36620fef474a4e9b32873253d2242445979713",
+    "open": "c50c39cd847663e2e717375c0a5df9e7889242add92a0201335a9a4fa75ae50c",
+    "tiny": "f0d3ff346c475f1da127355bc12c41d48bf9e40f04185056411dc216ee1af03a",
+    "wideLabelDiagnostic": "3d0e3426a1782a6ea2c892cb3c8288ca6eb3d268adb3828ec42d20f2de8f205c"
+  },
+  "sourceProofScripts": [
+    {
+      "name": "headed-source-measure.mjs",
+      "sha256": "d8f29dea3b8d24dd9b5d1e36610d4f667084b9ce885ef1b0a167e5f92618f8e5"
+    },
+    {
+      "name": "headed-open-scroll.mjs",
+      "sha256": "eb32c3d2d0bde30851c2c76ca819402309e9e7b2f0b83d143ce46dc5819fb29d"
+    },
+    {
+      "name": "headed-tiny-gutter.mjs",
+      "sha256": "eee4590e73fb1546753257db16f54952234201b259407898584fad2a2f1354cb"
+    },
+    {
+      "name": "headed-footer-width.mjs",
+      "sha256": "fa3945c7fefee18cf5afa71b3476e077da7ddb5c9488186c89241a2db113609b"
+    }
+  ],
+  "implementationFiles": [
+    {
+      "path": "packages/dsh_ui/lib/dsh_ui.dart",
+      "sha256": "c9ef0ec3b6aba9231397bcf86667b31feb4ef5da2be3e6042c1e510a2b8d7dac"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "sha256": "dbee88c074deb7855d6181e44300ac7df15238aea56fefabdaae94a7ad53361b"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_headed_dialog.dart",
+      "sha256": "2bb113eda00a3898aed8432f610f133a1bd0ce54a74acfb40d29ed95416b1e96"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_option_sheet.dart",
+      "sha256": "b02802d4ffb40b1b6f54cc126860d898bcf37135ca032909a6841786aa1c7589"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_settings.dart",
+      "sha256": "031bdcff6ba1d89f46ea34f23a6ec0a18a28e715f983b36409cd958211fad7c2"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_button.dart",
+      "sha256": "fa8002d3b64a46e3adc030fe469dba0a8918d318a9ee57d57f9e18c921086157"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_presentation.dart",
+      "sha256": "99d8337e22cb5b6610bb0e47a1699b05d6b0c4fa6a5d7488256961086a53b1b0"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_focus_presentation.dart",
+      "sha256": "caff713c607ecc66180a34a701ceba29f4c941dc49749683bfa947446b7ef47c"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_control_focus_modality.dart",
+      "sha256": "23647849376738fd69e109df358037dea9498d0aa83323b1864db9f8f27db9f5"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_recipes.g.dart",
+      "sha256": "3f5512c4567cdf32dbd950e5db2c1107476e069c9b766f07f53cdc5400be0239"
+    },
+    {
+      "path": "features/dsh_feature_permission_presets/lib/src/permission_widgets.dart",
+      "sha256": "13a6a977581f335666f6ecc3a322c6e21f3f878a2c6d49bf76812ddac9f134ac"
+    },
+    {
+      "path": "features/dsh_feature_commands/lib/src/popup_view.dart",
+      "sha256": "1811f386164877a27fed503d2fd195b1b7a52ad50ffe0e07ca5ce69f280482f7"
+    }
+  ],
+  "testSources": [
+    {
+      "path": "packages/dsh_ui/test/dsh_headed_dialog_test.dart",
+      "sha256": "64fb13f70205a139c2b0b033fdc3bb457fb24dcc1a463cba67dc3aa056364794"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_risk_dialog_test.dart",
+      "sha256": "f7774418b58c8dc202b0b07a7652660f95f749583560da852096a2f22f229e34"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_risk_dialog_focus_test.dart",
+      "sha256": "14dfad4d3b184f4109eea6ab6604f249471c18f750a9313d03153d9a8a9c0f63"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_checkbox_test.dart",
+      "sha256": "36aa2847de857f2b89d21bab0f63a4917106c1c1f0ce921273942869b7f7cc5e"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_dialog_lifecycle_test.dart",
+      "sha256": "3d271e07c9028cb0e06ebf12e2ed54d9ba6e78ffe4c9463d1ea4e68a84869db0"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_focus_presentation_test.dart",
+      "sha256": "14bf23c1684e8a230b7d8bdd6f00ad610aefd1198155ff925d6f028343c3abc5"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_dialog_reader_test.dart",
+      "sha256": "3e3c1d22d24f575a9f230ffa2e1f93add96ccf3d2d6559ebf17465b91c6bc0c1"
+    },
+    {
+      "path": "tool/tests/test_design_system.py",
+      "sha256": "e5fcddd99abdd28bd551f78152c10d18942bc20cb3d18e69d0855373dd95fd62"
+    }
+  ],
+  "referenceSourceFiles": [
+    {
+      "path": "packages/client/ui-primitives/src/Modal.tsx",
+      "sha256": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Modal.module.css",
+      "sha256": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/useModalLayer.ts",
+      "sha256": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/focus.ts",
+      "sha256": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/keyboard-composition.ts",
+      "sha256": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "sha256": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/RiskConfirmation.module.css",
+      "sha256": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Checkbox.tsx",
+      "sha256": "2a1b1d5b04cfff9a5494e19b1d8fb16a172bacb3094e360d7f5b5dc2a4930151"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Checkbox.module.css",
+      "sha256": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Button.tsx",
+      "sha256": "514c31404c5c8fb21ad906e92631b9c554c08d23c77437009e3443cef3a94e9c"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Button.module.css",
+      "sha256": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5"
+    },
+    {
+      "path": "packages/client/ui-primitives/tests/modal-layer.client.spec.tsx",
+      "sha256": "aa41fccbe198328fd1c59b34371f9b708340cf6eee88d74a696805e2ddfb1fdd"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "headed-dialogs.desktop",
+      "assertions": 69,
+      "captures": 24
+    },
+    {
+      "case": "headed-dialogs.phone",
+      "assertions": 69,
+      "captures": 24
+    }
+  ],
+  "nativeReproduction": {
+    "androidScriptSha256": "fbb23a22304452da20eb92ba2cafa84b1ef79a1790fd6bcdcc7ef2dfcef8cce2",
+    "gpuManifestSha256": "a56b403d6a0ae1aa1d8d6577aad7af435e449ab0477cfc3a5bb8938d59144054",
+    "gpuRecorderSha256": "556fb0664c9961b1b7ceb48f7b0dd45172e83536211661d898d0ead280e5dfc7"
+  },
+  "android": {
+    "synthetic": true,
+    "ownedEmulator": "emulator-5560",
+    "fixtureSha256": "e969a5e6ed6452bcde8e725700080179cc8a02ab1fa81fd3a5bec3f0a04e5b1a",
+    "actualInputs": [
+      "touch",
+      "contained risk-content swipes",
+      "emulated hardware Enter, Space, Tab and Shift+Tab"
+    ],
+    "accessibility": "Native checkbox checked/enabled/clickable/focused state and accessible Close; dynamic identified or unique scrollable pane; fixed footer button bounds",
+    "keyboardReadiness": "Native FlutterView and expected logical focus checked before every selection key",
+    "failedSelectionKeysRetried": false,
+    "pixelAcceptance": "Exact RGBA equality for unchanged unchecked footer and reopened default bottom; changed content pixels for keyboard reveal and actual contained swipe",
+    "pageDownClaimed": false,
+    "cleanupOwner": "Driver restores its exact wm-size override; parent restores normal APK, stops the app, unroots and stops its emulator",
+    "passed": true,
+    "scenes": [
+      {
+        "scene": "normal-home",
+        "observationAttempts": 1,
+        "focusSignature": []
+      },
+      {
+        "scene": "normal-off",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,1381][954,1439]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-enter-blocked",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,1381][954,1439]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-space-checked",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,1381][954,1439]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-cancel-focused",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "Cancel",
+            "android.view.View",
+            "[368,1491][557,1586]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-confirm-focused",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "Enable Full access",
+            "android.view.View",
+            "[578,1491][954,1586]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-confirmed",
+        "observationAttempts": 1,
+        "focusSignature": [
+          [
+            "",
+            "Open risk confirmation",
+            "android.view.View",
+            "[63,199][507,294]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-reopened-off",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,1381][954,1439]"
+          ]
+        ]
+      },
+      {
+        "scene": "normal-touch-close-canceled",
+        "observationAttempts": 1,
+        "focusSignature": [
+          [
+            "",
+            "Open risk confirmation",
+            "android.view.View",
+            "[63,199][507,294]"
+          ]
+        ]
+      },
+      {
+        "scene": "disabled-open",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[907,882][980,956]"
+          ]
+        ]
+      },
+      {
+        "scene": "disabled-ack-touch-blocked",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[907,882][980,956]"
+          ]
+        ]
+      },
+      {
+        "scene": "disabled-confirm-touch-blocked",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[907,882][980,956]"
+          ]
+        ]
+      },
+      {
+        "scene": "disabled-accessible-close-focused",
+        "observationAttempts": 1,
+        "footerBounds": {
+          "cancel": [
+            368,
+            1491,
+            557,
+            1586
+          ],
+          "confirm": [
+            578,
+            1491,
+            954,
+            1586
+          ],
+          "region": [
+            368,
+            1491,
+            954,
+            1586
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[907,882][980,956]"
+          ]
+        ]
+      },
+      {
+        "scene": "disabled-close-canceled",
+        "observationAttempts": 1,
+        "focusSignature": [
+          [
+            "",
+            "Open disabled risk confirmation",
+            "android.view.View",
+            "[63,493][655,588]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-home",
+        "observationAttempts": 1,
+        "focusSignature": []
+      },
+      {
+        "scene": "long-autofocus-bottom",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,926][941,984]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-close-at-top",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[894,196][967,269]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-contained-swipe",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": []
+      },
+      {
+        "scene": "long-swipe-returned-top",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "",
+            "android.view.View",
+            "[894,196][967,269]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-keyboard-ack-bottom",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,926][941,984]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-cancel-focused",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "Cancel",
+            "android.view.View",
+            "[368,1037][557,1131]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-canceled",
+        "observationAttempts": 1,
+        "focusSignature": [
+          [
+            "",
+            "Open long risk confirmation",
+            "android.view.View",
+            "[63,285][587,380]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-reopened-default-bottom",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,926][941,984]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-checked",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "I understand the risks and want to continue",
+            "android.widget.CheckBox",
+            "[126,926][941,984]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-checked-cancel-focused",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "Cancel",
+            "android.view.View",
+            "[368,1037][557,1131]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-confirm-focused",
+        "observationAttempts": 1,
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "footerBounds": {
+          "cancel": [
+            368,
+            1037,
+            557,
+            1131
+          ],
+          "confirm": [
+            578,
+            1037,
+            954,
+            1131
+          ],
+          "region": [
+            368,
+            1037,
+            954,
+            1131
+          ]
+        },
+        "focusSignature": [
+          [
+            "",
+            "Enable Full access",
+            "android.view.View",
+            "[578,1037][954,1131]"
+          ]
+        ]
+      },
+      {
+        "scene": "long-confirmed",
+        "observationAttempts": 1,
+        "focusSignature": [
+          [
+            "",
+            "Open long risk confirmation",
+            "android.view.View",
+            "[63,285][587,380]"
+          ]
+        ]
+      }
+    ],
+    "inputs": [
+      {
+        "type": "touch",
+        "target": "Open risk confirmation",
+        "bounds": [
+          63,
+          199,
+          507,
+          294
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter on unchecked acknowledgement must not confirm",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Space explicitly acknowledges risk",
+        "linuxCode": 57,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from acknowledgement to Cancel",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from Cancel to Confirm",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter activates acknowledged Confirm",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Open risk confirmation",
+        "bounds": [
+          63,
+          199,
+          507,
+          294
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Close",
+        "bounds": [
+          907,
+          882,
+          980,
+          956
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Open disabled risk confirmation",
+        "bounds": [
+          63,
+          493,
+          655,
+          588
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "disabled acknowledgement must stay unchecked",
+        "bounds": [
+          126,
+          1381,
+          954,
+          1439
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "disabled Confirm must not close",
+        "bounds": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter activates disabled-dialog accessible Close",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Open long risk confirmation",
+        "bounds": [
+          63,
+          285,
+          587,
+          380
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Shift+Tab reveals the header Close at the top",
+        "linuxCode": 15,
+        "shift": true,
+        "sentOnce": true
+      },
+      {
+        "type": "contained touch swipe",
+        "direction": "up",
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "start": [
+          533,
+          814
+        ],
+        "end": [
+          533,
+          307
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "contained touch swipe",
+        "direction": "down",
+        "contentBounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "start": [
+          533,
+          222
+        ],
+        "end": [
+          533,
+          899
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from header Close reveals acknowledgement at bottom",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from long acknowledgement reaches Cancel",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter activates reachable long-dialog Cancel",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Open long risk confirmation",
+        "bounds": [
+          63,
+          285,
+          587,
+          380
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Space acknowledges the reopened long dialog",
+        "linuxCode": 57,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from checked long acknowledgement to Cancel",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from long Cancel to enabled Confirm",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter confirms the long acknowledged dialog",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      }
+    ],
+    "pixelProofs": [
+      {
+        "purpose": "keyboard Close scrolls the full content/header back to the top",
+        "region": "content",
+        "bounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "before": "long-autofocus-bottom",
+        "after": "long-close-at-top",
+        "rgbaByteEqual": false,
+        "changedBoundsInRegion": [
+          63,
+          0,
+          907,
+          842
+        ]
+      },
+      {
+        "purpose": "fixed unchecked footer stays pixel-identical while header/content scroll",
+        "region": "footer",
+        "bounds": [
+          368,
+          1037,
+          954,
+          1131
+        ],
+        "before": "long-autofocus-bottom",
+        "after": "long-close-at-top",
+        "rgbaByteEqual": true,
+        "changedBoundsInRegion": null
+      },
+      {
+        "purpose": "real contained swipe moves the header and warning body",
+        "region": "content",
+        "bounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "before": "long-close-at-top",
+        "after": "long-contained-swipe",
+        "rgbaByteEqual": false,
+        "changedBoundsInRegion": [
+          66,
+          0,
+          907,
+          846
+        ]
+      },
+      {
+        "purpose": "contained content swipe leaves both fixed footer actions unchanged",
+        "region": "footer",
+        "bounds": [
+          368,
+          1037,
+          954,
+          1131
+        ],
+        "before": "long-close-at-top",
+        "after": "long-contained-swipe",
+        "rgbaByteEqual": true,
+        "changedBoundsInRegion": null
+      },
+      {
+        "purpose": "reopening resets unchecked state and repeats default automatic bottom reveal",
+        "region": "content",
+        "bounds": [
+          63,
+          138,
+          1004,
+          984
+        ],
+        "before": "long-autofocus-bottom",
+        "after": "long-reopened-default-bottom",
+        "rgbaByteEqual": true,
+        "changedBoundsInRegion": null
+      },
+      {
+        "purpose": "reopened unchecked footer returns to identical pixels",
+        "region": "footer",
+        "bounds": [
+          368,
+          1037,
+          954,
+          1131
+        ],
+        "before": "long-autofocus-bottom",
+        "after": "long-reopened-default-bottom",
+        "rgbaByteEqual": true,
+        "changedBoundsInRegion": null
+      }
+    ],
+    "displayOverride": {
+      "original": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "requestedOverride": "1080x1320",
+      "densityUnchanged": "Physical density: 420",
+      "applied": {
+        "physical": "1080x2400",
+        "override": "1080x1320"
+      },
+      "restoredState": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "restoredExactly": true
+    },
+    "normalEnterGateVerified": true,
+    "explicitAcknowledgementRequired": true,
+    "disabledAckAndConfirmBlocked": true,
+    "accessibleCloseTouchAndEnter": true,
+    "longAutofocusRevealsAcknowledgement": true,
+    "headerAndBodyScrollTogether": true,
+    "footerBoundsRemainFixed": true,
+    "tabRevealsHeaderAndAcknowledgement": true,
+    "reopenResetsStateAndDefaultScroll": true,
+    "restoresEachFixtureOpener": true
+  },
+  "runtimeCleanup": {
+    "normalApkRestored": true,
+    "normalAppForceStopped": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbRetained": true,
+    "recordedGpuPidsAbsent": true,
+    "displayOverrideReset": true,
+    "adbdUnrootRequested": true,
+    "normalApkLocalSha256": "fcad406aa234454a89157158ce090b43778b9e95ed637ae34d8b96f8a8874b07",
+    "normalApkInstalledSha256": "fcad406aa234454a89157158ce090b43778b9e95ed637ae34d8b96f8a8874b07",
+    "displayState": "Physical size: 1080x2400",
+    "displayOriginal": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "unrootResponse": "restarting adbd as non root",
+    "gpuPidFiles": 2
+  },
+  "limitations": [
+    "The 64 source parity images retain implicit --hide-scrollbars. The 18-context visible-gutter diagnostics are separate and do not replace acceptance captures.",
+    "Cold source font loading can leave the preferred checkbox partially hidden; fonts-ready source mounting reaches the settled maximum. Explicit top/bottom parity actions do not establish default-open scrolling.",
+    "Disabled source entry leaves focus on BODY in all 16 measured contexts; first Tab reaches Close in the two sampled desktop English/light contexts. Flutter keeps focus in the foreground dialog; that platform difference is intentional.",
+    "Generic headed footer shrink weights use outer intrinsic widths; arbitrary simultaneous shrinking can differ from CSS content-box weights. The measured risk case freezes Cancel at its minimum and gives Confirm the exact remaining width.",
+    "Only the declared headed RiskConfirmation profile is migrated; other modal profiles and selection-sheet adaptations remain tracked separately.",
+    "The model checkbox preservation fixture is synthetic context; the Flutter model editor is not yet wired to this atom.",
+    "GPU recorder environments establish hardware rendering and assertions but do not hash the executable; the runtime source/build identity is operator-declared and checked for product equivalence.",
+    "The fixed 99.5% non-text threshold is reported by group. No overall visual completion, deployment or release is claimed."
+  ],
+  "releaseOrDeployment": false
+}

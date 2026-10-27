@@ -1,0 +1,1131 @@
+{
+  "synthetic": true,
+  "ownedEmulator": "emulator-5560",
+  "fixtureSha256": "e969a5e6ed6452bcde8e725700080179cc8a02ab1fa81fd3a5bec3f0a04e5b1a",
+  "actualInputs": [
+    "touch",
+    "contained risk-content swipes",
+    "emulated hardware Enter, Space, Tab and Shift+Tab"
+  ],
+  "accessibility": "Native checkbox checked/enabled/clickable/focused state and accessible Close; dynamic identified or unique scrollable pane; fixed footer button bounds",
+  "keyboardReadiness": "Native FlutterView and expected logical focus checked before every selection key",
+  "failedSelectionKeysRetried": false,
+  "pixelAcceptance": "Exact RGBA equality for unchanged unchecked footer and reopened default bottom; changed content pixels for keyboard reveal and actual contained swipe",
+  "pageDownClaimed": false,
+  "cleanupOwner": "Driver restores its exact wm-size override; parent restores normal APK, stops the app, unroots and stops its emulator",
+  "passed": true,
+  "scenes": [
+    {
+      "scene": "normal-home",
+      "observationAttempts": 1,
+      "focusSignature": []
+    },
+    {
+      "scene": "normal-off",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,1381][954,1439]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-enter-blocked",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,1381][954,1439]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-space-checked",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,1381][954,1439]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-cancel-focused",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "Cancel",
+          "android.view.View",
+          "[368,1491][557,1586]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-confirm-focused",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "Enable Full access",
+          "android.view.View",
+          "[578,1491][954,1586]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-confirmed",
+      "observationAttempts": 1,
+      "focusSignature": [
+        [
+          "",
+          "Open risk confirmation",
+          "android.view.View",
+          "[63,199][507,294]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-reopened-off",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,1381][954,1439]"
+        ]
+      ]
+    },
+    {
+      "scene": "normal-touch-close-canceled",
+      "observationAttempts": 1,
+      "focusSignature": [
+        [
+          "",
+          "Open risk confirmation",
+          "android.view.View",
+          "[63,199][507,294]"
+        ]
+      ]
+    },
+    {
+      "scene": "disabled-open",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[907,882][980,956]"
+        ]
+      ]
+    },
+    {
+      "scene": "disabled-ack-touch-blocked",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[907,882][980,956]"
+        ]
+      ]
+    },
+    {
+      "scene": "disabled-confirm-touch-blocked",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[907,882][980,956]"
+        ]
+      ]
+    },
+    {
+      "scene": "disabled-accessible-close-focused",
+      "observationAttempts": 1,
+      "footerBounds": {
+        "cancel": [
+          368,
+          1491,
+          557,
+          1586
+        ],
+        "confirm": [
+          578,
+          1491,
+          954,
+          1586
+        ],
+        "region": [
+          368,
+          1491,
+          954,
+          1586
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[907,882][980,956]"
+        ]
+      ]
+    },
+    {
+      "scene": "disabled-close-canceled",
+      "observationAttempts": 1,
+      "focusSignature": [
+        [
+          "",
+          "Open disabled risk confirmation",
+          "android.view.View",
+          "[63,493][655,588]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-home",
+      "observationAttempts": 1,
+      "focusSignature": []
+    },
+    {
+      "scene": "long-autofocus-bottom",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,926][941,984]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-close-at-top",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[894,196][967,269]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-contained-swipe",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": []
+    },
+    {
+      "scene": "long-swipe-returned-top",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "",
+          "android.view.View",
+          "[894,196][967,269]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-keyboard-ack-bottom",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,926][941,984]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-cancel-focused",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "Cancel",
+          "android.view.View",
+          "[368,1037][557,1131]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-canceled",
+      "observationAttempts": 1,
+      "focusSignature": [
+        [
+          "",
+          "Open long risk confirmation",
+          "android.view.View",
+          "[63,285][587,380]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-reopened-default-bottom",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,926][941,984]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-checked",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "I understand the risks and want to continue",
+          "android.widget.CheckBox",
+          "[126,926][941,984]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-checked-cancel-focused",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "Cancel",
+          "android.view.View",
+          "[368,1037][557,1131]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-confirm-focused",
+      "observationAttempts": 1,
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "footerBounds": {
+        "cancel": [
+          368,
+          1037,
+          557,
+          1131
+        ],
+        "confirm": [
+          578,
+          1037,
+          954,
+          1131
+        ],
+        "region": [
+          368,
+          1037,
+          954,
+          1131
+        ]
+      },
+      "focusSignature": [
+        [
+          "",
+          "Enable Full access",
+          "android.view.View",
+          "[578,1037][954,1131]"
+        ]
+      ]
+    },
+    {
+      "scene": "long-confirmed",
+      "observationAttempts": 1,
+      "focusSignature": [
+        [
+          "",
+          "Open long risk confirmation",
+          "android.view.View",
+          "[63,285][587,380]"
+        ]
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "touch",
+      "target": "Open risk confirmation",
+      "bounds": [
+        63,
+        199,
+        507,
+        294
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter on unchecked acknowledgement must not confirm",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Space explicitly acknowledges risk",
+      "linuxCode": 57,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from acknowledgement to Cancel",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from Cancel to Confirm",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter activates acknowledged Confirm",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Open risk confirmation",
+      "bounds": [
+        63,
+        199,
+        507,
+        294
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Close",
+      "bounds": [
+        907,
+        882,
+        980,
+        956
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Open disabled risk confirmation",
+      "bounds": [
+        63,
+        493,
+        655,
+        588
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "disabled acknowledgement must stay unchecked",
+      "bounds": [
+        126,
+        1381,
+        954,
+        1439
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "disabled Confirm must not close",
+      "bounds": [
+        578,
+        1491,
+        954,
+        1586
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter activates disabled-dialog accessible Close",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Open long risk confirmation",
+      "bounds": [
+        63,
+        285,
+        587,
+        380
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Shift+Tab reveals the header Close at the top",
+      "linuxCode": 15,
+      "shift": true,
+      "sentOnce": true
+    },
+    {
+      "type": "contained touch swipe",
+      "direction": "up",
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "start": [
+        533,
+        814
+      ],
+      "end": [
+        533,
+        307
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "contained touch swipe",
+      "direction": "down",
+      "contentBounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "start": [
+        533,
+        222
+      ],
+      "end": [
+        533,
+        899
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from header Close reveals acknowledgement at bottom",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from long acknowledgement reaches Cancel",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter activates reachable long-dialog Cancel",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Open long risk confirmation",
+      "bounds": [
+        63,
+        285,
+        587,
+        380
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Space acknowledges the reopened long dialog",
+      "linuxCode": 57,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from checked long acknowledgement to Cancel",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from long Cancel to enabled Confirm",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter confirms the long acknowledged dialog",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    }
+  ],
+  "pixelProofs": [
+    {
+      "purpose": "keyboard Close scrolls the full content/header back to the top",
+      "region": "content",
+      "bounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "before": "long-autofocus-bottom",
+      "after": "long-close-at-top",
+      "rgbaByteEqual": false,
+      "changedBoundsInRegion": [
+        63,
+        0,
+        907,
+        842
+      ]
+    },
+    {
+      "purpose": "fixed unchecked footer stays pixel-identical while header/content scroll",
+      "region": "footer",
+      "bounds": [
+        368,
+        1037,
+        954,
+        1131
+      ],
+      "before": "long-autofocus-bottom",
+      "after": "long-close-at-top",
+      "rgbaByteEqual": true,
+      "changedBoundsInRegion": null
+    },
+    {
+      "purpose": "real contained swipe moves the header and warning body",
+      "region": "content",
+      "bounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "before": "long-close-at-top",
+      "after": "long-contained-swipe",
+      "rgbaByteEqual": false,
+      "changedBoundsInRegion": [
+        66,
+        0,
+        907,
+        846
+      ]
+    },
+    {
+      "purpose": "contained content swipe leaves both fixed footer actions unchanged",
+      "region": "footer",
+      "bounds": [
+        368,
+        1037,
+        954,
+        1131
+      ],
+      "before": "long-close-at-top",
+      "after": "long-contained-swipe",
+      "rgbaByteEqual": true,
+      "changedBoundsInRegion": null
+    },
+    {
+      "purpose": "reopening resets unchecked state and repeats default automatic bottom reveal",
+      "region": "content",
+      "bounds": [
+        63,
+        138,
+        1004,
+        984
+      ],
+      "before": "long-autofocus-bottom",
+      "after": "long-reopened-default-bottom",
+      "rgbaByteEqual": true,
+      "changedBoundsInRegion": null
+    },
+    {
+      "purpose": "reopened unchecked footer returns to identical pixels",
+      "region": "footer",
+      "bounds": [
+        368,
+        1037,
+        954,
+        1131
+      ],
+      "before": "long-autofocus-bottom",
+      "after": "long-reopened-default-bottom",
+      "rgbaByteEqual": true,
+      "changedBoundsInRegion": null
+    }
+  ],
+  "displayOverride": {
+    "original": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "requestedOverride": "1080x1320",
+    "densityUnchanged": "Physical density: 420",
+    "applied": {
+      "physical": "1080x2400",
+      "override": "1080x1320"
+    },
+    "restoredState": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "restoredExactly": true
+  },
+  "normalEnterGateVerified": true,
+  "explicitAcknowledgementRequired": true,
+  "disabledAckAndConfirmBlocked": true,
+  "accessibleCloseTouchAndEnter": true,
+  "longAutofocusRevealsAcknowledgement": true,
+  "headerAndBodyScrollTogether": true,
+  "footerBoundsRemainFixed": true,
+  "tabRevealsHeaderAndAcknowledgement": true,
+  "reopenResetsStateAndDefaultScroll": true,
+  "restoresEachFixtureOpener": true
+}

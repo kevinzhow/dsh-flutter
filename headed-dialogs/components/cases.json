@@ -1,0 +1,2598 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-off.light",
+      "title": "Risk confirmation card-off (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-off.dark",
+      "title": "Risk confirmation card-off (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-on.light",
+      "title": "Risk confirmation card-on (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-on.dark",
+      "title": "Risk confirmation card-on (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-off-disabled.light",
+      "title": "Risk confirmation card-off-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-off-disabled.dark",
+      "title": "Risk confirmation card-off-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-on-disabled.light",
+      "title": "Risk confirmation card-on-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-card-on-disabled.dark",
+      "title": "Risk confirmation card-on-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-card-top.light",
+      "title": "Risk confirmation long-card-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-card-top.dark",
+      "title": "Risk confirmation long-card-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-card-bottom.light",
+      "title": "Risk confirmation long-card-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-card-bottom.dark",
+      "title": "Risk confirmation long-card-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-footer-top.light",
+      "title": "Risk confirmation long-footer-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-footer-top.dark",
+      "title": "Risk confirmation long-footer-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.light",
+      "title": "Risk confirmation long-footer-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-en-long-footer-bottom.dark",
+      "title": "Risk confirmation long-footer-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-en-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-off.light",
+      "title": "Risk confirmation card-off (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-off.dark",
+      "title": "Risk confirmation card-off (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-on.light",
+      "title": "Risk confirmation card-on (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-on.dark",
+      "title": "Risk confirmation card-on (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.light",
+      "title": "Risk confirmation card-off-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-off-disabled.dark",
+      "title": "Risk confirmation card-off-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.light",
+      "title": "Risk confirmation card-on-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-card-on-disabled.dark",
+      "title": "Risk confirmation card-on-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 900,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-card-top.light",
+      "title": "Risk confirmation long-card-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-card-top.dark",
+      "title": "Risk confirmation long-card-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.light",
+      "title": "Risk confirmation long-card-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-card-bottom.dark",
+      "title": "Risk confirmation long-card-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-footer-top.light",
+      "title": "Risk confirmation long-footer-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-footer-top.dark",
+      "title": "Risk confirmation long-footer-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.light",
+      "title": "Risk confirmation long-footer-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-desktop-zh-long-footer-bottom.dark",
+      "title": "Risk confirmation long-footer-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-desktop-zh-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 320,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-off.light",
+      "title": "Risk confirmation card-off (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-off.dark",
+      "title": "Risk confirmation card-off (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-on.light",
+      "title": "Risk confirmation card-on (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-on.dark",
+      "title": "Risk confirmation card-on (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-off-disabled.light",
+      "title": "Risk confirmation card-off-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-off-disabled.dark",
+      "title": "Risk confirmation card-off-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-on-disabled.light",
+      "title": "Risk confirmation card-on-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-card-on-disabled.dark",
+      "title": "Risk confirmation card-on-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-card-top.light",
+      "title": "Risk confirmation long-card-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-card-top.dark",
+      "title": "Risk confirmation long-card-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-card-bottom.light",
+      "title": "Risk confirmation long-card-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-card-bottom.dark",
+      "title": "Risk confirmation long-card-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-footer-top.light",
+      "title": "Risk confirmation long-footer-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-footer-top.dark",
+      "title": "Risk confirmation long-footer-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-footer-bottom.light",
+      "title": "Risk confirmation long-footer-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-en-long-footer-bottom.dark",
+      "title": "Risk confirmation long-footer-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-en-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-off.light",
+      "title": "Risk confirmation card-off (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-off.dark",
+      "title": "Risk confirmation card-off (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-off",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off",
+          "props": {
+            "checked": false,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-on.light",
+      "title": "Risk confirmation card-on (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-on.dark",
+      "title": "Risk confirmation card-on (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-on",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-off-disabled.light",
+      "title": "Risk confirmation card-off-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-off-disabled.dark",
+      "title": "Risk confirmation card-off-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-off-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-off-disabled",
+          "props": {
+            "checked": false,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-on-disabled.light",
+      "title": "Risk confirmation card-on-disabled (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-card-on-disabled.dark",
+      "title": "Risk confirmation card-on-disabled (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-card-on-disabled",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 900,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "card-on-disabled",
+          "props": {
+            "checked": true,
+            "disabled": true,
+            "repeat": 1
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-card-top.light",
+      "title": "Risk confirmation long-card-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-card-top.dark",
+      "title": "Risk confirmation long-card-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-card-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-card-bottom.light",
+      "title": "Risk confirmation long-card-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-card-bottom.dark",
+      "title": "Risk confirmation long-card-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-card-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-card-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-dialog\"]",
+        "flutterKey": "risk-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-footer-top.light",
+      "title": "Risk confirmation long-footer-top (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-footer-top.dark",
+      "title": "Risk confirmation long-footer-top (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-footer-top",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-top",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 0
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.light",
+      "title": "Risk confirmation long-footer-bottom (light)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.headed-dialogs.risk-phone-zh-long-footer-bottom.dark",
+      "title": "Risk confirmation long-footer-bottom (dark)",
+      "kind": "headed-dialogs.risk",
+      "surface": "risk-phone-zh-long-footer-bottom",
+      "category": "extension/headed-dialogs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 320,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "long-footer-bottom",
+          "props": {
+            "checked": true,
+            "disabled": false,
+            "repeat": 6
+          },
+          "interactions": [
+            {
+              "type": "set-scroll",
+              "target": "risk-content",
+              "offset": 1000000
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"risk-footer\"]",
+        "flutterKey": "risk-footer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-primitives/src/RiskConfirmation.tsx",
+      "flutterCaseHint": "packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "theme": "dark"
+    }
+  ]
+}

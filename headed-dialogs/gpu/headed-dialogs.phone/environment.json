@@ -1,0 +1,852 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "home-initial",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-on",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-initial",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-reset",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-confirmed",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-confirmed",
+      "rect": [
+        24,
+        222,
+        200,
+        250
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-pointer-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-pointer-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-pointer-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-pointer-on",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-return-after-cancel",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        45,
+        696,
+        67,
+        718
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        48,
+        759,
+        342,
+        797
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        45,
+        696,
+        67,
+        718
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        199,
+        763,
+        339,
+        793
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        114,
+        758,
+        191,
+        798
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        759,
+        342,
+        797
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        759,
+        342,
+        797
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-top-close-focused",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        759,
+        342,
+        797
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-bottom-on",
+      "rect": [
+        48,
+        759,
+        342,
+        797
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-returned-bottom",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        45,
+        696,
+        67,
+        718
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-auto-bottom-off",
+      "rect": [
+        199,
+        763,
+        339,
+        793
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "long-reopened-bottom-off",
+      "rect": [
+        48,
+        40,
+        337,
+        686
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "normal-keyboard-off",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        114,
+        539,
+        191,
+        579
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        322,
+        263,
+        354,
+        295
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-skips-confirm",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        45,
+        477,
+        67,
+        499
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-open",
+      "rect": [
+        199,
+        544,
+        339,
+        574
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "disabled-restored-opener",
+      "rect": [
+        48,
+        326,
+        339,
+        458
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "home-canceled",
+      "rect": [
+        24,
+        188,
+        350,
+        219
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "en"
+}
