@@ -1,0 +1,687 @@
+{
+  "implementationHead": "7b0ce87951dbf754d115480e214165a84a0b22e5",
+  "tree": "ed326e7bf77797a0f3ea704725a0c7303a241876",
+  "runtimeBuildHead": "9f1fa8fc75c14fbea242570d8662e29ffe75deef",
+  "runtimeBuildTree": "331c04eb6514896ac0ccab999b46d8a811d618b1",
+  "runtimeHeadDeclaredByOperator": true,
+  "productAndNativeFixtureInputsEqualToBuildHead": true,
+  "changesSinceRuntimeBuild": [
+    "tool/parity-desktop/segmented-tabs-cases.json"
+  ],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "referenceSourceFiles": [
+    {
+      "path": "packages/client/ui-primitives/src/SegmentedTabs.tsx",
+      "sha256": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Pill.tsx",
+      "sha256": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "sha256": "fb2abf1a26ea0748526f32d5c271ce2c510d1867fc67db5fb3bc075f55d76822"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css",
+      "sha256": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45"
+    }
+  ],
+  "publishedInput": "DSH ui-primitives 0.2.1-rc.2; published archive inputs are recorded in sources.lock.json",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-27T02:35:08+00:00",
+    "headTree": "ed326e7bf77797a0f3ea704725a0c7303a241876",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.2
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.9
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.0
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.2
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 179.5
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Four Linux release / Android debug artifacts and successful build logs checked",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "9a28882bcd87daf6d132387ac988892695f67efa929812f98a8505d260eb7cf9"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "f1e7d357272910fedce75769cdcce9b613551d73e3d08022243afdad1da84d9c"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "91b0fee65db3b63f076a23dc00557a58d232c4944f53d2323bbd3056c3fe8a50",
+      "applicationLibrarySha256": "4d172d24cdd63ee41ea91045209276b7e731e71e5b784327f2d3577bb3de2b46"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "91b0fee65db3b63f076a23dc00557a58d232c4944f53d2323bbd3056c3fe8a50",
+      "applicationLibrarySha256": "aa53826ec174835791a453b9416cdd98d3b6fd23bacf9d2a50ff164500e11145"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "segmented-tabs.desktop",
+      "assertions": 13
+    },
+    {
+      "case": "segmented-tabs.phone",
+      "assertions": 13
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "ownedEmulator": "emulator-5560",
+    "fixtureSha256": "9a28882bcd87daf6d132387ac988892695f67efa929812f98a8505d260eb7cf9",
+    "actualInputs": [
+      "touch",
+      "emulated hardware Tab, Shift+Tab, ArrowLeft, ArrowRight, Home and End"
+    ],
+    "accessibility": "Named tab groups; selected, focused, focusable, enabled and clickable tab owners read from UIAutomator",
+    "keyboardReadiness": "Native FlutterView focus checked immediately before every key; expected logical tab focus checked for selection keys",
+    "failedSelectionKeysRetried": false,
+    "cleanupOwner": "Parent restores the normal APK and stops its owned emulator after inspection",
+    "passed": true,
+    "scenes": [
+      {
+        "scene": "plugin-initial",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-touch-discover",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-touch-installed",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-keyboard-initial",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-keyboard-focus",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-arrowright",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-arrowright-wraps",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-arrowleft-wraps",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-home",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-end",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-tab-leaves-group",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "plugin-shift-tab-selected",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "presets",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-initial-selected-focus",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-touch-usage",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-home",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-end",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-arrowright-wraps",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-arrowleft-wraps",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-tab-leaves-group",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-shift-tab-selected",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "guide-closed",
+        "observationAttempts": 1
+      }
+    ],
+    "inputs": [
+      {
+        "type": "touch",
+        "target": "Plugin views: Discover"
+      },
+      {
+        "type": "touch",
+        "target": "Plugin views: Installed"
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Installed",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "ArrowRight",
+        "linuxCode": 106,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "ArrowRight wraps",
+        "linuxCode": 106,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "ArrowLeft wraps",
+        "linuxCode": 105,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Home",
+        "linuxCode": 102,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "End",
+        "linuxCode": 107,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab leaves plugin tab list",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Shift+Tab returns to selected plugin tab",
+        "linuxCode": 15,
+        "shift": true,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Presets"
+      },
+      {
+        "type": "touch",
+        "target": "Mode details"
+      },
+      {
+        "type": "touch",
+        "target": "Guide sections: How to use"
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Home",
+        "linuxCode": 102,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "End",
+        "linuxCode": 107,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "ArrowRight wraps",
+        "linuxCode": 106,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "ArrowLeft wraps",
+        "linuxCode": 105,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab leaves guide tab list",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Shift+Tab returns to selected guide tab",
+        "linuxCode": 15,
+        "shift": true,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Close"
+      }
+    ],
+    "focusUnderlineChangedPixels": true,
+    "focusPixelProof": {
+      "before": "plugin-keyboard-initial",
+      "after": "plugin-keyboard-focus",
+      "region": [
+        63,
+        609,
+        714,
+        719
+      ],
+      "changedBoundsInRegion": [
+        97,
+        77,
+        239,
+        80
+      ]
+    }
+  },
+  "visual": {
+    "compared": 64,
+    "dimensionsEqual": 32,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 84.305890625
+  },
+  "visualGroups": {
+    "manager": {
+      "compared": 32,
+      "dimensionsEqual": 32,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 95.66421875
+    },
+    "guide": {
+      "compared": 32,
+      "dimensionsEqual": 0,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 72.9475625
+    }
+  },
+  "browserProbes": {
+    "managerCases": 4,
+    "guideCases": 4,
+    "independentGuideContextsPerCase": 3,
+    "guideActivationModes": [
+      "pointer",
+      "keyboard",
+      "keyboardThenSamePointer"
+    ]
+  },
+  "regression": [
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-en.light",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-en.light",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        76,
+        110,
+        230,
+        125
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        76,
+        110,
+        230,
+        125
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-en.light",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-en.light",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        150,
+        417,
+        620,
+        447
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-en.dark",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-en.dark",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        150,
+        417,
+        620,
+        447
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-zh.light",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-zh.light",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        179,
+        415,
+        582,
+        453
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "group": "manager",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "group": "manager",
+      "rgbaByteEqual": false,
+      "changedPixelBounds": [
+        179,
+        415,
+        582,
+        453
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-en-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-en-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-en-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-en-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-zh-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-zh-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-zh-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-zh-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-en-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-en-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-en-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-en-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-zh-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-zh-override.light",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-zh-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-zh-override.dark",
+      "group": "neutral-shell",
+      "rgbaByteEqual": true
+    }
+  ],
+  "fontClassifierAndThresholdChanged": false,
+  "protectedInputsComparedAgainst": "99d56a88c1e089f970e028bf47733ce8f940177d",
+  "runtimeCleanup": {
+    "normalApkRestored": true,
+    "normalApkSha256": "f1e7d357272910fedce75769cdcce9b613551d73e3d08022243afdad1da84d9c",
+    "appForceStopped": true,
+    "ownedEmulatorUnrooted": true,
+    "ownedEmulatorStopped": true,
+    "sharedAdbPreserved": true,
+    "allRecordedGpuPidsAbsent": true
+  },
+  "limitations": [
+    "The real preset guide uses the shared tabs; its modal dimensions, panel layout and typography remain separate unfinished family work.",
+    "Cropped controls do not establish whole-page placement parity; source-specific placement can change fractional-pixel crop dimensions.",
+    "Frozen capture comparisons use software host rendering at rest; native GPU and Android interaction evidence is recorded separately.",
+    "The overall visual target remains unfinished; measured failures are retained."
+  ],
+  "releaseOrDeployment": false
+}

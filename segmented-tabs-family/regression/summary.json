@@ -1,0 +1,230 @@
+[
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-desktop-en.light",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-desktop-en.light",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      76,
+      110,
+      230,
+      125
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      76,
+      110,
+      230,
+      125
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-phone-en.light",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-phone-en.light",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      150,
+      417,
+      620,
+      447
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-phone-en.dark",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-phone-en.dark",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      150,
+      417,
+      620,
+      447
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-phone-zh.light",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-phone-zh.light",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      179,
+      415,
+      582,
+      453
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+    "group": "manager",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+    "group": "manager",
+    "rgbaByteEqual": false,
+    "changedPixelBounds": [
+      179,
+      415,
+      582,
+      453
+    ]
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-desktop-en-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-desktop-en-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-desktop-en-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-desktop-en-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-desktop-zh-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-desktop-zh-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-desktop-zh-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-desktop-zh-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-phone-en-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-phone-en-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-phone-en-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-phone-en-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-phone-zh-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-phone-zh-override.light",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "react",
+    "case": "components.tag-family.shell-phone-zh-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  },
+  {
+    "provider": "flutter",
+    "case": "components.tag-family.shell-phone-zh-override.dark",
+    "group": "neutral-shell",
+    "rgbaByteEqual": true
+  }
+]

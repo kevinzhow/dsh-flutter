@@ -1,0 +1,180 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "keyboard-presets",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "initial",
+      "rect": [
+        160,
+        132,
+        408,
+        174
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "initial",
+      "rect": [
+        160,
+        205,
+        1120,
+        390
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "initial",
+      "rect": [
+        160,
+        205,
+        1120,
+        390
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "initial",
+      "rect": [
+        160,
+        132,
+        408,
+        174
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "discover",
+      "rect": [
+        160,
+        132,
+        408,
+        174
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-keyboard",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-keyboard",
+      "rect": [
+        474,
+        237,
+        806,
+        279
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "presets",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-pointer",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-pointer",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-pointer",
+      "rect": [
+        474,
+        237,
+        806,
+        279
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "guide-home",
+      "rect": [
+        474,
+        283,
+        806,
+        570
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    1280,
+    720
+  ],
+  "theme": "light",
+  "locale": "en"
+}

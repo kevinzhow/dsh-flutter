@@ -1,0 +1,2806 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-initial.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-initial.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-other.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-other.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-hover.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-hover.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-focus.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-en-focus.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-initial.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-initial.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-other.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-other.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-hover.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-hover.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-focus.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-en-focus.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-initial.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-initial.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-other.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-other.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-hover.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-hover.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-focus.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-desktop-zh-focus.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-desktop-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-initial.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-initial.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-other.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-other.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-hover.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-hover.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-focus.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-desktop-zh-focus.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-desktop-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-initial.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-initial.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-other.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-other.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-hover.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-hover.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-focus.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-en-focus.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-initial.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-initial.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-other.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-other.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-hover.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-hover.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-focus.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-en-focus.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-en-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-initial.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-initial.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-other.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-other.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-hover.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-hover.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "plugin-manager-tab-discover"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-focus.light",
+      "title": "Plugin tabs (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.manager-phone-zh-focus.dark",
+      "title": "Plugin tabs (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-phone-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "plugin-manager-tab-installed"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+        "flutterKey": "plugin-manager-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-initial.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-initial.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-initial",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "initial",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-other.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-other.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-other",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "other",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-hover.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-hover.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-hover",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "hover",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-focus.light",
+      "title": "Preset guide tabs (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.segmented-tabs.guide-phone-zh-focus.dark",
+      "title": "Preset guide tabs (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "guide-phone-zh-focus",
+      "category": "extension/segmented-tabs",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "focus-by-tab",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    }
+  ]
+}

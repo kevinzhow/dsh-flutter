@@ -1,0 +1,1246 @@
+[
+  {
+    "key": "components.segmented-tabs.manager-desktop-en-initial.light",
+    "density": 1,
+    "browser": "145.0.7632.6",
+    "normal": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "keyboard": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceAfterPointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointerOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceOnOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(22, 24, 28)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(90, 95, 100)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "right": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(22, 24, 28)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(76, 80, 85)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "home": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(22, 24, 28)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(59, 62, 67)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "end": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(22, 24, 28)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(45, 48, 52)",
+          "transition": "color 0.18s"
+        }
+      ]
+    }
+  },
+  {
+    "key": "components.segmented-tabs.manager-desktop-en-initial.dark",
+    "density": 1,
+    "browser": "145.0.7632.6",
+    "normal": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "keyboard": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceAfterPointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointerOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceOnOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "right": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(218, 221, 224)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "home": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(218, 221, 224)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "end": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(227, 229, 231)",
+          "transition": "color 0.18s"
+        }
+      ]
+    }
+  },
+  {
+    "key": "components.segmented-tabs.manager-phone-en-initial.light",
+    "density": 2.625,
+    "browser": "145.0.7632.6",
+    "normal": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "keyboard": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceAfterPointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointerOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceOnOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(97, 102, 107)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "right": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(90, 95, 100)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "home": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(90, 95, 100)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "end": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(15, 17, 21)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(83, 87, 92)",
+          "transition": "color 0.18s"
+        }
+      ]
+    }
+  },
+  {
+    "key": "components.segmented-tabs.manager-phone-en-initial.dark",
+    "density": 2.625,
+    "browser": "145.0.7632.6",
+    "normal": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "keyboard": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceAfterPointer": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "pointerOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "spaceOnOther": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(249, 250, 251)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(207, 211, 214)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "right": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(211, 214, 217)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "home": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(211, 214, 217)",
+          "transition": "color 0.18s"
+        }
+      ]
+    },
+    "end": {
+      "role": "tablist",
+      "label": "Plugin views",
+      "tabs": [
+        {
+          "label": "Installed",
+          "selected": "false",
+          "tabIndex": -1,
+          "focused": false,
+          "focusVisible": false,
+          "underline": "none",
+          "underlineOffset": "auto",
+          "underlineThickness": "auto",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(245, 247, 248)",
+          "transition": "color 0.18s"
+        },
+        {
+          "label": "Discover",
+          "selected": "true",
+          "tabIndex": 0,
+          "focused": true,
+          "focusVisible": true,
+          "underline": "underline",
+          "underlineOffset": "4px",
+          "underlineThickness": "1px",
+          "height": 34,
+          "padding": "0px 12px",
+          "color": "rgb(211, 214, 217)",
+          "transition": "color 0.18s"
+        }
+      ]
+    }
+  }
+]

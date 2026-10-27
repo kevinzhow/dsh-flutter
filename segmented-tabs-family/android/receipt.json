@@ -1,0 +1,287 @@
+{
+  "synthetic": true,
+  "ownedEmulator": "emulator-5560",
+  "fixtureSha256": "9a28882bcd87daf6d132387ac988892695f67efa929812f98a8505d260eb7cf9",
+  "actualInputs": [
+    "touch",
+    "emulated hardware Tab, Shift+Tab, ArrowLeft, ArrowRight, Home and End"
+  ],
+  "accessibility": "Named tab groups; selected, focused, focusable, enabled and clickable tab owners read from UIAutomator",
+  "keyboardReadiness": "Native FlutterView focus checked immediately before every key; expected logical tab focus checked for selection keys",
+  "failedSelectionKeysRetried": false,
+  "cleanupOwner": "Parent restores the normal APK and stops its owned emulator after inspection",
+  "passed": true,
+  "scenes": [
+    {
+      "scene": "plugin-initial",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-touch-discover",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-touch-installed",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-keyboard-initial",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-keyboard-focus",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-arrowright",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-arrowright-wraps",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-arrowleft-wraps",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-home",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-end",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-tab-leaves-group",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "plugin-shift-tab-selected",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "presets",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-initial-selected-focus",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-touch-usage",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-home",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-end",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-arrowright-wraps",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-arrowleft-wraps",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-tab-leaves-group",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-shift-tab-selected",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "guide-closed",
+      "observationAttempts": 1
+    }
+  ],
+  "inputs": [
+    {
+      "type": "touch",
+      "target": "Plugin views: Discover"
+    },
+    {
+      "type": "touch",
+      "target": "Plugin views: Installed"
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Installed",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "ArrowRight",
+      "linuxCode": 106,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "ArrowRight wraps",
+      "linuxCode": 106,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "ArrowLeft wraps",
+      "linuxCode": 105,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Home",
+      "linuxCode": 102,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "End",
+      "linuxCode": 107,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab leaves plugin tab list",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Shift+Tab returns to selected plugin tab",
+      "linuxCode": 15,
+      "shift": true,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Presets"
+    },
+    {
+      "type": "touch",
+      "target": "Mode details"
+    },
+    {
+      "type": "touch",
+      "target": "Guide sections: How to use"
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Home",
+      "linuxCode": 102,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "End",
+      "linuxCode": 107,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "ArrowRight wraps",
+      "linuxCode": 106,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "ArrowLeft wraps",
+      "linuxCode": 105,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab leaves guide tab list",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Shift+Tab returns to selected guide tab",
+      "linuxCode": 15,
+      "shift": true,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Close"
+    }
+  ],
+  "focusUnderlineChangedPixels": true,
+  "focusPixelProof": {
+    "before": "plugin-keyboard-initial",
+    "after": "plugin-keyboard-focus",
+    "region": [
+      63,
+      609,
+      714,
+      719
+    ],
+    "changedBoundsInRegion": [
+      97,
+      77,
+      239,
+      80
+    ]
+  }
+}
