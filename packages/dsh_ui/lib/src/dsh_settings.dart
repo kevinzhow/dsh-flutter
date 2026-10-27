@@ -1,10 +1,9 @@
-import 'package:flutter/gestures.dart'
-    show GestureBinding, PointerDownEvent, PointerEvent;
 import 'package:flutter/services.dart'
     show HardwareKeyboard, KeyDownEvent, KeyEvent, LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_corners.dart';
+import 'dsh_control_focus_modality.dart';
 import 'dsh_diff_block.dart' show blendLikeChromium;
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
@@ -432,73 +431,6 @@ class DshSwitch extends StatefulWidget {
   State<DshSwitch> createState() => _DshSwitchState();
 }
 
-// dsh's focus-visible styling remains pointer-owned until a navigation key,
-// or a key followed by focus moving to a different control. Ordinary keys on
-// the same control do not bring the outline back after a pointer click.
-class _ControlFocusModality extends ChangeNotifier {
-  static final _ControlFocusModality instance = _ControlFocusModality();
-  static final _navigation = {
-    LogicalKeyboardKey.tab,
-    LogicalKeyboardKey.home,
-    LogicalKeyboardKey.end,
-    LogicalKeyboardKey.pageUp,
-    LogicalKeyboardKey.pageDown,
-    LogicalKeyboardKey.arrowUp,
-    LogicalKeyboardKey.arrowDown,
-    LogicalKeyboardKey.arrowLeft,
-    LogicalKeyboardKey.arrowRight,
-  };
-  int _users = 0;
-  bool pointerOwnsFocus = false;
-  FocusNode? _keyOrigin;
-
-  void acquire(VoidCallback listener) {
-    addListener(listener);
-    if (_users++ != 0) return;
-    pointerOwnsFocus = false;
-    _keyOrigin = null;
-    GestureBinding.instance.pointerRouter.addGlobalRoute(_onPointer);
-    HardwareKeyboard.instance.addHandler(_onKey);
-    FocusManager.instance.addListener(_onFocusChange);
-  }
-
-  void release(VoidCallback listener) {
-    removeListener(listener);
-    if (--_users != 0) return;
-    GestureBinding.instance.pointerRouter.removeGlobalRoute(_onPointer);
-    HardwareKeyboard.instance.removeHandler(_onKey);
-    FocusManager.instance.removeListener(_onFocusChange);
-  }
-
-  void _setPointerOwnsFocus(bool value) {
-    if (pointerOwnsFocus == value) return;
-    pointerOwnsFocus = value;
-    notifyListeners();
-  }
-
-  void _onPointer(PointerEvent event) {
-    if (event is! PointerDownEvent) return;
-    _keyOrigin = null;
-    _setPointerOwnsFocus(true);
-  }
-
-  bool _onKey(KeyEvent event) {
-    if (event is! KeyDownEvent) return false;
-    _keyOrigin = FocusManager.instance.primaryFocus;
-    if (_navigation.contains(event.logicalKey)) _setPointerOwnsFocus(false);
-    return false;
-  }
-
-  void _onFocusChange() {
-    if (_keyOrigin == null ||
-        _keyOrigin == FocusManager.instance.primaryFocus) {
-      return;
-    }
-    _keyOrigin = null;
-    _setPointerOwnsFocus(false);
-  }
-}
-
 class _DshSwitchState extends State<DshSwitch> {
   final FocusNode _focus = FocusNode(debugLabel: 'dsh switch');
   bool _focused = false;
@@ -509,7 +441,7 @@ class _DshSwitchState extends State<DshSwitch> {
   @override
   void initState() {
     super.initState();
-    _ControlFocusModality.instance.acquire(_modalityChanged);
+    DshControlFocusModality.instance.acquire(_modalityChanged);
   }
 
   void _modalityChanged() {
@@ -526,7 +458,7 @@ class _DshSwitchState extends State<DshSwitch> {
 
   @override
   void dispose() {
-    _ControlFocusModality.instance.release(_modalityChanged);
+    DshControlFocusModality.instance.release(_modalityChanged);
     _focus.dispose();
     super.dispose();
   }
@@ -616,7 +548,7 @@ class _DshSwitchState extends State<DshSwitch> {
                 ),
                 if (_focusVisible &&
                     _enabled &&
-                    !_ControlFocusModality.instance.pointerOwnsFocus)
+                    !DshControlFocusModality.instance.pointerOwnsFocus)
                   Positioned(
                     left: -ringReach,
                     top: -ringReach,
@@ -694,7 +626,7 @@ class _DshCheckboxState extends State<DshCheckbox> {
   void initState() {
     super.initState();
     _automaticFocusSuppressed = widget.autofocus;
-    _ControlFocusModality.instance.acquire(_modalityChanged);
+    DshControlFocusModality.instance.acquire(_modalityChanged);
     HardwareKeyboard.instance.addHandler(_automaticFocusKey);
   }
 
@@ -721,7 +653,7 @@ class _DshCheckboxState extends State<DshCheckbox> {
   @override
   void dispose() {
     HardwareKeyboard.instance.removeHandler(_automaticFocusKey);
-    _ControlFocusModality.instance.release(_modalityChanged);
+    DshControlFocusModality.instance.release(_modalityChanged);
     _focus.dispose();
     super.dispose();
   }
@@ -790,7 +722,7 @@ class _DshCheckboxState extends State<DshCheckbox> {
         if (_focusVisible &&
             _enabled &&
             !_automaticFocusSuppressed &&
-            !_ControlFocusModality.instance.pointerOwnsFocus)
+            !DshControlFocusModality.instance.pointerOwnsFocus)
           Positioned(
             left: -ringReach,
             top: -ringReach,

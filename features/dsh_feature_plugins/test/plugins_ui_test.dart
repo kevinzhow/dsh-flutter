@@ -1,10 +1,12 @@
 import 'package:dsh_client/dsh_client.dart';
+import 'package:dsh_client/generated_plugin_market.dart';
 import 'package:dsh_feature_plugins/dsh_feature_plugins.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -65,6 +67,88 @@ Future<void> pump(WidgetTester t) async {
 }
 
 void main() {
+  testWidgets('market categories use pills only when declarations exist', (
+    t,
+  ) async {
+    const url = 'https://market.example/index.json';
+    final host = FakeHost();
+    final manager = PluginManagerModel(remotes: host.remotes);
+    final model = PluginMarketModel(host.remotes)
+      ..status = PluginDiscoverStatus.ready
+      ..indexes = const [MarketIndexSummary(url: url, title: 'Market')]
+      ..selected = url;
+    MarketSearchResult result(Map<String, MarketDeclaration> categories) =>
+        MarketSearchResult(
+          url: url,
+          title: 'Market',
+          metadata: MarketIndexMetadata(
+            categories: categories,
+            labels: const {},
+            sortKeys: const {},
+          ),
+          fetchedAt: 1,
+          entries: const [],
+          total: 0,
+          nextOffset: null,
+        );
+    void setListing(MarketSearchResult value) {
+      model.listing = PluginListing(
+        url: url,
+        query: const PluginDiscoverQuery(),
+        status: PluginListingStatus.ready,
+        value: value,
+      );
+      model.changed.set(model.changed.value + 1);
+    }
+
+    final empty = result(const {});
+    final populated = result(const {
+      'tools': MarketDeclaration(title: 'Tools'),
+    });
+    host.handlers['pluginMarket/search'] = (_) => populated.toJson();
+    setListing(empty);
+    await t.pumpWidget(
+      dshTestApp(
+        SingleChildScrollView(
+          child: PluginMarketPage(
+            model: model,
+            manager: manager,
+            i18n: i18n,
+            onInstall: () {},
+          ),
+        ),
+      ),
+    );
+    await t.pumpAndSettle();
+    expect(find.byType(DshPill), findsNothing);
+    expect(
+      find.bySemanticsLabel(i18n.t('pluginMarket', 'categoriesLabel')),
+      findsNothing,
+    );
+    setListing(populated);
+    await t.pumpAndSettle();
+    final pills = find.byType(DshPill);
+    expect(pills, findsNWidgets(2));
+    expect(t.widget<DshPill>(pills.first).pressed, isTrue);
+    expect(t.widget<DshPill>(pills.last).pressed, isFalse);
+    final group = find
+        .ancestor(of: pills.first, matching: find.byType(Wrap))
+        .first;
+    expect(t.widget<Wrap>(group).spacing, DshPillRecipe.categoryGap);
+    await t.tap(find.text('Tools'));
+    await t.pumpAndSettle();
+    expect(model.listing!.query.category, 'tools');
+    expect(t.widget<DshPill>(find.byType(DshPill).last).pressed, isTrue);
+    await t.tap(find.text(i18n.t('pluginMarket', 'allCategories')));
+    await t.pumpAndSettle();
+    expect(model.listing!.query.category, isNull);
+    await t.pumpWidget(const SizedBox());
+    await t.runAsync(() async {
+      await manager.dispose();
+      await model.dispose();
+      await host.close();
+    });
+  });
   testWidgets(
     'details toggles exact row, uninstall waits for confirmation; lost install remains inspectable',
     (t) async {

@@ -94,7 +94,7 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_pill.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
+      "migrationStatus": "published Pill recipe and market category filters use the shared static/interactive capsule; Tag badges and schedule-specific overrides remain to be audited",
       "pendingDuplicates": []
     },
     {
@@ -558,9 +558,6 @@
     },
     "packages/dsh_ui/lib/src/dsh_phone_chrome.dart": {
       "manual-metric": 5
-    },
-    "packages/dsh_ui/lib/src/dsh_pill.dart": {
-      "manual-metric": 1
     },
     "packages/dsh_ui/lib/src/dsh_read_block.dart": {
       "manual-metric": 1

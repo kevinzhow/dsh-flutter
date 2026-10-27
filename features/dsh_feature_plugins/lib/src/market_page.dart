@@ -288,33 +288,35 @@ class _PluginMarketPageState extends State<PluginMarketPage> {
                 unawaited(model.search(listing.query.withText(text))),
           ),
           const SizedBox(height: 12),
-          Wrap(
-            spacing: 4,
-            runSpacing: 4,
-            children: [
-              DshButton(
-                size: DshButtonSize.sm,
-                variant: listing.query.category == null
-                    ? DshButtonVariant.toolbar
-                    : DshButtonVariant.ghost,
-                onPressed: () => unawaited(_query(clearCategory: true)),
-                child: Text(t('allCategories')),
-              ),
-              for (final entry
-                  in value?.metadata.categories.entries ??
-                      const <MapEntry<String, MarketDeclaration>>[])
-                DshButton(
-                  size: DshButtonSize.sm,
-                  variant: listing.query.category == entry.key
-                      ? DshButtonVariant.toolbar
-                      : DshButtonVariant.ghost,
-                  onPressed: () => unawaited(_query(category: entry.key)),
-                  child: Text(
-                    pluginText(entry.value.title, widget.i18n, entry.key),
+          if (value?.metadata.categories.isNotEmpty == true)
+            Semantics(
+              container: true,
+              explicitChildNodes: true,
+              label: t('categoriesLabel'),
+              child: Wrap(
+                spacing: DshPillRecipe.categoryGap,
+                runSpacing: DshPillRecipe.categoryGap,
+                children: [
+                  DshPill(
+                    key: const ValueKey('market-category-all'),
+                    active: listing.query.category == null,
+                    pressed: listing.query.category == null,
+                    onPressed: () => unawaited(_query(clearCategory: true)),
+                    child: DshChromeText(t('allCategories')),
                   ),
-                ),
-            ],
-          ),
+                  for (final entry in value!.metadata.categories.entries)
+                    DshPill(
+                      key: ValueKey('market-category-${entry.key}'),
+                      active: listing.query.category == entry.key,
+                      pressed: listing.query.category == entry.key,
+                      onPressed: () => unawaited(_query(category: entry.key)),
+                      child: DshChromeText(
+                        pluginText(entry.value.title, widget.i18n, entry.key),
+                      ),
+                    ),
+                ],
+              ),
+            ),
           if (value?.metadata.labels.isNotEmpty == true)
             Wrap(
               spacing: 4,

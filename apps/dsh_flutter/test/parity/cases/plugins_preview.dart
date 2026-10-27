@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:dsh_client/generated_plugin_market.dart';
 import 'package:dsh_feature_plugins/dsh_feature_plugins.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_parity/dsh_parity.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_ui/dsh_ui.dart';
@@ -20,6 +22,7 @@ final Map<String, ParityCase> pluginsPreviewCases = {
         height: (ctx.props['height'] as num).toDouble(),
         switchEnabled: ctx.props['switchEnabled'] as bool? ?? true,
         switchLocked: ctx.props['switchLocked'] as bool? ?? false,
+        category: ctx.props['category'] as String?,
         i18n: DshI18n(DshLocale.fromTag(ctx.locale)),
       ),
     ),
@@ -33,12 +36,14 @@ class _Surface extends StatefulWidget {
     required this.height,
     required this.switchEnabled,
     required this.switchLocked,
+    required this.category,
     required this.i18n,
   });
   final String family, name;
   final double width, height;
   final bool switchEnabled;
   final bool switchLocked;
+  final String? category;
   final DshI18n i18n;
   @override
   State<_Surface> createState() => _SurfaceState();
@@ -109,6 +114,35 @@ class _SurfaceState extends State<_Surface> {
         'total': 0,
         'nextOffset': null,
       };
+    }
+    if (widget.family == 'market' && widget.name == 'categories') {
+      const url = 'https://synthetic.example/index.json';
+      const result = MarketSearchResult(
+        url: url,
+        title: 'Synthetic market',
+        metadata: MarketIndexMetadata(
+          categories: {'tools': MarketDeclaration(title: 'Tools')},
+          labels: {},
+          sortKeys: {},
+        ),
+        fetchedAt: 1000,
+        entries: [],
+        total: 0,
+        nextOffset: null,
+      );
+      fixture.host.handlers['pluginMarket/search'] = (_) => result.toJson();
+      fixture.market
+        ..status = PluginDiscoverStatus.ready
+        ..indexes = const [
+          MarketIndexSummary(url: url, title: 'Synthetic market'),
+        ]
+        ..selected = url
+        ..listing = PluginListing(
+          url: url,
+          query: PluginDiscoverQuery(category: widget.category),
+          status: PluginListingStatus.ready,
+          value: result,
+        );
     }
     if (widget.name == 'install') {
       unawaited(

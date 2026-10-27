@@ -4,6 +4,7 @@
 // From @deepseek-ai/dsh-client-ui-theme 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-sidebar-terminal 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-dockkit 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-plugin-market 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -335,4 +336,23 @@ abstract final class DshCheckboxRecipe {
   static const String focusToken = '--dsw-focus-ring-color';
   static const String focusFallbackToken = '--dsw-alias-state-business-primary';
   static const double focusOffset = 2.0;
+}
+
+abstract final class DshPillRecipe {
+  static const double height = 24.0;
+  static const double padding = 8.0;
+  static const double gap = 4.0;
+  static const double radius = 999.0;
+  static const double fontSize = 12.0;
+  static const double lineHeight = 18.0;
+  static const String fontToken = '--dsw-font-xxs-12';
+  static const String labelToken = '--dsw-alias-label-secondary';
+  static const String fillToken = '--dsw-alias-bg-layer-2';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const String activeLabelToken = '--dsw-alias-label-primary';
+  static const String activeFillToken = '--dsw-alias-button-ghost-active-fill';
+  static const double activeBorderWidth = 1.0;
+  static const String activeBorderToken =
+      '--dsw-alias-button-ghost-active-border';
+  static const double categoryGap = 6.0;
 }

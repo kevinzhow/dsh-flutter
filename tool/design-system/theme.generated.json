@@ -38,7 +38,8 @@
           "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67",
           "packages/client/ui-primitives/src/Switch.tsx": "9f0f6db0de338793711b4333e87dcd2b82d06d8ad43aa362eb67efc63573ccb1",
           "packages/client/ui-primitives/src/Checkbox.tsx": "2a1b1d5b04cfff9a5494e19b1d8fb16a172bacb3094e360d7f5b5dc2a4930151",
-          "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868"
+          "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868",
+          "packages/client/ui-primitives/src/Pill.tsx": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f"
         }
       },
       {
@@ -147,6 +148,29 @@
           "packages/client/ui-dockkit/src/components/DockSurface.tsx": "437ef9917fdfa29f3461b89b0904f3e91b3b309eaacddfc89baeef4b4142ddc9",
           "packages/client/ui-dockkit/src/components/TabPanel.tsx": "21d7c1dde24b86f3f165d87af68e1cbe69d9336f1fc5931cb058bee902043c5e",
           "packages/client/ui-dockkit/src/components/TabLayout.tsx": "ea6305089a7697214a3dba28ca0c364253721b5b67533fc5245bad3036e990be"
+        }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-plugin-market",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-plugin-market/-/dsh-client-ui-plugin-market-0.2.1-rc.2.tgz",
+        "integrity": "sha512-vxf6BzUqEA8YRemGJRGC5lcP8vU9xlSjO92wSACMPHYHcbJdJmUybPLJH5lu4/ZU2UNXvD4K/NxNnpWyecuJzw==",
+        "publishedBundleSha256": "e961988dd984dc527b0bfeed37f6ae45b4a72392a2eb21676350359d8a127a60",
+        "extractionKind": "market-css",
+        "extraction": "Decode static JSON CSS and class export without executing JavaScript",
+        "sourcePackage": "packages/client/ui-plugin-market/package.json",
+        "referenceConsumer": "packages/experimental/plugin-market-bundle/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-plugin-market",
+        "files": {
+          "package.json": "74e97be85662285e22e04172d7ab8740c8fb16549a1802fc2a129598150b9138",
+          "classes.json": "58e41f237101bb85eda13d207aca0935e196d9e951073824d96b98731dd58aa8",
+          "DiscoverSection.module.css": "83d43d3fc71453b1a8b96d15d2670c37b11cf3eae54769e6438c7b39c602c718",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx": "f702e5b72028a37cf9bc5c8e855eed935d7a4e6d26d2d6b9059196ada2539c06"
         }
       }
     ],

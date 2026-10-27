@@ -44,6 +44,22 @@ def plugin_style_snapshot(archive):
         return {'css':css,'classes':classes,'bundleSha256':hashlib.sha256(bundle).hexdigest(),
                 'manifest':tar.extractfile('package/package.json').read(),'license':tar.extractfile('package/LICENSE').read()}
 
+def market_style_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        text = bundle.decode()
+        start = text.index('DiscoverSection.module.css.mjs')
+        literal = re.search(r'const css = ("(?:\\.|[^"\\])*");', text[start:])
+        if literal is None: raise ValueError('published market CSS JSON literal not recognized')
+        css = json.loads(literal.group(1))
+        prefix = 'var DiscoverSection_module_css_default = '
+        start = text.index(prefix) + len(prefix)
+        classes, _ = json.JSONDecoder().raw_decode(text[start:])
+        if not isinstance(classes, dict) or not all(isinstance(k, str) and isinstance(v, str) for k, v in classes.items()):
+            raise ValueError('published market CSS class export is not a static string map')
+        return {'css': css, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'manifest': tar.extractfile('package/package.json').read(), 'license': tar.extractfile('package/LICENSE').read()}
+
 def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
@@ -131,12 +147,15 @@ def verify_snapshot(archive, package, folder):
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published primitive snapshot mismatch: ' + name)
         return
-    extract = {'plugin-css': plugin_style_snapshot, 'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
+    extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot, 'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
     result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
         if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
+    elif kind == 'market-css':
+        if (folder / 'DiscoverSection.module.css').read_text() != result['css']: raise ValueError('decoded market CSS snapshot mismatch')
+        if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('market class export snapshot mismatch')
     elif kind == 'theme-css':
         for name, css in result['css'].items():
             if (folder / name).read_text() != css: raise ValueError('decoded theme CSS snapshot mismatch: ' + name)
