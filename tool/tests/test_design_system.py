@@ -15,6 +15,20 @@ def module(name):
 gen, guard = module('generate'), module('check')
 
 class DesignSystemTests(unittest.TestCase):
+    def test_segmented_tab_transition_tracks_each_source_duration_and_rejects_unknown_easing(self):
+        import copy
+        lock, sheets = gen.collect()
+        altered = copy.deepcopy(sheets)
+        next(r for r in altered['SegmentedTabs.module.css'] if r['selector'] == '.tab')['declarations']['transition'] = 'color 220ms ease'
+        dart, _ = gen.render(lock, altered)
+        self.assertIn('labelTransitionMs = 220.0;', dart)
+        self.assertIn('transitionMs = 180.0;', dart)
+        for selector, value in [('.indicator', 'transform 180ms linear'), ('.tab', 'color 180ms linear'), ('.tab', 'opacity 180ms ease')]:
+            altered = copy.deepcopy(sheets)
+            next(r for r in altered['SegmentedTabs.module.css'] if r['selector'] == selector)['declarations']['transition'] = value
+            with self.subTest(selector=selector, value=value), self.assertRaisesRegex(ValueError, 'unsupported tab transition'):
+                gen.render(lock, altered)
+
     def test_plugin_button_states_fail_closed_and_source_drift_is_detected(self):
         import copy
         _, sheets = gen.collect()

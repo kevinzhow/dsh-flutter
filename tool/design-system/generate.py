@@ -278,7 +278,9 @@ def render(lock, sheets):
     if len(outline) != 3 or outline[1] != 'solid':
         raise ValueError('unsupported button outline')
     transition = get(t, '.indicator', 'transition').split()
-    if len(transition) != 3 or transition[0] != 'transform':
+    label_transition = get(t, '.tab', 'transition').split()
+    if (len(transition) != 3 or transition[0] != 'transform' or transition[2] != 'ease'
+            or len(label_transition) != 3 or label_transition[0] != 'color' or label_transition[2] != 'ease'):
         raise ValueError('unsupported tab transition')
     tab_border = get(t, '.indicator', 'border').split()
     if len(tab_border) != 3 or tab_border[1] != 'solid':
@@ -311,6 +313,7 @@ def render(lock, sheets):
             'fontSize': px(t, '.tab', 'font-size'), 'lineHeight': px(t, '.tab', 'line-height'),
             'selectedWeight': number(get(t, weight_selector, 'font-weight'), ''),
             'transitionMs': number(transition[1], 'ms'),
+            'labelTransitionMs': number(label_transition[1], 'ms'),
             'focusLineWidth': px(t, '.tab:focus-visible', 'text-decoration-thickness'),
             'backgroundToken': tok(t, '.tabs', 'background'), 'radiusToken': tok(t, '.tabs', 'border-radius'),
             'indicatorBackgroundToken': tok(t, '.indicator', 'background'),
