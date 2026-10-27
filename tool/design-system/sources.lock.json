@@ -23,7 +23,9 @@
         "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
         "Checkbox.module.css": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
         "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
-        "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e"
+        "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+        "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+        "modal-layer.json": "d485226251899c293cc6ab09adb9dbd034dbc55cface9bcf978ca87dabd7aa29"
       },
       "sourcePackage": "packages/client/ui-primitives/package.json",
       "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -41,8 +43,19 @@
         "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868",
         "packages/client/ui-primitives/src/Pill.tsx": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f",
         "packages/client/ui-primitives/src/Tag.tsx": "2f4845c6b5c7d6f06304de6b972127692a909c775bae72c14799acfd2dc56289",
-        "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd"
-      }
+        "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd",
+        "packages/client/ui-primitives/src/Modal.tsx": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f",
+        "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+        "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+        "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+      },
+      "referenceConsumers": [
+        {
+          "path": "packages/client/ui-agent-preset/package.json",
+          "dependencyField": "devDependencies",
+          "dependencySpecifier": "workspace:*"
+        }
+      ]
     },
     {
       "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
@@ -173,6 +186,35 @@
       },
       "referenceSourceSha256": {
         "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx": "f702e5b72028a37cf9bc5c8e855eed935d7a4e6d26d2d6b9059196ada2539c06"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-agent-preset",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-agent-preset/-/dsh-client-ui-agent-preset-0.2.1-rc.2.tgz",
+      "integrity": "sha512-Tp3CI/LpwykU3ttjG7MfLHk+5jep/qgwL982MAyYuoRHItuj/zvGLH/fXX0X8VAWW9OtRyv7gs/yFffkfXZ5dQ==",
+      "publishedBundleSha256": "6ecdf173de66fce620e588f10ed1e3b624725febab059fb867beefef9ae4ddb8",
+      "extractionKind": "agent-preset-css",
+      "extraction": "Decode separate guide and roster CSS literals, static class maps, and reader region from named release regions without executing JavaScript",
+      "sourcePackage": "packages/client/ui-agent-preset/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-agent-preset",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "PresetGuideDialog.module.css": "66f8d99bef244fe2de94506c1c6142207f93713708f9aeb5c9fe9052f8f47817",
+        "guide-classes.json": "96ff147637c8e0724b7233def3d2f343a5f5cb3d026ce2d2f1e148c6501c46b1",
+        "package.json": "d2a6fbce35d6fa9dc4b5f330889791d466b37c97df277c76074020d4988cfdb4",
+        "reader-behavior.json": "6bcfa990163e2fdadb0e669a75799072175626f69c6b2837dd9f32be79b3fcae",
+        "roster-classes.json": "a37292f6e720da3f4e9564f546a14ddbca947d4edaf05c2e28040bb78862d608",
+        "styles.css": "d841924d9dcbab7ef9cc641be98d0d1832ae3a77449bfe5af40c6d412a87d3a0"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx": "fb2abf1a26ea0748526f32d5c271ce2c510d1867fc67db5fb3bc075f55d76822",
+        "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
+        "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2",
+        "packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea"
       }
     }
   ],

@@ -55,6 +55,7 @@ ICONS = {
     'IconEditOutlineRegular': 'editOutline',
     'IconTrashOutlineRegular': 'trash',
     'IconCopyOutlineRegular': 'copyOutline',
+    'IconListPenOutlineRegular': 'listPenOutline',
     'IconBranchOutlineRegular': 'branch',
     'IconPlusOutlineRegular': 'plusOutline',
     'IconInfoOutlineRegular': 'infoOutline',

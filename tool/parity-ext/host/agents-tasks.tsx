@@ -25,6 +25,13 @@ function Surface({family,props,ctx}:any){
    help.find(el=>el.textContent===t('modeExplanation'))?.setAttribute('data-parity-id','preset-guide-standard-details')
    help.find(el=>el.textContent===t('howToUse'))?.setAttribute('data-parity-id','preset-guide-standard-usage')
    const tabs=document.querySelector('[role="dialog"] [role="tablist"]')
+   const reader=tabs?.closest('[role="dialog"]')
+   reader?.setAttribute('data-parity-id','preset-guide-dialog')
+   reader?.querySelectorAll('[role="tabpanel"][data-guide-page]').forEach(el=>{
+    const page=el.getAttribute('data-guide-page')
+    el.setAttribute('data-parity-id',`preset-guide-panel-${page}`)
+   })
+   reader?.querySelector('button[aria-label]')?.setAttribute('data-parity-id','preset-guide-close')
    tabs?.setAttribute('data-parity-id','preset-guide-tabs')
    tabs?.querySelectorAll('[role="tab"]').forEach((el,i)=>el.setAttribute('data-parity-id',`preset-guide-tab-${i===0?'explanation':'usage'}`))
   }

@@ -5,6 +5,7 @@
 // From @deepseek-ai/dsh-client-ui-sidebar-terminal 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-dockkit 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-plugin-market 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-agent-preset 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -383,4 +384,128 @@ abstract final class DshTagRecipe {
   static const double warningAlpha = 0.12;
   static const String dangerToken = '--dsw-alias-state-error-primary';
   static const double dangerAlpha = 0.1;
+}
+
+abstract final class DshModalRecipe {
+  static const double rootMargin = 24.0;
+  static const double rootHorizontalMargin = 24.0;
+  static const double maskChromeTopFallback = 0.0;
+  static const double defaultWidth = 380.0;
+  static const double gap = 20.0;
+  static const double paddingBottom = 24.0;
+  static const double headerTop = 22.0;
+  static const double headerRight = 14.0;
+  static const double headerBottom = 12.0;
+  static const double headerLeft = 24.0;
+  static const double headerGap = 8.0;
+  static const double titleFontSize = 16.0;
+  static const double titleLineHeight = 24.0;
+  static const String titleFontToken = '--dsw-font-base-16';
+  static const double titleWeight = 500.0;
+  static const String titleLabelToken = '--dsw-alias-label-primary';
+  static const double closeSize = 28.0;
+  static const double closeIconSize = 14.0;
+  static const String closeRadiusToken = '--dsw-radius-sm';
+  static const String closeLabelToken = '--dsw-alias-label-secondary';
+  static const String closeHoverToken = '--dsw-alias-interactive-bg-hover';
+  static const double descriptionHorizontalPadding = 24.0;
+  static const double descriptionFontSize = 14.0;
+  static const double descriptionLineHeight = 22.0;
+  static const double descriptionWeight = 400.0;
+  static const String descriptionLabelToken = '--dsw-alias-label-primary';
+  static const double bodyMarginTop = 20.0;
+  static const double bodyHorizontalPadding = 24.0;
+  static const double footerGap = 8.0;
+  static const double footerHorizontalPadding = 24.0;
+  static const String maskToken = '--dsw-alias-bg-mask-1';
+  static const String backgroundToken = '--dsw-alias-bg-layer-2';
+  static const String radiusToken = '--dsw-radius-panel';
+  static const String elevationToken = '--dsw-elevation-prominent';
+  static const String animationDurationToken = '--ds-transition-duration';
+  static const String easeToken = '--ds-ease-in-out';
+  static const double animationMs = 200.0;
+  static const double curveX1 = 0.4;
+  static const double curveY1 = 0.0;
+  static const double curveX2 = 0.2;
+  static const double curveY2 = 1.0;
+  static const String maskBlurToken = '--dsw-mask-blur';
+  static const String maskBlur = 'none';
+}
+
+abstract final class DshGuideReaderRecipe {
+  static const double width = 640.0;
+  static const double height = 600.0;
+  static const double headerTop = 24.0;
+  static const double headerRight = 24.0;
+  static const double headerBottom = 20.0;
+  static const double headerLeft = 28.0;
+  static const double titleGap = 16.0;
+  static const double titleFontSize = 20.0;
+  static const double titleLineHeight = 28.0;
+  static const double titleWeight = 600.0;
+  static const String titleFontToken = '--dsw-font-l-20';
+  static const double introGap = 8.0;
+  static const double introFontSize = 14.0;
+  static const double introLineHeight = 22.0;
+  static const String introLabelToken = '--dsw-alias-label-secondary';
+  static const String introFontToken = '--dsw-font-s-14';
+  static const double closeSize = 32.0;
+  static const double closeIconSize = 18.0;
+  static const double closePadding = 0.0;
+  static const String closeRadiusToken = '--dsw-radius-md';
+  static const String closeLabelToken = '--dsw-alias-label-tertiary';
+  static const double tabsTopMargin = 0.0;
+  static const double tabsHorizontalMargin = 28.0;
+  static const double tabsBottomMargin = 22.0;
+  static const double panelTop = 0.0;
+  static const double panelRight = 24.0;
+  static const double panelBottom = 24.0;
+  static const double panelLeft = 28.0;
+  static const double panelFontSize = 16.0;
+  static const String panelLabelToken = '--dsw-alias-label-primary';
+  static const String panelFontToken = '--dsw-font-base-16';
+  static const String panelFocusWidthToken = '--dsw-focus-ring-width';
+  static const String panelFocusToken = '--dsw-focus-ring-color';
+  static const String panelFocusFallbackToken =
+      '--dsw-alias-state-business-primary';
+  static const double panelFocusOffset = -2.0;
+  static const String scrollbarThumbToken = '--dsw-alias-scrollbar-bg-l2';
+  static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
+  static const double scrollbarWidth = 5.0;
+  static const double scrollbarRadius = 999.0;
+  static const double scrollbarThumbBorderWidth = 0.0;
+  static const double scrollbarTrackMargin = 0.0;
+  static const double headingTop = 28.0;
+  static const double headingBottom = 10.0;
+  static const double headingFirstTop = 0.0;
+  static const double headingFontSize = 16.0;
+  static const double headingLineHeight = 24.0;
+  static const double headingWeight = 600.0;
+  static const double paragraphBottom = 16.0;
+  static const double paragraphFontSize = 16.0;
+  static const double paragraphLineHeight = 26.0;
+  static const String paragraphLabelToken = '--dsw-alias-label-primary';
+  static const double quoteTop = 10.0;
+  static const double quoteBottom = 14.0;
+  static const double quoteVerticalPadding = 14.0;
+  static const double quoteHorizontalPadding = 16.0;
+  static const String quoteRadiusToken = '--dsw-radius-lg';
+  static const String quoteBackgroundToken = '--dsw-alias-bg-module-platform';
+  static const String quoteLabelToken = '--dsw-alias-label-primary';
+  static const double usageParagraphBottom = 12.0;
+  static const double usageParagraphFontSize = 14.0;
+  static const double usageParagraphLineHeight = 22.0;
+  static const String usageParagraphLabelToken = '--dsw-alias-label-secondary';
+  static const double exampleGap = 28.0;
+  static const double exampleHeaderRowGap = 8.0;
+  static const double exampleHeaderColumnGap = 10.0;
+  static const double exampleHeaderBottom = 8.0;
+  static const double exampleTagGap = 4.0;
+  static const double exampleIconSize = 12.0;
+  static const double usageQuoteVerticalMargin = 8.0;
+  static const double usageQuoteVerticalPadding = 12.0;
+  static const double usageQuoteHorizontalPadding = 16.0;
+  static const double usageQuoteFontSize = 16.0;
+  static const double usageQuoteLineHeight = 26.0;
+  static const String usageQuoteLabelToken = '--dsw-alias-label-primary';
 }

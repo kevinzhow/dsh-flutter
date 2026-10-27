@@ -8,8 +8,8 @@ transitions. Real pinned-browser probes record same-tab pointer focus retention,
 new pointer focus and subsequent Space/arrow behavior; this underline differs
 from the global outline-color suppression rule. Underline raster bounds use the
 existing primary-font baseline/strut helpers and native density snapping.
-Preset dialog width, its surrounding layout and independent panel scroll-state
-retention remain follow-up work in their respective families.
+The preset guide now uses the canonical Modal reader profile described below,
+including its source width, fixed chrome and independent scroll panels.
 
 The reference is DSH commit `687f282e8625c6b8d11ff58211a90524be2e4317`. Its plugin manager declares `@deepseek-ai/dsh-client-ui-primitives` as `workspace:*`; the actual referenced package version is `0.2.1-rc.2`. `tool/design-system/sources.lock.json` records that dependency, published npm tarball integrity and the hashes of the consumed published files. The checked-in CSS files are extracted from that release and checked against the pinned reference checkout.
 
@@ -22,6 +22,50 @@ Run the pinned environment and `python tool/design-system/generate.py --check` t
 `tool/preflight` runs recipe verification and the family ratchet as a separate check, including CI when other upstream-dependent checks skip. Regenerate recipes with `python tool/design-system/generate.py`, then run the check and full preflight. Do not increase the baseline to make a new violation pass. Retire duplicates by migrating their callers to the family recipe, then lower the baseline.
 
 Acceptance uses real reference components with matching data, viewport, locale, density and theme. Previous Whalee images are only regression evidence, never the source of the desired design. Keep fonts, thresholds and pixel classification fixed. Each subsequent family migration must include reference comparisons, explicit remaining differences and regression evidence for preserved appearances. No automated upstream polling schedule is created by this work; run the checks during every planned upstream synchronization.
+
+## Shared Modal and preset reader
+
+The published primitive Modal CSS generates the shared mask, viewport margins,
+card material and entry animation. The guide profile comes from the separately
+locked `ui-agent-preset@0.2.1-rc.2` package. Its guide and roster CSS literals are
+extracted separately; the roster stylesheet is an audited input and does not
+provide the guide profile. The lock also verifies the published behavioral
+regions and pinned source for composition, focus and retained panels. Unknown
+selectors, declarations and behavioral inputs fail generation.
+
+`showDshDialog` owns viewport fitting, the mask below native caption paint,
+reduced-motion entry and keyboard ownership. Flutter's route retains the Tab
+trap and foreground dismissal; the canonical layer guards repeated Escape and
+active or just-ended IME composition. A newer menu or child route keeps its own
+Escape handling. Explicit opener restoration checks that the owner and target
+remain mounted and current. Shared button focus presentation keeps browser-like
+input history separate from temporary outline suppression during automatic
+entry and return; unmodified navigation restores the outline.
+
+`DshDialogReader` owns the source 640×600 frame, fixed header and accessible Close
+button, full-width segmented tabs and independent mounted scroll panels. The
+frame clamps to available room, and short viewports clip fixed chrome without
+layout overflow. Each panel has its own controller, focus target and stable
+scrollbar gutter. The active panel receives keyboard scrolling; inactive panels
+leave traversal and semantics. Features supply localized content and labels.
+`DshReaderMarkdown` consumes the generated prose and usage styles, including
+collapsed paragraph/heading margins, example tags and rounded quotes, while the
+ordinary Markdown renderer retains its default profile.
+
+Acceptance compares the actual source guide at two densities, in both languages
+and themes, with whole-reader, tab and scrolled-panel crops reported separately.
+Directly scrolled and returned panels have paired captures for each provider;
+source DOM probes also record node identity and positive scroll offsets. Native
+replay exercises real Close, selection, independent scrolling, keyboard paging
+and focus behavior. Representative workspace and directory frames report the
+shared shell changes separately from the risk dialog preservation cohort.
+
+This is a bounded dialog migration. The headed Modal profile, risk card and its
+separate route, Settings and shortcut routes, and raw schedule deletion remain
+pending in the inventory. The bottom option sheet is a selection adaptation and
+has its own presentation contract. Other content profiles keep their existing
+geometry until individually audited and migrated. No overall visual completion
+is inferred from this family.
 
 ## Button family profiles
 

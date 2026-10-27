@@ -50,6 +50,7 @@ export 'src/dsh_menu.dart';
 export 'src/dsh_menu_item.dart';
 export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
+export 'src/dsh_reader_markdown.dart';
 export 'src/dsh_menu_surface.dart';
 export 'src/dsh_status_dot.dart';
 export 'src/dsh_text_field.dart';
@@ -84,3 +85,7 @@ export 'src/dsh_recipes.g.dart';
 
 export 'src/dsh_menu_footer.dart';
 export 'src/dsh_menu_group.dart';
+
+export 'src/dsh_dialog_reader.dart';
+
+export 'src/dsh_focus_presentation.dart';

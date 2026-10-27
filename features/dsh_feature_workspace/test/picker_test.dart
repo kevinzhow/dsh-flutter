@@ -248,9 +248,7 @@ void main() {
         expect(find.text('flow open'), findsNothing);
         expect(log.where((e) => e.startsWith('pick')), isEmpty);
         await t.tap(key('folder-error-retry'));
-        await t.pump();
-        await t.pump(const Duration(milliseconds: 100));
-        await t.pump();
+        await t.pumpAndSettle();
         expect(find.text('Couldn’t open folder'), findsNothing);
         expect(find.text('flow open'), findsOneWidget);
       },
@@ -267,8 +265,7 @@ void main() {
       await t.pumpAndSettle();
       await t.pump(const Duration(milliseconds: 100));
       await t.tap(key('folder-error-cancel'));
-      await t.pump();
-      await t.pump(const Duration(milliseconds: 100));
+      await t.pumpAndSettle();
       expect(find.text('Couldn’t open folder'), findsNothing);
       expect(find.text('flow open'), findsNothing);
     });
