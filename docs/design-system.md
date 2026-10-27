@@ -242,6 +242,11 @@ inventory page still has a different row layout and retains its enabled-state
 text; other source Tag consumers remain to be migrated. The family ratchet
 prevents the retired private components from returning.
 
+Plugin cards declare their own opaque surface to descendants, so translucent
+status tints composite over the card instead of a more distant page surface.
+The dark inventory warning and error fills are checked against the original
+browser's card pixels.
+
 The settings field exposes accessibility focus and activation for its reset
 and help buttons, and supports Tab, Enter and Space in source order; disabled
 reset remains unavailable. `probe_settings_reset.mjs` records the actual shell

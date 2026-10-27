@@ -100,7 +100,15 @@ void main() {
       ],
     };
     await t.pumpWidget(
-      dshTestApp(PluginInventorySection(remotes: host.remotes, i18n: i18n)),
+      dshTestApp(
+        Builder(
+          builder: (context) => DshSurface(
+            color: context.dsh.bgBase,
+            child: PluginInventorySection(remotes: host.remotes, i18n: i18n),
+          ),
+        ),
+        brightness: Brightness.dark,
+      ),
     );
     await t.pumpAndSettle();
     expect(
@@ -121,6 +129,20 @@ void main() {
       t.widget<DshTag>(find.byKey(const ValueKey('inventory-tag-failed'))).tone,
       DshTagTone.danger,
     );
+    Color? tagFill(String id) =>
+        (t
+                    .widget<DshContainer>(
+                      find.descendant(
+                        of: find.byKey(ValueKey('inventory-tag-$id')),
+                        matching: find.byType(DshContainer),
+                      ),
+                    )
+                    .decoration
+                as BoxDecoration)
+            .color;
+    // Opaque pixels measured from the actual pinned Chromium inventory card.
+    expect(tagFill('conditional'), const Color(0xff443929));
+    expect(tagFill('failed'), const Color(0xff403032));
     await t.pumpWidget(const SizedBox());
     await t.runAsync(host.close);
   });
