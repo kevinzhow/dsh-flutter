@@ -60,6 +60,53 @@ def market_style_snapshot(archive):
         return {'css': css, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
                 'manifest': tar.extractfile('package/package.json').read(), 'license': tar.extractfile('package/LICENSE').read()}
 
+def bundle_region(text, name):
+    """Return one named release region; never execute its JavaScript."""
+    matches = list(re.finditer(r'//#region ([^\r\n]+)', text))
+    starts = [m for m in matches if m[1] == name or m[1].endswith('/' + name)]
+    if len(starts) != 1:
+        raise ValueError('published bundle region missing/ambiguous: ' + name)
+    start = starts[0].start()
+    end = text.find('//#endregion', starts[0].end())
+    if end < 0:
+        raise ValueError('published bundle region has no end: ' + name)
+    return text[start:end]
+
+def agent_preset_style_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        text = bundle.decode()
+        styles, classes = {}, {}
+        for component, filename in [('PresetGuideDialog', 'PresetGuideDialog.module.css'),
+                                     ('AgentPresetSection', 'styles.css')]:
+            region = bundle_region(text, component + '.module.css.mjs')
+            # The guide variable is css$1, while the roster variable is css.
+            # Searching only `const css =` silently skips to another module.
+            literals = re.findall(r'\bconst css(?:\$\d+)? = ("(?:\\.|[^"\\])*");', region)
+            if len(literals) != 1:
+                raise ValueError('published preset CSS literal missing/ambiguous: ' + component)
+            styles[filename] = json.loads(literals[0])
+            prefix = 'var ' + component + '_module_css_default = '
+            if region.count(prefix) != 1:
+                raise ValueError('published preset class export missing/ambiguous: ' + component)
+            mapping, _ = json.JSONDecoder().raw_decode(region.split(prefix, 1)[1])
+            if not isinstance(mapping, dict) or not mapping or not all(isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()):
+                raise ValueError('published preset class export is not a static string map')
+            classes['guide' if component == 'PresetGuideDialog' else 'roster'] = mapping
+        return {'css': styles, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'readerBehavior': {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                                   'region': bundle_region(text, 'PresetGuideDialog.js')},
+                'manifest': tar.extractfile('package/package.json').read(),
+                'license': tar.extractfile('package/LICENSE').read()}
+
+def modal_layer_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/index.js').read()
+    text = bundle.decode()
+    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+            'layer': bundle_region(text, 'useModalLayer.js'),
+            'modal': bundle_region(text, 'Modal.js')}
+
 def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
@@ -117,6 +164,10 @@ def verify_packages(source=None):
                 raise ValueError('reference dependency version drift: regenerate from its published package')
             if consumer[package['dependencyField']].get(package['name']) != package['dependencySpecifier']:
                 raise ValueError('reference dependency specifier drift: update the package lock')
+            for declaration in package.get('referenceConsumers', []):
+                extra = json.loads((source / declaration['path']).read_text())
+                if extra[declaration['dependencyField']].get(package['name']) != declaration['dependencySpecifier']:
+                    raise ValueError('reference additional consumer drift: ' + declaration['path'])
             for name, sha in package.get('referenceSourceSha256', {}).items():
                 if hashlib.sha256((source / name).read_bytes()).hexdigest() != sha:
                     raise ValueError('reference source drift: review the corresponding published package: ' + name)
@@ -143,11 +194,17 @@ def verify_snapshot(archive, package, folder):
                     if json.loads((folder / name).read_text()) != tooltip_placement_snapshot(archive):
                         raise ValueError('published tooltip placement snapshot mismatch')
                     continue
+                if name == 'modal-layer.json':
+                    if json.loads((folder / name).read_text()) != modal_layer_snapshot(archive):
+                        raise ValueError('published modal layer snapshot mismatch')
+                    continue
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published primitive snapshot mismatch: ' + name)
         return
-    extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot, 'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
+    extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot,
+               'agent-preset-css': agent_preset_style_snapshot,
+               'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
     result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
@@ -161,6 +218,15 @@ def verify_snapshot(archive, package, folder):
             if (folder / name).read_text() != css: raise ValueError('decoded theme CSS snapshot mismatch: ' + name)
         if json.loads((folder / 'styles-order.json').read_text()) != result['order']:
             raise ValueError('published theme injection order snapshot mismatch')
+    elif kind == 'agent-preset-css':
+        for name, css in result['css'].items():
+            if (folder / name).read_text() != css:
+                raise ValueError('decoded preset CSS snapshot mismatch: ' + name)
+        for component, mapping in result['classes'].items():
+            if json.loads((folder / (component + '-classes.json')).read_text()) != mapping:
+                raise ValueError('preset class export snapshot mismatch: ' + component)
+        if json.loads((folder / 'reader-behavior.json').read_text()) != result['readerBehavior']:
+            raise ValueError('published guide behavior snapshot mismatch')
     else:
         if json.loads((folder / 'terminal-font.json').read_text()) != {'terminalFontStack': result['font']}:
             raise ValueError('decoded terminal font snapshot mismatch')

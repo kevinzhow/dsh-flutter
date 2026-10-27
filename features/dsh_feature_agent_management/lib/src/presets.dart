@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' show SemanticsRole;
 
 import 'package:dsh_client/generated_agent_presets.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -118,16 +117,52 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
   Future<void> _guide(AgentPresetRow row, bool usage) async {
     final stem = _copyStem(row);
     if (stem == null) return;
-    final initialHighlight = _guideTrigger(row, usage).hasPrimaryFocus;
-    await showDshDialog<void>(
+    final initialHighlight = dshHasVisibleFocus(_guideTrigger(row, usage));
+    final codeLabels = DshCodeToolbarLabels(
+      codeLabel: t('codeBlock.title'),
+      wrapLabel: t('codeBlock.wrap'),
+      unwrapLabel: t('codeBlock.unwrap'),
+      copy: t('guideCopy'),
+      copied: t('guideCopied'),
+    );
+    await showDshReaderDialog<void>(
       context,
-      label: presetName(row, widget.i18n),
-      builder: (context) => _PresetGuide(
-        stem: stem,
-        i18n: widget.i18n,
-        usage: usage,
-        initialHighlight: initialHighlight,
-      ),
+      title: presetName(row, widget.i18n),
+      intro: t('guide${stem}Intro'),
+      closeLabel: t('close'),
+      tabsLabel: t('guideSections'),
+      identifier: 'preset-guide',
+      readerKey: const ValueKey('preset-guide-dialog'),
+      tabsKey: const ValueKey('preset-guide-tabs'),
+      closeKey: const ValueKey('preset-guide-close'),
+      initialValue: usage ? 'usage' : 'explanation',
+      initialHighlight: initialHighlight,
+      restoreFocus: _guideTrigger(row, usage),
+      tabs: [
+        DshReaderTab(
+          'explanation',
+          t('modeExplanation'),
+          tabKey: const ValueKey('preset-guide-tab-explanation'),
+          panelKey: const ValueKey('preset-guide-panel-explanation'),
+          child: DshReaderMarkdown(
+            t('guide${stem}Explanation'),
+            exampleLabel: t('guideExampleTask'),
+            codeLabels: codeLabels,
+          ),
+        ),
+        DshReaderTab(
+          'usage',
+          t('howToUse'),
+          tabKey: const ValueKey('preset-guide-tab-usage'),
+          panelKey: const ValueKey('preset-guide-panel-usage'),
+          child: DshReaderMarkdown(
+            t('guide${stem}Usage'),
+            usage: true,
+            exampleLabel: t('guideExampleTask'),
+            codeLabels: codeLabels,
+          ),
+        ),
+      ],
     );
   }
 
@@ -326,86 +361,6 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
       ),
     );
   }
-}
-
-class _PresetGuide extends StatefulWidget {
-  const _PresetGuide({
-    required this.stem,
-    required this.i18n,
-    required this.usage,
-    required this.initialHighlight,
-  });
-  final String stem;
-  final DshI18n i18n;
-  final bool usage;
-  final bool initialHighlight;
-  @override
-  State<_PresetGuide> createState() => _PresetGuideState();
-}
-
-class _PresetGuideState extends State<_PresetGuide> {
-  late bool usage = widget.usage;
-  String t(String key) => widget.i18n.t('settings.agentPreset', key);
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(24),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(t('preset${widget.stem}Name')),
-        const SizedBox(height: 12),
-        Text(t('guide${widget.stem}Intro')),
-        const SizedBox(height: 12),
-        DshSegmentedTabs(
-          key: const ValueKey('preset-guide-tabs'),
-          items: [
-            DshSegmentedTab(
-              'explanation',
-              t('modeExplanation'),
-              key: const ValueKey('preset-guide-tab-explanation'),
-              id: 'preset-guide-tab-explanation',
-              panelId: 'preset-guide-panel-explanation',
-            ),
-            DshSegmentedTab(
-              'usage',
-              t('howToUse'),
-              key: const ValueKey('preset-guide-tab-usage'),
-              id: 'preset-guide-tab-usage',
-              panelId: 'preset-guide-panel-usage',
-            ),
-          ],
-          value: usage ? 'usage' : 'explanation',
-          label: t('guideSections'),
-          expand: true,
-          autofocus: true,
-          autofocusHighlight: widget.initialHighlight,
-          onChanged: (value) => setState(() => usage = value == 'usage'),
-        ),
-        Flexible(
-          child: Semantics(
-            container: true,
-            explicitChildNodes: true,
-            role: SemanticsRole.tabPanel,
-            identifier: 'preset-guide-panel-${usage ? 'usage' : 'explanation'}',
-            label: t(usage ? 'howToUse' : 'modeExplanation'),
-            child: Focus(
-              child: SingleChildScrollView(
-                key: ValueKey(usage),
-                child: DshMarkdown(
-                  t('guide${widget.stem}${usage ? 'Usage' : 'Explanation'}'),
-                ),
-              ),
-            ),
-          ),
-        ),
-        DshButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(t('close')),
-        ),
-      ],
-    ),
-  );
 }
 
 class AgentPresetChip extends StatefulWidget {

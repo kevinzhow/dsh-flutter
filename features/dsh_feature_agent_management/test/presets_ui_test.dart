@@ -144,7 +144,7 @@ void main() {
         tester.widget<DshMarkdown>(find.byType(DshMarkdown)).data,
         i18n.t('settings.agentPreset', 'guideStandardUsage'),
       );
-      await tester.tap(find.text(i18n.t('settings.agentPreset', 'close')));
+      await tester.tap(find.byKey(const ValueKey('preset-guide-close')));
       await tester.pumpAndSettle();
       tester
           .widget<DshButton>(
@@ -161,7 +161,7 @@ void main() {
             .autofocusHighlight,
         isTrue,
       );
-      await tester.tap(find.text(i18n.t('settings.agentPreset', 'close')));
+      await tester.tap(find.byKey(const ValueKey('preset-guide-close')));
       await tester.pumpAndSettle();
       final button = find.bySemanticsLabel(
         '${i18n.t('settings.agentPreset', 'view')}: Broken preset',

@@ -82,7 +82,7 @@ def collect(source=None):
                 original = source / Path(package['sourcePackage']).parent / 'src' / name
                 if original.read_bytes() != (folder / name).read_bytes():
                     raise ValueError('reference CSS differs from pinned published package: ' + name)
-    rules = {name: css_rules((folder / name).read_text(), allow_keyframes=name == 'Tooltip.module.css',
+    rules = {name: css_rules((folder / name).read_text(), allow_keyframes=name in ('Tooltip.module.css', 'Modal.module.css'),
                              allow_supports=name == 'RiskConfirmation.module.css')
              for name in package['files'] if name.endswith('.css')}
     browser = lock['rendererSnapshots']['chromiumCheckbox']
@@ -133,6 +133,38 @@ def collect(source=None):
         if select(market_rules) != select(css_rules(original.read_text(), allow_keyframes=True)):
             raise ValueError('reference category CSS differs from pinned published market package')
 
+    modal_spec = importlib.util.spec_from_file_location('modal_recipes', HERE / 'modal_recipes.py')
+    modal = importlib.util.module_from_spec(modal_spec)
+    modal_spec.loader.exec_module(modal)
+    preset = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-agent-preset')
+    preset_folder = HERE / 'upstream' / preset['snapshotFolder']
+    guide_classes = json.loads((preset_folder / 'guide-classes.json').read_text())
+    guide = css_rules((preset_folder / 'PresetGuideDialog.module.css').read_text())
+    for rule in guide:
+        rule['selector'] = published.unhash_selectors(rule['selector'], guide_classes)
+    if source is not None:
+        original = source / Path(preset['sourcePackage']).parent / 'src/client/PresetGuideDialog.module.css'
+        modal.verify_guide_source(guide, css_rules(original.read_text()))
+    rules['PresetGuideDialog.module.css'] = [modal.normalize(rule) for rule in guide]
+    roster_classes = json.loads((preset_folder / 'roster-classes.json').read_text())
+    roster = css_rules((preset_folder / 'styles.css').read_text(), allow_keyframes=True, allow_supports=True)
+    for rule in roster:
+        rule['selector'] = published.unhash_selectors(rule['selector'], roster_classes)
+    rules['AgentPresetSection.styles.css'] = roster  # audited; not a migrated roster recipe
+    theme_folder = HERE / 'upstream/ui-theme'
+    token_names = {'--ds-transition-duration', '--ds-ease-in-out', '--dsw-mask-blur'}
+    theme_tokens = []
+    for name in ('base.css', 'gradient-shadow-text.css'):
+        for rule in css_rules((theme_folder / name).read_text()):
+            selected = {key: value for key, value in rule['declarations'].items() if key in token_names}
+            if selected:
+                theme_tokens.append({**rule, 'declarations': selected})
+    rules['ModalContext'] = {
+        'themeTokens': theme_tokens,
+        'scrollbarRules': css_rules((theme_folder / 'scrollbar.css').read_text(), allow_supports=True),
+        'modalBehavior': json.loads((HERE / 'upstream/ui-primitives/modal-layer.json').read_text()),
+        'readerBehavior': json.loads((preset_folder / 'reader-behavior.json').read_text()),
+    }
     return lock, rules
 
 
@@ -262,6 +294,22 @@ def chrome_size_token(size):
     if len(candidates) != 1:
         raise ValueError('ambiguous chrome typography rung for shortcut size: ' + str(size))
     return candidates[0]
+
+
+def profile_font_token(size, line):
+    # Profiles can override weight (the guide's 20/28 is 600 while the
+    # corresponding named theme rung is 500). Preserve its configurable face.
+    pack = json.loads((ROOT / 'packages/dsh_theme/assets/themes/official.theme.json').read_text())
+    candidates = [(style['weight'], name) for name, style in pack['common']['typography'].items()
+                  if style['size'] == size and style['line'] == line
+                  and style['style'] == 'normal' and style['family'] == 'text']
+    if not candidates:
+        raise ValueError('missing typography rung for modal profile: ' + str(size))
+    minimum = min(weight for weight, _ in candidates)
+    selected = [name for weight, name in candidates if weight == minimum]
+    if len(selected) != 1:
+        raise ValueError('ambiguous typography rung for modal profile: ' + str(size))
+    return selected[0]
 
 
 def render(lock, sheets):
@@ -409,6 +457,11 @@ def render(lock, sheets):
     tag = importlib.util.module_from_spec(tag_spec)
     tag_spec.loader.exec_module(tag)
     metrics.update(tag.build(sheets['Tag.module.css'], value=value, number=number, token=token))
+    modal_spec = importlib.util.spec_from_file_location('modal_recipes', HERE / 'modal_recipes.py')
+    modal = importlib.util.module_from_spec(modal_spec)
+    modal_spec.loader.exec_module(modal)
+    metrics.update(modal.build(sheets['Modal.module.css'], sheets['PresetGuideDialog.module.css'], sheets['ModalContext'],
+                               value=value, number=number, token=token, font_token=profile_font_token))
     package = lock['packages'][0]
     lines = ['// Generated by tool/design-system/generate.py; do not edit.', *['// From ' + p['name'] + ' ' + p['version'] + '.' for p in lock['packages']], '']
     for name, fields in metrics.items():

@@ -24,7 +24,9 @@
           "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
           "Checkbox.module.css": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
           "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
-          "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e"
+          "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+          "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+          "modal-layer.json": "d485226251899c293cc6ab09adb9dbd034dbc55cface9bcf978ca87dabd7aa29"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -42,8 +44,19 @@
           "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868",
           "packages/client/ui-primitives/src/Pill.tsx": "851727b4f745755f8553a92bc5881e54d0479ea680d1686533ba210cb943ca2f",
           "packages/client/ui-primitives/src/Tag.tsx": "2f4845c6b5c7d6f06304de6b972127692a909c775bae72c14799acfd2dc56289",
-          "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd"
-        }
+          "packages/client/ui-primitives/src/SegmentedTabs.tsx": "c069e4bf6d76170420cf27b160b3e7d8f9f36669ef53702182459d57ba3637fd",
+          "packages/client/ui-primitives/src/Modal.tsx": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f",
+          "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+          "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+          "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+        },
+        "referenceConsumers": [
+          {
+            "path": "packages/client/ui-agent-preset/package.json",
+            "dependencyField": "devDependencies",
+            "dependencySpecifier": "workspace:*"
+          }
+        ]
       },
       {
         "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
@@ -174,6 +187,35 @@
         },
         "referenceSourceSha256": {
           "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx": "f702e5b72028a37cf9bc5c8e855eed935d7a4e6d26d2d6b9059196ada2539c06"
+        }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-agent-preset",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-agent-preset/-/dsh-client-ui-agent-preset-0.2.1-rc.2.tgz",
+        "integrity": "sha512-Tp3CI/LpwykU3ttjG7MfLHk+5jep/qgwL982MAyYuoRHItuj/zvGLH/fXX0X8VAWW9OtRyv7gs/yFffkfXZ5dQ==",
+        "publishedBundleSha256": "6ecdf173de66fce620e588f10ed1e3b624725febab059fb867beefef9ae4ddb8",
+        "extractionKind": "agent-preset-css",
+        "extraction": "Decode separate guide and roster CSS literals, static class maps, and reader region from named release regions without executing JavaScript",
+        "sourcePackage": "packages/client/ui-agent-preset/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-agent-preset",
+        "files": {
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "PresetGuideDialog.module.css": "66f8d99bef244fe2de94506c1c6142207f93713708f9aeb5c9fe9052f8f47817",
+          "guide-classes.json": "96ff147637c8e0724b7233def3d2f343a5f5cb3d026ce2d2f1e148c6501c46b1",
+          "package.json": "d2a6fbce35d6fa9dc4b5f330889791d466b37c97df277c76074020d4988cfdb4",
+          "reader-behavior.json": "6bcfa990163e2fdadb0e669a75799072175626f69c6b2837dd9f32be79b3fcae",
+          "roster-classes.json": "a37292f6e720da3f4e9564f546a14ddbca947d4edaf05c2e28040bb78862d608",
+          "styles.css": "d841924d9dcbab7ef9cc641be98d0d1832ae3a77449bfe5af40c6d412a87d3a0"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx": "fb2abf1a26ea0748526f32d5c271ce2c510d1867fc67db5fb3bc075f55d76822",
+          "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
+          "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2",
+          "packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea"
         }
       }
     ],
@@ -1464,6 +1506,185 @@
         "declarations": {
           "background": "color-mix(in srgb, var(--dsw-alias-state-error-primary) 10%, transparent)",
           "color": "var(--dsw-alias-state-error-primary)"
+        }
+      }
+    ],
+    "Modal.module.css": [
+      {
+        "selector": ".root",
+        "conditions": [],
+        "declarations": {
+          "pointer-events": "auto",
+          "position": "fixed",
+          "inset": "0",
+          "z-index": "1000",
+          "display": "flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "padding": "max(24px, var(--dsh-frame-overlay-top, 24px)) 24px"
+        }
+      },
+      {
+        "selector": ".mask",
+        "conditions": [],
+        "declarations": {
+          "position": "absolute",
+          "inset": "var(--dsh-frame-chrome-top, 0px) 0 0",
+          "backdrop-filter": "var(--dsw-mask-blur)"
+        }
+      },
+      {
+        "selector": ".mask::after",
+        "conditions": [],
+        "declarations": {
+          "content": "''",
+          "position": "absolute",
+          "inset": "0",
+          "background": "var(--dsw-alias-bg-mask-1)",
+          "animation": "modalEnter var(--ds-transition-duration) var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": ".dialog",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "position": "relative",
+          "z-index": "1",
+          "display": "flex",
+          "flex-direction": "column",
+          "gap": "20px",
+          "width": "min(380px, 100%)",
+          "padding": "0 0 24px",
+          "overflow": "hidden",
+          "border": "0",
+          "border-radius": "var(--dsw-radius-panel)",
+          "background": "var(--dsw-alias-bg-layer-2)",
+          "box-shadow": "var(--dsw-elevation-prominent)",
+          "animation": "modalEnter var(--ds-transition-duration) var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": "from",
+        "conditions": [
+          "@keyframes modalEnter"
+        ],
+        "declarations": {
+          "opacity": "0"
+        }
+      },
+      {
+        "selector": "to",
+        "conditions": [
+          "@keyframes modalEnter"
+        ],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": ".mask::after, .dialog",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "animation": "none"
+        }
+      },
+      {
+        "selector": ".dialog:focus",
+        "conditions": [],
+        "declarations": {
+          "outline": "none"
+        }
+      },
+      {
+        "selector": ".content",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "flex-direction": "column",
+          "width": "100%"
+        }
+      },
+      {
+        "selector": ".header",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "align-items": "center",
+          "justify-content": "space-between",
+          "gap": "8px",
+          "padding": "22px 14px 12px 24px"
+        }
+      },
+      {
+        "selector": ".title",
+        "conditions": [],
+        "declarations": {
+          "margin": "0",
+          "font-size": "16px",
+          "line-height": "24px",
+          "font-weight": "500",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".close",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "display": "inline-flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "width": "28px",
+          "height": "28px",
+          "border": "none",
+          "border-radius": "var(--dsw-radius-sm)",
+          "background": "transparent",
+          "cursor": "pointer",
+          "color": "var(--dsw-alias-label-secondary)"
+        }
+      },
+      {
+        "selector": ".close:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".description",
+        "conditions": [],
+        "declarations": {
+          "margin": "0",
+          "padding": "0 24px",
+          "font-size": "14px",
+          "line-height": "22px",
+          "font-weight": "400",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".body",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "flex-direction": "column",
+          "min-width": "0",
+          "margin-top": "20px",
+          "padding": "0 24px"
+        }
+      },
+      {
+        "selector": ".footer",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "align-items": "center",
+          "justify-content": "flex-end",
+          "gap": "8px",
+          "padding": "0 24px"
         }
       }
     ],
@@ -5256,7 +5477,756 @@
           "text-decoration": "underline"
         }
       }
-    ]
+    ],
+    "PresetGuideDialog.module.css": [
+      {
+        "selector": ".guideDialog",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "gap": "0",
+          "width": "min(640px,100%)",
+          "height": "min(600px,100%)",
+          "max-height": "100%",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".guideLayout",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "height": "100%",
+          "min-height": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".guideHeader",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "padding": "24px 24px 20px 28px"
+        }
+      },
+      {
+        "selector": ".guideTitleRow",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "space-between",
+          "align-items": "center",
+          "gap": "16px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".guideTitle",
+        "conditions": [],
+        "declarations": {
+          "margin": "0",
+          "font-size": "20px",
+          "font-weight": "600",
+          "line-height": "28px"
+        }
+      },
+      {
+        "selector": ".guideIntro",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "margin": "8px 0 0",
+          "font-size": "14px",
+          "line-height": "22px"
+        }
+      },
+      {
+        "selector": ".guideClose",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "32px",
+          "height": "32px",
+          "min-height": "32px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".guideTabs",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "margin": "0 28px 22px"
+        }
+      },
+      {
+        "selector": ".guidePanel",
+        "conditions": [],
+        "declarations": {
+          "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l2)",
+          "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l2)",
+          "overscroll-behavior": "contain",
+          "scrollbar-gutter": "stable",
+          "min-height": "0",
+          "color": "var(--dsw-alias-label-primary)",
+          "overflow-wrap": "anywhere",
+          "flex": "1",
+          "padding": "0 24px 24px 28px",
+          "font-size": "16px",
+          "overflow-y": "auto"
+        }
+      },
+      {
+        "selector": ".guidePanel:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-2px"
+        }
+      },
+      {
+        "selector": ".guidePanel h3",
+        "conditions": [],
+        "declarations": {
+          "margin": "28px 0 10px",
+          "font-size": "16px",
+          "font-weight": "600",
+          "line-height": "24px"
+        }
+      },
+      {
+        "selector": ".guidePanel h3:first-child",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "0"
+        }
+      },
+      {
+        "selector": ".guidePanel p",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "margin": "0 0 16px",
+          "font-size": "16px",
+          "line-height": "1.625"
+        }
+      },
+      {
+        "selector": ".guidePanel blockquote",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-lg)",
+          "background": "var(--dsw-alias-bg-module-platform)",
+          "border": "0",
+          "margin": "10px 0 14px",
+          "padding": "14px 16px"
+        }
+      },
+      {
+        "selector": ".guidePanel blockquote p",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".guidePanel[data-guide-page=usage] p",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "margin-bottom": "12px",
+          "font-size": "14px",
+          "line-height": "22px"
+        }
+      },
+      {
+        "selector": ".guidePanel[data-guide-page=usage] h3",
+        "conditions": [],
+        "declarations": {
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".guideExample+.guideExample",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "28px"
+        }
+      },
+      {
+        "selector": ".guideExampleHeader",
+        "conditions": [],
+        "declarations": {
+          "flex-wrap": "wrap",
+          "align-items": "center",
+          "gap": "8px 10px",
+          "margin-bottom": "8px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".guideExampleTag",
+        "conditions": [],
+        "declarations": {
+          "flex-shrink": "0",
+          "gap": "4px"
+        }
+      },
+      {
+        "selector": ".guidePanel[data-guide-page=usage] blockquote",
+        "conditions": [],
+        "declarations": {
+          "margin": "8px 0",
+          "padding": "12px 16px"
+        }
+      },
+      {
+        "selector": ".guidePanel[data-guide-page=usage] blockquote p",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "margin": "0",
+          "font-size": "16px",
+          "line-height": "26px"
+        }
+      }
+    ],
+    "AgentPresetSection.styles.css": [
+      {
+        "selector": ".section",
+        "conditions": [],
+        "declarations": {
+          "max-width": "720px",
+          "color": "var(--dsw-alias-label-primary)",
+          "flex-direction": "column",
+          "gap": "12px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".title",
+        "conditions": [],
+        "declarations": {
+          "margin": "0",
+          "font-size": "18px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": ".intro",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "margin": "0",
+          "font-size": "13px"
+        }
+      },
+      {
+        "selector": ".group",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "gap": "10px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".group+.group",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "20px"
+        }
+      },
+      {
+        "selector": ".groupHead",
+        "conditions": [],
+        "declarations": {
+          "letter-spacing": ".06em",
+          "text-transform": "uppercase",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "margin": "0",
+          "font-size": "12px",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": ".cards",
+        "conditions": [],
+        "declarations": {
+          "grid-template-columns": "repeat(auto-fill,minmax(268px,1fr))",
+          "gap": "12px",
+          "margin": "0",
+          "padding": "0",
+          "list-style": "none",
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".card",
+        "conditions": [],
+        "declarations": {
+          "border": ".5px solid var(--dsw-alias-settings-card-stroke)",
+          "border-radius": "var(--dsw-radius-xl)",
+          "background": "var(--dsw-alias-settings-card-fill)",
+          "flex-direction": "column",
+          "transition": "border-color .16s,background .16s",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".card:hover:not(.cardActive)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".cardActive",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-bg-module-platform)",
+          "border-color": "var(--dsw-static-neutral-bluish-400)"
+        }
+      },
+      {
+        "selector": ".cardBroken, .cardBroken:hover",
+        "conditions": [],
+        "declarations": {
+          "border-color": "var(--dsw-alias-state-error-primary)"
+        }
+      },
+      {
+        "selector": ".brokenBadge",
+        "conditions": [],
+        "declarations": {
+          "corner-shape": "round",
+          "white-space": "nowrap",
+          "background": "var(--dsw-alias-state-error-primary)",
+          "color": "var(--dsw-alias-bg-layer-3)",
+          "border-radius": "999px",
+          "padding": "1px 8px",
+          "font-size": "11px",
+          "font-weight": "500",
+          "line-height": "17px"
+        }
+      },
+      {
+        "selector": ".brokenTip",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1",
+          "border-radius": "var(--dsw-radius-sm)",
+          "background": "var(--dsw-alias-label-primary)",
+          "width": "max-content",
+          "max-width": "100%",
+          "color": "var(--dsw-alias-bg-layer-3)",
+          "text-align": "left",
+          "white-space": "pre-line",
+          "overflow-wrap": "anywhere",
+          "opacity": "0",
+          "pointer-events": "none",
+          "padding": "6px 8px",
+          "font-size": "11px",
+          "font-weight": "400",
+          "line-height": "1.5",
+          "transition": "opacity .12s",
+          "position": "absolute",
+          "top": "calc(100% + 6px)",
+          "left": "0"
+        }
+      },
+      {
+        "selector": ".brokenBadge:hover .brokenTip, .cardMain:focus-visible .brokenTip",
+        "conditions": [],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": ".cardMain[aria-disabled=true]",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".cardBrokenReason",
+        "conditions": [],
+        "declarations": {
+          "clip": "rect(0 0 0 0)",
+          "white-space": "nowrap",
+          "width": "1px",
+          "height": "1px",
+          "position": "absolute",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".cardMain",
+        "conditions": [],
+        "declarations": {
+          "appearance": "none",
+          "font": "inherit",
+          "color": "inherit",
+          "text-align": "left",
+          "cursor": "pointer",
+          "border-radius": "var(--dsw-radius-xl) var(--dsw-radius-xl) 0 0",
+          "background": "0 0",
+          "border": "0",
+          "flex-direction": "column",
+          "flex": "1",
+          "gap": "12px",
+          "padding": "14px 16px 12px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".cardMain:disabled",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".cardMain:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-2px"
+        }
+      },
+      {
+        "selector": ".cardHead",
+        "conditions": [],
+        "declarations": {
+          "align-items": "flex-start",
+          "gap": "12px",
+          "display": "flex",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".cardIdentity",
+        "conditions": [],
+        "declarations": {
+          "flex": "1",
+          "align-items": "center",
+          "gap": "6px",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".cardName",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "min-width": "0",
+          "font-size": "15px",
+          "font-weight": "600",
+          "line-height": "1.4",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".cardDesc",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "-webkit-line-clamp": "4",
+          "overflow-wrap": "anywhere",
+          "-webkit-box-orient": "vertical",
+          "margin-block": "auto",
+          "font-size": "13px",
+          "line-height": "1.55",
+          "display": "-webkit-box",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".cardId",
+        "conditions": [],
+        "declarations": {
+          "max-width": "35%",
+          "font-family": "var(--dsw-font-mono,ui-monospace, SFMono-Regular, Menlo, monospace)",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "flex-shrink": "0",
+          "font-size": "11px",
+          "line-height": "21px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".cardFoot",
+        "conditions": [],
+        "declarations": {
+          "border-top": ".5px solid var(--dsw-alias-border-l2)",
+          "flex-wrap": "wrap",
+          "justify-content": "flex-end",
+          "align-items": "center",
+          "gap": "2px",
+          "padding": "6px 10px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".cardHelp",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "gap": "4px",
+          "margin-right": "auto",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".helpButton",
+        "conditions": [],
+        "declarations": {
+          "min-height": "28px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "padding": "5px 6px",
+          "font-size": "12px",
+          "font-weight": "400"
+        }
+      },
+      {
+        "selector": ".helpButton:hover, .helpButton:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".iconButton",
+        "conditions": [],
+        "declarations": {
+          "appearance": "none",
+          "border-radius": "var(--dsw-radius-sm)",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "cursor": "pointer",
+          "background": "0 0",
+          "border": "0",
+          "align-items": "center",
+          "padding": "6px",
+          "display": "inline-flex",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".iconButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-bg-layer-1)",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".iconButton:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-1px"
+        }
+      },
+      {
+        "selector": ".iconButton:after",
+        "conditions": [],
+        "declarations": {
+          "content": "attr(data-tip)",
+          "border-radius": "var(--dsw-radius-sm)",
+          "background": "var(--dsw-alias-label-primary)",
+          "color": "var(--dsw-alias-bg-layer-3)",
+          "white-space": "nowrap",
+          "opacity": "0",
+          "pointer-events": "none",
+          "padding": "3px 8px",
+          "font-size": "11px",
+          "line-height": "17px",
+          "transition": "opacity .12s",
+          "position": "absolute",
+          "bottom": "calc(100% + 6px)",
+          "left": "50%",
+          "transform": "translate(-50%)"
+        }
+      },
+      {
+        "selector": ".iconButton:hover:after, .iconButton:focus-visible:after",
+        "conditions": [],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": ".dialog",
+        "conditions": [],
+        "declarations": {
+          "width": "min(720px,100%)"
+        }
+      },
+      {
+        "selector": ".viewerCode",
+        "conditions": [],
+        "declarations": {
+          "border": ".5px solid var(--dsw-alias-border-l4)",
+          "border-radius": "var(--dsw-radius-lg)",
+          "background": "var(--dsw-alias-bg-layer-2)",
+          "max-height": "min(60vh,560px)",
+          "color": "var(--dsw-alias-label-secondary)",
+          "font-family": "var(--dsw-font-mono,ui-monospace, SFMono-Regular, Menlo, monospace)",
+          "white-space": "pre",
+          "tab-size": "2",
+          "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l2)",
+          "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l2)",
+          "margin": "0",
+          "padding": "12px",
+          "font-size": "12.5px",
+          "line-height": "1.5",
+          "overflow": "auto"
+        }
+      },
+      {
+        "selector": ".error",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-state-error-primary)",
+          "margin": "0",
+          "font-size": "12px"
+        }
+      },
+      {
+        "selector": ".creatorButton",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border": "1px dashed var(--dsw-alias-border-l3)",
+          "border-radius": "var(--dsw-radius-lg)",
+          "height": "44px",
+          "font": "inherit",
+          "color": "var(--dsw-alias-label-primary)",
+          "cursor": "pointer",
+          "background": "0 0",
+          "justify-content": "center",
+          "align-self": "stretch",
+          "align-items": "center",
+          "gap": "6px",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".creatorButton:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".creatorButton:disabled",
+        "conditions": [],
+        "declarations": {
+          "opacity": ".4",
+          "cursor": "default"
+        }
+      }
+    ],
+    "ModalContext": {
+      "themeTokens": [
+        {
+          "selector": ":root",
+          "conditions": [],
+          "declarations": {
+            "--ds-ease-in-out": "cubic-bezier(.4, 0, .2, 1)",
+            "--ds-transition-duration": ".2s"
+          }
+        },
+        {
+          "selector": "body",
+          "conditions": [],
+          "declarations": {
+            "--dsw-mask-blur": "none"
+          }
+        }
+      ],
+      "scrollbarRules": [
+        {
+          "selector": "body",
+          "conditions": [],
+          "declarations": {
+            "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l1)",
+            "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l1)",
+            "--dsh-scrollbar-thumb-border": "0px",
+            "--dsh-scrollbar-track-margin": "0px",
+            "--dsh-scrollbar-width": "5px"
+          }
+        },
+        {
+          "selector": "body, body *",
+          "conditions": [
+            "@supports not selector(::-webkit-scrollbar)"
+          ],
+          "declarations": {
+            "scrollbar-width": "thin",
+            "scrollbar-color": "var(--dsh-scrollbar-thumb) transparent"
+          }
+        },
+        {
+          "selector": "::-webkit-scrollbar",
+          "conditions": [],
+          "declarations": {
+            "width": "var(--dsh-scrollbar-width)",
+            "height": "var(--dsh-scrollbar-width)"
+          }
+        },
+        {
+          "selector": "::-webkit-scrollbar-track",
+          "conditions": [],
+          "declarations": {
+            "margin-block": "var(--dsh-scrollbar-track-margin)",
+            "background": "0 0"
+          }
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb",
+          "conditions": [],
+          "declarations": {
+            "border": "var(--dsh-scrollbar-thumb-border) solid transparent",
+            "corner-shape": "round",
+            "background": "var(--dsh-scrollbar-thumb)",
+            "background-clip": "content-box",
+            "border-radius": "999px"
+          }
+        },
+        {
+          "selector": "::-webkit-scrollbar-thumb:hover",
+          "conditions": [],
+          "declarations": {
+            "background-color": "var(--dsh-scrollbar-thumb-hover)"
+          }
+        },
+        {
+          "selector": "::-webkit-scrollbar-corner",
+          "conditions": [],
+          "declarations": {
+            "background": "0 0"
+          }
+        }
+      ],
+      "modalBehavior": {
+        "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
+        "layer": "//#region lib/types/useModalLayer.js\n/** Shared modal keyboard ownership and focus lifetime. */\n/** Dialog and menu elements whose document order determines foreground shortcut ownership. */\nconst modalSelector = \"[role=\\\"dialog\\\"][aria-modal=\\\"true\\\"], [role=\\\"menu\\\"]\";\nconst layers = /* @__PURE__ */ new WeakMap();\n/**\n* Request closure of the foreground registered modal using its current onClose callback.\n* A newer menu or unregistered dialog blocks dismissal of the modal behind it.\n* @param document - product document whose modal owns the close command.\n*/\nfunction closeTopModal(document) {\n\tconst top = layers.get(document)?.at(-1);\n\tif (top === void 0) return;\n\tif ([...document.querySelectorAll(\"[role=\\\"dialog\\\"][aria-modal=\\\"true\\\"], [role=\\\"menu\\\"]\")].at(-1) === top.element) top.close();\n}\n/**\n* Whether an anchor belongs behind the current modal and must yield keyboard input.\n* @param anchor - local control owning the input handler.\n* @returns true when another modal owns the foreground.\n*/\nfunction isBehindModal(anchor) {\n\tif (anchor === null) return false;\n\tconst top = layers.get(anchor.ownerDocument)?.at(-1);\n\treturn top !== void 0 && !top.element.contains(anchor);\n}\nconst focusable = \"button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), a[href], [tabindex=\\\"0\\\"]\";\n/**\n* Give only the top modal Escape and Tab ownership, then restore its previous focus.\n* Automatic entry and return focus omit outlines; keyboard traversal retains its indicators.\n* Controls mounted with the dialog use data-modal-autofocus for initial focus;\n* React autoFocus runs before this layer can capture the invoking control.\n* Local menus handle their Escape during capture before this bubble listener.\n* @param dialog - mounted dialog element.\n* @param open - whether this layer is active.\n* @param onClose - top-layer Escape or application close action.\n*/\nfunction useModalLayer(dialog, open, onClose) {\n\tconst close = useRef(onClose);\n\tclose.current = onClose;\n\tuseLayoutEffect(() => {\n\t\tconst element = dialog.current;\n\t\tif (!open || element === null) return;\n\t\tconst document = element.ownerDocument;\n\t\tconst composition = observeComposition(document);\n\t\tconst previous = document.activeElement;\n\t\tconst stack = layers.get(document) ?? [];\n\t\tlayers.set(document, stack);\n\t\tconst layer = {\n\t\t\telement,\n\t\t\tclose: () => {\n\t\t\t\tclose.current();\n\t\t\t}\n\t\t};\n\t\tstack.push(layer);\n\t\tconst initial = element.querySelector(\"[data-modal-autofocus]\") ?? element.querySelector(focusable) ?? element;\n\t\tif (!element.contains(document.activeElement)) focusWithoutRing(initial);\n\t\tconst keydown = (event) => {\n\t\t\tconst composing = composition.guards(event);\n\t\t\tif (stack.at(-1) !== layer || event.defaultPrevented || composing || event.ctrlKey || event.altKey || event.metaKey) return;\n\t\t\tif (event.key === \"Escape\" && !event.shiftKey) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\tif (!event.repeat) close.current();\n\t\t\t}\n\t\t\tif (event.key !== \"Tab\") return;\n\t\t\tif (document.activeElement?.closest(\"[role=\\\"menu\\\"]\")) return;\n\t\t\tconst items = [...element.querySelectorAll(focusable)].filter((item) => !item.closest(\"[inert], [hidden]\"));\n\t\t\tconst first = items[0] ?? element;\n\t\t\tconst last = items.at(-1) ?? element;\n\t\t\tconst atEdge = event.shiftKey ? document.activeElement === first : document.activeElement === last;\n\t\t\tif (document.activeElement === element || !element.contains(document.activeElement) || atEdge) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\t(event.shiftKey ? last : first).focus();\n\t\t\t}\n\t\t};\n\t\tdocument.addEventListener(\"keydown\", keydown);\n\t\treturn () => {\n\t\t\tcomposition.dispose();\n\t\t\tconst wasTop = stack.at(-1) === layer;\n\t\t\tstack.splice(stack.indexOf(layer), 1);\n\t\t\tdocument.removeEventListener(\"keydown\", keydown);\n\t\t\tif (stack.length === 0) layers.delete(document);\n\t\t\tif (wasTop) {\n\t\t\t\tconst target = previous instanceof HTMLElement && previous.isConnected ? previous : stack.at(-1)?.element;\n\t\t\t\tif (target !== void 0) focusWithoutRing(target);\n\t\t\t}\n\t\t};\n\t}, [dialog, open]);\n}\n",
+        "modal": "//#region lib/types/Modal.js\n/**\n* Render a centered, body-portaled modal over a blurred page mask.\n* @param props.open - whether the dialog is showing.\n* @param props.onClose - application close command, Escape, or mask click; while a menu is open inside the\n* dialog, Escape belongs to that menu first.\n* @param props.title - dialog heading (aria-label in every mode).\n* @param props.closeLabel - localized accessible close-button label.\n* @param props.description - optional supporting sentence under the title.\n* @param props.children - dialog body; mark its initial-focus control with\n* data-modal-autofocus instead of React autoFocus to preserve return focus.\n* @param props.footer - action row (Cancel / Create).\n* @param props.contentClassName - optional class for a scrollable content region.\n* @param props.backdropBlur - disable when the caller already blurs the page; defaults to true.\n* @param props.shortcutModal - command scope allowed by shortcut owners; unnamed\n* dialogs block application commands unless their owner allows the \"other\" scope.\n* @param props.headless - render children directly in the card (no default\n* header/close/body chrome); mask, card, Escape, and aria-label remain.\n* @param props.onKeyDownCapture - handle a nested dialog's keys before the document Escape listeners.\n* @returns null when closed; otherwise the overlay tree.\n*/\nfunction Modal({ open, onClose, title, closeLabel, description, children, footer, className, contentClassName, onKeyDownCapture, headless = false, backdropBlur = true, shortcutModal }) {\n\tconst dialog = useRef(null);\n\tuseModalLayer(dialog, open, onClose);\n\tif (!open) return null;\n\treturn createPortal(jsxs(\"div\", {\n\t\tclassName: css$18.root,\n\t\trole: \"presentation\",\n\t\tonKeyDownCapture,\n\t\tchildren: [jsx(\"div\", {\n\t\t\tclassName: css$18.mask,\n\t\t\tstyle: backdropBlur ? void 0 : { backdropFilter: \"none\" },\n\t\t\t\"aria-hidden\": \"true\",\n\t\t\tonClick: onClose\n\t\t}), jsx(\"div\", {\n\t\t\tref: dialog,\n\t\t\ttabIndex: -1,\n\t\t\t\"data-shortcut-modal\": shortcutModal,\n\t\t\tclassName: clsx(css$18.dialog, className),\n\t\t\trole: \"dialog\",\n\t\t\t\"aria-modal\": \"true\",\n\t\t\t\"aria-label\": title,\n\t\t\tchildren: headless ? children : jsxs(Fragment, { children: [jsxs(\"div\", {\n\t\t\t\tclassName: clsx(css$18.content, contentClassName),\n\t\t\t\tchildren: [\n\t\t\t\t\tjsxs(\"div\", {\n\t\t\t\t\t\tclassName: css$18.header,\n\t\t\t\t\t\tchildren: [jsx(\"h2\", {\n\t\t\t\t\t\t\tclassName: css$18.title,\n\t\t\t\t\t\t\tchildren: title\n\t\t\t\t\t\t}), jsx(\"button\", {\n\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\tclassName: css$18.close,\n\t\t\t\t\t\t\t\"aria-label\": closeLabel,\n\t\t\t\t\t\t\tonClick: onClose,\n\t\t\t\t\t\t\tchildren: jsx(IconCloseOutlineRegular, { size: 14 })\n\t\t\t\t\t\t})]\n\t\t\t\t\t}),\n\t\t\t\t\tdescription !== void 0 && description !== \"\" && jsx(\"p\", {\n\t\t\t\t\t\tclassName: css$18.description,\n\t\t\t\t\t\tchildren: description\n\t\t\t\t\t}),\n\t\t\t\t\tchildren !== void 0 && jsx(\"div\", {\n\t\t\t\t\t\tclassName: css$18.body,\n\t\t\t\t\t\tchildren\n\t\t\t\t\t})\n\t\t\t\t]\n\t\t\t}), footer !== void 0 && jsx(\"div\", {\n\t\t\t\tclassName: css$18.footer,\n\t\t\t\tchildren: footer\n\t\t\t})] })\n\t\t})]\n\t}), document.body);\n}\n"
+      },
+      "readerBehavior": {
+        "bundleSha256": "6ecdf173de66fce620e588f10ed1e3b624725febab059fb867beefef9ae4ddb8",
+        "region": "//#region lib/types/client/PresetGuideDialog.js\n\t\t/** Read-only help stays local to Settings and never changes the selected preset. */\n\t\tconst guides = new Map([\n\t\t\t[\"standard\", {\n\t\t\t\tname: \"presetStandardName\",\n\t\t\t\tintro: \"guideStandardIntro\",\n\t\t\t\texplanation: \"guideStandardExplanation\",\n\t\t\t\tusage: \"guideStandardUsage\"\n\t\t\t}],\n\t\t\t[\"ptc\", {\n\t\t\t\tname: \"presetPtcName\",\n\t\t\t\tintro: \"guidePtcIntro\",\n\t\t\t\texplanation: \"guidePtcExplanation\",\n\t\t\t\tusage: \"guidePtcUsage\"\n\t\t\t}],\n\t\t\t[\"minimal\", {\n\t\t\t\tname: \"presetMinimalName\",\n\t\t\t\tintro: \"guideMinimalIntro\",\n\t\t\t\texplanation: \"guideMinimalExplanation\",\n\t\t\t\tusage: \"guideMinimalUsage\"\n\t\t\t}],\n\t\t\t[\"cordis\", {\n\t\t\t\tname: \"presetCordisName\",\n\t\t\t\tintro: \"guideCordisIntro\",\n\t\t\t\texplanation: \"guideCordisExplanation\",\n\t\t\t\tusage: \"guideCordisUsage\"\n\t\t\t}]\n\t\t]);\n\t\t/**\n\t\t* Look up help only for known, shipped presets.\n\t\t* @param id - preset identifier from the roster.\n\t\t* @param trust - roster source; custom presets own their capability claims.\n\t\t* @returns the shipped guide, or undefined for unknown and custom presets.\n\t\t*/\n\t\tfunction presetGuide(id, trust) {\n\t\t\treturn trust === \"system\" ? guides.get(id) : void 0;\n\t\t}\n\t\t/** Keep keyboard focus inside a preset reader while Tab moves through its controls.\n\t\t* @param event Keyboard event from the active reader.\n\t\t*/\n\t\tfunction trapPresetReaderTab(event) {\n\t\t\tif (event.key !== \"Tab\") return;\n\t\t\tconst targets = Array.from(event.currentTarget.querySelectorAll(\"button:not([disabled]):not([tabindex=\\\"-1\\\"]), [tabindex=\\\"0\\\"]\")).filter((element) => !element.closest(\"[hidden]\"));\n\t\t\tconst first = targets[0];\n\t\t\tconst last = targets[targets.length - 1];\n\t\t\tif (event.shiftKey && document.activeElement === first) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\tlast?.focus();\n\t\t\t} else if (!event.shiftKey && document.activeElement === last) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\tfirst?.focus();\n\t\t\t}\n\t\t}\n\t\t/** Curated usage dictionaries contain only level-three example sections. */\n\t\tfunction GuideUsage({ text, t }) {\n\t\t\tconst labels = {\n\t\t\t\tcode: {\n\t\t\t\t\tcopyLabel: t(\"guideCopy\"),\n\t\t\t\t\tcopiedLabel: t(\"guideCopied\"),\n\t\t\t\t\ttoolbarLabels: {\n\t\t\t\t\t\tcodeLabel: t(\"codeBlock.title\"),\n\t\t\t\t\t\twrapLabel: t(\"codeBlock.wrap\"),\n\t\t\t\t\t\tunwrapLabel: t(\"codeBlock.unwrap\")\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\tfootnotes: t(\"guideFootnotes\")\n\t\t\t};\n\t\t\treturn text.split(/(?=^### )/m).map((section) => {\n\t\t\t\tconst headingEnd = section.indexOf(\"\\n\");\n\t\t\t\tconst title = section.slice(4, headingEnd);\n\t\t\t\treturn (0, react_jsx_runtime.jsxs)(\"section\", {\n\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExample,\n\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExampleHeader,\n\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"h3\", { children: title }), (0, react_jsx_runtime.jsxs)(_deepseek_ai_dsh_client_ui_primitives.Tag, {\n\t\t\t\t\t\t\ttone: \"neutral\",\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExampleTag,\n\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconListPenOutlineRegular, { size: 12 }), t(\"guideExampleTask\")]\n\t\t\t\t\t\t})]\n\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.MarkdownText, {\n\t\t\t\t\t\ttext: section.slice(headingEnd + 1),\n\t\t\t\t\t\tlabels\n\t\t\t\t\t})]\n\t\t\t\t}, title);\n\t\t\t});\n\t\t}\n\t\t/**\n\t\t* Open read-only help without changing the selected preset.\n\t\t* @param props - localized guide, initial page, and close callback.\n\t\t* @returns the modal reader with independent scroll positions for each page.\n\t\t*/\n\t\tfunction PresetGuideDialog({ guide, initialPage, t, onClose }) {\n\t\t\tconst [page, setPage] = (0, react.useState)(initialPage);\n\t\t\tconst guideId = (0, react.useId)();\n\t\t\tconst content = (0, react.useRef)(null);\n\t\t\t(0, react.useLayoutEffect)(() => {\n\t\t\t\tcontent.current?.querySelector(\"[role=\\\"tab\\\"][aria-selected=\\\"true\\\"]\")?.focus();\n\t\t\t}, []);\n\t\t\tconst onKeyDown = (event) => {\n\t\t\t\tif (event.key === \"Escape\") {\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tevent.stopPropagation();\n\t\t\t\t\tonClose();\n\t\t\t\t} else trapPresetReaderTab(event);\n\t\t\t};\n\t\t\treturn (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Modal, {\n\t\t\t\topen: true,\n\t\t\t\theadless: true,\n\t\t\t\tonClose,\n\t\t\t\ttitle: t(guide.name),\n\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideDialog,\n\t\t\t\tchildren: (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\tref: content,\n\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideLayout,\n\t\t\t\t\trole: \"presentation\",\n\t\t\t\t\tonKeyDownCapture: onKeyDown,\n\t\t\t\t\tchildren: [\n\t\t\t\t\t\t(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideHeader,\n\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTitleRow,\n\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"h2\", {\n\t\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTitle,\n\t\t\t\t\t\t\t\t\tchildren: t(guide.name)\n\t\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Button, {\n\t\t\t\t\t\t\t\t\tvariant: \"ghost\",\n\t\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideClose,\n\t\t\t\t\t\t\t\t\t\"aria-label\": t(\"close\"),\n\t\t\t\t\t\t\t\t\tonClick: onClose,\n\t\t\t\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCloseOutlineRegular, { size: 18 })\n\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(\"p\", {\n\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideIntro,\n\t\t\t\t\t\t\t\tchildren: t(guide.intro)\n\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t}),\n\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.SegmentedTabs, {\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTabs,\n\t\t\t\t\t\t\tlabel: t(\"guideSections\"),\n\t\t\t\t\t\t\tvalue: page,\n\t\t\t\t\t\t\tonChange: setPage,\n\t\t\t\t\t\t\titems: [{\n\t\t\t\t\t\t\t\tvalue: \"explanation\",\n\t\t\t\t\t\t\t\tlabel: t(\"modeExplanation\"),\n\t\t\t\t\t\t\t\tid: `${guideId}-explanation-tab`,\n\t\t\t\t\t\t\t\tpanelId: `${guideId}-explanation-panel`\n\t\t\t\t\t\t\t}, {\n\t\t\t\t\t\t\t\tvalue: \"usage\",\n\t\t\t\t\t\t\t\tlabel: t(\"howToUse\"),\n\t\t\t\t\t\t\t\tid: `${guideId}-usage-tab`,\n\t\t\t\t\t\t\t\tpanelId: `${guideId}-usage-panel`\n\t\t\t\t\t\t\t}]\n\t\t\t\t\t\t}),\n\t\t\t\t\t\t[\"explanation\", \"usage\"].map((section) => (0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\tid: `${guideId}-${section}-panel`,\n\t\t\t\t\t\t\trole: \"tabpanel\",\n\t\t\t\t\t\t\t\"aria-labelledby\": `${guideId}-${section}-tab`,\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guidePanel,\n\t\t\t\t\t\t\t\"data-guide-page\": section,\n\t\t\t\t\t\t\thidden: page !== section,\n\t\t\t\t\t\t\ttabIndex: 0,\n\t\t\t\t\t\t\tchildren: section === \"usage\" ? (0, react_jsx_runtime.jsx)(GuideUsage, {\n\t\t\t\t\t\t\t\ttext: t(guide.usage),\n\t\t\t\t\t\t\t\tt\n\t\t\t\t\t\t\t}) : (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.MarkdownText, {\n\t\t\t\t\t\t\t\ttext: t(guide.explanation),\n\t\t\t\t\t\t\t\tlabels: {\n\t\t\t\t\t\t\t\t\tcode: {\n\t\t\t\t\t\t\t\t\t\tcopyLabel: t(\"guideCopy\"),\n\t\t\t\t\t\t\t\t\t\tcopiedLabel: t(\"guideCopied\"),\n\t\t\t\t\t\t\t\t\t\ttoolbarLabels: {\n\t\t\t\t\t\t\t\t\t\t\tcodeLabel: t(\"codeBlock.title\"),\n\t\t\t\t\t\t\t\t\t\t\twrapLabel: t(\"codeBlock.wrap\"),\n\t\t\t\t\t\t\t\t\t\t\tunwrapLabel: t(\"codeBlock.unwrap\")\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\tfootnotes: t(\"guideFootnotes\")\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t})\n\t\t\t\t\t\t}, section))\n\t\t\t\t\t]\n\t\t\t\t})\n\t\t\t});\n\t\t}\n\t\t"
+      }
+    }
   },
   "metrics": {
     "DshButtonRecipe": {
@@ -5615,6 +6585,127 @@
       "warningAlpha": 0.12,
       "dangerToken": "--dsw-alias-state-error-primary",
       "dangerAlpha": 0.1
+    },
+    "DshModalRecipe": {
+      "rootMargin": 24.0,
+      "rootHorizontalMargin": 24.0,
+      "maskChromeTopFallback": 0.0,
+      "defaultWidth": 380.0,
+      "gap": 20.0,
+      "paddingBottom": 24.0,
+      "headerTop": 22.0,
+      "headerRight": 14.0,
+      "headerBottom": 12.0,
+      "headerLeft": 24.0,
+      "headerGap": 8.0,
+      "titleFontSize": 16.0,
+      "titleLineHeight": 24.0,
+      "titleFontToken": "--dsw-font-base-16",
+      "titleWeight": 500.0,
+      "titleLabelToken": "--dsw-alias-label-primary",
+      "closeSize": 28.0,
+      "closeIconSize": 14.0,
+      "closeRadiusToken": "--dsw-radius-sm",
+      "closeLabelToken": "--dsw-alias-label-secondary",
+      "closeHoverToken": "--dsw-alias-interactive-bg-hover",
+      "descriptionHorizontalPadding": 24.0,
+      "descriptionFontSize": 14.0,
+      "descriptionLineHeight": 22.0,
+      "descriptionWeight": 400.0,
+      "descriptionLabelToken": "--dsw-alias-label-primary",
+      "bodyMarginTop": 20.0,
+      "bodyHorizontalPadding": 24.0,
+      "footerGap": 8.0,
+      "footerHorizontalPadding": 24.0,
+      "maskToken": "--dsw-alias-bg-mask-1",
+      "backgroundToken": "--dsw-alias-bg-layer-2",
+      "radiusToken": "--dsw-radius-panel",
+      "elevationToken": "--dsw-elevation-prominent",
+      "animationDurationToken": "--ds-transition-duration",
+      "easeToken": "--ds-ease-in-out",
+      "animationMs": 200.0,
+      "curveX1": 0.4,
+      "curveY1": 0.0,
+      "curveX2": 0.2,
+      "curveY2": 1.0,
+      "maskBlurToken": "--dsw-mask-blur",
+      "maskBlur": "none"
+    },
+    "DshGuideReaderRecipe": {
+      "width": 640.0,
+      "height": 600.0,
+      "headerTop": 24.0,
+      "headerRight": 24.0,
+      "headerBottom": 20.0,
+      "headerLeft": 28.0,
+      "titleGap": 16.0,
+      "titleFontSize": 20.0,
+      "titleLineHeight": 28.0,
+      "titleWeight": 600.0,
+      "titleFontToken": "--dsw-font-l-20",
+      "introGap": 8.0,
+      "introFontSize": 14.0,
+      "introLineHeight": 22.0,
+      "introLabelToken": "--dsw-alias-label-secondary",
+      "introFontToken": "--dsw-font-s-14",
+      "closeSize": 32.0,
+      "closeIconSize": 18.0,
+      "closePadding": 0.0,
+      "closeRadiusToken": "--dsw-radius-md",
+      "closeLabelToken": "--dsw-alias-label-tertiary",
+      "tabsTopMargin": 0.0,
+      "tabsHorizontalMargin": 28.0,
+      "tabsBottomMargin": 22.0,
+      "panelTop": 0.0,
+      "panelRight": 24.0,
+      "panelBottom": 24.0,
+      "panelLeft": 28.0,
+      "panelFontSize": 16.0,
+      "panelLabelToken": "--dsw-alias-label-primary",
+      "panelFontToken": "--dsw-font-base-16",
+      "panelFocusWidthToken": "--dsw-focus-ring-width",
+      "panelFocusToken": "--dsw-focus-ring-color",
+      "panelFocusFallbackToken": "--dsw-alias-state-business-primary",
+      "panelFocusOffset": -2.0,
+      "scrollbarThumbToken": "--dsw-alias-scrollbar-bg-l2",
+      "scrollbarHoverToken": "--dsw-alias-scrollbar-hover-l2",
+      "scrollbarWidth": 5.0,
+      "scrollbarRadius": 999.0,
+      "scrollbarThumbBorderWidth": 0.0,
+      "scrollbarTrackMargin": 0.0,
+      "headingTop": 28.0,
+      "headingBottom": 10.0,
+      "headingFirstTop": 0.0,
+      "headingFontSize": 16.0,
+      "headingLineHeight": 24.0,
+      "headingWeight": 600.0,
+      "paragraphBottom": 16.0,
+      "paragraphFontSize": 16.0,
+      "paragraphLineHeight": 26.0,
+      "paragraphLabelToken": "--dsw-alias-label-primary",
+      "quoteTop": 10.0,
+      "quoteBottom": 14.0,
+      "quoteVerticalPadding": 14.0,
+      "quoteHorizontalPadding": 16.0,
+      "quoteRadiusToken": "--dsw-radius-lg",
+      "quoteBackgroundToken": "--dsw-alias-bg-module-platform",
+      "quoteLabelToken": "--dsw-alias-label-primary",
+      "usageParagraphBottom": 12.0,
+      "usageParagraphFontSize": 14.0,
+      "usageParagraphLineHeight": 22.0,
+      "usageParagraphLabelToken": "--dsw-alias-label-secondary",
+      "exampleGap": 28.0,
+      "exampleHeaderRowGap": 8.0,
+      "exampleHeaderColumnGap": 10.0,
+      "exampleHeaderBottom": 8.0,
+      "exampleTagGap": 4.0,
+      "exampleIconSize": 12.0,
+      "usageQuoteVerticalMargin": 8.0,
+      "usageQuoteVerticalPadding": 12.0,
+      "usageQuoteHorizontalPadding": 16.0,
+      "usageQuoteFontSize": 16.0,
+      "usageQuoteLineHeight": 26.0,
+      "usageQuoteLabelToken": "--dsw-alias-label-primary"
     }
   }
 }

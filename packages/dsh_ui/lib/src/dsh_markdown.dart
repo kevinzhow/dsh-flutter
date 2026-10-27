@@ -10,6 +10,20 @@ import 'dsh_file_link.dart';
 
 import 'theme_access.dart';
 
+/// A source-backed content profile may adjust the canonical Markdown styles.
+/// Omitted profiles retain the ordinary assistant-message presentation.
+typedef DshMarkdownStyleBuilder = MarkdownStyleSheet Function(
+  BuildContext context,
+  MarkdownStyleSheet standard,
+);
+
+/// Arrange the existing Markdown engine's rendered blocks without replacing
+/// its parsing, inline formatting, link handling or fenced code renderer.
+typedef DshMarkdownBlockBuilder = Widget Function(
+  BuildContext context,
+  List<Widget> blocks,
+);
+
 /// Markdown body of an assistant answer, styled from dsh's markdown tokens
 /// (`--dsw-font-markdown-*`, `--dsw-alias-markdown-*`, `--dsw-alias-link`).
 /// Safe for partial text while it streams.
@@ -24,6 +38,8 @@ class DshMarkdown extends StatelessWidget {
     this.streaming = false,
     this.blockSpacing,
     this.fileMentions,
+    this.styleBuilder,
+    this.blockBuilder,
   });
 
   final String data;
@@ -33,6 +49,9 @@ class DshMarkdown extends StatelessWidget {
   /// Space between block elements when the enclosing surface specifies its
   /// own paragraph margins. Omitted preserves the standard body spacing.
   final double? blockSpacing;
+
+  final DshMarkdownStyleBuilder? styleBuilder;
+  final DshMarkdownBlockBuilder? blockBuilder;
 
   /// Strings of the code card toolbar. With them a fenced block is dsh's code
   /// card (language, wrap and copy, coloured by the ambient highlighter);
@@ -122,18 +141,47 @@ class DshMarkdown extends StatelessWidget {
       ),
       blockSpacing: blockSpacing ?? DshSpace.sm,
     );
+    final effectiveSheet = styleBuilder?.call(context, sheet) ?? sheet;
+    final builders = <String, MarkdownElementBuilder>{
+      if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!),
+      if (!streaming && fileMentions != null)
+        'code': _FileMentionBuilder(fileMentions!),
+    };
+    if (blockBuilder case final arrange?) {
+      return _ProfiledMarkdownBody(
+        data: data,
+        selectable: selectable,
+        styleSheet: effectiveSheet,
+        onTapLink: onOpenUrl == null && onOpenFile == null ? null : _tap,
+        builders: builders,
+        arrange: arrange,
+      );
+    }
     return MarkdownBody(
       data: data,
       selectable: selectable,
-      styleSheet: sheet,
+      styleSheet: effectiveSheet,
       onTapLink: onOpenUrl == null && onOpenFile == null ? null : _tap,
-      builders: {
-        if (codeLabels != null) 'pre': _FenceBuilder(codeLabels!),
-        if (!streaming && fileMentions != null)
-          'code': _FileMentionBuilder(fileMentions!),
-      },
+      builders: builders,
     );
   }
+}
+
+class _ProfiledMarkdownBody extends MarkdownBody {
+  const _ProfiledMarkdownBody({
+    required super.data,
+    required super.selectable,
+    required super.styleSheet,
+    required super.onTapLink,
+    required super.builders,
+    required this.arrange,
+  }) : super(fitContent: false);
+
+  final DshMarkdownBlockBuilder arrange;
+
+  @override
+  Widget build(BuildContext context, List<Widget>? children) =>
+      arrange(context, children ?? const []);
 }
 
 /// Draws a fenced block as a [DshCodeBlock] (dsh's `CodeBlock` for markdown).

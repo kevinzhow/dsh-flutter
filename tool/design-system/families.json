@@ -44,10 +44,15 @@
       "name": "dialogs",
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_presentation.dart",
-        "packages/dsh_ui/lib/src/dsh_option_sheet.dart"
+        "packages/dsh_ui/lib/src/dsh_dialog_reader.dart",
+        "packages/dsh_ui/lib/src/dsh_reader_markdown.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
-      "pendingDuplicates": []
+      "migrationStatus": "published Modal layer and preset-reader profile; source viewport mask, reduced-motion entry, keyboard/composition guards, automatic focus presentation and independent reader panels and generated reader prose/usage profiles; headed/risk/settings/shortcut profiles and other callers remain pending",
+      "pendingDuplicates": [
+        "DshRiskDialog route and card -> shared Modal headed profile",
+        "SettingsShell and shortcut reference routes -> shared Modal layer",
+        "Raw schedule deletion dialog -> generated Modal profile"
+      ]
     },
     {
       "name": "text-inputs",
@@ -78,7 +83,7 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_segmented_tabs.dart"
       ],
-      "migrationStatus": "published equal-width tab recipe, named tab semantics, roving keyboard selection, source focus underline and reduced-motion indicator/label transitions; plugin manager and preset guide share the component; caller-owned dialog/panel layout remains a separate family",
+      "migrationStatus": "published equal-width tabs, named panel relationships, keyboard selection and reduced-motion transitions; plugin manager and canonical preset reader share the component",
       "pendingDuplicates": []
     },
     {
@@ -188,7 +193,7 @@
       "manual-metric": 6
     },
     "features/dsh_feature_agent_management/lib/src/presets.dart": {
-      "manual-metric": 13
+      "manual-metric": 11
     },
     "features/dsh_feature_agent_management/lib/src/register.dart": {
       "manual-metric": 2

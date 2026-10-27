@@ -1,0 +1,1281 @@
+{
+  "cases": [
+    {
+      "id": "dialog-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "presets-keyboard"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "presets-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-keyboard"
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-keyboard-usage"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-panel-keyboard"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-keyboard"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-restored-keyboard"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            30,
+            18
+          ]
+        },
+        {
+          "click": [
+            110,
+            18
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "capture": "presets-pointer"
+        },
+        {
+          "click": [
+            330,
+            348
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              188,
+              932,
+              230
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-pointer"
+        },
+        {
+          "click": [
+            920,
+            100
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-pointer",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-pointer"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-pointer-return"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-pointer-return",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            700,
+            348
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-pointer",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "explanation-top"
+        },
+        {
+          "scroll": [
+            640,
+            450,
+            120
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              348,
+              84,
+              936,
+              174
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "explanation-scrolled"
+        },
+        {
+          "click": [
+            786,
+            209
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "usage-top"
+        },
+        {
+          "scroll": [
+            640,
+            450,
+            180
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-top",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              348,
+              84,
+              936,
+              174
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "usage-scrolled"
+        },
+        {
+          "click": [
+            494,
+            209
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "explanation-retained"
+        },
+        {
+          "click": [
+            786,
+            209
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "usage-retained"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            920,
+            100
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-after-scroll"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-reopened-reset"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-reopened-reset",
+            "rect": [
+              348,
+              268,
+              920,
+              632
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-final"
+        }
+      ]
+    },
+    {
+      "id": "dialog-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "presets-keyboard"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "presets-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-keyboard"
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-keyboard-usage"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-panel-keyboard"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-keyboard"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-restored-keyboard"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            30,
+            18
+          ]
+        },
+        {
+          "click": [
+            110,
+            18
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "presets-pointer"
+        },
+        {
+          "click": [
+            70,
+            370
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              294,
+              338,
+              336
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-pointer"
+        },
+        {
+          "click": [
+            326,
+            162
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-pointer",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-pointer"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-keyboard",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-pointer-return"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-pointer-return",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            70,
+            370
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "explanation-top"
+        },
+        {
+          "scroll": [
+            195,
+            520,
+            28
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              52,
+              146,
+              342,
+              280
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "explanation-scrolled"
+        },
+        {
+          "click": [
+            267,
+            315
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "usage-top"
+        },
+        {
+          "scroll": [
+            195,
+            520,
+            140
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-top",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              52,
+              146,
+              342,
+              280
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "usage-scrolled"
+        },
+        {
+          "click": [
+            123,
+            315
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "explanation-retained"
+        },
+        {
+          "click": [
+            267,
+            315
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "usage-retained"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            326,
+            162
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "usage-scrolled",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-after-scroll"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "explanation-top",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "reader-reopened-reset"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reader-reopened-reset",
+            "rect": [
+              52,
+              374,
+              332,
+              694
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reader-closed-final"
+        }
+      ]
+    }
+  ]
+}

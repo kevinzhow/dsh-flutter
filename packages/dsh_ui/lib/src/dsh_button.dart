@@ -3,6 +3,8 @@ import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
+import 'dsh_focus_presentation.dart';
+
 import 'dsh_corners.dart' show DshCornerDecoration, DshSurface;
 import 'dsh_pixel_snap.dart';
 import 'dsh_recipes.g.dart';
@@ -187,6 +189,14 @@ class _DshButtonState extends State<DshButton> {
     super.initState();
     _primaryFocus = _focusNode.hasPrimaryFocus;
     _focusNode.addListener(_focusChanged);
+    DshFocusPresentation.instance.acquire(
+      _focusNode,
+      _focusPresentationChanged,
+    );
+  }
+
+  void _focusPresentationChanged() {
+    if (mounted) setState(() {});
   }
 
   void _focusChanged() {
@@ -198,9 +208,17 @@ class _DshButtonState extends State<DshButton> {
   void didUpdateWidget(DshButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.focusNode != widget.focusNode) {
+      DshFocusPresentation.instance.release(
+        oldWidget.focusNode ?? _ownedFocus,
+        _focusPresentationChanged,
+      );
       (oldWidget.focusNode ?? _ownedFocus).removeListener(_focusChanged);
       _primaryFocus = _focusNode.hasPrimaryFocus;
       _focusNode.addListener(_focusChanged);
+      DshFocusPresentation.instance.acquire(
+        _focusNode,
+        _focusPresentationChanged,
+      );
     }
     if (!_enabled) {
       _hovered = false;
@@ -211,6 +229,10 @@ class _DshButtonState extends State<DshButton> {
 
   @override
   void dispose() {
+    DshFocusPresentation.instance.release(
+      _focusNode,
+      _focusPresentationChanged,
+    );
     _focusNode.removeListener(_focusChanged);
     _ownedFocus.dispose();
     super.dispose();
@@ -428,7 +450,10 @@ class _DshButtonState extends State<DshButton> {
       clipBehavior: Clip.none,
       children: [
         surface,
-        if (_focusVisible && _enabled && _primaryFocus)
+        if (_focusVisible &&
+            _enabled &&
+            _primaryFocus &&
+            !DshFocusPresentation.instance.suppressed(_focusNode))
           Positioned(
             left: -ringReach,
             top: -ringReach,

@@ -15,6 +15,163 @@ def module(name):
 gen, guard = module('generate'), module('check')
 
 class DesignSystemTests(unittest.TestCase):
+    def test_preset_archive_extraction_keeps_dollar_guide_literal_separate_from_roster(self):
+        import io
+        import tarfile
+        published = module('published')
+        bundle = '''//#region lib/types/client/PresetGuideDialog.module.css.mjs
+const css$1 = ".g_guideDialog{width:640px}";
+var PresetGuideDialog_module_css_default = {"guideDialog":"g_guideDialog"};
+//#endregion
+//#region lib/types/client/PresetGuideDialog.js
+function PresetGuideDialog() { return null; }
+//#endregion
+//#region lib/types/client/AgentPresetSection.module.css.mjs
+const css = ".r_section{width:720px}";
+var AgentPresetSection_module_css_default = {"section":"r_section"};
+//#endregion
+'''
+        with tempfile.TemporaryDirectory() as d:
+            archive = pathlib.Path(d) / 'preset.tgz'
+            with tarfile.open(archive, 'w:gz') as tar:
+                for name, text in {'lib/client.js': bundle, 'package.json': '{}', 'LICENSE': 'MIT'}.items():
+                    data = text.encode(); info = tarfile.TarInfo('package/' + name); info.size = len(data)
+                    tar.addfile(info, io.BytesIO(data))
+            snapshot = published.agent_preset_style_snapshot(archive)
+            self.assertEqual(snapshot['css']['PresetGuideDialog.module.css'], '.g_guideDialog{width:640px}')
+            self.assertEqual(snapshot['css']['styles.css'], '.r_section{width:720px}')
+            self.assertEqual(snapshot['classes']['guide'], {'guideDialog': 'g_guideDialog'})
+            self.assertNotIn('r_section', snapshot['css']['PresetGuideDialog.module.css'])
+            with self.assertRaisesRegex(ValueError, 'missing/ambiguous'):
+                published.bundle_region(bundle + bundle, 'PresetGuideDialog.module.css.mjs')
+
+    def test_modal_and_guide_metrics_track_published_geometry(self):
+        import copy
+        lock, original = gen.collect()
+        altered = copy.deepcopy(original)
+        next(r for r in altered['Modal.module.css'] if r['selector'] == '.root')['declarations']['padding'] = 'max(28px, var(--dsh-frame-overlay-top, 28px)) 32px'
+        next(r for r in altered['Modal.module.css'] if r['selector'] == '.dialog')['declarations']['width'] = 'min(420px, 100%)'
+        next(r for r in altered['PresetGuideDialog.module.css'] if r['selector'] == '.guideDialog')['declarations'].update({'width': 'min(680px,100%)', 'height': 'min(620px,100%)'})
+        next(r for r in altered['PresetGuideDialog.module.css'] if r['selector'] == '.guideHeader')['declarations']['padding'] = '26px 25px 21px 29px'
+        next(r for r in altered['PresetGuideDialog.module.css'] if r['selector'] == '.guideClose')['declarations']['padding'] = '3px'
+        next(r for r in altered['PresetGuideDialog.module.css'] if r['selector'] == '.guideTabs')['declarations']['margin'] = '4px 30px 24px'
+        _, audit = gen.render(lock, altered)
+        metrics = json.loads(audit)['metrics']
+        self.assertEqual(metrics['DshModalRecipe']['rootMargin'], 28)
+        self.assertEqual(metrics['DshModalRecipe']['rootHorizontalMargin'], 32)
+        self.assertEqual(metrics['DshModalRecipe']['defaultWidth'], 420)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['width'], 680)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['height'], 620)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['headerLeft'], 29)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['closePadding'], 3)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['tabsTopMargin'], 4)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['tabsHorizontalMargin'], 30)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['tabsBottomMargin'], 24)
+
+    def test_modal_timing_scrollbar_and_bundle_icon_inputs_are_consumed(self):
+        import copy
+        lock, original = gen.collect()
+        altered = copy.deepcopy(original)
+        context = altered['ModalContext']
+        next(r for r in context['themeTokens'] if r['selector'] == ':root')['declarations'].update({
+            '--ds-transition-duration': '.3s', '--ds-ease-in-out': 'cubic-bezier(.2, 0, .3, 1)'})
+        next(r for r in context['scrollbarRules'] if r['selector'] == 'body')['declarations']['--dsh-scrollbar-width'] = '6px'
+        context['modalBehavior']['modal'] = context['modalBehavior']['modal'].replace('IconCloseOutlineRegular, { size: 14 }', 'IconCloseOutlineRegular, { size: 16 }')
+        context['readerBehavior']['region'] = context['readerBehavior']['region'].replace('IconCloseOutlineRegular, { size: 18 }', 'IconCloseOutlineRegular, { size: 20 }')
+        context['readerBehavior']['region'] = context['readerBehavior']['region'].replace('IconListPenOutlineRegular, { size: 12 }', 'IconListPenOutlineRegular, { size: 16 }')
+        _, audit = gen.render(lock, altered)
+        metrics = json.loads(audit)['metrics']
+        self.assertEqual(metrics['DshModalRecipe']['animationMs'], 300)
+        self.assertEqual(metrics['DshModalRecipe']['curveX1'], .2)
+        self.assertEqual(metrics['DshModalRecipe']['curveX2'], .3)
+        self.assertEqual(metrics['DshModalRecipe']['closeIconSize'], 16)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['closeIconSize'], 20)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['exampleIconSize'], 16)
+        self.assertEqual(metrics['DshGuideReaderRecipe']['scrollbarWidth'], 6)
+        for change in ['missing', 'ambiguous']:
+            altered = copy.deepcopy(original)
+            if change == 'missing':
+                altered['ModalContext']['readerBehavior']['region'] = altered['ModalContext']['readerBehavior']['region'].replace('IconListPenOutlineRegular', 'OtherIcon')
+            else:
+                altered['ModalContext']['readerBehavior']['region'] += '\nIconListPenOutlineRegular, { size: 12 }'
+            with self.subTest(example_icon=change), self.assertRaisesRegex(ValueError, 'example icon declaration changed'):
+                gen.render(lock, altered)
+
+    def test_modal_guide_new_rules_and_untranslated_structures_fail_closed(self):
+        import copy
+        lock, original = gen.collect()
+        mutations = [
+            ('Modal.module.css', '.root', 'pointer-events', 'none'),
+            ('Modal.module.css', '.mask', 'inset', '0'),
+            ('Modal.module.css', '.dialog', 'animation', 'other 200ms ease'),
+            ('PresetGuideDialog.module.css', '.guidePanel', 'overflow-y', 'visible'),
+            ('PresetGuideDialog.module.css', '.guidePanel', 'scrollbar-gutter', 'auto'),
+            ('PresetGuideDialog.module.css', '.guideExampleTag', 'flex-shrink', '1'),
+        ]
+        for sheet, selector, prop, changed in mutations:
+            altered = copy.deepcopy(original)
+            next(r for r in altered[sheet] if r['selector'] == selector)['declarations'][prop] = changed
+            with self.subTest(sheet=sheet, selector=selector, prop=prop), self.assertRaisesRegex(ValueError, 'untranslated'):
+                gen.render(lock, altered)
+        for sheet, rule in [
+            ('Modal.module.css', {'selector': 'from', 'conditions': ['@keyframes modalEnter'], 'declarations': {'opacity': '.5'}}),
+            ('Modal.module.css', {'selector': '.dialog:hover', 'conditions': [], 'declarations': {'opacity': '.5'}}),
+            ('PresetGuideDialog.module.css', {'selector': '.guidePanel', 'conditions': ['@media (prefers-color-scheme: dark)'], 'declarations': {'color': 'red'}}),
+        ]:
+            altered = copy.deepcopy(original)
+            if rule['conditions'] == ['@keyframes modalEnter']:
+                next(r for r in altered[sheet] if r['selector'] == 'from')['declarations'] = rule['declarations']
+            else:
+                altered[sheet].append(rule)
+            with self.subTest(sheet=sheet, selector=rule['selector']), self.assertRaisesRegex(ValueError, 'untranslated'):
+                gen.render(lock, altered)
+
+    def test_modal_scoped_tokens_unknown_scrollbar_structure_and_blur_fail_closed(self):
+        import copy
+        lock, original = gen.collect()
+        altered = copy.deepcopy(original)
+        altered['ModalContext']['themeTokens'].append({'selector': 'body[data-ds-dark-theme]', 'conditions': [],
+                                                      'declarations': {'--dsw-mask-blur': 'blur(2px)'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated modal theme token scope'):
+            gen.render(lock, altered)
+        altered = copy.deepcopy(original)
+        next(r for r in altered['ModalContext']['themeTokens'] if r['selector'] == 'body')['declarations']['--dsw-mask-blur'] = 'blur(2px)'
+        with self.assertRaisesRegex(ValueError, 'mask blur'):
+            gen.render(lock, altered)
+        altered = copy.deepcopy(original)
+        next(r for r in altered['ModalContext']['scrollbarRules'] if r['selector'] == '::-webkit-scrollbar-thumb')['declarations']['background-clip'] = 'padding-box'
+        with self.assertRaisesRegex(ValueError, 'untranslated modal scrollbar structure'):
+            gen.render(lock, altered)
+
+    def test_guide_published_minifier_normalization_preserves_source_drift_detection(self):
+        import copy
+        _, sheets = gen.collect()
+        modal = module('modal_recipes')
+        original = copy.deepcopy(sheets['PresetGuideDialog.module.css'])
+        for rule in original:
+            rule['selector'] = rule['selector'].replace('[data-guide-page=usage]', "[data-guide-page='usage']").replace('+', ' + ')
+            rule['declarations'] = dict(reversed(list(rule['declarations'].items())))
+        modal.verify_guide_source(sheets['PresetGuideDialog.module.css'], original)
+        next(r for r in original if r['selector'] == '.guideTabs')['declarations']['margin'] = '0 32px 22px'
+        with self.assertRaisesRegex(ValueError, 'reference guide CSS differs'):
+            modal.verify_guide_source(sheets['PresetGuideDialog.module.css'], original)
+
+    def test_guide_primitive_consumer_dependency_is_verified(self):
+        published = module('published')
+        lock = json.loads((ROOT / 'tool/design-system/sources.lock.json').read_text())
+        package = lock['packages'][0]
+        declaration = next(d for d in package['referenceConsumers'] if d['path'] == 'packages/client/ui-agent-preset/package.json')
+        with tempfile.TemporaryDirectory() as d:
+            source = pathlib.Path(d)
+            manifest = source / package['sourcePackage']; manifest.parent.mkdir(parents=True)
+            manifest.write_text(json.dumps({'version': package['version']}))
+            consumer = source / package['referenceConsumer']; consumer.parent.mkdir(parents=True)
+            consumer.write_text(json.dumps({package['dependencyField']: {package['name']: package['dependencySpecifier']}}))
+            guide = source / declaration['path']; guide.parent.mkdir(parents=True)
+            guide.write_text(json.dumps({declaration['dependencyField']: {package['name']: '^0.3.0'}}))
+            with self.assertRaisesRegex(ValueError, 'additional consumer drift'):
+                published.verify_packages(source)
+
     def test_segmented_tab_transition_tracks_each_source_duration_and_rejects_unknown_easing(self):
         import copy
         lock, sheets = gen.collect()
