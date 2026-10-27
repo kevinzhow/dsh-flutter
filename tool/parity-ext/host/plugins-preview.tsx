@@ -1,4 +1,4 @@
-import {useLayoutEffect,useRef} from 'react'
+import {useLayoutEffect,useRef,useState} from 'react'
 import {PluginManagerPage} from '@dsh/ui-plugin-manager/src/client/PluginManagerPage.tsx'
 import {en as managerEn,zh as managerZh} from '@dsh/ui-plugin-manager/src/client/locales.ts'
 import {PluginInventorySettingsTab} from '@dsh/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx'
@@ -12,9 +12,13 @@ const pkg={name:'@synthetic/preview-bundle',official:false,availability:'profile
 const entry={entryId:'synthetic-entry',moduleName:'@synthetic/reader',enabled:true,fiberPhase:'active'}
 function Surface({family,props,ctx}:any){
  const surface=useRef<HTMLDivElement>(null)
+ const [category,setCategory]=useState(props.category??null)
  useLayoutEffect(()=>{
   surface.current?.querySelector('[aria-haspopup="menu"]')?.setAttribute('data-parity-id','plugin-add-more')
   surface.current?.querySelector('[role="switch"]')?.setAttribute('data-parity-id','plugin-switch-@synthetic/preview-bundle')
+  const categoryButtons=surface.current?.querySelectorAll('[role="group"] button')
+  categoryButtons?.[0]?.setAttribute('data-parity-id','market-category-all')
+  categoryButtons?.[1]?.setAttribute('data-parity-id','market-category-tools')
  },[])
  const dictionaries:any={manager:[managerEn,managerZh],inventory:[inventoryEn,inventoryZh],market:[marketEn,marketZh]}
  const [en,zh]=dictionaries[family],t=createTranslator(ctx.case.locale,{en,zh}),name=props.name
@@ -28,9 +32,9 @@ function Surface({family,props,ctx}:any){
  if(family==='inventory')body=<PluginInventorySettingsTab {...{t,resolveText,list:async()=>({managementAvailable:true,entries:name==='empty'?[]:[entry],agentPresets:[]}),presetName:(p:any)=>p.id,useClientSync:(s:any)=>s({syncing:false,failures:[],entries:[]}),retryClient:noop} as any}/>
  if(family==='market'){
   const index={url:'https://synthetic.example/index.json',status:'ready',name:'Synthetic market',title:'Synthetic market',description:'Synthetic index',entryCount:0,fetchedAt:1000}
-  const query={text:'',category:null,labels:[],sort:{kind:'index'}}
-  const state={status:'ready',indexes:name==='noindexes'?[]:[index],selected:name==='noindexes'?null:index.url,listing:name==='noindexes'?null:{url:index.url,query,status:'ready',value:{url:index.url,title:'Synthetic market',metadata:{categories:{},labels:{},sortKeys:{}},entries:[],total:0,nextOffset:null,fetchedAt:1000},answered:query,failure:null},editing:false,draft:'',saving:false,sourceFailure:null}
-  body=<DiscoverSection {...{t,resolveText,useDiscover:(s:any)=>s(state),useLocale:(s:any)=>s({active:ctx.case.locale}),ensure:noop,reload:noop,select:noop,search:noop,more:noop,refresh:noop,retry:noop,toggleSources:noop,editDraft:noop,addSource:asyncNoop,removeSource:asyncNoop,install:noop,openPackage:noop} as any}/>
+  const query={text:'',category,labels:[],sort:{kind:'index'}}
+  const state={status:'ready',indexes:name==='noindexes'?[]:[index],selected:name==='noindexes'?null:index.url,listing:name==='noindexes'?null:{url:index.url,query,status:'ready',value:{url:index.url,title:'Synthetic market',metadata:{categories:name==='categories'?{tools:{title:'Tools'}}:{},labels:{},sortKeys:{}},entries:[],total:0,nextOffset:null,fetchedAt:1000},answered:query,failure:null},editing:false,draft:'',saving:false,sourceFailure:null}
+  body=<DiscoverSection {...{t,resolveText,useDiscover:(s:any)=>s(state),useLocale:(s:any)=>s({active:ctx.case.locale}),ensure:noop,reload:noop,select:noop,search:(next:any)=>setCategory(next.category),more:noop,refresh:noop,retry:noop,toggleSources:noop,editDraft:noop,addSource:asyncNoop,removeSource:asyncNoop,install:noop,openPackage:noop} as any}/>
  }
  return <div ref={surface} data-parity-id="plugins-preview-surface" style={{width:props.width,height:props.height,overflow:'auto',color:'var(--dsw-alias-label-primary)'}}>{body}</div>
 }

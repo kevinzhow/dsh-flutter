@@ -190,6 +190,22 @@ class DesignSystemTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'unsupported Chromium checkbox hover'):
             gen.render(lock, changed)
 
+    def test_pill_and_market_group_track_source_and_reject_unknown_states(self):
+        import copy
+        lock, sheets = gen.collect()
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['Pill.module.css'] if r['selector'] == '.pill')['declarations']['height'] = '26px'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('height = 26.0;', dart)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['DiscoverSection.module.css'] if r['selector'] == '.categories')['declarations']['gap'] = '8px'
+        dart, _ = gen.render(lock, changed)
+        self.assertIn('categoryGap = 8.0;', dart)
+        changed = copy.deepcopy(sheets)
+        changed['Pill.module.css'].append({'selector': '.pill:focus', 'conditions': [], 'declarations': {'color': 'red'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated pill'):
+            gen.render(lock, changed)
+
     def test_menu_viewport_limits_are_generated_and_unknown_expressions_fail(self):
         import copy
         lock, original = gen.collect()

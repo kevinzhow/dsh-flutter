@@ -1,8 +1,8 @@
 # Design system replication
 
-The reference is DSH commit `687f282e8625c6b8d11ff58211a90524be2e4317`. Its plugin manager declares `@deepseek-ai/dsh-client-ui-primitives` as `workspace:*`; the actual referenced package version is `0.2.1-rc.2`. `tool/design-system/sources.lock.json` records that dependency, published npm tarball integrity and the hashes of the consumed published files. The checked-in CSS files are exact bytes from that release and match the pinned reference checkout.
+The reference is DSH commit `687f282e8625c6b8d11ff58211a90524be2e4317`. Its plugin manager declares `@deepseek-ai/dsh-client-ui-primitives` as `workspace:*`; the actual referenced package version is `0.2.1-rc.2`. `tool/design-system/sources.lock.json` records that dependency, published npm tarball integrity and the hashes of the consumed published files. The checked-in CSS files are extracted from that release and checked against the pinned reference checkout.
 
-`tool/design-system/generate.py` produces the button and segmented-tab base recipes and a complete CSS rule audit. Components consume the generated recipes; colours and radii resolve through the current theme. Button typography resolves to the corresponding generated theme ladder rung so user theme overrides remain effective. Unsupported states, properties or conditional rules fail generation. Reduced-motion rules are retained. Recipe coverage is initially limited to these two base families: page-specific variants and other families remain migration work.
+`tool/design-system/generate.py` produces component recipes and a complete CSS rule audit for the published sources recorded in the lock. Components consume the generated recipes; colours and radii resolve through the current theme. Typography resolves to the corresponding generated theme ladder rung so user theme overrides remain effective. Unsupported states, properties or conditional rules fail generation. Reduced-motion rules are retained. The family inventory records which variants and families still need migration.
 
 Run the pinned environment and `python tool/design-system/generate.py --check` to check the actual reference consumer dependency, package version, source CSS and generated output. CI without a reference checkout uses `--snapshot-only` to verify the published snapshot and generated output; it cannot independently check an upstream checkout it does not have. No network request is needed during validation. Updating the pin requires obtaining the newly referenced published package, verifying the archive, replacing its snapshot and lock, and reviewing the generated recipe diff. A repository tag alone is insufficient.
 
@@ -210,3 +210,23 @@ Reference cases use the actual risk confirmation and model input-type source
 components. The Flutter risk dialog is real; the model checkbox context is a
 fixture because the model editor has not yet been wired to the shared atom.
 The comparison reports isolated controls and whole-dialog focus separately.
+
+### Pills
+
+The published primitive defines a static capsule and an interactive button,
+with independent active, hover and focus behavior. The market package supplies
+the category-group spacing. Their source locks and generated recipes drive
+`DshPill` and the actual market category filter. An empty category declaration
+shows no group. The terminal status retains its source height and color
+overrides. Keyboard and accessibility activation, pressed state, disabled
+behavior and pointer-controlled focus follow the source; the pinned Chromium
+probe records the browser's focus outline and disabled-hover behavior.
+Native accessibility exposes the pressed category as a selected button, since
+Flutter's toggled flag maps to a switch on Android.
+
+The segmented-tab source uses Pill as an underlying button but overrides its
+geometry, focus decoration and keyboard model; it remains the separate
+`DshSegmentedTabs` profile. Tag badges, schedule-specific overrides, and the
+market's locale-aware category ordering remain to be audited. The real market
+and terminal screenshots measure the remaining visual differences; focused
+whole-page captures are reported separately from the cropped controls.
