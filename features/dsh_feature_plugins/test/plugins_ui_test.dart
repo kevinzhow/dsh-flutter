@@ -67,6 +67,63 @@ Future<void> pump(WidgetTester t) async {
 }
 
 void main() {
+  testWidgets('inventory status uses the source tag tones', (t) async {
+    final host = FakeHost();
+    host.handlers['pluginInventory/list'] = (_) => {
+      'managementAvailable': true,
+      'entries': <Object?>[],
+      'agentPresets': [
+        {
+          'id': 'standard',
+          'isDefault': true,
+          'rows': [
+            {
+              'entryId': 'conditional',
+              'moduleName': 'conditional',
+              'enabled': 'conditional',
+              'fiberPhase': null,
+            },
+            {
+              'entryId': 'disabled',
+              'moduleName': 'disabled',
+              'enabled': false,
+              'fiberPhase': null,
+            },
+            {
+              'entryId': 'failed',
+              'moduleName': 'failed',
+              'enabled': true,
+              'fiberPhase': 'failed',
+            },
+          ],
+        },
+      ],
+    };
+    await t.pumpWidget(
+      dshTestApp(PluginInventorySection(remotes: host.remotes, i18n: i18n)),
+    );
+    await t.pumpAndSettle();
+    expect(
+      t
+          .widget<DshTag>(
+            find.byKey(const ValueKey('inventory-tag-conditional')),
+          )
+          .tone,
+      DshTagTone.warning,
+    );
+    expect(
+      t
+          .widget<DshTag>(find.byKey(const ValueKey('inventory-tag-disabled')))
+          .tone,
+      DshTagTone.neutral,
+    );
+    expect(
+      t.widget<DshTag>(find.byKey(const ValueKey('inventory-tag-failed'))).tone,
+      DshTagTone.danger,
+    );
+    await t.pumpWidget(const SizedBox());
+    await t.runAsync(host.close);
+  });
   testWidgets('market categories use pills only when declarations exist', (
     t,
   ) async {

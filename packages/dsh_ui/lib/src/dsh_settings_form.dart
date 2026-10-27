@@ -16,6 +16,7 @@ import 'dsh_pixel_snap.dart';
 import 'dsh_settings.dart';
 import 'dsh_settings_form_model.dart';
 import 'dsh_snapped_box.dart';
+import 'dsh_tag.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
@@ -341,7 +342,7 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
       children: [
         KeyedSubtree(
           key: DshSettingsValueField.badgeKey(id),
-          child: _Tag(widget.overriddenLabel),
+          child: DshTag.text(widget.overriddenLabel, tone: DshTagTone.neutral),
         ),
         const SizedBox(width: 8),
         Semantics(
@@ -523,38 +524,6 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
               ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// The neutral read-only capsule beside a field label (dsh `Tag`, tone
-/// `neutral`): 11px text on the platform gray.
-class _Tag extends StatelessWidget {
-  const _Tag(this.text);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return DshContainer(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
-      decoration: BoxDecoration(
-        color: theme.color('--dsw-alias-bg-module-platform'),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: DshChromeText(
-        text,
-        maxLines: 1,
-        style: theme
-            .textStyle('--dsw-font-xxs-12')
-            .apply(fontSizeDelta: 11 - 12)
-            .copyWith(
-              color: theme.labelSecondary,
-              fontWeight: FontWeight.w500,
-              height: 17 / 11,
-            ),
       ),
     );
   }

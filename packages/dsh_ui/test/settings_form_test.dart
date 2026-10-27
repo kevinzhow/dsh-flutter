@@ -231,6 +231,7 @@ void main() {
       var resets = 0;
       await t.pumpWidget(app(field(overridden: true, onReset: () => resets++)));
       expect(find.text('Overridden'), findsOneWidget);
+      expect(t.widget<DshTag>(find.byType(DshTag)).tone, DshTagTone.neutral);
       await t.tap(find.byKey(DshSettingsValueField.resetKey('f')));
       expect(resets, 1);
     });

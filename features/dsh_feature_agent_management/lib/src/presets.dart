@@ -175,14 +175,18 @@ class _AgentPresetSectionState extends State<AgentPresetSection> {
                             name,
                             style: theme.textStyle('--dsw-font-base-16'),
                           ),
-                          _PresetTag(
-                            label: t(
+                          DshTag.text(
+                            t(
                               row.isDefault
                                   ? 'inUse'
                                   : builtInPreset(row)
                                   ? 'builtInGroup'
                                   : 'customGroup',
                             ),
+                            key: ValueKey('preset-tag-${row.id}'),
+                            tone: row.isDefault
+                                ? DshTagTone.solid
+                                : DshTagTone.outline,
                           ),
                         ],
                       ),
@@ -434,25 +438,6 @@ class _Notice extends StatelessWidget {
           .copyWith(
             color: context.dsh.color('--dsw-alias-state-error-primary'),
           ),
-    ),
-  );
-}
-
-class _PresetTag extends StatelessWidget {
-  const _PresetTag({required this.label});
-  final String label;
-  @override
-  Widget build(BuildContext context) => DshDecoratedBox(
-    decoration: BoxDecoration(
-      border: Border.all(
-        width: .5,
-        color: context.dsh.color('--dsw-alias-border-l3'),
-      ),
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      child: Text(label, style: context.dsh.textStyle('--dsw-font-xxs-12')),
     ),
   );
 }

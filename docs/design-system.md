@@ -226,7 +226,23 @@ Flutter's toggled flag maps to a switch on Android.
 
 The segmented-tab source uses Pill as an underlying button but overrides its
 geometry, focus decoration and keyboard model; it remains the separate
-`DshSegmentedTabs` profile. Tag badges, schedule-specific overrides, and the
+`DshSegmentedTabs` profile. Schedule-specific overrides and the
 market's locale-aware category ordering remain to be audited. The real market
 and terminal screenshots measure the remaining visual differences; focused
 whole-page captures are reported separately from the cropped controls.
+
+### Read-only tags
+
+The published Tag stylesheet generates the capsule's content-box geometry,
+typography and eight tones, including the source's `color-mix` percentages.
+`DshTag` is the shared non-interactive component. Settings override labels,
+agent-preset selection labels and plugin inventory warning, disabled and
+failure states now use it. The first two replace separate private tags. The
+inventory page still has a different row layout and retains its enabled-state
+text; other source Tag consumers remain to be migrated. The family ratchet
+prevents the retired private components from returning.
+
+Reference captures use the actual DSH shell settings, agent-preset section and
+plugin inventory components. Crop dimensions can differ when the surrounding
+page positions a tag at a different fraction of a device pixel; the reference
+comparison retains those differences and the unchanged 99.5% target.
