@@ -1,0 +1,367 @@
+{
+  "implementationHead": "df10996a4f7accb9bf06f13f8f293193667e5bb7",
+  "tree": "8b92c87f47d04617714c33c89abeb502c5eae570",
+  "runtimeBuildHead": "df10996a4f7accb9bf06f13f8f293193667e5bb7",
+  "changesSinceRuntimeBuild": [],
+  "androidFixtureApkByteIdenticalToTestedBuild": true,
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "DSH ui-primitives 0.2.1-rc.2, archive integrity verified",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-27T01:11:42+00:00",
+    "headTree": "8b92c87f47d04617714c33c89abeb502c5eae570",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.1
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 0.9
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.0
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 196.5
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "247c6681e4b35d3d24c2792b37da3c522c1f0ca65f54f33cae311fd9ea7ba203"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "9c5806bb72e8bdf068c0bafc472561ad9d4aed302924045012ac74d36e196b76"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "51cbcd23f2d6db2cad601f9989619c80f0a2ad984638cd488ca35353c4874ad7",
+      "applicationLibrarySha256": "447b6203c966b962029b5e48e05d5ac4fcf46f1a884c6a9a0397d971dfec475d"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "51cbcd23f2d6db2cad601f9989619c80f0a2ad984638cd488ca35353c4874ad7",
+      "applicationLibrarySha256": "27a69c10538c4197f6f392b3116bbd16713054342d571a2c1118483ade21d438"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "tag-family.desktop",
+      "assertions": 6
+    },
+    {
+      "case": "tag-family.phone",
+      "assertions": 6
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "emulated hardware Tab and Space"
+    ],
+    "accessibility": "named enabled clickable reset button and focused state read from UIAutomator",
+    "focusOutlineChangedPixels": true,
+    "scenes": [
+      {
+        "scene": "initial",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-reset",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-initial",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-focus",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-space-reset",
+        "attempts": 1
+      },
+      {
+        "scene": "presets",
+        "attempts": 1
+      },
+      {
+        "scene": "custom-preset",
+        "attempts": 1
+      }
+    ]
+  },
+  "androidResetBeforeAfter": {
+    "before": {
+      "class": "android.widget.Button",
+      "enabled": "true",
+      "clickable": "false",
+      "focusable": "true",
+      "focused": "false"
+    },
+    "after": {
+      "class": "android.widget.Button",
+      "enabled": "true",
+      "clickable": "true",
+      "focusable": "true",
+      "focused": "false"
+    }
+  },
+  "visual": {
+    "compared": 56,
+    "dimensionsEqual": 34,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 85.86187500000001
+  },
+  "visualGroups": {
+    "preset": {
+      "compared": 24,
+      "dimensionsEqual": 18,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 83.39075
+    },
+    "shell": {
+      "compared": 8,
+      "dimensionsEqual": 8,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 83.5655
+    },
+    "inventory": {
+      "compared": 24,
+      "dimensionsEqual": 8,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 89.09845833333333
+    }
+  },
+  "neutralRegression": [
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-en-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-en-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-en-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-en-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-zh-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-zh-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-desktop-zh-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-desktop-zh-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-en-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-en-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-en-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-en-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-zh-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-zh-override.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.tag-family.shell-phone-zh-override.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.tag-family.shell-phone-zh-override.dark",
+      "rgbaByteEqual": true
+    }
+  ],
+  "managerRegression": [
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-en.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-en.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-en.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-en.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-en.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-en.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-zh.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-zh.light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "case": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "rgbaByteEqual": true
+    }
+  ],
+  "inventorySurfaceComparison": {
+    "before": {
+      "compared": 24,
+      "dimensionsEqual": 8,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 74.726125
+    },
+    "after": {
+      "compared": 24,
+      "dimensionsEqual": 8,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 89.09845833333333
+    }
+  },
+  "limitations": [
+    "Inventory row layout differs from source and retains enabled-state text",
+    "Other Tag consumers remain to migrate",
+    "Visual target remains unfinished"
+  ],
+  "fontsClassifierAndThresholdChanged": false,
+  "runtimeCleanup": "Normal Android app restored and stopped; owned emulator and GPU processes stopped; shared ADB retained",
+  "releaseOrDeployment": false
+}

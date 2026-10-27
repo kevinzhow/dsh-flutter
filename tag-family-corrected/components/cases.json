@@ -1,0 +1,2366 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-en.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-en.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-zh.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-desktop-zh.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-desktop-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-en.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-en.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-en",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-zh.light",
+      "title": "manager populated (light)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.plugins-preview.manager-populated-phone-zh.dark",
+      "title": "manager populated (dark)",
+      "kind": "plugins-preview.manager",
+      "surface": "manager-populated-phone-zh",
+      "category": "extension/plugins-preview",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "populated",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "populated"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-manager,ui-plugin-market,ui-settings-plugin-inventory/src/client",
+      "flutterCaseHint": "apps/dsh_flutter/test/parity/cases/plugins_preview.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-selected.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-selected.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-built-in.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-built-in.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-custom.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-en-custom.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-en-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.shell-desktop-en-override.light",
+      "title": "Shell setting override tag (light)",
+      "kind": "model-settings.shell",
+      "surface": "shell-desktop-en-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 600,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.shell-desktop-en-override.dark",
+      "title": "Shell setting override tag (dark)",
+      "kind": "model-settings.shell",
+      "surface": "shell-desktop-en-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 600,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-conditional.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-conditional.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-disabled.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-disabled.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-failed.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-en-failed.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-en-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-selected.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-selected.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-built-in.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-built-in.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-custom.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-desktop-zh-custom.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-desktop-zh-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.shell-desktop-zh-override.light",
+      "title": "Shell setting override tag (light)",
+      "kind": "model-settings.shell",
+      "surface": "shell-desktop-zh-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 600,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.shell-desktop-zh-override.dark",
+      "title": "Shell setting override tag (dark)",
+      "kind": "model-settings.shell",
+      "surface": "shell-desktop-zh-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 600,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-conditional.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-conditional.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-disabled.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-disabled.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-failed.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-desktop-zh-failed.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-desktop-zh-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1600,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 600,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-selected.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-selected.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-built-in.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-built-in.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-custom.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-en-custom.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-en-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.shell-phone-en-override.light",
+      "title": "Shell setting override tag (light)",
+      "kind": "model-settings.shell",
+      "surface": "shell-phone-en-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 326,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.shell-phone-en-override.dark",
+      "title": "Shell setting override tag (dark)",
+      "kind": "model-settings.shell",
+      "surface": "shell-phone-en-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 326,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-conditional.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-conditional.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-disabled.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-disabled.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-failed.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-en-failed.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-en-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-selected.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-selected.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-selected",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "selected",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-standard\"]",
+        "flutterKey": "preset-tag-standard",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-built-in.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-built-in.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-built-in",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "built-in",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-ptc\"]",
+        "flutterKey": "preset-tag-ptc",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-custom.light",
+      "title": "Agent preset tag (light)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.preset-phone-zh-custom.dark",
+      "title": "Agent preset tag (dark)",
+      "kind": "agents-tasks.preset",
+      "surface": "preset-phone-zh-custom",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "custom",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "coding"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-tag-reviewer\"]",
+        "flutterKey": "preset-tag-reviewer",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.shell-phone-zh-override.light",
+      "title": "Shell setting override tag (light)",
+      "kind": "model-settings.shell",
+      "surface": "shell-phone-zh-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 326,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.shell-phone-zh-override.dark",
+      "title": "Shell setting override tag (dark)",
+      "kind": "model-settings.shell",
+      "surface": "shell-phone-zh-override",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "override",
+          "props": {
+            "width": 326,
+            "name": "overridden"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"timeoutMs-overridden\"]",
+        "flutterKey": "timeoutMs-overridden",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+      "flutterCaseHint": "features/dsh_feature_settings/lib/src/common_settings.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-conditional.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-conditional.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-conditional",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "conditional",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/conditional",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-disabled.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-disabled.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-disabled",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "disabled",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/disabled\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/disabled",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-failed.light",
+      "title": "Plugin inventory status tag (light)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.tag-family.inventory-phone-zh-failed.dark",
+      "title": "Plugin inventory status tag (dark)",
+      "kind": "plugins-preview.inventory",
+      "surface": "inventory-phone-zh-failed",
+      "category": "extension/tag-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1600,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "failed",
+          "props": {
+            "width": 326,
+            "height": 1250,
+            "name": "tags"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+        "flutterKey": "inventory-tag-@synthetic/failed",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/inventory.dart",
+      "theme": "dark"
+    }
+  ]
+}

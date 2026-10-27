@@ -1,0 +1,39 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "emulated hardware Tab and Space"
+  ],
+  "accessibility": "named enabled clickable reset button and focused state read from UIAutomator",
+  "focusOutlineChangedPixels": true,
+  "scenes": [
+    {
+      "scene": "initial",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-reset",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-initial",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-focus",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-space-reset",
+      "attempts": 1
+    },
+    {
+      "scene": "presets",
+      "attempts": 1
+    },
+    {
+      "scene": "custom-preset",
+      "attempts": 1
+    }
+  ]
+}
