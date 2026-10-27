@@ -91,6 +91,10 @@ void main() {
       await tester.pumpAndSettle();
       final guideTabs = find.byType(DshSegmentedTabs);
       expect(guideTabs, findsOneWidget);
+      expect(
+        tester.widget<DshSegmentedTabs>(guideTabs).autofocusHighlight,
+        isFalse,
+      );
       final explanation = tester
           .getSemantics(
             find.byKey(const ValueKey('preset-guide-tab-explanation')),
@@ -139,6 +143,23 @@ void main() {
       expect(
         tester.widget<DshMarkdown>(find.byType(DshMarkdown)).data,
         i18n.t('settings.agentPreset', 'guideStandardUsage'),
+      );
+      await tester.tap(find.text(i18n.t('settings.agentPreset', 'close')));
+      await tester.pumpAndSettle();
+      tester
+          .widget<DshButton>(
+            find.byKey(const ValueKey('preset-guide-standard-details')),
+          )
+          .focusNode!
+          .requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<DshSegmentedTabs>(find.byType(DshSegmentedTabs))
+            .autofocusHighlight,
+        isTrue,
       );
       await tester.tap(find.text(i18n.t('settings.agentPreset', 'close')));
       await tester.pumpAndSettle();

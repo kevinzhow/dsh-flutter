@@ -1,0 +1,540 @@
+{
+  "cases": [
+    {
+      "id": "segmented-tabs.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            220,
+            153
+          ]
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              160,
+              132,
+              408,
+              174
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              160,
+              205,
+              1120,
+              390
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "discover"
+        },
+        {
+          "keys": [
+            105
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              160,
+              205,
+              1120,
+              390
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "installed-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              160,
+              132,
+              408,
+              174
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "expect": {
+            "reference": "discover",
+            "rect": [
+              160,
+              132,
+              408,
+              174
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "click": [
+            110,
+            18
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "capture": "presets"
+        },
+        {
+          "click": [
+            330,
+            348
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "capture": "guide-pointer"
+        },
+        {
+          "expect": {
+            "reference": "presets",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-usage"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              474,
+              237,
+              806,
+              279
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-home"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-home",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-closed"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              474,
+              237,
+              806,
+              279
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-keyboard"
+        }
+      ]
+    },
+    {
+      "id": "segmented-tabs.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "click": [
+            85,
+            201
+          ]
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              180,
+              272,
+              222
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              250,
+              370,
+              400
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "discover"
+        },
+        {
+          "keys": [
+            105
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              250,
+              370,
+              400
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "installed-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              24,
+              180,
+              272,
+              222
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            107
+          ]
+        },
+        {
+          "expect": {
+            "reference": "discover",
+            "rect": [
+              24,
+              180,
+              272,
+              222
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "click": [
+            110,
+            18
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "presets"
+        },
+        {
+          "click": [
+            70,
+            370
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "guide-pointer"
+        },
+        {
+          "expect": {
+            "reference": "presets",
+            "rect": [
+              48,
+              333,
+              342,
+              640
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            106
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              48,
+              333,
+              342,
+              640
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-usage"
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              48,
+              333,
+              342,
+              640
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              48,
+              287,
+              342,
+              329
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-home"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-home",
+            "rect": [
+              48,
+              333,
+              342,
+              640
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-closed"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "guide-pointer",
+            "rect": [
+              48,
+              287,
+              342,
+              329
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-keyboard"
+        }
+      ]
+    }
+  ]
+}

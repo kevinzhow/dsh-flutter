@@ -36,6 +36,7 @@ class DshSegmentedTabs extends StatefulWidget {
     this.minWidth = 240,
     this.expand = false,
     this.autofocus = false,
+    this.autofocusHighlight,
   }) : assert(items.length > 0);
   final List<DshSegmentedTab> items;
   final String value, label;
@@ -47,6 +48,10 @@ class DshSegmentedTabs extends StatefulWidget {
 
   /// Initially focus the selected tab, as the preset guide does on opening.
   final bool autofocus;
+
+  /// Inherit the triggering control's visible focus when a new reader opens.
+  /// Null keeps the ambient input-modality behavior for ordinary tab lists.
+  final bool? autofocusHighlight;
   @override
   State<DshSegmentedTabs> createState() => _DshSegmentedTabsState();
 }
@@ -56,6 +61,7 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
   final nodes = <FocusNode>[];
   int? focusIndex, hoverIndex;
   int? _pointerTarget;
+  late bool _autofocusPending = widget.autofocus;
   int get selected => math.max(
     0,
     widget.items.indexWhere((item) => item.value == widget.value),
@@ -99,6 +105,7 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
   }
 
   void _focus(int index) {
+    _autofocusPending = false;
     _pointerTarget = null;
     focusIndex = index;
     nodes[index].requestFocus();
@@ -106,11 +113,14 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
   }
 
   void select(int index, {bool pointer = false}) {
+    _autofocusPending = false;
     // Native :focus-visible preserves an existing keyboard underline when
     // clicking the same focused tab, but a newly pointer-focused tab has none.
     if (pointer) {
       focusIndex = nodes[index].hasFocus && focusIndex == index ? index : null;
-      _pointerTarget = index;
+      // Already-focused nodes do not emit another focus-change notification.
+      // Leave no pending pointer transfer to suppress a later keyboard entry.
+      _pointerTarget = nodes[index].hasFocus ? null : index;
     } else {
       focusIndex = index;
       _pointerTarget = null;
@@ -127,6 +137,7 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
     final focused = nodes.indexWhere((node) => node.hasFocus),
         current = focused < 0 ? selected : focused;
     if (focused >= 0) {
+      _autofocusPending = false;
       _pointerTarget = null;
       setState(() => focusIndex = focused);
     }
@@ -246,7 +257,14 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                                 autofocus: widget.autofocus && i == selected,
                                 mouseCursor: SystemMouseCursors.click,
                                 onFocusChange: (focused) {
-                                  if (focused && _pointerTarget == i) {
+                                  final initial = focused && _autofocusPending;
+                                  if (focused) _autofocusPending = false;
+                                  if (initial &&
+                                      widget.autofocusHighlight != null) {
+                                    focusIndex = widget.autofocusHighlight!
+                                        ? i
+                                        : null;
+                                  } else if (focused && _pointerTarget == i) {
                                     _pointerTarget = null;
                                   } else if (focused &&
                                       !modality.pointerOwnsFocus &&
@@ -255,6 +273,9 @@ class _DshSegmentedTabsState extends State<DshSegmentedTabs> {
                                     focusIndex = i;
                                   } else if (!focused && focusIndex == i) {
                                     focusIndex = null;
+                                  }
+                                  if (!focused && _pointerTarget == i) {
+                                    _pointerTarget = null;
                                   }
                                   _refresh();
                                 },

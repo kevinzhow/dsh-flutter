@@ -8,9 +8,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets(
-    'source focus-visible distinguishes same-tab and new pointer focus',
-    (t) async {
+  for (final highlight in [false, true]) {
+    testWidgets('reader autofocus inherits visible focus=$highlight', (
+      t,
+    ) async {
       final boundary = GlobalKey();
       await t.pumpWidget(
         dshTestApp(
@@ -24,9 +25,73 @@ void main() {
                   DshSegmentedTab('second', 'Second'),
                 ],
                 value: 'first',
-                label: 'Views',
+                label: 'Reader',
+                autofocus: true,
+                autofocusHighlight: highlight,
                 onChanged: (_) {},
               ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      expect(
+        t
+            .widgetList<FocusableActionDetector>(
+              find.byType(FocusableActionDetector),
+            )
+            .first
+            .focusNode!
+            .hasPrimaryFocus,
+        isTrue,
+      );
+      Future<List<int>> pixels() async => (await t.runAsync(() async {
+        final image =
+            await (boundary.currentContext!.findRenderObject()!
+                    as RenderRepaintBoundary)
+                .toImage();
+        final bytes = (await image.toByteData())!.buffer.asUint8List().toList();
+        image.dispose();
+        return bytes;
+      }))!;
+      final initial = await pixels();
+      await t.sendKeyEvent(LogicalKeyboardKey.home);
+      await t.pumpAndSettle();
+      final keyboard = await pixels();
+      expect(initial, highlight ? keyboard : isNot(keyboard));
+    });
+  }
+  testWidgets(
+    'source focus-visible distinguishes same-tab and new pointer focus',
+    (t) async {
+      final boundary = GlobalKey();
+      final outsideFocus = FocusNode(debugLabel: 'outside tab group');
+      addTearDown(outsideFocus.dispose);
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.topLeft,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RepaintBoundary(
+                  key: boundary,
+                  child: DshSegmentedTabs(
+                    items: const [
+                      DshSegmentedTab('first', 'First'),
+                      DshSegmentedTab('second', 'Second'),
+                    ],
+                    value: 'first',
+                    label: 'Views',
+                    onChanged: (_) {},
+                  ),
+                ),
+                DshButton(
+                  focusNode: outsideFocus,
+                  onPressed: outsideFocus.requestFocus,
+                  child: const Text('Outside'),
+                ),
+              ],
             ),
           ),
         ),
@@ -56,6 +121,25 @@ void main() {
       expect(await pixels(), isNot(otherPointer));
       await t.sendKeyEvent(LogicalKeyboardKey.arrowLeft);
       await t.pumpAndSettle();
+      expect(await pixels(), keyboard);
+      await t.tap(find.text('First'));
+      await t.pumpAndSettle();
+      await t.tap(find.text('Outside'));
+      await t.pumpAndSettle();
+      expect(outsideFocus.hasPrimaryFocus, isTrue);
+      await t.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+      await t.pumpAndSettle();
+      final firstDetector = t.widget<FocusableActionDetector>(
+        find
+            .descendant(
+              of: find.byType(DshSegmentedTabs),
+              matching: find.byType(FocusableActionDetector),
+            )
+            .first,
+      );
+      expect(firstDetector.focusNode!.hasPrimaryFocus, isTrue);
       expect(await pixels(), keyboard);
     },
   );
