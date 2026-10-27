@@ -1,0 +1,314 @@
+{
+  "cases": [
+    {
+      "id": "tag-family.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            400,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              1170,
+              100,
+              1266,
+              124
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reset-focused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "move": [
+            400,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              1090,
+              102,
+              1169,
+              124
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              1090,
+              100,
+              1266,
+              125
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reset"
+        },
+        {
+          "click": [
+            670,
+            18
+          ]
+        },
+        {
+          "move": [
+            400,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reset",
+            "rect": [
+              150,
+              190,
+              265,
+              216
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "presets"
+        },
+        {
+          "click": [
+            338,
+            18
+          ]
+        },
+        {
+          "move": [
+            400,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reset",
+            "rect": [
+              1090,
+              100,
+              1266,
+              125
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              1090,
+              100,
+              1266,
+              125
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "shell-restored"
+        }
+      ]
+    },
+    {
+      "id": "tag-family.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            320,
+            20
+          ]
+        },
+        {
+          "capture": "initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              96,
+              125,
+              190,
+              149
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reset-focused"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "move": [
+            320,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              15,
+              125,
+              92,
+              149
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              15,
+              125,
+              190,
+              149
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "reset"
+        },
+        {
+          "click": [
+            225,
+            18
+          ]
+        },
+        {
+          "move": [
+            320,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reset",
+            "rect": [
+              150,
+              210,
+              265,
+              238
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "presets"
+        },
+        {
+          "click": [
+            155,
+            18
+          ]
+        },
+        {
+          "move": [
+            320,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "reset",
+            "rect": [
+              15,
+              125,
+              190,
+              149
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "initial",
+            "rect": [
+              15,
+              125,
+              190,
+              149
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "shell-restored"
+        }
+      ]
+    }
+  ]
+}
