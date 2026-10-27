@@ -434,9 +434,9 @@ class DshSwitch extends StatefulWidget {
 
 // dsh's focus-visible styling remains pointer-owned until a navigation key,
 // or a key followed by focus moving to a different control. Ordinary keys on
-// the same switch do not bring the outline back after a pointer click.
-class _SwitchFocusModality extends ChangeNotifier {
-  static final _SwitchFocusModality instance = _SwitchFocusModality();
+// the same control do not bring the outline back after a pointer click.
+class _ControlFocusModality extends ChangeNotifier {
+  static final _ControlFocusModality instance = _ControlFocusModality();
   static final _navigation = {
     LogicalKeyboardKey.tab,
     LogicalKeyboardKey.home,
@@ -509,7 +509,7 @@ class _DshSwitchState extends State<DshSwitch> {
   @override
   void initState() {
     super.initState();
-    _SwitchFocusModality.instance.acquire(_modalityChanged);
+    _ControlFocusModality.instance.acquire(_modalityChanged);
   }
 
   void _modalityChanged() {
@@ -526,7 +526,7 @@ class _DshSwitchState extends State<DshSwitch> {
 
   @override
   void dispose() {
-    _SwitchFocusModality.instance.release(_modalityChanged);
+    _ControlFocusModality.instance.release(_modalityChanged);
     _focus.dispose();
     super.dispose();
   }
@@ -616,7 +616,7 @@ class _DshSwitchState extends State<DshSwitch> {
                 ),
                 if (_focusVisible &&
                     _enabled &&
-                    !_SwitchFocusModality.instance.pointerOwnsFocus)
+                    !_ControlFocusModality.instance.pointerOwnsFocus)
                   Positioned(
                     left: -ringReach,
                     top: -ringReach,
@@ -646,75 +646,372 @@ class _DshSwitchState extends State<DshSwitch> {
   }
 }
 
-/// A checkbox with its label (dsh `Checkbox`, the acknowledgement of the risk
-/// dialog): a 16px box in the brand colour.
-class DshCheckbox extends StatelessWidget {
+/// Source profiles for the primitive and the risk dialog's acknowledgement.
+enum DshCheckboxProfile { primitive, riskAcknowledgement }
+
+/// Controlled, labeled checkbox matching the published dsh profile.
+class DshCheckbox extends StatefulWidget {
   const DshCheckbox({
     super.key,
     required this.value,
     required this.onChanged,
     required this.label,
+    this.profile = DshCheckboxProfile.primitive,
+    this.autofocus = false,
   });
 
   final bool value;
   final ValueChanged<bool>? onChanged;
   final String label;
+  final DshCheckboxProfile profile;
+  final bool autofocus;
+
+  @override
+  State<DshCheckbox> createState() => _DshCheckboxState();
+}
+
+class _DshCheckboxState extends State<DshCheckbox> {
+  final FocusNode _focus = FocusNode(debugLabel: 'dsh checkbox');
+  bool _focused = false;
+  bool _focusVisible = false;
+  bool _automaticFocusSuppressed = false;
+  bool _boxHovered = false;
+  bool _boxPressed = false;
+
+  static final _automaticFocusNavigation = {
+    LogicalKeyboardKey.tab,
+    LogicalKeyboardKey.home,
+    LogicalKeyboardKey.end,
+    LogicalKeyboardKey.arrowUp,
+    LogicalKeyboardKey.arrowDown,
+    LogicalKeyboardKey.arrowLeft,
+    LogicalKeyboardKey.arrowRight,
+  };
+
+  bool get _enabled => widget.onChanged != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _automaticFocusSuppressed = widget.autofocus;
+    _ControlFocusModality.instance.acquire(_modalityChanged);
+    HardwareKeyboard.instance.addHandler(_automaticFocusKey);
+  }
+
+  void _modalityChanged() {
+    if (mounted) setState(() {});
+  }
+
+  void _activate() => widget.onChanged?.call(!widget.value);
+
+  bool _automaticFocusKey(KeyEvent event) {
+    final keyboard = HardwareKeyboard.instance;
+    if (_automaticFocusSuppressed &&
+        _focus.hasPrimaryFocus &&
+        event is KeyDownEvent &&
+        _automaticFocusNavigation.contains(event.logicalKey) &&
+        !keyboard.isControlPressed &&
+        !keyboard.isAltPressed &&
+        !keyboard.isMetaPressed) {
+      setState(() => _automaticFocusSuppressed = false);
+    }
+    return false;
+  }
+
+  @override
+  void dispose() {
+    HardwareKeyboard.instance.removeHandler(_automaticFocusKey);
+    _ControlFocusModality.instance.release(_modalityChanged);
+    _focus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    final enabled = onChanged != null;
+    final risk = widget.profile == DshCheckboxProfile.riskAcknowledgement;
     final style = theme
-        .textStyle('--dsw-font-s-14')
-        .copyWith(color: theme.labelPrimary);
-    return Semantics(
-      checked: value,
-      enabled: enabled,
-      label: label,
-      excludeSemantics: true,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: enabled ? () => onChanged!(!value) : null,
-        child: Opacity(
-          opacity: enabled ? 1 : 0.5,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 3),
-                child: DshContainer(
-                  width: 16,
-                  height: 16,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: value
-                        ? theme.color('--dsw-alias-brand-primary')
-                        : null,
-                    border: Border.all(
-                      color: value
-                          ? theme.color('--dsw-alias-brand-primary')
-                          : theme.borderL3,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                  child: value
-                      ? DshIcon(
-                          DshIcons.check,
-                          size: 12,
-                          color: theme.labelPrimaryForeground,
-                        )
-                      : null,
+        .fixedTextStyle(
+          size: risk
+              ? DshCheckboxRecipe.riskFontSize
+              : DshCheckboxRecipe.fontSize,
+          line: risk
+              ? DshCheckboxRecipe.riskLineHeight
+              : DshCheckboxRecipe.lineHeight,
+        )
+        .copyWith(
+          color: theme.color(
+            risk
+                ? DshCheckboxRecipe.riskLabelToken
+                : DshCheckboxRecipe.labelToken,
+          ),
+        );
+    final accent = theme.color(
+      risk ? DshCheckboxRecipe.riskAccentToken : DshCheckboxRecipe.accentToken,
+    );
+    final ringWidth = theme.number(DshCheckboxRecipe.focusWidthToken);
+    final ringColor =
+        theme.colors[DshCheckboxRecipe.focusToken] ??
+        theme.color(DshCheckboxRecipe.focusFallbackToken);
+    final ringReach = ringWidth + DshCheckboxRecipe.focusOffset;
+    final nativeState = !_enabled
+        ? _CheckboxPaintState.disabled
+        : _boxPressed
+        ? _CheckboxPaintState.pressed
+        : _boxHovered
+        ? _CheckboxPaintState.hover
+        : _CheckboxPaintState.normal;
+    final box = Stack(
+      clipBehavior: Clip.none,
+      children: [
+        MouseRegion(
+          onEnter: (_) => setState(() => _boxHovered = true),
+          onExit: (_) => setState(() => _boxHovered = false),
+          child: Listener(
+            behavior: HitTestBehavior.opaque,
+            onPointerDown: (_) => setState(() => _boxPressed = true),
+            onPointerUp: (_) => setState(() => _boxPressed = false),
+            onPointerCancel: (_) => setState(() => _boxPressed = false),
+            child: SizedBox(
+              key: const ValueKey('dsh-checkbox-box'),
+              width: DshCheckboxRecipe.size,
+              height: DshCheckboxRecipe.size,
+              child: CustomPaint(
+                painter: _DshCheckboxPainter(
+                  checked: widget.value,
+                  dark: theme.brightness == Brightness.dark,
+                  state: nativeState,
+                  accent: accent,
                 ),
               ),
-              const SizedBox(width: 10),
-              Expanded(child: DshChromeText(label, style: style)),
-            ],
+            ),
+          ),
+        ),
+        if (_focusVisible &&
+            _enabled &&
+            !_automaticFocusSuppressed &&
+            !_ControlFocusModality.instance.pointerOwnsFocus)
+          Positioned(
+            left: -ringReach,
+            top: -ringReach,
+            right: -ringReach,
+            bottom: -ringReach,
+            child: IgnorePointer(
+              child: DecoratedBox(
+                key: const ValueKey('dsh-checkbox-focus-ring'),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  border: Border.all(color: ringColor, width: ringWidth),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+    return Semantics(
+      container: true,
+      checked: widget.value,
+      enabled: _enabled,
+      focused: _focused,
+      label: widget.label,
+      onTap: _enabled ? _activate : null,
+      onFocus: _enabled ? _focus.requestFocus : null,
+      excludeSemantics: true,
+      child: FocusableActionDetector(
+        enabled: _enabled,
+        focusNode: _focus,
+        autofocus: widget.autofocus,
+        mouseCursor: _enabled
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        onFocusChange: (value) => setState(() {
+          _focused = value;
+          if (!value) _automaticFocusSuppressed = false;
+        }),
+        onShowFocusHighlight: (value) => setState(() => _focusVisible = value),
+        shortcuts: const {
+          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+          SingleActivator(LogicalKeyboardKey.enter):
+              DoNothingAndStopPropagationIntent(),
+          SingleActivator(LogicalKeyboardKey.numpadEnter):
+              DoNothingAndStopPropagationIntent(),
+        },
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              _activate();
+              return null;
+            },
+          ),
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: _enabled ? _activate : null,
+          child: Opacity(
+            opacity: _enabled || risk ? 1 : DshCheckboxRecipe.disabledOpacity,
+            child: Row(
+              mainAxisSize: risk ? MainAxisSize.max : MainAxisSize.min,
+              crossAxisAlignment: risk
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: risk ? DshCheckboxRecipe.riskInputTop : 0,
+                  ),
+                  child: box,
+                ),
+                SizedBox(
+                  width: risk
+                      ? DshCheckboxRecipe.riskGap
+                      : DshCheckboxRecipe.gap,
+                ),
+                Flexible(child: DshChromeText(widget.label, style: style)),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+enum _CheckboxPaintState { normal, hover, pressed, disabled }
+
+/// Geometry follows Chromium 145's native control (The Chromium Authors;
+/// license in tool/design-system/upstream/chromium/LICENSE); the palette is
+/// sampled from that browser at both supported reference densities.
+class _DshCheckboxPainter extends CustomPainter {
+  const _DshCheckboxPainter({
+    required this.checked,
+    required this.dark,
+    required this.state,
+    required this.accent,
+  });
+
+  final bool checked, dark;
+  final _CheckboxPaintState state;
+  final Color accent;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final disabled = state == _CheckboxPaintState.disabled;
+    final fill = Color(
+      dark
+          ? (disabled
+                ? DshCheckboxNativeRecipe.darkOffDisabledFill
+                : DshCheckboxNativeRecipe.darkOffFill)
+          : (disabled
+                ? DshCheckboxNativeRecipe.lightOffDisabledFill
+                : DshCheckboxNativeRecipe.lightOffFill),
+    );
+    final edge = Color(switch ((dark, state)) {
+      (false, _CheckboxPaintState.normal) =>
+        DshCheckboxNativeRecipe.lightOffBorderNormal,
+      (false, _CheckboxPaintState.hover) =>
+        DshCheckboxNativeRecipe.lightOffBorderHover,
+      (false, _CheckboxPaintState.pressed) =>
+        DshCheckboxNativeRecipe.lightOffBorderPressed,
+      (false, _CheckboxPaintState.disabled) =>
+        DshCheckboxNativeRecipe.lightOffBorderDisabled,
+      (true, _CheckboxPaintState.normal) =>
+        DshCheckboxNativeRecipe.darkOffBorderNormal,
+      (true, _CheckboxPaintState.hover) =>
+        DshCheckboxNativeRecipe.darkOffBorderHover,
+      (true, _CheckboxPaintState.pressed) =>
+        DshCheckboxNativeRecipe.darkOffBorderPressed,
+      (true, _CheckboxPaintState.disabled) =>
+        DshCheckboxNativeRecipe.darkOffBorderDisabled,
+    });
+    final mark = Color(
+      dark
+          ? (disabled
+                ? DshCheckboxNativeRecipe.darkOnDisabledMark
+                : DshCheckboxNativeRecipe.darkOnMark)
+          : (disabled
+                ? DshCheckboxNativeRecipe.lightOnDisabledMark
+                : DshCheckboxNativeRecipe.lightOnMark),
+    );
+    final Color checkedFill;
+    if (disabled) {
+      checkedFill = Color(
+        dark
+            ? DshCheckboxNativeRecipe.darkOnDisabledFill
+            : DshCheckboxNativeRecipe.lightOnDisabledFill,
+      );
+    } else if (state == _CheckboxPaintState.normal) {
+      checkedFill = accent;
+    } else {
+      final hsl = HSLColor.fromColor(accent);
+      final direction =
+          (state == _CheckboxPaintState.pressed ? 1 : -1) * (dark ? -1 : 1);
+      checkedFill = hsl
+          .withLightness(
+            (hsl.lightness +
+                    direction * DshCheckboxNativeRecipe.accentLightnessAdjust)
+                .clamp(0, 1),
+          )
+          .toColor();
+    }
+    final rect = Offset.zero & size;
+    const radius = Radius.circular(DshCheckboxNativeRecipe.radius);
+    final paint = Paint()..isAntiAlias = true;
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        rect.deflate(
+          DshCheckboxNativeRecipe.borderWidth *
+              DshCheckboxNativeRecipe.backgroundInsetRatio,
+        ),
+        radius,
+      ),
+      paint..color = fill,
+    );
+    if (checked) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, radius),
+        paint..color = checkedFill,
+      );
+      final path = Path()
+        ..moveTo(
+          size.width * DshCheckboxNativeRecipe.checkStartX,
+          size.height * DshCheckboxNativeRecipe.checkStartY,
+        )
+        ..relativeLineTo(
+          size.width * DshCheckboxNativeRecipe.checkStepX,
+          size.height * DshCheckboxNativeRecipe.checkStepY,
+        )
+        ..lineTo(
+          size.width * (1 - DshCheckboxNativeRecipe.checkEndXFromRight),
+          size.height * DshCheckboxNativeRecipe.checkEndY,
+        );
+      canvas.drawPath(
+        path,
+        paint
+          ..color = mark
+          ..style = PaintingStyle.stroke
+          ..strokeWidth =
+              size.height * DshCheckboxNativeRecipe.checkStrokeRatio,
+      );
+    } else {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          rect.deflate(DshCheckboxNativeRecipe.borderWidth / 2),
+          radius,
+        ),
+        paint
+          ..color = edge
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = DshCheckboxNativeRecipe.borderWidth,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DshCheckboxPainter old) =>
+      checked != old.checked ||
+      dark != old.dark ||
+      state != old.state ||
+      accent != old.accent;
 }
 
 /// Rebuilds [builder] whenever [changes] emits: the bridge between a model's

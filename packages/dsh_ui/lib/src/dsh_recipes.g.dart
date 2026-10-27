@@ -282,3 +282,57 @@ abstract final class DshSwitchRecipe {
   static const String offThumbToken = '--dsw-alias-switch-thumb';
   static const String onThumbToken = '--dsw-alias-label-primary-foreground';
 }
+
+abstract final class DshCheckboxNativeRecipe {
+  static const double radius = 2.0;
+  static const double borderWidth = 1.0;
+  static const double backgroundInsetRatio = 0.2;
+  static const double checkStartX = 0.2;
+  static const double checkStartY = 0.5;
+  static const double checkStepX = 0.2;
+  static const double checkStepY = 0.2;
+  static const double checkEndXFromRight = 0.2;
+  static const double checkEndY = 0.2;
+  static const double checkStrokeRatio = 0.16;
+  static const double accentLightnessAdjust = 0.11;
+  static const int lightOffFill = 0xffffffff;
+  static const int lightOffDisabledFill = 0xfff8f8f8;
+  static const int lightOffBorderNormal = 0xff767676;
+  static const int lightOffBorderHover = 0xff4f4f4f;
+  static const int lightOffBorderPressed = 0xff8d8d8d;
+  static const int lightOffBorderDisabled = 0xffd1d1d1;
+  static const int lightOnMark = 0xffffffff;
+  static const int lightOnDisabledMark = 0xffededed;
+  static const int lightOnDisabledFill = 0xffd1d1d1;
+  static const int darkOffFill = 0xff3b3b3b;
+  static const int darkOffDisabledFill = 0xff3b3b3b;
+  static const int darkOffBorderNormal = 0xff858585;
+  static const int darkOffBorderHover = 0xffacacac;
+  static const int darkOffBorderPressed = 0xff6e6e6e;
+  static const int darkOffBorderDisabled = 0xff626262;
+  static const int darkOnMark = 0xff3b3b3b;
+  static const int darkOnDisabledMark = 0xff3b3b3b;
+  static const int darkOnDisabledFill = 0xff757575;
+}
+
+abstract final class DshCheckboxRecipe {
+  static const double size = 16.0;
+  static const double gap = 6.0;
+  static const double riskGap = 10.0;
+  static const double fontSize = 14.0;
+  static const double lineHeight = 20.0;
+  static const double riskFontSize = 14.0;
+  static const double riskLineHeight = 22.0;
+  static const String riskFontToken = '--dsw-font-s-14';
+  static const double riskInputTop = 3.0;
+  static const double riskMarginTop = 20.0;
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String riskLabelToken = '--dsw-alias-label-primary';
+  static const String accentToken = '--dsw-alias-brand-primary';
+  static const String riskAccentToken = '--dsw-alias-button-primary-fill';
+  static const double disabledOpacity = 0.5;
+  static const String focusWidthToken = '--dsw-focus-ring-width';
+  static const String focusToken = '--dsw-focus-ring-color';
+  static const String focusFallbackToken = '--dsw-alias-state-business-primary';
+  static const double focusOffset = 2.0;
+}

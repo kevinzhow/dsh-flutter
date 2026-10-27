@@ -21,7 +21,9 @@
           "Tooltip.module.css": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
           "tooltip-placement.json": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
           "Input.module.css": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
-          "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b"
+          "Switch.module.css": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
+          "Checkbox.module.css": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
+          "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -34,7 +36,9 @@
           "packages/client/ui-primitives/src/Menu.tsx": "6a1acc8cc2310d036471b42a7a047a803c0e0629ba46810836bcf4f7c786d4b1",
           "packages/client/ui-primitives/src/Tooltip.tsx": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695",
           "packages/client/ui-primitives/src/Input.tsx": "f418f7ea495f16c5c656e87f61c27d262f86f39e8bf14c33b8eeccfb41492b67",
-          "packages/client/ui-primitives/src/Switch.tsx": "9f0f6db0de338793711b4333e87dcd2b82d06d8ad43aa362eb67efc63573ccb1"
+          "packages/client/ui-primitives/src/Switch.tsx": "9f0f6db0de338793711b4333e87dcd2b82d06d8ad43aa362eb67efc63573ccb1",
+          "packages/client/ui-primitives/src/Checkbox.tsx": "2a1b1d5b04cfff9a5494e19b1d8fb16a172bacb3094e360d7f5b5dc2a4930151",
+          "packages/client/ui-primitives/src/RiskConfirmation.tsx": "57944ab7a67d11f5694d8e5281eb2a4b88ce322c6cbdd7ebd17fabc080478868"
         }
       },
       {
@@ -145,7 +149,17 @@
           "packages/client/ui-dockkit/src/components/TabLayout.tsx": "ea6305089a7697214a3dba28ca0c364253721b5b67533fc5245bad3036e990be"
         }
       }
-    ]
+    ],
+    "rendererSnapshots": {
+      "chromiumCheckbox": {
+        "path": "upstream/chromium/checkbox-native.json",
+        "sha256": "72b56ce1b621ac23f481137c4e6ec2bc09b42ea25ccd06b6f8038a8897e12167",
+        "browser": "145.0.7632.6",
+        "sourceSha256": "bc7f19f1b86b74ff20f138e68f5807e288e9443ab48b9ac7be2b85e56fbcd738",
+        "license": "upstream/chromium/LICENSE",
+        "licenseSha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+      }
+    }
   },
   "sheets": {
     "Button.module.css": [
@@ -1191,6 +1205,235 @@
         }
       }
     ],
+    "Checkbox.module.css": [
+      {
+        "selector": ".checkbox",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex",
+          "align-items": "center",
+          "gap": "6px",
+          "font-size": "14px",
+          "line-height": "20px",
+          "color": "var(--dsw-alias-label-primary)",
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": ".checkbox input",
+        "conditions": [],
+        "declarations": {
+          "flex": "0 0 auto",
+          "width": "16px",
+          "height": "16px",
+          "margin": "0",
+          "accent-color": "var(--dsw-alias-brand-primary)",
+          "cursor": "inherit"
+        }
+      },
+      {
+        "selector": ".checkbox input:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color, var(--dsw-alias-state-business-primary))",
+          "outline-offset": "2px"
+        }
+      },
+      {
+        "selector": ".checkbox:has(input:disabled)",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default",
+          "opacity": "0.5"
+        }
+      }
+    ],
+    "RiskConfirmation.module.css": [
+      {
+        "selector": ".confirmation",
+        "conditions": [],
+        "declarations": {
+          "width": "min(440px, 100%)",
+          "max-height": "100%",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".confirmationContent",
+        "conditions": [],
+        "declarations": {
+          "min-height": "0",
+          "overflow-y": "auto",
+          "overscroll-behavior": "contain"
+        }
+      },
+      {
+        "selector": ".confirmation",
+        "conditions": [
+          "@supports (height: 100dvh)"
+        ],
+        "declarations": {
+          "max-height": "calc(100dvh - 48px)"
+        }
+      },
+      {
+        "selector": ".warning",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "align-items": "flex-start",
+          "gap": "10px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "font-size": "14px",
+          "line-height": "22px"
+        }
+      },
+      {
+        "selector": ".warning p",
+        "conditions": [],
+        "declarations": {
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".warningIcon",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "margin-top": "2px",
+          "color": "var(--dsw-alias-state-error-primary)"
+        }
+      },
+      {
+        "selector": ".acknowledgement",
+        "conditions": [],
+        "declarations": {
+          "display": "flex",
+          "align-items": "flex-start",
+          "gap": "10px",
+          "margin-top": "20px",
+          "color": "var(--dsw-alias-label-primary)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": ".acknowledgement input",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "width": "16px",
+          "height": "16px",
+          "margin": "3px 0 0",
+          "accent-color": "var(--dsw-alias-button-primary-fill)",
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": ".acknowledgement input:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color, var(--dsw-alias-state-business-primary))",
+          "outline-offset": "2px"
+        }
+      },
+      {
+        "selector": ".acknowledgement input:disabled",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".modalAction",
+        "conditions": [],
+        "declarations": {
+          "min-width": "72px"
+        }
+      },
+      {
+        "selector": ".confirmAction",
+        "conditions": [],
+        "declarations": {
+          "min-width": "136px"
+        }
+      }
+    ],
+    "ChromiumCheckbox": {
+      "schema": "dsh-chromium-checkbox/1",
+      "browser": "145.0.7632.6",
+      "source": "https://chromium.googlesource.com/chromium/src/+/refs/tags/145.0.7632.6/ui/native_theme/native_theme_base.cc",
+      "sourceSha256": "bc7f19f1b86b74ff20f138e68f5807e288e9443ab48b9ac7be2b85e56fbcd738",
+      "probe": "native Chromium input, 16 CSS px, light/dark, normal/hover/pressed/disabled, DPR 1 and 2.625",
+      "geometry": {
+        "radius": 2.0,
+        "borderWidth": 1.0,
+        "backgroundInsetRatio": 0.2,
+        "checkStartX": 0.2,
+        "checkStartY": 0.5,
+        "checkStepX": 0.2,
+        "checkStepY": 0.2,
+        "checkEndXFromRight": 0.2,
+        "checkEndY": 0.2,
+        "checkStrokeRatio": 0.16,
+        "accentLightnessAdjust": 0.11
+      },
+      "palette": {
+        "light": {
+          "normal": {
+            "offFill": "#ffffff",
+            "offBorder": "#767676",
+            "onMark": "#ffffff",
+            "onFillSample": "#0f1115"
+          },
+          "hover": {
+            "offFill": "#ffffff",
+            "offBorder": "#4f4f4f",
+            "onMark": "#ffffff",
+            "onFillSample": "#000000"
+          },
+          "pressed": {
+            "offFill": "#ffffff",
+            "offBorder": "#8d8d8d",
+            "onMark": "#ffffff",
+            "onFillSample": "#262b36"
+          },
+          "disabled": {
+            "offFill": "#f8f8f8",
+            "offBorder": "#d1d1d1",
+            "onMark": "#ededed",
+            "onFillSample": "#d1d1d1"
+          }
+        },
+        "dark": {
+          "normal": {
+            "offFill": "#3b3b3b",
+            "offBorder": "#858585",
+            "onMark": "#3b3b3b",
+            "onFillSample": "#f9fafb"
+          },
+          "hover": {
+            "offFill": "#3b3b3b",
+            "offBorder": "#acacac",
+            "onMark": "#3b3b3b",
+            "onFillSample": "#ffffff"
+          },
+          "pressed": {
+            "offFill": "#3b3b3b",
+            "offBorder": "#6e6e6e",
+            "onMark": "#3b3b3b",
+            "onFillSample": "#d7dee5"
+          },
+          "disabled": {
+            "offFill": "#3b3b3b",
+            "offBorder": "#626262",
+            "onMark": "#3b3b3b",
+            "onFillSample": "#757575"
+          }
+        }
+      }
+    },
     "PluginManagerPage.module.css": [
       {
         "selector": ".page",
@@ -4520,6 +4763,58 @@
       "onTrackToken": "--dsw-alias-brand-primary",
       "offThumbToken": "--dsw-alias-switch-thumb",
       "onThumbToken": "--dsw-alias-label-primary-foreground"
+    },
+    "DshCheckboxNativeRecipe": {
+      "radius": 2.0,
+      "borderWidth": 1.0,
+      "backgroundInsetRatio": 0.2,
+      "checkStartX": 0.2,
+      "checkStartY": 0.5,
+      "checkStepX": 0.2,
+      "checkStepY": 0.2,
+      "checkEndXFromRight": 0.2,
+      "checkEndY": 0.2,
+      "checkStrokeRatio": 0.16,
+      "accentLightnessAdjust": 0.11,
+      "lightOffFill": 4294967295,
+      "lightOffDisabledFill": 4294506744,
+      "lightOffBorderNormal": 4285953654,
+      "lightOffBorderHover": 4283387727,
+      "lightOffBorderPressed": 4287466893,
+      "lightOffBorderDisabled": 4291940817,
+      "lightOnMark": 4294967295,
+      "lightOnDisabledMark": 4293783021,
+      "lightOnDisabledFill": 4291940817,
+      "darkOffFill": 4282071867,
+      "darkOffDisabledFill": 4282071867,
+      "darkOffBorderNormal": 4286940549,
+      "darkOffBorderHover": 4289506476,
+      "darkOffBorderPressed": 4285427310,
+      "darkOffBorderDisabled": 4284637794,
+      "darkOnMark": 4282071867,
+      "darkOnDisabledMark": 4282071867,
+      "darkOnDisabledFill": 4285887861
+    },
+    "DshCheckboxRecipe": {
+      "size": 16.0,
+      "gap": 6.0,
+      "riskGap": 10.0,
+      "fontSize": 14.0,
+      "lineHeight": 20.0,
+      "riskFontSize": 14.0,
+      "riskLineHeight": 22.0,
+      "riskFontToken": "--dsw-font-s-14",
+      "riskInputTop": 3.0,
+      "riskMarginTop": 20.0,
+      "labelToken": "--dsw-alias-label-primary",
+      "riskLabelToken": "--dsw-alias-label-primary",
+      "accentToken": "--dsw-alias-brand-primary",
+      "riskAccentToken": "--dsw-alias-button-primary-fill",
+      "disabledOpacity": 0.5,
+      "focusWidthToken": "--dsw-focus-ring-width",
+      "focusToken": "--dsw-focus-ring-color",
+      "focusFallbackToken": "--dsw-alias-state-business-primary",
+      "focusOffset": 2.0
     }
   }
 }
