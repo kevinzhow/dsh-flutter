@@ -1,0 +1,3126 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.dialog-family.reader-desktop-en-explanation.light",
+      "title": "Preset guide reader (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-en-explanation.dark",
+      "title": "Preset guide reader (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-en-usage.light",
+      "title": "Preset guide reader (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-en-usage.dark",
+      "title": "Preset guide reader (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-en-explanation.light",
+      "title": "Preset guide tabs (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-en-explanation.dark",
+      "title": "Preset guide tabs (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-en-usage.light",
+      "title": "Preset guide tabs (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-en-usage.dark",
+      "title": "Preset guide tabs (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "title": "Preset guide panel-scrolled (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "title": "Preset guide panel-scrolled (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "title": "Preset guide panel-scrolled (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "title": "Preset guide panel-scrolled (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "title": "Preset guide panel-retained (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "title": "Preset guide panel-retained (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "title": "Preset guide panel-retained (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "title": "Preset guide panel-retained (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-zh-explanation.light",
+      "title": "Preset guide reader (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-zh-explanation.dark",
+      "title": "Preset guide reader (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-zh-usage.light",
+      "title": "Preset guide reader (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-desktop-zh-usage.dark",
+      "title": "Preset guide reader (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-zh-explanation.light",
+      "title": "Preset guide tabs (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-zh-explanation.dark",
+      "title": "Preset guide tabs (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-zh-usage.light",
+      "title": "Preset guide tabs (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-desktop-zh-usage.dark",
+      "title": "Preset guide tabs (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "title": "Preset guide panel-scrolled (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "title": "Preset guide panel-scrolled (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "title": "Preset guide panel-scrolled (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "title": "Preset guide panel-scrolled (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "title": "Preset guide panel-retained (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "title": "Preset guide panel-retained (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "title": "Preset guide panel-retained (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "title": "Preset guide panel-retained (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-desktop-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 420,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 600,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-en-explanation.light",
+      "title": "Preset guide reader (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-en-explanation.dark",
+      "title": "Preset guide reader (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-en-usage.light",
+      "title": "Preset guide reader (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-en-usage.dark",
+      "title": "Preset guide reader (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-en-explanation.light",
+      "title": "Preset guide tabs (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-en-explanation.dark",
+      "title": "Preset guide tabs (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-en-usage.light",
+      "title": "Preset guide tabs (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-en-usage.dark",
+      "title": "Preset guide tabs (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "title": "Preset guide panel-scrolled (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "title": "Preset guide panel-scrolled (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "title": "Preset guide panel-scrolled (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "title": "Preset guide panel-scrolled (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "title": "Preset guide panel-retained (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "title": "Preset guide panel-retained (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-en-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "title": "Preset guide panel-retained (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "title": "Preset guide panel-retained (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-en-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-zh-explanation.light",
+      "title": "Preset guide reader (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-zh-explanation.dark",
+      "title": "Preset guide reader (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-zh-usage.light",
+      "title": "Preset guide reader (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.reader-phone-zh-usage.dark",
+      "title": "Preset guide reader (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "reader-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "reader-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+        "flutterKey": "preset-guide-dialog",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-zh-explanation.light",
+      "title": "Preset guide tabs (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-zh-explanation.dark",
+      "title": "Preset guide tabs (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-zh-usage.light",
+      "title": "Preset guide tabs (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.tabs-phone-zh-usage.dark",
+      "title": "Preset guide tabs (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "tabs-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "tabs-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-tabs\"]",
+        "flutterKey": "preset-guide-tabs",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "title": "Preset guide panel-scrolled (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "title": "Preset guide panel-scrolled (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "title": "Preset guide panel-scrolled (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "title": "Preset guide panel-scrolled (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-scrolled-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-scrolled-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "title": "Preset guide panel-retained (explanation) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "title": "Preset guide panel-retained (explanation) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-zh-explanation",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-explanation",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-details"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-explanation\"]",
+        "flutterKey": "preset-guide-panel-explanation",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "title": "Preset guide panel-retained (usage) (light)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "title": "Preset guide panel-retained (usage) (dark)",
+      "kind": "agents-tasks.guide",
+      "surface": "panel-retained-phone-zh-usage",
+      "category": "extension/dialog-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 420,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "panel-retained-usage",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "coding"
+          },
+          "interactions": [
+            {
+              "type": "click",
+              "target": "preset-guide-standard-usage"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-usage",
+              "offset": 150
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-explanation"
+            },
+            {
+              "type": "set-scroll",
+              "target": "preset-guide-panel-explanation",
+              "offset": 100
+            },
+            {
+              "type": "click",
+              "target": "preset-guide-tab-usage"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"preset-guide-panel-usage\"]",
+        "flutterKey": "preset-guide-panel-usage",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "flutterCaseHint": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "theme": "dark"
+    }
+  ]
+}

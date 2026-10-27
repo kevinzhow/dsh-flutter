@@ -1,0 +1,1189 @@
+{
+  "thresholdPct": 99.5,
+  "allCaptures": {
+    "compared": 64,
+    "dimensionsEqual": 64,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 97.102578125
+  },
+  "groups": {
+    "reader": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.51575
+    },
+    "tabs": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 96.7736875
+    },
+    "panel-scrolled": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.0604375
+    },
+    "panel-retained": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.0604375
+    }
+  },
+  "cases": [
+    {
+      "key": "components.dialog-family.reader-desktop-en-explanation.light",
+      "caseId": "components.dialog-family.reader-desktop-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 98.206,
+      "pixelPerfectPct": 93.872,
+      "rgbPct": 99.308,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-en-explanation.dark",
+      "caseId": "components.dialog-family.reader-desktop-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 98.215,
+      "pixelPerfectPct": 93.958,
+      "rgbPct": 99.213,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-en-usage.light",
+      "caseId": "components.dialog-family.reader-desktop-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.824,
+      "pixelPerfectPct": 92.904,
+      "rgbPct": 99.292,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-en-usage.dark",
+      "caseId": "components.dialog-family.reader-desktop-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.803,
+      "pixelPerfectPct": 92.971,
+      "rgbPct": 99.152,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-en-explanation.light",
+      "caseId": "components.dialog-family.tabs-desktop-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.631,
+      "pixelPerfectPct": 94.945,
+      "rgbPct": 99.586,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-en-explanation.dark",
+      "caseId": "components.dialog-family.tabs-desktop-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.631,
+      "pixelPerfectPct": 94.989,
+      "rgbPct": 99.548,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-en-usage.light",
+      "caseId": "components.dialog-family.tabs-desktop-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.517,
+      "pixelPerfectPct": 94.993,
+      "rgbPct": 99.624,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-en-usage.dark",
+      "caseId": "components.dialog-family.tabs-desktop-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.517,
+      "pixelPerfectPct": 95.006,
+      "rgbPct": 99.555,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.477,
+      "pixelPerfectPct": 91.238,
+      "rgbPct": 98.91,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.451,
+      "pixelPerfectPct": 91.346,
+      "rgbPct": 98.804,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.284,
+      "pixelPerfectPct": 91.171,
+      "rgbPct": 99.087,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.24,
+      "pixelPerfectPct": 91.246,
+      "rgbPct": 98.938,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "caseId": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.477,
+      "pixelPerfectPct": 91.238,
+      "rgbPct": 98.91,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "caseId": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.451,
+      "pixelPerfectPct": 91.346,
+      "rgbPct": 98.804,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "caseId": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.284,
+      "pixelPerfectPct": 91.171,
+      "rgbPct": 99.087,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "caseId": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.24,
+      "pixelPerfectPct": 91.246,
+      "rgbPct": 98.938,
+      "sizeReact": [
+        640,
+        180
+      ],
+      "sizeFlutter": [
+        640,
+        180
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-zh-explanation.light",
+      "caseId": "components.dialog-family.reader-desktop-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 98.517,
+      "pixelPerfectPct": 94.269,
+      "rgbPct": 99.503,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-zh-explanation.dark",
+      "caseId": "components.dialog-family.reader-desktop-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 98.52,
+      "pixelPerfectPct": 94.302,
+      "rgbPct": 99.376,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-zh-usage.light",
+      "caseId": "components.dialog-family.reader-desktop-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 98.285,
+      "pixelPerfectPct": 93.296,
+      "rgbPct": 99.552,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-desktop-zh-usage.dark",
+      "caseId": "components.dialog-family.reader-desktop-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 98.256,
+      "pixelPerfectPct": 93.289,
+      "rgbPct": 99.362,
+      "sizeReact": [
+        640,
+        600
+      ],
+      "sizeFlutter": [
+        640,
+        600
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-desktop-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-zh-explanation.light",
+      "caseId": "components.dialog-family.tabs-desktop-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.66,
+      "pixelPerfectPct": 94.781,
+      "rgbPct": 99.718,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-zh-explanation.dark",
+      "caseId": "components.dialog-family.tabs-desktop-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.615,
+      "pixelPerfectPct": 94.749,
+      "rgbPct": 99.587,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-zh-usage.light",
+      "caseId": "components.dialog-family.tabs-desktop-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.46,
+      "pixelPerfectPct": 94.798,
+      "rgbPct": 99.692,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-desktop-zh-usage.dark",
+      "caseId": "components.dialog-family.tabs-desktop-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.44,
+      "pixelPerfectPct": 94.79,
+      "rgbPct": 99.657,
+      "sizeReact": [
+        584,
+        42
+      ],
+      "sizeFlutter": [
+        584,
+        42
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-desktop-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.429,
+      "pixelPerfectPct": 87.586,
+      "rgbPct": 98.702,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.405,
+      "pixelPerfectPct": 87.645,
+      "rgbPct": 98.484,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.676,
+      "pixelPerfectPct": 91.318,
+      "rgbPct": 99.412,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "caseId": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.617,
+      "pixelPerfectPct": 91.31,
+      "rgbPct": 99.124,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-desktop-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "caseId": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.429,
+      "pixelPerfectPct": 87.586,
+      "rgbPct": 98.702,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "caseId": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.405,
+      "pixelPerfectPct": 87.645,
+      "rgbPct": 98.484,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "caseId": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.676,
+      "pixelPerfectPct": 91.318,
+      "rgbPct": 99.412,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "caseId": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.617,
+      "pixelPerfectPct": 91.31,
+      "rgbPct": 99.124,
+      "sizeReact": [
+        640,
+        202
+      ],
+      "sizeFlutter": [
+        640,
+        202
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-desktop-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-en-explanation.light",
+      "caseId": "components.dialog-family.reader-phone-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.66,
+      "pixelPerfectPct": 93.994,
+      "rgbPct": 99.002,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-en-explanation.dark",
+      "caseId": "components.dialog-family.reader-phone-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.818,
+      "pixelPerfectPct": 94.125,
+      "rgbPct": 98.995,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-en-usage.light",
+      "caseId": "components.dialog-family.reader-phone-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.184,
+      "pixelPerfectPct": 94.965,
+      "rgbPct": 99.297,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-en-usage.dark",
+      "caseId": "components.dialog-family.reader-phone-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.324,
+      "pixelPerfectPct": 95.068,
+      "rgbPct": 99.276,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-en-explanation.light",
+      "caseId": "components.dialog-family.tabs-phone-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.105,
+      "pixelPerfectPct": 94.302,
+      "rgbPct": 99.484,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-en-explanation.dark",
+      "caseId": "components.dialog-family.tabs-phone-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.237,
+      "pixelPerfectPct": 94.407,
+      "rgbPct": 99.477,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-en-usage.light",
+      "caseId": "components.dialog-family.tabs-phone-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 95.975,
+      "pixelPerfectPct": 93.149,
+      "rgbPct": 98.919,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-en-usage.dark",
+      "caseId": "components.dialog-family.tabs-phone-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.065,
+      "pixelPerfectPct": 93.252,
+      "rgbPct": 99.321,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "caseId": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.428,
+      "pixelPerfectPct": 95.387,
+      "rgbPct": 99.342,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "caseId": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.503,
+      "pixelPerfectPct": 95.576,
+      "rgbPct": 99.346,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "caseId": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.332,
+      "pixelPerfectPct": 95.264,
+      "rgbPct": 99.588,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "caseId": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.425,
+      "pixelPerfectPct": 95.421,
+      "rgbPct": 99.481,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "caseId": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.428,
+      "pixelPerfectPct": 95.387,
+      "rgbPct": 99.342,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-en-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "caseId": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.503,
+      "pixelPerfectPct": 95.576,
+      "rgbPct": 99.346,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-en-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "caseId": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.332,
+      "pixelPerfectPct": 95.264,
+      "rgbPct": 99.588,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-en-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "caseId": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.425,
+      "pixelPerfectPct": 95.421,
+      "rgbPct": 99.481,
+      "sizeReact": [
+        898,
+        358
+      ],
+      "sizeFlutter": [
+        898,
+        358
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-en-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-zh-explanation.light",
+      "caseId": "components.dialog-family.reader-phone-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 97.053,
+      "pixelPerfectPct": 94.873,
+      "rgbPct": 99.116,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-zh-explanation.dark",
+      "caseId": "components.dialog-family.reader-phone-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 97.267,
+      "pixelPerfectPct": 94.981,
+      "rgbPct": 99.11,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-zh-usage.light",
+      "caseId": "components.dialog-family.reader-phone-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.063,
+      "pixelPerfectPct": 93.792,
+      "rgbPct": 99.159,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.reader-phone-zh-usage.dark",
+      "caseId": "components.dialog-family.reader-phone-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.257,
+      "pixelPerfectPct": 93.88,
+      "rgbPct": 99.08,
+      "sizeReact": [
+        898,
+        1576
+      ],
+      "sizeFlutter": [
+        898,
+        1576
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.reader-phone-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-zh-explanation.light",
+      "caseId": "components.dialog-family.tabs-phone-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 95.882,
+      "pixelPerfectPct": 94.297,
+      "rgbPct": 99.734,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-zh-explanation.dark",
+      "caseId": "components.dialog-family.tabs-phone-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 95.926,
+      "pixelPerfectPct": 94.345,
+      "rgbPct": 99.643,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-zh-usage.light",
+      "caseId": "components.dialog-family.tabs-phone-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 95.826,
+      "pixelPerfectPct": 94.338,
+      "rgbPct": 99.753,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.tabs-phone-zh-usage.dark",
+      "caseId": "components.dialog-family.tabs-phone-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 95.892,
+      "pixelPerfectPct": 94.389,
+      "rgbPct": 99.631,
+      "sizeReact": [
+        752,
+        111
+      ],
+      "sizeFlutter": [
+        752,
+        111
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.tabs-phone-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "caseId": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.358,
+      "pixelPerfectPct": 93.74,
+      "rgbPct": 99.008,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "caseId": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.443,
+      "pixelPerfectPct": 93.934,
+      "rgbPct": 98.962,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "caseId": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.421,
+      "pixelPerfectPct": 94.117,
+      "rgbPct": 99.225,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "caseId": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.478,
+      "pixelPerfectPct": 94.248,
+      "rgbPct": 99.153,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-scrolled-phone-zh-usage.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "caseId": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.358,
+      "pixelPerfectPct": 93.74,
+      "rgbPct": 99.008,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-zh-explanation.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "caseId": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.443,
+      "pixelPerfectPct": 93.934,
+      "rgbPct": 98.962,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-zh-explanation.dark.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "caseId": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "kind": "agents-tasks.guide",
+      "theme": "light",
+      "nonTextPct": 96.421,
+      "pixelPerfectPct": 94.117,
+      "rgbPct": 99.225,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-zh-usage.light.side-by-side.png"
+    },
+    {
+      "key": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "caseId": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "kind": "agents-tasks.guide",
+      "theme": "dark",
+      "nonTextPct": 96.478,
+      "pixelPerfectPct": 94.248,
+      "rgbPct": 99.153,
+      "sizeReact": [
+        898,
+        416
+      ],
+      "sizeFlutter": [
+        898,
+        416
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.dialog-family.panel-retained-phone-zh-usage.dark.side-by-side.png"
+    }
+  ]
+}

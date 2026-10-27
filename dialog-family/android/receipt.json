@@ -1,0 +1,596 @@
+{
+  "synthetic": true,
+  "ownedEmulator": "emulator-5560",
+  "fixtureSha256": "23f92f633433973d6ca51edf128af3fc8cc06eb75eba14a9077d1ce4c0ac883f",
+  "actualInputs": [
+    "touch",
+    "contained panel swipes",
+    "emulated hardware Tab, Enter, PageDown and Escape"
+  ],
+  "accessibility": "Named tabs, identified active panels and enabled/clickable/focusable Close button read from UIAutomator",
+  "keyboardReadiness": "Native FlutterView plus expected logical focus checked before each selection or scrolling key",
+  "failedSelectionKeysRetried": false,
+  "cleanupOwner": "Parent restores normal APK and stops its emulator; driver restores its wm-size override",
+  "passed": true,
+  "scenes": [
+    {
+      "scene": "normal-presets",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "normal-explanation-open",
+      "observationAttempts": 1,
+      "panel": "explanation",
+      "panelBounds": [
+        63,
+        1069,
+        1017,
+        2024
+      ]
+    },
+    {
+      "scene": "normal-touch-close",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "normal-usage-open",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        1069,
+        1017,
+        2024
+      ]
+    },
+    {
+      "scene": "normal-close-keyboard-focused",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "normal-keyboard-close",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "short-presets",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "short-explanation-initial",
+      "observationAttempts": 1,
+      "panel": "explanation",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-explanation-scrolled",
+      "observationAttempts": 1,
+      "panel": "explanation",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-initial",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-scrolled",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-explanation-retained",
+      "observationAttempts": 1,
+      "panel": "explanation",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-retained",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-touch-close",
+      "observationAttempts": 1
+    },
+    {
+      "scene": "short-explanation-reopened",
+      "observationAttempts": 1,
+      "panel": "explanation",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-reopened",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-panel-focused",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-usage-page-down",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-tab-cycle-1",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-tab-cycle-2",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-tab-cycle-3",
+      "observationAttempts": 1,
+      "panel": "usage",
+      "panelBounds": [
+        63,
+        758,
+        1017,
+        1194
+      ]
+    },
+    {
+      "scene": "short-escape-close",
+      "observationAttempts": 1
+    }
+  ],
+  "inputs": [
+    {
+      "type": "touch",
+      "target": "Presets",
+      "bounds": [
+        195,
+        136,
+        392,
+        231
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Mode details",
+      "bounds": [
+        63,
+        1068,
+        297,
+        1141
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Close",
+      "bounds": [
+        870,
+        512,
+        954,
+        596
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "How to use",
+      "bounds": [
+        307,
+        1068,
+        518,
+        1141
+      ]
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Close",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab traversal to Close",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Enter activates the accessible Close button",
+      "linuxCode": 28,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Presets",
+      "bounds": [
+        195,
+        75,
+        392,
+        170
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Mode details",
+      "bounds": [
+        63,
+        1007,
+        297,
+        1080
+      ]
+    },
+    {
+      "type": "touch swipe",
+      "panel": "explanation",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "start": [
+        540,
+        1106
+      ],
+      "end": [
+        540,
+        845
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Guide sections: How to use",
+      "bounds": [
+        540,
+        600,
+        933,
+        689
+      ]
+    },
+    {
+      "type": "touch swipe",
+      "panel": "usage",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "start": [
+        540,
+        1106
+      ],
+      "end": [
+        540,
+        845
+      ],
+      "sentOnce": true
+    },
+    {
+      "type": "touch",
+      "target": "Guide sections: Mode details",
+      "bounds": [
+        147,
+        600,
+        540,
+        689
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Guide sections: How to use",
+      "bounds": [
+        540,
+        600,
+        933,
+        689
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Close",
+      "bounds": [
+        870,
+        201,
+        954,
+        285
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Mode details",
+      "bounds": [
+        63,
+        1007,
+        297,
+        1080
+      ]
+    },
+    {
+      "type": "touch",
+      "target": "Guide sections: How to use",
+      "bounds": [
+        540,
+        600,
+        933,
+        689
+      ]
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab from selected usage tab into its panel",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "PageDown scrolls the focused usage panel",
+      "linuxCode": 109,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab cycle step 1",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab cycle step 2",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Tab cycle step 3",
+      "linuxCode": 15,
+      "shift": false,
+      "sentOnce": true
+    },
+    {
+      "type": "emulated hardware key",
+      "key": "Escape closes only the active reader",
+      "linuxCode": 1,
+      "shift": false,
+      "sentOnce": true
+    }
+  ],
+  "pixelProofs": [
+    {
+      "purpose": "real explanation swipe scrolls content",
+      "page": "explanation",
+      "before": "short-explanation-initial",
+      "after": "short-explanation-scrolled",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": false,
+      "changedBoundsInPanel": [
+        74,
+        0,
+        954,
+        419
+      ]
+    },
+    {
+      "purpose": "real usage swipe scrolls content",
+      "page": "usage",
+      "before": "short-usage-initial",
+      "after": "short-usage-scrolled",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": false,
+      "changedBoundsInPanel": [
+        74,
+        0,
+        954,
+        436
+      ]
+    },
+    {
+      "purpose": "explanation preserves its independent scroll position",
+      "page": "explanation",
+      "before": "short-explanation-scrolled",
+      "after": "short-explanation-retained",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": true,
+      "changedBoundsInPanel": null
+    },
+    {
+      "purpose": "usage preserves its independent scroll position",
+      "page": "usage",
+      "before": "short-usage-scrolled",
+      "after": "short-usage-retained",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": true,
+      "changedBoundsInPanel": null
+    },
+    {
+      "purpose": "closing and reopening resets explanation to the top",
+      "page": "explanation",
+      "before": "short-explanation-initial",
+      "after": "short-explanation-reopened",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": true,
+      "changedBoundsInPanel": null
+    },
+    {
+      "purpose": "closing and reopening resets usage to the top",
+      "page": "usage",
+      "before": "short-usage-initial",
+      "after": "short-usage-reopened",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": true,
+      "changedBoundsInPanel": null
+    },
+    {
+      "purpose": "hardware PageDown scrolls the active panel",
+      "page": "usage",
+      "before": "short-usage-panel-focused",
+      "after": "short-usage-page-down",
+      "bounds": [
+        63,
+        758,
+        1017,
+        1194
+      ],
+      "rgbaByteEqual": false,
+      "changedBoundsInPanel": [
+        74,
+        5,
+        949,
+        431
+      ]
+    }
+  ],
+  "tabTraversal": [
+    {
+      "step": 1,
+      "focused": [
+        "close",
+        ""
+      ],
+      "inactivePanelAbsent": true
+    },
+    {
+      "step": 2,
+      "focused": [
+        "tab",
+        "usage"
+      ],
+      "inactivePanelAbsent": true
+    },
+    {
+      "step": 3,
+      "focused": [
+        "panel",
+        "usage"
+      ],
+      "inactivePanelAbsent": true
+    }
+  ],
+  "displayOverride": {
+    "original": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "requestedOverride": "1080x1320",
+    "density": "Physical density: 420",
+    "applied": {
+      "physical": "1080x2400",
+      "override": "1080x1320"
+    },
+    "restoredState": {
+      "physical": "1080x2400",
+      "override": null
+    },
+    "restoredExactly": true
+  },
+  "independentPanelScrollPreserved": true,
+  "reopenResetsPanelScroll": true,
+  "keyboardPageDownScrolledPanel": true,
+  "inactivePanelsSkippedByTab": true,
+  "accessibleHeaderCloseVerified": true
+}

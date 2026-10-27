@@ -1,0 +1,1515 @@
+{
+  "plan": "build/parity-dialog-reference/react-plan.json",
+  "rows": [
+    {
+      "caseKey": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "mode": "parity-default",
+      "browser": "145.0.7632.6",
+      "scrollbarArgs": [
+        "[workspace]/toolchains/playwright-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell",
+        "--headless",
+        "--hide-scrollbars",
+        "--ozone-platform=headless"
+      ],
+      "measurements": [
+        {
+          "state": "idle",
+          "dom": {
+            "rect": {
+              "x": 80,
+              "y": 216,
+              "width": 640,
+              "height": 180,
+              "right": 720,
+              "bottom": 396
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 180,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 715,
+            "y": 216,
+            "width": 5,
+            "height": 180
+          },
+          "uniqueColors": 20,
+          "topColors": [
+            [
+              "44,44,46,255",
+              828
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "45,45,47,255",
+              2
+            ],
+            [
+              "50,50,51,255",
+              2
+            ],
+            [
+              "46,46,48,255",
+              1
+            ],
+            [
+              "48,48,49,255",
+              1
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-parity-default-idle.png",
+            "gutter": "desktop-parity-default-idle.gutter.png"
+          }
+        },
+        {
+          "state": "hover-panel",
+          "dom": {
+            "rect": {
+              "x": 80,
+              "y": 216,
+              "width": 640,
+              "height": 180,
+              "right": 720,
+              "bottom": 396
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 180,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 715,
+            "y": 216,
+            "width": 5,
+            "height": 180
+          },
+          "uniqueColors": 20,
+          "topColors": [
+            [
+              "44,44,46,255",
+              828
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "45,45,47,255",
+              2
+            ],
+            [
+              "50,50,51,255",
+              2
+            ],
+            [
+              "46,46,48,255",
+              1
+            ],
+            [
+              "48,48,49,255",
+              1
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-parity-default-hover-panel.png",
+            "gutter": "desktop-parity-default-hover-panel.gutter.png"
+          }
+        },
+        {
+          "state": "hover-gutter",
+          "dom": {
+            "rect": {
+              "x": 80,
+              "y": 216,
+              "width": 640,
+              "height": 180,
+              "right": 720,
+              "bottom": 396
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 180,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 715,
+            "y": 216,
+            "width": 5,
+            "height": 180
+          },
+          "uniqueColors": 20,
+          "topColors": [
+            [
+              "44,44,46,255",
+              828
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "45,45,47,255",
+              2
+            ],
+            [
+              "50,50,51,255",
+              2
+            ],
+            [
+              "46,46,48,255",
+              1
+            ],
+            [
+              "48,48,49,255",
+              1
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-parity-default-hover-gutter.png",
+            "gutter": "desktop-parity-default-hover-gutter.gutter.png"
+          }
+        },
+        {
+          "state": "wheel",
+          "dom": {
+            "rect": {
+              "x": 80,
+              "y": 216,
+              "width": 640,
+              "height": 180,
+              "right": 720,
+              "bottom": 396
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 180,
+            "scrollHeight": 398,
+            "scrollTop": 180,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 715,
+            "y": 216,
+            "width": 5,
+            "height": 180
+          },
+          "uniqueColors": 20,
+          "topColors": [
+            [
+              "44,44,46,255",
+              828
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "45,45,47,255",
+              2
+            ],
+            [
+              "50,50,51,255",
+              2
+            ],
+            [
+              "46,46,48,255",
+              1
+            ],
+            [
+              "48,48,49,255",
+              1
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-parity-default-wheel.png",
+            "gutter": "desktop-parity-default-wheel.gutter.png"
+          }
+        },
+        {
+          "state": "after-wheel-idle",
+          "dom": {
+            "rect": {
+              "x": 80,
+              "y": 216,
+              "width": 640,
+              "height": 180,
+              "right": 720,
+              "bottom": 396
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 180,
+            "scrollHeight": 398,
+            "scrollTop": 180,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 715,
+            "y": 216,
+            "width": 5,
+            "height": 180
+          },
+          "uniqueColors": 20,
+          "topColors": [
+            [
+              "44,44,46,255",
+              828
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "45,45,47,255",
+              2
+            ],
+            [
+              "50,50,51,255",
+              2
+            ],
+            [
+              "46,46,48,255",
+              1
+            ],
+            [
+              "48,48,49,255",
+              1
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-parity-default-after-wheel-idle.png",
+            "gutter": "desktop-parity-default-after-wheel-idle.gutter.png"
+          }
+        }
+      ]
+    },
+    {
+      "caseKey": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "mode": "diagnostic-visible",
+      "browser": "145.0.7632.6",
+      "scrollbarArgs": [
+        "[workspace]/toolchains/playwright-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell",
+        "--headless",
+        "--ozone-platform=headless"
+      ],
+      "measurements": [
+        {
+          "state": "idle",
+          "dom": {
+            "rect": {
+              "x": 77.5,
+              "y": 216,
+              "width": 640,
+              "height": 175,
+              "right": 717.5,
+              "bottom": 391
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 175,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 713,
+            "y": 216,
+            "width": 5,
+            "height": 175
+          },
+          "uniqueColors": 32,
+          "topColors": [
+            [
+              "44,44,46,255",
+              418
+            ],
+            [
+              "84,85,87,255",
+              369
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "50,50,51,255",
+              4
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "81,82,84,255",
+              2
+            ],
+            [
+              "82,83,85,255",
+              2
+            ]
+          ],
+          "exactCssThumbPixels": 369,
+          "images": {
+            "full": "desktop-diagnostic-visible-idle.png",
+            "gutter": "desktop-diagnostic-visible-idle.gutter.png"
+          }
+        },
+        {
+          "state": "hover-panel",
+          "dom": {
+            "rect": {
+              "x": 77.5,
+              "y": 216,
+              "width": 640,
+              "height": 175,
+              "right": 717.5,
+              "bottom": 391
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 175,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 713,
+            "y": 216,
+            "width": 5,
+            "height": 175
+          },
+          "uniqueColors": 32,
+          "topColors": [
+            [
+              "44,44,46,255",
+              418
+            ],
+            [
+              "84,85,87,255",
+              369
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "50,50,51,255",
+              4
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "81,82,84,255",
+              2
+            ],
+            [
+              "82,83,85,255",
+              2
+            ]
+          ],
+          "exactCssThumbPixels": 369,
+          "images": {
+            "full": "desktop-diagnostic-visible-hover-panel.png",
+            "gutter": "desktop-diagnostic-visible-hover-panel.gutter.png"
+          }
+        },
+        {
+          "state": "hover-gutter",
+          "dom": {
+            "rect": {
+              "x": 77.5,
+              "y": 216,
+              "width": 640,
+              "height": 175,
+              "right": 717.5,
+              "bottom": 391
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 175,
+            "scrollHeight": 398,
+            "scrollTop": 0,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 713,
+            "y": 216,
+            "width": 5,
+            "height": 175
+          },
+          "uniqueColors": 33,
+          "topColors": [
+            [
+              "44,44,46,255",
+              418
+            ],
+            [
+              "101,103,107,255",
+              369
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "43,43,45,255",
+              3
+            ],
+            [
+              "49,49,50,255",
+              3
+            ],
+            [
+              "52,53,54,255",
+              2
+            ],
+            [
+              "97,99,103,255",
+              2
+            ],
+            [
+              "99,101,105,255",
+              2
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "desktop-diagnostic-visible-hover-gutter.png",
+            "gutter": "desktop-diagnostic-visible-hover-gutter.gutter.png"
+          }
+        },
+        {
+          "state": "wheel",
+          "dom": {
+            "rect": {
+              "x": 77.5,
+              "y": 216,
+              "width": 640,
+              "height": 175,
+              "right": 717.5,
+              "bottom": 391
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 175,
+            "scrollHeight": 398,
+            "scrollTop": 180,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 713,
+            "y": 216,
+            "width": 5,
+            "height": 175
+          },
+          "uniqueColors": 34,
+          "topColors": [
+            [
+              "44,44,46,255",
+              423
+            ],
+            [
+              "84,85,87,255",
+              365
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "50,50,51,255",
+              4
+            ],
+            [
+              "81,82,84,255",
+              3
+            ],
+            [
+              "82,83,85,255",
+              2
+            ],
+            [
+              "49,49,50,255",
+              2
+            ],
+            [
+              "43,43,45,255",
+              2
+            ]
+          ],
+          "exactCssThumbPixels": 365,
+          "images": {
+            "full": "desktop-diagnostic-visible-wheel.png",
+            "gutter": "desktop-diagnostic-visible-wheel.gutter.png"
+          }
+        },
+        {
+          "state": "after-wheel-idle",
+          "dom": {
+            "rect": {
+              "x": 77.5,
+              "y": 216,
+              "width": 640,
+              "height": 175,
+              "right": 717.5,
+              "bottom": 391
+            },
+            "offsetWidth": 640,
+            "clientWidth": 635,
+            "clientHeight": 175,
+            "scrollHeight": 398,
+            "scrollTop": 180,
+            "dpr": 1,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 713,
+            "y": 216,
+            "width": 5,
+            "height": 175
+          },
+          "uniqueColors": 34,
+          "topColors": [
+            [
+              "44,44,46,255",
+              423
+            ],
+            [
+              "84,85,87,255",
+              365
+            ],
+            [
+              "10,10,11,255",
+              48
+            ],
+            [
+              "50,50,51,255",
+              4
+            ],
+            [
+              "81,82,84,255",
+              3
+            ],
+            [
+              "82,83,85,255",
+              2
+            ],
+            [
+              "49,49,50,255",
+              2
+            ],
+            [
+              "43,43,45,255",
+              2
+            ]
+          ],
+          "exactCssThumbPixels": 365,
+          "images": {
+            "full": "desktop-diagnostic-visible-after-wheel-idle.png",
+            "gutter": "desktop-diagnostic-visible-after-wheel-idle.gutter.png"
+          }
+        }
+      ]
+    },
+    {
+      "caseKey": "components.dialog-family.reader-phone-en-usage.dark",
+      "mode": "parity-default",
+      "browser": "145.0.7632.6",
+      "scrollbarArgs": [
+        "[workspace]/toolchains/playwright-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell",
+        "--headless",
+        "--hide-scrollbars",
+        "--ozone-platform=headless"
+      ],
+      "measurements": [
+        {
+          "state": "idle",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 358.0952453613281,
+              "width": 342.0952453613281,
+              "height": 364,
+              "right": 366.0952453613281,
+              "bottom": 722.0952453613281
+            },
+            "offsetWidth": 342,
+            "clientWidth": 337,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 948,
+            "y": 941,
+            "width": 13,
+            "height": 954
+          },
+          "uniqueColors": 42,
+          "topColors": [
+            [
+              "44,44,46,255",
+              11964
+            ],
+            [
+              "10,10,11,255",
+              342
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "43,43,45,255",
+              5
+            ],
+            [
+              "57,57,58,255",
+              5
+            ],
+            [
+              "45,45,47,255",
+              4
+            ],
+            [
+              "47,47,48,255",
+              4
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-parity-default-idle.png",
+            "gutter": "phone-parity-default-idle.gutter.png"
+          }
+        },
+        {
+          "state": "hover-panel",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 358.0952453613281,
+              "width": 342.0952453613281,
+              "height": 364,
+              "right": 366.0952453613281,
+              "bottom": 722.0952453613281
+            },
+            "offsetWidth": 342,
+            "clientWidth": 337,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 948,
+            "y": 941,
+            "width": 13,
+            "height": 954
+          },
+          "uniqueColors": 42,
+          "topColors": [
+            [
+              "44,44,46,255",
+              11964
+            ],
+            [
+              "10,10,11,255",
+              342
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "43,43,45,255",
+              5
+            ],
+            [
+              "57,57,58,255",
+              5
+            ],
+            [
+              "45,45,47,255",
+              4
+            ],
+            [
+              "47,47,48,255",
+              4
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-parity-default-hover-panel.png",
+            "gutter": "phone-parity-default-hover-panel.gutter.png"
+          }
+        },
+        {
+          "state": "hover-gutter",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 358.0952453613281,
+              "width": 342.0952453613281,
+              "height": 364,
+              "right": 366.0952453613281,
+              "bottom": 722.0952453613281
+            },
+            "offsetWidth": 342,
+            "clientWidth": 337,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 948,
+            "y": 941,
+            "width": 13,
+            "height": 954
+          },
+          "uniqueColors": 42,
+          "topColors": [
+            [
+              "44,44,46,255",
+              11964
+            ],
+            [
+              "10,10,11,255",
+              342
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "43,43,45,255",
+              5
+            ],
+            [
+              "57,57,58,255",
+              5
+            ],
+            [
+              "45,45,47,255",
+              4
+            ],
+            [
+              "47,47,48,255",
+              4
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-parity-default-hover-gutter.png",
+            "gutter": "phone-parity-default-hover-gutter.gutter.png"
+          }
+        },
+        {
+          "state": "wheel",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 358.0952453613281,
+              "width": 342.0952453613281,
+              "height": 364,
+              "right": 366.0952453613281,
+              "bottom": 722.0952453613281
+            },
+            "offsetWidth": 342,
+            "clientWidth": 337,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 180.1904754638672,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 948,
+            "y": 941,
+            "width": 13,
+            "height": 954
+          },
+          "uniqueColors": 42,
+          "topColors": [
+            [
+              "44,44,46,255",
+              11964
+            ],
+            [
+              "10,10,11,255",
+              342
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "43,43,45,255",
+              5
+            ],
+            [
+              "57,57,58,255",
+              5
+            ],
+            [
+              "45,45,47,255",
+              4
+            ],
+            [
+              "47,47,48,255",
+              4
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-parity-default-wheel.png",
+            "gutter": "phone-parity-default-wheel.gutter.png"
+          }
+        },
+        {
+          "state": "after-wheel-idle",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 358.0952453613281,
+              "width": 342.0952453613281,
+              "height": 364,
+              "right": 366.0952453613281,
+              "bottom": 722.0952453613281
+            },
+            "offsetWidth": 342,
+            "clientWidth": 337,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 180.1904754638672,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 948,
+            "y": 941,
+            "width": 13,
+            "height": 954
+          },
+          "uniqueColors": 42,
+          "topColors": [
+            [
+              "44,44,46,255",
+              11964
+            ],
+            [
+              "10,10,11,255",
+              342
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "43,43,45,255",
+              5
+            ],
+            [
+              "57,57,58,255",
+              5
+            ],
+            [
+              "45,45,47,255",
+              4
+            ],
+            [
+              "47,47,48,255",
+              4
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-parity-default-after-wheel-idle.png",
+            "gutter": "phone-parity-default-after-wheel-idle.gutter.png"
+          }
+        }
+      ]
+    },
+    {
+      "caseKey": "components.dialog-family.reader-phone-en-usage.dark",
+      "mode": "diagnostic-visible",
+      "browser": "145.0.7632.6",
+      "scrollbarArgs": [
+        "[workspace]/toolchains/playwright-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-headless-shell",
+        "--headless",
+        "--ozone-platform=headless"
+      ],
+      "measurements": [
+        {
+          "state": "idle",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 355.6190490722656,
+              "width": 337.1428527832031,
+              "height": 364,
+              "right": 361.1428527832031,
+              "bottom": 719.6190490722656
+            },
+            "offsetWidth": 337,
+            "clientWidth": 332,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 935,
+            "y": 934,
+            "width": 13,
+            "height": 955
+          },
+          "uniqueColors": 56,
+          "topColors": [
+            [
+              "84,85,87,255",
+              7823
+            ],
+            [
+              "44,44,46,255",
+              4094
+            ],
+            [
+              "10,10,11,255",
+              355
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "43,43,45,255",
+              8
+            ],
+            [
+              "82,83,85,255",
+              7
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "67,67,69,255",
+              6
+            ]
+          ],
+          "exactCssThumbPixels": 7823,
+          "images": {
+            "full": "phone-diagnostic-visible-idle.png",
+            "gutter": "phone-diagnostic-visible-idle.gutter.png"
+          }
+        },
+        {
+          "state": "hover-panel",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 355.6190490722656,
+              "width": 337.1428527832031,
+              "height": 364,
+              "right": 361.1428527832031,
+              "bottom": 719.6190490722656
+            },
+            "offsetWidth": 337,
+            "clientWidth": 332,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 935,
+            "y": 934,
+            "width": 13,
+            "height": 955
+          },
+          "uniqueColors": 56,
+          "topColors": [
+            [
+              "84,85,87,255",
+              7823
+            ],
+            [
+              "44,44,46,255",
+              4094
+            ],
+            [
+              "10,10,11,255",
+              355
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "43,43,45,255",
+              8
+            ],
+            [
+              "82,83,85,255",
+              7
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "67,67,69,255",
+              6
+            ]
+          ],
+          "exactCssThumbPixels": 7823,
+          "images": {
+            "full": "phone-diagnostic-visible-hover-panel.png",
+            "gutter": "phone-diagnostic-visible-hover-panel.gutter.png"
+          }
+        },
+        {
+          "state": "hover-gutter",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 355.6190490722656,
+              "width": 337.1428527832031,
+              "height": 364,
+              "right": 361.1428527832031,
+              "bottom": 719.6190490722656
+            },
+            "offsetWidth": 337,
+            "clientWidth": 332,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 0,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 935,
+            "y": 934,
+            "width": 13,
+            "height": 955
+          },
+          "uniqueColors": 57,
+          "topColors": [
+            [
+              "101,103,107,255",
+              7823
+            ],
+            [
+              "44,44,46,255",
+              4094
+            ],
+            [
+              "10,10,11,255",
+              355
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "43,43,45,255",
+              8
+            ],
+            [
+              "98,100,104,255",
+              7
+            ],
+            [
+              "49,49,50,255",
+              7
+            ],
+            [
+              "77,78,81,255",
+              6
+            ]
+          ],
+          "exactCssThumbPixels": 0,
+          "images": {
+            "full": "phone-diagnostic-visible-hover-gutter.png",
+            "gutter": "phone-diagnostic-visible-hover-gutter.gutter.png"
+          }
+        },
+        {
+          "state": "wheel",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 355.6190490722656,
+              "width": 337.1428527832031,
+              "height": 364,
+              "right": 361.1428527832031,
+              "bottom": 719.6190490722656
+            },
+            "offsetWidth": 337,
+            "clientWidth": 332,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 180.1904754638672,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 935,
+            "y": 934,
+            "width": 13,
+            "height": 955
+          },
+          "uniqueColors": 70,
+          "topColors": [
+            [
+              "84,85,87,255",
+              7807
+            ],
+            [
+              "44,44,46,255",
+              4112
+            ],
+            [
+              "10,10,11,255",
+              355
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "82,83,85,255",
+              9
+            ],
+            [
+              "67,67,69,255",
+              6
+            ],
+            [
+              "49,49,50,255",
+              6
+            ],
+            [
+              "57,57,58,255",
+              5
+            ]
+          ],
+          "exactCssThumbPixels": 7807,
+          "images": {
+            "full": "phone-diagnostic-visible-wheel.png",
+            "gutter": "phone-diagnostic-visible-wheel.gutter.png"
+          }
+        },
+        {
+          "state": "after-wheel-idle",
+          "dom": {
+            "rect": {
+              "x": 24,
+              "y": 355.6190490722656,
+              "width": 337.1428527832031,
+              "height": 364,
+              "right": 361.1428527832031,
+              "bottom": 719.6190490722656
+            },
+            "offsetWidth": 337,
+            "clientWidth": 332,
+            "clientHeight": 364,
+            "scrollHeight": 573,
+            "scrollTop": 180.1904754638672,
+            "dpr": 2.625,
+            "overflowY": "auto",
+            "gutter": "stable",
+            "scrollbarWidth": "auto",
+            "webkitWidth": "5px",
+            "thumbColor": "rgb(84, 85, 87)",
+            "thumbOpacity": "1",
+            "thumbDisplay": "inline",
+            "paddingRight": "24px"
+          },
+          "gutterPixelRect": {
+            "x": 935,
+            "y": 934,
+            "width": 13,
+            "height": 955
+          },
+          "uniqueColors": 70,
+          "topColors": [
+            [
+              "84,85,87,255",
+              7807
+            ],
+            [
+              "44,44,46,255",
+              4112
+            ],
+            [
+              "10,10,11,255",
+              355
+            ],
+            [
+              "59,59,59,255",
+              11
+            ],
+            [
+              "82,83,85,255",
+              9
+            ],
+            [
+              "67,67,69,255",
+              6
+            ],
+            [
+              "49,49,50,255",
+              6
+            ],
+            [
+              "57,57,58,255",
+              5
+            ]
+          ],
+          "exactCssThumbPixels": 7807,
+          "images": {
+            "full": "phone-diagnostic-visible-after-wheel-idle.png",
+            "gutter": "phone-diagnostic-visible-after-wheel-idle.gutter.png"
+          }
+        }
+      ]
+    }
+  ]
+}

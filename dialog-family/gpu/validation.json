@@ -1,0 +1,76 @@
+{
+  "manifest": "tool/parity-desktop/dialog-family-cases.json",
+  "manifestSha256": "ad93f70b34bf012de0c82f82b006f7685da43282d693897f5013cbbaed231617",
+  "fixtureExecutable": "[workspace]/scratch/whalee-dialog-family/.local/dialog-family-builds/linux-fixture/dsh_flutter",
+  "cases": {
+    "dialog-family.desktop": {
+      "assertionsPassed": 29,
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "pids": {
+        "weston": {
+          "pid": 1566912,
+          "absent": true
+        },
+        "app": {
+          "pid": 1566923,
+          "absent": true
+        }
+      },
+      "bodyRect": [
+        348,
+        268,
+        920,
+        632
+      ],
+      "changedBodyPixels": {
+        "keyboardVsPointer": 0,
+        "explanationScrolledVsTop": 46794,
+        "usageScrolledVsTop": 113400,
+        "explanationRetainedVsScrolled": 0,
+        "usageRetainedVsScrolled": 0
+      },
+      "scrollPreset": "ptc"
+    },
+    "dialog-family.phone": {
+      "assertionsPassed": 28,
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "pids": {
+        "weston": {
+          "pid": 1567825,
+          "absent": true
+        },
+        "app": {
+          "pid": 1567840,
+          "absent": true
+        }
+      },
+      "bodyRect": [
+        52,
+        374,
+        332,
+        694
+      ],
+      "changedBodyPixels": {
+        "keyboardVsPointer": 0,
+        "explanationScrolledVsTop": 27222,
+        "usageScrolledVsTop": 59956,
+        "explanationRetainedVsScrolled": 0,
+        "usageRetainedVsScrolled": 0
+      },
+      "scrollPreset": "standard"
+    }
+  },
+  "allRecordedPidsAbsent": true
+}

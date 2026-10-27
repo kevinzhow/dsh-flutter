@@ -1,0 +1,2481 @@
+{
+  "implementationHead": "4e9b957aa5a610446725a9932e429cc10a673420",
+  "tree": "f25b01542a822f759c6e7bde9fc1813b8e8964dd",
+  "runtimeBuildHead": "4e9b957aa5a610446725a9932e429cc10a673420",
+  "runtimeBuildTree": "f25b01542a822f759c6e7bde9fc1813b8e8964dd",
+  "runtimeHeadDeclaredByOperator": true,
+  "productAndNativeFixtureInputsEqualToBuildHead": true,
+  "changesSinceRuntimeBuild": [],
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "referenceSourceFiles": [
+    {
+      "path": "packages/client/ui-primitives/src/Modal.tsx",
+      "sha256": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/Modal.module.css",
+      "sha256": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/useModalLayer.ts",
+      "sha256": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/focus.ts",
+      "sha256": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b"
+    },
+    {
+      "path": "packages/client/ui-primitives/src/keyboard-composition.ts",
+      "sha256": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+    },
+    {
+      "path": "packages/client/ui-primitives/tests/modal-layer.client.spec.tsx",
+      "sha256": "aa41fccbe198328fd1c59b34371f9b708340cf6eee88d74a696805e2ddfb1fdd"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.tsx",
+      "sha256": "fb2abf1a26ea0748526f32d5c271ce2c510d1867fc67db5fb3bc075f55d76822"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css",
+      "sha256": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx",
+      "sha256": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2"
+    },
+    {
+      "path": "packages/client/ui-agent-preset/tests/section.client.spec.tsx",
+      "sha256": "444100721f670f20bd4c539a077ac6964606ff85b0819608e99fbc645654f81c"
+    }
+  ],
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-27T04:43:36+00:00",
+    "headTree": "f25b01542a822f759c6e7bde9fc1813b8e8964dd",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.4
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 3.1
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.8
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 2.6
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 189.2
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "23f92f633433973d6ca51edf128af3fc8cc06eb75eba14a9077d1ce4c0ac883f"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "bafadff950075aaf233d6d7b44e8bd95658970e5a2331aef8387c8215220104e"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "ba80b9c2a7bb96236c3fdf2d5c4341d6d35e153560d4ff74df5936a87c44e854",
+      "applicationLibrarySha256": "bb4bec7cef7fdc590dd2273dfa05cc829ceee9315f18a1dc800945796d752d88"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "ba80b9c2a7bb96236c3fdf2d5c4341d6d35e153560d4ff74df5936a87c44e854",
+      "applicationLibrarySha256": "0c24b9989ea80acd466bc3955015ea75ab35894ea9ca1fb67916a8f1e6430a1e"
+    }
+  ],
+  "visual": {
+    "compared": 64,
+    "dimensionsEqual": 64,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 97.102578125
+  },
+  "visualGroups": {
+    "reader": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.51575
+    },
+    "tabs": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 96.7736875
+    },
+    "panel-scrolled": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.0604375
+    },
+    "panel-retained": {
+      "compared": 16,
+      "dimensionsEqual": 16,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.0604375
+    }
+  },
+  "captureProvenance": {
+    "head": "4e9b957aa5a610446725a9932e429cc10a673420",
+    "tree": "f25b01542a822f759c6e7bde9fc1813b8e8964dd",
+    "recordedPngs": 176,
+    "productAndNativeFixtureInputsEqualToCaptureHead": true
+  },
+  "panelRetention": [
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "retained": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-explanation.light",
+      "retained": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "retained": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-usage.light",
+      "retained": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-en-usage.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        180
+      ],
+      "sizeAfter": [
+        640,
+        180
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-explanation.light",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-usage.light",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-desktop-zh-usage.dark",
+      "retained": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        640,
+        202
+      ],
+      "sizeAfter": [
+        640,
+        202
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "retained": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-explanation.light",
+      "retained": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "retained": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-usage.light",
+      "retained": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "retained": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-en-usage.dark",
+      "retained": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        358
+      ],
+      "sizeAfter": [
+        898,
+        358
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "retained": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-explanation.light",
+      "retained": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-explanation.dark",
+      "retained": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "retained": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-usage.light",
+      "retained": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "retained": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "direct": "components.dialog-family.panel-scrolled-phone-zh-usage.dark",
+      "retained": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        416
+      ],
+      "sizeAfter": [
+        898,
+        416
+      ],
+      "changedPixelBounds": null
+    }
+  ],
+  "sourceDomRetention": [
+    {
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.light",
+      "page": "explanation",
+      "beforeScrollTop": 96,
+      "afterScrollTop": 96,
+      "otherScrollTop": 150,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-en-explanation.dark",
+      "page": "explanation",
+      "beforeScrollTop": 96,
+      "afterScrollTop": 96,
+      "otherScrollTop": 150,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.light",
+      "page": "usage",
+      "beforeScrollTop": 150,
+      "afterScrollTop": 150,
+      "otherScrollTop": 96,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-en-usage.dark",
+      "page": "usage",
+      "beforeScrollTop": 150,
+      "afterScrollTop": 150,
+      "otherScrollTop": 96,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.light",
+      "page": "explanation",
+      "beforeScrollTop": 22,
+      "afterScrollTop": 22,
+      "otherScrollTop": 126,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-zh-explanation.dark",
+      "page": "explanation",
+      "beforeScrollTop": 22,
+      "afterScrollTop": 22,
+      "otherScrollTop": 126,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.light",
+      "page": "usage",
+      "beforeScrollTop": 126,
+      "afterScrollTop": 126,
+      "otherScrollTop": 22,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-desktop-zh-usage.dark",
+      "page": "usage",
+      "beforeScrollTop": 126,
+      "afterScrollTop": 126,
+      "otherScrollTop": 22,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.light",
+      "page": "explanation",
+      "beforeScrollTop": 100.19047546386719,
+      "afterScrollTop": 100.19047546386719,
+      "otherScrollTop": 150.09524536132812,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-en-explanation.dark",
+      "page": "explanation",
+      "beforeScrollTop": 100.19047546386719,
+      "afterScrollTop": 100.19047546386719,
+      "otherScrollTop": 150.09524536132812,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-en-usage.light",
+      "page": "usage",
+      "beforeScrollTop": 150.09524536132812,
+      "afterScrollTop": 150.09524536132812,
+      "otherScrollTop": 100.19047546386719,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-en-usage.dark",
+      "page": "usage",
+      "beforeScrollTop": 150.09524536132812,
+      "afterScrollTop": 150.09524536132812,
+      "otherScrollTop": 100.19047546386719,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.light",
+      "page": "explanation",
+      "beforeScrollTop": 100.19047546386719,
+      "afterScrollTop": 100.19047546386719,
+      "otherScrollTop": 150.09524536132812,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-zh-explanation.dark",
+      "page": "explanation",
+      "beforeScrollTop": 100.19047546386719,
+      "afterScrollTop": 100.19047546386719,
+      "otherScrollTop": 150.09524536132812,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.light",
+      "page": "usage",
+      "beforeScrollTop": 150.09524536132812,
+      "afterScrollTop": 150.09524536132812,
+      "otherScrollTop": 100.19047546386719,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    },
+    {
+      "case": "components.dialog-family.panel-retained-phone-zh-usage.dark",
+      "page": "usage",
+      "beforeScrollTop": 150.09524536132812,
+      "afterScrollTop": 150.09524536132812,
+      "otherScrollTop": 100.19047546386719,
+      "samePanelNode": true,
+      "positiveScrollOffsetPreserved": true
+    }
+  ],
+  "sourceMeasurementScriptSha256": "6b46d61266b0fd11016960a0b0597ff31d125ca3332720cbb4a9664672ca9255",
+  "sourceScrollbarDiagnostic": {
+    "implicitReferenceArgument": "--hide-scrollbars",
+    "productAndComparisonInputsChanged": false,
+    "diagnosticOnly": true,
+    "cases": 2,
+    "statesPerLaunch": 5,
+    "receiptSha256": "6e9a8513bdc0e5c1c04f6bb45fd05e0aac134d546e83056e0f317c45af8a83f6",
+    "sourcePaintWidthDevicePixels": {
+      "1": 5,
+      "2.625": 13
+    }
+  },
+  "sourceFocusHistory": {
+    "reopen": {
+      "cases": 4,
+      "locales": [
+        "en"
+      ],
+      "densities": [
+        1,
+        2.625
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "controlOnlyKeyChecked": false,
+      "browserVersionRecorded": false,
+      "proofSha256": "9edb6fe5d6cf17a0546bf2248502a510a33e718bd8f09bb7b69dcd721d14e6a6",
+      "scriptSha256": "cb51bb7b3372ebb69a9acf6d816e20547118c970eac099c37ad1d8f3bfec5d26"
+    },
+    "modifier": {
+      "cases": 4,
+      "locales": [
+        "en"
+      ],
+      "densities": [
+        1,
+        2.625
+      ],
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "controlOnlyKeyChecked": true,
+      "browserVersionRecorded": false,
+      "proofSha256": "0d88c15e2eebf18b5b4345d1de02b8001c425a331e59019cbc0d4cdb1c678af8",
+      "scriptSha256": "da1b3940ed9a664e3b45985bb6b1244fc549e75b6308da6a144026fc434e4ba9"
+    }
+  },
+  "implementationFiles": [
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_presentation.dart",
+      "sha256": "99d8337e22cb5b6610bb0e47a1699b05d6b0c4fa6a5d7488256961086a53b1b0"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_focus_presentation.dart",
+      "sha256": "caff713c607ecc66180a34a701ceba29f4c941dc49749683bfa947446b7ef47c"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_dialog_reader.dart",
+      "sha256": "9ea59bb320e35353197db97255d408abada064e6123c5fc549e7f50f8fd296f1"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_reader_markdown.dart",
+      "sha256": "7c45cc37c09da966e2a4fe5d08a596b7b9afede2e8946ca73fad01f9db6fbbe4"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_markdown.dart",
+      "sha256": "78124954dd85de9fbae22b1b5f9f0c63e7e812fedfc3b16b86b4e43d1698d18b"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_button.dart",
+      "sha256": "285752e5a1b88b41c85533f7ebeed51ba4c6fc784f405522bdffeb2f074fdf4f"
+    },
+    {
+      "path": "packages/dsh_ui/lib/src/dsh_recipes.g.dart",
+      "sha256": "b9a4ac0f8da50ca8d1d482ac5806a92d4b42290f473367aea8a23795d0bca6ef"
+    },
+    {
+      "path": "features/dsh_feature_agent_management/lib/src/presets.dart",
+      "sha256": "007a081051f4d20c4617b3a9d96ac5bc2fa4a65e14f09b53e032cd193b31e0d8"
+    }
+  ],
+  "testSources": [
+    {
+      "path": "packages/dsh_ui/test/dsh_dialog_reader_test.dart",
+      "sha256": "3e3c1d22d24f575a9f230ffa2e1f93add96ccf3d2d6559ebf17465b91c6bc0c1"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_reader_markdown_test.dart",
+      "sha256": "c3b517edf04c181c40de9049eab25546eee58566d5086c6183f76fee143b2518"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_dialog_lifecycle_test.dart",
+      "sha256": "3d271e07c9028cb0e06ebf12e2ed54d9ba6e78ffe4c9463d1ea4e68a84869db0"
+    },
+    {
+      "path": "packages/dsh_ui/test/dsh_focus_presentation_test.dart",
+      "sha256": "14bf23c1684e8a230b7d8bdd6f00ad610aefd1198155ff925d6f028343c3abc5"
+    },
+    {
+      "path": "features/dsh_feature_agent_management/test/presets_ui_test.dart",
+      "sha256": "4b056825919fdf4e6b2b56e75babf45b92951e69f51b0aba85fae85a3982623d"
+    },
+    {
+      "path": "features/dsh_feature_workspace/test/picker_test.dart",
+      "sha256": "9997976fa1c7d97934cb2de785ed7830402b4d49922c29dd411c80bdc795b300"
+    }
+  ],
+  "testExecutionEvidence": "The successful final-tree preflight tests check covers the included Flutter test sources.",
+  "gpu": [
+    {
+      "case": "dialog-family.desktop",
+      "assertions": 29
+    },
+    {
+      "case": "dialog-family.phone",
+      "assertions": 28
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "ownedEmulator": "emulator-5560",
+    "fixtureSha256": "23f92f633433973d6ca51edf128af3fc8cc06eb75eba14a9077d1ce4c0ac883f",
+    "actualInputs": [
+      "touch",
+      "contained panel swipes",
+      "emulated hardware Tab, Enter, PageDown and Escape"
+    ],
+    "accessibility": "Named tabs, identified active panels and enabled/clickable/focusable Close button read from UIAutomator",
+    "keyboardReadiness": "Native FlutterView plus expected logical focus checked before each selection or scrolling key",
+    "failedSelectionKeysRetried": false,
+    "cleanupOwner": "Parent restores normal APK and stops its emulator; driver restores its wm-size override",
+    "passed": true,
+    "scenes": [
+      {
+        "scene": "normal-presets",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "normal-explanation-open",
+        "observationAttempts": 1,
+        "panel": "explanation",
+        "panelBounds": [
+          63,
+          1069,
+          1017,
+          2024
+        ]
+      },
+      {
+        "scene": "normal-touch-close",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "normal-usage-open",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          1069,
+          1017,
+          2024
+        ]
+      },
+      {
+        "scene": "normal-close-keyboard-focused",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "normal-keyboard-close",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "short-presets",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "short-explanation-initial",
+        "observationAttempts": 1,
+        "panel": "explanation",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-explanation-scrolled",
+        "observationAttempts": 1,
+        "panel": "explanation",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-initial",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-scrolled",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-explanation-retained",
+        "observationAttempts": 1,
+        "panel": "explanation",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-retained",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-touch-close",
+        "observationAttempts": 1
+      },
+      {
+        "scene": "short-explanation-reopened",
+        "observationAttempts": 1,
+        "panel": "explanation",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-reopened",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-panel-focused",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-usage-page-down",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-tab-cycle-1",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-tab-cycle-2",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-tab-cycle-3",
+        "observationAttempts": 1,
+        "panel": "usage",
+        "panelBounds": [
+          63,
+          758,
+          1017,
+          1194
+        ]
+      },
+      {
+        "scene": "short-escape-close",
+        "observationAttempts": 1
+      }
+    ],
+    "inputs": [
+      {
+        "type": "touch",
+        "target": "Presets",
+        "bounds": [
+          195,
+          136,
+          392,
+          231
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Mode details",
+        "bounds": [
+          63,
+          1068,
+          297,
+          1141
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Close",
+        "bounds": [
+          870,
+          512,
+          954,
+          596
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "How to use",
+        "bounds": [
+          307,
+          1068,
+          518,
+          1141
+        ]
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Close",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab traversal to Close",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Enter activates the accessible Close button",
+        "linuxCode": 28,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Presets",
+        "bounds": [
+          195,
+          75,
+          392,
+          170
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Mode details",
+        "bounds": [
+          63,
+          1007,
+          297,
+          1080
+        ]
+      },
+      {
+        "type": "touch swipe",
+        "panel": "explanation",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "start": [
+          540,
+          1106
+        ],
+        "end": [
+          540,
+          845
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Guide sections: How to use",
+        "bounds": [
+          540,
+          600,
+          933,
+          689
+        ]
+      },
+      {
+        "type": "touch swipe",
+        "panel": "usage",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "start": [
+          540,
+          1106
+        ],
+        "end": [
+          540,
+          845
+        ],
+        "sentOnce": true
+      },
+      {
+        "type": "touch",
+        "target": "Guide sections: Mode details",
+        "bounds": [
+          147,
+          600,
+          540,
+          689
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Guide sections: How to use",
+        "bounds": [
+          540,
+          600,
+          933,
+          689
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Close",
+        "bounds": [
+          870,
+          201,
+          954,
+          285
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Mode details",
+        "bounds": [
+          63,
+          1007,
+          297,
+          1080
+        ]
+      },
+      {
+        "type": "touch",
+        "target": "Guide sections: How to use",
+        "bounds": [
+          540,
+          600,
+          933,
+          689
+        ]
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab from selected usage tab into its panel",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "PageDown scrolls the focused usage panel",
+        "linuxCode": 109,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab cycle step 1",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab cycle step 2",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Tab cycle step 3",
+        "linuxCode": 15,
+        "shift": false,
+        "sentOnce": true
+      },
+      {
+        "type": "emulated hardware key",
+        "key": "Escape closes only the active reader",
+        "linuxCode": 1,
+        "shift": false,
+        "sentOnce": true
+      }
+    ],
+    "pixelProofs": [
+      {
+        "purpose": "real explanation swipe scrolls content",
+        "page": "explanation",
+        "before": "short-explanation-initial",
+        "after": "short-explanation-scrolled",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": false,
+        "changedBoundsInPanel": [
+          74,
+          0,
+          954,
+          419
+        ]
+      },
+      {
+        "purpose": "real usage swipe scrolls content",
+        "page": "usage",
+        "before": "short-usage-initial",
+        "after": "short-usage-scrolled",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": false,
+        "changedBoundsInPanel": [
+          74,
+          0,
+          954,
+          436
+        ]
+      },
+      {
+        "purpose": "explanation preserves its independent scroll position",
+        "page": "explanation",
+        "before": "short-explanation-scrolled",
+        "after": "short-explanation-retained",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": true,
+        "changedBoundsInPanel": null
+      },
+      {
+        "purpose": "usage preserves its independent scroll position",
+        "page": "usage",
+        "before": "short-usage-scrolled",
+        "after": "short-usage-retained",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": true,
+        "changedBoundsInPanel": null
+      },
+      {
+        "purpose": "closing and reopening resets explanation to the top",
+        "page": "explanation",
+        "before": "short-explanation-initial",
+        "after": "short-explanation-reopened",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": true,
+        "changedBoundsInPanel": null
+      },
+      {
+        "purpose": "closing and reopening resets usage to the top",
+        "page": "usage",
+        "before": "short-usage-initial",
+        "after": "short-usage-reopened",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": true,
+        "changedBoundsInPanel": null
+      },
+      {
+        "purpose": "hardware PageDown scrolls the active panel",
+        "page": "usage",
+        "before": "short-usage-panel-focused",
+        "after": "short-usage-page-down",
+        "bounds": [
+          63,
+          758,
+          1017,
+          1194
+        ],
+        "rgbaByteEqual": false,
+        "changedBoundsInPanel": [
+          74,
+          5,
+          949,
+          431
+        ]
+      }
+    ],
+    "tabTraversal": [
+      {
+        "step": 1,
+        "focused": [
+          "close",
+          ""
+        ],
+        "inactivePanelAbsent": true
+      },
+      {
+        "step": 2,
+        "focused": [
+          "tab",
+          "usage"
+        ],
+        "inactivePanelAbsent": true
+      },
+      {
+        "step": 3,
+        "focused": [
+          "panel",
+          "usage"
+        ],
+        "inactivePanelAbsent": true
+      }
+    ],
+    "displayOverride": {
+      "original": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "requestedOverride": "1080x1320",
+      "density": "Physical density: 420",
+      "applied": {
+        "physical": "1080x2400",
+        "override": "1080x1320"
+      },
+      "restoredState": {
+        "physical": "1080x2400",
+        "override": null
+      },
+      "restoredExactly": true
+    },
+    "independentPanelScrollPreserved": true,
+    "reopenResetsPanelScroll": true,
+    "keyboardPageDownScrolledPanel": true,
+    "inactivePanelsSkippedByTab": true,
+    "accessibleHeaderCloseVerified": true
+  },
+  "runtimeCleanup": {
+    "when": "2026-10-27T04:49:26.916711+00:00",
+    "normalApkRestored": true,
+    "normalApkLocalSha256": "bafadff950075aaf233d6d7b44e8bd95658970e5a2331aef8387c8215220104e",
+    "normalApkInstalledSha256": "bafadff950075aaf233d6d7b44e8bd95658970e5a2331aef8387c8215220104e",
+    "normalAppForceStopped": true,
+    "displayOverrideReset": true,
+    "displayState": "Physical size: 1080x2400",
+    "adbdUnrootRequested": true,
+    "unrootResult": "restarting adbd as non root",
+    "ownedEmulatorStopped": true,
+    "ownedSerial": "emulator-5560",
+    "ownedAvd": "whalee-api36",
+    "sharedAdbRetained": true,
+    "recordedGpuPidsAbsent": true,
+    "absentGpuPids": [
+      1566912,
+      1566923,
+      1567825,
+      1567840
+    ]
+  },
+  "regressionCoverage": {
+    "provided": true,
+    "cases": 24,
+    "exactCohortEnforced": true,
+    "additionalCohortFileProvided": true,
+    "rgbaEqualByProvider": {
+      "react": 24,
+      "flutter": 8
+    },
+    "groups": {
+      "risk-preservation": {
+        "cases": 8,
+        "preservationRequired": true,
+        "before": {
+          "compared": 8,
+          "dimensionsEqual": 0,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 87.81700000000001
+        },
+        "after": {
+          "compared": 8,
+          "dimensionsEqual": 0,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 87.81700000000001
+        },
+        "rgbaEqualByProvider": {
+          "react": 8,
+          "flutter": 8
+        }
+      },
+      "workspace-rename": {
+        "cases": 8,
+        "preservationRequired": false,
+        "before": {
+          "compared": 8,
+          "dimensionsEqual": 8,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 95.78949999999999
+        },
+        "after": {
+          "compared": 8,
+          "dimensionsEqual": 8,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 96.08850000000001
+        },
+        "rgbaEqualByProvider": {
+          "react": 8,
+          "flutter": 0
+        }
+      },
+      "directory-home": {
+        "cases": 8,
+        "preservationRequired": false,
+        "before": {
+          "compared": 8,
+          "dimensionsEqual": 8,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 97.97275
+        },
+        "after": {
+          "compared": 8,
+          "dimensionsEqual": 8,
+          "nonTextPassing": 0,
+          "meanNonTextPct": 98.073375
+        },
+        "rgbaEqualByProvider": {
+          "react": 8,
+          "flutter": 0
+        }
+      }
+    },
+    "riskPreservationGate": {
+      "casesPerProvider": 8,
+      "rgbaEqualByProvider": {
+        "react": 8,
+        "flutter": 8
+      },
+      "passed": true
+    },
+    "canonicalFrameChangesIntentional": true,
+    "canonicalFrameRgbaEqualityRequired": false
+  },
+  "regression": [
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-desktop-en.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-desktop-en.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        380,
+        206
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-desktop-en.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-desktop-en.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        380,
+        206
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-desktop-zh.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-desktop-zh.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        380,
+        206
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-desktop-zh.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-desktop-zh.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        380,
+        206
+      ],
+      "sizeAfter": [
+        380,
+        206
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        380,
+        206
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-phone-en.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-phone-en.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        898,
+        541
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-phone-en.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-phone-en.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        898,
+        541
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-phone-zh.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-phone-zh.light",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        898,
+        541
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.workspace-management.rename-ready-phone-zh.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.workspace-management.rename-ready-phone-zh.dark",
+      "group": "workspace-rename",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        898,
+        541
+      ],
+      "sizeAfter": [
+        898,
+        541
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        898,
+        541
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-desktop-en-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        292
+      ],
+      "sizeAfter": [
+        440,
+        292
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-desktop-en-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        302
+      ],
+      "sizeAfter": [
+        440,
+        302
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-desktop-en-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        292
+      ],
+      "sizeAfter": [
+        440,
+        292
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-desktop-en-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        302
+      ],
+      "sizeAfter": [
+        440,
+        302
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-desktop-zh-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        270
+      ],
+      "sizeAfter": [
+        440,
+        270
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-desktop-zh-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        258
+      ],
+      "sizeAfter": [
+        440,
+        258
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-desktop-zh-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        270
+      ],
+      "sizeAfter": [
+        440,
+        270
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-desktop-zh-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        440,
+        258
+      ],
+      "sizeAfter": [
+        440,
+        258
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-phone-en-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        941
+      ],
+      "sizeAfter": [
+        898,
+        941
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-phone-en-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        909
+      ],
+      "sizeAfter": [
+        898,
+        909
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-phone-en-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        941
+      ],
+      "sizeAfter": [
+        898,
+        941
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-phone-en-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        909
+      ],
+      "sizeAfter": [
+        898,
+        909
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-phone-zh-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        767
+      ],
+      "sizeAfter": [
+        898,
+        767
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-phone-zh-focus.light",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        735
+      ],
+      "sizeAfter": [
+        898,
+        735
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.checkbox-family.risk-phone-zh-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        767
+      ],
+      "sizeAfter": [
+        898,
+        767
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.checkbox-family.risk-phone-zh-focus.dark",
+      "group": "risk-preservation",
+      "preservationRequired": true,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        898,
+        735
+      ],
+      "sizeAfter": [
+        898,
+        735
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-en.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-en.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        1360,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-en.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-en.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        1360,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-zh.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-zh.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        1360,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-zh.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-zh.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        1360,
+        1000
+      ],
+      "sizeAfter": [
+        1360,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        1360,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-phone-en.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-phone-en.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        684,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-phone-en.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-phone-en.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        684,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-phone-zh.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-phone-zh.light",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        684,
+        1000
+      ]
+    },
+    {
+      "provider": "react",
+      "case": "components.directory-browser.home-phone-zh.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": true,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": null
+    },
+    {
+      "provider": "flutter",
+      "case": "components.directory-browser.home-phone-zh.dark",
+      "group": "directory-home",
+      "preservationRequired": false,
+      "rgbaByteEqual": false,
+      "sizeBefore": [
+        684,
+        1000
+      ],
+      "sizeAfter": [
+        684,
+        1000
+      ],
+      "changedPixelBounds": [
+        0,
+        0,
+        684,
+        1000
+      ]
+    }
+  ],
+  "fontClassifierAndThresholdChanged": false,
+  "protectedInputsComparedAgainst": "2517f8f0850546c12a8b6e841adcc9850b07db7d",
+  "releaseOrDeployment": false,
+  "limitations": [
+    "Legacy regression coverage is limited to eight preserved risk dialogs and sixteen intentionally updated directory/workspace frames.",
+    "Playwright implicitly hides source scrollbars in the unchanged comparison pipeline. A separate diagnostic confirms persistent source thumbs; its changed viewport geometry excludes it from acceptance comparisons.",
+    "The guide reader prose/usage profile is included; other modal and Markdown profiles remain pending in the family inventory.",
+    "Browser focus-history probes cover English in both themes at two native densities; they do not separately probe Chinese or every dialog caller.",
+    "Browser focus-history JSON does not record its browser version; the renderer pin is recorded separately in the source lock.",
+    "Whole-reader, tab and panel metrics are listed separately; no overall visual completion is inferred."
+  ]
+}
