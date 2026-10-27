@@ -1,0 +1,43 @@
+{
+  "synthetic": true,
+  "actualInputs": [
+    "touch",
+    "emulated hardware Tab, Shift+Tab and Space"
+  ],
+  "accessibility": "named Android buttons with selected, enabled, clickable and focused states read from UIAutomator",
+  "focusOutlineChangedPixels": true,
+  "scenes": [
+    {
+      "scene": "initial",
+      "attempts": 1
+    },
+    {
+      "scene": "disabled-tap",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-tools",
+      "attempts": 1
+    },
+    {
+      "scene": "touch-all",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-focus",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-space-tools",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-shift-tab",
+      "attempts": 1
+    },
+    {
+      "scene": "keyboard-space-all",
+      "attempts": 1
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "implementationHead": "aac737eddfe1f68e47e3313c5a77c8197ae71e16",
+  "tree": "ad0b3e8a39da6c81030cc9f66fc2562b405f484e",
+  "runtimeBuildHead": "aac737eddfe1f68e47e3313c5a77c8197ae71e16",
+  "referenceDshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "publishedInput": "DSH ui-primitives and ui-plugin-market 0.2.1-rc.2",
+  "syntheticOnly": true,
+  "fullLocalPreflight": {
+    "when": "2026-10-27T00:08:49+00:00",
+    "headTree": "ad0b3e8a39da6c81030cc9f66fc2562b405f484e",
+    "fast": false,
+    "results": {
+      "check-deps": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "tool-tests": {
+        "state": "ok",
+        "secs": 2.2
+      },
+      "codegen": {
+        "state": "ok",
+        "secs": 1.0
+      },
+      "theme-pack": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "design-system": {
+        "state": "ok",
+        "secs": 0.4
+      },
+      "i18n": {
+        "state": "ok",
+        "secs": 0.2
+      },
+      "icons": {
+        "state": "ok",
+        "secs": 0.1
+      },
+      "vector": {
+        "state": "ok",
+        "secs": 10.6
+      },
+      "parity": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "capability": {
+        "state": "ok",
+        "secs": 0.3
+      },
+      "format": {
+        "state": "ok",
+        "secs": 2.7
+      },
+      "analyze": {
+        "state": "ok",
+        "secs": 3.0
+      },
+      "tests": {
+        "state": "ok",
+        "secs": 187.7
+      }
+    }
+  },
+  "normalAndFixtureBuilds": "Linux release and Android debug passed",
+  "artifacts": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "285b156c63d5effd7d0520371a92f258e2ce06499181d022dedc7e81ba7d2ef5"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "a5a7ac9d962f3daf9aa01b54da92cb54fa1f14526ac01abeb0f2330b0bb40aa9"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "99118452000664b5c5700aaf8af04bc77363e4335bb07e3ae32273d94379e3e1",
+      "applicationLibrarySha256": "dbc1d5297e0589ed4fa107f4190680cbb9caa6985f1248ce71b4b79f88954e14"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "99118452000664b5c5700aaf8af04bc77363e4335bb07e3ae32273d94379e3e1",
+      "applicationLibrarySha256": "434b1e0ac97cfadd13fedc3807778b0eeb2ab72d439700ec56bd031481b49e4a"
+    }
+  ],
+  "gpu": [
+    {
+      "case": "pill-family.desktop",
+      "assertions": 7
+    },
+    {
+      "case": "pill-family.phone",
+      "assertions": 7
+    }
+  ],
+  "android": {
+    "synthetic": true,
+    "actualInputs": [
+      "touch",
+      "emulated hardware Tab, Shift+Tab and Space"
+    ],
+    "accessibility": "named Android buttons with selected, enabled, clickable and focused states read from UIAutomator",
+    "focusOutlineChangedPixels": true,
+    "scenes": [
+      {
+        "scene": "initial",
+        "attempts": 1
+      },
+      {
+        "scene": "disabled-tap",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-tools",
+        "attempts": 1
+      },
+      {
+        "scene": "touch-all",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-focus",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-space-tools",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-shift-tab",
+        "attempts": 1
+      },
+      {
+        "scene": "keyboard-space-all",
+        "attempts": 1
+      }
+    ]
+  },
+  "visual": {
+    "croppedMarketControls": {
+      "compared": 40,
+      "dimensionsEqual": 20,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 90.619675
+    },
+    "wholePageFocus": {
+      "compared": 8,
+      "dimensionsEqual": 8,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 97.751875
+    },
+    "terminalRows": {
+      "compared": 2,
+      "dimensionsEqual": 2,
+      "nonTextPassing": 0,
+      "meanNonTextPct": 98.1055
+    },
+    "thresholdPct": 99.5
+  },
+  "terminalRegression": [
+    {
+      "provider": "react",
+      "theme": "light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "theme": "light",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "react",
+      "theme": "dark",
+      "rgbaByteEqual": true
+    },
+    {
+      "provider": "flutter",
+      "theme": "dark",
+      "rgbaByteEqual": true
+    }
+  ],
+  "browserProbe": {
+    "browser": "145.0.7632.6",
+    "conditions": 4,
+    "densities": [
+      1,
+      2.625
+    ]
+  },
+  "remaining": "Market ordering is not locale-collated. Tag badges and schedule-specific overrides remain; the market page layout differs from DSH. Phone crop bounds include a fractional-origin extra row.",
+  "fontsThresholdClassifierChanges": false,
+  "runtimeCleanup": "Normal Android APK restored and stopped; owned emulator and GPU processes stopped; shared ADB retained.",
+  "releaseOrDeployment": false
+}

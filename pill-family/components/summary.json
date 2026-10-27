@@ -1,0 +1,923 @@
+{
+  "thresholdPct": 99.5,
+  "croppedMarketControls": {
+    "compared": 40,
+    "dimensionsEqual": 20,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 90.619675
+  },
+  "wholePageFocus": {
+    "compared": 8,
+    "dimensionsEqual": 8,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 97.751875
+  },
+  "terminalRows": {
+    "compared": 2,
+    "dimensionsEqual": 2,
+    "nonTextPassing": 0,
+    "meanNonTextPct": 98.1055
+  },
+  "cases": [
+    {
+      "key": "components.tool.bash.row.states.light",
+      "caseId": "components.tool.bash.row.states.light",
+      "kind": "tool.card",
+      "theme": "light",
+      "nonTextPct": 98.129,
+      "pixelPerfectPct": 95.621,
+      "rgbPct": 99.057,
+      "sizeReact": [
+        780,
+        880
+      ],
+      "sizeFlutter": [
+        780,
+        880
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tool.bash.row.states.light.side-by-side.png"
+    },
+    {
+      "key": "components.tool.bash.row.states.dark",
+      "caseId": "components.tool.bash.row.states.dark",
+      "kind": "tool.card",
+      "theme": "dark",
+      "nonTextPct": 98.082,
+      "pixelPerfectPct": 95.535,
+      "rgbPct": 98.981,
+      "sizeReact": [
+        780,
+        880
+      ],
+      "sizeFlutter": [
+        780,
+        880
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tool.bash.row.states.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-all.light",
+      "caseId": "components.pill-family.market-desktop-en-all.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 89.306,
+      "pixelPerfectPct": 68.056,
+      "rgbPct": 97.773,
+      "sizeReact": [
+        30,
+        24
+      ],
+      "sizeFlutter": [
+        30,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-all.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-all.dark",
+      "caseId": "components.pill-family.market-desktop-en-all.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 89.583,
+      "pixelPerfectPct": 67.778,
+      "rgbPct": 97.641,
+      "sizeReact": [
+        30,
+        24
+      ],
+      "sizeFlutter": [
+        30,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-all.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-inactive.light",
+      "caseId": "components.pill-family.market-desktop-en-inactive.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 95.035,
+      "pixelPerfectPct": 85.284,
+      "rgbPct": 98.535,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-inactive.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-inactive.dark",
+      "caseId": "components.pill-family.market-desktop-en-inactive.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 88.918,
+      "pixelPerfectPct": 79.255,
+      "rgbPct": 98.021,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-inactive.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-active.light",
+      "caseId": "components.pill-family.market-desktop-en-active.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 87.855,
+      "pixelPerfectPct": 72.252,
+      "rgbPct": 97.038,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-active.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-active.dark",
+      "caseId": "components.pill-family.market-desktop-en-active.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 88.298,
+      "pixelPerfectPct": 71.986,
+      "rgbPct": 97.21,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-active.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-hover.light",
+      "caseId": "components.pill-family.market-desktop-en-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 91.046,
+      "pixelPerfectPct": 81.383,
+      "rgbPct": 98.641,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-hover.dark",
+      "caseId": "components.pill-family.market-desktop-en-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 90.16,
+      "pixelPerfectPct": 80.496,
+      "rgbPct": 97.96,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-active-hover.light",
+      "caseId": "components.pill-family.market-desktop-en-active-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 87.943,
+      "pixelPerfectPct": 72.252,
+      "rgbPct": 96.967,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-active-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-active-hover.dark",
+      "caseId": "components.pill-family.market-desktop-en-active-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 88.298,
+      "pixelPerfectPct": 72.163,
+      "rgbPct": 96.677,
+      "sizeReact": [
+        47,
+        24
+      ],
+      "sizeFlutter": [
+        47,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-active-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-focus.light",
+      "caseId": "components.pill-family.market-desktop-en-focus.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.913,
+      "pixelPerfectPct": 97.965,
+      "rgbPct": 99.196,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-en-focus.dark",
+      "caseId": "components.pill-family.market-desktop-en-focus.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 97.511,
+      "pixelPerfectPct": 96.108,
+      "rgbPct": 99.063,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-en-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-all.light",
+      "caseId": "components.pill-family.market-desktop-zh-all.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 89.533,
+      "pixelPerfectPct": 65.346,
+      "rgbPct": 97.034,
+      "sizeReact": [
+        41,
+        24
+      ],
+      "sizeFlutter": [
+        41,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-all.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-all.dark",
+      "caseId": "components.pill-family.market-desktop-zh-all.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 89.837,
+      "pixelPerfectPct": 65.041,
+      "rgbPct": 97.468,
+      "sizeReact": [
+        41,
+        24
+      ],
+      "sizeFlutter": [
+        41,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-all.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-inactive.light",
+      "caseId": "components.pill-family.market-desktop-zh-inactive.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 96.467,
+      "pixelPerfectPct": 85.507,
+      "rgbPct": 98.678,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-inactive.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-inactive.dark",
+      "caseId": "components.pill-family.market-desktop-zh-inactive.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 90.036,
+      "pixelPerfectPct": 79.167,
+      "rgbPct": 98.125,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-inactive.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-active.light",
+      "caseId": "components.pill-family.market-desktop-zh-active.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 91.033,
+      "pixelPerfectPct": 72.101,
+      "rgbPct": 97.167,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-active.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-active.dark",
+      "caseId": "components.pill-family.market-desktop-zh-active.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 91.214,
+      "pixelPerfectPct": 71.92,
+      "rgbPct": 97.312,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-active.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-hover.light",
+      "caseId": "components.pill-family.market-desktop-zh-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 92.301,
+      "pixelPerfectPct": 81.522,
+      "rgbPct": 98.772,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-hover.dark",
+      "caseId": "components.pill-family.market-desktop-zh-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 91.304,
+      "pixelPerfectPct": 80.435,
+      "rgbPct": 98.067,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-active-hover.light",
+      "caseId": "components.pill-family.market-desktop-zh-active-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 91.123,
+      "pixelPerfectPct": 72.101,
+      "rgbPct": 97.096,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-active-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-active-hover.dark",
+      "caseId": "components.pill-family.market-desktop-zh-active-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 91.214,
+      "pixelPerfectPct": 72.101,
+      "rgbPct": 96.795,
+      "sizeReact": [
+        46,
+        24
+      ],
+      "sizeFlutter": [
+        46,
+        24
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-active-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-focus.light",
+      "caseId": "components.pill-family.market-desktop-zh-focus.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 99.145,
+      "pixelPerfectPct": 98.265,
+      "rgbPct": 99.479,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-desktop-zh-focus.dark",
+      "caseId": "components.pill-family.market-desktop-zh-focus.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 97.533,
+      "pixelPerfectPct": 96.221,
+      "rgbPct": 99.298,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-desktop-zh-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-all.light",
+      "caseId": "components.pill-family.market-phone-en-all.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 94.818,
+      "pixelPerfectPct": 86.847,
+      "rgbPct": 95.361,
+      "sizeReact": [
+        79,
+        63
+      ],
+      "sizeFlutter": [
+        79,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-all.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-all.dark",
+      "caseId": "components.pill-family.market-phone-en-all.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 93.097,
+      "pixelPerfectPct": 85.186,
+      "rgbPct": 95.884,
+      "sizeReact": [
+        79,
+        63
+      ],
+      "sizeFlutter": [
+        79,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-all.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-inactive.light",
+      "caseId": "components.pill-family.market-phone-en-inactive.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 97.151,
+      "pixelPerfectPct": 94.105,
+      "rgbPct": 97.891,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-inactive.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-inactive.dark",
+      "caseId": "components.pill-family.market-phone-en-inactive.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 92.66,
+      "pixelPerfectPct": 89.561,
+      "rgbPct": 97.404,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-inactive.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-active.light",
+      "caseId": "components.pill-family.market-phone-en-active.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 93.881,
+      "pixelPerfectPct": 87.014,
+      "rgbPct": 94.684,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-active.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-active.dark",
+      "caseId": "components.pill-family.market-phone-en-active.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 92.266,
+      "pixelPerfectPct": 85.386,
+      "rgbPct": 95.396,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-active.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-hover.light",
+      "caseId": "components.pill-family.market-phone-en-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 95.851,
+      "pixelPerfectPct": 92.765,
+      "rgbPct": 97.875,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-hover.dark",
+      "caseId": "components.pill-family.market-phone-en-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 93.054,
+      "pixelPerfectPct": 89.955,
+      "rgbPct": 97.386,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-active-hover.light",
+      "caseId": "components.pill-family.market-phone-en-active-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 93.829,
+      "pixelPerfectPct": 86.949,
+      "rgbPct": 94.549,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-active-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-active-hover.dark",
+      "caseId": "components.pill-family.market-phone-en-active-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 92.253,
+      "pixelPerfectPct": 85.373,
+      "rgbPct": 94.505,
+      "sizeReact": [
+        119,
+        63
+      ],
+      "sizeFlutter": [
+        119,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-active-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-focus.light",
+      "caseId": "components.pill-family.market-phone-en-focus.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 97.522,
+      "pixelPerfectPct": 96.292,
+      "rgbPct": 98.312,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-en-focus.dark",
+      "caseId": "components.pill-family.market-phone-en-focus.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 96.283,
+      "pixelPerfectPct": 94.526,
+      "rgbPct": 98.232,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-en-focus.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-all.light",
+      "caseId": "components.pill-family.market-phone-zh-all.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 82.356,
+      "pixelPerfectPct": 74.263,
+      "rgbPct": 96.382,
+      "sizeReact": [
+        106,
+        63
+      ],
+      "sizeFlutter": [
+        106,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-all.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-all.dark",
+      "caseId": "components.pill-family.market-phone-zh-all.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 81.972,
+      "pixelPerfectPct": 73.526,
+      "rgbPct": 96.829,
+      "sizeReact": [
+        106,
+        63
+      ],
+      "sizeFlutter": [
+        106,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-all.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-inactive.light",
+      "caseId": "components.pill-family.market-phone-zh-inactive.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 96.693,
+      "pixelPerfectPct": 91.901,
+      "rgbPct": 98.535,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-inactive.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-inactive.dark",
+      "caseId": "components.pill-family.market-phone-zh-inactive.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 90.677,
+      "pixelPerfectPct": 85.352,
+      "rgbPct": 98.113,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-inactive.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-active.light",
+      "caseId": "components.pill-family.market-phone-zh-active.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 85.234,
+      "pixelPerfectPct": 79.154,
+      "rgbPct": 96.443,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-active.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-active.dark",
+      "caseId": "components.pill-family.market-phone-zh-active.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 84.909,
+      "pixelPerfectPct": 78.451,
+      "rgbPct": 96.841,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-active.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-hover.light",
+      "caseId": "components.pill-family.market-phone-zh-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 91.133,
+      "pixelPerfectPct": 86.406,
+      "rgbPct": 98.487,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-hover.dark",
+      "caseId": "components.pill-family.market-phone-zh-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 90.938,
+      "pixelPerfectPct": 85.612,
+      "rgbPct": 98.103,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-active-hover.light",
+      "caseId": "components.pill-family.market-phone-zh-active-hover.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 85.469,
+      "pixelPerfectPct": 79.154,
+      "rgbPct": 96.36,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-active-hover.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-active-hover.dark",
+      "caseId": "components.pill-family.market-phone-zh-active-hover.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 86.042,
+      "pixelPerfectPct": 78.477,
+      "rgbPct": 96.318,
+      "sizeReact": [
+        120,
+        63
+      ],
+      "sizeFlutter": [
+        120,
+        64
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-active-hover.dark.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-focus.light",
+      "caseId": "components.pill-family.market-phone-zh-focus.light",
+      "kind": "plugins-preview.market",
+      "theme": "light",
+      "nonTextPct": 98.125,
+      "pixelPerfectPct": 97.006,
+      "rgbPct": 98.924,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-focus.light.side-by-side.png"
+    },
+    {
+      "key": "components.pill-family.market-phone-zh-focus.dark",
+      "caseId": "components.pill-family.market-phone-zh-focus.dark",
+      "kind": "plugins-preview.market",
+      "theme": "dark",
+      "nonTextPct": 96.983,
+      "pixelPerfectPct": 95.336,
+      "rgbPct": 98.82,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.pill-family.market-phone-zh-focus.dark.side-by-side.png"
+    }
+  ]
+}

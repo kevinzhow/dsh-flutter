@@ -1,0 +1,2188 @@
+{
+  "schema": "dsh-parity-cases/1",
+  "name": "extension",
+  "cases": [
+    {
+      "id": "components.tool.bash.row.states.light",
+      "title": "Bash tool row states (light)",
+      "kind": "tool.card",
+      "surface": "bash",
+      "category": "extension/tool",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 440,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Settled, expanded, failed and running rows",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 8,
+              "align": "stretch"
+            },
+            "items": [
+              {
+                "id": "bash-ok",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-ok",
+                "argsRaw": "{\"command\": \"npm test\", \"description\": \"Run the unit tests\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": false,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Tests: 12 passed, 12 total"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-ok-open",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-ok-open",
+                "argsRaw": "{\"command\": \"ls -la src\", \"description\": \"List the source directory\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": true,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "total 32\ndrwxr-xr-x 4 user 4096 Oct  2 .\ndrwxr-xr-x 7 user 4096 Oct  2 ..\n-rw-r--r-- 1 user 1204 Oct  2 app.ts\n-rw-r--r-- 1 user  873 Oct  1 config.ts\ndrwxr-xr-x 2 user 4096 Sep 29 utils"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-exit",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-exit",
+                "argsRaw": "{\"command\": \"cat missing.txt\", \"description\": \"Print a missing file\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": true,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "[stderr]\ncat: missing.txt: No such file or directory\n[exit code: 1]"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-running",
+                "toolName": "bash",
+                "phase": "start",
+                "callId": "call-bash-running",
+                "argsRaw": "{\"command\": \"npm run build\", \"description\": \"Build the project\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": false
+              }
+            ]
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-tool/src/client/tool/toolviews/bash-sample.tsx",
+      "theme": "light"
+    },
+    {
+      "id": "components.tool.bash.row.states.dark",
+      "title": "Bash tool row states (dark)",
+      "kind": "tool.card",
+      "surface": "bash",
+      "category": "extension/tool",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 440,
+        "density": 2
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "Settled, expanded, failed and running rows",
+          "props": {
+            "layout": {
+              "direction": "column",
+              "gap": 8,
+              "align": "stretch"
+            },
+            "items": [
+              {
+                "id": "bash-ok",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-ok",
+                "argsRaw": "{\"command\": \"npm test\", \"description\": \"Run the unit tests\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": false,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Tests: 12 passed, 12 total"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-ok-open",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-ok-open",
+                "argsRaw": "{\"command\": \"ls -la src\", \"description\": \"List the source directory\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": true,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "total 32\ndrwxr-xr-x 4 user 4096 Oct  2 .\ndrwxr-xr-x 7 user 4096 Oct  2 ..\n-rw-r--r-- 1 user 1204 Oct  2 app.ts\n-rw-r--r-- 1 user  873 Oct  1 config.ts\ndrwxr-xr-x 2 user 4096 Sep 29 utils"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-exit",
+                "toolName": "bash",
+                "phase": "result",
+                "callId": "call-bash-exit",
+                "argsRaw": "{\"command\": \"cat missing.txt\", \"description\": \"Print a missing file\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": true,
+                "result": {
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "[stderr]\ncat: missing.txt: No such file or directory\n[exit code: 1]"
+                    }
+                  ],
+                  "isError": false
+                }
+              },
+              {
+                "id": "bash-running",
+                "toolName": "bash",
+                "phase": "start",
+                "callId": "call-bash-running",
+                "argsRaw": "{\"command\": \"npm run build\", \"description\": \"Build the project\"}",
+                "cwd": "/home/user/project",
+                "home": "/home/user",
+                "expanded": false
+              }
+            ]
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-target]",
+        "flutterKey": "parity-target",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-tool/src/client/tool/toolviews/bash-sample.tsx",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-all.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-all.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-inactive.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-inactive.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-active.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-active.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-active-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-active-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-focus.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-en-focus.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-en-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-all.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-all.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-inactive.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-inactive.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-active.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-active.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-active-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-active-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-focus.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-desktop-zh-focus.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-desktop-zh-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 800,
+        "height": 1100,
+        "density": 1
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 720,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-all.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-all.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-inactive.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-inactive.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-active.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-active.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-active-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-active-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-focus.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-en-focus.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-en-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "en",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-all.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-all.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-all",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "all",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-all\"]",
+        "flutterKey": "market-category-all",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-inactive.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-inactive.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-inactive",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "inactive",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-active.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-active.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-active",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          }
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-active-hover.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-active-hover.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-active-hover",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "active-hover",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": "tools"
+          },
+          "interactions": [
+            {
+              "type": "hover",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"market-category-tools\"]",
+        "flutterKey": "market-category-tools",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-focus.light",
+      "title": "Market category pill (light)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "light"
+    },
+    {
+      "id": "components.pill-family.market-phone-zh-focus.dark",
+      "title": "Market category pill (dark)",
+      "kind": "plugins-preview.market",
+      "surface": "market-phone-zh-focus",
+      "category": "extension/pill-family",
+      "suite": "dsh-flutter-extension",
+      "viewport": {
+        "width": 390,
+        "height": 1100,
+        "density": 2.625
+      },
+      "locale": "zh-CN",
+      "variants": [
+        {
+          "id": "default",
+          "name": "focus",
+          "props": {
+            "width": 326,
+            "height": 900,
+            "name": "categories",
+            "category": null
+          },
+          "interactions": [
+            {
+              "type": "focus-by-tab",
+              "target": "market-category-tools"
+            }
+          ]
+        }
+      ],
+      "capture": {
+        "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+        "flutterKey": "plugins-preview-surface",
+        "crop": "element"
+      },
+      "tolerance": {
+        "pixelRatio": 0.02,
+        "layoutPx": 1
+      },
+      "reactPathHint": "packages/client/ui-plugin-market/src/client/DiscoverSection.tsx",
+      "flutterCaseHint": "features/dsh_feature_plugins/lib/src/market_page.dart",
+      "theme": "dark"
+    }
+  ]
+}
