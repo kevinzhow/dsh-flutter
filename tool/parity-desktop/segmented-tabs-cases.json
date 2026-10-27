@@ -17,6 +17,71 @@
           ]
         },
         {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "keyboard-presets"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "keyboard-presets",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "guide-keyboard"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            30,
+            18
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
           "capture": "initial"
         },
         {
@@ -149,6 +214,30 @@
         },
         {
           "expect": {
+            "reference": "guide-keyboard",
+            "rect": [
+              474,
+              283,
+              806,
+              570
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "guide-keyboard",
+            "rect": [
+              474,
+              237,
+              806,
+              279
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
             "reference": "presets",
             "rect": [
               474,
@@ -230,10 +319,23 @@
         },
         {
           "capture": "guide-closed"
-        },
+        }
+      ]
+    },
+    {
+      "id": "segmented-tabs.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
         {
-          "keys": [
-            15
+          "move": [
+            370,
+            20
           ]
         },
         {
@@ -252,32 +354,44 @@
           ]
         },
         {
+          "capture": "keyboard-presets"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
           "expect": {
-            "reference": "guide-pointer",
+            "reference": "keyboard-presets",
             "rect": [
-              474,
-              237,
-              806,
-              279
+              48,
+              333,
+              342,
+              640
             ],
             "changed": true
           }
         },
         {
           "capture": "guide-keyboard"
-        }
-      ]
-    },
-    {
-      "id": "segmented-tabs.phone",
-      "state": "component",
-      "appOnly": true,
-      "pairHost": false,
-      "width": 390,
-      "height": 844,
-      "theme": "dark",
-      "locale": "en",
-      "app": [
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "click": [
+            30,
+            18
+          ]
+        },
         {
           "move": [
             370,
@@ -417,6 +531,30 @@
         },
         {
           "expect": {
+            "reference": "guide-keyboard",
+            "rect": [
+              48,
+              333,
+              342,
+              640
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "guide-keyboard",
+            "rect": [
+              48,
+              287,
+              342,
+              329
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
             "reference": "presets",
             "rect": [
               48,
@@ -498,41 +636,6 @@
         },
         {
           "capture": "guide-closed"
-        },
-        {
-          "keys": [
-            15
-          ]
-        },
-        {
-          "keys": [
-            15
-          ]
-        },
-        {
-          "keys": [
-            15
-          ]
-        },
-        {
-          "keys": [
-            28
-          ]
-        },
-        {
-          "expect": {
-            "reference": "guide-pointer",
-            "rect": [
-              48,
-              287,
-              342,
-              329
-            ],
-            "changed": true
-          }
-        },
-        {
-          "capture": "guide-keyboard"
         }
       ]
     }
