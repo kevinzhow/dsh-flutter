@@ -87,5 +87,7 @@ export 'src/dsh_menu_footer.dart';
 export 'src/dsh_menu_group.dart';
 
 export 'src/dsh_dialog_reader.dart';
+export 'src/dsh_headed_dialog.dart';
+export 'src/dsh_risk_dialog.dart';
 
 export 'src/dsh_focus_presentation.dart';

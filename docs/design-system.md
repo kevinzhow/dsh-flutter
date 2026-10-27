@@ -60,12 +60,40 @@ replay exercises real Close, selection, independent scrolling, keyboard paging
 and focus behavior. Representative workspace and directory frames report the
 shared shell changes separately from the risk dialog preservation cohort.
 
-This is a bounded dialog migration. The headed Modal profile, risk card and its
-separate route, Settings and shortcut routes, and raw schedule deletion remain
-pending in the inventory. The bottom option sheet is a selection adaptation and
-has its own presentation contract. Other content profiles keep their existing
-geometry until individually audited and migrated. No overall visual completion
-is inferred from this family.
+`DshHeadedDialogContent` owns the generated header, accessible Close, optional
+description/body and footer. Risk confirmation uses this profile through the
+canonical Modal route and a single frame. The card and content entry points
+share the controlled acknowledgement, disabled state and confirmation gate;
+the existing option-sheet library re-exports the risk API for compatibility.
+The selection sheet keeps its separate presentation contract.
+
+Risk content includes its header and body in one contained scroll region. Its
+footer stays outside, using the published action minimum widths. On entry,
+automatic checkbox focus reveals the acknowledgement at the end of long
+content. Keyboard traversal follows widget order, matching DOM order even when
+Close is scrolled offscreen; returning to Close reveals the entire header at
+the top. The checkbox retains its existing automatic-outline suppression.
+Tiny viewports preserve the source's 20px gap and clip the natural footer,
+rather than shrinking the gap or overflowing Flutter's layout.
+
+`DshScrollbarRecipe` describes inherited l1 scrollbars. Headed overflow reserves
+the measured gutter only when content overflows, and remeasures at full width
+after resizing. The reader keeps its stable gutter and l2 palette. Source
+probes verify five physical columns at DPR 1 and thirteen at DPR 2.625.
+Playwright's unchanged implicit `--hide-scrollbars` argument removes that
+conditional source gutter in acceptance captures. A separate diagnostic shows
+the actual gutter and resulting text wrapping; it does not replace acceptance
+images. Fonts, classifier and threshold are unchanged.
+
+Two source details remain explicit: browser font loading can change the scroll
+extent after automatic focus, while preloaded pinned fonts produce the final
+bottom position. Also, the pinned disabled source tries to focus a disabled
+checkbox and leaves BODY focused until Tab enters Close. Flutter keeps focus in
+the foreground modal and uses its first enabled control in that case.
+
+This remains a bounded dialog migration. Settings and shortcut routes, raw
+schedule deletion and other content profiles remain pending in the inventory.
+No overall visual completion is inferred from this family.
 
 ## Button family profiles
 

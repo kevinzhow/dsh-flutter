@@ -509,3 +509,29 @@ abstract final class DshGuideReaderRecipe {
   static const double usageQuoteLineHeight = 26.0;
   static const String usageQuoteLabelToken = '--dsw-alias-label-primary';
 }
+
+abstract final class DshScrollbarRecipe {
+  static const double width = 5.0;
+  static const double radius = 999.0;
+  static const double thumbBorderWidth = 0.0;
+  static const double trackMargin = 0.0;
+  static const String thumbToken = '--dsw-alias-scrollbar-bg-l1';
+  static const String hoverToken = '--dsw-alias-scrollbar-hover-l1';
+}
+
+abstract final class DshRiskDialogRecipe {
+  static const double width = 440.0;
+  static const double maxHeightFactor = 1.0;
+  static const double dynamicViewportInset = 48.0;
+  static const double contentMinHeight = 0.0;
+  static const double warningGap = 10.0;
+  static const double warningFontSize = 14.0;
+  static const double warningLineHeight = 22.0;
+  static const String warningFontToken = '--dsw-font-s-14';
+  static const String warningLabelToken = '--dsw-alias-label-secondary';
+  static const double warningIconTop = 2.0;
+  static const double warningIconSize = 18.0;
+  static const String errorIconToken = '--dsw-alias-state-error-primary';
+  static const double actionMinWidth = 72.0;
+  static const double confirmMinWidth = 136.0;
+}

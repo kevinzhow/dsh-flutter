@@ -119,6 +119,7 @@ def resolve_context(context, *, number, value):
 
 
 def build(modal, guide, context, *, value, number, token, font_token):
+    scrollbar_rules = context['scrollbarRules']
     context = resolve_context(context, number=number, value=value)
     def validate(rules, schema, family):
         seen = set()
@@ -334,4 +335,12 @@ def build(modal, guide, context, *, value, number, token, font_token):
         'usageQuoteLineHeight': px(guide, '.guidePanel[data-guide-page=usage] blockquote p', 'line-height'),
         'usageQuoteLabelToken': tok(guide, '.guidePanel[data-guide-page=usage] blockquote p', 'color'),
     }
-    return {'DshModalRecipe': modal_recipe, 'DshGuideReaderRecipe': guide_recipe}
+    scrollbar_recipe = {
+        'width': context['scrollbar']['scrollbarWidth'], 'radius': context['scrollbar']['scrollbarRadius'],
+        'thumbBorderWidth': context['scrollbar']['scrollbarThumbBorderWidth'],
+        'trackMargin': context['scrollbar']['scrollbarTrackMargin'],
+        'thumbToken': tok(scrollbar_rules, 'body', '--dsh-scrollbar-thumb'),
+        'hoverToken': tok(scrollbar_rules, 'body', '--dsh-scrollbar-thumb-hover'),
+    }
+    return {'DshModalRecipe': modal_recipe, 'DshGuideReaderRecipe': guide_recipe,
+            'DshScrollbarRecipe': scrollbar_recipe}

@@ -105,7 +105,8 @@ def modal_layer_snapshot(archive):
     text = bundle.decode()
     return {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
             'layer': bundle_region(text, 'useModalLayer.js'),
-            'modal': bundle_region(text, 'Modal.js')}
+            'modal': bundle_region(text, 'Modal.js'),
+            'risk': bundle_region(text, 'RiskConfirmation.js')}
 
 def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
