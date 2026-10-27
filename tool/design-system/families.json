@@ -45,11 +45,12 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_presentation.dart",
         "packages/dsh_ui/lib/src/dsh_dialog_reader.dart",
-        "packages/dsh_ui/lib/src/dsh_reader_markdown.dart"
+        "packages/dsh_ui/lib/src/dsh_reader_markdown.dart",
+        "packages/dsh_ui/lib/src/dsh_headed_dialog.dart",
+        "packages/dsh_ui/lib/src/dsh_risk_dialog.dart"
       ],
-      "migrationStatus": "published Modal layer and preset-reader profile; source viewport mask, reduced-motion entry, keyboard/composition guards, automatic focus presentation and independent reader panels and generated reader prose/usage profiles; headed/risk/settings/shortcut profiles and other callers remain pending",
+      "migrationStatus": "published Modal layer, headed content, preset reader and controlled risk profile; source viewport mask, keyboard/composition guards, independent reader panels and scrollable risk content with a fixed footer; settings/shortcut routes and other caller profiles remain pending",
       "pendingDuplicates": [
-        "DshRiskDialog route and card -> shared Modal headed profile",
         "SettingsShell and shortcut reference routes -> shared Modal layer",
         "Raw schedule deletion dialog -> generated Modal profile"
       ]
@@ -562,7 +563,7 @@
       "manual-metric": 7
     },
     "packages/dsh_ui/lib/src/dsh_option_sheet.dart": {
-      "manual-metric": 8
+      "manual-metric": 3
     },
     "packages/dsh_ui/lib/src/dsh_phone_chrome.dart": {
       "manual-metric": 5

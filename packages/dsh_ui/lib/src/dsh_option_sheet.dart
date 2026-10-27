@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart' show showModalBottomSheet;
 import 'package:flutter/widgets.dart';
 
-import 'dsh_button.dart';
 import 'dsh_corners.dart';
 import 'dsh_icon.dart';
 import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
-import 'dsh_recipes.g.dart';
-import 'dsh_settings.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
+
+// Retain the existing direct library import while the components use separate files.
+export 'dsh_risk_dialog.dart';
 
 /// One choice of a [showDshOptionSheet].
 class DshOption {
@@ -216,212 +216,6 @@ class _Badge extends StatelessWidget {
         style: theme
             .textStyle('--dsw-font-xxxs-strong-11')
             .copyWith(color: theme.labelSecondary),
-      ),
-    );
-  }
-}
-
-/// The risk acknowledgement dialog (dsh `RiskConfirmation` over `Modal`): the
-/// confirm button stays disabled until the acknowledgement is checked.
-/// Resolves true when confirmed.
-Future<bool> showDshRiskDialog(
-  BuildContext context, {
-  required String title,
-  required String description,
-  required String acknowledgeLabel,
-  required String cancelLabel,
-  required String closeLabel,
-  required String confirmLabel,
-}) async {
-  final theme = context.dsh;
-  final confirmed = await showGeneralDialog<bool>(
-    context: context,
-    barrierDismissible: true,
-    barrierLabel: closeLabel,
-    barrierColor: theme.color('--dsw-alias-bg-mask-1'),
-    transitionDuration: Duration.zero,
-    pageBuilder: (dialogContext, _, _) => SafeArea(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: DshRiskDialog(
-            title: title,
-            description: description,
-            acknowledgeLabel: acknowledgeLabel,
-            cancelLabel: cancelLabel,
-            closeLabel: closeLabel,
-            confirmLabel: confirmLabel,
-          ),
-        ),
-      ),
-    ),
-  );
-  return confirmed ?? false;
-}
-
-/// The card of [showDshRiskDialog].
-class DshRiskDialog extends StatefulWidget {
-  const DshRiskDialog({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.acknowledgeLabel,
-    required this.cancelLabel,
-    required this.closeLabel,
-    required this.confirmLabel,
-  });
-
-  final String title;
-  final String description;
-  final String acknowledgeLabel;
-  final String cancelLabel;
-  final String closeLabel;
-  final String confirmLabel;
-
-  @override
-  State<DshRiskDialog> createState() => _DshRiskDialogState();
-}
-
-class _DshRiskDialogState extends State<DshRiskDialog> {
-  bool _acknowledged = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final body = theme
-        .textStyle('--dsw-font-s-14')
-        .copyWith(color: theme.labelSecondary);
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 440),
-      child: DshDecoratedBox(
-        key: const ValueKey('risk-dialog'),
-        decoration: theme.cornerDecoration(
-          theme.radiusPanel,
-          color: theme.color('--dsw-alias-bg-layer-2'),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 22, 14, 12),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: DshChromeText(
-                          widget.title,
-                          style: theme
-                              .textStyle('--dsw-font-base-strong-16')
-                              .copyWith(color: theme.labelPrimary),
-                        ),
-                      ),
-                      Semantics(
-                        button: true,
-                        label: widget.closeLabel,
-                        excludeSemantics: true,
-                        child: GestureDetector(
-                          key: const ValueKey('risk-close'),
-                          behavior: HitTestBehavior.opaque,
-                          onTap: () => Navigator.of(context).pop(false),
-                          child: SizedBox(
-                            width: 28,
-                            height: 28,
-                            child: Center(
-                              child: DshIcon(
-                                DshIcons.close,
-                                size: 14,
-                                color: theme.labelSecondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: DshIcon(
-                          DshIcons.warning,
-                          size: 18,
-                          color: theme.color('--dsw-alias-state-error-primary'),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: DshChromeText(
-                          widget.description,
-                          key: const ValueKey('risk-description'),
-                          style: body,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    24,
-                    DshCheckboxRecipe.riskMarginTop,
-                    24,
-                    20,
-                  ),
-                  child: DshCheckbox(
-                    key: const ValueKey('risk-acknowledge'),
-                    value: _acknowledged,
-                    onChanged: (v) => setState(() => _acknowledged = v),
-                    label: widget.acknowledgeLabel,
-                    profile: DshCheckboxProfile.riskAcknowledgement,
-                    autofocus: true,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Wrap(
-                    alignment: WrapAlignment.end,
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      DshButton(
-                        key: const ValueKey('risk-cancel'),
-                        variant: DshButtonVariant.outline,
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(minWidth: 44),
-                          child: DshChromeText(
-                            widget.cancelLabel,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      DshButton(
-                        key: const ValueKey('risk-confirm'),
-                        variant: DshButtonVariant.primary,
-                        onPressed: _acknowledged
-                            ? () => Navigator.of(context).pop(true)
-                            : null,
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(minWidth: 108),
-                          child: DshChromeText(
-                            widget.confirmLabel,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

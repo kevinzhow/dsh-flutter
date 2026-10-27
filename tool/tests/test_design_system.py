@@ -143,6 +143,49 @@ var AgentPresetSection_module_css_default = {"section":"r_section"};
         with self.assertRaisesRegex(ValueError, 'untranslated modal scrollbar structure'):
             gen.render(lock, altered)
 
+    def test_global_scrollbar_recipe_tracks_verified_geometry_and_l1_inheritance(self):
+        import copy
+        lock, original = gen.collect()
+        _, audit = gen.render(lock, original)
+        metrics = json.loads(audit)['metrics']
+        self.assertEqual(metrics['DshScrollbarRecipe'], {
+            'width': 5, 'radius': 999, 'thumbBorderWidth': 0, 'trackMargin': 0,
+            'thumbToken': '--dsw-alias-scrollbar-bg-l1', 'hoverToken': '--dsw-alias-scrollbar-hover-l1',
+        })
+        self.assertEqual(metrics['DshGuideReaderRecipe']['scrollbarThumbToken'], '--dsw-alias-scrollbar-bg-l2')
+        self.assertEqual(metrics['DshGuideReaderRecipe']['scrollbarHoverToken'], '--dsw-alias-scrollbar-hover-l2')
+        changed = copy.deepcopy(original)
+        rules = changed['ModalContext']['scrollbarRules']
+        next(rule for rule in rules if rule['selector'] == 'body')['declarations'].update({
+            '--dsh-scrollbar-width': '7px', '--dsh-scrollbar-thumb-border': '1px',
+            '--dsh-scrollbar-track-margin': '3px',
+        })
+        next(rule for rule in rules if rule['selector'] == '::-webkit-scrollbar-thumb')['declarations']['border-radius'] = '40px'
+        _, audit = gen.render(lock, changed)
+        measured = json.loads(audit)['metrics']
+        expected = {**metrics['DshScrollbarRecipe'], 'width': 7, 'radius': 40, 'thumbBorderWidth': 1, 'trackMargin': 3}
+        self.assertEqual(measured['DshScrollbarRecipe'], expected)
+        self.assertEqual(measured['DshGuideReaderRecipe']['scrollbarWidth'], 7)
+        self.assertEqual(measured['DshGuideReaderRecipe']['scrollbarRadius'], 40)
+        self.assertEqual(measured['DshGuideReaderRecipe']['scrollbarThumbBorderWidth'], 1)
+        self.assertEqual(measured['DshGuideReaderRecipe']['scrollbarTrackMargin'], 3)
+        for mode in ('unknown-state', 'unknown-property', 'unknown-condition', 'different-thumb', 'different-hover'):
+            changed = copy.deepcopy(original)
+            rules = changed['ModalContext']['scrollbarRules']
+            if mode == 'unknown-state':
+                rules.append({'selector': '::-webkit-scrollbar-thumb:active', 'conditions': [],
+                              'declarations': {'background': 'red'}})
+            elif mode == 'unknown-property':
+                rules[0]['declarations']['--dsh-scrollbar-extra'] = '1px'
+            elif mode == 'unknown-condition':
+                rules.append({'selector': '::-webkit-scrollbar-thumb', 'conditions': ['@media (prefers-color-scheme: dark)'],
+                              'declarations': {'background': 'red'}})
+            else:
+                prop = '--dsh-scrollbar-thumb' if mode == 'different-thumb' else '--dsh-scrollbar-thumb-hover'
+                next(rule for rule in rules if rule['selector'] == 'body')['declarations'][prop] = 'var(--dsw-alias-scrollbar-bg-l2)'
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'untranslated modal scrollbar'):
+                gen.render(lock, changed)
+
     def test_guide_published_minifier_normalization_preserves_source_drift_detection(self):
         import copy
         _, sheets = gen.collect()
@@ -171,6 +214,127 @@ var AgentPresetSection_module_css_default = {"section":"r_section"};
             guide.write_text(json.dumps({declaration['dependencyField']: {package['name']: '^0.3.0'}}))
             with self.assertRaisesRegex(ValueError, 'additional consumer drift'):
                 published.verify_packages(source)
+
+    def test_risk_dialog_metrics_follow_css_and_verified_bundle_without_changing_other_profiles(self):
+        import copy
+        lock, original = gen.collect()
+        _, baseline = gen.render(lock, original)
+        changed = copy.deepcopy(original)
+        rules = changed['RiskConfirmation.module.css']
+        def update(selector, **props):
+            next(rule for rule in rules if rule['selector'] == selector and not rule['conditions'])['declarations'].update(props)
+        update('.confirmation', width='min(480px, 100%)', **{'max-height': '80%'})
+        next(rule for rule in rules if rule['conditions'])['declarations']['max-height'] = 'calc(100dvh - 64px)'
+        update('.confirmationContent', **{'min-height': '2px'})
+        update('.warning', gap='12px', color='var(--dsw-alias-label-primary)',
+               **{'font-size': '16px', 'line-height': '24px'})
+        update('.warningIcon', color='var(--dsw-alias-state-business-primary)', **{'margin-top': '3px'})
+        update('.modalAction', **{'min-width': '80px'})
+        update('.confirmAction', **{'min-width': '148px'})
+        behavior = changed['ModalContext']['modalBehavior']
+        behavior['risk'] = behavior['risk'].replace('size: 18,', 'size: 20,')
+        _, audit = gen.render(lock, changed)
+        metrics = json.loads(audit)['metrics']
+        risk = metrics.pop('DshRiskDialogRecipe')
+        self.assertEqual(risk, {
+            'width': 480, 'maxHeightFactor': .8, 'dynamicViewportInset': 64, 'contentMinHeight': 2,
+            'warningGap': 12, 'warningFontSize': 16, 'warningLineHeight': 24,
+            'warningFontToken': gen.profile_font_token(16, 24), 'warningLabelToken': '--dsw-alias-label-primary',
+            'warningIconTop': 3, 'warningIconSize': 20, 'errorIconToken': '--dsw-alias-state-business-primary',
+            'actionMinWidth': 80, 'confirmMinWidth': 148,
+        })
+        baseline = json.loads(baseline)['metrics']
+        del baseline['DshRiskDialogRecipe']
+        self.assertEqual(metrics, baseline)
+
+    def test_risk_dialog_rejects_unknown_rules_conditions_and_untranslated_structures(self):
+        import copy
+        lock, original = gen.collect()
+        mutations = [
+            ('.confirmation', 'overflow', 'visible'),
+            ('.confirmationContent', 'overflow-y', 'visible'),
+            ('.confirmationContent', 'overscroll-behavior', 'auto'),
+            ('.warning', 'align-items', 'center'),
+            ('.warning p', 'margin', '4px'),
+            ('.warningIcon', 'flex', '1'),
+            ('.confirmation', 'width', '440px'),
+            ('.confirmation', 'max-height', '100dvh'),
+        ]
+        for selector, prop, value in mutations:
+            changed = copy.deepcopy(original)
+            next(rule for rule in changed['RiskConfirmation.module.css']
+                 if rule['selector'] == selector and not rule['conditions'])['declarations'][prop] = value
+            with self.subTest(selector=selector, prop=prop), self.assertRaisesRegex(ValueError, 'risk dialog'):
+                gen.render(lock, changed)
+        for mode in ('unknown-selector', 'unknown-property', 'unknown-condition', 'missing-cap',
+                     'duplicate-cap', 'different-support', 'different-viewport-unit'):
+            changed = copy.deepcopy(original)
+            rules = changed['RiskConfirmation.module.css']
+            cap = next(rule for rule in rules if rule['conditions'])
+            if mode == 'unknown-selector':
+                rules.append({'selector': '.confirmation:hover', 'conditions': [], 'declarations': {'opacity': '.5'}})
+            elif mode == 'unknown-property':
+                rules[0]['declarations']['padding'] = '2px'
+            elif mode == 'unknown-condition':
+                rules.append({'selector': '.confirmation', 'conditions': ['@media (prefers-color-scheme: dark)'],
+                              'declarations': {'max-height': '100%'}})
+            elif mode == 'missing-cap':
+                rules.remove(cap)
+            elif mode == 'duplicate-cap':
+                rules.append(copy.deepcopy(cap))
+            elif mode == 'different-support':
+                cap['conditions'] = ['@supports (height: 100svh)']
+            else:
+                cap['declarations']['max-height'] = 'calc(100svh - 48px)'
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'risk dialog'):
+                gen.render(lock, changed)
+
+    def test_risk_published_icon_and_control_structure_fail_closed(self):
+        import copy
+        lock, original = gen.collect()
+        risk_recipe = module('risk_recipes')
+        behavior = original['ModalContext']['modalBehavior']['risk']
+        source = '<IconWarningOutlineRegular size={18} className={css.warningIcon} />'
+        risk_recipe.verify_source_icon(behavior, source)
+        for changed_source in (source.replace('18', '20'), source + source, source.replace('warningIcon', 'other')):
+            with self.subTest(source=changed_source), self.assertRaisesRegex(ValueError, 'differs from its published bundle'):
+                risk_recipe.verify_source_icon(behavior, changed_source)
+        for old, replacement in [
+            ('IconWarningOutlineRegular', 'OtherIcon'),
+            ('contentClassName:', 'otherContentClassName:'),
+            ('disabled || !acknowledged', 'disabled'),
+            ('"data-modal-autofocus": true', '"data-modal-autofocus": false'),
+            ('onAcknowledgedChange(event.currentTarget.checked)', 'onAcknowledgedChange(true)'),
+        ]:
+            changed = copy.deepcopy(original)
+            behavior = changed['ModalContext']['modalBehavior']
+            self.assertIn(old, behavior['risk'])
+            behavior['risk'] = behavior['risk'].replace(old, replacement)
+            with self.subTest(input=old), self.assertRaisesRegex(ValueError, 'risk'):
+                gen.render(lock, changed)
+        changed = copy.deepcopy(original)
+        changed['ModalContext']['modalBehavior']['risk'] += '\nIconWarningOutlineRegular, { size: 18, className: css.warningIcon }'
+        with self.assertRaisesRegex(ValueError, 'risk warning icon declaration changed'):
+            gen.render(lock, changed)
+
+    def test_published_modal_snapshot_keeps_risk_behavior_region_unique(self):
+        import io
+        import tarfile
+        published = module('published')
+        names = ('useModalLayer', 'Modal', 'RiskConfirmation')
+        regions = {name: f'//#region lib/types/{name}.js\nfunction {name}() {{}}\n\n' for name in names}
+        bundle = ''.join(region + '//#endregion\n' for region in regions.values())
+        with tempfile.TemporaryDirectory() as d:
+            archive = pathlib.Path(d) / 'primitive.tgz'
+            with tarfile.open(archive, 'w:gz') as tar:
+                data = bundle.encode(); info = tarfile.TarInfo('package/lib/index.js'); info.size = len(data)
+                tar.addfile(info, io.BytesIO(data))
+            snapshot = published.modal_layer_snapshot(archive)
+            self.assertEqual(snapshot['layer'], regions['useModalLayer'])
+            self.assertEqual(snapshot['modal'], regions['Modal'])
+            self.assertEqual(snapshot['risk'], regions['RiskConfirmation'])
+            with self.assertRaisesRegex(ValueError, 'missing/ambiguous'):
+                published.bundle_region(bundle + regions['RiskConfirmation'] + '//#endregion\n', 'RiskConfirmation.js')
 
     def test_segmented_tab_transition_tracks_each_source_duration_and_rejects_unknown_easing(self):
         import copy

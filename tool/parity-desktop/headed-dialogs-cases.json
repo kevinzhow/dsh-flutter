@@ -1,0 +1,2382 @@
+{
+  "cases": [
+    {
+      "id": "headed-dialogs.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "capture": "home-initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "home-initial",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "normal-keyboard-off"
+        },
+        {
+          "click": [
+            764,
+            475
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-keyboard-on"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-on",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-initial",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "home-confirmed"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-keyboard-reset"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-reset",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-confirmed",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-confirmed",
+            "rect": [
+              24,
+              222,
+              200,
+              250
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "home-canceled"
+        },
+        {
+          "click": [
+            150,
+            42
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-pointer-off"
+        },
+        {
+          "click": [
+            452,
+            426
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-pointer-on"
+        },
+        {
+          "click": [
+            646,
+            475
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-on",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-pointer-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-return-after-cancel"
+        },
+        {
+          "click": [
+            832,
+            239
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-return-after-cancel",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-close-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-cancel-enter"
+        },
+        {
+          "click": [
+            180,
+            98
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "long-auto-bottom-off"
+        },
+        {
+          "scroll": [
+            640,
+            300,
+            10000
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              441,
+              594,
+              463,
+              616
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              444,
+              635,
+              836,
+              673
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              441,
+              594,
+              463,
+              616
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              693,
+              639,
+              836,
+              669
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-bottom-on"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              607,
+              634,
+              686,
+              674
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              635,
+              836,
+              673
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-bottom-refocused"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              635,
+              836,
+              673
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-top-close-focused"
+        },
+        {
+          "scroll": [
+            640,
+            300,
+            -10000
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-top-close-focused",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              635,
+              836,
+              673
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              444,
+              635,
+              836,
+              673
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-returned-bottom"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-returned-bottom",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-long-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              441,
+              594,
+              463,
+              616
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              693,
+              639,
+              836,
+              669
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-reopened-bottom-off"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-reopened-bottom-off",
+            "rect": [
+              444,
+              40,
+              830,
+              584
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            170,
+            154
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "disabled-open"
+        },
+        {
+          "click": [
+            452,
+            426
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            764,
+            475
+          ]
+        },
+        {
+          "move": [
+            1260,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              607,
+              455,
+              686,
+              495
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              816,
+              223,
+              848,
+              255
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-skips-confirm"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-skips-confirm",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-disabled-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              441,
+              415,
+              463,
+              437
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              693,
+              460,
+              836,
+              490
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-restored-opener"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-restored-opener",
+            "rect": [
+              444,
+              284,
+              836,
+              401
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-final"
+        }
+      ]
+    },
+    {
+      "id": "headed-dialogs.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "capture": "home-initial"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "home-initial",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "normal-keyboard-off"
+        },
+        {
+          "click": [
+            270,
+            559
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-keyboard-on"
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-on",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-initial",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "home-confirmed"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-keyboard-reset"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-reset",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-confirmed",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-confirmed",
+            "rect": [
+              24,
+              222,
+              200,
+              250
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "home-canceled"
+        },
+        {
+          "click": [
+            150,
+            42
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-pointer-off"
+        },
+        {
+          "click": [
+            56,
+            488
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-pointer-on"
+        },
+        {
+          "click": [
+            152,
+            559
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-pointer-on",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-pointer-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "normal-return-after-cancel"
+        },
+        {
+          "click": [
+            338,
+            279
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-return-after-cancel",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-close-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-cancel-enter"
+        },
+        {
+          "click": [
+            180,
+            98
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "long-auto-bottom-off"
+        },
+        {
+          "scroll": [
+            190,
+            370,
+            10000
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              45,
+              696,
+              67,
+              718
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              48,
+              759,
+              342,
+              797
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              45,
+              696,
+              67,
+              718
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              199,
+              763,
+              339,
+              793
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-bottom-on"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              114,
+              758,
+              191,
+              798
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              759,
+              342,
+              797
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-bottom-refocused"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              759,
+              342,
+              797
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-top-close-focused"
+        },
+        {
+          "scroll": [
+            190,
+            370,
+            -10000
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-top-close-focused",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              759,
+              342,
+              797
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-bottom-on",
+            "rect": [
+              48,
+              759,
+              342,
+              797
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-returned-bottom"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-returned-bottom",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-long-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              45,
+              696,
+              67,
+              718
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "long-auto-bottom-off",
+            "rect": [
+              199,
+              763,
+              339,
+              793
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "long-reopened-bottom-off"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "long-reopened-bottom-off",
+            "rect": [
+              48,
+              40,
+              337,
+              686
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            170,
+            154
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "normal-keyboard-off",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": true
+          }
+        },
+        {
+          "capture": "disabled-open"
+        },
+        {
+          "click": [
+            56,
+            488
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            270,
+            559
+          ]
+        },
+        {
+          "move": [
+            370,
+            20
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              114,
+              539,
+              191,
+              579
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              322,
+              263,
+              354,
+              295
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-skips-confirm"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-skips-confirm",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-disabled-canceled"
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              45,
+              477,
+              67,
+              499
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "disabled-open",
+            "rect": [
+              199,
+              544,
+              339,
+              574
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "disabled-restored-opener"
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "expect": {
+            "reference": "disabled-restored-opener",
+            "rect": [
+              48,
+              326,
+              339,
+              458
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "home-canceled",
+            "rect": [
+              24,
+              188,
+              350,
+              219
+            ],
+            "changed": false
+          }
+        },
+        {
+          "capture": "home-final"
+        }
+      ]
+    }
+  ]
+}
