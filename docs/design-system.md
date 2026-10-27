@@ -242,6 +242,9 @@ inventory page still has a different row layout and retains its enabled-state
 text; other source Tag consumers remain to be migrated. The family ratchet
 prevents the retired private components from returning.
 
+The settings field also exposes accessibility activation for its reset and
+help buttons; disabled reset remains unavailable.
+
 Reference captures use the actual DSH shell settings, agent-preset section and
 plugin inventory components. Crop dimensions can differ when the surrounding
 page positions a tag at a different fraction of a device pixel; the reference

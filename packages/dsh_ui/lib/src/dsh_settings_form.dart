@@ -350,6 +350,7 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
           enabled: !widget.disabled,
           label: widget.resetLabel,
           excludeSemantics: true,
+          onTap: widget.disabled ? null : widget.onReset,
           child: GestureDetector(
             key: DshSettingsValueField.resetKey(id),
             behavior: HitTestBehavior.opaque,
@@ -386,6 +387,7 @@ class _DshSettingsValueFieldState extends State<DshSettingsValueField> {
             expanded: _helpOpen,
             label: help.label,
             excludeSemantics: true,
+            onTap: () => setState(() => _helpOpen = !_helpOpen),
             child: GestureDetector(
               key: DshSettingsValueField.helpKey(id),
               behavior: HitTestBehavior.opaque,
