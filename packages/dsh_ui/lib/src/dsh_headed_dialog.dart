@@ -203,15 +203,9 @@ class _DshHeadedDialogContentState extends State<DshHeadedDialogContent> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: DshModalRecipe.footerHorizontalPadding,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        for (var i = 0; i < widget.footer!.length; i++) ...[
-                          if (i > 0)
-                            const SizedBox(width: DshModalRecipe.footerGap),
-                          widget.footer![i],
-                        ],
-                      ],
+                    child: _HeadedFooter(
+                      gap: DshModalRecipe.footerGap,
+                      children: widget.footer!,
                     ),
                   ),
           ),
@@ -261,6 +255,175 @@ class _DshHeadedDialogContentState extends State<DshHeadedDialogContent> {
       ),
     );
   }
+}
+
+/// Keep natural action widths while they fit, then shrink toward min-content
+/// widths, including explicit caller minima. Risk's one-word Cancel freezes
+/// at its minimum and Confirm receives the remaining width, as in the source.
+/// Arbitrary children use outer natural widths as shrink weights: if several
+/// shrink together this approximates CSS, whose weights exclude box padding.
+class _HeadedFooter extends MultiChildRenderObjectWidget {
+  const _HeadedFooter({required this.gap, required super.children});
+  final double gap;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderHeadedFooter(gap);
+
+  @override
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderHeadedFooter renderObject,
+  ) {
+    renderObject.gap = gap;
+  }
+}
+
+class _RenderHeadedFooter extends RenderBox
+    with
+        ContainerRenderObjectMixin<RenderBox, _HeadedParentData>,
+        RenderBoxContainerDefaultsMixin<RenderBox, _HeadedParentData> {
+  _RenderHeadedFooter(this._gap);
+  double _gap;
+
+  set gap(double value) {
+    if (_gap == value) return;
+    _gap = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void setupParentData(RenderBox child) {
+    if (child.parentData is! _HeadedParentData) {
+      child.parentData = _HeadedParentData();
+    }
+  }
+
+  List<RenderBox> get _children => [
+    for (var child = firstChild; child != null; child = childAfter(child))
+      child,
+  ];
+
+  double get _spacing => math.max(0, childCount - 1) * _gap;
+
+  List<double> _widths(
+    BoxConstraints constraints,
+    List<RenderBox> children,
+    List<Size> natural,
+  ) {
+    final widths = natural.map((size) => size.width).toList();
+    if (!constraints.hasBoundedWidth ||
+        widths.fold(0.0, (sum, width) => sum + width) + _spacing <=
+            constraints.maxWidth) {
+      return widths;
+    }
+    final minima = [
+      for (var i = 0; i < children.length; i++)
+        math.min(
+          widths[i],
+          children[i].getMinIntrinsicWidth(constraints.maxHeight),
+        ),
+    ];
+    final flexible = {for (var i = 0; i < children.length; i++) i};
+    while (flexible.isNotEmpty) {
+      final deficit =
+          widths.fold(0.0, (sum, width) => sum + width) +
+          _spacing -
+          constraints.maxWidth;
+      if (deficit <= 0) break;
+      final weight = flexible.fold(
+        0.0,
+        (sum, index) => sum + natural[index].width,
+      );
+      if (weight <= 0) break;
+      final frozen = <int>[];
+      for (final index in flexible) {
+        final target = widths[index] - deficit * natural[index].width / weight;
+        if (target < minima[index]) {
+          widths[index] = minima[index];
+          frozen.add(index);
+        }
+      }
+      if (frozen.isEmpty) {
+        for (final index in flexible) {
+          widths[index] -= deficit * natural[index].width / weight;
+        }
+        break;
+      }
+      flexible.removeAll(frozen);
+    }
+    return widths;
+  }
+
+  @override
+  double computeMinIntrinsicWidth(double height) =>
+      _children.fold(
+        0.0,
+        (sum, child) => sum + child.getMinIntrinsicWidth(height),
+      ) +
+      _spacing;
+
+  @override
+  double computeMaxIntrinsicWidth(double height) =>
+      _children.fold(
+        0.0,
+        (sum, child) => sum + child.getMaxIntrinsicWidth(height),
+      ) +
+      _spacing;
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) {
+    final children = _children;
+    final loose = BoxConstraints(maxHeight: constraints.maxHeight);
+    final natural = [for (final child in children) child.getDryLayout(loose)];
+    final widths = _widths(constraints, children, natural);
+    var height = 0.0;
+    for (var i = 0; i < children.length; i++) {
+      height = math.max(
+        height,
+        children[i].getDryLayout(loose.tighten(width: widths[i])).height,
+      );
+    }
+    return constraints.constrain(
+      Size(widths.fold(0.0, (sum, width) => sum + width) + _spacing, height),
+    );
+  }
+
+  @override
+  void performLayout() {
+    final children = _children;
+    final loose = BoxConstraints(maxHeight: constraints.maxHeight);
+    for (final child in children) {
+      child.layout(loose, parentUsesSize: true);
+    }
+    final widths = _widths(constraints, children, [
+      for (final child in children) child.size,
+    ]);
+    var height = 0.0;
+    for (var i = 0; i < children.length; i++) {
+      children[i].layout(loose.tighten(width: widths[i]), parentUsesSize: true);
+      height = math.max(height, children[i].size.height);
+    }
+    final totalWidth = widths.fold(0.0, (sum, width) => sum + width) + _spacing;
+    size = constraints.constrain(Size(totalWidth, height));
+    var left = size.width - totalWidth;
+    for (var i = 0; i < children.length; i++) {
+      final child = children[i];
+      (child.parentData! as _HeadedParentData).offset = Offset(
+        left,
+        (size.height - child.size.height) / 2,
+      );
+      left += widths[i] + _gap;
+    }
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) =>
+      defaultPaint(context, offset);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
 }
 
 /// CSS overflow:auto reserves its scrollbar only when the full-width content

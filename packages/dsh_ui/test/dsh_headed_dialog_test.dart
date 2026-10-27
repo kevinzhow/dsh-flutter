@@ -154,6 +154,58 @@ void main() {
     expect(position.maxScrollExtent, 0);
   });
 
+  testWidgets(
+    'footer actions shrink text to fit while retaining their minima',
+    (tester) async {
+      await pumpDialog(
+        tester,
+        DshHeadedDialogContent(
+          title: 'Enable Full access?',
+          closeLabel: 'Close confirmation',
+          onClose: () {},
+          footerKey: footerKey,
+          footer: [
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 72),
+              child: DshButton(
+                key: cancelKey,
+                variant: DshButtonVariant.outline,
+                onPressed: () {},
+                child: const DshChromeText('Cancel'),
+              ),
+            ),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minWidth: 136),
+              child: DshButton(
+                key: confirmKey,
+                variant: DshButtonVariant.primary,
+                onPressed: () {},
+                child: const DshChromeText('Enable Full access'),
+              ),
+            ),
+          ],
+        ),
+      );
+
+      // The default test face is wider than the pinned production fonts. CSS
+      // flex-shrink keeps both actions in the 392px footer and wraps the long
+      // label, instead of overflowing its right edge.
+      final cancel = tester.getRect(find.byKey(cancelKey));
+      final confirm = tester.getRect(find.byKey(confirmKey));
+      final footer = tester.getRect(find.byKey(footerKey));
+      expect(cancel.width, greaterThanOrEqualTo(72));
+      expect(confirm.width, greaterThanOrEqualTo(136));
+      expect(cancel.left, greaterThanOrEqualTo(24));
+      expect(confirm.right, closeTo(footer.right - 24, 0.001));
+      expect(confirm.left - cancel.right, 8);
+      expect(
+        tester.getSize(find.text('Enable Full access')).height,
+        greaterThan(22),
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
   testWidgets('long content scrolls its header while the footer stays fixed', (
     tester,
   ) async {
