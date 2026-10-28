@@ -9,7 +9,7 @@ failure), then prints a summary table and one `preflight: ...` line for the PR.
   tool-tests       python unit tests under tool/tests
   codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
   theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
-  design-system    published source recipes, dependency drift and per-file family ratchets
+  design-system    released archive reconstruction, source inventory, recipes and family ratchets
   i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
   icons            tool/icons/gen_icons.py, gen_code_language.py and gen_file_types.py --check: icon paths and code-language tables are
                    fresh against the pinned dsh checkout
@@ -133,13 +133,26 @@ def c_theme_pack():
 
 def c_design_system():
     src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local/dsh-src')))
-    command = [sys.executable, '-I', 'tool/design-system/generate.py', '--check']
+    source_commands = [
+        [sys.executable, '-I', 'tool/design-system/generate.py', '--check'],
+        [sys.executable, '-I', 'tool/design-system/source_inventory.py', '--check'],
+    ]
     if not (src / 'packages/client/ui-primitives/package.json').is_file():
-        command.append('--snapshot-only')
-    result = run(command)
-    if result[0] != 0:
-        return result
-    return run([sys.executable, '-I', 'tool/design-system/check.py'])
+        for command in source_commands:
+            command.append('--snapshot-only')
+    commands = [
+        [sys.executable, '-I', 'tool/design-system/verify_release_inputs.py',
+         '--receipt', str(OUT_DIR / 'release-inputs.json')],
+        *source_commands,
+        [sys.executable, '-I', 'tool/design-system/check.py'],
+    ]
+    results = []
+    for command in commands:
+        result = run(command)
+        results.append(result)
+        if result[0] != 0:
+            break
+    return results[-1][0], '\n'.join(r[1].strip() for r in results), sum(r[2] for r in results)
 
 
 def c_i18n():
