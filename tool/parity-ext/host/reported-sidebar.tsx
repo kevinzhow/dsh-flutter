@@ -5,7 +5,8 @@ import {SidebarRoot} from '@dsh/ui-sidebar/src/client/SidebarRoot.tsx'
 import {WorkspaceBrowser} from '@dsh/ui-workspace/src/client/rows/WorkspaceBrowser.tsx'
 import {SettingsRoot} from '@dsh/ui-settings-general/src/client/SettingsRoot.tsx'
 import {AccountMenu} from '@dsh/ui-settings-account/src/client/AccountMenu.tsx'
-import {IconClockOutlineRegular, IconPersonalizationOutlineRegular, IconProjectAddOutlineRegular} from '@deepseek-ai/dsh-client-ui-primitives'
+import {PluginsPanelIcon} from '@dsh/ui-plugin-manager/src/client/PluginsPanelIcon.tsx'
+import {IconClockOutlineRegular} from '@deepseek-ai/dsh-client-ui-primitives'
 import {en as sidebarEn,zh as sidebarZh} from '@dsh/ui-sidebar/src/client/locales.ts'
 import {en as workspaceEn,zh as workspaceZh} from '@dsh/ui-workspace/src/client/locales.ts'
 import {en as settingsEn,zh as settingsZh} from '@dsh/ui-settings-general/src/client/locales.ts'
@@ -44,7 +45,7 @@ function ReportedSidebar({props,ctx}:any){
  const render=(seat:string,owner:any,options:any):any=>{
   if(seat==='sidebar.brand.mark')return <span style={{display:'inline-flex',width:24,height:24,alignItems:'center',justifyContent:'center',fontSize:24,lineHeight:'24px'}}>🐳</span>
   if(seat==='sidebar.brand.name')return 'Whalee'
-  if(seat==='sidebar.panellist')return options.only==='plugins'?<IconPersonalizationOutlineRegular size={owner.size}/>:<IconClockOutlineRegular size={owner.size}/>
+  if(seat==='sidebar.panellist')return options.only==='plugins'?<PluginsPanelIcon {...owner}/>:<IconClockOutlineRegular size={owner.size}/>
   if(seat==='sidebar.workspaces')return <WorkspaceBrowser {...{
    ...owner,useStore,actions,useSessions,usePanelInfo,useSessionStatus:fixed(new Map()),useWorkspaces:fixed(workspaces),
    useShortcuts:fixed([]),useWorkspaceShortcuts:fixed({addRequested:false,searchRequested:0}),useHostInfo:fixed({home:undefined,isLoopback:true}),
