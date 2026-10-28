@@ -1,9 +1,8 @@
 import 'package:dsh_i18n/dsh_i18n.dart';
+import 'package:dsh_feature_model_selection/testing.dart';
 import 'package:dsh_parity/dsh_parity.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
-
-import '../helpers/reported_model_fixture.dart';
 
 final Map<String, ParityCase> reportedModelCases = {
   'reported-model.menu': ParityCase(

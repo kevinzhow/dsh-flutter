@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dsh_client/dsh_client.dart' show RemoteException;
 import 'package:dsh_client/generated.dart' as session_ns;
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
+import 'package:dsh_feature_model_selection/testing.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
@@ -783,6 +784,32 @@ void main() {
         expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
       },
     );
+
+    testWidgets('public test support runs the real selector and projection', (
+      t,
+    ) async {
+      await t.pumpWidget(
+        dshTestApp(
+          const ReportedModelFixture(i18n: DshI18n(DshLocale.en)),
+          size: const Size(390, 800),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('model-root-effort')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('effort-option-effort:low')));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(
+        find.text('Selection: deepseek-official/flash/low'),
+        findsOneWidget,
+      );
+      expect(find.text('Low'), findsOneWidget);
+      await t.pumpWidget(const SizedBox.shrink());
+      await t.runAsync(() => flush(3));
+    });
   });
 }
 

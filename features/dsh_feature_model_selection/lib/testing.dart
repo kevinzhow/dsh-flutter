@@ -1,5 +1,8 @@
-// A synthetic caller-owned Host, rendered by the actual production ModelSeat.
-// This helper intentionally depends on neither flutter_test nor dsh_parity.
+/// Test support for rendering the production model menu over synthetic data.
+/// Import this entry point only from tests and tools; it has no dependency on
+/// flutter_test or dsh_parity and is not exported by the normal runtime entry.
+library;
+
 import 'dart:async';
 
 import 'package:dsh_client/generated.dart' as session;
@@ -129,13 +132,13 @@ class _ReportedModelFixtureState extends State<ReportedModelFixture> {
   Widget build(BuildContext context) => Stack(
     children: [
       Positioned(
-        right: 24,
-        bottom: 24,
+        right: DshSpace.xl,
+        bottom: DshSpace.xl,
         child: ModelSeat(directory: _directory, i18n: widget.i18n),
       ),
       Positioned(
-        left: 24,
-        top: 24,
+        left: DshSpace.xl,
+        top: DshSpace.xl,
         child: DshChromeText(
           'Selection: $_result',
           key: const ValueKey('reported-model-result'),
