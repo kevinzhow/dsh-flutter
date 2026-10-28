@@ -130,8 +130,12 @@
     },
     {
       "name": "drawers-and-navigation",
-      "canonical": [],
-      "migrationStatus": "inventory only; recipe migration pending",
+      "canonical": [
+        "features/dsh_feature_sidebar/lib/src/sidebar_root.dart",
+        "features/dsh_feature_sidebar/lib/src/leading_controls.dart",
+        "features/dsh_feature_session/lib/src/workspace/browser.dart"
+      ],
+      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; pointer scrollbar, keyboard sidebar controls, collapse-entry animations and macOS window vibrancy remain pending",
       "pendingDuplicates": []
     },
     {
@@ -409,7 +413,7 @@
       "manual-metric": 15
     },
     "features/dsh_feature_session/lib/src/workspace/browser.dart": {
-      "manual-metric": 78
+      "manual-metric": 73
     },
     "features/dsh_feature_session/lib/src/workspace/hover_card.dart": {
       "manual-metric": 2
@@ -430,7 +434,7 @@
       "manual-metric": 7
     },
     "features/dsh_feature_settings/lib/src/settings_shell.dart": {
-      "manual-metric": 9
+      "manual-metric": 4
     },
     "features/dsh_feature_settings/lib/src/subagent_settings.dart": {
       "manual-metric": 6
@@ -445,7 +449,7 @@
       "manual-metric": 4
     },
     "features/dsh_feature_sidebar/lib/src/sidebar_root.dart": {
-      "manual-metric": 13
+      "manual-metric": 7
     },
     "features/dsh_feature_sidebar_right/lib/src/guide.dart": {
       "manual-metric": 3

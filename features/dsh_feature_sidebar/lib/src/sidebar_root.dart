@@ -119,8 +119,18 @@ class _SidebarRootState extends State<SidebarRoot> {
     final padding = windows && collapsed
         ? EdgeInsets.zero
         : rail
-        ? const EdgeInsets.fromLTRB(10, 18, 10, 6)
-        : const EdgeInsets.fromLTRB(12, 6, 12, 6);
+        ? const EdgeInsets.fromLTRB(
+            DshSidebarRecipe.railInlinePadding,
+            DshSidebarRecipe.railTopPadding,
+            DshSidebarRecipe.railInlinePadding,
+            DshSidebarRecipe.railBottomPadding,
+          )
+        : EdgeInsets.fromLTRB(
+            DshSidebarRecipe.inlinePadding,
+            darwin ? 0 : DshSidebarRecipe.verticalPadding,
+            DshSidebarRecipe.inlinePadding,
+            DshSidebarRecipe.verticalPadding,
+          );
 
     // A drawer closes once something in it was picked.
     void closeDrawer() {
@@ -147,14 +157,25 @@ class _SidebarRootState extends State<SidebarRoot> {
       if (darwin)
         chrome.drag(
           SizedBox(
-            height: 52,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
-              child: Align(
-                alignment: chrome.fullscreen
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight,
-                child: toggle,
+            // The source strip cancels the root top inset and the following
+            // logo overlaps its last 12px. Allocate that overlap once, while
+            // retaining the toggle's full 52px coordinate space.
+            height:
+                DshSidebarRecipe.topStripHeight - DshSidebarRecipe.logoTopTuck,
+            child: OverflowBox(
+              alignment: Alignment.topCenter,
+              minHeight: DshSidebarRecipe.topStripHeight,
+              maxHeight: DshSidebarRecipe.topStripHeight,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: DshSidebarRecipe.topStripFootPadding,
+                ),
+                child: Align(
+                  alignment: chrome.fullscreen
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
+                  child: toggle,
+                ),
               ),
             ),
           ),
@@ -170,7 +191,6 @@ class _SidebarRootState extends State<SidebarRoot> {
             label: _t('session.new.label'),
             onNew: picked(widget.services.startSession),
             toggle: darwin || windows || owner.drawer ? null : toggle,
-            topTuck: darwin,
           ),
         ),
       _NewSession(
@@ -197,17 +217,28 @@ class _SidebarRootState extends State<SidebarRoot> {
         ),
       Expanded(
         child: Padding(
-          padding: wide ? const EdgeInsets.only(left: 0) : EdgeInsets.zero,
+          padding: EdgeInsets.zero,
           // dsh fills this region with the workspace browser; the composition
           // supplies it (`sidebar.workspaces` itself is the browser's add action).
-          child: widget.services.browsingRegion(
-            context,
-            SidebarSectionOwner(
-              wide: wide,
-              expandSidebar: () {
-                if (collapsed) widget.services.layout.toggleSidebar();
-              },
-              navigated: owner.drawer ? closeDrawer : null,
+          child: LayoutBuilder(
+            builder: (context, constraints) => OverflowBox(
+              alignment: Alignment.topLeft,
+              minWidth:
+                  constraints.maxWidth +
+                  (wide ? DshSidebarRecipe.regionScrollbarExpansion : 0),
+              maxWidth:
+                  constraints.maxWidth +
+                  (wide ? DshSidebarRecipe.regionScrollbarExpansion : 0),
+              child: widget.services.browsingRegion(
+                context,
+                SidebarSectionOwner(
+                  wide: wide,
+                  expandSidebar: () {
+                    if (collapsed) widget.services.layout.toggleSidebar();
+                  },
+                  navigated: owner.drawer ? closeDrawer : null,
+                ),
+              ),
             ),
           ),
         ),
@@ -258,7 +289,6 @@ class _LogoRow extends StatelessWidget {
     required this.label,
     required this.onNew,
     required this.toggle,
-    required this.topTuck,
   });
 
   final bool wide;
@@ -269,13 +299,16 @@ class _LogoRow extends StatelessWidget {
   final String label;
   final VoidCallback onNew;
   final Widget? toggle;
-  final bool topTuck;
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
     // Rail: 36px, the toggle left, 12 below. Wide: 60px with 8/0/8/4 padding.
-    final height = windows ? 40.0 : (wide ? 60.0 : 36.0);
+    final height = windows
+        ? DshSidebarRecipe.windowsLogoHeight
+        : (wide
+              ? DshSidebarRecipe.logoHeight
+              : DshSidebarRecipe.railLogoHeight);
     final mark =
         slots.renderSingle(
           DshShellSlots.sidebarBrandMark.typed<SidebarBrandMarkOwner, Widget>(),
@@ -291,14 +324,21 @@ class _LogoRow extends StatelessWidget {
           brandName,
           maxLines: 1,
           style: theme
-              .textStyle('--dsw-font-base-strong-16')
-              .copyWith(color: theme.labelPrimary),
+              .fixedTextStyle(
+                size: DshSidebarRecipe.brandFontSize,
+                line: DshSidebarRecipe.brandLineHeight,
+              )
+              .copyWith(
+                color: theme.labelPrimary,
+                fontWeight: windows ? FontWeight.w400 : FontWeight.w600,
+                letterSpacing: DshSidebarRecipe.brandLetterSpacing,
+              ),
         );
     final identity = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         mark,
-        const SizedBox(width: 8),
+        const SizedBox(width: DshSidebarRecipe.brandGap),
         Flexible(child: name),
       ],
     );
@@ -321,18 +361,23 @@ class _LogoRow extends StatelessWidget {
     );
     return Padding(
       padding: EdgeInsets.only(
-        top: topTuck ? 0 : 0,
-        bottom: windows || !wide ? (windows ? 0 : 12) : 4,
+        bottom: windows
+            ? 0
+            : (!wide
+                  ? DshSidebarRecipe.railLogoBottomMargin
+                  : DshSidebarRecipe.logoBottomMargin),
       ),
       child: SizedBox(
-        height: wide || windows ? height - (topTuck ? 12 : 0) : height,
+        height: height,
         child: Padding(
           padding: wide
               ? EdgeInsets.fromLTRB(
-                  windows ? 8 : 4,
-                  windows ? 0 : 8,
+                  windows
+                      ? DshSidebarRecipe.logoLeftPadding * 2
+                      : DshSidebarRecipe.logoLeftPadding,
+                  windows ? 0 : DshSidebarRecipe.logoTopPadding,
                   0,
-                  windows ? 0 : 8,
+                  windows ? 0 : DshSidebarRecipe.logoTopPadding,
                 )
               : EdgeInsets.zero,
           child: Row(
@@ -380,7 +425,7 @@ class _ToggleState extends State<_Toggle> {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final rail = !widget.wide && !widget.windows;
-    final box = rail ? 36.0 : 28.0;
+    final box = rail ? DshSidebarRecipe.railIconBox : DshSidebarRecipe.iconBox;
     final iconSize = rail ? 18.0 : 16.0;
     final ink = rail ? theme.labelPrimary : theme.labelSecondary;
     Widget glyph;
@@ -474,7 +519,9 @@ class _NewSessionState extends State<_NewSession> {
       // controls); the rail keeps a plain 36px icon control.
       if (widget.windows) return const SizedBox.shrink();
       return Padding(
-        padding: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.only(
+          bottom: DshSidebarRecipe.newBottomMargin,
+        ),
         child: DshTooltip(
           label: widget.aria,
           shortcutKeys: widget.keys,
@@ -490,8 +537,8 @@ class _NewSessionState extends State<_NewSession> {
                 behavior: HitTestBehavior.opaque,
                 onTap: widget.onPressed,
                 child: DshContainer(
-                  width: 36,
-                  height: 36,
+                  width: DshSidebarRecipe.railIconBox,
+                  height: DshSidebarRecipe.railIconBox,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: _hover ? theme.interactiveBgHover : null,
@@ -514,8 +561,12 @@ class _NewSessionState extends State<_NewSession> {
               .color('--dsw-static-neutral-bluish-00')
               .withValues(
                 alpha: theme.brightness == Brightness.dark
-                    ? (_hover ? 0.2 : 0.15)
-                    : (_hover ? 0.3 : 0.55),
+                    ? (_hover
+                          ? DshSidebarRecipe.darwinNewDarkHoverAlpha
+                          : DshSidebarRecipe.darwinNewDarkAlpha)
+                    : (_hover
+                          ? DshSidebarRecipe.darwinNewHoverAlpha
+                          : DshSidebarRecipe.darwinNewAlpha),
               )
         : _hover
         ? theme.color('--dsw-alias-button-floating-hover')
@@ -525,10 +576,10 @@ class _NewSessionState extends State<_NewSession> {
         .copyWith(color: theme.labelPrimary);
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        widget.windows ? 0 : 2,
-        widget.windows ? 8 : 0,
-        2,
-        12,
+        widget.windows ? 0 : DshSidebarRecipe.newInlineMargin,
+        widget.windows ? DshSidebarRecipe.logoTopPadding : 0,
+        DshSidebarRecipe.newInlineMargin,
+        DshSidebarRecipe.newBottomMargin,
       ),
       child: MouseRegion(
         onEnter: (_) => setState(() => _hover = true),
@@ -542,13 +593,16 @@ class _NewSessionState extends State<_NewSession> {
             behavior: HitTestBehavior.opaque,
             onTap: widget.onPressed,
             child: DshContainer(
-              height: 38,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              height: DshSidebarRecipe.newHeight,
+              padding: const EdgeInsets.symmetric(
+                horizontal: DshSidebarRecipe.newHorizontalPadding,
+                vertical: DshSidebarRecipe.newVerticalPadding,
+              ),
               decoration: BoxDecoration(
                 color: fill,
                 borderRadius: BorderRadius.circular(theme.radiusMd),
                 border: Border.all(
-                  color: theme.color('--dsw-alias-border-l3'),
+                  color: theme.color(DshSidebarRecipe.newBorderToken),
                   width: hairline,
                 ),
               ),
@@ -564,7 +618,7 @@ class _NewSessionState extends State<_NewSession> {
                         size: 14,
                         color: theme.labelPrimary,
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: DshSidebarRecipe.newGap),
                       Flexible(
                         child: DshChromeText(
                           widget.label,
@@ -611,14 +665,23 @@ class _PanelList extends StatelessWidget {
     final slot = DshShellSlots.sidebarPanellist
         .typed<SidebarPanelIconOwner, Widget>();
     return Padding(
-      padding: EdgeInsets.only(bottom: wide ? 8 : 12),
+      padding: EdgeInsets.only(
+        bottom: wide
+            ? DshSidebarRecipe.panelListBottomMargin
+            : DshSidebarRecipe.railPanelGap,
+      ),
       child: Column(
         crossAxisAlignment: wide
             ? CrossAxisAlignment.stretch
             : CrossAxisAlignment.start,
         children: [
           for (var i = 0; i < panels.length; i++) ...[
-            if (i > 0) SizedBox(height: wide ? 4 : 12),
+            if (i > 0)
+              SizedBox(
+                height: wide
+                    ? DshSidebarRecipe.panelListGap
+                    : DshSidebarRecipe.railPanelGap,
+              ),
             _PanelRow(
               key: ValueKey('sidebar-panel-${panels[i].id}'),
               wide: wide,
@@ -669,12 +732,21 @@ class _PanelRowState extends State<_PanelRow> {
     final theme = context.dsh;
     final fill = widget.active || _hover ? theme.interactiveBgHover : null;
     final row = DshContainer(
-      constraints: widget.wide ? const BoxConstraints(minHeight: 36) : null,
-      width: widget.wide ? null : 36,
-      height: widget.wide ? null : 36,
-      margin: widget.wide ? const EdgeInsets.symmetric(horizontal: 2) : null,
+      constraints: widget.wide
+          ? const BoxConstraints(minHeight: DshSidebarRecipe.panelHeight)
+          : null,
+      width: widget.wide ? null : DshSidebarRecipe.railIconBox,
+      height: widget.wide ? null : DshSidebarRecipe.railIconBox,
+      margin: widget.wide
+          ? const EdgeInsets.symmetric(
+              horizontal: DshSidebarRecipe.newInlineMargin,
+            )
+          : null,
       padding: widget.wide
-          ? const EdgeInsets.symmetric(horizontal: 8, vertical: 7)
+          ? const EdgeInsets.symmetric(
+              horizontal: DshSidebarRecipe.panelHorizontalPadding,
+              vertical: DshSidebarRecipe.panelVerticalPadding,
+            )
           : null,
       alignment: widget.wide ? null : Alignment.center,
       decoration: BoxDecoration(

@@ -293,12 +293,12 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
         child: Stack(
           children: [
             if (wide) Positioned.fill(child: _body(context)),
-            if (wide)
+            if (wide && !ShellScope.of(context).darwin)
               Positioned(
                 left: 0,
-                right: 0,
+                right: DshSidebarRecipe.inlinePadding,
                 bottom: 0,
-                height: 24,
+                height: DshWorkspaceBrowserRecipe.fadeHeight,
                 child: IgnorePointer(
                   child: DshDecoratedBox(
                     decoration: BoxDecoration(
@@ -381,11 +381,19 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
       onClear: _closeSearch,
     );
     return Padding(
-      padding: const EdgeInsets.only(top: 2, bottom: 4),
+      padding: const EdgeInsets.only(
+        top: DshWorkspaceBrowserRecipe.headerTopMargin,
+        bottom: DshWorkspaceBrowserRecipe.headerBottomMargin,
+        right:
+            DshSidebarRecipe.inlinePadding -
+            DshWorkspaceBrowserRecipe.headerRightExpansion,
+      ),
       child: SizedBox(
-        height: 36,
+        height: DshWorkspaceBrowserRecipe.headerHeight,
         child: Padding(
-          padding: const EdgeInsets.only(left: 4),
+          padding: const EdgeInsets.only(
+            left: DshWorkspaceBrowserRecipe.headerLeftPadding,
+          ),
           child: _searchExpanded
               ? search
               : Row(
@@ -558,7 +566,10 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
         .merge(theme.textStyle('--dsw-font-xxs-12').copyWith(height: 18 / 12));
     return ListView(
       key: const ValueKey('browser-results'),
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(
+        right: DshSidebarRecipe.inlinePadding,
+        bottom: DshWorkspaceBrowserRecipe.listBottomPadding,
+      ),
       children: [
         for (final r in set.items)
           Padding(
@@ -633,7 +644,10 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
     return ListView(
       key: const ValueKey('browser-list'),
       controller: _scroll,
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(
+        right: DshSidebarRecipe.inlinePadding,
+        bottom: DshWorkspaceBrowserRecipe.listBottomPadding,
+      ),
       children: [
         if (rows.isEmpty) _empty(context),
         for (final r in rows)
@@ -848,7 +862,10 @@ class _WorkspaceBrowserState extends State<WorkspaceBrowser> {
     return ListView(
       key: const ValueKey('browser-list'),
       controller: _scroll,
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(
+        right: DshSidebarRecipe.inlinePadding,
+        bottom: DshWorkspaceBrowserRecipe.listBottomPadding,
+      ),
       children: [
         if (groups.isEmpty) _empty(context),
         for (final g in children[null] ?? const <GroupNode>[]) group(g, 0),
@@ -1203,8 +1220,13 @@ class _ProjectRowState extends State<_ProjectRow> {
           onTap: widget.onToggle,
           onLongPress: menu,
           child: DshContainer(
-            height: 34,
-            padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
+            height: DshWorkspaceBrowserRecipe.groupHeight,
+            padding: EdgeInsets.only(
+              left:
+                  DshWorkspaceBrowserRecipe.rowHorizontalPadding +
+                  widget.indent,
+              right: DshWorkspaceBrowserRecipe.rowHorizontalPadding,
+            ),
             decoration: BoxDecoration(
               color: _hover ? theme.interactiveBgHover : null,
               borderRadius: BorderRadius.circular(theme.radiusMd),
@@ -1492,8 +1514,13 @@ class _SessionRowState extends State<_SessionRow> {
           onTap: widget.onTap,
           onLongPress: menu,
           child: DshContainer(
-            height: 32,
-            padding: EdgeInsets.only(left: 8 + widget.indent, right: 8),
+            height: DshWorkspaceBrowserRecipe.sessionHeight,
+            padding: EdgeInsets.only(
+              left:
+                  DshWorkspaceBrowserRecipe.rowHorizontalPadding +
+                  widget.indent,
+              right: DshWorkspaceBrowserRecipe.rowHorizontalPadding,
+            ),
             decoration: BoxDecoration(
               color: widget.selected || _hover
                   ? theme.interactiveBgHover
@@ -1576,7 +1603,10 @@ class _SessionRowState extends State<_SessionRow> {
                     time,
                     maxLines: 1,
                     style: theme
-                        .fixedTextStyle(size: 10, line: 16)
+                        .fixedTextStyle(
+                          size: DshWorkspaceBrowserRecipe.timeFontSize,
+                          line: DshWorkspaceBrowserRecipe.timeLineHeight,
+                        )
                         .copyWith(
                           color: theme.color('--dsw-alias-label-tertiary'),
                         ),

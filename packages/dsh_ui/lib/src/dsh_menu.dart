@@ -300,7 +300,7 @@ class _DshMenuCardState extends State<DshMenuCard> {
         DshMenuSeparator() =>
           i == 0 || items[i - 1] is DshMenuSeparator
               ? const SizedBox.shrink()
-              : _Separator(compact: widget.compact),
+              : DshMenuSeparatorLine(compact: widget.compact),
         DshMenuLabel(:final id, :final text) => _Heading(
           key: ValueKey('dsh-menu-label-$id'),
           text: text,
@@ -325,8 +325,9 @@ class _DshMenuCardState extends State<DshMenuCard> {
   ];
 }
 
-class _Separator extends StatelessWidget {
-  const _Separator({required this.compact});
+/// The canonical divider for arbitrary-content menus.
+class DshMenuSeparatorLine extends StatelessWidget {
+  const DshMenuSeparatorLine({super.key, this.compact = false});
   final bool compact;
   @override
   Widget build(BuildContext context) => Padding(

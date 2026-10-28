@@ -68,3 +68,10 @@ export { PluginArtworkTerminal, PluginArtworkLoop, PluginArtworkSubagent, Plugin
 export {focusWithoutRing} from '@dsh/ui-primitives/src/focus.ts'
 export {modalSelector} from '@dsh/ui-primitives/src/useModalLayer.ts'
 export {observeComposition} from '@dsh/ui-primitives/src/keyboard-composition.ts'
+// Actual sidebar/setting roots need these production primitives too.
+export { FishLogo } from '@dsh/ui-primitives/src/FishLogo.tsx'
+export { isDarwinDesktop } from '@dsh/ui-primitives/src/darwin-desktop.ts'
+export { ShortcutKeys } from '@dsh/ui-primitives/src/ShortcutKeys.tsx'
+export { HoverCardGroup } from '@dsh/ui-primitives/src/HoverCardGroup.tsx'
+export { ConnectionIndicator } from '@dsh/ui-primitives/src/ConnectionIndicator.tsx'
+export { useModalLayer } from '@dsh/ui-primitives/src/useModalLayer.ts'

@@ -6,6 +6,10 @@
 // From @deepseek-ai/dsh-client-ui-dockkit 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-plugin-market 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-agent-preset 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-sidebar 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-workspace 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-settings-general 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-settings-account 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -539,4 +543,107 @@ abstract final class DshRiskDialogRecipe {
 abstract final class DshPlatformMaterialRecipe {
   static const String darwinLightMenuFill = '#f8f9faf0';
   static const String darwinDarkMenuFill = '#303136f0';
+}
+
+abstract final class DshSidebarRecipe {
+  static const double inlinePadding = 12.0;
+  static const double verticalPadding = 6.0;
+  static const double railTopPadding = 18.0;
+  static const double railInlinePadding = 10.0;
+  static const double railBottomPadding = 6.0;
+  static const double topStripHeight = 52.0;
+  static const double topStripFootPadding = 2.0;
+  static const double logoTopTuck = 12.0;
+  static const double logoHeight = 60.0;
+  static const double logoBottomMargin = 4.0;
+  static const double logoTopPadding = 8.0;
+  static const double logoLeftPadding = 4.0;
+  static const double railLogoHeight = 36.0;
+  static const double railLogoBottomMargin = 12.0;
+  static const double windowsLogoHeight = 40.0;
+  static const double brandGap = 8.0;
+  static const double brandHeight = 24.0;
+  static const double brandFontSize = 18.0;
+  static const double brandLineHeight = 24.0;
+  static const double brandFontWeight = 600.0;
+  static const double brandLetterSpacing = 0.72;
+  static const double iconBox = 28.0;
+  static const double railIconBox = 36.0;
+  static const double newHeight = 38.0;
+  static const double newHorizontalPadding = 12.0;
+  static const double newVerticalPadding = 8.0;
+  static const double newInlineMargin = 2.0;
+  static const double newBottomMargin = 12.0;
+  static const double newBorderWidth = 0.5;
+  static const String newBorderToken = '--dsw-alias-border-l3';
+  static const double darwinNewAlpha = 0.5490196078431373;
+  static const double darwinNewHoverAlpha = 0.30196078431372547;
+  static const double darwinNewDarkAlpha = 0.14901960784313725;
+  static const double darwinNewDarkHoverAlpha = 0.2;
+  static const String newFillToken = '--dsw-alias-button-elevated-fill';
+  static const String newHoverToken = '--dsw-alias-button-floating-hover';
+  static const double newGap = 6.0;
+  static const double newFontSize = 14.0;
+  static const double newLineHeight = 22.0;
+  static const double panelHeight = 36.0;
+  static const double panelGap = 8.0;
+  static const double panelHorizontalPadding = 8.0;
+  static const double panelVerticalPadding = 7.0;
+  static const double panelListGap = 4.0;
+  static const double panelListBottomMargin = 8.0;
+  static const double railPanelGap = 12.0;
+  static const double regionScrollbarExpansion = 12.0;
+  static const String scrollbarThumbToken = '--dsw-alias-scrollbar-bg-l2';
+  static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
+}
+
+abstract final class DshWorkspaceBrowserRecipe {
+  static const double headerHeight = 36.0;
+  static const double headerLeftPadding = 4.0;
+  static const double headerTopMargin = 2.0;
+  static const double headerRightExpansion = 4.0;
+  static const double headerBottomMargin = 4.0;
+  static const double headerGap = 4.0;
+  static const double iconBox = 28.0;
+  static const double scrollbarWidth = 5.0;
+  static const double scrollbarOffset = 2.0;
+  static const double listBottomPadding = 16.0;
+  static const double fadeHeight = 24.0;
+  static const double groupHeight = 34.0;
+  static const double sessionHeight = 32.0;
+  static const double rowHorizontalPadding = 8.0;
+  static const double rowGap = 6.0;
+  static const double groupGap = 4.0;
+  static const double rowStackGap = 2.0;
+  static const double rowFontSize = 14.0;
+  static const double rowLineHeight = 20.0;
+  static const double timeFontSize = 10.0;
+  static const double timeLineHeight = 16.0;
+}
+
+abstract final class DshSidebarLauncherRecipe {
+  static const double height = 32.0;
+  static const double lineHeight = 20.0;
+  static const double topPadding = 6.0;
+  static const double rightPadding = 2.0;
+  static const double bottomPadding = 6.0;
+  static const double leftPadding = 6.0;
+  static const double gap = 8.0;
+  static const double fontSize = 14.0;
+  static const double railBox = 36.0;
+  static const double verticalMargin = 4.0;
+  static const double inlineExpansion = 2.0;
+  static const double railTopMargin = 8.0;
+  static const double railBottomMargin = 10.0;
+  static const double menuMinWidth = 124.0;
+  static const double menuMaxWidth = 280.0;
+  static const double menuPadding = 4.0;
+  static const double menuRowHeight = 40.0;
+  static const double menuRowGap = 8.0;
+  static const double menuRowVerticalPadding = 8.0;
+  static const double menuRowHorizontalPadding = 10.0;
+  static const double menuIconSize = 16.0;
+  static const String menuIconToken = '--dsw-alias-menu-icon';
+  static const double menuFontSize = 14.0;
+  static const double menuLineHeight = 22.0;
 }

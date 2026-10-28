@@ -15,6 +15,39 @@ def module(name):
 gen, guard = module('generate'), module('check')
 
 class DesignSystemTests(unittest.TestCase):
+    def test_sidebar_profiles_read_real_published_geometry(self):
+        import copy
+        lock, sheets = gen.collect()
+        _, audit = gen.render(lock, sheets)
+        before = json.loads(audit)['metrics']
+        self.assertEqual(before['DshSidebarRecipe']['topStripHeight'], 52)
+        self.assertEqual(before['DshSidebarRecipe']['logoTopTuck'], 12)
+        self.assertEqual(before['DshSidebarLauncherRecipe']['height'], 32)
+        self.assertEqual(before['DshSidebarLauncherRecipe']['menuIconSize'], 16)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['SidebarRoot.module.css'] if r['selector'] == '.logoRow')['declarations']['height'] = '64px'
+        next(r for r in changed['AccountMenu.module.css'] if r['selector'] == '.signedOutMenu [role=menuitem]')['declarations']['min-height'] = '42px'
+        _, audit = gen.render(lock, changed)
+        after = json.loads(audit)['metrics']
+        self.assertEqual(after['DshSidebarRecipe']['logoHeight'], 64)
+        self.assertEqual(after['DshSidebarLauncherRecipe']['menuRowHeight'], 42)
+        self.assertEqual(after['DshModalRecipe'], before['DshModalRecipe'])
+
+    def test_sidebar_unknown_state_property_and_condition_fail_closed(self):
+        import copy
+        lock, sheets = gen.collect()
+        for mode in ('state', 'property', 'condition'):
+            changed = copy.deepcopy(sheets)
+            rule = next(r for r in changed['SidebarRoot.module.css'] if r['selector'] == '.topStrip')
+            if mode == 'state':
+                changed['SidebarRoot.module.css'].append({**rule, 'selector': '.topStrip:hover'})
+            elif mode == 'property':
+                rule['declarations']['min-height'] = '60px'
+            else:
+                rule['conditions'] = ['@media (max-width: 600px)']
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'untranslated sidebar'):
+                gen.render(lock, changed)
+
     def test_preset_archive_extraction_keeps_dollar_guide_literal_separate_from_roster(self):
         import io
         import tarfile

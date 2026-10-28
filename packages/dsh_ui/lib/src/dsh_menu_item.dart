@@ -14,7 +14,7 @@ import 'dsh_text_baseline.dart';
 import 'dsh_tooltip.dart';
 import 'theme_access.dart';
 
-enum DshMenuItemProfile { standard, addPlugin, dock }
+enum DshMenuItemProfile { standard, addPlugin, dock, sidebarLauncher }
 
 /// An effective shortcut supplied by the action owner, not a default binding.
 class DshMenuShortcut {
@@ -81,12 +81,17 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
     final theme = context.dsh;
     final add = widget.profile == DshMenuItemProfile.addPlugin;
     final dock = widget.profile == DshMenuItemProfile.dock;
-    final compact = widget.compact && !add && !dock;
+    final sidebar = widget.profile == DshMenuItemProfile.sidebarLauncher;
+    final compact = widget.compact && !add && !dock && !sidebar;
     final hover = _enabled && (_hover || (_focusVisible && !dock));
-    final iconSize = compact
+    final iconSize = sidebar
+        ? DshSidebarLauncherRecipe.menuIconSize
+        : compact
         ? DshMenuRecipe.compactIconSize
         : DshMenuRecipe.iconSize;
-    final gap = add
+    final gap = sidebar
+        ? DshSidebarLauncherRecipe.menuRowGap
+        : add
         ? DshPluginAddMenuRecipe.gap
         : compact
         ? DshMenuRecipe.compactGap
@@ -145,7 +150,9 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
       constraints: dock
           ? null
           : BoxConstraints(
-              minHeight: add
+              minHeight: sidebar
+                  ? DshSidebarLauncherRecipe.menuRowHeight
+                  : add
                   ? DshPluginAddMenuRecipe.height
                   : compact
                   ? DshMenuRecipe.compactHeight
@@ -154,14 +161,18 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
                   : DshMenuRecipe.height,
             ),
       padding: EdgeInsets.symmetric(
-        horizontal: dock
+        horizontal: sidebar
+            ? DshSidebarLauncherRecipe.menuRowHorizontalPadding
+            : dock
             ? DshDockMenuRecipe.horizontalPadding
             : add
             ? DshPluginAddMenuRecipe.horizontalPadding
             : compact
             ? DshMenuRecipe.compactHorizontalPadding
             : DshMenuRecipe.horizontalPadding,
-        vertical: dock
+        vertical: sidebar
+            ? DshSidebarLauncherRecipe.menuRowVerticalPadding
+            : dock
             ? DshDockMenuRecipe.verticalPadding
             : add
             ? DshPluginAddMenuRecipe.verticalPadding
@@ -179,7 +190,9 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
               widget.icon!,
               size: iconSize,
               color: theme.color(
-                widget.danger
+                sidebar
+                    ? DshSidebarLauncherRecipe.menuIconToken
+                    : widget.danger
                     ? DshMenuRecipe.dangerIconToken
                     : DshMenuRecipe.iconToken,
               ),

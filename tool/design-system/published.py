@@ -112,6 +112,29 @@ def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
 
+def sidebar_component_snapshot(archive, components):
+    """Decode the real sidebar, workspace and launcher CSS from named regions."""
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        text = bundle.decode()
+        styles, classes = {}, {}
+        for component in components:
+            region = bundle_region(text, component + '.module.css.mjs')
+            literals = re.findall(r'\bconst css(?:\$\d+)? = ("(?:\\.|[^"\\])*");', region)
+            if len(literals) != 1:
+                raise ValueError('published sidebar CSS literal missing/ambiguous: ' + component)
+            styles[component + '.module.css'] = json.loads(literals[0])
+            prefix = 'var ' + component + '_module_css_default = '
+            if region.count(prefix) != 1:
+                raise ValueError('published sidebar class export missing/ambiguous: ' + component)
+            mapping, _ = json.JSONDecoder().raw_decode(region.split(prefix, 1)[1])
+            if not isinstance(mapping, dict) or not mapping or not all(isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()):
+                raise ValueError('published sidebar class export is not a static string map')
+            classes[component] = mapping
+        return {'css': styles, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'manifest': tar.extractfile('package/package.json').read(),
+                'license': tar.extractfile('package/LICENSE').read()}
+
 THEME_SHEETS = ('base', 'corner_shape', 'design_platform', 'focus', 'onboarding', 'scrollbar', 'gradient_shadow_text', 'shiki')
 
 def theme_injection_order(text):
@@ -178,6 +201,20 @@ def verify_snapshot(archive, package, folder):
     integrity = 'sha512-' + base64.b64encode(hashlib.sha512(Path(archive).read_bytes()).digest()).decode()
     if integrity != package['integrity']: raise ValueError('published archive integrity mismatch')
     kind = package.get('extractionKind', 'plugin-css')
+    if kind == 'sidebar-component-css':
+        result = sidebar_component_snapshot(archive, package['styleSheets'])
+        if result['bundleSha256'] != package['publishedBundleSha256']:
+            raise ValueError('published sidebar bundle hash mismatch')
+        for name, css in result['css'].items():
+            if (folder / name).read_text() != css:
+                raise ValueError('decoded sidebar CSS snapshot mismatch: ' + name)
+        for component, mapping in result['classes'].items():
+            if json.loads((folder / (component + '-classes.json')).read_text()) != mapping:
+                raise ValueError('sidebar class export snapshot mismatch: ' + component)
+        for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
+            if (folder / name).read_bytes() != result[key]:
+                raise ValueError('sidebar package metadata mismatch')
+        return
     if kind == 'plain-files':
         with tarfile.open(archive) as tar:
             for name, member in package['archiveFiles'].items():
