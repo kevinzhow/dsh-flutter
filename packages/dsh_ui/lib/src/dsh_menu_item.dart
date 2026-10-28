@@ -56,6 +56,7 @@ class DshMenuItemButton extends StatefulWidget {
     this.active = false,
     this.onHover,
     this.onFocusChange,
+    this.focusVisible,
     this.pending = false,
   }) : assert(description == null || profile == DshMenuItemProfile.addPlugin);
   final String label;
@@ -73,6 +74,10 @@ class DshMenuItemButton extends StatefulWidget {
   final bool active;
   final VoidCallback? onHover;
   final ValueChanged<bool>? onFocusChange;
+
+  /// Source focus intent for programmatic entry, applied only while this row
+  /// actually owns focus. Null keeps the default input-modality presentation.
+  final bool? focusVisible;
   final bool pending;
   @override
   State<DshMenuItemButton> createState() => _DshMenuItemButtonState();
@@ -105,8 +110,11 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
     final cell = widget.profile == DshMenuItemProfile.modelCell;
     final model = cell || widget.profile == DshMenuItemProfile.modelOption;
     final compact = widget.compact && !add && !dock && !sidebar && !model;
+    final focusVisible = widget.focusVisible == null
+        ? _focusVisible
+        : widget.focusVisible! && _focusNode.hasPrimaryFocus;
     final hover =
-        _enabled && (_hover || widget.active || (_focusVisible && !dock));
+        _enabled && (_hover || widget.active || (focusVisible && !dock));
     final iconSize = sidebar
         ? DshSidebarLauncherRecipe.menuIconSize
         : compact
@@ -181,10 +189,10 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
                 : dock
                 ? DshDockMenuRecipe.hoverToken
                 : widget.danger
-                ? (_focusVisible
+                ? (focusVisible
                       ? DshMenuRecipe.dangerFocusToken
                       : DshMenuRecipe.dangerHoverToken)
-                : (_focusVisible
+                : (focusVisible
                       ? DshMenuRecipe.focusToken
                       : DshMenuRecipe.hoverToken),
           )
@@ -421,7 +429,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
             onTap: _enabled ? widget.onPressed : null,
             child: Opacity(
               opacity: _enabled || model ? 1 : DshMenuRecipe.disabledOpacity,
-              child: (dock && _focusVisible && _enabled)
+              child: (dock && focusVisible && _enabled)
                   ? Stack(
                       clipBehavior: Clip.none,
                       children: [

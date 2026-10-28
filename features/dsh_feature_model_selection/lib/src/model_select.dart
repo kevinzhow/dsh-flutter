@@ -311,6 +311,7 @@ class _ModelSheetState extends State<ModelSheet> {
   Timer? _toastTimer;
   final _searchFocus = FocusNode();
   final _rowFocus = <String, FocusNode>{};
+  FocusNode? _programmaticFocus;
   final _searchController = TextEditingController();
   FocusNode _node(String id) => _rowFocus.putIfAbsent(id, () {
     final node = FocusNode();
@@ -443,6 +444,7 @@ class _ModelSheetState extends State<ModelSheet> {
       _query = '';
       _highlight = null;
       _lastRevealed = null;
+      _programmaticFocus = null;
       _searchController.clear();
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -454,7 +456,13 @@ class _ModelSheetState extends State<ModelSheet> {
       final id = pane == _Pane.effort
           ? 'effort-option-${view.efforts.where((e) => e.effort == view.effective).firstOrNull?.key ?? view.efforts.firstOrNull?.key}'
           : 'model-option-${view.choice?.group.id}/${view.choice?.model.id}';
-      (_rowFocus[id] ?? _rowFocus.values.firstOrNull)?.requestFocus();
+      final node = _rowFocus[id] ?? _rowFocus.values.firstOrNull;
+      if (node == null) return;
+      // Source pane entry unmounts the clicked root button before focusing
+      // the checked option. Chromium gives that programmatic focus a visible
+      // cue even after pointer entry; keep the intent local to this focus.
+      setState(() => _programmaticFocus = node);
+      node.requestFocus();
     });
   }
 
@@ -469,6 +477,7 @@ class _ModelSheetState extends State<ModelSheet> {
       _paneChosen = true;
       _query = '';
       _highlight = null;
+      _programmaticFocus = null;
       _searchController.clear();
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -788,12 +797,16 @@ class _ModelSheetState extends State<ModelSheet> {
     active: active,
     disabled: view.state.pending != null,
     focusNode: _node(id),
+    focusVisible: _programmaticFocus == _node(id) ? true : null,
     onPressed: onTap,
     onHover: onHover,
     onDismiss: () => _back(view),
     pending: pending,
     onFocusChange: (focused) {
       if (focused) onHover?.call();
+      if (mounted && !focused && _programmaticFocus == _node(id)) {
+        setState(() => _programmaticFocus = null);
+      }
     },
   );
   Widget _models(DshThemeData theme, _View view) {

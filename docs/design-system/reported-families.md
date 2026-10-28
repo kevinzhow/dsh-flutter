@@ -52,6 +52,9 @@ it. This preserves the native input box when a fallback glyph is taller.
 MenuSurface reads its own generated `--dsw-menu-surface-fill` token; statistics
 retain the separate scoped `--dsw-specific-menu` material. They intentionally
 resolve different fills on macOS, as the released stylesheets require.
+Programmatic pane entry also carries the source focus-visible intent into the
+canonical menu row. The cue requires actual primary focus and clears on blur;
+selection continues to use its check mark independently of that cue.
 
 Native replay uses these production entries with synthetic services. Its scene
 toolbar is painted after the sidebar's nested route so Android can expose its

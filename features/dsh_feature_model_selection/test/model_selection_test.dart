@@ -12,6 +12,7 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -902,6 +903,91 @@ void main() {
       await t.pumpAndSettle();
       expect(t.getSize(menu), const Size(248, 110));
     });
+
+    testWidgets(
+      'pointer drilling retains the source effort focus cue until blur',
+      (t) async {
+        t.view.physicalSize = const Size(1100, 800);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.reset);
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                model(
+                  'flash',
+                  'Flash',
+                  efforts: ['low', 'high', 'max'],
+                  defaultEffort: 'max',
+                ),
+              ],
+            },
+          ],
+        );
+        await ready(t, size: const Size(1100, 800));
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-root-effort')));
+        await t.pumpAndSettle();
+        final pointer = await t.createGesture(kind: PointerDeviceKind.mouse);
+        await pointer.addPointer(location: const Offset(1090, 790));
+        addTearDown(pointer.removePointer);
+        await pointer.moveTo(const Offset(1000, 700));
+        await t.pumpAndSettle();
+
+        Finder row(String effort) =>
+            find.byKey(ValueKey('effort-option-effort:$effort'));
+        DshMenuItemButton button(String effort) =>
+            t.widget<DshMenuItemButton>(row(effort));
+        Color? fill(String effort) =>
+            (t
+                        .widget<DshContainer>(
+                          find
+                              .descendant(
+                                of: row(effort),
+                                matching: find.byType(DshContainer),
+                              )
+                              .first,
+                        )
+                        .decoration
+                    as ShapeDecoration)
+                .color;
+        final sourceFocusFill = t
+            .element(row('max'))
+            .dsh
+            .color(DshModelMenuRecipe.hoverToken);
+        // Actual Chromium still matches :focus-visible after this pointer
+        // sequence; selection itself remains a check on a transparent row.
+        expect(button('max').focusNode!.hasPrimaryFocus, isTrue);
+        expect(button('max').selected, isTrue);
+        expect(button('max').selectionFill, isFalse);
+        expect(fill('max'), sourceFocusFill);
+        expect(fill('high'), isNull);
+        expect(fill('low'), isNull);
+
+        await t.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+        await t.pumpAndSettle();
+        expect(button('high').focusNode!.hasPrimaryFocus, isTrue);
+        expect(fill('high'), sourceFocusFill);
+        expect(button('max').selected, isTrue);
+        expect(fill('max'), isNull);
+
+        await t.sendKeyEvent(LogicalKeyboardKey.escape);
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
+        expect(
+          t
+              .widget<DshMenuItemButton>(
+                find.byKey(const ValueKey('model-root-effort')),
+              )
+              .focusNode!
+              .hasPrimaryFocus,
+          isTrue,
+        );
+      },
+    );
 
     testWidgets(
       'pending effort choice keeps the row and blocks a second request',
