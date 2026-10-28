@@ -1,153 +1,406 @@
 import 'dart:async';
+import 'dart:math' as math;
 
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_icon.dart';
+import 'dsh_icon_data.dart';
+import 'dsh_corners.dart';
 import 'dsh_icons.g.dart';
-import 'dsh_snapped_box.dart';
+import 'dsh_recipes.g.dart';
+import 'dsh_shadow_box.dart';
 import 'dsh_text_baseline.dart';
+import 'dsh_toast_host.dart';
 import 'theme_access.dart';
 
-/// Hold at full opacity before the fade (dsh `Toast` `HOLD_MS`).
-const Duration dshToastHold = Duration(milliseconds: 3000);
+export 'dsh_toast_host.dart' show DshToastHost;
 
-/// The fade (dsh `FADE_MS`).
-const Duration dshToastFade = Duration(milliseconds: 1000);
+Duration _milliseconds(double value) => Duration(
+  microseconds: (value * Duration.microsecondsPerMillisecond).round(),
+);
 
-/// The floating banner of dsh's `Toast`: 40px below the top, centred, dark in
-/// both themes, click-through, with a warning-tinted icon seat. It lives for
-/// [dshToastHold] plus [dshToastFade], then calls [onDone].
+/// Source defaults retain fractional milliseconds when the recipe changes.
+final Duration dshToastHold = _milliseconds(DshToastRecipe.holdMs);
+final Duration dshToastFade = _milliseconds(DshToastRecipe.fadeMs);
+
+enum DshToastTone { success }
+
+/// A source Toast occurrence: no icon by default; success owns the published
+/// circled-check glyph and overrides an optional icon. Actions/anchors remain
+/// unsupported pending source/native acceptance. Completion is timer-owned.
 class DshToast extends StatefulWidget {
   const DshToast({
     super.key,
     required this.text,
-    this.hold = dshToastHold,
+    this.icon,
+    this.tone,
+    this.hold,
     required this.onDone,
   });
-
   final String text;
-  final Duration hold;
+  final Widget? icon;
+  final DshToastTone? tone;
+  final Duration? hold;
   final VoidCallback onDone;
-
   @override
   State<DshToast> createState() => _DshToastState();
 }
 
-class _DshToastState extends State<DshToast> with TickerProviderStateMixin {
-  late final AnimationController _in = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 160),
-  )..forward();
-  late final AnimationController _out = AnimationController(
-    vsync: this,
-    duration: dshToastFade,
+class _DshToastState extends State<DshToast> {
+  final _identity = UniqueKey();
+  final _portal = OverlayPortalController();
+  late final _hold = ValueNotifier(widget.hold ?? dshToastHold);
+  _ToastSpec get _spec => _ToastSpec(
+    text: widget.text,
+    icon: widget.icon,
+    tone: widget.tone,
+    holdSource: _hold,
+    onDone: () {
+      if (mounted) widget.onDone();
+    },
   );
-  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer(widget.hold, () {
-      if (!mounted) return;
-      unawaited(
-        _out.forward().whenComplete(() {
-          if (mounted) widget.onDone();
-        }),
-      );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _portal.show();
     });
   }
 
   @override
+  void didUpdateWidget(DshToast oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Cancel/reschedule the source effect's timer during this update, even
+    // before the logical owner's overlay child gets its next build.
+    _hold.value = widget.hold ?? dshToastHold;
+  }
+
+  @override
   void dispose() {
-    _timer?.cancel();
-    _in.dispose();
-    _out.dispose();
+    _hold.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return IgnorePointer(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 40, left: 24, right: 24),
-          child: AnimatedBuilder(
-            animation: Listenable.merge([_in, _out]),
-            builder: (context, child) => Opacity(
-              opacity: _in.value * (1 - _out.value),
-              child: Transform.translate(
-                offset: Offset(0, -6 * (1 - _in.value)),
-                child: child,
-              ),
-            ),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 640),
-              child: Semantics(
-                liveRegion: true,
-                child: DshContainer(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    color: theme.color('--dsw-alias-toast-bg'),
-                    borderRadius: BorderRadius.circular(theme.radiusLg),
-                    boxShadow: theme.boxShadow('--dsw-shadow-lv3'),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      DshIcon(
-                        DshIcons.warning,
-                        size: 16,
-                        color: theme.color('--dsw-alias-state-warn-label'),
-                      ),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: DshChromeText(
-                          widget.text,
-                          style: theme
-                              .textStyle('--dsw-font-s-14')
-                              .copyWith(
-                                color: theme.color('--dsw-alias-toast-label'),
-                                height: 22 / 14,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    // Keep the actual logical owner/provider ancestry. Production's outer
+    // Overlay above Navigator also preserves priority over later inner routes.
+    return OverlayPortal(
+      overlayLocation: OverlayChildLocation.rootOverlay,
+      controller: _portal,
+      overlayChildBuilder: (_) => _ToastPaint(key: _identity, spec: _spec),
+      child: const SizedBox.shrink(),
     );
   }
 }
 
-/// Show one [DshToast] over the app and replace a banner still showing from the
-/// same [DshToasts] (announcing again replays it).
-class DshToasts {
-  OverlayEntry? _entry;
+class _ToastSpec {
+  const _ToastSpec({
+    required this.text,
+    required this.icon,
+    required this.tone,
+    required this.holdSource,
+    required this.onDone,
+  });
+  final String text;
+  final Widget? icon;
+  final DshToastTone? tone;
+  final ValueNotifier<Duration> holdSource;
+  Duration get hold => holdSource.value;
+  final VoidCallback onDone;
+}
 
-  void show(BuildContext context, String text) {
-    final overlay = Overlay.maybeOf(context, rootOverlay: true);
-    if (overlay != null) showOn(overlay, text);
+Curve _cssCurve(String value) => switch (value) {
+  'linear' => Curves.linear,
+  'ease' => Curves.ease,
+  'ease-in' => Curves.easeIn,
+  'ease-out' => Curves.easeOut,
+  'ease-in-out' => Curves.easeInOut,
+  _ => throw StateError('Unsupported generated Toast curve: $value'),
+};
+
+class _ToastPaint extends StatefulWidget {
+  const _ToastPaint({super.key, required this.spec});
+  final _ToastSpec spec;
+  @override
+  State<_ToastPaint> createState() => _ToastPaintState();
+}
+
+class _ToastPaintState extends State<_ToastPaint> {
+  // Source body-portal animations continue when another route covers the owner.
+  // This occurrence-owned ticker therefore does not inherit route TickerMode.
+  late final Ticker _ticker = Ticker((_) {
+    setState(() => _elapsed = _timelineElapsed);
+    if (_elapsed >= _paintEnd) _ticker.stop();
+  });
+  Duration _elapsed = Duration.zero;
+  late final Duration _origin;
+  Duration get _timelineElapsed =>
+      SchedulerBinding.instance.currentFrameTimeStamp - _origin;
+  Timer? _deadline;
+  Duration get _enter => _milliseconds(DshToastRecipe.enterMs);
+  Duration get _paintEnd => widget.spec.hold + dshToastFade > _enter
+      ? widget.spec.hold + dshToastFade
+      : _enter;
+
+  void _scheduleDeadline() {
+    _deadline?.cancel();
+    _deadline = Timer(widget.spec.hold + dshToastFade, () {
+      if (mounted) widget.spec.onDone();
+    });
   }
 
-  void showOn(OverlayState overlay, String text) {
+  @override
+  void initState() {
+    super.initState();
+    _origin = SchedulerBinding.instance.currentFrameTimeStamp;
+    widget.spec.holdSource.addListener(_holdChanged);
+    _scheduleDeadline();
+    _ticker.start();
+  }
+
+  @override
+  void didUpdateWidget(_ToastPaint oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.spec.holdSource != widget.spec.holdSource) {
+      oldWidget.spec.holdSource.removeListener(_holdChanged);
+      widget.spec.holdSource.addListener(_holdChanged);
+      _holdChanged();
+    }
+  }
+
+  void _holdChanged() {
+    _scheduleDeadline();
+    // CSS changes delay on its original mount timeline; the timer restarts.
+    _elapsed = _timelineElapsed;
+    if (!_ticker.isActive && _elapsed < _paintEnd) _ticker.start();
+  }
+
+  @override
+  void dispose() {
+    widget.spec.holdSource.removeListener(_holdChanged);
+    _deadline?.cancel();
+    _ticker.dispose();
+    super.dispose();
+  }
+
+  double _progress(Duration elapsed, Duration duration) =>
+      duration == Duration.zero
+      ? 1
+      : (elapsed.inMicroseconds / duration.inMicroseconds).clamp(0, 1);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.dsh, spec = widget.spec;
+    final reduced = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    final entry = reduced
+        ? 1.0
+        : _cssCurve(DshToastRecipe.enterCurve)
+              .transform(_progress(_elapsed, _enter));
+    final afterHold = _elapsed - spec.hold;
+    final fade = afterHold.isNegative
+        ? 0.0
+        : _cssCurve(DshToastRecipe.fadeCurve)
+              .transform(_progress(afterHold, dshToastFade));
+    final hidden = !afterHold.isNegative && afterHold >= dshToastFade;
+    final icon = spec.tone == DshToastTone.success
+        ? const DshIcon(DshIcons.checkCircle)
+        : spec.icon;
+    final radius = theme.number(DshToastRecipe.radiusToken);
+    return IgnorePointer(
+      child: hidden
+          ? const SizedBox.shrink()
+          : LayoutBuilder(
+              builder: (context, constraints) {
+                final contentWidth = math.max(
+                  0.0,
+                  math.min(
+                    DshToastRecipe.maxContentWidth,
+                    constraints.maxWidth - DshToastRecipe.viewportInset,
+                  ),
+                );
+                return Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: DshToastRecipe.top),
+                    child: Opacity(
+                      opacity: entry * (1 - fade),
+                      alwaysIncludeSemantics: true,
+                      child: Transform.translate(
+                        offset: Offset(
+                          0,
+                          DshToastRecipe.enterOffsetY * (1 - entry),
+                        ),
+                        child: DshToastAnnouncement(
+                          text: spec.text,
+                          child: DshShadowBox(
+                            // CSS left:50%/top is laid out before the centering
+                            // and entry transforms. Blink snaps in that space.
+                            sourcePaintOrigin: Offset(
+                              constraints.maxWidth / 2,
+                              DshToastRecipe.top,
+                            ),
+                            color: theme.color(DshToastRecipe.backgroundToken),
+                            authoredOpaqueBackground:
+                                theme.color(DshToastRecipe.backgroundToken).a ==
+                                1,
+                            radius: radius,
+                            shape: theme.cornerBorder(radius),
+                            shadows: theme.boxShadow(
+                              DshToastRecipe.shadowToken,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: DshToastRecipe.horizontalPadding,
+                              vertical: DshToastRecipe.verticalPadding,
+                            ),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: contentWidth,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (icon != null) ...[
+                                    ExcludeSemantics(
+                                      child: IconTheme(
+                                        data: IconThemeData(
+                                          color: theme.color(
+                                            spec.tone == DshToastTone.success
+                                                ? DshToastRecipe
+                                                      .successIconLabelToken
+                                                : DshToastRecipe.iconLabelToken,
+                                          ),
+                                        ),
+                                        child: icon,
+                                      ),
+                                    ),
+                                    SizedBox(width: DshToastRecipe.gap),
+                                  ],
+                                  Flexible(
+                                    child: _ToastText(
+                                      spec.text,
+                                      style: theme
+                                          .fixedTextStyle(
+                                            size: DshToastRecipe.fontSize,
+                                            line: DshToastRecipe.lineHeight,
+                                          )
+                                          .copyWith(
+                                            color: theme.color(
+                                              DshToastRecipe.labelToken,
+                                            ),
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+
+/// The published Toast inherits white-space/overflow-wrap/word-break: normal.
+/// Preserve its raw announcement, but collapse only CSS's ASCII whitespace in
+/// the visual string. NBSP and other Unicode spacing characters stay intact.
+class _ToastText extends StatelessWidget {
+  const _ToastText(this.text, {required this.style});
+  final String text;
+  final TextStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    final normalized = text
+        .replaceAll(RegExp(r'[ \t\r\n\f]+'), ' ')
+        .replaceAll(RegExp(r'^ +| +$'), '');
+    final effective = DefaultTextStyle.of(context).style.merge(style);
+    final direction = Directionality.of(context);
+    final scaler = MediaQuery.textScalerOf(context);
+    final locale = Localizations.maybeLocaleOf(context);
+    // Ask the native breaker's intrinsic calculation whether there is any
+    // soft break. This otherwise-identical measurement-only clone suppresses
+    // breaks with WJ, just as the card clamp's existing min-content probe does.
+    // Neither inserted WJs nor the terminal measurement space ever paint.
+    double intrinsic(String value) {
+      final painter = TextPainter(
+        text: TextSpan(text: '$value ', style: effective),
+        textDirection: direction,
+        textScaler: scaler,
+        locale: locale,
+      )..layout();
+      final width = painter.minIntrinsicWidth;
+      painter.dispose();
+      return width;
+    }
+
+    final singleRun =
+        normalized.isNotEmpty &&
+        intrinsic(normalized) ==
+            intrinsic(normalized.characters.join('\u2060'));
+    final line = DshChromeText(
+      normalized,
+      style: style,
+      semanticsLabel: text,
+      // Flutter otherwise emergency-wraps a sole oversized word at graphemes;
+      // CSS normal keeps that unbreakable run on one overflowing line.
+      softWrap: singleRun ? false : null,
+      overflow: TextOverflow.visible,
+    );
+    // A wholly collapsed CSS span has no line box. Its owner retains padding
+    // and any independent icon seat; a non-collapsible NBSP still has a line.
+    return normalized.isEmpty ? SizedBox.shrink(child: line) : line;
+  }
+}
+
+/// Owner-local, data-only imperative adapter. An OverlayEntry cannot preserve
+/// an arbitrary initiating provider subtree; use owner-mounted [DshToast] for a
+/// custom context-dependent icon. Identity is allocated once per show, so an
+/// overlay rebuild keeps its deadline and old completion keeps a replacement.
+class DshToasts {
+  OverlayEntry? _entry;
+  void show(
+    BuildContext context,
+    String text, {
+    DshIconData? icon,
+    DshToastTone? tone,
+    Duration? hold,
+  }) {
+    final overlay = Overlay.maybeOf(context);
+    if (overlay != null) {
+      showOn(overlay, text, icon: icon, tone: tone, hold: hold);
+    }
+  }
+
+  void showOn(
+    OverlayState overlay,
+    String text, {
+    DshIconData? icon,
+    DshToastTone? tone,
+    Duration? hold,
+  }) {
     dismiss();
+    final identity = UniqueKey();
     late OverlayEntry entry;
     entry = OverlayEntry(
       builder: (_) => DshToast(
-        key: UniqueKey(),
+        key: identity,
         text: text,
+        icon: icon == null ? null : DshIcon(icon),
+        tone: tone,
+        hold: hold,
         onDone: () {
-          if (_entry == entry) _entry = null;
+          if (!identical(_entry, entry)) return;
+          _entry = null;
           entry.remove();
+          entry.dispose();
         },
       ),
     );
@@ -156,7 +409,9 @@ class DshToasts {
   }
 
   void dismiss() {
-    _entry?.remove();
+    final entry = _entry;
     _entry = null;
+    entry?.remove();
+    entry?.dispose();
   }
 }

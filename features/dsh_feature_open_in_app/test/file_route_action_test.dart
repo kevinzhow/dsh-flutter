@@ -5,6 +5,7 @@ import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -56,6 +57,55 @@ class _Client implements DeliverablesClient {
 }
 
 void main() {
+  testWidgets('actual failed file action explicitly owns its warning Toast', (
+    t,
+  ) async {
+    final client = _Client(), session = testSessionOwner('failure');
+    final active = DeliverablesModel(client);
+    addTearDown(active.dispose);
+    addTearDown(session.conversation.dispose);
+    var attempts = 0;
+    const file = DeliveryFile('failure', 8, 3);
+    final owner = DeliverablesFileActionsOwner(
+      session: session,
+      actionUrl: file.actionKey,
+      available: true,
+      pending: false,
+      acquireApplications: () => active.acquireApplications(file),
+      releaseApplications: active.releaseApplications,
+      onAction: (action, [app]) async {
+        attempts++;
+        return NativeOpenFailure.openError;
+      },
+    );
+    await t.pumpWidget(
+      dshTestApp(
+        FileRouteAction(owner: owner, i18n: const DshI18n(DshLocale.en)),
+      ),
+    );
+    await t.pumpAndSettle();
+    await t.tap(find.bySemanticsLabel('Open in Preferred editor'));
+    await t.pump();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 200));
+    expect(attempts, 1);
+    expect(t.widget<DshToast>(find.byType(DshToast)).tone, isNull);
+    expect(
+      t
+          .widget<DshIcon>(
+            find.descendant(
+              of: find.byType(DshShadowBox),
+              matching: find.byType(DshIcon),
+            ),
+          )
+          .icon,
+      DshIcons.warning,
+    );
+    await t.pumpWidget(const SizedBox());
+    await t.pump(const Duration(seconds: 5));
+    expect(t.takeException(), isNull);
+  });
+
   testWidgets(
     'shared actions name the Host associations and forward the selected operation',
     (t) async {

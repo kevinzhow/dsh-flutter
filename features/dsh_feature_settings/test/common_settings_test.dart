@@ -224,6 +224,49 @@ void main() {
     expect(toggle.state.value.$2, 'failed');
     await toggle.dispose();
   });
+  testWidgets(
+    'actual accepted upload is success; refused upload has no icon and stale completion is fenced',
+    (t) async {
+      await t.runAsync(() => setup([enabledView()]));
+      final toggle = AcceptedToggle(forms.get('ui-settings'));
+      addTearDown(toggle.dispose);
+      await t.runAsync(() => toggle.set(true));
+      await t.pumpWidget(
+        dshTestApp(
+          SettingsUploadNotice(
+            controller: toggle,
+            i18n: const DshI18n(DshLocale.en),
+          ),
+        ),
+      );
+      await t.pump();
+      await t.pump();
+      await t.pump(const Duration(milliseconds: 200));
+      final saved = t.widget<DshToast>(find.byType(DshToast));
+      expect(saved.tone, DshToastTone.success);
+      expect(
+        t.widget<DshIcon>(find.byType(DshIcon)).icon,
+        DshIcons.checkCircle,
+      );
+      expect(toggle.form.snapshot.value?['enabled'], true);
+      host.handlers['settings/mutate'] = (_) =>
+          throw RemoteException('gateway/refused', 'read-only');
+      await t.runAsync(() => toggle.set(false));
+      await t.pump();
+      await t.pump();
+      await t.pump();
+      final failed = t.widget<DshToast>(find.byType(DshToast));
+      expect(failed.tone, isNull);
+      expect(failed.icon, isNull);
+      expect(find.byType(DshIcon), findsNothing);
+      saved.onDone();
+      await t.pump();
+      expect(toggle.state.value.$2, 'failed');
+      expect(find.byType(DshToast), findsOneWidget);
+      await t.pumpWidget(const SizedBox());
+      await t.pump();
+    },
+  );
   test('web selection saves section first, blocks invalid/failure switch and retains staged keys', () async {
     await setup(webViews());
     host.handlers['credentials/describe'] = (_) => {

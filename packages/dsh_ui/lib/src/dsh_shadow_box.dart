@@ -4,10 +4,14 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_snapped_box.dart';
 import 'dsh_corners.dart';
+import 'dsh_pixel_snap.dart';
 
 /// A rounded surface with CSS `box-shadow` semantics: [shadows] are painted
-/// outside the border box only, so a translucent [color] (dsh's menu surface)
-/// does not show them through, unlike Flutter's own `BoxDecoration.boxShadow`.
+/// outside the source owner's exclusion contour. Translucent source owners
+/// exclude the full border box; an authored opaque background uses Blink's
+/// one-internal-pixel inset to prevent antialias gaps. An explicit source paint
+/// origin makes the shadow, exclusion and foreground share the contour snapped
+/// before the source's post-layout transform.
 class DshShadowBox extends StatelessWidget {
   const DshShadowBox({
     super.key,
@@ -17,6 +21,8 @@ class DshShadowBox extends StatelessWidget {
     required this.child,
     this.padding = EdgeInsets.zero,
     this.shape,
+    this.authoredOpaqueBackground = false,
+    this.sourcePaintOrigin,
   });
 
   final Color color;
@@ -26,10 +32,31 @@ class DshShadowBox extends StatelessWidget {
   final Widget child;
   final DshCornerBorder? shape;
 
+  /// Whether the source shadow owner itself has an opaque authored background.
+  /// A translucent source material precomposited onto an opaque ground does
+  /// not qualify. Keep that distinction explicit at the canonical caller.
+  final bool authoredOpaqueBackground;
+
+  /// The source layout origin before its post-layout transform. The shadow,
+  /// exclusion and foreground share this snapped contour. Null preserves the
+  /// existing callers' paint spaces.
+  final Offset? sourcePaintOrigin;
+
   @override
   Widget build(BuildContext context) => CustomPaint(
-    painter: _OuterShadowPainter(shadows, radius, shape),
+    painter: _OuterShadowPainter(
+      shadows,
+      radius,
+      shape,
+      authoredOpaqueBackground: authoredOpaqueBackground,
+      opaqueClipInset:
+          _opaqueShadowClipInset /
+          dshSnapDensity(dshDevicePixelRatioOf(context)),
+      sourcePaintOrigin: sourcePaintOrigin,
+      devicePixelRatio: dshDevicePixelRatioOf(context),
+    ),
     child: DshDecoratedBox(
+      sourcePaintOrigin: sourcePaintOrigin,
       decoration: shape == null
           ? BoxDecoration(
               color: color,
@@ -45,21 +72,62 @@ class DshShadowBox extends StatelessWidget {
 /// This differs from Flutter Shadow's legacy radius-to-sigma conversion.
 double _cssShadowSigma(double blur) => blur / 2;
 
+// Pinned Chromium145 box_painter_base.cc::ClipToBorderEdge. This is a renderer
+// coverage operation, independent of the generated component's geometry.
+const _opaqueShadowClipInset = 1.0;
+
 class _OuterShadowPainter extends CustomPainter {
-  _OuterShadowPainter(this.shadows, this.radius, this.shape);
+  _OuterShadowPainter(
+    this.shadows,
+    this.radius,
+    this.shape, {
+    this.authoredOpaqueBackground = false,
+    this.opaqueClipInset = _opaqueShadowClipInset,
+    this.sourcePaintOrigin,
+    this.devicePixelRatio = 1,
+  });
 
   final List<BoxShadow> shadows;
   final double radius;
   final DshCornerBorder? shape;
+  final bool authoredOpaqueBackground;
+  final double opaqueClipInset;
+  final Offset? sourcePaintOrigin;
+  final double devicePixelRatio;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final box = RRect.fromRectAndRadius(
-      Offset.zero & size,
-      Radius.circular(radius),
-    );
-    final outer =
-        shape?.getOuterPath(Offset.zero & size) ?? (Path()..addRRect(box));
+    final origin = sourcePaintOrigin;
+    final rect = origin == null
+        ? Offset.zero & size
+        : dshSnapRect(origin & size, devicePixelRatio).shift(-origin);
+    final box = RRect.fromRectAndRadius(rect, Radius.circular(radius));
+    // Chromium145 ClipToBorderEdge insets the excluded contour by one internal
+    // paint pixel only for an authored opaque owner. ZoomForDSF scales CSS
+    // layout before this operation; do not multiply the inset by native DPR.
+    // DshCornerBorder's inner path preserves curvature and shrinks radii.
+    final maskRect = authoredOpaqueBackground
+        ? rect.deflate(opaqueClipInset)
+        : rect;
+    final outer = maskRect.isEmpty
+        ? null
+        : shape != null
+        ? authoredOpaqueBackground
+              ? shape!
+                    .copyWith(side: BorderSide(width: opaqueClipInset))
+                    .getInnerPath(rect)
+              : shape!.getOuterPath(rect)
+        : (Path()..addRRect(
+            RRect.fromRectAndRadius(
+              maskRect,
+              Radius.circular(
+                math.max(
+                  0,
+                  radius - (authoredOpaqueBackground ? opaqueClipInset : 0),
+                ),
+              ),
+            ),
+          ));
     for (final s in shadows.reversed) {
       final rrect = box.shift(s.offset).inflate(s.spreadRadius);
       if (rrect.isEmpty) continue;
@@ -78,18 +146,24 @@ class _OuterShadowPainter extends CustomPainter {
         canvas.drawPath(
           shape!
               .copyWith(radius: math.max(0, radius + s.spreadRadius))
-              .getOuterPath(
-                (Offset.zero & size).shift(s.offset).inflate(s.spreadRadius),
-              ),
+              .getOuterPath(rect.shift(s.offset).inflate(s.spreadRadius)),
           paint,
         );
       }
-      canvas.drawPath(outer, Paint()..blendMode = BlendMode.dstOut);
+      if (outer != null) {
+        canvas.drawPath(outer, Paint()..blendMode = BlendMode.dstOut);
+      }
       canvas.restore();
     }
   }
 
   @override
   bool shouldRepaint(_OuterShadowPainter old) =>
-      old.radius != radius || old.shadows != shadows || old.shape != shape;
+      old.radius != radius ||
+      old.shadows != shadows ||
+      old.shape != shape ||
+      old.authoredOpaqueBackground != authoredOpaqueBackground ||
+      old.opaqueClipInset != opaqueClipInset ||
+      old.sourcePaintOrigin != sourcePaintOrigin ||
+      old.devicePixelRatio != devicePixelRatio;
 }

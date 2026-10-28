@@ -2,6 +2,26 @@
 from pathlib import Path
 import argparse,base64,hashlib,json,re,subprocess,tarfile
 
+# The intentionally retained primitive subset, not the package's complete
+# component universe. Freeze its decoder output set independently of an
+# editable lock, including both new Toast inputs.
+PRIMITIVE_OUTPUTS = frozenset({
+    'package.json', 'LICENSE', 'Button.module.css', 'SegmentedTabs.module.css',
+    'Pill.module.css', 'Menu.module.css', 'MenuSurface.module.css', 'MenuGroup.module.css',
+    'menu-portal.json', 'ShortcutKeys.module.css', 'Tooltip.module.css',
+    'tooltip-placement.json', 'Input.module.css', 'Switch.module.css',
+    'Checkbox.module.css', 'RiskConfirmation.module.css', 'Tag.module.css',
+    'Modal.module.css', 'modal-layer.json', 'input-modality.json',
+    'Toast.module.css', 'toast-behavior.json',
+})
+
+
+def toast_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/index.js').read()
+    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+            'region': bundle_region(bundle.decode(), 'Toast.js')}
+
 def menu_portal_snapshot(archive):
     with tarfile.open(archive) as tar:
         bundle = tar.extractfile('package/lib/index.js').read()
@@ -300,8 +320,16 @@ def verify_snapshot(archive, package, folder):
                     raise ValueError('published plain-file snapshot mismatch: ' + name)
         return set(package['archiveFiles'])
     if kind == 'primitive-css':
+        names = verified_outputs(package, PRIMITIVE_OUTPUTS)
         with tarfile.open(archive) as tar:
             for name in package['files']:
+                if name == 'toast-behavior.json':
+                    snapshot = toast_snapshot(archive)
+                    if snapshot['bundleSha256'] != package['publishedBundleSha256']:
+                        raise ValueError('published primitive bundle hash mismatch')
+                    if json.loads((folder / name).read_text()) != snapshot:
+                        raise ValueError('published Toast behavior snapshot mismatch')
+                    continue
                 if name == 'menu-portal.json':
                     if json.loads((folder / name).read_text()) != menu_portal_snapshot(archive):
                         raise ValueError('published menu portal snapshot mismatch')
@@ -321,7 +349,7 @@ def verify_snapshot(archive, package, folder):
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published primitive snapshot mismatch: ' + name)
-        return set(package['files'])
+        return names
     extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot,
                'agent-preset-css': agent_preset_style_snapshot,
                'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot,

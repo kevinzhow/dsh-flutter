@@ -11,6 +11,7 @@ import 'package:dsh_shortcuts/dsh_shortcuts.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -204,6 +205,18 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 300));
       expect(find.text('Could not open. Try again.'), findsOneWidget);
+      expect(t.widget<DshToast>(find.byType(DshToast)).tone, isNull);
+      expect(
+        t
+            .widget<DshIcon>(
+              find.descendant(
+                of: find.byType(DshShadowBox),
+                matching: find.byType(DshIcon),
+              ),
+            )
+            .icon,
+        DshIcons.warning,
+      );
       await t.pump(const Duration(seconds: 5));
       await t.pumpAndSettle();
       expect(find.text('Could not open. Try again.'), findsNothing);

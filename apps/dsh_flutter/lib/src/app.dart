@@ -123,7 +123,7 @@ class _WhaleeAppState extends State<WhaleeApp> with WidgetsBindingObserver {
             if (shortcuts != null) {
               body = ShortcutKeyboardHost(service: shortcuts, child: body);
             }
-            return body;
+            return DshToastHost(child: body);
           },
           home: ValueListenableBuilder<ShellChrome>(
             valueListenable: widget.chrome,

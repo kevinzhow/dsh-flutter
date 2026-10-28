@@ -5,19 +5,31 @@ import 'dsh_pixel_snap.dart';
 
 /// A [DecoratedBox] whose decoration (fill, border, shadow) is painted at the
 /// rectangle Blink paints a box at: every edge rounded to a whole device pixel
-/// ([dshSnapRect], `PixelSnappedIntRect`), measured on the display and not in
-/// the box's own coordinates.
+/// ([dshSnapRect], `PixelSnappedIntRect`). The default measures the destination
+/// on the display; [sourcePaintOrigin] explicitly supplies the source's layout
+/// paint space before a post-layout transform.
 ///
 /// Layout is untouched (the box keeps its fractional size and position, and so
 /// does its child); only the painted rectangle moves by up to half a device
 /// pixel. At a whole density with whole logical sizes that is nothing; on a
 /// fractional density (2.625x) it is the difference between a crisp 1-device
-/// pixel border and one smeared over two rows. A box under a rotation or scale
-/// is painted as it is.
+/// pixel border and one smeared over two rows. The default paints a box under
+/// rotation or scale as it is. An explicit source paint space retains its later
+/// transform, including fractional translation.
 class DshDecoratedBox extends SingleChildRenderObjectWidget {
-  const DshDecoratedBox({super.key, required this.decoration, super.child});
+  const DshDecoratedBox({
+    super.key,
+    required this.decoration,
+    this.sourcePaintOrigin,
+    super.child,
+  });
 
   final Decoration decoration;
+
+  /// The source layout origin before a post-layout CSS transform, when known.
+  /// Snap the contour in that paint space and retain the later transform.
+  /// Omitting it preserves the existing destination-space snapping behavior.
+  final Offset? sourcePaintOrigin;
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
@@ -25,6 +37,7 @@ class DshDecoratedBox extends SingleChildRenderObjectWidget {
         decoration,
         dshDevicePixelRatioOf(context),
         Directionality.maybeOf(context),
+        sourcePaintOrigin,
       );
 
   @override
@@ -32,7 +45,8 @@ class DshDecoratedBox extends SingleChildRenderObjectWidget {
     (renderObject as _RenderDshDecoratedBox)
       ..decoration = decoration
       ..devicePixelRatio = dshDevicePixelRatioOf(context)
-      ..textDirection = Directionality.maybeOf(context);
+      ..textDirection = Directionality.maybeOf(context)
+      ..sourcePaintOrigin = sourcePaintOrigin;
   }
 }
 
@@ -41,11 +55,13 @@ class _RenderDshDecoratedBox extends RenderProxyBox {
     this._decoration,
     this._devicePixelRatio,
     this._textDirection,
+    this._sourcePaintOrigin,
   );
 
   Decoration _decoration;
   double _devicePixelRatio;
   TextDirection? _textDirection;
+  Offset? _sourcePaintOrigin;
   BoxPainter? _painter;
 
   set decoration(Decoration value) {
@@ -65,6 +81,12 @@ class _RenderDshDecoratedBox extends RenderProxyBox {
   set textDirection(TextDirection? value) {
     if (value == _textDirection) return;
     _textDirection = value;
+    markNeedsPaint();
+  }
+
+  set sourcePaintOrigin(Offset? value) {
+    if (value == _sourcePaintOrigin) return;
+    _sourcePaintOrigin = value;
     markNeedsPaint();
   }
 
@@ -89,6 +111,13 @@ class _RenderDshDecoratedBox extends RenderProxyBox {
   /// [offset] & [size] with its edges snapped on the display.
   Rect _paintRect(Offset offset) {
     final rect = offset & size;
+    final sourceOrigin = _sourcePaintOrigin;
+    if (sourceOrigin != null) {
+      return dshSnapRect(
+        sourceOrigin & size,
+        _devicePixelRatio,
+      ).shift(offset - sourceOrigin);
+    }
     final matrix = getTransformTo(null);
     final m = matrix.storage;
     final translationOnly =

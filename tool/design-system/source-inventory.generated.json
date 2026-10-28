@@ -5,7 +5,7 @@
     "path": "pnpm-workspace.yaml",
     "sha256": "3c624c26e58ab02ffc8d653bb8a9e8767a63fe0576bc0dbfaa3a5e43f88d973b"
   },
-  "snapshotLockSha256": "9abb49916af9c9fedfd2a6183d2586c72b5b08d2718a9534ae624cd68fc064d6",
+  "snapshotLockSha256": "419587a4e9622f522dea637e488d7aadff20bdf8843606ab87b8d5fc24848a1a",
   "meaning": "Source-input retention only. Recipe implementation, inline/SVG coverage and state acceptance are not assessed.",
   "dependencyScope": {
     "roots": [
@@ -164,8 +164,8 @@
     "uiPackagesWithoutCss": 9,
     "uiCssInputs": 209,
     "uiPackagesWithRetainedSnapshots": 13,
-    "uiCssRetainedInputs": 36,
-    "uiCssPendingInputs": 173,
+    "uiCssRetainedInputs": 37,
+    "uiCssPendingInputs": 172,
     "supportStylePackages": 9,
     "supportCssInputs": 10
   },
@@ -2806,6 +2806,10 @@
             "sha256": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e"
           },
           {
+            "path": "tool/design-system/upstream/ui-primitives/Toast.module.css",
+            "sha256": "74cab625e372a6cdaff92fa468b7d59bc037212d738e476ea0f8d485e4f8dbcb"
+          },
+          {
             "path": "tool/design-system/upstream/ui-primitives/Tooltip.module.css",
             "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678"
           },
@@ -2824,6 +2828,10 @@
           {
             "path": "tool/design-system/upstream/ui-primitives/package.json",
             "sha256": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75"
+          },
+          {
+            "path": "tool/design-system/upstream/ui-primitives/toast-behavior.json",
+            "sha256": "56f59a31900f445e7905a818f075fca5729534c392b5ddf0a1adcd59bced23db"
           },
           {
             "path": "tool/design-system/upstream/ui-primitives/tooltip-placement.json",
@@ -3053,8 +3061,10 @@
         {
           "path": "packages/client/ui-primitives/src/Toast.module.css",
           "sha256": "74cab625e372a6cdaff92fa468b7d59bc037212d738e476ea0f8d485e4f8dbcb",
-          "retention": "pending",
-          "retainedInputs": []
+          "retention": "retained-input",
+          "retainedInputs": [
+            "tool/design-system/upstream/ui-primitives/Toast.module.css"
+          ]
         },
         {
           "path": "packages/client/ui-primitives/src/Tooltip.module.css",

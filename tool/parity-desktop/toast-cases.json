@@ -1,0 +1,3976 @@
+{
+  "schema": "whalee-toast-native/1",
+  "fixtureTarget": "test/parity/toast_main.dart",
+  "sourceReferenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "scenarioInput": {
+    "path": "apps/dsh_flutter/test/parity/helpers/toast_fixture.dart",
+    "sha256": "5ee0ed756395820602288a50101ae46408cb04dd039a4c33b9c3a92ece0ae910",
+    "literal": "toastScenarioJson"
+  },
+  "preparation": {
+    "only": true,
+    "nativeExecuted": false,
+    "widgetTest": "apps/dsh_flutter/test/parity/toast_native_fixture_test.dart",
+    "widgetTestSha256": "9525fe3a5a28d744689240616ac4d7d670f3e0e99376c6ca035ad2d80e251ae7",
+    "fixtureSha256": "0b5a9699df476ba026772a377e9fc206482c7ab929a0ce02fcab7f72761b416c",
+    "pinnedGeometryLogSha256": "37b7bcae74b16d2ade704fff7838364dbc7100d7909d378d57c1ccb0c2fa1c50",
+    "fontManifestSha256": "1c7960ce9c9dbb200f493dd624c732a6903acc3cfd419244449e58b0771f4c4e",
+    "geometry": [
+      {
+        "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 1.0,
+        "theme": "dark",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            627.5,
+            270.0,
+            652.5,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 1.0,
+        "theme": "light",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            627.5,
+            270.0,
+            652.5,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 2.625,
+        "theme": "dark",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            628.1190476190476,
+            270.0,
+            651.8809523809524,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 2.625,
+        "theme": "light",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            628.1190476190476,
+            270.0,
+            651.8809523809524,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          390.0,
+          844.0
+        ],
+        "dpr": 1.0,
+        "theme": "dark",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            122.59922790527344,
+            40.0,
+            267.40077209472656,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            382.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            382.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            8.0,
+            222.0,
+            73.69633483886719,
+            250.0
+          ],
+          "Same hold": [
+            77.69633483886719,
+            222.0,
+            157.27674865722656,
+            250.0
+          ],
+          "Changed hold": [
+            161.27674865722656,
+            222.0,
+            260.2252960205078,
+            250.0
+          ],
+          "Upload saved": [
+            135.38072204589844,
+            286.0,
+            231.8452606201172,
+            314.0
+          ],
+          "Upload failed": [
+            235.8452606201172,
+            286.0,
+            330.7857971191406,
+            314.0
+          ],
+          "Reduced motion": [
+            266.0854949951172,
+            254.0,
+            378.7261505126953,
+            282.0
+          ],
+          "Toast then preview": [
+            8.0,
+            254.0,
+            133.85275268554688,
+            282.0
+          ],
+          "Preview then toast": [
+            137.85275268554688,
+            254.0,
+            262.0854949951172,
+            282.0
+          ],
+          "Focus background": [
+            8.0,
+            286.0,
+            131.38072204589844,
+            314.0
+          ],
+          "Remove file owner": [
+            8.0,
+            318.0,
+            132.25674438476562,
+            346.0
+          ],
+          "workspace": [
+            182.5,
+            366.0,
+            207.5,
+            390.0
+          ],
+          "file": [
+            162.5,
+            410.0,
+            195.5,
+            438.0
+          ],
+          "noIcon": [
+            126.74520874023438,
+            40.0,
+            263.2547912597656,
+            86.0
+          ],
+          "success": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "warning": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "long": [
+            8.0,
+            40.0,
+            382.0,
+            262.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          390.0,
+          844.0
+        ],
+        "dpr": 1.0,
+        "theme": "light",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            122.59922790527344,
+            40.0,
+            267.40077209472656,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            382.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            382.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            8.0,
+            222.0,
+            73.69633483886719,
+            250.0
+          ],
+          "Same hold": [
+            77.69633483886719,
+            222.0,
+            157.27674865722656,
+            250.0
+          ],
+          "Changed hold": [
+            161.27674865722656,
+            222.0,
+            260.2252960205078,
+            250.0
+          ],
+          "Upload saved": [
+            135.38072204589844,
+            286.0,
+            231.8452606201172,
+            314.0
+          ],
+          "Upload failed": [
+            235.8452606201172,
+            286.0,
+            330.7857971191406,
+            314.0
+          ],
+          "Reduced motion": [
+            266.0854949951172,
+            254.0,
+            378.7261505126953,
+            282.0
+          ],
+          "Toast then preview": [
+            8.0,
+            254.0,
+            133.85275268554688,
+            282.0
+          ],
+          "Preview then toast": [
+            137.85275268554688,
+            254.0,
+            262.0854949951172,
+            282.0
+          ],
+          "Focus background": [
+            8.0,
+            286.0,
+            131.38072204589844,
+            314.0
+          ],
+          "Remove file owner": [
+            8.0,
+            318.0,
+            132.25674438476562,
+            346.0
+          ],
+          "workspace": [
+            182.5,
+            366.0,
+            207.5,
+            390.0
+          ],
+          "file": [
+            162.5,
+            410.0,
+            195.5,
+            438.0
+          ],
+          "noIcon": [
+            126.74520874023438,
+            40.0,
+            263.2547912597656,
+            86.0
+          ],
+          "success": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "warning": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "long": [
+            8.0,
+            40.0,
+            382.0,
+            262.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          390.0,
+          844.0
+        ],
+        "dpr": 2.625,
+        "theme": "dark",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            122.59922790527344,
+            40.0,
+            267.40077209472656,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            382.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            382.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            8.0,
+            222.0,
+            73.69633483886719,
+            250.0
+          ],
+          "Same hold": [
+            77.69633483886719,
+            222.0,
+            157.27674865722656,
+            250.0
+          ],
+          "Changed hold": [
+            161.27674865722656,
+            222.0,
+            260.2252960205078,
+            250.0
+          ],
+          "Upload saved": [
+            135.38072204589844,
+            286.0,
+            231.8452606201172,
+            314.0
+          ],
+          "Upload failed": [
+            235.8452606201172,
+            286.0,
+            330.7857971191406,
+            314.0
+          ],
+          "Reduced motion": [
+            266.0854949951172,
+            254.0,
+            378.7261505126953,
+            282.0
+          ],
+          "Toast then preview": [
+            8.0,
+            254.0,
+            133.85275268554688,
+            282.0
+          ],
+          "Preview then toast": [
+            137.85275268554688,
+            254.0,
+            262.0854949951172,
+            282.0
+          ],
+          "Focus background": [
+            8.0,
+            286.0,
+            131.38072204589844,
+            314.0
+          ],
+          "Remove file owner": [
+            8.0,
+            318.0,
+            132.25674438476562,
+            346.0
+          ],
+          "workspace": [
+            183.11904761904762,
+            366.0,
+            206.88095238095238,
+            390.0
+          ],
+          "file": [
+            162.5,
+            410.0,
+            195.5,
+            438.0
+          ],
+          "noIcon": [
+            126.74520874023438,
+            40.0,
+            263.2547912597656,
+            86.0
+          ],
+          "success": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "warning": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "long": [
+            8.0,
+            40.0,
+            382.0,
+            262.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          390.0,
+          844.0
+        ],
+        "dpr": 2.625,
+        "theme": "light",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            122.59922790527344,
+            40.0,
+            267.40077209472656,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            382.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            382.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            8.0,
+            222.0,
+            73.69633483886719,
+            250.0
+          ],
+          "Same hold": [
+            77.69633483886719,
+            222.0,
+            157.27674865722656,
+            250.0
+          ],
+          "Changed hold": [
+            161.27674865722656,
+            222.0,
+            260.2252960205078,
+            250.0
+          ],
+          "Upload saved": [
+            135.38072204589844,
+            286.0,
+            231.8452606201172,
+            314.0
+          ],
+          "Upload failed": [
+            235.8452606201172,
+            286.0,
+            330.7857971191406,
+            314.0
+          ],
+          "Reduced motion": [
+            266.0854949951172,
+            254.0,
+            378.7261505126953,
+            282.0
+          ],
+          "Toast then preview": [
+            8.0,
+            254.0,
+            133.85275268554688,
+            282.0
+          ],
+          "Preview then toast": [
+            137.85275268554688,
+            254.0,
+            262.0854949951172,
+            282.0
+          ],
+          "Focus background": [
+            8.0,
+            286.0,
+            131.38072204589844,
+            314.0
+          ],
+          "Remove file owner": [
+            8.0,
+            318.0,
+            132.25674438476562,
+            346.0
+          ],
+          "workspace": [
+            183.11904761904762,
+            366.0,
+            206.88095238095238,
+            390.0
+          ],
+          "file": [
+            162.5,
+            410.0,
+            195.5,
+            438.0
+          ],
+          "noIcon": [
+            126.74520874023438,
+            40.0,
+            263.2547912597656,
+            86.0
+          ],
+          "success": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "warning": [
+            113.74520874023438,
+            40.0,
+            276.2547912597656,
+            86.0
+          ],
+          "long": [
+            8.0,
+            40.0,
+            382.0,
+            262.0
+          ]
+        }
+      }
+    ],
+    "testsPassed": 13,
+    "contextRepairCommit": "dbc681c6d16d80dd3bb30d9c054d7b7ec53bec2e",
+    "lightboxProof": "actual opaque Toast-core RGBA equals the same Toast alone, both show orders; logical portal ancestry is not paint evidence"
+  },
+  "limits": [
+    "Actions/anchor APIs remain unsupported/frozen.",
+    "Exact default/same/changed deadlines and motion curves have widget proofs; native waits certify observed completion only.",
+    "Alert role is widget-verified; equal spoken screen-reader delivery remains pending.",
+    "Whitespace/oversized-word, complexUnicode/bidi and native font rasterization remain reported separately.",
+    "All services/data are synthetic; no host lookup or configuration network is used.",
+    "GPU counter pixel assertions do not read exact numeric counter text.",
+    "Fresh exact-head build/native execution/cleanup and paired acceptance belong to root; this manifest is preparation only."
+  ],
+  "cases": [
+    {
+      "id": "toast-1280-dark",
+      "width": 1280,
+      "height": 720,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "baseline"
+        },
+        {
+          "keys": [
+            88
+          ]
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "no-icon"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "keyboard-through"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              8,
+              110,
+              1272,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            58
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "click-through"
+        },
+        {
+          "expect": {
+            "reference": "keyboard-through",
+            "rect": [
+              8,
+              110,
+              1272,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            61
+          ]
+        },
+        {
+          "capture": "success"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            62
+          ]
+        },
+        {
+          "capture": "warning"
+        },
+        {
+          "expect": {
+            "reference": "success",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            63
+          ]
+        },
+        {
+          "capture": "long"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              40,
+              1280,
+              174
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              688,
+              1280,
+              720
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "lifecycle-start"
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "same-update"
+        },
+        {
+          "expect": {
+            "reference": "lifecycle-start",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "wait": 4100
+        },
+        {
+          "capture": "same-expired"
+        },
+        {
+          "expect": {
+            "reference": "same-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "changed-update"
+        },
+        {
+          "wait": 3800
+        },
+        {
+          "capture": "changed-pending"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": false
+          }
+        },
+        {
+          "wait": 2200
+        },
+        {
+          "capture": "changed-expired"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            67
+          ]
+        },
+        {
+          "capture": "toast-then-preview"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              100,
+              1280,
+              720
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            68
+          ]
+        },
+        {
+          "capture": "preview-then-toast"
+        },
+        {
+          "expect": {
+            "reference": "toast-then-preview",
+            "rect": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared-preview"
+        },
+        {
+          "expect": {
+            "reference": "preview-then-toast",
+            "rect": [
+              0,
+              100,
+              1280,
+              720
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            282
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-failure"
+        },
+        {
+          "expect": {
+            "reference": "cleared-preview",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            282
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-repeat"
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              8,
+              130,
+              1272,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              0,
+              0,
+              1280,
+              100
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            624,
+            328
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "file-failure"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            1127,
+            204
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "upload-saved"
+        },
+        {
+          "expect": {
+            "reference": "file-failure",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            55,
+            236
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "upload-failed"
+        },
+        {
+          "expect": {
+            "reference": "upload-saved",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "keys": [
+            87
+          ]
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "normal-motion"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared"
+        },
+        {
+          "expect": {
+            "reference": "normal-motion",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        }
+      ],
+      "pairHost": false
+    },
+    {
+      "id": "toast-1280-light",
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "baseline"
+        },
+        {
+          "keys": [
+            88
+          ]
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "no-icon"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "keyboard-through"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              8,
+              110,
+              1272,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            58
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "click-through"
+        },
+        {
+          "expect": {
+            "reference": "keyboard-through",
+            "rect": [
+              8,
+              110,
+              1272,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            61
+          ]
+        },
+        {
+          "capture": "success"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            62
+          ]
+        },
+        {
+          "capture": "warning"
+        },
+        {
+          "expect": {
+            "reference": "success",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            63
+          ]
+        },
+        {
+          "capture": "long"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              40,
+              1280,
+              174
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              688,
+              1280,
+              720
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "lifecycle-start"
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "same-update"
+        },
+        {
+          "expect": {
+            "reference": "lifecycle-start",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "wait": 4100
+        },
+        {
+          "capture": "same-expired"
+        },
+        {
+          "expect": {
+            "reference": "same-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "changed-update"
+        },
+        {
+          "wait": 3800
+        },
+        {
+          "capture": "changed-pending"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": false
+          }
+        },
+        {
+          "wait": 2200
+        },
+        {
+          "capture": "changed-expired"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              692,
+              1272,
+              712
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            67
+          ]
+        },
+        {
+          "capture": "toast-then-preview"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              100,
+              1280,
+              720
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            68
+          ]
+        },
+        {
+          "capture": "preview-then-toast"
+        },
+        {
+          "expect": {
+            "reference": "toast-then-preview",
+            "rect": [
+              0,
+              0,
+              1280,
+              720
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared-preview"
+        },
+        {
+          "expect": {
+            "reference": "preview-then-toast",
+            "rect": [
+              0,
+              100,
+              1280,
+              720
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            282
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-failure"
+        },
+        {
+          "expect": {
+            "reference": "cleared-preview",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            640,
+            282
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-repeat"
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              8,
+              130,
+              1272,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              0,
+              0,
+              1280,
+              100
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            624,
+            328
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "file-failure"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            1127,
+            204
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "upload-saved"
+        },
+        {
+          "expect": {
+            "reference": "file-failure",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            55,
+            236
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "upload-failed"
+        },
+        {
+          "expect": {
+            "reference": "upload-saved",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "keys": [
+            87
+          ]
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "normal-motion"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared"
+        },
+        {
+          "expect": {
+            "reference": "normal-motion",
+            "rect": [
+              0,
+              40,
+              1280,
+              86
+            ],
+            "changed": true
+          }
+        }
+      ],
+      "pairHost": false
+    },
+    {
+      "id": "toast-390-dark",
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "baseline"
+        },
+        {
+          "keys": [
+            88
+          ]
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "no-icon"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "keyboard-through"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              8,
+              110,
+              382,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            58
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "click-through"
+        },
+        {
+          "expect": {
+            "reference": "keyboard-through",
+            "rect": [
+              8,
+              110,
+              382,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            61
+          ]
+        },
+        {
+          "capture": "success"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            62
+          ]
+        },
+        {
+          "capture": "warning"
+        },
+        {
+          "expect": {
+            "reference": "success",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            63
+          ]
+        },
+        {
+          "capture": "long"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              40,
+              390,
+              262
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              812,
+              390,
+              844
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "lifecycle-start"
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "same-update"
+        },
+        {
+          "expect": {
+            "reference": "lifecycle-start",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "wait": 4100
+        },
+        {
+          "capture": "same-expired"
+        },
+        {
+          "expect": {
+            "reference": "same-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "changed-update"
+        },
+        {
+          "wait": 3800
+        },
+        {
+          "capture": "changed-pending"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": false
+          }
+        },
+        {
+          "wait": 2200
+        },
+        {
+          "capture": "changed-expired"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            67
+          ]
+        },
+        {
+          "capture": "toast-then-preview"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              100,
+              390,
+              844
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            68
+          ]
+        },
+        {
+          "capture": "preview-then-toast"
+        },
+        {
+          "expect": {
+            "reference": "toast-then-preview",
+            "rect": [
+              0,
+              0,
+              390,
+              844
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared-preview"
+        },
+        {
+          "expect": {
+            "reference": "preview-then-toast",
+            "rect": [
+              0,
+              100,
+              390,
+              844
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            378
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-failure"
+        },
+        {
+          "expect": {
+            "reference": "cleared-preview",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            378
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-repeat"
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              8,
+              130,
+              382,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              0,
+              0,
+              390,
+              100
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            179,
+            424
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "file-failure"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            184,
+            300
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "upload-saved"
+        },
+        {
+          "expect": {
+            "reference": "file-failure",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            283,
+            300
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "upload-failed"
+        },
+        {
+          "expect": {
+            "reference": "upload-saved",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "keys": [
+            87
+          ]
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "normal-motion"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared"
+        },
+        {
+          "expect": {
+            "reference": "normal-motion",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        }
+      ],
+      "pairHost": false
+    },
+    {
+      "id": "toast-390-light",
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "baseline"
+        },
+        {
+          "keys": [
+            88
+          ]
+        },
+        {
+          "capture": "focused"
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "no-icon"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "keyboard-through"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              8,
+              110,
+              382,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            58
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "click-through"
+        },
+        {
+          "expect": {
+            "reference": "keyboard-through",
+            "rect": [
+              8,
+              110,
+              382,
+              130
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            61
+          ]
+        },
+        {
+          "capture": "success"
+        },
+        {
+          "expect": {
+            "reference": "no-icon",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            62
+          ]
+        },
+        {
+          "capture": "warning"
+        },
+        {
+          "expect": {
+            "reference": "success",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            63
+          ]
+        },
+        {
+          "capture": "long"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              40,
+              390,
+              262
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              812,
+              390,
+              844
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "lifecycle-start"
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "same-update"
+        },
+        {
+          "expect": {
+            "reference": "lifecycle-start",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "wait": 4100
+        },
+        {
+          "capture": "same-expired"
+        },
+        {
+          "expect": {
+            "reference": "same-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "changed-update"
+        },
+        {
+          "wait": 3800
+        },
+        {
+          "capture": "changed-pending"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": false
+          }
+        },
+        {
+          "wait": 2200
+        },
+        {
+          "capture": "changed-expired"
+        },
+        {
+          "expect": {
+            "reference": "changed-update",
+            "rect": [
+              8,
+              816,
+              382,
+              836
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            67
+          ]
+        },
+        {
+          "capture": "toast-then-preview"
+        },
+        {
+          "expect": {
+            "reference": "warning",
+            "rect": [
+              0,
+              100,
+              390,
+              844
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            68
+          ]
+        },
+        {
+          "capture": "preview-then-toast"
+        },
+        {
+          "expect": {
+            "reference": "toast-then-preview",
+            "rect": [
+              0,
+              0,
+              390,
+              844
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared-preview"
+        },
+        {
+          "expect": {
+            "reference": "preview-then-toast",
+            "rect": [
+              0,
+              100,
+              390,
+              844
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            378
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-failure"
+        },
+        {
+          "expect": {
+            "reference": "cleared-preview",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            195,
+            378
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "workspace-repeat"
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              8,
+              130,
+              382,
+              150
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "workspace-failure",
+            "rect": [
+              0,
+              0,
+              390,
+              100
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            179,
+            424
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "file-failure"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            184,
+            300
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "upload-saved"
+        },
+        {
+          "expect": {
+            "reference": "file-failure",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "click": [
+            283,
+            300
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "upload-failed"
+        },
+        {
+          "expect": {
+            "reference": "upload-saved",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "keys": [
+            87
+          ]
+        },
+        {
+          "keys": [
+            60
+          ]
+        },
+        {
+          "capture": "normal-motion"
+        },
+        {
+          "expect": {
+            "reference": "baseline",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            59
+          ]
+        },
+        {
+          "capture": "cleared"
+        },
+        {
+          "expect": {
+            "reference": "normal-motion",
+            "rect": [
+              0,
+              40,
+              390,
+              86
+            ],
+            "changed": true
+          }
+        }
+      ],
+      "pairHost": false
+    }
+  ],
+  "android": {
+    "schema": "whalee-toast-android-steps/1",
+    "steps": [
+      {
+        "expect": [
+          "Toast fixture: none; done: 0; clicks: 0",
+          "Services: synthetic offline; no network"
+        ]
+      },
+      {
+        "capture": "baseline"
+      },
+      {
+        "tap": "Focus background"
+      },
+      {
+        "focused": "Underlying action"
+      },
+      {
+        "tap": "No icon"
+      },
+      {
+        "expect": [
+          "Synthetic notice"
+        ]
+      },
+      {
+        "sourceToast": {
+          "text": "Synthetic notice",
+          "long": false
+        }
+      },
+      {
+        "focused": "Underlying action"
+      },
+      {
+        "capture": "no-icon"
+      },
+      {
+        "clickThrough": "Underlying action"
+      },
+      {
+        "expect": [
+          "Toast fixture: no-icon; done: 0; clicks: 1"
+        ]
+      },
+      {
+        "capture": "click-through"
+      },
+      {
+        "key": 66
+      },
+      {
+        "expect": [
+          "Toast fixture: no-icon; done: 0; clicks: 2"
+        ]
+      },
+      {
+        "capture": "keyboard-through"
+      },
+      {
+        "tap": "Success"
+      },
+      {
+        "expect": [
+          "Synthetic notice"
+        ]
+      },
+      {
+        "sourceToast": {
+          "text": "Synthetic notice",
+          "long": false
+        }
+      },
+      {
+        "capture": "success"
+      },
+      {
+        "tap": "Warning"
+      },
+      {
+        "expect": [
+          "Synthetic notice"
+        ]
+      },
+      {
+        "sourceToast": {
+          "text": "Synthetic notice",
+          "long": false
+        }
+      },
+      {
+        "capture": "warning"
+      },
+      {
+        "tap": "Long"
+      },
+      {
+        "expect": [
+          "This is a deliberately long synthetic failure notice. It names the operation that failed and keeps natural paragraph wrapping without a fixed line count. The full text must remain readable on a narrow phone and a desktop window, using the actual content-box cap, icon seat and padding from the published source. No line break, font, colour or screenshot crop is fitted to this text."
+        ]
+      },
+      {
+        "sourceToast": {
+          "text": "This is a deliberately long synthetic failure notice. It names the operation that failed and keeps natural paragraph wrapping without a fixed line count. The full text must remain readable on a narrow phone and a desktop window, using the actual content-box cap, icon seat and padding from the published source. No line break, font, colour or screenshot crop is fitted to this text.",
+          "long": true
+        }
+      },
+      {
+        "capture": "long"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "key": 136
+      },
+      {
+        "wait": 4500
+      },
+      {
+        "expect": [
+          "Toast fixture: none; done: 1; clicks: 2"
+        ]
+      },
+      {
+        "capture": "lifetime-expired"
+      },
+      {
+        "key": 136
+      },
+      {
+        "wait": 500
+      },
+      {
+        "key": 137
+      },
+      {
+        "wait": 4500
+      },
+      {
+        "expect": [
+          "Toast fixture: none; done: 1; clicks: 2"
+        ]
+      },
+      {
+        "capture": "same-hold-expired"
+      },
+      {
+        "key": 136
+      },
+      {
+        "wait": 500
+      },
+      {
+        "key": 138
+      },
+      {
+        "wait": 6000
+      },
+      {
+        "expect": [
+          "Toast fixture: none; done: 1; clicks: 2"
+        ]
+      },
+      {
+        "capture": "changed-hold-expired"
+      },
+      {
+        "tap": "Toast then preview"
+      },
+      {
+        "capture": "toast-then-preview"
+      },
+      {
+        "lightboxProof": {
+          "scene": "toast-then-preview",
+          "baseline": "warning",
+          "closeLabel": "Close preview",
+          "failureLabel": "Synthetic preview has no image",
+          "toastLabel": "Synthetic notice"
+        }
+      },
+      {
+        "key": 140
+      },
+      {
+        "capture": "preview-then-toast"
+      },
+      {
+        "lightboxProof": {
+          "scene": "preview-then-toast",
+          "baseline": "warning",
+          "closeLabel": "Close preview",
+          "failureLabel": "Synthetic preview has no image",
+          "toastLabel": "Synthetic notice"
+        }
+      },
+      {
+        "key": 131
+      },
+      {
+        "tap": "Open in VS Code"
+      },
+      {
+        "expect": [
+          "Could not open. Try again.",
+          "Owner requests: workspace 1; file 0; upload 0"
+        ]
+      },
+      {
+        "capture": "workspace-failure"
+      },
+      {
+        "tap": "Open in VS Code"
+      },
+      {
+        "expect": [
+          "Could not open. Try again.",
+          "Owner requests: workspace 2; file 0; upload 0"
+        ]
+      },
+      {
+        "capture": "workspace-repeat"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "tap": "Show file location"
+      },
+      {
+        "expect": [
+          "Could not show the file location. Try again.",
+          "Owner requests: workspace 2; file 1; upload 0"
+        ]
+      },
+      {
+        "capture": "file-failure"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "tap": "Upload saved"
+      },
+      {
+        "expect": [
+          "Preference saved",
+          "Owner requests: workspace 2; file 1; upload 1"
+        ]
+      },
+      {
+        "capture": "upload-saved"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "tap": "Upload failed"
+      },
+      {
+        "expect": [
+          "Could not save preference",
+          "Owner requests: workspace 2; file 1; upload 2"
+        ]
+      },
+      {
+        "capture": "upload-failed"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "key": 141
+      },
+      {
+        "tap": "No icon"
+      },
+      {
+        "expect": [
+          "Synthetic notice",
+          "Reduced motion: off; upload accepted: true"
+        ]
+      },
+      {
+        "capture": "normal-motion"
+      },
+      {
+        "tap": "Clear"
+      },
+      {
+        "absent": [
+          "Synthetic notice"
+        ]
+      },
+      {
+        "capture": "cleared"
+      }
+    ]
+  }
+}

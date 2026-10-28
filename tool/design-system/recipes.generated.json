@@ -27,7 +27,9 @@
           "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
           "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
           "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
-          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86",
+          "Toast.module.css": "74cab625e372a6cdaff92fa468b7d59bc037212d738e476ea0f8d485e4f8dbcb",
+          "toast-behavior.json": "56f59a31900f445e7905a818f075fca5729534c392b5ddf0a1adcd59bced23db"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -51,7 +53,9 @@
           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
           "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
           "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
-          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
+          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba",
+          "packages/client/ui-primitives/src/Toast.tsx": "85ed92693c910decadb38f095764bbdb3a1c6992b60bf63dedabdbebccd309b6",
+          "packages/client/ui-primitives/src/icons/index.tsx": "25052a41938e69b557fd730f1ada0deae0994f1ee410195f98c83661188b958a"
         },
         "referenceConsumers": [
           {
@@ -59,7 +63,8 @@
             "dependencyField": "devDependencies",
             "dependencySpecifier": "workspace:*"
           }
-        ]
+        ],
+        "publishedBundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566"
       },
       {
         "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
@@ -1870,6 +1875,122 @@
         }
       }
     ],
+    "Toast.module.css": [
+      {
+        "selector": ".toast",
+        "conditions": [],
+        "declarations": {
+          "position": "fixed",
+          "top": "40px",
+          "left": "50%",
+          "z-index": "1100",
+          "pointer-events": "none",
+          "display": "flex",
+          "align-items": "center",
+          "gap": "10px",
+          "width": "max-content",
+          "max-width": "min(640px, calc(100vw - 48px))",
+          "padding": "12px 16px",
+          "border-radius": "var(--dsw-radius-lg)",
+          "background": "var(--dsw-alias-toast-bg)",
+          "color": "var(--dsw-alias-toast-label)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "box-shadow": "var(--dsw-shadow-lv3)",
+          "transform": "translateX(-50%)",
+          "animation": "dsh-toast-in 160ms ease-out,\n    dsh-toast-fade 1000ms ease var(--dsh-toast-hold, 3000ms) forwards"
+        }
+      },
+      {
+        "selector": ".icon",
+        "conditions": [],
+        "declarations": {
+          "display": "grid",
+          "place-items": "center",
+          "flex": "none",
+          "color": "var(--dsw-alias-state-warn-label)"
+        }
+      },
+      {
+        "selector": ".icon.success",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-state-success-primary)"
+        }
+      },
+      {
+        "selector": ".text",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0"
+        }
+      },
+      {
+        "selector": ".action",
+        "conditions": [],
+        "declarations": {
+          "display": "inline",
+          "padding": "0",
+          "border": "0",
+          "background": "none",
+          "color": "var(--dsw-static-deepseek-400)",
+          "font": "inherit",
+          "cursor": "pointer",
+          "margin-inline": "3px",
+          "pointer-events": "auto"
+        }
+      },
+      {
+        "selector": ".action:hover",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0.8"
+        }
+      },
+      {
+        "selector": "from",
+        "conditions": [
+          "@keyframes dsh-toast-in"
+        ],
+        "declarations": {
+          "opacity": "0",
+          "transform": "translate(-50%, -6px)"
+        }
+      },
+      {
+        "selector": "to",
+        "conditions": [
+          "@keyframes dsh-toast-in"
+        ],
+        "declarations": {
+          "opacity": "1",
+          "transform": "translate(-50%, 0)"
+        }
+      },
+      {
+        "selector": "to",
+        "conditions": [
+          "@keyframes dsh-toast-fade"
+        ],
+        "declarations": {
+          "opacity": "0",
+          "visibility": "hidden"
+        }
+      },
+      {
+        "selector": ".toast",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "animation": "dsh-toast-fade 1000ms ease var(--dsh-toast-hold, 3000ms) forwards"
+        }
+      }
+    ],
+    "ToastBehavior": {
+      "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
+      "region": "//#region lib/types/Toast.js\n/** Full-opacity hold before the fade starts, when the owner names none. */\nconst HOLD_MS = 3e3;\n/** Fade duration. Must agree with the stylesheet's toast-fade duration. */\nconst FADE_MS = 1e3;\n/**\n* Transient top-center banner: slides in, holds at full opacity, fades out,\n* then reports done so the owner can unmount it. Re-showing the same text\n* restarts the cycle when the owner remounts the component (key it by a\n* per-show sequence). Rendered through a body portal so an owner inside a\n* transformed or filtered ancestor cannot trap the fixed banner in that\n* ancestor's box.\n* With unchanged holdMs, parent rerenders do not extend the lifetime.\n* Completion calls the latest onDone handler; fully faded actions receive no input.\n*\n* The hold is the owner's to set, because how long a banner has to stay\n* depends on how much there is to read: a one-line limit lands in the default\n* window, while a failure that names what broke does not. One value drives\n* both the unmount timer and the stylesheet's fade delay \u2014 the stylesheet\n* reads it as a custom property \u2014 so the two can no longer disagree and leave\n* the banner unmounting mid-fade.\n* @param props.text - resolved banner copy; the owner passes localized text.\n* @param props.icon - optional leading glyph (e.g. a warning icon); ignored\n* under `tone=\"success\"`, which brings its own glyph.\n* @param props.tone - 'success' renders the design's circled green check as\n* the leading glyph; omitted, the icon seat keeps its warning tint.\n* @param props.actions - optional inline actions continuing the sentence:\n* each renders its plain-text `prefix` (a connective like \u6216) followed by its\n* localized `label` as blue clickable text, flowing after `text` as one\n* sentence. Each press is the owner's to handle (e.g. undo the reported\n* change, then unmount the toast). The banner surface stays click-through \u2014\n* only the action text takes the pointer.\n* @param props.holdMs - full-opacity hold before the fade; defaults to 3000.\n* @param props.anchor - optional element whose horizontal center the banner\n* follows (e.g. the composer card, so the banner centers over the chat column\n* rather than the whole window); omitted, it centers on the viewport.\n* @param props.onDone - called once the fade completes; unmount the toast here.\n* @returns the floating banner.\n*/\nfunction Toast({ text, icon, tone, anchor, holdMs = HOLD_MS, actions, onDone }) {\n\tconst latestOnDone = useRef(onDone);\n\tuseLayoutEffect(() => {\n\t\tlatestOnDone.current = onDone;\n\t}, [onDone]);\n\tuseEffect(() => {\n\t\tconst timer = setTimeout(() => {\n\t\t\tlatestOnDone.current();\n\t\t}, holdMs + FADE_MS);\n\t\treturn () => {\n\t\t\tclearTimeout(timer);\n\t\t};\n\t}, [holdMs]);\n\tconst [left, setLeft] = useState(null);\n\tuseLayoutEffect(() => {\n\t\tif (anchor == null) return;\n\t\tconst measure = () => {\n\t\t\tconst rect = anchor.getBoundingClientRect();\n\t\t\tsetLeft(rect.left + rect.width / 2);\n\t\t};\n\t\tmeasure();\n\t\twindow.addEventListener(\"resize\", measure);\n\t\treturn () => {\n\t\t\twindow.removeEventListener(\"resize\", measure);\n\t\t};\n\t}, [anchor]);\n\treturn createPortal(jsxs(\"div\", {\n\t\tclassName: css$24.toast,\n\t\trole: \"alert\",\n\t\tstyle: {\n\t\t\t...left === null ? {} : { left },\n\t\t\t\"--dsh-toast-hold\": `${String(holdMs)}ms`\n\t\t},\n\t\tchildren: [tone === \"success\" ? jsx(\"span\", {\n\t\t\tclassName: `${css$24.icon} ${css$24.success}`,\n\t\t\t\"aria-hidden\": true,\n\t\t\tchildren: jsx(IconCheckCircleOutlineRegular, {})\n\t\t}) : icon !== void 0 && jsx(\"span\", {\n\t\t\tclassName: css$24.icon,\n\t\t\t\"aria-hidden\": true,\n\t\t\tchildren: icon\n\t\t}), jsxs(\"span\", {\n\t\t\tclassName: css$24.text,\n\t\t\tchildren: [text, actions?.map((action) => jsxs(Fragment$1, { children: [action.prefix, jsx(\"button\", {\n\t\t\t\ttype: \"button\",\n\t\t\t\tclassName: css$24.action,\n\t\t\t\tonClick: action.onClick,\n\t\t\t\tchildren: action.label\n\t\t\t})] }, action.label))]\n\t\t})]\n\t}), document.body);\n}\n"
+    },
     "ChromiumCheckbox": {
       "schema": "dsh-chromium-checkbox/1",
       "browser": "145.0.7632.6",
@@ -10380,6 +10501,28 @@
       "horizontalPadding": 7.0,
       "fontSize": 10.0,
       "lineHeightFactor": 1.0
+    },
+    "DshToastRecipe": {
+      "top": 40.0,
+      "maxContentWidth": 640.0,
+      "viewportInset": 48.0,
+      "horizontalPadding": 16.0,
+      "verticalPadding": 12.0,
+      "gap": 10.0,
+      "fontSize": 14.0,
+      "lineHeight": 22.0,
+      "radiusToken": "--dsw-radius-lg",
+      "backgroundToken": "--dsw-alias-toast-bg",
+      "labelToken": "--dsw-alias-toast-label",
+      "shadowToken": "--dsw-shadow-lv3",
+      "iconLabelToken": "--dsw-alias-state-warn-label",
+      "successIconLabelToken": "--dsw-alias-state-success-primary",
+      "holdMs": 3000.0,
+      "fadeMs": 1000.0,
+      "enterMs": 160.0,
+      "enterOffsetY": -6.0,
+      "enterCurve": "ease-out",
+      "fadeCurve": "ease"
     }
   }
 }
