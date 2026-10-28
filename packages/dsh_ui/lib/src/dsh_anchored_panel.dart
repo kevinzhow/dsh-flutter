@@ -232,7 +232,8 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
               builder: (context) => FocusScope(
                 node: _panelFocus,
                 onKeyEvent: (_, event) {
-                  if (event.logicalKey != LogicalKeyboardKey.escape) {
+                  if (event is! KeyDownEvent ||
+                      event.logicalKey != LogicalKeyboardKey.escape) {
                     return KeyEventResult.ignored;
                   }
                   _close();

@@ -6,6 +6,7 @@ import 'dsh_recipes.g.dart';
 import 'dsh_shadow_box.dart';
 import 'dsh_snapped_box.dart';
 import 'dsh_pixel_snap.dart';
+import 'dsh_platform_material.dart';
 import 'theme_access.dart';
 
 enum DshMenuSurfaceProfile { standard, dock }
@@ -36,7 +37,7 @@ class DshMenuSurface extends StatelessWidget {
     );
     final shape = theme.cornerBorder(radius);
     final fill = blendLikeChromium(
-      theme.color(DshMenuSurfaceRecipe.fillToken),
+      dshSpecificMenuFillOf(context),
       saturateLikeChromium(theme.bgBase, DshMenuSurfaceRecipe.saturation),
     );
     if (profile == DshMenuSurfaceProfile.dock) {
