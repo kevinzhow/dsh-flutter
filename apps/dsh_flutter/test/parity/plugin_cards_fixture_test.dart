@@ -121,7 +121,7 @@ void main() {
               final metadata =
                   (pluginCardScenarios['long-tags']!['package'] as Map)['meta']
                       as Map;
-                expect(card.title, (metadata['title'] as Map)[locale.name]);
+              expect(card.title, (metadata['title'] as Map)[locale.name]);
               expect(card.tags.length, 4);
               expect(t.takeException(), isNull);
               await t.pumpWidget(const SizedBox());
