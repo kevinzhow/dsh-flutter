@@ -107,6 +107,7 @@ void main() {
         await t.pump(const Duration(milliseconds: 200));
         final owner = find.byType(DshShadowBox);
         final rect = t.getRect(owner);
+        final clipInset = 1 / dshSnapDensity(density);
         final widget = t.widget<DshShadowBox>(owner);
         expect(widget.color.a, 1);
         final painter = t
@@ -128,13 +129,13 @@ void main() {
           final bounds = (mask.invocation.positionalArguments.first as Path)
               .getBounds();
           // Pinned Blink ClipToBorderEdge insets its exclusion contour by
-          // exactly one CSS pixel for an authored opaque shadow owner.
+          // exactly one internal paint pixel (1/DPR in the native model) for an authored opaque shadow owner.
           // This test checks that source operation on the existing local
           // contour; it does not certify pre-transform coordinate snapping.
-          expect(bounds.width, closeTo(rect.width - 2, 1e-9));
-          expect(bounds.height, closeTo(rect.height - 2, 1e-9));
-          expect(bounds.left, closeTo(1, 1e-9));
-          expect(bounds.top, closeTo(1, 1e-9));
+          expect(bounds.width, closeTo(rect.width - 2 * clipInset, 1e-9));
+          expect(bounds.height, closeTo(rect.height - 2 * clipInset, 1e-9));
+          expect(bounds.left, closeTo(clipInset, 1e-9));
+          expect(bounds.top, closeTo(clipInset, 1e-9));
         }
         await t.pumpWidget(const SizedBox());
       });

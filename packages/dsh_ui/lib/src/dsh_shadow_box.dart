@@ -4,11 +4,12 @@ import 'package:flutter/widgets.dart';
 
 import 'dsh_snapped_box.dart';
 import 'dsh_corners.dart';
+import 'dsh_pixel_snap.dart';
 
 /// A rounded surface with CSS `box-shadow` semantics: [shadows] are painted
 /// outside the source owner's exclusion contour. Translucent source owners
 /// exclude the full border box; an authored opaque background uses Blink's
-/// one-CSS-pixel inset to prevent antialias gaps. This preserves the existing
+/// one-internal-pixel inset to prevent antialias gaps. This preserves the existing
 /// local paint coordinates; source pre-transform snapping remains separate.
 class DshShadowBox extends StatelessWidget {
   const DshShadowBox({
@@ -41,6 +42,9 @@ class DshShadowBox extends StatelessWidget {
       radius,
       shape,
       authoredOpaqueBackground: authoredOpaqueBackground,
+      opaqueClipInset:
+          _opaqueShadowClipInset /
+          dshSnapDensity(dshDevicePixelRatioOf(context)),
     ),
     child: DshDecoratedBox(
       decoration: shape == null
@@ -68,31 +72,32 @@ class _OuterShadowPainter extends CustomPainter {
     this.radius,
     this.shape, {
     this.authoredOpaqueBackground = false,
+    this.opaqueClipInset = _opaqueShadowClipInset,
   });
 
   final List<BoxShadow> shadows;
   final double radius;
   final DshCornerBorder? shape;
   final bool authoredOpaqueBackground;
+  final double opaqueClipInset;
 
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     final box = RRect.fromRectAndRadius(rect, Radius.circular(radius));
-    // Chromium145 ClipToBorderEdge insets the excluded contour by one CSS
-    // pixel only for an authored opaque owner, preventing antialias gaps.
+    // Chromium145 ClipToBorderEdge insets the excluded contour by one internal
+    // paint pixel only for an authored opaque owner. ZoomForDSF scales CSS
+    // layout before this operation; do not multiply the inset by native DPR.
     // DshCornerBorder's inner path preserves curvature and shrinks radii.
     final maskRect = authoredOpaqueBackground
-        ? rect.deflate(_opaqueShadowClipInset)
+        ? rect.deflate(opaqueClipInset)
         : rect;
     final outer = maskRect.isEmpty
         ? null
         : shape != null
         ? authoredOpaqueBackground
               ? shape!
-                    .copyWith(
-                      side: const BorderSide(width: _opaqueShadowClipInset),
-                    )
+                    .copyWith(side: BorderSide(width: opaqueClipInset))
                     .getInnerPath(rect)
               : shape!.getOuterPath(rect)
         : (Path()..addRRect(
@@ -101,8 +106,7 @@ class _OuterShadowPainter extends CustomPainter {
               Radius.circular(
                 math.max(
                   0,
-                  radius -
-                      (authoredOpaqueBackground ? _opaqueShadowClipInset : 0),
+                  radius - (authoredOpaqueBackground ? opaqueClipInset : 0),
                 ),
               ),
             ),
@@ -141,5 +145,6 @@ class _OuterShadowPainter extends CustomPainter {
       old.radius != radius ||
       old.shadows != shadows ||
       old.shape != shape ||
-      old.authoredOpaqueBackground != authoredOpaqueBackground;
+      old.authoredOpaqueBackground != authoredOpaqueBackground ||
+      old.opaqueClipInset != opaqueClipInset;
 }

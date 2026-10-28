@@ -129,7 +129,7 @@ collapse, preserves raw semantics/NBSP, removes empty collapsed line boxes and
 keeps a sole unbreakable run on one overflowing line. See `toast-text.md` for
 the actual-source controls and the pending mixed-paragraph/Unicode boundary.
 The shared shadow now takes an explicit authored-owner opacity flag. Only the
-direct Toast background token enables its one-CSS-pixel exclusion inset;
+direct Toast background token enables its one-internal-paint-pixel exclusion inset (1/native DPR in logical units);
 computed opaque menu materials keep their prior source-owner classification.
 No global post-transform snapping is added: actual browser controls preserve
 fractional translations, and Chromium's pre-transform coordinates and
