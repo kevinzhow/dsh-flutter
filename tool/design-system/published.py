@@ -287,7 +287,8 @@ def verify_snapshot(archive, package, folder):
             if (folder / name).read_bytes() != result[key]:
                 raise ValueError('sidebar package metadata mismatch')
         return verified_outputs(package, [*result['css'],
-            *(component + '-classes.json' for component in result['classes']), 'package.json', 'LICENSE'])
+            *(component + '-classes.json' for component in result['classes']),
+            *result['behavior'], 'package.json', 'LICENSE'])
     if kind == 'plain-files':
         verified_outputs(package, package['archiveFiles'])
         with tarfile.open(archive) as tar:

@@ -41,12 +41,9 @@ class DshShadowBox extends StatelessWidget {
   );
 }
 
-/// The Gaussian sigma (logical px) Chromium's low-alpha box shadows land on
-/// for a CSS blur radius. Fitted on Chromium's own output for dsh's panel
-/// elevation (8px and 16px layers at 2-3%): Chromium truncates the Gaussian
-/// tails of faint shadows, so the textbook `blur / 2` over-spreads them and
-/// Flutter's own `blur * 0.58 + 0.5` still does.
-double _chromiumSigma(double blur) => math.max(0.5, 0.45 * blur - 2.1);
+/// Blink ShadowData::BlurRadiusToStdDev uses half the authored CSS radius.
+/// This differs from Flutter Shadow's legacy radius-to-sigma conversion.
+double _cssShadowSigma(double blur) => blur / 2;
 
 class _OuterShadowPainter extends CustomPainter {
   _OuterShadowPainter(this.shadows, this.radius, this.shape);
@@ -63,21 +60,17 @@ class _OuterShadowPainter extends CustomPainter {
     );
     final outer =
         shape?.getOuterPath(Offset.zero & size) ?? (Path()..addRRect(box));
-    final outside = Path.combine(
-      PathOperation.difference,
-      Path()..addRect(
-        Rect.fromLTWH(-200, -200, size.width + 400, size.height + 400),
-      ),
-      outer,
-    );
-    canvas.save();
-    canvas.clipPath(outside);
     for (final s in shadows.reversed) {
       final rrect = box.shift(s.offset).inflate(s.spreadRadius);
+      if (rrect.isEmpty) continue;
+      // Dart exposes no inverse path clip. Mask each shadow separately to
+      // preserve CSS layer ordering and avoid an extra antialiased exterior
+      // rectangle at a fractional shadow or ancestor-clip edge.
+      canvas.saveLayer(null, Paint());
       final paint = Paint()
         ..color = s.color
         ..maskFilter = s.blurRadius > 0
-            ? MaskFilter.blur(BlurStyle.normal, _chromiumSigma(s.blurRadius))
+            ? MaskFilter.blur(BlurStyle.normal, _cssShadowSigma(s.blurRadius))
             : null;
       if (shape == null) {
         canvas.drawRRect(rrect, paint);
@@ -91,8 +84,9 @@ class _OuterShadowPainter extends CustomPainter {
           paint,
         );
       }
+      canvas.drawPath(outer, Paint()..blendMode = BlendMode.dstOut);
+      canvas.restore();
     }
-    canvas.restore();
   }
 
   @override
