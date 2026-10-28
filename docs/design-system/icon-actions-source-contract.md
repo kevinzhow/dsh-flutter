@@ -67,6 +67,22 @@ if it might eventually prove unrelated to IconAction.
 
 ## CSS-to-Flutter numeric boundary
 
+The shared scalar parser follows the ASCII numeric-token grammar in
+[CSS Syntax 3's number algorithm](https://www.w3.org/TR/css-syntax-3/#consume-a-number)
+and its [digit definition](https://www.w3.org/TR/css-syntax-3/#digit).
+It accepts ASCII signs, leading zeros, fractions and exponent notation. Thus
+`028px`, `+.5`, `-003px` and `1e2px` are valid supported scalars; fullwidth or
+Arabic-Indic digits are not CSS numbers. This is not the stricter JavaScript
+integer-literal grammar. Conversion must also produce a finite value.
+
+All numeric values in the 29 translated property slots use that gate. The
+divider percentage uses the scalar parser instead of direct Python `float`;
+its width must be nonnegative and its percentage in `0..100`. The menu viewport
+literal is also validated before the menu compiler's existing narrower
+expression parser converts it. Unsupported expression forms still fail closed.
+This blocks invalid Unicode and overflow without changing current generated
+values or translating an arbitrary new CSS expression.
+
 IconAction and info width/height must be finite and strictly positive before
 Dart emission. Negative CSS widths are invalid/ignored by a browser; emitting
 the same negative scalar into Flutter constraints is unsupported. Zero-sized
@@ -87,10 +103,15 @@ unrelated recipes.
 `tool/tests/test_icon_action_source_contract.py` first reproduced 36 missing
 rejections on the pre-fix generator. The final 15-test file, including the
 overflow regression, records 37 failing assertions and no errors against that
-same base; all 15 pass with the hardening. The passing suite covers generic active
+same base; all 15 passed with the first hardening. The numeric follow-up
+reproduces three Unicode-number rejection failures on that first version and
+extends the passing suite to 22 tests. It covers generic active
 and size rules, ancestor/custom-property changes, conditional generic rules,
 pending values/literals, order/duplicate/missing rules, existing state/property
 and token-role gates, numeric boundaries and valid field propagation.
+The numeric cases include valid leading-zero/signed/fractional/exponent forms,
+opacity endpoints, direct divider/viewport inputs, nonfinite conversion and
+collateral primitive-button compatibility.
 
 On the unchanged real inputs, both generated Dart and `recipes.generated.json`
 remain byte-identical. Full Python tests, actual-source generation checking,

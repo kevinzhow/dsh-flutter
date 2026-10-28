@@ -28,11 +28,20 @@ def value(rules, selector, prop):
     return found[0]
 
 
+# CSS Syntax 3, "consume a number": digits are ASCII U+0030..U+0039.
+# CSS permits signs, leading zeros, fractions and exponent notation; unlike
+# JavaScript integer literals, its numeric token grammar does not ban 028.
+CSS_NUMBER = r'[+-]?(?:[0-9]*\.[0-9]+|[0-9]+)(?:[eE][+-]?[0-9]+)?'
+
+
 def number(raw, unit='px'):
-    match = re.fullmatch(r'(-?(?:\d+(?:\.\d+)?|\.\d+))' + unit, raw)
+    match = re.fullmatch('(' + CSS_NUMBER + ')' + re.escape(unit), raw)
     if not match:
         raise ValueError('unsupported CSS number: ' + raw)
-    return float(match[1])
+    parsed = float(match[1])
+    if not math.isfinite(parsed):
+        raise ValueError('unsupported nonfinite CSS number: ' + raw)
+    return parsed
 
 
 @functools.lru_cache(maxsize=1)
@@ -616,15 +625,18 @@ def render(lock, sheets):
     add = '.addButton, .addPrimary, .addMore'
     add_padding = get(p, add, 'padding').split()
     if len(add_padding) != 2 or add_padding[0] != '0': raise ValueError('unsupported add button padding')
-    divider = re.fullmatch(r'([.\d]+px) solid color-mix\(in srgb,\s*var\((--[\w-]+)\) ([\d.]+)%,\s*transparent\)', get(p, '.addMore', 'border-left'))
+    divider = re.fullmatch(rf'({CSS_NUMBER}px) solid color-mix\(in srgb,\s*var\((--[\w-]+)\) ({CSS_NUMBER})%,\s*transparent\)', get(p, '.addMore', 'border-left'))
     focus = re.fullmatch(r'var\((--[\w-]+)\) solid var\((--[\w-]+),\s*var\((--[\w-]+)\)\)', get(p, '.iconButton:focus-visible', 'outline'))
     if divider is None or focus is None: raise ValueError('unsupported plugin button divider/focus')
+    divider_width, divider_percentage = number(divider[1]), number(divider[3], '')
+    if divider_width < 0 or not 0 <= divider_percentage <= 100:
+        raise ValueError('unsupported plugin button divider width/percentage')
     metrics['DshAddButtonRecipe'] = {
         'height': px(p, add, 'height'), 'padding': number(add_padding[1]),
         'fontToken': ladder_token(px(p, add, 'font-size'), px(p, add, 'line-height')),
         'radiusToken': tok(p, add, 'border-radius'),
-        'moreWidth': px(p, '.addMore', 'width'), 'dividerWidth': number(divider[1]),
-        'dividerToken': divider[2], 'dividerAlpha': float(divider[3]) / 100,
+        'moreWidth': px(p, '.addMore', 'width'), 'dividerWidth': divider_width,
+        'dividerToken': divider[2], 'dividerAlpha': divider_percentage / 100,
     }
     metrics['DshIconActionRecipe'] = {
         'width': px(p, '.iconButton', 'width'), 'height': px(p, '.iconButton', 'height'),
@@ -648,6 +660,13 @@ def render(lock, sheets):
         # CSS clamps opacity; Flutter's Opacity requires this domain. Other
         # inputs are rejected until that CSS clamp behavior is translated.
         raise ValueError('unsupported plugin icon action opacity: expected 0..1')
+    # The menu compiler also consumes one numeric literal from this translated
+    # slot. Validate it through the same ASCII/finite gate before its narrower
+    # supported expression grammar performs the existing float conversion.
+    plugin_viewport = re.fullmatch(r'calc\(100vw - (.+)\)', get(p, '.addMenu', 'max-width'))
+    if plugin_viewport is None:
+        raise ValueError('unsupported plugin menu viewport width')
+    number(plugin_viewport[1])
     menu_spec = importlib.util.spec_from_file_location('menu_recipes', HERE / 'menu_recipes.py')
     menu = importlib.util.module_from_spec(menu_spec)
     menu_spec.loader.exec_module(menu)

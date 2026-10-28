@@ -163,6 +163,93 @@ class IconActionSourceContractTests(unittest.TestCase):
         self.assert_rejected(self.changed('.iconButton', 'width', overflow + 'px'))
         self.assert_rejected(self.changed('.iconButton:focus-visible', 'outline-offset', overflow + 'px'))
 
+    def test_non_ascii_css_numbers_do_not_silently_preserve_dart(self):
+        for selector, prop, value in [
+            ('.iconButton', 'width', '２８px'),
+            ('.infoButton', 'height', '２０px'),
+            ('.iconButton:disabled', 'opacity', '０.５'),
+        ]:
+            with self.subTest(selector=selector, prop=prop, value=value):
+                self.assert_rejected(self.changed(selector, prop, value))
+
+    def test_other_translated_numeric_slots_reject_unicode_and_overflow(self):
+        for selector, prop, value in [
+            ('.addMore', 'border-left', '.５px solid color-mix(in srgb, var(--dsw-alias-label-primary-foreground) 30%, transparent)'),
+            ('.addMore', 'border-left', '.5px solid color-mix(in srgb, var(--dsw-alias-label-primary-foreground) ３０%, transparent)'),
+            ('.addMore', 'border-left', '.5px solid color-mix(in srgb, var(--dsw-alias-label-primary-foreground) ' + '9' * 400 + '%, transparent)'),
+            ('.addMenu', 'max-width', 'calc(100vw - ２４px)'),
+            ('.addMenu', 'max-width', 'calc(100vw - ' + '9' * 400 + 'px)'),
+            ('.addButton, .addPrimary, .addMore', 'padding', '0 １２px'),
+            ('.addMenuDescription', 'max-height', '３６px'),
+            ('.iconButton:focus-visible', 'outline-offset', '-１px'),
+        ]:
+            with self.subTest(selector=selector, prop=prop, value=value):
+                self.assert_rejected(self.changed(selector, prop, value))
+
+    def test_ascii_css_number_grammar_keeps_sign_fraction_exponent_and_leading_zeros(self):
+        for raw, unit, expected in [
+            ('0', '', 0), ('-0', '', 0), ('+0', '', 0),
+            ('00.50', '', .5), ('+.5', '', .5), ('-.5px', 'px', -.5),
+            ('0028px', 'px', 28), ('+0028.00px', 'px', 28),
+            ('01e+2px', 'px', 100), ('2.5E-1px', 'px', .25),
+            ('000.5%', '%', .5), ('00180ms', 'ms', 180),
+        ]:
+            with self.subTest(raw=raw, unit=unit):
+                self.assertEqual(gen.number(raw, unit), expected)
+
+    def test_invalid_css_numeric_tokens_and_nonfinite_values_fail(self):
+        for raw, unit in [
+            ('٢٨px', 'px'), ('28pｘ', 'px'), ('28 px', 'px'),
+            ('1.px', 'px'), ('.px', 'px'), ('--1px', 'px'),
+            ('1_0px', 'px'), ('0x1px', 'px'), ('1e', ''),
+            ('NaN', ''), ('Infinity', ''), ('-inf', ''),
+            ('1e400px', 'px'), ('-1e400', ''), ('9' * 400, ''),
+        ]:
+            with self.subTest(raw=raw, unit=unit), self.assertRaises(ValueError):
+                gen.number(raw, unit)
+
+    def test_ascii_equivalent_icon_forms_propagate_without_other_recipe_changes(self):
+        sheets = self.changed('.iconButton', 'width', '+0030.0px')
+        for selector, values in {
+            '.infoButton': {'height': '022.5px'},
+            '.iconButton:disabled': {'opacity': '00.50'},
+            '.iconButton:focus-visible': {'outline-offset': '-003.0px'},
+        }.items():
+            next(r for r in sheets[SHEET] if r['selector'] == selector)['declarations'].update(values)
+        metrics = self.rendered_metrics(sheets)
+        self.assert_only_recipe_changed(metrics, 'DshIconActionRecipe')
+        icon = metrics['DshIconActionRecipe']
+        self.assertEqual((icon['width'], icon['infoHeight'], icon['disabledOpacity'], icon['focusOffset']),
+                         (30, 22.5, .5, -3))
+        for opacity in ('+0', '-0', '+01.0'):
+            metrics = self.rendered_metrics(self.changed('.iconButton:disabled', 'opacity', opacity))
+            self.assertEqual(metrics['DshIconActionRecipe']['disabledOpacity'], float(opacity))
+
+    def test_divider_ascii_tokens_and_viewport_literal_share_finite_number_validation(self):
+        for percentage, expected in [('000', 0), ('+0030.5', .305), ('1e2', 1)]:
+            sheets = self.changed('.addMore', 'border-left',
+                '+00.5px solid color-mix(in srgb, var(--dsw-alias-label-primary-foreground) ' + percentage + '%, transparent)')
+            metrics = self.rendered_metrics(sheets)
+            self.assert_only_recipe_changed(metrics, 'DshAddButtonRecipe')
+            self.assertEqual(metrics['DshAddButtonRecipe']['dividerWidth'], .5)
+            self.assertEqual(metrics['DshAddButtonRecipe']['dividerAlpha'], expected)
+        metrics = self.rendered_metrics(self.changed('.addMenu', 'max-width', 'calc(100vw - 0048px)'))
+        self.assertEqual(metrics, self.metrics)
+        for width, percentage in [('-1px', '30'), ('.5px', '-1'), ('.5px', '101')]:
+            self.assert_rejected(self.changed('.addMore', 'border-left', width +
+                ' solid color-mix(in srgb, var(--dsw-alias-label-primary-foreground) ' + percentage + '%, transparent)'))
+
+    def test_shared_number_parser_preserves_valid_other_profiles_and_rejects_bad_ones(self):
+        sheets = copy.deepcopy(self.sheets)
+        next(r for r in sheets['Button.module.css'] if r['selector'] == '.md')['declarations']['height'] = '+0034px'
+        metrics = self.rendered_metrics(sheets)
+        self.assert_only_recipe_changed(metrics, 'DshButtonRecipe')
+        self.assertEqual(metrics['DshButtonRecipe']['height'], 34)
+        for value in ('０.５', '9' * 400):
+            sheets = copy.deepcopy(self.sheets)
+            next(r for r in sheets['Button.module.css'] if r['selector'] == '.button:disabled')['declarations']['opacity'] = value
+            self.assert_rejected(sheets)
+
     def test_supported_icon_values_propagate_only_to_icon_recipe(self):
         sheets = self.changed('.iconButton', 'width', '30px')
         for selector, values in {
