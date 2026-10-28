@@ -196,6 +196,6 @@ try{
  assert.equal(sha(await readFile(planPath)),provenance.planSha256);assert.equal(sha(await readFile(fileURLToPath(import.meta.url))),provenance.producerSha256)
  assert.equal(sha(await readFile(recipePath)),provenance.recipeSha256)
  const receipt={schema:'whalee-published-toast-source/1',passed:true,provenance,captures:traces.length,traces,behaviorTraces,defaultLifecycleProbed:runBehavior,
-  limits:['preparation source captures are not final combined-runtime authority','whitespace and unbroken-word differences are retained, not normalized','native/paired behavior and pixel acceptance remain pending']}
+  limits:['source captures require exact integrated runtime binding for final acceptance','raw whitespace and unbroken-token inputs are retained without fixture normalization','mixed oversized runs, complex Unicode, shadow coordinates/inner-contour raster and native announcement remain pending']}
  await writeFile(join(out,'source-trace.json'),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify({passed:true,captures:traces.length,planSha256:provenance.planSha256}))
 }finally{await new Promise(done=>server.close(done))}

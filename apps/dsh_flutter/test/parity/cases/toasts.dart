@@ -10,7 +10,7 @@ final Map<String, ParityCase> toastCases = {
     widgets: ['dsh_ui:DshToast', 'dsh_ui:DshToastHost'],
     framed: false,
     settle: Duration.zero,
-    notes: 'Actual canonical Toast with explicit long hold only for stable PNGs. Normal motion is default; reduced motion is a separate case. Whitespace and unbroken-word differences remain uncensored.',
+    notes: 'Actual canonical Toast with explicit long hold only for stable PNGs. Normal motion is default; reduced motion is separate. Original text and actual CSS-collapsed display text are both retained; mixed oversized runs and complex Unicode remain pending.',
     build: (ctx) => ToastCaptureSurface(
       id: ctx.props['scenarioId'] as String,
       locale: ctx.locale,
@@ -108,7 +108,13 @@ Map<String, Object?> toastGeometryProbe(
     'toast': box(surface),
     'text': {
       ...?box(text),
-      'text': (text?.widget as DshChromeText?)?.data,
+      'text':
+          (text?.widget as DshChromeText?)?.semanticsLabel ??
+          (text?.widget as DshChromeText?)?.data,
+      'originalText':
+          (text?.widget as DshChromeText?)?.semanticsLabel ??
+          (text?.widget as DshChromeText?)?.data,
+      'displayedText': (text?.widget as DshChromeText?)?.data,
       'measurement': 'DshChromeText outer line box; not glyph ink',
     },
     'icon': box(icon),

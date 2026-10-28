@@ -58,8 +58,9 @@ void main() {
         );
         final path = paths.single;
         expect(path.getBounds(), const Rect.fromLTWH(1, 1, 38, 38));
-        // FloatRoundedRect::Outset shrinks radius12 to11 while keeping the
-        // original corner centre(12,12); the contour retains its curvature.
+        // Circle inset keeps its original corner centre(12,12). Superellipse
+        // points here verify the existing canonical reduced-radius model;
+        // Chromium's retained-origin inner contour is separate pending work.
         expect(
           path.contains(Offset(curvature == 1 ? 4 : 3, curvature == 1 ? 4 : 3)),
           isFalse,

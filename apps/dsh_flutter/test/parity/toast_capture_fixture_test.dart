@@ -53,9 +53,19 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 200));
       expect(
-        t.widget<DshChromeText>(find.byType(DshChromeText)).data,
+        t.widget<DshChromeText>(find.byType(DshChromeText)).semanticsLabel,
         toastFixtureText(id, 'en'),
       );
+      expect(
+        t.widget<DshToast>(find.byType(DshToast)).text,
+        toastFixtureText(id, 'en'),
+      );
+      if (id == 'whitespace') {
+        expect(
+          t.widget<DshChromeText>(find.byType(DshChromeText)).data,
+          'Synthetic spaces and line breaks with\u00a0a non-breaking space.',
+        );
+      }
       final expected =
           toastScenario(id)['tone'] == 'success' ||
           toastScenario(id)['icon'] == 'warning';

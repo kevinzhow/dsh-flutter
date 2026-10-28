@@ -27,8 +27,9 @@ Omitted hold preserves the real default lifecycle.
 There are seven synthetic inputs: `no-icon`, `success`, `warning`, `long-warning`,
 `long-no-icon`, `whitespace` and `unbroken-word`. Text is localized English/
 Chinese. Newline/tab/repeated-space/NBSP and oversized unbroken token data is
-retained verbatim. Neither provider normalizes it to hide the known native/CSS
-text differences.
+retained verbatim. The native component applies its actual CSS-normal text
+contract; neither provider alters fixture strings to hide differences. Native
+geometry records raw/original and displayed text separately.
 
 The builder emits224 cases: seven inputs ×normal/reduced motion ×light/dark
 ×English/Chinese ×800/390 viewport widths ×DPR1/2.625. Height is600CSSpx. Normal
@@ -104,8 +105,12 @@ the final combined-tree authority. Root must recapture after Card/Toast
 integration and retain all paired raw differences. No full paired Flutter
 batch, application build, native input, push, PR or release runs in this lane.
 
-Whitespace collapse, unbroken-word wrapping, opaque-background shadow exclusion,
-animation rasterization and native announcement/contour delivery remain pending.
+CSS ASCII whitespace/empty spans and sole unbreakable-run overflow now have
+actual-source controls and canonical corrections. The authored-opaque shadow
+exclusion branch is explicit, with previous callers preserved. Mixed paragraphs
+containing oversized runs, broader Unicode/bidi, pre-transform shadow coordinates,
+Chromium retained-origin inner contours, animation rasterization and native
+announcement/contour delivery remain pending.
 The three real feature owners are covered by the separate native preparation
 lane; these primitive screenshots do not pretend to be complete browser owner
 or production Host/network flows. Actions/anchor and fourteen other source

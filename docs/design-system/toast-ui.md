@@ -113,12 +113,19 @@ The family scanner reports877 manual-metric matches, down from880 by removing
 the three existing Toast matches; duplicate-button0 and platform-control11 are
 unchanged. These counts do not prove component coverage.
 
-Still unproven: oversized unbroken-word wrapping versus CSS
-`overflow-wrap:normal`, detailed source whitespace/line-breaking equivalence,
-source animation rasterization, opaque-background shadow exclusion, real native
-announcement/contour behavior, the fourteen other owners and actions/anchor.
-Native Flutter paragraph fallback may split an oversized word where Chromium
-overflows it; no custom text renderer or fitted line break is introduced here.
+The integrated text correction implements source-proven CSS ASCII whitespace
+collapse, preserves raw semantics/NBSP, removes empty collapsed line boxes and
+keeps a sole unbreakable run on one overflowing line. See `toast-text.md` for
+the actual-source controls and the pending mixed-paragraph/Unicode boundary.
+The shared shadow now takes an explicit authored-owner opacity flag. Only the
+direct Toast background token enables its one-CSS-pixel exclusion inset;
+computed opaque menu materials keep their prior source-owner classification.
+No global post-transform snapping is added: actual browser controls preserve
+fractional translations, and Chromium's pre-transform coordinates and
+retained-origin inner superellipse contour remain separate pending work.
+Still unproven: general mixed oversized-word paragraph breaking, complex
+Unicode/bidi, source animation and shadow raster equivalence, native
+announcement/contour delivery, the fourteen other owners and actions/anchor.
 The native launch warning remains registration-owned rather than keyed to each
 source OpenTargetButton/path. Control unmount/path changes, independent source
 controls and the source command path's different failure policy are separate
