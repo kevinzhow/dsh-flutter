@@ -120,6 +120,18 @@ def build(rules, behavior, *, bundle_sha, value, number, token, css_number):
         'errorFontSize': px('.reason', 'font-size'), 'errorLineHeight': px('.reason', 'line-height'),
         'errorToken': tok('.reason', 'color'), 'experimentalPrefix': prefix,
     }
+    # The current native canvas reserves the negative card margin inside the
+    # page's smallest horizontal inset. Keep that source-owned bound rather
+    # than emitting negative Flutter Padding or silently expanding the canvas.
+    page_padding = re.fullmatch(
+        rf'0\s+clamp\(\s*({css_number}px)\s*,\s*{css_number}vw\s*,\s*{css_number}px\s*\)\s+{css_number}px',
+        get('.page', 'padding'),
+    )
+    if page_padding is None:
+        raise ValueError('unsupported loaded card parent inset')
+    minimum_inset = number(page_padding[1])
+    if minimum_inset < 0 or not -minimum_inset <= card['horizontalMargin'] <= 0:
+        raise ValueError('unsupported loaded card margin outside parent inset')
     padding = get('.statusTag', 'padding').split()
     if len(padding) != 2: raise ValueError('unsupported plugin status tag padding')
     length = lambda raw: number(raw, '') if raw in ('0', '+0', '-0') else number(raw)

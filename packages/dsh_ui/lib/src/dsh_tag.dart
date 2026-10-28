@@ -103,7 +103,11 @@ class DshTag extends StatelessWidget {
     final edge = border?.dimensions.vertical ?? 0;
     return IntrinsicWidth(
       child: DshContainer(
-        height: status ? DshPluginStatusTagRecipe.contentHeight + edge : null,
+        height: status
+            ? DshPluginStatusTagRecipe.contentHeight +
+                  DshPluginStatusTagRecipe.verticalPadding * 2 +
+                  edge
+            : null,
         alignment: status ? Alignment.center : null,
         padding: EdgeInsets.symmetric(
           horizontal: status

@@ -99,6 +99,18 @@ class PluginCardSourceContractTests(unittest.TestCase):
         self.assertEqual((card['headGap'], card['horizontalMargin'], card['artworkSize'], card['focusOffset']), (16, -10, 40, -2))
         self.assertEqual(after['DshPluginStatusTagRecipe']['verticalPadding'], 1)
 
+    def test_card_margins_fit_the_source_page_inset_before_flutter_padding(self):
+        # The current canvas translates a negative source margin to reserved
+        # bleed and a nonnegative inset. Positive CSS margins need a different
+        # layout owner; emitting one here would construct invalid Padding.
+        for raw in ('1px', '+.5px', '1e-3px', '-24.0001px', '-25px'):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                self.render(self.change('.card', 'margin', '0 ' + raw))
+        for raw, expected in (('0px', 0), ('-0.5px', -.5), ('-24px', -24)):
+            with self.subTest(raw=raw):
+                card = self.render(self.change('.card', 'margin', '0 ' + raw))['DshPluginCardRecipe']
+                self.assertEqual(card['horizontalMargin'], expected)
+
     def test_complete_published_behavior_predicates_and_pending_context_fail_closed(self):
         for old, new in [
             ('disabled: busy || pkg.readOnlyReason !== void 0', 'disabled: busy'),
