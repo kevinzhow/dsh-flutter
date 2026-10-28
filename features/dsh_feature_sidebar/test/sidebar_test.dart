@@ -143,6 +143,41 @@ void main() {
     expect(store.layoutInfo.sidebar, 0);
   });
 
+  testWidgets('assistive activation of the brand starts a session', (t) async {
+    final semantics = t.ensureSemantics();
+    try {
+      await pump(t);
+      final node = t.getSemantics(
+        find
+            .ancestor(
+              of: find.byKey(const ValueKey('sidebar-brand')),
+              matching: find.byType(Semantics),
+            )
+            .first,
+      );
+      expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      t.binding.pipelineOwner.semanticsOwner!.performAction(
+        node.id,
+        SemanticsAction.tap,
+      );
+      expect(services.started, 1);
+    } finally {
+      semantics.dispose();
+    }
+  });
+
+  testWidgets('the macOS toggle glyph remains inside the sidebar strip', (
+    t,
+  ) async {
+    await pump(t, chrome: const ShellChrome(platform: ShellPlatform.darwin));
+    final toggle = find.byKey(const ValueKey('sidebar-toggle'));
+    final icon = find.descendant(of: toggle, matching: find.byType(DshIcon));
+    final rect = t.getRect(icon);
+    expect(rect.width, 16);
+    expect(rect.height, 16);
+    expect(rect.center, const Offset(254, 25));
+  });
+
   testWidgets('the rail drops the wide content and keeps the actions', (
     t,
   ) async {

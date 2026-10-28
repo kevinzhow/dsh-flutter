@@ -347,6 +347,7 @@ class _LogoRow extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       button: !darwin,
+      onTap: darwin ? null : onNew,
       child: darwin
           ? Align(alignment: Alignment.centerLeft, child: identity)
           : MouseRegion(

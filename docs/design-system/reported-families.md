@@ -33,8 +33,9 @@ Model selection uses the compact anchored root/model/effort menu at every
 width. It has no modal viewport mask or bottom-sheet header. Statistics use
 the source blur, saturation, scoped macOS fill, clamping and content metrics.
 The sidebar restores the source top-strip overlap, brand and browser insets;
-More opens above its bottom launcher. Expanded New Session also exposes its
-actual activation callback to assistive technology.
+More opens above its bottom launcher. New Session, the interactive brand,
+statistics and model triggers expose their activation callbacks to assistive
+technology; a locked model trigger exposes no activation action.
 
 Native replay uses these production entries with synthetic services. Its scene
 toolbar is painted after the sidebar's nested route so Android can expose its

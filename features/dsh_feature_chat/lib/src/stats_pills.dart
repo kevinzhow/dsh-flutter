@@ -385,6 +385,7 @@ class StatPillViewState extends State<StatPillView> {
             label: pill.aria,
             expanded: panel.isOpen,
             excludeSemantics: true,
+            onTap: panel.toggle,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: panel.toggle,

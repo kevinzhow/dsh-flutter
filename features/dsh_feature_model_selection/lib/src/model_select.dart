@@ -101,6 +101,7 @@ class _ModelSeatState extends State<ModelSeat> {
           enabled: !widget.locked,
           label: aria,
           excludeSemantics: true,
+          onTap: widget.locked ? null : () => _toggle(panel),
           child: MouseRegion(
             cursor: widget.locked
                 ? SystemMouseCursors.basic

@@ -1,3 +1,5 @@
+import 'dart:ui' show SemanticsAction;
+
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
@@ -121,6 +123,33 @@ void main() {
       await t.tapAt(const Offset(10, 10));
       await t.pumpAndSettle();
       expect(find.text('Session statistics'), findsNothing);
+    });
+
+    testWidgets('native accessibility activates both statistics pills', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      await pump(t, values: {'sessionStats': stats, 'tokenUsage': usage});
+      final activity = t.getSemantics(
+        find.bySemanticsLabel(activityPill(SessionStats.of(stats), i18n)!.aria),
+      );
+      expect(
+        activity.getSemanticsData().hasAction(SemanticsAction.tap),
+        isTrue,
+      );
+      activity.owner!.performAction(activity.id, SemanticsAction.tap);
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsOneWidget);
+      final tokens = t.getSemantics(
+        find.bySemanticsLabel(usagePill(TokenUsage.of(usage), i18n)!.aria),
+      );
+      expect(tokens.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      tokens.owner!.performAction(tokens.id, SemanticsAction.tap);
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsNothing);
+      expect(find.text('Token usage'), findsOneWidget);
+      expect(find.byType(DshStatPanel), findsOneWidget);
+      semantics.dispose();
     });
 
     testWidgets('the usage pill lists every billing bucket', (t) async {

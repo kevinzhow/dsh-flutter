@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show SemanticsAction;
 
 import 'package:dsh_client/dsh_client.dart' show RemoteException;
 import 'package:dsh_client/generated.dart' as session_ns;
@@ -429,6 +430,84 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('native accessibility selects model and effort from the chip', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      host.handlers['session/selectModel'] = (_) => {
+        'selected': {'provider': 'deepseek-official', 'model': 'flash'},
+      };
+      await ready(t);
+      Future<void> activate(Finder finder) async {
+        final node = t.getSemantics(finder);
+        expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+        node.owner!.performAction(node.id, SemanticsAction.tap);
+        await t.pumpAndSettle();
+      }
+
+      Finder trigger() => find.bySemanticsLabel(
+        'Select model, current DeepSeek Flash, reasoning effort High',
+      );
+      await activate(trigger());
+      expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
+      await activate(find.byKey(const ValueKey('model-root-model')));
+      await activate(
+        find.byKey(const ValueKey('model-option-deepseek-official/pro')),
+      );
+      await t.runAsync(() => flush(8));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel').single.args['request'], {
+        'sessionId': 's1',
+        'provider': 'deepseek-official',
+        'model': 'pro',
+      });
+      await activate(trigger());
+      await activate(find.byKey(const ValueKey('model-root-effort')));
+      await activate(find.byKey(const ValueKey('effort-option-effort:low')));
+      await t.runAsync(() => flush(8));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel').last.args['request'], {
+        'sessionId': 's1',
+        'provider': 'deepseek-official',
+        'model': 'flash',
+        'reasoningEffort': 'low',
+      });
+      semantics.dispose();
+    });
+
+    testWidgets('a locked model chip has no native activation action', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      await ready(t);
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ModelSeat(
+              directory: feature.directoryFor(owner),
+              i18n: i18n,
+              locked: true,
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      final node = t.getSemantics(
+        find.bySemanticsLabel(
+          'Select model, current DeepSeek Flash, reasoning effort High',
+        ),
+      );
+      expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isFalse);
+      node.owner!.performAction(node.id, SemanticsAction.tap);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel'), isEmpty);
+      semantics.dispose();
     });
 
     testWidgets('with no model resolved the chip invites a choice', (t) async {

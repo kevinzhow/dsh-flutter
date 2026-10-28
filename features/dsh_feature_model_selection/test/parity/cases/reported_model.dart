@@ -18,10 +18,13 @@ final Map<String, ParityCase> reportedModelCases = {
         chrome: chrome,
         child: FrameInsetsScope(
           insets: frameInsetsFor(chrome, sidebarCollapsed: false),
-          child: SizedBox.expand(
-            key: const ValueKey('reported-model-viewport'),
-            child: ReportedModelFixture(
-              i18n: DshI18n(DshLocale.fromTag(ctx.locale)),
+          child: ColoredBox(
+            color: ctx.theme.bgBase,
+            child: SizedBox.expand(
+              key: const ValueKey('reported-model-viewport'),
+              child: ReportedModelFixture(
+                i18n: DshI18n(DshLocale.fromTag(ctx.locale)),
+              ),
             ),
           ),
         ),

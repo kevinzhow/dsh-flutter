@@ -142,7 +142,9 @@ class _ReportedModelFixtureState extends State<ReportedModelFixture> {
         child: DshChromeText(
           'Selection: $_result',
           key: const ValueKey('reported-model-result'),
-          style: context.dsh.textStyle('--dsw-font-xs-13'),
+          style: context.dsh
+              .textStyle('--dsw-font-xs-13')
+              .copyWith(color: context.dsh.labelPrimary),
         ),
       ),
     ],
