@@ -36,7 +36,13 @@ enum DshButtonSize {
 }
 
 /// Published CSS profiles layered on the common button interaction model.
-enum DshButtonProfile { primitive, addAction, iconAction, infoAction }
+enum DshButtonProfile {
+  primitive,
+  addAction,
+  iconAction,
+  infoAction,
+  headerAction,
+}
 
 /// Physical corners used by DSH's left-to-right compound add control.
 enum DshButtonJoin { none, left, right }
@@ -259,8 +265,11 @@ class _DshButtonState extends State<DshButton> {
     final add = widget.profile == DshButtonProfile.addAction;
     final iconAction = widget.profile == DshButtonProfile.iconAction;
     final info = widget.profile == DshButtonProfile.infoAction;
-    final compactAction = iconAction || info;
-    final radiusToken = compactAction
+    final header = widget.profile == DshButtonProfile.headerAction;
+    final compactAction = iconAction || info || header;
+    final radiusToken = header
+        ? DshHeaderLeadingRecipe.radiusToken
+        : compactAction
         ? DshIconActionRecipe.radiusToken
         : add
         ? DshAddButtonRecipe.radiusToken
@@ -280,19 +289,26 @@ class _DshButtonState extends State<DshButton> {
       ),
     };
     final hover = _enabled && (_hovered || _pressed);
-    final rawFill = iconAction
+    // HeaderLeadingControls has only `.iconButton:hover`: pointer-down does
+    // not introduce the primitive ghost :active fill or synthesize hover.
+    final rawFill = header
+        ? _hovered
+              ? theme.color(DshHeaderLeadingRecipe.hoverToken)
+              : null
+        : iconAction
         ? hover
               ? theme.color(DshIconActionRecipe.hoverToken)
               : null
         : _fill(theme);
-    // A disabled button is one translucent group (`opacity: 0.4` on the whole
-    // button), so its fill must stay translucent inside the group: the group
-    // composites onto the page, not the fill.
-    Color paint(Color c, {Color? over}) => _enabled
+    // Disabled primitive/profile buttons are translucent groups, so their
+    // fills stay translucent inside the group. Header has no opacity rule.
+    Color paint(Color c, {Color? over}) => _enabled || header
         ? DshSurface.paint(context, c, over: over)
         : DshSurface.quantizeAlpha(c);
     final fill = rawFill == null ? null : paint(rawFill);
-    final foreground = iconAction
+    final foreground = header
+        ? theme.color(DshHeaderLeadingRecipe.labelToken)
+        : iconAction
         ? theme.color(
             hover
                 ? DshIconActionRecipe.hoverLabelToken
@@ -318,7 +334,7 @@ class _DshButtonState extends State<DshButton> {
     // ([dshHairlineOf]: one device pixel on a phone, a whole CSS pixel in the
     // emulated capture) and it widens the box (the content width is padding +
     // label + both borders).
-    final outlined = widget.variant == DshButtonVariant.outline;
+    final outlined = !header && widget.variant == DshButtonVariant.outline;
     final borderWidth = outlined
         ? dshBorderWidthOf(context, DshButtonRecipe.outlineWidth)
         : 0.0;
@@ -340,7 +356,9 @@ class _DshButtonState extends State<DshButton> {
       ),
       over: fill,
     );
-    final profileWidth = compactAction
+    final profileWidth = header
+        ? DshHeaderLeadingRecipe.width
+        : compactAction
         ? info
               ? DshIconActionRecipe.infoWidth
               : DshIconActionRecipe.width
@@ -364,7 +382,9 @@ class _DshButtonState extends State<DshButton> {
         width: profileWidth,
         height:
             widget.height ??
-            (compactAction
+            (header
+                ? DshHeaderLeadingRecipe.height
+                : compactAction
                 ? info
                       ? DshIconActionRecipe.infoHeight
                       : DshIconActionRecipe.height
@@ -438,10 +458,15 @@ class _DshButtonState extends State<DshButton> {
       ),
     );
 
-    final ringWidth = iconAction
+    final ringWidth = header
+        ? theme.number(DshHeaderLeadingRecipe.focusWidthToken)
+        : iconAction
         ? theme.number(DshIconActionRecipe.focusWidthToken)
         : theme.focusRingWidth;
-    final ringColor = iconAction
+    final ringColor = header
+        ? theme.colors[DshHeaderLeadingRecipe.focusToken] ??
+              theme.color(DshHeaderLeadingRecipe.focusFallbackToken)
+        : iconAction
         ? theme.colors[DshIconActionRecipe.focusToken] ??
               theme.color(DshIconActionRecipe.focusFallbackToken)
         : theme.focusRingColor;
@@ -455,9 +480,10 @@ class _DshButtonState extends State<DshButton> {
       clipBehavior: Clip.none,
       children: [
         surface,
-        if (_focusVisible &&
+        if ((header ? dshHasVisibleFocus(_focusNode) : _focusVisible) &&
             _enabled &&
             _primaryFocus &&
+            (!header || !DshFocusPresentation.instance.pointerOwnsOutline) &&
             !DshFocusPresentation.instance.suppressed(_focusNode))
           Positioned(
             left: -ringReach,
@@ -494,7 +520,7 @@ class _DshButtonState extends State<DshButton> {
           enabled: _enabled,
           focusNode: _focusNode,
           autofocus: widget.autofocus,
-          mouseCursor: _enabled
+          mouseCursor: _enabled || header
               ? SystemMouseCursors.click
               : iconAction
               ? SystemMouseCursors.basic
@@ -514,12 +540,20 @@ class _DshButtonState extends State<DshButton> {
           onShowFocusHighlight: (value) => _set(() => _focusVisible = value),
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTapDown: _enabled ? (_) => _set(() => _pressed = true) : null,
+            onTapDown: _enabled
+                ? (_) {
+                    // The source Header renders a native button, which takes
+                    // pointer focus. Its global modality suppresses the ring.
+                    if (header) _focusNode.requestFocus();
+                    _set(() => _pressed = true);
+                  }
+                : null,
             onTapUp: _enabled ? (_) => _set(() => _pressed = false) : null,
             onTapCancel: _enabled ? () => _set(() => _pressed = false) : null,
             onTap: widget.onPressed,
             child: Opacity(
-              opacity: _enabled
+              // This raw Header button has no :disabled opacity declaration.
+              opacity: _enabled || header
                   ? 1
                   : iconAction
                   ? DshIconActionRecipe.disabledOpacity

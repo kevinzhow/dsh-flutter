@@ -26,7 +26,8 @@
           "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
           "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
           "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
-          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340"
+          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
+          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -49,7 +50,8 @@
           "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
           "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
-          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
+          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
+          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
         },
         "referenceConsumers": [
           {
@@ -241,7 +243,8 @@
           "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
           "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
           "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
-          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
+          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
+          "HeaderLeadingControls-behavior.json": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
         },
         "referenceSourceSha256": {
           "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
@@ -6308,6 +6311,37 @@
         }
       }
     ],
+    "HeaderLeadingFocusContext": {
+      "focus": [
+        {
+          "selector": ":root",
+          "conditions": [],
+          "declarations": {
+            "--dsw-focus-ring-width": "2px"
+          }
+        },
+        {
+          "selector": ":focus-visible",
+          "conditions": [],
+          "declarations": {
+            "outline-color": "var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+            "outline-width": "var(--dsw-focus-ring-width)"
+          }
+        },
+        {
+          "selector": "html[data-input-modality=pointer] body :focus-visible:not(:read-write)",
+          "conditions": [],
+          "declarations": {
+            "--dsw-focus-ring-color": "transparent",
+            "outline-color": "#0000"
+          }
+        }
+      ],
+      "inputModality": {
+        "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
+        "region": "//#region lib/types/input-modality.js\n/**\n* Document-wide input tracking shared by tooltips and focus-ring styles.\n* Tooltips follow the last input; rings follow navigation or a key followed by\n* focus on a different control. Modifiers and refocusing alone keep rings silent.\n* Module-level listeners live for the document lifetime; Node imports are inert.\n*/\n/** Modality values published on the document element. */\nconst INPUT_MODALITY = {\n\tpointer: \"pointer\",\n\tkeyboard: \"keyboard\"\n};\n/** Attribute carrying whether focus navigation last owned focus. */\nconst INPUT_MODALITY_ATTRIBUTE = \"data-input-modality\";\nconst FOCUS_NAVIGATION = new Set([\n\t\"Tab\",\n\t\"Home\",\n\t\"End\",\n\t\"PageUp\",\n\t\"PageDown\"\n]);\nlet pointer = false;\nlet pointerOwnsFocus = false;\nlet keyFocusOrigin;\nfunction publish() {\n\tdocument.documentElement.setAttribute(INPUT_MODALITY_ATTRIBUTE, pointerOwnsFocus ? INPUT_MODALITY.pointer : INPUT_MODALITY.keyboard);\n}\n/**\n* Whether the last input came from a pointer, independently of ring visibility.\n* @returns True after pointer input; false after any key.\n*/\nfunction pointerModality() {\n\treturn pointer;\n}\nif (typeof window !== \"undefined\") {\n\twindow.addEventListener(\"pointerdown\", () => {\n\t\tpointer = true;\n\t\tpointerOwnsFocus = true;\n\t\tkeyFocusOrigin = void 0;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"keydown\", (event) => {\n\t\tpointer = false;\n\t\tif (event.isComposing) {\n\t\t\tkeyFocusOrigin = void 0;\n\t\t\treturn;\n\t\t}\n\t\tkeyFocusOrigin = event.composedPath()[0];\n\t\tif (!FOCUS_NAVIGATION.has(event.key) && !event.key.startsWith(\"Arrow\")) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"focusin\", (event) => {\n\t\tif (keyFocusOrigin === void 0 || event.composedPath()[0] === keyFocusOrigin) return;\n\t\tkeyFocusOrigin = void 0;\n\t\tif (!pointerOwnsFocus) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"blur\", () => {\n\t\tkeyFocusOrigin = void 0;\n\t});\n}\n"
+      }
+    },
     "PlatformMenuMaterial": [
       {
         "selector": "html[data-platform=darwin] body",
@@ -7237,6 +7271,10 @@
         }
       }
     ],
+    "HeaderLeadingControlsBehavior": {
+      "bundleSha256": "4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e",
+      "region": "//#region lib/types/client/HeaderLeadingControls.js\n\t\t/** Window-chrome controls for the fully hidden sidebar (frame shell.leading seat). */\n\t\t/**\n\t\t* Sidebar-open and New Session controls in the frame's window-chrome seat.\n\t\t* On macOS desktop a collapsed sidebar hides entirely (no rail), taking both\n\t\t* controls off screen; this occupant puts them back beside the traffic\n\t\t* lights. The frame mounts the seat only in that state and owns its\n\t\t* placement, so the occupant renders unconditionally.\n\t\t* @param props - Injected sidebar actions plus the sidebar locale seat.\n\t\t* @returns the two window-chrome controls.\n\t\t*/\n\t\tfunction HeaderLeadingControls({ toggleSidebar, startSession, useShortcuts, t }) {\n\t\t\tconst shortcut = useShortcuts((rows) => rows.find((row) => row.id === \"sidebar.left.toggle\"));\n\t\t\tconst newShortcut = useShortcuts((rows) => rows.find((row) => row.id === \"session.new\"));\n\t\t\treturn (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\tclassName: HeaderLeadingControls_module_css_default.controls,\n\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"toggle.open\"),\n\t\t\t\t\tshortcutKeys: shortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"toggle.open\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": shortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\ttoggleSidebar();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPanelLeftOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"session.new.label\"),\n\t\t\t\t\tshortcutKeys: newShortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"session.new.label\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": newShortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\tstartSession();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconNewChatOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t})]\n\t\t\t});\n\t\t}\n\t\t"
+    },
     "WorkspaceBrowser.module.css": [
       {
         "selector": ".root",
@@ -10157,6 +10195,19 @@
       "menuIconToken": "--dsw-alias-menu-icon",
       "menuFontSize": 14.0,
       "menuLineHeight": 22.0
+    },
+    "DshHeaderLeadingRecipe": {
+      "width": 28.0,
+      "height": 28.0,
+      "controlsGap": 8.0,
+      "iconSize": 16.0,
+      "tooltipDelayMs": 500,
+      "radiusToken": "--dsw-radius-sm",
+      "labelToken": "--dsw-alias-label-secondary",
+      "hoverToken": "--dsw-alias-interactive-bg-hover",
+      "focusWidthToken": "--dsw-focus-ring-width",
+      "focusToken": "--dsw-focus-ring-color",
+      "focusFallbackToken": "--dsw-alias-state-business-primary"
     },
     "DshModelMenuRecipe": {
       "minWidth": 240.0,

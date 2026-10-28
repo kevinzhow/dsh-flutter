@@ -9,6 +9,22 @@ class DshFocusPresentation {
   static final instance = DshFocusPresentation._();
   final _states = <FocusNode, _FocusPresentationState>{};
   bool _keyboard = false;
+  bool _pointerOwnsOutline = false;
+  FocusNode? _keyFocusOrigin;
+
+  /// The published global focus.css suppresses non-editable outlines while
+  /// input-modality.ts says a pointer owns focus. This is distinct from the
+  /// browser's retained :focus-visible history. Consumers opt in separately.
+  bool get pointerOwnsOutline => _pointerOwnsOutline;
+
+  void _setPointerOwnsOutline(bool value) {
+    if (_pointerOwnsOutline == value) return;
+    _pointerOwnsOutline = value;
+    for (final state in _states.values.toList()) {
+      state.notify();
+    }
+  }
+
   static final _navigation = {
     LogicalKeyboardKey.tab,
     LogicalKeyboardKey.arrowUp,
@@ -31,6 +47,10 @@ class DshFocusPresentation {
         if (focused == value.focused) return;
         value.focused = focused;
         value.visible = focused && _keyboard;
+        if (focused && _keyFocusOrigin != null && _keyFocusOrigin != node) {
+          _keyFocusOrigin = null;
+          _setPointerOwnsOutline(false);
+        }
         if (!focused) value.suppressed = false;
         value.notify();
       };
@@ -68,13 +88,23 @@ class DshFocusPresentation {
   }
 
   void _pointer(PointerEvent event) {
-    if (event is PointerDownEvent) _keyboard = false;
+    if (event is PointerDownEvent) {
+      _keyboard = false;
+      _keyFocusOrigin = null;
+      _setPointerOwnsOutline(true);
+    }
     // A click on an already keyboard-focused control retains :focus-visible.
     // A newly focused control receives the current input mode on focus change.
   }
 
   bool _key(KeyEvent event) {
     if (event is! KeyDownEvent && event is! KeyRepeatEvent) return false;
+    _keyFocusOrigin = FocusManager.instance.primaryFocus;
+    if (_navigation.contains(event.logicalKey) ||
+        event.logicalKey == LogicalKeyboardKey.pageUp ||
+        event.logicalKey == LogicalKeyboardKey.pageDown) {
+      _setPointerOwnsOutline(false);
+    }
     final keyboard = HardwareKeyboard.instance;
     if (keyboard.isControlPressed ||
         keyboard.isAltPressed ||

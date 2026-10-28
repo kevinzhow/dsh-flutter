@@ -108,6 +108,12 @@ def modal_layer_snapshot(archive):
             'modal': bundle_region(text, 'Modal.js'),
             'risk': bundle_region(text, 'RiskConfirmation.js')}
 
+def input_modality_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/index.js').read()
+    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+            'region': bundle_region(bundle.decode(), 'input-modality.js')}
+
 def model_menu_snapshot(archive):
     with tarfile.open(archive) as tar:
         bundle = tar.extractfile('package/lib/client.js').read()
@@ -174,7 +180,12 @@ def sidebar_component_snapshot(archive, components):
             if not isinstance(mapping, dict) or not mapping or not all(isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()):
                 raise ValueError('published sidebar class export is not a static string map')
             classes[component] = mapping
-        return {'css': styles, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+        behavior = ({'HeaderLeadingControls-behavior.json': {
+            'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+            'region': bundle_region(text, 'HeaderLeadingControls.js'),
+        }} if 'HeaderLeadingControls' in components else {})
+        return {'css': styles, 'classes': classes, 'behavior': behavior,
+                'bundleSha256': hashlib.sha256(bundle).hexdigest(),
                 'manifest': tar.extractfile('package/package.json').read(),
                 'license': tar.extractfile('package/LICENSE').read()}
 
@@ -269,11 +280,15 @@ def verify_snapshot(archive, package, folder):
         for component, mapping in result['classes'].items():
             if json.loads((folder / (component + '-classes.json')).read_text()) != mapping:
                 raise ValueError('sidebar class export snapshot mismatch: ' + component)
+        for name, behavior in result['behavior'].items():
+            if json.loads((folder / name).read_text()) != behavior:
+                raise ValueError('sidebar behavior snapshot mismatch: ' + name)
         for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
             if (folder / name).read_bytes() != result[key]:
                 raise ValueError('sidebar package metadata mismatch')
         return verified_outputs(package, [*result['css'],
-            *(component + '-classes.json' for component in result['classes']), 'package.json', 'LICENSE'])
+            *(component + '-classes.json' for component in result['classes']),
+            *result['behavior'], 'package.json', 'LICENSE'])
     if kind == 'plain-files':
         verified_outputs(package, package['archiveFiles'])
         with tarfile.open(archive) as tar:
@@ -295,6 +310,10 @@ def verify_snapshot(archive, package, folder):
                 if name == 'modal-layer.json':
                     if json.loads((folder / name).read_text()) != modal_layer_snapshot(archive):
                         raise ValueError('published modal layer snapshot mismatch')
+                    continue
+                if name == 'input-modality.json':
+                    if json.loads((folder / name).read_text()) != input_modality_snapshot(archive):
+                        raise ValueError('published input modality snapshot mismatch')
                     continue
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():

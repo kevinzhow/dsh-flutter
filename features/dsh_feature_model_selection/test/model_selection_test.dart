@@ -480,6 +480,81 @@ void main() {
       semantics.dispose();
     });
 
+    for (final shortcuts in [false, true]) {
+      testWidgets(
+        'native model trigger bounds stay isolated under ${shortcuts ? 'CallbackShortcuts' : 'Focus'}',
+        (t) async {
+          final semantics = t.ensureSemantics();
+          try {
+            t.view.physicalSize = const Size(390, 800);
+            t.view.devicePixelRatio = 1;
+            addTearDown(t.view.reset);
+            await ready(t);
+            Widget scene = Stack(
+              children: [
+                const Positioned(
+                  left: 24,
+                  top: 24,
+                  child: Text('Selection: none'),
+                ),
+                const Positioned(
+                  left: 24,
+                  top: 64,
+                  child: Text('Sidebar action: none'),
+                ),
+                Positioned(
+                  right: 24,
+                  bottom: 24,
+                  child: ModelSeat(
+                    directory: feature.directoryFor(owner),
+                    i18n: i18n,
+                  ),
+                ),
+              ],
+            );
+            scene = shortcuts
+                ? CallbackShortcuts(
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.f6): () {},
+                    },
+                    child: scene,
+                  )
+                : Focus(child: scene);
+            await t.pumpWidget(dshTestApp(scene));
+            await t.pumpAndSettle();
+            final trigger = find.byKey(const ValueKey('model-chip'));
+            final node = t.getSemantics(trigger);
+            var nativeRect = node.rect;
+            for (var ancestor = node; ;) {
+              final transform = ancestor.transform;
+              if (transform != null) {
+                nativeRect = MatrixUtils.transformRect(transform, nativeRect);
+              }
+              final parent = ancestor.parent;
+              if (parent == null) break;
+              ancestor = parent;
+            }
+            expect(nativeRect, t.getRect(trigger));
+            final data = node.getSemanticsData();
+            expect(
+              data.label,
+              'Select model, current DeepSeek Flash, reasoning effort High',
+            );
+            expect(data.hasAction(SemanticsAction.tap), isTrue);
+            await t.tapAt(nativeRect.center);
+            await t.pumpAndSettle();
+            expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
+            expect(
+              find.byKey(const ValueKey('model-root-effort')),
+              findsOneWidget,
+            );
+          } finally {
+            semantics.dispose();
+          }
+        },
+      );
+    }
+
     testWidgets('a locked model chip has no native activation action', (
       t,
     ) async {

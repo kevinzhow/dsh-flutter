@@ -66,7 +66,7 @@ class _SidebarLeadingControlsState extends State<SidebarLeadingControls> {
           onPressed: services.layout.toggleSidebar,
         ),
         if (!chrome.windowsTitlebar || widget.collapsed) ...[
-          const SizedBox(width: 8),
+          const SizedBox(width: DshHeaderLeadingRecipe.controlsGap),
           _Control(
             key: const ValueKey('leading-new-session'),
             icon: DshShellIcons.newChatRegular,
@@ -83,7 +83,7 @@ class _SidebarLeadingControlsState extends State<SidebarLeadingControls> {
   }
 }
 
-class _Control extends StatefulWidget {
+class _Control extends StatelessWidget {
   const _Control({
     super.key,
     required this.icon,
@@ -100,46 +100,19 @@ class _Control extends StatefulWidget {
   final VoidCallback onPressed;
 
   @override
-  State<_Control> createState() => _ControlState();
-}
-
-class _ControlState extends State<_Control> {
-  bool _hover = false;
-
-  @override
   Widget build(BuildContext context) {
-    final theme = context.dsh;
     return DshTooltip(
-      label: widget.label,
-      shortcutKeys: widget.keys,
-      side: widget.side,
-      delay: const Duration(milliseconds: 500),
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _hover = true),
-        onExit: (_) => setState(() => _hover = false),
-        cursor: SystemMouseCursors.click,
-        child: Semantics(
-          button: true,
-          label: widget.label,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: widget.onPressed,
-            child: DshContainer(
-              width: 28,
-              height: 28,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: _hover ? theme.interactiveBgHover : null,
-                borderRadius: BorderRadius.circular(theme.radiusSm),
-              ),
-              child: DshIcon(
-                widget.icon,
-                size: 16,
-                color: theme.labelSecondary,
-              ),
-            ),
-          ),
-        ),
+      label: label,
+      shortcutKeys: keys,
+      side: side,
+      delay: const Duration(
+        milliseconds: DshHeaderLeadingRecipe.tooltipDelayMs,
+      ),
+      child: DshButton(
+        profile: DshButtonProfile.headerAction,
+        semanticLabel: label,
+        onPressed: onPressed,
+        child: DshIcon(icon, size: DshHeaderLeadingRecipe.iconSize),
       ),
     );
   }

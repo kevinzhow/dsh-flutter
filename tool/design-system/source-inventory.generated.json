@@ -5,7 +5,7 @@
     "path": "pnpm-workspace.yaml",
     "sha256": "3c624c26e58ab02ffc8d653bb8a9e8767a63fe0576bc0dbfaa3a5e43f88d973b"
   },
-  "snapshotLockSha256": "0ec890e9e2c6033fea87fbc287827c4332ad0ba434ab94c0369aea22d03b5983",
+  "snapshotLockSha256": "133545002c7eddb1ba9fed0e10d94d932d252f9abd03cfe5ab51486256b72c8a",
   "meaning": "Source-input retention only. Recipe implementation, inline/SVG coverage and state acceptance are not assessed.",
   "dependencyScope": {
     "roots": [
@@ -2806,6 +2806,10 @@
             "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678"
           },
           {
+            "path": "tool/design-system/upstream/ui-primitives/input-modality.json",
+            "sha256": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+          },
+          {
             "path": "tool/design-system/upstream/ui-primitives/menu-portal.json",
             "sha256": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b"
           },
@@ -4644,6 +4648,10 @@
         "version": "0.2.1-rc.2",
         "integrity": "sha512-nm/JKDUL/GNjwlTT9AQ4QnWU7hTgG81Ib6yNa0NOwCrC5TFRAb+3WhpvshCqcS6ofwhdXMjN5KB+zWuOrZdQRg==",
         "files": [
+          {
+            "path": "tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-behavior.json",
+            "sha256": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
+          },
           {
             "path": "tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-classes.json",
             "sha256": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d"
