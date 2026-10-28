@@ -47,181 +47,185 @@ void main() {
   ];
   for (final viewport in viewports) {
     for (final brightness in Brightness.values) {
-      testWidgets('Toast native source geometry/input $viewport ${brightness.name}', (
-        t,
-      ) async {
-        t.view.physicalSize = viewport.size * viewport.dpr;
-        t.view.devicePixelRatio = viewport.dpr;
-        addTearDown(t.view.reset);
-        final key = GlobalKey<ToastNativeState>();
-        await t.pumpWidget(ToastNativeApp(key: key, brightness: brightness));
-        await flush(t);
-        final state = key.currentState!;
-        final measured = <String, Rect>{};
-        measured['underlying'] = t.getRect(
-          find.byKey(const ValueKey('toast-underlying')),
-        );
-        measured['status'] = t.getRect(
-          find.byKey(const ValueKey('toast-status')),
-        );
-        measured['callbackCounter'] = t.getRect(
-          find.byKey(const ValueKey('toast-callback-counter')),
-        );
-        measured['owners'] = t.getRect(
-          find.byKey(const ValueKey('toast-owners')),
-        );
-        measured['noIconControl'] = t.getRect(control('No icon'));
-        measured['successControl'] = t.getRect(control('Success'));
-        measured['warningControl'] = t.getRect(control('Warning'));
-        measured['longControl'] = t.getRect(control('Long'));
-        measured['clearControl'] = t.getRect(control('Clear'));
-        for (final label in [
-          'Lifetime',
-          'Same hold',
-          'Changed hold',
-          'Upload saved',
-          'Upload failed',
-          'Reduced motion',
-          'Toast then preview',
-          'Preview then toast',
-          'Focus background',
-          'Remove file owner',
-        ]) {
-          measured[label] = t.getRect(control(label));
-        }
-        measured['workspace'] = t.getRect(
-          find.byKey(const ValueKey('open-in-app')),
-        );
-        measured['file'] = t.getRect(
-          find.bySemanticsLabel('Show file location'),
-        );
-        state.focus.requestFocus();
-        await flush(t);
-        state.show('no-icon');
-        await flush(t, const Duration(milliseconds: 200));
-        expect(find.byType(DshToastHost), findsOneWidget);
-        expect(find.text(toastFixtureText('no-icon', 'en')), findsOneWidget);
-        expect(
-          find.byType(DshIcon),
-          findsWidgets,
-        ); // Real owner icons still exist.
-        expect(
-          find.descendant(of: surface(), matching: find.byType(DshIcon)),
-          findsNothing,
-        );
-        expect(state.focus.hasPrimaryFocus, isTrue);
-        final semantics = t.ensureSemantics();
-        expect(
-          alert(t).getSemanticsData().role,
-          SemanticsRole.alert,
-        );
-        expect(
-          alert(t)
-              .getSemanticsData()
-              .hasAction(SemanticsAction.tap),
-          isFalse,
-        );
-        expect(
-          alert(t).getSemanticsData().label,
-          toastFixtureText('no-icon', 'en'),
-        );
-        expect(alert(t).rect.size, t.getSize(surface()));
-        measured['noIcon'] = t.getRect(surface());
-        expect(measured['noIcon']!.top, DshToastRecipe.top);
-        expect(measured['noIcon']!.center.dx, viewport.size.width / 2);
-        final overlap = measured['noIcon']!.intersect(measured['underlying']!);
-        expect(overlap.contains(measured['underlying']!.center), isTrue);
-        await t.tapAt(measured['underlying']!.center);
-        await flush(t);
-        expect(state.clicks, 1);
-        expect(find.text(toastFixtureText('no-icon', 'en')), findsOneWidget);
-        state.show('success');
-        await flush(t, const Duration(milliseconds: 200));
-        expect(
-          t
-              .widget<DshIcon>(
-                find.descendant(of: surface(), matching: find.byType(DshIcon)),
-              )
-              .icon,
-          DshIcons.checkCircle,
-        );
-        measured['success'] = t.getRect(surface());
-        state.show('warning');
-        await flush(t, const Duration(milliseconds: 200));
-        expect(
-          t
-              .widget<DshIcon>(
-                find.descendant(of: surface(), matching: find.byType(DshIcon)),
-              )
-              .icon,
-          DshIcons.warning,
-        );
-        measured['warning'] = t.getRect(surface());
-        expect(
-          measured['warning']!.width - measured['noIcon']!.width,
-          DshIcons.warning.size + DshToastRecipe.gap,
-        );
-        state.show('long-warning');
-        await flush(t, const Duration(milliseconds: 200));
-        measured['long'] = t.getRect(surface());
-        expect(
-          measured['long']!.width,
-          (viewport.size.width - DshToastRecipe.viewportInset).clamp(
-                0,
-                DshToastRecipe.maxContentWidth,
-              ) +
-              DshToastRecipe.horizontalPadding * 2,
-        );
-        expect(
-          measured['long']!.height,
-          greaterThan(measured['warning']!.height),
-        );
-        expect(measured['long']!.top, DshToastRecipe.top);
-        final shadowBottom = sourceShadowBottom(t);
-        final shadowLayers = t.widget<DshShadowBox>(surface()).shadows;
-        expect(measured['callbackCounter']!.top, greaterThan(shadowBottom));
-        expect(
-          measured['callbackCounter']!.bottom,
-          lessThanOrEqualTo(viewport.size.height),
-        );
-        expect(
-          find.bySemanticsLabel('Lifecycle callback count: 0'),
-          findsOneWidget,
-        );
-        expect(
-          find.text(toastFixtureText('long-warning', 'en')),
-          findsOneWidget,
-        );
-        state.clear();
-        await flush(t);
-        expect(surface(), findsNothing);
-        semantics.dispose();
-        // Preparation measurement only; root will bind this to the final manifest.
-        if (Platform.environment['WHALEE_TOAST_NATIVE_GEOMETRY'] == '1') {
-          debugPrint(
-            'TOAST_NATIVE_GEOMETRY ${jsonEncode({
-              'viewport': [viewport.size.width, viewport.size.height],
-              'dpr': viewport.dpr,
-              'theme': brightness.name,
-              'pinnedFonts': true,
-              'callbackProbe': {
-                'semanticsLabel': 'Lifecycle callback count: 0',
-                'sourceLongShadowBandBottom': shadowBottom,
-                'shadowBandRule': 'offsetY + spread + 3 * (CSS blurRadius / 2)',
-                'shadowLayers': [
-                  for (final shadow in shadowLayers) {'dx': shadow.offset.dx, 'dy': shadow.offset.dy, 'blurRadius': shadow.blurRadius, 'spreadRadius': shadow.spreadRadius},
-                ],
-              },
-              'rects': {
-                for (final e in measured.entries) e.key: [e.value.left, e.value.top, e.value.right, e.value.bottom],
-              },
-            })}',
+      testWidgets(
+        'Toast native source geometry/input $viewport ${brightness.name}',
+        (t) async {
+          t.view.physicalSize = viewport.size * viewport.dpr;
+          t.view.devicePixelRatio = viewport.dpr;
+          addTearDown(t.view.reset);
+          final key = GlobalKey<ToastNativeState>();
+          await t.pumpWidget(ToastNativeApp(key: key, brightness: brightness));
+          await flush(t);
+          final state = key.currentState!;
+          final measured = <String, Rect>{};
+          measured['underlying'] = t.getRect(
+            find.byKey(const ValueKey('toast-underlying')),
           );
-        }
-        await t.pumpWidget(const SizedBox());
-        await flush(t);
-        expect(t.takeException(), isNull);
-      });
+          measured['status'] = t.getRect(
+            find.byKey(const ValueKey('toast-status')),
+          );
+          measured['callbackCounter'] = t.getRect(
+            find.byKey(const ValueKey('toast-callback-counter')),
+          );
+          measured['owners'] = t.getRect(
+            find.byKey(const ValueKey('toast-owners')),
+          );
+          measured['noIconControl'] = t.getRect(control('No icon'));
+          measured['successControl'] = t.getRect(control('Success'));
+          measured['warningControl'] = t.getRect(control('Warning'));
+          measured['longControl'] = t.getRect(control('Long'));
+          measured['clearControl'] = t.getRect(control('Clear'));
+          for (final label in [
+            'Lifetime',
+            'Same hold',
+            'Changed hold',
+            'Upload saved',
+            'Upload failed',
+            'Reduced motion',
+            'Toast then preview',
+            'Preview then toast',
+            'Focus background',
+            'Remove file owner',
+          ]) {
+            measured[label] = t.getRect(control(label));
+          }
+          measured['workspace'] = t.getRect(
+            find.byKey(const ValueKey('open-in-app')),
+          );
+          measured['file'] = t.getRect(
+            find.bySemanticsLabel('Show file location'),
+          );
+          state.focus.requestFocus();
+          await flush(t);
+          state.show('no-icon');
+          await flush(t, const Duration(milliseconds: 200));
+          expect(find.byType(DshToastHost), findsOneWidget);
+          expect(find.text(toastFixtureText('no-icon', 'en')), findsOneWidget);
+          expect(
+            find.byType(DshIcon),
+            findsWidgets,
+          ); // Real owner icons still exist.
+          expect(
+            find.descendant(of: surface(), matching: find.byType(DshIcon)),
+            findsNothing,
+          );
+          expect(state.focus.hasPrimaryFocus, isTrue);
+          final semantics = t.ensureSemantics();
+          expect(alert(t).getSemanticsData().role, SemanticsRole.alert);
+          expect(
+            alert(t).getSemanticsData().hasAction(SemanticsAction.tap),
+            isFalse,
+          );
+          expect(
+            alert(t).getSemanticsData().label,
+            toastFixtureText('no-icon', 'en'),
+          );
+          expect(alert(t).rect.size, t.getSize(surface()));
+          measured['noIcon'] = t.getRect(surface());
+          expect(measured['noIcon']!.top, DshToastRecipe.top);
+          expect(measured['noIcon']!.center.dx, viewport.size.width / 2);
+          final overlap = measured['noIcon']!.intersect(
+            measured['underlying']!,
+          );
+          expect(overlap.contains(measured['underlying']!.center), isTrue);
+          await t.tapAt(measured['underlying']!.center);
+          await flush(t);
+          expect(state.clicks, 1);
+          expect(find.text(toastFixtureText('no-icon', 'en')), findsOneWidget);
+          state.show('success');
+          await flush(t, const Duration(milliseconds: 200));
+          expect(
+            t
+                .widget<DshIcon>(
+                  find.descendant(
+                    of: surface(),
+                    matching: find.byType(DshIcon),
+                  ),
+                )
+                .icon,
+            DshIcons.checkCircle,
+          );
+          measured['success'] = t.getRect(surface());
+          state.show('warning');
+          await flush(t, const Duration(milliseconds: 200));
+          expect(
+            t
+                .widget<DshIcon>(
+                  find.descendant(
+                    of: surface(),
+                    matching: find.byType(DshIcon),
+                  ),
+                )
+                .icon,
+            DshIcons.warning,
+          );
+          measured['warning'] = t.getRect(surface());
+          expect(
+            measured['warning']!.width - measured['noIcon']!.width,
+            DshIcons.warning.size + DshToastRecipe.gap,
+          );
+          state.show('long-warning');
+          await flush(t, const Duration(milliseconds: 200));
+          measured['long'] = t.getRect(surface());
+          expect(
+            measured['long']!.width,
+            (viewport.size.width - DshToastRecipe.viewportInset).clamp(
+                  0,
+                  DshToastRecipe.maxContentWidth,
+                ) +
+                DshToastRecipe.horizontalPadding * 2,
+          );
+          expect(
+            measured['long']!.height,
+            greaterThan(measured['warning']!.height),
+          );
+          expect(measured['long']!.top, DshToastRecipe.top);
+          final shadowBottom = sourceShadowBottom(t);
+          final shadowLayers = t.widget<DshShadowBox>(surface()).shadows;
+          expect(measured['callbackCounter']!.top, greaterThan(shadowBottom));
+          expect(
+            measured['callbackCounter']!.bottom,
+            lessThanOrEqualTo(viewport.size.height),
+          );
+          expect(
+            find.bySemanticsLabel('Lifecycle callback count: 0'),
+            findsOneWidget,
+          );
+          expect(
+            find.text(toastFixtureText('long-warning', 'en')),
+            findsOneWidget,
+          );
+          state.clear();
+          await flush(t);
+          expect(surface(), findsNothing);
+          semantics.dispose();
+          // Preparation measurement only; root will bind this to the final manifest.
+          if (Platform.environment['WHALEE_TOAST_NATIVE_GEOMETRY'] == '1') {
+            debugPrint(
+              'TOAST_NATIVE_GEOMETRY ${jsonEncode({
+                'viewport': [viewport.size.width, viewport.size.height],
+                'dpr': viewport.dpr,
+                'theme': brightness.name,
+                'pinnedFonts': true,
+                'callbackProbe': {
+                  'semanticsLabel': 'Lifecycle callback count: 0',
+                  'sourceLongShadowBandBottom': shadowBottom,
+                  'shadowBandRule': 'offsetY + spread + 3 * (CSS blurRadius / 2)',
+                  'shadowLayers': [
+                    for (final shadow in shadowLayers) {'dx': shadow.offset.dx, 'dy': shadow.offset.dy, 'blurRadius': shadow.blurRadius, 'spreadRadius': shadow.spreadRadius},
+                  ],
+                },
+                'rects': {
+                  for (final e in measured.entries) e.key: [e.value.left, e.value.top, e.value.right, e.value.bottom],
+                },
+              })}',
+            );
+          }
+          await t.pumpWidget(const SizedBox());
+          await flush(t);
+          expect(t.takeException(), isNull);
+        },
+      );
     }
   }
 
