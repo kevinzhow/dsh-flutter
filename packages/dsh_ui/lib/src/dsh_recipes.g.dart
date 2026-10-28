@@ -785,3 +785,49 @@ abstract final class DshStatsPillRecipe {
   static const String separatorToken = '--dsw-alias-separator-primary';
   static const double separatorMargin = 6.0;
 }
+
+abstract final class DshPluginCardListRecipe {
+  static const double gap = 2.0;
+}
+
+abstract final class DshPluginCardRecipe {
+  static const double horizontalMargin = -8.0;
+  static const String radiusToken = '--dsw-radius-xl';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const double headGap = 14.0;
+  static const double headPadding = 8.0;
+  static const double iconWidth = 48.0;
+  static const double iconHeight = 48.0;
+  static const double iconBorderWidth = 0.5;
+  static const String iconBorderToken = '--dsw-alias-border-l3';
+  static const String iconRadiusToken = '--dsw-radius-lg';
+  static const String iconLabelToken = '--dsw-alias-label-secondary';
+  static const double artworkSize = 36.0;
+  static const double mainGap = 4.0;
+  static const double titleRowGap = 8.0;
+  static const double titleFontSize = 14.0;
+  static const double titleLineHeight = 20.0;
+  static const double titleWeight = 500.0;
+  static const double titleMaxLines = 1.0;
+  static const double descriptionFontSize = 13.0;
+  static const double descriptionLineHeight = 18.0;
+  static const double descriptionMaxLines = 1.0;
+  static const String descriptionToken = '--dsw-alias-label-tertiary';
+  static const double endGap = 8.0;
+  static const String focusWidthToken = '--dsw-focus-ring-width';
+  static const String focusToken = '--dsw-focus-ring-color';
+  static const String focusFallbackToken = '--dsw-alias-state-business-primary';
+  static const double focusOffset = 2.0;
+  static const double errorFontSize = 12.0;
+  static const double errorLineHeight = 18.0;
+  static const String errorToken = '--dsw-alias-state-error-primary';
+  static const String experimentalPrefix = '@deepseek-ai/dsh-experimental-';
+}
+
+abstract final class DshPluginStatusTagRecipe {
+  static const double contentHeight = 18.0;
+  static const double verticalPadding = 0.0;
+  static const double horizontalPadding = 7.0;
+  static const double fontSize = 10.0;
+  static const double lineHeightFactor = 1.0;
+}

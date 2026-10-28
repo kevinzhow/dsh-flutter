@@ -1,4 +1,4 @@
-"""Read published bundle CSS without executing JavaScript."""
+"""Read published CSS and complete behavior regions without executing JS."""
 from pathlib import Path
 import argparse,base64,hashlib,json,re,subprocess,tarfile
 
@@ -42,6 +42,9 @@ def plugin_style_snapshot(archive):
         if not isinstance(classes,dict) or not all(isinstance(k,str) and isinstance(v,str) for k,v in classes.items()):
             raise ValueError('published CSS class export is not a static string map')
         return {'css':css,'classes':classes,'bundleSha256':hashlib.sha256(bundle).hexdigest(),
+                'behavior': {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                             'region': bundle_region(text, 'PluginManagerPage.js'),
+                             'presentationRegion': bundle_region(text, 'presentation.js')},
                 'manifest':tar.extractfile('package/package.json').read(),'license':tar.extractfile('package/LICENSE').read()}
 
 def market_style_snapshot(archive):
@@ -328,9 +331,11 @@ def verify_snapshot(archive, package, folder):
     names = {'package.json', 'LICENSE'}
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
-        names.update(('PluginManagerPage.module.css', 'classes.json'))
+        names.update(('PluginManagerPage.module.css', 'classes.json', 'loaded-card-behavior.json'))
         if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
+        if json.loads((folder / 'loaded-card-behavior.json').read_text()) != result['behavior']:
+            raise ValueError('loaded card published behavior snapshot mismatch')
     elif kind == 'model-menu-css':
         names.update(('ModelSelect.module.css', 'classes.json', 'model-behavior.json'))
         if (folder / 'ModelSelect.module.css').read_text() != result['css']: raise ValueError('decoded model menu CSS snapshot mismatch')
