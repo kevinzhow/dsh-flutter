@@ -376,7 +376,7 @@ class DshToasts {
     DshToastTone? tone,
     Duration? hold,
   }) {
-    final overlay = Overlay.maybeOf(context, rootOverlay: true);
+    final overlay = Overlay.maybeOf(context);
     if (overlay != null) {
       showOn(overlay, text, icon: icon, tone: tone, hold: hold);
     }

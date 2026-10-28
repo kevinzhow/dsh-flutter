@@ -24,6 +24,17 @@ relationship to the initiating widget's provider subtree. It deliberately does
 not accept a generic Widget or claim to capture that context. The existing two
 warning callers pass `DshIcons.warning`; Settings mounts `DshToast` itself.
 
+The imperative `show(context)` inserts its occurrence in the nearest logical
+Overlay, normally Navigator's, while that occurrence's own portal paints in
+the outer Toast host. This keeps launch/file notices and direct Settings
+notices on the same outer entry, so their show order matches the source's
+equal-z body portals. Inserting an imperative occurrence directly into the
+outer host would otherwise keep it above a later direct notice. The explicit
+`showOn(navigator.overlay)` fallback already has the required logical placement.
+The actual workspace/file failure followed by accepted upload is covered by a
+painted-icon comparison to the upload notice alone; counting both widgets is
+not proof of their visible order.
+
 ## Source layout and placement
 
 The max-width constraint applies to content before adding horizontal padding:
