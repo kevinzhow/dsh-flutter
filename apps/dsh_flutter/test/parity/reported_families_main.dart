@@ -10,7 +10,9 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'helpers/header_leading_native_fixture.dart';
 import 'helpers/reported_sidebar_fixture.dart';
 
 Future<void> main() async {
@@ -32,22 +34,24 @@ Future<void> main() async {
       home: Scaffold(
         backgroundColor: theme.bgBase,
         body: SafeArea(
-          child: _Scenes(DshI18n(zh ? DshLocale.zh : DshLocale.en)),
+          child: ReportedFamiliesNativeScenes(
+            DshI18n(zh ? DshLocale.zh : DshLocale.en),
+          ),
         ),
       ),
     ),
   );
 }
 
-class _Scenes extends StatefulWidget {
-  const _Scenes(this.i18n);
+class ReportedFamiliesNativeScenes extends StatefulWidget {
+  const ReportedFamiliesNativeScenes(this.i18n, {super.key});
   final DshI18n i18n;
 
   @override
-  State<_Scenes> createState() => _ScenesState();
+  State<ReportedFamiliesNativeScenes> createState() => _ScenesState();
 }
 
-class _ScenesState extends State<_Scenes> {
+class _ScenesState extends State<ReportedFamiliesNativeScenes> {
   int selected = 0;
   String sidebarAction = 'none';
 
@@ -77,38 +81,48 @@ class _ScenesState extends State<_Scenes> {
         Text('Sidebar action: $sidebarAction'),
       ],
     );
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Keep the measured layout unchanged while painting the controls
-            // after the sidebar's nested route. A route excludes earlier
-            // semantics siblings, including this native replay toolbar.
-            Visibility(
-              visible: false,
-              maintainSize: true,
-              maintainAnimation: true,
-              maintainState: true,
-              child: header,
-            ),
-            Expanded(
-              child: switch (selected) {
-                0 => Align(
-                  alignment: Alignment.topLeft,
-                  child: ReportedSidebarFixture(
-                    i18n: widget.i18n,
-                    onAction: (value) => setState(() => sidebarAction = value),
+    // A fixture-only entry keeps the existing three-button toolbar and all
+    // previously measured scene coordinates unchanged at narrow widths.
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.f6): () =>
+            setState(() => selected = 3),
+      },
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Keep the measured layout unchanged while painting the controls
+              // after the sidebar's nested route. A route excludes earlier
+              // semantics siblings, including this native replay toolbar.
+              Visibility(
+                visible: false,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: header,
+              ),
+              Expanded(
+                child: switch (selected) {
+                  0 => Align(
+                    alignment: Alignment.topLeft,
+                    child: ReportedSidebarFixture(
+                      i18n: widget.i18n,
+                      onAction: (value) =>
+                          setState(() => sidebarAction = value),
+                    ),
                   ),
-                ),
-                1 => _StatisticsScene(i18n: widget.i18n),
-                _ => ReportedModelFixture(i18n: widget.i18n),
-              },
-            ),
-          ],
-        ),
-        Positioned(top: 0, left: 0, right: 0, child: header),
-      ],
+                  1 => _StatisticsScene(i18n: widget.i18n),
+                  2 => ReportedModelFixture(i18n: widget.i18n),
+                  _ => HeaderLeadingNativeFixture(i18n: widget.i18n),
+                },
+              ),
+            ],
+          ),
+          Positioned(top: 0, left: 0, right: 0, child: header),
+        ],
+      ),
     );
   }
 }
