@@ -1,0 +1,167 @@
+{
+  "schema": "whalee-menu-compositing-gpu-runtime/1",
+  "status": "passed",
+  "startedAt": "2026-10-28T07:00:54.338129+00:00",
+  "finishedAt": "2026-10-28T07:02:20.374672+00:00",
+  "exitCode": 0,
+  "runtimeHead": "4feb2c38e63fc61f0e2a6dab125bd5709be7ccb2",
+  "runtimeTree": "a32ed26154623c6ee9ced491712348f44330557f",
+  "executableSha256": "fbf494b3954342abde12bfc84cf75bed159d119d0f732ee2ef68b0e4cfb9b896",
+  "applicationLibrarySha256": "4e884c58aa480461fc5c52a4a0a7fb7f0f9c5c07d1d86f1c78ea18b27a512a5e",
+  "manifestSha256": "3043538f398f175baea933f223c703374925ef30497f7177c0ea91f5cfb2a078",
+  "binaryBefore": {
+    "runtimeHead": "4feb2c38e63fc61f0e2a6dab125bd5709be7ccb2",
+    "runtimeTree": "a32ed26154623c6ee9ced491712348f44330557f",
+    "executableSha256": "fbf494b3954342abde12bfc84cf75bed159d119d0f732ee2ef68b0e4cfb9b896",
+    "applicationLibrarySha256": "4e884c58aa480461fc5c52a4a0a7fb7f0f9c5c07d1d86f1c78ea18b27a512a5e",
+    "manifestSha256": "3043538f398f175baea933f223c703374925ef30497f7177c0ea91f5cfb2a078"
+  },
+  "binaryAfter": {
+    "runtimeHead": "4feb2c38e63fc61f0e2a6dab125bd5709be7ccb2",
+    "runtimeTree": "a32ed26154623c6ee9ced491712348f44330557f",
+    "executableSha256": "fbf494b3954342abde12bfc84cf75bed159d119d0f732ee2ef68b0e4cfb9b896",
+    "applicationLibrarySha256": "4e884c58aa480461fc5c52a4a0a7fb7f0f9c5c07d1d86f1c78ea18b27a512a5e",
+    "manifestSha256": "3043538f398f175baea933f223c703374925ef30497f7177c0ea91f5cfb2a078"
+  },
+  "binaryUnchanged": true,
+  "cases": [
+    {
+      "id": "reported-families.desktop",
+      "size": [
+        1280,
+        720
+      ],
+      "theme": "light",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "move": 23,
+        "click": 16,
+        "keys": 5,
+        "text": 1
+      },
+      "inputCount": 45,
+      "activationKeyInputCount": 22,
+      "assertionCount": 42,
+      "passedAssertions": 42,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 23,
+      "screenshotCount": 24,
+      "screenshots": [
+        "reported-families.desktop/sidebar-initial.png",
+        "reported-families.desktop/sidebar-new-session.png",
+        "reported-families.desktop/sidebar-more-open.png",
+        "reported-families.desktop/sidebar-more-escaped.png",
+        "reported-families.desktop/sidebar-more-reopened.png",
+        "reported-families.desktop/statistics-initial.png",
+        "reported-families.desktop/statistics-activity.png",
+        "reported-families.desktop/statistics-usage-one-click.png",
+        "reported-families.desktop/statistics-escaped.png",
+        "reported-families.desktop/model-closed.png",
+        "reported-families.desktop/model-root.png",
+        "reported-families.desktop/model-directory.png",
+        "reported-families.desktop/model-escape-root.png",
+        "reported-families.desktop/model-escape-closed.png",
+        "reported-families.desktop/model-root-reopened.png",
+        "reported-families.desktop/model-efforts.png",
+        "reported-families.desktop/model-low-selected.png",
+        "reported-families.desktop/model-low-root.png",
+        "reported-families.desktop/model-all.png",
+        "reported-families.desktop/model-filtered.png",
+        "reported-families.desktop/model-pro-selected.png",
+        "reported-families.desktop/model-pro-root.png",
+        "reported-families.desktop/model-pro-closed.png",
+        "reported-families.desktop.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 1921889,
+        "app": 1921901
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    },
+    {
+      "id": "reported-families.phone",
+      "size": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "move": 23,
+        "click": 16,
+        "keys": 5,
+        "text": 1
+      },
+      "inputCount": 45,
+      "activationKeyInputCount": 22,
+      "assertionCount": 42,
+      "passedAssertions": 42,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 23,
+      "screenshotCount": 24,
+      "screenshots": [
+        "reported-families.phone/sidebar-initial.png",
+        "reported-families.phone/sidebar-new-session.png",
+        "reported-families.phone/sidebar-more-open.png",
+        "reported-families.phone/sidebar-more-escaped.png",
+        "reported-families.phone/sidebar-more-reopened.png",
+        "reported-families.phone/statistics-initial.png",
+        "reported-families.phone/statistics-activity.png",
+        "reported-families.phone/statistics-usage-one-click.png",
+        "reported-families.phone/statistics-escaped.png",
+        "reported-families.phone/model-closed.png",
+        "reported-families.phone/model-root.png",
+        "reported-families.phone/model-directory.png",
+        "reported-families.phone/model-escape-root.png",
+        "reported-families.phone/model-escape-closed.png",
+        "reported-families.phone/model-root-reopened.png",
+        "reported-families.phone/model-efforts.png",
+        "reported-families.phone/model-low-selected.png",
+        "reported-families.phone/model-low-root.png",
+        "reported-families.phone/model-all.png",
+        "reported-families.phone/model-filtered.png",
+        "reported-families.phone/model-pro-selected.png",
+        "reported-families.phone/model-pro-root.png",
+        "reported-families.phone/model-pro-closed.png",
+        "reported-families.phone.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 1922178,
+        "app": 1922189
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    }
+  ],
+  "proofWrapperSha256": "93b5537bb37e32a4f8a61948eaff51fcf307dbcc3ad20e435fdf549e0a35ee45",
+  "totalAssertions": 84,
+  "totalPassedAssertions": 84,
+  "totalScreenshots": 48,
+  "ownedFixturePidsRemaining": [],
+  "ownedPidsAbsent": true
+}

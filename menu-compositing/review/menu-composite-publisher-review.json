@@ -1,0 +1,45 @@
+{
+  "schema": "menu-compositing-independent-publisher-review/1",
+  "reviewedAt": "2026-10-28T07:08:31.293836+00:00",
+  "publisherSha256": "8802ddfe916891aa4a1a38da765ff3fd6d4f55d861a8a6cc5b1f7096b3a93bd0",
+  "runtimeHead": "4feb2c38e63fc61f0e2a6dab125bd5709be7ccb2",
+  "runtimeTree": "a32ed26154623c6ee9ced491712348f44330557f",
+  "manifestSha256": "3043538f398f175baea933f223c703374925ef30497f7177c0ea91f5cfb2a078",
+  "controls": [
+    {
+      "control": "actual-completed-receipt",
+      "accepted": true,
+      "cases": 2,
+      "assertions": 84,
+      "screenshots": 48
+    },
+    {
+      "control": "failed-runtime-status",
+      "rejected": true,
+      "reason": "GPU replay failed or teardown is incomplete"
+    },
+    {
+      "control": "remaining-owned-pid",
+      "rejected": true,
+      "reason": "GPU replay failed or teardown is incomplete"
+    },
+    {
+      "control": "altered-parsed-manifest",
+      "rejected": true,
+      "reason": "GPU replay contract differs from the committed runtime manifest"
+    },
+    {
+      "control": "altered-manifest-file-digest",
+      "rejected": true,
+      "reason": "GPU replay contract differs from the committed runtime manifest"
+    },
+    {
+      "control": "before-after-identity-mismatch",
+      "rejected": true,
+      "reason": "GPU before/after identity does not match its runtime receipt"
+    }
+  ],
+  "nativeReplayRun": false,
+  "stagingRun": false,
+  "productChanged": false
+}

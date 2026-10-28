@@ -1,0 +1,441 @@
+== packages/dsh_client (dart test) exit 0
+etrying; a new token resumes                                                                       
+00:04 +121: test/reconnect_test.dart: token expiry (host restart): halts in needsPairing and stops retrying; a new token resumes                                                                       
+00:04 +121: test/reconnect_test.dart: a host that is down for a while: waiting, then reachable again, same token still good                                                                            
+00:05 +121: test/reconnect_test.dart: a host that is down for a while: waiting, then reachable again, same token still good                                                                            
+00:05 +122: test/reconnect_test.dart: a host that is down for a while: waiting, then reachable again, same token still good                                                                            
+00:05 +122: test/reconnect_test.dart: streams resume on the next generation with the cursor of the moment                                                                                              
+00:05 +123: test/reconnect_test.dart: streams resume on the next generation with the cursor of the moment                                                                                              
+00:05 +123: All tests passed!                                                                                                                                                                          
+
+== packages/dsh_models (dart test) exit 0
+hen submits minimal content-only request                                                           
+00:02 +292: test/schedules_test.dart: draft preserves edited content while adopting remote timing, then submits minimal content-only request                                                           
+00:02 +293: test/schedules_test.dart: draft preserves edited content while adopting remote timing, then submits minimal content-only request                                                           
+00:02 +293: test/schedules_test.dart: timing parser retains milliseconds, changes zones through Host inputs and rejects empty weekday removal                                                          
+00:02 +294: test/schedules_test.dart: timing parser retains milliseconds, changes zones through Host inputs and rejects empty weekday removal                                                          
+00:02 +294: test/schedules_test.dart: history deduplicates pages and a fresh latest page supersedes a pending older page                                                                               
+00:02 +295: test/schedules_test.dart: history deduplicates pages and a fresh latest page supersedes a pending older page                                                                               
+00:02 +295: All tests passed!                                                                                                                                                                          
+
+== packages/dsh_conversation (dart test) exit 0
+suffix scanning                                                                                    
+00:01 +158: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +159: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +160: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +161: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +162: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +163: test/user_text_behavior_test.dart: digit-free repeated prefixes do not trigger repeated suffix scanning                                                                                    
+00:01 +163: All tests passed!                                                                                                                                                                          
+
+== packages/dsh_slots (dart test) exit 0
+ders with matched                                                                                  
+00:00 +13: test/slot_registry_test.dart: labelled list entries entries lists id, order and the resolved label                                                                                          
+00:00 +14: test/slot_registry_test.dart: labelled list entries entries lists id, order and the resolved label                                                                                          
+00:00 +14: test/slot_registry_test.dart: labelled list entries renderOnly renders the one occupant                                                                                                     
+00:00 +15: test/slot_registry_test.dart: labelled list entries renderOnly renders the one occupant                                                                                                     
+00:00 +15: test/slot_registry_test.dart: labelled list entries a registration can be withdrawn and announces both changes                                                                              
+00:00 +16: test/slot_registry_test.dart: labelled list entries a registration can be withdrawn and announces both changes                                                                              
+00:00 +16: All tests passed!                                                                                                                                                                           
+
+== packages/dsh_i18n (dart test) exit 0
+                                                                                                   
+00:00 +15: test/dsh_i18n_test.dart: catalog every en key has a zh value, except gaps in known-gaps.json                                                                                                
+00:00 +16: test/dsh_i18n_test.dart: catalog every en key has a zh value, except gaps in known-gaps.json                                                                                                
+00:00 +16: test/dsh_i18n_test.dart: catalog en and zh use the same placeholders                                                                                                                        
+00:00 +17: test/dsh_i18n_test.dart: catalog en and zh use the same placeholders                                                                                                                        
+00:00 +17: test/dsh_i18n_test.dart: catalog zh text is actually Chinese for the mandatory approval keys                                                                                                
+00:00 +18: test/dsh_i18n_test.dart: catalog zh text is actually Chinese for the mandatory approval keys                                                                                                
+00:00 +18: All tests passed!                                                                                                                                                                           
+
+== packages/dsh_layout (dart test) exit 0
+he Conversation without changing geometry                                                          
+00:00 +54: test/layout_store_test.dart: LayoutController keeps separately constructed controllers bound to their own stores                                                                            
+00:00 +55: test/layout_store_test.dart: LayoutController keeps separately constructed controllers bound to their own stores                                                                            
+00:00 +55: test/layout_store_test.dart: LayoutController rejects an absent main entry without changing selection or cancelling pending navigation                                                      
+00:00 +56: test/layout_store_test.dart: LayoutController rejects an absent main entry without changing selection or cancelling pending navigation                                                      
+00:00 +56: test/layout_store_test.dart: LayoutController supersedes asynchronous navigation on another request, any valid selection, and disposal                                                      
+00:00 +57: test/layout_store_test.dart: LayoutController supersedes asynchronous navigation on another request, any valid selection, and disposal                                                      
+00:00 +57: All tests passed!                                                                                                                                                                           
+
+== packages/dsh_shortcuts (dart test) exit 0
+                                                                                                   
+00:00 +68: test/persistence_test.dart: two-key chords rejects bare keys and chords in web on linux                                                                                                     
+00:00 +69: test/persistence_test.dart: two-key chords rejects bare keys and chords in web on linux                                                                                                     
+00:00 +69: test/persistence_test.dart: two-key chords rejects bare keys and chords in desktop on linux                                                                                                 
+00:00 +70: test/persistence_test.dart: two-key chords rejects bare keys and chords in desktop on linux                                                                                                 
+00:00 +70: test/persistence_test.dart: two-key chords canonicalizes unordered pairs, rejects invalid main keys, and omits unsupported ARIA accelerators                                                
+00:00 +71: test/persistence_test.dart: two-key chords canonicalizes unordered pairs, rejects invalid main keys, and omits unsupported ARIA accelerators                                                
+00:00 +71: All tests passed!                                                                                                                                                                           
+
+== packages/dsh_theme (flutter test) exit 0
+                                                                                                   
+00:01 +54: [workspace]/scratch/whalee-menu-compositing/packages/dsh_theme/test/theme_settings_test.dart: ... names and css round trip            
+00:01 +55: [workspace]/scratch/whalee-menu-compositing/packages/dsh_theme/test/theme_settings_test.dart: ... names and css round trip            
+00:01 +55: ... preference and snapshot system follows the platform brightness                                                                                                                          
+00:01 +56: ... preference and snapshot system follows the platform brightness                                                                                                                          
+00:01 +56: ... preference and snapshot snapshot shape follows dsh ThemeSnapshot                                                                                                                        
+00:01 +57: ... preference and snapshot snapshot shape follows dsh ThemeSnapshot                                                                                                                        
+00:01 +57: All tests passed!                                                                                                                                                                           
+
+== packages/dsh_ui (flutter test) exit 0
+                                                                                                   
+00:17 +350: [workspace]/scratch/whalee-menu-compositing/packages/dsh_ui/test/dsh_dialog_reader_test.dart: ... scrolls the focused reader panel   
+00:17 +351: [workspace]/scratch/whalee-menu-compositing/packages/dsh_ui/test/dsh_dialog_reader_test.dart: ... scrolls the focused reader panel   
+00:17 +351: ... short viewports clip fixed chrome without overflowing layout                                                                                                                           
+00:17 +352: ... short viewports clip fixed chrome without overflowing layout                                                                                                                           
+00:17 +352: [workspace]/scratch/whalee-menu-compositing/packages/dsh_ui/test/dsh_dialog_reader_test.dart: ... mask paint but blocks caption input
+00:17 +353: [workspace]/scratch/whalee-menu-compositing/packages/dsh_ui/test/dsh_dialog_reader_test.dart: ... mask paint but blocks caption input
+00:17 +353: All tests passed!                                                                                                                                                                          
+
+== packages/dsh_dockkit (flutter test) exit 0
+mpositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... menu whose close item closes the tab
+00:02 +159: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... menu whose close item closes the tab
+00:02 +159: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... tab menu and selection closes it    
+00:02 +160: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... tab menu and selection closes it    
+00:02 +160: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... alive while another tab is in front 
+00:03 +160: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... alive while another tab is in front 
+00:03 +161: [workspace]/scratch/whalee-menu-compositing/packages/dsh_dockkit/test/dock_layout_test.dart: ... alive while another tab is in front 
+00:03 +161: All tests passed!                                                                                                                                                                          
+
+== features/dsh_feature_approval (flutter test) exit 0
+                                                                                                   
+00:01 +7: panel Reject sends rejected; buttons disable while answering                                                                                                                                 
+00:01 +8: panel Reject sends rejected; buttons disable while answering                                                                                                                                 
+00:01 +8: panel zh locale renders the Chinese catalog and the localized displayReason                                                                                                                  
+00:01 +9: panel zh locale renders the Chinese catalog and the localized displayReason                                                                                                                  
+00:01 +9: panel a refused answer re-enables the buttons                                                                                                                                                
+00:01 +10: panel a refused answer re-enables the buttons                                                                                                                                               
+00:01 +10: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_attachment (flutter test) exit 0
+                                                                                                  
+00:01 +10 ~1: ... image groups a failed load shows the retry control and retries                                                                                                                       
+00:01 +10 ~1: ... image groups a local preview shows without any read                                                                                                                                  
+00:01 +11 ~1: ... image groups a local preview shows without any read                                                                                                                                  
+00:01 +11 ~1: ... image groups tapping opens the lightbox on the original                                                                                                                              
+00:01 +12 ~1: ... image groups tapping opens the lightbox on the original                                                                                                                              
+00:01 +12 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:01 +12 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_chat (flutter test) exit 0
+compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... reopens at the latest end   
+00:12 +120 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... a bounded number of rows    
+00:13 +120 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... a bounded number of rows    
+00:14 +120 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... a bounded number of rows    
+00:15 +120 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... a bounded number of rows    
+00:15 +121 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_chat/test/chat_stream_test.dart: ... a bounded number of rows    
+00:15 +121 ~1: 1 skipped test.                                                                                                                                                                         
+
+00:15 +121 ~1: All other tests passed!                                                                                                                                                                 
+
+== features/dsh_feature_commands (flutter test) exit 0
+                                                                                                  
+00:02 +63 ~1: ... a gated row asks for the risk acknowledgement before it runs                                                                                                                         
+00:02 +63 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_commands/test/popup_view_test.dart: the zh copy                   
+00:02 +64 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_commands/test/popup_view_test.dart: the zh copy                   
+00:02 +64 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_commands/test/popup_view_test.dart: ... not change with the width 
+00:02 +65 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_commands/test/popup_view_test.dart: ... not change with the width 
+00:02 +65 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +65 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_conversation (flutter test) exit 0
+ompositing/features/dsh_feature_conversation/test/conversation_test.dart: ... to the last used one
+00:04 +46 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_conversation/test/conversation_test.dart: ... to the last used one
+00:04 +46 ~1: ... model indicator the header shows title and model from projections                                                                                                                    
+00:04 +47 ~1: ... model indicator the header shows title and model from projections                                                                                                                    
+00:04 +47 ~1: ... model indicator without a selection the indicator says so                                                                                                                            
+00:04 +48 ~1: ... model indicator without a selection the indicator says so                                                                                                                            
+00:04 +48 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:04 +48 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_directory_picker_browse (flutter test) exit 0
+oard                                                                                              
+00:03 +50 ~1: ... a phone gets the same dialog as web New folder is the centered card, above the keyboard                                                                                              
+00:03 +50 ~1: ... zh the dialog speaks Chinese with dsh's own strings                                                                                                                                  
+00:03 +51 ~1: ... zh the dialog speaks Chinese with dsh's own strings                                                                                                                                  
+00:03 +51 ~1: ... directoryFailureText prefers the Host business message                                                                                                                               
+00:03 +52 ~1: ... directoryFailureText prefers the Host business message                                                                                                                               
+00:03 +52 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:03 +52 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_documentpreview (flutter test) exit 0
+                                                                                                   
+00:04 +35: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_documentpreview/test/document_view_test.dart: reload rereads         
+00:04 +36: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_documentpreview/test/document_view_test.dart: reload rereads         
+00:04 +36: ... no file service, no preview                                                                                                                                                             
+00:04 +37: ... no file service, no preview                                                                                                                                                             
+00:04 +37: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_documentpreview/test/document_view_test.dart: zh copy                
+00:04 +38: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_documentpreview/test/document_view_test.dart: zh copy                
+00:04 +38: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_files (flutter test) exit 0
+                                                                                                   
+00:02 +8: truncated listings say so                                                                                                                                                                    
+00:02 +9: truncated listings say so                                                                                                                                                                    
+00:02 +9: no workspace, no tree                                                                                                                                                                        
+00:02 +10: no workspace, no tree                                                                                                                                                                       
+00:02 +10: zh copy                                                                                                                                                                                     
+00:02 +11: zh copy                                                                                                                                                                                     
+00:02 +11: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_input_trigger (flutter test) exit 0
+.5.3 (2.5.4 available)
+  shared_preferences_foundation 2.6.0 (2.6.1 available)
+  test 1.31.1 (1.33.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  test_core 0.6.18 (0.6.21 available)
+  vector_math 2.4.3 (2.4.4 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies in `[workspace]/scratch/whalee-menu-compositing`!
+25 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+
+00:00 +0: loading [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_input_trigger/test/parity/parity_capture_test.dart            
+00:01 +0: loading [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_input_trigger/test/parity/parity_capture_test.dart            
+00:01 +0: parity capture (set PARITY_PLAN, see tool/parity)                                                                                                                                            
+00:01 +0 ~1: parity capture (set PARITY_PLAN, see tool/parity)                                                                                                                                         
+00:01 +0 ~1: All tests skipped.                                                                                                                                                                        
+
+== features/dsh_feature_layout (flutter test) exit 0
+                                                                                                   
+00:01 +18: below 600 the sidebar is a drawer system back closes it                                                                                                                                     
+00:01 +19: below 600 the sidebar is a drawer system back closes it                                                                                                                                     
+00:01 +19: below 600 the sidebar is a drawer the new-session button calls the frame callback                                                                                                           
+00:01 +20: below 600 the sidebar is a drawer the new-session button calls the frame callback                                                                                                           
+00:01 +20: below 600 the sidebar is a drawer 600 and wider keep the rail, not a drawer                                                                                                                 
+00:01 +21: below 600 the sidebar is a drawer 600 and wider keep the rail, not a drawer                                                                                                                 
+00:01 +21: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_open_in_app (flutter test) exit 0
+                                                                                                   
+00:01 +7: ... header a failed launch announces itself                                                                                                                                                  
+00:01 +8: ... header a failed launch announces itself                                                                                                                                                  
+00:01 +8: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_open_in_app/test/open_in_app_test.dart: ... local host or a directory 
+00:01 +9: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_open_in_app/test/open_in_app_test.dart: ... local host or a directory 
+00:01 +9: ... header a single installed application has no menu half                                                                                                                                   
+00:01 +10: ... header a single installed application has no menu half                                                                                                                                  
+00:01 +10: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_shortcuts (flutter test) exit 0
+                                                                                                   
+00:01 +6: reset restores the default binding                                                                                                                                                           
+00:01 +6: the settings row offers the reference                                                                                                                                                        
+00:01 +7: the settings row offers the reference                                                                                                                                                        
+00:01 +7: the open command toggles the reference with Mod+/                                                                                                                                            
+00:01 +8: the open command toggles the reference with Mod+/                                                                                                                                            
+00:02 +8: the open command toggles the reference with Mod+/                                                                                                                                            
+00:02 +8: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_sidebar (flutter test) exit 0
+                                                                                                   
+00:01 +8: macOS puts the toggle in a 52px strip and drops the rail                                                                                                                                     
+00:01 +9: macOS puts the toggle in a 52px strip and drops the rail                                                                                                                                     
+00:01 +9: Windows keeps the full content in the caption row layout                                                                                                                                     
+00:01 +10: Windows keeps the full content in the caption row layout                                                                                                                                    
+00:01 +10: the leading seat offers the toggle and New Session                                                                                                                                          
+00:01 +11: the leading seat offers the toggle and New Session                                                                                                                                          
+00:01 +11: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_model_selection (flutter test) exit 0
+                                                                                                  
+00:02 +36 ~1: ... seat pointer drilling retains the source effort focus cue until blur                                                                                                                 
+00:02 +36 ~1: ... seat pending effort choice keeps the row and blocks a second request                                                                                                                 
+00:02 +37 ~1: ... seat pending effort choice keeps the row and blocks a second request                                                                                                                 
+00:02 +37 ~1: ... seat public test support runs the real selector and projection                                                                                                                       
+00:02 +38 ~1: ... seat public test support runs the real selector and projection                                                                                                                       
+00:02 +38 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +38 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_model_settings (flutter test) exit 0
+                                                                                                   
+00:02 +1: custom provider validates route/protocol/models and buffers incomplete capacity text                                                                                                         
+00:02 +2: custom provider validates route/protocol/models and buffers incomplete capacity text                                                                                                         
+00:02 +2: discovery uses unsaved request and adopting preserves existing row metadata                                                                                                                  
+00:02 +3: discovery uses unsaved request and adopting preserves existing row metadata                                                                                                                  
+00:02 +3: welcome only completes for exact accepted version and retries refusal                                                                                                                        
+00:02 +4: welcome only completes for exact accepted version and retries refusal                                                                                                                        
+00:02 +4: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_agent_management (flutter test) exit 0
+                                                                                                   
+00:02 +6: ... catalog search and details bind updates/history/delete to original task and session                                                                                                      
+00:02 +7: ... catalog search and details bind updates/history/delete to original task and session                                                                                                      
+00:03 +7: ... catalog search and details bind updates/history/delete to original task and session                                                                                                      
+00:03 +8: ... jobs observe only expanded output and require two stop presses without duplicate kill                                                                                                    
+00:03 +9: ... jobs observe only expanded output and require two stop presses without duplicate kill                                                                                                    
+00:03 +10: ... jobs observe only expanded output and require two stop presses without duplicate kill                                                                                                   
+00:03 +10: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_plugins (flutter test) exit 0
+ble                                                                                                
+00:01 +3: details toggles exact row, uninstall waits for confirmation; lost install remains inspectable                                                                                                
+00:01 +3: installer requires second explicit approval before native build scripts are sent                                                                                                             
+00:02 +3: installer requires second explicit approval before native build scripts are sent                                                                                                             
+00:02 +4: installer requires second explicit approval before native build scripts are sent                                                                                                             
+00:02 +4: read-only inventory works without management or an agent preset roster                                                                                                                       
+00:02 +5: read-only inventory works without management or an agent preset roster                                                                                                                       
+00:02 +5: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_permission_presets (flutter test) exit 0
+                                                                                                  
+00:02 +34 ~1: ... composer control a command the host does not know leaves the chip unchanged                                                                                                          
+00:02 +34 ~1: ... composer control a custom value shows as is                                                                                                                                          
+00:02 +35 ~1: ... composer control a custom value shows as is                                                                                                                                          
+00:02 +35 ~1: ... composer control Chinese copy comes from the generated dictionary                                                                                                                    
+00:02 +36 ~1: ... composer control Chinese copy comes from the generated dictionary                                                                                                                    
+00:02 +36 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +36 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_plan (flutter test) exit 0
+                                                                                                  
+00:02 +23 ~1: ... canceling an unopened read closes follow instead of hanging                                                                                                                          
+00:02 +23 ~1: ... a no-progress page stops and does not request an infinite history                                                                                                                    
+00:02 +24 ~1: ... a no-progress page stops and does not request an infinite history                                                                                                                    
+00:02 +24 ~1: ... plan resource identities keep encoded segments and reject invalid shapes                                                                                                             
+00:02 +25 ~1: ... plan resource identities keep encoded segments and reject invalid shapes                                                                                                             
+00:02 +25 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +25 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_reference (flutter test) exit 0
+                                                                                                   
+00:01 +20: ... a file navigation refusal remains local and retries the same reference                                                                                                                  
+00:01 +21: ... a file navigation refusal remains local and retries the same reference                                                                                                                  
+00:01 +22: ... a file navigation refusal remains local and retries the same reference                                                                                                                  
+00:01 +23: ... a file navigation refusal remains local and retries the same reference                                                                                                                  
+00:01 +23: ... noninteractive references preserve labels without activation                                                                                                                            
+00:01 +24: ... noninteractive references preserve labels without activation                                                                                                                            
+00:01 +24: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_deliverables (flutter test) exit 0
+                                                                                                   
+00:01 +1: delivery fold and changes enablement consume only announced host data                                                                                                                        
+00:01 +2: delivery fold and changes enablement consume only announced host data                                                                                                                        
+00:01 +2: review navigation keeps layout choices and never opens native files on render                                                                                                                
+00:01 +3: review navigation keeps layout choices and never opens native files on render                                                                                                                
+00:01 +3: numbered and split rows pair edits around context lines                                                                                                                                      
+00:01 +4: numbered and split rows pair edits around context lines                                                                                                                                      
+00:01 +4: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_secret_mask (flutter test) exit 0
+enu-compositing/features/dsh_feature_secret_mask/test/secret_text_test.dart                        
+00:01 +0: hidden semantics contain the mask, reveal keeps the same layout, new raw re-masks                                                                                                            
+00:01 +1: hidden semantics contain the mask, reveal keeps the same layout, new raw re-masks                                                                                                            
+00:01 +1: reveal preserves the surrounding paragraph baseline and line height                                                                                                                          
+00:01 +2: reveal preserves the surrounding paragraph baseline and line height                                                                                                                          
+00:01 +2: read-only text has no reveal control and keyboard activation works when interactive                                                                                                          
+00:01 +3: read-only text has no reveal control and keyboard activation works when interactive                                                                                                          
+00:01 +3: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_session (flutter test) exit 0
+                                                                                                   
+00:03 +42: ... row slots render lazily, menus suppress hover and contributed actions run once                                                                                                          
+00:03 +43: ... row slots render lazily, menus suppress hover and contributed actions run once                                                                                                          
+00:03 +44: ... view options regroup, reorder and filter                                                                                                                                                
+00:03 +45: ... view options regroup, reorder and filter                                                                                                                                                
+00:03 +45: ... the add button reaches the host chooser; the rail keeps two controls                                                                                                                    
+00:03 +46: ... the add button reaches the host chooser; the rail keeps two controls                                                                                                                    
+00:03 +46: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_settings (flutter test) exit 0
+econnect                                                                                           
+00:02 +23: ... allowlist retains unavailable choices, blocks empty/conflicted drafts and resets on reconnect                                                                                           
+00:02 +23: loading [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_settings/test/common_settings_vector_test.dart               
+00:02 +23: ... Web settings traces replay actual upstream controllers, including partial refusal and credential-only save                                                                              
+00:02 +24: ... Web settings traces replay actual upstream controllers, including partial refusal and credential-only save                                                                              
+00:02 +24: ... Subagent allowlist traces retain removed models and match upstream revision conflicts                                                                                                   
+00:02 +25: ... Subagent allowlist traces retain removed models and match upstream revision conflicts                                                                                                   
+00:02 +25: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_sidebar_right (flutter test) exit 0
+                                                                                                   
+00:02 +27: ... live and restored states stay isolated when Hosts reuse a Session id                                                                                                                    
+00:02 +28: ... live and restored states stay isolated when Hosts reuse a Session id                                                                                                                    
+00:02 +28: ... task binding survives duplicate, original close, split and restart                                                                                                                      
+00:02 +29: ... task binding survives duplicate, original close, split and restart                                                                                                                      
+00:02 +29: ... restart never recreates terminal work and corrupt state starts empty                                                                                                                    
+00:02 +30: ... restart never recreates terminal work and corrupt state starts empty                                                                                                                    
+00:02 +30: All tests passed!                                                                                                                                                                           
+
+== features/dsh_feature_subagent (flutter test) exit 0
+                                                                                                   
+00:01 +5: a one-shot record says it is a record; an unknown mode says to read it first                                                                                                                 
+00:01 +6: a one-shot record says it is a record; an unknown mode says to read it first                                                                                                                 
+00:01 +6: opening an unknown or external child does nothing                                                                                                                                            
+00:01 +7: opening an unknown or external child does nothing                                                                                                                                            
+00:01 +7: the catalog reads in Chinese                                                                                                                                                                 
+00:01 +8: the catalog reads in Chinese                                                                                                                                                                 
+00:01 +8: All tests passed!                                                                                                                                                                            
+
+== features/dsh_feature_theme (flutter test) exit 0
+ompositing/features/dsh_feature_theme/test/theme_test.dart: ... the host document is read-only    
+00:01 +20 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_theme/test/theme_test.dart: ... the host document is read-only    
+00:01 +20 ~1: ... rows Chinese copy comes from the generated dictionary                                                                                                                                
+00:01 +21 ~1: ... rows Chinese copy comes from the generated dictionary                                                                                                                                
+00:01 +21 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_theme/test/theme_test.dart: ... of the column carries no separator
+00:01 +22 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_theme/test/theme_test.dart: ... of the column carries no separator
+00:01 +22 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:01 +22 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_tool (flutter test) exit 0
+ompositing/features/dsh_feature_tool/test/tool_test.dart: ... to the gallery, path and size lines 
+00:02 +49 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_tool/test/tool_test.dart: ... to the gallery, path and size lines 
+00:02 +49 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_tool/test/tool_test.dart: ... a failed read shows the plain row   
+00:02 +50 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_tool/test/tool_test.dart: ... a failed read shows the plain row   
+00:02 +50 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_tool/test/tool_test.dart: ... the read card by its language       
+00:02 +51 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_tool/test/tool_test.dart: ... the read card by its language       
+00:02 +51 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +51 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_user_questions (flutter test) exit 0
+                                                                                                  
+00:03 +32: ... failed remote answer remains editable; accepted retry hides continued review                                                                                                            
+00:03 +32: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_user_questions/test/plan_review_test.dart: (tearDownAll)             
+00:03 +32: loading [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_user_questions/test/parity/parity_capture_test.dart          
+00:03 +32: ... parity capture (set PARITY_PLAN, see tool/parity)                                                                                                                                       
+00:03 +32 ~1: ... parity capture (set PARITY_PLAN, see tool/parity)                                                                                                                                    
+00:03 +32 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:03 +32 ~1: All other tests passed!                                                                                                                                                                  
+
+== features/dsh_feature_workspace (flutter test) exit 0
+ompositing/features/dsh_feature_workspace/test/picker_test.dart: ... the chip at 390px, 34px rows 
+00:02 +25 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_workspace/test/picker_test.dart: ... the chip at 390px, 34px rows 
+00:02 +25 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_workspace/test/picker_test.dart: ... dialog is the centered card  
+00:02 +26 ~1: [workspace]/scratch/whalee-menu-compositing/features/dsh_feature_workspace/test/picker_test.dart: ... dialog is the centered card  
+00:02 +26 ~1: ... zh the menu and the error dialog speak Chinese                                                                                                                                       
+00:02 +27 ~1: ... zh the menu and the error dialog speak Chinese                                                                                                                                       
+00:02 +27 ~1: 1 skipped test.                                                                                                                                                                          
+
+00:02 +27 ~1: All other tests passed!                                                                                                                                                                  
+
+== apps/dsh_flutter (flutter test) exit 0
+compositing/apps/dsh_flutter/test/connection_ui_test.dart: ... that cannot start points to pasting
+00:33 +138 ~1: [workspace]/scratch/whalee-menu-compositing/apps/dsh_flutter/test/connection_ui_test.dart: ... that cannot start points to pasting
+00:33 +138 ~1: [workspace]/scratch/whalee-menu-compositing/apps/dsh_flutter/test/connection_ui_test.dart: ... the close button returns nothing   
+00:33 +139 ~1: [workspace]/scratch/whalee-menu-compositing/apps/dsh_flutter/test/connection_ui_test.dart: ... the close button returns nothing   
+00:33 +139 ~1: [workspace]/scratch/whalee-menu-compositing/apps/dsh_flutter/test/connection_ui_test.dart: scanner screen Chinese copy            
+00:33 +140 ~1: [workspace]/scratch/whalee-menu-compositing/apps/dsh_flutter/test/connection_ui_test.dart: scanner screen Chinese copy            
+00:33 +140 ~1: 1 skipped test.                                                                                                                                                                         
+
+00:33 +140 ~1: All other tests passed!                                                                                                                                                                 
+
+== tool/parity_flutter (flutter test) exit 0
+                                                                                                  
+00:01 +17 ~2: [workspace]/scratch/whalee-menu-compositing/tool/parity_flutter/test/harness_selftest_test.dart: ... a button row in light at 1x   
+00:01 +18 ~2: [workspace]/scratch/whalee-menu-compositing/tool/parity_flutter/test/harness_selftest_test.dart: ... a button row in light at 1x   
+00:01 +18 ~2: [workspace]/scratch/whalee-menu-compositing/tool/parity_flutter/test/harness_selftest_test.dart: ... a button row in dark at 2x    
+00:01 +19 ~2: [workspace]/scratch/whalee-menu-compositing/tool/parity_flutter/test/harness_selftest_test.dart: ... a button row in dark at 2x    
+00:01 +19 ~2: [workspace]/scratch/whalee-menu-compositing/tool/parity_flutter/test/harness_selftest_test.dart: capture smoke (tearDownAll)       
+00:01 +19 ~2: 2 skipped tests.                                                                                                                                                                         
+
+00:01 +19 ~2: All other tests passed!                                                                                                                                                                  

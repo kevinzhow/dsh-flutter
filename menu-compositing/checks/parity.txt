@@ -1,0 +1,9 @@
+core-manifest      ok    11 cases, 19 captures
+font-pins          ok    sha256 ok
+ext-builders       ok    2254 cases (2228 after theme sampling)
+diff-metrics       ok    ok
+reference-modes    ok    native default; density 1 shared, emulated keys unchanged
+case-map           ok    regenerated tool/parity_flutter/test/parity/case_map.g.dart
+vendored-validate  ok    validate: 19 cases ok
+vendored-diff      ok    same=100.0% moved=97.00%
+parity selftest: ok

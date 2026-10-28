@@ -1,0 +1,528 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "sidebar-initial",
+      "rect": [
+        0,
+        52,
+        270,
+        70
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-initial",
+      "rect": [
+        12,
+        422,
+        270,
+        454
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-initial",
+      "rect": [
+        16,
+        130,
+        260,
+        160
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-new-session",
+      "rect": [
+        26,
+        766,
+        120,
+        782
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-new-session",
+      "rect": [
+        16,
+        130,
+        260,
+        160
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-new-session",
+      "rect": [
+        26,
+        766,
+        120,
+        782
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-new-session",
+      "rect": [
+        26,
+        766,
+        120,
+        782
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-more-reopened",
+      "rect": [
+        24,
+        100,
+        280,
+        120
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "sidebar-more-reopened",
+      "rect": [
+        16,
+        802,
+        270,
+        824
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        32,
+        652,
+        300,
+        779
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        24,
+        150,
+        280,
+        350
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        104,
+        610,
+        358,
+        734
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        28,
+        654,
+        48,
+        779
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        24,
+        150,
+        280,
+        350
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        104,
+        610,
+        358,
+        734
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        28,
+        654,
+        48,
+        779
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "statistics-initial",
+      "rect": [
+        24,
+        100,
+        280,
+        120
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        24,
+        160,
+        100,
+        400
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        524,
+        358,
+        674
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        24,
+        160,
+        100,
+        400
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        524,
+        358,
+        674
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        684,
+        358,
+        706
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        684,
+        358,
+        706
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-low-selected",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-root",
+      "rect": [
+        240,
+        755,
+        355,
+        772
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-low-selected",
+      "rect": [
+        138,
+        524,
+        358,
+        674
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-low-selected",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-all",
+      "rect": [
+        138,
+        694,
+        350,
+        719
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-low-selected",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-closed",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-pro-selected",
+      "rect": [
+        138,
+        718,
+        358,
+        730
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-pro-selected",
+      "rect": [
+        138,
+        750,
+        358,
+        776
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-pro-selected",
+      "rect": [
+        24,
+        98,
+        366,
+        118
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "model-pro-selected",
+      "rect": [
+        138,
+        716,
+        358,
+        776
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "dark",
+  "locale": "en"
+}

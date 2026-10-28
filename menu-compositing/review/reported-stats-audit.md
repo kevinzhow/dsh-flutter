@@ -1,0 +1,49 @@
+# Reported statistics popover — 2026-10-28
+
+Task #19 screenshot `scratch/user-visual-20261028/02.png` is the session activity popover above the composer dock, not a blocking Modal. The screenshot visibly lets sharp conversation text show through. This work is the popover family, independent of the sidebar/model selector lanes.
+
+Source is pinned at DSH `687f282e8625c6b8d11ff58211a90524be2e4317`, published `@deepseek-ai/dsh-client-ui-chat@0.2.1-rc.2`. Exact npm archive is preserved under `scratch/design-system-source-packages/deepseek-ai-dsh-client-ui-chat-0.2.1-rc.2.tgz`; lock integrity is `sha512-ZDT17V3+LoavO3CJZ5alZf6edoh3+Qnllb3Y2DKOSmJYfpbPvR45uWl2DYxcnU4EAW2XvT8/k6KkbklFR1ZV8Q==`.
+
+## Source contract and root causes
+
+- Real exports `ActivityPill` and `UsagePill` are in `packages/client/ui-chat/src/client/chat/StatsPills.tsx`. Their shared `stat-dialog.module.css` and `stat-dialog.ts` own the statistics card and placement. Actual app composition uses these in the composer dock; the Flutter route remains production `StatsPill` → `StatPillView`, reading durable session projections.
+- Statistics panels use `--dsw-specific-menu`, backdrop `blur(40px) saturate(150%)`, radius16, prominent elevation with the l1 stroke override. They do **not** use MenuSurface's macOS opaque backing.
+- `design-platform.css` explicitly scopes the statistics material to 94% opacity on macOS: light `(248,249,250)`, dark `(48,49,54)`. Generic light uses58%, generic dark45%. Existing Flutter `_StatDialog` bypassed that platform scope and backdrop filtering and painted its own `BoxDecoration` shadows behind the translucent card. Its raw intrinsic follower also lacked the source viewport fit.
+- Source card width is max-content, bounded300–440 and viewport−24; padding16, fixed typography12/18, title weight500, icon14/gap6, heading margin8, rule0.5px/margin10, one shared grid label column min76 with row gap6/column gap16. Pill font size/line height follow secondary content-size deltas; the panel's fixed12/18 does not.
+- Source `--dsw-alias-separator-primary` is undefined in the pinned theme. Chromium therefore inherits the pill ink for its middle dot. Flutter now follows that explicit cascade instead of throwing a missing token error.
+
+## Implementation
+
+Published snapshots preserve both CSS regions, class maps, shared placement region, npm metadata and license. `stats_recipes.py` emits `DshStatPanelRecipe` and `DshStatsPillRecipe`, guards every state/property and unconsumed structural value, verifies current source CSS against release CSS and verifies release placement constants.
+
+`DshPopoverSurface` is the canonical unbacked, filtered popover material. It uses `DshShadowBox` for outside-only shadows and the real clipped backdrop filter; no opaque backing, alpha retuning or blur-score fitting was added. `DshStatPanel` owns max-content sizing, source-constrained geometry, shared columns, title and dialog semantics. The feature supplies icon/title/value/rows. Old raw `_StatDialog` is removed. The trigger now supports Enter/Space, source label ellipsis and generated recipe values.
+
+This lane consumes root's shared dependency commit `d84f31c`: `dshSpecificMenuFillOf`, platform recipe/scope preservation, live overlay rebuild, configurable follower gap/margins, source pass-through outside dismissal, `focusPanel:false` and `exclusiveGroup:StatPillView`. Root owns those files; temporary local copies used for focused validation are deliberately excluded from the stats commit. The final integrated generator must be rerun to retain both platform and stats generated classes.
+
+The statistics feature's manual-metric ratchet falls11→0. Popover family inventory names the new canonical files and explicitly leaves context/turn/custom popover profiles incomplete.
+
+## Reference harness and validation
+
+- `tool/parity-ext/build-reported-stats.py`, `host/reported-stats.tsx`, and feature parity `cases/reported_stats.dart` provide48 cases under `components.reported-stats.*`. Desktop generic/macOS/phone ×EN/ZH ×activity/usage ×left/right-edge ×light/dark. They click the actual upstream source trigger and production Flutter trigger; only projection data and text/bands beneath the card are synthetic. The backdrop is deliberately varied so an incorrect material cannot pass on an empty canvas.
+- Host computes `document.body.dataset.statsMaterial` from the actual source panel. A temporary local probe wrapper saved these browser read-outs in `scratch/stats-reference-smoke/computed-material-probes.json` and in `reportedStatsProbe` in the React metadata. Generic light is `rgba(248,249,250,.58)`, macOS light `rgba(248,249,250,.94)`, macOS dark `rgba(48,49,54,.94)`, every case `blur(40px) saturate(1.5)`, radius16, stroke l1. Chromium inherited middle-dot ink rgb97/102/107 light,207/211/214 dark.
+- Generator35 tests pass, including new mutated-source metric and fail-closed state/filter/grid cases. Exact published archive integrity/extraction passes; recipe source/snapshot check passes. Focused analysis and family ratchet pass.
+- Focused stats UI12/12 pass with the shared root dependency: single-click sibling swap, Enter/Escape retaining trigger focus, projection change while open, narrow280px viewport preserving12px margins/width256 and no overflow, plus original formatting and projection/card behavior.
+- Three bounded actual-source/Flutter smoke captures all render and have exact matching300×159 card bounds and origin(16,195). Both providers' PNGs have been viewed. Output is `scratch/stats-reference-smoke`. Remaining differences are retained: nontext generic light21.02%, macOS light69.62%, macOS dark45.50%; RGB similarity98.91–99.34%. Source and Flutter backdrop sampling over the deliberately varied content differs by1–5 RGB in many ground pixels; text raster differences remain too. No99.5% acceptance is claimed and no threshold/font/alpha/sigma hack was made.
+
+Root owns full48 captures, actual app/native acceptance, integrated preflight/builds and PR/merge decisions. No native resources, production hosts, deployment or release were started by this lane. User screenshots remain local and are not added to product source/evidence commits.
+
+## Bounded mirror-edge follow-up
+
+Root authorized one isolated, source-backed follow-up after the first handoff. The CSS backdrop filtering contract mirrors its input at the clipped element border box; this is distinct from adjusting blur radius or opacity. See the [Filter Effects 2 operation](https://drafts.fxtf.org/filter-effects-2/#backdrop-filter-operation).
+
+The **exact reference browser** is Chromium145.0.7632.6. Chromiumdash's version readback maps it to commit `47e20adcc15fc15f01825aa17e570c8f5492ac0f`; retained under `scratch/stats-material-research/chromium-version.json`. Its [tagged Skia renderer](https://chromium.googlesource.com/chromium/src/+/refs/tags/145.0.7632.6/components/viz/service/display/skia_renderer.cc), lines3161–3179, places a mirrored crop before the backdrop filter when input sampling would exceed the card rectangle. Its [tagged feature defaults](https://chromium.googlesource.com/chromium/src/+/refs/tags/145.0.7632.6/components/viz/common/features.cc), line56, enables that mirror behavior. Exact decoded sources are retained locally with SHA256 `3a534511c6aed57ccea1054777765536b5668ae87577d04d593361b1329618d8` and `0c7acdff7023b602459545355f8b5e71b65dfe23486e57de99d5ef444618f4a9` respectively.
+
+The pinned local Flutter framework is `5fc346839b5d0eef006ed8404392afb4dfae428d` (3.47.6), engine artifact version `692136cb6582dbfc5af3fb33c2515a069f2f66d0`. Read-only inspection of the matching local source, below `toolchains/flutter-3.47.6/engine/src/flutter`, found:
+
+- `lib/ui/painting/image_filter.cc` lines59–68 allow a dynamic blur mode to be selected by its caller; lines129–131 materialize composed filters using clamp, so nesting the unspecified blur under saturation loses that dynamic choice. [Pinned source](https://github.com/flutter/flutter/blob/5fc346839b5d0eef006ed8404392afb4dfae428d/engine/src/flutter/lib/ui/painting/image_filter.cc#L129).
+- `lib/ui/compositing/scene_builder.cc` lines194–196 normally asks a backdrop filter for mirror. [Pinned source](https://github.com/flutter/flutter/blob/5fc346839b5d0eef006ed8404392afb4dfae428d/engine/src/flutter/lib/ui/compositing/scene_builder.cc#L194).
+- `display_list/skia/dl_sk_canvas.cc` lines67–69 forwards the backdrop save-layer tile mode only for a top-level blur; a composed filter does not enter that path. [Pinned source](https://github.com/flutter/flutter/blob/5fc346839b5d0eef006ed8404392afb4dfae428d/engine/src/flutter/display_list/skia/dl_sk_canvas.cc#L67). This is a remaining backend difference from Chromium's explicit mirrored crop.
+
+The follow-up makes the inner blur's `TileMode.mirror` explicit so composition retains the requested CSS mode. `popover_material_test.dart` checks that source contract at the composed filter API boundary. Removing the explicit mode reproduced a RED failure with `unspecified` in the filter; restoring it passes. Original12 statistics behavior tests also pass, for13 focused tests total.
+
+The same three source PNGs were reused byte for byte and only the three Flutter cases were recaptured into `scratch/stats-mirror-smoke`; all three pass execution. **Every Flutter PNG is byte-identical to its pre-mirror counterpart, with zero changed pixels.** Geometry remains300×159 at(16,195). The explicit mode is a semantic translation correction; it has **not** fixed the Skia backdrop sampling discrepancy or improved any similarity score. The source-proven mirrored-crop/save-layer limitation remains. `sampler-comparison.json` in that folder records equality/hashes/metrics. No alpha, sigma, palette, fonts, classifier or threshold changed; no new visual acceptance is claimed.
