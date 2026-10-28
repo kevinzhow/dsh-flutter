@@ -116,6 +116,21 @@ class HeaderLeadingRecipesTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
             self.recipe(changed)
 
+    def test_only_supported_complete_ascii_decimal_literals_are_translated(self):
+        original = self.sheets['HeaderLeadingControlsBehavior']['region']
+        for before, after in [('delayMs: 500', 'delayMs: 0500'),
+                              ('size: 16', 'size: 016'),
+                              ('delayMs: 500', 'delayMs: ５００'),
+                              ('size: 16', 'size: １６'),
+                              ('delayMs: 500', 'delayMs: 500e0'),
+                              ('size: 16', 'size: 16.0'),
+                              ('delayMs: 500', 'delayMs: 500n'),
+                              ('size: 16', 'size: +16')]:
+            self.assertIn(before, original)
+            with self.subTest(after=after), self.assertRaisesRegex(
+                    ValueError, 'untranslated HeaderLeadingControls'):
+                header.behavior_values(original.replace(before, after))
+
     def test_behavior_is_extracted_from_the_same_named_published_bundle(self):
         published = module('published')
         behavior = self.sheets['HeaderLeadingControlsBehavior']

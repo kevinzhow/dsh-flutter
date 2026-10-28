@@ -25,13 +25,18 @@ def behavior_values(region):
     # boundaries. Stripping whitespace/comments without a JS lexer can hide
     # changed labels, shortcuts or key names (or even invalid identifiers).
     body = region
-    delays = re.findall(r'\bdelayMs:\s*(\d+)\s*,', body)
-    sizes = re.findall(r'\bsize:\s*(\d+)\s*}', body)
+    # The pinned ESM bundle uses canonical ASCII decimal integer literals.
+    # Python \d/int would also accept Unicode digits and legacy leading zeros.
+    integer = r'(?:0|[1-9][0-9]*)'
+    delay_field = rf'\bdelayMs:\s*({integer})(?=\s*,)'
+    size_field = rf'\bsize:\s*({integer})(?=\s*}})'
+    delays = re.findall(delay_field, body)
+    sizes = re.findall(size_field, body)
     if (len(delays) != 2 or len(set(delays)) != 1 or
             len(sizes) != 2 or len(set(sizes)) != 1 or int(sizes[0]) <= 0):
         raise ValueError('untranslated HeaderLeadingControls repeated timing/icon inputs')
-    shape = re.sub(r'delayMs:\s*\d+', 'delayMs: DELAY', body)
-    shape = re.sub(r'size:\s*\d+', 'size: ICON_SIZE', shape)
+    shape = re.sub(delay_field, 'delayMs: DELAY', body)
+    shape = re.sub(size_field, 'size: ICON_SIZE', shape)
     digest = hashlib.sha256(shape.encode()).hexdigest()
     # ui-sidebar 0.2.1-rc.2 client.js HeaderLeadingControls.js region, with
     # numeric inputs replaced above. Region bytes remain in the locked JSON.
