@@ -246,6 +246,9 @@ class _ToastPaintState extends State<_ToastPaint> {
                           role: SemanticsRole.alert,
                           child: DshShadowBox(
                             color: theme.color(DshToastRecipe.backgroundToken),
+                            authoredOpaqueBackground:
+                                theme.color(DshToastRecipe.backgroundToken).a ==
+                                1,
                             radius: radius,
                             shape: theme.cornerBorder(radius),
                             shadows: theme.boxShadow(
