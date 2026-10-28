@@ -589,6 +589,7 @@ class _NewSessionState extends State<_NewSession> {
           button: true,
           label: widget.aria,
           excludeSemantics: true,
+          onTap: widget.onPressed,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: widget.onPressed,

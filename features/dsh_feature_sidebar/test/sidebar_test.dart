@@ -10,6 +10,7 @@ import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _Services implements SidebarServices {
@@ -109,6 +110,31 @@ void main() {
     expect(services.started, 1);
     await t.tap(find.byKey(const ValueKey('sidebar-brand')));
     expect(services.started, 2);
+  });
+
+  testWidgets('assistive activation of wide New Session starts a session', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    try {
+      await pump(t);
+      final node = t.getSemantics(
+        find
+            .descendant(
+              of: find.byKey(const ValueKey('sidebar-new-session')),
+              matching: find.byType(Semantics),
+            )
+            .first,
+      );
+      expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+      t.binding.pipelineOwner.semanticsOwner!.performAction(
+        node.id,
+        SemanticsAction.tap,
+      );
+      expect(services.started, 1);
+    } finally {
+      semantics.dispose();
+    }
   });
 
   testWidgets('the toggle collapses through ctx.layout', (t) async {

@@ -52,43 +52,65 @@ class _ScenesState extends State<_Scenes> {
   String sidebarAction = 'none';
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8),
-        child: Wrap(
-          spacing: 8,
+  Widget build(BuildContext context) {
+    final header = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Wrap(
+            spacing: 8,
+            children: [
+              for (final (index, label) in [
+                'Sidebar',
+                'Statistics',
+                'Model',
+              ].indexed)
+                DshButton(
+                  key: ValueKey('scene-$index'),
+                  onPressed: () => setState(() => selected = index),
+                  child: Text(label),
+                ),
+            ],
+          ),
+        ),
+        Text('Sidebar action: $sidebarAction'),
+      ],
+    );
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            for (final (index, label) in [
-              'Sidebar',
-              'Statistics',
-              'Model',
-            ].indexed)
-              DshButton(
-                key: ValueKey('scene-$index'),
-                onPressed: () => setState(() => selected = index),
-                child: Text(label),
-              ),
+            // Keep the measured layout unchanged while painting the controls
+            // after the sidebar's nested route. A route excludes earlier
+            // semantics siblings, including this native replay toolbar.
+            Visibility(
+              visible: false,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: header,
+            ),
+            Expanded(
+              child: switch (selected) {
+                0 => Align(
+                  alignment: Alignment.topLeft,
+                  child: ReportedSidebarFixture(
+                    i18n: widget.i18n,
+                    onAction: (value) => setState(() => sidebarAction = value),
+                  ),
+                ),
+                1 => _StatisticsScene(i18n: widget.i18n),
+                _ => ReportedModelFixture(i18n: widget.i18n),
+              },
+            ),
           ],
         ),
-      ),
-      Text('Sidebar action: $sidebarAction'),
-      Expanded(
-        child: switch (selected) {
-          0 => Align(
-            alignment: Alignment.topLeft,
-            child: ReportedSidebarFixture(
-              i18n: widget.i18n,
-              onAction: (value) => setState(() => sidebarAction = value),
-            ),
-          ),
-          1 => _StatisticsScene(i18n: widget.i18n),
-          _ => ReportedModelFixture(i18n: widget.i18n),
-        },
-      ),
-    ],
-  );
+        Positioned(top: 0, left: 0, right: 0, child: header),
+      ],
+    );
+  }
 }
 
 class _StatisticsScene extends StatelessWidget {
