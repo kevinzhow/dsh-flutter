@@ -163,13 +163,13 @@ def verify_archive(path, package, record, folder):
         raise ValueError('archive dependency declarations differ from inventory publication: ' + package['name'])
     # Existing decoder verifies archive integrity again, extracts only declared
     # static files/JSON literals, and compares CSS/classes/behavior/metadata.
-    published.verify_snapshot(path, package, folder)
+    verified = published.verify_snapshot(path, package, folder)
     after = verify_integrity(path, package, 'cached after reconstruction')
     if before != after:
         raise ValueError('archive changed during snapshot reconstruction: ' + package['name'])
     return {'name': package['name'], 'version': package['version'], 'tarball': package['tarball'],
             'integrity': package['integrity'], 'archiveFile': path.name, 'archiveSha256': after['sha256'],
-            'archiveUnchanged': True, 'snapshotFiles': len(package['files']),
+            'archiveUnchanged': True, 'snapshotFiles': len(verified),
             'extractionKind': package.get('extractionKind', 'plugin-css'), 'verified': True}
 
 

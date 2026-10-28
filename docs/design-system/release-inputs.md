@@ -30,7 +30,7 @@ Each archive is checked against its locked SHA-512 integrity before parsing.
 The archive's unique regular `package/package.json` must have the exact
 name/version and published dependency declarations recorded in the inventory.
 The existing decoder then reconstructs and compares the retained inputs.
-Archive hashes are checked again afterward, so a successful receipt also states
+Declared snapshot files must equal the decoder’s reconstructed output set. Plain-file mappings cannot omit a declared input, and bundled extraction cannot add an unverified file or omit a required decoded output. Receipt counts come from that verified output set. Archive hashes are checked again afterward, so a successful receipt also states
 that the archive stayed unchanged through reconstruction.
 
 The verifier makes direct public HTTPS requests with no npm credential file,

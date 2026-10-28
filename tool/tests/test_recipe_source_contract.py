@@ -73,6 +73,17 @@ class RecipeSourceContractTests(unittest.TestCase):
         self.assertEqual(json.loads(audit)['metrics']['DshStatsPillRecipe']['separatorToken'],
                          '--dsw-unset-separator-reference')
 
+    def test_existing_tokens_of_wrong_value_kind_cannot_emit_broken_lookups(self):
+        for sheet, selector, prop, value in [
+            ('Button.module.css', '.primary', 'background', 'var(--dsw-radius-md)'),
+            ('Button.module.css', '.button', 'border-radius', 'var(--dsw-alias-label-primary)'),
+            ('stat-dialog.module.css', '.panel', 'box-shadow', 'var(--dsw-alias-label-primary)'),
+        ]:
+            changed = copy.deepcopy(self.sheets)
+            next(r for r in changed[sheet] if r['selector'] == selector)['declarations'][prop] = value
+            with self.subTest(prop=prop), self.assertRaisesRegex(ValueError, 'token kind mismatch'):
+                gen.render(self.lock, changed)
+
 
 if __name__ == '__main__':
     unittest.main()

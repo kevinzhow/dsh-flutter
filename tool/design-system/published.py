@@ -245,6 +245,16 @@ def verify_packages(source=None):
             raise ValueError('reference checkout differs from locked commit')
     return lock
 
+def verified_outputs(package, names):
+    names = set(names)
+    declared = set(package['files'])
+    if declared != names:
+        raise ValueError('published decoder output coverage mismatch: '
+                         + 'unverified=' + str(sorted(declared - names))
+                         + ', undeclared=' + str(sorted(names - declared)))
+    return names
+
+
 def verify_snapshot(archive, package, folder):
     integrity = 'sha512-' + base64.b64encode(hashlib.sha512(Path(archive).read_bytes()).digest()).decode()
     if integrity != package['integrity']: raise ValueError('published archive integrity mismatch')
@@ -262,13 +272,15 @@ def verify_snapshot(archive, package, folder):
         for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
             if (folder / name).read_bytes() != result[key]:
                 raise ValueError('sidebar package metadata mismatch')
-        return
+        return verified_outputs(package, [*result['css'],
+            *(component + '-classes.json' for component in result['classes']), 'package.json', 'LICENSE'])
     if kind == 'plain-files':
+        verified_outputs(package, package['archiveFiles'])
         with tarfile.open(archive) as tar:
             for name, member in package['archiveFiles'].items():
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published plain-file snapshot mismatch: ' + name)
-        return
+        return set(package['archiveFiles'])
     if kind == 'primitive-css':
         with tarfile.open(archive) as tar:
             for name in package['files']:
@@ -287,30 +299,37 @@ def verify_snapshot(archive, package, folder):
                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
                 if (folder / name).read_bytes() != tar.extractfile(member).read():
                     raise ValueError('published primitive snapshot mismatch: ' + name)
-        return
+        return set(package['files'])
     extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot,
                'agent-preset-css': agent_preset_style_snapshot,
                'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot,
                'model-menu-css': model_menu_snapshot,
                'stat-dialog-css': stat_dialog_style_snapshot}
     result = extract[kind](archive)
+    names = {'package.json', 'LICENSE'}
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
+        names.update(('PluginManagerPage.module.css', 'classes.json'))
         if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
     elif kind == 'model-menu-css':
+        names.update(('ModelSelect.module.css', 'classes.json', 'model-behavior.json'))
         if (folder / 'ModelSelect.module.css').read_text() != result['css']: raise ValueError('decoded model menu CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('model menu class map snapshot mismatch')
         if json.loads((folder / 'model-behavior.json').read_text()) != result['behavior']: raise ValueError('model menu behavior snapshot mismatch')
     elif kind == 'market-css':
+        names.update(('DiscoverSection.module.css', 'classes.json'))
         if (folder / 'DiscoverSection.module.css').read_text() != result['css']: raise ValueError('decoded market CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('market class export snapshot mismatch')
     elif kind == 'theme-css':
+        names.update((*result['css'], 'styles-order.json'))
         for name, css in result['css'].items():
             if (folder / name).read_text() != css: raise ValueError('decoded theme CSS snapshot mismatch: ' + name)
         if json.loads((folder / 'styles-order.json').read_text()) != result['order']:
             raise ValueError('published theme injection order snapshot mismatch')
     elif kind == 'agent-preset-css':
+        names.update((*result['css'], *(component + '-classes.json' for component in result['classes']),
+                      'reader-behavior.json'))
         for name, css in result['css'].items():
             if (folder / name).read_text() != css:
                 raise ValueError('decoded preset CSS snapshot mismatch: ' + name)
@@ -320,6 +339,8 @@ def verify_snapshot(archive, package, folder):
         if json.loads((folder / 'reader-behavior.json').read_text()) != result['readerBehavior']:
             raise ValueError('published guide behavior snapshot mismatch')
     elif kind == 'stat-dialog-css':
+        names.update((*result['css'], *(name + '-classes.json' for name in result['classes']),
+                      'stat-dialog-behavior.json'))
         for name, css in result['css'].items():
             if (folder / name).read_text() != css:
                 raise ValueError('decoded stat CSS snapshot mismatch: ' + name)
@@ -329,10 +350,12 @@ def verify_snapshot(archive, package, folder):
         if json.loads((folder / 'stat-dialog-behavior.json').read_text()) != result['behavior']:
             raise ValueError('published stat behavior snapshot mismatch')
     else:
+        names.add('terminal-font.json')
         if json.loads((folder / 'terminal-font.json').read_text()) != {'terminalFontStack': result['font']}:
             raise ValueError('decoded terminal font snapshot mismatch')
     for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
         if (folder / name).read_bytes() != result[key]: raise ValueError('package metadata snapshot mismatch')
+    return verified_outputs(package, names)
 
 def main():
     parser = argparse.ArgumentParser(description='Verify reproducible inputs from a locked published package archive (no JS execution).')

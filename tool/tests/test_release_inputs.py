@@ -209,6 +209,41 @@ class ReleaseInputTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'published plain-file snapshot mismatch: Fixture.module.css'):
             release.verify_all(self.repo, self.cache, offline=True)
 
+    def test_omitted_plain_file_mapping_cannot_skip_rehashed_css(self):
+        self.cached()
+        css = self.folder / 'Fixture.module.css'
+        css.write_text('.fixture { color: blue; }\n')
+        self.package['files']['Fixture.module.css'] = release.inventory.sha(css)
+        del self.package['archiveFiles']['Fixture.module.css']
+        self.update_records()
+        release.load_plan(self.repo)
+        with self.assertRaisesRegex(ValueError, 'decoder output coverage mismatch'):
+            release.verify_all(self.repo, self.cache, offline=True)
+
+    def test_bundle_decoder_rejects_extra_and_omitted_output_declarations(self):
+        css, classes = '.fixture { color: red; }\n', {'fixture': 'released_fixture'}
+        bundle = ('//#region PluginManagerPage.module.css.mjs\nconst css = '
+                  + json.dumps(css) + ';\nvar PluginManagerPage_module_css_default = '
+                  + json.dumps(classes) + ';\n//#endregion\n').encode()
+        self.write_archive(self.archive, {**self.members, 'package/lib/client.js': bundle})
+        (self.folder / 'PluginManagerPage.module.css').write_text(css)
+        (self.folder / 'classes.json').write_text(json.dumps(classes))
+        package = {**self.package, 'extractionKind': 'plugin-css',
+                   'integrity': self.integrity(self.archive),
+                   'publishedBundleSha256': hashlib.sha256(bundle).hexdigest(),
+                   'files': {name: release.inventory.sha(self.folder / name) for name in (
+                       'package.json', 'LICENSE', 'PluginManagerPage.module.css', 'classes.json')}}
+        self.assertEqual(release.verify_archive(self.archive, package, self.record, self.folder)['snapshotFiles'], 4)
+        for mode in ['extra', 'omitted']:
+            changed = copy.deepcopy(package)
+            if mode == 'extra':
+                (self.folder / 'unverified.json').write_text('{"unreleased":true}')
+                changed['files']['unverified.json'] = release.inventory.sha(self.folder / 'unverified.json')
+            else:
+                del changed['files']['classes.json']
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'decoder output coverage mismatch'):
+                release.verify_archive(self.archive, changed, self.record, self.folder)
+
     def test_integrity_verified_archive_with_wrong_manifest_identity_fails(self):
         members = {**self.members, 'package/package.json': b'{"name":"wrong-package","version":"0.2.1-rc.2"}\n'}
         self.write_archive(self.archive, members)
@@ -232,9 +267,10 @@ class ReleaseInputTests(unittest.TestCase):
         self.cached()
         actual = release.published.verify_snapshot
         def changing_inventory(path, package, folder):
-            actual(path, package, folder)
+            verified = actual(path, package, folder)
             with (self.repo / 'tool/design-system/source-inventory.generated.json').open('a') as stream:
                 stream.write(' ')
+            return verified
         with patch.object(release.published, 'verify_snapshot', side_effect=changing_inventory):
             with self.assertRaisesRegex(ValueError, 'verification inputs changed during'):
                 release.verify_all(self.repo, self.cache, offline=True)
@@ -243,8 +279,9 @@ class ReleaseInputTests(unittest.TestCase):
         self.cached()
         actual = release.published.verify_snapshot
         def changing_snapshot(path, package, folder):
-            actual(path, package, folder)
+            verified = actual(path, package, folder)
             (folder / 'Fixture.module.css').write_text('.changed-after-decoding {}\n')
+            return verified
         with patch.object(release.published, 'verify_snapshot', side_effect=changing_snapshot):
             with self.assertRaisesRegex(ValueError, 'retained input hash drift'):
                 release.verify_all(self.repo, self.cache, offline=True)
