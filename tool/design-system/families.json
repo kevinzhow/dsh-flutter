@@ -90,9 +90,10 @@
     {
       "name": "cards",
       "canonical": [
-        "packages/dsh_ui/lib/src/dsh_card.dart"
+        "packages/dsh_ui/lib/src/dsh_card.dart",
+        "packages/dsh_ui/lib/src/dsh_plugin_card.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
+      "migrationStatus": "loaded PluginManager package cards/list use the published card profile and behavior, with independent title/switch ownership; generic cards, official configuration ItemCard, highlight and other manager consumers remain pending",
       "pendingDuplicates": []
     },
     {
@@ -101,7 +102,7 @@
         "packages/dsh_ui/lib/src/dsh_pill.dart",
         "packages/dsh_ui/lib/src/dsh_tag.dart"
       ],
-      "migrationStatus": "published Pill and Tag recipes; market categories, settings override, agent preset and plugin inventory status tags use the shared components; schedule overrides and other badge consumers remain to be audited",
+      "migrationStatus": "published Pill and Tag recipes; market categories, settings override, agent preset and plugin inventory status tags use the shared components; schedule overrides and other badge consumers remain to be audited; loaded package-card status tags use the published content-box status profile",
       "pendingDuplicates": []
     },
     {
@@ -382,7 +383,7 @@
       "manual-metric": 4
     },
     "features/dsh_feature_plugins/lib/src/manager_page.dart": {
-      "manual-metric": 43
+      "manual-metric": 31
     },
     "features/dsh_feature_plugins/lib/src/market_page.dart": {
       "manual-metric": 13

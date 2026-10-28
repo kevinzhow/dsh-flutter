@@ -42,6 +42,7 @@ enum DshButtonProfile {
   iconAction,
   infoAction,
   headerAction,
+  pluginCard,
 }
 
 /// Physical corners used by DSH's left-to-right compound add control.
@@ -70,6 +71,8 @@ class DshButton extends StatefulWidget {
     this.focusNode,
     this.autofocus = false,
     this.semanticLabel,
+    this.semanticHint,
+    this.sourceHovered,
     this.height,
     this.minWidth,
     this.horizontalPadding,
@@ -88,6 +91,10 @@ class DshButton extends StatefulWidget {
        ),
        assert(
          join == DshButtonJoin.none || profile == DshButtonProfile.addAction,
+       ),
+       assert(
+         sourceHovered == null || profile == DshButtonProfile.pluginCard,
+         'Only the source card ancestor owns an external hover state.',
        );
 
   /// Label, usually a `Text`; it inherits the button's text style and colour.
@@ -112,7 +119,10 @@ class DshButton extends StatefulWidget {
   final bool autofocus;
 
   /// Accessibility label; defaults to the child's text.
-  final String? semanticLabel;
+  final String? semanticLabel, semanticHint;
+
+  /// Source cardLink hover belongs to the containing card, including controls.
+  final bool? sourceHovered;
 
   /// Component-level CSS overrides; omitted values retain primitive metrics.
   final double? height, minWidth, horizontalPadding, radius;
@@ -266,8 +276,11 @@ class _DshButtonState extends State<DshButton> {
     final iconAction = widget.profile == DshButtonProfile.iconAction;
     final info = widget.profile == DshButtonProfile.infoAction;
     final header = widget.profile == DshButtonProfile.headerAction;
+    final card = widget.profile == DshButtonProfile.pluginCard;
     final compactAction = iconAction || info || header;
-    final radiusToken = header
+    final radiusToken = card
+        ? DshPluginCardRecipe.radiusToken
+        : header
         ? DshHeaderLeadingRecipe.radiusToken
         : compactAction
         ? DshIconActionRecipe.radiusToken
@@ -294,7 +307,11 @@ class _DshButtonState extends State<DshButton> {
     final iconHovered = _enabled && _hovered;
     // HeaderLeadingControls has only `.iconButton:hover`: pointer-down does
     // not introduce the primitive ghost :active fill or synthesize hover.
-    final rawFill = header
+    final rawFill = card
+        ? (widget.sourceHovered ?? _hovered)
+              ? theme.color(DshPluginCardRecipe.hoverToken)
+              : null
+        : header
         ? _hovered
               ? theme.color(DshHeaderLeadingRecipe.hoverToken)
               : null
@@ -337,7 +354,8 @@ class _DshButtonState extends State<DshButton> {
     // ([dshHairlineOf]: one device pixel on a phone, a whole CSS pixel in the
     // emulated capture) and it widens the box (the content width is padding +
     // label + both borders).
-    final outlined = !header && widget.variant == DshButtonVariant.outline;
+    final outlined =
+        !header && !card && widget.variant == DshButtonVariant.outline;
     final borderWidth = outlined
         ? dshBorderWidthOf(context, DshButtonRecipe.outlineWidth)
         : 0.0;
@@ -378,95 +396,107 @@ class _DshButtonState extends State<DshButton> {
         borderColor: borderColor,
         borderWidth: borderWidth,
       ),
-      child: Container(
-        constraints: widget.minWidth == null
-            ? null
-            : BoxConstraints(minWidth: widget.minWidth!),
-        width: profileWidth,
-        height:
-            widget.height ??
-            (header
-                ? DshHeaderLeadingRecipe.height
-                : compactAction
-                ? info
-                      ? DshIconActionRecipe.infoHeight
-                      : DshIconActionRecipe.height
-                : add
-                ? DshAddButtonRecipe.height
-                : small
-                ? DshButtonRecipe.smallHeight
-                : DshButtonRecipe.height),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            if (dividerWidth > 0)
-              Positioned(
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: dividerWidth,
-                child: ColoredBox(color: dividerColor),
-              ),
-            Padding(
-              padding: EdgeInsets.only(
-                left:
-                    dividerWidth +
-                    (widget.horizontalPadding ??
-                        (compactAction || widget.join == DshButtonJoin.right
-                            ? 0
-                            : add
-                            ? DshAddButtonRecipe.padding
-                            : (small
+      child: card
+          ? widget.child
+          : Container(
+              constraints: widget.minWidth == null
+                  ? null
+                  : BoxConstraints(minWidth: widget.minWidth!),
+              width: profileWidth,
+              height:
+                  widget.height ??
+                  (header
+                      ? DshHeaderLeadingRecipe.height
+                      : compactAction
+                      ? info
+                            ? DshIconActionRecipe.infoHeight
+                            : DshIconActionRecipe.height
+                      : add
+                      ? DshAddButtonRecipe.height
+                      : small
+                      ? DshButtonRecipe.smallHeight
+                      : DshButtonRecipe.height),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (dividerWidth > 0)
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: dividerWidth,
+                      child: ColoredBox(color: dividerColor),
+                    ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left:
+                          dividerWidth +
+                          (widget.horizontalPadding ??
+                              (compactAction ||
+                                      widget.join == DshButtonJoin.right
+                                  ? 0
+                                  : add
+                                  ? DshAddButtonRecipe.padding
+                                  : (small
+                                        ? DshButtonRecipe.smallPadding
+                                        : DshButtonRecipe.padding))) +
+                          borderWidth,
+                      right:
+                          (widget.horizontalPadding ??
+                              (compactAction ||
+                                      widget.join == DshButtonJoin.right
+                                  ? 0
+                                  : add
+                                  ? DshAddButtonRecipe.padding
+                                  : small
                                   ? DshButtonRecipe.smallPadding
-                                  : DshButtonRecipe.padding))) +
-                    borderWidth,
-                right:
-                    (widget.horizontalPadding ??
-                        (compactAction || widget.join == DshButtonJoin.right
-                            ? 0
-                            : add
-                            ? DshAddButtonRecipe.padding
-                            : small
-                            ? DshButtonRecipe.smallPadding
-                            : DshButtonRecipe.padding)) +
-                    borderWidth,
-              ),
-              child: DefaultTextStyle.merge(
-                style: textStyle,
-                child: IconTheme(
-                  data: IconThemeData(
-                    color: foreground,
-                    size: DshButtonRecipe.iconSize,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (widget.icon != null) ...[
-                        SizedBox(
-                          width: DshButtonRecipe.iconSize,
-                          height: DshButtonRecipe.iconSize,
-                          child: Center(child: widget.icon),
+                                  : DshButtonRecipe.padding)) +
+                          borderWidth,
+                    ),
+                    child: DefaultTextStyle.merge(
+                      style: textStyle,
+                      child: IconTheme(
+                        data: IconThemeData(
+                          color: foreground,
+                          size: DshButtonRecipe.iconSize,
                         ),
-                        const SizedBox(width: DshButtonRecipe.gap),
-                      ],
-                      Flexible(child: widget.child),
-                    ],
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (widget.icon != null) ...[
+                              SizedBox(
+                                width: DshButtonRecipe.iconSize,
+                                height: DshButtonRecipe.iconSize,
+                                child: Center(child: widget.icon),
+                              ),
+                              const SizedBox(width: DshButtonRecipe.gap),
+                            ],
+                            Flexible(child: widget.child),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
 
-    final ringWidth = header
+    final ringWidth = card
+        ? dshBorderWidthOf(
+            context,
+            theme.number(DshPluginCardRecipe.focusWidthToken),
+          )
+        : header
         ? theme.number(DshHeaderLeadingRecipe.focusWidthToken)
         : iconAction
         ? theme.number(DshIconActionRecipe.focusWidthToken)
         : theme.focusRingWidth;
-    final ringColor = header
+    final ringColor = card
+        ? theme.colors[DshPluginCardRecipe.focusToken] ??
+              theme.color(DshPluginCardRecipe.focusFallbackToken)
+        : header
         ? theme.colors[DshHeaderLeadingRecipe.focusToken] ??
               theme.color(DshHeaderLeadingRecipe.focusFallbackToken)
         : iconAction
@@ -476,7 +506,9 @@ class _DshButtonState extends State<DshButton> {
     // dsh sets `outline-width` only; the button keeps the UA's `outline-style:
     // auto`, which Chromium draws centred on the border edge (half the width
     // outside, half inside), not outside it as a plain outline would.
-    final ringReach = iconAction
+    final ringReach = card
+        ? ringWidth + DshPluginCardRecipe.focusOffset
+        : iconAction
         ? ringWidth + DshIconActionRecipe.focusOffset
         : ringWidth / 2;
     final stack = Stack(
@@ -515,6 +547,7 @@ class _DshButtonState extends State<DshButton> {
       button: true,
       enabled: _enabled,
       label: widget.semanticLabel,
+      hint: widget.semanticHint,
       onTap: widget.onPressed,
       child: MouseRegion(
         onEnter: (_) => _set(() => _hovered = true),
@@ -547,7 +580,7 @@ class _DshButtonState extends State<DshButton> {
                 ? (_) {
                     // The source Header renders a native button, which takes
                     // pointer focus. Its global modality suppresses the ring.
-                    if (header) _focusNode.requestFocus();
+                    if (header || card) _focusNode.requestFocus();
                     _set(() => _pressed = true);
                   }
                 : null,
