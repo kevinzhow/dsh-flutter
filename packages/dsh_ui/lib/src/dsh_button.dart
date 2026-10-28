@@ -288,7 +288,10 @@ class _DshButtonState extends State<DshButton> {
         bottomRight: Radius.circular(r),
       ),
     };
-    final hover = _enabled && (_hovered || _pressed);
+    // Published PluginManager `.iconButton:hover:not(:disabled)` follows
+    // actual hover, including leaving the control while a pointer is held.
+    // A native touch-down does not synthesize CSS :hover from :active.
+    final iconHovered = _enabled && _hovered;
     // HeaderLeadingControls has only `.iconButton:hover`: pointer-down does
     // not introduce the primitive ghost :active fill or synthesize hover.
     final rawFill = header
@@ -296,7 +299,7 @@ class _DshButtonState extends State<DshButton> {
               ? theme.color(DshHeaderLeadingRecipe.hoverToken)
               : null
         : iconAction
-        ? hover
+        ? iconHovered
               ? theme.color(DshIconActionRecipe.hoverToken)
               : null
         : _fill(theme);
@@ -310,7 +313,7 @@ class _DshButtonState extends State<DshButton> {
         ? theme.color(DshHeaderLeadingRecipe.labelToken)
         : iconAction
         ? theme.color(
-            hover
+            iconHovered
                 ? DshIconActionRecipe.hoverLabelToken
                 : DshIconActionRecipe.labelToken,
           )

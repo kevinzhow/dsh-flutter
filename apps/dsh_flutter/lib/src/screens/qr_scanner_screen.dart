@@ -143,12 +143,15 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                   ),
                   child: Row(
                     children: [
-                      DshIconButton(
+                      DshButton(
                         key: const ValueKey('scan-close'),
-                        icon: CharcoalIcons.close,
-                        plain: true,
+                        profile: DshButtonProfile.iconAction,
                         semanticLabel: _a('pairing.scan.close'),
                         onPressed: () => Navigator.of(context).pop(),
+                        child: const DshIcon(
+                          CharcoalIcons.close,
+                          size: DshButtonRecipe.iconSize,
+                        ),
                       ),
                       const SizedBox(width: DshSpace.sm),
                       Text(

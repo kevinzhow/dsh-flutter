@@ -85,12 +85,15 @@ class RepairRoute extends StatelessWidget {
                   padding: const EdgeInsets.all(DshSpace.xs),
                   child: Row(
                     children: [
-                      DshIconButton(
+                      DshButton(
                         key: const ValueKey('repair-back'),
-                        icon: CharcoalIcons.arrowLeft,
-                        plain: true,
+                        profile: DshButtonProfile.iconAction,
                         semanticLabel: controller.i18n.t('common', 'back'),
                         onPressed: () => Navigator.of(context).maybePop(),
+                        child: const DshIcon(
+                          CharcoalIcons.arrowLeft,
+                          size: DshButtonRecipe.iconSize,
+                        ),
                       ),
                       Text(
                         controller.i18n.t(

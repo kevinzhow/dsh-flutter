@@ -6,10 +6,8 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_button.dart"
       ],
-      "migrationStatus": "primitive variants and add/icon/info/header profiles generated from published CSS; local round icon adaptation still pending",
-      "pendingDuplicates": [
-        "DshIconButton -> DshButton icon-action recipe"
-      ]
+      "migrationStatus": "primitive variants and add/icon/info/header profiles generated from published CSS; Whalee-only pairing Settings/back/scanner actions adopt canonical iconAction and the duplicate round wrapper is retired; source hover-only mouse/touch-down states corrected; Chromium post-touch-up synthetic sticky hover remains unmatched and pending",
+      "pendingDuplicates": []
     },
     {
       "name": "menus",
@@ -171,9 +169,6 @@
     }
   },
   "baseline": {
-    "apps/dsh_flutter/lib/src/app.dart": {
-      "duplicate-button": 1
-    },
     "apps/dsh_flutter/lib/src/desktop_shell.dart": {
       "manual-metric": 5
     },
@@ -184,11 +179,7 @@
       "manual-metric": 1
     },
     "apps/dsh_flutter/lib/src/screens/pairing_screen.dart": {
-      "duplicate-button": 1,
       "manual-metric": 3
-    },
-    "apps/dsh_flutter/lib/src/screens/qr_scanner_screen.dart": {
-      "duplicate-button": 1
     },
     "apps/dsh_flutter/lib/src/screens/security_chip.dart": {
       "manual-metric": 1
@@ -549,10 +540,6 @@
     },
     "packages/dsh_ui/lib/src/dsh_guide.dart": {
       "manual-metric": 7
-    },
-    "packages/dsh_ui/lib/src/dsh_icon_button.dart": {
-      "duplicate-button": 1,
-      "manual-metric": 3
     },
     "packages/dsh_ui/lib/src/dsh_json_block.dart": {
       "manual-metric": 2
