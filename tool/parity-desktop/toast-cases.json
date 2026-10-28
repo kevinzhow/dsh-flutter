@@ -11,9 +11,9 @@
     "only": true,
     "nativeExecuted": false,
     "widgetTest": "apps/dsh_flutter/test/parity/toast_native_fixture_test.dart",
-    "widgetTestSha256": "d21d7c8ecd818722758eb97cc8bf30967973dc0b4d7e04a1625d7e4b36d35cbe",
-    "fixtureSha256": "a884a8461257dd23f04f26aedabb02fbda75b9e9dffe41e5ea2dee7b159dc273",
-    "pinnedGeometryLogSha256": "2e40ae5b766d6dec5d2a2e64321d43890e17e66ccadf48baa7a39697966fad83",
+    "widgetTestSha256": "546a3761cbde5c427263c44beecfb3895e0c9c4f684c3bf0aa1d3b8edbbd1fb8",
+    "fixtureSha256": "0b5a9699df476ba026772a377e9fc206482c7ab929a0ce02fcab7f72761b416c",
+    "pinnedGeometryLogSha256": "d6e594ee7b424e8a78f14493bab34aec9d0a53e636510ca32160201ac0854c39",
     "fontManifestSha256": "1c7960ce9c9dbb200f493dd624c732a6903acc3cfd419244449e58b0771f4c4e",
     "geometry": [
       {
@@ -24,6 +24,31 @@
         "dpr": 1.0,
         "theme": "dark",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             567.5992279052734,
@@ -36,6 +61,12 @@
             110.0,
             1272.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
           ],
           "owners": [
             8.0,
@@ -179,6 +210,31 @@
         "dpr": 1.0,
         "theme": "light",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             567.5992279052734,
@@ -191,6 +247,12 @@
             110.0,
             1272.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
           ],
           "owners": [
             8.0,
@@ -328,12 +390,409 @@
       },
       {
         "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 2.625,
+        "theme": "dark",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            628.1190476190476,
+            270.0,
+            651.8809523809524,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
+          1280.0,
+          720.0
+        ],
+        "dpr": 2.625,
+        "theme": "light",
+        "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 234.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
+        "rects": {
+          "underlying": [
+            567.5992279052734,
+            40.0,
+            712.4007720947266,
+            76.0
+          ],
+          "status": [
+            8.0,
+            110.0,
+            1272.0,
+            130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            692.0,
+            1272.0,
+            712.0
+          ],
+          "owners": [
+            8.0,
+            130.0,
+            1272.0,
+            150.0
+          ],
+          "noIconControl": [
+            61.13621520996094,
+            190.0,
+            124.16853332519531,
+            218.0
+          ],
+          "successControl": [
+            128.1685333251953,
+            190.0,
+            191.95684814453125,
+            218.0
+          ],
+          "warningControl": [
+            195.95684814453125,
+            190.0,
+            263.8731689453125,
+            218.0
+          ],
+          "longControl": [
+            267.8731689453125,
+            190.0,
+            316.2173614501953,
+            218.0
+          ],
+          "clearControl": [
+            8.0,
+            190.0,
+            57.13621520996094,
+            218.0
+          ],
+          "Lifetime": [
+            320.2173614501953,
+            190.0,
+            385.9136962890625,
+            218.0
+          ],
+          "Same hold": [
+            389.9136962890625,
+            190.0,
+            469.4941101074219,
+            218.0
+          ],
+          "Changed hold": [
+            473.4941101074219,
+            190.0,
+            572.4426574707031,
+            218.0
+          ],
+          "Upload saved": [
+            1078.5495300292969,
+            190.0,
+            1175.0140686035156,
+            218.0
+          ],
+          "Upload failed": [
+            8.0,
+            222.0,
+            102.94053649902344,
+            250.0
+          ],
+          "Reduced motion": [
+            834.5281524658203,
+            190.0,
+            947.1688079833984,
+            218.0
+          ],
+          "Toast then preview": [
+            576.4426574707031,
+            190.0,
+            702.29541015625,
+            218.0
+          ],
+          "Preview then toast": [
+            706.29541015625,
+            190.0,
+            830.5281524658203,
+            218.0
+          ],
+          "Focus background": [
+            951.1688079833984,
+            190.0,
+            1074.5495300292969,
+            218.0
+          ],
+          "Remove file owner": [
+            106.94053649902344,
+            222.0,
+            231.19728088378906,
+            250.0
+          ],
+          "workspace": [
+            628.1190476190476,
+            270.0,
+            651.8809523809524,
+            294.0
+          ],
+          "file": [
+            607.5,
+            314.0,
+            640.5,
+            342.0
+          ],
+          "noIcon": [
+            571.7452087402344,
+            40.0,
+            708.2547912597656,
+            86.0
+          ],
+          "success": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "warning": [
+            558.7452087402344,
+            40.0,
+            721.2547912597656,
+            86.0
+          ],
+          "long": [
+            304.0,
+            40.0,
+            976.0,
+            174.0
+          ]
+        }
+      },
+      {
+        "viewport": [
           390.0,
           844.0
         ],
         "dpr": 1.0,
         "theme": "dark",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             122.59922790527344,
@@ -346,6 +805,12 @@
             110.0,
             382.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
           ],
           "owners": [
             8.0,
@@ -489,6 +954,31 @@
         "dpr": 1.0,
         "theme": "light",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             122.59922790527344,
@@ -501,6 +991,12 @@
             110.0,
             382.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
           ],
           "owners": [
             8.0,
@@ -644,6 +1140,31 @@
         "dpr": 2.625,
         "theme": "dark",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             122.59922790527344,
@@ -656,6 +1177,12 @@
             110.0,
             382.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
           ],
           "owners": [
             8.0,
@@ -799,6 +1326,31 @@
         "dpr": 2.625,
         "theme": "light",
         "pinnedFonts": true,
+        "callbackProbe": {
+          "semanticsLabel": "Lifecycle callback count: 0",
+          "sourceLongShadowBandBottom": 322.0,
+          "shadowBandRule": "offsetY + spread + 3 * (CSS blurRadius / 2)",
+          "shadowLayers": [
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 1.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 0.0,
+              "blurRadius": 4.0,
+              "spreadRadius": 0.0
+            },
+            {
+              "dx": 0.0,
+              "dy": 12.0,
+              "blurRadius": 32.0,
+              "spreadRadius": 0.0
+            }
+          ]
+        },
         "rects": {
           "underlying": [
             122.59922790527344,
@@ -811,6 +1363,12 @@
             110.0,
             382.0,
             130.0
+          ],
+          "callbackCounter": [
+            8.0,
+            816.0,
+            382.0,
+            836.0
           ],
           "owners": [
             8.0,
@@ -1168,9 +1726,9 @@
             "reference": "same-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": true
           }
@@ -1199,9 +1757,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": false
           }
@@ -1217,9 +1775,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": true
           }
@@ -1706,9 +2264,9 @@
             "reference": "same-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": true
           }
@@ -1737,9 +2295,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": false
           }
@@ -1755,9 +2313,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              692,
               1272,
-              130
+              712
             ],
             "changed": true
           }
@@ -2244,9 +2802,9 @@
             "reference": "same-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": true
           }
@@ -2275,9 +2833,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": false
           }
@@ -2293,9 +2851,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": true
           }
@@ -2782,9 +3340,9 @@
             "reference": "same-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": true
           }
@@ -2813,9 +3371,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": false
           }
@@ -2831,9 +3389,9 @@
             "reference": "changed-update",
             "rect": [
               8,
-              110,
+              816,
               382,
-              130
+              836
             ],
             "changed": true
           }

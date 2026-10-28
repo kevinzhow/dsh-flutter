@@ -356,6 +356,23 @@ class ToastNativeState extends State<ToastNativeApp> {
                       ),
                     ),
                   ),
+                  // This synthetic callback observation has its own seat,
+                  // outside the actual Toast and its source shadow. The upper
+                  // status line remains the unchanged Android action label.
+                  Positioned(
+                    left: DshSpace.sm,
+                    right: DshSpace.sm,
+                    bottom: DshSpace.sm,
+                    child: Semantics(
+                      container: true,
+                      excludeSemantics: true,
+                      label: 'Lifecycle callback count: $done',
+                      child: Text(
+                        'Lifecycle callback count: $done',
+                        key: const ValueKey('toast-callback-counter'),
+                      ),
+                    ),
+                  ),
                   if (direct != null)
                     direct == 'lifecycle'
                         ? DshToast(
