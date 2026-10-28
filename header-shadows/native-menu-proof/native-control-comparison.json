@@ -1,0 +1,59 @@
+{
+  "runtimeHead": "2293a830c1edecc18d5e488e67493fd2e90f2d10",
+  "runtimeReceipt": "build/native-header-shadows-menu-gpu/runtime.json",
+  "method": "Offline exact RGBA comparison of retained failed native capture; no new native input or run",
+  "screenshots": {
+    "model-pro-selected": {
+      "path": "build/native-header-shadows-menu-gpu/reported-families.desktop/model-pro-selected.png",
+      "sha256": "67026e5cb2bc933fadb3b43dfd481621f0691cb53d2d475be5971c9a403520fb"
+    },
+    "model-pro-root": {
+      "path": "build/native-header-shadows-menu-gpu/reported-families.desktop/model-pro-root.png",
+      "sha256": "7746d45024090fdaed8caec152df9ea085f0eafd93c9f8efe52dac02675e4e23"
+    },
+    "model-closed": {
+      "path": "build/native-header-shadows-menu-gpu/reported-families.desktop/model-closed.png",
+      "sha256": "76f1c9cd3a311568f71400f34c8ff560f3a898af4cb0a2a32e19207fe5e26562"
+    },
+    "model-root": {
+      "path": "build/native-header-shadows-menu-gpu/reported-families.desktop/model-root.png",
+      "sha256": "e6a9197942bf84e1c79b8264c96df9af762b6c80ef007d3dd02d9ca60b234220"
+    }
+  },
+  "regions": [
+    {
+      "name": "original-guard",
+      "rect": [
+        1028,
+        594,
+        1248,
+        606
+      ],
+      "correct-one-row": {
+        "changedPixels": 220,
+        "maxChannelDifference": 1
+      },
+      "actual-two-row-control": {
+        "changedPixels": 2640,
+        "maxChannelDifference": 240
+      }
+    },
+    {
+      "name": "source-derived-guard",
+      "rect": [
+        1028,
+        584,
+        1248,
+        588
+      ],
+      "correct-one-row": {
+        "changedPixels": 0,
+        "maxChannelDifference": 0
+      },
+      "actual-two-row-control": {
+        "changedPixels": 880,
+        "maxChannelDifference": 8
+      }
+    }
+  ]
+}

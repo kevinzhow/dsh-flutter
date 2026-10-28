@@ -1,0 +1,594 @@
+{
+  "schema": "dsh-design-families/1",
+  "families": [
+    {
+      "name": "buttons",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_button.dart"
+      ],
+      "migrationStatus": "primitive variants and add/icon/info/header profiles generated from published CSS; local round icon adaptation still pending",
+      "pendingDuplicates": [
+        "DshIconButton -> DshButton icon-action recipe"
+      ]
+    },
+    {
+      "name": "menus",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_menu.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_surface.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_item.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_footer.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_follower.dart",
+        "packages/dsh_ui/lib/src/dsh_menu_group.dart"
+      ],
+      "migrationStatus": "published menu/dock rows, material, footer, viewport fitting, sticky groups, keyboard walk and effective shortcut presentation; workspace picker uses canonical card; live session shortcut wiring, submenus and arbitrary-content/macOS backing pending; model root/options now use generated published ModelSelect profiles and anchored placement, with composer compact-trigger, selection Toast and programmatic outside-focus dismissal still pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "popovers",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_anchored_panel.dart",
+        "packages/dsh_ui/lib/src/dsh_popover_surface.dart",
+        "packages/dsh_ui/lib/src/dsh_stat_panel.dart"
+      ],
+      "migrationStatus": "published StatsPills trigger and shared stat-dialog geometry/material migrated; source-clamped anchored session activity/usage panels with live projection updates and keyboard/outside dismissal; remaining context/turn/custom popover profiles still pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "tooltips",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_tooltip.dart"
+      ],
+      "migrationStatus": "published tooltip and keycap recipes, anchor fitting, focus/hover and click dismissal; dynamic label resolvers and document-level portal behavior remain to be audited",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "dialogs",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_presentation.dart",
+        "packages/dsh_ui/lib/src/dsh_dialog_reader.dart",
+        "packages/dsh_ui/lib/src/dsh_reader_markdown.dart",
+        "packages/dsh_ui/lib/src/dsh_headed_dialog.dart",
+        "packages/dsh_ui/lib/src/dsh_risk_dialog.dart"
+      ],
+      "migrationStatus": "published Modal layer, headed content, preset reader and controlled risk profile; source viewport mask, keyboard/composition guards, independent reader panels and scrollable risk content with a fixed footer; settings/shortcut routes and other caller profiles remain pending",
+      "pendingDuplicates": [
+        "SettingsShell and shortcut reference routes -> shared Modal layer",
+        "Raw schedule deletion dialog -> generated Modal profile"
+      ]
+    },
+    {
+      "name": "text-inputs",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_text_field.dart"
+      ],
+      "migrationStatus": "published single-line Input atom, model-menu search profile and font settings consolidated; major and other feature-specific input variants remain to be audited",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "selection-and-checkbox",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_settings.dart"
+      ],
+      "migrationStatus": "published checkbox and risk acknowledgement profiles, controlled interaction and native Chromium paint snapshot; model editor wiring and broader selection controls remain pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "switches",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_settings.dart"
+      ],
+      "migrationStatus": "published Switch recipe, controlled keyboard/pointer and accessibility, focus ring and reduced-motion thumb transition",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "segmented-tabs",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_segmented_tabs.dart"
+      ],
+      "migrationStatus": "published equal-width tabs, named panel relationships, keyboard selection and reduced-motion transitions; plugin manager and canonical preset reader share the component",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "cards",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_card.dart"
+      ],
+      "migrationStatus": "inventory only; recipe migration pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "badges-and-pills",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_pill.dart",
+        "packages/dsh_ui/lib/src/dsh_tag.dart"
+      ],
+      "migrationStatus": "published Pill and Tag recipes; market categories, settings override, agent preset and plugin inventory status tags use the shared components; schedule overrides and other badge consumers remain to be audited",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "list-rows",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_settings.dart"
+      ],
+      "migrationStatus": "inventory only; recipe migration pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "empty-states",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_guide.dart"
+      ],
+      "migrationStatus": "inventory only; recipe migration pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "toasts",
+      "canonical": [
+        "packages/dsh_ui/lib/src/dsh_toast.dart"
+      ],
+      "migrationStatus": "inventory only; recipe migration pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "drawers-and-navigation",
+      "canonical": [
+        "features/dsh_feature_sidebar/lib/src/sidebar_root.dart",
+        "features/dsh_feature_sidebar/lib/src/leading_controls.dart",
+        "features/dsh_feature_session/lib/src/workspace/browser.dart"
+      ],
+      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; HeaderLeadingControls styles, glyph size and tooltip delay generated into canonical DshButton headerAction with source global focus visibility; Chromium native auto-outline paint, AppFrame seat/platform mounting, pointer scrollbar, remaining sidebar keyboard controls, collapse-entry animations and macOS window vibrancy remain pending",
+      "pendingDuplicates": []
+    },
+    {
+      "name": "banners",
+      "canonical": [],
+      "status": "pending",
+      "migrationStatus": "inventory only; recipe migration pending",
+      "pendingDuplicates": []
+    }
+  ],
+  "patterns": {
+    "platform-control": "\\b(?:TextButton|ElevatedButton|OutlinedButton|IconButton|PopupMenuButton|DropdownButton|DropdownMenu|Checkbox|Switch|Radio|Slider|AlertDialog|SimpleDialog|Drawer|NavigationRail|NavigationBar|TabBar|Tooltip|SnackBar|TextField|TextFormField|CupertinoButton|CupertinoTextField|CupertinoSwitch)\\s*\\(",
+    "duplicate-button": "\\bDshIconButton\\s*\\(",
+    "duplicate-input": "\\bDshFieldInput\\s*\\(",
+    "duplicate-tag": "\\b(?:_Tag|_PresetTag)\\s*\\(",
+    "manual-metric": "\\b(?:height|width|fontSize|radius|horizontalPadding|size|gap|decorationThickness)\\s*:\\s*(?:\\d+\\.?\\d*)\\b|\\bBorderRadius\\.circular\\(\\s*\\d",
+    "duplicate-menu": "\\b(?:_MenuSurface|_MenuItem)\\s*\\("
+  },
+  "remediation": {
+    "platform-control": "use the canonical Dsh family wrapper; allowlisted wrappers need a source-backed reason",
+    "duplicate-button": "migrate to DshButton with the source icon-action recipe",
+    "duplicate-input": "consolidate through the canonical DshInput atom",
+    "duplicate-tag": "use DshTag with its published tone recipe",
+    "manual-metric": "generate a source recipe or use its theme token; avoid page overrides",
+    "duplicate-menu": "use DshMenuSurface/DshMenuItemButton with the published dock profile; do not copy generic row geometry"
+  },
+  "wrapperAllowlist": {
+    "platform-control": {
+      "packages/dsh_ui/lib/src/dsh_text_field.dart": "Canonical general-purpose native text-editing wrapper",
+      "packages/dsh_ui/lib/src/dsh_settings.dart": "Legacy settings text editor; retire when its settings variant uses DshTextField"
+    }
+  },
+  "baseline": {
+    "apps/dsh_flutter/lib/src/app.dart": {
+      "duplicate-button": 1
+    },
+    "apps/dsh_flutter/lib/src/desktop_shell.dart": {
+      "manual-metric": 5
+    },
+    "apps/dsh_flutter/lib/src/platform/window_chrome.dart": {
+      "manual-metric": 4
+    },
+    "apps/dsh_flutter/lib/src/screens/certificate_card.dart": {
+      "manual-metric": 1
+    },
+    "apps/dsh_flutter/lib/src/screens/pairing_screen.dart": {
+      "duplicate-button": 1,
+      "manual-metric": 3
+    },
+    "apps/dsh_flutter/lib/src/screens/qr_scanner_screen.dart": {
+      "duplicate-button": 1
+    },
+    "apps/dsh_flutter/lib/src/screens/security_chip.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_agent_management/lib/src/goals.dart": {
+      "platform-control": 1,
+      "manual-metric": 5
+    },
+    "features/dsh_feature_agent_management/lib/src/jobs.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_agent_management/lib/src/presets.dart": {
+      "manual-metric": 11
+    },
+    "features/dsh_feature_agent_management/lib/src/register.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_agent_management/lib/src/schedule_seats.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_agent_management/lib/src/schedule_timing_controls.dart": {
+      "platform-control": 1,
+      "manual-metric": 5
+    },
+    "features/dsh_feature_agent_management/lib/src/schedules.dart": {
+      "platform-control": 2,
+      "manual-metric": 23
+    },
+    "features/dsh_feature_agent_management/lib/src/skill_row.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_approval/lib/src/approval_panel.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_attachment/lib/src/composer_attachments.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_chat/lib/src/chat_nodes.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_chat/lib/src/command_input_view.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_chat/lib/src/command_view.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_chat/lib/src/compaction_view.dart": {
+      "manual-metric": 8
+    },
+    "features/dsh_feature_chat/lib/src/context_view.dart": {
+      "manual-metric": 9
+    },
+    "features/dsh_feature_chat/lib/src/model_retry_view.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_chat/lib/src/stream/jump_button.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_chat/lib/src/stream/load_earlier.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_chat/lib/src/stream/loading_hint.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_chat/lib/src/stream/message_actions.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_chat/lib/src/stream/skeleton.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_chat/lib/src/system_prompt_view.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_chat/lib/src/work_details_settings.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_chat/lib/src/work_details_view.dart": {
+      "manual-metric": 8
+    },
+    "features/dsh_feature_commands/lib/src/popup_view.dart": {
+      "manual-metric": 10
+    },
+    "features/dsh_feature_conversation/lib/src/breadcrumbs.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_conversation/lib/src/composer.dart": {
+      "platform-control": 1,
+      "manual-metric": 12
+    },
+    "features/dsh_feature_conversation/lib/src/composer_text.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_conversation/lib/src/desktop_header.dart": {
+      "manual-metric": 10
+    },
+    "features/dsh_feature_conversation/lib/src/enter_settings.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_conversation/lib/src/hero.dart": {
+      "manual-metric": 12
+    },
+    "features/dsh_feature_conversation/lib/src/queue_dock.dart": {
+      "platform-control": 1,
+      "manual-metric": 26
+    },
+    "features/dsh_feature_conversation/lib/src/shell.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_conversation/lib/src/todo_panel.dart": {
+      "manual-metric": 11
+    },
+    "features/dsh_feature_deliverables/lib/src/controls.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_deliverables/lib/src/deliverables_tail.dart": {
+      "manual-metric": 15
+    },
+    "features/dsh_feature_deliverables/lib/src/file_diff.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_deliverables/lib/src/register.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_deliverables/lib/src/review_tab.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart": {
+      "platform-control": 2,
+      "manual-metric": 31
+    },
+    "features/dsh_feature_directory_picker_browse/lib/src/flow.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_documentpreview/lib/src/document_bodies.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_documentpreview/lib/src/document_view.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_documentpreview/lib/src/pdf_body.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_files/lib/src/files_view.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_files/lib/src/register.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_input_trigger/lib/src/menu_view.dart": {
+      "manual-metric": 21
+    },
+    "features/dsh_feature_layout/lib/src/app_frame.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_model_settings/lib/src/model_input.dart": {
+      "platform-control": 1,
+      "manual-metric": 4
+    },
+    "features/dsh_feature_model_settings/lib/src/models_section.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_model_settings/lib/src/provider_editor.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_model_settings/lib/src/welcome.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_open_in_app/lib/src/file_route_action.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_open_in_app/lib/src/target_button.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_permission_presets/lib/src/permission_widgets.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_plan/lib/src/plan_cards.dart": {
+      "manual-metric": 11
+    },
+    "features/dsh_feature_plan/lib/src/plan_chip.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_plan/lib/src/plan_document.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_plan/lib/src/plan_preview.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_plan/lib/src/register.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_plugins/lib/src/common.dart": {
+      "platform-control": 1,
+      "manual-metric": 1
+    },
+    "features/dsh_feature_plugins/lib/src/install_dialog.dart": {
+      "manual-metric": 11
+    },
+    "features/dsh_feature_plugins/lib/src/inventory.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_plugins/lib/src/manager_page.dart": {
+      "manual-metric": 43
+    },
+    "features/dsh_feature_plugins/lib/src/market_page.dart": {
+      "manual-metric": 13
+    },
+    "features/dsh_feature_reference/lib/src/sent_reference.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_secret_mask/lib/src/secret_text.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_session/lib/src/session_list_view.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_session/lib/src/workspace/actions.dart": {
+      "platform-control": 1,
+      "manual-metric": 15
+    },
+    "features/dsh_feature_session/lib/src/workspace/browser.dart": {
+      "manual-metric": 73
+    },
+    "features/dsh_feature_session/lib/src/workspace/hover_card.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_session/lib/src/workspace/reorder_row.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_session/lib/src/workspace/row_slots.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_settings/lib/src/common_settings.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_settings/lib/src/settings_dialog.dart": {
+      "manual-metric": 10
+    },
+    "features/dsh_feature_settings/lib/src/settings_page.dart": {
+      "manual-metric": 7
+    },
+    "features/dsh_feature_settings/lib/src/settings_shell.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_settings/lib/src/subagent_settings.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_shortcuts/lib/src/reference_dialog.dart": {
+      "manual-metric": 36
+    },
+    "features/dsh_feature_shortcuts/lib/src/register.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_sidebar/lib/src/sidebar_root.dart": {
+      "manual-metric": 7
+    },
+    "features/dsh_feature_sidebar_right/lib/src/guide.dart": {
+      "manual-metric": 3
+    },
+    "features/dsh_feature_sidebar_right/lib/src/panel.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_sidebar_right/lib/src/register.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_sidebar_terminal/lib/src/terminal_body.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_sidebar_terminal/lib/src/terminal_guide.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_sidebar_terminal/lib/src/terminal_keys.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_sidebar_terminal/lib/src/terminal_title.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_subagent/lib/src/register.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_subagent/lib/src/transcript.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_theme/lib/src/theme_rows.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_tool/lib/src/register.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_tool/lib/src/widgets/ask_card.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_tool/lib/src/widgets/exit_badge.dart": {
+      "manual-metric": 4
+    },
+    "features/dsh_feature_tool/lib/src/widgets/io_card.dart": {
+      "manual-metric": 1
+    },
+    "features/dsh_feature_tool/lib/src/widgets/tool_details.dart": {
+      "manual-metric": 18
+    },
+    "features/dsh_feature_tool/lib/src/widgets/tool_row.dart": {
+      "manual-metric": 5
+    },
+    "features/dsh_feature_user_questions/lib/src/plan_review_panel.dart": {
+      "manual-metric": 9
+    },
+    "features/dsh_feature_user_questions/lib/src/question_panel.dart": {
+      "manual-metric": 7
+    },
+    "features/dsh_feature_user_questions/lib/src/question_reply_view.dart": {
+      "manual-metric": 17
+    },
+    "features/dsh_feature_user_questions/lib/src/question_wait_strip.dart": {
+      "manual-metric": 2
+    },
+    "features/dsh_feature_workflow_run/lib/src/workflow_run_panel.dart": {
+      "manual-metric": 21
+    },
+    "features/dsh_feature_workspace/lib/src/folder_error.dart": {
+      "manual-metric": 6
+    },
+    "features/dsh_feature_workspace/lib/src/workspace_picker.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_dockkit/lib/src/engine/constraints.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_dockkit/lib/src/widgets/dock_layout.dart": {
+      "manual-metric": 15
+    },
+    "packages/dsh_theme/lib/src/dsh_theme_data.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_ui/lib/src/dsh_attachment.dart": {
+      "manual-metric": 18
+    },
+    "packages/dsh_ui/lib/src/dsh_code_block.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_ui/lib/src/dsh_code_toolbar.dart": {
+      "manual-metric": 6
+    },
+    "packages/dsh_ui/lib/src/dsh_connection_indicator.dart": {
+      "manual-metric": 7
+    },
+    "packages/dsh_ui/lib/src/dsh_diff_block.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_ui/lib/src/dsh_disclosure.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_ui/lib/src/dsh_disclosure_row.dart": {
+      "manual-metric": 6
+    },
+    "packages/dsh_ui/lib/src/dsh_drop_overlay.dart": {
+      "manual-metric": 3
+    },
+    "packages/dsh_ui/lib/src/dsh_guide.dart": {
+      "manual-metric": 7
+    },
+    "packages/dsh_ui/lib/src/dsh_icon_button.dart": {
+      "duplicate-button": 1,
+      "manual-metric": 3
+    },
+    "packages/dsh_ui/lib/src/dsh_json_block.dart": {
+      "manual-metric": 2
+    },
+    "packages/dsh_ui/lib/src/dsh_lightbox.dart": {
+      "manual-metric": 7
+    },
+    "packages/dsh_ui/lib/src/dsh_option_sheet.dart": {
+      "manual-metric": 3
+    },
+    "packages/dsh_ui/lib/src/dsh_phone_chrome.dart": {
+      "manual-metric": 5
+    },
+    "packages/dsh_ui/lib/src/dsh_read_block.dart": {
+      "manual-metric": 1
+    },
+    "packages/dsh_ui/lib/src/dsh_search_block.dart": {
+      "manual-metric": 2
+    },
+    "packages/dsh_ui/lib/src/dsh_settings.dart": {
+      "manual-metric": 15
+    },
+    "packages/dsh_ui/lib/src/dsh_settings_form.dart": {
+      "manual-metric": 8
+    },
+    "packages/dsh_ui/lib/src/dsh_terminal_block.dart": {
+      "manual-metric": 7
+    },
+    "packages/dsh_ui/lib/src/dsh_toast.dart": {
+      "manual-metric": 3
+    },
+    "packages/dsh_ui/lib/src/dsh_web_block.dart": {
+      "manual-metric": 8
+    },
+    "packages/dsh_ui/lib/src/dsh_whale_mark.dart": {
+      "manual-metric": 1
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "literalCaptureCalls": {
+    "run_reported": 15,
+    "run_header": 8
+  },
+  "oldDriverSha256": "6b23d815476ec47e1eba7ee2df87ed50ad7810cd7a54501ee038f53e89fb1b09",
+  "newDriverSha256": "9d72dd09cf82451798454143f19160aabbd4e732b61f5dbfd7daecfd1098553d",
+  "onlyChange": [
+    "len(self.scenes) != 24 or len(self.checks) != 54",
+    "len(self.scenes) != 23 or len(self.checks) != 54"
+  ],
+  "inputsActionsAssertionsUnchanged": true
+}

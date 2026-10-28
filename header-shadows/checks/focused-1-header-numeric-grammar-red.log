@@ -1,0 +1,54 @@
+test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) ... 
+  test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='delayMs: 0500') ... FAIL
+  test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='size: 016') ... FAIL
+  test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='delayMs: ５００') ... FAIL
+  test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='size: １６') ... FAIL
+
+======================================================================
+FAIL: test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='delayMs: 0500')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 130, in test_only_supported_complete_ascii_decimal_literals_are_translated
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='size: 016')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 130, in test_only_supported_complete_ascii_decimal_literals_are_translated
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='delayMs: ５００')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 130, in test_only_supported_complete_ascii_decimal_literals_are_translated
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_only_supported_complete_ascii_decimal_literals_are_translated (test_header_leading_recipes.HeaderLeadingRecipesTests.test_only_supported_complete_ascii_decimal_literals_are_translated) (after='size: １６')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 130, in test_only_supported_complete_ascii_decimal_literals_are_translated
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.035s
+
+FAILED (failures=4)

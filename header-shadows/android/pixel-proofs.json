@@ -1,0 +1,98 @@
+[
+  {
+    "assertion": "Opening the desktop-style menu adds no viewport mask",
+    "passed": true,
+    "rect": [
+      0,
+      600,
+      540,
+      1200
+    ],
+    "before": "model-closed",
+    "after": "model-root",
+    "expectsDifference": false,
+    "changedPixels": 0,
+    "maxChannelDifference": 0,
+    "comparisonChannels": "RGB"
+  },
+  {
+    "assertion": "Enter after pointer focus does not paint the Header outline",
+    "passed": true,
+    "rect": [
+      15,
+      340,
+      101,
+      426
+    ],
+    "before": "header-pointer-toggle",
+    "after": "header-enter-pointer",
+    "expectsDifference": false,
+    "changedPixels": 0,
+    "maxChannelDifference": 0,
+    "comparisonChannels": "RGB"
+  },
+  {
+    "assertion": "Home releases pointer ownership and paints Header keyboard focus",
+    "passed": true,
+    "rect": [
+      15,
+      340,
+      101,
+      426
+    ],
+    "before": "header-enter-pointer",
+    "after": "header-keyboard-toggle",
+    "expectsDifference": true,
+    "changedPixels": 1400,
+    "maxChannelDifference": 190,
+    "comparisonChannels": "RGB"
+  },
+  {
+    "assertion": "Tab moves visible Header focus to New session",
+    "passed": true,
+    "rect": [
+      110,
+      340,
+      195,
+      426
+    ],
+    "before": "header-initial",
+    "after": "header-keyboard-new",
+    "expectsDifference": true,
+    "changedPixels": 1400,
+    "maxChannelDifference": 190,
+    "comparisonChannels": "RGB"
+  },
+  {
+    "assertion": "Pointer activation removes the New session keyboard outline",
+    "passed": true,
+    "rect": [
+      110,
+      340,
+      195,
+      426
+    ],
+    "before": "header-initial",
+    "after": "header-pointer-new",
+    "expectsDifference": false,
+    "changedPixels": 0,
+    "maxChannelDifference": 0,
+    "comparisonChannels": "RGB"
+  },
+  {
+    "assertion": "New session pointer state differs from its keyboard-focus state",
+    "passed": true,
+    "rect": [
+      110,
+      340,
+      195,
+      426
+    ],
+    "before": "header-new-space",
+    "after": "header-pointer-new",
+    "expectsDifference": true,
+    "changedPixels": 1400,
+    "maxChannelDifference": 190,
+    "comparisonChannels": "RGB"
+  }
+]

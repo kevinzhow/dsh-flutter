@@ -1,0 +1,112 @@
+{
+  "passed": true,
+  "chromiumVersion": "145.0.7632.6",
+  "cases": [
+    {
+      "id": "desktop-light",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "density": 1
+      },
+      "theme": "light",
+      "twoBounds": {
+        "x": 1008,
+        "y": 584,
+        "width": 248,
+        "height": 76
+      },
+      "oneBounds": {
+        "x": 1008,
+        "y": 618,
+        "width": 248,
+        "height": 42
+      },
+      "triggerBounds": {
+        "x": 1111.34375,
+        "y": 668,
+        "width": 144.65625,
+        "height": 28
+      },
+      "css": {
+        "boxShadow": "rgba(0, 0, 0, 0.04) 0px 0px 0px 0.5px, rgba(0, 0, 0, 0.04) 0px 3px 8px 0px, rgba(0, 0, 0, 0.05) 0px 0px 20px 0px",
+        "padding": "4px",
+        "rows": [
+          {
+            "height": 34,
+            "text": "ModelDeepSeek V4.1 Pro"
+          }
+        ]
+      },
+      "authoredShadow": "0px 0px 0px 0.5px #00000029, 0px 3px 8px 0px #0000000a, 0px 0px 20px 0px #0000000d",
+      "upwardReach": 30,
+      "sourceDerivedRect": [
+        1028,
+        584,
+        1248,
+        588
+      ],
+      "correctOneRow": {
+        "changedPixels": 0,
+        "maxChannelDifference": 0
+      },
+      "actualTwoRowControl": {
+        "changedPixels": 880,
+        "maxChannelDifference": 8
+      }
+    },
+    {
+      "id": "phone-dark",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "density": 1
+      },
+      "theme": "dark",
+      "twoBounds": {
+        "x": 118,
+        "y": 708,
+        "width": 248,
+        "height": 76
+      },
+      "oneBounds": {
+        "x": 118,
+        "y": 742,
+        "width": 248,
+        "height": 42
+      },
+      "triggerBounds": {
+        "x": 221.34375,
+        "y": 792,
+        "width": 144.65625,
+        "height": 28
+      },
+      "css": {
+        "boxShadow": "rgba(255, 255, 255, 0.16) 0px 0px 0px 0.5px, rgba(0, 0, 0, 0.04) 0px 3px 8px 0px, rgba(0, 0, 0, 0.05) 0px 0px 20px 0px",
+        "padding": "4px",
+        "rows": [
+          {
+            "height": 34,
+            "text": "ModelDeepSeek V4.1 Pro"
+          }
+        ]
+      },
+      "authoredShadow": "0px 0px 0px 0.5px #ffffff33, 0px 3px 8px 0px #0000000a, 0px 0px 20px 0px #0000000d",
+      "upwardReach": 30,
+      "sourceDerivedRect": [
+        138,
+        708,
+        358,
+        712
+      ],
+      "correctOneRow": {
+        "changedPixels": 0,
+        "maxChannelDifference": 0
+      },
+      "actualTwoRowControl": {
+        "changedPixels": 880,
+        "maxChannelDifference": 23
+      }
+    }
+  ]
+}

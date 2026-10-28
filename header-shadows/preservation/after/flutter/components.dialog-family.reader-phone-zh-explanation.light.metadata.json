@@ -1,0 +1,284 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.dialog-family.reader-phone-zh-explanation.light",
+  "variantId": "default",
+  "captureKey": "components.dialog-family.reader-phone-zh-explanation.light",
+  "theme": "light",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "light"
+  },
+  "locale": "zh-CN",
+  "image": "visual-testing-results/flutter/components.dialog-family.reader-phone-zh-explanation.light.png",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "density": 2.625
+  },
+  "selector": "[data-parity-id=\"preset-guide-dialog\"]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 24.0,
+      "y": 122.09523809523807,
+      "width": 342.0952380952381,
+      "height": 600.0
+    },
+    "pixelRect": {
+      "x": 63.0,
+      "y": 320.0,
+      "width": 898.0,
+      "height": 1576.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_agent_management:AgentPresetSection",
+      "dsh_ui:DshSegmentedTabs"
+    ],
+    "layoutViewport": {
+      "width": 390.0952380952381,
+      "height": 844.1904761904761
+    },
+    "notes": "Real guide opened through its preset row. The modal barrier covers the frame corner; in-tree theme validation remains active.",
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "标准模式",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 20.0,
+      "fontWeight": 600,
+      "lineHeight": 28.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[1]",
+      "text": "新建任务时选择「标准模式」，说明要完成什么、相关文件在哪里，以及怎样判断任务完成。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 400,
+      "lineHeight": 22.0,
+      "letterSpacing": 0.0,
+      "color": "#61666B"
+    },
+    {
+      "selector": "RenderParagraph[2]",
+      "text": "模式说明",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 600,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[3]",
+      "text": "如何使用",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#61666B"
+    },
+    {
+      "selector": "RenderParagraph[4]",
+      "text": "工作方式",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[5]",
+      "text": "Agent 直接调用工具来读写文件、检索资料和执行终端命令。包含 Skills、计划、目标、子 Agent、工作流和上下...",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[6]",
+      "text": "什么时候选",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[7]",
+      "text": "日常编程、文件处理和资料整理可以从这里开始。标准模式也能编写脚本、批量处理文件；PTC 改变的是工具调用方式，批量任务并...",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[8]",
+      "text": "修复一个问题",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 600,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[9]",
+      "text": "示例任务",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 11.0,
+      "fontWeight": 500,
+      "lineHeight": 17.0,
+      "letterSpacing": 0.0,
+      "color": "#61666B"
+    },
+    {
+      "selector": "RenderParagraph[10]",
+      "text": "搜索表单连续提交两次后，结果会消失。请定位原因、修复问题并运行相关测试，最后说明原因和修改内容。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[11]",
+      "text": "预期产出：代码修改、相关测试结果，以及问题原因说明。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[12]",
+      "text": "整理项目资料",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 600,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[13]",
+      "text": "示例任务",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 11.0,
+      "fontWeight": 500,
+      "lineHeight": 17.0,
+      "letterSpacing": 0.0,
+      "color": "#61666B"
+    },
+    {
+      "selector": "RenderParagraph[14]",
+      "text": "阅读项目中的 Markdown 记录，整理已经达成的结论和仍待确认的问题，并附上对应文件链接。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[15]",
+      "text": "预期产出：一份带来源引用的总结，方便回到原文核对。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 16.0,
+      "fontWeight": 400,
+      "lineHeight": 24.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    }
+  ],
+  "styleTokens": [],
+  "capturedAt": "2026-10-28T11:14:39.981360Z"
+}

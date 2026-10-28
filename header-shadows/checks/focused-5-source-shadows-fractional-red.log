@@ -1,0 +1,173 @@
+00:00 +0: loading [workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart
+00:00 +0: fractional far shadow retains single coverage at 1.0/-350.25
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [59199] is <3> instead of <13>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:157:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 157
+The test description was:
+  fractional far shadow retains single coverage at 1.0/-350.25
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: fractional far shadow retains single coverage at 1.0/-350.25 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional far shadow retains single coverage at 1.0/-350.25
+  
+00:00 +0 -1: fractional far shadow retains single coverage at 1.0/350.25
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [79363] is <3> instead of <14>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:157:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 157
+The test description was:
+  fractional far shadow retains single coverage at 1.0/350.25
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: fractional far shadow retains single coverage at 1.0/350.25 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional far shadow retains single coverage at 1.0/350.25
+  
+00:00 +0 -2: fractional hard ancestor stays hard at 1.0
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [79363] is <3> instead of <14>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:182:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 182
+The test description was:
+  fractional hard ancestor stays hard at 1.0
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -3: fractional hard ancestor stays hard at 1.0 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional hard ancestor stays hard at 1.0
+  
+00:00 +0 -3: fractional far shadow retains single coverage at 2.625/-350.25
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [332107] is <9> instead of <12>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:157:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 157
+The test description was:
+  fractional far shadow retains single coverage at 2.625/-350.25
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -4: fractional far shadow retains single coverage at 2.625/-350.25 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional far shadow retains single coverage at 2.625/-350.25
+  
+00:00 +0 -4: fractional far shadow retains single coverage at 2.625/350.25
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [443203] is <18> instead of <24>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:157:11)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 157
+The test description was:
+  fractional far shadow retains single coverage at 2.625/350.25
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -5: fractional far shadow retains single coverage at 2.625/350.25 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional far shadow retains single coverage at 2.625/350.25
+  
+00:00 +0 -5: fractional hard ancestor stays hard at 2.625
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+  Actual: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...]
+   Which: at location [443315] is <145> instead of <192>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart:182:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart line 182
+The test description was:
+  fractional hard ancestor stays hard at 2.625
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -6: fractional hard ancestor stays hard at 2.625 [E]
+  Test failed. See exception logs above.
+  The test description was: fractional hard ancestor stays hard at 2.625
+  
+00:00 +0 -6: CSS shadow blur radius 0.0 uses Blink standard deviation
+00:00 +1 -6: CSS shadow blur radius 8.0 uses Blink standard deviation
+00:00 +2 -6: CSS shadow blur radius 16.0 uses Blink standard deviation
+00:00 +3 -6: source shadow offset -350.0 is not cut off at a fixed reach
+00:00 +4 -6: source shadow offset 350.0 is not cut off at a fixed reach
+00:00 +5 -6: exterior shadow does not fill a translucent card interior
+00:00 +6 -6: source first-listed shadow remains the top layer
+00:00 +7 -6: negative spread that removes the box paints no shadow
+00:00 +8 -6: Some tests failed.
+
+Failing tests:
+  [workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart: fractional far shadow retains single coverage at 1.0/-350.25
+  [workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart: fractional far shadow retains single coverage at 1.0/350.25
+  [workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart: fractional far shadow retains single coverage at 2.625/-350.25
+  [workspace]/scratch/whalee-source-shadows/packages/dsh_ui/test/css_shadow_source_test.dart: fractional far shadow retains single coverage at 2.625/350.25
+  ... and 2 more

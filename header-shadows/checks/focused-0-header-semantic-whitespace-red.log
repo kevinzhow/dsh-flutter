@@ -1,0 +1,47 @@
+....FFFF..
+======================================================================
+FAIL: test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint (tool.tests.test_header_leading_recipes.HeaderLeadingRecipesTests.test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint) (after='"session. new"')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 108, in test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint (tool.tests.test_header_leading_recipes.HeaderLeadingRecipesTests.test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint) (after='"toggle. open"')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 108, in test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint (tool.tests.test_header_leading_recipes.HeaderLeadingRecipesTests.test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint) (after='toggle Sidebar')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 108, in test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint
+    with self.subTest(after=after), self.assertRaisesRegex(
+                                    ~~~~~~~~~~~~~~~~~~~~~~^
+            ValueError, 'untranslated HeaderLeadingControls'):
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint (tool.tests.test_header_leading_recipes.HeaderLeadingRecipesTests.test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-source-shadows/tool/tests/test_header_leading_recipes.py", line 116, in test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint
+    with self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.197s
+
+FAILED (failures=4)

@@ -1,0 +1,1292 @@
+{
+  "cases": [
+    {
+      "id": "header-leading.desktop-light",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
+      "app": [
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-initial"
+        },
+        {
+          "move": [
+            22,
+            94
+          ]
+        },
+        {
+          "capture": "header-hover"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            94
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-enter-pointer"
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "capture": "header-keyboard-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "header-keyboard-new"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-new-enter"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "header-new-space"
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            58,
+            94
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-new"
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "header-leading.desktop-dark",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "dark",
+      "locale": "en",
+      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
+      "app": [
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-initial"
+        },
+        {
+          "move": [
+            22,
+            94
+          ]
+        },
+        {
+          "capture": "header-hover"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            94
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-enter-pointer"
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "capture": "header-keyboard-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "header-keyboard-new"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-new-enter"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "header-new-space"
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            58,
+            94
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-new"
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              0,
+              116,
+              600,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "header-leading.phone-light",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "locale": "en",
+      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
+      "app": [
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-initial"
+        },
+        {
+          "move": [
+            22,
+            94
+          ]
+        },
+        {
+          "capture": "header-hover"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            94
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-enter-pointer"
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "capture": "header-keyboard-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "header-keyboard-new"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-new-enter"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "header-new-space"
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            58,
+            94
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-new"
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "header-leading.phone-dark",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
+      "app": [
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-initial"
+        },
+        {
+          "move": [
+            22,
+            94
+          ]
+        },
+        {
+          "capture": "header-hover"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            94
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-enter-pointer"
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-pointer-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            102
+          ]
+        },
+        {
+          "capture": "header-keyboard-toggle"
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-enter-pointer",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "header-keyboard-new"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              6,
+              78,
+              38,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-toggle",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "header-new-enter"
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-keyboard-new",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "header-new-space"
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-enter",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            58,
+            94
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "header-pointer-new"
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              0,
+              116,
+              390,
+              160
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-initial",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "header-new-space",
+            "rect": [
+              42,
+              78,
+              74,
+              110
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ]
+}

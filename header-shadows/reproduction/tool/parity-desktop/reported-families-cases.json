@@ -1,0 +1,1698 @@
+{
+  "cases": [
+    {
+      "id": "reported-families.desktop",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-initial"
+        },
+        {
+          "click": [
+            140,
+            195
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-new-session"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              0,
+              52,
+              270,
+              70
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              12,
+              422,
+              270,
+              454
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              16,
+              130,
+              260,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            80,
+            694
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-open"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              642,
+              120,
+              658
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              16,
+              130,
+              260,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-escaped"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              642,
+              120,
+              658
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            80,
+            694
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-reopened"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              642,
+              120,
+              658
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            137,
+            25
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-initial"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-more-reopened",
+            "rect": [
+              24,
+              100,
+              280,
+              120
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-more-reopened",
+            "rect": [
+              16,
+              678,
+              270,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            100,
+            689
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-activity"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              32,
+              528,
+              300,
+              655
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              150,
+              280,
+              350
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1240,
+            649
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-usage-one-click"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              994,
+              486,
+              1248,
+              610
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              28,
+              530,
+              48,
+              655
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              150,
+              280,
+              350
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-escaped"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              994,
+              486,
+              1248,
+              610
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              28,
+              530,
+              48,
+              655
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            223,
+            25
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-closed"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              100,
+              280,
+              120
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1170,
+            682
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-root"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              160,
+              100,
+              400
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1140,
+            605
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-directory"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              400,
+              1248,
+              550
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              160,
+              100,
+              400
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-escape-root"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              400,
+              1248,
+              550
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-escape-closed"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1170,
+            682
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-root-reopened"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1140,
+            639
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-efforts"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              560,
+              1248,
+              582
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1140,
+            571
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-low-selected"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              560,
+              1248,
+              582
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1170,
+            682
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-low-root"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-root",
+            "rect": [
+              1130,
+              631,
+              1245,
+              648
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1140,
+            605
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-all"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              1028,
+              400,
+              1248,
+              550
+            ],
+            "changed": true
+          }
+        },
+        {
+          "text": "Pro"
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-filtered"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-all",
+            "rect": [
+              1028,
+              570,
+              1240,
+              595
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            1140,
+            639
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-selected"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1170,
+            682
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-root"
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              1028,
+              584,
+              1248,
+              588
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              1028,
+              626,
+              1248,
+              652
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              24,
+              98,
+              380,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            1276,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-closed"
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              1028,
+              592,
+              1248,
+              652
+            ],
+            "changed": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "reported-families.phone",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "app": [
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-initial"
+        },
+        {
+          "click": [
+            140,
+            195
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-new-session"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              0,
+              52,
+              270,
+              70
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              12,
+              422,
+              270,
+              454
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-initial",
+            "rect": [
+              16,
+              130,
+              260,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            80,
+            818
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-open"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              766,
+              120,
+              782
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              16,
+              130,
+              260,
+              160
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-escaped"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              766,
+              120,
+              782
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            80,
+            818
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "sidebar-more-reopened"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-new-session",
+            "rect": [
+              26,
+              766,
+              120,
+              782
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            137,
+            25
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-initial"
+        },
+        {
+          "expect": {
+            "reference": "sidebar-more-reopened",
+            "rect": [
+              24,
+              100,
+              280,
+              120
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "sidebar-more-reopened",
+            "rect": [
+              16,
+              802,
+              270,
+              824
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            100,
+            813
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-activity"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              32,
+              652,
+              300,
+              779
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              150,
+              280,
+              350
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            350,
+            773
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-usage-one-click"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              104,
+              610,
+              358,
+              734
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              28,
+              654,
+              48,
+              779
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              150,
+              280,
+              350
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "statistics-escaped"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              104,
+              610,
+              358,
+              734
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              28,
+              654,
+              48,
+              779
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            223,
+            25
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-closed"
+        },
+        {
+          "expect": {
+            "reference": "statistics-initial",
+            "rect": [
+              24,
+              100,
+              280,
+              120
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            280,
+            806
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-root"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              160,
+              100,
+              400
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            250,
+            729
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-directory"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              524,
+              358,
+              674
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              160,
+              100,
+              400
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-escape-root"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              524,
+              358,
+              674
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-escape-closed"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            280,
+            806
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-root-reopened"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            250,
+            763
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-efforts"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              684,
+              358,
+              706
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            250,
+            695
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-low-selected"
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              684,
+              358,
+              706
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            280,
+            806
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-low-root"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-root",
+            "rect": [
+              240,
+              755,
+              355,
+              772
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            250,
+            729
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-all"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              138,
+              524,
+              358,
+              674
+            ],
+            "changed": true
+          }
+        },
+        {
+          "text": "Pro"
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-filtered"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-all",
+            "rect": [
+              138,
+              694,
+              350,
+              719
+            ],
+            "changed": true
+          }
+        },
+        {
+          "click": [
+            250,
+            763
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-selected"
+        },
+        {
+          "expect": {
+            "reference": "model-low-selected",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-closed",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            280,
+            806
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-root"
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              138,
+              708,
+              358,
+              712
+            ],
+            "changed": false
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              138,
+              750,
+              358,
+              776
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              24,
+              98,
+              366,
+              118
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            1
+          ]
+        },
+        {
+          "move": [
+            386,
+            4
+          ]
+        },
+        {
+          "capture": "model-pro-closed"
+        },
+        {
+          "expect": {
+            "reference": "model-pro-selected",
+            "rect": [
+              138,
+              716,
+              358,
+              776
+            ],
+            "changed": false
+          }
+        }
+      ]
+    }
+  ]
+}

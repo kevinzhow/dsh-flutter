@@ -1,0 +1,39 @@
+00:00 +0: loading [workspace]/scratch/whalee-source-shadows/features/dsh_feature_model_selection/test/model_selection_test.dart
+00:00 +0: provider order account and official first, the rest in catalog order
+00:00 +1: catalog directory loads once and shares the load
+00:00 +2: catalog directory remembers the reasoning metadata of every model it has seen
+00:00 +3: catalog directory a failed load lands on the state and the next load retries
+00:00 +4: catalog directory a Host-side model input change reloads the catalog
+00:00 +5: catalog directory a new generation clears the old catalog and loads again
+00:00 +6: session directory waits for the projection and the catalog, then resolves the default
+00:00 +7: session directory the projection wins over the default and may be unroutable
+00:00 +8: session directory select submits and waits for the projection frame to update
+00:00 +9: session directory a refusal is reported and kept on the state
+00:00 +10: session directory the pending selection shows while the request is in flight
+00:00 +11: session directory a stale answer never overwrites a newer selection
+00:00 +12: session directory resetConnected drops a pending selection
+00:00 +13: session directory a catalog error shows with the failed status
+00:00 +14: seat the chip names the model and its effort
+00:00 +15: seat native accessibility selects model and effort from the chip
+00:00 +16: seat native model trigger bounds stay isolated under Focus
+00:00 +17: seat native model trigger bounds stay isolated under CallbackShortcuts
+00:00 +18: seat a locked model chip has no native activation action
+00:00 +19: seat with no model resolved the chip invites a choice
+00:00 +20: seat the source content-box menu root has two compact rows and no sheet title
+00:00 +21: seat choosing a model submits it with its default effort
+00:00 +22: seat the effort pane lists the model levels and submits one
+00:00 +23: seat a rejected selection keeps the sheet open with the reason
+00:00 +24: seat search appears above four models and ranks by name
+00:00 +25: seat scrolling the model sheet pins the provider and selects a later group
+00:01 +26: seat a provider that failed to load is listed with a retry
+00:01 +27: seat a model without reasoning levels has no Effort row
+00:01 +28: seat Chinese copy comes from the generated dictionary
+00:01 +29: seat desktop root stays above its trigger and dismisses outside
+00:01 +30: seat keyboard drills then Escape returns to root before closing
+00:01 +31: seat source content-box overflow bounds at Size(1100.0, 800.0)
+00:01 +32: seat source content-box overflow bounds at Size(390.0, 320.0)
+00:01 +33: seat content-box change preserves the three-row effort height
+00:01 +34: seat pointer drilling retains the source effort focus cue until blur
+00:01 +35: seat pending effort choice keeps the row and blocks a second request
+00:01 +36: seat public test support runs the real selector and projection
+00:01 +37: All tests passed!

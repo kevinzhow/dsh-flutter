@@ -1,0 +1,7 @@
+HeaderLeadingControls previously used local button geometry and tooltip timing, while shared shadows used fitted blur conversion and a fixed exterior crop. Generate a dedicated Header profile from the same published DSH 0.2.1-rc.2 inputs, use canonical header actions, and restore CSS blur/2 with per-shadow exterior masking. Keep model-button accessibility bounds separate under ancestor focus widgets so native taps reach the actual control.
+
+The source lock adds two behavior inputs, exact release reconstruction covers 13 archives/85 outputs, and the Header behavior guards preserve literal contents and reject unsupported numeric syntax. Four real metric occurrences are removed; 895 legacy metric matches and 173 unretained UI CSS inputs remain.
+
+Validation of exact head e4a35753b8e615e9f42d89d496eeef3fe1953581 is in progress: full local checks, four builds, current source screenshots, GPU replay and Android input replay. Focused source/tool, fractional-shadow and model accessibility regressions pass. The menu replay clearance bands are derived from actual source menu geometry and shadow bounds, with real Chromium positive/negative controls retained.
+
+Remaining limits: Chromium native auto-outline painting, full AppFrame mounting, opaque/square CSS shadow branches and the overall 99.5% visual target are unfinished. No font, scorer, threshold or source color is adjusted. No release/deployment.

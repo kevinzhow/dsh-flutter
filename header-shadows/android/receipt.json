@@ -1,0 +1,823 @@
+{
+  "avd": "whalee-api36",
+  "serial": "emulator-5560",
+  "apkSha256": "80934fa893efbbfa13fa98c9f6034b34e7069f52bb4822c5ebe9a6996dc4ff4a",
+  "runtimeHead": "e4a35753b8e615e9f42d89d496eeef3fe1953581",
+  "runtimeTree": "42fa793b5e2404ec4829a29a7b94a29eb14da44b",
+  "driverSha256": "9d72dd09cf82451798454143f19160aabbd4e732b61f5dbfd7daecfd1098553d",
+  "displayOverrideApplied": false,
+  "adbRootUsed": false,
+  "displaySize": "Physical size: 1080x2400",
+  "displayDensity": "Physical density: 420",
+  "androidApi": "36",
+  "installedFixtureSha256": "80934fa893efbbfa13fa98c9f6034b34e7069f52bb4822c5ebe9a6996dc4ff4a",
+  "passed": true,
+  "inputs": [
+    {
+      "tap": [
+        367,
+        648
+      ],
+      "label": "New session",
+      "bounds": [
+        37,
+        598,
+        698,
+        698
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        37,
+        598,
+        698,
+        698
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        367,
+        2269
+      ],
+      "label": "More",
+      "bounds": [
+        26,
+        2227,
+        709,
+        2311
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        26,
+        2227,
+        709,
+        2311
+      ],
+      "occludingBounds": null
+    },
+    {
+      "keycode": 111
+    },
+    {
+      "tap": [
+        367,
+        2269
+      ],
+      "label": "More",
+      "bounds": [
+        26,
+        2227,
+        709,
+        2311
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        26,
+        2227,
+        709,
+        2311
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        353,
+        204
+      ],
+      "label": "Statistics",
+      "bounds": [
+        240,
+        157,
+        466,
+        252
+      ],
+      "semanticClass": "android.view.View",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        240,
+        157,
+        466,
+        252
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        324,
+        2256
+      ],
+      "label": "231 turns",
+      "bounds": [
+        42,
+        2227,
+        607,
+        2285
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        42,
+        2227,
+        607,
+        2285
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        934,
+        2151
+      ],
+      "label": "1616M",
+      "bounds": [
+        495,
+        2122,
+        1038,
+        2180
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        830,
+        2122,
+        1038,
+        2180
+      ],
+      "occludingBounds": [
+        42,
+        1791,
+        830,
+        2207
+      ]
+    },
+    {
+      "keycode": 111
+    },
+    {
+      "tap": [
+        324,
+        2256
+      ],
+      "label": "231 turns",
+      "bounds": [
+        42,
+        2227,
+        607,
+        2285
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        42,
+        2227,
+        607,
+        2285
+      ],
+      "occludingBounds": null
+    },
+    {
+      "keycode": 4
+    },
+    {
+      "tap": [
+        575,
+        204
+      ],
+      "label": "Model",
+      "bounds": [
+        487,
+        157,
+        663,
+        252
+      ],
+      "semanticClass": "android.view.View",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        487,
+        157,
+        663,
+        252
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        842,
+        2237
+      ],
+      "label": "DeepSeek V4.1 Flash",
+      "bounds": [
+        667,
+        2201,
+        1017,
+        2274
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        667,
+        2201,
+        1017,
+        2274
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        692,
+        2035
+      ],
+      "label": "Model\n",
+      "bounds": [
+        377,
+        1991,
+        1007,
+        2080
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        377,
+        1991,
+        1007,
+        2080
+      ],
+      "occludingBounds": null
+    },
+    {
+      "keycode": 111
+    },
+    {
+      "keycode": 111
+    },
+    {
+      "tap": [
+        842,
+        2237
+      ],
+      "label": "DeepSeek V4.1 Flash",
+      "bounds": [
+        667,
+        2201,
+        1017,
+        2274
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        667,
+        2201,
+        1017,
+        2274
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        692,
+        2124
+      ],
+      "label": "Effort\n",
+      "bounds": [
+        377,
+        2080,
+        1007,
+        2169
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        377,
+        2080,
+        1007,
+        2169
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        692,
+        1946
+      ],
+      "label": "Low",
+      "bounds": [
+        377,
+        1901,
+        1007,
+        1991
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        377,
+        1901,
+        1007,
+        1991
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        843,
+        2237
+      ],
+      "label": "DeepSeek V4.1 Flash",
+      "bounds": [
+        669,
+        2201,
+        1017,
+        2274
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        669,
+        2201,
+        1017,
+        2274
+      ],
+      "occludingBounds": null
+    },
+    {
+      "tap": [
+        692,
+        2035
+      ],
+      "label": "Model\n",
+      "bounds": [
+        377,
+        1991,
+        1007,
+        2080
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        377,
+        1991,
+        1007,
+        2080
+      ],
+      "occludingBounds": null
+    },
+    {
+      "text": "Pro",
+      "focusedSearchBounds": [
+        395,
+        632,
+        988,
+        669
+      ]
+    },
+    {
+      "tap": [
+        692,
+        1304
+      ],
+      "label": "DeepSeek V4.1 Pro",
+      "bounds": [
+        377,
+        1260,
+        1007,
+        1349
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        377,
+        1260,
+        1007,
+        1349
+      ],
+      "occludingBounds": null
+    },
+    {
+      "keycode": 136
+    },
+    {
+      "tap": [
+        58,
+        383
+      ],
+      "label": "Open sidebar",
+      "bounds": [
+        21,
+        346,
+        95,
+        420
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        21,
+        346,
+        95,
+        420
+      ],
+      "occludingBounds": null
+    },
+    {
+      "keycode": 66
+    },
+    {
+      "keycode": 122
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 66
+    },
+    {
+      "keycode": 62
+    },
+    {
+      "tap": [
+        152,
+        383
+      ],
+      "label": "New session",
+      "bounds": [
+        116,
+        346,
+        189,
+        420
+      ],
+      "semanticClass": "android.widget.Button",
+      "semanticClickable": "true",
+      "visibleTouchRect": [
+        116,
+        346,
+        189,
+        420
+      ],
+      "occludingBounds": null
+    }
+  ],
+  "scenes": [
+    "sidebar-initial",
+    "sidebar-new-session",
+    "sidebar-more-menu",
+    "statistics-initial",
+    "statistics-activity",
+    "statistics-usage-one-tap",
+    "statistics-system-back",
+    "model-closed",
+    "model-root",
+    "model-directory",
+    "model-escape-to-root",
+    "model-efforts",
+    "model-effort-selected",
+    "model-search",
+    "model-selected",
+    "header-initial",
+    "header-pointer-toggle",
+    "header-enter-pointer",
+    "header-keyboard-toggle",
+    "header-keyboard-new",
+    "header-new-enter",
+    "header-new-space",
+    "header-pointer-new"
+  ],
+  "checks": [
+    {
+      "assertion": "Visible: New session",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: New session",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Sidebar action: new-session",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: More",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Settings",
+      "passed": true
+    },
+    {
+      "assertion": "Absent: Settings",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: More",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Settings",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Statistics",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: 231 turns",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: 231 turns",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Session statistics",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: 1616M",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Token usage",
+      "passed": true
+    },
+    {
+      "assertion": "Absent: Session statistics",
+      "passed": true
+    },
+    {
+      "assertion": "Absent: Token usage",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: 231 turns",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Session statistics",
+      "passed": true
+    },
+    {
+      "assertion": "Absent: Session statistics",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Model",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Selection: none",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: DeepSeek V4.1 Flash",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Effort",
+      "passed": true
+    },
+    {
+      "assertion": "Opening the desktop-style menu adds no viewport mask",
+      "passed": true,
+      "rect": [
+        0,
+        600,
+        540,
+        1200
+      ],
+      "before": "model-closed",
+      "after": "model-root"
+    },
+    {
+      "assertion": "Unique touch target: Model\n",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Search models",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Effort",
+      "passed": true
+    },
+    {
+      "assertion": "Absent: Effort",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: DeepSeek V4.1 Flash",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Effort\n",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Low",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Low",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Selection: deepseek-official/flash/low",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: DeepSeek V4.1 Flash",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Model\n",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Search models",
+      "passed": true
+    },
+    {
+      "assertion": "Search autofocus reaches its unique native editable descendant",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: DeepSeek V4.1 Pro",
+      "passed": true
+    },
+    {
+      "assertion": "Search removes unmatched Flash and Alpha model options",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: DeepSeek V4.1 Pro",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Selection: deepseek-official/pro/default",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=0 session=0",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: Open sidebar",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=1 session=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=2 session=0",
+      "passed": true
+    },
+    {
+      "assertion": "Enter after pointer focus does not paint the Header outline",
+      "passed": true,
+      "rect": [
+        15,
+        340,
+        101,
+        426
+      ],
+      "before": "header-pointer-toggle",
+      "after": "header-enter-pointer"
+    },
+    {
+      "assertion": "Home releases pointer ownership and paints Header keyboard focus",
+      "passed": true,
+      "rect": [
+        15,
+        340,
+        101,
+        426
+      ],
+      "before": "header-enter-pointer",
+      "after": "header-keyboard-toggle"
+    },
+    {
+      "assertion": "Tab moves visible Header focus to New session",
+      "passed": true,
+      "rect": [
+        110,
+        340,
+        195,
+        426
+      ],
+      "before": "header-initial",
+      "after": "header-keyboard-new"
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=2 session=1",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=2 session=2",
+      "passed": true
+    },
+    {
+      "assertion": "Unique touch target: New session",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Header callbacks: toggle=2 session=3",
+      "passed": true
+    },
+    {
+      "assertion": "Pointer activation removes the New session keyboard outline",
+      "passed": true,
+      "rect": [
+        110,
+        340,
+        195,
+        426
+      ],
+      "before": "header-initial",
+      "after": "header-pointer-new"
+    },
+    {
+      "assertion": "New session pointer state differs from its keyboard-focus state",
+      "passed": true,
+      "rect": [
+        110,
+        340,
+        195,
+        426
+      ],
+      "before": "header-new-space",
+      "after": "header-pointer-new"
+    }
+  ],
+  "geometryProofs": [
+    {
+      "assertion": "More menu Settings row is above the footer launcher",
+      "passed": true,
+      "launcher": [
+        26,
+        2227,
+        709,
+        2311
+      ],
+      "settings": [
+        [
+          42,
+          2101,
+          347,
+          2206
+        ]
+      ]
+    },
+    {
+      "assertion": "Model root is compact, within viewport and above its launcher",
+      "passed": true,
+      "launcher": [
+        667,
+        2201,
+        1017,
+        2274
+      ],
+      "panels": [
+        [
+          377,
+          1991,
+          1007,
+          2169
+        ]
+      ],
+      "viewport": [
+        1080,
+        2400
+      ]
+    },
+    {
+      "assertion": "Header has two unique native actions with measured bounds",
+      "passed": true,
+      "toggleBounds": [
+        21,
+        346,
+        95,
+        420
+      ],
+      "newSessionBounds": [
+        116,
+        346,
+        189,
+        420
+      ],
+      "toggleRegion": [
+        15,
+        340,
+        101,
+        426
+      ],
+      "newSessionRegion": [
+        110,
+        340,
+        195,
+        426
+      ],
+      "regionMarginSource": "HeaderLeadingFocusContext source focus width"
+    }
+  ],
+  "dumpDiagnostics": []
+}

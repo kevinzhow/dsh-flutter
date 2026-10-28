@@ -1,0 +1,353 @@
+{
+  "passed": true,
+  "source": "actual locked HeaderLeadingControls.tsx, Tooltip.tsx and input-modality.ts",
+  "referenceMode": "native device scale factor",
+  "chromiumVersions": [
+    {
+      "density": 1,
+      "version": "145.0.7632.6"
+    },
+    {
+      "density": 2,
+      "version": "145.0.7632.6"
+    }
+  ],
+  "receipts": [
+    {
+      "theme": "light",
+      "density": 1,
+      "state": "idle",
+      "file": "source-light-dpr1-idle.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 1,
+      "state": "hover",
+      "file": "source-light-dpr1-hover.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(38, 49, 72, 0.06)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 1,
+      "state": "pressed",
+      "file": "source-light-dpr1-pressed.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(38, 49, 72, 0.06)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": false,
+        "modality": "pointer",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 1,
+      "state": "focus",
+      "file": "source-light-dpr1-focus.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(65, 118, 230)",
+        "outlineWidth": "2px",
+        "outlineStyle": "auto",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": true,
+        "modality": "keyboard",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 1,
+      "check": "native-callbacks-and-pointer-versus-navigation-focus",
+      "passed": true,
+      "calls": {
+        "toggle": 2,
+        "session": 2
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 1,
+      "state": "idle",
+      "file": "source-dark-dpr1-idle.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 1,
+      "state": "hover",
+      "file": "source-dark-dpr1-hover.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(255, 255, 255, 0.08)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 1,
+      "state": "pressed",
+      "file": "source-dark-dpr1-pressed.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(255, 255, 255, 0.08)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": false,
+        "modality": "pointer",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 1,
+      "state": "focus",
+      "file": "source-dark-dpr1-focus.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(122, 170, 255)",
+        "outlineWidth": "2px",
+        "outlineStyle": "auto",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": true,
+        "modality": "keyboard",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 1,
+      "check": "native-callbacks-and-pointer-versus-navigation-focus",
+      "passed": true,
+      "calls": {
+        "toggle": 2,
+        "session": 2
+      }
+    },
+    {
+      "theme": "light",
+      "density": 2,
+      "state": "idle",
+      "file": "source-light-dpr2-idle.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 2,
+      "state": "hover",
+      "file": "source-light-dpr2-hover.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(38, 49, 72, 0.06)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 2,
+      "state": "pressed",
+      "file": "source-light-dpr2-pressed.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(38, 49, 72, 0.06)",
+        "outlineColor": "rgb(97, 102, 107)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": false,
+        "modality": "pointer",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 2,
+      "state": "focus",
+      "file": "source-light-dpr2-focus.png",
+      "actual": {
+        "color": "rgb(97, 102, 107)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(65, 118, 230)",
+        "outlineWidth": "2px",
+        "outlineStyle": "auto",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": true,
+        "modality": "keyboard",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "light",
+      "density": 2,
+      "check": "native-callbacks-and-pointer-versus-navigation-focus",
+      "passed": true,
+      "calls": {
+        "toggle": 2,
+        "session": 2
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 2,
+      "state": "idle",
+      "file": "source-dark-dpr2-idle.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 2,
+      "state": "hover",
+      "file": "source-dark-dpr2-hover.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(255, 255, 255, 0.08)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": false,
+        "focusVisible": false,
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 2,
+      "state": "pressed",
+      "file": "source-dark-dpr2-pressed.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(255, 255, 255, 0.08)",
+        "outlineColor": "rgb(207, 211, 214)",
+        "outlineWidth": "0px",
+        "outlineStyle": "none",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": false,
+        "modality": "pointer",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 2,
+      "state": "focus",
+      "file": "source-dark-dpr2-focus.png",
+      "actual": {
+        "color": "rgb(207, 211, 214)",
+        "background": "rgba(0, 0, 0, 0)",
+        "outlineColor": "rgb(122, 170, 255)",
+        "outlineWidth": "2px",
+        "outlineStyle": "auto",
+        "outlineOffset": "0px",
+        "focused": true,
+        "focusVisible": true,
+        "modality": "keyboard",
+        "iconWidth": 16,
+        "iconHeight": 16
+      }
+    },
+    {
+      "theme": "dark",
+      "density": 2,
+      "check": "native-callbacks-and-pointer-versus-navigation-focus",
+      "passed": true,
+      "calls": {
+        "toggle": 2,
+        "session": 2
+      }
+    }
+  ]
+}

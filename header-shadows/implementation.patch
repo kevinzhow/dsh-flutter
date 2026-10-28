@@ -1,0 +1,4045 @@
+diff --git a/apps/dsh_flutter/test/parity/header_leading_native_fixture_test.dart b/apps/dsh_flutter/test/parity/header_leading_native_fixture_test.dart
+new file mode 100644
+index 0000000..8800c67
+--- /dev/null
++++ b/apps/dsh_flutter/test/parity/header_leading_native_fixture_test.dart
+@@ -0,0 +1,115 @@
++import 'dart:convert';
++
++import 'package:dsh_i18n/dsh_i18n.dart';
++import 'package:dsh_flutter/src/platform/pinned_fonts.dart';
++import 'package:dsh_theme/testing.dart';
++import 'package:dsh_ui/dsh_ui.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter/widgets.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++import 'reported_families_main.dart';
++
++void main() {
++  setUpAll(loadPinnedFontsFromEnvironment);
++  for (final size in [const Size(1280, 720), const Size(390, 844)]) {
++    testWidgets(
++      'Header native scene preserves toolbar and exposes actual callbacks at $size',
++      (t) async {
++        t.view.physicalSize = size;
++        t.view.devicePixelRatio = 1;
++        addTearDown(t.view.reset);
++        await t.pumpWidget(
++          dshTestApp(
++            const SafeArea(
++              child: ReportedFamiliesNativeScenes(DshI18n(DshLocale.en)),
++            ),
++          ),
++        );
++        await t.pumpAndSettle();
++        final toolbar = [
++          for (var i = 0; i < 3; i++)
++            t.getRect(find.byKey(ValueKey('scene-$i')).last),
++        ];
++        final headerBottom = t
++            .getBottomLeft(find.text('Sidebar action: none').last)
++            .dy;
++        await t.sendKeyEvent(LogicalKeyboardKey.f6);
++        await t.pumpAndSettle();
++        expect(
++          find.text('Header callbacks: toggle=0 session=0'),
++          findsOneWidget,
++        );
++        expect(find.byKey(DshButton.focusRingKey), findsNothing);
++        for (var i = 0; i < 3; i++) {
++          expect(t.getRect(find.byKey(ValueKey('scene-$i')).last), toolbar[i]);
++        }
++        final toggle = find.byKey(const ValueKey('leading-toggle'));
++        final session = find.byKey(const ValueKey('leading-new-session'));
++        final toggleRect = t.getRect(toggle), sessionRect = t.getRect(session);
++        expect(
++          toggleRect.size,
++          const Size(
++            DshHeaderLeadingRecipe.width,
++            DshHeaderLeadingRecipe.height,
++          ),
++        );
++        expect(
++          toggleRect.top,
++          headerBottom + DshHeaderLeadingRecipe.controlsGap,
++        );
++        expect(
++          sessionRect.left - toggleRect.right,
++          DshHeaderLeadingRecipe.controlsGap,
++        );
++        debugPrint(
++          'HEADER_NATIVE_GEOMETRY ${jsonEncode({
++            'viewport': [size.width, size.height],
++            'toolbarBottom': headerBottom,
++            'toggle': [toggleRect.left, toggleRect.top, toggleRect.right, toggleRect.bottom],
++            'newSession': [sessionRect.left, sessionRect.top, sessionRect.right, sessionRect.bottom],
++            'counter': [t.getTopLeft(find.text('Header callbacks: toggle=0 session=0')).dx, t.getTopLeft(find.text('Header callbacks: toggle=0 session=0')).dy, t.getBottomRight(find.text('Header callbacks: toggle=0 session=0')).dx, t.getBottomRight(find.text('Header callbacks: toggle=0 session=0')).dy],
++          })}',
++        );
++        await t.tap(toggle);
++        await t.pump();
++        expect(
++          find.text('Header callbacks: toggle=1 session=0'),
++          findsOneWidget,
++        );
++        await t.sendKeyEvent(LogicalKeyboardKey.enter);
++        await t.pump();
++        expect(
++          find.text('Header callbacks: toggle=2 session=0'),
++          findsOneWidget,
++        );
++        expect(find.byKey(DshButton.focusRingKey), findsNothing);
++        await t.sendKeyEvent(LogicalKeyboardKey.home);
++        await t.pump();
++        expect(find.byKey(DshButton.focusRingKey), findsOneWidget);
++        await t.sendKeyEvent(LogicalKeyboardKey.tab);
++        await t.pump();
++        await t.sendKeyEvent(LogicalKeyboardKey.enter);
++        await t.pump();
++        expect(
++          find.text('Header callbacks: toggle=2 session=1'),
++          findsOneWidget,
++        );
++        await t.sendKeyEvent(LogicalKeyboardKey.space);
++        await t.pump();
++        expect(
++          find.text('Header callbacks: toggle=2 session=2'),
++          findsOneWidget,
++        );
++        await t.tap(session);
++        await t.pump();
++        expect(
++          find.text('Header callbacks: toggle=2 session=3'),
++          findsOneWidget,
++        );
++        expect(find.byKey(DshButton.focusRingKey), findsNothing);
++        await t.pumpWidget(const SizedBox.shrink());
++      },
++    );
++  }
++}
+diff --git a/apps/dsh_flutter/test/parity/helpers/header_leading_native_fixture.dart b/apps/dsh_flutter/test/parity/helpers/header_leading_native_fixture.dart
+new file mode 100644
+index 0000000..5170d02
+--- /dev/null
++++ b/apps/dsh_flutter/test/parity/helpers/header_leading_native_fixture.dart
+@@ -0,0 +1,95 @@
++// The actual Header occupant with synthetic actions, independent of AppFrame's
++// platform/mounting policy. No product styles or alternative buttons live here.
++import 'package:dsh_feature_sidebar/dsh_feature_sidebar.dart';
++import 'package:dsh_i18n/dsh_i18n.dart';
++import 'package:dsh_layout/dsh_layout.dart';
++import 'package:dsh_shortcuts/dsh_shortcuts.dart';
++import 'package:dsh_slots/dsh_slots.dart';
++import 'package:dsh_ui/dsh_ui.dart';
++import 'package:flutter/widgets.dart';
++
++class HeaderLeadingNativeFixture extends StatefulWidget {
++  const HeaderLeadingNativeFixture({super.key, required this.i18n});
++  final DshI18n i18n;
++
++  @override
++  State<HeaderLeadingNativeFixture> createState() =>
++      _HeaderLeadingNativeFixtureState();
++}
++
++class _HeaderLeadingNativeFixtureState
++    extends State<HeaderLeadingNativeFixture> {
++  final _scope = FocusScopeNode(debugLabel: 'native Header replay');
++  final _store = LayoutStore(viewportWidth: 1280);
++  late final _layout = LayoutController(_store, (_) => false);
++  late final _services = _Services(this);
++  late final void Function() _off;
++  int toggles = 0, sessions = 0;
++
++  @override
++  void initState() {
++    super.initState();
++    _off = _store.subscribe(() => setState(() => toggles++));
++    // Enter an empty focus scope. Its first Tab reaches the actual Header
++    // buttons, while the initial scene has no programmatically painted ring.
++    WidgetsBinding.instance.addPostFrameCallback((_) {
++      if (mounted) _scope.requestFocus();
++    });
++  }
++
++  void _newSession() => setState(() => sessions++);
++
++  @override
++  void dispose() {
++    _off();
++    _layout.dispose();
++    _scope.dispose();
++    super.dispose();
++  }
++
++  @override
++  Widget build(BuildContext context) => FocusScope(
++    node: _scope,
++    child: Align(
++      alignment: Alignment.topLeft,
++      child: Column(
++        mainAxisSize: MainAxisSize.min,
++        crossAxisAlignment: CrossAxisAlignment.start,
++        children: [
++          Padding(
++            padding: const EdgeInsets.all(DshHeaderLeadingRecipe.controlsGap),
++            child: DshSurface(
++              color: context.dsh.bgBase,
++              child: ShellScope(
++                chrome: const ShellChrome(platform: ShellPlatform.darwin),
++                child: SidebarLeadingControls(
++                  services: _services,
++                  collapsed: true,
++                ),
++              ),
++            ),
++          ),
++          Text('Header callbacks: toggle=$toggles session=$sessions'),
++        ],
++      ),
++    ),
++  );
++}
++
++class _Services implements SidebarServices {
++  const _Services(this.owner);
++  final _HeaderLeadingNativeFixtureState owner;
++  @override
++  DshI18n get i18n => owner.widget.i18n;
++  @override
++  LayoutController get layout => owner._layout;
++  @override
++  void startSession() => owner._newSession();
++  @override
++  String get brandName => 'Whalee';
++  @override
++  ShortcutService? get shortcuts => null;
++  @override
++  Widget browsingRegion(BuildContext context, SidebarSectionOwner owner) =>
++      const SizedBox.shrink();
++}
+diff --git a/apps/dsh_flutter/test/parity/reported_families_main.dart b/apps/dsh_flutter/test/parity/reported_families_main.dart
+index 6c5d9b6..653aaa5 100644
+--- a/apps/dsh_flutter/test/parity/reported_families_main.dart
++++ b/apps/dsh_flutter/test/parity/reported_families_main.dart
+@@ -10,7 +10,9 @@ import 'package:dsh_i18n/dsh_i18n.dart';
+ import 'package:dsh_theme/dsh_theme.dart';
+ import 'package:dsh_ui/dsh_ui.dart';
+ import 'package:flutter/material.dart';
++import 'package:flutter/services.dart';
+ 
++import 'helpers/header_leading_native_fixture.dart';
+ import 'helpers/reported_sidebar_fixture.dart';
+ 
+ Future<void> main() async {
+@@ -32,22 +34,24 @@ Future<void> main() async {
+       home: Scaffold(
+         backgroundColor: theme.bgBase,
+         body: SafeArea(
+-          child: _Scenes(DshI18n(zh ? DshLocale.zh : DshLocale.en)),
++          child: ReportedFamiliesNativeScenes(
++            DshI18n(zh ? DshLocale.zh : DshLocale.en),
++          ),
+         ),
+       ),
+     ),
+   );
+ }
+ 
+-class _Scenes extends StatefulWidget {
+-  const _Scenes(this.i18n);
++class ReportedFamiliesNativeScenes extends StatefulWidget {
++  const ReportedFamiliesNativeScenes(this.i18n, {super.key});
+   final DshI18n i18n;
+ 
+   @override
+-  State<_Scenes> createState() => _ScenesState();
++  State<ReportedFamiliesNativeScenes> createState() => _ScenesState();
+ }
+ 
+-class _ScenesState extends State<_Scenes> {
++class _ScenesState extends State<ReportedFamiliesNativeScenes> {
+   int selected = 0;
+   String sidebarAction = 'none';
+ 
+@@ -77,38 +81,48 @@ class _ScenesState extends State<_Scenes> {
+         Text('Sidebar action: $sidebarAction'),
+       ],
+     );
+-    return Stack(
+-      children: [
+-        Column(
+-          crossAxisAlignment: CrossAxisAlignment.stretch,
+-          children: [
+-            // Keep the measured layout unchanged while painting the controls
+-            // after the sidebar's nested route. A route excludes earlier
+-            // semantics siblings, including this native replay toolbar.
+-            Visibility(
+-              visible: false,
+-              maintainSize: true,
+-              maintainAnimation: true,
+-              maintainState: true,
+-              child: header,
+-            ),
+-            Expanded(
+-              child: switch (selected) {
+-                0 => Align(
+-                  alignment: Alignment.topLeft,
+-                  child: ReportedSidebarFixture(
+-                    i18n: widget.i18n,
+-                    onAction: (value) => setState(() => sidebarAction = value),
++    // A fixture-only entry keeps the existing three-button toolbar and all
++    // previously measured scene coordinates unchanged at narrow widths.
++    return CallbackShortcuts(
++      bindings: {
++        const SingleActivator(LogicalKeyboardKey.f6): () =>
++            setState(() => selected = 3),
++      },
++      child: Stack(
++        children: [
++          Column(
++            crossAxisAlignment: CrossAxisAlignment.stretch,
++            children: [
++              // Keep the measured layout unchanged while painting the controls
++              // after the sidebar's nested route. A route excludes earlier
++              // semantics siblings, including this native replay toolbar.
++              Visibility(
++                visible: false,
++                maintainSize: true,
++                maintainAnimation: true,
++                maintainState: true,
++                child: header,
++              ),
++              Expanded(
++                child: switch (selected) {
++                  0 => Align(
++                    alignment: Alignment.topLeft,
++                    child: ReportedSidebarFixture(
++                      i18n: widget.i18n,
++                      onAction: (value) =>
++                          setState(() => sidebarAction = value),
++                    ),
+                   ),
+-                ),
+-                1 => _StatisticsScene(i18n: widget.i18n),
+-                _ => ReportedModelFixture(i18n: widget.i18n),
+-              },
+-            ),
+-          ],
+-        ),
+-        Positioned(top: 0, left: 0, right: 0, child: header),
+-      ],
++                  1 => _StatisticsScene(i18n: widget.i18n),
++                  2 => ReportedModelFixture(i18n: widget.i18n),
++                  _ => HeaderLeadingNativeFixture(i18n: widget.i18n),
++                },
++              ),
++            ],
++          ),
++          Positioned(top: 0, left: 0, right: 0, child: header),
++        ],
++      ),
+     );
+   }
+ }
+diff --git a/docs/design-system.md b/docs/design-system.md
+index fc496c4..0c9170a 100644
+--- a/docs/design-system.md
++++ b/docs/design-system.md
+@@ -19,7 +19,7 @@ Run the pinned environment and `python tool/design-system/generate.py --check` t
+ 
+ The [source-input inventory](design-system/source-inventory.md) separately enumerates the pinned package/dependency/CSS universe, including explicitly pending inputs and CSS-free packages. Its check against the real source detects package, stylesheet and dependency drift; snapshot-only mode explicitly cannot establish source-universe completeness. The [release-input verifier](design-system/release-inputs.md) reconstructs every locked snapshot from its SHA-512-verified npm archive, so editing a snapshot and its recorded hash together cannot pass. Missing archives are fetched from their exact public release URLs; cached archives are revalidated, and an explicit offline mode is available. The supplied source checkout's Git revision must equal the locked commit, even when selected package bytes happen to match.
+ 
+-`tool/design-system/families.json` records the canonical components, known duplicate implementations and migration status. Families without audited recipes are explicitly marked pending. `check.py` rejects increases in direct platform controls, references to known duplicate button/input implementations and detected manual numeric metrics. Limits are per file and rule: moving a bypass fails even if the repository total declines. The checker compares its policy and baseline with the actual PR base commit: existing patterns cannot be weakened or removed, family/canonical coverage cannot shrink, and wrapper exemptions cannot gain files or constructor occurrences. Additional stricter rules and actual reductions remain possible. Empty canonical lists require an explicit pending status. Duplicate keys, unknown policy fields and malformed entries fail validation. The current metric allowance is exactly the 899 observed matches, after removing six unused slots; this is historical debt, not zero handwritten styling. The scanner still covers named metrics and control constructors rather than every Dart expression, so further coverage and source provenance work remains necessary.
++`tool/design-system/families.json` records the canonical components, known duplicate implementations and migration status. Families without audited recipes are explicitly marked pending. `check.py` rejects increases in direct platform controls, references to known duplicate button/input implementations and detected manual numeric metrics. Limits are per file and rule: moving a bypass fails even if the repository total declines. The checker compares its policy and baseline with the actual PR base commit: existing patterns cannot be weakened or removed, family/canonical coverage cannot shrink, and wrapper exemptions cannot gain files or constructor occurrences. Additional stricter rules and actual reductions remain possible. Empty canonical lists require an explicit pending status. Duplicate keys, unknown policy fields and malformed entries fail validation. The current metric allowance is exactly the 895 observed matches: the source-contract foundation removed six unused slots to reach 899, then HeaderLeadingControls removed four actual handwritten metric occurrences. This is remaining historical debt, not zero handwritten styling. The scanner still covers named metrics and control constructors rather than every Dart expression, so further coverage and source provenance work remains necessary.
+ 
+ Source declarations represented by fixed widget structure must also be checked. SegmentedTabs now rejects changes to its grid/positioning, transparent hit regions, pointer handling, focus underline and the source relation between indicator inset, padding and radius until the renderer is deliberately updated. Its reduced-motion rule is required exactly once and cannot be attached to another primitive family. Required generated theme references must exist in the official pack and match the lookup value kind (color, number, shadow, typography or CSS string). The released statistics separator is a narrowly explicit nullable reference: its source custom property is undefined, CSS inherits the text color, and the existing Flutter consumer performs the same optional lookup and inheritance. It is not a fallback for required color or size tokens.
+ 
+diff --git a/docs/design-system/header-leading.md b/docs/design-system/header-leading.md
+new file mode 100644
+index 0000000..29d6216
+--- /dev/null
++++ b/docs/design-system/header-leading.md
+@@ -0,0 +1,122 @@
++# HeaderLeadingControls source migration
++
++This batch replaces the sidebar leading seat's private gesture/hover-painted
++button with the canonical `DshButtonProfile.headerAction`. It is based on
++`2a4e85c659b51fee5e1e3115f1c1a9bbe5b5b374`, with no package upgrade.
++
++The published `@deepseek-ai/dsh-client-ui-sidebar` 0.2.1-rc.2 CSS provides the
++28×28 control, radius token, secondary glyph token, hover fill and 8px group
++gap. Its published `HeaderLeadingControls.js` region provides both 16px glyphs
++and both 500ms tooltip delays. `header_leading_recipes.py` translates those
++inputs into `DshHeaderLeadingRecipe`; the feature uses its fields without
++handwritten layout metrics or a second button implementation.
++
++The entire three-rule Header stylesheet is classified, including structural
++declarations. New states, declarations, conditions, unsupported structural
++values and unknown required tokens fail generation. The release behavior's
++exact released text is fingerprinted after substituting only the supported
++numeric delay/icon fields: changed actions, labels, shortcut IDs, native button
++type, icon identity or ambiguous repeated fields also fail. This is an explicit
++closed set, not a JavaScript evaluator.
++Whitespace, comments and literal contents remain in the fingerprints. A
++previous normalization removed whitespace inside strings and incorrectly
++accepted changed shortcut/key names such as `session. new` and `Page Down`.
++Four negative cases reproduced that gap before the exact-text check; the
++numeric propagation tests still pass and the generated recipes are unchanged.
++
++## Retained provenance
++
++Reference checkout: `687f282e8625c6b8d11ff58211a90524be2e4317`.
++The existing package integrities and all existing CSS/class/source hashes stay
++unchanged. New inputs come from the same integrity-verified archives:
++
++| Input | SHA256 |
++| --- | --- |
++| ui-sidebar `package/lib/client.js` | `4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e` |
++| Actual `HeaderLeadingControls.js` region | `c37d454753de03040012910c34c36db4a4b1a5c463f6c1670ec33a2d2021b22c` |
++| `HeaderLeadingControls-behavior.json` | `36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d` |
++| `ui-primitives/input-modality.json` | `fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86` |
++| Raw source `ui-primitives/src/input-modality.ts` | `91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba` |
++
++`published.py` extracts and verifies the named behavior regions without
++executing JavaScript. `generate.py --src` additionally verifies the pinned
++source hashes and normalizes the actual Header CSS against the published CSS.
++
++## Interaction and focus contract
++
++Header keeps the secondary glyph color while idle, hovered or pressed. It has
++only a `:hover` fill; touch press or keyboard activation does not synthesize a
++ghost active fill. Canonical button semantics, pointer activation, Enter and
++Space dispatch the feature actions once. The Header profile owns its geometry
++and rejects caller metric overrides. Its absent disabled opacity rule is not
++replaced with the primitive button's dimming rule.
++
++Header has no local focus rule or outline offset. The generated profile reads
++the locked global `focus.css` width and color tokens. The shared
++`DshFocusPresentation` now separately exposes the published input modality's
++pointer ownership of outline suppression. Only Header consumes that new flag
++and the shared focus-visible history. Existing button profiles retain their
++prior paint conditions and interaction paths.
++
++A pointer press takes Header focus and suppresses the outline. Enter alone
++does not remove suppression. Navigation keys remove it; a non-navigation key
++also removes it after focus moves to another control. Four actual consumer
++raster assertions first failed when Header still used Flutter's highlight
++callback after mouse focus, and passed after Header switched to the existing
++shared focus-visible history. Tests also retain the original profiles' behavior.
++
++## Focused validation and evidence
++
++Local evidence is retained under `build/header-leading/` in the isolated
++`scratch/whalee-header-leading` worktree. It includes the verified package
++archives, source checks, targeted logs and all failed attempts.
++
++- Six Python tests cover actual released values, mutation propagation to every
++  Header field without changing other recipes, unknown style/state/condition
++  rejection, ambiguous behavior rejection, extraction and global focus drift.
++- Six Header profile tests and seven consumer tests cover light/dark states,
++  touch/mouse press, native semantics, keyboard callbacks, pointer/navigation
++  focus ownership, focus transfer, disabled semantics, live shortcut updates,
++  the 499/500ms tooltip boundary and existing Windows visibility/placement.
++- Thirty existing button/profile/sidebar tests pass unchanged.
++- The five touched Dart source/test files pass focused analysis. Recipe/source
++  drift and the existing per-file family guard pass. The feature's actual
++  manual metric count decreases from four to zero; only that debt is removed.
++
++The reference fixture in `tool/parity-ext/host/header-leading.tsx` imports the
++actual locked `HeaderLeadingControls.tsx`, actual Tooltip/icons and actual
++input-modality implementation. The wrapper supplies only callback/shortcut
++fixture data and a fixed capture frame. `capture-header-leading.mjs` captures
++idle, hover, pressed and keyboard focus in both themes at DPR1 and DPR2, and
++asserts actual DOM metrics, color inheritance, state behavior and callbacks.
++Flutter's consumer test exports the matching 16 images when
++`HEADER_LEADING_RASTER_OUT` is set.
++
++`raster/source-receipt.json`, `raster/comparison.json` and `receipt.json` retain
++the source observations and uncensored image comparison. Non-focus captures
++have only small glyph/edge raster differences (maximum 1–3 channel levels).
++No scorer, acceptance threshold, font, token, alpha or color was tuned to them.
++
++## Remaining boundaries
++
++Native Chromium `outline-style:auto` is still a renderer difference: despite
++the computed CSS primary outline color, Chromium paints a UA ring (notably a
++white ring in dark mode) with native geometry. Canonical `DshButton` paints
++its existing theme-colored stroke. This batch fixes the Header visibility
++state and uses the source tokens; it does **not** certify those focus rasters
++as matching, invent UA color constants or claim full visual completion.
++
++The source AppFrame mounts this seat only on Darwin with a collapsed sidebar;
++the Header component itself renders both controls unconditionally. Flutter's
++existing host additionally supports Windows caption controls, hiding New
++Session while expanded and changing tooltip side/label. This batch preserves
++that host behavior. AppFrame/index source files are not newly locked here, so
++full platform mounting, traffic-light placement and caption behavior are not
++certified by this component profile.
++
++Header focus tests cover ordinary hardware keys, pointer focus and focus
++transfer. Cross-window blur and composition originating in a separate editor
++are not certified here. The feature still projects shortcut keycaps rather
++than the Web's `aria-keyshortcuts` attribute into Flutter semantics. Native
++applications, full suites, release builds and deployment remain the integrating
++owner's next validation steps.
+diff --git a/docs/design-system/native-menu-proof.md b/docs/design-system/native-menu-proof.md
+new file mode 100644
+index 0000000..aed3f99
+--- /dev/null
++++ b/docs/design-system/native-menu-proof.md
+@@ -0,0 +1,112 @@
++# Native model-root clearance proof
++
++The native menu replay retains 84 assertions and the same inputs, captures,
++references and changed/unchanged expectations. Two rectangle coordinates
++change because the original compact-root guard intersected a legitimate
++source shadow after correcting CSS blur-radius conversion. This is a test
++geometry correction, not a rendering tolerance or appearance adjustment.
++
++The original guard's intent is to catch a wrongly retained two-row root after
++selecting Pro. The synthetic Pro model has no reasoning configuration. Actual
++`ModelSelect.tsx` renders its Model row unconditionally and its Effort row only
++when `reasoning !== undefined`; therefore Pro's root must have one row. The
++existing replay preparation note records this same one-row-versus-two-row
++intent. The separate guards for root content, selection result, directory
++closure, Escape and viewport masking remain unchanged.
++
++## Derivation from the pinned design system
++
++Reference: DSH `687f282e8625c6b8d11ff58211a90524be2e4317`, published packages
++0.2.1-rc.2. The locked `ModelSelect.module.css` and generated
++`DshModelMenuRecipe` specify cell height 34, menu padding 4 on both vertical
++edges and anchor gap 8. The native fixture places its trigger 24 above the
++viewport bottom, with trigger height 28. These determine:
++
++- One-row outer height: `34 + 2×4 = 42`.
++- Two-row outer height: `2×34 + 2×4 = 76`.
++- Menu bottom: `viewportHeight − 24 − 28 − 8`.
++
++The published `--dsw-elevation-prominent` layers have vertical
++offset/blur/spread `(0,0,0.5)`, `(3,8,0)` and `(0,20,0)` in both themes.
++Pinned Blink converts CSS blur radius to sigma with `radius/2`; pinned Skia's
++local blur fast bounds extend by `3×sigma`. The largest upward extent is
++therefore `max(0.5, 3×(8/2)−3, 3×(20/2)) = 30`.
++
++For a one-row menu whose top is `T`, the entire interval `[T−34,T−30)` is
++outside its correct shadow but inside the top of a wrongly retained two-row
++card. The interval exists because the extra source row34 exceeds the maximum
++shadow reach30. It is selected by those source values; its edges are not
++chosen from the first changed screenshot pixel. The existing horizontal
++interval remains unchanged.
++
++| Case | One-row top | Two-row top | Correct shadow starts | Replacement rectangle |
++| --- | ---: | ---: | ---: | --- |
++| Desktop1280×720 | 618 | 584 | 588 | `[1028,584,1248,588]` |
++| Phone390×844 | 742 | 708 | 712 | `[138,708,358,712]` |
++
++The older desktop band `[1028,594,1248,606]` and its phone translation lie
++inside the correct source shadow envelope. Pixel equality there can no
++longer distinguish a valid shadow from an incorrect extra root row.
++
++Source inputs are retained in:
++
++- `tool/design-system/upstream/ui-model-selection/ModelSelect.module.css` and
++  `model-behavior.json`, with generated row/padding/gap fields in
++  `tool/design-system/recipes.generated.json`.
++- `packages/dsh_theme/assets/themes/official.theme.json`, both modes'
++  `--dsw-elevation-prominent` values.
++- The actual `ModelSelect.tsx` root branch at lines507–527 and the native
++  synthetic model fixture in
++  `features/dsh_feature_model_selection/lib/testing.dart`.
++- Pinned [Blink CSS sigma conversion](https://chromium.googlesource.com/chromium/src/+/47e20adcc15fc15f01825aa17e570c8f5492ac0f/third_party/blink/renderer/core/style/shadow_data.h)
++  and [Skia local fast bounds](https://chromium.googlesource.com/skia/+/2ab8add5be2c46eb6238f4c217f6d6dbc9bccd23/src/core/SkBlurMaskFilterImpl.cpp).
++
++## Positive and negative controls
++
++Read-only Chromium145.0.7632.6 observation of the actual upstream component,
++using its existing synthetic data and callbacks, confirmed:
++
++| Viewport/theme | Two-row DOM bounds | Pro DOM bounds | Correct Pro band changes | Actual two-row control band changes |
++| --- | --- | --- | ---: | ---: |
++| Desktop/light | `(1008,584,248,76)` | `(1008,618,248,42)` | 0 pixels | 880 pixels, max channel8 |
++| Phone/dark | `(118,708,248,76)` | `(118,742,248,42)` | 0 pixels | 880 pixels, max channel23 |
++
++Both source DOMs reported padding4 and one remaining Model row of height34
++after Pro selection. The observed shadows retained their authored blur8 and20
++layers. The positive control is the real initial two-row Flash root, not a
++hand-drawn approximation of an invalid menu. Thus the replacement still
++rejects the specific extra-row regression the original guard was designed
++to detect.
++
++The retained failed native desktop captures at
++`build/native-header-shadows-menu-gpu/reported-families.desktop/` independently
++show the old band changing220 pixels by one channel level from the legitimate
++shadow. The source-derived replacement band changes0 pixels for correct Pro
++and880 pixels for the actual two-row control, matching the source result.
++Those failed captures and their runtime receipt remain intact.
++
++All comparisons above use exact pixel equality, with no threshold, scorer,
++font, alpha, color, blur or product geometry change. The new rectangle does
++not certify visual similarity or all possible model-menu errors. Native
++execution against the final compiled runtime remains required. The separate
++Header manifest remains unchanged at 72 assertions; every Header rectangle
++was checked against its own viewport, including phone callback edges at 390.
++
++## Retained source control artifacts
++
++`build/native-menu-proof/` contains the reproducible
++`capture-source.mjs`, its execution log and
++`native-control-comparison.json` for the retained failed native desktop run.
++`source-controls/geometry.json` records Chromium version, actual source
++file hashes, locked-input matches, host bundle hashes, pinned font hashes,
++source DOM bounds, authored/computed shadows and both exact comparisons.
++The same directory retains eight actual source PNGs: closed, two-row root,
++Pro selected and Pro root for desktop/light and phone/dark.
++
++The script imports the existing actual-source parity host rather than
++recreating menu CSS or controls. It derives the vertical band from the
++generated row height and authored shadow values, checks the DOM geometry,
++and fails if no source clearance interval exists. Reproduction requires
++the pinned environment and explicit `--repo`, `--host-dist` and fresh `--out`
++arguments. The source checkout commit and locked source hashes are checked
++before capture; all PNGs and failure receipts are preserved.
+diff --git a/docs/design-system/source-shadows.md b/docs/design-system/source-shadows.md
+new file mode 100644
+index 0000000..3bcf281
+--- /dev/null
++++ b/docs/design-system/source-shadows.md
+@@ -0,0 +1,66 @@
++# Source shadow conversion and exterior coverage
++
++`DshShadowBox` consumes the generated theme's CSS shadow offsets, blur radii,
++spreads and colors. It converts the authored blur radius to sigma with
++`radius / 2`. The former `max(0.5, 0.45 * radius - 2.1)` was a screenshot fit
++and has been removed, together with the fixed 200px exterior clipping bound.
++
++The conversion follows Chromium 145.0.7632.6, commit
++`47e20adcc15fc15f01825aa17e570c8f5492ac0f`:
++
++- Blink `core/style/shadow_data.h`, `ShadowData::BlurRadiusToStdDev` and
++  `BlurAsSigma`, defines the conversion. SHA256:
++  `8a4f620e196502c3f9cd1188bebe92e42092ac9dbce3bb7e93ce639dfd07f563`.
++- `core/paint/box_painter_base.cc` excludes the shadow owner's border shape
++  from the existing context clip, skips empty eroded shapes and preserves CSS
++  layer order. SHA256:
++  `bb6718a8cb3885693a35ec51b14cae7c44ab1f26d518e27fab4ca077d3bd9995`.
++- `platform/graphics/graphics_context.cc` forwards rounded difference clips
++  with antialiasing. SHA256:
++  `9593e9d4cee4332d0b6e70280960448b0c7f8a18f6ef7d0b686a6ccd29493da9`.
++
++Chromium's DEPS pins Skia `2ab8add5be2c46eb6238f4c217f6d6dbc9bccd23`.
++Skia's legacy radius converter, also used by Flutter `Shadow`, is a separate
++algorithm; it is not the CSS conversion above. These renderer sources explain
++the translation, while the actual pinned DSH screens remain the acceptance
++reference. They do not replace the published theme inputs with a new style.
++
++## Flutter translation
++
++Dart Canvas has no inverse-path clip API. Each shadow therefore gets its own
++unbounded `saveLayer`, followed by an opaque `dstOut` mask of the original
++rounded card outline. For card coverage `m`, this contributes
++`shadow * (1 - m)` before that shadow composites onto the parent. Masking a
++combined stack once would change partially covered pixels, so each layer is
++masked and restored independently. The first-listed CSS shadow paints last.
++Zero blur has no mask filter; a spread that erodes the rectangle to empty is
++skipped.
++
++An intermediate implementation used the union of shadow bounds plus three
++sigma as an exterior path. Six raster regressions demonstrated why that was
++incorrect: the new antialiased outer boundary attenuated a fractional shadow
++edge and softened a fractional hard ancestor clip. The final implementation
++adds no exterior rectangle and preserves the parent's clip.
++
++`css_shadow_source_test.dart` checks the source sigma, zero blur, far offsets,
++empty negative spread, translucent interiors and layer order. Its independent
++standalone draw controls compare the entire far-shadow raster at offsets
++±350.25 and DPR1/2.625, including a fractional hard ancestor clip. Those
++controls omit the disjoint card, rather than reproducing the production mask.
++
++## Scope and remaining differences
++
++This change removes unsupported fitting and reach limits for the current
++rounded translucent panels. It does not certify all CSS box-shadow branches.
++Blink insets the excluded shape for an authored opaque background and uses a
++hard difference clip for a square border. Those branches are not newly modeled
++here. A Flutter menu material preblended to opaque does not establish that the
++CSS shadow owner had an opaque authored background: the real MenuSurface has
++a separate material child. General transformed and superellipse contours also
++need their own source comparisons before claiming equivalence.
++
++Existing screen rasters can intentionally change when the source sigma is
++restored. Report those changes against the real source, with the old images
++retained as regression history; equality to the former fitted appearance is
++not acceptance. Fonts, thresholds, source colors and generated shadow inputs
++are unchanged.
+diff --git a/features/dsh_feature_model_selection/lib/src/model_select.dart b/features/dsh_feature_model_selection/lib/src/model_select.dart
+index 18daf9d..57b4f14 100644
+--- a/features/dsh_feature_model_selection/lib/src/model_select.dart
++++ b/features/dsh_feature_model_selection/lib/src/model_select.dart
+@@ -98,6 +98,7 @@ class _ModelSeatState extends State<ModelSeat> {
+           onClose: panel.close,
+         ),
+         builder: (context, panel) => Semantics(
++          container: true,
+           button: true,
+           enabled: !widget.locked,
+           label: aria,
+diff --git a/features/dsh_feature_model_selection/test/model_selection_test.dart b/features/dsh_feature_model_selection/test/model_selection_test.dart
+index 9f830c9..eae42b9 100644
+--- a/features/dsh_feature_model_selection/test/model_selection_test.dart
++++ b/features/dsh_feature_model_selection/test/model_selection_test.dart
+@@ -480,6 +480,81 @@ void main() {
+       semantics.dispose();
+     });
+ 
++    for (final shortcuts in [false, true]) {
++      testWidgets(
++        'native model trigger bounds stay isolated under ${shortcuts ? 'CallbackShortcuts' : 'Focus'}',
++        (t) async {
++          final semantics = t.ensureSemantics();
++          try {
++            t.view.physicalSize = const Size(390, 800);
++            t.view.devicePixelRatio = 1;
++            addTearDown(t.view.reset);
++            await ready(t);
++            Widget scene = Stack(
++              children: [
++                const Positioned(
++                  left: 24,
++                  top: 24,
++                  child: Text('Selection: none'),
++                ),
++                const Positioned(
++                  left: 24,
++                  top: 64,
++                  child: Text('Sidebar action: none'),
++                ),
++                Positioned(
++                  right: 24,
++                  bottom: 24,
++                  child: ModelSeat(
++                    directory: feature.directoryFor(owner),
++                    i18n: i18n,
++                  ),
++                ),
++              ],
++            );
++            scene = shortcuts
++                ? CallbackShortcuts(
++                    bindings: {
++                      const SingleActivator(LogicalKeyboardKey.f6): () {},
++                    },
++                    child: scene,
++                  )
++                : Focus(child: scene);
++            await t.pumpWidget(dshTestApp(scene));
++            await t.pumpAndSettle();
++            final trigger = find.byKey(const ValueKey('model-chip'));
++            final node = t.getSemantics(trigger);
++            var nativeRect = node.rect;
++            for (var ancestor = node; ;) {
++              final transform = ancestor.transform;
++              if (transform != null) {
++                nativeRect = MatrixUtils.transformRect(transform, nativeRect);
++              }
++              final parent = ancestor.parent;
++              if (parent == null) break;
++              ancestor = parent;
++            }
++            expect(nativeRect, t.getRect(trigger));
++            final data = node.getSemanticsData();
++            expect(
++              data.label,
++              'Select model, current DeepSeek Flash, reasoning effort High',
++            );
++            expect(data.hasAction(SemanticsAction.tap), isTrue);
++            await t.tapAt(nativeRect.center);
++            await t.pumpAndSettle();
++            expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
++            expect(
++              find.byKey(const ValueKey('model-root-effort')),
++              findsOneWidget,
++            );
++          } finally {
++            semantics.dispose();
++          }
++        },
++      );
++    }
++
+     testWidgets('a locked model chip has no native activation action', (
+       t,
+     ) async {
+diff --git a/features/dsh_feature_sidebar/lib/src/leading_controls.dart b/features/dsh_feature_sidebar/lib/src/leading_controls.dart
+index bf5ae8a..01debbe 100644
+--- a/features/dsh_feature_sidebar/lib/src/leading_controls.dart
++++ b/features/dsh_feature_sidebar/lib/src/leading_controls.dart
+@@ -66,7 +66,7 @@ class _SidebarLeadingControlsState extends State<SidebarLeadingControls> {
+           onPressed: services.layout.toggleSidebar,
+         ),
+         if (!chrome.windowsTitlebar || widget.collapsed) ...[
+-          const SizedBox(width: 8),
++          const SizedBox(width: DshHeaderLeadingRecipe.controlsGap),
+           _Control(
+             key: const ValueKey('leading-new-session'),
+             icon: DshShellIcons.newChatRegular,
+@@ -83,7 +83,7 @@ class _SidebarLeadingControlsState extends State<SidebarLeadingControls> {
+   }
+ }
+ 
+-class _Control extends StatefulWidget {
++class _Control extends StatelessWidget {
+   const _Control({
+     super.key,
+     required this.icon,
+@@ -99,47 +99,20 @@ class _Control extends StatefulWidget {
+   final DshTooltipSide side;
+   final VoidCallback onPressed;
+ 
+-  @override
+-  State<_Control> createState() => _ControlState();
+-}
+-
+-class _ControlState extends State<_Control> {
+-  bool _hover = false;
+-
+   @override
+   Widget build(BuildContext context) {
+-    final theme = context.dsh;
+     return DshTooltip(
+-      label: widget.label,
+-      shortcutKeys: widget.keys,
+-      side: widget.side,
+-      delay: const Duration(milliseconds: 500),
+-      child: MouseRegion(
+-        onEnter: (_) => setState(() => _hover = true),
+-        onExit: (_) => setState(() => _hover = false),
+-        cursor: SystemMouseCursors.click,
+-        child: Semantics(
+-          button: true,
+-          label: widget.label,
+-          child: GestureDetector(
+-            behavior: HitTestBehavior.opaque,
+-            onTap: widget.onPressed,
+-            child: DshContainer(
+-              width: 28,
+-              height: 28,
+-              alignment: Alignment.center,
+-              decoration: BoxDecoration(
+-                color: _hover ? theme.interactiveBgHover : null,
+-                borderRadius: BorderRadius.circular(theme.radiusSm),
+-              ),
+-              child: DshIcon(
+-                widget.icon,
+-                size: 16,
+-                color: theme.labelSecondary,
+-              ),
+-            ),
+-          ),
+-        ),
++      label: label,
++      shortcutKeys: keys,
++      side: side,
++      delay: const Duration(
++        milliseconds: DshHeaderLeadingRecipe.tooltipDelayMs,
++      ),
++      child: DshButton(
++        profile: DshButtonProfile.headerAction,
++        semanticLabel: label,
++        onPressed: onPressed,
++        child: DshIcon(icon, size: DshHeaderLeadingRecipe.iconSize),
+       ),
+     );
+   }
+diff --git a/features/dsh_feature_sidebar/test/header_leading_test.dart b/features/dsh_feature_sidebar/test/header_leading_test.dart
+new file mode 100644
+index 0000000..f1147c7
+--- /dev/null
++++ b/features/dsh_feature_sidebar/test/header_leading_test.dart
+@@ -0,0 +1,266 @@
++import 'dart:io';
++import 'dart:ui' as ui;
++
++import 'package:dsh_feature_sidebar/dsh_feature_sidebar.dart';
++import 'package:dsh_i18n/dsh_i18n.dart';
++import 'package:dsh_layout/dsh_layout.dart';
++import 'package:dsh_shortcuts/dsh_shortcuts.dart';
++import 'package:dsh_slots/dsh_slots.dart';
++import 'package:dsh_theme/testing.dart';
++import 'package:dsh_ui/dsh_ui.dart';
++import 'package:flutter/gestures.dart';
++import 'package:flutter/rendering.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter/widgets.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++class _MemoryStorage implements ShortcutStorage {
++  String? raw;
++  @override
++  String? read() => raw;
++  @override
++  void write(String next) => raw = next;
++}
++
++class _Services implements SidebarServices {
++  _Services({this.shortcuts});
++  @override
++  final ShortcutService? shortcuts;
++  final store = LayoutStore(viewportWidth: 1280);
++  @override
++  late final layout = LayoutController(store, (_) => false);
++  var started = 0;
++  @override
++  DshI18n get i18n => const DshI18n(DshLocale.en);
++  @override
++  String get brandName => 'Whalee';
++  @override
++  Widget browsingRegion(BuildContext context, SidebarSectionOwner owner) =>
++      const SizedBox.shrink();
++  @override
++  void startSession() => started++;
++}
++
++Widget _controls(
++  _Services services, {
++  bool collapsed = true,
++  ShellPlatform platform = ShellPlatform.darwin,
++}) => ShellScope(
++  chrome: ShellChrome(platform: platform),
++  child: SidebarLeadingControls(services: services, collapsed: collapsed),
++);
++
++void main() {
++  testWidgets(
++    'Header consumer uses two canonical buttons with native semantics and keyboard actions',
++    (t) async {
++      final services = _Services();
++      final semantics = t.ensureSemantics();
++      await t.pumpWidget(dshTestApp(Center(child: _controls(services))));
++      expect(find.byType(DshButton), findsNWidgets(2));
++      expect(
++        t.widgetList<DshButton>(find.byType(DshButton)).map((b) => b.profile),
++        everyElement(DshButtonProfile.headerAction),
++      );
++      final toggle = find.byKey(const ValueKey('leading-toggle'));
++      final session = find.byKey(const ValueKey('leading-new-session'));
++      expect(t.getSize(toggle), const Size(28, 28));
++      expect(t.getTopLeft(session).dx - t.getTopRight(toggle).dx, 8);
++      expect(
++        t.widgetList<DshIcon>(find.byType(DshIcon)).map((i) => i.size),
++        everyElement(16),
++      );
++      final action = t.getSemantics(
++        find.descendant(of: session, matching: find.byType(DshButton)),
++      );
++      expect(action.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
++      t.binding.performSemanticsAction(
++        ui.SemanticsActionEvent(
++          nodeId: action.id,
++          viewId: t.view.viewId,
++          type: SemanticsAction.tap,
++        ),
++      );
++      await t.pump();
++      expect(services.started, 1);
++      await t.sendKeyEvent(LogicalKeyboardKey.tab);
++      await t.sendKeyEvent(LogicalKeyboardKey.tab);
++      await t.pump();
++      await t.sendKeyEvent(LogicalKeyboardKey.enter);
++      await t.sendKeyEvent(LogicalKeyboardKey.space);
++      expect(services.started, 3);
++      final before = services.store.layoutInfo.sidebar;
++      await t.tap(toggle);
++      await t.pump();
++      expect(services.store.layoutInfo.sidebar, isNot(before));
++      semantics.dispose();
++    },
++  );
++
++  testWidgets(
++    'Header tooltip waits 500ms and shortcut catalog updates reach the existing consumer',
++    (t) async {
++      final shortcuts = ShortcutService(
++        runtime: ShortcutRuntime.desktop,
++        platform: ShortcutPlatform.macos,
++        storage: _MemoryStorage(),
++      );
++      final services = _Services(shortcuts: shortcuts);
++      void Function() register(String code) => shortcuts.register(
++        ShortcutCommand(
++          id: 'session.new',
++          label: () => 'New Session',
++          defaults: {
++            'desktop:macos': ShortcutBinding(code, const [
++              ShortcutModifier.primary,
++            ]),
++          },
++          resolve: (_) => ShortcutHandled(services.startSession),
++        ),
++      );
++      var off = register('KeyN');
++      await shortcuts.start();
++      await t.pumpWidget(dshTestApp(Center(child: _controls(services))));
++      final session = find.byKey(const ValueKey('leading-new-session'));
++      DshTooltip tooltip() => t.widget<DshTooltip>(
++        find.descendant(of: session, matching: find.byType(DshTooltip)),
++      );
++      expect(tooltip().shortcutKeys, ['⌘', 'N']);
++      final pointer = await t.createGesture(kind: PointerDeviceKind.mouse);
++      await pointer.addPointer(location: Offset.zero);
++      await pointer.moveTo(t.getCenter(session));
++      await t.pump(const Duration(milliseconds: 499));
++      expect(find.text('New session'), findsNothing);
++      await t.pump(const Duration(milliseconds: 1));
++      await t.pump();
++      expect(find.text('New session'), findsOneWidget);
++      off();
++      off = register('KeyJ');
++      await t.pump();
++      expect(tooltip().shortcutKeys, ['⌘', 'J']);
++      await pointer.removePointer();
++      await t.pumpWidget(const SizedBox.shrink());
++      off();
++      shortcuts.dispose();
++    },
++  );
++
++  testWidgets(
++    'Header migration preserves Windows expanded/collapsed tooltip placement',
++    (t) async {
++      final services = _Services();
++      for (final collapsed in [false, true]) {
++        await t.pumpWidget(
++          dshTestApp(
++            Center(
++              child: _controls(
++                services,
++                collapsed: collapsed,
++                platform: ShellPlatform.windows,
++              ),
++            ),
++          ),
++        );
++        expect(find.byType(DshButton), findsNWidgets(collapsed ? 2 : 1));
++        expect(
++          t
++              .widgetList<DshTooltip>(find.byType(DshTooltip))
++              .map((hint) => hint.side),
++          everyElement(DshTooltipSide.bottom),
++        );
++      }
++      await t.pumpWidget(dshTestApp(Center(child: _controls(services))));
++      expect(
++        t
++            .widgetList<DshTooltip>(find.byType(DshTooltip))
++            .map((hint) => hint.side),
++        everyElement(DshTooltipSide.right),
++      );
++    },
++  );
++
++  // Actual component raster artifacts; the companion source capture imports
++  // the locked HeaderLeadingControls.tsx itself. These are not golden baselines.
++  for (final brightness in Brightness.values) {
++    for (final density in [1.0, 2.0]) {
++      testWidgets('actual Header raster ${brightness.name} dpr$density', (
++        t,
++      ) async {
++        final services = _Services();
++        final boundary = GlobalKey();
++        t.view.devicePixelRatio = density;
++        t.view.physicalSize = Size(400 * density, 240 * density);
++        addTearDown(t.view.reset);
++        await t.pumpWidget(
++          dshTestApp(
++            Center(
++              child: RepaintBoundary(
++                key: boundary,
++                child: Builder(
++                  builder: (context) => SizedBox(
++                    width: 96,
++                    height: 64,
++                    child: ColoredBox(
++                      color: context.dsh.bgBase,
++                      child: DshSurface(
++                        color: context.dsh.bgBase,
++                        child: Center(child: _controls(services)),
++                      ),
++                    ),
++                  ),
++                ),
++              ),
++            ),
++            brightness: brightness,
++          ),
++        );
++        await t.pump();
++        Future<void> capture(String state) async {
++          final output = Platform.environment['HEADER_LEADING_RASTER_OUT'];
++          if (output == null) return;
++          final render =
++              boundary.currentContext!.findRenderObject()!
++                  as RenderRepaintBoundary;
++          await t.runAsync(() async {
++            final image = await render.toImage(pixelRatio: density);
++            final data = await image.toByteData(format: ui.ImageByteFormat.png);
++            final directory = Directory(output)..createSync(recursive: true);
++            File(
++              '${directory.path}/flutter-${brightness.name}-dpr${density.toInt()}-$state.png',
++            ).writeAsBytesSync(data!.buffer.asUint8List());
++            image.dispose();
++          });
++        }
++
++        await capture('idle');
++        final toggle = find.byKey(const ValueKey('leading-toggle'));
++        final mouse = await t.createGesture(kind: PointerDeviceKind.mouse);
++        await mouse.addPointer(location: Offset.zero);
++        await mouse.moveTo(t.getCenter(toggle));
++        await t.pump();
++        await capture('hover');
++        await mouse.down(t.getCenter(toggle));
++        await t.pump(const Duration(milliseconds: 100));
++        await capture('pressed');
++        await mouse.up();
++        await mouse.moveTo(Offset.zero);
++        await t.pump(); // settle the native-equivalent pointer focus first
++        final action = t.widget<FocusableActionDetector>(
++          find.descendant(
++            of: toggle,
++            matching: find.byType(FocusableActionDetector),
++          ),
++        );
++        expect(action.focusNode!.hasPrimaryFocus, isTrue);
++        await t.sendKeyEvent(LogicalKeyboardKey.home);
++        await t.pump();
++        await t
++            .pump(); // FocusableActionDetector publishes highlight post-frame
++        expect(find.byKey(DshButton.focusRingKey), findsOneWidget);
++        await capture('focus');
++        await mouse.removePointer();
++        await t.pumpWidget(const SizedBox.shrink());
++      });
++    }
++  }
++}
+diff --git a/packages/dsh_ui/lib/src/dsh_button.dart b/packages/dsh_ui/lib/src/dsh_button.dart
+index 1e04632..f9da332 100644
+--- a/packages/dsh_ui/lib/src/dsh_button.dart
++++ b/packages/dsh_ui/lib/src/dsh_button.dart
+@@ -36,7 +36,13 @@ enum DshButtonSize {
+ }
+ 
+ /// Published CSS profiles layered on the common button interaction model.
+-enum DshButtonProfile { primitive, addAction, iconAction, infoAction }
++enum DshButtonProfile {
++  primitive,
++  addAction,
++  iconAction,
++  infoAction,
++  headerAction,
++}
+ 
+ /// Physical corners used by DSH's left-to-right compound add control.
+ enum DshButtonJoin { none, left, right }
+@@ -259,8 +265,11 @@ class _DshButtonState extends State<DshButton> {
+     final add = widget.profile == DshButtonProfile.addAction;
+     final iconAction = widget.profile == DshButtonProfile.iconAction;
+     final info = widget.profile == DshButtonProfile.infoAction;
+-    final compactAction = iconAction || info;
+-    final radiusToken = compactAction
++    final header = widget.profile == DshButtonProfile.headerAction;
++    final compactAction = iconAction || info || header;
++    final radiusToken = header
++        ? DshHeaderLeadingRecipe.radiusToken
++        : compactAction
+         ? DshIconActionRecipe.radiusToken
+         : add
+         ? DshAddButtonRecipe.radiusToken
+@@ -280,19 +289,26 @@ class _DshButtonState extends State<DshButton> {
+       ),
+     };
+     final hover = _enabled && (_hovered || _pressed);
+-    final rawFill = iconAction
++    // HeaderLeadingControls has only `.iconButton:hover`: pointer-down does
++    // not introduce the primitive ghost :active fill or synthesize hover.
++    final rawFill = header
++        ? _hovered
++              ? theme.color(DshHeaderLeadingRecipe.hoverToken)
++              : null
++        : iconAction
+         ? hover
+               ? theme.color(DshIconActionRecipe.hoverToken)
+               : null
+         : _fill(theme);
+-    // A disabled button is one translucent group (`opacity: 0.4` on the whole
+-    // button), so its fill must stay translucent inside the group: the group
+-    // composites onto the page, not the fill.
+-    Color paint(Color c, {Color? over}) => _enabled
++    // Disabled primitive/profile buttons are translucent groups, so their
++    // fills stay translucent inside the group. Header has no opacity rule.
++    Color paint(Color c, {Color? over}) => _enabled || header
+         ? DshSurface.paint(context, c, over: over)
+         : DshSurface.quantizeAlpha(c);
+     final fill = rawFill == null ? null : paint(rawFill);
+-    final foreground = iconAction
++    final foreground = header
++        ? theme.color(DshHeaderLeadingRecipe.labelToken)
++        : iconAction
+         ? theme.color(
+             hover
+                 ? DshIconActionRecipe.hoverLabelToken
+@@ -318,7 +334,7 @@ class _DshButtonState extends State<DshButton> {
+     // ([dshHairlineOf]: one device pixel on a phone, a whole CSS pixel in the
+     // emulated capture) and it widens the box (the content width is padding +
+     // label + both borders).
+-    final outlined = widget.variant == DshButtonVariant.outline;
++    final outlined = !header && widget.variant == DshButtonVariant.outline;
+     final borderWidth = outlined
+         ? dshBorderWidthOf(context, DshButtonRecipe.outlineWidth)
+         : 0.0;
+@@ -340,7 +356,9 @@ class _DshButtonState extends State<DshButton> {
+       ),
+       over: fill,
+     );
+-    final profileWidth = compactAction
++    final profileWidth = header
++        ? DshHeaderLeadingRecipe.width
++        : compactAction
+         ? info
+               ? DshIconActionRecipe.infoWidth
+               : DshIconActionRecipe.width
+@@ -364,7 +382,9 @@ class _DshButtonState extends State<DshButton> {
+         width: profileWidth,
+         height:
+             widget.height ??
+-            (compactAction
++            (header
++                ? DshHeaderLeadingRecipe.height
++                : compactAction
+                 ? info
+                       ? DshIconActionRecipe.infoHeight
+                       : DshIconActionRecipe.height
+@@ -438,10 +458,15 @@ class _DshButtonState extends State<DshButton> {
+       ),
+     );
+ 
+-    final ringWidth = iconAction
++    final ringWidth = header
++        ? theme.number(DshHeaderLeadingRecipe.focusWidthToken)
++        : iconAction
+         ? theme.number(DshIconActionRecipe.focusWidthToken)
+         : theme.focusRingWidth;
+-    final ringColor = iconAction
++    final ringColor = header
++        ? theme.colors[DshHeaderLeadingRecipe.focusToken] ??
++              theme.color(DshHeaderLeadingRecipe.focusFallbackToken)
++        : iconAction
+         ? theme.colors[DshIconActionRecipe.focusToken] ??
+               theme.color(DshIconActionRecipe.focusFallbackToken)
+         : theme.focusRingColor;
+@@ -455,9 +480,10 @@ class _DshButtonState extends State<DshButton> {
+       clipBehavior: Clip.none,
+       children: [
+         surface,
+-        if (_focusVisible &&
++        if ((header ? dshHasVisibleFocus(_focusNode) : _focusVisible) &&
+             _enabled &&
+             _primaryFocus &&
++            (!header || !DshFocusPresentation.instance.pointerOwnsOutline) &&
+             !DshFocusPresentation.instance.suppressed(_focusNode))
+           Positioned(
+             left: -ringReach,
+@@ -494,7 +520,7 @@ class _DshButtonState extends State<DshButton> {
+           enabled: _enabled,
+           focusNode: _focusNode,
+           autofocus: widget.autofocus,
+-          mouseCursor: _enabled
++          mouseCursor: _enabled || header
+               ? SystemMouseCursors.click
+               : iconAction
+               ? SystemMouseCursors.basic
+@@ -514,12 +540,20 @@ class _DshButtonState extends State<DshButton> {
+           onShowFocusHighlight: (value) => _set(() => _focusVisible = value),
+           child: GestureDetector(
+             behavior: HitTestBehavior.opaque,
+-            onTapDown: _enabled ? (_) => _set(() => _pressed = true) : null,
++            onTapDown: _enabled
++                ? (_) {
++                    // The source Header renders a native button, which takes
++                    // pointer focus. Its global modality suppresses the ring.
++                    if (header) _focusNode.requestFocus();
++                    _set(() => _pressed = true);
++                  }
++                : null,
+             onTapUp: _enabled ? (_) => _set(() => _pressed = false) : null,
+             onTapCancel: _enabled ? () => _set(() => _pressed = false) : null,
+             onTap: widget.onPressed,
+             child: Opacity(
+-              opacity: _enabled
++              // This raw Header button has no :disabled opacity declaration.
++              opacity: _enabled || header
+                   ? 1
+                   : iconAction
+                   ? DshIconActionRecipe.disabledOpacity
+diff --git a/packages/dsh_ui/lib/src/dsh_focus_presentation.dart b/packages/dsh_ui/lib/src/dsh_focus_presentation.dart
+index ff325a1..e3fce3c 100644
+--- a/packages/dsh_ui/lib/src/dsh_focus_presentation.dart
++++ b/packages/dsh_ui/lib/src/dsh_focus_presentation.dart
+@@ -9,6 +9,22 @@ class DshFocusPresentation {
+   static final instance = DshFocusPresentation._();
+   final _states = <FocusNode, _FocusPresentationState>{};
+   bool _keyboard = false;
++  bool _pointerOwnsOutline = false;
++  FocusNode? _keyFocusOrigin;
++
++  /// The published global focus.css suppresses non-editable outlines while
++  /// input-modality.ts says a pointer owns focus. This is distinct from the
++  /// browser's retained :focus-visible history. Consumers opt in separately.
++  bool get pointerOwnsOutline => _pointerOwnsOutline;
++
++  void _setPointerOwnsOutline(bool value) {
++    if (_pointerOwnsOutline == value) return;
++    _pointerOwnsOutline = value;
++    for (final state in _states.values.toList()) {
++      state.notify();
++    }
++  }
++
+   static final _navigation = {
+     LogicalKeyboardKey.tab,
+     LogicalKeyboardKey.arrowUp,
+@@ -31,6 +47,10 @@ class DshFocusPresentation {
+         if (focused == value.focused) return;
+         value.focused = focused;
+         value.visible = focused && _keyboard;
++        if (focused && _keyFocusOrigin != null && _keyFocusOrigin != node) {
++          _keyFocusOrigin = null;
++          _setPointerOwnsOutline(false);
++        }
+         if (!focused) value.suppressed = false;
+         value.notify();
+       };
+@@ -68,13 +88,23 @@ class DshFocusPresentation {
+   }
+ 
+   void _pointer(PointerEvent event) {
+-    if (event is PointerDownEvent) _keyboard = false;
++    if (event is PointerDownEvent) {
++      _keyboard = false;
++      _keyFocusOrigin = null;
++      _setPointerOwnsOutline(true);
++    }
+     // A click on an already keyboard-focused control retains :focus-visible.
+     // A newly focused control receives the current input mode on focus change.
+   }
+ 
+   bool _key(KeyEvent event) {
+     if (event is! KeyDownEvent && event is! KeyRepeatEvent) return false;
++    _keyFocusOrigin = FocusManager.instance.primaryFocus;
++    if (_navigation.contains(event.logicalKey) ||
++        event.logicalKey == LogicalKeyboardKey.pageUp ||
++        event.logicalKey == LogicalKeyboardKey.pageDown) {
++      _setPointerOwnsOutline(false);
++    }
+     final keyboard = HardwareKeyboard.instance;
+     if (keyboard.isControlPressed ||
+         keyboard.isAltPressed ||
+diff --git a/packages/dsh_ui/lib/src/dsh_recipes.g.dart b/packages/dsh_ui/lib/src/dsh_recipes.g.dart
+index 846acb4..d89f530 100644
+--- a/packages/dsh_ui/lib/src/dsh_recipes.g.dart
++++ b/packages/dsh_ui/lib/src/dsh_recipes.g.dart
+@@ -650,6 +650,20 @@ abstract final class DshSidebarLauncherRecipe {
+   static const double menuLineHeight = 22.0;
+ }
+ 
++abstract final class DshHeaderLeadingRecipe {
++  static const double width = 28.0;
++  static const double height = 28.0;
++  static const double controlsGap = 8.0;
++  static const double iconSize = 16.0;
++  static const int tooltipDelayMs = 0x1f4;
++  static const String radiusToken = '--dsw-radius-sm';
++  static const String labelToken = '--dsw-alias-label-secondary';
++  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
++  static const String focusWidthToken = '--dsw-focus-ring-width';
++  static const String focusToken = '--dsw-focus-ring-color';
++  static const String focusFallbackToken = '--dsw-alias-state-business-primary';
++}
++
+ abstract final class DshModelMenuRecipe {
+   static const double minWidth = 240.0;
+   static const double viewportWidthInset = 32.0;
+diff --git a/packages/dsh_ui/lib/src/dsh_shadow_box.dart b/packages/dsh_ui/lib/src/dsh_shadow_box.dart
+index aadfd51..547a54a 100644
+--- a/packages/dsh_ui/lib/src/dsh_shadow_box.dart
++++ b/packages/dsh_ui/lib/src/dsh_shadow_box.dart
+@@ -41,12 +41,9 @@ class DshShadowBox extends StatelessWidget {
+   );
+ }
+ 
+-/// The Gaussian sigma (logical px) Chromium's low-alpha box shadows land on
+-/// for a CSS blur radius. Fitted on Chromium's own output for dsh's panel
+-/// elevation (8px and 16px layers at 2-3%): Chromium truncates the Gaussian
+-/// tails of faint shadows, so the textbook `blur / 2` over-spreads them and
+-/// Flutter's own `blur * 0.58 + 0.5` still does.
+-double _chromiumSigma(double blur) => math.max(0.5, 0.45 * blur - 2.1);
++/// Blink ShadowData::BlurRadiusToStdDev uses half the authored CSS radius.
++/// This differs from Flutter Shadow's legacy radius-to-sigma conversion.
++double _cssShadowSigma(double blur) => blur / 2;
+ 
+ class _OuterShadowPainter extends CustomPainter {
+   _OuterShadowPainter(this.shadows, this.radius, this.shape);
+@@ -63,21 +60,17 @@ class _OuterShadowPainter extends CustomPainter {
+     );
+     final outer =
+         shape?.getOuterPath(Offset.zero & size) ?? (Path()..addRRect(box));
+-    final outside = Path.combine(
+-      PathOperation.difference,
+-      Path()..addRect(
+-        Rect.fromLTWH(-200, -200, size.width + 400, size.height + 400),
+-      ),
+-      outer,
+-    );
+-    canvas.save();
+-    canvas.clipPath(outside);
+     for (final s in shadows.reversed) {
+       final rrect = box.shift(s.offset).inflate(s.spreadRadius);
++      if (rrect.isEmpty) continue;
++      // Dart exposes no inverse path clip. Mask each shadow separately to
++      // preserve CSS layer ordering and avoid an extra antialiased exterior
++      // rectangle at a fractional shadow or ancestor-clip edge.
++      canvas.saveLayer(null, Paint());
+       final paint = Paint()
+         ..color = s.color
+         ..maskFilter = s.blurRadius > 0
+-            ? MaskFilter.blur(BlurStyle.normal, _chromiumSigma(s.blurRadius))
++            ? MaskFilter.blur(BlurStyle.normal, _cssShadowSigma(s.blurRadius))
+             : null;
+       if (shape == null) {
+         canvas.drawRRect(rrect, paint);
+@@ -91,8 +84,9 @@ class _OuterShadowPainter extends CustomPainter {
+           paint,
+         );
+       }
++      canvas.drawPath(outer, Paint()..blendMode = BlendMode.dstOut);
++      canvas.restore();
+     }
+-    canvas.restore();
+   }
+ 
+   @override
+diff --git a/packages/dsh_ui/test/css_shadow_source_test.dart b/packages/dsh_ui/test/css_shadow_source_test.dart
+new file mode 100644
+index 0000000..4d91689
+--- /dev/null
++++ b/packages/dsh_ui/test/css_shadow_source_test.dart
+@@ -0,0 +1,313 @@
++import 'dart:ui' as ui;
++
++import 'package:dsh_ui/dsh_ui.dart';
++import 'package:flutter/rendering.dart';
++import 'package:flutter/widgets.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++Future<List<int>> rgbaAt(
++  WidgetTester tester,
++  GlobalKey key,
++  int x,
++  int y,
++) async {
++  final boundary =
++      key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
++  return (await tester.runAsync(() async {
++    final image = await boundary.toImage();
++    try {
++      final bytes = (await image.toByteData(
++        format: ui.ImageByteFormat.rawStraightRgba,
++      ))!;
++      final pixel = (y * image.width + x) * 4;
++      return List.generate(4, (i) => bytes.getUint8(pixel + i));
++    } finally {
++      image.dispose();
++    }
++  }))!;
++}
++
++Widget frame(
++  GlobalKey key,
++  List<BoxShadow> shadows, {
++  bool reference = false,
++  Rect? ancestorClip,
++}) {
++  final contents = Directionality(
++    textDirection: TextDirection.ltr,
++    child: Stack(
++      clipBehavior: Clip.none,
++      children: [
++        Positioned(
++          left: 450,
++          top: 90,
++          child: reference
++              ? CustomPaint(
++                  painter: _StandaloneFarShadow(shadows),
++                  child: const SizedBox(width: 40, height: 40),
++                )
++              : DshShadowBox(
++                  color: const Color(0x80ffffff),
++                  radius: 12,
++                  shadows: shadows,
++                  child: const SizedBox(width: 40, height: 40),
++                ),
++        ),
++      ],
++    ),
++  );
++  return RepaintBoundary(
++    key: key,
++    child: ancestorClip == null
++        ? contents
++        : ClipRect(
++            clipper: _ExactClip(ancestorClip),
++            clipBehavior: Clip.hardEdge,
++            child: contents,
++          ),
++  );
++}
++
++class _ExactClip extends CustomClipper<Rect> {
++  const _ExactClip(this.rect);
++  final Rect rect;
++  @override
++  Rect getClip(Size size) => rect;
++  @override
++  bool shouldReclip(_ExactClip old) => rect != old.rect;
++}
++
++// The tested shadow is disjoint from the card, so no interior exclusion is
++// needed in this independent renderer reference. Extra edge masks must not
++// change its antialias coverage or the ancestor's existing hard clip.
++class _StandaloneFarShadow extends CustomPainter {
++  _StandaloneFarShadow(this.shadows);
++  final List<BoxShadow> shadows;
++  @override
++  void paint(Canvas canvas, Size size) {
++    for (final shadow in shadows.reversed) {
++      canvas.drawRRect(
++        RRect.fromRectAndRadius(
++          (Offset.zero & size).shift(shadow.offset),
++          const Radius.circular(12),
++        ),
++        Paint()..color = shadow.color,
++      );
++    }
++  }
++
++  @override
++  bool shouldRepaint(_StandaloneFarShadow old) => shadows != old.shadows;
++}
++
++Future<List<int>> farShadowPixels(
++  WidgetTester tester,
++  GlobalKey key,
++  double density,
++  bool right,
++) async => (await tester.runAsync(() async {
++  final boundary =
++      key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
++  final image = await boundary.toImage(pixelRatio: density);
++  try {
++    final bytes = (await image.toByteData(
++      format: ui.ImageByteFormat.rawStraightRgba,
++    ))!;
++    final data = bytes.buffer.asUint8List();
++    final left = ((right ? 600 : 0) * density).floor();
++    final end = ((right ? 1000 : 300) * density).ceil();
++    return [
++      for (var y = (50 * density).floor(); y < (160 * density).ceil(); y++)
++        ...data.sublist(
++          (y * image.width + left) * 4,
++          (y * image.width + end) * 4,
++        ),
++    ];
++  } finally {
++    image.dispose();
++  }
++}))!;
++
++void main() {
++  for (final density in [1.0, 2.625]) {
++    for (final offset in [-350.25, 350.25]) {
++      testWidgets(
++        'fractional far shadow retains single coverage at $density/$offset',
++        (tester) async {
++          tester.view.physicalSize = Size(1000 * density, 240 * density);
++          tester.view.devicePixelRatio = density;
++          addTearDown(tester.view.reset);
++          final key = GlobalKey();
++          final shadows = [
++            BoxShadow(
++              color: const Color(0xffff0000),
++              offset: Offset(offset, 0),
++            ),
++          ];
++          await tester.pumpWidget(frame(key, shadows));
++          await tester.pumpAndSettle();
++          final actual = await farShadowPixels(
++            tester,
++            key,
++            density,
++            offset > 0,
++          );
++          await tester.pumpWidget(frame(key, shadows, reference: true));
++          await tester.pumpAndSettle();
++          expect(
++            actual,
++            await farShadowPixels(tester, key, density, offset > 0),
++          );
++        },
++      );
++    }
++    testWidgets('fractional hard ancestor stays hard at $density', (
++      tester,
++    ) async {
++      tester.view.physicalSize = Size(1000 * density, 240 * density);
++      tester.view.devicePixelRatio = density;
++      addTearDown(tester.view.reset);
++      final key = GlobalKey();
++      const clip = Rect.fromLTRB(820.25, 80.25, 870.25, 140.25);
++      const shadows = [
++        BoxShadow(color: Color(0xffff0000), offset: Offset(350.25, 0)),
++      ];
++      await tester.pumpWidget(frame(key, shadows, ancestorClip: clip));
++      await tester.pumpAndSettle();
++      final actual = await farShadowPixels(tester, key, density, true);
++      await tester.pumpWidget(
++        frame(key, shadows, ancestorClip: clip, reference: true),
++      );
++      await tester.pumpAndSettle();
++      expect(actual, await farShadowPixels(tester, key, density, true));
++    });
++  }
++  for (final blur in [0.0, 8.0, 16.0]) {
++    testWidgets('CSS shadow blur radius $blur uses Blink standard deviation', (
++      tester,
++    ) async {
++      final key = GlobalKey();
++      await tester.pumpWidget(frame(key, [BoxShadow(blurRadius: blur)]));
++      final paint = tester
++          .widget<CustomPaint>(
++            find
++                .descendant(
++                  of: find.byType(DshShadowBox),
++                  matching: find.byType(CustomPaint),
++                )
++                .first,
++          )
++          .painter!;
++      final canvas = TestRecordingCanvas();
++      paint.paint(canvas, const Size(40, 40));
++      final draw = canvas.invocations.singleWhere(
++        (call) => call.invocation.memberName == #drawRRect,
++      );
++      final actual = draw.invocation.positionalArguments.last as Paint;
++      // Pinned Blink ShadowData::BlurRadiusToStdDev defines sigma=radius/2.
++      expect(
++        actual.maskFilter,
++        blur == 0 ? isNull : MaskFilter.blur(BlurStyle.normal, blur / 2),
++      );
++    });
++  }
++
++  for (final offset in [-350.0, 350.0]) {
++    testWidgets(
++      'source shadow offset $offset is not cut off at a fixed reach',
++      (tester) async {
++        tester.view.physicalSize = const Size(1000, 220);
++        tester.view.devicePixelRatio = 1;
++        addTearDown(tester.view.reset);
++        final key = GlobalKey();
++        await tester.pumpWidget(
++          frame(key, [
++            BoxShadow(
++              color: const Color(0xffff0000),
++              offset: Offset(offset, 0),
++            ),
++          ]),
++        );
++        await tester.pumpAndSettle();
++        expect(await rgbaAt(tester, key, (470 + offset).round(), 110), [
++          255,
++          0,
++          0,
++          255,
++        ]);
++      },
++    );
++  }
++
++  testWidgets('exterior shadow does not fill a translucent card interior', (
++    tester,
++  ) async {
++    tester.view.physicalSize = const Size(1000, 220);
++    tester.view.devicePixelRatio = 1;
++    addTearDown(tester.view.reset);
++    final key = GlobalKey();
++    await tester.pumpWidget(
++      frame(key, const [BoxShadow(color: Color(0xffff0000), spreadRadius: 20)]),
++    );
++    await tester.pumpAndSettle();
++    expect(await rgbaAt(tester, key, 470, 110), [255, 255, 255, 128]);
++    expect(await rgbaAt(tester, key, 440, 110), [255, 0, 0, 255]);
++  });
++
++  testWidgets('source first-listed shadow remains the top layer', (
++    tester,
++  ) async {
++    final key = GlobalKey();
++    await tester.pumpWidget(
++      frame(key, const [
++        BoxShadow(color: Color(0xffff0000), blurRadius: 8),
++        BoxShadow(color: Color(0xff00ff00), blurRadius: 16),
++      ]),
++    );
++    final painter = tester
++        .widget<CustomPaint>(
++          find
++              .descendant(
++                of: find.byType(DshShadowBox),
++                matching: find.byType(CustomPaint),
++              )
++              .first,
++        )
++        .painter!;
++    final canvas = TestRecordingCanvas();
++    painter.paint(canvas, const Size(40, 40));
++    final colors = canvas.invocations
++        .where((call) => call.invocation.memberName == #drawRRect)
++        .map(
++          (call) => (call.invocation.positionalArguments.last as Paint).color,
++        );
++    expect(colors, [const Color(0xff00ff00), const Color(0xffff0000)]);
++  });
++
++  testWidgets('negative spread that removes the box paints no shadow', (
++    tester,
++  ) async {
++    final key = GlobalKey();
++    await tester.pumpWidget(
++      frame(key, const [BoxShadow(spreadRadius: -30, blurRadius: 8)]),
++    );
++    final painter = tester
++        .widget<CustomPaint>(
++          find
++              .descendant(
++                of: find.byType(DshShadowBox),
++                matching: find.byType(CustomPaint),
++              )
++              .first,
++        )
++        .painter!;
++    final canvas = TestRecordingCanvas();
++    painter.paint(canvas, const Size(40, 40));
++    expect(
++      canvas.invocations.where(
++        (call) => call.invocation.memberName == #drawRRect,
++      ),
++      isEmpty,
++    );
++  });
++}
+diff --git a/packages/dsh_ui/test/dsh_header_action_test.dart b/packages/dsh_ui/test/dsh_header_action_test.dart
+new file mode 100644
+index 0000000..cd8d75d
+--- /dev/null
++++ b/packages/dsh_ui/test/dsh_header_action_test.dart
+@@ -0,0 +1,200 @@
++import 'package:dsh_ui/dsh_ui.dart';
++import 'package:flutter/gestures.dart';
++import 'package:flutter/semantics.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter/widgets.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++import 'dsh_button_test.dart' show host, official, surface, textColor;
++
++void main() {
++  for (final brightness in Brightness.values) {
++    testWidgets(
++      'Header ${brightness.name}: secondary idle/hover and no active fill',
++      (t) async {
++        final theme = official(brightness);
++        var calls = 0;
++        await t.pumpWidget(
++          host(
++            theme,
++            DshButton(
++              profile: DshButtonProfile.headerAction,
++              onPressed: () => calls++,
++              child: const Text('Go'),
++            ),
++          ),
++        );
++        final button = find.byType(DshButton);
++        expect(t.getSize(find.byKey(DshButton.surfaceKey)), const Size(28, 28));
++        expect((surface(t).shape as DshCornerBorder).radius, theme.radiusSm);
++        expect(textColor(t), theme.labelSecondary);
++        expect(surface(t).color, isNull);
++        // Touch has no :hover. :active alone does not introduce a fill.
++        final touch = await t.startGesture(t.getCenter(button));
++        await t.pump(const Duration(milliseconds: 100));
++        expect(surface(t).color, isNull);
++        await touch.up();
++        await t.pump();
++        expect(calls, 1);
++        final mouse = await t.createGesture(kind: PointerDeviceKind.mouse);
++        await mouse.addPointer(location: Offset.zero);
++        await mouse.moveTo(t.getCenter(button));
++        await t.pump();
++        final hoverFill = DshSurface.quantizeAlpha(theme.interactiveBgHover);
++        expect(surface(t).color, hoverFill);
++        expect(textColor(t), theme.labelSecondary);
++        await mouse.down(t.getCenter(button));
++        await t.pump(const Duration(milliseconds: 100));
++        expect(surface(t).color, hoverFill);
++        await mouse.up();
++        await t.pump();
++        expect(calls, 2);
++        await mouse.moveTo(Offset.zero);
++        await t.pump();
++        expect(surface(t).color, isNull);
++        await mouse.removePointer();
++      },
++    );
++  }
++
++  testWidgets(
++    'Header global outline: navigation releases pointer suppression; Enter alone does not',
++    (t) async {
++      final theme = official(Brightness.dark);
++      final focus = FocusNode();
++      addTearDown(focus.dispose);
++      var calls = 0;
++      await t.pumpWidget(
++        host(
++          theme,
++          DshButton(
++            profile: DshButtonProfile.headerAction,
++            focusNode: focus,
++            onPressed: () => calls++,
++            child: const Text('Go'),
++          ),
++        ),
++      );
++      await t.sendKeyEvent(LogicalKeyboardKey.tab);
++      await t.pump();
++      final ring = find.byKey(DshButton.focusRingKey);
++      expect(ring, findsOneWidget);
++      expect(t.getSize(ring), const Size(30, 30)); // global width2, no offset1
++      final decoration =
++          t.widget<DshDecoratedBox>(ring).decoration as ShapeDecoration;
++      final side = (decoration.shape as DshCornerBorder).side;
++      expect(side.width, theme.focusRingWidth);
++      expect(side.color, theme.focusRingColor);
++      await t.tap(find.byType(DshButton));
++      await t.pump();
++      expect(focus.hasPrimaryFocus, isTrue);
++      expect(ring, findsNothing);
++      expect(calls, 1);
++      await t.sendKeyEvent(LogicalKeyboardKey.enter);
++      await t.pump();
++      expect(calls, 2);
++      expect(ring, findsNothing);
++      await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
++      await t.pump();
++      expect(ring, findsOneWidget);
++      expect(surface(t).color, isNull); // keyboard does not synthesize :hover
++      await t.sendKeyEvent(LogicalKeyboardKey.space);
++      expect(calls, 3);
++    },
++  );
++
++  testWidgets('Header disabled has no authored dimming and never activates', (
++    t,
++  ) async {
++    final semantics = t.ensureSemantics();
++    final theme = official(Brightness.light);
++    await t.pumpWidget(
++      host(
++        theme,
++        DshSurface(
++          color: theme.bgBase,
++          child: const DshButton(
++            profile: DshButtonProfile.headerAction,
++            semanticLabel: 'Header action',
++            child: Text('Go'),
++          ),
++        ),
++      ),
++    );
++    expect(t.widget<Opacity>(find.byType(Opacity)).opacity, 1);
++    await t.tap(find.byType(DshButton));
++    await t.sendKeyEvent(LogicalKeyboardKey.enter);
++    expect(find.byKey(DshButton.focusRingKey), findsNothing);
++    expect(
++      t
++          .getSemantics(find.byType(DshButton))
++          .getSemanticsData()
++          .hasAction(SemanticsAction.tap),
++      isFalse,
++    );
++    final pointer = await t.createGesture(kind: PointerDeviceKind.mouse);
++    await pointer.addPointer(location: Offset.zero);
++    await pointer.moveTo(t.getCenter(find.byType(DshButton)));
++    await t.pump();
++    expect(
++      surface(t).color,
++      blendLikeChromium(theme.interactiveBgHover, theme.bgBase),
++    );
++    await pointer.removePointer();
++    semantics.dispose();
++  });
++
++  testWidgets(
++    'a non-navigation key releases Header outline suppression only after focus moves',
++    (t) async {
++      final first = FocusNode(), second = FocusNode();
++      addTearDown(first.dispose);
++      addTearDown(second.dispose);
++      await t.pumpWidget(
++        host(
++          official(Brightness.light),
++          Row(
++            mainAxisSize: MainAxisSize.min,
++            children: [
++              DshButton(
++                profile: DshButtonProfile.headerAction,
++                focusNode: first,
++                onPressed: () {},
++                child: const Text('First'),
++              ),
++              DshButton(
++                profile: DshButtonProfile.headerAction,
++                focusNode: second,
++                onPressed: () {},
++                child: const Text('Second'),
++              ),
++            ],
++          ),
++        ),
++      );
++      await t.tap(find.text('First'));
++      await t.pump();
++      expect(first.hasPrimaryFocus, isTrue);
++      await t.sendKeyEvent(LogicalKeyboardKey.keyA);
++      await t.pump();
++      expect(find.byKey(DshButton.focusRingKey), findsNothing);
++      second.requestFocus();
++      await t.pump();
++      await t.pump();
++      expect(second.hasPrimaryFocus, isTrue);
++      expect(find.byKey(DshButton.focusRingKey), findsOneWidget);
++    },
++  );
++
++  test('Header source profile rejects handwritten metrics', () {
++    expect(
++      () => DshButton(
++        profile: DshButtonProfile.headerAction,
++        height: 32,
++        onPressed: () {},
++        child: const Text('Go'),
++      ),
++      throwsAssertionError,
++    );
++  });
++}
+diff --git a/tool/design-system/capture-header-leading.mjs b/tool/design-system/capture-header-leading.mjs
+new file mode 100644
+index 0000000..bb34367
+--- /dev/null
++++ b/tool/design-system/capture-header-leading.mjs
+@@ -0,0 +1,91 @@
++// Focused reference proof. First build the existing parity web host, then run:
++// node tool/design-system/capture-header-leading.mjs <react-host> <output>
++// Source checkout/hash verification is generate.py --src's responsibility.
++import {readFile, mkdir, writeFile} from 'node:fs/promises'
++import {createServer} from 'node:http'
++import {resolve, extname, join} from 'node:path'
++import {pathToFileURL} from 'node:url'
++import assert from 'node:assert/strict'
++
++const [distArg, outArg] = process.argv.slice(2)
++if (!distArg || !outArg) throw new Error('react-host and output directories are required')
++const dist = resolve(distArg), out = resolve(outArg)
++const {chromium} = await import(pathToFileURL(join(process.env.PARITY_WEB_DEPS, 'node_modules/playwright-core/index.mjs')))
++await mkdir(out, {recursive: true})
++const server = createServer(async (request, response) => {
++  try {
++    const name = new URL(request.url, '[local-runtime-url]').pathname
++    const file = resolve(dist, '.' + (name === '/' ? '/index.html' : name))
++    if (!file.startsWith(dist + '/')) throw new Error('outside host')
++    response.setHeader('Content-Type', {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css'}[extname(file)] ?? 'application/octet-stream')
++    response.end(await readFile(file))
++  } catch { response.writeHead(404); response.end() }
++})
++await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
++const url = `[local-runtime-url]
++const receipts = []
++const chromiumVersions = []
++try {
++  for (const density of [1, 2]) {
++    const browser = await chromium.launch({args: ['--disable-lcd-text', '--font-render-hinting=none', `--force-device-scale-factor=${density}`]})
++    chromiumVersions.push({density, version: browser.version()})
++    try {
++      for (const theme of ['light', 'dark']) {
++        const context = await browser.newContext({viewport: {width: 400, height: 240}, deviceScaleFactor: density, colorScheme: theme, reducedMotion: 'reduce'})
++        const page = await context.newPage()
++        await page.addInitScript(({theme, density}) => {
++          window.__PARITY__ = {case: {id: 'header-leading', kind: 'header-leading.actual', locale: 'en', theme, viewport: {width: 400, height: 240, density}}, variant: {id: 'default', props: {}}}
++        }, {theme, density})
++        await page.goto(url)
++        const frame = page.locator('[data-header-leading-frame]')
++        const toggle = page.getByRole('button', {name: 'Open sidebar', exact: true})
++        await toggle.waitFor()
++        const box = await toggle.boundingBox()
++        assert.deepEqual({width: box.width, height: box.height}, {width: 28, height: 28})
++        const read = () => toggle.evaluate(el => {
++          const css = getComputedStyle(el), icon = el.querySelector('svg').getBoundingClientRect()
++          return {color: css.color, background: css.backgroundColor, outlineColor: css.outlineColor, outlineWidth: css.outlineWidth, outlineStyle: css.outlineStyle, outlineOffset: css.outlineOffset, focused: document.activeElement === el, focusVisible: el.matches(':focus-visible'), modality: document.documentElement.dataset.inputModality, iconWidth: icon.width, iconHeight: icon.height}
++        })
++        const capture = async state => {
++          const actual = await read()
++          const file = `source-${theme}-dpr${density}-${state}.png`
++          await frame.screenshot({path: join(out, file), animations: 'disabled'})
++          receipts.push({theme, density, state, file, actual})
++          return actual
++        }
++        const idle = await capture('idle')
++        await toggle.hover()
++        const hover = await capture('hover')
++        assert.equal(hover.color, idle.color)
++        assert.notEqual(hover.background, idle.background)
++        await page.mouse.down()
++        const pressed = await capture('pressed')
++        assert.equal(pressed.background, hover.background)
++        await page.mouse.up()
++        await page.mouse.move(200, 200)
++        // Native pointer focus suppresses the ring; Enter alone retains that.
++        await page.keyboard.press('Enter')
++        let pointer = await read()
++        assert.equal(pointer.modality, 'pointer')
++        assert.equal(pointer.outlineColor, 'rgba(0, 0, 0, 0)')
++        await page.keyboard.press('Home')
++        const focus = await capture('focus')
++        assert.equal(focus.modality, 'keyboard')
++        assert.equal(focus.outlineWidth, '2px')
++        assert.equal(focus.outlineStyle, 'auto')
++        assert.equal(focus.outlineOffset, '0px')
++        assert.equal(focus.background, idle.background)
++        assert.equal(focus.iconWidth, 16)
++        assert.equal(focus.iconHeight, 16)
++        await page.keyboard.press('Tab')
++        await page.keyboard.press('Enter')
++        await page.keyboard.press('Space')
++        const calls = await page.evaluate(() => ({toggle: Number(document.body.dataset.headerToggleCalls), session: Number(document.body.dataset.headerSessionCalls)}))
++        assert.deepEqual(calls, {toggle: 2, session: 2})
++        receipts.push({theme, density, check: 'native-callbacks-and-pointer-versus-navigation-focus', passed: true, calls})
++        await context.close()
++      }
++    } finally { await browser.close() }
++  }
++  await writeFile(join(out, 'source-receipt.json'), JSON.stringify({passed: true, source: 'actual locked HeaderLeadingControls.tsx, Tooltip.tsx and input-modality.ts', referenceMode: 'native device scale factor', chromiumVersions, receipts}, null, 2) + '\n')
++} finally { await new Promise(resolve => server.close(resolve)) }
+diff --git a/tool/design-system/families.json b/tool/design-system/families.json
+index 1a98e18..d7e5ed9 100644
+--- a/tool/design-system/families.json
++++ b/tool/design-system/families.json
+@@ -6,7 +6,7 @@
+       "canonical": [
+         "packages/dsh_ui/lib/src/dsh_button.dart"
+       ],
+-      "migrationStatus": "primitive variants and add/icon/info profiles generated from published CSS; local round icon adaptation still pending",
++      "migrationStatus": "primitive variants and add/icon/info/header profiles generated from published CSS; local round icon adaptation still pending",
+       "pendingDuplicates": [
+         "DshIconButton -> DshButton icon-action recipe"
+       ]
+@@ -137,7 +137,7 @@
+         "features/dsh_feature_sidebar/lib/src/leading_controls.dart",
+         "features/dsh_feature_session/lib/src/workspace/browser.dart"
+       ],
+-      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; pointer scrollbar, keyboard sidebar controls, collapse-entry animations and macOS window vibrancy remain pending",
++      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; HeaderLeadingControls styles, glyph size and tooltip delay generated into canonical DshButton headerAction with source global focus visibility; Chromium native auto-outline paint, AppFrame seat/platform mounting, pointer scrollbar, remaining sidebar keyboard controls, collapse-entry animations and macOS window vibrancy remain pending",
+       "pendingDuplicates": []
+     },
+     {
+@@ -442,9 +442,6 @@
+     "features/dsh_feature_shortcuts/lib/src/register.dart": {
+       "manual-metric": 1
+     },
+-    "features/dsh_feature_sidebar/lib/src/leading_controls.dart": {
+-      "manual-metric": 4
+-    },
+     "features/dsh_feature_sidebar/lib/src/sidebar_root.dart": {
+       "manual-metric": 7
+     },
+diff --git a/tool/design-system/generate.py b/tool/design-system/generate.py
+index 616f926..15c1e72 100644
+--- a/tool/design-system/generate.py
++++ b/tool/design-system/generate.py
+@@ -199,6 +199,10 @@ def collect(source=None):
+         rule['selector'] = published.unhash_selectors(rule['selector'], roster_classes)
+     rules['AgentPresetSection.styles.css'] = roster  # audited; not a migrated roster recipe
+     theme_folder = HERE / 'upstream/ui-theme'
++    rules['HeaderLeadingFocusContext'] = {
++        'focus': css_rules((theme_folder / 'focus.css').read_text()),
++        'inputModality': json.loads((HERE / 'upstream/ui-primitives/input-modality.json').read_text()),
++    }
+     rules['PlatformMenuMaterial'] = [
+         rule for rule in css_rules((theme_folder / 'design-platform.css').read_text())
+         if 'html[data-platform' in rule['selector']
+@@ -231,6 +235,14 @@ def collect(source=None):
+             for rule in sheet:
+                 rule['selector'] = published.unhash_selectors(rule['selector'], classes)
+             rules[component + '.module.css'] = sheet
++        if 'HeaderLeadingControls' in sidebar_package['styleSheets']:
++            rules['HeaderLeadingControlsBehavior'] = json.loads(
++                (folder / 'HeaderLeadingControls-behavior.json').read_text())
++            if source is not None:
++                original = source / Path(sidebar_package['sourcePackage']).parent / 'src/client/HeaderLeadingControls.module.css'
++                if ([normalized_rule(r) for r in rules['HeaderLeadingControls.module.css']] !=
++                        [normalized_rule(r) for r in css_rules(original.read_text())]):
++                    raise ValueError('reference HeaderLeadingControls CSS differs from its published package')
+     model_package = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-model-selection')
+     model_folder = HERE / 'upstream' / model_package['snapshotFolder']
+     model_classes = json.loads((model_folder / 'classes.json').read_text())
+@@ -614,6 +626,11 @@ def render(lock, sheets):
+     sidebar = importlib.util.module_from_spec(sidebar_spec)
+     sidebar_spec.loader.exec_module(sidebar)
+     metrics.update(sidebar.build(sheets, value=value, number=number, token=token))
++    header_spec = importlib.util.spec_from_file_location('header_leading_recipes', HERE / 'header_leading_recipes.py')
++    header = importlib.util.module_from_spec(header_spec)
++    header_spec.loader.exec_module(header)
++    metrics.update(header.build(sheets['HeaderLeadingControls.module.css'], sheets['HeaderLeadingControlsBehavior'],
++                                focus_context=sheets['HeaderLeadingFocusContext'], number=number, token=token))
+     model_spec = importlib.util.spec_from_file_location('model_menu_recipes', HERE / 'model_menu_recipes.py')
+     model = importlib.util.module_from_spec(model_spec)
+     model_spec.loader.exec_module(model)
+diff --git a/tool/design-system/header_leading_recipes.py b/tool/design-system/header_leading_recipes.py
+new file mode 100644
+index 0000000..02a8f8f
+--- /dev/null
++++ b/tool/design-system/header_leading_recipes.py
+@@ -0,0 +1,95 @@
++"""Compile the published HeaderLeadingControls profile, without executing JS.
++
++This profile is deliberately separate from SidebarRoot's iconButton: the
++Header keeps its secondary label in every state and defines only :hover.
++"""
++import hashlib
++import re
++
++
++# All three rules, including structural declarations and conditional scope.
++SHAPE = [
++    ('.controls', (), ('align-items', 'display', 'gap')),
++    ('.iconButton', (), ('align-items', 'background', 'border', 'border-radius',
++                        'color', 'cursor', 'display', 'flex', 'height',
++                        'justify-content', 'padding', 'width')),
++    ('.iconButton:hover', (), ('background',)),
++]
++
++
++def behavior_values(region):
++    # The immutable release skeleton covers both labels/shortcuts, native
++    # button type, callbacks, class bindings and icon identities. Only the two
++    # repeated numeric inputs are translated. Unknown behavior fails closed.
++    # Preserve the exact released text, including literal contents and token
++    # boundaries. Stripping whitespace/comments without a JS lexer can hide
++    # changed labels, shortcuts or key names (or even invalid identifiers).
++    body = region
++    # The pinned ESM bundle uses canonical ASCII decimal integer literals.
++    # Python \d/int would also accept Unicode digits and legacy leading zeros.
++    integer = r'(?:0|[1-9][0-9]*)'
++    delay_field = rf'\bdelayMs:\s*({integer})(?=\s*,)'
++    size_field = rf'\bsize:\s*({integer})(?=\s*}})'
++    delays = re.findall(delay_field, body)
++    sizes = re.findall(size_field, body)
++    if (len(delays) != 2 or len(set(delays)) != 1 or
++            len(sizes) != 2 or len(set(sizes)) != 1 or int(sizes[0]) <= 0):
++        raise ValueError('untranslated HeaderLeadingControls repeated timing/icon inputs')
++    shape = re.sub(delay_field, 'delayMs: DELAY', body)
++    shape = re.sub(size_field, 'size: ICON_SIZE', shape)
++    digest = hashlib.sha256(shape.encode()).hexdigest()
++    # ui-sidebar 0.2.1-rc.2 client.js HeaderLeadingControls.js region, with
++    # numeric inputs replaced above. Region bytes remain in the locked JSON.
++    if digest != '9f0e864db395efaa1cdc91b26aa022e32ba8fecb55caf187c9e2449e5b6229dd':
++        raise ValueError('untranslated HeaderLeadingControls behavior')
++    return int(delays[0]), float(sizes[0])
++
++
++def focus_values(context, token):
++    focus = context['focus']
++    if (len(focus) != 3 or any(r['conditions'] for r in focus) or
++            focus[0]['selector'] != ':root' or
++            focus[0]['declarations'] != {'--dsw-focus-ring-width': '2px'} or
++            focus[1]['selector'] != ':focus-visible' or
++            set(focus[1]['declarations']) != {'outline-color', 'outline-width'} or
++            focus[2]['selector'] != 'html[data-input-modality=pointer] body :focus-visible:not(:read-write)' or
++            focus[2]['declarations'] != {'--dsw-focus-ring-color': 'transparent', 'outline-color': '#0000'}):
++        raise ValueError('untranslated HeaderLeadingControls global focus structure')
++    color = re.fullmatch(r'var\((--[\w-]+),var\((--[\w-]+)\)\)', focus[1]['declarations']['outline-color'])
++    if color is None:
++        raise ValueError('untranslated HeaderLeadingControls global focus color')
++    region = context['inputModality']['region']
++    if hashlib.sha256(region.encode()).hexdigest() != 'b0da4fdc0aee867bd6c3780d9fb1da56528261229b54c52129af1aa9abccdac4':
++        raise ValueError('untranslated HeaderLeadingControls input modality')
++    return {'focusWidthToken': token(focus[1]['declarations']['outline-width']),
++            'focusToken': token('var(' + color[1] + ')', inherits_if_unset=True),
++            'focusFallbackToken': token('var(' + color[2] + ')')}
++
++
++def build(sheet, behavior, *, focus_context, number, token):
++    actual = [(r['selector'], tuple(r['conditions']),
++               tuple(sorted(r['declarations']))) for r in sheet]
++    if actual != SHAPE:
++        raise ValueError('untranslated HeaderLeadingControls state/property/condition')
++    controls, button, hover = [r['declarations'] for r in sheet]
++    for declarations, required in [
++        (controls, {'align-items': 'center', 'display': 'flex'}),
++        (button, {'align-items': 'center', 'justify-content': 'center',
++                  'background': '0 0', 'border': 'none', 'cursor': 'pointer',
++                  'display': 'inline-flex', 'flex': 'none', 'padding': '0'}),
++    ]:
++        if any(declarations[key] != val for key, val in required.items()):
++            raise ValueError('untranslated HeaderLeadingControls structural value')
++    delay, icon = behavior_values(behavior['region'])
++    width, height, gap = (number(button['width']), number(button['height']),
++                          number(controls['gap']))
++    if width <= 0 or height <= 0 or gap < 0:
++        raise ValueError('untranslated HeaderLeadingControls dimensions')
++    return {'DshHeaderLeadingRecipe': {
++        'width': width, 'height': height, 'controlsGap': gap,
++        'iconSize': icon, 'tooltipDelayMs': delay,
++        'radiusToken': token(button['border-radius']),
++        'labelToken': token(button['color']),
++        'hoverToken': token(hover['background']),
++        **focus_values(focus_context, token),
++    }}
+diff --git a/tool/design-system/published.py b/tool/design-system/published.py
+index cb14ba8..f9043d5 100644
+--- a/tool/design-system/published.py
++++ b/tool/design-system/published.py
+@@ -108,6 +108,12 @@ def modal_layer_snapshot(archive):
+             'modal': bundle_region(text, 'Modal.js'),
+             'risk': bundle_region(text, 'RiskConfirmation.js')}
+ 
++def input_modality_snapshot(archive):
++    with tarfile.open(archive) as tar:
++        bundle = tar.extractfile('package/lib/index.js').read()
++    return {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
++            'region': bundle_region(bundle.decode(), 'input-modality.js')}
++
+ def model_menu_snapshot(archive):
+     with tarfile.open(archive) as tar:
+         bundle = tar.extractfile('package/lib/client.js').read()
+@@ -174,7 +180,12 @@ def sidebar_component_snapshot(archive, components):
+             if not isinstance(mapping, dict) or not mapping or not all(isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()):
+                 raise ValueError('published sidebar class export is not a static string map')
+             classes[component] = mapping
+-        return {'css': styles, 'classes': classes, 'bundleSha256': hashlib.sha256(bundle).hexdigest(),
++        behavior = ({'HeaderLeadingControls-behavior.json': {
++            'bundleSha256': hashlib.sha256(bundle).hexdigest(),
++            'region': bundle_region(text, 'HeaderLeadingControls.js'),
++        }} if 'HeaderLeadingControls' in components else {})
++        return {'css': styles, 'classes': classes, 'behavior': behavior,
++                'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                 'manifest': tar.extractfile('package/package.json').read(),
+                 'license': tar.extractfile('package/LICENSE').read()}
+ 
+@@ -269,11 +280,15 @@ def verify_snapshot(archive, package, folder):
+         for component, mapping in result['classes'].items():
+             if json.loads((folder / (component + '-classes.json')).read_text()) != mapping:
+                 raise ValueError('sidebar class export snapshot mismatch: ' + component)
++        for name, behavior in result['behavior'].items():
++            if json.loads((folder / name).read_text()) != behavior:
++                raise ValueError('sidebar behavior snapshot mismatch: ' + name)
+         for key, name in [('manifest', 'package.json'), ('license', 'LICENSE')]:
+             if (folder / name).read_bytes() != result[key]:
+                 raise ValueError('sidebar package metadata mismatch')
+         return verified_outputs(package, [*result['css'],
+-            *(component + '-classes.json' for component in result['classes']), 'package.json', 'LICENSE'])
++            *(component + '-classes.json' for component in result['classes']),
++            *result['behavior'], 'package.json', 'LICENSE'])
+     if kind == 'plain-files':
+         verified_outputs(package, package['archiveFiles'])
+         with tarfile.open(archive) as tar:
+@@ -296,6 +311,10 @@ def verify_snapshot(archive, package, folder):
+                     if json.loads((folder / name).read_text()) != modal_layer_snapshot(archive):
+                         raise ValueError('published modal layer snapshot mismatch')
+                     continue
++                if name == 'input-modality.json':
++                    if json.loads((folder / name).read_text()) != input_modality_snapshot(archive):
++                        raise ValueError('published input modality snapshot mismatch')
++                    continue
+                 member = 'package/' + ('' if name in ('package.json', 'LICENSE') else 'lib/') + name
+                 if (folder / name).read_bytes() != tar.extractfile(member).read():
+                     raise ValueError('published primitive snapshot mismatch: ' + name)
+diff --git a/tool/design-system/recipes.generated.json b/tool/design-system/recipes.generated.json
+index 24333d7..53f0b0d 100644
+--- a/tool/design-system/recipes.generated.json
++++ b/tool/design-system/recipes.generated.json
+@@ -26,7 +26,8 @@
+           "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+           "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+           "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+-          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340"
++          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
++          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+         },
+         "sourcePackage": "packages/client/ui-primitives/package.json",
+         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+@@ -49,7 +50,8 @@
+           "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+           "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
+-          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
++          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
++          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
+         },
+         "referenceConsumers": [
+           {
+@@ -241,7 +243,8 @@
+           "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+           "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+           "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+-          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
++          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
++          "HeaderLeadingControls-behavior.json": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
+         },
+         "referenceSourceSha256": {
+           "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+@@ -6308,6 +6311,37 @@
+         }
+       }
+     ],
++    "HeaderLeadingFocusContext": {
++      "focus": [
++        {
++          "selector": ":root",
++          "conditions": [],
++          "declarations": {
++            "--dsw-focus-ring-width": "2px"
++          }
++        },
++        {
++          "selector": ":focus-visible",
++          "conditions": [],
++          "declarations": {
++            "outline-color": "var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
++            "outline-width": "var(--dsw-focus-ring-width)"
++          }
++        },
++        {
++          "selector": "html[data-input-modality=pointer] body :focus-visible:not(:read-write)",
++          "conditions": [],
++          "declarations": {
++            "--dsw-focus-ring-color": "transparent",
++            "outline-color": "#0000"
++          }
++        }
++      ],
++      "inputModality": {
++        "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
++        "region": "//#region lib/types/input-modality.js\n/**\n* Document-wide input tracking shared by tooltips and focus-ring styles.\n* Tooltips follow the last input; rings follow navigation or a key followed by\n* focus on a different control. Modifiers and refocusing alone keep rings silent.\n* Module-level listeners live for the document lifetime; Node imports are inert.\n*/\n/** Modality values published on the document element. */\nconst INPUT_MODALITY = {\n\tpointer: \"pointer\",\n\tkeyboard: \"keyboard\"\n};\n/** Attribute carrying whether focus navigation last owned focus. */\nconst INPUT_MODALITY_ATTRIBUTE = \"data-input-modality\";\nconst FOCUS_NAVIGATION = new Set([\n\t\"Tab\",\n\t\"Home\",\n\t\"End\",\n\t\"PageUp\",\n\t\"PageDown\"\n]);\nlet pointer = false;\nlet pointerOwnsFocus = false;\nlet keyFocusOrigin;\nfunction publish() {\n\tdocument.documentElement.setAttribute(INPUT_MODALITY_ATTRIBUTE, pointerOwnsFocus ? INPUT_MODALITY.pointer : INPUT_MODALITY.keyboard);\n}\n/**\n* Whether the last input came from a pointer, independently of ring visibility.\n* @returns True after pointer input; false after any key.\n*/\nfunction pointerModality() {\n\treturn pointer;\n}\nif (typeof window !== \"undefined\") {\n\twindow.addEventListener(\"pointerdown\", () => {\n\t\tpointer = true;\n\t\tpointerOwnsFocus = true;\n\t\tkeyFocusOrigin = void 0;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"keydown\", (event) => {\n\t\tpointer = false;\n\t\tif (event.isComposing) {\n\t\t\tkeyFocusOrigin = void 0;\n\t\t\treturn;\n\t\t}\n\t\tkeyFocusOrigin = event.composedPath()[0];\n\t\tif (!FOCUS_NAVIGATION.has(event.key) && !event.key.startsWith(\"Arrow\")) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"focusin\", (event) => {\n\t\tif (keyFocusOrigin === void 0 || event.composedPath()[0] === keyFocusOrigin) return;\n\t\tkeyFocusOrigin = void 0;\n\t\tif (!pointerOwnsFocus) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"blur\", () => {\n\t\tkeyFocusOrigin = void 0;\n\t});\n}\n"
++      }
++    },
+     "PlatformMenuMaterial": [
+       {
+         "selector": "html[data-platform=darwin] body",
+@@ -7237,6 +7271,10 @@
+         }
+       }
+     ],
++    "HeaderLeadingControlsBehavior": {
++      "bundleSha256": "4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e",
++      "region": "//#region lib/types/client/HeaderLeadingControls.js\n\t\t/** Window-chrome controls for the fully hidden sidebar (frame shell.leading seat). */\n\t\t/**\n\t\t* Sidebar-open and New Session controls in the frame's window-chrome seat.\n\t\t* On macOS desktop a collapsed sidebar hides entirely (no rail), taking both\n\t\t* controls off screen; this occupant puts them back beside the traffic\n\t\t* lights. The frame mounts the seat only in that state and owns its\n\t\t* placement, so the occupant renders unconditionally.\n\t\t* @param props - Injected sidebar actions plus the sidebar locale seat.\n\t\t* @returns the two window-chrome controls.\n\t\t*/\n\t\tfunction HeaderLeadingControls({ toggleSidebar, startSession, useShortcuts, t }) {\n\t\t\tconst shortcut = useShortcuts((rows) => rows.find((row) => row.id === \"sidebar.left.toggle\"));\n\t\t\tconst newShortcut = useShortcuts((rows) => rows.find((row) => row.id === \"session.new\"));\n\t\t\treturn (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\tclassName: HeaderLeadingControls_module_css_default.controls,\n\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"toggle.open\"),\n\t\t\t\t\tshortcutKeys: shortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"toggle.open\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": shortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\ttoggleSidebar();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPanelLeftOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"session.new.label\"),\n\t\t\t\t\tshortcutKeys: newShortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"session.new.label\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": newShortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\tstartSession();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconNewChatOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t})]\n\t\t\t});\n\t\t}\n\t\t"
++    },
+     "WorkspaceBrowser.module.css": [
+       {
+         "selector": ".root",
+@@ -10158,6 +10196,19 @@
+       "menuFontSize": 14.0,
+       "menuLineHeight": 22.0
+     },
++    "DshHeaderLeadingRecipe": {
++      "width": 28.0,
++      "height": 28.0,
++      "controlsGap": 8.0,
++      "iconSize": 16.0,
++      "tooltipDelayMs": 500,
++      "radiusToken": "--dsw-radius-sm",
++      "labelToken": "--dsw-alias-label-secondary",
++      "hoverToken": "--dsw-alias-interactive-bg-hover",
++      "focusWidthToken": "--dsw-focus-ring-width",
++      "focusToken": "--dsw-focus-ring-color",
++      "focusFallbackToken": "--dsw-alias-state-business-primary"
++    },
+     "DshModelMenuRecipe": {
+       "minWidth": 240.0,
+       "viewportWidthInset": 32.0,
+diff --git a/tool/design-system/source-inventory.generated.json b/tool/design-system/source-inventory.generated.json
+index a596b91..0b55f85 100644
+--- a/tool/design-system/source-inventory.generated.json
++++ b/tool/design-system/source-inventory.generated.json
+@@ -5,7 +5,7 @@
+     "path": "pnpm-workspace.yaml",
+     "sha256": "3c624c26e58ab02ffc8d653bb8a9e8767a63fe0576bc0dbfaa3a5e43f88d973b"
+   },
+-  "snapshotLockSha256": "0ec890e9e2c6033fea87fbc287827c4332ad0ba434ab94c0369aea22d03b5983",
++  "snapshotLockSha256": "133545002c7eddb1ba9fed0e10d94d932d252f9abd03cfe5ab51486256b72c8a",
+   "meaning": "Source-input retention only. Recipe implementation, inline/SVG coverage and state acceptance are not assessed.",
+   "dependencyScope": {
+     "roots": [
+@@ -2805,6 +2805,10 @@
+             "path": "tool/design-system/upstream/ui-primitives/Tooltip.module.css",
+             "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678"
+           },
++          {
++            "path": "tool/design-system/upstream/ui-primitives/input-modality.json",
++            "sha256": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
++          },
+           {
+             "path": "tool/design-system/upstream/ui-primitives/menu-portal.json",
+             "sha256": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b"
+@@ -4644,6 +4648,10 @@
+         "version": "0.2.1-rc.2",
+         "integrity": "sha512-nm/JKDUL/GNjwlTT9AQ4QnWU7hTgG81Ib6yNa0NOwCrC5TFRAb+3WhpvshCqcS6ofwhdXMjN5KB+zWuOrZdQRg==",
+         "files": [
++          {
++            "path": "tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-behavior.json",
++            "sha256": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
++          },
+           {
+             "path": "tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-classes.json",
+             "sha256": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d"
+diff --git a/tool/design-system/sources.lock.json b/tool/design-system/sources.lock.json
+index a399ad0..d879259 100644
+--- a/tool/design-system/sources.lock.json
++++ b/tool/design-system/sources.lock.json
+@@ -25,7 +25,8 @@
+         "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+         "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+         "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+-        "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340"
++        "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
++        "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+       },
+       "sourcePackage": "packages/client/ui-primitives/package.json",
+       "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+@@ -48,7 +49,8 @@
+         "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+         "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+         "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
+-        "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
++        "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
++        "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
+       },
+       "referenceConsumers": [
+         {
+@@ -240,7 +242,8 @@
+         "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+         "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+         "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+-        "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
++        "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
++        "HeaderLeadingControls-behavior.json": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
+       },
+       "referenceSourceSha256": {
+         "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+diff --git a/tool/design-system/theme.generated.json b/tool/design-system/theme.generated.json
+index 6b17783..4143828 100644
+--- a/tool/design-system/theme.generated.json
++++ b/tool/design-system/theme.generated.json
+@@ -26,7 +26,8 @@
+           "RiskConfirmation.module.css": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+           "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+           "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+-          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340"
++          "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
++          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+         },
+         "sourcePackage": "packages/client/ui-primitives/package.json",
+         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
+@@ -49,7 +50,8 @@
+           "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
+           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
+           "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
+-          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
++          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
++          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
+         },
+         "referenceConsumers": [
+           {
+@@ -241,7 +243,8 @@
+           "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+           "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+           "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+-          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
++          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
++          "HeaderLeadingControls-behavior.json": "36dd043a238d1ef6d9b85bcd9d84ff09129a0a3c0e130789dae69f65d6bb1a2d"
+         },
+         "referenceSourceSha256": {
+           "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+diff --git a/tool/design-system/upstream/ui-primitives/input-modality.json b/tool/design-system/upstream/ui-primitives/input-modality.json
+new file mode 100644
+index 0000000..cd66542
+--- /dev/null
++++ b/tool/design-system/upstream/ui-primitives/input-modality.json
+@@ -0,0 +1,4 @@
++{
++  "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
++  "region": "//#region lib/types/input-modality.js\n/**\n* Document-wide input tracking shared by tooltips and focus-ring styles.\n* Tooltips follow the last input; rings follow navigation or a key followed by\n* focus on a different control. Modifiers and refocusing alone keep rings silent.\n* Module-level listeners live for the document lifetime; Node imports are inert.\n*/\n/** Modality values published on the document element. */\nconst INPUT_MODALITY = {\n\tpointer: \"pointer\",\n\tkeyboard: \"keyboard\"\n};\n/** Attribute carrying whether focus navigation last owned focus. */\nconst INPUT_MODALITY_ATTRIBUTE = \"data-input-modality\";\nconst FOCUS_NAVIGATION = new Set([\n\t\"Tab\",\n\t\"Home\",\n\t\"End\",\n\t\"PageUp\",\n\t\"PageDown\"\n]);\nlet pointer = false;\nlet pointerOwnsFocus = false;\nlet keyFocusOrigin;\nfunction publish() {\n\tdocument.documentElement.setAttribute(INPUT_MODALITY_ATTRIBUTE, pointerOwnsFocus ? INPUT_MODALITY.pointer : INPUT_MODALITY.keyboard);\n}\n/**\n* Whether the last input came from a pointer, independently of ring visibility.\n* @returns True after pointer input; false after any key.\n*/\nfunction pointerModality() {\n\treturn pointer;\n}\nif (typeof window !== \"undefined\") {\n\twindow.addEventListener(\"pointerdown\", () => {\n\t\tpointer = true;\n\t\tpointerOwnsFocus = true;\n\t\tkeyFocusOrigin = void 0;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"keydown\", (event) => {\n\t\tpointer = false;\n\t\tif (event.isComposing) {\n\t\t\tkeyFocusOrigin = void 0;\n\t\t\treturn;\n\t\t}\n\t\tkeyFocusOrigin = event.composedPath()[0];\n\t\tif (!FOCUS_NAVIGATION.has(event.key) && !event.key.startsWith(\"Arrow\")) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"focusin\", (event) => {\n\t\tif (keyFocusOrigin === void 0 || event.composedPath()[0] === keyFocusOrigin) return;\n\t\tkeyFocusOrigin = void 0;\n\t\tif (!pointerOwnsFocus) return;\n\t\tpointerOwnsFocus = false;\n\t\tpublish();\n\t}, true);\n\twindow.addEventListener(\"blur\", () => {\n\t\tkeyFocusOrigin = void 0;\n\t});\n}\n"
++}
+diff --git a/tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-behavior.json b/tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-behavior.json
+new file mode 100644
+index 0000000..3d7c3a7
+--- /dev/null
++++ b/tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-behavior.json
+@@ -0,0 +1,4 @@
++{
++  "bundleSha256": "4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e",
++  "region": "//#region lib/types/client/HeaderLeadingControls.js\n\t\t/** Window-chrome controls for the fully hidden sidebar (frame shell.leading seat). */\n\t\t/**\n\t\t* Sidebar-open and New Session controls in the frame's window-chrome seat.\n\t\t* On macOS desktop a collapsed sidebar hides entirely (no rail), taking both\n\t\t* controls off screen; this occupant puts them back beside the traffic\n\t\t* lights. The frame mounts the seat only in that state and owns its\n\t\t* placement, so the occupant renders unconditionally.\n\t\t* @param props - Injected sidebar actions plus the sidebar locale seat.\n\t\t* @returns the two window-chrome controls.\n\t\t*/\n\t\tfunction HeaderLeadingControls({ toggleSidebar, startSession, useShortcuts, t }) {\n\t\t\tconst shortcut = useShortcuts((rows) => rows.find((row) => row.id === \"sidebar.left.toggle\"));\n\t\t\tconst newShortcut = useShortcuts((rows) => rows.find((row) => row.id === \"session.new\"));\n\t\t\treturn (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\tclassName: HeaderLeadingControls_module_css_default.controls,\n\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"toggle.open\"),\n\t\t\t\t\tshortcutKeys: shortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"toggle.open\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": shortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\ttoggleSidebar();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconPanelLeftOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Tooltip, {\n\t\t\t\t\tlabel: t(\"session.new.label\"),\n\t\t\t\t\tshortcutKeys: newShortcut?.keys,\n\t\t\t\t\tdelayMs: 500,\n\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: HeaderLeadingControls_module_css_default.iconButton,\n\t\t\t\t\t\t\"aria-label\": t(\"session.new.label\"),\n\t\t\t\t\t\t\"aria-keyshortcuts\": newShortcut?.aria,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\tstartSession();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconNewChatOutlineRegular, { size: 16 })\n\t\t\t\t\t})\n\t\t\t\t})]\n\t\t\t});\n\t\t}\n\t\t"
++}
+diff --git a/tool/parity-desktop/header-leading-cases.json b/tool/parity-desktop/header-leading-cases.json
+new file mode 100644
+index 0000000..dea420b
+--- /dev/null
++++ b/tool/parity-desktop/header-leading-cases.json
+@@ -0,0 +1,1292 @@
++{
++  "cases": [
++    {
++      "id": "header-leading.desktop-light",
++      "state": "component",
++      "appOnly": true,
++      "pairHost": false,
++      "width": 1280,
++      "height": 720,
++      "theme": "light",
++      "locale": "en",
++      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
++      "app": [
++        {
++          "keys": [
++            64
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-initial"
++        },
++        {
++          "move": [
++            22,
++            94
++          ]
++        },
++        {
++          "capture": "header-hover"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            22,
++            94
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-enter-pointer"
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            102
++          ]
++        },
++        {
++          "capture": "header-keyboard-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            15
++          ]
++        },
++        {
++          "capture": "header-keyboard-new"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-new-enter"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            57
++          ]
++        },
++        {
++          "capture": "header-new-space"
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            58,
++            94
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-new"
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        }
++      ]
++    },
++    {
++      "id": "header-leading.desktop-dark",
++      "state": "component",
++      "appOnly": true,
++      "pairHost": false,
++      "width": 1280,
++      "height": 720,
++      "theme": "dark",
++      "locale": "en",
++      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
++      "app": [
++        {
++          "keys": [
++            64
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-initial"
++        },
++        {
++          "move": [
++            22,
++            94
++          ]
++        },
++        {
++          "capture": "header-hover"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            22,
++            94
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-enter-pointer"
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            102
++          ]
++        },
++        {
++          "capture": "header-keyboard-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            15
++          ]
++        },
++        {
++          "capture": "header-keyboard-new"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-new-enter"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            57
++          ]
++        },
++        {
++          "capture": "header-new-space"
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            58,
++            94
++          ]
++        },
++        {
++          "move": [
++            1276,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-new"
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              0,
++              116,
++              600,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        }
++      ]
++    },
++    {
++      "id": "header-leading.phone-light",
++      "state": "component",
++      "appOnly": true,
++      "pairHost": false,
++      "width": 390,
++      "height": 844,
++      "theme": "light",
++      "locale": "en",
++      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
++      "app": [
++        {
++          "keys": [
++            64
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-initial"
++        },
++        {
++          "move": [
++            22,
++            94
++          ]
++        },
++        {
++          "capture": "header-hover"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            22,
++            94
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-enter-pointer"
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            102
++          ]
++        },
++        {
++          "capture": "header-keyboard-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            15
++          ]
++        },
++        {
++          "capture": "header-keyboard-new"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-new-enter"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            57
++          ]
++        },
++        {
++          "capture": "header-new-space"
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            58,
++            94
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-new"
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        }
++      ]
++    },
++    {
++      "id": "header-leading.phone-dark",
++      "state": "component",
++      "appOnly": true,
++      "pairHost": false,
++      "width": 390,
++      "height": 844,
++      "theme": "dark",
++      "locale": "en",
++      "notes": "Fixture-only F6 enters the actual SidebarLeadingControls; existing toolbar/three-family manifest is unchanged. Measured with pinned fonts: toolbarBottom72, toggle[8,80,36,108], new[44,80,72,108]. Synthetic callbacks remain visible; AppFrame mounting and Chromium UA-outline paint are outside this native interaction proof.",
++      "app": [
++        {
++          "keys": [
++            64
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-initial"
++        },
++        {
++          "move": [
++            22,
++            94
++          ]
++        },
++        {
++          "capture": "header-hover"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            22,
++            94
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-enter-pointer"
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-pointer-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            102
++          ]
++        },
++        {
++          "capture": "header-keyboard-toggle"
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-enter-pointer",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            15
++          ]
++        },
++        {
++          "capture": "header-keyboard-new"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              6,
++              78,
++              38,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-toggle",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            28
++          ]
++        },
++        {
++          "capture": "header-new-enter"
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-keyboard-new",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "keys": [
++            57
++          ]
++        },
++        {
++          "capture": "header-new-space"
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-enter",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "click": [
++            58,
++            94
++          ]
++        },
++        {
++          "move": [
++            386,
++            4
++          ]
++        },
++        {
++          "capture": "header-pointer-new"
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              0,
++              116,
++              390,
++              160
++            ],
++            "changed": true
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-initial",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": false
++          }
++        },
++        {
++          "expect": {
++            "reference": "header-new-space",
++            "rect": [
++              42,
++              78,
++              74,
++              110
++            ],
++            "changed": true
++          }
++        }
++      ]
++    }
++  ]
++}
+diff --git a/tool/parity-desktop/reported-families-cases.json b/tool/parity-desktop/reported-families-cases.json
+index a72ea83..a11b725 100644
+--- a/tool/parity-desktop/reported-families-cases.json
++++ b/tool/parity-desktop/reported-families-cases.json
+@@ -788,9 +788,9 @@
+             "reference": "model-pro-selected",
+             "rect": [
+               1028,
+-              594,
++              584,
+               1248,
+-              606
++              588
+             ],
+             "changed": false
+           }
+@@ -1635,9 +1635,9 @@
+             "reference": "model-pro-selected",
+             "rect": [
+               138,
+-              718,
++              708,
+               358,
+-              730
++              712
+             ],
+             "changed": false
+           }
+diff --git a/tool/parity-ext/host/header-leading.tsx b/tool/parity-ext/host/header-leading.tsx
+new file mode 100644
+index 0000000..ebed486
+--- /dev/null
++++ b/tool/parity-ext/host/header-leading.tsx
+@@ -0,0 +1,16 @@
++// Mount the real upstream component. The wrapper only fixes the capture frame;
++// all control CSS, glyphs, Tooltip and input-modality handling are upstream.
++import {HeaderLeadingControls} from '@dsh/ui-sidebar/src/client/HeaderLeadingControls.tsx'
++import type {KindRenderer} from '../../parity-web/host/types.ts'
++
++const labels: Record<string, string> = {'toggle.open': 'Open sidebar', 'session.new.label': 'New session'}
++export const kinds: Record<string, KindRenderer> = {
++  'header-leading.actual': () => <div data-header-leading-frame style={{position: 'fixed', left: 0, top: 0, width: 96, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--dsw-alias-bg-base)'}}>
++    <HeaderLeadingControls
++      toggleSidebar={() => {document.body.dataset.headerToggleCalls = String(Number(document.body.dataset.headerToggleCalls ?? 0) + 1)}}
++      startSession={() => {document.body.dataset.headerSessionCalls = String(Number(document.body.dataset.headerSessionCalls ?? 0) + 1)}}
++      useShortcuts={(selector: any) => selector([])}
++      t={(key: string) => labels[key] ?? key}
++    />
++  </div>,
++}
+diff --git a/tool/tests/test_header_leading_recipes.py b/tool/tests/test_header_leading_recipes.py
+new file mode 100644
+index 0000000..abadaee
+--- /dev/null
++++ b/tool/tests/test_header_leading_recipes.py
+@@ -0,0 +1,175 @@
++"""Header's real release inputs must reach the generated profile or fail."""
++import copy
++import hashlib
++import importlib.util
++import io
++import json
++from pathlib import Path
++import tarfile
++import tempfile
++import unittest
++
++ROOT = Path(__file__).resolve().parents[2]
++HERE = ROOT / 'tool/design-system'
++
++
++def module(name):
++    spec = importlib.util.spec_from_file_location(name, HERE / (name + '.py'))
++    result = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(result)
++    return result
++
++
++gen = module('generate')
++header = module('header_leading_recipes')
++
++
++class HeaderLeadingRecipesTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.lock, cls.sheets = gen.collect()
++
++    def recipe(self, sheets):
++        return header.build(sheets['HeaderLeadingControls.module.css'],
++                            sheets['HeaderLeadingControlsBehavior'],
++                            focus_context=sheets['HeaderLeadingFocusContext'],
++                            number=gen.number, token=gen.token)['DshHeaderLeadingRecipe']
++
++    def test_actual_release_geometry_and_behavior_are_generated(self):
++        recipe = self.recipe(self.sheets)
++        self.assertEqual((recipe['width'], recipe['height'], recipe['controlsGap'],
++                          recipe['iconSize'], recipe['tooltipDelayMs']), (28, 28, 8, 16, 500))
++        self.assertEqual(recipe['labelToken'], '--dsw-alias-label-secondary')
++        self.assertEqual(recipe['radiusToken'], '--dsw-radius-sm')
++        self.assertEqual(recipe['hoverToken'], '--dsw-alias-interactive-bg-hover')
++        _, audit = gen.render(self.lock, self.sheets)
++        self.assertEqual(json.loads(audit)['metrics']['DshHeaderLeadingRecipe'], recipe)
++
++    def test_source_mutations_propagate_without_changing_other_profiles(self):
++        changed = copy.deepcopy(self.sheets)
++        controls, button, hover = changed['HeaderLeadingControls.module.css']
++        controls['declarations']['gap'] = '9px'
++        button['declarations'].update(width='31px', height='29px',
++                                      color='var(--dsw-alias-label-caption)',
++                                      **{'border-radius': 'var(--dsw-radius-md)'})
++        hover['declarations']['background'] = 'var(--dsw-alias-interactive-bg-active)'
++        changed['HeaderLeadingControlsBehavior']['region'] = changed['HeaderLeadingControlsBehavior']['region'].replace(
++            'delayMs: 500', 'delayMs: 640').replace('size: 16', 'size: 18')
++        _, before = gen.render(self.lock, self.sheets)
++        _, after = gen.render(self.lock, changed)
++        before, after = json.loads(before)['metrics'], json.loads(after)['metrics']
++        recipe = after.pop('DshHeaderLeadingRecipe')
++        before.pop('DshHeaderLeadingRecipe')
++        self.assertEqual(before, after)
++        self.assertEqual(recipe, dict(width=31, height=29, controlsGap=9, iconSize=18,
++                                     tooltipDelayMs=640, labelToken='--dsw-alias-label-caption',
++                                     radiusToken='--dsw-radius-md', hoverToken='--dsw-alias-interactive-bg-active',
++                                     focusWidthToken='--dsw-focus-ring-width', focusToken='--dsw-focus-ring-color',
++                                     focusFallbackToken='--dsw-alias-state-business-primary'))
++
++    def test_unknown_states_properties_conditions_and_structure_fail_closed(self):
++        for mode in ('active', 'focus', 'property', 'condition', 'structure', 'token'):
++            changed = copy.deepcopy(self.sheets)
++            sheet = changed['HeaderLeadingControls.module.css']
++            if mode in ('active', 'focus'):
++                sheet.append({'selector': '.iconButton:' + mode, 'conditions': [],
++                              'declarations': {'background': 'red'}})
++            elif mode == 'property':
++                sheet[1]['declarations']['box-shadow'] = 'none'
++            elif mode == 'condition':
++                sheet[2]['conditions'] = ['@media (hover: hover)']
++            elif mode == 'structure':
++                sheet[1]['declarations']['padding'] = '1px'
++            else:
++                sheet[1]['declarations']['color'] = 'var(--untranslated-header-color)'
++            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'untranslated|unknown source theme token'):
++                self.recipe(changed)
++
++    def test_changed_or_ambiguous_behavior_is_rejected(self):
++        original = self.sheets['HeaderLeadingControlsBehavior']['region']
++        for value in (original.replace('delayMs: 500', 'delayMs: sourceDelay'),
++                      original.replace('delayMs: 500', 'delayMs: 600', 1),
++                      original.replace('size: 16', 'size: 17', 1),
++                      original.replace('size: 16', 'size: 0'),
++                      original.replace('toggleSidebar();', 'startSession();'),
++                      original.replace('IconNewChatOutlineRegular', 'IconCloseOutlineRegular'),
++                      original + original):
++            with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
++                header.behavior_values(value)
++
++    def test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint(self):
++        # Whitespace inside a string changes an actual shortcut/label/key.
++        # Removing all whitespace also accepts an invalid split identifier.
++        for before, after in [('"session.new"', '"session. new"'),
++                              ('"toggle.open"', '"toggle. open"'),
++                              ('toggleSidebar', 'toggle Sidebar')]:
++            original = self.sheets['HeaderLeadingControlsBehavior']['region']
++            self.assertIn(before, original)
++            with self.subTest(after=after), self.assertRaisesRegex(
++                    ValueError, 'untranslated HeaderLeadingControls'):
++                header.behavior_values(original.replace(before, after))
++        changed = copy.deepcopy(self.sheets)
++        context = changed['HeaderLeadingFocusContext']
++        original = context['inputModality']['region']
++        self.assertIn('"PageDown"', original)
++        context['inputModality']['region'] = original.replace('"PageDown"', '"Page Down"')
++        with self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
++            self.recipe(changed)
++
++    def test_only_supported_complete_ascii_decimal_literals_are_translated(self):
++        original = self.sheets['HeaderLeadingControlsBehavior']['region']
++        for before, after in [('delayMs: 500', 'delayMs: 0500'),
++                              ('size: 16', 'size: 016'),
++                              ('delayMs: 500', 'delayMs: ５００'),
++                              ('size: 16', 'size: １６'),
++                              ('delayMs: 500', 'delayMs: 500e0'),
++                              ('size: 16', 'size: 16.0'),
++                              ('delayMs: 500', 'delayMs: 500n'),
++                              ('size: 16', 'size: +16')]:
++            self.assertIn(before, original)
++            with self.subTest(after=after), self.assertRaisesRegex(
++                    ValueError, 'untranslated HeaderLeadingControls'):
++                header.behavior_values(original.replace(before, after))
++
++    def test_behavior_is_extracted_from_the_same_named_published_bundle(self):
++        published = module('published')
++        behavior = self.sheets['HeaderLeadingControlsBehavior']
++        css = (HERE / 'upstream/ui-sidebar/HeaderLeadingControls.module.css').read_text()
++        classes = json.loads((HERE / 'upstream/ui-sidebar/HeaderLeadingControls-classes.json').read_text())
++        bundle = ('//#region lib/types/client/HeaderLeadingControls.module.css.mjs\nconst css = ' +
++                  json.dumps(css) + ';\nvar HeaderLeadingControls_module_css_default = ' +
++                  json.dumps(classes) + ';\n//#endregion\n' + behavior['region'] + '//#endregion\n')
++        with tempfile.TemporaryDirectory() as directory:
++            archive = Path(directory) / 'sidebar.tgz'
++            with tarfile.open(archive, 'w:gz') as tar:
++                for name, text in {'lib/client.js': bundle, 'package.json': '{}', 'LICENSE': 'MIT'}.items():
++                    data = text.encode()
++                    info = tarfile.TarInfo('package/' + name)
++                    info.size = len(data)
++                    tar.addfile(info, io.BytesIO(data))
++            snapshot = published.sidebar_component_snapshot(archive, ['HeaderLeadingControls'])
++        self.assertEqual(snapshot['behavior']['HeaderLeadingControls-behavior.json'], {
++            'bundleSha256': hashlib.sha256(bundle.encode()).hexdigest(), 'region': behavior['region']})
++        with self.assertRaisesRegex(ValueError, 'missing/ambiguous'):
++            published.bundle_region(bundle + behavior['region'] + '//#endregion', 'HeaderLeadingControls.js')
++
++    def test_global_focus_source_has_no_header_specific_outline(self):
++        # Header has no local :focus-visible rule. Its canonical button uses
++        # the theme's generated global focus width/color and pointer modality.
++        focus = (HERE / 'upstream/ui-theme/focus.css').read_text()
++        self.assertIn('--dsw-focus-ring-width:2px', focus)
++        self.assertIn('outline-width:var(--dsw-focus-ring-width)', focus)
++        self.assertIn('html[data-input-modality=pointer]', focus)
++        self.assertNotIn('outline-offset', focus)
++        for mode in ('outline-offset', 'modality'):
++            changed = copy.deepcopy(self.sheets)
++            if mode == 'outline-offset':
++                changed['HeaderLeadingFocusContext']['focus'][1]['declarations']['outline-offset'] = '1px'
++            else:
++                changed['HeaderLeadingFocusContext']['inputModality']['region'] = changed['HeaderLeadingFocusContext']['inputModality']['region'].replace('"PageDown"', '"Enter"')
++            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
++                self.recipe(changed)
++
++
++if __name__ == '__main__':
++    unittest.main()
