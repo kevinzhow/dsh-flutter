@@ -1,0 +1,2172 @@
+[
+  {
+    "path": "checks/analyze.txt",
+    "sha256": "6c605f9f216937e88e5895b5d337e05cca90f8379c89447dd528c00a68bd9ad1",
+    "bytes": 32
+  },
+  {
+    "path": "checks/capability.txt",
+    "sha256": "2ed401488de9ddef87535fb7c13868117ace97d3e78f2771bef24e800b202401",
+    "bytes": 176
+  },
+  {
+    "path": "checks/check-deps.txt",
+    "sha256": "72821ec2faa683d7c4c553a4e356f397dc4b94333fabd70928ed4fb8029a9af6",
+    "bytes": 48
+  },
+  {
+    "path": "checks/codegen.txt",
+    "sha256": "932eee2c8a6de97de067d679478b025ca875f5c6c4aafa5c97018391f0cfc776",
+    "bytes": 62
+  },
+  {
+    "path": "checks/cold-source-free/design-system.txt",
+    "sha256": "8c974b693c0d63bdc882359bcee80111cf4d14317c1c2945e85bad218b6935a7",
+    "bytes": 380
+  },
+  {
+    "path": "checks/cold-source-free/release-inputs.json",
+    "sha256": "a6d9719cfd2b65d9a177d35607e2e98a63033e676504f3ea550433df885e199f",
+    "bytes": 9845
+  },
+  {
+    "path": "checks/design-system.txt",
+    "sha256": "26c70ea9dd73e4d90a2681d66f2a3e2b34bf50de5198c5c8673b752272795c0c",
+    "bytes": 402
+  },
+  {
+    "path": "checks/format.txt",
+    "sha256": "964ff0a37f1d8b078c61fa7a6daa71c7dd090af50e6c7bc8472758817b784f46",
+    "bytes": 49
+  },
+  {
+    "path": "checks/i18n.txt",
+    "sha256": "d0d8010702fefaf2922463ca9bfa943b7e581ad81674fe5e2f4048b30d7d18ed",
+    "bytes": 67
+  },
+  {
+    "path": "checks/icons.txt",
+    "sha256": "72d0e1803e2941ae0442696cd87e51e68cb3426c648007ebafad6098723fc10c",
+    "bytes": 22
+  },
+  {
+    "path": "checks/parity.txt",
+    "sha256": "2542b5c100483abe4c8d5bd53ba1a3abece67c2e7db24d46b928eab15e9bacdc",
+    "bytes": 459
+  },
+  {
+    "path": "checks/tests.txt",
+    "sha256": "e1cc883575ccd0580bf414f6ffd093a3335a5a90645f339d5b8ea964c01c04a1",
+    "bytes": 63492
+  },
+  {
+    "path": "checks/theme-pack.txt",
+    "sha256": "b9a297af6ed064ac9928508e1669b2fe23c9554c44a38e67caed4cc1266dc5f2",
+    "bytes": 34
+  },
+  {
+    "path": "checks/tool-tests.txt",
+    "sha256": "a92f879f46d86d60470e979b9fa98111844627229e0d852fefec670dc524d286",
+    "bytes": 294
+  },
+  {
+    "path": "checks/vector.txt",
+    "sha256": "17c893c38d8fe68525bdd3d36e552efc5045e5b29b5bd51034c8410d90eadf48",
+    "bytes": 2300
+  },
+  {
+    "path": "implementation/docs/design-system/release-inputs.md",
+    "sha256": "a12d7c08206d6d98c8589656fa277dec7aec588d2c26d47eb4902ca9caa3f61b",
+    "bytes": 5867
+  },
+  {
+    "path": "implementation/docs/design-system/source-inventory.md",
+    "sha256": "34d599828a40eb429801da05000996eeb081dff05aa431b4e5d5950d94398544",
+    "bytes": 8390
+  },
+  {
+    "path": "implementation/docs/design-system.md",
+    "sha256": "1066c43989429b7fe627974ba6e04df73a89e85bf5fd475b69b7f07ebf3f974a",
+    "bytes": 32790
+  },
+  {
+    "path": "implementation/tool/design-system/check.py",
+    "sha256": "f06f6a0f7f188aebe11e5b5c4c3cee5bb848254b4751c538ce14d720967362cf",
+    "bytes": 11085
+  },
+  {
+    "path": "implementation/tool/design-system/families.json",
+    "sha256": "8a723a93c2300ca862e01ed6e8fb73d8d8bc62d46fb06c19ebfdc94d2b262f08",
+    "bytes": 21847
+  },
+  {
+    "path": "implementation/tool/design-system/generate.py",
+    "sha256": "60117832dd39b27d8baa5deb729e62ab5d3283681d1dead2bd7559d2bbcbf452",
+    "bytes": 42010
+  },
+  {
+    "path": "implementation/tool/design-system/published.py",
+    "sha256": "6809b788b040551db7cd5e483049513b34e5d7693e476d48590d6adb9c88f44d",
+    "bytes": 23955
+  },
+  {
+    "path": "implementation/tool/design-system/source-inventory.generated.json",
+    "sha256": "72df452edbc09c4b89090d8f1daaa35543304bd20c35add7013672e64061fe32",
+    "bytes": 318544
+  },
+  {
+    "path": "implementation/tool/design-system/source_inventory.py",
+    "sha256": "c9626d26542d68ab60d7c5fbc9abf91770b556d8276c8b448e1895861270fdf1",
+    "bytes": 28434
+  },
+  {
+    "path": "implementation/tool/design-system/stats_recipes.py",
+    "sha256": "8d26a8ad5df7517364457b5cb2d8aa390227d578363bad2bb5b7927b0f14d0e8",
+    "bytes": 7668
+  },
+  {
+    "path": "implementation/tool/design-system/verify_release_inputs.py",
+    "sha256": "566999a2c2f6b7997af081f1ccdcaab4295badfd0decaf6b8ffd06215b9bc7e4",
+    "bytes": 11833
+  },
+  {
+    "path": "implementation/tool/preflight",
+    "sha256": "ea4195aacfad0ac7bfd6384aab27770b564f2b465f007d1f63ff5ac4ac3ac532",
+    "bytes": 17731
+  },
+  {
+    "path": "implementation/tool/tests/test_design_system_guard_policy.py",
+    "sha256": "2e4c3759866098baf67628b4434925703e51be87225fbfd15b20d48c27d8aadb",
+    "bytes": 8746
+  },
+  {
+    "path": "implementation/tool/tests/test_recipe_source_contract.py",
+    "sha256": "3d571a50e2b2622589153925817268f76c849d2a96b2311bdb5855933477a6ad",
+    "bytes": 4888
+  },
+  {
+    "path": "implementation/tool/tests/test_release_inputs.py",
+    "sha256": "faf70b1416df8ea67b71e6b2e909e07fa23c1c87cfd861b4450d909e064e80f4",
+    "bytes": 19371
+  },
+  {
+    "path": "implementation/tool/tests/test_source_inventory.py",
+    "sha256": "ce27bacf9e79b689e8429b3859412a80aaace05485dddc2bb1cba33ab1e808b4",
+    "bytes": 18682
+  },
+  {
+    "path": "implementation/tool/tests/test_theme_generator.py",
+    "sha256": "6f786965a837dd833282528ec31d8db851c1ca4b76670397190137ad6f05c94b",
+    "bytes": 7385
+  },
+  {
+    "path": "implementation.patch",
+    "sha256": "e337007e937af10cd3221e540397d78ea0a1588064afb9fa6ef8d53b78fa96cd",
+    "bytes": 474505
+  },
+  {
+    "path": "preflight.json",
+    "sha256": "e0ba30ad85e339823488a522b2fe6c339ccde1a2395c247b77fba048cbc9442f",
+    "bytes": 830
+  },
+  {
+    "path": "receipt.json",
+    "sha256": "78a19c02b8824b2e2d2678a83bbce57280ec5f03e4c724f2caa1aade12f7545f",
+    "bytes": 1000
+  },
+  {
+    "path": "reference-source/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "reference-source/packages/bundle/web-app/package.json",
+    "sha256": "610f015025c0e68079ad142227beca7936a7fc37e0866c712d28db7815d0b47b",
+    "bytes": 10152
+  },
+  {
+    "path": "reference-source/packages/client/locale/package.json",
+    "sha256": "608e17da0794c6058313ac5885c0b4e1dc39f587f844323a672d234d8c937fa0",
+    "bytes": 2107
+  },
+  {
+    "path": "reference-source/packages/client/locale/src/client/LanguageRow.module.css",
+    "sha256": "a97d67645d9f9322e1e433de1ef0dfcf984d849914f080c83b01f11457a60f26",
+    "bytes": 1004
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/package.json",
+    "sha256": "26bc59100dd0a425b32403d0189fc8a56ff76089b0df857697137350471f3a79",
+    "bytes": 2637
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/src/client/AgentPresetLabel.module.css",
+    "sha256": "f53c22f6560e04d664ef4cf87e62c9f62f782c64347ca0c5527f2c8222309149",
+    "bytes": 755
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/src/client/AgentPresetSeat.module.css",
+    "sha256": "9b468b40ffde94ed3433aa6e8096748edb3dd7fbeb2d429f758aadffd58eaf99",
+    "bytes": 3204
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css",
+    "sha256": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea",
+    "bytes": 9710
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/src/client/CreatePluginMenuItem.module.css",
+    "sha256": "e67112573786debee868e8322fd16faa2be09eab4acad1a8e25d402ab749796a",
+    "bytes": 353
+  },
+  {
+    "path": "reference-source/packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css",
+    "sha256": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
+    "bytes": 2671
+  },
+  {
+    "path": "reference-source/packages/client/ui-approval/package.json",
+    "sha256": "4be4caa023ac4114785442b16128bec154d5fe4f8c2c576cbb3ee274c32cca88",
+    "bytes": 2169
+  },
+  {
+    "path": "reference-source/packages/client/ui-approval/src/client/ApprovalPanel.module.css",
+    "sha256": "c7946195e6e30360e2b33de81074b4893d06ec7e8b4bc5b616eb8144f9c28317",
+    "bytes": 1501
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/package.json",
+    "sha256": "3dcd7929c705ba2ef519f6a2e595ed828b7a720720b639860d81cedf7450b59a",
+    "bytes": 2107
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/src/AttachmentRail.module.css",
+    "sha256": "328127d897bc3c1b4a414919f5a8de0a75a333006d948178a38ddc8d53d4888a",
+    "bytes": 2288
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/src/DropOverlay.module.css",
+    "sha256": "cce5c2b38f9db422895d498ea652fad36276b6117a8e02d7b5dbe4960e000189",
+    "bytes": 933
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/src/FileCard.module.css",
+    "sha256": "8dbd8226fd3ce3452f9a8e82d5a4d4e0039afff5e434a62840a8eca8cf8fbc75",
+    "bytes": 2994
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/src/MessageImage.module.css",
+    "sha256": "21278a1b8b8303d8e7817e59b416cb9a11317fdd5ac0f7490bd0e67bbdc99e67",
+    "bytes": 2068
+  },
+  {
+    "path": "reference-source/packages/client/ui-attachment/src/client/ComposerAttachments.module.css",
+    "sha256": "c2191478d35bd2c6a16355c60ac2801f4533bfcfcbb83309d9a03d7faeeee71e",
+    "bytes": 1248
+  },
+  {
+    "path": "reference-source/packages/client/ui-brand-official/package.json",
+    "sha256": "a811a719c734879b5c177c2d1263d2f52a8f391404c4e8d3cbe78205fdc9cab1",
+    "bytes": 1593
+  },
+  {
+    "path": "reference-source/packages/client/ui-brand-official/src/client/Brand.tsx",
+    "sha256": "1cd3240600f9307bbd3af99568f0186877f3383500fe10111adc15e8c68ca764",
+    "bytes": 672
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/package.json",
+    "sha256": "6cfa7ac4bcd19e5f34700d59cefa90b15ddf67948b508bfc7256f77fc0518095",
+    "bytes": 3893
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/AssistantMarkdown.module.css",
+    "sha256": "e10c5986e93070cf87bbd5c4a570a64a103c0d596d178ad4b8e170bbb6883908",
+    "bytes": 3310
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/ChatGroupSeat.module.css",
+    "sha256": "dc7b725e4f1d25bb046c7f2d995ad4c60e32b18fc5bd8d7d84361c48512a1307",
+    "bytes": 2956
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/ChatView.module.css",
+    "sha256": "9b5f56347f4b86846766ae9544207b7ecf112e857e2c31ca9fb8a3e734b5bafb",
+    "bytes": 9364
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/ContextBody.module.css",
+    "sha256": "f15582b800ea2c8a92c7e5d09d0d38586c5e42ab7654d27f6e45167269d3dec2",
+    "bytes": 2766
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/ContextInjectionRow.module.css",
+    "sha256": "1877c8962bf9462e9763517873e13660e9e8ef3d3e385853b388a377cdd3c808",
+    "bytes": 1850
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/GenericCommandCard.module.css",
+    "sha256": "b20c378e81c992132575f631bb134c52043d62b1c802b5817472cc74896312c5",
+    "bytes": 949
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/MessageIconActions.module.css",
+    "sha256": "b5e3ced5112bb676345eaa7d1bf7ec291b87f56ffa87579b6ece7b6ca6c72902",
+    "bytes": 3303
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/MessageItem.module.css",
+    "sha256": "d82759f3805832e0087dd85b41473ec4bf93aea51aa039378f161df4ccac1038",
+    "bytes": 9782
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/ReasoningRow.module.css",
+    "sha256": "5c28a61623c3bda67513c728422141921909d5227dbfb6c2e8a1a2e7e59079b1",
+    "bytes": 1659
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/StatsPills.module.css",
+    "sha256": "3d962cc52d5a535175459c72713980299270377af60f4c756509b1abfa6b2f10",
+    "bytes": 1302
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/TurnNavigator.module.css",
+    "sha256": "114ad82f41d9676dfd39ee6c8f9c239fcbbe343f9555dc9fbaea4814d9b8acdc",
+    "bytes": 5344
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/TurnProcessNodeView.module.css",
+    "sha256": "2fb00c2a24da7f9946dac118eaa076bd55133ca972d159c8b72d7ffee1ba2292",
+    "bytes": 1144
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/TurnTailNodeView.module.css",
+    "sha256": "9a40577b0c47199b8c9f2801ad484b1947e9b53f57182b4176badf03bbbc113f",
+    "bytes": 254
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/TurnTriggerNodeView.module.css",
+    "sha256": "b8bfb0760331cad4e0a98cbf5760abd22e160176e88525b85b266f71a2fd272c",
+    "bytes": 1341
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/TurnUsagePanel.module.css",
+    "sha256": "04bf7fd6d5e3a243225d66faf731774555a0c36a393415ae4f0479528f2f7fd4",
+    "bytes": 2004
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/accessibility.module.css",
+    "sha256": "57cfa9a890cb754cbd2cf9ade7d7379873620b7ee86cb8f11f0177065065788d",
+    "bytes": 137
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/chat/stat-dialog.module.css",
+    "sha256": "14228b7f038c2be37a01c08fe8b86cc4391e0016453a1f760e71621e527e3224",
+    "bytes": 2480
+  },
+  {
+    "path": "reference-source/packages/client/ui-chat/src/client/settings/PreferenceRow.module.css",
+    "sha256": "1e1d409eb08a85038358d116378493b62593dcbce71033334882da78b2cd0741",
+    "bytes": 971
+  },
+  {
+    "path": "reference-source/packages/client/ui-commands/package.json",
+    "sha256": "d25bc6eabed5274221f5d89ff700e35065dff9120e5b73d9edf8c3af3e03053b",
+    "bytes": 2314
+  },
+  {
+    "path": "reference-source/packages/client/ui-commands/src/client/PopupSelectView.module.css",
+    "sha256": "fb0b6d247299328dd40dea2308eecc565b7303e726012376dafb5874075c88c9",
+    "bytes": 3088
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/package.json",
+    "sha256": "3c45269ade859d13e94d186a23a461d910d8a5b3a871b6a0320c171f94c83ad8",
+    "bytes": 3725
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/input/editor/ReferenceChip.module.css",
+    "sha256": "8b1d1c03119183b0ff52ee18c956ed482293d699967944597a9c50d193102932",
+    "bytes": 511
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/input/editor/composer-editor.module.css",
+    "sha256": "3d13c16b881725eda1cbd9f052fc524f8179e9e1c7793898326877af85db6231",
+    "bytes": 750
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/queue/QueueDock.module.css",
+    "sha256": "0a217189c647d2a1234800f47b92c5bcf688d05a03a20dffa8b50375636fe716",
+    "bytes": 5219
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/settings/EnterBehaviorRow.module.css",
+    "sha256": "4cc511211f097ee6ee0b882a63dfd0c8dc44396f115bb28661b7f94cf3a993db",
+    "bytes": 993
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/skeleton/ContextMeter.module.css",
+    "sha256": "ec8c6b8b7a4abb8e99c6b2ca96b56d447a8169b5b12b109cf024b0b22cc29a5a",
+    "bytes": 3064
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/skeleton/ConversationRoot.module.css",
+    "sha256": "db3f29845e6cefa877737683e18d6b7e790be48d0c6510939ab4d18ab56a72fe",
+    "bytes": 18577
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/skeleton/HeroShell.module.css",
+    "sha256": "38a98b030dc643553bbbfaffeb8e98ca4668c59e55165da57aca31e89ee92f44",
+    "bytes": 6103
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/skeleton/InputBar.module.css",
+    "sha256": "3d6e405a567b04280dc33566890cce3056a7a36508b91b0abe01a0c53f11337f",
+    "bytes": 12969
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/skeleton/TodoPanel.module.css",
+    "sha256": "4177256462b4cde12c43eabc6433216bf2747cefcf911a93b4d1f1a2568011cc",
+    "bytes": 2571
+  },
+  {
+    "path": "reference-source/packages/client/ui-conversation/src/client/user-text/UserText.module.css",
+    "sha256": "9a0cdddce121ba41dc75fa24d1901986e63b843e3bc1a29f8158a7479f806b6d",
+    "bytes": 169
+  },
+  {
+    "path": "reference-source/packages/client/ui-deepseek-model-label-1017/package.json",
+    "sha256": "810093441a6f209010d6ab6bc452760d990bac5a4fbc417554edba5e4cfb9bc4",
+    "bytes": 1880
+  },
+  {
+    "path": "reference-source/packages/client/ui-deepseek-model-label-1017/src/client/DeepSeekModelLabel.module.css",
+    "sha256": "089ad41aa6742822fb049437974c161994f4fe4af46c00fd6b8a7bf98e719f8b",
+    "bytes": 121
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/package.json",
+    "sha256": "110a917fe2311126bd0f2f500c02f0f93a4c23227e0dde2a7b3a8febd0f9db7d",
+    "bytes": 3302
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/src/client/ChangedFiles.module.css",
+    "sha256": "9195a2c60f3987266176a4b1d877ba022bb2b6c1bd9c8fabfc1f41f6277f1e67",
+    "bytes": 4379
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/src/client/Deliverables.module.css",
+    "sha256": "99e722476a3ade8cb82bdf7fe6bc903e05bbf0b1921e3226f46180921a0d0772",
+    "bytes": 3912
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/src/client/FileDiff.module.css",
+    "sha256": "a3d8aa354bf27c5652ceb1878b32e165b8ebbd9810b2adbeaa7abb78237e9d33",
+    "bytes": 3302
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/src/client/PresentRow.module.css",
+    "sha256": "3bfed0d0ad6bd47d49ca070bfedec611ae355616cf60b19c0c8ec0aed458ed17",
+    "bytes": 708
+  },
+  {
+    "path": "reference-source/packages/client/ui-deliverables/src/client/ReviewTab.module.css",
+    "sha256": "1df595e6fc98568ffb725ae8ee8906f3f9af4795bcc0c1248db2e364d39a014b",
+    "bytes": 2090
+  },
+  {
+    "path": "reference-source/packages/client/ui-directory-picker-browse/package.json",
+    "sha256": "8a43992af5cf744ffcb903bfb7fcdd9f73702df7063b618520f6062cb264dd03",
+    "bytes": 1983
+  },
+  {
+    "path": "reference-source/packages/client/ui-directory-picker-browse/src/client/DirectoryBrowser.module.css",
+    "sha256": "de8d0c69280d3e22ebd2f29c87bef5b81b75f8118557abf822621ff2f9672cf3",
+    "bytes": 11158
+  },
+  {
+    "path": "reference-source/packages/client/ui-directory-picker-native/package.json",
+    "sha256": "2bbb82c06074e316772528d29eff89a3767c1350e11bd1cb14044f1274f6b612",
+    "bytes": 1664
+  },
+  {
+    "path": "reference-source/packages/client/ui-directory-picker-native/src/client/flow.ts",
+    "sha256": "d4bb4bf3383fe3240d32ad7e8676151607482327ec2758f411d7c2c505c78d36",
+    "bytes": 2764
+  },
+  {
+    "path": "reference-source/packages/client/ui-dockkit/package.json",
+    "sha256": "be71bc99b6ad274fe25784e4cdc27be0fc902f5d08febf1d71d9d24b88dd5a28",
+    "bytes": 1157
+  },
+  {
+    "path": "reference-source/packages/client/ui-dockkit/src/components/dockkit.module.css",
+    "sha256": "aa18d0e2a41bfd99babd9011f1107b26d387c30665fdbcc3d6276ec268750fdf",
+    "bytes": 23906
+  },
+  {
+    "path": "reference-source/packages/client/ui-goal/package.json",
+    "sha256": "b5244078dfac4af883c4cc9f647f1f0056c80f08c77d1f6a195e3cdd141763bd",
+    "bytes": 2408
+  },
+  {
+    "path": "reference-source/packages/client/ui-goal/src/client/GoalBar.module.css",
+    "sha256": "1adf7c2dbe667abffef511430af8929eaa6b6384ca41e58020407f07ae804967",
+    "bytes": 2875
+  },
+  {
+    "path": "reference-source/packages/client/ui-goal/src/client/GoalCommandInputView.module.css",
+    "sha256": "e6c1951def521891ab134aac416f864d5bceb1ee04ee9682e36230c50b2056c1",
+    "bytes": 1101
+  },
+  {
+    "path": "reference-source/packages/client/ui-input-trigger/package.json",
+    "sha256": "c9375bfb1c3f6557d8b2460ea9ca3aebaf06b6d05b81a7cb845578d37f9dcd74",
+    "bytes": 2158
+  },
+  {
+    "path": "reference-source/packages/client/ui-input-trigger/src/client/MenuView.module.css",
+    "sha256": "7a6f1828ae790a1cf9cc0755f77b0a5020618f2aca2cd12d54199fb82a86431a",
+    "bytes": 7131
+  },
+  {
+    "path": "reference-source/packages/client/ui-jobs/package.json",
+    "sha256": "41c75ca27fb9486efc8660811b19859ac55e6224af3f2a552a2913ebe82573ce",
+    "bytes": 2003
+  },
+  {
+    "path": "reference-source/packages/client/ui-jobs/src/client/JobListAction.module.css",
+    "sha256": "98ba8551bb494586f3097d455a45dc1f5b26b88ed66b4a8d70dd7b993d9cf564",
+    "bytes": 8359
+  },
+  {
+    "path": "reference-source/packages/client/ui-layout/package.json",
+    "sha256": "e9e57caed05a9479405e30dfca2eabff082ce59c934b8f72e2c9b0a68bbb9e9e",
+    "bytes": 1928
+  },
+  {
+    "path": "reference-source/packages/client/ui-layout/src/client/AppFrame.module.css",
+    "sha256": "f0bce7eb34595a249c7865b5e0542cfae175a50804060af46344aba906e6789c",
+    "bytes": 10297
+  },
+  {
+    "path": "reference-source/packages/client/ui-message-feedback/package.json",
+    "sha256": "f030d52700f4b2bd1539bfbf875ef7e446cd4e89b19322b2a4520002fd7473fc",
+    "bytes": 2631
+  },
+  {
+    "path": "reference-source/packages/client/ui-message-feedback/src/client/FeedbackDialog.module.css",
+    "sha256": "391cfa1a1a5fd60c5bab4e340e4531bc3060bcaa84d008f514db37e8701a2c6e",
+    "bytes": 2277
+  },
+  {
+    "path": "reference-source/packages/client/ui-message-feedback/src/client/MessageFeedbackActions.module.css",
+    "sha256": "e1883de6a4d0296d91230dd4bb483957221dcf9fef5a1806629fdfcad96766ba",
+    "bytes": 1271
+  },
+  {
+    "path": "reference-source/packages/client/ui-model-selection/package.json",
+    "sha256": "34d1fcdc561503f4a2de097dcc6c182c5614d072c52af720323bf4e570c0226f",
+    "bytes": 2409
+  },
+  {
+    "path": "reference-source/packages/client/ui-model-selection/src/client/ModelSelect.module.css",
+    "sha256": "7754687bfd5b18693e326f29367bf96a5ecf2906f0a00da82290406c9f12f80b",
+    "bytes": 7535
+  },
+  {
+    "path": "reference-source/packages/client/ui-open-in-app/package.json",
+    "sha256": "e3340ce45fdc7027817fc8e3160fa84aba52682c31041965e9f4873b6c0bf1cc",
+    "bytes": 2920
+  },
+  {
+    "path": "reference-source/packages/client/ui-open-in-app/src/client/OpenTargetButton.module.css",
+    "sha256": "cc8959182293fb47bab6006a24c0d12e5981667343859937ba0310d5ad6418cc",
+    "bytes": 1749
+  },
+  {
+    "path": "reference-source/packages/client/ui-permission-presets/package.json",
+    "sha256": "a8997b5f11923912f95595db98f652786423e50379c6076aac28337d1df18471",
+    "bytes": 2582
+  },
+  {
+    "path": "reference-source/packages/client/ui-permission-presets/src/client/PermissionRow.module.css",
+    "sha256": "805011ab50eab2c2b3c0a87863cd29995161881c2b5d4f5630fdc41300b20456",
+    "bytes": 1047
+  },
+  {
+    "path": "reference-source/packages/client/ui-permission-presets/src/client/PermissionSelect.module.css",
+    "sha256": "479464c75eb3f4ed6e2fd1d8e41632fed6c9a0e7a48f0287094195ae0524d51d",
+    "bytes": 2310
+  },
+  {
+    "path": "reference-source/packages/client/ui-plan/package.json",
+    "sha256": "3c548509b656f88f429565f478abd5bb6469cc89e9d41e59e3bac164295e9ca6",
+    "bytes": 2716
+  },
+  {
+    "path": "reference-source/packages/client/ui-plan/src/client/PlanModeControl.module.css",
+    "sha256": "86afe26e6ef51e6368b49dd1e299b770999c9ed3f806b1d1c12b0bbbd7a80187",
+    "bytes": 1541
+  },
+  {
+    "path": "reference-source/packages/client/ui-plan/src/client/PlanPreview.module.css",
+    "sha256": "91342f11f1778600916d033c7d1661cb429d29f364da0dc37f88f110e2b9399e",
+    "bytes": 2841
+  },
+  {
+    "path": "reference-source/packages/client/ui-plugin-manager/package.json",
+    "sha256": "5b3068edb3927d6652bf1f6517b523f4ecba0211da472720c33272c22d5260a3",
+    "bytes": 2921
+  },
+  {
+    "path": "reference-source/packages/client/ui-plugin-manager/src/client/PluginManagerPage.module.css",
+    "sha256": "348e68d454da869671ae5c9137b488e5d4125c963fdacd72f6c3c437e6c20757",
+    "bytes": 32263
+  },
+  {
+    "path": "reference-source/packages/client/ui-plugin-market/package.json",
+    "sha256": "2fc9c4c645deb0f181741d649e1b1f916c8f4c0b68b6b993380e6f8f30785789",
+    "bytes": 2155
+  },
+  {
+    "path": "reference-source/packages/client/ui-plugin-market/src/client/DiscoverSection.module.css",
+    "sha256": "98352eb5cd5d08360dd99c1abd24f56c67a3d68a20e057bdfe5bcaf39260b006",
+    "bytes": 7017
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/package.json",
+    "sha256": "341202014617ea1d511d49bddc4b279e3e3c2546c3a2c5de870337e0c765f1b6",
+    "bytes": 1828
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Button.module.css",
+    "sha256": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+    "bytes": 1577
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Checkbox.module.css",
+    "sha256": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
+    "bytes": 566
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/CodeCard.module.css",
+    "sha256": "56cce1937d45385b9cb5574e8f7d89501154a1f8cd47a38da4d9051d7a740ada",
+    "bytes": 1690
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/CommandText.module.css",
+    "sha256": "06cb8fb047eb046d96773d95a39f13c41deb085b83d8af8cd6c144280fd9900c",
+    "bytes": 306
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ConfigField.module.css",
+    "sha256": "fc586a9bbcac41fda5e2d91ac7b8c6445e0e007e09c90518369939b9f71b366b",
+    "bytes": 910
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ConnectionIndicator.module.css",
+    "sha256": "e48ba1dfdb2baf2e094e338621bb0bf6970f60dc7eefaaef1ddeea5864bf3797",
+    "bytes": 2241
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/DiffBlock.module.css",
+    "sha256": "20497caac6324eaf06f6f253b79969a2a6def2894d4a97ce3b0ac29f1f17c547",
+    "bytes": 1376
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/DisclosureRow.module.css",
+    "sha256": "4f153362045d4d374b5f52f21a39373e9c8d41cfab06978130e588dede447b91",
+    "bytes": 2441
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/FileTypeIcon.module.css",
+    "sha256": "bc5756f2834772d4c7cc661d15417aafe0af8d00c959cdfe2dcde19bebcf62fe",
+    "bytes": 1056
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/HoverCard.module.css",
+    "sha256": "03e81485eb927d73f3db0352e8910c9bd6ce76fb8a7e5773ca16b2a61f151dfa",
+    "bytes": 1963
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ImageLightbox.module.css",
+    "sha256": "cc2b6346c0a6443fbe94c274c129ccbf8cd8ca4dd0dac672cf64402fd22e25eb",
+    "bytes": 1374
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ImagePreview.module.css",
+    "sha256": "0830f46ff6efe022b33fc0145417ee9e30a893b056cb434baa1eb14f3cc2ebc7",
+    "bytes": 549
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/InlineEditor.module.css",
+    "sha256": "3b4c0bb10cba65579f49161c99d222d7834b05fafb268ca7c1cac7d4f17558a3",
+    "bytes": 600
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Input.module.css",
+    "sha256": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
+    "bytes": 719
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/JsonTree.module.css",
+    "sha256": "7fa75ad3380973de2ada25c94a8ae2fceb50b972ce28a801a87afe10f1575153",
+    "bytes": 6407
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Menu.module.css",
+    "sha256": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
+    "bytes": 6491
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/MenuGroup.module.css",
+    "sha256": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
+    "bytes": 584
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/MenuSurface.module.css",
+    "sha256": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
+    "bytes": 1188
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Modal.module.css",
+    "sha256": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+    "bytes": 2883
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/PathLabel.module.css",
+    "sha256": "d9a0a5851bcf16bfb59a5e94223119aff73337c42a255bc2a9dd0df2c4caa0f9",
+    "bytes": 548
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Pill.module.css",
+    "sha256": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82",
+    "bytes": 592
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ReadBlock.module.css",
+    "sha256": "fede27713617b2d12201862793336cd999276bf6301af1c31c87652efaceced5",
+    "bytes": 743
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/RiskConfirmation.module.css",
+    "sha256": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+    "bytes": 1229
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/SearchBlock.module.css",
+    "sha256": "89287f8f6082dd4f74a01ab8ef66531d1a0f4b58888f04232fb3687fc32002c6",
+    "bytes": 2356
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/SegmentedControl.module.css",
+    "sha256": "1891ca684346df51fed598de51545d6d195d0442a59be85271d0ee3f8dce63fd",
+    "bytes": 2173
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/SegmentedTabs.module.css",
+    "sha256": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+    "bytes": 1106
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/ShortcutKeys.module.css",
+    "sha256": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
+    "bytes": 800
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/StateDot.module.css",
+    "sha256": "ad4603fd7a499dcc3b672dc87663f6c73302a8cedaf4a9859db0abdb9144bee8",
+    "bytes": 2448
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Switch.module.css",
+    "sha256": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
+    "bytes": 1147
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Tag.module.css",
+    "sha256": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+    "bytes": 1858
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/TerminalBlock.module.css",
+    "sha256": "2820fc45befaeee637d2e04e4a62cfa709f3861291c2b536cbc6cea274387dcb",
+    "bytes": 7050
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/TextShimmer.module.css",
+    "sha256": "2353d6d72be5150aee3b528e7ae081a941f508f4ee3aa17243d6b0cc3b4240c7",
+    "bytes": 1733
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Toast.module.css",
+    "sha256": "74cab625e372a6cdaff92fa468b7d59bc037212d738e476ea0f8d485e4f8dbcb",
+    "bytes": 2824
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/Tooltip.module.css",
+    "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
+    "bytes": 1688
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/WebBlock.module.css",
+    "sha256": "65a4f4586c92533ad681f78231ddb6541e7ec6479fb9950eb0cce385bfc4d486",
+    "bytes": 3426
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/markdown/CodeBlock.module.css",
+    "sha256": "2c02318e7f43d24c1acd0400221b63e9ba85b6bffc004ed9b212e994f2535677",
+    "bytes": 3832
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/markdown/JsonBlock.module.css",
+    "sha256": "bd2051f52f562c6d39739e313c567405a366b57d03fc62abe675b608fdcc6f20",
+    "bytes": 666
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/markdown/MarkdownText.module.css",
+    "sha256": "b26d4977785a4ac6b60da56ac04c57116643830208ee76bb8095f8d8700cb7a5",
+    "bytes": 10923
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/settings-form/SettingsForm.module.css",
+    "sha256": "e6f8665558ac3f71e37a7d201a2fbc0f5f2991473747bf0a24795d2a037be26d",
+    "bytes": 1004
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/settings-form/fields.module.css",
+    "sha256": "afd83b53d8b053bd6e60967b3b452e307b69312c38f3c64ef22320ed9e32f2a6",
+    "bytes": 2478
+  },
+  {
+    "path": "reference-source/packages/client/ui-primitives/src/user-text.module.css",
+    "sha256": "4a7c80989bc7af1b9d4d1116f7718d57768aaea2945c5caa0428791695b014f7",
+    "bytes": 1786
+  },
+  {
+    "path": "reference-source/packages/client/ui-reference/package.json",
+    "sha256": "d045395ff92041a7dc9ba609dd1bdc154f8447e9ee7ca6e7f549e9f0f3025f38",
+    "bytes": 2466
+  },
+  {
+    "path": "reference-source/packages/client/ui-reference/src/client/FileReference.tsx",
+    "sha256": "e117a67a10a370a4829c01abc3511961a6c917858a4c31d1be16aa42a61c6e6b",
+    "bytes": 2590
+  },
+  {
+    "path": "reference-source/packages/client/ui-renderer/package.json",
+    "sha256": "d93d78641c781edaf748802ab538b5faab96545da8e2232232e0d2ce4ae7abb8",
+    "bytes": 1491
+  },
+  {
+    "path": "reference-source/packages/client/ui-renderer/src/client/app.tsx",
+    "sha256": "cd3328d22018734edfa72ade57f7806edfb5254c0b9a08b323373624a2e48d64",
+    "bytes": 740
+  },
+  {
+    "path": "reference-source/packages/client/ui-renderer/src/client/bindings.tsx",
+    "sha256": "ceaf302fcb4eb4ec419fc92c5b39f3667d753e67584dffbaf4540a67fc4f6672",
+    "bytes": 7252
+  },
+  {
+    "path": "reference-source/packages/client/ui-renderer/src/client/scoped-slots.tsx",
+    "sha256": "ff53b648f9a6fbd59bc13b89fbe33c67b32421c99ab7923689bfa1b47cea95c1",
+    "bytes": 53787
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/package.json",
+    "sha256": "0f975e86bfb4e2c6c3a3e518fa1184d8212a1c66e6e035abc34d8a1b5d53ffed",
+    "bytes": 2952
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/ClockPicker.module.css",
+    "sha256": "50d4903681f06f7efa41f5ecce302d7adaeab7a299eee3468fead6d3faabbe28",
+    "bytes": 1175
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/DatePicker.module.css",
+    "sha256": "3c2faf9dcac0813a3c7645894ad4546b18148fe1316244fc9def3f6a3271aab5",
+    "bytes": 2110
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/PickerPopover.module.css",
+    "sha256": "4a999a92069506cf000313a3111c16995ea87127831be3cd96ce34c42d92bf8d",
+    "bytes": 763
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/ScheduleCatalogAction.module.css",
+    "sha256": "1712a9ab18cad1cd241bd244282a0cfa712cc4f9141644735c8355fd74dcc248",
+    "bytes": 4126
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/ScheduleCreateCard.module.css",
+    "sha256": "05da6b5ba044b07461a7d88c3da9bd516b0018dafc6ba05c76f43b8db3fc7c2e",
+    "bytes": 3158
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/ScheduleTurnCard.module.css",
+    "sha256": "979a884765ef46f5fde2d336d29769257ca379edab14f23dfdb6086453b5dab5",
+    "bytes": 282
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/SessionScheduleMark.module.css",
+    "sha256": "23a257f872015f44d25ce9fd711ee5afd0473992fa5cd39e739faf7cea152fe7",
+    "bytes": 1678
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/TaskManagerPage.module.css",
+    "sha256": "3ad241c8d7ef637d466b148aecde77879498c62c80469b95f423a4a4569e165e",
+    "bytes": 36591
+  },
+  {
+    "path": "reference-source/packages/client/ui-schedule/src/client/TaskMenu.module.css",
+    "sha256": "ceecd4092ff1494f74e1d58dbb2ae63e68c81efd4c25175bce5d59a9bce2a336",
+    "bytes": 4701
+  },
+  {
+    "path": "reference-source/packages/client/ui-secret-mask/package.json",
+    "sha256": "f26365b8106a9741418bb721419009c3d51a5d9d538b883aeba6764fe81b94c4",
+    "bytes": 1665
+  },
+  {
+    "path": "reference-source/packages/client/ui-secret-mask/src/client/SecretText.module.css",
+    "sha256": "7e304248b2152c86e04d0ab294bbb6f573821aadd9a1430eff2e7b447b84c61c",
+    "bytes": 1998
+  },
+  {
+    "path": "reference-source/packages/client/ui-session/package.json",
+    "sha256": "a94da322313b5aaa750c919f754edb4d2cbad3e00c29b14eb1405747088a423d",
+    "bytes": 1954
+  },
+  {
+    "path": "reference-source/packages/client/ui-session/src/client/session-provider.tsx",
+    "sha256": "28c2ca1782551c8854c3544a7cb07f40741d2e6c72e2a383aedcc5475028704e",
+    "bytes": 648
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings/package.json",
+    "sha256": "4266a43fbce32d98b711d22f8ce0e90e9129fc7b74f44ff6107686582b5af81f",
+    "bytes": 1696
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings/src/client/config-form.ts",
+    "sha256": "2b5ef40f2bb06c1af50152d494aaf72c10b7127d563d86e7726b12342e3f8f5b",
+    "bytes": 13335
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings/src/client/contract/slots.ts",
+    "sha256": "2318031c951e80df0185be3fff1a55faf8d4932c2b36c16940d3ee33dce68060",
+    "bytes": 8053
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings/src/client/schema.ts",
+    "sha256": "dabe5d1e34375ca310fd09b666cda9c3ac5b6f61b38ffcc96eff9aef3dda1542",
+    "bytes": 5918
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings/src/client/settings-mirror.ts",
+    "sha256": "520fe2ac60c4cf9fcef7e64cf91c4b84999b9dec49117cdd5a7e575ef6725af0",
+    "bytes": 8155
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/package.json",
+    "sha256": "1b3f00b3dbd0ecfe2febba8df41030457f4f58dace40b799e29c083d08772490",
+    "bytes": 2591
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/AccountAvatar.module.css",
+    "sha256": "9423cc2ae23f7265ba91bd76b2bd3095adc7b35887a1e05d71743bb40478cd9c",
+    "bytes": 114
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/AccountMenu.module.css",
+    "sha256": "b3301b1224cca6e8adc17415ae0c92c6a239e5da145f8ddbbb85ed35931d60f0",
+    "bytes": 1632
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/AccountNotice.module.css",
+    "sha256": "eab8e56e98861593497e79a46206f58d5f3f8cdc5842ca4a516e69e74da24499",
+    "bytes": 1698
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/AccountSection.module.css",
+    "sha256": "429104049bf1eb4e2bb6f2dc302415922a0a2ccb326a12cff70a17d081e9b286",
+    "bytes": 4100
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/DesktopOnboarding.module.css",
+    "sha256": "6195d36369483c09600e90bd3437af04ed8c86a533955aff24cd8af615a8e7f6",
+    "bytes": 11905
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/OnboardingSurface.module.css",
+    "sha256": "560a956b1e7065c5e130b53b0228137b1072fcb7168a89c2d485275f33c8bea8",
+    "bytes": 1059
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/PlatformOverlay.module.css",
+    "sha256": "1813c36749bf9068d0e4f4661fb73cddb9b4c26f2d347088c4985f4762e020a3",
+    "bytes": 6082
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-account/src/client/SignInDialog.module.css",
+    "sha256": "2cb6cc9d6b13d1c97def36f26a6dc539d8c4d6f2eade45c2a1c241de0d06f80a",
+    "bytes": 1690
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-agent-loop/package.json",
+    "sha256": "2d4b836e4a53db3a666cbc590317f21021bfe4505da0426d2dfcc286c7216ca9",
+    "bytes": 1966
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-agent-loop/src/client/AgentLoopCard.tsx",
+    "sha256": "b45200616d313e98f610dea1aa9c5707202dba12fd7b0e5215be62881cd3e8b8",
+    "bytes": 1706
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/package.json",
+    "sha256": "38371811a03110f0cb8dd43c5cf27f0810496220d769edbbc181b0c0b8ccfc95",
+    "bytes": 2773
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/CurrentVersionRow.module.css",
+    "sha256": "025690154ff19102ad24dd8c821a12d77210e01e28072c8af1a10cae8a9e8ec0",
+    "bytes": 136
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/DesktopUpdateIndicator.module.css",
+    "sha256": "3d3afea694008e2f9587efed31c419e963297026dd53aef475641dc8d2f5fcfa",
+    "bytes": 1317
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/DeveloperToolsRow.module.css",
+    "sha256": "0912de3a4e55db10b01e11d00a22d94e88131843b02ad734343ef7680b7444f0",
+    "bytes": 344
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/GeneralSection.module.css",
+    "sha256": "3d39210b1ea0f422827b3ba5b58fc906e21e8465b3ebbe6f3ed9c8a434dc1156",
+    "bytes": 305
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/HostReleasePrompt.module.css",
+    "sha256": "418852eb3927b1a46cd9bd086df012fc7ab06d5d39a3bb5328a8535bb3e7b201",
+    "bytes": 1213
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/SettingsDocumentAction.module.css",
+    "sha256": "74f9b5c941ea8e65b6ee55e0b1506a709ecf75aaecb0807867569f9b7bdf6aac",
+    "bytes": 269
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/SettingsRoot.module.css",
+    "sha256": "886528a854b668db25c60cbc46ad982687142fcb02fda1f533dcbf491dc73513",
+    "bytes": 5870
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-general/src/client/chrome.module.css",
+    "sha256": "b358ca8429afe83e3a025a770f10884c9eb270b1de3ed52c9754e8b2061baeea",
+    "bytes": 212
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-models/package.json",
+    "sha256": "31b97ef86f1763ad2f14a0acd6bcedf53df412d1f8067e98a95351739f70a57b",
+    "bytes": 2145
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-models/src/client/DeepSeekOnboardingDialog.module.css",
+    "sha256": "9dd7d57f7a2a681b5576e9185b59462568296c298fedc42fb2ed4e9acd4d5cf9",
+    "bytes": 215
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-models/src/client/ModelsSection.module.css",
+    "sha256": "1b178d900cb96da046bef7b573019622267c650e0e2ae9a840204f164cefe636",
+    "bytes": 17728
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-models/src/client/OnboardingModal.module.css",
+    "sha256": "0df69ceaa5f4a31d4aaf7789371ec9004d64d70216e2161431fbfcce0d2c8b50",
+    "bytes": 451
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-models/src/client/WelcomeNotice.module.css",
+    "sha256": "4765269e05cb3edaff0d2983421575b902263663e05596db853e00de373df438",
+    "bytes": 454
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-plugin-inventory/package.json",
+    "sha256": "b4549282db4a842047afaaa56abb0e71710e3b8afe30cae48c4557d70ebcf756",
+    "bytes": 2234
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-plugin-inventory/src/client/PluginInventorySettingsTab.module.css",
+    "sha256": "b0c988b3873e40f1dc0752ea5aae6a26455d6d4ab037f4856dd7a34e9d7ea6ca",
+    "bytes": 10242
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-plugins/package.json",
+    "sha256": "3d6cc7b7fef956c5454771d2b227819f7ae8bdc52a2d3c0b2aa000427fbfc793",
+    "bytes": 1746
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-plugins/src/client/PluginsSettingsSection.module.css",
+    "sha256": "52e72879550cca4666b413bc89f88b2980675b3cc5839935ada1944b4cc8d524",
+    "bytes": 1862
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-session-log/package.json",
+    "sha256": "3eb1d61fc85d26be76db34db2d82241304e6c76109317683187883c430fbc0d7",
+    "bytes": 1930
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-session-log/src/client/UploadRow.module.css",
+    "sha256": "0912de3a4e55db10b01e11d00a22d94e88131843b02ad734343ef7680b7444f0",
+    "bytes": 344
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-shell/package.json",
+    "sha256": "7454509f3ed3db6a9661b03b18784a483ceec12aecb839268270f2d050b32975",
+    "bytes": 1978
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-shell/src/client/ShellCard.tsx",
+    "sha256": "fd7cd8f0c63b881527dd206e3492407e8411d954e56aa94b22d8a110cacb13bb",
+    "bytes": 2141
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-subagent/package.json",
+    "sha256": "ca994f4a74f77404af7c23771f1e6476975ad77ce7a60dcd4c644cb253acdc93",
+    "bytes": 2035
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-subagent/src/client/SubagentCard.module.css",
+    "sha256": "541f463c6b3e85ae61be323675e0f73a62004c2d4dd9023b2cc1200ebbf8d6b5",
+    "bytes": 175
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-subagent/src/client/SubagentLimitsFields.module.css",
+    "sha256": "c7e60d71c4871391d28df8aa3ca2d08ab72d23fdf1fb42dc2a15db02241f28dc",
+    "bytes": 699
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-subagent/src/client/SubagentModelSelectionFields.module.css",
+    "sha256": "ffca17e0c6db49067194c176a52620834da394d9fc170712ab843b7b8a1f2ded",
+    "bytes": 2111
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-web-search/package.json",
+    "sha256": "05d8269318a164319b3ef31f1ee44a16b2a9811d457cb86a6f16e7f2de88dbb7",
+    "bytes": 2022
+  },
+  {
+    "path": "reference-source/packages/client/ui-settings-web-search/src/client/WebSearchCard.module.css",
+    "sha256": "600bd4e03b303c0ad937b77a0aad6e9a693583253597bb1d9d3fcda1c5ec79cb",
+    "bytes": 449
+  },
+  {
+    "path": "reference-source/packages/client/ui-shortcuts/package.json",
+    "sha256": "405df24fa9e82257602274104f340ada5d2308a9dfbdb9711c8d91648536f34a",
+    "bytes": 1991
+  },
+  {
+    "path": "reference-source/packages/client/ui-shortcuts/src/client/Reference.module.css",
+    "sha256": "71ab17a0cb573e0fc02aa30077d366eb6c522e2db2151636639f278fa5672da7",
+    "bytes": 8551
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar/package.json",
+    "sha256": "86531f8468bd3549805f16fdda6b56091825a3a1c26cb2df509930e89b48086f",
+    "bytes": 2277
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar/src/client/HeaderLeadingControls.module.css",
+    "sha256": "7f106cb3de2068dff52f301b63ba7f69b6b813b58e11bef77fd818da2bb3d684",
+    "bytes": 772
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar/src/client/SidebarRoot.module.css",
+    "sha256": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+    "bytes": 16390
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-browser/package.json",
+    "sha256": "2555c26dd5b44f61cd1b77d8483b578beec0ce0069d070365b634b086e2c917b",
+    "bytes": 2134
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-browser/src/client/view/Browser.module.css",
+    "sha256": "787ffc87ef674562ef1758e3d7452809ebb19cd4d5853a6dc4207c7b3c6c4039",
+    "bytes": 4698
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/package.json",
+    "sha256": "86fc92a400579f907584552d58ce8c779aff3043dcf5cdf855581afb02790a08",
+    "bytes": 3276
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/LoadingIndicator.module.css",
+    "sha256": "636ca4bb3f68ccdeabd4667d3d6fcaeaf0c8e318e534b6afba0e922310ba38bd",
+    "bytes": 554
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/TextPreview.module.css",
+    "sha256": "807a437e79912284c87b36c4f2556d9c155a966f04b4e034f951e705cf1029ee",
+    "bytes": 7532
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/code/CodeBody.module.css",
+    "sha256": "009e8dcf43a3aa9add6788b1774624a0f717f657d1ae0c8a86170219eea20fc8",
+    "bytes": 1292
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/excel/ExcelBody.module.css",
+    "sha256": "2d5a0130b0ccb63d5c1e387eec4f608f9bea96a0379d79027b279cb64be426bb",
+    "bytes": 2506
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/html/HtmlBody.module.css",
+    "sha256": "39a8e289e5bf57e19d63342fa81bcb8d879c3c9151399608974816376cd2d4e4",
+    "bytes": 246
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/image/ImageBody.module.css",
+    "sha256": "65b56f071490860ce7e8f12fd26d7d0e302525add8a7b86e83e8c4505d45c5bb",
+    "bytes": 1176
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/markdown/MarkdownBody.module.css",
+    "sha256": "58ce708a0e5f059bb8d071d72fa03766c6e50a55341265727c07120db596cdb2",
+    "bytes": 850
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/markdown/frontmatter-fields.module.css",
+    "sha256": "399a4186764d0d8cf2d25f2d2f5c0ec624dcde8f1a3adcd67f7a359d69361271",
+    "bytes": 394
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/office/FontNotice.module.css",
+    "sha256": "f872bce7851724d07c9bab7ae1029c917c473ec61c22369f265dde06b9809d76",
+    "bytes": 1318
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/office/OfficeBody.module.css",
+    "sha256": "c04fcefadfe8b83a352f176289c59727af48af9cbeb77fbdc6c6088985d2cc73",
+    "bytes": 86
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/pdf/PdfBody.module.css",
+    "sha256": "6f057689cb3239eb107a6a820838badf2364cdb25adbfddb59fd0e56abb9fb6c",
+    "bytes": 3053
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/zoom/ZoomControls.module.css",
+    "sha256": "b73e0fd34444dd0b4ff17e3d5ca595971f2c1c99180538e35a85dd8a33ce2acd",
+    "bytes": 1416
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-documentpreview/src/client/zoom/ZoomViewport.module.css",
+    "sha256": "597acbd5b4b858bc9712b61b5b2b6300d6a9b085adf075ec840116b484c87840",
+    "bytes": 524
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-files/package.json",
+    "sha256": "58ba8e91e7a4da29609dbda5c933c8c555e2329bf03e078acc776123350f0b85",
+    "bytes": 2488
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-files/src/client/FilesBody.module.css",
+    "sha256": "7ac1f0f136195ad639128394edb4355133071b9ff510b7d2caefed51773a8522",
+    "bytes": 4043
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-right/package.json",
+    "sha256": "3641b5b7a34a0d8fccd0bfd8c34adf693607b97f973888d70af1ca74907ceda4",
+    "bytes": 2648
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-right/src/client/shell/ExpandButton.module.css",
+    "sha256": "d4c36e6e304067a820c3ff4873f26f85bc55c6af8341f89a4802f53766bcb599",
+    "bytes": 343
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-right/src/client/shell/SidebarRight.module.css",
+    "sha256": "546b01c7d4dc1126230696999a4b9385f8fd2d0d1eab3d4660febdf8d5544bce",
+    "bytes": 6148
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-right/src/client/tabs/guide/GuideBody.module.css",
+    "sha256": "14fcccfc92a8cdabdb9337b6c961d013d3dc586228d842ef1012d7323321f4b3",
+    "bytes": 3616
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-terminal/package.json",
+    "sha256": "17e5364d1c7f54033c57d1d69abcd754fc7adf7aacc80324870049989936b31f",
+    "bytes": 2544
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-terminal/src/client/TerminalCleanup.module.css",
+    "sha256": "7eb175d509f2dece61d182e1889d577751cf623fe3e8a4e9adf1492427b1744a",
+    "bytes": 652
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-terminal/src/client/TerminalGuide.module.css",
+    "sha256": "e0ff5cacf9fc313fb32811891ba25edbb7422a5495f9df27c9187d56c250d6f0",
+    "bytes": 1416
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-terminal/src/client/TerminalTitle.module.css",
+    "sha256": "a2a9fca62a8595c39b3e175e6ba2cfff35c7e90a00f6e04d25b70bc83ded8b17",
+    "bytes": 330
+  },
+  {
+    "path": "reference-source/packages/client/ui-sidebar-terminal/src/client/terminal.module.css",
+    "sha256": "1609e7dad23ba726a53c3ba61f57e849ceddff36daae73fbe95b795c66f12964",
+    "bytes": 2280
+  },
+  {
+    "path": "reference-source/packages/client/ui-skill/package.json",
+    "sha256": "f6d943e7b7d3f3b7d71738975d4ee07768d7f52aa12ca7c984756d0d19a26caa",
+    "bytes": 2570
+  },
+  {
+    "path": "reference-source/packages/client/ui-skill/src/client/SkillRow.module.css",
+    "sha256": "8d13dc8c4ce39a7f44421b9b60511e06eb9e453679d75b3f3c2ed2131270f786",
+    "bytes": 3986
+  },
+  {
+    "path": "reference-source/packages/client/ui-slots/package.json",
+    "sha256": "e6dffa5cbaaf46256c930e8dc64a7344753a748f05407b4e1d60350f25bebba1",
+    "bytes": 993
+  },
+  {
+    "path": "reference-source/packages/client/ui-slots/src/index.ts",
+    "sha256": "43989fb355e1e85316caa70b28de3294f9d6e7b179199a4e429dcd1ef73f2e24",
+    "bytes": 70931
+  },
+  {
+    "path": "reference-source/packages/client/ui-slots/src/renderer.ts",
+    "sha256": "43ba3492fff724ffbe71d0b4bcfca410ab695d019aa2e163d2c8dd56cab1a849",
+    "bytes": 12553
+  },
+  {
+    "path": "reference-source/packages/client/ui-slots/src/store.ts",
+    "sha256": "4233ae32911848aa771910286e5f41b4c683e8c5b16da190935082ac4249cca0",
+    "bytes": 334
+  },
+  {
+    "path": "reference-source/packages/client/ui-subagent/package.json",
+    "sha256": "9769bc376942759b0c353d6bbe76f0332118a8ceab023a1f95d922b6c41b5259",
+    "bytes": 2673
+  },
+  {
+    "path": "reference-source/packages/client/ui-subagent/src/client/SubagentHeaderLineage.module.css",
+    "sha256": "936d891e1c6dcf680b5d0e741cda2008a77f1282e5a713606c25c596722de87f",
+    "bytes": 6354
+  },
+  {
+    "path": "reference-source/packages/client/ui-subagent/src/client/SubagentReadOnlyComposer.module.css",
+    "sha256": "9a0296f824e5c7df0d30edf0d4285800e387029a54da1c62775cfc78a47eb59b",
+    "bytes": 449
+  },
+  {
+    "path": "reference-source/packages/client/ui-subagent/src/client/sidebar-chat/SidebarChat.module.css",
+    "sha256": "5b68550715870b7a66972b4370da3c3aff36190d5b1b4635147824046aea6075",
+    "bytes": 91
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/package.json",
+    "sha256": "58740e5f425a9270f112691eac8ed30c1908d7e1291dd034e5cf3b074f4d8036",
+    "bytes": 2439
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/client/AppearanceRow.module.css",
+    "sha256": "2e1f8f44ee41256aaf6af103d38edb7220a3e0a82099be8e9d3e0b75a5e4f6c4",
+    "bytes": 1460
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/client/FontFamilyRow.module.css",
+    "sha256": "4057c269fd2f045357ee708d6e809485b5d62b78f66bd0582054f169950dc990",
+    "bytes": 205
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/client/FontSettingsGroup.module.css",
+    "sha256": "97169df928efb6f6f04fac215e894fcde573d8d5034ed7552cd345f4b4220269",
+    "bytes": 333
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/client/FontSizeRow.module.css",
+    "sha256": "63f0c2e0786803e073cfbc67e96cba4590637a2d98b4e1bdd87c54e08738da9e",
+    "bytes": 3159
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/base.css",
+    "sha256": "803926ce39f5ea48b652021d06b6ca65c4acc7be2c5c4e19bd904ab1dabf0b67",
+    "bytes": 1933
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/brand-font.css",
+    "sha256": "d0733ee69620e686561800ac788e54fc0bb9e02af5294c8b6f74c109132210cf",
+    "bytes": 554
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/corner-shape.css",
+    "sha256": "d94f82e1332b6d37e8345aafe1b6b4129faed65891edd3861c00b88940ec4d3f",
+    "bytes": 1135
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/design-platform.css",
+    "sha256": "809b20ae477324fdf5181a2d338655a19919cabbf1b0e60adc149908462c5a66",
+    "bytes": 23492
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/focus.css",
+    "sha256": "f7398e7730415592ab1e81cec36f8c5e23065becd06c050f0129a6fa44d247e8",
+    "bytes": 1018
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/gradient-shadow-text.css",
+    "sha256": "b6e1e8387edbfa60ec03bb29aad7c01245c0adbd22229d5a6f2916caa7e7b427",
+    "bytes": 15273
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/onboarding.css",
+    "sha256": "9b3a0541c9639e73aa52f001d9b2e8056d3e9ffb55ea69c5ba95989706c92ddb",
+    "bytes": 1034
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/scrollbar.css",
+    "sha256": "673450184fe82a679b5759a7f93ceab17895b9f12e1196f7efb281304afd8398",
+    "bytes": 4338
+  },
+  {
+    "path": "reference-source/packages/client/ui-theme/src/styles/shiki.css",
+    "sha256": "14f2b00083b035d8f92e26243a669d1b04a8d564c20d91856b20706cc79b8828",
+    "bytes": 1181
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/package.json",
+    "sha256": "41b41f43d7ad242cb72666db925e57d8e7085debb4c0ea023671b206a8085e57",
+    "bytes": 2946
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/ToolCallTree.module.css",
+    "sha256": "7247f04ee77725aa59ed3621634fd4ac7b4ea63ae35cd5e647fdc8a6ae374dbb",
+    "bytes": 224
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/components/AskQuestionCard.module.css",
+    "sha256": "e8796a15b635851f22a0190d991ba2cb8f0fa685c354a64db68f2bf0795873fb",
+    "bytes": 1291
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/components/ExitCodeBadge.module.css",
+    "sha256": "1c844d514c65a199493fd9c112ad546caadf1d957804c3ac466213f52cce144c",
+    "bytes": 207
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/components/QuestionToolRow.module.css",
+    "sha256": "f1d2095bccb7cdbe340cb2f8afa2864941cab9f934e2e6354dc17508ab2d574c",
+    "bytes": 668
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/components/ToolDetails.module.css",
+    "sha256": "ba9603a9c3d90b24fcd0ae2ddb41bff1b5a60a74cd6dd698c46d15e69638d907",
+    "bytes": 4760
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/components/ToolRow.module.css",
+    "sha256": "943c0b6205ba9eb922e1ced7223dcf6d908d3012dfbd58ccaa73b65c2ef99313",
+    "bytes": 10581
+  },
+  {
+    "path": "reference-source/packages/client/ui-tool/src/client/tool/toolviews/bash-sample.module.css",
+    "sha256": "c68550cbeae02e062ba9eadc6b14bb71d44cf7c2e40695ff4a542a71f2dacb72",
+    "bytes": 6369
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/package.json",
+    "sha256": "38210f7c89cea50773da8e30ba2b8de772f00c5df1663a437c74fcf5eed0944c",
+    "bytes": 2540
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryCell.module.css",
+    "sha256": "aa45ae24a5fc0584b42545070eb89c333cf1c64b6ec270a3dbbeef9c6de72da5",
+    "bytes": 2895
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryGroupHeader.module.css",
+    "sha256": "b08362f0a3525131a9764d523c4b6bac5d9a9ee0a3b8aeec4c70253c5cb764e8",
+    "bytes": 491
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryTable.module.css",
+    "sha256": "dba4683d768a518704f13bbd8acc4d00e5ae23c1db147d5b66d610c39dfe6d88",
+    "bytes": 39798
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryTimeline.module.css",
+    "sha256": "3dde8e6e549a674b2b82c1750cfd67ae1cba61ffd4387d0e1a7e5a104164a39a",
+    "bytes": 6618
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryToolbar.module.css",
+    "sha256": "b512e1c52f397ef81775295ae779e95dbf7682d53ce7a9b48e2f1f01dd714c8c",
+    "bytes": 4249
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryTurn.module.css",
+    "sha256": "77877a5afcf4cf2f33e680ad495c1713c6f798d21e44aa7cb53a1e7e987bd21a",
+    "bytes": 268
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/TrajectoryTurnHeader.module.css",
+    "sha256": "e9740dcd1b98cfd92b68bfe3d2f1f968623542b7e0ce2c6697be0b3c79180fc5",
+    "bytes": 958
+  },
+  {
+    "path": "reference-source/packages/client/ui-trajectory/src/client/views.module.css",
+    "sha256": "8712809e4e159aefbc98394aad34d112737121030eaea0c221fba2a83c2e5c01",
+    "bytes": 646
+  },
+  {
+    "path": "reference-source/packages/client/ui-user-questions/package.json",
+    "sha256": "187acc95f387d72b9beea450d572d821a89945684fb2ffe8035208ef6189b521",
+    "bytes": 2655
+  },
+  {
+    "path": "reference-source/packages/client/ui-user-questions/src/client/PlanReviewPanel.module.css",
+    "sha256": "01a8d8999ae1d9412a90ca7408fbbc305d579a6a8168b7d958fff6d875d96f7c",
+    "bytes": 2021
+  },
+  {
+    "path": "reference-source/packages/client/ui-user-questions/src/client/QuestionComposer.module.css",
+    "sha256": "b1d33fe590bbc7d17ccadda6bfa63dfc6c0b01a87b2f3b7230f821041785b1d7",
+    "bytes": 12381
+  },
+  {
+    "path": "reference-source/packages/client/ui-user-questions/src/client/QuestionReplyView.module.css",
+    "sha256": "5793c94070d2374ceabdb6cd6e47f3861df3dc14e324c4d19ba25b5561b0e593",
+    "bytes": 2863
+  },
+  {
+    "path": "reference-source/packages/client/ui-workflow-run/package.json",
+    "sha256": "22ad215d08f8335ae2c55abe344dc7fbc0be28f282ab4c4b84ccb53d32d724a6",
+    "bytes": 2362
+  },
+  {
+    "path": "reference-source/packages/client/ui-workflow-run/src/client/WorkflowRunPanel.module.css",
+    "sha256": "aa60a5b61a67cca064ec18cc7a9414816308546ad4b74d10630a8a4c8baf949c",
+    "bytes": 5995
+  },
+  {
+    "path": "reference-source/packages/client/ui-workspace/package.json",
+    "sha256": "ebb59f1a613fe20aa62cf1d38c721467adb3714a59df00b61327fa4883524c59",
+    "bytes": 3292
+  },
+  {
+    "path": "reference-source/packages/client/ui-workspace/src/client/WorkspacePicker.module.css",
+    "sha256": "8b9252a27e4163be3c9b32b2ec30a750477e83d09b5d2a05af3346b628503db4",
+    "bytes": 408
+  },
+  {
+    "path": "reference-source/packages/client/ui-workspace/src/client/rows/AnimatedRows.module.css",
+    "sha256": "987b8ae5ad66b19dd0bbdd938c340b14833f075ee99e644940364909841d1190",
+    "bytes": 106
+  },
+  {
+    "path": "reference-source/packages/client/ui-workspace/src/client/rows/Rows.module.css",
+    "sha256": "7c7abb0d19d2265aa6edfb0e0b1a96cf3bb686b5c7d7806ad161f67be4d4dbad",
+    "bytes": 9569
+  },
+  {
+    "path": "reference-source/packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.module.css",
+    "sha256": "208fe8d00ef6e4285bd41bc979bc2362895ab2d2026e82ebd255c0bce680fbde",
+    "bytes": 13813
+  },
+  {
+    "path": "reference-source/packages/client/web/package.json",
+    "sha256": "92eb6ea55c76365db9c79adfb334cb65bd679b61b90bfc14e2d96624b9cc159a",
+    "bytes": 1641
+  },
+  {
+    "path": "reference-source/packages/client/web/src/base.css",
+    "sha256": "dfaaf04e7498017ef406269ec28b5981566cb07b48eadc0ab92dac48ecbf7a6e",
+    "bytes": 4190
+  },
+  {
+    "path": "reference-source/packages/client/web/src/boot-page.module.css",
+    "sha256": "0e8312489cf10b6d0c1e4d9298137ffd3bf6d65c74ca1d4a06c4c430bfda8d4b",
+    "bytes": 2305
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-agent-team/package.json",
+    "sha256": "8b9894d8875a78cf82831efbbc6924c13324c72942039aeae0cc1eab40d7b517",
+    "bytes": 2254
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-agent-team/src/client/TeamAction.module.css",
+    "sha256": "69c7c0d76c708132f8324187f974d3a4736a112eef7f48f9a9ed9fba741e4b43",
+    "bytes": 7134
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-claude-code-mods/package.json",
+    "sha256": "f1c90399bfd5baf687e1889cfcbce8bc4b5d3b71b480d444ea97d10727bf7d28",
+    "bytes": 2258
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-claude-code-mods/src/client/Band.module.css",
+    "sha256": "d7a28ed0773e1f7ddd30b8c153ff137f3165d657095f742fea9d1f4ac4d73ef9",
+    "bytes": 2572
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-cot-translation/package.json",
+    "sha256": "22710384deb8f2ba42a3f31f99001ae1490be24a955efa4e3a76f4f714879168",
+    "bytes": 3288
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-cot-translation/src/client/Translation.module.css",
+    "sha256": "0647020c281dc6d2694d84bbfc248806a3a8377c73ea17fa118b29f50e7202a5",
+    "bytes": 1338
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-voice-input/package.json",
+    "sha256": "97b908a7372be4962aa8d7709fbad0353f7c3d3bde16e87d94e68a7fe1d541de",
+    "bytes": 2682
+  },
+  {
+    "path": "reference-source/packages/experimental/client-ui-voice-input/src/client/VoiceInput.module.css",
+    "sha256": "f881e77b0550417b02817385a78f70b194cbbc5aed881a61cf43fd3b8ed838ba",
+    "bytes": 4262
+  },
+  {
+    "path": "reference-source/packages/experimental/inspector/package.json",
+    "sha256": "1e4e277203b84305d92507a869670694899d523149aab179dd3ed9503032dd9c",
+    "bytes": 2579
+  },
+  {
+    "path": "reference-source/packages/experimental/inspector/src/client/bottom/page.module.css",
+    "sha256": "1ec6671399b308f7a278303a6c663958ec60a451edfb9eadab33c6a088f0d73f",
+    "bytes": 896
+  },
+  {
+    "path": "reference-source/packages/experimental/plugin-market-bundle/package.json",
+    "sha256": "7066c39ee3e08f9cc8931091f45a2a2976e8fe556ad7d0907feb5b774564aacc",
+    "bytes": 1320
+  },
+  {
+    "path": "reference-source/packages/experimental/session-inspector/package.json",
+    "sha256": "4836a8fa82dd98ca582993215f5be965416c361b72b4aee6846d2ca3fec171a3",
+    "bytes": 2339
+  },
+  {
+    "path": "reference-source/packages/experimental/session-inspector/src/client/views/inspector.module.css",
+    "sha256": "d0be2db2041c3fb62addb3be9d3f6605ffd51b31b547a1fed8983e9163eda70f",
+    "bytes": 6966
+  },
+  {
+    "path": "reference-source/packages/extensions/ui-cordis/package.json",
+    "sha256": "a15e54b4dfa8f28e125d90a9cb2939629fb79238dcbcd0e502c4d29e5736d3a6",
+    "bytes": 2283
+  },
+  {
+    "path": "reference-source/packages/extensions/ui-cordis/src/client/CordisDefineRow.module.css",
+    "sha256": "fa5e504ce0fdd6413e79986533d83289f1980f874151e08c2978719936e2ab86",
+    "bytes": 6005
+  },
+  {
+    "path": "reference-source/packages/extensions/ui-cordis/src/client/CordisPanel.module.css",
+    "sha256": "ad4b5ea8f958f756f90614e4adeeaab1e995c59b94f57c13db03072e77e3f78b",
+    "bytes": 6538
+  },
+  {
+    "path": "reference-source/packages/extensions/ui-cordis/src/client/CordisRunRow.module.css",
+    "sha256": "d34c2d5422a31e36418860f61e6b4be08a49b541e5ba6f85b00558d57182850c",
+    "bytes": 2514
+  },
+  {
+    "path": "reference-source/packages/session-query/session-log-export/package.json",
+    "sha256": "9fac265d1a90eb1928e0a7f72a446878084c7ecb0478f3de741065863528c678",
+    "bytes": 2708
+  },
+  {
+    "path": "reference-source/packages/session-query/session-log-export/src/client/HeaderAction.module.css",
+    "sha256": "b8f965caceed742c978952d3adb1551b5d174a459b40755812c41725a78c9f7b",
+    "bytes": 230
+  },
+  {
+    "path": "reference-source/pnpm-workspace.yaml",
+    "sha256": "3c624c26e58ab02ffc8d653bb8a9e8767a63fe0576bc0dbfaa3a5e43f88d973b",
+    "bytes": 5952
+  },
+  {
+    "path": "release-inputs.json",
+    "sha256": "7f104ebad1613470f1d3847e0f0c561685187d0e8a8d8ce1d319759950b334ee",
+    "bytes": 9832
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/PresetGuideDialog.module.css",
+    "sha256": "66f8d99bef244fe2de94506c1c6142207f93713708f9aeb5c9fe9052f8f47817",
+    "bytes": 2301
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/guide-classes.json",
+    "sha256": "96ff147637c8e0724b7233def3d2f343a5f5cb3d026ce2d2f1e148c6501c46b1",
+    "bytes": 487
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/package.json",
+    "sha256": "d2a6fbce35d6fa9dc4b5f330889791d466b37c97df277c76074020d4988cfdb4",
+    "bytes": 2609
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/reader-behavior.json",
+    "sha256": "6bcfa990163e2fdadb0e669a75799072175626f69c6b2837dd9f32be79b3fcae",
+    "bytes": 8357
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/roster-classes.json",
+    "sha256": "a37292f6e720da3f4e9564f546a14ddbca947d4edaf05c2e28040bb78862d608",
+    "bytes": 877
+  },
+  {
+    "path": "released-inputs/ui-agent-preset/styles.css",
+    "sha256": "d841924d9dcbab7ef9cc641be98d0d1832ae3a77449bfe5af40c6d412a87d3a0",
+    "bytes": 5717
+  },
+  {
+    "path": "released-inputs/ui-chat/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-chat/StatsPills-classes.json",
+    "sha256": "e67825fd17cc2f0bd750a55b5625d91e4bcf265e8aa57b22a472fba299df3a92",
+    "bytes": 107
+  },
+  {
+    "path": "released-inputs/ui-chat/StatsPills.module.css",
+    "sha256": "75d2c43103b0ee4466bbb1674df08b4ef0959719ad820deb246ecf171ce8756d",
+    "bytes": 848
+  },
+  {
+    "path": "released-inputs/ui-chat/package.json",
+    "sha256": "d012125c7c2e8260de2166222f2d78509da95eec93c89db00af3260addae9d48",
+    "bytes": 3842
+  },
+  {
+    "path": "released-inputs/ui-chat/stat-dialog-behavior.json",
+    "sha256": "87b0dc19f2d31df1edc2231f052c49242eaab5c710b69a97fb109f3b9f881857",
+    "bytes": 2151
+  },
+  {
+    "path": "released-inputs/ui-chat/stat-dialog-classes.json",
+    "sha256": "5c8c0cb28292112965f887776e4241e19455c3d8d15c72f112de68a610b72674",
+    "bytes": 259
+  },
+  {
+    "path": "released-inputs/ui-chat/stat-dialog.module.css",
+    "sha256": "9e88b9f02983d4f4fc7dd39eaee041df61abff5cd5416a7a4d36f75b360d177c",
+    "bytes": 1324
+  },
+  {
+    "path": "released-inputs/ui-dockkit/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-dockkit/dockkit.module.css",
+    "sha256": "aa18d0e2a41bfd99babd9011f1107b26d387c30665fdbcc3d6276ec268750fdf",
+    "bytes": 23906
+  },
+  {
+    "path": "released-inputs/ui-dockkit/package.json",
+    "sha256": "de5e839bae6121b7793406209fe422f1af732a4206d2b7fe1a9ea6d1ed509c50",
+    "bytes": 1144
+  },
+  {
+    "path": "released-inputs/ui-model-selection/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-model-selection/ModelSelect.module.css",
+    "sha256": "1fd9ef13401cb2cdf8a154ee8cf5dcbf16c9e2f90dac348e2beb2f90c309cb6e",
+    "bytes": 4922
+  },
+  {
+    "path": "released-inputs/ui-model-selection/classes.json",
+    "sha256": "50e37a1ea4c0cd87ade7fe6b17d26e3afa7e4b1c13233af6d7a4e17cbd45ec34",
+    "bytes": 1001
+  },
+  {
+    "path": "released-inputs/ui-model-selection/model-behavior.json",
+    "sha256": "b8657b618691f847d71af5475d37444f6be99359b5c1304b0e050b1f128edb42",
+    "bytes": 31842
+  },
+  {
+    "path": "released-inputs/ui-model-selection/package.json",
+    "sha256": "658fcd344cf6ca8b08c8fb149ef7578dcd02201d95fc55f817ddc2fe742a6923",
+    "bytes": 2382
+  },
+  {
+    "path": "released-inputs/ui-plugin-manager/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-plugin-manager/PluginManagerPage.module.css",
+    "sha256": "45966a0e6822bbbb4beb617862815ddd4478b62fa4563ae6cfc45925caff982d",
+    "bytes": 23136
+  },
+  {
+    "path": "released-inputs/ui-plugin-manager/classes.json",
+    "sha256": "fdbb0d7cc8dea100112a9c70e152d6992f81a0cda38fa8f1c56ed6d7356432d2",
+    "bytes": 5698
+  },
+  {
+    "path": "released-inputs/ui-plugin-manager/package.json",
+    "sha256": "b18af71d36fa3614fa2e358a08d2afd635c82928d00cd8ae613184ec18098f51",
+    "bytes": 2890
+  },
+  {
+    "path": "released-inputs/ui-plugin-market/DiscoverSection.module.css",
+    "sha256": "83d43d3fc71453b1a8b96d15d2670c37b11cf3eae54769e6438c7b39c602c718",
+    "bytes": 5879
+  },
+  {
+    "path": "released-inputs/ui-plugin-market/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-plugin-market/classes.json",
+    "sha256": "58e41f237101bb85eda13d207aca0935e196d9e951073824d96b98731dd58aa8",
+    "bytes": 1722
+  },
+  {
+    "path": "released-inputs/ui-plugin-market/package.json",
+    "sha256": "74e97be85662285e22e04172d7ab8740c8fb16549a1802fc2a129598150b9138",
+    "bytes": 2131
+  },
+  {
+    "path": "released-inputs/ui-primitives/Button.module.css",
+    "sha256": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+    "bytes": 1577
+  },
+  {
+    "path": "released-inputs/ui-primitives/Checkbox.module.css",
+    "sha256": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
+    "bytes": 566
+  },
+  {
+    "path": "released-inputs/ui-primitives/Input.module.css",
+    "sha256": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
+    "bytes": 719
+  },
+  {
+    "path": "released-inputs/ui-primitives/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-primitives/Menu.module.css",
+    "sha256": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
+    "bytes": 6491
+  },
+  {
+    "path": "released-inputs/ui-primitives/MenuGroup.module.css",
+    "sha256": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
+    "bytes": 584
+  },
+  {
+    "path": "released-inputs/ui-primitives/MenuSurface.module.css",
+    "sha256": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
+    "bytes": 1188
+  },
+  {
+    "path": "released-inputs/ui-primitives/Modal.module.css",
+    "sha256": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+    "bytes": 2883
+  },
+  {
+    "path": "released-inputs/ui-primitives/Pill.module.css",
+    "sha256": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82",
+    "bytes": 592
+  },
+  {
+    "path": "released-inputs/ui-primitives/RiskConfirmation.module.css",
+    "sha256": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+    "bytes": 1229
+  },
+  {
+    "path": "released-inputs/ui-primitives/SegmentedTabs.module.css",
+    "sha256": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+    "bytes": 1106
+  },
+  {
+    "path": "released-inputs/ui-primitives/ShortcutKeys.module.css",
+    "sha256": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
+    "bytes": 800
+  },
+  {
+    "path": "released-inputs/ui-primitives/Switch.module.css",
+    "sha256": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
+    "bytes": 1147
+  },
+  {
+    "path": "released-inputs/ui-primitives/Tag.module.css",
+    "sha256": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+    "bytes": 1858
+  },
+  {
+    "path": "released-inputs/ui-primitives/Tooltip.module.css",
+    "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
+    "bytes": 1688
+  },
+  {
+    "path": "released-inputs/ui-primitives/menu-portal.json",
+    "sha256": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
+    "bytes": 844
+  },
+  {
+    "path": "released-inputs/ui-primitives/modal-layer.json",
+    "sha256": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
+    "bytes": 9473
+  },
+  {
+    "path": "released-inputs/ui-primitives/package.json",
+    "sha256": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75",
+    "bytes": 1814
+  },
+  {
+    "path": "released-inputs/ui-primitives/tooltip-placement.json",
+    "sha256": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
+    "bytes": 1337
+  },
+  {
+    "path": "released-inputs/ui-settings-account/AccountMenu-classes.json",
+    "sha256": "7175fd6a90098c060bac6e84dd1570ede125526debad04873d604684634f5a38",
+    "bytes": 187
+  },
+  {
+    "path": "released-inputs/ui-settings-account/AccountMenu.module.css",
+    "sha256": "2a69ea98ef652191f57121f44083d23acc2bc95cc162dbeb6e8267de66250b78",
+    "bytes": 1355
+  },
+  {
+    "path": "released-inputs/ui-settings-account/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-settings-account/package.json",
+    "sha256": "b71ed47b7b22a67e065c0336bff45355b727b6e6a3aeca33850a4d9ff4d93949",
+    "bytes": 2560
+  },
+  {
+    "path": "released-inputs/ui-settings-general/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-settings-general/SettingsRoot-classes.json",
+    "sha256": "860d5090691ba68ab7541d23bbd598562284beaa0bc4cde005be122c53a943bf",
+    "bytes": 650
+  },
+  {
+    "path": "released-inputs/ui-settings-general/SettingsRoot.module.css",
+    "sha256": "0adf94aa416696864b392ad40b3a3ebca1df1869c73e340595de6e4a6d400e38",
+    "bytes": 3201
+  },
+  {
+    "path": "released-inputs/ui-settings-general/package.json",
+    "sha256": "f84fcace2bcdf96b44d3be6aa3f87d0bbafffabfe7ab149c6aff79c836825f0e",
+    "bytes": 2742
+  },
+  {
+    "path": "released-inputs/ui-sidebar/HeaderLeadingControls-classes.json",
+    "sha256": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d",
+    "bytes": 73
+  },
+  {
+    "path": "released-inputs/ui-sidebar/HeaderLeadingControls.module.css",
+    "sha256": "0878fae90f7873c26fd062e317ef12a6d5ca5369724bf4e5badb5502bd7c35cf",
+    "bytes": 371
+  },
+  {
+    "path": "released-inputs/ui-sidebar/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-sidebar/SidebarRoot-classes.json",
+    "sha256": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+    "bytes": 1386
+  },
+  {
+    "path": "released-inputs/ui-sidebar/SidebarRoot.module.css",
+    "sha256": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+    "bytes": 9368
+  },
+  {
+    "path": "released-inputs/ui-sidebar/package.json",
+    "sha256": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
+    "bytes": 2254
+  },
+  {
+    "path": "released-inputs/ui-sidebar-terminal/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-sidebar-terminal/package.json",
+    "sha256": "a4093117e6687d4fcc7ebf91be445393dc04be3c4c5f6b8aab35a7082ae977f5",
+    "bytes": 2517
+  },
+  {
+    "path": "released-inputs/ui-sidebar-terminal/terminal-font.json",
+    "sha256": "bd309601d61d0efd54fe3dfac862b1539d5e16881cd4f956a0c0cda97a884640",
+    "bytes": 86
+  },
+  {
+    "path": "released-inputs/ui-theme/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-theme/base.css",
+    "sha256": "77d5487e7f9cf7597d8b15f1b598598658d970f0cdb4a513c9a93c2f450aa77e",
+    "bytes": 1249
+  },
+  {
+    "path": "released-inputs/ui-theme/corner-shape.css",
+    "sha256": "b3ef70d30ee48289413e753be96b56a1e3273115d8123cc22105504dbd38ebe7",
+    "bytes": 141
+  },
+  {
+    "path": "released-inputs/ui-theme/design-platform.css",
+    "sha256": "f04a03df7d266e4859959ceddcff12c5a58ff9c9972e80c8b10d2184376a833e",
+    "bytes": 19081
+  },
+  {
+    "path": "released-inputs/ui-theme/focus.css",
+    "sha256": "77bcbea3e42c33667afa8e835bf798cc9bbc4bdcd0d37e796423af9dbd9bbded",
+    "bytes": 298
+  },
+  {
+    "path": "released-inputs/ui-theme/gradient-shadow-text.css",
+    "sha256": "814dee95539b2f719e22e6e22812d5b9d22fe620ad6ddd457b0303ea2e69d2c8",
+    "bytes": 12175
+  },
+  {
+    "path": "released-inputs/ui-theme/onboarding.css",
+    "sha256": "d321e1903c77ba69cfc2ba7c077504efda2fc2b3ee3d8cf4797a6746fe23224e",
+    "bytes": 869
+  },
+  {
+    "path": "released-inputs/ui-theme/package.json",
+    "sha256": "dc7d7ea3f8ccb0a0001178af61dd4eb1b3d7032bd5af86af21b3bad6ee4971c9",
+    "bytes": 2412
+  },
+  {
+    "path": "released-inputs/ui-theme/scrollbar.css",
+    "sha256": "7457fa7bcde76d19981125c94c0a8afd7d83b1dac3f72bd418597bda35297c5b",
+    "bytes": 838
+  },
+  {
+    "path": "released-inputs/ui-theme/shiki.css",
+    "sha256": "71deb2de951ab101ef23e584e4ea588c27d5cbfc4f3cdc8707bcf99243dac7e7",
+    "bytes": 705
+  },
+  {
+    "path": "released-inputs/ui-theme/styles-order.json",
+    "sha256": "5636a6bb26c22a2ae2158b3e508d885ca40d8019484ada5c67acd2fb987d347e",
+    "bytes": 163
+  },
+  {
+    "path": "released-inputs/ui-workspace/LICENSE",
+    "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+    "bytes": 1065
+  },
+  {
+    "path": "released-inputs/ui-workspace/Rows-classes.json",
+    "sha256": "388ea48420828451592557d93bbed93686ac996058239f94eda9be3c16498ebf",
+    "bytes": 1320
+  },
+  {
+    "path": "released-inputs/ui-workspace/Rows.module.css",
+    "sha256": "2e6e7841baa22df02a2d39ff4d86370a1682ae210b168b04476de2555fa90d69",
+    "bytes": 6410
+  },
+  {
+    "path": "released-inputs/ui-workspace/WorkspaceBrowser-classes.json",
+    "sha256": "73dcf6732753ac0e2fbdf240408088202ebcd625301eb7cbc294a68c88325c22",
+    "bytes": 1816
+  },
+  {
+    "path": "released-inputs/ui-workspace/WorkspaceBrowser.module.css",
+    "sha256": "8f6222836e75a4b59fea20310df31a03fee2973acd92379416aedf333205ed0e",
+    "bytes": 9674
+  },
+  {
+    "path": "released-inputs/ui-workspace/package.json",
+    "sha256": "ca68f8957654d510c614c5ada6303c006f4071f53278f540afb682cb035b5a62",
+    "bytes": 3255
+  },
+  {
+    "path": "report/build-receipt.json",
+    "sha256": "9d3c92a6be59df5ea68cf4ed45439cd2ca3d6273034ec1f40566f424cc945a7a",
+    "bytes": 155109
+  },
+  {
+    "path": "report/index.html",
+    "sha256": "16d27c40bb2f76ff6ecf92176ac400ac1cbd77d44fad2ee91d047fd7638f2d79",
+    "bytes": 279078
+  },
+  {
+    "path": "report/preview.cjs",
+    "sha256": "da064de4667c4d23e690e95ba2ef4f11657fe6e086906c4b9d39b017522c1c63",
+    "bytes": 4030
+  },
+  {
+    "path": "report/preview.json",
+    "sha256": "696920a57f0227262e19bb20130d2a983caf83de568fc7e8c5c51eb6469feded",
+    "bytes": 2396
+  },
+  {
+    "path": "reproduction/report.py",
+    "sha256": "be8092b986e0239824154c1683e3a152fd574eef0059a5e26e26969c1e179e56",
+    "bytes": 32803
+  },
+  {
+    "path": "reproduction/stage.py",
+    "sha256": "d867bdc7ddf2e928b1f1c356f06524235fbc311b6f457dd1840679021e117063",
+    "bytes": 9421
+  },
+  {
+    "path": "review/design-system-all-families-audit.md",
+    "sha256": "e73c3a4770780b7c965f8be2849e48c2598b73b6d6b9ee0f7381c833fef342f9",
+    "bytes": 44601
+  },
+  {
+    "path": "review/design-system-contract-independent-review.md",
+    "sha256": "e64b00b16e19dc3be0aa55a7463e874e1e335504a052aaffb93f29536b36c40c",
+    "bytes": 10081
+  },
+  {
+    "path": "review/design-system-guard-audit.md",
+    "sha256": "708716d6671c91d0b0bfa40284eed3622e6a6c371d953cc000924d6c77c5d9f8",
+    "bytes": 13574
+  },
+  {
+    "path": "review/design-system-style-literals-audit.md",
+    "sha256": "a31e88083751451d7e4209894f5499a790a6d737a54bfff824eb2bbb542035db",
+    "bytes": 11478
+  }
+]

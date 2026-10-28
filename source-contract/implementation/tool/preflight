@@ -1,0 +1,355 @@
+#!/usr/bin/env python3
+"""Fast local checks to run before opening a PR.
+
+Runs every cheap guard and reports all results (it never stops at the first
+failure), then prints a summary table and one `preflight: ...` line for the PR.
+
+  check-deps       tool/check_deps.py: package layering (client <- models <- conversation <- slots/features;
+                   features never import each other; ui/theme never import client)
+  tool-tests       python unit tests under tool/tests
+  codegen          tool/codegen/gen.py --check: generated Dart is not stale against the pinned IR
+  theme-pack       tool/theme-adapters/build_official_pack.py --check (needs the pinned dsh checkout)
+  design-system    released archive reconstruction, source inventory, recipes and family ratchets
+  i18n             tool/i18n/gen_catalog.py --check: catalog is fresh and every key has zh
+  icons            tool/icons/gen_icons.py, gen_code_language.py and gen_file_types.py --check: icon paths and code-language tables are
+                   fresh against the pinned dsh checkout
+  vector           tool/vectors/gen_expected.py --check: committed TS-expected snapshots still hold
+                   (skipped with exit 2 when the node install is missing)
+  parity           tool/parity selftest: parity case manifests validate (dsh schema and the vendored visual-testing CLI),
+                   font pins hold, the vendored CLI diffs synthetic captures, bucket metrics behave, Flutter case map
+                   regenerated (skipped with exit 2 when numpy/Pillow or the CLI's `tool/parity setup` install are missing)
+  capability       tool/capability_parity.py --check: docs/capability-parity.json is well formed and fresh, and the pinned dsh has no
+                   ui package, Remote method, slot or settings namespace without a row (skipped with exit 2 without the dsh checkout)
+  format           dart format --set-exit-if-changed on every Dart file
+  analyze          dart analyze (whole workspace)
+  tests            dart test / flutter test per package (skipped with --fast)
+
+  tool/preflight [--fast] [--only NAME[,NAME...]] [--allow-skip NAME[,NAME...]] [--out .local/preflight.json]
+
+A check that cannot run (no dsh checkout, no node install, ...) is reported as `skip` with its reason and does not fail the
+run. `--allow-skip` makes that explicit for CI: only the named checks may skip, any other skip counts as a failure, so a
+check that silently stopped running cannot pass. The `skip` reasons are printed in full and stored in the JSON output.
+
+The pinned dsh checkout is found through $DSH_SRC or <repo>/.local/dsh-src
+(see README). The Flutter SDK is the one pinned in .fvmrc: $FLUTTER_SDK,
+~/fvm/versions/<pin>, ~/flutter-sdks/versions/<pin>, else `flutter` on PATH.
+Heavy children run under `nice -n 15`; tests use `-j 2`. Exit 1 if any check failed.
+"""
+import argparse
+import concurrent.futures
+import datetime
+import json
+import os
+import pathlib
+import shutil
+import subprocess
+import sys
+import time
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+NICE = ['nice', '-n', '15']
+OUT_DIR = ROOT / '.local' / 'preflight'
+
+PURE_DART_PACKAGES = ['packages/dsh_client', 'packages/dsh_models', 'packages/dsh_conversation',
+                      'packages/dsh_slots', 'packages/dsh_i18n', 'packages/dsh_layout',
+                      'packages/dsh_shortcuts']
+FLUTTER_PACKAGES = ['packages/dsh_theme', 'packages/dsh_ui', 'packages/dsh_dockkit',
+                    'features/dsh_feature_approval',
+                    'features/dsh_feature_attachment', 'features/dsh_feature_chat',
+                    'features/dsh_feature_commands', 'features/dsh_feature_conversation', 'features/dsh_feature_directory_picker_browse', 'features/dsh_feature_documentpreview',
+                    'features/dsh_feature_files', 'features/dsh_feature_input_trigger', 'features/dsh_feature_layout',
+                    'features/dsh_feature_open_in_app', 'features/dsh_feature_shortcuts', 'features/dsh_feature_sidebar',
+                    'features/dsh_feature_model_selection', 'features/dsh_feature_model_settings',
+                    'features/dsh_feature_agent_management', 'features/dsh_feature_plugins',
+                    'features/dsh_feature_permission_presets', 'features/dsh_feature_plan', 'features/dsh_feature_reference',
+                    'features/dsh_feature_deliverables', 'features/dsh_feature_secret_mask', 'features/dsh_feature_session', 'features/dsh_feature_settings',
+                    'features/dsh_feature_sidebar_right', 'features/dsh_feature_subagent',
+                    'features/dsh_feature_theme', 'features/dsh_feature_tool',
+                    'features/dsh_feature_user_questions', 'features/dsh_feature_workspace', 'apps/dsh_flutter', 'tool/parity_flutter']
+
+
+def flutter_bin_dir():
+    pin = json.loads((ROOT / '.fvmrc').read_text())['flutter']
+    candidates = []
+    if os.environ.get('FLUTTER_SDK'):
+        candidates.append(pathlib.Path(os.environ['FLUTTER_SDK']))
+    home = pathlib.Path.home()
+    candidates += [home / 'fvm' / 'versions' / pin, home / 'flutter-sdks' / 'versions' / pin]
+    for c in candidates:
+        if (c / 'bin' / 'flutter').exists():
+            return str(c / 'bin'), pin
+    return None, pin
+
+
+def env():
+    e = dict(os.environ)
+    bin_dir, _ = flutter_bin_dir()
+    if bin_dir:
+        e['PATH'] = bin_dir + os.pathsep + e['PATH']
+    return e
+
+
+def run(cmd, cwd=ROOT, timeout=1800):
+    start = time.time()
+    try:
+        p = subprocess.run(cmd, cwd=cwd, env=env(), capture_output=True, text=True, timeout=timeout)
+        return p.returncode, (p.stdout or '') + (p.stderr or ''), time.time() - start
+    except subprocess.TimeoutExpired as e:
+        return 124, 'timeout after %ds\n%s' % (timeout, e.stdout or ''), time.time() - start
+
+
+def dart_files():
+    out = []
+    for sub in ('packages', 'features', 'apps', 'tool'):
+        for p in sorted((ROOT / sub).rglob('*.dart')):
+            parts = set(p.relative_to(ROOT).parts)
+            if parts & {'.dart_tool', 'build', 'linux', '.local', 'node_modules'}:
+                continue
+            if p.name == 'case_map.g.dart':  # git-ignored, written by tool/parity_case_map.py
+                continue
+            out.append(str(p.relative_to(ROOT)))
+    return out
+
+
+def c_check_deps():
+    return run([sys.executable, '-I', 'tool/check_deps.py'])
+
+
+def c_tool_tests():
+    return run([sys.executable, '-I', '-m', 'unittest', 'discover', '-s', 'tool/tests', '-p', 'test_*.py'])
+
+
+def c_codegen():
+    return run([sys.executable, '-I', 'tool/codegen/gen.py', '--check'])
+
+
+def c_theme_pack():
+    src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local' / 'dsh-src')))
+    command = [sys.executable, '-I', 'tool/theme-adapters/build_official_pack.py', '--check', '--quiet']
+    if not (src / 'packages' / 'client' / 'ui-theme').is_dir():
+        command.append('--snapshot-only')
+    return run(command)
+
+
+def c_design_system():
+    src = pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local/dsh-src')))
+    source_commands = [
+        [sys.executable, '-I', 'tool/design-system/generate.py', '--check'],
+        [sys.executable, '-I', 'tool/design-system/source_inventory.py', '--check'],
+    ]
+    if not (src / 'packages/client/ui-primitives/package.json').is_file():
+        for command in source_commands:
+            command.append('--snapshot-only')
+    commands = [
+        [sys.executable, '-I', 'tool/design-system/verify_release_inputs.py',
+         '--receipt', str(OUT_DIR / 'release-inputs.json')],
+        *source_commands,
+        [sys.executable, '-I', 'tool/design-system/check.py'],
+    ]
+    results = []
+    for command in commands:
+        result = run(command)
+        results.append(result)
+        if result[0] != 0:
+            break
+    return results[-1][0], '\n'.join(r[1].strip() for r in results), sum(r[2] for r in results)
+
+
+def c_i18n():
+    return run([sys.executable, '-I', 'tool/i18n/gen_catalog.py', '--check'])
+
+
+def c_icons():
+    results = [run([sys.executable, '-I', 'tool/icons/%s' % script, '--check']) for script in ('gen_icons.py', 'gen_shell_icons.py', 'gen_charcoal_icons.py', 'gen_code_language.py', 'gen_file_types.py')]
+    for r in results:
+        if r[0] == 1 or (isinstance(r[0], int) and r[0] not in (0, 2)):
+            return r
+    for r in results:
+        if r[0] == 2:  # the generators exit 2 when the dsh checkout is missing
+            return 'skip', r[1], r[2]
+    return results[0]
+
+
+VECTOR_FIXTURES = [
+    'packages/dsh_models/test/fixtures/session_window_vector.json',
+    'packages/dsh_conversation/test/fixtures/conversation_edge_vector.json',
+    'packages/dsh_conversation/test/fixtures/plan_todo_vector.json',
+    'packages/dsh_conversation/test/fixtures/attachment_vector.json',
+    'packages/dsh_conversation/test/fixtures/tool_turn_vector.json',
+        'packages/dsh_conversation/test/fixtures/system_prompt_vector.json',
+        'packages/dsh_conversation/test/fixtures/model_retry_vector.json',
+    'packages/dsh_conversation/test/fixtures/compaction_command_vector.json',
+    'packages/dsh_conversation/test/fixtures/turn_process_vector.json',
+    'packages/dsh_conversation/test/fixtures/extended_nodes_vector.json',
+]
+# dsh-settings-vector/1 fixtures, checked by their own driver
+SETTINGS_VECTOR_FIXTURES = [
+    'packages/dsh_models/test/fixtures/settings_schema_vector.json',
+    'packages/dsh_models/test/fixtures/settings_form_vector.json',
+    'packages/dsh_ui/test/fixtures/settings_form_model_vector.json',
+]
+# dsh-input-vector/1 fixtures (trigger detection, @file grammar, menu reduction, ranking)
+INPUT_VECTOR_FIXTURES = [
+    'packages/dsh_conversation/test/fixtures/input_vector.json',
+]
+
+
+def c_vector():
+    start = time.time()
+    log = []
+    checks = [('gen_expected.py', f) for f in VECTOR_FIXTURES] + [('gen_settings_expected.py', f) for f in SETTINGS_VECTOR_FIXTURES] \
+        + [('gen_input_expected.py', f) for f in INPUT_VECTOR_FIXTURES] \
+        + [('gen_submission_expected.py', 'features/dsh_feature_conversation/test/fixtures/submission_policy.json')] \
+        + [('gen_plan_expected.py', 'features/dsh_feature_plan/test/fixtures/plan_behavior.json')] \
+        + [('gen_workspace_expected.py', 'features/dsh_feature_session/test/fixtures/workspace_behavior.json')] \
+        + [('gen_user_text_expected.py', 'packages/dsh_conversation/test/fixtures/user_text_behavior.json')] \
+        + [('gen_common_settings_expected.py', 'features/dsh_feature_settings/test/fixtures/common_settings_behavior.json')] \
+        + [('gen_model_settings_expected.py', 'packages/dsh_models/test/fixtures/model_settings_behavior.json')] \
+        + [('gen_agents_tasks_expected.py', 'packages/dsh_models/test/fixtures/agents_tasks.json')] \
+        + [('gen_sidebar_persistence_expected.py', 'packages/dsh_dockkit/test/fixtures/sidebar_layouts.json')] \
+        + [('gen_plugins_preview_expected.py', 'packages/dsh_models/test/fixtures/plugins_preview.json')] \
+        + [('gen_deliverables_expected.py', 'packages/dsh_conversation/test/fixtures/deliverables_behavior.json')]
+    for driver, fixture in checks:
+        code, out, _ = run([sys.executable, '-I', 'tool/vectors/' + driver, '--check', fixture])
+        if code == 2:
+            return 'skip', out, time.time() - start
+        log.append(out.strip())
+        if code != 0:
+            return code, '\n'.join(log), time.time() - start
+    return 0, '\n'.join(log), time.time() - start
+
+
+def c_parity():
+    if not (pathlib.Path(os.environ.get('DSH_SRC', str(ROOT / '.local' / 'dsh-src'))) / 'packages' / 'client' / 'ui-theme').is_dir():
+        # The extension builders read dsh's locale dictionaries, so the selftest needs the checkout. The Flutter case map
+        # (git-ignored, imported by every parity test entry point) is still regenerated: analyze and tests need it.
+        code, out, secs = run([sys.executable, '-I', 'tool/parity_case_map.py'])
+        if code != 0:
+            return code, out, secs
+        return 'skip', 'parity selftest needs the dsh checkout (not found; set DSH_SRC or link .local/dsh-src); only the Flutter case map was regenerated', secs
+    code, out, secs = run([sys.executable, '-I', 'tool/parity', 'selftest'])
+    if code == 2:
+        return 'skip', out, secs
+    return code, out, secs
+
+
+def c_capability():
+    code, out, secs = run([sys.executable, '-I', 'tool/capability_parity.py', '--check'])
+    if code == 2:  # the table itself is fine; only the upstream coverage could not be checked
+        return 'skip', out, secs
+    return code, out, secs
+
+
+def c_format():
+    files = dart_files()
+    return run(NICE + ['dart', 'format', '--output=none', '--set-exit-if-changed'] + files)
+
+
+def c_analyze():
+    return run(NICE + ['dart', 'analyze', '--fatal-infos', '.'])
+
+
+def c_tests():
+    start = time.time()
+    log = []
+    failed = False
+    for pkg in PURE_DART_PACKAGES:
+        code, out, _ = run(NICE + ['dart', 'test', '-j', '2', '--reporter', 'compact'], cwd=ROOT / pkg)
+        log.append('== %s (dart test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
+        failed |= code != 0
+    for pkg in FLUTTER_PACKAGES:
+        # `-x live`: the live tests start real `dsh web` hosts (tool/live_spike, README "Live tests"); never part of preflight
+        code, out, _ = run(NICE + ['flutter', 'test', '-j', '2', '-x', 'live', '--reporter', 'compact'], cwd=ROOT / pkg)
+        log.append('== %s (flutter test) exit %d\n%s' % (pkg, code, out[-1500:] if code == 0 else out[-20000:]))
+        failed |= code != 0
+    return (1 if failed else 0), '\n'.join(log), time.time() - start
+
+
+CHECKS = [
+    ('check-deps', c_check_deps),
+    ('tool-tests', c_tool_tests),
+    ('codegen', c_codegen),
+    ('theme-pack', c_theme_pack), ('design-system', c_design_system),
+    ('i18n', c_i18n),
+    ('icons', c_icons),
+    ('vector', c_vector),
+    ('parity', c_parity),
+    ('capability', c_capability),
+    ('format', c_format),
+    ('analyze', c_analyze),
+    ('tests', c_tests),
+]
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--fast', action='store_true', help='skip the test suites')
+    ap.add_argument('--only', default='', help='comma separated check names')
+    ap.add_argument('--allow-skip', default='', help='comma separated check names that may skip; any other skip fails (CI)')
+    ap.add_argument('--out', default=str(ROOT / '.local' / 'preflight.json'))
+    args = ap.parse_args()
+    only = {x for x in args.only.split(',') if x}
+    allow_skip = {x for x in args.allow_skip.split(',') if x}
+    selected = [(n, f) for n, f in CHECKS if (not only or n in only) and not (args.fast and n == 'tests')]
+    bin_dir, pin = flutter_bin_dir()
+    if bin_dir is None:
+        print('preflight: warning: pinned Flutter %s not found; using `flutter` from PATH' % pin)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    cheap = [(n, f) for n, f in selected if n not in ('format', 'analyze', 'tests')]
+    heavy = [(n, f) for n, f in selected if n in ('format', 'analyze', 'tests')]
+    results = {}
+
+    def go(item):
+        name, fn = item
+        code, out, secs = fn()
+        (OUT_DIR / (name + '.txt')).write_text(out)
+        return name, code, secs, out
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        for name, code, secs, out in pool.map(go, cheap):
+            results[name] = (code, secs, out)
+    for item in heavy:  # sequential: they share the analysis server and pub cache
+        name, code, secs, out = go(item)
+        results[name] = (code, secs, out)
+
+    rows = []
+    failed = []
+    for name, _ in selected:
+        code, secs, out = results[name]
+        status = 'skip' if code == 'skip' else ('ok' if code == 0 else 'FAIL')
+        if status == 'skip' and args.allow_skip and name not in allow_skip:
+            status = 'FAIL'
+            out = 'skipped but not allowed to skip (--allow-skip %s): %s' % (args.allow_skip, out)
+            results[name] = (code, secs, out)
+        if status == 'FAIL':
+            failed.append(name)
+        last = [l for l in out.strip().splitlines() if l.strip()][-1:] or ['']
+        rows.append((name, status, secs, last[0][:90]))
+    print('\n%-12s %-5s %7s  %s' % ('check', 'state', 'secs', 'last line'))
+    for name, status, secs, last in rows:
+        print('%-12s %-5s %7.1f  %s' % (name, status, secs, last))
+    skipped = [(n, results[n][2].strip().splitlines()[-1][:300] if results[n][2].strip() else '') for n, st, _, _ in rows if st == 'skip']
+    if skipped:
+        print('\nskipped (%d):' % len(skipped))
+        for name, reason in skipped:
+            print('  %s: %s' % (name, reason))
+    for name in failed:
+        print('\n--- %s (full output: .local/preflight/%s.txt) ---' % (name, name))
+        print('\n'.join(results[name][2].strip().splitlines()[-25:]))
+    tree = subprocess.run(['git', 'rev-parse', 'HEAD^{tree}'], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    payload = {
+        'when': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
+        'headTree': tree,
+        'fast': args.fast,
+        'results': {n: {'state': s, 'secs': round(t, 1), **({'reason': dict(skipped)[n]} if s == 'skip' else {})} for n, s, t, _ in rows},
+    }
+    pathlib.Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    pathlib.Path(args.out).write_text(json.dumps(payload, indent=1) + '\n')
+    summary = ' '.join('%s=%s' % (n, s) for n, s, _, _ in rows)
+    print('\npreflight: %s%s' % ('FAILED ' if failed else 'ok ', summary))
+    return 1 if failed else 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

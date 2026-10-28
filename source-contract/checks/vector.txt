@@ -1,0 +1,24 @@
+gen_expected: OK, 23 window and 23 chat snapshots match packages/dsh_models/test/fixtures/session_window_vector.json
+gen_expected: OK, 119 window and 119 chat snapshots match packages/dsh_conversation/test/fixtures/conversation_edge_vector.json
+gen_expected: OK, 31 window and 31 chat snapshots match packages/dsh_conversation/test/fixtures/plan_todo_vector.json
+gen_expected: OK, 33 window and 33 chat snapshots match packages/dsh_conversation/test/fixtures/attachment_vector.json
+gen_expected: OK, 63 window and 63 chat snapshots match packages/dsh_conversation/test/fixtures/tool_turn_vector.json
+gen_expected: OK, 20 window and 20 chat snapshots match packages/dsh_conversation/test/fixtures/system_prompt_vector.json
+gen_expected: OK, 10 window and 10 chat snapshots match packages/dsh_conversation/test/fixtures/model_retry_vector.json
+gen_expected: OK, 23 window and 23 chat snapshots match packages/dsh_conversation/test/fixtures/compaction_command_vector.json
+gen_expected: OK, 17 window and 17 chat snapshots match packages/dsh_conversation/test/fixtures/turn_process_vector.json
+gen_expected: OK, 30 window and 30 chat snapshots match packages/dsh_conversation/test/fixtures/extended_nodes_vector.json
+gen_settings_expected: OK, 3365 cases match packages/dsh_models/test/fixtures/settings_schema_vector.json
+gen_settings_expected: OK, 193 steps match packages/dsh_models/test/fixtures/settings_form_vector.json
+gen_settings_expected: OK, 150 steps match packages/dsh_ui/test/fixtures/settings_form_model_vector.json
+gen_input_expected: OK, 1362 cases match packages/dsh_conversation/test/fixtures/input_vector.json
+submission policy: 16 upstream cases match
+plan behavior: upstream addresses, intent and Markdown summaries match
+workspace behavior: fork titles, visible drag and ancestry match upstream
+user-text behavior: references, whitespace and credential masks match upstream
+common settings: provider, credential and model policy match upstream
+model settings: provider, credential and model policy match upstream
+agents/tasks: pinned schedule/Skill policies match upstream
+sidebar persistence: pinned layout restoration decisions match upstream
+plugins/preview: pinned registry/market/install policies match upstream
+deliverables: turn facts, paths and file mentions match upstream

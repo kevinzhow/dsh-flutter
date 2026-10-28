@@ -1,0 +1,3967 @@
+{
+  "head": "9e885323416526664a510bf77d84b7b049aaa450",
+  "tree": "18e41cef957ec5ae3181609c418a16aa3687872e",
+  "base": "ac8d066aa10802679e5e7c3c1d897c1bea613981",
+  "sourceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "pr": "https://github.com/kevinzhow/dsh-flutter/pull/59",
+  "checksPassed": 13,
+  "releasePackagesVerified": 13,
+  "releaseFilesVerified": 83,
+  "sourceCoverage": {
+    "uiPackages": 57,
+    "uiPackagesWithCss": 48,
+    "uiPackagesWithoutCss": 9,
+    "uiCssInputs": 209,
+    "uiPackagesWithRetainedSnapshots": 13,
+    "uiCssRetainedInputs": 36,
+    "uiCssPendingInputs": 173,
+    "supportStylePackages": 9,
+    "supportCssInputs": 10
+  },
+  "legacyDebt": {
+    "duplicate-button": 4,
+    "manual-metric": 899,
+    "platform-control": 11
+  },
+  "legacyBudget": {
+    "duplicate-button": 4,
+    "manual-metric": 899,
+    "platform-control": 11
+  },
+  "runtimeChangedPaths": [],
+  "runtimeDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "htmlBytes": 279078,
+  "htmlSha256": "16d27c40bb2f76ff6ecf92176ac400ac1cbd77d44fad2ee91d047fd7638f2d79",
+  "inputHashes": [
+    {
+      "path": "repo/.local/preflight/release-inputs.json",
+      "sha256": "7f104ebad1613470f1d3847e0f0c561685187d0e8a8d8ce1d319759950b334ee",
+      "bytes": 9832,
+      "role": "completed release reconstruction"
+    },
+    {
+      "path": "repo/.local/source-contract-full.json",
+      "sha256": "e0ba30ad85e339823488a522b2fe6c339ccde1a2395c247b77fba048cbc9442f",
+      "bytes": 830,
+      "role": "final required checks"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/main.dart",
+      "sha256": "a38b8b39d1d894d78f86a04d3fad68a52b1c847cdbe47790eace89714aca0d45",
+      "bytes": 2980,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/perf_main.dart",
+      "sha256": "1ff008070bb083bc5617b3640b770c40cc1c09c5dc3f3c547fb3e36e5bda6877",
+      "bytes": 1995,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/app.dart",
+      "sha256": "b3c4f0f593050144a3ee72d5e3247913c193c6155d700ddd2d450024fcc4a812",
+      "bytes": 9479,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/app_controller.dart",
+      "sha256": "8d606062b75d1d14f5c21621b4ef249c2aec2b5ff55633aeaad07c28ddc402b1",
+      "bytes": 64925,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/app_identity.dart",
+      "sha256": "75fd545934bfa41347ab80ac7fdc884e878322680e2e2bcfbdecdc7b18c915c5",
+      "bytes": 726,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/backend.dart",
+      "sha256": "1c44343a78f4c7b73c330c6ff05bf3ec4b84e99b5850e58fbc4add383bd4f698",
+      "bytes": 11835,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/connection_store.dart",
+      "sha256": "c0849e0f7a5cbdec90a07e8310bd34fcfd0bd00343e659e89f9e77409281f94b",
+      "bytes": 2062,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/desktop_shell.dart",
+      "sha256": "78bb08fb0ed3ad7b7822522902a19f26d9be83678c1d078327967cf4378f926b",
+      "bytes": 24319,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/host_locale.dart",
+      "sha256": "38a2f8ff9ecc48dcea9d9c7c2e2673c42400a6b0ae64fec344943d7c9ed67744",
+      "bytes": 2181,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/launch_link.dart",
+      "sha256": "b51c2f5864c43cb294cd11b0262717aa75d44abacf8c146196b9c815f58e5344",
+      "bytes": 3329,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/local_prefs.dart",
+      "sha256": "3265671dff18311dd6961e6a6bbda936d3e39f55603040005307c713487c7e7c",
+      "bytes": 11499,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/notice_coordinator.dart",
+      "sha256": "eef4d0b97b1bd98e5c7978b235ecc8eb69fdc4ebc6826272b066968a788eebb9",
+      "bytes": 7788,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/camera_scanner.dart",
+      "sha256": "8de61648901bb04c89e4dda4e1e48e71344253f84344b9cc27a68b0d25a89a57",
+      "bytes": 2633,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/file_actions.dart",
+      "sha256": "f3a2aad1534a0547b7c1acc0b3a564a190650f50bb02e177a9b844ebea003611",
+      "bytes": 2272,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/notifications.dart",
+      "sha256": "5c07094bc611e0cc86c0ab6f661fe69571f1505c10ac64659cc38e98f6f0276a",
+      "bytes": 10168,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/pickers.dart",
+      "sha256": "29ab4c1a98eb56353ee2a0288903794caa3383e002297996e41b7644c46ba6bc",
+      "bytes": 2109,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/pinned_fonts.dart",
+      "sha256": "4ac2b7478330aa7f9b93e8686a7ee3d28bb7ce49828ee0bdce2e62efd70d6271",
+      "bytes": 1639,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/platform_services.dart",
+      "sha256": "27a9b526a0214dd2fbfb5f87489a093b608b3188f665fefd3285a912149cf762",
+      "bytes": 1236,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/shortcut_storage.dart",
+      "sha256": "442e996a1b17c3f454bb235d9b34a7becb7e1b00a964ca5a9b5c0a916db4e3bd",
+      "bytes": 1265,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/time_zone.dart",
+      "sha256": "2fd612bb81a7327e3e1b5666d37a124f06e5bd7fe6603484b40883f884153be9",
+      "bytes": 1542,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/platform/window_chrome.dart",
+      "sha256": "f40a7c11f854f1eaa8fb88525019d93adb10b0cdbb62da099fefb499988227b2",
+      "bytes": 8658,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/app_settings_rows.dart",
+      "sha256": "811c849799c58c8e6dfee633f211ec678bffda8ce84be7bbc50ea4d19f6cb34a",
+      "bytes": 7218,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/certificate_card.dart",
+      "sha256": "0cd633ffce8964ee41eb19c157ab7016c32bdafca1e5c43045e82e47ac108631",
+      "bytes": 6404,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/connection_bar.dart",
+      "sha256": "abb354e519ea2388671eff4a66dc4dd397646f14eee6a87d1316744e442ae8ed",
+      "bytes": 7773,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/pairing_screen.dart",
+      "sha256": "4be33eba0fc6aa9f6b5a3579fcbbd3840ac36844411bd9c11f28db49ff018b76",
+      "bytes": 13881,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/qr_scanner_screen.dart",
+      "sha256": "822d483423285da8e5ab88ceb4cd5b23d9475fbce8becd4a9f9fcb6da71a0b03",
+      "bytes": 6233,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/security_chip.dart",
+      "sha256": "060f938ec42d7a6bb08f5cbe802827bb73339522ba9c3ce50ae07bf7335c0c0f",
+      "bytes": 1639,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/session_screen.dart",
+      "sha256": "292313fab87476dfe4e323fb7d5db7e965119c932ee754f1704930e9423c81b0",
+      "bytes": 1161,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/screens/settings_route.dart",
+      "sha256": "4c1008ac76cfece32370ecd07da75aeaabd7f22cb757556aa68301d5300c1f57",
+      "bytes": 841,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/apps/dsh_flutter/lib/src/session_controller.dart",
+      "sha256": "92e6c11b150f06b9ba61df4bccbe9efc62a6a005559032c301a7e5e6f919d7e8",
+      "bytes": 4741,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/dsh_feature_agent_management.dart",
+      "sha256": "5f9951bbfa60b05e394fdb011fbfa992edd89b20992dc91852067647da321630",
+      "bytes": 232,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/goals.dart",
+      "sha256": "2f8b2fb95bea72af98b97ab49b9daeb659f80febef74583064bbc0d4c2224318",
+      "bytes": 7537,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/jobs.dart",
+      "sha256": "1e62e125b2f481dd4d3e98937cf1f50b318be65d37a282134a579911dd3d9f26",
+      "bytes": 13447,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/presets.dart",
+      "sha256": "007a081051f4d20c4617b3a9d96ac5bc2fa4a65e14f09b53e032cd193b31e0d8",
+      "bytes": 14717,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/register.dart",
+      "sha256": "a48c100f776a0fcf787806850910a79a8bda7548e36509f0248a05bd9b0941a0",
+      "bytes": 2990,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/schedule_format.dart",
+      "sha256": "f4bfab2e55f11e4b60d0c3d85afa7dece2a0a05420ae3245e9717da8e097fd65",
+      "bytes": 2480,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/schedule_seats.dart",
+      "sha256": "80358536a4082d9cd66f67681d9864de38ebb4b92f7fbc53107b268e5c1808e9",
+      "bytes": 11188,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/schedule_timing_controls.dart",
+      "sha256": "04dfb5ffa1ddf4421aac936ae4406af10d6433ec5133699e316ac179bb29e4d7",
+      "bytes": 8768,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/schedules.dart",
+      "sha256": "7b12182f860d64a28019bbac4e85a6ab6158bc5921be5c858d902ef28c8c66b0",
+      "bytes": 34178,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/skill_row.dart",
+      "sha256": "e052aba6a91e82f3e07582d95d91962aed551d02ba6d64228993a306923803f0",
+      "bytes": 7983,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_agent_management/lib/src/skills.dart",
+      "sha256": "ffab09049edcf3ee54d61a7c5211b38f3d368e806a0976b6a807d8f00a60a7e2",
+      "bytes": 5030,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_approval/lib/dsh_feature_approval.dart",
+      "sha256": "e7b203d3e96d281d90983cfddabda78c2daa779c78d23c62d47ea19c1b4322ac",
+      "bytes": 368,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_approval/lib/src/approval_panel.dart",
+      "sha256": "e1bb37ff08dc46f1a426f344548d4bf31a06fcba0b3596afde5c5237a3655f5d",
+      "bytes": 4053,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_approval/lib/src/approval_tracker.dart",
+      "sha256": "9b0b47aad2cc96ebf1f0a4ae29bcbad1adc1061bc266419c5e7ea9688cda4ebd",
+      "bytes": 3971,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_approval/lib/src/register.dart",
+      "sha256": "6a8f3b64562869c50e8501ec70e1521b38defd9b249d4bc5e1f4916922717860",
+      "bytes": 1173,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_attachment/lib/dsh_feature_attachment.dart",
+      "sha256": "9f1569168028278a1f694b7879952652f56a476ef66cd828bc66c38cfc53675b",
+      "bytes": 347,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_attachment/lib/src/composer_attachments.dart",
+      "sha256": "00c964d8572abf6df9a2f2afaab8fcfc3c91b68c34ec7f76ab81d1844849448c",
+      "bytes": 5594,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_attachment/lib/src/message_images.dart",
+      "sha256": "81e6d19d2d46bd158df184d4d6140c09996f8f07482df4336f484b996812f9ab",
+      "bytes": 6182,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_attachment/lib/src/register.dart",
+      "sha256": "55bfaa6a84cb9c31e00df143053c0953362340ecb7f0c8dc59127707f7f26ae5",
+      "bytes": 1545,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/dsh_feature_chat.dart",
+      "sha256": "6a3492781104039e76fbc73ace7b1ac27d6ce77eac4112bb6bf522be935d982d",
+      "bytes": 736,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/chat_nodes.dart",
+      "sha256": "83628f56c7374564d66971a9e6efdc3c0e11ffab2c48bc13a2c0d5604af8cce5",
+      "bytes": 19362,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/chat_preferences.dart",
+      "sha256": "5d62428aa291475323d2bcf77058c048a659401f494f2d1e1ebf4060112c0401",
+      "bytes": 3134,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/chat_view.dart",
+      "sha256": "40dbe2536204d44b8bfc25b26098b63ecc0a77ec2b532f6b7c7a63be8695924c",
+      "bytes": 36284,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/command_input_view.dart",
+      "sha256": "861e9a793e063156403298af1d1c2776ff3f72c7c344ca5f7cdfffa0ebd4c6b7",
+      "bytes": 2429,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/command_view.dart",
+      "sha256": "079bf43041ce22cf6a96e176b76c1ebe7aae5707462eca5b74a250e64987fabd",
+      "bytes": 4175,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/compaction_sticky.dart",
+      "sha256": "c76e3d15871038701528b1c9db0ddf4b6c41559c03bf61e28df37c747e0a8922",
+      "bytes": 3784,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/compaction_view.dart",
+      "sha256": "a97c85d21b02f05eae998053fa33f943fed217d586ccb520d0f2f6303a76e0c2",
+      "bytes": 6858,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/context_view.dart",
+      "sha256": "c37ed70556902e2b456c5600c7f72fd51eaee45df0268e2f466d3a136e74208b",
+      "bytes": 19372,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/model_retry_view.dart",
+      "sha256": "2fb1d2debae1e2bbdf9ee3dfed45e51885cad8ac8c8aa4dd14e5a5155c06f449",
+      "bytes": 9782,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/process_layout.dart",
+      "sha256": "3c2503f28b0d4c4a706e202ea64da4b6c0b9532c854af005fd9a9edf7f452525",
+      "bytes": 9434,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/register.dart",
+      "sha256": "902d7ea373f3f6dfef13e691847686f544ab7766c1208cd090b0a67ef997022e",
+      "bytes": 7647,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stats_pills.dart",
+      "sha256": "9ba7653c6435d424fb09c99f18a80a8b506995b629fdc1804c1eeb3b2d858980",
+      "bytes": 14558,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/extras.dart",
+      "sha256": "765930ce6bfd9871a7534df33be9fcaf3b4adfecb402a509905d0c162ca8f9c1",
+      "bytes": 491,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/jump_button.dart",
+      "sha256": "6d8a361e08ee2f208c8630eb98ff02e39ad2ed608e124e8071d8a5dbd39f6f56",
+      "bytes": 4102,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/load_earlier.dart",
+      "sha256": "818528443a3ca15c542526fe16a68d401d3f170e85f9f5ab6233d32725aaeb3a",
+      "bytes": 2592,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/loading_hint.dart",
+      "sha256": "c922c95cd6bdc05954b3798dbe391839d6bf5ca21e8b906ce832561e0b9180e6",
+      "bytes": 770,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/message_actions.dart",
+      "sha256": "2cd42095a92f795cb003dce803412fe1f11eec985e795473f85a3e0505af28e2",
+      "bytes": 9928,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/reading_anchor.dart",
+      "sha256": "70f7cad77dfc5afbe5185d08c1fc0bbe769642c0c35cbb93c61d870f2fff3a45",
+      "bytes": 3758,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/row_extents.dart",
+      "sha256": "a7dde852f4e94bc5e8e770f80c69e66ded33aac090298a485276b6370c8ca785",
+      "bytes": 3269,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/scrollbar.dart",
+      "sha256": "a360e7ffe1b3e2810bdfa2f7930e7dff3052e2ea67408422c2b1c9c347c73eb0",
+      "bytes": 8360,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/selection.dart",
+      "sha256": "dab989fccffcb4e069d030411e082938c9ce4354fafb8c065ab1aff9079878dd",
+      "bytes": 3770,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/skeleton.dart",
+      "sha256": "107f7f1e4657c2c3dedb358e20b64800b0437a462c9b6528ff5ebce4f1769ef3",
+      "bytes": 4375,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/stream/timeline.dart",
+      "sha256": "a816e8f6a09b76725bf6de0c2dfd792b227c5df9e6323e3ce413020a1d70e5d3",
+      "bytes": 38885,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/system_prompt_view.dart",
+      "sha256": "341cdb06816a1962d99e6399f33f354454ccbc7fecdb464b0f55f1666972858e",
+      "bytes": 2346,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/work_details_settings.dart",
+      "sha256": "ff80dbe993e04a7bba24c666785d9137965eab41d9b50c10de70821d80b3a61f",
+      "bytes": 6832,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_chat/lib/src/work_details_view.dart",
+      "sha256": "74e3a1561060b6d1082ff963d60d6f2bac5ce07248c223838a48f01f1baf9348",
+      "bytes": 16567,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/dsh_feature_commands.dart",
+      "sha256": "d9c9b78dd6b48fa303f344e134f70e5c067d17b308b6d9d543ec8753d6222f99",
+      "bytes": 493,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/command_source.dart",
+      "sha256": "ef7531c75146a99ccfba5a236ab4008680d13606d26dc14a397e82aa80c8414f",
+      "bytes": 12997,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/directory.dart",
+      "sha256": "ce7df201a3783bc7f2930ffa2ad2b09502ed0d03fa5c4c39c31156997f9b1797",
+      "bytes": 5337,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/popup_controller.dart",
+      "sha256": "26cdbb4c606508abd3a6c2ddcc19082616b28b507555f78bbb397f1b3995b886",
+      "bytes": 11707,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/popup_view.dart",
+      "sha256": "1811f386164877a27fed503d2fd195b1b7a52ad50ffe0e07ca5ce69f280482f7",
+      "bytes": 19796,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/presentation.dart",
+      "sha256": "e97ae320c5e6f1de3d9ac8b1841d98febf06810241949149e583b23baf66951c",
+      "bytes": 2178,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/register.dart",
+      "sha256": "dec90dfd6d22265b53b7f62eff84afb9d1e1ac0f5624ea0bf8e65dcafa94325e",
+      "bytes": 2529,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_commands/lib/src/resolution.dart",
+      "sha256": "4aac3b792586d0c6fa1ecea11483b29d0140649f038e819a7fa17505238f2260",
+      "bytes": 2154,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/dsh_feature_conversation.dart",
+      "sha256": "b3130fe1c57404b75b6e442a8938d676fbdc3d2e66cf09295ff3e17247316d69",
+      "bytes": 599,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/attachment_text.dart",
+      "sha256": "9d3a637fb8a38fb9bd41d472e9da8baa8c814bb92ae952fba20343b0d8268085",
+      "bytes": 2766,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/breadcrumbs.dart",
+      "sha256": "016b718f2af7c69fc22973c459644567e0dd564c3fb269b0e68dbf12cf2284ba",
+      "bytes": 3532,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/composer.dart",
+      "sha256": "fa2a7ce7001ceb4c93c94da7ec3a2820a87a6db7d24d0df2adf21b3db09a18b3",
+      "bytes": 31804,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/composer_text.dart",
+      "sha256": "3f00701efd7a42920a2c313833488907bee9c4616d20d1b70885d26b806ed86a",
+      "bytes": 9786,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/desktop_header.dart",
+      "sha256": "661d112b5847fa14fb66fdf4167ce569f0acbaf1f57a495d75403c9b627f96b2",
+      "bytes": 12666,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/enter_settings.dart",
+      "sha256": "b93f525cab324ef1edc6c79670ec6f969b39f2894c1ae56cca833836acfd2096",
+      "bytes": 3923,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/hero.dart",
+      "sha256": "e2b203fe9c98dab269ae87dc5783ef6473a85901925dc3902b7be841760ae97a",
+      "bytes": 16461,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/queue_dock.dart",
+      "sha256": "8f9a478df7b48875f425320be3fbb99f0a8b835a032beb9d3bf480366565ca63",
+      "bytes": 27129,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/register.dart",
+      "sha256": "59e4dcadf78939bec65921b39c542de10ac0104f63d7f2bf8716f2797b173d2e",
+      "bytes": 3969,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/session_header.dart",
+      "sha256": "397ea1f45959f46dbf60453a2de17728fcdc0463c93f6ee413577867deeca9d2",
+      "bytes": 4547,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/shell.dart",
+      "sha256": "0f88ac4b31a1c238d655ba722ca5650d060a6dc751a814e0f9203d592d9d3d28",
+      "bytes": 10976,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/submission_policy.dart",
+      "sha256": "6262338d96ccfaca53e61aabe3ff4cb7643ded0bbc285f5c2f95305ddc555aee",
+      "bytes": 2100,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/todo_panel.dart",
+      "sha256": "b8a1ae45db5b91494bc13ed8ecaab13551ff3d032e4ae59ffb1955105137b6ed",
+      "bytes": 7683,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/user_text.dart",
+      "sha256": "9f10d2e6a303a8739c767867da03a816df13b03bb16eafad58fb82b4d8bf09b2",
+      "bytes": 5110,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_conversation/lib/src/view_selection.dart",
+      "sha256": "7f9f91b2ccc0c68deff0574378c348173307b2b64b390105f2652c595e4984e3",
+      "bytes": 470,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/dsh_feature_deliverables.dart",
+      "sha256": "73164c4236ed5929099fa5aa7391a5f2962e68603a53f97723c63bd3c822740f",
+      "bytes": 138,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/controls.dart",
+      "sha256": "8454741fbe549adfb3ded4e5be72bca2e0cd37868cb0e4a8872f32ff581fc1ff",
+      "bytes": 2741,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/deliverables_tail.dart",
+      "sha256": "ed87bcd91167b129f7a5274c4ae19d01615b0a8f7cf3698259262ab1bd525674",
+      "bytes": 23264,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/file_diff.dart",
+      "sha256": "454b33edf10366148527462a90699a9784368d65178839c58cbdaeb57f2af212",
+      "bytes": 13140,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/register.dart",
+      "sha256": "5567498256a2ce007da9a86067c59d2164e61948301fcb46a9da87ffe68ebf0d",
+      "bytes": 7209,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/review_address.dart",
+      "sha256": "ecb0250add69286fc8c6ba52e07dfcbc15df6a00b998a4c0ae829208aa2cd353",
+      "bytes": 949,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_deliverables/lib/src/review_tab.dart",
+      "sha256": "199c0202cb4080b9bb3090506f4de24b580c1ae23deffeaa1d2ff871602612d3",
+      "bytes": 7923,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/dsh_feature_directory_picker_browse.dart",
+      "sha256": "a39f72f36997f44dd137836b2fa43be2fa7e15a4834237aaf655a17f59441986",
+      "bytes": 353,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/src/browser_model.dart",
+      "sha256": "f479fbd8672f3bbc0030696497c66dded367f3dd605bb4c24277a7d612fceac1",
+      "bytes": 19138,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/src/browser_view.dart",
+      "sha256": "58b5c0b487dba7c99fb4f95ea38d305c1372c69bf222f8f242daa9feffde4595",
+      "bytes": 40554,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/src/flex_wrap.dart",
+      "sha256": "73fa191d3b43e147edc5ac12e54dd6bdef555d5ea8fb20f80b86a0d1cae3ead8",
+      "bytes": 4654,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/src/flow.dart",
+      "sha256": "07a5b5c8c75cb7ade0d0b17216050b9240b54203abf490dd320797e97d01fd13",
+      "bytes": 4979,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_browse/lib/src/register.dart",
+      "sha256": "f072495c6cc9416f2e5aa9aa9e6b42423d2facb64eca67481b6dbbdc6358818f",
+      "bytes": 2095,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_native/lib/dsh_feature_directory_picker_native.dart",
+      "sha256": "039149ab98c1de909ca9b757e85c3467836e302237f7d6c3567453a181213c95",
+      "bytes": 182,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_directory_picker_native/lib/src/flow.dart",
+      "sha256": "c7213881ec5f34b47608ea733b38b4a011d3380864c335c6fe2b27e6aca1d11d",
+      "bytes": 2742,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/dsh_feature_documentpreview.dart",
+      "sha256": "da530af885120ac7666ab745f69abca4e9e270e8a20088093b315114eec3f85b",
+      "bytes": 484,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/document_bodies.dart",
+      "sha256": "706be7789042f401ec0ec6edbf42f373143ef112a9156a149224d14a067639c1",
+      "bytes": 13494,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/document_controller.dart",
+      "sha256": "e744993167b52ebc7cc5cddd1ee232fe1e6db7bf30f162df5db5b79faa3d35fe",
+      "bytes": 8696,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/document_view.dart",
+      "sha256": "b5ecb0bec06a4e529a186cf705bea250c570bce1310763ef983eb6d8e8c87c7a",
+      "bytes": 22616,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/download.dart",
+      "sha256": "12226cd49a75f58a0765326fda5ca47c82e5c887c3dea61c5818cbc2974a3e34",
+      "bytes": 2771,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/html_body.dart",
+      "sha256": "d1a0673c5cf957413ff4d71f2a17e1303da114de50d91477097acf24e7d85b29",
+      "bytes": 4340,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/html_document.dart",
+      "sha256": "6d4e89ef2a2f85e40c6d767f50902a100bc646b6fe841533fa757813bf665468",
+      "bytes": 6702,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/html_platform_view.dart",
+      "sha256": "132fb6922462619ddab10df2074cf191c491edbf448958d83602612d030a8137",
+      "bytes": 4968,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/pdf_body.dart",
+      "sha256": "8e86579c527ffba94615a9c13a245a86d36215fab558b3fda870c623704d02ae",
+      "bytes": 4743,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/register.dart",
+      "sha256": "ac555820a4eeaccd9690445bd615046bbdadce0fa67fb96d8eee67f21cd6dc6e",
+      "bytes": 1036,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_documentpreview/lib/src/renderers.dart",
+      "sha256": "f9cbfd2d86d9223fdd9da31641162ff28a22f484d33b359c4f2d4ac263b56cdf",
+      "bytes": 5800,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_files/lib/dsh_feature_files.dart",
+      "sha256": "380b461f51e7db3b6cea6a6238812039560ccf5d42119168326810835e051085",
+      "bytes": 311,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_files/lib/src/files_controller.dart",
+      "sha256": "4b568d58e5a244f37418aa128a042bbf6c5cdae07b88eb7fbc72e8edca59e69c",
+      "bytes": 5880,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_files/lib/src/files_view.dart",
+      "sha256": "a580b9c465ac9d8ddafa75a4d96358a3d47b8cdee490d66c54fb98ec8b1c1e29",
+      "bytes": 10802,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_files/lib/src/register.dart",
+      "sha256": "1c1d45a308398a05556d4ceb6be3cf9b2726591e8989473dc0288fbea5bbe39e",
+      "bytes": 1273,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_input_trigger/lib/dsh_feature_input_trigger.dart",
+      "sha256": "0eb749ccd4389cb2a567ad755346a1f842cab264004081585f33e557cf565a25",
+      "bytes": 418,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_input_trigger/lib/src/candidate_icons.dart",
+      "sha256": "73850962dde51cc9842cb788ebaf8def9d5885cba973757b2a31bc7bfa18dd96",
+      "bytes": 689,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_input_trigger/lib/src/menu_view.dart",
+      "sha256": "905ae7c3060c59fa0ba82c9e1155595e70e43fd1816e3c3481cd6365b2ce3eb7",
+      "bytes": 17966,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_input_trigger/lib/src/register.dart",
+      "sha256": "73bd09ed676caa684886cfd102b8a4d4c0238c7f7eeb3538e8226eb3baaede58",
+      "bytes": 875,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_layout/lib/dsh_feature_layout.dart",
+      "sha256": "8ded1b1cf3cfe2a466dde676d5718b779063656b8c045a240c949db034ac8a76",
+      "bytes": 281,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_layout/lib/src/app_frame.dart",
+      "sha256": "95c4dfdf07202193bfc7fba902ce3bf607faaaa072955818a08fce79f3de3fc9",
+      "bytes": 24195,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_layout/lib/src/layout_feature.dart",
+      "sha256": "bb55743fc44d6f2fd7e67aa661b187c99f33e3c6d7f698f8d1e3debb4ea810f8",
+      "bytes": 2350,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/dsh_feature_model_selection.dart",
+      "sha256": "a720a579f7535ddf1cc21a9d887e73f904af405320734cb0461102938575eeb7",
+      "bytes": 468,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/model_catalog.dart",
+      "sha256": "93babf19913437823d9799a0489c5b3c62bc8ce7d837a0ba5d76bebd0fc0ece4",
+      "bytes": 4616,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/model_command.dart",
+      "sha256": "90c07df56803bfa8e7e872a99c5c9a9008c18db9af6a353375b5166bf841f685",
+      "bytes": 4613,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/model_directory.dart",
+      "sha256": "439ded79100bb0c7114888b6a987fe407dae88f8ad9e263b6971f279430d0555",
+      "bytes": 8226,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/model_select.dart",
+      "sha256": "16430a9d9ff5487915d55073c9c7a5ddb9c9cef5462a0f2a805e6951fc4ac397",
+      "bytes": 34272,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/provider_order.dart",
+      "sha256": "fd26c4069840b63a40dd35ef8eb310bc527871c638e438954460cc151491b17a",
+      "bytes": 736,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/src/register.dart",
+      "sha256": "ff86210b4a2d12e1f4b6cb1a3ef6909dd439cd3c8b8333f871d4156568f13a5a",
+      "bytes": 3534,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_selection/lib/testing.dart",
+      "sha256": "a9cc6b3e0b23c4cc54e973928e971822ac8336734c19c37a5478b1c4f24b7bf0",
+      "bytes": 4292,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/dsh_feature_model_settings.dart",
+      "sha256": "169c32fbe410d2c63fdebda04768823f15dbf74a3893f45e688631162d98b02c",
+      "bytes": 62,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/src/model_input.dart",
+      "sha256": "037059fada8d7a49ad8cbce54cdacce4c7f1f85a737ecf347a4b29a391e3d9a6",
+      "bytes": 5469,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/src/models_section.dart",
+      "sha256": "8ae5b4cb1235313adc50fb30d0395116907b136b5cf9317927cb5201eda6f5eb",
+      "bytes": 18238,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/src/provider_editor.dart",
+      "sha256": "a357c43dc1378a4d1ec687802dc50ce39750ac1bbf48ad5554ed58674b0417b3",
+      "bytes": 30412,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/src/register.dart",
+      "sha256": "d7c29f7a0bb8bbad504527ddefb44c3959d9b82481954415e836315e545fc567",
+      "bytes": 1452,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_model_settings/lib/src/welcome.dart",
+      "sha256": "d1633bb9157721fddf4a2d3d0c93b60f68c07f1f701c5389328c576d07e848f7",
+      "bytes": 4895,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/dsh_feature_open_in_app.dart",
+      "sha256": "dad574ae0da208b5dbe85500f6739f9c4da0adf472dda9b526086d3b93377ca5",
+      "bytes": 328,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/src/applications.dart",
+      "sha256": "e20072e910627ff9270390bb6995a41a762a47f6741001aff2fc5a9477bf2647",
+      "bytes": 1214,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/src/controller.dart",
+      "sha256": "86a3f044f7d684e367362c9a8fab885ca4d7c82e8641c479f0c2a2b4ccf564ac",
+      "bytes": 3082,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/src/file_route_action.dart",
+      "sha256": "9a23bd37c16c93e0b4fac4d3fbce36b2ebf1364921720395ed7945d21d7f6dc0",
+      "bytes": 4806,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/src/register.dart",
+      "sha256": "60bcab46feda50d657aed12898b638d2b5a77dd4a7a620e479962d0846642495",
+      "bytes": 6145,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_open_in_app/lib/src/target_button.dart",
+      "sha256": "0157daf24aabe1970f48ac9f0e5337e976840f042029712113c04242c1263c13",
+      "bytes": 11735,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/dsh_feature_permission_presets.dart",
+      "sha256": "209bfc9813940beda7e23c319bc79c75f456490fdddede2dcaac283ded690d3a",
+      "bytes": 476,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/permission_catalog.dart",
+      "sha256": "754e9a35b9a58c66336e1d4e59eb85a061aaffb7e6c8d2f1a306e7bb92ba7939",
+      "bytes": 4669,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/permission_command.dart",
+      "sha256": "c9b697c0d5bdb5fec9600190533f0ecf40a355296fc565ddd981869feacd5ae8",
+      "bytes": 3520,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/permission_default.dart",
+      "sha256": "8939b0b324a23c08918ed223c8d03125c130b25c349521323f2fb9a690c7954f",
+      "bytes": 7601,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/permission_widgets.dart",
+      "sha256": "13a6a977581f335666f6ecc3a322c6e21f3f878a2c6d49bf76812ddac9f134ac",
+      "bytes": 11908,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/presentation.dart",
+      "sha256": "0caaa4f4ba99e2b0f895a09eefe4a03529ffa8c9e07a805b227cb385dbe8feda",
+      "bytes": 1679,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_permission_presets/lib/src/register.dart",
+      "sha256": "d1d375fd69f7d5e97c0da30916bc08981d6febdfc95639df61b7297bd4ffe9c3",
+      "bytes": 3228,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/dsh_feature_plan.dart",
+      "sha256": "feb56f27e9e7409a9cb347ec84d61dd9132f4cf6d47cb8a8f96d8c7dc927c1ad",
+      "bytes": 447,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_cards.dart",
+      "sha256": "2e562834b3b6b7b2e251352ddc5cc5a61c62a9f949c4655a31cd966dc137f638",
+      "bytes": 5614,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_chip.dart",
+      "sha256": "0411963ab22f32c819d6e92ba17946dfce6570ad8d36db14a393862257e4e848",
+      "bytes": 4791,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_document.dart",
+      "sha256": "2a1ffa772c24170ef82fc3cf7b1c103948c9cb8e03e214d5b0457eec3f345854",
+      "bytes": 3256,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_preview.dart",
+      "sha256": "223ac113484e50821868b28840537e1cb64d078b4249b42a93270e78ef51da77",
+      "bytes": 4479,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_resource.dart",
+      "sha256": "118aff8aa1b6c621fb67b3b85009b13d1c99d39565d26e1a0537434727d4fb7e",
+      "bytes": 3268,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/plan_services.dart",
+      "sha256": "42cdb9f3b7195f5327af12ec0c39c5b1193492cfcccb3a9082c3b7b23313d273",
+      "bytes": 3980,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plan/lib/src/register.dart",
+      "sha256": "06222c0483ced84a70d1d3a210ce81611e29ab6c936abde6b035730b7b091791",
+      "bytes": 6093,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/dsh_feature_plugins.dart",
+      "sha256": "71d66022a81e52ac550f76929858d4ca962ef4c0d036fe8baf23b8445bc67124",
+      "bytes": 194,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/common.dart",
+      "sha256": "4a0bb759b22f5ed8bc1834be72a26a519f1af8ee6b1ffe95bb85c3f5487e6cb2",
+      "bytes": 3673,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/install_dialog.dart",
+      "sha256": "4ec7d2178f0477b5101dfcfd60d3f15f2da7124b3fea557fd8b81d8059f95987",
+      "bytes": 16071,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/inventory.dart",
+      "sha256": "e83a0728782898d16063937a2c0b7f61aec8d0116acfa502dc9aebe931704643",
+      "bytes": 7980,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/manager_page.dart",
+      "sha256": "817cdd8e05e9b0a5253e1c977f28c06905605db05b4bb838eb7fafb729bf2830",
+      "bytes": 29288,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/market_page.dart",
+      "sha256": "d7c8677c1ee9b0effa5a4cd2dd31a30492117759bf93c48a332f912228873b4e",
+      "bytes": 17844,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_plugins/lib/src/register.dart",
+      "sha256": "132ed7b3a21290ef615169bcd9d6e0f1986632f59e00183520ee60f745e07dfb",
+      "bytes": 2904,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_reference/lib/dsh_feature_reference.dart",
+      "sha256": "073c988f9496e33a1b7138abde500d63a78e91f8f574f41166654ebe8cdd5156",
+      "bytes": 433,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_reference/lib/src/reference_source.dart",
+      "sha256": "dedfb3014f7c872fcb9b9a2568b4a9ba30aa91729ac1efbbd3b9ccde32a74b14",
+      "bytes": 10646,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_reference/lib/src/register.dart",
+      "sha256": "cd8bd860a4466b7fb877413b77a44094be61fdb4adb42fe238c40a10e050e73c",
+      "bytes": 674,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_reference/lib/src/sent_reference.dart",
+      "sha256": "08c7d553f785318299c6bd323b1800e25f7c1e0d53af490d46be774945ba0b74",
+      "bytes": 4907,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_secret_mask/lib/dsh_feature_secret_mask.dart",
+      "sha256": "8d51f072e01eeb3d63b927816e905f4e6f8eb5b580a2e3046f1982f515bb127a",
+      "bytes": 149,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_secret_mask/lib/src/register.dart",
+      "sha256": "92bda440efe346fdb367eb74fdad61d242fb67a6a0280534ccccd0fb73921503",
+      "bytes": 907,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_secret_mask/lib/src/secret_text.dart",
+      "sha256": "5f1eace49bf3ddd6b6861413fc3925c6f0e9f5834d04b8ddf8685c9b0174ec85",
+      "bytes": 10374,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/dsh_feature_session.dart",
+      "sha256": "0170f2cb6b3db11a7e2b1de024576c915644bea9633179518dc7efe16ea9be8d",
+      "bytes": 292,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/session_list_view.dart",
+      "sha256": "cec497ef33fb2ede5870e39bac17c3af86eca7b8144d942df29813ea4436c03d",
+      "bytes": 8192,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/actions.dart",
+      "sha256": "ddb9c60b1b73d9c3eb28bf4ac6ec56a0944b82bcbcffe32e4311b6b8fe64804e",
+      "bytes": 22034,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/browser.dart",
+      "sha256": "78f8460e7d7dba72a8c4472adb973b2b462d1ee2f5a81eaeaca8d898b2a77119",
+      "bytes": 66026,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/hover_card.dart",
+      "sha256": "b0ea606062b6e9874f938f24e95d9ff2197c0b2a170feb2d64118bef102c9ca1",
+      "bytes": 6310,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/reorder_row.dart",
+      "sha256": "54e78711ead22cc354f6007382a50a2cae61825b38ca21f48abd170de405daec",
+      "bytes": 4133,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/row_slots.dart",
+      "sha256": "1ffa8a4a676142ea5948313cbc2f9747bc85a5b385b3fd388044d5e4b27450f7",
+      "bytes": 3759,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/title_marquee.dart",
+      "sha256": "c0a2a80618c1bb1634fe7cf7f7263b9630770dc697e835f073311067f2ed5ada",
+      "bytes": 3153,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/tree.dart",
+      "sha256": "c8e9a621e9ba90d2723429a79a917d447c66cc440e62cecf6a2d6e849d682e9c",
+      "bytes": 18275,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_session/lib/src/workspace/view_state.dart",
+      "sha256": "47e91b230c7ad97a97adbeed660591f21c75ad96c5bdaac4ed41fdf326696b4a",
+      "bytes": 5540,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/dsh_feature_settings.dart",
+      "sha256": "9c4e8d96a4016fe4339f3354a2475771cd64e73b645fd20fdb18affb568c65e4",
+      "bytes": 605,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/common_settings.dart",
+      "sha256": "77b992e66dad7f2c358318f643039f7f14782e09492bfe52e38acef41938f998",
+      "bytes": 12782,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/form_scope.dart",
+      "sha256": "fc5a0d1555dd432cb2adcc2b55ccd87ec1447ad05448137e57b4859229855f84",
+      "bytes": 1902,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/general_section.dart",
+      "sha256": "14f8c72ee5ef2055fca21b7fb26f0c4a4377dd8c22a7511ada767233fbff77ce",
+      "bytes": 2905,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/onboarding.dart",
+      "sha256": "e444a491eb71d0ac1bce0c87de2bac9aa51f02c84dd407d943a2d33bbc8bcec4",
+      "bytes": 1583,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/register.dart",
+      "sha256": "b9346eb9bbbf87cdba22a1f92b3a63612593e5a3a1caff62c3105163de126419",
+      "bytes": 1400,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/settings_dialog.dart",
+      "sha256": "54692647e595219ec52e0dedb0b0cf1979c245762fad920c021d43add8e2faf8",
+      "bytes": 10946,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/settings_page.dart",
+      "sha256": "d7b5022dd60efaf60481228c15afdee701c817408169b1bb7e19920ac9811c50",
+      "bytes": 10643,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/settings_shell.dart",
+      "sha256": "f9f451b730080ecc8abf8bf3cdc30d998e91313e82560a4596ec33f1acdd566d",
+      "bytes": 18242,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/subagent_models.dart",
+      "sha256": "78feb15f4aa4a991a3fafc05a4c2ce015b408b9061bc3881c66dd3254fffa478",
+      "bytes": 11263,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/subagent_settings.dart",
+      "sha256": "e5b69caadc006390dcabaae907c6dc44cdf73861105f20f0fe0bf5dbc0f04f97",
+      "bytes": 5509,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_settings/lib/src/web_search.dart",
+      "sha256": "9009f241faf7ae4456040acddbd8f99b8ef11315be6c5ef0d8be28b646ebe29b",
+      "bytes": 11260,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/dsh_feature_shortcuts.dart",
+      "sha256": "1de1eb2f3493c5add5d0c8420527259a15f4e6ac79a8d1051062df522aa55ee6",
+      "bytes": 365,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/src/feedback.dart",
+      "sha256": "a4ec5e396b448449ddff9e3d7fd7e57247a926fdd64333d5930ab0c4154cdaeb",
+      "bytes": 2169,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/src/key_codes.dart",
+      "sha256": "77af33cd5623fce83b38838c33298d1b13eae0b3cc04280533948fb2de6d3cd8",
+      "bytes": 1748,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/src/keyboard_host.dart",
+      "sha256": "677443a56c5ef78a9f751a21775e5d0f0a1765cbe4a4dfb77e429d6e6a05f1f1",
+      "bytes": 4671,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/src/reference_dialog.dart",
+      "sha256": "f495881e418bea3af3b59012d4be595f74e9b86b520458c4459e474a03e4675f",
+      "bytes": 47119,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_shortcuts/lib/src/register.dart",
+      "sha256": "62ffe988ce154025d0283fa6e2fcb418273a2558702ae4efc2da93ae3fe9f10f",
+      "bytes": 7208,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar/lib/dsh_feature_sidebar.dart",
+      "sha256": "c29b92596a5da624cb97bbc61f0a07b6744ac02c2a5f8c4aaad09633454b1bec",
+      "bytes": 314,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar/lib/src/leading_controls.dart",
+      "sha256": "fec501eadde30d041a8cbeadb45d122ead1f48c24ad8bc1197f3077f270cfa14",
+      "bytes": 4210,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar/lib/src/register.dart",
+      "sha256": "2ee784a1037fec09f671a9e95ba21649e9a32551d0bee90da9c6b40978a79d62",
+      "bytes": 2539,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar/lib/src/sidebar_root.dart",
+      "sha256": "cc4b69d536d080179944b134345742f416a45ad25becc4da754fa05afa5d29bd",
+      "bytes": 25905,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar/lib/src/sidebar_services.dart",
+      "sha256": "8c3c02164f74fb969ad15cf6834d3ffa5b8c0e9011eff28edf092867672dd308",
+      "bytes": 990,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/dsh_feature_sidebar_right.dart",
+      "sha256": "aa7a03987aa43df2e8cf042c4d6a75e1a92dc332bedded7abfe0b01fa7e83020",
+      "bytes": 481,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/src/guide.dart",
+      "sha256": "1b79d858441d426d75214874f0fb947d7fcf6c03b5797256bb7e24f210f2b577",
+      "bytes": 2350,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/src/panel.dart",
+      "sha256": "b3cfcd54b8ab894709e6f1d39edddafb375666b5b5fc30ed270e8c63038efc1b",
+      "bytes": 10122,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/src/persistence.dart",
+      "sha256": "8240a0b46eb27d82ecd6a1ea2e3e45e1e7fb79efcdf4301226a4830b74050cf1",
+      "bytes": 2575,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/src/register.dart",
+      "sha256": "6e48cd41bbabdb5f930e4edca08004d7967a09ea8fa596f349fc7f7d2e70ed53",
+      "bytes": 18855,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_right/lib/src/state.dart",
+      "sha256": "3dcaba9eda7f371637535a654b163177b99d3bebab59b80fda82f825c94dd8c0",
+      "bytes": 12245,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/dsh_feature_sidebar_terminal.dart",
+      "sha256": "310bdfdcf9c40ffdcf22c4d1fe5a34b8125a602ebe05ad83663bfa12df405cdb",
+      "bytes": 411,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/register.dart",
+      "sha256": "f9cb1f929131c37df005cdf5848feb280654d5ac53cebb0782a1ea2b8c813c2b",
+      "bytes": 1798,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/terminal_body.dart",
+      "sha256": "cf7901ff9dced35b66e00aa2d11ac6a826b79821231c4a15f032d44749f4e8f6",
+      "bytes": 16518,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/terminal_guide.dart",
+      "sha256": "208f1456527f5e5ceb08d1680e76534d28e5664b6732a19c2d9c17a4ce6196ef",
+      "bytes": 3185,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/terminal_keys.dart",
+      "sha256": "8193b8d4ee6261e56c0afadeccea3efe17b53c1969c99ec7b17a3cf4fd699cca",
+      "bytes": 3703,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/terminal_theme.dart",
+      "sha256": "a09e8631c1af39679d04e75d84ccc10d485d7dd637dd7585767f7a7b37e19137",
+      "bytes": 2434,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_sidebar_terminal/lib/src/terminal_title.dart",
+      "sha256": "f98974082ccca856691ff9b122d9525f242ae6c58fbda4528724474d48730324",
+      "bytes": 3861,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_subagent/lib/dsh_feature_subagent.dart",
+      "sha256": "a73267d79601b72e36642851d7d96fc68eb352c92a3200be593b42461d854b93",
+      "bytes": 283,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_subagent/lib/src/catalog.dart",
+      "sha256": "0a18d459080b81c45f0953ec58649a0606eda96450c1484b577f45de77dc4405",
+      "bytes": 3111,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_subagent/lib/src/register.dart",
+      "sha256": "dd0debabad495cba560e1007942df704dd42c603bfd09457c648712b69095293",
+      "bytes": 11663,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_subagent/lib/src/transcript.dart",
+      "sha256": "75934db49e1acbb0acd7ebbc120866e2eb30011848618ca83ef614e648d3b625",
+      "bytes": 5039,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_theme/lib/dsh_feature_theme.dart",
+      "sha256": "5b52a0316728459fbb17061af4bcfcb7482845bb7bb742892b36c290ccff7d2d",
+      "bytes": 355,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_theme/lib/src/register.dart",
+      "sha256": "ea0d5ff18519c9ded87b4283aec17abb3d2a4cf5978545907f74aa0f2d7ee019",
+      "bytes": 1208,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_theme/lib/src/theme_rows.dart",
+      "sha256": "cff6360d219db931691273e0914380c755f4174c7630aa365d6663325053d612",
+      "bytes": 13161,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_theme/lib/src/theme_service.dart",
+      "sha256": "feff4bc428d5e78ba9fe8ab2c53839554d276cd9606bea5b393628242811fcf0",
+      "bytes": 4332,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/dsh_feature_tool.dart",
+      "sha256": "d6a0d171e70c9b76451dd60d5f8c77de358dbd2fede4140a296ee3f1c3fe397b",
+      "bytes": 634,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/ask_model.dart",
+      "sha256": "cecfe453b0e63001b30df23d7652396f561ce8971c92667efd9f3072c98d3f55",
+      "bytes": 7653,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/details_model.dart",
+      "sha256": "c939de106cca9ab642e698d43da0d945a279697ef609f99799f53274403fd79e",
+      "bytes": 13185,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/diff_model.dart",
+      "sha256": "f425d572e1c2dc23d44851bbe4bb9ecdd1ba0564993ce1814f0ba2648feb6c96",
+      "bytes": 3992,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/image_card_model.dart",
+      "sha256": "33e3dde729fe98ef9bc963d6caad091e4894bd4eff4b27f2df3e7d46dd071727",
+      "bytes": 3558,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/raw_call.dart",
+      "sha256": "84fbdc4d786574f3406240bf70a968e1df42267e644ef3232d162745fcdb8b44",
+      "bytes": 2030,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/read_search_web_model.dart",
+      "sha256": "5e091e823349cfc2752a5f8890be1ca36fbac8a840f8079d1de7b5fe8e2147e2",
+      "bytes": 9408,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/row_model.dart",
+      "sha256": "c93ddef5f411758991419b564374300cbdbeb7ab94b20508a0d53e89c588e352",
+      "bytes": 11217,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/terminal_model.dart",
+      "sha256": "41c6da4fe3c418a498c0e86831bd4c688a04578d519b605b6803d98ee99c8060",
+      "bytes": 11311,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/model/workspace_path.dart",
+      "sha256": "882f1cc691045c8726201e012bb2edebf56d6c2765cf86b61f3a75c7a035676b",
+      "bytes": 1372,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/register.dart",
+      "sha256": "62b9547e8782c767ad9558f8afbcbe997b155c4f7ac5d5781b484b7fbab5fe9c",
+      "bytes": 7424,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/toolviews.dart",
+      "sha256": "094c9eacdcbd6fc261fde4e82df67a908abe395035e11afcb21ad4d5fdfbf2d2",
+      "bytes": 24068,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/widgets/ask_card.dart",
+      "sha256": "d1bc3e91c05ce3ced418e467396cd4be0b8a108db5ae1c21841d9d14cd238202",
+      "bytes": 2755,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/widgets/exit_badge.dart",
+      "sha256": "86e19fed43e101ed6f15a1c3f83fefced0b8850ae2bc48c7a4dbf1443d6145bc",
+      "bytes": 1619,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/widgets/io_card.dart",
+      "sha256": "15e32d788f786b3b3359fb4720b6ec7266aafbb07caa0d2542a25ef1d2aa6d89",
+      "bytes": 2763,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/widgets/tool_details.dart",
+      "sha256": "896d83dfe837528c991bdae018e15a6525f4cf25573152681df44c24aebe3f3e",
+      "bytes": 9391,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_tool/lib/src/widgets/tool_row.dart",
+      "sha256": "3846a88e67e32d61fa5f5d79c6b27d2be32ff8cb4d9ec429b177511886a6dca8",
+      "bytes": 10577,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/dsh_feature_user_questions.dart",
+      "sha256": "e9265da9006adf57ea55f2482d32248eb76bda8f67c8e7bb7dd1ee8a24c4d619",
+      "bytes": 396,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/plan_review_panel.dart",
+      "sha256": "dbba1cd8f8191a75b27f747d571b2b7a6116e3bbdb7c0c911e47fcd44977cbd1",
+      "bytes": 8981,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_card.dart",
+      "sha256": "a263cba418c6fe7a099fb01bc950e4408a07cbb07dcabedaa90d4a7bc1743aa8",
+      "bytes": 10576,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_model.dart",
+      "sha256": "3db729607a6e60ee3b6dbb78d875472712013c1e6665194e1654fae144edcda1",
+      "bytes": 2949,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_panel.dart",
+      "sha256": "6c7b2ad72eeeb592da10b9560970c158172fe906047939ab2269d13b262af17a",
+      "bytes": 14954,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_reply_view.dart",
+      "sha256": "765f5fbab4cfba37dd2a92e8b1f4ef6bbc187c8cea9e418d4b485f3aabd6eb29",
+      "bytes": 24127,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_tracker.dart",
+      "sha256": "b83e1765997da2760c97406418f53b8d3fd23f3da5a9389955aea28ea2b3497f",
+      "bytes": 11885,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/question_wait_strip.dart",
+      "sha256": "a2fb25931660ecd3ce43293a6f3a205b56531f88ad7863c94f80a054fa2cf20b",
+      "bytes": 3095,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_user_questions/lib/src/register.dart",
+      "sha256": "7af26ccdd0acb73f3129e0494a38f24068a6c78d0b558619cc1a6be43364b7dd",
+      "bytes": 1755,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workflow_run/lib/dsh_feature_workflow_run.dart",
+      "sha256": "47788a0eeb6a61f3ed327fab8e4f63ecd565a65b2c20db5da13956fbe057d2b2",
+      "bytes": 76,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workflow_run/lib/src/register.dart",
+      "sha256": "01800ceec279424ea6cdffa839cc34a6754d677173a08a2c22e6a9fbc1ea249c",
+      "bytes": 1293,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workflow_run/lib/src/workflow_run_panel.dart",
+      "sha256": "b8586524e71f4dd61bfb629b125537abebd9d46b6c28e8a84c6f44b6f1d57a82",
+      "bytes": 22532,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/dsh_feature_workspace.dart",
+      "sha256": "c987ed44274b1dfdb1ec972d5db9aad02ca39dc733f1009b64584b55f9db3d1c",
+      "bytes": 469,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/src/add_action.dart",
+      "sha256": "59156f02e339bffa27217486e7afb0b41871eeca89c33f61769275ef31be7e0d",
+      "bytes": 5641,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/src/folder_error.dart",
+      "sha256": "6ff164121aa0522b50744d556342a474c6cd27938a2b3578e1c6662159324474",
+      "bytes": 4350,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/src/picker_menu.dart",
+      "sha256": "0ecbdc3d8526accd821a126ad039df512febae25b579a2f2ac6e06ad31b73ca0",
+      "bytes": 1997,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/src/register.dart",
+      "sha256": "9dac228b39a5dd5d73eb7e1027473a52cca277c5bf459086a0a00e817738a5f7",
+      "bytes": 1888,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/features/dsh_feature_workspace/lib/src/workspace_picker.dart",
+      "sha256": "9d3a2c898b74adf3422fb21a9d5bd5e02a6a9aec973ceaa9a9e63b13e1ac90e6",
+      "bytes": 10153,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/dsh_client.dart",
+      "sha256": "3d05d60c8ee8630640cd8e9fd1743eb5a02b2ca692477f31195388ec342c2e7e",
+      "bytes": 749,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated.dart",
+      "sha256": "ff94810e79fbd67fe40652afb1ac4b2950ad0a85dff16154fab3beabb80c94cb",
+      "bytes": 345,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_agent_presets.dart",
+      "sha256": "061d99138f097445c52a2191cf2a62d1949ddaec47dbd8b3f0a1a17b64ef16b3",
+      "bytes": 140,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_commands.dart",
+      "sha256": "dfc8709c19eed5e168b933aaea6870ec8a7556b5bcc75238970443728184738b",
+      "bytes": 337,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_credentials.dart",
+      "sha256": "10ebf2cedaa8e4118ad0f39c4ad98928faece12f460aceb52b40a6e23ad68c2f",
+      "bytes": 137,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_directory_picker.dart",
+      "sha256": "ca7f57d36860e8031d860ddf1d47f69339275408a178d8855a8005e29e8d1722",
+      "bytes": 352,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_file_references.dart",
+      "sha256": "9d8f2c37723185612939db35e8ab9ed0f3df1f888df215b0a2a543fa194d5377",
+      "bytes": 350,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_goals.dart",
+      "sha256": "1cde422aceb8f927abb947b5856edf0a0933ff11184a6b60722195ec57f1304a",
+      "bytes": 125,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_job.dart",
+      "sha256": "91b256151bc479380eabbfffe2def5a5371ce3a1eaf5f10a18a181a223a9eaca",
+      "bytes": 121,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_llm.dart",
+      "sha256": "12edb273ef748956858737d2c4e1d5592e22448e113c1b0f36efbdd8e9d3cf33",
+      "bytes": 121,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_office_to_pdf.dart",
+      "sha256": "fae65e031008ad0450567e9d46beb5aaefd3709c4ce276f44307b45e456bf2e1",
+      "bytes": 139,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_permission_presets.dart",
+      "sha256": "6b27db9eb7bd8b3ba69816b4749c38d575fa7bf75824a9712f6f62fa084b83c8",
+      "bytes": 356,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_plugin_inventory.dart",
+      "sha256": "64c8837dfd030c92542069458d84e457e37e2fc3e54c4ca86add7ed2fafd50ec",
+      "bytes": 146,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_plugin_manager.dart",
+      "sha256": "bbccc7bb57a58093ca2b59e7658c29e21ab3c35fd16beea77decf8209ddc9a1a",
+      "bytes": 142,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_plugin_market.dart",
+      "sha256": "54a4101eb782aaa470a6ab763c23103a752a4b58cb3b2aa9d36934d987456194",
+      "bytes": 140,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_plugin_registry_probe.dart",
+      "sha256": "e27ffc8c98e4e4745e8a551b0720b45577ab42cec838dfdafc960c87ff3db677",
+      "bytes": 155,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_schedule.dart",
+      "sha256": "24a70355c354102ee4847776a7b63a5710f061e166205112c8a21c7e9be1e1fc",
+      "bytes": 131,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_session_reference_resolver.dart",
+      "sha256": "6a538aa7f667d6604c2a79b6b84e6188f1b4b7258fff94c8c98aad77f054f3ab",
+      "bytes": 371,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_settings.dart",
+      "sha256": "9302b1f5e2527f7039fa559aea6cc8352b122fbe7add4190b1c72c20732e9f7e",
+      "bytes": 337,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_skills.dart",
+      "sha256": "db245a43c1a884e8b211f16d0a698ffcc1ef953d68985e9119764361b003f1b4",
+      "bytes": 127,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_terminal.dart",
+      "sha256": "afa61589b524805d47fcfdeea2fc359f5ba5c0a745368d7fc5ba3cd94d3469d7",
+      "bytes": 403,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_user_questions.dart",
+      "sha256": "3c9a4d29567b71ce7f6cd6f62bb01dc473953519d0f1ac8edc3fbb12947abea7",
+      "bytes": 382,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/generated_workspace.dart",
+      "sha256": "03736ae683c6e86016fcb4d4c3521264528bd02718c9f8bace828f8475d6de21",
+      "bytes": 339,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/binary_response.dart",
+      "sha256": "4ea53b8f04b6f5fc30c7efdf1b2605fbc5aa314bc92b4b4ef6fb22407c1e36b8",
+      "bytes": 6617,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/connection.dart",
+      "sha256": "6b1e00a24c39df33016c469c4c38e961adb687cffc32c648761cd161d78f01ba",
+      "bytes": 19119,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/deliverables.dart",
+      "sha256": "58fa5172c147745882244fe6df3f050fa616283f472dad3c7a55da6b599a528b",
+      "bytes": 12320,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/events.dart",
+      "sha256": "ec0867574def9c916cacae563f49f6976b0db7dac5c2472a1b95c079a68d97a5",
+      "bytes": 3157,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/file_upload.dart",
+      "sha256": "4575be6a291055114715a43c9327db2a9c4e6540f8733a5f2b98e29d84666316",
+      "bytes": 7855,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/host_info.dart",
+      "sha256": "c3152323378b1843afc58c6d980abe2302eb8e3628f41f32d4d8d4088765a771",
+      "bytes": 870,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/host_scope.dart",
+      "sha256": "4203e3b99f2c5e5f04bd490afe0a8a559a5ed11a8262adfe45c62a48b738c5b8",
+      "bytes": 3090,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/ids.dart",
+      "sha256": "27622c4399bb6f52e742d8a816d3316dbbc23d114fa9f15b6e8b90ec0f92f9d3",
+      "bytes": 524,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/mux.dart",
+      "sha256": "d846227715101f23ceaddb0dd0ca2af0b845d9669cd131a4b890af5c43eb568f",
+      "bytes": 5933,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/open_in_app.dart",
+      "sha256": "1c2432103c7fc950395d13b899388f41f29c23976ff2a57faa2b134ffa67b4cb",
+      "bytes": 3959,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/pairing.dart",
+      "sha256": "8c1888dea5f37c50abe533fb7bd6ac465a1c166282c9ec06d9a1f15de85a7c8c",
+      "bytes": 4826,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/remote_caller.dart",
+      "sha256": "012f25b1293d7c0b1616fc1343106662c6177bc720e5ce27f6612710d8b2f140",
+      "bytes": 3290,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/transport_error.dart",
+      "sha256": "eac753beee072e21c9ff6409e88d7027aeeebb6d4118139bebf9fedf45875ebc",
+      "bytes": 697,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/trust.dart",
+      "sha256": "9499b4db71edea13982f89401dbb692ae42db1dcccb6043e10b3d51649695bd0",
+      "bytes": 9941,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/unary.dart",
+      "sha256": "7f0bcad6abbcae34c8b850c56ba221df365f43f6552237489ac71924ece4b013",
+      "bytes": 4241,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_client/lib/src/workspace_files.dart",
+      "sha256": "eb08c01f4ae17f3ad37808f3a26a22f58646e2cd419025d000d3bb2b65a2c3ba",
+      "bytes": 10753,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/dsh_conversation.dart",
+      "sha256": "2caafdc4dc1bf2fa1f28c4276a53b3500407fe11c30c154a326bac824ebe6f1d",
+      "bytes": 1467,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/assembler.dart",
+      "sha256": "be2a10b061b4b46b62e1ca8a62914648f8b4be50b0698b9d567c097c6772bcb6",
+      "bytes": 28050,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/binding.dart",
+      "sha256": "678a6094b119a9b6110ee3ec111b6ddbcc090d3d7f9ccca861a5c99ec7b215ef",
+      "bytes": 4706,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/commands.dart",
+      "sha256": "663fdb2335597902b0a5c7ab950a17b7bbd42b9c9505d90ca024ac9014b2e8b4",
+      "bytes": 8719,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/definitions.dart",
+      "sha256": "6d7a3cadc00feeff8e663ea68fe63e5a6ace4ce129357b2041c147044dfcefe2",
+      "bytes": 45257,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/extended_inputs.dart",
+      "sha256": "7b2801fde8d4721384293ec46aba0b53953476f1cbe82f34645f770be5913b76",
+      "bytes": 5476,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/nodes.dart",
+      "sha256": "df8395bf381c39a5ebeca6e8f0b2903ab715cff2555b3c622d80a2ba7e4d23ba",
+      "bytes": 8471,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/partial_arguments.dart",
+      "sha256": "3debd4b4f4646e5036bdd44660d5cf5aac75211d8a2a91b76eec55e45d3f0f98",
+      "bytes": 6145,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/projection.dart",
+      "sha256": "c1e24e1fb8a10b3f6b1d311759eed0a0d27bbda5c7125a56744058e7b4d35053",
+      "bytes": 5159,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/reference_labels.dart",
+      "sha256": "a2984bb100ed4abe2ab2d56375922b01ecf869153609bad6b7e04bd61290046a",
+      "bytes": 2816,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/retry.dart",
+      "sha256": "bc948309b10116e406c572d3fd1f6230bd984320783c8c5b391e30fa6d640c1b",
+      "bytes": 4499,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/snapshot.dart",
+      "sha256": "0fc70ee66378c1e8e68d34de2980c09e312233f62573fe41c3241e195121bf52",
+      "bytes": 8707,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/system_prompt.dart",
+      "sha256": "d9c0634c796b344c8f57825378fe4fe702dd5778fcee71345d5609bd148db756",
+      "bytes": 9835,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/turn_process.dart",
+      "sha256": "9905305b4e3df78ad21f3cd565d2009c5d952f1ea44890fcc2c3f8a3518f4754",
+      "bytes": 8070,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/chat/workflow_run.dart",
+      "sha256": "fda50cad7525902213bffa52a8aec6927af264ff986eb3fbf636934b6dbd188c",
+      "bytes": 4352,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/contract.dart",
+      "sha256": "1a646d89ab5ada87fb30b01d76126914d89ecd8f59feafdb6e7ab1412eed3bae",
+      "bytes": 7929,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/deliverables/turn_deliverables.dart",
+      "sha256": "f594a064a4ad53e6198c4bba7f9ef90301f014d55c34345a219cdc4416686e69",
+      "bytes": 9727,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/event.dart",
+      "sha256": "32d0a3e0f4b6e22aea27f697581a21ec3d4ed6310397215109b1fcb143ed27f2",
+      "bytes": 1673,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/command_ui.dart",
+      "sha256": "3fa2c3b6f4a2d22b7a8ea2b33136b23dd989aecc7176ff09103521671f94b7e4",
+      "bytes": 6302,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/composer_input.dart",
+      "sha256": "a28b1fec76d942858257af04113c3180e710d454c6d4a7b4d544b324182de72a",
+      "bytes": 23877,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/file_reference_grammar.dart",
+      "sha256": "005e28674860d9da78aaf9bba2a0f064eba1ebb617fef6d20793ed59c24eef83",
+      "bytes": 2736,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/session_port.dart",
+      "sha256": "7a5b44685522be30dfd57c5fbdd098f63efd23e2e0e760496cb8f28528598cb4",
+      "bytes": 1184,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/trigger_controller.dart",
+      "sha256": "3c1e5e7a136dc07d3879b0b026de5ac2b2b0e101dae47a6b2dbf44e33cee2889",
+      "bytes": 20377,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/trigger_detect.dart",
+      "sha256": "2742222a315f4d8876c3aeb6a9bdbce5867787a6dbe74928e0a3140c1cc05311",
+      "bytes": 2465,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/trigger_menu.dart",
+      "sha256": "9b19b2adefe88f061eedfea69690ecc15df8cfbd8aa2c4ea72a989623bbeef9e",
+      "bytes": 5116,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/input/trigger_types.dart",
+      "sha256": "b0678e5812da21a5cea9c67858855cca654a663906025c5ccd0a8a88508793a6",
+      "bytes": 13904,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/location_index.dart",
+      "sha256": "4dc497159f7aa299ecce351032d765543c7a2c3ba32cd1469bab14cf9925b453",
+      "bytes": 18082,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/plan/submitted_plan.dart",
+      "sha256": "d78a572d2ab0e5f0ceebfc959fae9e9607631d3c97f20fe1821f374c8c9fafc5",
+      "bytes": 3406,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/registry.dart",
+      "sha256": "2b4cc1a4af2b7626f3755a363a313d112079eb74dc48b4c527662c2241c2b481",
+      "bytes": 3508,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/tool/todo_history.dart",
+      "sha256": "db22f617dccf0fb62fdbe51dc1c67bfa888e52dbcb88944a170af9e2847ab389",
+      "bytes": 4478,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/user_text/credentials.dart",
+      "sha256": "679ab4c5917452fc96689f73af644122492552e4b6c570813c54a58a20c79704",
+      "bytes": 9292,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/user_text/document.dart",
+      "sha256": "b7dd6345350c8515e885dfee3dc2983cd3adee37f5c620c594d335bb2edbf268",
+      "bytes": 8121,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_conversation/lib/src/user_text/reference_rules.dart",
+      "sha256": "b3ae62dddb3a29706c49eaad00ad8f84f8586e27614be4c533d42a894b85b359",
+      "bytes": 4206,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/dsh_dockkit.dart",
+      "sha256": "1c67467af997f64c8b365616fa4aa4c87b51c87a65a574defc0a0b76820eba9f",
+      "bytes": 607,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/constraints.dart",
+      "sha256": "39f113dc6a04f6aa8a6b2bd1905611b8cc7e95dc293ddeec82c8264b43991332",
+      "bytes": 4029,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/controller.dart",
+      "sha256": "3dec44f6ceba29a400539c24cb140a6016bd88d1f705651b80c957a3cdb2c24b",
+      "bytes": 9126,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/geometry.dart",
+      "sha256": "1f89298ca21f65cc0c3eaaa4e9091fcac3b8041771f31449395e35a1a0c8319e",
+      "bytes": 6925,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/initial.dart",
+      "sha256": "b921bea972d930260b09266cf4c1f3d1c6ecdb75dd00f8e1e687f23f7042ed3c",
+      "bytes": 1733,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/operations.dart",
+      "sha256": "b38692af8461ac9eccad96d0b8872e5f7e1809cfbb97a33673d8d465ef1ffa49",
+      "bytes": 18665,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/persistence.dart",
+      "sha256": "a633a801ce6d5e0d30bdc2d5e761216cc76c1797d7de56facdeb60dc39ea36c2",
+      "bytes": 7629,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/planner.dart",
+      "sha256": "03d0246d4a0e5e3b2b8f78f236650de11dde7731395747df10788c3d65c9d6e4",
+      "bytes": 10964,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/sequence.dart",
+      "sha256": "fc7aa222968412c3a1204b0fdab4a458478e8492c219e6396471c7fc59e64a8e",
+      "bytes": 6218,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/tree.dart",
+      "sha256": "3bbfb585cb2fb7b6cb5f057f62007c6e10f68c1402b1635f56b35176f0d08265",
+      "bytes": 6825,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/engine/types.dart",
+      "sha256": "fab80f6efde2c89ef6246a2d526748982649502ec6da1beda1e556f42867a5a0",
+      "bytes": 15096,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/widgets/dock_labels.dart",
+      "sha256": "e0b1616be3d9234e46f555f544633b7a1eb3d9c6de2ffe81365a5542ae39efdf",
+      "bytes": 1402,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_dockkit/lib/src/widgets/dock_layout.dart",
+      "sha256": "3788d37e82ccbbc0cfc287afe81531f6e50e393433b2a9bc2a92989b29fd3283",
+      "bytes": 41435,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/dsh_highlight.dart",
+      "sha256": "794977f293e8f2163f5cd39875913168c76be907d34f9cf8acd8f853d79765f5",
+      "bytes": 410,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/dsh_highlight_flutter.dart",
+      "sha256": "9e4624dee482d5f33fb6bd1d391489f096f9136cd0c01e73f20ee5fecba225dd",
+      "bytes": 1206,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/dsh_highlight_io.dart",
+      "sha256": "82209b762c80517b246ec75a902db12c722b2b2413ed8d30b1dd0633af8933cb",
+      "bytes": 844,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/api.dart",
+      "sha256": "6069c1609487e68139fa7b901c6c90cb74f5d1006a861354198fbed9ea55288c",
+      "bytes": 1849,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/compiled_pattern.dart",
+      "sha256": "23014bae37e6b2b18037046109ebe8dba26972db0af7fe81ba6b13107c3aa97d",
+      "bytes": 7170,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/engine.dart",
+      "sha256": "b7e86c5d6311ca15f45a7c7c97da23fa4609be9043863c9a224078a80d112922",
+      "bytes": 9862,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/onig_translator.dart",
+      "sha256": "d412e70ed93a7fb503d158d5d69f42be5c467e959d8ee15a54d64465c8c9dbee",
+      "bytes": 52024,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/raw_grammar.dart",
+      "sha256": "5411c468941ab450a1ecd2605e5bde40fc8152aaecf284139a67c38a60c37a02",
+      "bytes": 4634,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/rules.dart",
+      "sha256": "17b5cab1a21757bc276d4b0ee6d8957dbfa6ea44f8a6a3ee92ea0eb1e4779205",
+      "bytes": 20589,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/theme.dart",
+      "sha256": "7f8144b76f948fd1d4e1a818c65af6ff72b15ab69b5ee8cb6fff62c00e438058",
+      "bytes": 13216,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_highlight/lib/src/tokenizer.dart",
+      "sha256": "37d2b8d25af7e2f56828b80738575b6bb8559d9b0d3d5eadcc97e6daa83ba6ef",
+      "bytes": 26064,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_i18n/lib/dsh_i18n.dart",
+      "sha256": "11b1fae388a63ca8ae5538a74f513bc36df31091e4ed5f95aafa996cc914cbe6",
+      "bytes": 239,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_i18n/lib/src/app_catalog.dart",
+      "sha256": "fd5deaa0d5056d5c4603810be53a15c2c473bd69e8d8ad7b98aa2497ef2b1c26",
+      "bytes": 16985,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_i18n/lib/src/dsh_i18n.dart",
+      "sha256": "707d474a65dd6894b1687512d028efb06b3aa0b2c88ea0a7dd9d855e1f418e80",
+      "bytes": 3841,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_layout/lib/dsh_layout.dart",
+      "sha256": "48874eb2a3cafdc867b6b4033928b8cebe33b96956b83463a1eaf67afc87526c",
+      "bytes": 284,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_layout/lib/src/columns.dart",
+      "sha256": "4480e92985b6b876dad6f2cbb9b590acaf04794d4f7048d2a6feae21abe95ac3",
+      "bytes": 3425,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_layout/lib/src/layout_controller.dart",
+      "sha256": "6eab480711cc0f3267bf49ad5a384be2093f5cb2d8fd3a929de04382b162b146",
+      "bytes": 2495,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_layout/lib/src/layout_store.dart",
+      "sha256": "b3c421eba7da50775807da03f713a246f987a2b5dfe5f6938cee1bab8af82eac",
+      "bytes": 9418,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/dsh_models.dart",
+      "sha256": "cce11b785d068b76b72ef5931f01c0a3897b4288d031629bc7fd674f83441afd",
+      "bytes": 1714,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/generated.dart",
+      "sha256": "1b07d3498298e2f0e9ceff6b553cd2a5e7ad07724cb7c7c3e5eb7b513e05ee28",
+      "bytes": 242,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/agents/goals.dart",
+      "sha256": "9bdae6b9bbeb49811ae9a3af48a1f85c0f3cf108a5ad9eb57a6b4cf26f8124be",
+      "bytes": 6297,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/agents/jobs.dart",
+      "sha256": "6cbc5758bbe9230f85bfa364a28401a608cfa7d2a3eb97e46d09be83d49f8875",
+      "bytes": 9316,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/agents/presets.dart",
+      "sha256": "9520911226b17c9cb94bea97fa4882376a39c0dbf0932547b1e28ce1aa38a2e2",
+      "bytes": 8683,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/agents/schedules.dart",
+      "sha256": "6d8a4c26a0412dd95f2b7a7bb5a113764d4b2828e17949d216d931e9d892b3d8",
+      "bytes": 10503,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/agents/task_timing.dart",
+      "sha256": "974a9693885025feb991fb6af3ea77ac07fc592462f3932a98fb57c84bba82a2",
+      "bytes": 19162,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/assistant_stream.dart",
+      "sha256": "3dea9205833b6dfc0cb75f621450a30e5c83b1487d1240821f06cd62a5c3cc9b",
+      "bytes": 9443,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/attachments.dart",
+      "sha256": "346b364d540c047017b08f19b17092bcb12d773b336514b686e79262cfb67357",
+      "bytes": 19088,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/client_sessions.dart",
+      "sha256": "fadb8c9165a51b6bc99febf301f10eb578f5a16b42e714a23a198bbcdcba9745",
+      "bytes": 1481,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/deliverables.dart",
+      "sha256": "52418ba77ed72b4a9ffd467ea0973eb6233dcb360ab531220610a787207f8192",
+      "bytes": 9683,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/documents/office.dart",
+      "sha256": "d85d90ff29e080a8816942a69a9b88d8684ab64d63428d1e5076099b187c9078",
+      "bytes": 7765,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/event_window.dart",
+      "sha256": "c363eed6edd0fe3d190d204bf91154bd5c57b96752248699ffe51271dac5e64b",
+      "bytes": 4045,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/history_read.dart",
+      "sha256": "1ba9abaac519284f881b4e91da5e03776841a323c693bed3bff55bff55222efe",
+      "bytes": 2174,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/inbox.dart",
+      "sha256": "198fa78a834ea63bc5ff388773641abe68995c2fd68ddb7eb030fde13c64f928",
+      "bytes": 1506,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/journal.dart",
+      "sha256": "b8a8f02d838c4749435f23095b6446c644ce3f87d51512c9b816d42b6103cda4",
+      "bytes": 12927,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/observable.dart",
+      "sha256": "c6337b178c5ea44f2606aee00232be54f7c7789aa9ebe6f2c9cc980b94e3cdbe",
+      "bytes": 943,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/plugins/installer.dart",
+      "sha256": "a5e9c20c488174df936dac3216792ebd6551d40b5f8803393e283a4d141ba4dd",
+      "bytes": 23226,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/plugins/manager.dart",
+      "sha256": "299ccaa6f6aa202dd3714c5f7bee89a781128540de9d3cfb8c3affc7a3f9efdd",
+      "bytes": 12916,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/plugins/market.dart",
+      "sha256": "84654ae681f42b402624561f6e5e796a31e311e730da086e081c657ab915ba97",
+      "bytes": 13083,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/projection_store.dart",
+      "sha256": "15928c0f29253f655cae7b58cf418958274b1f512dc886fda7b60df1632189f5",
+      "bytes": 2403,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/session.dart",
+      "sha256": "4c320dd10a49e7a1de91108c43707e7a3c1614d982fab42dd738856df5af24d7",
+      "bytes": 15320,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/session_lineage.dart",
+      "sha256": "3ece8370e4bb986859a0cc4df46fa50a82a5b02fc3bac650e35669128fd78d33",
+      "bytes": 1057,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/session_manager.dart",
+      "sha256": "626608bfca724d90409f6a3757c0446752e3c04f1ef0b8b65941cdf58cb87005",
+      "bytes": 14401,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/session_summary.dart",
+      "sha256": "d335abdf568f75f5b7dab5a97ec61cc8b36dfa549045814245bf9fd0ebd3a881",
+      "bytes": 5578,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/config_form.dart",
+      "sha256": "0053b4ec32ab7e53dde6280355ea30e44cf65557a36be6064fec97b9030aef5e",
+      "bytes": 12808,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/developer_tools.dart",
+      "sha256": "4995cbaec87cdf8e81f29c4cd6799f2a17792c6540b1da7d14f8292eac816730",
+      "bytes": 639,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/host_remotes.dart",
+      "sha256": "264ec9f70c0322477fb3200f9a0d3459240d0017604e326c809ca848beb6c591",
+      "bytes": 6079,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/model_providers.dart",
+      "sha256": "ea532afcd22a5ca3cc41715b5d8f829e055a413935796c4740228313eaee5928",
+      "bytes": 21680,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/schema.dart",
+      "sha256": "c67224288172b3f0b08121cd850dd2a686e0240b778bcc02d22d13927fd23442",
+      "bytes": 31360,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/settings/settings_mirror.dart",
+      "sha256": "0995e4077ee3eba08b82a001167a1cdeaccb7a84eb6ee55b6f937431f8cf3ea8",
+      "bytes": 6021,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_hold.dart",
+      "sha256": "82056f90d85a1c25a314cbf5cc0f74577bc00362bb0c4bc1c39d250d4d314400",
+      "bytes": 2549,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_host.dart",
+      "sha256": "d5cf62fc3999e347a3b98831eaf1c8825f2706cf171d83f871248160826bed7d",
+      "bytes": 2824,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_inventory.dart",
+      "sha256": "1ece7cac38080961b4b43037541434d355fd463dc3f08528bec39324d3950e95",
+      "bytes": 2067,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_prefs.dart",
+      "sha256": "1234240be8351e11e561bb69b63055e128ecca43aa1ee23a59d88f67e8e6173f",
+      "bytes": 2032,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_service.dart",
+      "sha256": "cc26f4e1b2205405b6d0f4bc2007edf885436dfe1989d15a140f847a732de10c",
+      "bytes": 6928,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/terminal/terminal_view.dart",
+      "sha256": "d86b6f3a66632aeb6931cdd6c77ff8bb31a9b3508ef3199f6e6d6c0b5694dacd",
+      "bytes": 23531,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/testing/fake_host.dart",
+      "sha256": "15b0e07051b938b6af0f73fa019d25a22ea7ef1534a143d943c6cecb62065fd2",
+      "bytes": 6232,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/testing/fake_terminal.dart",
+      "sha256": "939407284e6cb99651c8549bc8549eb9f54edd2ed31af1b8d2c8a52a617e2320",
+      "bytes": 7284,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/testing/fake_transport.dart",
+      "sha256": "c10a862dce3b9682b38830312d6d03e21cbca6a771a81ad92e65bd446cfd4908",
+      "bytes": 5281,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/testing/replay.dart",
+      "sha256": "b4f0873a96772793b660f6df72b2a63b12240cdd58898607f5d8d5c52dd4cce6",
+      "bytes": 4195,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/transport.dart",
+      "sha256": "2e16e9ae114e01de2c2fee16c299ced0b5d8cadb3cd45a367dbba6119b8eec84",
+      "bytes": 3701,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/workspace_list.dart",
+      "sha256": "4c741b35c59f0ae59433119dbc39e53c98906d61e0a651b80497af9d609b020c",
+      "bytes": 9038,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/workspace_navigation.dart",
+      "sha256": "0949ef3b0bca7e91e8b9d5861a78801fa25035d3bee8cf341eb730e2a380904c",
+      "bytes": 6149,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/src/workspace_path.dart",
+      "sha256": "9fede7bd5a77508db8faca50adc0469cd94f8a87383a5ce34e7a5ae69b71d0e3",
+      "bytes": 4991,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_models/lib/testing.dart",
+      "sha256": "6dd850acdbbbb0cc2be01d9723bf2bc398df4199522dfb82b247256eb6a2a275",
+      "bytes": 437,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/dsh_shortcuts.dart",
+      "sha256": "aef901962c32c2f0e90f3833252f88de8b8728ec330dc590958e2fab8d2b247f",
+      "bytes": 376,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/src/binding.dart",
+      "sha256": "07577b4e50895e7be1e840a1116acd444b58b47db36f0d22f19129251b14e4d3",
+      "bytes": 9346,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/src/configuration.dart",
+      "sha256": "22d6a873f33abfe7d76e117dc2a60eac8b17cda9553b18dd370bca87f2edf20c",
+      "bytes": 16458,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/src/persistence.dart",
+      "sha256": "1d21dc735a04c762caa681e7ad2ba2ea2c1d98deca4889f1407027a9fdb4afa5",
+      "bytes": 9167,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/src/registry.dart",
+      "sha256": "cf626247d7e44322256cec014359e4fdc4c02f1201d1e46b606d2f18ef7b29c0",
+      "bytes": 16159,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_shortcuts/lib/src/service.dart",
+      "sha256": "81bd85c2d9256fa2ba8aa1df2b3949aa66400db784057af20ae0e14a8229e34c",
+      "bytes": 5609,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/dsh_slots.dart",
+      "sha256": "81eeb517f16f53bd18b32adfcd51a8b1649c4cce9087b9609750404249997b0e",
+      "bytes": 347,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/declarations.dart",
+      "sha256": "c633f5da4ca914ced01718acb399b0315dc96828e1858d2b1a49766192869087",
+      "bytes": 11815,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/owners.dart",
+      "sha256": "f6c2b3770706cdbf5779971d13c27abbb87c0b6656926d47cbd835e787e02e30",
+      "bytes": 21016,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/registry.dart",
+      "sha256": "84661f0635bf32d4868788b7a58ea5f865facf9ab769ba4f4bf1b0143412db4c",
+      "bytes": 8432,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/shell_slots.dart",
+      "sha256": "e0c0a9d50c97e489b06d05a87b3f0367e073ddb2c232d3a247092a9e94ba9e77",
+      "bytes": 7681,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/sidebar_tabs.dart",
+      "sha256": "63d579cc339ec8800a39102709a033659318bc4341796c031eb77c0982ba999d",
+      "bytes": 2971,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/slot.dart",
+      "sha256": "eae1a6c9415042fc6d77db016b3ffbb541baa642fae7ce2d9830ed1691350b62",
+      "bytes": 1765,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/src/workspace_actions.dart",
+      "sha256": "0022a2e643026b460b9fa05d147f644e54ca515b8987f0b02f6d63349f17041f",
+      "bytes": 1061,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_slots/lib/testing.dart",
+      "sha256": "3806e67e83b2e620026a5e0212b3bbcb981eb1d524317a4e18de3f1b0c72e244",
+      "bytes": 10249,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/dsh_theme.dart",
+      "sha256": "9a6f58f82af66ca614438872603f4a58ee63574fc13245ec812a31ffc28bea7e",
+      "bytes": 919,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/color_value.dart",
+      "sha256": "d1750d4dcfbc90eddd3f9ecc9e689c2a01fc08d657a0d5db4e33e0fea08b6dc8",
+      "bytes": 4125,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/dsh_theme_data.dart",
+      "sha256": "cd6d56c6e99904bb42ef1dbe3689ea9ef9ab57400c6671ce93347a455e19012a",
+      "bytes": 10957,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/gradient_value.dart",
+      "sha256": "e580eb585e904084c0285900a914fe194acd4bf6005293a9de4ad3d02779d052",
+      "bytes": 4375,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/official_pack.dart",
+      "sha256": "a809275e75be9f03eef05e1666ab0fbecb44864c7df567f7cab3cd028016d028",
+      "bytes": 518,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/resolve_theme.dart",
+      "sha256": "1a7c2a9735a8800624ed40be6f9f6e54eae82be2c3cf78221ed59abf87b58ed6",
+      "bytes": 2133,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/shadow_value.dart",
+      "sha256": "9573976c152541278b2077f38f4c744548fe580ba03a96b0af13e5353303da62",
+      "bytes": 4812,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/theme_exception.dart",
+      "sha256": "03556c2cc009b645ee7b2f50ca89dfa568699a570b242f83dfce2297beffbde9",
+      "bytes": 609,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/theme_pack.dart",
+      "sha256": "240bf84fd461f725d92855b8fc137cb45647e16ce3215401b29d9ee85c9f8c29",
+      "bytes": 14184,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/theme_settings.dart",
+      "sha256": "d3a43b4361c1bbec20b0d6a617af48eae70ae64f09a6dae4fbf1ceae7b0fc514",
+      "bytes": 14536,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/src/typography_value.dart",
+      "sha256": "54f3e6293d7183610fe04f37f3fbc2ec97a9321d7d2fac76be6524715748aa38",
+      "bytes": 5323,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_theme/lib/testing.dart",
+      "sha256": "d293c69701a15e3efe4d85386c874795efbd42e21d87a9f6523363f9ceb253d3",
+      "bytes": 720,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/dsh_ui.dart",
+      "sha256": "f7ef3518f89d6f8d494c60572820fb2ba0794d715de4a1bf6ff0158c10e0c36e",
+      "bytes": 3070,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_anchored_panel.dart",
+      "sha256": "313fd96cd9d3bd83eb3518d688dd4d1d2f653aaac7516ed016ccdba86c082c00",
+      "bytes": 10677,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_ansi.dart",
+      "sha256": "94b66e4fd1e752f9501ed3281d5c4f65c4df839ecc1d551ec4ffcdb2f7eed053",
+      "bytes": 9782,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_attachment.dart",
+      "sha256": "3f4c7cd22596ec32ef3ad89975c6bbdf4141a8b4bcd063382da7126a986800f3",
+      "bytes": 33091,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_button.dart",
+      "sha256": "fa8002d3b64a46e3adc030fe469dba0a8918d318a9ee57d57f9e18c921086157",
+      "bytes": 19075,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_card.dart",
+      "sha256": "d81635dcb8a1169d3200448f8324b2b9d00a6d1b1c1e2e78235de4cef742ef1f",
+      "bytes": 1194,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_chat_axis.dart",
+      "sha256": "5fcc7df5b26724645b59e8ae0aecb6f9e590fa191425702b12e59f4b02380b67",
+      "bytes": 4361,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_code_block.dart",
+      "sha256": "612d740b97a02c96426f1436bde2734051f951bda22df35e4c5d0e465aef939a",
+      "bytes": 7120,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_code_highlight.dart",
+      "sha256": "bed2cde2acbf18e14b3ecbba892f851b1fe056a40ed78fb5b40da4e007984744",
+      "bytes": 7689,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_code_language.dart",
+      "sha256": "5e62f523e38f95e8b4fdc6f3369a2976e331a6ac0eeac92737bf0ed1d4937a02",
+      "bytes": 1294,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_code_toolbar.dart",
+      "sha256": "cc0eb2520019f86d98bacea20f4953034acd6d68cea990c23f911ae1e682ad60",
+      "bytes": 3768,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_connection_indicator.dart",
+      "sha256": "a49ed15df00c3096ec4b5ba51cf433cb8c6a2121d60a0939b58100a346ebd960",
+      "bytes": 11689,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_control_focus_modality.dart",
+      "sha256": "23647849376738fd69e109df358037dea9498d0aa83323b1864db9f8f27db9f5",
+      "bytes": 2214,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_copy_feedback.dart",
+      "sha256": "7683ea7c384ca73392c7267b0e6f49482dc8578be5044bc3e429064f05ac7a0b",
+      "bytes": 700,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_corners.dart",
+      "sha256": "15ac3822c21299b1aa5fc83e0ca6209c315f2a46bb39ae6493f87c89ce42ae8a",
+      "bytes": 12651,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_dialog_reader.dart",
+      "sha256": "9ea59bb320e35353197db97255d408abada064e6123c5fc549e7f50f8fd296f1",
+      "bytes": 12080,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_diff.dart",
+      "sha256": "ebbb9d5d2f59b63cbbc039a0115f1ab94d8df559949f3a033b709cde73a25225",
+      "bytes": 9468,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_diff_block.dart",
+      "sha256": "b82d2c3f4bc19381a6599d656053298083f4435fc4b49833c61bad70aa8d3661",
+      "bytes": 7957,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_disclosure.dart",
+      "sha256": "0f4c71b0c4117132f51b5b2eeeb97328cdf77813f87b0431c50481130a07de1a",
+      "bytes": 2068,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_disclosure_reset.dart",
+      "sha256": "65226fceabdafce2908fbdff471073d8d1126935e4a7a83965db99e78bc20ca1",
+      "bytes": 940,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_disclosure_row.dart",
+      "sha256": "5c81c446a8703eb69b7539f5ea87648204e7ec8af316a4f82401637498959aba",
+      "bytes": 4700,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_drop_overlay.dart",
+      "sha256": "84d5d772f0c98649aee73e133c98c15bf40463442baff3a03299161008b0ad59",
+      "bytes": 1929,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_file_link.dart",
+      "sha256": "3dfe978274222697a42ae1361a34d9e7f45af652ba3c16f1b9bbc4b67770f10e",
+      "bytes": 1491,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_file_types.dart",
+      "sha256": "d17a37f215f4c1806b58899a284f2222234ecd75c3194bed9b6152b22df6b39b",
+      "bytes": 6560,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_focus_presentation.dart",
+      "sha256": "caff713c607ecc66180a34a701ceba29f4c941dc49749683bfa947446b7ef47c",
+      "bytes": 3866,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_guide.dart",
+      "sha256": "7bfa96b78eee88dc0d325307ab1e7432a198d8bd3e754a55d6c7236efa69be45",
+      "bytes": 12091,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_head_tail_cap.dart",
+      "sha256": "0a771e09a943502c475b88bbb2f35eeaa9fec752628a4845883de9312e2bf0b8",
+      "bytes": 737,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_headed_dialog.dart",
+      "sha256": "2bb113eda00a3898aed8432f610f133a1bd0ce54a74acfb40d29ed95416b1e96",
+      "bytes": 19543,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_icon.dart",
+      "sha256": "a83602205d87e1fce52e8e69b60d9c546612d3512f7685601e10d72a0806dcde",
+      "bytes": 2944,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_icon_button.dart",
+      "sha256": "ff355675b496ee47d36c91c99df7657c8dc9dde5e59bc68884617118341bf9f8",
+      "bytes": 1929,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_icon_data.dart",
+      "sha256": "8c7d36b6ec0c8ae45d3b852e8463659ea47dfab638daa7d2a8b3dd1e40014b31",
+      "bytes": 1340,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_image_size.dart",
+      "sha256": "190103937728e8517c2feef1c7035e22d75f2cb48d1bfe820f269f7fa1796054",
+      "bytes": 5428,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_json_block.dart",
+      "sha256": "308c6bc6057b8cd8a1062d6e5f6062e0166470a08c3e57b77c5ffb79c8b03450",
+      "bytes": 4014,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_lightbox.dart",
+      "sha256": "fe21d2f31788e60f96e1933e106247a0add225ef2cd6ec33714c51f6235a23e9",
+      "bytes": 10791,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_markdown.dart",
+      "sha256": "78124954dd85de9fbae22b1b5f9f0c63e7e812fedfc3b16b86b4e43d1698d18b",
+      "bytes": 9086,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_markdown_file_icon.dart",
+      "sha256": "9a657baafba11e7bbfb1157cf959b379f4962be56340567c90044f7cfef7d997",
+      "bytes": 3453,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_markdown_plain_text.dart",
+      "sha256": "008b642344aeab0e37c388aee2e1cc5b23cc5f6e9468c39a1bd8022d87b4cb24",
+      "bytes": 2701,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu.dart",
+      "sha256": "038caacd14d4a4395466b4b47b4f3255ad68eca762f90e503517ee748c4f51d7",
+      "bytes": 12380,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu_follower.dart",
+      "sha256": "ee1d6dc250cc436bbcf16f018f8ea755c104ddd2d2a6cf3751bc30de10de2530",
+      "bytes": 6284,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu_footer.dart",
+      "sha256": "c390e50b312ded9b9d07b26773546c321684b730caa32528dc361037c386053f",
+      "bytes": 1181,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu_group.dart",
+      "sha256": "d9c81d78160cee110199e5b50017885e1b84571782011c6287640f9d8ad1fa50",
+      "bytes": 4830,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu_item.dart",
+      "sha256": "44f7fc542248a2679117b33905e8a5c3de0d19d7a360fdaea1349a7b2da6f8ee",
+      "bytes": 16570,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_menu_surface.dart",
+      "sha256": "f0d2a93bc0dc43a3319c4d11bb9afa5061aa3f3c9e9f549b53fed8ab423d4ae1",
+      "bytes": 3373,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_option_sheet.dart",
+      "sha256": "b02802d4ffb40b1b6f54cc126860d898bcf37135ca032909a6841786aa1c7589",
+      "bytes": 7875,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_phone_chrome.dart",
+      "sha256": "69765626be8151d9982f5e0fa88331f406b7f49f96997f88a9f4f777fbccbc4a",
+      "bytes": 3563,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_pill.dart",
+      "sha256": "28f9a2b884a2c3059a44dfb46c191f0e8f90dbdab39de078f5b12db117c68d52",
+      "bytes": 6538,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_pixel_snap.dart",
+      "sha256": "6e0d8a9a9b80332013927a93d0c3bd4764e218ff3848c1a4506dd72fee08c341",
+      "bytes": 4647,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_platform_material.dart",
+      "sha256": "85cd3c2acda983495143986949bccc7de6af2e8386cfdd76161e2105639a944f",
+      "bytes": 825,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_popover_surface.dart",
+      "sha256": "cfce2c82ed1d1e9b3d5baa1412c6846ce073844a1a0f42414a50371e2b2f3649",
+      "bytes": 2930,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_presentation.dart",
+      "sha256": "99d8337e22cb5b6610bb0e47a1699b05d6b0c4fa6a5d7488256961086a53b1b0",
+      "bytes": 9405,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_rank_by_name.dart",
+      "sha256": "3b0df386b8fecd2f4756bf700ea6413b547a332f2b41df7d106ede7a4fbec8fa",
+      "bytes": 3711,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_read_block.dart",
+      "sha256": "f92d2a5af91c0b96543e0244e246cc01aaa8bedae9e21dc2452d56af3fdd31f0",
+      "bytes": 6282,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_reader_markdown.dart",
+      "sha256": "7c45cc37c09da966e2a4fe5d08a596b7b9afede2e8946ca73fad01f9db6fbbe4",
+      "bytes": 11298,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_reference_chip.dart",
+      "sha256": "bb525c6a13cee5331e0fe77e14ddf80c17cf40ffa9b05116f4b283bb8ece301a",
+      "bytes": 2904,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_rightbar_host.dart",
+      "sha256": "39f92717eea50749045219cf07e201bfb6e6227b87e2e528b78616d8cd67ab42",
+      "bytes": 1776,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_risk_dialog.dart",
+      "sha256": "dbee88c074deb7855d6181e44300ac7df15238aea56fefabdaae94a7ad53361b",
+      "bytes": 8020,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_search_block.dart",
+      "sha256": "20aef82f8a689f84f2351d49dd5b9d33f5b78b4777a3b76fe54df1dd66f676c1",
+      "bytes": 11030,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_segmented_tabs.dart",
+      "sha256": "100104ccefd06cdab03390a3de8c6d142acf3a6c0ca8ba0dbb0aacc55b01e284",
+      "bytes": 16997,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_settings.dart",
+      "sha256": "031bdcff6ba1d89f46ea34f23a6ec0a18a28e715f983b36409cd958211fad7c2",
+      "bytes": 31694,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_settings_form.dart",
+      "sha256": "9422261f159ceda13ad90137399721f43192ace65d0db3015a8de1251c8b3d14",
+      "bytes": 23840,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_settings_form_model.dart",
+      "sha256": "66b3aa349c676d225014aa758032b685475edc8c26957febe6fe6bf7ad770df3",
+      "bytes": 19687,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_shadow_box.dart",
+      "sha256": "6c899851bd923d539b8c10c5ff1bd206310680dad9750c70e517d50c699928f1",
+      "bytes": 3160,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_shell_chrome.dart",
+      "sha256": "6830032934b94653b402bc809b3f90dc7b060a72fa21997fba36aede3e52a5bc",
+      "bytes": 5961,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_shimmer.dart",
+      "sha256": "6d12e2b762467b1ea66a670d0003bf47746a199ac0a7331086ffca23a18e1f2a",
+      "bytes": 3174,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_single_line_clamp.dart",
+      "sha256": "48b8c32c999c5ec85795fb8af1e9357e344635756738322b684afdba413612b9",
+      "bytes": 2476,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_snapped_box.dart",
+      "sha256": "75b5ba50fc67b10b50142e2bc19754f69e7379e29a27769245fe2b137e07030c",
+      "bytes": 5254,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_stat_panel.dart",
+      "sha256": "6c591a24b4b8ec55c9a020298e962fd53ab04adfe6cb64b98a5badf96da25cef",
+      "bytes": 6835,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_state_dot.dart",
+      "sha256": "83c4a29385173c6a8149ee81921a71befd7c0e46b1c89159b36679134ea5bcfd",
+      "bytes": 4627,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_status_dot.dart",
+      "sha256": "4f5d657fe29142dcdad7542cc26b36cb59c21afa5489b1926549c03725c4d5c6",
+      "bytes": 1043,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_syntax_highlighter.dart",
+      "sha256": "6889758803769aceb779dd22ac5f2229f1b806cf28af4d17e9cbef7f80402115",
+      "bytes": 2959,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_tag.dart",
+      "sha256": "771daffebb1bf4d1e2f66b543a46951d1456261345448ced92ddb3cddbf448cf",
+      "bytes": 3299,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_terminal_block.dart",
+      "sha256": "2679705c8e874a71f4c3d08cb4744574e55cbc551ea84c2282fc4e267c0a4f88",
+      "bytes": 11885,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_text_baseline.dart",
+      "sha256": "56fa27af7894569992b5f7272717d45cc070afea18a488e49511b45637f0b348",
+      "bytes": 10566,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_text_field.dart",
+      "sha256": "059830975f5c07b1a42a52578efb1d170c3f9bb2d3aa96369c602ec1b3d3c55f",
+      "bytes": 15944,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_text_scale.dart",
+      "sha256": "45f838ceac1fd10d5d4576e7972b1b9885a075b612c7c3ad24d1fc8cb43202d9",
+      "bytes": 819,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_toast.dart",
+      "sha256": "e6607f63f0646a21a4178cccfe161322532be2e0efb54316d7dc685fac9f8b04",
+      "bytes": 4662,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_tooltip.dart",
+      "sha256": "f3c713dc7a8abba02d939d1e89cd4570932b0a58b6c72ac63f57d872409833cb",
+      "bytes": 21121,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_web_block.dart",
+      "sha256": "f9839fe74c85e1be890f42d73b206d1ff109cf7b2a761c3f74e6264e52f2d5e6",
+      "bytes": 8893,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/dsh_whale_mark.dart",
+      "sha256": "374413da6bbaaf6a2e6c4900140edef58b6c74a352d9c8b646d92bf36357e783",
+      "bytes": 1074,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/packages/dsh_ui/lib/src/theme_access.dart",
+      "sha256": "61a86453568b71a19791c4eda9de5a3ae1a2aed5a529d8bce26df2bdd6cc113a",
+      "bytes": 1486,
+      "role": "source scanned for legacy debt"
+    },
+    {
+      "path": "repo/tool/design-system/check.py",
+      "sha256": "f06f6a0f7f188aebe11e5b5c4c3cee5bb848254b4751c538ce14d720967362cf",
+      "bytes": 11085,
+      "role": "verification code"
+    },
+    {
+      "path": "repo/tool/design-system/families.json",
+      "sha256": "8a723a93c2300ca862e01ed6e8fb73d8d8bc62d46fb06c19ebfdc94d2b262f08",
+      "bytes": 21847,
+      "role": "legacy debt policy"
+    },
+    {
+      "path": "repo/tool/design-system/generate.py",
+      "sha256": "60117832dd39b27d8baa5deb729e62ab5d3283681d1dead2bd7559d2bbcbf452",
+      "bytes": 42010,
+      "role": "recipe generator"
+    },
+    {
+      "path": "repo/tool/design-system/published.py",
+      "sha256": "6809b788b040551db7cd5e483049513b34e5d7693e476d48590d6adb9c88f44d",
+      "bytes": 23955,
+      "role": "published decoder"
+    },
+    {
+      "path": "repo/tool/design-system/source-inventory.generated.json",
+      "sha256": "72df452edbc09c4b89090d8f1daaa35543304bd20c35add7013672e64061fe32",
+      "bytes": 318544,
+      "role": "source input ledger"
+    },
+    {
+      "path": "repo/tool/design-system/source_inventory.py",
+      "sha256": "c9626d26542d68ab60d7c5fbc9abf91770b556d8276c8b448e1895861270fdf1",
+      "bytes": 28434,
+      "role": "verification code"
+    },
+    {
+      "path": "repo/tool/design-system/sources.lock.json",
+      "sha256": "0ec890e9e2c6033fea87fbc287827c4332ad0ba434ab94c0369aea22d03b5983",
+      "bytes": 28103,
+      "role": "published source lock"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/PresetGuideDialog.module.css",
+      "sha256": "66f8d99bef244fe2de94506c1c6142207f93713708f9aeb5c9fe9052f8f47817",
+      "bytes": 2301,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/guide-classes.json",
+      "sha256": "96ff147637c8e0724b7233def3d2f343a5f5cb3d026ce2d2f1e148c6501c46b1",
+      "bytes": 487,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/package.json",
+      "sha256": "d2a6fbce35d6fa9dc4b5f330889791d466b37c97df277c76074020d4988cfdb4",
+      "bytes": 2609,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/reader-behavior.json",
+      "sha256": "6bcfa990163e2fdadb0e669a75799072175626f69c6b2837dd9f32be79b3fcae",
+      "bytes": 8357,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/roster-classes.json",
+      "sha256": "a37292f6e720da3f4e9564f546a14ddbca947d4edaf05c2e28040bb78862d608",
+      "bytes": 877,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-agent-preset/styles.css",
+      "sha256": "d841924d9dcbab7ef9cc641be98d0d1832ae3a77449bfe5af40c6d412a87d3a0",
+      "bytes": 5717,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/StatsPills-classes.json",
+      "sha256": "e67825fd17cc2f0bd750a55b5625d91e4bcf265e8aa57b22a472fba299df3a92",
+      "bytes": 107,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/StatsPills.module.css",
+      "sha256": "75d2c43103b0ee4466bbb1674df08b4ef0959719ad820deb246ecf171ce8756d",
+      "bytes": 848,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/package.json",
+      "sha256": "d012125c7c2e8260de2166222f2d78509da95eec93c89db00af3260addae9d48",
+      "bytes": 3842,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/stat-dialog-behavior.json",
+      "sha256": "87b0dc19f2d31df1edc2231f052c49242eaab5c710b69a97fb109f3b9f881857",
+      "bytes": 2151,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/stat-dialog-classes.json",
+      "sha256": "5c8c0cb28292112965f887776e4241e19455c3d8d15c72f112de68a610b72674",
+      "bytes": 259,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-chat/stat-dialog.module.css",
+      "sha256": "9e88b9f02983d4f4fc7dd39eaee041df61abff5cd5416a7a4d36f75b360d177c",
+      "bytes": 1324,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-dockkit/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-dockkit/dockkit.module.css",
+      "sha256": "aa18d0e2a41bfd99babd9011f1107b26d387c30665fdbcc3d6276ec268750fdf",
+      "bytes": 23906,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-dockkit/package.json",
+      "sha256": "de5e839bae6121b7793406209fe422f1af732a4206d2b7fe1a9ea6d1ed509c50",
+      "bytes": 1144,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-model-selection/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-model-selection/ModelSelect.module.css",
+      "sha256": "1fd9ef13401cb2cdf8a154ee8cf5dcbf16c9e2f90dac348e2beb2f90c309cb6e",
+      "bytes": 4922,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-model-selection/classes.json",
+      "sha256": "50e37a1ea4c0cd87ade7fe6b17d26e3afa7e4b1c13233af6d7a4e17cbd45ec34",
+      "bytes": 1001,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-model-selection/model-behavior.json",
+      "sha256": "b8657b618691f847d71af5475d37444f6be99359b5c1304b0e050b1f128edb42",
+      "bytes": 31842,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-model-selection/package.json",
+      "sha256": "658fcd344cf6ca8b08c8fb149ef7578dcd02201d95fc55f817ddc2fe742a6923",
+      "bytes": 2382,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-manager/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-manager/PluginManagerPage.module.css",
+      "sha256": "45966a0e6822bbbb4beb617862815ddd4478b62fa4563ae6cfc45925caff982d",
+      "bytes": 23136,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-manager/classes.json",
+      "sha256": "fdbb0d7cc8dea100112a9c70e152d6992f81a0cda38fa8f1c56ed6d7356432d2",
+      "bytes": 5698,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-manager/package.json",
+      "sha256": "b18af71d36fa3614fa2e358a08d2afd635c82928d00cd8ae613184ec18098f51",
+      "bytes": 2890,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-market/DiscoverSection.module.css",
+      "sha256": "83d43d3fc71453b1a8b96d15d2670c37b11cf3eae54769e6438c7b39c602c718",
+      "bytes": 5879,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-market/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-market/classes.json",
+      "sha256": "58e41f237101bb85eda13d207aca0935e196d9e951073824d96b98731dd58aa8",
+      "bytes": 1722,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-plugin-market/package.json",
+      "sha256": "74e97be85662285e22e04172d7ab8740c8fb16549a1802fc2a129598150b9138",
+      "bytes": 2131,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Button.module.css",
+      "sha256": "d5e324be7782f28b320ebac3e5b48e3a3f95a6c8d90656c086a3a933e0b2c7a5",
+      "bytes": 1577,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Checkbox.module.css",
+      "sha256": "ff7cab42e1278f55a5f339fbecd89185c15c6dfa6c49c704e38c38e4d7c1a162",
+      "bytes": 566,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Input.module.css",
+      "sha256": "e24eb924cfefcc009e486b25cd8de6afaf4bfff5d9c0c3da17b5afb6441c8632",
+      "bytes": 719,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Menu.module.css",
+      "sha256": "77265cc046078c060ca2f5b700b31c77f024a32e1834ebd3a0fc8b4562c7134a",
+      "bytes": 6491,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/MenuGroup.module.css",
+      "sha256": "d0b927d0df0026de5211e8ba8bec81e9f1960eeb914dea57bb0dc440bd71fd59",
+      "bytes": 584,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/MenuSurface.module.css",
+      "sha256": "6230cfabdb5294b5cf174bc79842a9596f6aee6cd76a8cd5e183c67279bca9ae",
+      "bytes": 1188,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Modal.module.css",
+      "sha256": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
+      "bytes": 2883,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Pill.module.css",
+      "sha256": "8059dd46e4a5340c00e6758278b6afb4f480c4dd2d11c7b555d914e52bd06f82",
+      "bytes": 592,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/RiskConfirmation.module.css",
+      "sha256": "e032809655b1e3a269634083b9ede58baeab7c2e01fc5b86f72c18a21e24f538",
+      "bytes": 1229,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/SegmentedTabs.module.css",
+      "sha256": "022efca5f83f640c83afcf472ef64b2776b2b20bfa351adda347171ba5cc4c18",
+      "bytes": 1106,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/ShortcutKeys.module.css",
+      "sha256": "ffa9624099dafb8dfe3e76c57fe26a523cb7943fa5bedd31d3c67e16e3351139",
+      "bytes": 800,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Switch.module.css",
+      "sha256": "74229d867e805e0bb52e921bce35049e94b34a3ebb8997aaf2de9e6a1fcd456b",
+      "bytes": 1147,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Tag.module.css",
+      "sha256": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
+      "bytes": 1858,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/Tooltip.module.css",
+      "sha256": "d1f3aa2d804d18f234a12b7219498fd1823ce8cc207a4da3778fa414bca97678",
+      "bytes": 1688,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/menu-portal.json",
+      "sha256": "2fe7050c56e0bb6c19033d6b1256fd8ed40da358ca45abb8fcb26d50bc41c76b",
+      "bytes": 844,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/modal-layer.json",
+      "sha256": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
+      "bytes": 9473,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/package.json",
+      "sha256": "94f9353a4ec8939102d096809eee78ea688b22f3013bf4b1a12b101ba2f94b75",
+      "bytes": 1814,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-primitives/tooltip-placement.json",
+      "sha256": "bb6252935071608ed64ea022c62589421a2d4b9e8a628a34a12f0a249a8becbf",
+      "bytes": 1337,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-account/AccountMenu-classes.json",
+      "sha256": "7175fd6a90098c060bac6e84dd1570ede125526debad04873d604684634f5a38",
+      "bytes": 187,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-account/AccountMenu.module.css",
+      "sha256": "2a69ea98ef652191f57121f44083d23acc2bc95cc162dbeb6e8267de66250b78",
+      "bytes": 1355,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-account/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-account/package.json",
+      "sha256": "b71ed47b7b22a67e065c0336bff45355b727b6e6a3aeca33850a4d9ff4d93949",
+      "bytes": 2560,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-general/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-general/SettingsRoot-classes.json",
+      "sha256": "860d5090691ba68ab7541d23bbd598562284beaa0bc4cde005be122c53a943bf",
+      "bytes": 650,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-general/SettingsRoot.module.css",
+      "sha256": "0adf94aa416696864b392ad40b3a3ebca1df1869c73e340595de6e4a6d400e38",
+      "bytes": 3201,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-settings-general/package.json",
+      "sha256": "f84fcace2bcdf96b44d3be6aa3f87d0bbafffabfe7ab149c6aff79c836825f0e",
+      "bytes": 2742,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar-terminal/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar-terminal/package.json",
+      "sha256": "a4093117e6687d4fcc7ebf91be445393dc04be3c4c5f6b8aab35a7082ae977f5",
+      "bytes": 2517,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar-terminal/terminal-font.json",
+      "sha256": "bd309601d61d0efd54fe3dfac862b1539d5e16881cd4f956a0c0cda97a884640",
+      "bytes": 86,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/HeaderLeadingControls-classes.json",
+      "sha256": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d",
+      "bytes": 73,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/HeaderLeadingControls.module.css",
+      "sha256": "0878fae90f7873c26fd062e317ef12a6d5ca5369724bf4e5badb5502bd7c35cf",
+      "bytes": 371,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/SidebarRoot-classes.json",
+      "sha256": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+      "bytes": 1386,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/SidebarRoot.module.css",
+      "sha256": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+      "bytes": 9368,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-sidebar/package.json",
+      "sha256": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf",
+      "bytes": 2254,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/base.css",
+      "sha256": "77d5487e7f9cf7597d8b15f1b598598658d970f0cdb4a513c9a93c2f450aa77e",
+      "bytes": 1249,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/corner-shape.css",
+      "sha256": "b3ef70d30ee48289413e753be96b56a1e3273115d8123cc22105504dbd38ebe7",
+      "bytes": 141,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/design-platform.css",
+      "sha256": "f04a03df7d266e4859959ceddcff12c5a58ff9c9972e80c8b10d2184376a833e",
+      "bytes": 19081,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/focus.css",
+      "sha256": "77bcbea3e42c33667afa8e835bf798cc9bbc4bdcd0d37e796423af9dbd9bbded",
+      "bytes": 298,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/gradient-shadow-text.css",
+      "sha256": "814dee95539b2f719e22e6e22812d5b9d22fe620ad6ddd457b0303ea2e69d2c8",
+      "bytes": 12175,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/onboarding.css",
+      "sha256": "d321e1903c77ba69cfc2ba7c077504efda2fc2b3ee3d8cf4797a6746fe23224e",
+      "bytes": 869,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/package.json",
+      "sha256": "dc7d7ea3f8ccb0a0001178af61dd4eb1b3d7032bd5af86af21b3bad6ee4971c9",
+      "bytes": 2412,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/scrollbar.css",
+      "sha256": "7457fa7bcde76d19981125c94c0a8afd7d83b1dac3f72bd418597bda35297c5b",
+      "bytes": 838,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/shiki.css",
+      "sha256": "71deb2de951ab101ef23e584e4ea588c27d5cbfc4f3cdc8707bcf99243dac7e7",
+      "bytes": 705,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-theme/styles-order.json",
+      "sha256": "5636a6bb26c22a2ae2158b3e508d885ca40d8019484ada5c67acd2fb987d347e",
+      "bytes": 163,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/LICENSE",
+      "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+      "bytes": 1065,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/Rows-classes.json",
+      "sha256": "388ea48420828451592557d93bbed93686ac996058239f94eda9be3c16498ebf",
+      "bytes": 1320,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/Rows.module.css",
+      "sha256": "2e6e7841baa22df02a2d39ff4d86370a1682ae210b168b04476de2555fa90d69",
+      "bytes": 6410,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/WorkspaceBrowser-classes.json",
+      "sha256": "73dcf6732753ac0e2fbdf240408088202ebcd625301eb7cbc294a68c88325c22",
+      "bytes": 1816,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/WorkspaceBrowser.module.css",
+      "sha256": "8f6222836e75a4b59fea20310df31a03fee2973acd92379416aedf333205ed0e",
+      "bytes": 9674,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/upstream/ui-workspace/package.json",
+      "sha256": "ca68f8957654d510c614c5ada6303c006f4071f53278f540afb682cb035b5a62",
+      "bytes": 3255,
+      "role": "retained released input"
+    },
+    {
+      "path": "repo/tool/design-system/verify_release_inputs.py",
+      "sha256": "566999a2c2f6b7997af081f1ccdcaab4295badfd0decaf6b8ffd06215b9bc7e4",
+      "bytes": 11833,
+      "role": "archive verifier"
+    },
+    {
+      "path": "repo/tool/preflight",
+      "sha256": "ea4195aacfad0ac7bfd6384aab27770b564f2b465f007d1f63ff5ac4ac3ac532",
+      "bytes": 17731,
+      "role": "preflight wiring"
+    },
+    {
+      "path": "workspace/notes/source-contract-pr-created.txt",
+      "sha256": "082d1e72f8e65f3cccadc41c955d991de4bd77b67b0d45e103454ed1bdbfc592",
+      "bytes": 49,
+      "role": "pull request URL"
+    },
+    {
+      "path": "workspace/scripts/design-system-source-report.py",
+      "sha256": "be8092b986e0239824154c1683e3a152fd574eef0059a5e26e26969c1e179e56",
+      "bytes": 32803,
+      "role": "report builder"
+    }
+  ],
+  "previewPassed": true,
+  "published": false,
+  "preview": [
+    {
+      "width": 300,
+      "initial": 66,
+      "uiPackages": 57,
+      "supportPackages": 9,
+      "uiCssInputs": 209,
+      "supportCssInputs": 10,
+      "uiFilter": 57,
+      "packageFilter": 1,
+      "supportFilter": 9,
+      "pathSearch": 1,
+      "emptySearch": 0,
+      "reset": 66,
+      "geometry": {
+        "width": 300,
+        "scrollWidth": 300,
+        "controls": [
+          {
+            "tag": "SUMMARY",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "INPUT",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "BUTTON",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "SUMMARY",
+            "height": 44,
+            "width": 244
+          },
+          {
+            "tag": "SUMMARY",
+            "height": 62.78125,
+            "width": 244
+          }
+        ]
+      },
+      "errors": [],
+      "unexpectedRequests": []
+    },
+    {
+      "width": 1280,
+      "initial": 66,
+      "uiPackages": 57,
+      "supportPackages": 9,
+      "uiCssInputs": 209,
+      "supportCssInputs": 10,
+      "uiFilter": 57,
+      "packageFilter": 1,
+      "supportFilter": 9,
+      "pathSearch": 1,
+      "emptySearch": 0,
+      "reset": 66,
+      "geometry": {
+        "width": 1280,
+        "scrollWidth": 1280,
+        "controls": [
+          {
+            "tag": "SUMMARY",
+            "height": 44,
+            "width": 1062
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 205.1875
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 307.8125
+          },
+          {
+            "tag": "SELECT",
+            "height": 44,
+            "width": 205.1875
+          },
+          {
+            "tag": "INPUT",
+            "height": 44,
+            "width": 307.8125
+          },
+          {
+            "tag": "BUTTON",
+            "height": 44,
+            "width": 96
+          },
+          {
+            "tag": "SUMMARY",
+            "height": 44,
+            "width": 1070
+          },
+          {
+            "tag": "SUMMARY",
+            "height": 44,
+            "width": 1062
+          }
+        ]
+      },
+      "errors": [],
+      "unexpectedRequests": []
+    }
+  ],
+  "previewFiles": [
+    {
+      "path": "preview-1280-filtered.png",
+      "sha256": "139aab91e9724118e31808cb4f6874631073f16c96b024df886a879ae6502d72"
+    },
+    {
+      "path": "preview-1280-overview.png",
+      "sha256": "40eeaed13cbbd44f57bd3568494ad1d47f4ec3ec38f92359bef7d2bbb970b40e"
+    },
+    {
+      "path": "preview-300-filtered.png",
+      "sha256": "d74b06b94841add581a7f637dab94afa0b491b14c856d84371bba20d77b9e3a3"
+    },
+    {
+      "path": "preview-300-overview.png",
+      "sha256": "9c9b8961e3e4e1435e03edc937124f21ca0394595f8e0c73856bf1a5710ca1e8"
+    },
+    {
+      "path": "preview.json",
+      "sha256": "696920a57f0227262e19bb20130d2a983caf83de568fc7e8c5c51eb6469feded"
+    }
+  ],
+  "negativeControls": [
+    {
+      "control": "skipped-required-check",
+      "rejected": true
+    },
+    {
+      "control": "stale-release-receipt",
+      "rejected": true
+    },
+    {
+      "control": "private-path",
+      "rejected": true
+    },
+    {
+      "control": "credential-signature",
+      "rejected": true
+    }
+  ]
+}
