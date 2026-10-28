@@ -1,0 +1,75 @@
+{
+  "schema": "whalee-icon-actions-native-preparation/1",
+  "status": "prepared-not-native-tested",
+  "baseHead": "056cb7738e4dd103f222dd6f996c067bda48ae9b",
+  "filesSha256": {
+    "apps/dsh_flutter/test/parity/icon_actions_main.dart": "47d2712b25884c3d4d4c129857b6ec03c6763dd2660598fc405a4df1988e84b0",
+    "apps/dsh_flutter/test/parity/icon_actions_native_fixture_test.dart": "753e4deb67d6a0635c8e1d90795d162182acaf0a06608ba6ecddd52c963fccdf",
+    "tool/parity-desktop/icon-actions-cases.json": "2a32b7f849a7461600e0cbb5121e8d72513d53e4f3b28ac41a66ef0f6f8a1175"
+  },
+  "driverPath": "[workspace]/scripts/icon-actions-android.py",
+  "driverSha256": "f99ef72306b37d05c1f8ee667791cc7dcef893c6bcc00489f6fc7d450ffba790",
+  "manifestSha256": "2a32b7f849a7461600e0cbb5121e8d72513d53e4f3b28ac41a66ef0f6f8a1175",
+  "gpuCases": [
+    {
+      "id": "icon-actions.desktop-light",
+      "assertions": 19,
+      "namedCaptures": 18,
+      "inputs": 22
+    },
+    {
+      "id": "icon-actions.desktop-dark",
+      "assertions": 19,
+      "namedCaptures": 18,
+      "inputs": 22
+    },
+    {
+      "id": "icon-actions.phone-light",
+      "assertions": 19,
+      "namedCaptures": 18,
+      "inputs": 22
+    },
+    {
+      "id": "icon-actions.phone-dark",
+      "assertions": 19,
+      "namedCaptures": 18,
+      "inputs": 22
+    }
+  ],
+  "gpuTotalAssertions": 76,
+  "gpuNamedCaptures": 72,
+  "gpuTotalScreenshotsIncludingFinals": 76,
+  "android": {
+    "sceneCount": 12,
+    "scenes": [
+      "pairing-initial",
+      "settings-pointer",
+      "pairing-keyboard-focus",
+      "settings-keyboard",
+      "repair-initial",
+      "back-pointer-return",
+      "repair-keyboard-focus",
+      "back-keyboard-return",
+      "scanner-initial",
+      "close-pointer-return",
+      "scanner-keyboard-focus",
+      "close-keyboard-return"
+    ],
+    "inputCount": 16,
+    "checkCount": 27
+  },
+  "focusedFixtureTests": 4,
+  "focusHierarchyDriverChecks": 3,
+  "manifestDigestRejection": true,
+  "logs": [
+    ".local/icon-actions-native-fixture5.log",
+    ".local/icon-actions-native-analyze-final.log",
+    ".local/icon-actions-native-focus-diagnosis.log"
+  ],
+  "staging": "all new repo paths UNSTAGED; no index mutations",
+  "remaining": [
+    "Actual GPU/Android runtime replay and installed-normal-APK cleanup are not run",
+    "Chromium post-touch sticky hover remains UNMATCHED/PENDING",
+    "Route/camera/network Web parity is not claimed"
+  ]
+}

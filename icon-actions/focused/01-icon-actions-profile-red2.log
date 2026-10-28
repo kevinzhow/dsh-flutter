@@ -1,0 +1,113 @@
+00:00 +0: loading [workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart
+00:00 +0: iconAction dark: touch-down is source idle
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: Color:<Color(alpha: 0.0784, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace:
+ColorSpace.sRGB)>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart:31:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart line 31
+The test description was:
+  iconAction dark: touch-down is source idle
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: iconAction dark: touch-down is source idle [E]
+  Test failed. See exception logs above.
+  The test description was: iconAction dark: touch-down is source idle
+  
+00:00 +0 -1: iconAction dark: held mouse follows hover
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: Color:<Color(alpha: 0.0784, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace:
+ColorSpace.sRGB)>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart:71:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart line 71
+The test description was:
+  iconAction dark: held mouse follows hover
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: iconAction dark: held mouse follows hover [E]
+  Test failed. See exception logs above.
+  The test description was: iconAction dark: held mouse follows hover
+  
+00:00 +0 -2: iconAction light: touch-down is source idle
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: Color:<Color(alpha: 0.0588, red: 0.1490, green: 0.1922, blue: 0.2824, colorSpace:
+ColorSpace.sRGB)>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart:31:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart line 31
+The test description was:
+  iconAction light: touch-down is source idle
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -3: iconAction light: touch-down is source idle [E]
+  Test failed. See exception logs above.
+  The test description was: iconAction light: touch-down is source idle
+  
+00:00 +0 -3: iconAction light: held mouse follows hover
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: Color:<Color(alpha: 0.0588, red: 0.1490, green: 0.1922, blue: 0.2824, colorSpace:
+ColorSpace.sRGB)>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart:71:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart line 71
+The test description was:
+  iconAction light: held mouse follows hover
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -4: iconAction light: held mouse follows hover [E]
+  Test failed. See exception logs above.
+  The test description was: iconAction light: held mouse follows hover
+  
+00:00 +0 -4: iconAction keyboard and semantics activate once; disabled blocks
+00:00 +1 -4: Some tests failed.
+
+Failing tests:
+  [workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart: iconAction dark: held mouse follows hover
+  [workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart: iconAction dark: touch-down is source idle
+  [workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart: iconAction light: held mouse follows hover
+  [workspace]/scratch/whalee-icon-actions/packages/dsh_ui/test/dsh_icon_action_input_test.dart: iconAction light: touch-down is source idle

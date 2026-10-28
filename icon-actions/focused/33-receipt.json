@@ -1,0 +1,273 @@
+{
+  "runtimeHead": "3d51110e78f09780ddc49f378f1402546de6cf28",
+  "runtimeTree": "4f71ad642e9aac1de8d2f86bedbc8247d049d5db",
+  "manifestSha256": "eadcca1b1c5e46092e6b9b1b69027d1df7da3bc98eb96e42de500360e1c8f0da",
+  "driverSha256": "f99ef72306b37d05c1f8ee667791cc7dcef893c6bcc00489f6fc7d450ffba790",
+  "contract": {
+    "sceneCount": 12,
+    "scenes": [
+      "pairing-initial",
+      "settings-pointer",
+      "pairing-keyboard-focus",
+      "settings-keyboard",
+      "repair-initial",
+      "back-pointer-return",
+      "repair-keyboard-focus",
+      "back-keyboard-return",
+      "scanner-initial",
+      "close-pointer-return",
+      "scanner-keyboard-focus",
+      "close-keyboard-return"
+    ],
+    "inputCount": 16,
+    "checkCount": 27
+  },
+  "avd": "whalee-api36",
+  "serial": "emulator-5560",
+  "displaySize": "Physical size: 1080x2400",
+  "displayDensity": "Physical density: 420",
+  "androidApi": "36",
+  "adbdShellUid": "2000",
+  "displayOverrideApplied": false,
+  "adbRootUsed": false,
+  "apkSha256": "0c65c68abed517d05d427364d3af6585e8d2bc111fd34309db2ef5cbd82d4602",
+  "sharedAdbPids": [
+    42291
+  ],
+  "installedFixtureSha256": "0c65c68abed517d05d427364d3af6585e8d2bc111fd34309db2ef5cbd82d4602",
+  "passed": false,
+  "error": "Keyboard focuses the real action: Back",
+  "inputs": [
+    {
+      "keycode": 111
+    },
+    {
+      "tap": [
+        1022,
+        194
+      ],
+      "label": "Settings",
+      "bounds": [
+        985,
+        157,
+        1059,
+        231
+      ],
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Button"
+    },
+    {
+      "keycode": 138
+    },
+    {
+      "keycombination": [
+        59,
+        61
+      ]
+    },
+    {
+      "keycode": 66
+    },
+    {
+      "keycode": 138
+    },
+    {
+      "keycode": 136
+    },
+    {
+      "tap": [
+        47,
+        183
+      ],
+      "label": "Back",
+      "bounds": [
+        11,
+        147,
+        84,
+        220
+      ],
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Button"
+    },
+    {
+      "keycode": 136
+    },
+    {
+      "keycombination": [
+        59,
+        61
+      ]
+    }
+  ],
+  "scenes": [
+    "pairing-initial",
+    "settings-pointer",
+    "pairing-keyboard-focus",
+    "settings-keyboard",
+    "repair-initial",
+    "back-pointer-return",
+    "failed-6"
+  ],
+  "checks": [
+    {
+      "assertion": "Visible: Native actions: settings=0 back=0 close=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: pairing; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Source-sized clickable action: Settings",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native actions: settings=1 back=0 close=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: settings; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: pairing; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Keyboard focuses the real action: Settings",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native actions: settings=2 back=0 close=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: settings; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: pairing; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: repair; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Source-sized clickable action: Back",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native actions: settings=2 back=1 close=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: pairing; network=0",
+      "passed": true
+    },
+    {
+      "assertion": "Visible: Native route: repair; network=0",
+      "passed": true
+    }
+  ],
+  "geometryProofs": [
+    {
+      "label": "Settings",
+      "bounds": [
+        985,
+        157,
+        1059,
+        231
+      ],
+      "density": 2.625,
+      "sourceLogicalSize": [
+        28.0,
+        28.0
+      ],
+      "clickable": "true",
+      "class": "android.widget.Button",
+      "passed": true
+    },
+    {
+      "label": "Settings",
+      "bounds": [
+        985,
+        157,
+        1059,
+        231
+      ],
+      "density": 2.625,
+      "sourceLogicalSize": [
+        28.0,
+        28.0
+      ],
+      "clickable": "true",
+      "class": "android.widget.Button",
+      "passed": true
+    },
+    {
+      "label": "Settings",
+      "bounds": [
+        985,
+        157,
+        1059,
+        231
+      ],
+      "density": 2.625,
+      "sourceLogicalSize": [
+        28.0,
+        28.0
+      ],
+      "clickable": "true",
+      "class": "android.widget.Button",
+      "passed": true,
+      "keyboardFocusNode": {
+        "bounds": [
+          985,
+          157,
+          1059,
+          231
+        ],
+        "class": "android.view.View",
+        "label": "",
+        "ownerFocused": "false",
+        "sameBoundsAsLabeledAction": true
+      }
+    },
+    {
+      "label": "Back",
+      "bounds": [
+        11,
+        147,
+        84,
+        220
+      ],
+      "density": 2.625,
+      "sourceLogicalSize": [
+        28.0,
+        28.0
+      ],
+      "clickable": "true",
+      "class": "android.widget.Button",
+      "passed": true
+    },
+    {
+      "label": "Back",
+      "bounds": [
+        11,
+        147,
+        84,
+        220
+      ],
+      "density": 2.625,
+      "sourceLogicalSize": [
+        28.0,
+        28.0
+      ],
+      "clickable": "true",
+      "class": "android.widget.Button",
+      "passed": true
+    }
+  ],
+  "dumpDiagnostics": []
+}

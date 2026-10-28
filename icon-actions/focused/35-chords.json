@@ -1,0 +1,42 @@
+[
+  {
+    "name": "default",
+    "args": [
+      59,
+      61
+    ],
+    "focused": [
+      {
+        "content-desc": "",
+        "bounds": "[0,0][1080,2400]",
+        "class": "android.widget.FrameLayout"
+      },
+      {
+        "content-desc": "Paste launch link",
+        "bounds": "[42,966][447,1060]",
+        "class": "android.view.View"
+      }
+    ]
+  },
+  {
+    "name": "held100",
+    "args": [
+      "-t",
+      "100",
+      59,
+      61
+    ],
+    "focused": [
+      {
+        "content-desc": "",
+        "bounds": "[0,0][1080,2400]",
+        "class": "android.widget.FrameLayout"
+      },
+      {
+        "content-desc": "Scan QR code",
+        "bounds": "[468,966][824,1060]",
+        "class": "android.view.View"
+      }
+    ]
+  }
+]

@@ -1,0 +1,278 @@
+{
+  "schema": "dsh-icon-actions-handoff/1",
+  "baseHead": "e4a35753b8e615e9f42d89d496eeef3fe1953581",
+  "head": "82e84377582f0c9efdae349b39e055029900ea9d",
+  "tree": "44eb1af36693090e9b0babdb4f83176f46846c37",
+  "clean": true,
+  "guardObserved": {
+    "platform-control": 11,
+    "duplicate-button": 0,
+    "duplicate-input": 0,
+    "duplicate-tag": 0,
+    "manual-metric": 892,
+    "duplicate-menu": 0
+  },
+  "constructorClassification": {
+    "actualLegacyControls": 3,
+    "constructorMatches": 1,
+    "duplicateBefore": 4,
+    "duplicateAfter": 0,
+    "metricBefore": 895,
+    "metricAfter": 892
+  },
+  "api": {
+    "workspacePublishTo": "none",
+    "dshUiPublishTo": "none",
+    "resolution": "workspace",
+    "productionCallersBefore": [
+      "apps/dsh_flutter/lib/src/app.dart:190",
+      "apps/dsh_flutter/lib/src/screens/pairing_screen.dart:88",
+      "apps/dsh_flutter/lib/src/screens/qr_scanner_screen.dart:146"
+    ],
+    "declaredExternalConsumersFound": false,
+    "unknownExternalGitConsumersAssessed": false
+  },
+  "tests": {
+    "profileRed": {
+      "failed": 4,
+      "passed": 1,
+      "log": "profile-red2"
+    },
+    "routesRed": {
+      "failed": 18,
+      "passed": 0,
+      "log": "routes-red2"
+    },
+    "greenCanonicalAndExistingProfiles": 30,
+    "greenRealRouteCases": 18,
+    "initialHarnessFailurePreserved": true,
+    "focusedAnalysis": "No issues found!"
+  },
+  "sourceProof": {
+    "path": "build/icon-actions-source-final2",
+    "receiptSha256": "5399ed92732ddfcf113b3adcfb0b026da658d3bde7f3cedabe84fb8150de89c8",
+    "provenanceSha256": "3b00075fd9f5a5eff152d045c279237aaa752966f427d02a2099d72be326bb42",
+    "toolSha256": "bd565b73db99a372d7e7e98bca8b3b18da95d43bcf77279888554d1e1c74ef72",
+    "traces": 8,
+    "checks": 16,
+    "screenshots": 144,
+    "pngSha256": {
+      "light-dpr1-mouse-iconAction-idle.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-iconAction-hover.png": "4f3709ba0ef406945fe188ca988e5a13a8e383517ad984d6fcb8deb205a9ebc8",
+      "light-dpr1-mouse-iconAction-held.png": "4f3709ba0ef406945fe188ca988e5a13a8e383517ad984d6fcb8deb205a9ebc8",
+      "light-dpr1-mouse-iconAction-held-away.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-iconAction-held-return.png": "4f3709ba0ef406945fe188ca988e5a13a8e383517ad984d6fcb8deb205a9ebc8",
+      "light-dpr1-mouse-iconAction-released.png": "4f3709ba0ef406945fe188ca988e5a13a8e383517ad984d6fcb8deb205a9ebc8",
+      "light-dpr1-mouse-iconAction-pointer-away.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-iconAction-home-focus.png": "377a1fde80edded8896a9a26e759f88333509b2417a3cfdb413da638d9752a54",
+      "light-dpr1-mouse-iconAction-enter-focus.png": "377a1fde80edded8896a9a26e759f88333509b2417a3cfdb413da638d9752a54",
+      "light-dpr1-mouse-headerAction-idle.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-headerAction-hover.png": "5c89877eeba51cf3e67b3f34a9b2ec0e9612b06d47df40a38c8111751ca046d5",
+      "light-dpr1-mouse-headerAction-held.png": "5c89877eeba51cf3e67b3f34a9b2ec0e9612b06d47df40a38c8111751ca046d5",
+      "light-dpr1-mouse-headerAction-held-away.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-headerAction-held-return.png": "5c89877eeba51cf3e67b3f34a9b2ec0e9612b06d47df40a38c8111751ca046d5",
+      "light-dpr1-mouse-headerAction-released.png": "5c89877eeba51cf3e67b3f34a9b2ec0e9612b06d47df40a38c8111751ca046d5",
+      "light-dpr1-mouse-headerAction-pointer-away.png": "d15f24a513d5e1a1a09737e2517ef4754a517bfad167e3b52dc08df95ebe0f23",
+      "light-dpr1-mouse-headerAction-home-focus.png": "4892a771a6489e92352ee2886d89d31b39ff0377cc6a21637de8b4eff09ca913",
+      "light-dpr1-mouse-headerAction-enter-focus.png": "4892a771a6489e92352ee2886d89d31b39ff0377cc6a21637de8b4eff09ca913",
+      "light-dpr1-mouse-iconAction-disabled.png": "37382b3bdb2902a9ea02a11d18610d4a599c022269ebb4016cdf262dc5a05cb0",
+      "light-dpr1-mouse-iconAction-disabled-after-input.png": "37382b3bdb2902a9ea02a11d18610d4a599c022269ebb4016cdf262dc5a05cb0",
+      "light-dpr1-touch-iconAction-idle.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-iconAction-touch-down.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-iconAction-touch-up.png": "eac82e82349eaf9b2fce717ef75cd8ee14fe60f3474a62d5e9a2d6c067505aea",
+      "light-dpr1-touch-iconAction-touch-settled.png": "0caf4086fda55348d7712333748935a33cb06b04923f8ac3d0c57f2c2d16e561",
+      "light-dpr1-touch-iconAction-outside-touch.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-iconAction-home-focus.png": "5c23db3bb7b4f61d0058ae3074947547fcf0c4adb1a732db0ea291cd4acc3d63",
+      "light-dpr1-touch-iconAction-enter-focus.png": "5c23db3bb7b4f61d0058ae3074947547fcf0c4adb1a732db0ea291cd4acc3d63",
+      "light-dpr1-touch-headerAction-idle.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-headerAction-touch-down.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-headerAction-touch-up.png": "e50435db7d89f80f56d0c16fa85802f827a45ab238e32a9510f6fbab7a3a93ae",
+      "light-dpr1-touch-headerAction-touch-settled.png": "ab2fccdb1d710fb816b8b6ffd42ff7af4d041af9226f0edd4c93d4fcf02be5dc",
+      "light-dpr1-touch-headerAction-outside-touch.png": "6ea8c27560e8a560fd3f412a59d6ea2e8c212759fddfa0d09583551c0e9e7a04",
+      "light-dpr1-touch-headerAction-home-focus.png": "f7d4344a6a379e48804dad72b111548109d28002953231c585b489f4a6e9f0c9",
+      "light-dpr1-touch-headerAction-enter-focus.png": "f7d4344a6a379e48804dad72b111548109d28002953231c585b489f4a6e9f0c9",
+      "light-dpr1-touch-iconAction-disabled.png": "c94d938bfbe3c94c45f5fae622a04fd5ebadd333e60b899b4c353503864e4921",
+      "light-dpr1-touch-iconAction-disabled-after-input.png": "c94d938bfbe3c94c45f5fae622a04fd5ebadd333e60b899b4c353503864e4921",
+      "dark-dpr1-mouse-iconAction-idle.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-iconAction-hover.png": "164cd032d38c5ebccd2778c00d47d54abd42da2fb4b7adc3890c5b6de2295b6c",
+      "dark-dpr1-mouse-iconAction-held.png": "164cd032d38c5ebccd2778c00d47d54abd42da2fb4b7adc3890c5b6de2295b6c",
+      "dark-dpr1-mouse-iconAction-held-away.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-iconAction-held-return.png": "164cd032d38c5ebccd2778c00d47d54abd42da2fb4b7adc3890c5b6de2295b6c",
+      "dark-dpr1-mouse-iconAction-released.png": "164cd032d38c5ebccd2778c00d47d54abd42da2fb4b7adc3890c5b6de2295b6c",
+      "dark-dpr1-mouse-iconAction-pointer-away.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-iconAction-home-focus.png": "276894fa27ee53214b15b6237009ec6f13570a9b925b4ef09eefaf591906a771",
+      "dark-dpr1-mouse-iconAction-enter-focus.png": "276894fa27ee53214b15b6237009ec6f13570a9b925b4ef09eefaf591906a771",
+      "dark-dpr1-mouse-headerAction-idle.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-headerAction-hover.png": "4c2492424945cc19929201871ea1b998db8cc56ae2c5aea189de6e4ef0651195",
+      "dark-dpr1-mouse-headerAction-held.png": "4c2492424945cc19929201871ea1b998db8cc56ae2c5aea189de6e4ef0651195",
+      "dark-dpr1-mouse-headerAction-held-away.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-headerAction-held-return.png": "4c2492424945cc19929201871ea1b998db8cc56ae2c5aea189de6e4ef0651195",
+      "dark-dpr1-mouse-headerAction-released.png": "4c2492424945cc19929201871ea1b998db8cc56ae2c5aea189de6e4ef0651195",
+      "dark-dpr1-mouse-headerAction-pointer-away.png": "13be6b241e09d97f448e3f90dd6cff9df24df31d6f4375785d0c1f2c0059024b",
+      "dark-dpr1-mouse-headerAction-home-focus.png": "e6646ae1dd81808a2d21b7d4b1b83f27b77373bd0ee276c694a79b2af7ab6e47",
+      "dark-dpr1-mouse-headerAction-enter-focus.png": "e6646ae1dd81808a2d21b7d4b1b83f27b77373bd0ee276c694a79b2af7ab6e47",
+      "dark-dpr1-mouse-iconAction-disabled.png": "a5dd403d480ca2ab3ad6e005b19d48e4872c983ed470f9ba949c944a81e50dd5",
+      "dark-dpr1-mouse-iconAction-disabled-after-input.png": "a5dd403d480ca2ab3ad6e005b19d48e4872c983ed470f9ba949c944a81e50dd5",
+      "dark-dpr1-touch-iconAction-idle.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-iconAction-touch-down.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-iconAction-touch-up.png": "f87e34ed43bef89b7c0fa78d7237324217daf11f5ac5714c74d0b71a26320bd9",
+      "dark-dpr1-touch-iconAction-touch-settled.png": "241b7c340695200ee5cdd7ebaaa8b7162d814bafa356596da27dfc7dfbc6d6e2",
+      "dark-dpr1-touch-iconAction-outside-touch.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-iconAction-home-focus.png": "c55c81cc78e807bf7351b5bb73cb39f6ef9fad8190337669d4a9b12795a5abd9",
+      "dark-dpr1-touch-iconAction-enter-focus.png": "c55c81cc78e807bf7351b5bb73cb39f6ef9fad8190337669d4a9b12795a5abd9",
+      "dark-dpr1-touch-headerAction-idle.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-headerAction-touch-down.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-headerAction-touch-up.png": "88be426191e6b3996178e910b9e2f74fd36e792561c86ead1956c7858e821b6f",
+      "dark-dpr1-touch-headerAction-touch-settled.png": "eb06dbdc314eab9682879aa0e22023b4a977c876fec59c7ef99c74ed425a9abc",
+      "dark-dpr1-touch-headerAction-outside-touch.png": "b32342a2a3bd773850bcf4ce2159fb54a22b772529a834775274dae63487b1db",
+      "dark-dpr1-touch-headerAction-home-focus.png": "0378ff3d4b2b87cfe92be07e64272a644037c4e0fce8de8e0fdbe3ff3b5566e9",
+      "dark-dpr1-touch-headerAction-enter-focus.png": "0378ff3d4b2b87cfe92be07e64272a644037c4e0fce8de8e0fdbe3ff3b5566e9",
+      "dark-dpr1-touch-iconAction-disabled.png": "e3213d819e1f100c80da7cfd55506cdfc7ff240eb0ac79bcb1b065f007d5ebb3",
+      "dark-dpr1-touch-iconAction-disabled-after-input.png": "e3213d819e1f100c80da7cfd55506cdfc7ff240eb0ac79bcb1b065f007d5ebb3",
+      "light-dpr2.625-mouse-iconAction-idle.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-iconAction-hover.png": "1f54d6f61dbe58fd9a567213a8cd4aeb592ca2726d45dd65efbc28289ca98b9d",
+      "light-dpr2.625-mouse-iconAction-held.png": "1f54d6f61dbe58fd9a567213a8cd4aeb592ca2726d45dd65efbc28289ca98b9d",
+      "light-dpr2.625-mouse-iconAction-held-away.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-iconAction-held-return.png": "1f54d6f61dbe58fd9a567213a8cd4aeb592ca2726d45dd65efbc28289ca98b9d",
+      "light-dpr2.625-mouse-iconAction-released.png": "1f54d6f61dbe58fd9a567213a8cd4aeb592ca2726d45dd65efbc28289ca98b9d",
+      "light-dpr2.625-mouse-iconAction-pointer-away.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-iconAction-home-focus.png": "aa2ed7151b25fc55e5bb90cdf20110261f0227fd3b9259b3cb297bd67837cb6c",
+      "light-dpr2.625-mouse-iconAction-enter-focus.png": "aa2ed7151b25fc55e5bb90cdf20110261f0227fd3b9259b3cb297bd67837cb6c",
+      "light-dpr2.625-mouse-headerAction-idle.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-headerAction-hover.png": "fd98f95cdc16d0d08a8bdb5a03733fcbd48392652f5a36655ce76390a6ed3636",
+      "light-dpr2.625-mouse-headerAction-held.png": "fd98f95cdc16d0d08a8bdb5a03733fcbd48392652f5a36655ce76390a6ed3636",
+      "light-dpr2.625-mouse-headerAction-held-away.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-headerAction-held-return.png": "fd98f95cdc16d0d08a8bdb5a03733fcbd48392652f5a36655ce76390a6ed3636",
+      "light-dpr2.625-mouse-headerAction-released.png": "fd98f95cdc16d0d08a8bdb5a03733fcbd48392652f5a36655ce76390a6ed3636",
+      "light-dpr2.625-mouse-headerAction-pointer-away.png": "737f83210cf805dbf44b4e391d1e72651687a1ef9732210b7851dcbb9cd3813b",
+      "light-dpr2.625-mouse-headerAction-home-focus.png": "a9adb4fb92ce041d92f7710d97f8b54c6978160e18e36a39583cd4c4c9499810",
+      "light-dpr2.625-mouse-headerAction-enter-focus.png": "a9adb4fb92ce041d92f7710d97f8b54c6978160e18e36a39583cd4c4c9499810",
+      "light-dpr2.625-mouse-iconAction-disabled.png": "15c760207611f01a368764392bca9ea692cc18b9db19e1851dcfbea7e5be35bb",
+      "light-dpr2.625-mouse-iconAction-disabled-after-input.png": "15c760207611f01a368764392bca9ea692cc18b9db19e1851dcfbea7e5be35bb",
+      "light-dpr2.625-touch-iconAction-idle.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-iconAction-touch-down.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-iconAction-touch-up.png": "6169a2100d2eca62302ff5eda4e85f9b848fb69d54cd78ed91cd930074e7ba21",
+      "light-dpr2.625-touch-iconAction-touch-settled.png": "9054415c865847eaedf92f97e70a26edc1f2324702854c69f497584f707abce7",
+      "light-dpr2.625-touch-iconAction-outside-touch.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-iconAction-home-focus.png": "b5526bde3bf7fe360300370f6b8894ee47e3b02dcea6d29efcab6f68df5f9fbd",
+      "light-dpr2.625-touch-iconAction-enter-focus.png": "b5526bde3bf7fe360300370f6b8894ee47e3b02dcea6d29efcab6f68df5f9fbd",
+      "light-dpr2.625-touch-headerAction-idle.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-headerAction-touch-down.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-headerAction-touch-up.png": "477c86fc893f26eb51a3549852ea8ec485461f25cf6a37652cda9744dd7965ee",
+      "light-dpr2.625-touch-headerAction-touch-settled.png": "c2bfd29b25f32b0430dc0b47e4780f033727fdabf2d8115d40c645e331086ae8",
+      "light-dpr2.625-touch-headerAction-outside-touch.png": "4ddd3c608bdff9b59d1c775b13f350dc36b6f3bf04607bc58fb2f460ee5e438b",
+      "light-dpr2.625-touch-headerAction-home-focus.png": "a3b401111feccd3a2270a9d59e5dc50b6c2497de96a070daa127e5562be64bb8",
+      "light-dpr2.625-touch-headerAction-enter-focus.png": "a3b401111feccd3a2270a9d59e5dc50b6c2497de96a070daa127e5562be64bb8",
+      "light-dpr2.625-touch-iconAction-disabled.png": "64d5ddbbe9c37cb27583e3604e383b9096e66541b3339d628abe881c748d3995",
+      "light-dpr2.625-touch-iconAction-disabled-after-input.png": "64d5ddbbe9c37cb27583e3604e383b9096e66541b3339d628abe881c748d3995",
+      "dark-dpr2.625-mouse-iconAction-idle.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-iconAction-hover.png": "a982f8b4e94cd085e7ac0851bc67bbf20fb6f4f1b3314b022fa91a605b17dfa0",
+      "dark-dpr2.625-mouse-iconAction-held.png": "a982f8b4e94cd085e7ac0851bc67bbf20fb6f4f1b3314b022fa91a605b17dfa0",
+      "dark-dpr2.625-mouse-iconAction-held-away.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-iconAction-held-return.png": "a982f8b4e94cd085e7ac0851bc67bbf20fb6f4f1b3314b022fa91a605b17dfa0",
+      "dark-dpr2.625-mouse-iconAction-released.png": "a982f8b4e94cd085e7ac0851bc67bbf20fb6f4f1b3314b022fa91a605b17dfa0",
+      "dark-dpr2.625-mouse-iconAction-pointer-away.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-iconAction-home-focus.png": "1e0f34f3078960b40c4ec6eba017177bdef7ea9df8f1e842489515f80c3de177",
+      "dark-dpr2.625-mouse-iconAction-enter-focus.png": "1e0f34f3078960b40c4ec6eba017177bdef7ea9df8f1e842489515f80c3de177",
+      "dark-dpr2.625-mouse-headerAction-idle.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-headerAction-hover.png": "a7c383d1e9870d0bebf8a5878b3c3fe0bb5997da1cfa3cd9c68a810c85a3b1ab",
+      "dark-dpr2.625-mouse-headerAction-held.png": "a7c383d1e9870d0bebf8a5878b3c3fe0bb5997da1cfa3cd9c68a810c85a3b1ab",
+      "dark-dpr2.625-mouse-headerAction-held-away.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-headerAction-held-return.png": "a7c383d1e9870d0bebf8a5878b3c3fe0bb5997da1cfa3cd9c68a810c85a3b1ab",
+      "dark-dpr2.625-mouse-headerAction-released.png": "a7c383d1e9870d0bebf8a5878b3c3fe0bb5997da1cfa3cd9c68a810c85a3b1ab",
+      "dark-dpr2.625-mouse-headerAction-pointer-away.png": "f9cd4a57419139968c7ef7a7ab72ecac2d867f9b44277b38c5254243d99b4e1b",
+      "dark-dpr2.625-mouse-headerAction-home-focus.png": "ba42129ac6c8a62e2f4480ff81f3198e820cce49bcd0bfab5c60324eb9f52562",
+      "dark-dpr2.625-mouse-headerAction-enter-focus.png": "ba42129ac6c8a62e2f4480ff81f3198e820cce49bcd0bfab5c60324eb9f52562",
+      "dark-dpr2.625-mouse-iconAction-disabled.png": "660ae77fc01b257476baddc2b2c8ced0414b2ecc90dfa54de594a18b78a2869a",
+      "dark-dpr2.625-mouse-iconAction-disabled-after-input.png": "660ae77fc01b257476baddc2b2c8ced0414b2ecc90dfa54de594a18b78a2869a",
+      "dark-dpr2.625-touch-iconAction-idle.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-iconAction-touch-down.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-iconAction-touch-up.png": "3ec0ede708c95c2f868541dd30f66373e3e018f624e0c9af3e3237eb90bf879c",
+      "dark-dpr2.625-touch-iconAction-touch-settled.png": "356d1e0109cc1fe9b16336ac247dd70a3a1ac7a08dee414febdd8f97b2f1825f",
+      "dark-dpr2.625-touch-iconAction-outside-touch.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-iconAction-home-focus.png": "d0c99ac07e1ead2757248e6f943653b46edf0b6c9fc2ef29c4bbed1e9c2e456b",
+      "dark-dpr2.625-touch-iconAction-enter-focus.png": "d0c99ac07e1ead2757248e6f943653b46edf0b6c9fc2ef29c4bbed1e9c2e456b",
+      "dark-dpr2.625-touch-headerAction-idle.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-headerAction-touch-down.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-headerAction-touch-up.png": "4b85717922c9e8da11c841d2c7f2c1e043002d2ea2342a8ac4bae9cb3fcfccb1",
+      "dark-dpr2.625-touch-headerAction-touch-settled.png": "c30625d341ca6934558ca116c95379f75e0316241cc63cb34049942433ccd6a0",
+      "dark-dpr2.625-touch-headerAction-outside-touch.png": "90133a84e9ce0ab4a4c2036e32866ac750956b8b38a7f547ae50d905d824c15f",
+      "dark-dpr2.625-touch-headerAction-home-focus.png": "ec4b46ce0fa7cb5363f522bad68b317cb59ede6dad62bf108a2ecb105d84c335",
+      "dark-dpr2.625-touch-headerAction-enter-focus.png": "ec4b46ce0fa7cb5363f522bad68b317cb59ede6dad62bf108a2ecb105d84c335",
+      "dark-dpr2.625-touch-iconAction-disabled.png": "a614006f75caa08c3322f82f5511ed3e4519d290bad1e51db5c8343389875e6f",
+      "dark-dpr2.625-touch-iconAction-disabled-after-input.png": "a614006f75caa08c3322f82f5511ed3e4519d290bad1e51db5c8343389875e6f"
+    },
+    "chromiumVersions": [
+      "145.0.7632.6"
+    ],
+    "preliminaryRunsRetained": [
+      "build/icon-actions-source",
+      "build/icon-actions-source-final"
+    ]
+  },
+  "generatedInputsUnchanged": {
+    "tool/design-system/sources.lock.json": "133545002c7eddb1ba9fed0e10d94d932d252f9abd03cfe5ab51486256b72c8a",
+    "tool/design-system/recipes.generated.json": "cb455dd4091c48764b8daf5bbb84b38b800d3f71b31da9fe00d424d7ffdb4e8b",
+    "packages/dsh_ui/lib/src/dsh_recipes.g.dart": "bdd942b8b011ea1b7f6fffe7212ea5aa237323a5b2925c590092eb56b015625a"
+  },
+  "logs": {
+    "profile-red": {
+      "path": ".local/icon-actions-profile-red.log",
+      "sha256": "03df980cd4024d6bc916830a838fed5d01cdf2f2762213a4ad6f104f57758cf4"
+    },
+    "routes-red": {
+      "path": ".local/icon-actions-routes-red.log",
+      "sha256": "4e7f544f8798816aca498d9765c6dd6651cf1eb545fc149c04001ec4c4d7be24"
+    },
+    "profile-red2": {
+      "path": ".local/icon-actions-profile-red2.log",
+      "sha256": "8ba3116c3a03b80324aa20910e4a5e93f35d2eb6b8bcf474495890e069108689"
+    },
+    "routes-red2": {
+      "path": ".local/icon-actions-routes-red2.log",
+      "sha256": "70dcf2f70bce819d19afa68b15ed5c04087fa6ba05452dd73485c306586c2c2c"
+    },
+    "profile-green": {
+      "path": ".local/icon-actions-profile-green.log",
+      "sha256": "a8cc2afd4562dcb08f818da8e69844c02b715d67e092d8666ebd8a252d270980"
+    },
+    "routes-green": {
+      "path": ".local/icon-actions-routes-green.log",
+      "sha256": "422d5cd79ea7ef4a0ef8c7d502b138e138d062852a1c58c004796fcca1266156"
+    },
+    "analyze": {
+      "path": ".local/icon-actions-analyze.log",
+      "sha256": "d132afd22f411ca919acde5d7beea2a6131026082b37e34c70b3cfe3a048a3d6"
+    },
+    "pub": {
+      "path": ".local/icon-actions-pub.log",
+      "sha256": "fe3d51ef15a2265d2525e62700d501765e22b5ec9b0417aeb70ef3d18088e36a"
+    },
+    "source": {
+      "path": ".local/icon-actions-source.log",
+      "sha256": "2d64d6e02f1a766f378530a4a7ba1d93e9a06e778762963722c1afc2ad06ebbd"
+    },
+    "source-final": {
+      "path": ".local/icon-actions-source-final.log",
+      "sha256": "66a45a07ebbb5095df20a8b3b023cf54d816102b098f356fceae1a23490dfca5"
+    },
+    "source-final2": {
+      "path": ".local/icon-actions-source-final2.log",
+      "sha256": "aaff4399f7f57e25be3f623c1f986315b77ba4b53ed65af908750f1dcf711856"
+    }
+  },
+  "pending": [
+    "Chromium synthetic post-touch-up sticky hover is UNMATCHED/PENDING; no approved platform exception",
+    "Native connection routes adopt a published profile but have no exact Web route pixel counterpart",
+    "Integrator owns full checks, paired capture review, native binary replay"
+  ],
+  "notPerformed": [
+    "release/native build",
+    "emulator",
+    "GPU replay",
+    "git push",
+    "PR",
+    "merge"
+  ],
+  "scheduleDeleteUntouched": true
+}

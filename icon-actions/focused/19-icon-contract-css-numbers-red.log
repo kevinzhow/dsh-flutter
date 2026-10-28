@@ -1,0 +1,53 @@
+Warning: Package resolution error when reading "analysis_options.yaml" file for "[workspace]/scratch/whalee-icon-contract/packages/dsh_ui/lib/src/dsh_recipes.g.dart":
+Failed to resolve package URI "package:lints/recommended.yaml" in include at "[workspace]/scratch/whalee-icon-contract/analysis_options.yaml".
+test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) ... Warning: Package resolution error when reading "analysis_options.yaml" file for "[workspace]/scratch/whalee-icon-contract/packages/dsh_ui/lib/src/dsh_recipes.g.dart":
+Failed to resolve package URI "package:lints/recommended.yaml" in include at "[workspace]/scratch/whalee-icon-contract/analysis_options.yaml".
+
+  test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.iconButton', prop='width', value='２８px') ... FAIL
+Warning: Package resolution error when reading "analysis_options.yaml" file for "[workspace]/scratch/whalee-icon-contract/packages/dsh_ui/lib/src/dsh_recipes.g.dart":
+Failed to resolve package URI "package:lints/recommended.yaml" in include at "[workspace]/scratch/whalee-icon-contract/analysis_options.yaml".
+  test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.infoButton', prop='height', value='２０px') ... FAIL
+Warning: Package resolution error when reading "analysis_options.yaml" file for "[workspace]/scratch/whalee-icon-contract/packages/dsh_ui/lib/src/dsh_recipes.g.dart":
+Failed to resolve package URI "package:lints/recommended.yaml" in include at "[workspace]/scratch/whalee-icon-contract/analysis_options.yaml".
+  test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.iconButton:disabled', prop='opacity', value='０.５') ... FAIL
+
+======================================================================
+FAIL: test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.iconButton', prop='width', value='２８px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 173, in test_non_ascii_css_numbers_do_not_silently_preserve_dart
+    self.assert_rejected(self.changed(selector, prop, value))
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 31, in assert_rejected
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.infoButton', prop='height', value='２０px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 173, in test_non_ascii_css_numbers_do_not_silently_preserve_dart
+    self.assert_rejected(self.changed(selector, prop, value))
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 31, in assert_rejected
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_non_ascii_css_numbers_do_not_silently_preserve_dart (test_icon_action_source_contract.IconActionSourceContractTests.test_non_ascii_css_numbers_do_not_silently_preserve_dart) (selector='.iconButton:disabled', prop='opacity', value='０.５')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 173, in test_non_ascii_css_numbers_do_not_silently_preserve_dart
+    self.assert_rejected(self.changed(selector, prop, value))
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scratch/whalee-icon-contract/tool/tests/test_icon_action_source_contract.py", line 31, in assert_rejected
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.264s
+
+FAILED (failures=3)

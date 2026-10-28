@@ -1,0 +1,253 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "kernel": "7.0.0-38-generic",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "pairing-initial",
+      "rect": [
+        351,
+        5,
+        385,
+        39
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-initial",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-hover",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-initial",
+      "rect": [
+        0,
+        120,
+        390,
+        824
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-return",
+      "rect": [
+        351,
+        5,
+        385,
+        39
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-return",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "pairing-keyboard-focus",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-initial",
+      "rect": [
+        1,
+        1,
+        35,
+        35
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-initial",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-hover",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-second",
+      "rect": [
+        1,
+        1,
+        35,
+        35
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-second",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "repair-keyboard-focus",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-initial",
+      "rect": [
+        5,
+        5,
+        39,
+        39
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-initial",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-hover",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-second",
+      "rect": [
+        5,
+        5,
+        39,
+        39
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-second",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "scanner-keyboard-focus",
+      "rect": [
+        0,
+        56,
+        320,
+        76
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    390,
+    844
+  ],
+  "theme": "light",
+  "locale": "en"
+}

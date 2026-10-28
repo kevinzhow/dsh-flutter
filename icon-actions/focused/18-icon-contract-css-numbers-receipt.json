@@ -1,0 +1,52 @@
+{
+  "schema": "icon-action-css-numeric-contract/1",
+  "head": "25d66a938dcd5b43e96d31c424cc662df8c052dc",
+  "tree": "2b71a01d6137e393f10ce308562d8ec17f8a54a1",
+  "base": "2db3f6472a7609c2120c27b279115f3e53a493f9",
+  "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "numberGrammarSource": "https://www.w3.org/TR/css-syntax-3/#consume-a-number",
+  "ownedPathsSha256": {
+    "docs/design-system/icon-actions-source-contract.md": "52d7f6acc35b2de5dc17d464faba59719c378d20ac104c9d4fc31f0fae28b91f",
+    "tool/design-system/generate.py": "c7604838207232bb115c6bd44f2e63f69a26032de7c9dce4ae32455594c61618",
+    "tool/tests/test_icon_action_source_contract.py": "a9c3b14c8cfb86892871e560dabda2f3ed91b555272ccab3f53e8dab8c7e775c"
+  },
+  "unicodeNegativeControl": {
+    "testMethods": 1,
+    "reproducedFailures": 3,
+    "errors": 0
+  },
+  "focusedTests": 22,
+  "pythonTests": 224,
+  "actualSourceGenerationCheck": true,
+  "snapshotGenerationCheck": true,
+  "familyGuardPassed": true,
+  "guardCounts": {
+    "platform-control": 11,
+    "duplicate-button": 0,
+    "duplicate-input": 0,
+    "duplicate-tag": 0,
+    "manual-metric": 892,
+    "duplicate-menu": 0
+  },
+  "releaseArchives": 13,
+  "releaseOutputs": 85,
+  "releaseOffline": true,
+  "generatedUnchangedSha256": {
+    "packages/dsh_ui/lib/src/dsh_recipes.g.dart": "bdd942b8b011ea1b7f6fffe7212ea5aa237323a5b2925c590092eb56b015625a",
+    "tool/design-system/recipes.generated.json": "cb455dd4091c48764b8daf5bbb84b38b800d3f71b31da9fe00d424d7ffdb4e8b"
+  },
+  "productPathsChanged": [],
+  "worktreeClean": true,
+  "logSha256": {
+    "red": "afce0a884c65e8ca42f3a5f038397f31b72eac3c3e8049e9cc6129ddeb0a5280",
+    "green": "13da2d16905cbd208063e24635c951d1088142b1fa8ede68800961d49fc57aa3",
+    "python-all": "9a75a1dffd80100b2bb5f5a2d54d7c31300d884c11dd35c03221063c5c9b61fd",
+    "generate-source": "91dfdc0e0d198c3b2dbb74f61aef561e040bcda471eac30997c214538b31e757",
+    "generate-snapshot": "91dfdc0e0d198c3b2dbb74f61aef561e040bcda471eac30997c214538b31e757",
+    "family-guard": "11aa82f5ad039ff57bacdfc5a397d1792a70f3a50c2a9b6103df1c7833fc5c2f",
+    "release-inputs": "9a301b930d1aff37cf3021d83012144cb4882dabd06fea3704467d3a69cad2e7"
+  },
+  "releaseReceiptSha256": "5a94876294d7e86cf60a970aa926fd3e0b136c73a5b621e04ed53d172561ba61",
+  "nativeOrBuildRun": false,
+  "allPassed": true
+}

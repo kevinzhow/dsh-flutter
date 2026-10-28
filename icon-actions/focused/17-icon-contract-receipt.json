@@ -1,0 +1,54 @@
+{
+  "schema": "icon-action-source-contract/1",
+  "head": "2db3f6472a7609c2120c27b279115f3e53a493f9",
+  "tree": "65a966022436ce47b1368186138186d995e0cb9c",
+  "base": "ef68677092f66bf0ab43d12b61940fa62c1a9815",
+  "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "ownedPathsSha256": {
+    "docs/design-system/icon-actions-source-contract.md": "189155f292253d4be193cb525ff836a66b802c84caef37c0e8d929a39026604b",
+    "tool/design-system/generate.py": "1d3c2ceaf42109e42c020e8ff577475b551a66a7ea29faace7cd1756c4e8a1fa",
+    "tool/tests/test_icon_action_source_contract.py": "0dbe6b2b61091d9f857d3d777bc317f2b1b0da314c12fa28cfd74a22f125d1f8"
+  },
+  "baseNegativeControl": {
+    "tests": 15,
+    "failures": 37,
+    "errors": 0
+  },
+  "focusedTests": 15,
+  "pythonTests": 217,
+  "actualSourceGenerationCheck": true,
+  "snapshotGenerationCheck": true,
+  "familyGuardPassed": true,
+  "guardCounts": {
+    "platform-control": 11,
+    "duplicate-button": 0,
+    "duplicate-input": 0,
+    "duplicate-tag": 0,
+    "manual-metric": 892,
+    "duplicate-menu": 0
+  },
+  "releaseArchives": 13,
+  "releaseOutputs": 85,
+  "releaseOffline": true,
+  "generatedUnchangedSha256": {
+    "packages/dsh_ui/lib/src/dsh_recipes.g.dart": "bdd942b8b011ea1b7f6fffe7212ea5aa237323a5b2925c590092eb56b015625a",
+    "tool/design-system/recipes.generated.json": "cb455dd4091c48764b8daf5bbb84b38b800d3f71b31da9fe00d424d7ffdb4e8b"
+  },
+  "productPathsChanged": [],
+  "worktreeClean": true,
+  "logSha256": {
+    "icon-contract-red.log": "e4a0f48fb6dbb5c3128bf031e4594a9f6b9630e6c7acb2d922be300bea19945d",
+    "icon-contract-red-final.log": "bea2e511a9d3bfecbf007ed79d167cebcec790c3f6967d1fa6a220f4dc4d2905",
+    "icon-contract-green.log": "5e2cca7cb7ca095da78b8d3605f3aca3b3e854a9531748f34a0cc9c9f650aee1",
+    "icon-contract-python-all.log": "b465998209a001f459d6b17e6a95aa4dfd24f3560eb802174add496b03e83ff1",
+    "icon-contract-generate-source.log": "91dfdc0e0d198c3b2dbb74f61aef561e040bcda471eac30997c214538b31e757",
+    "icon-contract-generate-snapshot.log": "91dfdc0e0d198c3b2dbb74f61aef561e040bcda471eac30997c214538b31e757",
+    "icon-contract-family-guard.log": "11aa82f5ad039ff57bacdfc5a397d1792a70f3a50c2a9b6103df1c7833fc5c2f",
+    "icon-contract-release-inputs.log": "9a301b930d1aff37cf3021d83012144cb4882dabd06fea3704467d3a69cad2e7",
+    "icon-contract-propagation.log": "087c0211640673d293bcd446d903868fe5139cad43bff1f3658951c381c20cc4"
+  },
+  "propagationReceiptSha256": "00f01c128cfa3aa798f7c0e6bf1166975b57e4b237121ef3286e390de3844dac",
+  "releaseReceiptSha256": "beb0c1bf8e4de640b87fe50fb3b84b826d57547b9074423a8c3ac9519e6fc1bd",
+  "nativeOrBuildRun": false,
+  "allPassed": true
+}

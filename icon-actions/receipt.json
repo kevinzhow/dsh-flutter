@@ -1,0 +1,124 @@
+{
+  "schema": "whalee-icon-actions-evidence/1",
+  "head": "1911e77e68d43c3badf83f22edd763071e8e7740",
+  "tree": "90a20ee9bf221367a3fe865ca7bc997a3081a02d",
+  "runtimeHead": "1911e77e68d43c3badf83f22edd763071e8e7740",
+  "runtimeTree": "90a20ee9bf221367a3fe865ca7bc997a3081a02d",
+  "identityBefore": {
+    "head": "1911e77e68d43c3badf83f22edd763071e8e7740",
+    "tree": "90a20ee9bf221367a3fe865ca7bc997a3081a02d"
+  },
+  "identityAfter": {
+    "head": "1911e77e68d43c3badf83f22edd763071e8e7740",
+    "tree": "90a20ee9bf221367a3fe865ca7bc997a3081a02d"
+  },
+  "productTrees": {
+    "apps": "f3a16cf7cd084225afb7df160495bca646a047a2",
+    "features": "7163ca7d83800e83bec36b35290a1cad57493382",
+    "packages": "40fbcd7e3cc741e6d01888fcb0234ec55775f01a"
+  },
+  "manifestSha256": "579e6be262553255877289ea0cab7b12f5fab58c59db394749aa5a89a36d01f9",
+  "builds": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "0c65c68abed517d05d427364d3af6585e8d2bc111fd34309db2ef5cbd82d4602",
+      "successLine": "✓ Built build/app/outputs/flutter-apk/app-debug.apk"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "8ba162e2e97a00675c940e2766b29d50c7cb22386aa3d28b68deaab8952ee1e8",
+      "successLine": "✓ Built build/app/outputs/flutter-apk/app-debug.apk"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "b8b47657d8ef97d1e0a1cdbda0798784222d279d72c7a7fdc95056f1dfee41ce",
+      "successLine": "✓ Built build/linux/x64/release/bundle/dsh_flutter",
+      "applicationLibrarySha256": "d266e77c3605bef43be2fb6791191e6272a6194003f2ef3ff0d3304c3d201616"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "b8b47657d8ef97d1e0a1cdbda0798784222d279d72c7a7fdc95056f1dfee41ce",
+      "successLine": "✓ Built build/linux/x64/release/bundle/dsh_flutter",
+      "applicationLibrarySha256": "b6b674d40fa1d46e0102bdad3736bd16ae4e25dfa1384d88b4a1a49ab634af3b"
+    }
+  ],
+  "fullChecks": 13,
+  "gpu": {
+    "assertions": 76,
+    "pngs": 76,
+    "hardware": true
+  },
+  "android": {
+    "captures": 12,
+    "inputs": 20,
+    "checks": 27,
+    "cleanupPassed": true
+  },
+  "profiles": {
+    "comparedFrames": 144,
+    "profiles": {
+      "iconAction": 80,
+      "headerAction": 64
+    },
+    "exactCrops": 0,
+    "knownPendingFrames": 64
+  },
+  "manager": {
+    "compared": 16,
+    "dimensionsEqual": 16,
+    "nonTextAtLeast99_5": 8,
+    "meanNonTextPct": 99.575875
+  },
+  "preservation108": {
+    "compared": 108,
+    "dimensionsEqual": 100,
+    "nonTextAtLeast99_5": 0,
+    "meanNonTextPct": 68.14376851851851
+  },
+  "preservation96": {
+    "compared": 96,
+    "dimensionsEqual": 72,
+    "nonTextAtLeast99_5": 0,
+    "meanNonTextPct": 93.36189583333334
+  },
+  "baseline108": {
+    "compared": 108,
+    "dimensionsEqual": 100,
+    "nonTextAtLeast99_5": 0,
+    "meanNonTextPct": 68.14376851851851
+  },
+  "sourceCoverage": {
+    "uiPackages": 57,
+    "uiPackagesWithCss": 48,
+    "uiPackagesWithoutCss": 9,
+    "uiCssInputs": 209,
+    "uiPackagesWithRetainedSnapshots": 13,
+    "uiCssRetainedInputs": 36,
+    "uiCssPendingInputs": 173,
+    "supportStylePackages": 9,
+    "supportCssInputs": 10
+  },
+  "legacyDebt": {
+    "manual-metric": 892,
+    "platform-control": 11,
+    "duplicate-button": 0
+  },
+  "sourcePin": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "releasePackages": 13,
+  "releaseFiles": 85,
+  "allowedPostRuntimeChanges": [],
+  "focusOwnershipMismatches": 36,
+  "limitations": [
+    "Chromium post-touch-up sticky hover remains UNMATCHED/PENDING; it is not an approved platform exception.",
+    "Header Chromium UA outline:auto pixels remain UNMATCHED/PENDING. Source input retention and a visible native focus cue do not establish matching rasterization.",
+    "36 source/native focus ownership differences remain UNMATCHED/PENDING. Matching callback effects do not close those differences.",
+    "Android reverse-tab injection remains UNMATCHED/PENDING: API36 keycombination 59,61 advanced forward in the retained diagnostics. Acceptance uses the explicitly committed ordinary-forward sequence; reverse keyboard navigation is not certified.",
+    "The three native connection-route actions adopt the canonical source profile and are exercised with synthetic offline services and an injected camera body. Web route, production camera and network parity are not claimed.",
+    "Back and Close counters observe actual route-pop effects; they do not independently count raw callback invocations. GPU image-change assertions do not read exact numeric counter text.",
+    "144 comparisons cover source-measured control regions, not the surrounding Web page. Raw nonzero differences are retained without an equality gate or fitted threshold.",
+    "892 manual metric matches, 0 duplicate button matches and 11 platform control matches remain in the family inventory. Source coverage is not implementation completion; the overall 99.5% visual target remains unfinished.",
+    "Historical108 scores and historical192 provider comparisons are retained separately. Their equality is not assumed for this candidate.",
+    "No publication, deployment, release, network access, product write, git write or device operation occurs in this staging script."
+  ],
+  "published": false
+}

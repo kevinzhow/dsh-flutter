@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-icon-actions/tool/parity-desktop/gpu_capture.py", line 363, in <module>
+    main()
+    ~~~~^^
+  File "[workspace]/scratch/whalee-icon-actions/tool/parity-desktop/gpu_capture.py", line 334, in main
+    assertions.append(expect_capture(env, case_out, screen, step['expect']))
+                      ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scratch/whalee-icon-actions/tool/parity-desktop/gpu_capture.py", line 194, in expect_capture
+    raise RuntimeError(f'Capture assertion timed out: reference={label}, changed={changed}')
+RuntimeError: Capture assertion timed out: reference=pairing-return, changed=True
+{"status": "failed", "runtimeHead": "21ff573d1d8f97eae78b292e64321f6a42646253", "runtimeTree": "5ff0e23417031e39fff2b9bd360857dd9c4098cc", "executableSha256": "b8b47657d8ef97d1e0a1cdbda0798784222d279d72c7a7fdc95056f1dfee41ce", "applicationLibrarySha256": "7cd4e350522030a06cb011456aae20ecb07ef09fed93c59026cb959d68a69656", "binaryUnchanged": true, "totalAssertions": 76, "totalPassedAssertions": 0, "totalScreenshots": 76, "ownedPidsAbsent": false}

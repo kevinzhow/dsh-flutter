@@ -1,0 +1,22 @@
+Captured pairing-initial
+Captured settings-pointer
+Captured pairing-keyboard-focus
+Captured settings-keyboard
+Captured repair-initial
+Captured back-pointer-return
+Captured failed-6
+Traceback (most recent call last):
+  File "[workspace]/scripts/icon-actions-android.py", line 388, in <module>
+    main()
+    ~~~~^^
+  File "[workspace]/scripts/icon-actions-android.py", line 370, in main
+    replay.run(steps)
+    ~~~~~~~~~~^^^^^^^
+  File "[workspace]/scripts/icon-actions-android.py", line 210, in run
+    self.wait(lambda: len(self.focused_nodes(value)) == 1,
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              'Keyboard focuses the real action: ' + value)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scripts/icon-actions-android.py", line 142, in wait
+    raise RuntimeError(description)
+RuntimeError: Keyboard focuses the real action: Back
