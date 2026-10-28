@@ -54,7 +54,10 @@ SettingsRoot and AccountMenu with synthetic injected stores. The Flutter case
 mounts the actual application composition through
 `ReportedSidebarFixture({required i18n, platform=darwin, collapsed=false,
 width=280, onAction})`. That helper has no test/parity imports and is reusable
-by the native fixture target. Its two Chinese Session titles, two Workspaces
+by the native fixture target. The composition helper and case live under
+`apps/dsh_flutter/test/parity/`: feature packages keep no cross-feature imports,
+including test code or development dependencies. The three behavior checks live
+in `apps/dsh_flutter/test/reported_sidebar_test.dart`. Its two Chinese Session titles, two Workspaces
 and panel labels are synthetic and identical between providers.
 
 Focused local results:39 sidebar/settings/browser widget tests pass;35

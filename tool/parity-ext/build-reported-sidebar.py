@@ -12,7 +12,7 @@ for platform,form,viewport_width,height in [('darwin','desktop',1280,800),('linu
             {'width':viewport_width,'height':height,'density':2}, [('default','full-root',{'width':280,'height':height,'platform':platform},None)],
             locale=locale,category='extension/reported-sidebar',
             react_hint='packages/client/ui-sidebar/src/client/SidebarRoot.tsx + ui-workspace rows/WorkspaceBrowser.tsx + ui-settings-general SettingsRoot.tsx + ui-settings-account AccountMenu.tsx',
-            flutter_hint='features/dsh_feature_sidebar/test/parity/cases/reported_sidebar.dart reportedSidebarCases')
+            flutter_hint='apps/dsh_flutter/test/parity/cases/reported_sidebar.dart reportedSidebarCases')
         case['capture']={'selector':'[data-parity-id="reported-sidebar-frame"]','flutterKey':'reported-sidebar-frame','crop':'element'}
         cases.extend(themed(case))
 replace_cases('components.reported-sidebar.',cases)
