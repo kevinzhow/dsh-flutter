@@ -114,6 +114,19 @@ def base_inputs(host_dirs):
 
 
 def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference=DEFAULT_REFERENCE):
+    """Add only the published Toast dispatch; preserve prior provider paths."""
+    from . import published_toasts
+    selected = [e for e in entries if e['case']['kind'] == published_toasts.KIND]
+    if not selected:
+        return _capture_without_toasts(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference)
+    other = [e for e in entries if e['case']['kind'] != published_toasts.KIND]
+    status = (_capture_without_toasts(other, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference)
+              if other else {})
+    status.update(published_toasts.capture(selected, out, results, reference))
+    return {entry['key']: status[entry['key']] for entry in entries}
+
+
+def _capture_without_toasts(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference=DEFAULT_REFERENCE):
     """Route the published loaded-card kind; preserve all other provider inputs."""
     from . import published_plugin_cards
     published = [e for e in entries if e['case']['kind'] == published_plugin_cards.KIND]
