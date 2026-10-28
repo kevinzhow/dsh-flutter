@@ -6,7 +6,7 @@ Unknown syntax fails; --check also verifies the reference consumer's dependency
 and source package version, not only the checkout commit label.
 """
 from pathlib import Path
-import argparse, functools, hashlib, json, os, re, subprocess, sys
+import argparse, functools, hashlib, json, math, os, re, subprocess, sys
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 OUT = ROOT / 'packages/dsh_ui/lib/src/dsh_recipes.g.dart'
@@ -28,11 +28,20 @@ def value(rules, selector, prop):
     return found[0]
 
 
+# CSS Syntax 3, "consume a number": digits are ASCII U+0030..U+0039.
+# CSS permits signs, leading zeros, fractions and exponent notation; unlike
+# JavaScript integer literals, its numeric token grammar does not ban 028.
+CSS_NUMBER = r'[+-]?(?:[0-9]*\.[0-9]+|[0-9]+)(?:[eE][+-]?[0-9]+)?'
+
+
 def number(raw, unit='px'):
-    match = re.fullmatch(r'(-?(?:\d+(?:\.\d+)?|\.\d+))' + unit, raw)
+    match = re.fullmatch('(' + CSS_NUMBER + ')' + re.escape(unit), raw)
     if not match:
         raise ValueError('unsupported CSS number: ' + raw)
-    return float(match[1])
+    parsed = float(match[1])
+    if not math.isfinite(parsed):
+        raise ValueError('unsupported nonfinite CSS number: ' + raw)
+    return parsed
 
 
 @functools.lru_cache(maxsize=1)
@@ -114,6 +123,8 @@ def verify_feature_source(published, source):
     menu_rules = lambda rules: [normalized_rule(r) for r in rules if '.addMenu' in r['selector']]
     if menu_rules(published) != menu_rules(source):
         raise ValueError('reference menu CSS differs from pinned published plugin package')
+    validate_plugin_context(published)
+    validate_plugin_context(source, source=True)
 
 
 def collect(source=None):
@@ -335,6 +346,63 @@ PLUGIN_BUTTON_SCHEMA = {
 }
 
 
+# Only values already translated into the three PluginManager recipe maps may
+# vary. Everything else in this sheet is retained/frozen context, not a claim
+# that its cards, layout, selectors or interactions have been implemented.
+PLUGIN_TRANSLATED_FIELDS = {
+    '.infoButton': 'width height color',
+    '.iconButton:focus-visible': 'outline outline-offset',
+    '.iconButton': 'border-radius width height color',
+    '.iconButton:hover:not(:disabled)': 'background color',
+    '.iconButton:disabled': 'opacity',
+    '.addButton, .addPrimary, .addMore': 'border-radius height padding font-size line-height',
+    '.addMore': 'border-left width',
+    '.addMenu': 'width max-width',
+    '.addMenu [role=menuitem]': 'gap height padding',
+    '.addMenuItem': 'gap',
+    '.addMenuDescription': 'max-height color font-size line-height',
+}
+
+
+def plugin_context_fingerprint(rules):
+    # Keep rule order, declaration order, selectors, conditions and meaningful
+    # literal/identifier bytes. Do not normalize whitespace or comments with a
+    # regex here: even a quoted font-family can contain significant spaces.
+    # css_rules has already rejected duplicate declarations and unknown syntax.
+    shape = []
+    for rule in rules:
+        field_selector = {".addMenu [role='menuitem']": '.addMenu [role=menuitem]'}.get(
+            rule['selector'], rule['selector'])
+        fields = PLUGIN_TRANSLATED_FIELDS.get(field_selector, '').split()
+        shape.append([
+            rule['selector'], rule['conditions'],
+            [[prop, '$translated' if not rule['conditions'] and prop in fields else raw]
+             for prop, raw in rule['declarations'].items()],
+        ])
+    return hashlib.sha256(json.dumps(shape, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+
+
+# Pinned 0.2.1-rc.2 logical sheet after the static class export is unhashed.
+# These hashes freeze *all* pending rules, including generic/ancestor selectors
+# and inherited custom properties; the class-filtered schema alone cannot.
+PLUGIN_PUBLISHED_CONTEXT = 'b33a05f966144c629da33e8af213d93a92b58275cb973d2490876e965737f6fd'
+# Source and release minification differ outside the translated profiles. Both
+# exact full forms are frozen independently; no CSS equivalence is inferred.
+# The normalized-release form keeps verify_feature_source's existing logical
+# input API usable without erasing literal bytes in a new candidate.
+PLUGIN_SOURCE_CONTEXTS = {
+    'dd6cf1177f316026719b8f661ddde9dc1f57c4ccc4bbe50fa06a1a68bb40ab57',
+    'bcec2e95e4ab1c13cd5fbcf359ec647f7b2d114ad39714484060ebaed994d259',
+}
+
+
+def validate_plugin_context(rules, *, source=False):
+    supported = PLUGIN_SOURCE_CONTEXTS if source else {PLUGIN_PUBLISHED_CONTEXT}
+    if plugin_context_fingerprint(rules) not in supported:
+        prefix = 'reference plugin CSS context differs' if source else 'untranslated plugin source context'
+        raise ValueError(prefix + ': classify changed rules/values before generating recipes')
+
+
 def validate_supported(sheets):
     for name, schema in SUPPORTED.items():
         seen, conditional_count = set(), 0
@@ -427,6 +495,7 @@ def validate_supported(sheets):
         for prop, expected in values.items():
             if value(rules, selector, prop) != expected:
                 raise ValueError('untranslated plugin button value: ' + selector + '/' + prop)
+    validate_plugin_context(sheets['PluginManagerPage.module.css'])
 
 
 def ladder_token(size, line):
@@ -556,15 +625,18 @@ def render(lock, sheets):
     add = '.addButton, .addPrimary, .addMore'
     add_padding = get(p, add, 'padding').split()
     if len(add_padding) != 2 or add_padding[0] != '0': raise ValueError('unsupported add button padding')
-    divider = re.fullmatch(r'([.\d]+px) solid color-mix\(in srgb,\s*var\((--[\w-]+)\) ([\d.]+)%,\s*transparent\)', get(p, '.addMore', 'border-left'))
+    divider = re.fullmatch(rf'({CSS_NUMBER}px) solid color-mix\(in srgb,\s*var\((--[\w-]+)\) ({CSS_NUMBER})%,\s*transparent\)', get(p, '.addMore', 'border-left'))
     focus = re.fullmatch(r'var\((--[\w-]+)\) solid var\((--[\w-]+),\s*var\((--[\w-]+)\)\)', get(p, '.iconButton:focus-visible', 'outline'))
     if divider is None or focus is None: raise ValueError('unsupported plugin button divider/focus')
+    divider_width, divider_percentage = number(divider[1]), number(divider[3], '')
+    if divider_width < 0 or not 0 <= divider_percentage <= 100:
+        raise ValueError('unsupported plugin button divider width/percentage')
     metrics['DshAddButtonRecipe'] = {
         'height': px(p, add, 'height'), 'padding': number(add_padding[1]),
         'fontToken': ladder_token(px(p, add, 'font-size'), px(p, add, 'line-height')),
         'radiusToken': tok(p, add, 'border-radius'),
-        'moreWidth': px(p, '.addMore', 'width'), 'dividerWidth': number(divider[1]),
-        'dividerToken': divider[2], 'dividerAlpha': float(divider[3]) / 100,
+        'moreWidth': px(p, '.addMore', 'width'), 'dividerWidth': divider_width,
+        'dividerToken': divider[2], 'dividerAlpha': divider_percentage / 100,
     }
     metrics['DshIconActionRecipe'] = {
         'width': px(p, '.iconButton', 'width'), 'height': px(p, '.iconButton', 'height'),
@@ -578,6 +650,23 @@ def render(lock, sheets):
         'focusWidthToken': focus[1], 'focusToken': focus[2], 'focusFallbackToken': focus[3],
         'focusOffset': px(p, '.iconButton:focus-visible', 'outline-offset'),
     }
+    icon_action = metrics['DshIconActionRecipe']
+    if any(not math.isfinite(icon_action[field]) or icon_action[field] <= 0
+           for field in ('width', 'height', 'infoWidth', 'infoHeight')):
+        raise ValueError('unsupported plugin icon action geometry: dimensions must be positive')
+    if not math.isfinite(icon_action['focusOffset']):
+        raise ValueError('unsupported plugin icon action outline offset: expected a finite number')
+    if not 0 <= icon_action['disabledOpacity'] <= 1:
+        # CSS clamps opacity; Flutter's Opacity requires this domain. Other
+        # inputs are rejected until that CSS clamp behavior is translated.
+        raise ValueError('unsupported plugin icon action opacity: expected 0..1')
+    # The menu compiler also consumes one numeric literal from this translated
+    # slot. Validate it through the same ASCII/finite gate before its narrower
+    # supported expression grammar performs the existing float conversion.
+    plugin_viewport = re.fullmatch(r'calc\(100vw - (.+)\)', get(p, '.addMenu', 'max-width'))
+    if plugin_viewport is None:
+        raise ValueError('unsupported plugin menu viewport width')
+    number(plugin_viewport[1])
     menu_spec = importlib.util.spec_from_file_location('menu_recipes', HERE / 'menu_recipes.py')
     menu = importlib.util.module_from_spec(menu_spec)
     menu_spec.loader.exec_module(menu)

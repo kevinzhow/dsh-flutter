@@ -187,12 +187,15 @@ class RootScreen extends StatelessWidget {
                   right: DshSpace.sm,
                   top: DshSpace.sm,
                   child: SafeArea(
-                    child: DshIconButton(
+                    child: DshButton(
                       key: const ValueKey('pairing-settings'),
-                      icon: CharcoalIcons.sliders,
-                      plain: true,
+                      profile: DshButtonProfile.iconAction,
                       semanticLabel: controller.i18n.t('settings', 'trigger'),
                       onPressed: () => _settings(context),
+                      child: const DshIcon(
+                        CharcoalIcons.sliders,
+                        size: DshButtonRecipe.iconSize,
+                      ),
                     ),
                   ),
                 ),

@@ -43,7 +43,6 @@ export 'src/dsh_web_block.dart';
 export 'src/dsh_card.dart';
 export 'src/dsh_corners.dart';
 export 'src/dsh_disclosure.dart';
-export 'src/dsh_icon_button.dart';
 export 'src/dsh_anchored_panel.dart';
 export 'src/dsh_menu_follower.dart';
 export 'src/dsh_menu.dart';

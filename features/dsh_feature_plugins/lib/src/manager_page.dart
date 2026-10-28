@@ -263,6 +263,7 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
           delay: const Duration(milliseconds: 500),
           disabled: !loaded || model.refreshing,
           child: DshButton(
+            key: const ValueKey('plugin-refresh'),
             profile: DshButtonProfile.iconAction,
             onPressed: !loaded || model.refreshing
                 ? null
