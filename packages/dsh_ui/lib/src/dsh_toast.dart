@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui' show SemanticsRole;
 
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +11,10 @@ import 'dsh_icons.g.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_shadow_box.dart';
 import 'dsh_text_baseline.dart';
+import 'dsh_toast_host.dart';
 import 'theme_access.dart';
+
+export 'dsh_toast_host.dart' show DshToastHost;
 
 Duration _milliseconds(double value) => Duration(
   microseconds: (value * Duration.microsecondsPerMillisecond).round(),
@@ -23,16 +25,6 @@ final Duration dshToastHold = _milliseconds(DshToastRecipe.holdMs);
 final Duration dshToastFade = _milliseconds(DshToastRecipe.fadeMs);
 
 enum DshToastTone { success }
-
-/// Root portal layer. Mount around the Navigator in the app builder so these
-/// announcements escape feature transforms and remain above lightbox routes in
-/// either show order. Other overlay-family priorities are not changed here.
-class DshToastHost extends StatelessWidget {
-  const DshToastHost({super.key, required this.child});
-  final Widget child;
-  @override
-  Widget build(BuildContext context) => Overlay.wrap(child: child);
-}
 
 /// A source Toast occurrence: no icon by default; success owns the published
 /// circled-check glyph and overrides an optional icon. Actions/anchors remain
@@ -241,9 +233,8 @@ class _ToastPaintState extends State<_ToastPaint> {
                           0,
                           DshToastRecipe.enterOffsetY * (1 - entry),
                         ),
-                        child: Semantics(
-                          container: true,
-                          role: SemanticsRole.alert,
+                        child: DshToastAnnouncement(
+                          text: spec.text,
                           child: DshShadowBox(
                             // CSS left:50%/top is laid out before the centering
                             // and entry transforms. Blink snaps in that space.
