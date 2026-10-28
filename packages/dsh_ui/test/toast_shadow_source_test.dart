@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dsh_theme/testing.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +8,10 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Future<List<Path>> masks(WidgetTester t, DshShadowBox box, Size size) async {
     await t.pumpWidget(
-      Directionality(textDirection: TextDirection.ltr, child: box),
+      MediaQuery(
+        data: const MediaQueryData(devicePixelRatio: 1),
+        child: Directionality(textDirection: TextDirection.ltr, child: box),
+      ),
     );
     final painter = t
         .widget<CustomPaint>(find.byType(CustomPaint).first)
@@ -108,6 +113,13 @@ void main() {
         final owner = find.byType(DshShadowBox);
         final rect = t.getRect(owner);
         final clipInset = 1 / dshSnapDensity(density);
+        // Flutter Path stores coordinates as float32; its reported width is
+        // the difference of those stored edges, not a new layout tolerance.
+        final edges = Float32List.fromList([
+          clipInset,
+          rect.width - clipInset,
+          rect.height - clipInset,
+        ]);
         final widget = t.widget<DshShadowBox>(owner);
         expect(widget.color.a, 1);
         final painter = t
@@ -132,10 +144,10 @@ void main() {
           // exactly one internal paint pixel (1/DPR in the native model) for an authored opaque shadow owner.
           // This test checks that source operation on the existing local
           // contour; it does not certify pre-transform coordinate snapping.
-          expect(bounds.width, closeTo(rect.width - 2 * clipInset, 1e-9));
-          expect(bounds.height, closeTo(rect.height - 2 * clipInset, 1e-9));
-          expect(bounds.left, closeTo(clipInset, 1e-9));
-          expect(bounds.top, closeTo(clipInset, 1e-9));
+          expect(bounds.width, edges[1] - edges[0]);
+          expect(bounds.height, edges[2] - edges[0]);
+          expect(bounds.left, edges[0]);
+          expect(bounds.top, edges[0]);
         }
         await t.pumpWidget(const SizedBox());
       });
