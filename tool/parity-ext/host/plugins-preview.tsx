@@ -15,6 +15,9 @@ function Surface({family,props,ctx}:any){
  const [category,setCategory]=useState(props.category??null)
  const [tab,setTab]=useState('installed')
  useLayoutEffect(()=>{
+  if(family==='manager'){
+   Array.from(surface.current?.querySelectorAll('button')??[]).find(el=>el.getAttribute('aria-label')===t('refresh'))?.setAttribute('data-parity-id','plugin-refresh')
+  }
   surface.current?.querySelector('[aria-haspopup="menu"]')?.setAttribute('data-parity-id','plugin-add-more')
   surface.current?.querySelector('[role="switch"]')?.setAttribute('data-parity-id','plugin-switch-@synthetic/preview-bundle')
   const categoryButtons=surface.current?.querySelectorAll('[role="group"] button')
