@@ -452,8 +452,8 @@ def dedupe(names: list[str]) -> list[str]:
 SCOPED_TOKENS = {
     ('gradient-shadow-text.css', 'body[data-ds-dark-theme] [data-menu-material]'): ({'--dsw-elevation-stroke-color'}, 'menus: dark material stroke consumed by DshMenuSurface recipe'),
     ('focus.css', 'html[data-input-modality=pointer] body :focus-visible:not(:read-write)'): ({'--dsw-focus-ring-color'}, 'focus: keyboard-only highlight is handled by canonical controls'),
-    ('design-platform.css', 'html[data-platform=darwin] body'): ({'--dsw-specific-menu'}, 'menus: macOS material; pending family migration'),
-    ('design-platform.css', 'html[data-platform=darwin] body[data-ds-dark-theme]'): ({'--dsw-specific-menu'}, 'menus: macOS dark material; pending family migration'),
+    ('design-platform.css', 'html[data-platform=darwin] body'): ({'--dsw-specific-menu'}, 'popovers: macOS fill consumed by DshPopoverSurface; generic menu backing pending'),
+    ('design-platform.css', 'html[data-platform=darwin] body[data-ds-dark-theme]'): ({'--dsw-specific-menu'}, 'popovers: macOS dark fill consumed by DshPopoverSurface; generic menu backing pending'),
 }
 
 

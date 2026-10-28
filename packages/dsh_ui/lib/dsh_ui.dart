@@ -52,6 +52,7 @@ export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
 export 'src/dsh_reader_markdown.dart';
 export 'src/dsh_menu_surface.dart';
+export 'src/dsh_platform_material.dart';
 export 'src/dsh_status_dot.dart';
 export 'src/dsh_text_field.dart';
 export 'src/theme_access.dart';

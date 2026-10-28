@@ -6135,6 +6135,22 @@
         }
       }
     ],
+    "PlatformMenuMaterial": [
+      {
+        "selector": "html[data-platform=darwin] body",
+        "conditions": [],
+        "declarations": {
+          "--dsw-specific-menu": "#f8f9faf0"
+        }
+      },
+      {
+        "selector": "html[data-platform=darwin] body[data-ds-dark-theme]",
+        "conditions": [],
+        "declarations": {
+          "--dsw-specific-menu": "#303136f0"
+        }
+      }
+    ],
     "ModalContext": {
       "themeTokens": [
         {
@@ -6731,6 +6747,10 @@
       "errorIconToken": "--dsw-alias-state-error-primary",
       "actionMinWidth": 72.0,
       "confirmMinWidth": 136.0
+    },
+    "DshPlatformMaterialRecipe": {
+      "darwinLightMenuFill": "#f8f9faf0",
+      "darwinDarkMenuFill": "#303136f0"
     }
   }
 }

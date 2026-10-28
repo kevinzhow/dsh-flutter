@@ -535,3 +535,8 @@ abstract final class DshRiskDialogRecipe {
   static const double actionMinWidth = 72.0;
   static const double confirmMinWidth = 136.0;
 }
+
+abstract final class DshPlatformMaterialRecipe {
+  static const String darwinLightMenuFill = '#f8f9faf0';
+  static const String darwinDarkMenuFill = '#303136f0';
+}

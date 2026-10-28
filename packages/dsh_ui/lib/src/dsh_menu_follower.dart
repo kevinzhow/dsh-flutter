@@ -33,11 +33,14 @@ class DshMenuFollower extends StatefulWidget {
     this.alignEnd = false,
     this.above = false,
     this.frameOverlayTop,
+    this.gap = DshMenuRecipe.anchorGap,
+    this.viewportMargin = DshMenuRecipe.portalMargin,
   });
   final LayerLink link;
   final Widget child;
   final bool alignEnd, above;
   final double? frameOverlayTop;
+  final double gap, viewportMargin;
   @override
   State<DshMenuFollower> createState() => _DshMenuFollowerState();
 }
@@ -109,9 +112,11 @@ class _DshMenuFollowerState extends State<DshMenuFollower>
                   safeInsets: dshMenuSafeInsetsOf(context),
                   alignEnd: widget.alignEnd,
                   above: widget.above,
+                  gap: widget.gap,
+                  margin: widget.viewportMargin,
                   top: math.max(
-                    DshMenuRecipe.portalMargin,
-                    widget.frameOverlayTop ?? DshMenuRecipe.portalMargin,
+                    widget.viewportMargin,
+                    widget.frameOverlayTop ?? widget.viewportMargin,
                   ),
                 ),
                 child: widget.child,
@@ -130,10 +135,13 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
     required this.above,
     required this.top,
     required this.safeInsets,
+    required this.gap,
+    required this.margin,
   });
   final Rect anchor;
   final bool alignEnd, above;
   final double top;
+  final double gap, margin;
   final EdgeInsets safeInsets;
 
   @override
@@ -143,23 +151,15 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
   @override
   Offset getPositionForChild(Size size, Size childSize) {
     final x = alignEnd ? anchor.right - childSize.width : anchor.left;
-    final y = above
-        ? anchor.top - childSize.height - DshMenuRecipe.anchorGap
-        : anchor.bottom + DshMenuRecipe.anchorGap;
+    final y = above ? anchor.top - childSize.height - gap : anchor.bottom + gap;
     return Offset(
       math.min(
-        math.max(x, safeInsets.left + DshMenuRecipe.portalMargin),
-        size.width -
-            childSize.width -
-            safeInsets.right -
-            DshMenuRecipe.portalMargin,
+        math.max(x, safeInsets.left + margin),
+        size.width - childSize.width - safeInsets.right - margin,
       ),
       math.min(
         math.max(y, safeInsets.top + top),
-        size.height -
-            childSize.height -
-            safeInsets.bottom -
-            DshMenuRecipe.portalMargin,
+        size.height - childSize.height - safeInsets.bottom - margin,
       ),
     );
   }
@@ -170,5 +170,7 @@ class _MenuPlacement extends SingleChildLayoutDelegate {
       alignEnd != old.alignEnd ||
       above != old.above ||
       top != old.top ||
+      gap != old.gap ||
+      margin != old.margin ||
       safeInsets != old.safeInsets;
 }

@@ -1,7 +1,10 @@
-import 'package:flutter/services.dart' show LogicalKeyboardKey;
+import 'package:flutter/services.dart'
+    show HardwareKeyboard, KeyDownEvent, KeyEvent, LogicalKeyboardKey;
 import 'package:flutter/widgets.dart';
 
 import 'dsh_menu_follower.dart';
+import 'dsh_recipes.g.dart';
+import 'dsh_shell_chrome.dart';
 
 /// Handle an anchor builder uses to open and close its panel.
 class DshPanelController extends ChangeNotifier {
@@ -40,12 +43,14 @@ class DshAnchoredPanel extends StatefulWidget {
     required this.panelBuilder,
     this.side = DshPanelSide.bottom,
     this.align = DshPanelAlign.start,
-    this.gap = 4,
+    this.gap = DshMenuRecipe.anchorGap,
     this.controller,
     this.panelWidth,
-    this.viewportMargin = 12,
+    this.viewportMargin = DshMenuRecipe.portalMargin,
     this.menuViewport = false,
     this.frameOverlayTop,
+    this.focusPanel = true,
+    this.exclusiveGroup,
   });
 
   final Widget Function(BuildContext context, DshPanelController controller)
@@ -66,17 +71,76 @@ class DshAnchoredPanel extends StatefulWidget {
   final bool menuViewport;
   final double? frameOverlayTop;
 
+  /// Static source stat dialogs retain focus on their trigger. Interactive
+  /// menus keep their existing foreground focus ownership by default.
+  final bool focusPanel;
+
+  /// Sibling panels in this source family replace one another, including when
+  /// a keyboard activates the sibling without a pointer-down event.
+  final Object? exclusiveGroup;
+
   @override
   State<DshAnchoredPanel> createState() => _DshAnchoredPanelState();
 }
 
 class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
+  static final _activeByOverlay =
+      Expando<Map<Object, _DshAnchoredPanelState>>();
   final LayerLink _link = LayerLink();
   late DshPanelController _controller;
   OverlayEntry? _entry;
   LocalHistoryEntry? _history;
   FocusNode? _previousFocus;
   final _panelFocus = FocusScopeNode(debugLabel: 'anchored panel');
+  bool _refreshScheduled = false;
+  bool _observingKeyboard = false;
+  OverlayState? _overlay;
+  Object? _openGroup;
+
+  bool _onGlobalKey(KeyEvent event) {
+    if (event is KeyDownEvent &&
+        event.logicalKey == LogicalKeyboardKey.escape) {
+      _close();
+    }
+    // The source's document listener does not cancel the underlying key.
+    return false;
+  }
+
+  void _forgetPanel() {
+    if (_observingKeyboard) {
+      HardwareKeyboard.instance.removeHandler(_onGlobalKey);
+      _observingKeyboard = false;
+    }
+    final overlay = _overlay;
+    final group = _openGroup;
+    if (overlay != null && group != null) {
+      final peers = _activeByOverlay[overlay];
+      if (peers?[group] == this) peers?.remove(group);
+    }
+    _overlay = null;
+    _openGroup = null;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _refreshOverlay();
+  }
+
+  @override
+  void didUpdateWidget(DshAnchoredPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _refreshOverlay();
+  }
+
+  void _refreshOverlay() {
+    if (_entry == null || _refreshScheduled) return;
+    _refreshScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _refreshScheduled = false;
+      if (mounted) _entry?.markNeedsBuild();
+    });
+  }
 
   @override
   void initState() {
@@ -88,6 +152,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
 
   @override
   void dispose() {
+    _forgetPanel();
     _controller._toggle = null;
     _controller._close = null;
     _entry?.remove();
@@ -104,6 +169,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
 
   void _close() {
     if (_entry == null) return;
+    _forgetPanel();
     _entry!.remove();
     _entry = null;
     _controller._set(false);
@@ -119,7 +185,21 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
 
   void _show() {
     final overlay = Overlay.of(context, rootOverlay: true);
-    _previousFocus = FocusManager.instance.primaryFocus;
+    final group = widget.exclusiveGroup;
+    if (group != null) {
+      final peers = _activeByOverlay[overlay] ??= {};
+      peers[group]?._close();
+      peers[group] = this;
+      _overlay = overlay;
+      _openGroup = group;
+    }
+    _previousFocus = widget.focusPanel
+        ? FocusManager.instance.primaryFocus
+        : null;
+    if (!widget.focusPanel) {
+      HardwareKeyboard.instance.addHandler(_onGlobalKey);
+      _observingKeyboard = true;
+    }
     final end = widget.align == DshPanelAlign.end;
     final top = widget.side == DshPanelSide.top;
     double shiftX = 0;
@@ -142,54 +222,65 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
       shiftX = clamped - left;
     }
     _entry = OverlayEntry(
-      builder: (context) => FocusScope(
-        node: _panelFocus,
-        onKeyEvent: (_, event) {
-          if (event.logicalKey != LogicalKeyboardKey.escape) {
-            return KeyEventResult.ignored;
-          }
-          _close();
-          return KeyEventResult.handled;
-        },
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Listener(
-                behavior: HitTestBehavior.translucent,
-                onPointerDown: (event) {
-                  final box = this.context.findRenderObject()! as RenderBox;
-                  final anchor = box.localToGlobal(Offset.zero) & box.size;
-                  // The trigger owns its toggle. Closing on its pointer-down
-                  // would make its subsequent tap reopen the same panel.
-                  if (!anchor.contains(event.position)) _close();
+      builder: (context) => InheritedTheme.captureAll(
+        this.context,
+        ShellScope(
+          chrome: ShellScope.of(this.context),
+          child: FrameInsetsScope(
+            insets: FrameInsetsScope.of(this.context),
+            child: Builder(
+              builder: (context) => FocusScope(
+                node: _panelFocus,
+                onKeyEvent: (_, event) {
+                  if (event.logicalKey != LogicalKeyboardKey.escape) {
+                    return KeyEventResult.ignored;
+                  }
+                  _close();
+                  return KeyEventResult.handled;
                 },
-                child: const SizedBox.expand(),
+                child: Stack(
+                  children: [
+                    if (widget.menuViewport)
+                      Positioned.fill(
+                        child: DshMenuFollower(
+                          link: _link,
+                          alignEnd: end,
+                          above: top,
+                          frameOverlayTop:
+                              widget.frameOverlayTop ??
+                              FrameInsetsScope.of(this.context).overlayTop,
+                          gap: widget.gap,
+                          viewportMargin: widget.viewportMargin,
+                          child: TapRegion(
+                            groupId: this,
+                            child: widget.panelBuilder(context, _controller),
+                          ),
+                        ),
+                      )
+                    else
+                      CompositedTransformFollower(
+                        link: _link,
+                        targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
+                        followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
+                        offset: Offset(shiftX, top ? -widget.gap : widget.gap),
+                        child: TapRegion(
+                          groupId: this,
+                          child: width == null
+                              ? widget.panelBuilder(context, _controller)
+                              : SizedBox(
+                                  width: width,
+                                  child: widget.panelBuilder(
+                                    context,
+                                    _controller,
+                                  ),
+                                ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
-            if (widget.menuViewport)
-              Positioned.fill(
-                child: DshMenuFollower(
-                  link: _link,
-                  alignEnd: end,
-                  above: top,
-                  frameOverlayTop: widget.frameOverlayTop,
-                  child: widget.panelBuilder(context, _controller),
-                ),
-              )
-            else
-              CompositedTransformFollower(
-                link: _link,
-                targetAnchor: Alignment(end ? 1 : -1, top ? -1 : 1),
-                followerAnchor: Alignment(end ? 1 : -1, top ? 1 : -1),
-                offset: Offset(shiftX, top ? -widget.gap : widget.gap),
-                child: width == null
-                    ? widget.panelBuilder(context, _controller)
-                    : SizedBox(
-                        width: width,
-                        child: widget.panelBuilder(context, _controller),
-                      ),
-              ),
-          ],
+          ),
         ),
       ),
     );
@@ -197,7 +288,9 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
     // A FocusScopeNode cannot defer a request made before it is attached.
     // Pointer-opened panels may start with only the route scope focused.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && _entry != null) _panelFocus.requestFocus();
+      if (mounted && _entry != null && widget.focusPanel) {
+        _panelFocus.requestFocus();
+      }
     });
     _history = LocalHistoryEntry(
       onRemove: () {
@@ -217,9 +310,14 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop) _close();
       },
-      child: CompositedTransformTarget(
-        link: _link,
-        child: widget.builder(context, _controller),
+      child: TapRegion(
+        groupId: this,
+        enabled: _controller.isOpen,
+        onTapOutside: (_) => _close(),
+        child: CompositedTransformTarget(
+          link: _link,
+          child: widget.builder(context, _controller),
+        ),
       ),
     ),
   );

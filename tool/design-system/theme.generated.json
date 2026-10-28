@@ -1100,7 +1100,7 @@
       "declarations": {
         "--dsw-specific-menu": "#f8f9faf0"
       },
-      "implementation": "menus: macOS material; pending family migration"
+      "implementation": "popovers: macOS fill consumed by DshPopoverSurface; generic menu backing pending"
     },
     {
       "sheet": "design-platform.css",
@@ -1109,7 +1109,7 @@
       "declarations": {
         "--dsw-specific-menu": "#303136f0"
       },
-      "implementation": "menus: macOS dark material; pending family migration"
+      "implementation": "popovers: macOS dark fill consumed by DshPopoverSurface; generic menu backing pending"
     },
     {
       "sheet": "focus.css",
