@@ -1,0 +1,1863 @@
+{
+  "schema": "whalee-icon-actions-native/1",
+  "fixtureTarget": "test/parity/icon_actions_main.dart",
+  "cases": [
+    {
+      "id": "icon-actions.desktop-light",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "light",
+      "locale": "en",
+      "notes": "Actual RootScreen pairing Settings / RepairRoute Back / QrScannerScreen Close; F6/F7/F8 are fixture-only route setup. No substitute action button. GPU assertions establish visible focus/hover/navigation-effect changes; exact counts are independently checked by widget/Android contracts. Native profile adoption only; no Web pairing/camera/network parity and sticky post-touch hover remains UNMATCHED/PENDING. Coordinates measured by icon_actions_native_fixture_test with pinned fonts.",
+      "app": [
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "pairing-initial"
+        },
+        {
+          "move": [
+            1258,
+            22
+          ]
+        },
+        {
+          "capture": "pairing-hover"
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              1241,
+              5,
+              1275,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1258,
+            22
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "settings-pointer"
+        },
+        {
+          "expect": {
+            "reference": "pairing-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              120,
+              1280,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "pairing-return"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "pairing-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              1241,
+              5,
+              1275,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "settings-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "pairing-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-initial"
+        },
+        {
+          "move": [
+            18,
+            18
+          ]
+        },
+        {
+          "capture": "repair-hover"
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            18,
+            18
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "back-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-second"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "repair-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "back-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-initial"
+        },
+        {
+          "move": [
+            22,
+            22
+          ]
+        },
+        {
+          "capture": "scanner-hover"
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            22
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "close-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-second"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "scanner-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "close-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "icon-actions.desktop-dark",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 1280,
+      "height": 720,
+      "theme": "dark",
+      "locale": "en",
+      "notes": "Actual RootScreen pairing Settings / RepairRoute Back / QrScannerScreen Close; F6/F7/F8 are fixture-only route setup. No substitute action button. GPU assertions establish visible focus/hover/navigation-effect changes; exact counts are independently checked by widget/Android contracts. Native profile adoption only; no Web pairing/camera/network parity and sticky post-touch hover remains UNMATCHED/PENDING. Coordinates measured by icon_actions_native_fixture_test with pinned fonts.",
+      "app": [
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "pairing-initial"
+        },
+        {
+          "move": [
+            1258,
+            22
+          ]
+        },
+        {
+          "capture": "pairing-hover"
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              1241,
+              5,
+              1275,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            1258,
+            22
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "settings-pointer"
+        },
+        {
+          "expect": {
+            "reference": "pairing-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              120,
+              1280,
+              700
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "pairing-return"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "pairing-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              1241,
+              5,
+              1275,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "settings-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "pairing-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-initial"
+        },
+        {
+          "move": [
+            18,
+            18
+          ]
+        },
+        {
+          "capture": "repair-hover"
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            18,
+            18
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "back-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-second"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "repair-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "back-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-initial"
+        },
+        {
+          "move": [
+            22,
+            22
+          ]
+        },
+        {
+          "capture": "scanner-hover"
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            22
+          ]
+        },
+        {
+          "move": [
+            640,
+            700
+          ]
+        },
+        {
+          "capture": "close-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-second"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "scanner-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "close-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "icon-actions.phone-light",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "light",
+      "locale": "en",
+      "notes": "Actual RootScreen pairing Settings / RepairRoute Back / QrScannerScreen Close; F6/F7/F8 are fixture-only route setup. No substitute action button. GPU assertions establish visible focus/hover/navigation-effect changes; exact counts are independently checked by widget/Android contracts. Native profile adoption only; no Web pairing/camera/network parity and sticky post-touch hover remains UNMATCHED/PENDING. Coordinates measured by icon_actions_native_fixture_test with pinned fonts.",
+      "app": [
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "pairing-initial"
+        },
+        {
+          "move": [
+            368,
+            22
+          ]
+        },
+        {
+          "capture": "pairing-hover"
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              351,
+              5,
+              385,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            368,
+            22
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "settings-pointer"
+        },
+        {
+          "expect": {
+            "reference": "pairing-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              120,
+              390,
+              824
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "pairing-return"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "pairing-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              351,
+              5,
+              385,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "settings-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "pairing-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-initial"
+        },
+        {
+          "move": [
+            18,
+            18
+          ]
+        },
+        {
+          "capture": "repair-hover"
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            18,
+            18
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "back-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-second"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "repair-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "back-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-initial"
+        },
+        {
+          "move": [
+            22,
+            22
+          ]
+        },
+        {
+          "capture": "scanner-hover"
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            22
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "close-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-second"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "scanner-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "close-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "icon-actions.phone-dark",
+      "state": "component",
+      "appOnly": true,
+      "pairHost": false,
+      "width": 390,
+      "height": 844,
+      "theme": "dark",
+      "locale": "en",
+      "notes": "Actual RootScreen pairing Settings / RepairRoute Back / QrScannerScreen Close; F6/F7/F8 are fixture-only route setup. No substitute action button. GPU assertions establish visible focus/hover/navigation-effect changes; exact counts are independently checked by widget/Android contracts. Native profile adoption only; no Web pairing/camera/network parity and sticky post-touch hover remains UNMATCHED/PENDING. Coordinates measured by icon_actions_native_fixture_test with pinned fonts.",
+      "app": [
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "pairing-initial"
+        },
+        {
+          "move": [
+            368,
+            22
+          ]
+        },
+        {
+          "capture": "pairing-hover"
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              351,
+              5,
+              385,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            368,
+            22
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "settings-pointer"
+        },
+        {
+          "expect": {
+            "reference": "pairing-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-initial",
+            "rect": [
+              0,
+              120,
+              390,
+              824
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "capture": "pairing-return"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "pairing-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              351,
+              5,
+              385,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "pairing-return",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "settings-keyboard"
+        },
+        {
+          "expect": {
+            "reference": "pairing-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            66
+          ]
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-initial"
+        },
+        {
+          "move": [
+            18,
+            18
+          ]
+        },
+        {
+          "capture": "repair-hover"
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            18,
+            18
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "back-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            64
+          ]
+        },
+        {
+          "capture": "repair-second"
+        },
+        {
+          "keys": [
+            42,
+            15
+          ]
+        },
+        {
+          "capture": "repair-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              1,
+              1,
+              35,
+              35
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "repair-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            57
+          ]
+        },
+        {
+          "capture": "back-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "repair-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-initial"
+        },
+        {
+          "move": [
+            22,
+            22
+          ]
+        },
+        {
+          "capture": "scanner-hover"
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-initial",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "click": [
+            22,
+            22
+          ]
+        },
+        {
+          "move": [
+            195,
+            824
+          ]
+        },
+        {
+          "capture": "close-pointer-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-hover",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        },
+        {
+          "keys": [
+            65
+          ]
+        },
+        {
+          "capture": "scanner-second"
+        },
+        {
+          "keys": [
+            15
+          ]
+        },
+        {
+          "capture": "scanner-keyboard-focus"
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              5,
+              5,
+              39,
+              39
+            ],
+            "changed": true
+          }
+        },
+        {
+          "expect": {
+            "reference": "scanner-second",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": false
+          }
+        },
+        {
+          "keys": [
+            28
+          ]
+        },
+        {
+          "capture": "close-keyboard-return"
+        },
+        {
+          "expect": {
+            "reference": "scanner-keyboard-focus",
+            "rect": [
+              0,
+              56,
+              320,
+              76
+            ],
+            "changed": true
+          }
+        }
+      ]
+    }
+  ],
+  "android": {
+    "schema": "whalee-icon-actions-android-steps/1",
+    "notes": "Counters record settings callback invocations and actual repair/scanner route-pop effects. Setup pops are excluded. Each input is sent once; all touch points derive from current unique clickable semantics bounds. Initial Escape dismisses the pairing field IME if present.",
+    "steps": [
+      {
+        "key": 111
+      },
+      {
+        "expect": [
+          "Native actions: settings=0 back=0 close=0",
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "sourceButton": "Settings"
+      },
+      {
+        "capture": "pairing-initial"
+      },
+      {
+        "tap": "Settings"
+      },
+      {
+        "expect": [
+          "Native actions: settings=1 back=0 close=0",
+          "Native route: settings; network=0"
+        ]
+      },
+      {
+        "capture": "settings-pointer"
+      },
+      {
+        "key": 138
+      },
+      {
+        "expect": [
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "chord": [
+          59,
+          61
+        ]
+      },
+      {
+        "focused": "Settings"
+      },
+      {
+        "capture": "pairing-keyboard-focus"
+      },
+      {
+        "key": 66
+      },
+      {
+        "expect": [
+          "Native actions: settings=2 back=0 close=0",
+          "Native route: settings; network=0"
+        ]
+      },
+      {
+        "capture": "settings-keyboard"
+      },
+      {
+        "key": 138
+      },
+      {
+        "expect": [
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "key": 136
+      },
+      {
+        "expect": [
+          "Native route: repair; network=0"
+        ]
+      },
+      {
+        "sourceButton": "Back"
+      },
+      {
+        "capture": "repair-initial"
+      },
+      {
+        "tap": "Back"
+      },
+      {
+        "expect": [
+          "Native actions: settings=2 back=1 close=0",
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "capture": "back-pointer-return"
+      },
+      {
+        "key": 136
+      },
+      {
+        "expect": [
+          "Native route: repair; network=0"
+        ]
+      },
+      {
+        "chord": [
+          59,
+          61
+        ]
+      },
+      {
+        "focused": "Back"
+      },
+      {
+        "capture": "repair-keyboard-focus"
+      },
+      {
+        "key": 62
+      },
+      {
+        "expect": [
+          "Native actions: settings=2 back=2 close=0",
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "capture": "back-keyboard-return"
+      },
+      {
+        "key": 137
+      },
+      {
+        "expect": [
+          "Native route: scanner; network=0"
+        ]
+      },
+      {
+        "sourceButton": "Close"
+      },
+      {
+        "capture": "scanner-initial"
+      },
+      {
+        "tap": "Close"
+      },
+      {
+        "expect": [
+          "Native actions: settings=2 back=2 close=1",
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "capture": "close-pointer-return"
+      },
+      {
+        "key": 137
+      },
+      {
+        "expect": [
+          "Native route: scanner; network=0"
+        ]
+      },
+      {
+        "key": 61
+      },
+      {
+        "focused": "Close"
+      },
+      {
+        "capture": "scanner-keyboard-focus"
+      },
+      {
+        "key": 66
+      },
+      {
+        "expect": [
+          "Native actions: settings=2 back=2 close=2",
+          "Native route: pairing; network=0"
+        ]
+      },
+      {
+        "sourceButton": "Settings"
+      },
+      {
+        "capture": "close-keyboard-return"
+      }
+    ]
+  }
+}
