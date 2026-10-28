@@ -245,6 +245,12 @@ class _ToastPaintState extends State<_ToastPaint> {
                           container: true,
                           role: SemanticsRole.alert,
                           child: DshShadowBox(
+                            // CSS left:50%/top is laid out before the centering
+                            // and entry transforms. Blink snaps in that space.
+                            sourcePaintOrigin: Offset(
+                              constraints.maxWidth / 2,
+                              DshToastRecipe.top,
+                            ),
                             color: theme.color(DshToastRecipe.backgroundToken),
                             authoredOpaqueBackground:
                                 theme.color(DshToastRecipe.backgroundToken).a ==

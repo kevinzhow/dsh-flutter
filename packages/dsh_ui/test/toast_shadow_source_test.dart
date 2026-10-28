@@ -113,12 +113,18 @@ void main() {
         final owner = find.byType(DshShadowBox);
         final rect = t.getRect(owner);
         final clipInset = 1 / dshSnapDensity(density);
+        final sourceOrigin = Offset(390 / 2, DshToastRecipe.top);
+        final contour = dshSnapRect(
+          sourceOrigin & rect.size,
+          density,
+        ).shift(-sourceOrigin);
         // Flutter Path stores coordinates as float32; its reported width is
         // the difference of those stored edges, not a new layout tolerance.
         final edges = Float32List.fromList([
-          clipInset,
-          rect.width - clipInset,
-          rect.height - clipInset,
+          contour.left + clipInset,
+          contour.top + clipInset,
+          contour.right - clipInset,
+          contour.bottom - clipInset,
         ]);
         final widget = t.widget<DshShadowBox>(owner);
         expect(widget.color.a, 1);
@@ -142,12 +148,13 @@ void main() {
               .getBounds();
           // Pinned Blink ClipToBorderEdge insets its exclusion contour by
           // exactly one internal paint pixel (1/DPR in the native model) for an authored opaque shadow owner.
-          // This test checks that source operation on the existing local
-          // contour; it does not certify pre-transform coordinate snapping.
-          expect(bounds.width, edges[1] - edges[0]);
-          expect(bounds.height, edges[2] - edges[0]);
+          // All three paint operations share the contour snapped before the
+          // source's centering/entry transform. Bounds do not certify full
+          // renderer raster equivalence.
+          expect(bounds.width, edges[2] - edges[0]);
+          expect(bounds.height, edges[3] - edges[1]);
           expect(bounds.left, edges[0]);
-          expect(bounds.top, edges[0]);
+          expect(bounds.top, edges[1]);
         }
         await t.pumpWidget(const SizedBox());
       });
