@@ -282,7 +282,7 @@ class _ToastPaintState extends State<_ToastPaint> {
                                     SizedBox(width: DshToastRecipe.gap),
                                   ],
                                   Flexible(
-                                    child: DshChromeText(
+                                    child: _ToastText(
                                       spec.text,
                                       style: theme
                                           .fixedTextStyle(
@@ -308,6 +308,58 @@ class _ToastPaintState extends State<_ToastPaint> {
               },
             ),
     );
+  }
+}
+
+/// The published Toast inherits white-space/overflow-wrap/word-break: normal.
+/// Preserve its raw announcement, but collapse only CSS's ASCII whitespace in
+/// the visual string. NBSP and other Unicode spacing characters stay intact.
+class _ToastText extends StatelessWidget {
+  const _ToastText(this.text, {required this.style});
+  final String text;
+  final TextStyle style;
+
+  @override
+  Widget build(BuildContext context) {
+    final normalized = text
+        .replaceAll(RegExp(r'[ \t\r\n\f]+'), ' ')
+        .replaceAll(RegExp(r'^ +| +$'), '');
+    final effective = DefaultTextStyle.of(context).style.merge(style);
+    final direction = Directionality.of(context);
+    final scaler = MediaQuery.textScalerOf(context);
+    final locale = Localizations.maybeLocaleOf(context);
+    // Ask the native breaker's intrinsic calculation whether there is any
+    // soft break. This otherwise-identical measurement-only clone suppresses
+    // breaks with WJ, just as the card clamp's existing min-content probe does.
+    // Neither inserted WJs nor the terminal measurement space ever paint.
+    double intrinsic(String value) {
+      final painter = TextPainter(
+        text: TextSpan(text: '$value ', style: effective),
+        textDirection: direction,
+        textScaler: scaler,
+        locale: locale,
+      )..layout();
+      final width = painter.minIntrinsicWidth;
+      painter.dispose();
+      return width;
+    }
+
+    final singleRun =
+        normalized.isNotEmpty &&
+        intrinsic(normalized) ==
+            intrinsic(normalized.characters.join('\u2060'));
+    final line = DshChromeText(
+      normalized,
+      style: style,
+      semanticsLabel: text,
+      // Flutter otherwise emergency-wraps a sole oversized word at graphemes;
+      // CSS normal keeps that unbreakable run on one overflowing line.
+      softWrap: singleRun ? false : null,
+      overflow: TextOverflow.visible,
+    );
+    // A wholly collapsed CSS span has no line box. Its owner retains padding
+    // and any independent icon seat; a non-collapsible NBSP still has a line.
+    return normalized.isEmpty ? SizedBox.shrink(child: line) : line;
   }
 }
 
