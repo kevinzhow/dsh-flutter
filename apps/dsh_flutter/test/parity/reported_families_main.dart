@@ -3,6 +3,7 @@
 import 'dart:io' show Platform;
 
 import 'package:dsh_feature_chat/dsh_feature_chat.dart';
+import 'package:dsh_feature_model_selection/testing.dart';
 import 'package:dsh_flutter/src/platform/pinned_fonts.dart';
 import 'package:dsh_flutter/src/platform/window_chrome.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
@@ -10,8 +11,7 @@ import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../features/dsh_feature_model_selection/test/parity/helpers/reported_model_fixture.dart';
-import '../../../../features/dsh_feature_sidebar/test/parity/helpers/reported_sidebar_fixture.dart';
+import 'helpers/reported_sidebar_fixture.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,9 +76,12 @@ class _ScenesState extends State<_Scenes> {
       Text('Sidebar action: $sidebarAction'),
       Expanded(
         child: switch (selected) {
-          0 => ReportedSidebarFixture(
-            i18n: widget.i18n,
-            onAction: (value) => setState(() => sidebarAction = value),
+          0 => Align(
+            alignment: Alignment.topLeft,
+            child: ReportedSidebarFixture(
+              i18n: widget.i18n,
+              onAction: (value) => setState(() => sidebarAction = value),
+            ),
           ),
           1 => _StatisticsScene(i18n: widget.i18n),
           _ => ReportedModelFixture(i18n: widget.i18n),

@@ -212,19 +212,19 @@ class _DshInputState extends State<DshInput> {
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final modelSearch = widget.profile == DshInputProfile.modelSearch;
-    final style = theme
-        .textStyle(
-          modelSearch
-              ? DshModelMenuRecipe.statusFontToken
-              : DshInputRecipe.fontToken,
-        )
-        .copyWith(
-          color: theme.color(DshInputRecipe.labelToken),
-          fontSize: modelSearch ? DshModelMenuRecipe.searchFontSize : null,
-          height: modelSearch
-              ? kTextHeightNone
-              : DshInputRecipe.lineHeight / DshInputRecipe.fontSize,
-        );
+    final style =
+        (modelSearch
+                ? theme.fixedTextStyle(
+                    size: DshModelMenuRecipe.searchFontSize,
+                    line: DshModelMenuRecipe.searchFontSize,
+                  )
+                : theme.textStyle(DshInputRecipe.fontToken))
+            .copyWith(
+              color: theme.color(DshInputRecipe.labelToken),
+              height: modelSearch
+                  ? kTextHeightNone
+                  : DshInputRecipe.lineHeight / DshInputRecipe.fontSize,
+            );
     final border = modelSearch
         ? 0.0
         : dshBorderWidthOf(context, DshInputRecipe.borderWidth);

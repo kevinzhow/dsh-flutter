@@ -373,6 +373,16 @@ Future<void> openSettingsUi(
       settle != null ? await settle(t) : await t.pump();
   await t.tap(find.byKey(const ValueKey('settings-trigger')));
   await wait();
+  // The source portal measures its actual anchor before mounting the visible
+  // card. Allow that composition pass before trying to press its first row.
+  for (
+    var frame = 0;
+    frame < 3 &&
+        find.byKey(const ValueKey('settings-more-settings')).evaluate().isEmpty;
+    frame++
+  ) {
+    await t.pump();
+  }
   await t.tap(find.byKey(const ValueKey('settings-more-settings')));
   await wait();
 }

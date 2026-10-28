@@ -48,7 +48,7 @@ function ReportedSidebar({props,ctx}:any){
   if(seat==='sidebar.panellist')return options.only==='plugins'?<PluginsPanelIcon {...owner}/>:<IconClockOutlineRegular size={owner.size}/>
   if(seat==='sidebar.workspaces')return <WorkspaceBrowser {...{
    ...owner,useStore,actions,useSessions,usePanelInfo,useSessionStatus:fixed(new Map()),useWorkspaces:fixed(workspaces),
-   useShortcuts:fixed([]),useWorkspaceShortcuts:fixed({addRequested:false,searchRequested:0}),useHostInfo:fixed({home:undefined,isLoopback:true}),
+   useShortcuts:fixed([]),useWorkspaceShortcuts:fixed({addRequested:false,searchRequest:0}),useHostInfo:fixed({home:undefined,isLoopback:true}),
    useDirectoryFlow:fixed(true),requestSearch:noop,requestAddWorkspace:noop,closeAddWorkspace:noop,setDirectoryBusy:noop,
    useSessionRetainInfo:()=>undefined,useSessionAccess:()=>true,useResource:()=>({status:'none'}),
    startSession:()=>setCurrent(undefined),open:setCurrent,requestSessionRename:noop,notifyArchivedNotOpenable:noop,
@@ -83,7 +83,7 @@ function ReportedSidebar({props,ctx}:any){
   }
   tag();const observer=new MutationObserver(tag);observer.observe(document.body,{childList:true,subtree:true});return()=>observer.disconnect()
  },[])
- return <div ref={root} data-parity-id="reported-sidebar-frame" style={{width:rail?56:props.width,height:props.height,background:'var(--dsw-specific-sidebar-fill)',color:'var(--dsw-alias-label-primary)'}}>
+ return <div ref={root} data-parity-id="reported-sidebar-frame" style={{position:'fixed',left:0,top:0,width:rail?56:props.width,height:props.height,background:'var(--dsw-specific-sidebar-fill)',color:'var(--dsw-alias-label-primary)'}}>
   <SidebarRoot {...sidebarProps as any} renderSlot={render as any}/>
  </div>
 }
