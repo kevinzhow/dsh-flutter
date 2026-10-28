@@ -6,7 +6,7 @@
       "canonical": [
         "packages/dsh_ui/lib/src/dsh_button.dart"
       ],
-      "migrationStatus": "primitive variants and add/icon/info profiles generated from published CSS; local round icon adaptation still pending",
+      "migrationStatus": "primitive variants and add/icon/info/header profiles generated from published CSS; local round icon adaptation still pending",
       "pendingDuplicates": [
         "DshIconButton -> DshButton icon-action recipe"
       ]
@@ -137,7 +137,7 @@
         "features/dsh_feature_sidebar/lib/src/leading_controls.dart",
         "features/dsh_feature_session/lib/src/workspace/browser.dart"
       ],
-      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; pointer scrollbar, keyboard sidebar controls, collapse-entry animations and macOS window vibrancy remain pending",
+      "migrationStatus": "published SidebarRoot static geometry and WorkspaceBrowser edge/row metrics; source macOS top-strip overlap and brand profile corrected; source signed-out launcher routed through canonical anchored menu/material/item; HeaderLeadingControls styles, glyph size and tooltip delay generated into canonical DshButton headerAction with source global focus visibility; Chromium native auto-outline paint, AppFrame seat/platform mounting, pointer scrollbar, remaining sidebar keyboard controls, collapse-entry animations and macOS window vibrancy remain pending",
       "pendingDuplicates": []
     },
     {
@@ -441,9 +441,6 @@
     },
     "features/dsh_feature_shortcuts/lib/src/register.dart": {
       "manual-metric": 1
-    },
-    "features/dsh_feature_sidebar/lib/src/leading_controls.dart": {
-      "manual-metric": 4
     },
     "features/dsh_feature_sidebar/lib/src/sidebar_root.dart": {
       "manual-metric": 7

@@ -199,6 +199,10 @@ def collect(source=None):
         rule['selector'] = published.unhash_selectors(rule['selector'], roster_classes)
     rules['AgentPresetSection.styles.css'] = roster  # audited; not a migrated roster recipe
     theme_folder = HERE / 'upstream/ui-theme'
+    rules['HeaderLeadingFocusContext'] = {
+        'focus': css_rules((theme_folder / 'focus.css').read_text()),
+        'inputModality': json.loads((HERE / 'upstream/ui-primitives/input-modality.json').read_text()),
+    }
     rules['PlatformMenuMaterial'] = [
         rule for rule in css_rules((theme_folder / 'design-platform.css').read_text())
         if 'html[data-platform' in rule['selector']
@@ -231,6 +235,14 @@ def collect(source=None):
             for rule in sheet:
                 rule['selector'] = published.unhash_selectors(rule['selector'], classes)
             rules[component + '.module.css'] = sheet
+        if 'HeaderLeadingControls' in sidebar_package['styleSheets']:
+            rules['HeaderLeadingControlsBehavior'] = json.loads(
+                (folder / 'HeaderLeadingControls-behavior.json').read_text())
+            if source is not None:
+                original = source / Path(sidebar_package['sourcePackage']).parent / 'src/client/HeaderLeadingControls.module.css'
+                if ([normalized_rule(r) for r in rules['HeaderLeadingControls.module.css']] !=
+                        [normalized_rule(r) for r in css_rules(original.read_text())]):
+                    raise ValueError('reference HeaderLeadingControls CSS differs from its published package')
     model_package = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-model-selection')
     model_folder = HERE / 'upstream' / model_package['snapshotFolder']
     model_classes = json.loads((model_folder / 'classes.json').read_text())
@@ -614,6 +626,11 @@ def render(lock, sheets):
     sidebar = importlib.util.module_from_spec(sidebar_spec)
     sidebar_spec.loader.exec_module(sidebar)
     metrics.update(sidebar.build(sheets, value=value, number=number, token=token))
+    header_spec = importlib.util.spec_from_file_location('header_leading_recipes', HERE / 'header_leading_recipes.py')
+    header = importlib.util.module_from_spec(header_spec)
+    header_spec.loader.exec_module(header)
+    metrics.update(header.build(sheets['HeaderLeadingControls.module.css'], sheets['HeaderLeadingControlsBehavior'],
+                                focus_context=sheets['HeaderLeadingFocusContext'], number=number, token=token))
     model_spec = importlib.util.spec_from_file_location('model_menu_recipes', HERE / 'model_menu_recipes.py')
     model = importlib.util.module_from_spec(model_spec)
     model_spec.loader.exec_module(model)

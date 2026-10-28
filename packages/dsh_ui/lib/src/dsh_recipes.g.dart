@@ -650,6 +650,20 @@ abstract final class DshSidebarLauncherRecipe {
   static const double menuLineHeight = 22.0;
 }
 
+abstract final class DshHeaderLeadingRecipe {
+  static const double width = 28.0;
+  static const double height = 28.0;
+  static const double controlsGap = 8.0;
+  static const double iconSize = 16.0;
+  static const int tooltipDelayMs = 0x1f4;
+  static const String radiusToken = '--dsw-radius-sm';
+  static const String labelToken = '--dsw-alias-label-secondary';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const String focusWidthToken = '--dsw-focus-ring-width';
+  static const String focusToken = '--dsw-focus-ring-color';
+  static const String focusFallbackToken = '--dsw-alias-state-business-primary';
+}
+
 abstract final class DshModelMenuRecipe {
   static const double minWidth = 240.0;
   static const double viewportWidthInset = 32.0;
