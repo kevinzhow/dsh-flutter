@@ -133,3 +133,45 @@ loaded card remain pending. Source captures and fixture test counts do not prove
 pixel parity, real-device accessibility, native contour acceptance or production
 camera/network behavior. All differences must remain visible in final paired
 results; no fitting, score thresholds or approved platform exceptions are added.
+
+## Read-only inner geometry
+
+`ParityCase.geometryProbe` is an optional synchronous read-only callback. Only
+`plugin-cards.manager` enables it in this batch. Its result is written under
+`metadata.componentGeometry`, schema `dsh-plugin-card-geometry/1`. Without a
+callback that field remains absent. The callback receives the capture root so
+its coordinates describe the actual rendered viewport rather than a size
+inferred from the manifest.
+
+The Card probe records outer card, inner Stack, stretched action, visible title,
+description, artwork frame/artwork, each status tag, switch and metadata error.
+Bounds are raw `[x,y,width,height]` logical coordinates relative to the capture
+root; raw left/top/right/bottom values, render/widget types and coordinate basis
+are retained without rounding or adjustment. Missing optional parts are explicit
+nulls or an empty tag list. Switch checked/disabled state, actual action focus,
+native focus-ring presence/bounds and the canonical action's hover input are
+read from the real widgets. No input, pump or style mutation happens in a probe.
+
+The visible title/description/error use their **DshChromeText outer render/line
+boxes**. They are not raw RenderParagraph or glyph-ink measurements; those are
+explicitly not sampled. The stretched DshButton action/semantic box is recorded
+separately. Its source counterpart is the whole-card pseudo-element hit area,
+not the source title DOM button's text-sized rectangle. Native ring presence is
+identified as that native measurement, without claiming CSS pseudo-element or
+glyph equivalence.
+
+All probes now read immediately after PNG capture and before held input is
+released. Existing typography/style probes are cached at this same point: a
+held Card release can open detail, so reading them afterwards could describe a
+different view. Existing metadata field shapes and PNG capture/release order are
+preserved; only those probe values/timing are corrected. The optional geometry
+callback adds no paint or input behavior.
+
+The harness RED demonstrates captured held text becoming released-detail text
+when probed too late. Two new harness tests verify the corrected held geometry,
+typography and style values against the captured PNG, and verify unchanged field
+shape/identical PNG bytes without a callback. All nineteen existing harness
+checks also pass. Six actual-manager measurement cases cover held navigation,
+keyboard focus, absent description, localized long tags at DPR2.625, metadata
+diagnostics and failed-image fallback. These measurements expose differences;
+they do not assert visual equality or run a paired224 batch.
