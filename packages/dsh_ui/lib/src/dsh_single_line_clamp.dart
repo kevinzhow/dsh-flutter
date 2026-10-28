@@ -94,7 +94,7 @@ class DshSingleLineClamp extends StatelessWidget {
         );
         // A CSS-normal block containing only collapsed whitespace has no
         // line box. Its owning Card still retains the description-row gap.
-        return normalized.isEmpty ? SizedBox(height: 0, child: line) : line;
+        return normalized.isEmpty ? SizedBox.shrink(child: line) : line;
       },
     );
   }
