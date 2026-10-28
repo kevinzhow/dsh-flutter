@@ -63,6 +63,10 @@ class DshPopoverSurface extends StatelessWidget {
       inner: ui.ImageFilter.blur(
         sigmaX: DshMenuSurfaceRecipe.blurSigma,
         sigmaY: DshMenuSurfaceRecipe.blurSigma,
+        // CSS backdrop blur mirrors at the filtered card's input edge. A
+        // composed Flutter filter resolves an unspecified mode to clamp
+        // before SceneBuilder can select the normal backdrop mirror mode.
+        tileMode: ui.TileMode.mirror,
       ),
     );
     return DshShadowBox(
