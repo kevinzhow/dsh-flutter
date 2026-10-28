@@ -831,3 +831,27 @@ abstract final class DshPluginStatusTagRecipe {
   static const double fontSize = 10.0;
   static const double lineHeightFactor = 1.0;
 }
+
+abstract final class DshToastRecipe {
+  static const double top = 40.0;
+  static const double maxContentWidth = 640.0;
+  static const double viewportInset = 48.0;
+  static const double horizontalPadding = 16.0;
+  static const double verticalPadding = 12.0;
+  static const double gap = 10.0;
+  static const double fontSize = 14.0;
+  static const double lineHeight = 22.0;
+  static const String radiusToken = '--dsw-radius-lg';
+  static const String backgroundToken = '--dsw-alias-toast-bg';
+  static const String labelToken = '--dsw-alias-toast-label';
+  static const String shadowToken = '--dsw-shadow-lv3';
+  static const String iconLabelToken = '--dsw-alias-state-warn-label';
+  static const String successIconLabelToken =
+      '--dsw-alias-state-success-primary';
+  static const double holdMs = 3000.0;
+  static const double fadeMs = 1000.0;
+  static const double enterMs = 160.0;
+  static const double enterOffsetY = -6.0;
+  static const String enterCurve = 'ease-out';
+  static const String fadeCurve = 'ease';
+}

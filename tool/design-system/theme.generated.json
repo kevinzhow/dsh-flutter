@@ -27,7 +27,9 @@
           "Tag.module.css": "ac135f028674d5bce37a2617902c86d5934b299742536056a2abc5e99583764e",
           "Modal.module.css": "c9d511821e0d13e6f1eb0e69642abb7740acf8a77aece12ad7906713076db24f",
           "modal-layer.json": "93b84a375a37f79459a0471211982f21fd8906c65728087f2e495ef36acde340",
-          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86"
+          "input-modality.json": "fee36d3bd30d2fbfb404bb2230de1ecaa7ccc905a5b3b7a10fdd4955dc14ee86",
+          "Toast.module.css": "74cab625e372a6cdaff92fa468b7d59bc037212d738e476ea0f8d485e4f8dbcb",
+          "toast-behavior.json": "56f59a31900f445e7905a818f075fca5729534c392b5ddf0a1adcd59bced23db"
         },
         "sourcePackage": "packages/client/ui-primitives/package.json",
         "referenceConsumer": "packages/client/ui-plugin-manager/package.json",
@@ -51,7 +53,9 @@
           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
           "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
           "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15",
-          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba"
+          "packages/client/ui-primitives/src/input-modality.ts": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba",
+          "packages/client/ui-primitives/src/Toast.tsx": "85ed92693c910decadb38f095764bbdb3a1c6992b60bf63dedabdbebccd309b6",
+          "packages/client/ui-primitives/src/icons/index.tsx": "25052a41938e69b557fd730f1ada0deae0994f1ee410195f98c83661188b958a"
         },
         "referenceConsumers": [
           {
@@ -59,7 +63,8 @@
             "dependencyField": "devDependencies",
             "dependencySpecifier": "workspace:*"
           }
-        ]
+        ],
+        "publishedBundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566"
       },
       {
         "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
