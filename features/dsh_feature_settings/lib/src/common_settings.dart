@@ -233,7 +233,10 @@ class SettingsUploadNotice extends StatelessWidget {
           : DshToast(
               key: ValueKey('upload-notice-${s.$3}'),
               text: i18n.t('settings.sessionLog', s.$2!),
-              onDone: controller.dismiss,
+              tone: s.$2 == 'saved' ? DshToastTone.success : null,
+              onDone: () {
+                if (controller.state.value.$3 == s.$3) controller.dismiss();
+              },
             );
     },
   );

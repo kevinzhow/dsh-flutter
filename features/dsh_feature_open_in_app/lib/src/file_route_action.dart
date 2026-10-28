@@ -63,6 +63,7 @@ class _RouteState extends State<FileRouteAction> {
               ? 'path.revealError'
               : 'path.openError',
         ),
+        icon: const DshIcon(DshIcons.warning),
       );
     }
   }

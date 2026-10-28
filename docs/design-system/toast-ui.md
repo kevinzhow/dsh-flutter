@@ -1,0 +1,104 @@
+# Published Toast and three existing owners
+
+This bounded UI change consumes `DshToastRecipe` from the companion published
+source contract, reference DSH `687f282e8625c6b8d11ff58211a90524be2e4317` and
+ui-primitives0.2.1-rc.2. It migrates the canonical Toast and exactly three existing
+Flutter owners: open-in-app launch failure, file open/reveal failure and Settings
+upload notice. Fourteen other source owners remain pending; this is not a
+whole-family or overall visual-completion claim.
+
+The API is resolved text, optional icon widget, optional `DshToastTone.success`,
+optional hold duration and completion callback. No icon is the default. Success
+overrides a supplied icon with the actual generated
+`IconCheckCircleOutlineRegular`, whose two filled paths are read by the existing
+icon generator. Caller-provided glyphs keep their own artwork size. Failure
+owners explicitly supply the existing real warning icon; upload saved uses
+success and upload failed supplies no icon. Actions and anchor inputs are not
+implemented and remain frozen/pending in the companion source contract.
+
+## Source layout and placement
+
+The max-width constraint applies to content before adding horizontal padding:
+the long source content cap is640 plus32 outer padding on desktop, and viewport
+minus48 content plus32 padding on phone. The reference's800px viewport therefore
+allows672px outside, and390 allows374px. Text has no artificial line-count cap
+or fixed banner height. Canonical theme contour and `DshShadowBox` paint the
+surface using the generated radius/material/shadow slots. There is no local
+alpha, blur, font or threshold fitting.
+
+`DshToastHost` mounts around the Navigator in `MaterialApp.builder`. Its actual
+Stack paints the Navigator before the Toast layer, preserving the source
+Toast1100/lightbox1000 relation in either show order. Both declarative and
+imperative occurrences use the same canonical painter through that host. This
+also escapes transformed feature ancestors, keeps coordinates relative to the
+window and lets pointer input reach the Navigator underneath. No focus is
+requested. Independent owners are still independent; this is not a global queue.
+
+An isolated consumer without the app host uses the framework's root-overlay
+portal so it still escapes feature transforms. Plain Overlay paint order cannot
+promise priority over a subsequently inserted route; production's host is the
+mount that supplies that ordering. Broader priorities involving menus, tooltips,
+other overlays or nested app roots remain outside this batch.
+
+The banner sets the actual source `SemanticsRole.alert`, with icon semantics
+excluded and the text retained through entry opacity. The pinned Flutter API
+forbids combining that role with its polite live-region flag, so the old
+`liveRegion:true` flag is deliberately removed. Widget role evidence does not
+certify actual native announcement timing or delivery.
+
+## Lifetime and motion
+
+Entry and delayed fade use the generated CSS curve keywords, durations and
+offset. The mapping uses Flutter's corresponding standard CSS cubic curves;
+unsupported generated keywords throw. Reduced motion removes entry movement and
+entry opacity while preserving the delayed fade. Fractional milliseconds are
+converted through microseconds, and zero hold/entry/fade values are handled
+without division by zero.
+
+The completion Timer is independent of animation ticks. Same-hold text/callback,
+theme and overlay rebuilds retain the deadline and call the latest completion
+once. A changed hold synchronously cancels/reschedules that Timer, even before a
+deferred root presentation rebuild. The CSS paint timeline stays anchored to the
+original mount; changing a delay can therefore hide paint earlier than the
+newly restarted completion Timer. Unmount cancels the Timer. The fully faded
+surface has no visible/semantic content if an owner delays removal.
+
+Each imperative show allocates its display identity outside the overlay builder.
+A rebuild cannot accidentally manufacture a new occurrence. Re-showing identical
+copy still creates a new identity, and old completion cannot remove its
+replacement. Settings upload also fences completion by the actual notice
+sequence. Host registration updates are frame-safe and keep these occurrence
+identities stable; the animation/timer owner lives in the root presentation,
+outside Navigator route ticker muting.
+
+## Verification and explicit limits
+
+Four source regressions were run against the unchanged base and failed for the
+existing icon, desktop/phone content-box and timer/frame defects. Additional RED
+evidence reproduces a deadline cancelled one frame late during a hold update.
+Focused tests cover source sizing, real artwork override, custom icon size,
+CSS curves, reduced entry, zero-hold composition, latest callback, hold changes,
+unmount, root placement, pointer pass-through, existing focus, alert role,
+replacement identity, independent owners and both actual lightbox show orders.
+Real feature tests invoke failed open/file actions and accepted/refused setting
+writes, checking warning/success/absent-icon mapping and stale-notice fencing.
+
+The zero-hold overlap was also checked with the retained unchanged source build
+and actual Chromium animations paused at0/80/160/500/1000ms. It confirms combined
+entry/fade opacity, rather than replacing entry opacity when fade starts. This
+small source-only probe is retained in `.local/toast-zero-source-proof.json`;
+it is not a new native/paired acceptance capture or an upstream source mutation.
+
+The family scanner reports877 manual-metric matches, down from880 by removing
+the three existing Toast matches; duplicate-button0 and platform-control11 are
+unchanged. These counts do not prove component coverage.
+
+Still unproven: oversized unbroken-word wrapping versus CSS
+`overflow-wrap:normal`, detailed source whitespace/line-breaking equivalence,
+source animation rasterization, opaque-background shadow exclusion, real native
+announcement/contour behavior, the fourteen other owners and actions/anchor.
+Native Flutter paragraph fallback may split an oversized word where Chromium
+overflows it; no custom text renderer or fitted line break is introduced here.
+Final actual-source/Flutter pairs, both locales/themes/DPRs and native replay
+belong to the integrator after the clean combined tree. This branch runs no
+application builds, GPU/Android inputs, publication or release.

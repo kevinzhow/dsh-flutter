@@ -40,6 +40,7 @@ ICONS = {
     'IconInspectOutlineRegular': 'inspect',
     'IconCopyOutlineRegular': 'copy',
     'IconCheckOutlineRegular': 'check',
+    'IconCheckCircleOutlineRegular': 'checkCircle',
     'IconWrapFillRegular': 'wrap',
     'IconNowrapFillRegular': 'nowrap',
     'IconPlayOutlineRegular': 'play',
