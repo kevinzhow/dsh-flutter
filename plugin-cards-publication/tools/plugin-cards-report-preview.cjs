@@ -16,7 +16,7 @@ for (const [name, row] of files) {
 }
 const requested = new Set();
 const server = http.createServer((req, res) => {
-  const name = new URL(req.url, 'http://127.0.0.1').pathname.slice(1) || 'index.html';
+  const name = new URL(req.url, '[local-runtime-url]').pathname.slice(1) || 'index.html';
   if (name === 'favicon.ico') {res.writeHead(204); return res.end();}
   if (!files.has(name)) {res.writeHead(404); return res.end();}
   const data = fs.readFileSync(path.join(folder, name));
@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
   let browser;
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
-    const origin = 'http://127.0.0.1:' + server.address().port;
+    const origin = '[local-runtime-url]' + server.address().port;
     browser = await chromium.launch({headless: true, args: ['--no-sandbox']});
     const rows = [];
     for (const width of [300, 1280]) {

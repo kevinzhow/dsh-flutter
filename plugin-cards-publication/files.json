@@ -1,5 +1,6 @@
 {
   "schema": "whalee-plugin-cards-publication-files/1",
+  "toolCopiesAreForReview": "Raw producer identities remain in build receipts; loopback templates and the home-path regex may be sanitized.",
   "files": [
     {
       "path": "assets-plan.json",
@@ -48,8 +49,10 @@
     },
     {
       "path": "tools/design-system-source-report.py",
-      "sha256": "be8092b986e0239824154c1683e3a152fd574eef0059a5e26e26969c1e179e56",
-      "bytes": 32803
+      "sha256": "e62b69541786e6f21ed63ae9d2b93417701b3e0db69b3dfa78b12b887878def3",
+      "bytes": 32813,
+      "rawSha256": "be8092b986e0239824154c1683e3a152fd574eef0059a5e26e26969c1e179e56",
+      "sanitized": true
     },
     {
       "path": "tools/plugin-cards-artifact-readback.py",
@@ -63,13 +66,17 @@
     },
     {
       "path": "tools/plugin-cards-report-preview.cjs",
-      "sha256": "5f951b5c426eb7945557f3972b1ce7f9eb8ee406b81e1da1be101afc15ab1b51",
-      "bytes": 7280
+      "sha256": "4a94c5f83455874af52c1af50900e80add689a083576841f30e01c39c81810fa",
+      "bytes": 7285,
+      "rawSha256": "5f951b5c426eb7945557f3972b1ce7f9eb8ee406b81e1da1be101afc15ab1b51",
+      "sanitized": true
     },
     {
       "path": "tools/plugin-cards-source-preview.cjs",
-      "sha256": "da064de4667c4d23e690e95ba2ef4f11657fe6e086906c4b9d39b017522c1c63",
-      "bytes": 4030
+      "sha256": "a1295eb6d2cc5e87f3e029ce66789b8dd6ed211f90bb9ae7a9b98685b17e9d81",
+      "bytes": 4034,
+      "rawSha256": "da064de4667c4d23e690e95ba2ef4f11657fe6e086906c4b9d39b017522c1c63",
+      "sanitized": true
     },
     {
       "path": "tools/plugin-cards-source-report.py",

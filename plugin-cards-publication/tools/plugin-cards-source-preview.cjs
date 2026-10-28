@@ -7,8 +7,8 @@ const server=http.createServer((req,res)=>{if(req.url==='/favicon.ico'){res.writ
 (async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));let browser;const results=[];
 try{browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 for(const width of [300,1280]){const page=await browser.newPage({viewport:{width,height:960}});const errors=[],unexpectedRequests=[];
-page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:'+server.address().port+'/'))unexpectedRequests.push(r.url());});
-await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
+page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith('[local-runtime-url]'+server.address().port+'/'))unexpectedRequests.push(r.url());});
+await page.goto('[local-runtime-url]'+server.address().port+'/',{waitUntil:'networkidle'});
 const visible=()=>page.locator('article.package:not([hidden])').count();
 if(await visible()!==66||await page.locator('#ui-section article.package').count()!==57||await page.locator('#support-section article.package').count()!==9)throw Error('Package cohort differs');
 if(await page.locator('#ui-section .css-row').count()!==209||await page.locator('#support-section .css-row').count()!==10)throw Error('CSS cohort differs');
