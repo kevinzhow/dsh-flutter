@@ -60,18 +60,23 @@ that actual painter seat is mounted. It adds no timer or inferred pixel rule.
 
 ## Ownership, bounds and fallback
 
-The host's announcement layer is logically outside Navigator, after the outer
-paint Overlay. Every painter state has its own identity, including occurrences
-with equal text. Keyed root nodes keep their semantic identity while raw text,
-direction or actual bounds change. Post-frame measurements use the real
-render transform to the host, including entry translation; no synthetic1px
-rectangle, fitted inset, threshold or alternate style is used.
+The host's render boundary is logically outside Navigator. Every attached
+painter render anchor owns its own virtual alert node, including occurrences
+with equal text. Those root nodes keep their identity while raw text,
+direction or actual bounds change. Registration/data changes/detachment are
+synchronous. During the current semantics flush, after layout and paint, the
+host reads each attached anchor's actual transform and rectangle. There is no
+post-frame record, deferred widget rebuild, synthetic1px rectangle, fitted
+inset, threshold or alternate style.
 
-Once the root accepts an occurrence, the local painter semantics are excluded
-to avoid duplicate alerts. Measurement callbacks verify attachment/mounting;
-removal queues a null record and fences stale reports. No pointer action or
-focus request is introduced. Ordinary replacement, clear, original expiry and
-changed-hold completion continue to belong to the existing Toast owner.
+The owner-side render anchor suppresses its local semantic children only while
+the root bridge exists. Standalone consumers retain the original local alert.
+Removal is visible in the same semantics frame, and equal labels are never
+deduplicated. The host releases dropped semantic children through the normal
+SemanticsNode child-update API and clears its node cache when semantics are
+disabled. No pointer action or focus request is introduced. Ordinary
+replacement, clear, original expiry and changed-hold completion continue to
+belong to the existing Toast owner.
 
 Without `DshToastHost`, the original local portal alert/context/lifetime path
 is preserved. This fallback does **not** certify platform traversal through
@@ -81,15 +86,23 @@ adapter remains data-only and does not gain arbitrary initiating context.
 
 ## Validation and remaining authority
 
-The new exported-traversal regressions fail on the unmodified27fd parent:
+The initial exported-traversal regressions fail on the unmodified27fd parent:
 four meaningful assertion failures, four passing boundary controls, no
 compilation failure (`.local/toast-announcement-red2.log`). The repaired
-candidate's98 focused pinned-font Toast tests pass, covering actual Settings
-upload, actual lightbox in both orders, clipped providers, full raw text,
-direction updates, stable node identity, equal-text independent owners,
-replacement/clear/unmount, initial-opacity0, changed-hold fade-before-callback,
-and the existing timer/paint/pointer/context tests. The earlier unpinned run
-is retained; Ahem cannot establish the callback digit raster comparisons.
+initial post-frame design passed multi-pump tests but was rejected by review:
+five direct single-pump controls fail on37847
+(`.local/toast-announcement-single-frame-red.log`), proving stale label,
+direction, moving bounds, removal and fully-faded/expired announcements.
+The current render-node design adds those controls plus actual host-ancestor
+transform, between-host owner-reparent and semantics re-enable controls. The focused106-test set
+covers actual Settings upload, actual lightbox in both orders, clipped live
+providers, full raw text/direction, stable identity, equal-text owners,
+replacement/clear/unmount, initial-opacity0 and the independent source timing
+boundaries. Existing tests now query exported platform nodes instead of
+requiring a particular Semantics Widget in the implementation. The native
+preparation test uses the shared strict retained-font loader, preserving all
+eight callback raster assertions without depending on an optional environment
+variable. Failed earlier designs/environment controls remain retained.
 
 The native diagnostic restored/read back the exact normal88 APK
 `faddd2bbc00391b5afff78b0f633f2912c9c71dc6b50685124ca11bb81daef09`,

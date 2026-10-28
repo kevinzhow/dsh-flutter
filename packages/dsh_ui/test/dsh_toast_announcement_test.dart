@@ -90,6 +90,261 @@ class _OwnerIcon extends StatelessWidget {
 }
 
 void main() {
+  testWidgets('semantics disable and re-enable rebuilds one live occurrence', (
+    t,
+  ) async {
+    var semantics = t.ensureSemantics();
+    await t.pumpWidget(
+      dshTestApp(
+        DshToastHost(
+          child: DshToast(text: 'Still mounted', onDone: () {}),
+        ),
+      ),
+    );
+    await flush(t, const Duration(milliseconds: 200));
+    expectAlert(t, 'Still mounted');
+    semantics.dispose();
+    await t.pump();
+    semantics = t.ensureSemantics();
+    await t.pump();
+    expectAlert(t, 'Still mounted');
+    await t.pumpWidget(const SizedBox());
+    semantics.dispose();
+  });
+
+  testWidgets('one ancestor-transform frame keeps the actual physical bounds', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    final offset = ValueNotifier(Offset.zero);
+    await t.pumpWidget(
+      MaterialApp(
+        theme: ThemeData(
+          extensions: [
+            resolveTheme(officialPack, ThemeSettings(), Brightness.light),
+          ],
+        ),
+        home: Scaffold(
+          body: DshToast(text: 'Ancestor motion', onDone: () {}),
+        ),
+        builder: (_, navigator) => ValueListenableBuilder(
+          valueListenable: offset,
+          child: DshToastHost(child: navigator!),
+          builder: (_, value, child) =>
+              Transform.translate(offset: value, child: child),
+        ),
+      ),
+    );
+    await flush(t, const Duration(milliseconds: 200));
+    final original = t.getRect(find.byType(DshShadowBox));
+    final id = platformAlerts(
+      t,
+      DebugSemanticsDumpOrder.traversalOrder,
+    ).single.id;
+    offset.value = const Offset(10.25, 20.5);
+    await t.pump();
+    expect(t.getRect(find.byType(DshShadowBox)), original.shift(offset.value));
+    expectAlert(t, 'Ancestor motion');
+    expect(
+      platformAlerts(t, DebugSemanticsDumpOrder.traversalOrder).single.id,
+      id,
+    );
+    await t.pumpWidget(const SizedBox());
+    offset.dispose();
+    semantics.dispose();
+  });
+
+  testWidgets(
+    'one reparent frame transfers an attached owner without stale alert',
+    (t) async {
+      final semantics = t.ensureSemantics();
+      final right = ValueNotifier(false);
+      final toastKey = GlobalKey();
+      await t.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Theme(
+            data: ThemeData(
+              extensions: [
+                resolveTheme(officialPack, ThemeSettings(), Brightness.light),
+              ],
+            ),
+            child: MediaQuery(
+              data: const MediaQueryData(),
+              child: ValueListenableBuilder(
+                valueListenable: right,
+                builder: (_, onRight, _) => Row(
+                  children: [
+                    for (final side in [false, true])
+                      Expanded(
+                        child: DshToastHost(
+                          child: onRight == side
+                              ? DshToast(
+                                  key: toastKey,
+                                  text: 'Reparented',
+                                  onDone: () {},
+                                )
+                              : const SizedBox(),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await flush(t, const Duration(milliseconds: 200));
+      final before = t.getRect(find.byType(DshShadowBox));
+      right.value = true;
+      await t.pump();
+      expect(
+        t.getRect(find.byType(DshShadowBox)).center.dx,
+        greaterThan(before.center.dx),
+      );
+      expectAlert(t, 'Reparented');
+      await t.pumpWidget(const SizedBox());
+      right.dispose();
+      semantics.dispose();
+    },
+  );
+
+  testWidgets('one frame exports current raw text and owner direction', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    final updated = ValueNotifier(false);
+    await t.pumpWidget(
+      dshTestApp(
+        DshToastHost(
+          child: ValueListenableBuilder(
+            valueListenable: updated,
+            builder: (_, value, _) => Directionality(
+              textDirection: value ? TextDirection.rtl : TextDirection.ltr,
+              child: DshToast(
+                text: value ? '  Updated raw\ntext  ' : 'Original',
+                onDone: () {},
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await flush(t, const Duration(milliseconds: 200));
+    final id = platformAlerts(
+      t,
+      DebugSemanticsDumpOrder.traversalOrder,
+    ).single.id;
+    updated.value = true;
+    await t.pump();
+    expectAlert(t, '  Updated raw\ntext  ');
+    final current = platformAlerts(
+      t,
+      DebugSemanticsDumpOrder.traversalOrder,
+    ).single;
+    expect(current.id, id);
+    expect(current.getSemanticsData().textDirection, TextDirection.rtl);
+    await t.pumpWidget(const SizedBox());
+    updated.dispose();
+    semantics.dispose();
+  });
+
+  testWidgets('one animation frame exports its current painted rectangle', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    await t.pumpWidget(
+      dshTestApp(
+        DshToastHost(
+          child: DshToast(text: 'Moving', onDone: () {}),
+        ),
+      ),
+    );
+    await flush(t);
+    final before = t.getRect(find.byType(DshShadowBox));
+    await t.pump(const Duration(milliseconds: 80));
+    expect(t.getRect(find.byType(DshShadowBox)), isNot(before));
+    expectAlert(t, 'Moving');
+    await t.pumpWidget(const SizedBox());
+    semantics.dispose();
+  });
+
+  testWidgets('one owner-removal frame removes its exported alert', (t) async {
+    final semantics = t.ensureSemantics();
+    final visible = ValueNotifier(true);
+    await t.pumpWidget(
+      dshTestApp(
+        DshToastHost(
+          child: ValueListenableBuilder(
+            valueListenable: visible,
+            builder: (_, value, _) => value
+                ? DshToast(text: 'Remove now', onDone: () {})
+                : const SizedBox(),
+          ),
+        ),
+      ),
+    );
+    await flush(t, const Duration(milliseconds: 200));
+    expectAlert(t, 'Remove now');
+    visible.value = false;
+    await t.pump();
+    expect(find.byType(DshShadowBox), findsNothing);
+    expectAlert(t, null);
+    await t.pumpWidget(const SizedBox());
+    visible.dispose();
+    semantics.dispose();
+  });
+
+  testWidgets(
+    'one fully-faded frame removes AX before rescheduled completion',
+    (t) async {
+      final semantics = t.ensureSemantics();
+      final hold = ValueNotifier<Duration?>(null);
+      var done = 0;
+      await t.pumpWidget(
+        dshTestApp(
+          DshToastHost(
+            child: ValueListenableBuilder(
+              valueListenable: hold,
+              builder: (_, value, _) =>
+                  DshToast(text: 'Fade now', hold: value, onDone: () => done++),
+            ),
+          ),
+        ),
+      );
+      await flush(t, const Duration(milliseconds: 1160));
+      hold.value = Duration.zero;
+      await t.pump();
+      expect(find.byType(DshShadowBox), findsNothing);
+      expect(done, 0);
+      expectAlert(t, null);
+      await t.pumpWidget(const SizedBox());
+      hold.dispose();
+      semantics.dispose();
+    },
+  );
+
+  testWidgets('one expiry frame removes the current exported occurrence', (
+    t,
+  ) async {
+    final semantics = t.ensureSemantics();
+    var done = 0;
+    await t.pumpWidget(
+      dshTestApp(
+        DshToastHost(
+          child: DshToast(text: 'Expire now', onDone: () => done++),
+        ),
+      ),
+    );
+    await flush(t);
+    await t.pump(const Duration(seconds: 4));
+    expect(find.byType(DshShadowBox), findsNothing);
+    expect(done, 1);
+    expectAlert(t, null);
+    await t.pumpWidget(const SizedBox());
+    semantics.dispose();
+  });
+
   for (final lightboxFirst in [false, true]) {
     testWidgets(
       'actual lightbox exports one alert, lightboxFirst=$lightboxFirst',
@@ -249,7 +504,18 @@ void main() {
       expect(initial.map((node) => node.label), everyElement('Same'));
       final originalIds = initial.map((node) => node.id).toSet();
       generation.value++;
-      await flush(t);
+      await t.pump();
+      // A new owner portal opens after its first frame, as before this repair.
+      // During that frame only the surviving owner's painter is present; its
+      // retired sibling must already be absent from platform semantics.
+      expect(find.byType(DshShadowBox), findsOneWidget);
+      final survivor = platformAlerts(
+        t,
+        DebugSemanticsDumpOrder.traversalOrder,
+      );
+      expect(survivor, hasLength(1));
+      expect(originalIds, contains(survivor.single.id));
+      await t.pump();
       final replacements = platformAlerts(
         t,
         DebugSemanticsDumpOrder.traversalOrder,
@@ -260,10 +526,10 @@ void main() {
         hasLength(1),
       );
       owners.value = 1;
-      await flush(t);
+      await t.pump();
       expectAlert(t, 'Same');
       owners.value = 0;
-      await flush(t);
+      await t.pump();
       expectAlert(t, null);
       await flush(t, const Duration(seconds: 5));
       expectAlert(t, null);

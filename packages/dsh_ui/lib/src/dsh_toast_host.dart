@@ -1,10 +1,8 @@
 import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 /// Mount around Navigator to keep source Toast paint and announcements above
-/// routes. Painter widgets keep their original inherited providers; the root
-/// holds only resolved announcement text, direction and actual painted bounds.
+/// routes. Painter widgets retain their original live inherited providers.
 class DshToastHost extends StatefulWidget {
   const DshToastHost({super.key, required this.child});
   final Widget child;
@@ -12,102 +10,122 @@ class DshToastHost extends StatefulWidget {
   State<DshToastHost> createState() => _DshToastHostState();
 }
 
-class _Announcement {
-  const _Announcement(this.text, this.direction, this.rect);
-  final String text;
-  final TextDirection direction;
-  final Rect rect;
-  bool sameAs(_Announcement? other) =>
-      other != null &&
-      text == other.text &&
-      direction == other.direction &&
-      rect == other.rect;
-}
-
 class _DshToastHostState extends State<DshToastHost> {
-  final _root = GlobalKey();
-  final _announcements = <Object, _Announcement>{};
-  final _pending = <Object, _Announcement?>{};
-  bool _scheduled = false;
-
-  RenderBox? get rootBox {
-    final object = _root.currentContext?.findRenderObject();
-    return object is RenderBox && object.hasSize ? object : null;
-  }
-
-  bool update(Object identity, _Announcement? value) {
-    _pending[identity] = value;
-    final phase = SchedulerBinding.instance.schedulerPhase;
-    if (phase == SchedulerPhase.idle ||
-        phase == SchedulerPhase.postFrameCallbacks) {
-      _flush();
-    } else if (!_scheduled) {
-      _scheduled = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _flush());
-      WidgetsBinding.instance.ensureVisualUpdate();
-    }
-    return value == null
-        ? !_announcements.containsKey(identity)
-        : value.sameAs(_announcements[identity]);
-  }
-
-  void _flush() {
-    _scheduled = false;
-    if (!mounted) return;
-    var changed = false;
-    for (final entry in _pending.entries) {
-      if (entry.value case final value?) {
-        if (!value.sameAs(_announcements[entry.key])) {
-          _announcements[entry.key] = value;
-          changed = true;
-        }
-      } else {
-        changed = _announcements.remove(entry.key) != null || changed;
-      }
-    }
-    _pending.clear();
-    if (changed) setState(() {});
-  }
+  final _bridge = _AnnouncementBridge();
 
   @override
   Widget build(BuildContext context) => _ToastHostScope(
-    host: this,
-    child: Stack(
-      key: _root,
-      fit: StackFit.expand,
-      children: [
-        Overlay.wrap(child: widget.child),
-        for (final entry in _announcements.entries)
-          Positioned.fromRect(
-            key: ObjectKey(entry.key),
-            rect: entry.value.rect,
-            child: IgnorePointer(
-              child: Semantics(
-                container: true,
-                role: SemanticsRole.alert,
-                label: entry.value.text,
-                textDirection: entry.value.direction,
-                child: const SizedBox.expand(),
-              ),
-            ),
-          ),
-      ],
+    bridge: _bridge,
+    child: _AnnouncementRoot(
+      bridge: _bridge,
+      child: Overlay.wrap(child: widget.child),
     ),
   );
 }
 
+class _AnnouncementBridge {
+  _RenderAnnouncementRoot? root;
+}
+
 class _ToastHostScope extends InheritedWidget {
-  const _ToastHostScope({required this.host, required super.child});
-  final _DshToastHostState host;
+  const _ToastHostScope({required this.bridge, required super.child});
+  final _AnnouncementBridge bridge;
   @override
-  bool updateShouldNotify(_ToastHostScope oldWidget) => oldWidget.host != host;
+  bool updateShouldNotify(_ToastHostScope oldWidget) =>
+      oldWidget.bridge != bridge;
+}
+
+class _AnnouncementRoot extends SingleChildRenderObjectWidget {
+  const _AnnouncementRoot({required this.bridge, required super.child});
+  final _AnnouncementBridge bridge;
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderAnnouncementRoot(bridge);
+}
+
+/// This render boundary is logically above Navigator. Extra alert nodes are
+/// assembled during the current semantics flush, after current layout/paint;
+/// there is no post-frame cache or widget rebuild that can lag a painted frame.
+class _RenderAnnouncementRoot extends RenderProxyBox {
+  _RenderAnnouncementRoot(this.bridge) {
+    bridge.root = this;
+  }
+  final _AnnouncementBridge bridge;
+  final _anchors = <_RenderAnnouncementAnchor>{};
+  final _nodes = <_RenderAnnouncementAnchor, SemanticsNode>{};
+
+  void register(_RenderAnnouncementAnchor anchor) {
+    _anchors.add(anchor);
+    markNeedsSemanticsUpdate();
+  }
+
+  void unregister(_RenderAnnouncementAnchor anchor) {
+    if (_anchors.remove(anchor)) markNeedsSemanticsUpdate();
+  }
+
+  @override
+  void describeSemanticsConfiguration(SemanticsConfiguration config) {
+    super.describeSemanticsConfiguration(config);
+    config
+      ..isSemanticBoundary = true
+      ..explicitChildNodes = true;
+  }
+
+  @override
+  void assembleSemanticsNode(
+    SemanticsNode node,
+    SemanticsConfiguration config,
+    Iterable<SemanticsNode> children,
+  ) {
+    final alerts = <SemanticsNode>[];
+    final active = <_RenderAnnouncementAnchor>{};
+    for (final anchor in _anchors) {
+      if (!anchor.attached || anchor.owner != owner || !anchor.hasSize) {
+        continue;
+      }
+      final rect = Offset.zero & anchor.size;
+      if (rect.isEmpty) continue;
+      active.add(anchor);
+      final alert = _nodes.putIfAbsent(anchor, SemanticsNode.new);
+      alert
+        ..rect = rect
+        ..transform = anchor.getTransformTo(this)
+        ..updateWith(
+          config: SemanticsConfiguration()
+            ..isSemanticBoundary = true
+            ..role = SemanticsRole.alert
+            ..label = anchor.text
+            ..textDirection = anchor.direction,
+        );
+      alerts.add(alert);
+    }
+    node.updateWith(
+      config: config,
+      childrenInInversePaintOrder: [...alerts.reversed, ...children],
+    );
+    // updateWith detaches removed semantic children before releasing our
+    // references. Equal labels never share an occurrence or semantic node.
+    _nodes.removeWhere((anchor, _) => !active.contains(anchor));
+  }
+
+  @override
+  void clearSemantics() {
+    super.clearSemantics();
+    _nodes.clear();
+  }
+
+  @override
+  void dispose() {
+    if (identical(bridge.root, this)) bridge.root = null;
+    _nodes.clear();
+    super.dispose();
+  }
 }
 
 /// Internal canonical painter seat; intentionally not exported as public API.
-/// A zero-size logical portal anchor inside a clipped owner can lose platform
-/// traversal semantics even while its overlay paints. Under the canonical host
-/// this widget supplies one root announcement at its real render rectangle.
-class DshToastAnnouncement extends StatefulWidget {
+/// The owner-side portal retains its real widget subtree. Only resolved text,
+/// direction and this attached render anchor are exposed at the root boundary.
+class DshToastAnnouncement extends StatelessWidget {
   const DshToastAnnouncement({
     super.key,
     required this.text,
@@ -115,115 +133,92 @@ class DshToastAnnouncement extends StatefulWidget {
   });
   final String text;
   final Widget child;
-  @override
-  State<DshToastAnnouncement> createState() => _DshToastAnnouncementState();
-}
-
-class _DshToastAnnouncementState extends State<DshToastAnnouncement> {
-  final _identity = Object();
-  _DshToastHostState? _host;
-  bool _rootOwns = false;
-  TextDirection _direction = TextDirection.ltr;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final host = context
+  Widget build(BuildContext context) => _AnnouncementAnchor(
+    bridge: context
         .dependOnInheritedWidgetOfExactType<_ToastHostScope>()
-        ?.host;
-    if (host != _host) {
-      _host?.update(_identity, null);
-      _rootOwns = false;
-    }
-    _host = host;
-    _direction = Directionality.of(context);
-  }
-
-  void _report(Rect rect) {
-    if (mounted && !rect.isEmpty) {
-      final owned =
-          _host?.update(
-            _identity,
-            _Announcement(widget.text, _direction, rect),
-          ) ??
-          false;
-      if (owned != _rootOwns) setState(() => _rootOwns = owned);
-    }
-  }
-
-  @override
-  void dispose() {
-    _host?.update(_identity, null);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final host = _host;
-    final semantics = Semantics(
-      container: !_rootOwns,
-      excludeSemantics: _rootOwns,
-      role: _rootOwns ? null : SemanticsRole.alert,
-      child: widget.child,
-    );
-    if (host == null) {
-      return semantics;
-    }
-    return _AnnouncementBounds(host: host, onRect: _report, child: semantics);
-  }
+        ?.bridge,
+    text: text,
+    direction: Directionality.of(context),
+    // Preserve the standalone local semantics path. The render anchor excludes
+    // this subtree only when the canonical root owns its announcement.
+    child: Semantics(container: true, role: SemanticsRole.alert, child: child),
+  );
 }
 
-class _AnnouncementBounds extends SingleChildRenderObjectWidget {
-  const _AnnouncementBounds({
-    required this.host,
-    required this.onRect,
+class _AnnouncementAnchor extends SingleChildRenderObjectWidget {
+  const _AnnouncementAnchor({
+    required this.bridge,
+    required this.text,
+    required this.direction,
     required super.child,
   });
-  final _DshToastHostState host;
-  final ValueChanged<Rect> onRect;
+  final _AnnouncementBridge? bridge;
+  final String text;
+  final TextDirection direction;
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderAnnouncementBounds(host, onRect);
+      _RenderAnnouncementAnchor(bridge, text, direction);
   @override
   void updateRenderObject(
     BuildContext context,
-    _RenderAnnouncementBounds object,
+    _RenderAnnouncementAnchor object,
   ) {
-    object
-      ..host = host
-      ..onRect = onRect
-      ..markNeedsPaint();
+    object.update(bridge, text, direction);
   }
 }
 
-class _RenderAnnouncementBounds extends RenderProxyBox {
-  _RenderAnnouncementBounds(this.host, this.onRect);
-  _DshToastHostState host;
-  ValueChanged<Rect> onRect;
-  bool _scheduled = false;
+class _RenderAnnouncementAnchor extends RenderProxyBox {
+  _RenderAnnouncementAnchor(this._bridge, this.text, this.direction);
+  _AnnouncementBridge? _bridge;
+  String text;
+  TextDirection direction;
 
-  void _afterFrame() {
-    if (_scheduled) return;
-    _scheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scheduled = false;
-      final root = host.rootBox;
-      if (!attached || !hasSize || root == null) return;
-      onRect(
-        MatrixUtils.transformRect(getTransformTo(root), Offset.zero & size),
-      );
-    });
+  void update(
+    _AnnouncementBridge? bridge,
+    String text,
+    TextDirection direction,
+  ) {
+    if (_bridge != bridge) {
+      if (attached) _bridge?.root?.unregister(this);
+      _bridge = bridge;
+      if (attached) _bridge?.root?.register(this);
+      markNeedsSemanticsUpdate();
+    }
+    this.text = text;
+    this.direction = direction;
+    // The Toast rebuild also represents entry/fade transforms outside this
+    // render object. Read their current values only at semantics assembly.
+    _bridge?.root?.markNeedsSemanticsUpdate();
+  }
+
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    _bridge?.root?.register(this);
+  }
+
+  @override
+  void detach() {
+    _bridge?.root?.unregister(this);
+    super.detach();
+  }
+
+  @override
+  void visitChildrenForSemantics(RenderObjectVisitor visitor) {
+    if (_bridge?.root == null) super.visitChildrenForSemantics(visitor);
   }
 
   @override
   void performLayout() {
     super.performLayout();
-    _afterFrame();
+    _bridge?.root?.markNeedsSemanticsUpdate();
   }
 
   @override
   void paint(PaintingContext context, Offset offset) {
     super.paint(context, offset);
-    _afterFrame();
+    _bridge?.root?.markNeedsSemanticsUpdate();
   }
 }

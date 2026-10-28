@@ -35,6 +35,21 @@ Future<void> present(
   await t.pump();
 }
 
+List<SemanticsNode> platformAlerts(WidgetTester t) {
+  final result = <SemanticsNode>[];
+  void visit(SemanticsNode node) {
+    if (node.getSemanticsData().role == SemanticsRole.alert) result.add(node);
+    for (final child in node.debugListChildrenInOrder(
+      DebugSemanticsDumpOrder.traversalOrder,
+    )) {
+      visit(child);
+    }
+  }
+
+  visit(t.binding.renderViews.single.owner!.semanticsOwner!.rootSemanticsNode!);
+  return result;
+}
+
 void main() {
   testWidgets('owner-mounted icon retains arbitrary live inherited context', (
     t,
@@ -431,15 +446,7 @@ void main() {
       expect(taps, 1);
       expect(focus.hasPrimaryFocus, isTrue);
       expect(
-        t
-            .getSemantics(
-              find.byWidgetPredicate(
-                (w) =>
-                    w is Semantics && w.properties.role == SemanticsRole.alert,
-              ),
-            )
-            .getSemanticsData()
-            .role,
+        platformAlerts(t).single.getSemanticsData().role,
         SemanticsRole.alert,
       );
       await t.pumpWidget(const SizedBox());

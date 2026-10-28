@@ -20,9 +20,20 @@ Future<void> flush(WidgetTester t, [Duration elapsed = Duration.zero]) async {
 
 Finder surface() => find.byType(DshShadowBox);
 Finder control(String name) => find.byKey(ValueKey('toast-control-$name'));
-Finder alert() => find.byWidgetPredicate(
-  (w) => w is Semantics && w.properties.role == SemanticsRole.alert,
-);
+SemanticsNode alert(WidgetTester t) {
+  final result = <SemanticsNode>[];
+  void visit(SemanticsNode node) {
+    if (node.getSemanticsData().role == SemanticsRole.alert) result.add(node);
+    for (final child in node.debugListChildrenInOrder(
+      DebugSemanticsDumpOrder.traversalOrder,
+    )) {
+      visit(child);
+    }
+  }
+
+  visit(t.binding.renderViews.single.owner!.semanticsOwner!.rootSemanticsNode!);
+  return result.single;
+}
 
 void main() {
   // Raster assertions must use the same retained fonts in an ordinary full
@@ -101,21 +112,20 @@ void main() {
         expect(state.focus.hasPrimaryFocus, isTrue);
         final semantics = t.ensureSemantics();
         expect(
-          t.getSemantics(alert()).getSemanticsData().role,
+          alert(t).getSemanticsData().role,
           SemanticsRole.alert,
         );
         expect(
-          t
-              .getSemantics(alert())
+          alert(t)
               .getSemanticsData()
               .hasAction(SemanticsAction.tap),
           isFalse,
         );
         expect(
-          t.getSemantics(alert()).getSemanticsData().label,
+          alert(t).getSemanticsData().label,
           toastFixtureText('no-icon', 'en'),
         );
-        expect(t.getSemantics(alert()).rect.size, t.getSize(surface()));
+        expect(alert(t).rect.size, t.getSize(surface()));
         measured['noIcon'] = t.getRect(surface());
         expect(measured['noIcon']!.top, DshToastRecipe.top);
         expect(measured['noIcon']!.center.dx, viewport.size.width / 2);
