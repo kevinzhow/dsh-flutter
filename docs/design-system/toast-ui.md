@@ -7,7 +7,7 @@ Flutter owners: open-in-app launch failure, file open/reveal failure and Setting
 upload notice. Fourteen other source owners remain pending; this is not a
 whole-family or overall visual-completion claim.
 
-The API is resolved text, optional icon widget, optional `DshToastTone.success`,
+The owner-mounted API is resolved text, optional icon widget, optional `DshToastTone.success`,
 optional hold duration and completion callback. No icon is the default. Success
 overrides a supplied icon with the actual generated
 `IconCheckCircleOutlineRegular`, whose two filled paths are read by the existing
@@ -15,6 +15,14 @@ icon generator. Caller-provided glyphs keep their own artwork size. Failure
 owners explicitly supply the existing real warning icon; upload saved uses
 success and upload failed supplies no icon. Actions and anchor inputs are not
 implemented and remain frozen/pending in the companion source contract.
+
+`DshToast` is the owner-mounted API for arbitrary custom icon widgets. Its real
+`OverlayPortal` retains the owner's live inherited providers, including values
+other than themes. The imperative `DshToasts.show` / `showOn` adapter accepts only
+resolved `DshIconData`, optional tone, hold and text: the entry it inserts has no
+relationship to the initiating widget's provider subtree. It deliberately does
+not accept a generic Widget or claim to capture that context. The existing two
+warning callers pass `DshIcons.warning`; Settings mounts `DshToast` itself.
 
 ## Source layout and placement
 
@@ -26,13 +34,15 @@ or fixed banner height. Canonical theme contour and `DshShadowBox` paint the
 surface using the generated radius/material/shadow slots. There is no local
 alpha, blur, font or threshold fitting.
 
-`DshToastHost` mounts around the Navigator in `MaterialApp.builder`. Its actual
-Stack paints the Navigator before the Toast layer, preserving the source
-Toast1100/lightbox1000 relation in either show order. Both declarative and
-imperative occurrences use the same canonical painter through that host. This
-also escapes transformed feature ancestors, keeps coordinates relative to the
-window and lets pointer input reach the Navigator underneath. No focus is
-requested. Independent owners are still independent; this is not a global queue.
+`DshToastHost` mounts a real outer `Overlay.wrap` around the Navigator in
+`MaterialApp.builder`. Each occurrence remains logically in its owner subtree
+and targets that outer Overlay using `OverlayPortal`; the host does not reparent
+widget specs into a root map. Navigator/lightbox entries stay inside the ordinary
+entry below those portal children, preserving the source Toast1100/lightbox1000
+relation in either show order. This also escapes transformed feature ancestors,
+keeps coordinates relative to the window and lets pointer input reach the
+Navigator underneath. No focus is requested. Independent owners remain
+independent; this is not a global queue.
 
 An isolated consumer without the app host uses the framework's root-overlay
 portal so it still escapes feature transforms. Plain Overlay paint order cannot
@@ -57,8 +67,8 @@ without division by zero.
 
 The completion Timer is independent of animation ticks. Same-hold text/callback,
 theme and overlay rebuilds retain the deadline and call the latest completion
-once. A changed hold synchronously cancels/reschedules that Timer, even before a
-deferred root presentation rebuild. The CSS paint timeline stays anchored to the
+once. A changed hold synchronously cancels/reschedules that Timer, even before
+the portal child rebuilds. The CSS paint timeline stays anchored to the
 original mount; changing a delay can therefore hide paint earlier than the
 newly restarted completion Timer. Unmount cancels the Timer. The fully faded
 surface has no visible/semantic content if an owner delays removal.
@@ -67,15 +77,25 @@ Each imperative show allocates its display identity outside the overlay builder.
 A rebuild cannot accidentally manufacture a new occurrence. Re-showing identical
 copy still creates a new identity, and old completion cannot remove its
 replacement. Settings upload also fences completion by the actual notice
-sequence. Host registration updates are frame-safe and keep these occurrence
-identities stable; the animation/timer owner lives in the root presentation,
-outside Navigator route ticker muting.
+sequence. The portal keeps these occurrence identities stable. The painter owns
+and disposes a scheduler `Ticker` directly, so a route's `TickerMode` does not
+pause source portal animations when a later route covers its logical owner.
+Completion still uses the independent Timer; removing the owner tears down the
+portal, timer and ticker together.
 
 ## Verification and explicit limits
 
 Four source regressions were run against the unchanged base and failed for the
 existing icon, desktop/phone content-box and timer/frame defects. Additional RED
 evidence reproduces a deadline cancelled one frame late during a hold update.
+The independent review reproduced a further RED failure: the original host map
+made an arbitrary inherited-context icon see the root instead of its owner.
+The repair tests require the live owner provider and preserve the original
+deadline through provider changes, cancellation on owner removal and source
+entry/fade timing while a later opaque route disables the owner's TickerMode.
+Both actual lightbox show orders compare real painted Toast-core RGBA to the
+same Toast alone, rather than assuming logical element order equals paint order.
+
 Focused tests cover source sizing, real artwork override, custom icon size,
 CSS curves, reduced entry, zero-hold composition, latest callback, hold changes,
 unmount, root placement, pointer pass-through, existing focus, alert role,
@@ -99,6 +119,10 @@ source animation rasterization, opaque-background shadow exclusion, real native
 announcement/contour behavior, the fourteen other owners and actions/anchor.
 Native Flutter paragraph fallback may split an oversized word where Chromium
 overflows it; no custom text renderer or fitted line break is introduced here.
+The native launch warning remains registration-owned rather than keyed to each
+source OpenTargetButton/path. Control unmount/path changes, independent source
+controls and the source command path's different failure policy are separate
+pending owner migrations; this context repair does not change them.
 Final actual-source/Flutter pairs, both locales/themes/DPRs and native replay
 belong to the integrator after the clean combined tree. This branch runs no
 application builds, GPU/Android inputs, publication or release.

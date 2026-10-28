@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dsh_icon.dart';
+import 'dsh_icon_data.dart';
 import 'dsh_corners.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_recipes.g.dart';
@@ -26,60 +27,11 @@ enum DshToastTone { success }
 /// Root portal layer. Mount around the Navigator in the app builder so these
 /// announcements escape feature transforms and remain above lightbox routes in
 /// either show order. Other overlay-family priorities are not changed here.
-class DshToastHost extends StatefulWidget {
+class DshToastHost extends StatelessWidget {
   const DshToastHost({super.key, required this.child});
   final Widget child;
   @override
-  State<DshToastHost> createState() => _DshToastHostState();
-}
-
-class _DshToastHostState extends State<DshToastHost> {
-  final _entries = <Key, _ToastSpec>{};
-  final _pending = <Key, _ToastSpec?>{};
-  bool _scheduled = false;
-
-  void update(Key identity, _ToastSpec? spec) {
-    _pending[identity] = spec;
-    if (_scheduled) return;
-    _scheduled = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scheduled = false;
-      if (!mounted) return;
-      setState(() {
-        for (final entry in _pending.entries) {
-          if (entry.value case final value?) {
-            _entries[entry.key] = value;
-          } else {
-            _entries.remove(entry.key);
-          }
-        }
-        _pending.clear();
-      });
-    });
-    WidgetsBinding.instance.ensureVisualUpdate();
-  }
-
-  @override
-  Widget build(BuildContext context) => _ToastHostScope(
-    host: this,
-    child: Stack(
-      fit: StackFit.expand,
-      children: [
-        widget.child,
-        for (final entry in _entries.entries)
-          Positioned.fill(
-            child: _ToastPaint(key: entry.key, spec: entry.value),
-          ),
-      ],
-    ),
-  );
-}
-
-class _ToastHostScope extends InheritedWidget {
-  const _ToastHostScope({required this.host, required super.child});
-  final _DshToastHostState host;
-  @override
-  bool updateShouldNotify(_ToastHostScope oldWidget) => oldWidget.host != host;
+  Widget build(BuildContext context) => Overlay.wrap(child: child);
 }
 
 /// A source Toast occurrence: no icon by default; success owns the published
@@ -107,8 +59,6 @@ class _DshToastState extends State<DshToast> {
   final _identity = UniqueKey();
   final _portal = OverlayPortalController();
   late final _hold = ValueNotifier(widget.hold ?? dshToastHold);
-  _DshToastHostState? _host;
-  bool _showScheduled = false;
   _ToastSpec get _spec => _ToastSpec(
     text: widget.text,
     icon: widget.icon,
@@ -120,43 +70,31 @@ class _DshToastState extends State<DshToast> {
   );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final host = context
-        .dependOnInheritedWidgetOfExactType<_ToastHostScope>()
-        ?.host;
-    if (_host != host) _host?.update(_identity, null);
-    _host = host;
-    host?.update(_identity, _spec);
-    if (host == null && !_showScheduled) {
-      _showScheduled = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted && _host == null) _portal.show();
-      });
-    }
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _portal.show();
+    });
   }
 
   @override
   void didUpdateWidget(DshToast oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Cancel/reschedule the source effect's timer during this update, even
-    // before the separately queued root presentation gets its next build.
+    // before the logical owner's overlay child gets its next build.
     _hold.value = widget.hold ?? dshToastHold;
-    _host?.update(_identity, _spec);
   }
 
   @override
   void dispose() {
-    _host?.update(_identity, null);
     _hold.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_host != null) return const SizedBox.shrink();
-    // Standalone consumers escape their feature ancestor. Production's host
-    // above Navigator also preserves priority when a later route is inserted.
+    // Keep the actual logical owner/provider ancestry. Production's outer
+    // Overlay above Navigator also preserves priority over later inner routes.
     return OverlayPortal(
       overlayLocation: OverlayChildLocation.rootOverlay,
       controller: _portal,
@@ -198,9 +136,10 @@ class _ToastPaint extends StatefulWidget {
   State<_ToastPaint> createState() => _ToastPaintState();
 }
 
-class _ToastPaintState extends State<_ToastPaint>
-    with SingleTickerProviderStateMixin {
-  late final Ticker _ticker = createTicker((_) {
+class _ToastPaintState extends State<_ToastPaint> {
+  // Source body-portal animations continue when another route covers the owner.
+  // This occurrence-owned ticker therefore does not inherit route TickerMode.
+  late final Ticker _ticker = Ticker((_) {
     setState(() => _elapsed = _timelineElapsed);
     if (_elapsed >= _paintEnd) _ticker.stop();
   });
@@ -369,14 +308,16 @@ class _ToastPaintState extends State<_ToastPaint>
   }
 }
 
-/// Owner-local replacement. Identity is allocated once per show, so an overlay
-/// rebuild keeps its deadline and an old callback cannot remove a replacement.
+/// Owner-local, data-only imperative adapter. An OverlayEntry cannot preserve
+/// an arbitrary initiating provider subtree; use owner-mounted [DshToast] for a
+/// custom context-dependent icon. Identity is allocated once per show, so an
+/// overlay rebuild keeps its deadline and old completion keeps a replacement.
 class DshToasts {
   OverlayEntry? _entry;
   void show(
     BuildContext context,
     String text, {
-    Widget? icon,
+    DshIconData? icon,
     DshToastTone? tone,
     Duration? hold,
   }) {
@@ -389,7 +330,7 @@ class DshToasts {
   void showOn(
     OverlayState overlay,
     String text, {
-    Widget? icon,
+    DshIconData? icon,
     DshToastTone? tone,
     Duration? hold,
   }) {
@@ -400,7 +341,7 @@ class DshToasts {
       builder: (_) => DshToast(
         key: identity,
         text: text,
-        icon: icon,
+        icon: icon == null ? null : DshIcon(icon),
         tone: tone,
         hold: hold,
         onDone: () {

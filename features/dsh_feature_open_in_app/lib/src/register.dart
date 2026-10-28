@@ -51,11 +51,11 @@ void Function() registerOpenInAppFeature(
     } on Object {
       final text = t('path.openError');
       if (context != null && context.mounted) {
-        toasts.show(context, text, icon: const DshIcon(DshIcons.warning));
+        toasts.show(context, text, icon: DshIcons.warning);
       } else {
         final overlay = services.navigatorKey.currentState?.overlay;
         if (overlay != null) {
-          toasts.showOn(overlay, text, icon: const DshIcon(DshIcons.warning));
+          toasts.showOn(overlay, text, icon: DshIcons.warning);
         }
       }
       return;

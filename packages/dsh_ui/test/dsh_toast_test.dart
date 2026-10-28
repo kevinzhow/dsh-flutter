@@ -1,9 +1,10 @@
 import 'dart:typed_data';
-import 'dart:ui' show SemanticsRole;
+import 'dart:ui' show ImageByteFormat, SemanticsRole;
 
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(
@@ -35,6 +36,122 @@ Future<void> present(
 }
 
 void main() {
+  testWidgets('owner-mounted icon retains arbitrary live inherited context', (
+    t,
+  ) async {
+    final value = ValueNotifier('owner');
+    var done = 0;
+    await present(
+      t,
+      ValueListenableBuilder(
+        valueListenable: value,
+        builder: (context, label, _) => _ToastContext(
+          value: label,
+          child: DshToast(
+            text: 'Context',
+            icon: const _ContextIcon(),
+            onDone: () => done++,
+          ),
+        ),
+      ),
+    );
+    expect(find.text('icon:owner'), findsOneWidget);
+    await t.pump(const Duration(seconds: 2));
+    value.value = 'updated';
+    await t.pump();
+    expect(find.text('icon:owner'), findsNothing);
+    expect(find.text('icon:updated'), findsOneWidget);
+    await t.pump(const Duration(milliseconds: 1999));
+    expect(done, 0);
+    await t.pump(const Duration(milliseconds: 1));
+    expect(done, 1);
+    await t.pumpWidget(const SizedBox());
+    value.dispose();
+  });
+
+  testWidgets('owner context disposal cancels its completion and portal', (
+    t,
+  ) async {
+    var done = 0;
+    await present(
+      t,
+      _ToastContext(
+        value: 'owner',
+        child: DshToast(
+          text: 'Remove owner',
+          icon: const _ContextIcon(),
+          onDone: () => done++,
+        ),
+      ),
+    );
+    expect(find.text('icon:owner'), findsOneWidget);
+    await t.pump(const Duration(seconds: 2));
+    await t.pumpWidget(app(const SizedBox(), reduced: true));
+    expect(find.text('Remove owner'), findsNothing);
+    expect(find.text('icon:owner'), findsNothing);
+    await t.pump(const Duration(seconds: 3));
+    expect(done, 0);
+    await t.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('covered owner route keeps portal animation and lifetime', (
+    t,
+  ) async {
+    final nav = GlobalKey<NavigatorState>();
+    var done = 0;
+    await t.pumpWidget(
+      app(
+        _ToastContext(
+          value: 'covered',
+          child: DshToast(
+            text: 'Covered owner',
+            icon: const _ContextIcon(),
+            onDone: () => done++,
+          ),
+        ),
+        navigatorKey: nav,
+      ),
+    );
+    await t.pump();
+    await t.pump();
+    await t.pump(const Duration(milliseconds: 80));
+    Opacity opacity() => t.widget<Opacity>(
+      find
+          .ancestor(
+            of: find.text('Covered owner'),
+            matching: find.byType(Opacity),
+          )
+          .first,
+    );
+    expect(opacity().opacity, closeTo(Curves.easeOut.transform(.5), 1e-6));
+    nav.currentState!.push(
+      PageRouteBuilder<void>(
+        pageBuilder: (_, _, _) => const Scaffold(body: Text('Covering route')),
+        transitionDuration: Duration.zero,
+      ),
+    );
+    await t.pump();
+    await t.pump();
+    final owner = t.element(find.byType(DshToast, skipOffstage: false));
+    expect(TickerMode.valuesOf(owner).enabled, isFalse);
+    await t.pump(const Duration(milliseconds: 3420));
+    expect(find.text('icon:covered', skipOffstage: false), findsOneWidget);
+    final ownerOpacity = find
+        .ancestor(
+          of: find.text('Covered owner', skipOffstage: false),
+          matching: find.byType(Opacity, skipOffstage: false),
+        )
+        .first;
+    expect(
+      t.widget<Opacity>(ownerOpacity).opacity,
+      closeTo(1 - Curves.ease.transform(.5), 1e-6),
+    );
+    await t.pump(const Duration(milliseconds: 500));
+    expect(done, 1);
+    expect(find.text('Covered owner', skipOffstage: false), findsNothing);
+    await t.pumpWidget(const SizedBox());
+  });
+
   testWidgets('success overrides icon; custom artwork is not forced to16', (
     t,
   ) async {
@@ -371,7 +488,13 @@ void main() {
       t,
     ) async {
       final nav = GlobalKey<NavigatorState>(), toasts = DshToasts();
-      await t.pumpWidget(app(const SizedBox(), navigatorKey: nav));
+      final raster = GlobalKey();
+      await t.pumpWidget(
+        RepaintBoundary(
+          key: raster,
+          child: app(const SizedBox(), navigatorKey: nav, reduced: true),
+        ),
+      );
       void showToast() =>
           toasts.showOn(nav.currentState!.overlay!, 'Above preview');
       void showLightbox() {
@@ -387,13 +510,16 @@ void main() {
         );
       }
 
+      showToast();
+      await t.pump();
+      await t.pump();
+      await t.pump();
+      final baseline = await _toastCorePixels(t, raster);
       if (toastFirst) {
-        showToast();
-        await t.pump();
-        await t.pump();
-        await t.pump();
         showLightbox();
       } else {
+        toasts.dismiss();
+        await t.pump();
         showLightbox();
         await t.pump();
         showToast();
@@ -402,32 +528,10 @@ void main() {
       await t.pump();
       await t.pump(const Duration(milliseconds: 200));
       expect(find.text('Above preview'), findsOneWidget);
-      final toast = t.element(find.byType(DshShadowBox));
-      final lightbox = t.element(find.byType(DshLightbox));
-      final root = find.byType(DshToastHost).evaluate().single;
-      final order = <Element>[];
-      void visit(Element el) {
-        order.add(el);
-        el.visitChildren(visit);
-      }
-
-      root.visitChildren(visit);
-      expect(order.indexOf(toast), greaterThan(order.indexOf(lightbox)));
-      // Root host paints its non-positioned Navigator before positioned Toasts.
-      expect(
-        t
-            .widget<Stack>(
-              find
-                  .descendant(
-                    of: find.byType(DshToastHost),
-                    matching: find.byType(Stack),
-                  )
-                  .first,
-            )
-            .children
-            .last,
-        isA<Positioned>(),
-      );
+      expect(find.byType(DshLightbox), findsOneWidget);
+      // Compare actual painted text/material pixels, not logical element order:
+      // an owner-side portal remains logically below the lightbox's route.
+      expect(await _toastCorePixels(t, raster), orderedEquals(baseline));
       toasts.dismiss();
       await t.pumpWidget(const SizedBox());
     });
@@ -464,3 +568,49 @@ void main() {
 }
 
 String _position(int index, int total) => '$index / $total';
+
+class _ToastContext extends InheritedWidget {
+  const _ToastContext({required this.value, required super.child});
+  final String value;
+  static String of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_ToastContext>()?.value ??
+      'missing';
+  @override
+  bool updateShouldNotify(_ToastContext oldWidget) => value != oldWidget.value;
+}
+
+class _ContextIcon extends StatelessWidget {
+  const _ContextIcon();
+  @override
+  Widget build(BuildContext context) =>
+      Text('icon:${_ToastContext.of(context)}');
+}
+
+Future<List<int>> _toastCorePixels(WidgetTester t, GlobalKey raster) async {
+  final bounds = t.getRect(find.byType(DshShadowBox));
+  // The center rectangle is inside the superellipse, so changing the surface
+  // behind its transparent outer corners cannot falsify the paint-order proof.
+  final core = Rect.fromCenter(
+    center: bounds.center,
+    width: bounds.width - bounds.height,
+    height: bounds.height / 2,
+  );
+  final boundary =
+      raster.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+  final pixels = (await t.runAsync(() async {
+    final image = await boundary.toImage();
+    final data = (await image.toByteData(format: ImageByteFormat.rawRgba))!;
+    final result = <int>[];
+    for (var y = core.top.ceil(); y < core.bottom.floor(); y++) {
+      final start = (y * image.width + core.left.ceil()) * 4;
+      final end = (y * image.width + core.right.floor()) * 4;
+      result.addAll(
+        data.buffer.asUint8List(data.offsetInBytes + start, end - start),
+      );
+    }
+    image.dispose();
+    return result;
+  }))!;
+  expect(pixels, isNotEmpty);
+  return pixels;
+}
