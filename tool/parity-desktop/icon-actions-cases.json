@@ -1669,7 +1669,7 @@
   ],
   "android": {
     "schema": "whalee-icon-actions-android-steps/1",
-    "notes": "Counters record settings callback invocations and actual repair/scanner route-pop effects. Setup pops are excluded. Each input is sent once; all touch points derive from current unique clickable semantics bounds. Initial Escape dismisses the pairing field IME if present.",
+    "notes": "Counters record settings callback invocations and actual repair/scanner route-pop effects. Setup pops are excluded. Each input is sent once; all touch points derive from current unique clickable semantics bounds. Initial Escape dismisses the pairing field IME if present. Android forward traversal is measured separately; injected Shift+Tab reversed traversal remains unverified/pending after it advanced to the next input on API36.",
     "steps": [
       {
         "key": 111
@@ -1707,10 +1707,7 @@
         ]
       },
       {
-        "chord": [
-          59,
-          61
-        ]
+        "key": 61
       },
       {
         "focused": "Settings"
@@ -1773,10 +1770,19 @@
         ]
       },
       {
-        "chord": [
-          59,
-          61
-        ]
+        "key": 61
+      },
+      {
+        "key": 61
+      },
+      {
+        "key": 61
+      },
+      {
+        "key": 61
+      },
+      {
+        "key": 61
       },
       {
         "focused": "Back"

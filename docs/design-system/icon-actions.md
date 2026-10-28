@@ -97,8 +97,27 @@ node tool/design-system/capture-icon-actions.mjs --archives <verified-archive-di
 ```
 
 The three native connection pages have no exact pinned Web route counterpart.
-Their published-profile adoption and route behavior are established here;
-there is no invented Web pairing/QR pixel-parity score. Full integration
-checks, paired capture review and final native binary replay remain the
-integrator's work. No release/native build, emulator, GPU replay, push or PR is
-part of this isolated handoff. Existing ScheduleDelete work is untouched.
+Their published-profile adoption and route behavior are checked separately
+from the actual Web manager and the source-measured profile regions.
+
+`apps/dsh_flutter/test/parity/icon_actions_main.dart` mounts the real routes
+with offline services, passive effect counters and an injected camera preview.
+F6/F7 only prepare routes. F8 returns to pairing and clears remembered focus
+before ordinary Tab traversal. Pointer and keyboard activation still use the
+production buttons. The literal native manifest has four GPU cases with 76
+image assertions and 76 screenshots; its Android section specifies twelve
+captures, 20 inputs sent once each and 27 checks, including a unique focused
+descendant within each labeled action's own bounds. Five forward Tabs reach
+Back from the Android route's first editable field. An injected Shift+Tab
+advanced focus in the observed API36 run; reverse injection remains pending.
+The earlier native focus failure and separate traversal diagnostics are
+retained as failed/history evidence.
+
+`icon_actions_source_raster_test.dart` replays all 144 actual source states
+(80 IconAction, 64 Header), retaining full native frames and source-defined
+control crops. Callback counts agree in preparation; 36 pointer-focus ownership
+differences, post-touch synthetic hover and Header UA outline paint remain
+unmatched. Raw RGBA differences have no equality or fitted acceptance gate.
+The actual PluginManager refresh toolbar also has sixteen paired idle/hover
+screens. These comparisons establish neither full-family completion nor Web
+pairing, production-camera or network parity.
