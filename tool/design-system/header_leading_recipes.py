@@ -21,7 +21,10 @@ def behavior_values(region):
     # The immutable release skeleton covers both labels/shortcuts, native
     # button type, callbacks, class bindings and icon identities. Only the two
     # repeated numeric inputs are translated. Unknown behavior fails closed.
-    body = re.sub(r'/\*[\s\S]*?\*/|//[^\n]*', '', region)
+    # Preserve the exact released text, including literal contents and token
+    # boundaries. Stripping whitespace/comments without a JS lexer can hide
+    # changed labels, shortcuts or key names (or even invalid identifiers).
+    body = region
     delays = re.findall(r'\bdelayMs:\s*(\d+)\s*,', body)
     sizes = re.findall(r'\bsize:\s*(\d+)\s*}', body)
     if (len(delays) != 2 or len(set(delays)) != 1 or
@@ -29,10 +32,10 @@ def behavior_values(region):
         raise ValueError('untranslated HeaderLeadingControls repeated timing/icon inputs')
     shape = re.sub(r'delayMs:\s*\d+', 'delayMs: DELAY', body)
     shape = re.sub(r'size:\s*\d+', 'size: ICON_SIZE', shape)
-    digest = hashlib.sha256(re.sub(r'\s+', '', shape).encode()).hexdigest()
+    digest = hashlib.sha256(shape.encode()).hexdigest()
     # ui-sidebar 0.2.1-rc.2 client.js HeaderLeadingControls.js region, with
     # numeric inputs replaced above. Region bytes remain in the locked JSON.
-    if digest != 'd16309f6a44f1281de6d4d045f7a8fb6ce38d3e0abb37344275fa6e411325abe':
+    if digest != '9f0e864db395efaa1cdc91b26aa022e32ba8fecb55caf187c9e2449e5b6229dd':
         raise ValueError('untranslated HeaderLeadingControls behavior')
     return int(delays[0]), float(sizes[0])
 
@@ -51,8 +54,7 @@ def focus_values(context, token):
     if color is None:
         raise ValueError('untranslated HeaderLeadingControls global focus color')
     region = context['inputModality']['region']
-    body = re.sub(r'/\*[\s\S]*?\*/|//[^\n]*', '', region)
-    if hashlib.sha256(re.sub(r'\s+', '', body).encode()).hexdigest() != '302331c7cfbc02ce0873fc6c4ed77e08e3287418ed0a0f9f9225c4121cfc47c8':
+    if hashlib.sha256(region.encode()).hexdigest() != 'b0da4fdc0aee867bd6c3780d9fb1da56528261229b54c52129af1aa9abccdac4':
         raise ValueError('untranslated HeaderLeadingControls input modality')
     return {'focusWidthToken': token(focus[1]['declarations']['outline-width']),
             'focusToken': token('var(' + color[1] + ')', inherits_if_unset=True),

@@ -97,6 +97,25 @@ class HeaderLeadingRecipesTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
                 header.behavior_values(value)
 
+    def test_semantic_whitespace_cannot_disappear_from_behavior_fingerprint(self):
+        # Whitespace inside a string changes an actual shortcut/label/key.
+        # Removing all whitespace also accepts an invalid split identifier.
+        for before, after in [('"session.new"', '"session. new"'),
+                              ('"toggle.open"', '"toggle. open"'),
+                              ('toggleSidebar', 'toggle Sidebar')]:
+            original = self.sheets['HeaderLeadingControlsBehavior']['region']
+            self.assertIn(before, original)
+            with self.subTest(after=after), self.assertRaisesRegex(
+                    ValueError, 'untranslated HeaderLeadingControls'):
+                header.behavior_values(original.replace(before, after))
+        changed = copy.deepcopy(self.sheets)
+        context = changed['HeaderLeadingFocusContext']
+        original = context['inputModality']['region']
+        self.assertIn('"PageDown"', original)
+        context['inputModality']['region'] = original.replace('"PageDown"', '"Page Down"')
+        with self.assertRaisesRegex(ValueError, 'untranslated HeaderLeadingControls'):
+            self.recipe(changed)
+
     def test_behavior_is_extracted_from_the_same_named_published_bundle(self):
         published = module('published')
         behavior = self.sheets['HeaderLeadingControlsBehavior']

@@ -14,10 +14,15 @@ handwritten layout metrics or a second button implementation.
 The entire three-rule Header stylesheet is classified, including structural
 declarations. New states, declarations, conditions, unsupported structural
 values and unknown required tokens fail generation. The release behavior's
-normalized structure is fingerprinted after substituting only the supported
+exact released text is fingerprinted after substituting only the supported
 numeric delay/icon fields: changed actions, labels, shortcut IDs, native button
 type, icon identity or ambiguous repeated fields also fail. This is an explicit
 closed set, not a JavaScript evaluator.
+Whitespace, comments and literal contents remain in the fingerprints. A
+previous normalization removed whitespace inside strings and incorrectly
+accepted changed shortcut/key names such as `session. new` and `Page Down`.
+Four negative cases reproduced that gap before the exact-text check; the
+numeric propagation tests still pass and the generated recipes are unchanged.
 
 ## Retained provenance
 
