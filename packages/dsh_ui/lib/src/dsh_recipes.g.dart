@@ -6,6 +6,12 @@
 // From @deepseek-ai/dsh-client-ui-dockkit 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-plugin-market 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-agent-preset 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-sidebar 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-workspace 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-settings-general 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-settings-account 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-model-selection 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-chat 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -534,4 +540,234 @@ abstract final class DshRiskDialogRecipe {
   static const String errorIconToken = '--dsw-alias-state-error-primary';
   static const double actionMinWidth = 72.0;
   static const double confirmMinWidth = 136.0;
+}
+
+abstract final class DshPlatformMaterialRecipe {
+  static const String darwinLightMenuFill = '#f8f9faf0';
+  static const String darwinDarkMenuFill = '#303136f0';
+}
+
+abstract final class DshSidebarRecipe {
+  static const double inlinePadding = 12.0;
+  static const double verticalPadding = 6.0;
+  static const double railTopPadding = 18.0;
+  static const double railInlinePadding = 10.0;
+  static const double railBottomPadding = 6.0;
+  static const double topStripHeight = 52.0;
+  static const double topStripFootPadding = 2.0;
+  static const double logoTopTuck = 12.0;
+  static const double logoHeight = 60.0;
+  static const double logoBottomMargin = 4.0;
+  static const double logoTopPadding = 8.0;
+  static const double logoLeftPadding = 4.0;
+  static const double railLogoHeight = 36.0;
+  static const double railLogoBottomMargin = 12.0;
+  static const double windowsLogoHeight = 40.0;
+  static const double brandGap = 8.0;
+  static const double brandHeight = 24.0;
+  static const double brandFontSize = 18.0;
+  static const double brandLineHeight = 24.0;
+  static const double brandFontWeight = 600.0;
+  static const double brandLetterSpacing = 0.72;
+  static const double iconBox = 28.0;
+  static const double railIconBox = 36.0;
+  static const double newHeight = 38.0;
+  static const double newHorizontalPadding = 12.0;
+  static const double newVerticalPadding = 8.0;
+  static const double newInlineMargin = 2.0;
+  static const double newBottomMargin = 12.0;
+  static const double newBorderWidth = 0.5;
+  static const String newBorderToken = '--dsw-alias-border-l3';
+  static const double darwinNewAlpha = 0.5490196078431373;
+  static const double darwinNewHoverAlpha = 0.30196078431372547;
+  static const double darwinNewDarkAlpha = 0.14901960784313725;
+  static const double darwinNewDarkHoverAlpha = 0.2;
+  static const String newFillToken = '--dsw-alias-button-elevated-fill';
+  static const String newHoverToken = '--dsw-alias-button-floating-hover';
+  static const double newGap = 6.0;
+  static const double newFontSize = 14.0;
+  static const double newLineHeight = 22.0;
+  static const double panelHeight = 36.0;
+  static const double panelGap = 8.0;
+  static const double panelHorizontalPadding = 8.0;
+  static const double panelVerticalPadding = 7.0;
+  static const double panelListGap = 4.0;
+  static const double panelListBottomMargin = 8.0;
+  static const double railPanelGap = 12.0;
+  static const double regionScrollbarExpansion = 12.0;
+  static const String scrollbarThumbToken = '--dsw-alias-scrollbar-bg-l2';
+  static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
+}
+
+abstract final class DshWorkspaceBrowserRecipe {
+  static const double headerHeight = 36.0;
+  static const double headerLeftPadding = 4.0;
+  static const double headerTopMargin = 2.0;
+  static const double headerRightExpansion = 4.0;
+  static const double headerBottomMargin = 4.0;
+  static const double headerGap = 4.0;
+  static const double iconBox = 28.0;
+  static const double scrollbarWidth = 5.0;
+  static const double scrollbarOffset = 2.0;
+  static const double listBottomPadding = 16.0;
+  static const double fadeHeight = 24.0;
+  static const double groupHeight = 34.0;
+  static const double sessionHeight = 32.0;
+  static const double rowHorizontalPadding = 8.0;
+  static const double rowGap = 6.0;
+  static const double groupGap = 4.0;
+  static const double rowStackGap = 2.0;
+  static const double rowFontSize = 14.0;
+  static const double rowLineHeight = 20.0;
+  static const double timeFontSize = 10.0;
+  static const double timeLineHeight = 16.0;
+}
+
+abstract final class DshSidebarLauncherRecipe {
+  static const double height = 32.0;
+  static const double lineHeight = 20.0;
+  static const double topPadding = 6.0;
+  static const double rightPadding = 2.0;
+  static const double bottomPadding = 6.0;
+  static const double leftPadding = 6.0;
+  static const double gap = 8.0;
+  static const double fontSize = 14.0;
+  static const double railBox = 36.0;
+  static const double verticalMargin = 4.0;
+  static const double inlineExpansion = 2.0;
+  static const double railTopMargin = 8.0;
+  static const double railBottomMargin = 10.0;
+  static const double menuMinWidth = 124.0;
+  static const double menuMaxWidth = 280.0;
+  static const double menuPadding = 4.0;
+  static const double menuRowHeight = 40.0;
+  static const double menuRowGap = 8.0;
+  static const double menuRowVerticalPadding = 8.0;
+  static const double menuRowHorizontalPadding = 10.0;
+  static const double menuIconSize = 16.0;
+  static const String menuIconToken = '--dsw-alias-menu-icon';
+  static const double menuFontSize = 14.0;
+  static const double menuLineHeight = 22.0;
+}
+
+abstract final class DshModelMenuRecipe {
+  static const double minWidth = 240.0;
+  static const double viewportWidthInset = 32.0;
+  static const double maxWidth = 420.0;
+  static const double maxHeight = 360.0;
+  static const double viewportHeightInset = 96.0;
+  static const double portalMargin = 12.0;
+  static const double anchorGap = 8.0;
+  static const double padding = 4.0;
+  static const double rowHeight = 34.0;
+  static const double rowGap = 6.0;
+  static const double rowHorizontalPadding = 7.0;
+  static const double rowVerticalPadding = 5.0;
+  static const double rowFontSize = 13.0;
+  static const double rowLineHeight = 18.0;
+  static const String rowFontToken = '--dsw-font-xs-13';
+  static const double rowFontWeight = 400.0;
+  static const String radiusToken = '--dsw-radius-md';
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String disabledToken = '--dsw-alias-label-dimmed';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const double checkSize = 14.0;
+  static const String checkToken = '--dsw-alias-label-primary';
+  static const double cellHeight = 34.0;
+  static const double cellGap = 6.0;
+  static const double cellHorizontalPadding = 8.0;
+  static const double cellVerticalPadding = 0.0;
+  static const double cellFontSize = 13.0;
+  static const double cellLineHeight = 20.0;
+  static const String cellFontToken = '--dsw-font-xs-13';
+  static const String valueToken = '--dsw-alias-label-tertiary';
+  static const double chevronSize = 12.0;
+  static const String chevronToken = '--dsw-alias-menu-icon';
+  static const double triggerHeight = 28.0;
+  static const double triggerGap = 4.0;
+  static const double triggerMaxWidth = 360.0;
+  static const double triggerWidthFactor = 0.45;
+  static const String triggerRadiusToken = '--dsw-radius-sm';
+  static const double triggerLeftPadding = 8.0;
+  static const double triggerRightPadding = 4.0;
+  static const String triggerFontToken = '--dsw-font-xs-13';
+  static const double triggerFontSize = 13.0;
+  static const double triggerLineHeight = 20.0;
+  static const double triggerFontWeight = 400.0;
+  static const String triggerLabelToken = '--dsw-alias-label-secondary';
+  static const String triggerEffortToken = '--dsw-alias-label-caption';
+  static const double statusPadding = 8.0;
+  static const double statusFontSize = 12.0;
+  static const double statusLineHeight = 18.0;
+  static const String statusFontToken = '--dsw-font-xxs-12';
+  static const String statusToken = '--dsw-alias-label-tertiary';
+  static const double errorHorizontalPadding = 7.0;
+  static const double errorVerticalPadding = 6.0;
+  static const double errorGap = 6.0;
+  static const double errorBottomMargin = 3.0;
+  static const double errorFontSize = 11.0;
+  static const double errorLineHeight = 16.0;
+  static const String errorFontToken = '--dsw-font-xxxs-11';
+  static const double retryFontWeight = 600.0;
+  static const String errorFillToken =
+      '--dsw-alias-interactive-bg-hover-danger';
+  static const String errorLabelToken = '--dsw-alias-state-error-primary';
+  static const String warningFillToken = '--dsw-alias-bg-module-platform';
+  static const String warningLabelToken = '--dsw-alias-state-warn-label';
+  static const double searchHorizontalPadding = 7.0;
+  static const double searchVerticalPadding = 5.0;
+  static const double searchTopMargin = 2.0;
+  static const double searchBottomMargin = 3.0;
+  static const double searchClearSize = 24.0;
+  static const double searchClearRight = 4.0;
+  static const double searchQueryRightPadding = 34.0;
+  static const double searchFontSize = 12.0;
+  static const String scrollbarToken = '--dsw-alias-scrollbar-bg-l2';
+  static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
+}
+
+abstract final class DshStatPanelRecipe {
+  static const double minWidth = 300.0;
+  static const double maxWidth = 440.0;
+  static const double viewportMargin = 12.0;
+  static const double anchorGap = 8.0;
+  static const double padding = 16.0;
+  static const String radiusToken = '--dsw-radius-lg';
+  static const String fillToken = '--dsw-specific-menu';
+  static const String shadowToken = '--dsw-elevation-prominent';
+  static const String strokeToken = '--dsw-alias-border-l1';
+  static const double fontSize = 12.0;
+  static const double lineHeight = 18.0;
+  static const String fontToken = '--dsw-font-xxs-12';
+  static const String labelToken = '--dsw-alias-label-secondary';
+  static const String titleToken = '--dsw-alias-label-primary';
+  static const double titleWeight = 500.0;
+  static const double titleGap = 16.0;
+  static const double titleBottomMargin = 8.0;
+  static const double ruleBottomMargin = 10.0;
+  static const double ruleWidth = 0.5;
+  static const String ruleToken = '--dsw-alias-border-l2';
+  static const double iconSize = 14.0;
+  static const double iconGap = 6.0;
+  static const double labelMinWidth = 76.0;
+  static const double rowGap = 6.0;
+  static const double columnGap = 16.0;
+  static const String detailLabelToken = '--dsw-alias-label-tertiary';
+  static const String detailValueToken = '--dsw-alias-label-secondary';
+}
+
+abstract final class DshStatsPillRecipe {
+  static const double fontBase = 12.0;
+  static const double lineBase = 20.0;
+  static const String fontScale = 'secondary';
+  static const double paddingVertical = 1.0;
+  static const double paddingHorizontal = 8.0;
+  static const double gap = 6.0;
+  static const double iconSize = 14.0;
+  static const String radiusToken = '--dsw-radius-sm';
+  static const String labelToken = '--dsw-alias-label-tertiary';
+  static const String activeLabelToken = '--dsw-alias-label-secondary';
+  static const String activeFillToken = '--dsw-alias-interactive-bg-hover';
+  static const String separatorToken = '--dsw-alias-separator-primary';
+  static const double separatorMargin = 6.0;
 }

@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:ui' show SemanticsAction;
 
 import 'package:dsh_client/dsh_client.dart' show RemoteException;
 import 'package:dsh_client/generated.dart' as session_ns;
 import 'package:dsh_feature_model_selection/dsh_feature_model_selection.dart';
+import 'package:dsh_feature_model_selection/testing.dart';
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_models/dsh_models.dart';
 import 'package:dsh_models/testing.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -387,7 +392,7 @@ void main() {
     });
     tearDown(() => feature.dispose());
 
-    Widget seat() => dshTestApp(
+    Widget seat({Size size = const Size(390, 800)}) => dshTestApp(
       Align(
         alignment: Alignment.centerLeft,
         child: slots.renderSingle(
@@ -395,7 +400,7 @@ void main() {
           owner,
         )!,
       ),
-      size: const Size(390, 800),
+      size: size,
     );
 
     void project(Map<String, Object?>? next, [int seq = 1]) => owner
@@ -403,11 +408,14 @@ void main() {
         .projections
         .apply('modelSelection', {'lastUsed': null, 'next': next}, seq);
 
-    Future<void> ready(WidgetTester t) async {
+    Future<void> ready(
+      WidgetTester t, {
+      Size size = const Size(390, 800),
+    }) async {
       // The feature read the catalog when it registered; a test that changed
       // the handler since announces the change like the host would.
       host.emit('llm/adapters-updated');
-      await t.pumpWidget(seat());
+      await t.pumpWidget(seat(size: size));
       await t.runAsync(() => flush(10));
       project(null);
       await t.pump();
@@ -425,6 +433,84 @@ void main() {
       );
     });
 
+    testWidgets('native accessibility selects model and effort from the chip', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      host.handlers['session/selectModel'] = (_) => {
+        'selected': {'provider': 'deepseek-official', 'model': 'flash'},
+      };
+      await ready(t);
+      Future<void> activate(Finder finder) async {
+        final node = t.getSemantics(finder);
+        expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
+        node.owner!.performAction(node.id, SemanticsAction.tap);
+        await t.pumpAndSettle();
+      }
+
+      Finder trigger() => find.bySemanticsLabel(
+        'Select model, current DeepSeek Flash, reasoning effort High',
+      );
+      await activate(trigger());
+      expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
+      await activate(find.byKey(const ValueKey('model-root-model')));
+      await activate(
+        find.byKey(const ValueKey('model-option-deepseek-official/pro')),
+      );
+      await t.runAsync(() => flush(8));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel').single.args['request'], {
+        'sessionId': 's1',
+        'provider': 'deepseek-official',
+        'model': 'pro',
+      });
+      await activate(trigger());
+      await activate(find.byKey(const ValueKey('model-root-effort')));
+      await activate(find.byKey(const ValueKey('effort-option-effort:low')));
+      await t.runAsync(() => flush(8));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel').last.args['request'], {
+        'sessionId': 's1',
+        'provider': 'deepseek-official',
+        'model': 'flash',
+        'reasoningEffort': 'low',
+      });
+      semantics.dispose();
+    });
+
+    testWidgets('a locked model chip has no native activation action', (
+      t,
+    ) async {
+      final semantics = t.ensureSemantics();
+      await ready(t);
+      await t.pumpWidget(
+        dshTestApp(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ModelSeat(
+              directory: feature.directoryFor(owner),
+              i18n: i18n,
+              locked: true,
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      final node = t.getSemantics(
+        find.bySemanticsLabel(
+          'Select model, current DeepSeek Flash, reasoning effort High',
+        ),
+      );
+      expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isFalse);
+      node.owner!.performAction(node.id, SemanticsAction.tap);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(host.callsTo('session/selectModel'), isEmpty);
+      semantics.dispose();
+    });
+
     testWidgets('with no model resolved the chip invites a choice', (t) async {
       host.handlers['session/modelCatalog'] = (_) =>
           catalog(groups: const [], def: {'provider': 'x', 'model': 'y'});
@@ -432,16 +518,36 @@ void main() {
       expect(find.text('Select model'), findsOneWidget);
     });
 
-    testWidgets('the sheet opens on the root with the Model and Effort rows', (
-      t,
-    ) async {
-      await ready(t);
-      await t.tap(find.byKey(const ValueKey('model-chip')));
-      await t.pumpAndSettle();
-      expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
-      expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
-      expect(find.text('Model and reasoning effort'), findsOneWidget);
-    });
+    testWidgets(
+      'the source content-box menu root has two compact rows and no sheet title',
+      (t) async {
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                model('flash', 'Flash', efforts: ['low', 'high']),
+              ],
+            },
+          ],
+        );
+        await ready(t);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
+        expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
+        expect(find.text('Model and reasoning effort'), findsNothing);
+        expect(
+          t.getSize(find.byKey(const ValueKey('model-sheet'))),
+          const Size(248, 76),
+        );
+        expect(
+          t.getSize(find.byKey(const ValueKey('model-root-model'))).height,
+          34,
+        );
+      },
+    );
 
     testWidgets('choosing a model submits it with its default effort', (
       t,
@@ -666,8 +772,285 @@ void main() {
       await ready(t);
       await t.tap(find.byKey(const ValueKey('model-chip')));
       await t.pumpAndSettle();
-      expect(find.text('模型与推理等级'), findsOneWidget);
+      expect(find.text('模型与推理等级'), findsNothing);
+      expect(find.text('模型'), findsOneWidget);
       expect(find.text('推理等级'), findsOneWidget);
+    });
+
+    testWidgets('desktop root stays above its trigger and dismisses outside', (
+      t,
+    ) async {
+      host.handlers['session/modelCatalog'] = (_) => catalog(
+        groups: [
+          {
+            'id': 'deepseek-official',
+            'name': 'DeepSeek',
+            'models': [
+              model('flash', 'Flash', efforts: ['low', 'high']),
+            ],
+          },
+        ],
+      );
+      t.view.physicalSize = const Size(1100, 800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await ready(t, size: const Size(1100, 800));
+      final barrierCount = find.byType(ModalBarrier).evaluate().length;
+      final trigger = find.byKey(const ValueKey('model-chip'));
+      await t.tap(trigger);
+      await t.pumpAndSettle();
+      final menu = find.byKey(const ValueKey('model-sheet'));
+      expect(t.getSize(menu), const Size(248, 76));
+      expect(t.getBottomLeft(menu).dy, t.getTopLeft(trigger).dy - 8);
+      expect(find.byType(ModalBarrier).evaluate().length, barrierCount);
+      await t.tapAt(const Offset(1000, 760));
+      await t.pumpAndSettle();
+      expect(menu, findsNothing);
+    });
+
+    testWidgets('keyboard drills then Escape returns to root before closing', (
+      t,
+    ) async {
+      await ready(t);
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-list')), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+    });
+
+    for (final spec in [
+      (size: const Size(1100, 800), width: 428.0, height: 368.0),
+      (size: const Size(390, 320), width: 366.0, height: 232.0),
+    ]) {
+      testWidgets('source content-box overflow bounds at ${spec.size}', (
+        t,
+      ) async {
+        t.view.physicalSize = spec.size;
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.resetPhysicalSize);
+        addTearDown(t.view.resetDevicePixelRatio);
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                for (var i = 0; i < 24; i++)
+                  model(
+                    i == 0 ? 'flash' : 'model-$i',
+                    '${List.filled(60, 'M').join()} $i',
+                  ),
+              ],
+            },
+          ],
+        );
+        await ready(t, size: spec.size);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        final menu = find.byKey(const ValueKey('model-sheet'));
+        // Published max-width420 and viewport−32 are CONTENT bounds. The
+        // source's4px padding on each side sits outside those bounds.
+        expect(t.getSize(menu).width, spec.width);
+        expect(t.getSize(menu).height, 42);
+        await t.tap(find.byKey(const ValueKey('model-root-model')));
+        await t.pumpAndSettle();
+        // Likewise max-height360 / viewport−96 cap the scrolling content,
+        // while the card retains both4px outer padding strips.
+        expect(t.getSize(menu), Size(spec.width, spec.height));
+        final list = find.byKey(const ValueKey('model-list'));
+        final scroll = t.state<ScrollableState>(
+          find.descendant(of: list, matching: find.byType(Scrollable)).first,
+        );
+        expect(scroll.position.maxScrollExtent, greaterThan(0));
+        expect(t.takeException(), isNull);
+      });
+    }
+
+    testWidgets('content-box change preserves the three-row effort height', (
+      t,
+    ) async {
+      host.handlers['session/modelCatalog'] = (_) => catalog(
+        groups: [
+          {
+            'id': 'deepseek-official',
+            'name': 'DeepSeek',
+            'models': [
+              model(
+                'flash',
+                'Flash',
+                efforts: ['low', 'high', 'max'],
+                defaultEffort: 'max',
+              ),
+            ],
+          },
+        ],
+      );
+      await ready(t);
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      final menu = find.byKey(const ValueKey('model-sheet'));
+      expect(t.getSize(menu), const Size(248, 76));
+      await t.tap(find.byKey(const ValueKey('model-root-effort')));
+      await t.pumpAndSettle();
+      expect(t.getSize(menu), const Size(248, 110));
+    });
+
+    testWidgets(
+      'pointer drilling retains the source effort focus cue until blur',
+      (t) async {
+        t.view.physicalSize = const Size(1100, 800);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.reset);
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                model(
+                  'flash',
+                  'Flash',
+                  efforts: ['low', 'high', 'max'],
+                  defaultEffort: 'max',
+                ),
+              ],
+            },
+          ],
+        );
+        await ready(t, size: const Size(1100, 800));
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-root-effort')));
+        await t.pumpAndSettle();
+        final pointer = await t.createGesture(kind: PointerDeviceKind.mouse);
+        await pointer.addPointer(location: const Offset(1090, 790));
+        addTearDown(pointer.removePointer);
+        await pointer.moveTo(const Offset(1000, 700));
+        await t.pumpAndSettle();
+
+        Finder row(String effort) =>
+            find.byKey(ValueKey('effort-option-effort:$effort'));
+        DshMenuItemButton button(String effort) =>
+            t.widget<DshMenuItemButton>(row(effort));
+        Color? fill(String effort) =>
+            (t
+                        .widget<DshContainer>(
+                          find
+                              .descendant(
+                                of: row(effort),
+                                matching: find.byType(DshContainer),
+                              )
+                              .first,
+                        )
+                        .decoration
+                    as ShapeDecoration)
+                .color;
+        final sourceFocusFill = t
+            .element(row('max'))
+            .dsh
+            .color(DshModelMenuRecipe.hoverToken);
+        // Actual Chromium still matches :focus-visible after this pointer
+        // sequence; selection itself remains a check on a transparent row.
+        expect(button('max').focusNode!.hasPrimaryFocus, isTrue);
+        expect(button('max').selected, isTrue);
+        expect(button('max').selectionFill, isFalse);
+        expect(fill('max'), sourceFocusFill);
+        expect(fill('high'), isNull);
+        expect(fill('low'), isNull);
+
+        await t.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+        await t.pumpAndSettle();
+        expect(button('high').focusNode!.hasPrimaryFocus, isTrue);
+        expect(fill('high'), sourceFocusFill);
+        expect(button('max').selected, isTrue);
+        expect(fill('max'), isNull);
+
+        await t.sendKeyEvent(LogicalKeyboardKey.escape);
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
+        expect(
+          t
+              .widget<DshMenuItemButton>(
+                find.byKey(const ValueKey('model-root-effort')),
+              )
+              .focusNode!
+              .hasPrimaryFocus,
+          isTrue,
+        );
+      },
+    );
+
+    testWidgets(
+      'pending effort choice keeps the row and blocks a second request',
+      (t) async {
+        final gate = Completer<void>();
+        host.handlers['session/selectModel'] = (_) async {
+          await gate.future;
+          return {
+            'selected': {
+              'provider': 'deepseek-official',
+              'model': 'flash',
+              'reasoningEffort': 'low',
+            },
+          };
+        };
+        await ready(t);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-root-effort')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('effort-option-effort:low')));
+        await t.pump();
+        expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byKey(const ValueKey('effort-option-effort:low')),
+            matching: find.byType(DshStatusDot),
+          ),
+          findsOneWidget,
+        );
+        await t.tap(find.byKey(const ValueKey('effort-option-effort:high')));
+        expect(host.callsTo('session/selectModel'), hasLength(1));
+        gate.complete();
+        await t.runAsync(() => flush(8));
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      },
+    );
+
+    testWidgets('public test support runs the real selector and projection', (
+      t,
+    ) async {
+      await t.pumpWidget(
+        dshTestApp(
+          const ReportedModelFixture(i18n: DshI18n(DshLocale.en)),
+          size: const Size(390, 800),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('model-root-effort')));
+      await t.pumpAndSettle();
+      await t.tap(find.byKey(const ValueKey('effort-option-effort:low')));
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      expect(
+        find.text('Selection: deepseek-official/flash/low'),
+        findsOneWidget,
+      );
+      expect(find.text('Low'), findsOneWidget);
+      await t.pumpWidget(const SizedBox.shrink());
+      await t.runAsync(() => flush(3));
     });
   });
 }

@@ -52,6 +52,7 @@ export 'src/dsh_lightbox.dart';
 export 'src/dsh_markdown.dart';
 export 'src/dsh_reader_markdown.dart';
 export 'src/dsh_menu_surface.dart';
+export 'src/dsh_platform_material.dart';
 export 'src/dsh_status_dot.dart';
 export 'src/dsh_text_field.dart';
 export 'src/theme_access.dart';
@@ -91,3 +92,5 @@ export 'src/dsh_headed_dialog.dart';
 export 'src/dsh_risk_dialog.dart';
 
 export 'src/dsh_focus_presentation.dart';
+export 'src/dsh_popover_surface.dart';
+export 'src/dsh_stat_panel.dart';

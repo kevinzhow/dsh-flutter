@@ -365,6 +365,98 @@ void main() {
   );
 
   testWidgets(
+    'source focus intent requires actual focus and preserves check-only selection',
+    (t) async {
+      final focus = FocusNode();
+      final outside = FocusNode();
+      addTearDown(focus.dispose);
+      addTearDown(outside.dispose);
+      var activations = 0;
+      Widget row({bool? focusVisible, bool disabled = false}) => dshTestApp(
+        Center(
+          child: SizedBox(
+            width: 240,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DshMenuItemButton(
+                  key: const ValueKey('source-focus-row'),
+                  label: 'Max',
+                  profile: DshMenuItemProfile.modelOption,
+                  selected: true,
+                  focusNode: focus,
+                  focusVisible: focusVisible,
+                  disabled: disabled,
+                  onPressed: () => activations++,
+                ),
+                Focus(focusNode: outside, child: const SizedBox(height: 20)),
+              ],
+            ),
+          ),
+        ),
+      );
+      final target = find.byKey(const ValueKey('source-focus-row'));
+      Color? fill() =>
+          (t
+                      .widget<DshContainer>(
+                        find
+                            .descendant(
+                              of: target,
+                              matching: find.byType(DshContainer),
+                            )
+                            .first,
+                      )
+                      .decoration
+                  as ShapeDecoration)
+              .color;
+
+      await t.pumpWidget(row());
+      await t.tapAt(const Offset(5, 5));
+      focus.requestFocus();
+      await t.pumpAndSettle();
+      expect(focus.hasPrimaryFocus, isTrue);
+      expect(
+        fill(),
+        isNull,
+        reason: 'default clients retain touch presentation',
+      );
+
+      await t.pumpWidget(row(focusVisible: true));
+      await t.pumpAndSettle();
+      final sourceFill = t
+          .element(target)
+          .dsh
+          .color(DshModelMenuRecipe.hoverToken);
+      expect(fill(), sourceFill);
+      expect(
+        find.descendant(of: target, matching: find.byType(DshIcon)),
+        findsOneWidget,
+      );
+      expect(t.widget<DshMenuItemButton>(target).selectionFill, isFalse);
+
+      outside.requestFocus();
+      await t.pumpAndSettle();
+      expect(focus.hasFocus, isFalse);
+      expect(fill(), isNull);
+
+      focus.requestFocus();
+      await t.pumpAndSettle();
+      expect(fill(), sourceFill);
+      await t.pumpWidget(row(focusVisible: false));
+      await t.pumpAndSettle();
+      expect(focus.hasPrimaryFocus, isTrue);
+      expect(fill(), isNull);
+
+      await t.pumpWidget(row(focusVisible: true, disabled: true));
+      await t.pumpAndSettle();
+      expect(fill(), isNull);
+      await t.tap(target);
+      await t.pumpAndSettle();
+      expect(activations, 0);
+    },
+  );
+
+  testWidgets(
     'optional shadow shape preserves the default rounded decoration',
     (t) async {
       await t.pumpWidget(

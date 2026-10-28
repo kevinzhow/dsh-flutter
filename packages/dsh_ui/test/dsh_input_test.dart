@@ -4,6 +4,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets('model search placeholder never changes the input height', (
+    t,
+  ) async {
+    final controller = TextEditingController();
+    addTearDown(controller.dispose);
+    for (final placeholder in ['Search models', '搜索模型', '🐳']) {
+      controller.clear();
+      await t.pumpWidget(
+        dshTestApp(
+          Center(
+            child: SizedBox(
+              width: 240,
+              child: DshInput(
+                controller: controller,
+                profile: DshInputProfile.modelSearch,
+                placeholder: placeholder,
+              ),
+            ),
+          ),
+        ),
+      );
+      await t.pumpAndSettle();
+      final emptyHeight = t.getSize(find.byType(DshInput)).height;
+      controller.text = 'a';
+      await t.pumpAndSettle();
+      expect(
+        emptyHeight,
+        closeTo(t.getSize(find.byType(DshInput)).height, 0.001),
+        reason: placeholder,
+      );
+    }
+  });
+
   testWidgets(
     'the input commits edited text on Enter and follows persisted updates',
     (t) async {

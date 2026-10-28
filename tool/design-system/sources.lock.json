@@ -47,7 +47,8 @@
         "packages/client/ui-primitives/src/Modal.tsx": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f",
         "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
         "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
-        "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+        "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
+        "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
       },
       "referenceConsumers": [
         {
@@ -215,6 +216,178 @@
         "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
         "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2",
         "packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-sidebar",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-sidebar/-/dsh-client-ui-sidebar-0.2.1-rc.2.tgz",
+      "integrity": "sha512-nm/JKDUL/GNjwlTT9AQ4QnWU7hTgG81Ib6yNa0NOwCrC5TFRAb+3WhpvshCqcS6ofwhdXMjN5KB+zWuOrZdQRg==",
+      "publishedBundleSha256": "4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e",
+      "extractionKind": "sidebar-component-css",
+      "styleSheets": [
+        "SidebarRoot",
+        "HeaderLeadingControls"
+      ],
+      "sourcePackage": "packages/client/ui-sidebar/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-sidebar",
+      "files": {
+        "HeaderLeadingControls-classes.json": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d",
+        "HeaderLeadingControls.module.css": "0878fae90f7873c26fd062e317ef12a6d5ca5369724bf4e5badb5502bd7c35cf",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+        "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+        "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+        "packages/client/ui-sidebar/src/client/SidebarRoot.tsx": "51d95e300ed74cdfdeb2c7f7daa8b32324af95071787c0e6d3905b450c9e4951",
+        "packages/client/ui-sidebar/src/client/HeaderLeadingControls.module.css": "7f106cb3de2068dff52f301b63ba7f69b6b813b58e11bef77fd818da2bb3d684",
+        "packages/client/ui-sidebar/src/client/HeaderLeadingControls.tsx": "2a232e3bdd2f2892a6752cb9d83c1084e90228558271c525cd68db831d3331ce"
+      },
+      "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-workspace",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-workspace/-/dsh-client-ui-workspace-0.2.1-rc.2.tgz",
+      "integrity": "sha512-v3ov7wH9/0npaqpACSCAnVIgc5ho8NofeU2k06xGFNmZwxM3//KPeKzHd17/rzl32agw6G2NV2+FbxMx6l3xJw==",
+      "publishedBundleSha256": "52765aacb6c7f96327da5d8709d8cbb30dd2957d4744a42da04c18e07fe264e5",
+      "extractionKind": "sidebar-component-css",
+      "styleSheets": [
+        "WorkspaceBrowser",
+        "Rows"
+      ],
+      "sourcePackage": "packages/client/ui-workspace/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-workspace",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "Rows-classes.json": "388ea48420828451592557d93bbed93686ac996058239f94eda9be3c16498ebf",
+        "Rows.module.css": "2e6e7841baa22df02a2d39ff4d86370a1682ae210b168b04476de2555fa90d69",
+        "WorkspaceBrowser-classes.json": "73dcf6732753ac0e2fbdf240408088202ebcd625301eb7cbc294a68c88325c22",
+        "WorkspaceBrowser.module.css": "8f6222836e75a4b59fea20310df31a03fee2973acd92379416aedf333205ed0e",
+        "package.json": "ca68f8957654d510c614c5ada6303c006f4071f53278f540afb682cb035b5a62"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.module.css": "208fe8d00ef6e4285bd41bc979bc2362895ab2d2026e82ebd255c0bce680fbde",
+        "packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.tsx": "0cec4cb11595b46d84f7d2ee49c5b73d45ab0303e31aa293cb00d92e4c699527",
+        "packages/client/ui-workspace/src/client/rows/Rows.module.css": "7c7abb0d19d2265aa6edfb0e0b1a96cf3bb686b5c7d7806ad161f67be4d4dbad",
+        "packages/client/ui-workspace/src/client/rows/Rows.tsx": "b8a7da793a526a1b4e04f321be547dfb2983b73b6604c474ed1fcb41e8493408"
+      },
+      "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-settings-general",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-settings-general/-/dsh-client-ui-settings-general-0.2.1-rc.2.tgz",
+      "integrity": "sha512-3wwd8JwR8WX9eydEcHmUtIicNa1+ft8MA/QSleq0VAWqM7bBOXIzSLSpD8H9izyNKW0XnW1UWOR3zoDTsVQ4Vg==",
+      "publishedBundleSha256": "fb6c8d32d1994454578caa31cc975575a789e11f0afd6d3c19fe769f47050f7e",
+      "extractionKind": "sidebar-component-css",
+      "styleSheets": [
+        "SettingsRoot"
+      ],
+      "sourcePackage": "packages/client/ui-settings-general/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-settings-general",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "SettingsRoot-classes.json": "860d5090691ba68ab7541d23bbd598562284beaa0bc4cde005be122c53a943bf",
+        "SettingsRoot.module.css": "0adf94aa416696864b392ad40b3a3ebca1df1869c73e340595de6e4a6d400e38",
+        "package.json": "f84fcace2bcdf96b44d3be6aa3f87d0bbafffabfe7ab149c6aff79c836825f0e"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-settings-general/src/client/SettingsRoot.module.css": "886528a854b668db25c60cbc46ad982687142fcb02fda1f533dcbf491dc73513",
+        "packages/client/ui-settings-general/src/client/SettingsRoot.tsx": "01966a7299b66d16b2f80106c72dd1f37c541bbfe2d3a0397ca9edd96c21f466"
+      },
+      "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-settings-account",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-settings-account/-/dsh-client-ui-settings-account-0.2.1-rc.2.tgz",
+      "integrity": "sha512-zOVB0l0/Hddn7jPwm1d/EG09R3vdpwFl32YqJmOT7gfTyeeptXDykobNyFI5gsSguaaBkPg1hEeTL5HI3AbOEw==",
+      "publishedBundleSha256": "ec4ca325a530d68c7e69df5465b4ef82a257e2be179f32801bd4b17b13e89c8a",
+      "extractionKind": "sidebar-component-css",
+      "styleSheets": [
+        "AccountMenu"
+      ],
+      "sourcePackage": "packages/client/ui-settings-account/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-settings-account",
+      "files": {
+        "AccountMenu-classes.json": "7175fd6a90098c060bac6e84dd1570ede125526debad04873d604684634f5a38",
+        "AccountMenu.module.css": "2a69ea98ef652191f57121f44083d23acc2bc95cc162dbeb6e8267de66250b78",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "package.json": "b71ed47b7b22a67e065c0336bff45355b727b6e6a3aeca33850a4d9ff4d93949"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-settings-account/src/client/AccountMenu.module.css": "b3301b1224cca6e8adc17415ae0c92c6a239e5da145f8ddbbb85ed35931d60f0",
+        "packages/client/ui-settings-account/src/client/AccountMenu.tsx": "c2da502b8ce38e15b03a1e445d586b47e00d13cb36d522f3bd4e7cf2b59ac1ab"
+      },
+      "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-model-selection",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-model-selection/-/dsh-client-ui-model-selection-0.2.1-rc.2.tgz",
+      "integrity": "sha512-vQ/MfeWbhR8kEjKDxWnJ9Wf5RgltngVnq+8TAnfx5cA/4PDlUD/Fm4K3/KWAgUMz7pS+x4yno4ri3SHSsksb5g==",
+      "publishedBundleSha256": "18f6e74e203d50f66c8e30552d52e070d06941514cb0e72b149683c092a3ba2a",
+      "extractionKind": "model-menu-css",
+      "extraction": "Decode static published model CSS/class map and ModelSelect region without JavaScript execution",
+      "sourcePackage": "packages/client/ui-model-selection/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-model-selection",
+      "files": {
+        "package.json": "658fcd344cf6ca8b08c8fb149ef7578dcd02201d95fc55f817ddc2fe742a6923",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "ModelSelect.module.css": "1fd9ef13401cb2cdf8a154ee8cf5dcbf16c9e2f90dac348e2beb2f90c309cb6e",
+        "classes.json": "50e37a1ea4c0cd87ade7fe6b17d26e3afa7e4b1c13233af6d7a4e17cbd45ec34",
+        "model-behavior.json": "b8657b618691f847d71af5475d37444f6be99359b5c1304b0e050b1f128edb42"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-model-selection/src/client/ModelSelect.tsx": "081a79904b09e45c3226e39baa711ed1c72138f00f3d29ba1f0c1aa5c3b768cb",
+        "packages/client/ui-model-selection/src/client/ModelSelect.module.css": "7754687bfd5b18693e326f29367bf96a5ecf2906f0a00da82290406c9f12f80b"
+      }
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-chat",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-chat/-/dsh-client-ui-chat-0.2.1-rc.2.tgz",
+      "integrity": "sha512-ZDT17V3+LoavO3CJZ5alZf6edoh3+Qnllb3Y2DKOSmJYfpbPvR45uWl2DYxcnU4EAW2XvT8/k6KkbklFR1ZV8Q==",
+      "publishedBundleSha256": "a00e5176d1257d51604cefbe9a15d326d4283439df31f76ba20ff690c76e10a1",
+      "extractionKind": "stat-dialog-css",
+      "extraction": "Decode named StatsPills and stat-dialog CSS regions, static class maps, and shared stat placement behavior without executing JavaScript",
+      "sourcePackage": "packages/client/ui-chat/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-chat",
+      "files": {
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "StatsPills-classes.json": "e67825fd17cc2f0bd750a55b5625d91e4bcf265e8aa57b22a472fba299df3a92",
+        "StatsPills.module.css": "75d2c43103b0ee4466bbb1674df08b4ef0959719ad820deb246ecf171ce8756d",
+        "package.json": "d012125c7c2e8260de2166222f2d78509da95eec93c89db00af3260addae9d48",
+        "stat-dialog-behavior.json": "87b0dc19f2d31df1edc2231f052c49242eaab5c710b69a97fb109f3b9f881857",
+        "stat-dialog-classes.json": "5c8c0cb28292112965f887776e4241e19455c3d8d15c72f112de68a610b72674",
+        "stat-dialog.module.css": "9e88b9f02983d4f4fc7dd39eaee041df61abff5cd5416a7a4d36f75b360d177c"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-chat/src/client/chat/StatsPills.tsx": "d901d8069b7f7263576478608cce2b27d0312b5863a6fcb19df76c1489b7d76c",
+        "packages/client/ui-chat/src/client/chat/StatsPills.module.css": "3d962cc52d5a535175459c72713980299270377af60f4c756509b1abfa6b2f10",
+        "packages/client/ui-chat/src/client/chat/stat-dialog.ts": "c58e74382631d7ee42f2a36f24300bf747a75d08924d9e756f477e4d07ffc14f",
+        "packages/client/ui-chat/src/client/chat/stat-dialog.module.css": "14228b7f038c2be37a01c08fe8b86cc4391e0016453a1f760e71621e527e3224"
       }
     }
   ],

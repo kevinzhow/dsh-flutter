@@ -152,6 +152,10 @@ def collect(source=None):
         rule['selector'] = published.unhash_selectors(rule['selector'], roster_classes)
     rules['AgentPresetSection.styles.css'] = roster  # audited; not a migrated roster recipe
     theme_folder = HERE / 'upstream/ui-theme'
+    rules['PlatformMenuMaterial'] = [
+        rule for rule in css_rules((theme_folder / 'design-platform.css').read_text())
+        if 'html[data-platform' in rule['selector']
+    ]
     token_names = {'--ds-transition-duration', '--ds-ease-in-out', '--dsw-mask-blur'}
     theme_tokens = []
     for name in ('base.css', 'gradient-shadow-text.css'):
@@ -172,6 +176,58 @@ def collect(source=None):
         primitive = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-primitives')
         risk.verify_source_icon(rules['ModalContext']['modalBehavior']['risk'],
                                 (source / Path(primitive['sourcePackage']).parent / 'src/RiskConfirmation.tsx').read_text())
+    for sidebar_package in (p for p in lock['packages'] if p.get('extractionKind') == 'sidebar-component-css'):
+        folder = HERE / 'upstream' / sidebar_package['snapshotFolder']
+        for component in sidebar_package['styleSheets']:
+            classes = json.loads((folder / (component + '-classes.json')).read_text())
+            sheet = css_rules((folder / (component + '.module.css')).read_text(), allow_keyframes=True)
+            for rule in sheet:
+                rule['selector'] = published.unhash_selectors(rule['selector'], classes)
+            rules[component + '.module.css'] = sheet
+    model_package = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-model-selection')
+    model_folder = HERE / 'upstream' / model_package['snapshotFolder']
+    model_classes = json.loads((model_folder / 'classes.json').read_text())
+    model_rules = css_rules((model_folder / 'ModelSelect.module.css').read_text())
+    for rule in model_rules:
+        rule['selector'] = published.unhash_selectors(rule['selector'], model_classes)
+    model_spec = importlib.util.spec_from_file_location('model_menu_recipes', HERE / 'model_menu_recipes.py')
+    model = importlib.util.module_from_spec(model_spec)
+    model_spec.loader.exec_module(model)
+    model_rules = [model.normalize(rule, normalized_rule) for rule in model_rules]
+    if source is not None:
+        original = source / Path(model_package['sourcePackage']).parent / 'src/client/ModelSelect.module.css'
+        source_css = original.read_text()
+        # The published minifier drops this one superseded compatibility
+        # fallback. Keep the accepted transformation exact and fail on drift.
+        if source_css.count('max-width: 220px;') != 1 or source_css.count('max-width: min(360px, 45cqw);') != 1:
+            raise ValueError('model trigger fallback declaration changed')
+        source_css = source_css.replace('max-width: 220px;', '')
+        if model_rules != [model.normalize(rule, normalized_rule) for rule in css_rules(source_css)]:
+            raise ValueError('reference model menu CSS differs from its published package')
+    rules['ModelSelect.module.css'] = model_rules
+    rules['ModelSelectBehavior'] = json.loads((model_folder / 'model-behavior.json').read_text())
+    stats_spec = importlib.util.spec_from_file_location('stats_recipes', HERE / 'stats_recipes.py')
+    stats = importlib.util.module_from_spec(stats_spec)
+    stats_spec.loader.exec_module(stats)
+    chat = next(p for p in lock['packages'] if p['snapshotFolder'] == 'ui-chat')
+    chat_folder = HERE / 'upstream' / chat['snapshotFolder']
+    for name in ('StatsPills', 'stat-dialog'):
+        classes = json.loads((chat_folder / (name + '-classes.json')).read_text())
+        current = css_rules((chat_folder / (name + '.module.css')).read_text())
+        for rule in current:
+            rule['selector'] = published.unhash_selectors(rule['selector'], classes)
+        current = [stats.normalized(rule, normalized_rule) for rule in current]
+        if source is not None:
+            original = source / Path(chat['sourcePackage']).parent / 'src/client/chat' / (name + '.module.css')
+            other = [stats.normalized(rule, normalized_rule) for rule in css_rules(original.read_text())]
+            canonical = lambda items: sorted(items, key=lambda rule: rule['selector'])
+            if canonical(current) != canonical(other):
+                raise ValueError('reference statistics CSS differs from pinned published package: ' + name)
+        rules[name + '.module.css'] = current
+    rules['StatDialogBehavior'] = json.loads((chat_folder / 'stat-dialog-behavior.json').read_text())
+    if source is not None:
+        stats.verify_source_behavior(rules['StatDialogBehavior'],
+                                     (source / Path(chat['sourcePackage']).parent / 'src/client/chat/stat-dialog.ts').read_text())
     return lock, rules
 
 
@@ -474,6 +530,25 @@ def render(lock, sheets):
     risk_spec.loader.exec_module(risk)
     metrics.update(risk.build(sheets['RiskConfirmation.module.css'], sheets['ModalContext']['modalBehavior']['risk'],
                               value=value, number=number, token=token, font_token=profile_font_token))
+    platform_spec = importlib.util.spec_from_file_location('platform_material_recipes', HERE / 'platform_material_recipes.py')
+    platform = importlib.util.module_from_spec(platform_spec)
+    platform_spec.loader.exec_module(platform)
+    metrics.update(platform.build(sheets['PlatformMenuMaterial']))
+    sidebar_spec = importlib.util.spec_from_file_location('sidebar_recipes', HERE / 'sidebar_recipes.py')
+    sidebar = importlib.util.module_from_spec(sidebar_spec)
+    sidebar_spec.loader.exec_module(sidebar)
+    metrics.update(sidebar.build(sheets, value=value, number=number, token=token))
+    model_spec = importlib.util.spec_from_file_location('model_menu_recipes', HERE / 'model_menu_recipes.py')
+    model = importlib.util.module_from_spec(model_spec)
+    model_spec.loader.exec_module(model)
+    metrics.update(model.build(sheets['ModelSelect.module.css'], sheets['ModelSelectBehavior']['region'],
+                               value=value, number=number, token=token, font_token=profile_font_token,
+                               font_size_token=chrome_size_token))
+    stats_spec = importlib.util.spec_from_file_location('stats_recipes', HERE / 'stats_recipes.py')
+    stats = importlib.util.module_from_spec(stats_spec)
+    stats_spec.loader.exec_module(stats)
+    metrics.update(stats.build(sheets, sheets['StatDialogBehavior'],
+                               value=value, number=number, token=token, font_token=profile_font_token))
     package = lock['packages'][0]
     lines = ['// Generated by tool/design-system/generate.py; do not edit.', *['// From ' + p['name'] + ' ' + p['version'] + '.' for p in lock['packages']], '']
     for name, fields in metrics.items():

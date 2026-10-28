@@ -15,6 +15,77 @@ def module(name):
 gen, guard = module('generate'), module('check')
 
 class DesignSystemTests(unittest.TestCase):
+    def test_sidebar_profiles_read_real_published_geometry(self):
+        import copy
+        lock, sheets = gen.collect()
+        _, audit = gen.render(lock, sheets)
+        before = json.loads(audit)['metrics']
+        self.assertEqual(before['DshSidebarRecipe']['topStripHeight'], 52)
+        self.assertEqual(before['DshSidebarRecipe']['logoTopTuck'], 12)
+        self.assertEqual(before['DshSidebarLauncherRecipe']['height'], 32)
+        self.assertEqual(before['DshSidebarLauncherRecipe']['menuIconSize'], 16)
+        changed = copy.deepcopy(sheets)
+        next(r for r in changed['SidebarRoot.module.css'] if r['selector'] == '.logoRow')['declarations']['height'] = '64px'
+        next(r for r in changed['AccountMenu.module.css'] if r['selector'] == '.signedOutMenu [role=menuitem]')['declarations']['min-height'] = '42px'
+        _, audit = gen.render(lock, changed)
+        after = json.loads(audit)['metrics']
+        self.assertEqual(after['DshSidebarRecipe']['logoHeight'], 64)
+        self.assertEqual(after['DshSidebarLauncherRecipe']['menuRowHeight'], 42)
+        self.assertEqual(after['DshModalRecipe'], before['DshModalRecipe'])
+
+    def test_sidebar_unknown_state_property_and_condition_fail_closed(self):
+        import copy
+        lock, sheets = gen.collect()
+        for mode in ('state', 'property', 'condition'):
+            changed = copy.deepcopy(sheets)
+            rule = next(r for r in changed['SidebarRoot.module.css'] if r['selector'] == '.topStrip')
+            if mode == 'state':
+                changed['SidebarRoot.module.css'].append({**rule, 'selector': '.topStrip:hover'})
+            elif mode == 'property':
+                rule['declarations']['min-height'] = '60px'
+            else:
+                rule['conditions'] = ['@media (max-width: 600px)']
+            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'untranslated sidebar'):
+                gen.render(lock, changed)
+    def test_statistics_recipe_tracks_released_geometry_and_placement(self):
+        import copy
+        lock, original = gen.collect()
+        _, audit = gen.render(lock, original)
+        metrics = json.loads(audit)['metrics']
+        panel = metrics['DshStatPanelRecipe']
+        self.assertEqual((panel['minWidth'], panel['maxWidth'], panel['padding']), (300, 440, 16))
+        self.assertEqual((panel['anchorGap'], panel['viewportMargin'], panel['labelMinWidth']), (8, 12, 76))
+        self.assertEqual((panel['fontSize'], panel['lineHeight'], panel['ruleWidth']), (12, 18, .5))
+        changed = copy.deepcopy(original)
+        next(r for r in changed['stat-dialog.module.css'] if r['selector'] == '.panel')['declarations'].update({
+            'padding': '20px', 'min-width': 'min(320px,100vw - 24px)'})
+        next(r for r in changed['StatsPills.module.css'] if r['selector'] == '.pill')['declarations']['gap'] = '7px'
+        changed['StatDialogBehavior']['region'] = changed['StatDialogBehavior']['region'].replace('const PANEL_GAP = 8;', 'const PANEL_GAP = 10;')
+        _, audit = gen.render(lock, changed)
+        metrics = json.loads(audit)['metrics']
+        self.assertEqual(metrics['DshStatPanelRecipe']['padding'], 20)
+        self.assertEqual(metrics['DshStatPanelRecipe']['minWidth'], 320)
+        self.assertEqual(metrics['DshStatPanelRecipe']['anchorGap'], 10)
+        self.assertEqual(metrics['DshStatsPillRecipe']['gap'], 7)
+
+    def test_statistics_untranslated_filter_grid_and_states_fail_closed(self):
+        import copy
+        lock, original = gen.collect()
+        for selector, prop, new in [
+            ('.panel', 'backdrop-filter', 'none'),
+            ('.panel', 'width', '100%'),
+            ('.details', 'display', 'flex'),
+            ('.details dd', 'text-align', 'left'),
+        ]:
+            changed = copy.deepcopy(original)
+            next(r for r in changed['stat-dialog.module.css'] if r['selector'] == selector)['declarations'][prop] = new
+            with self.subTest(selector=selector, prop=prop), self.assertRaisesRegex(ValueError, 'untranslated'):
+                gen.render(lock, changed)
+        changed = copy.deepcopy(original)
+        changed['stat-dialog.module.css'].append({'selector': '.panel:hover', 'conditions': [], 'declarations': {'color': 'red'}})
+        with self.assertRaisesRegex(ValueError, 'untranslated statistics state'):
+            gen.render(lock, changed)
+
     def test_preset_archive_extraction_keeps_dollar_guide_literal_separate_from_roster(self):
         import io
         import tarfile

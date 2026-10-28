@@ -59,10 +59,12 @@ class _ModelFixtureState extends State<_ModelFixture> {
     alignment: Alignment.bottomLeft,
     child: SizedBox(
       width: (widget.props['width'] as num).toDouble(),
-      height: 320,
-      child: ModelSheet(
-        directory: directory,
-        i18n: DshI18n(DshLocale.fromTag(widget.locale)),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: ModelSheet(
+          directory: directory,
+          i18n: DshI18n(DshLocale.fromTag(widget.locale)),
+        ),
       ),
     ),
   );

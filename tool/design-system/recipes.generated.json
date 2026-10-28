@@ -48,7 +48,8 @@
           "packages/client/ui-primitives/src/Modal.tsx": "f4f2ee9eb84c88b92ecd8419a24621ca422a0f8a71f0bd247947002d342e078f",
           "packages/client/ui-primitives/src/useModalLayer.ts": "c584a5cde081548fadaedbf703c205915e924a7b67a0488d45b56cfe960718e4",
           "packages/client/ui-primitives/src/focus.ts": "68fb4c2bde84ec41933090246cc1806494db78f15741ada54585630fe15ecc9b",
-          "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c"
+          "packages/client/ui-primitives/src/keyboard-composition.ts": "be1684e7f3b8306da3cb991f1a5e393065d74107892b78a1002cdf2624f23f6c",
+          "packages/client/ui-primitives/src/useAnchoredPosition.ts": "7a98a11f845fb6252f33c6f526712b46dcb2d9729f44c2394005f58b5c6e0b15"
         },
         "referenceConsumers": [
           {
@@ -216,6 +217,178 @@
           "packages/client/ui-agent-preset/src/client/PresetGuideDialog.module.css": "39fabb371bccdab3670660ef4dd87e8818f88e3e8af3673bb31e7a0e1b7eed45",
           "packages/client/ui-agent-preset/src/client/AgentPresetSection.tsx": "034faf7db148e4485842e0dc2f819f877974827398ea1d48d9475b5afd7879b2",
           "packages/client/ui-agent-preset/src/client/AgentPresetSection.module.css": "92c1ff168d6e978fed7a3f807feab1cdac79ef3a53f9df6bceb1fee197ae3aea"
+        }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-sidebar",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-sidebar/-/dsh-client-ui-sidebar-0.2.1-rc.2.tgz",
+        "integrity": "sha512-nm/JKDUL/GNjwlTT9AQ4QnWU7hTgG81Ib6yNa0NOwCrC5TFRAb+3WhpvshCqcS6ofwhdXMjN5KB+zWuOrZdQRg==",
+        "publishedBundleSha256": "4d4535b9ac9160e13067b1f8a8510d158da2aaf6a15191b418a5956261ff9b3e",
+        "extractionKind": "sidebar-component-css",
+        "styleSheets": [
+          "SidebarRoot",
+          "HeaderLeadingControls"
+        ],
+        "sourcePackage": "packages/client/ui-sidebar/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-sidebar",
+        "files": {
+          "HeaderLeadingControls-classes.json": "23002c6779dc295b71a5c55dd030d7c6dd2623f8794ddb3c2a8cbf50b07c4d0d",
+          "HeaderLeadingControls.module.css": "0878fae90f7873c26fd062e317ef12a6d5ca5369724bf4e5badb5502bd7c35cf",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "SidebarRoot-classes.json": "5e57c07b3651734810bc2d6ffec5e62ddfc40c8d9f84e89e3efeabfd0ed93fb7",
+          "SidebarRoot.module.css": "910d1b83295553ffcce9407815cdaf5b8bd803d11ace222fe8029e52caec6d91",
+          "package.json": "905c4de684d51d1dd28023e8a1c1130e730a10165abc621e2dad90f7979f17bf"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-sidebar/src/client/SidebarRoot.module.css": "6eaadd716ab135e0d08696f11e979449c14734b38b94ae65408601bdf5ff8393",
+          "packages/client/ui-sidebar/src/client/SidebarRoot.tsx": "51d95e300ed74cdfdeb2c7f7daa8b32324af95071787c0e6d3905b450c9e4951",
+          "packages/client/ui-sidebar/src/client/HeaderLeadingControls.module.css": "7f106cb3de2068dff52f301b63ba7f69b6b813b58e11bef77fd818da2bb3d684",
+          "packages/client/ui-sidebar/src/client/HeaderLeadingControls.tsx": "2a232e3bdd2f2892a6752cb9d83c1084e90228558271c525cd68db831d3331ce"
+        },
+        "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-workspace",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-workspace/-/dsh-client-ui-workspace-0.2.1-rc.2.tgz",
+        "integrity": "sha512-v3ov7wH9/0npaqpACSCAnVIgc5ho8NofeU2k06xGFNmZwxM3//KPeKzHd17/rzl32agw6G2NV2+FbxMx6l3xJw==",
+        "publishedBundleSha256": "52765aacb6c7f96327da5d8709d8cbb30dd2957d4744a42da04c18e07fe264e5",
+        "extractionKind": "sidebar-component-css",
+        "styleSheets": [
+          "WorkspaceBrowser",
+          "Rows"
+        ],
+        "sourcePackage": "packages/client/ui-workspace/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-workspace",
+        "files": {
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "Rows-classes.json": "388ea48420828451592557d93bbed93686ac996058239f94eda9be3c16498ebf",
+          "Rows.module.css": "2e6e7841baa22df02a2d39ff4d86370a1682ae210b168b04476de2555fa90d69",
+          "WorkspaceBrowser-classes.json": "73dcf6732753ac0e2fbdf240408088202ebcd625301eb7cbc294a68c88325c22",
+          "WorkspaceBrowser.module.css": "8f6222836e75a4b59fea20310df31a03fee2973acd92379416aedf333205ed0e",
+          "package.json": "ca68f8957654d510c614c5ada6303c006f4071f53278f540afb682cb035b5a62"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.module.css": "208fe8d00ef6e4285bd41bc979bc2362895ab2d2026e82ebd255c0bce680fbde",
+          "packages/client/ui-workspace/src/client/rows/WorkspaceBrowser.tsx": "0cec4cb11595b46d84f7d2ee49c5b73d45ab0303e31aa293cb00d92e4c699527",
+          "packages/client/ui-workspace/src/client/rows/Rows.module.css": "7c7abb0d19d2265aa6edfb0e0b1a96cf3bb686b5c7d7806ad161f67be4d4dbad",
+          "packages/client/ui-workspace/src/client/rows/Rows.tsx": "b8a7da793a526a1b4e04f321be547dfb2983b73b6604c474ed1fcb41e8493408"
+        },
+        "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-settings-general",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-settings-general/-/dsh-client-ui-settings-general-0.2.1-rc.2.tgz",
+        "integrity": "sha512-3wwd8JwR8WX9eydEcHmUtIicNa1+ft8MA/QSleq0VAWqM7bBOXIzSLSpD8H9izyNKW0XnW1UWOR3zoDTsVQ4Vg==",
+        "publishedBundleSha256": "fb6c8d32d1994454578caa31cc975575a789e11f0afd6d3c19fe769f47050f7e",
+        "extractionKind": "sidebar-component-css",
+        "styleSheets": [
+          "SettingsRoot"
+        ],
+        "sourcePackage": "packages/client/ui-settings-general/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-settings-general",
+        "files": {
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "SettingsRoot-classes.json": "860d5090691ba68ab7541d23bbd598562284beaa0bc4cde005be122c53a943bf",
+          "SettingsRoot.module.css": "0adf94aa416696864b392ad40b3a3ebca1df1869c73e340595de6e4a6d400e38",
+          "package.json": "f84fcace2bcdf96b44d3be6aa3f87d0bbafffabfe7ab149c6aff79c836825f0e"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-settings-general/src/client/SettingsRoot.module.css": "886528a854b668db25c60cbc46ad982687142fcb02fda1f533dcbf491dc73513",
+          "packages/client/ui-settings-general/src/client/SettingsRoot.tsx": "01966a7299b66d16b2f80106c72dd1f37c541bbfe2d3a0397ca9edd96c21f466"
+        },
+        "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-settings-account",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-settings-account/-/dsh-client-ui-settings-account-0.2.1-rc.2.tgz",
+        "integrity": "sha512-zOVB0l0/Hddn7jPwm1d/EG09R3vdpwFl32YqJmOT7gfTyeeptXDykobNyFI5gsSguaaBkPg1hEeTL5HI3AbOEw==",
+        "publishedBundleSha256": "ec4ca325a530d68c7e69df5465b4ef82a257e2be179f32801bd4b17b13e89c8a",
+        "extractionKind": "sidebar-component-css",
+        "styleSheets": [
+          "AccountMenu"
+        ],
+        "sourcePackage": "packages/client/ui-settings-account/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-settings-account",
+        "files": {
+          "AccountMenu-classes.json": "7175fd6a90098c060bac6e84dd1570ede125526debad04873d604684634f5a38",
+          "AccountMenu.module.css": "2a69ea98ef652191f57121f44083d23acc2bc95cc162dbeb6e8267de66250b78",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "package.json": "b71ed47b7b22a67e065c0336bff45355b727b6e6a3aeca33850a4d9ff4d93949"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-settings-account/src/client/AccountMenu.module.css": "b3301b1224cca6e8adc17415ae0c92c6a239e5da145f8ddbbb85ed35931d60f0",
+          "packages/client/ui-settings-account/src/client/AccountMenu.tsx": "c2da502b8ce38e15b03a1e445d586b47e00d13cb36d522f3bd4e7cf2b59ac1ab"
+        },
+        "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-model-selection",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-model-selection/-/dsh-client-ui-model-selection-0.2.1-rc.2.tgz",
+        "integrity": "sha512-vQ/MfeWbhR8kEjKDxWnJ9Wf5RgltngVnq+8TAnfx5cA/4PDlUD/Fm4K3/KWAgUMz7pS+x4yno4ri3SHSsksb5g==",
+        "publishedBundleSha256": "18f6e74e203d50f66c8e30552d52e070d06941514cb0e72b149683c092a3ba2a",
+        "extractionKind": "model-menu-css",
+        "extraction": "Decode static published model CSS/class map and ModelSelect region without JavaScript execution",
+        "sourcePackage": "packages/client/ui-model-selection/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-model-selection",
+        "files": {
+          "package.json": "658fcd344cf6ca8b08c8fb149ef7578dcd02201d95fc55f817ddc2fe742a6923",
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "ModelSelect.module.css": "1fd9ef13401cb2cdf8a154ee8cf5dcbf16c9e2f90dac348e2beb2f90c309cb6e",
+          "classes.json": "50e37a1ea4c0cd87ade7fe6b17d26e3afa7e4b1c13233af6d7a4e17cbd45ec34",
+          "model-behavior.json": "b8657b618691f847d71af5475d37444f6be99359b5c1304b0e050b1f128edb42"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-model-selection/src/client/ModelSelect.tsx": "081a79904b09e45c3226e39baa711ed1c72138f00f3d29ba1f0c1aa5c3b768cb",
+          "packages/client/ui-model-selection/src/client/ModelSelect.module.css": "7754687bfd5b18693e326f29367bf96a5ecf2906f0a00da82290406c9f12f80b"
+        }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-chat",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-chat/-/dsh-client-ui-chat-0.2.1-rc.2.tgz",
+        "integrity": "sha512-ZDT17V3+LoavO3CJZ5alZf6edoh3+Qnllb3Y2DKOSmJYfpbPvR45uWl2DYxcnU4EAW2XvT8/k6KkbklFR1ZV8Q==",
+        "publishedBundleSha256": "a00e5176d1257d51604cefbe9a15d326d4283439df31f76ba20ff690c76e10a1",
+        "extractionKind": "stat-dialog-css",
+        "extraction": "Decode named StatsPills and stat-dialog CSS regions, static class maps, and shared stat placement behavior without executing JavaScript",
+        "sourcePackage": "packages/client/ui-chat/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-chat",
+        "files": {
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "StatsPills-classes.json": "e67825fd17cc2f0bd750a55b5625d91e4bcf265e8aa57b22a472fba299df3a92",
+          "StatsPills.module.css": "75d2c43103b0ee4466bbb1674df08b4ef0959719ad820deb246ecf171ce8756d",
+          "package.json": "d012125c7c2e8260de2166222f2d78509da95eec93c89db00af3260addae9d48",
+          "stat-dialog-behavior.json": "87b0dc19f2d31df1edc2231f052c49242eaab5c710b69a97fb109f3b9f881857",
+          "stat-dialog-classes.json": "5c8c0cb28292112965f887776e4241e19455c3d8d15c72f112de68a610b72674",
+          "stat-dialog.module.css": "9e88b9f02983d4f4fc7dd39eaee041df61abff5cd5416a7a4d36f75b360d177c"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-chat/src/client/chat/StatsPills.tsx": "d901d8069b7f7263576478608cce2b27d0312b5863a6fcb19df76c1489b7d76c",
+          "packages/client/ui-chat/src/client/chat/StatsPills.module.css": "3d962cc52d5a535175459c72713980299270377af60f4c756509b1abfa6b2f10",
+          "packages/client/ui-chat/src/client/chat/stat-dialog.ts": "c58e74382631d7ee42f2a36f24300bf747a75d08924d9e756f477e4d07ffc14f",
+          "packages/client/ui-chat/src/client/chat/stat-dialog.module.css": "14228b7f038c2be37a01c08fe8b86cc4391e0016453a1f760e71621e527e3224"
         }
       }
     ],
@@ -6135,6 +6308,22 @@
         }
       }
     ],
+    "PlatformMenuMaterial": [
+      {
+        "selector": "html[data-platform=darwin] body",
+        "conditions": [],
+        "declarations": {
+          "--dsw-specific-menu": "#f8f9faf0"
+        }
+      },
+      {
+        "selector": "html[data-platform=darwin] body[data-ds-dark-theme]",
+        "conditions": [],
+        "declarations": {
+          "--dsw-specific-menu": "#303136f0"
+        }
+      }
+    ],
     "ModalContext": {
       "themeTokens": [
         {
@@ -6227,6 +6416,3139 @@
         "bundleSha256": "6ecdf173de66fce620e588f10ed1e3b624725febab059fb867beefef9ae4ddb8",
         "region": "//#region lib/types/client/PresetGuideDialog.js\n\t\t/** Read-only help stays local to Settings and never changes the selected preset. */\n\t\tconst guides = new Map([\n\t\t\t[\"standard\", {\n\t\t\t\tname: \"presetStandardName\",\n\t\t\t\tintro: \"guideStandardIntro\",\n\t\t\t\texplanation: \"guideStandardExplanation\",\n\t\t\t\tusage: \"guideStandardUsage\"\n\t\t\t}],\n\t\t\t[\"ptc\", {\n\t\t\t\tname: \"presetPtcName\",\n\t\t\t\tintro: \"guidePtcIntro\",\n\t\t\t\texplanation: \"guidePtcExplanation\",\n\t\t\t\tusage: \"guidePtcUsage\"\n\t\t\t}],\n\t\t\t[\"minimal\", {\n\t\t\t\tname: \"presetMinimalName\",\n\t\t\t\tintro: \"guideMinimalIntro\",\n\t\t\t\texplanation: \"guideMinimalExplanation\",\n\t\t\t\tusage: \"guideMinimalUsage\"\n\t\t\t}],\n\t\t\t[\"cordis\", {\n\t\t\t\tname: \"presetCordisName\",\n\t\t\t\tintro: \"guideCordisIntro\",\n\t\t\t\texplanation: \"guideCordisExplanation\",\n\t\t\t\tusage: \"guideCordisUsage\"\n\t\t\t}]\n\t\t]);\n\t\t/**\n\t\t* Look up help only for known, shipped presets.\n\t\t* @param id - preset identifier from the roster.\n\t\t* @param trust - roster source; custom presets own their capability claims.\n\t\t* @returns the shipped guide, or undefined for unknown and custom presets.\n\t\t*/\n\t\tfunction presetGuide(id, trust) {\n\t\t\treturn trust === \"system\" ? guides.get(id) : void 0;\n\t\t}\n\t\t/** Keep keyboard focus inside a preset reader while Tab moves through its controls.\n\t\t* @param event Keyboard event from the active reader.\n\t\t*/\n\t\tfunction trapPresetReaderTab(event) {\n\t\t\tif (event.key !== \"Tab\") return;\n\t\t\tconst targets = Array.from(event.currentTarget.querySelectorAll(\"button:not([disabled]):not([tabindex=\\\"-1\\\"]), [tabindex=\\\"0\\\"]\")).filter((element) => !element.closest(\"[hidden]\"));\n\t\t\tconst first = targets[0];\n\t\t\tconst last = targets[targets.length - 1];\n\t\t\tif (event.shiftKey && document.activeElement === first) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\tlast?.focus();\n\t\t\t} else if (!event.shiftKey && document.activeElement === last) {\n\t\t\t\tevent.preventDefault();\n\t\t\t\tfirst?.focus();\n\t\t\t}\n\t\t}\n\t\t/** Curated usage dictionaries contain only level-three example sections. */\n\t\tfunction GuideUsage({ text, t }) {\n\t\t\tconst labels = {\n\t\t\t\tcode: {\n\t\t\t\t\tcopyLabel: t(\"guideCopy\"),\n\t\t\t\t\tcopiedLabel: t(\"guideCopied\"),\n\t\t\t\t\ttoolbarLabels: {\n\t\t\t\t\t\tcodeLabel: t(\"codeBlock.title\"),\n\t\t\t\t\t\twrapLabel: t(\"codeBlock.wrap\"),\n\t\t\t\t\t\tunwrapLabel: t(\"codeBlock.unwrap\")\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\tfootnotes: t(\"guideFootnotes\")\n\t\t\t};\n\t\t\treturn text.split(/(?=^### )/m).map((section) => {\n\t\t\t\tconst headingEnd = section.indexOf(\"\\n\");\n\t\t\t\tconst title = section.slice(4, headingEnd);\n\t\t\t\treturn (0, react_jsx_runtime.jsxs)(\"section\", {\n\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExample,\n\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExampleHeader,\n\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"h3\", { children: title }), (0, react_jsx_runtime.jsxs)(_deepseek_ai_dsh_client_ui_primitives.Tag, {\n\t\t\t\t\t\t\ttone: \"neutral\",\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideExampleTag,\n\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconListPenOutlineRegular, { size: 12 }), t(\"guideExampleTask\")]\n\t\t\t\t\t\t})]\n\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.MarkdownText, {\n\t\t\t\t\t\ttext: section.slice(headingEnd + 1),\n\t\t\t\t\t\tlabels\n\t\t\t\t\t})]\n\t\t\t\t}, title);\n\t\t\t});\n\t\t}\n\t\t/**\n\t\t* Open read-only help without changing the selected preset.\n\t\t* @param props - localized guide, initial page, and close callback.\n\t\t* @returns the modal reader with independent scroll positions for each page.\n\t\t*/\n\t\tfunction PresetGuideDialog({ guide, initialPage, t, onClose }) {\n\t\t\tconst [page, setPage] = (0, react.useState)(initialPage);\n\t\t\tconst guideId = (0, react.useId)();\n\t\t\tconst content = (0, react.useRef)(null);\n\t\t\t(0, react.useLayoutEffect)(() => {\n\t\t\t\tcontent.current?.querySelector(\"[role=\\\"tab\\\"][aria-selected=\\\"true\\\"]\")?.focus();\n\t\t\t}, []);\n\t\t\tconst onKeyDown = (event) => {\n\t\t\t\tif (event.key === \"Escape\") {\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tevent.stopPropagation();\n\t\t\t\t\tonClose();\n\t\t\t\t} else trapPresetReaderTab(event);\n\t\t\t};\n\t\t\treturn (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Modal, {\n\t\t\t\topen: true,\n\t\t\t\theadless: true,\n\t\t\t\tonClose,\n\t\t\t\ttitle: t(guide.name),\n\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideDialog,\n\t\t\t\tchildren: (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\tref: content,\n\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideLayout,\n\t\t\t\t\trole: \"presentation\",\n\t\t\t\t\tonKeyDownCapture: onKeyDown,\n\t\t\t\t\tchildren: [\n\t\t\t\t\t\t(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideHeader,\n\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTitleRow,\n\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"h2\", {\n\t\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTitle,\n\t\t\t\t\t\t\t\t\tchildren: t(guide.name)\n\t\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Button, {\n\t\t\t\t\t\t\t\t\tvariant: \"ghost\",\n\t\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideClose,\n\t\t\t\t\t\t\t\t\t\"aria-label\": t(\"close\"),\n\t\t\t\t\t\t\t\t\tonClick: onClose,\n\t\t\t\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCloseOutlineRegular, { size: 18 })\n\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(\"p\", {\n\t\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideIntro,\n\t\t\t\t\t\t\t\tchildren: t(guide.intro)\n\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t}),\n\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.SegmentedTabs, {\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guideTabs,\n\t\t\t\t\t\t\tlabel: t(\"guideSections\"),\n\t\t\t\t\t\t\tvalue: page,\n\t\t\t\t\t\t\tonChange: setPage,\n\t\t\t\t\t\t\titems: [{\n\t\t\t\t\t\t\t\tvalue: \"explanation\",\n\t\t\t\t\t\t\t\tlabel: t(\"modeExplanation\"),\n\t\t\t\t\t\t\t\tid: `${guideId}-explanation-tab`,\n\t\t\t\t\t\t\t\tpanelId: `${guideId}-explanation-panel`\n\t\t\t\t\t\t\t}, {\n\t\t\t\t\t\t\t\tvalue: \"usage\",\n\t\t\t\t\t\t\t\tlabel: t(\"howToUse\"),\n\t\t\t\t\t\t\t\tid: `${guideId}-usage-tab`,\n\t\t\t\t\t\t\t\tpanelId: `${guideId}-usage-panel`\n\t\t\t\t\t\t\t}]\n\t\t\t\t\t\t}),\n\t\t\t\t\t\t[\"explanation\", \"usage\"].map((section) => (0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\tid: `${guideId}-${section}-panel`,\n\t\t\t\t\t\t\trole: \"tabpanel\",\n\t\t\t\t\t\t\t\"aria-labelledby\": `${guideId}-${section}-tab`,\n\t\t\t\t\t\t\tclassName: PresetGuideDialog_module_css_default.guidePanel,\n\t\t\t\t\t\t\t\"data-guide-page\": section,\n\t\t\t\t\t\t\thidden: page !== section,\n\t\t\t\t\t\t\ttabIndex: 0,\n\t\t\t\t\t\t\tchildren: section === \"usage\" ? (0, react_jsx_runtime.jsx)(GuideUsage, {\n\t\t\t\t\t\t\t\ttext: t(guide.usage),\n\t\t\t\t\t\t\t\tt\n\t\t\t\t\t\t\t}) : (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.MarkdownText, {\n\t\t\t\t\t\t\t\ttext: t(guide.explanation),\n\t\t\t\t\t\t\t\tlabels: {\n\t\t\t\t\t\t\t\t\tcode: {\n\t\t\t\t\t\t\t\t\t\tcopyLabel: t(\"guideCopy\"),\n\t\t\t\t\t\t\t\t\t\tcopiedLabel: t(\"guideCopied\"),\n\t\t\t\t\t\t\t\t\t\ttoolbarLabels: {\n\t\t\t\t\t\t\t\t\t\t\tcodeLabel: t(\"codeBlock.title\"),\n\t\t\t\t\t\t\t\t\t\t\twrapLabel: t(\"codeBlock.wrap\"),\n\t\t\t\t\t\t\t\t\t\t\tunwrapLabel: t(\"codeBlock.unwrap\")\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\tfootnotes: t(\"guideFootnotes\")\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t})\n\t\t\t\t\t\t}, section))\n\t\t\t\t\t]\n\t\t\t\t})\n\t\t\t});\n\t\t}\n\t\t"
       }
+    },
+    "SidebarRoot.module.css": [
+      {
+        "selector": ".root",
+        "conditions": [],
+        "declarations": {
+          "--dsh-sidebar-inline-padding": "12px",
+          "height": "100%",
+          "padding": "6px var(--dsh-sidebar-inline-padding)",
+          "box-sizing": "border-box",
+          "background": "var(--dsw-specific-sidebar-fill)",
+          "color": "var(--dsw-alias-label-primary)",
+          "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l2)",
+          "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l2)",
+          "flex-direction": "column",
+          "font-size": "14px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] .root",
+        "conditions": [],
+        "declarations": {
+          "background": "0 0"
+        }
+      },
+      {
+        "selector": ".root.collapsed",
+        "conditions": [],
+        "declarations": {
+          "padding": "18px 10px 6px"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .root .logoRow",
+        "conditions": [],
+        "declarations": {
+          "height": "40px",
+          "margin": "0",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .toggle",
+        "conditions": [],
+        "declarations": {
+          "top": "calc((var(--dsh-windows-titlebar-height) - 28px) / 2)",
+          "z-index": "30",
+          "-webkit-app-region": "no-drag",
+          "position": "fixed",
+          "left": "12px"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .root.collapsed .logoRow",
+        "conditions": [],
+        "declarations": {
+          "height": "0"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .root:not(.collapsed) .brand",
+        "conditions": [],
+        "declarations": {
+          "padding-left": "4px"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .brandIdentity",
+        "conditions": [],
+        "declarations": {
+          "transform": "translateY(1px)"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .brandMark",
+        "conditions": [],
+        "declarations": {
+          "transform": "translate(1px)"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .brandName",
+        "conditions": [],
+        "declarations": {
+          "font-weight": "400"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .root.collapsed",
+        "conditions": [],
+        "declarations": {
+          "padding": "0"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .root:not(.collapsed) .newSession",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "8px",
+          "margin-left": "0"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .collapsed .panelList, [data-windows-titlebar] .collapsed .regionArea, [data-windows-titlebar] .collapsed .footArea",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": "html[data-windows-titlebar]:has([data-sidebar-collapsed=true])",
+        "conditions": [],
+        "declarations": {
+          "--dsh-windows-menu-start": "84px"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .collapsed .newSession",
+        "conditions": [],
+        "declarations": {
+          "top": "calc((var(--dsh-windows-titlebar-height) - 28px) / 2)",
+          "z-index": "30",
+          "-webkit-app-region": "no-drag",
+          "border": "none",
+          "margin": "0",
+          "padding": "0",
+          "position": "fixed",
+          "left": "48px"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .railIn .iconButton, [data-windows-titlebar] .railIn .newSession",
+        "conditions": [],
+        "declarations": {
+          "animation": "none"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .collapsed .toggle, [data-windows-titlebar] .collapsed .newSession",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "width": "28px",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)"
+        }
+      },
+      {
+        "selector": "[data-windows-titlebar] .collapsed .toggle .panelIcon",
+        "conditions": [],
+        "declarations": {
+          "display": "inline"
+        }
+      },
+      {
+        "selector": ".root.quietBars",
+        "conditions": [],
+        "declarations": {
+          "--dsh-scrollbar-thumb": "transparent",
+          "--dsh-scrollbar-thumb-hover": "transparent"
+        }
+      },
+      {
+        "selector": ".fading>*",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0",
+          "transition": "opacity .15s var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": ".wide",
+        "conditions": [],
+        "declarations": {
+          "animation": "hHd-Xa_wide-in .2s var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": "0%",
+        "conditions": [
+          "@keyframes hHd-Xa_wide-in"
+        ],
+        "declarations": {
+          "opacity": "0"
+        }
+      },
+      {
+        "selector": ".railIn .iconButton, .railIn .newSession, .railIn .panelList, .railIn .regionArea",
+        "conditions": [],
+        "declarations": {
+          "animation": "hHd-Xa_rail-in .15s var(--ds-ease-in-out) backwards"
+        }
+      },
+      {
+        "selector": ".railIn .footArea",
+        "conditions": [],
+        "declarations": {
+          "animation": "hHd-Xa_rail-fade-in .15s var(--ds-ease-in-out) backwards"
+        }
+      },
+      {
+        "selector": "0%",
+        "conditions": [
+          "@keyframes hHd-Xa_rail-in"
+        ],
+        "declarations": {
+          "opacity": "0",
+          "transform": "translate(49px)"
+        }
+      },
+      {
+        "selector": "0%",
+        "conditions": [
+          "@keyframes hHd-Xa_rail-fade-in"
+        ],
+        "declarations": {
+          "opacity": "0"
+        }
+      },
+      {
+        "selector": ".topStrip",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "height": "52px",
+          "margin": "-6px calc(-1 * var(--dsh-sidebar-inline-padding)) 0",
+          "flex": "none",
+          "justify-content": "flex-end",
+          "align-items": "center",
+          "padding": "0 12px 2px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": "[data-fullscreen] .topStrip",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "flex-start"
+        }
+      },
+      {
+        "selector": ".topStrip+.logoRow",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "-12px"
+        }
+      },
+      {
+        "selector": ".logoRow",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "flex": "none",
+          "justify-content": "flex-end",
+          "align-items": "center",
+          "gap": "8px",
+          "height": "60px",
+          "margin-bottom": "4px",
+          "padding": "8px 0 8px 4px",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".collapsed .logoRow",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "flex-start",
+          "height": "36px",
+          "margin-bottom": "12px",
+          "padding": "0",
+          "overflow": "visible"
+        }
+      },
+      {
+        "selector": ".brand",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "color": "inherit",
+          "cursor": "pointer",
+          "background": "0 0",
+          "border": "none",
+          "flex": "1",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] .brand",
+        "conditions": [],
+        "declarations": {
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".brandIdentity",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "gap": "8px",
+          "min-width": "0",
+          "height": "24px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".brandMark",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".brandName",
+        "conditions": [],
+        "declarations": {
+          "letter-spacing": ".04em",
+          "align-items": "center",
+          "gap": "6px",
+          "min-width": "0",
+          "height": "24px",
+          "font-size": "18px",
+          "font-weight": "600",
+          "line-height": "24px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".fallbackBrandName",
+        "conditions": [],
+        "declarations": {
+          "letter-spacing": "0",
+          "white-space": "nowrap",
+          "font-size": "17px"
+        }
+      },
+      {
+        "selector": ".localBuildBrand",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "flex-direction": "column",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "flex-start",
+          "gap": "1px",
+          "height": "24px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".localBuildTitle",
+        "conditions": [],
+        "declarations": {
+          "letter-spacing": "0",
+          "font-size": "12px",
+          "line-height": "13px"
+        }
+      },
+      {
+        "selector": ".iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "pointer",
+          "width": "28px",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".iconButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".iconButton.toggle:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-2px"
+        }
+      },
+      {
+        "selector": ".collapsed .iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "36px",
+          "height": "36px"
+        }
+      },
+      {
+        "selector": ".collapsed .toggle .panelIcon",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".collapsed .toggle:hover .panelIcon",
+        "conditions": [],
+        "declarations": {
+          "display": "inline"
+        }
+      },
+      {
+        "selector": ".collapsed .toggle:hover .railMark",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".railMark",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".collapsed .iconButton",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".buildVersion",
+        "conditions": [],
+        "declarations": {
+          "height": "10px",
+          "color": "var(--dsw-alias-label-primary-inverted)",
+          "background": "var(--dsw-alias-label-primary)",
+          "font-family": "var(--ds-font-family-code)",
+          "white-space": "nowrap",
+          "border-radius": "2px",
+          "flex": "none",
+          "align-items": "center",
+          "padding": "0 3px",
+          "font-size": "6px",
+          "font-weight": "500",
+          "line-height": "10px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".newSession",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border": ".5px solid var(--dsw-alias-border-l3)",
+          "border-radius": "var(--dsw-radius-md)",
+          "background": "var(--dsw-alias-button-elevated-fill)",
+          "height": "38px",
+          "color": "var(--dsw-alias-label-primary)",
+          "cursor": "pointer",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "gap": "0",
+          "margin": "0 2px 12px",
+          "padding": "8px 12px",
+          "font-size": "14px",
+          "font-weight": "500",
+          "line-height": "22px",
+          "display": "flex",
+          "position": "relative",
+          "overflow": "hidden",
+          "container-type": "inline-size"
+        }
+      },
+      {
+        "selector": ".newSession:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-button-floating-hover)"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] .newSession",
+        "conditions": [],
+        "declarations": {
+          "background": "#ffffff8c"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] .newSession:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "#ffffff4d"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] [data-ds-dark-theme] .newSession",
+        "conditions": [],
+        "declarations": {
+          "background": "#ffffff26"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] [data-ds-dark-theme] .newSession:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "#fff3"
+        }
+      },
+      {
+        "selector": ".collapsed .newSession",
+        "conditions": [],
+        "declarations": {
+          "background": "0 0",
+          "border-color": "#0000",
+          "align-self": "flex-start",
+          "gap": "0",
+          "width": "36px",
+          "height": "36px",
+          "margin": "0 0 12px",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".collapsed .newSession:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".newSessionLabel",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "max-width": "200px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".collapsed .newSessionLabel",
+        "conditions": [],
+        "declarations": {
+          "max-width": "0"
+        }
+      },
+      {
+        "selector": ".newSessionLabelMask",
+        "conditions": [],
+        "declarations": {
+          "flex": "1",
+          "min-width": "0"
+        }
+      },
+      {
+        "selector": ".newSession:is(:hover,:focus-visible) .newSessionLabelMask:has(+.newSessionShortcut)",
+        "conditions": [],
+        "declarations": {
+          "overflow": "hidden",
+          "mask-image": "linear-gradient(90deg,#000 calc(100% - 16px),#0000)"
+        }
+      },
+      {
+        "selector": ".newSessionContent",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "center",
+          "align-items": "center",
+          "gap": "6px",
+          "width": "100cqw",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".newSessionContent>svg",
+        "conditions": [],
+        "declarations": {
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".newSessionShortcut",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0",
+          "pointer-events": "none",
+          "flex": "none",
+          "font-weight": "400",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".newSession:is(:hover,:focus-visible) .newSessionShortcut",
+        "conditions": [],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": ".panelList",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "none",
+          "gap": "4px",
+          "margin-bottom": "8px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".panelRow",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "min-height": "36px",
+          "color": "var(--dsw-alias-label-primary)",
+          "font": "inherit",
+          "text-align": "left",
+          "cursor": "pointer",
+          "background": "0 0",
+          "border": "none",
+          "align-items": "center",
+          "gap": "8px",
+          "margin": "0 2px",
+          "padding": "7px 8px",
+          "line-height": "22px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".panelRow:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".panelRow.panelActive",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".panelRow:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-2px"
+        }
+      },
+      {
+        "selector": ".panelGlyph",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".panelTitle",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "min-width": "0",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".collapsed .panelList",
+        "conditions": [],
+        "declarations": {
+          "gap": "12px",
+          "margin-bottom": "12px"
+        }
+      },
+      {
+        "selector": ".collapsed .panelRow",
+        "conditions": [],
+        "declarations": {
+          "width": "36px",
+          "height": "36px",
+          "color": "var(--dsw-alias-label-primary)",
+          "justify-content": "center",
+          "margin": "0",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".regionArea",
+        "conditions": [],
+        "declarations": {
+          "min-height": "0",
+          "margin-left": "-4px",
+          "margin-right": "calc(-1 * var(--dsh-sidebar-inline-padding))",
+          "flex-direction": "column",
+          "flex": "1",
+          "padding-left": "4px",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".collapsed .regionArea",
+        "conditions": [],
+        "declarations": {
+          "margin-left": "0",
+          "margin-right": "0",
+          "padding-left": "0"
+        }
+      },
+      {
+        "selector": ".footArea",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "none",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".settingsArea, .footerActions",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "width": "100%",
+          "min-width": "0"
+        }
+      },
+      {
+        "selector": ".footerActions",
+        "conditions": [],
+        "declarations": {
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".collapsed .footArea",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center"
+        }
+      },
+      {
+        "selector": ".collapsed .settingsArea, .collapsed .footerActions",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "center",
+          "width": "auto",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".wide, .fading>*, .railIn .iconButton, .railIn .newSession, .railIn .panelList, .railIn .footArea, .railIn .regionArea",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "transition": "none",
+          "animation": "none"
+        }
+      }
+    ],
+    "HeaderLeadingControls.module.css": [
+      {
+        "selector": ".controls",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "gap": "8px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "width": "28px",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "cursor": "pointer",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".iconButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      }
+    ],
+    "WorkspaceBrowser.module.css": [
+      {
+        "selector": ".root",
+        "conditions": [],
+        "declarations": {
+          "--dsh-session-list-edge-inset": "var(--dsh-sidebar-inline-padding)",
+          "--dsh-session-list-scrollbar-width": "5px",
+          "--dsh-session-list-scrollbar-offset": "2px",
+          "box-sizing": "border-box",
+          "min-height": "0",
+          "padding-right": "var(--dsh-session-list-edge-inset)",
+          "flex-direction": "column",
+          "flex": "1",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".root.rail",
+        "conditions": [],
+        "declarations": {
+          "padding-right": "0"
+        }
+      },
+      {
+        "selector": ".iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "pointer",
+          "width": "28px",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".iconButton:focus-visible, .searchButton:focus-visible, .clearButton:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "outline": "var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))",
+          "outline-offset": "-2px"
+        }
+      },
+      {
+        "selector": ".iconButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".viewOptionsMenu",
+        "conditions": [],
+        "declarations": {
+          "min-width": "200px"
+        }
+      },
+      {
+        "selector": ".sectionHeader",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "height": "36px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex": "none",
+          "justify-content": "flex-end",
+          "align-items": "center",
+          "gap": "4px",
+          "margin-bottom": "4px",
+          "padding-left": "4px",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".root:not(.rail) .sectionHeader",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "2px",
+          "margin-right": "-4px"
+        }
+      },
+      {
+        "selector": ".sectionLabel",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "opacity": "1",
+          "visibility": "visible",
+          "min-width": "0",
+          "max-width": "45%",
+          "transition": "max-width .18s var(--ds-ease-in-out), margin-right .18s var(--ds-ease-in-out), opacity .12s var(--ds-ease-in-out), transform .18s var(--ds-ease-in-out), visibility 0s linear",
+          "flex": "none",
+          "line-height": "20px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".sectionLabelHidden",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0",
+          "visibility": "hidden",
+          "max-width": "0",
+          "margin-right": "-4px",
+          "transition-delay": "0s,0s,0s,0s,.18s",
+          "transform": "translate(-4px)"
+        }
+      },
+      {
+        "selector": ".searchSlot",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "min-width": "0",
+          "max-width": "28px",
+          "transition": "max-width .18s var(--ds-ease-in-out), padding-left .18s var(--ds-ease-in-out)",
+          "flex": "1",
+          "align-items": "center",
+          "margin-left": "auto",
+          "padding-left": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".searchSlotExpanded",
+        "conditions": [],
+        "declarations": {
+          "max-width": "100%",
+          "padding-left": "0"
+        }
+      },
+      {
+        "selector": ".headerActions",
+        "conditions": [],
+        "declarations": {
+          "opacity": "1",
+          "visibility": "visible",
+          "max-width": "60px",
+          "transition": "max-width .18s var(--ds-ease-in-out), opacity .12s var(--ds-ease-in-out), transform .18s var(--ds-ease-in-out), visibility 0s linear",
+          "flex": "none",
+          "align-items": "center",
+          "gap": "4px",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".headerActionsHidden",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0",
+          "visibility": "hidden",
+          "pointer-events": "none",
+          "max-width": "0",
+          "transition-delay": "0s,0s,0s,.18s",
+          "transform": "translate(4px)"
+        }
+      },
+      {
+        "selector": ".search",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "text",
+          "width": "100%",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "transition": "width .18s var(--ds-ease-in-out), padding .18s var(--ds-ease-in-out), border-color .18s var(--ds-ease-in-out), background-color .18s var(--ds-ease-in-out)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "align-items": "center",
+          "gap": "0",
+          "margin": "0",
+          "padding": "0",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".searchExpanded",
+        "conditions": [],
+        "declarations": {
+          "border": ".5px solid var(--dsw-alias-border-l4)",
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "calc(100% + 4px)",
+          "height": "30px",
+          "color": "var(--dsw-alias-label-caption)",
+          "background": "0 0",
+          "margin-inline": "-2px",
+          "padding": "0 4px 0 0"
+        }
+      },
+      {
+        "selector": ".searchButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "pointer",
+          "width": "28px",
+          "height": "28px",
+          "color": "inherit",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".searchExpanded .searchButton",
+        "conditions": [],
+        "declarations": {
+          "width": "28px",
+          "height": "30px"
+        }
+      },
+      {
+        "selector": ".searchButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".searchExpanded .searchButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "0 0"
+        }
+      },
+      {
+        "selector": ".searchInput",
+        "conditions": [],
+        "declarations": {
+          "opacity": "0",
+          "pointer-events": "none",
+          "width": "0",
+          "min-width": "0",
+          "color": "var(--dsw-alias-label-primary)",
+          "transition": "opacity .12s var(--ds-ease-in-out)",
+          "background": "0 0",
+          "border": "none",
+          "outline": "none",
+          "flex": "1",
+          "font-size": "13px",
+          "line-height": "18px"
+        }
+      },
+      {
+        "selector": ".searchExpanded .searchInput",
+        "conditions": [],
+        "declarations": {
+          "opacity": "1",
+          "pointer-events": "auto",
+          "margin-left": "-2px"
+        }
+      },
+      {
+        "selector": ".searchInput::placeholder",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)"
+        }
+      },
+      {
+        "selector": ".clearButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "pointer",
+          "width": "24px",
+          "height": "24px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".clearButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".rail .sectionHeader",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "flex-start",
+          "gap": "0",
+          "margin-bottom": "12px",
+          "padding-left": "0"
+        }
+      },
+      {
+        "selector": ".rail .headerActions",
+        "conditions": [],
+        "declarations": {
+          "max-width": "none"
+        }
+      },
+      {
+        "selector": ".rail .iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "36px",
+          "height": "36px",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".rail .search",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "background": "0 0",
+          "border-color": "#0000",
+          "gap": "0",
+          "width": "36px",
+          "height": "36px",
+          "margin": "0 0 12px",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".rail .searchButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "36px",
+          "height": "36px",
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".rail .searchButton:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".listArea",
+        "conditions": [],
+        "declarations": {
+          "min-height": "0",
+          "margin-left": "-4px",
+          "margin-right": "calc(-1 * var(--dsh-session-list-edge-inset))",
+          "flex-direction": "column",
+          "flex": "1",
+          "padding-left": "4px",
+          "display": "flex",
+          "overflow": "visible"
+        }
+      },
+      {
+        "selector": ".rail .listArea",
+        "conditions": [],
+        "declarations": {
+          "margin-left": "0",
+          "margin-right": "0",
+          "padding-left": "0"
+        }
+      },
+      {
+        "selector": ".treeBody",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "1",
+          "min-height": "0",
+          "display": "flex",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".fade",
+        "conditions": [],
+        "declarations": {
+          "left": "0",
+          "right": "var(--dsh-session-list-edge-inset)",
+          "background": "linear-gradient(to bottom, transparent, var(--dsw-specific-sidebar-fill))",
+          "pointer-events": "none",
+          "height": "24px",
+          "position": "absolute",
+          "bottom": "0"
+        }
+      },
+      {
+        "selector": "[data-platform=darwin] .fade",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".wide",
+        "conditions": [],
+        "declarations": {
+          "animation": "bhn1Oq_wide-in .2s var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": "0%",
+        "conditions": [
+          "@keyframes bhn1Oq_wide-in"
+        ],
+        "declarations": {
+          "opacity": "0"
+        }
+      },
+      {
+        "selector": ".list",
+        "conditions": [],
+        "declarations": {
+          "min-height": "0",
+          "margin-left": "-4px",
+          "margin-right": "var(--dsh-session-list-scrollbar-offset)",
+          "padding-left": "4px",
+          "padding-right": "calc(var(--dsh-session-list-edge-inset) - var(--dsh-session-list-scrollbar-width) - var(--dsh-session-list-scrollbar-offset))",
+          "scrollbar-gutter": "stable",
+          "flex": "1",
+          "padding-bottom": "16px",
+          "overflow-y": "auto"
+        }
+      },
+      {
+        "selector": ".flatList>*+*, .searchTree>[role=treeitem]+[role=treeitem], .groupSection>*+*",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "2px"
+        }
+      },
+      {
+        "selector": ".searchStatus",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "padding": "10px 12px",
+          "font-size": "12px",
+          "line-height": "18px"
+        }
+      },
+      {
+        "selector": ".skeletonRow",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "align-items": "flex-start",
+          "gap": "8px",
+          "min-height": "48px",
+          "padding": "6px 8px 7px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".skeletonDot",
+        "conditions": [],
+        "declarations": {
+          "corner-shape": "round",
+          "border-radius": "50%",
+          "flex": "none",
+          "width": "16px",
+          "height": "16px"
+        }
+      },
+      {
+        "selector": ".skeletonBars",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "1",
+          "gap": "6px",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".skeletonDot, .skeletonBar",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-bg-skeleton)",
+          "animation": "2s cubic-bezier(.36,0,.64,1) infinite bhn1Oq_search-skeleton"
+        }
+      },
+      {
+        "selector": ".skeletonBar",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-xs)",
+          "width": "65%",
+          "height": "16px"
+        }
+      },
+      {
+        "selector": ".skeletonBarWide",
+        "conditions": [],
+        "declarations": {
+          "width": "90%",
+          "height": "13px"
+        }
+      },
+      {
+        "selector": "0%",
+        "conditions": [
+          "@keyframes bhn1Oq_search-skeleton"
+        ],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": "40%",
+        "conditions": [
+          "@keyframes bhn1Oq_search-skeleton"
+        ],
+        "declarations": {
+          "opacity": ".6"
+        }
+      },
+      {
+        "selector": "80%, to",
+        "conditions": [
+          "@keyframes bhn1Oq_search-skeleton"
+        ],
+        "declarations": {
+          "opacity": "1"
+        }
+      },
+      {
+        "selector": ".groupSection",
+        "conditions": [],
+        "declarations": {
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".groupSection+.groupSection",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "4px"
+        }
+      },
+      {
+        "selector": ".listTopDropIndicator, .workspaceDropBefore:before, .workspaceDropAfter:after",
+        "conditions": [],
+        "declarations": {
+          "content": "\"\"",
+          "z-index": "1",
+          "background": "linear-gradient(55deg, transparent calc(50% - 1px), var(--dsw-alias-state-business-primary) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 0 / 5px 7px no-repeat, linear-gradient(125deg, transparent calc(50% - 1px), var(--dsw-alias-state-business-primary) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 5px / 5px 7px no-repeat, linear-gradient(var(--dsw-alias-state-business-primary) 0 0) 4px 5px / calc(100% - 4px) 2px no-repeat",
+          "pointer-events": "none",
+          "height": "12px",
+          "position": "absolute",
+          "left": "0",
+          "right": "0"
+        }
+      },
+      {
+        "selector": ".listTopDropIndicator",
+        "conditions": [],
+        "declarations": {
+          "top": "-8px",
+          "left": "0",
+          "right": "var(--dsh-session-list-edge-inset)"
+        }
+      },
+      {
+        "selector": ".listTopDropActive>.workspaceDropBefore:first-child:before",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".workspaceDropBefore:before",
+        "conditions": [],
+        "declarations": {
+          "top": "-8px"
+        }
+      },
+      {
+        "selector": ".workspaceDropAfter:after",
+        "conditions": [],
+        "declarations": {
+          "bottom": "-8px"
+        }
+      },
+      {
+        "selector": ".sessionOverflowButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "width": "100%",
+          "height": "28px",
+          "padding": "0 12px 0 calc(28px + var(--dsh-workspace-indent,0px))",
+          "cursor": "pointer",
+          "text-align": "left",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "background": "0 0",
+          "border": "none",
+          "font-size": "12px"
+        }
+      },
+      {
+        "selector": ".groupSection>.sessionOverflowButton",
+        "conditions": [],
+        "declarations": {
+          "margin-top": "0"
+        }
+      },
+      {
+        "selector": ".sessionOverflowButton:hover",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "background": "0 0"
+        }
+      },
+      {
+        "selector": ".empty",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "padding": "16px 12px",
+          "font-size": "13px"
+        }
+      },
+      {
+        "selector": ".emptyState",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex-direction": "column",
+          "align-items": "center",
+          "gap": "8px",
+          "margin-top": "80px",
+          "padding": "0 12px",
+          "font-size": "13px",
+          "line-height": "20px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".emptyState>svg",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-caption)",
+          "margin-bottom": "4px"
+        }
+      },
+      {
+        "selector": ".emptyAction",
+        "conditions": [],
+        "declarations": {
+          "cursor": "pointer",
+          "color": "var(--dsw-alias-link)",
+          "background": "0 0",
+          "border": "none",
+          "padding": "0",
+          "font-size": "13px",
+          "line-height": "20px"
+        }
+      },
+      {
+        "selector": ".renameInput",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border": ".5px solid var(--dsw-alias-border-l4)",
+          "border-radius": "var(--dsw-radius-lg)",
+          "width": "100%",
+          "height": "44px",
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "0 0",
+          "outline": "none",
+          "padding": "7px 14px",
+          "font-size": "14px",
+          "font-weight": "400",
+          "line-height": "22px"
+        }
+      },
+      {
+        "selector": ".renameInput:disabled",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-dimmed)"
+        }
+      },
+      {
+        "selector": ".renameError",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-state-error-primary)",
+          "margin-top": "8px",
+          "font-size": "12px",
+          "line-height": "18px"
+        }
+      },
+      {
+        "selector": ".deleteAction:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-state-error-primary)"
+        }
+      },
+      {
+        "selector": ".deleteStatus",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "font-size": "12px",
+          "line-height": "18px"
+        }
+      },
+      {
+        "selector": ".archiveActivity",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "margin": "0 0 8px",
+          "padding-left": "18px",
+          "font-size": "13px",
+          "line-height": "20px"
+        }
+      },
+      {
+        "selector": ".archiveActivity li",
+        "conditions": [],
+        "declarations": {
+          "overflow-wrap": "anywhere"
+        }
+      },
+      {
+        "selector": ".wide, .skeletonDot, .skeletonBar",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "animation": "none"
+        }
+      },
+      {
+        "selector": ".search, .sectionLabel, .searchSlot, .searchInput, .headerActions",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "transition": "none"
+        }
+      }
+    ],
+    "Rows.module.css": [
+      {
+        "selector": ".projectRow, .sessionRow",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "padding": "0 8px",
+          "cursor": "pointer",
+          "user-select": "none",
+          "color": "var(--dsw-alias-label-primary)",
+          "align-items": "center",
+          "gap": "6px",
+          "padding-inline-start": "calc(8px + var(--dsh-workspace-indent,0px))",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".projectRow:hover, .sessionRow:hover, .sessionRow.selected",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".searchResultRow",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-lg)",
+          "cursor": "pointer",
+          "text-align": "left",
+          "width": "100%",
+          "min-height": "48px",
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "0 0",
+          "border": "none",
+          "flex-direction": "column",
+          "align-items": "stretch",
+          "padding": "4px 8px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".searchResultRow:hover, .searchResultRow.selected",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".searchResultHeading",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".searchResultTitle",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "flex": "0 auto",
+          "min-width": "0",
+          "margin-left": "4px",
+          "font-size": "14px",
+          "line-height": "20px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".searchResultMeta",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "gap": "6px",
+          "min-width": "0",
+          "margin-left": "20px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".searchResultWorkspace, .searchResultSnippet",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "font-size": "12px",
+          "line-height": "17px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".searchResultWorkspace",
+        "conditions": [],
+        "declarations": {
+          "max-width": "40%",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".searchResultWorkspace:only-child",
+        "conditions": [],
+        "declarations": {
+          "max-width": "100%"
+        }
+      },
+      {
+        "selector": ".searchResultSnippet",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "color": "var(--dsw-alias-label-secondary)",
+          "flex": "1"
+        }
+      },
+      {
+        "selector": ".projectRow",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "align-items": "center",
+          "height": "34px"
+        }
+      },
+      {
+        "selector": ".projectRow .rowActions",
+        "conditions": [],
+        "declarations": {
+          "height": "20px"
+        }
+      },
+      {
+        "selector": ".sessionRow",
+        "conditions": [],
+        "declarations": {
+          "gap": "0",
+          "height": "32px"
+        }
+      },
+      {
+        "selector": ".sessionRow .title",
+        "conditions": [],
+        "declarations": {
+          "margin": "0 6px 0 4px"
+        }
+      },
+      {
+        "selector": ".slot",
+        "conditions": [],
+        "declarations": {
+          "width": "16px",
+          "height": "20px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".visuallyHidden",
+        "conditions": [],
+        "declarations": {
+          "clip": "rect(0 0 0 0)",
+          "white-space": "nowrap",
+          "width": "1px",
+          "height": "1px",
+          "position": "absolute",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".folderActive",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-state-business-primary)"
+        }
+      },
+      {
+        "selector": ".projectRow .chevron",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".projectRow:hover .chevron",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".projectRow:hover .folder",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".arrow",
+        "conditions": [],
+        "declarations": {
+          "transition": "transform .15s var(--ds-ease-in-out)"
+        }
+      },
+      {
+        "selector": ".arrowOpen",
+        "conditions": [],
+        "declarations": {
+          "transform": "rotate(90deg)"
+        }
+      },
+      {
+        "selector": ".projectText",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "1",
+          "gap": "2px",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".title",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "min-width": "0",
+          "font-size": "14px",
+          "line-height": "20px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".renameInput",
+        "conditions": [],
+        "declarations": {
+          "border": ".5px solid var(--dsw-alias-border-l4)",
+          "border-radius": "var(--dsw-radius-sm)",
+          "background": "var(--dsw-alias-button-elevated-fill)",
+          "min-width": "0",
+          "color": "inherit",
+          "outline": "none",
+          "padding": "0 2px",
+          "font-size": "14px",
+          "line-height": "20px"
+        }
+      },
+      {
+        "selector": ".sessionRow .title",
+        "conditions": [],
+        "declarations": {
+          "flex": "1"
+        }
+      },
+      {
+        "selector": ".sessionRow .title[data-scrolled]",
+        "conditions": [],
+        "declarations": {
+          "mask-image": "linear-gradient(90deg,#0000,#000 12px)"
+        }
+      },
+      {
+        "selector": ".sessionRow .title[data-clipped]",
+        "conditions": [],
+        "declarations": {
+          "mask-image": "linear-gradient(270deg,#0000,#000 12px)"
+        }
+      },
+      {
+        "selector": ".sessionRow .title[data-scrolled][data-clipped]",
+        "conditions": [],
+        "declarations": {
+          "mask-image": "linear-gradient(90deg,#0000,#000 12px calc(100% - 12px),#0000)"
+        }
+      },
+      {
+        "selector": ".meta",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "font-size": "12px",
+          "line-height": "20px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".time",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex": "none",
+          "font-size": "10px",
+          "line-height": "16px"
+        }
+      },
+      {
+        "selector": ".pinIndicator",
+        "conditions": [],
+        "declarations": {
+          "width": "16px",
+          "height": "20px",
+          "color": "var(--dsw-alias-label-caption)",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "margin-left": "6px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".sessionRow.archived .title, .searchResultRow.archived .searchResultTitle, .searchResultRow.archived .searchResultWorkspace, .searchResultRow.archived .searchResultSnippet",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-caption)"
+        }
+      },
+      {
+        "selector": ".dot",
+        "conditions": [],
+        "declarations": {
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".rowActions",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "align-items": "center",
+          "gap": "15px",
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".projectRow:hover .rowActions, .sessionRow:hover .rowActions, .searchResultRow:hover .rowActions, .projectRow.menuOpen .rowActions, .sessionRow.menuOpen .rowActions",
+        "conditions": [],
+        "declarations": {
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".searchResultHeading .rowActions",
+        "conditions": [],
+        "declarations": {
+          "margin-left": "auto"
+        }
+      },
+      {
+        "selector": ".sessionRow:hover .time, .sessionRow.menuOpen .time, .sessionRow:hover .pinIndicator, .sessionRow.menuOpen .pinIndicator",
+        "conditions": [],
+        "declarations": {
+          "display": "none"
+        }
+      },
+      {
+        "selector": ".sessionRow:hover .title, .sessionRow.menuOpen .title",
+        "conditions": [
+          "@media (hover: hover)"
+        ],
+        "declarations": {
+          "text-overflow": "clip"
+        }
+      },
+      {
+        "selector": ".projectRow.menuOpen, .sessionRow.menuOpen",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".sessionRow.dropBefore, .sessionRow.dropAfter",
+        "conditions": [],
+        "declarations": {
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".sessionRow.dropBefore:before, .sessionRow.dropAfter:after",
+        "conditions": [],
+        "declarations": {
+          "content": "\"\"",
+          "z-index": "1",
+          "background": "linear-gradient(55deg, transparent calc(50% - 1px), var(--dsw-alias-state-business-primary) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 0 / 5px 7px no-repeat, linear-gradient(125deg, transparent calc(50% - 1px), var(--dsw-alias-state-business-primary) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)) 0 5px / 5px 7px no-repeat, linear-gradient(var(--dsw-alias-state-business-primary) 0 0) 4px 5px / calc(100% - 4px) 2px no-repeat",
+          "pointer-events": "none",
+          "height": "12px",
+          "position": "absolute",
+          "left": "0",
+          "right": "4px"
+        }
+      },
+      {
+        "selector": ".sessionRow.dropBefore:before",
+        "conditions": [],
+        "declarations": {
+          "top": "-7px"
+        }
+      },
+      {
+        "selector": ".sessionRow.dropAfter:after",
+        "conditions": [],
+        "declarations": {
+          "bottom": "-7px"
+        }
+      },
+      {
+        "selector": ".hoverContent",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "gap": "8px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".hoverTitle",
+        "conditions": [],
+        "declarations": {
+          "color": "#fff",
+          "overflow-wrap": "break-word",
+          "font-size": "14px",
+          "line-height": "20px"
+        }
+      },
+      {
+        "selector": ".hoverPath",
+        "conditions": [],
+        "declarations": {
+          "color": "#cfd3d6",
+          "word-break": "break-all",
+          "font-size": "12px",
+          "line-height": "16px"
+        }
+      },
+      {
+        "selector": ".hoverTime",
+        "conditions": [],
+        "declarations": {
+          "color": "#cfd3d6",
+          "font-size": "12px",
+          "line-height": "16px"
+        }
+      },
+      {
+        "selector": ".hoverStatus",
+        "conditions": [],
+        "declarations": {
+          "color": "#adb2b8",
+          "align-items": "center",
+          "gap": "8px",
+          "font-size": "12px",
+          "line-height": "20px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".hoverArchived svg",
+        "conditions": [],
+        "declarations": {
+          "flex-shrink": "0",
+          "margin": "0 -4px"
+        }
+      },
+      {
+        "selector": ".iconButton",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-xs)",
+          "cursor": "pointer",
+          "width": "16px",
+          "height": "16px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".iconButton:hover",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)"
+        }
+      },
+      {
+        "selector": ".chevron",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-caption)"
+        }
+      },
+      {
+        "selector": ".arrow",
+        "conditions": [
+          "@media (prefers-reduced-motion: reduce)"
+        ],
+        "declarations": {
+          "transition": "none",
+          "animation": "none"
+        }
+      }
+    ],
+    "SettingsRoot.module.css": [
+      {
+        "selector": ".triggerRow",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "align-items": "center",
+          "gap": "8px",
+          "width": "calc(100% + 4px)",
+          "margin": "4px -2px",
+          "display": "flex",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".triggerRow.railRow",
+        "conditions": [],
+        "declarations": {
+          "width": "36px",
+          "margin": "8px 0 10px"
+        }
+      },
+      {
+        "selector": ".trigger",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "cursor": "pointer",
+          "width": "auto",
+          "min-width": "0",
+          "height": "42px",
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "0 0",
+          "border": "none",
+          "flex": "1",
+          "align-items": "center",
+          "gap": "8px",
+          "margin": "0",
+          "padding": "0 10px 0 8px",
+          "font-family": "inherit",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "flex",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".trigger:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".trigger.rail",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "justify-content": "center",
+          "gap": "0",
+          "width": "36px",
+          "height": "36px",
+          "margin": "0",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".triggerLabel",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".overlay",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1000",
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "flex",
+          "position": "fixed",
+          "inset": "0"
+        }
+      },
+      {
+        "selector": ".mask",
+        "conditions": [],
+        "declarations": {
+          "inset": "var(--dsh-frame-chrome-top,0px) 0 0",
+          "background": "var(--dsw-alias-bg-mask-1)",
+          "backdrop-filter": "var(--dsw-mask-blur)",
+          "position": "absolute"
+        }
+      },
+      {
+        "selector": ".panel",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1",
+          "width": "800px",
+          "height": "min(800px, calc(100vh - 2 * max(24px, var(--dsh-frame-overlay-top,24px))))",
+          "border-radius": "var(--dsw-radius-panel)",
+          "background": "var(--dsw-alias-bg-layer-2)",
+          "max-width": "calc(100vw - 48px)",
+          "box-shadow": "var(--dsw-elevation-prominent)",
+          "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l2)",
+          "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l2)",
+          "display": "flex",
+          "position": "relative",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".panel:focus",
+        "conditions": [],
+        "declarations": {
+          "outline": "none"
+        }
+      },
+      {
+        "selector": ".nav",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "flex-direction": "column",
+          "flex": "none",
+          "gap": "18px",
+          "width": "188px",
+          "padding": "22px 12px 0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".navTitle",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "padding": "0 12px",
+          "font-size": "16px",
+          "font-weight": "500",
+          "line-height": "24px"
+        }
+      },
+      {
+        "selector": ".navList",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "gap": "4px",
+          "display": "flex",
+          "overflow-y": "auto"
+        }
+      },
+      {
+        "selector": ".navCell",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "cursor": "pointer",
+          "height": "40px",
+          "color": "var(--dsw-alias-label-primary)",
+          "text-align": "left",
+          "background": "0 0",
+          "border": "none",
+          "align-items": "center",
+          "gap": "8px",
+          "padding": "9px 16px 9px 12px",
+          "font-family": "inherit",
+          "font-size": "14px",
+          "font-weight": "400",
+          "line-height": "22px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".navCell:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-specific-sidebar-nav-item-hover)"
+        }
+      },
+      {
+        "selector": ".navCell.active",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-specific-sidebar-nav-item-active)"
+        }
+      },
+      {
+        "selector": ".navIcon",
+        "conditions": [],
+        "declarations": {
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".navLabel",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "text-overflow": "ellipsis",
+          "flex": "1",
+          "min-width": "0",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".content",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "1",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".header",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "flex": "none",
+          "justify-content": "space-between",
+          "align-items": "flex-start",
+          "gap": "8px",
+          "height": "54px",
+          "padding": "20px 14px 8px 10px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".actions",
+        "conditions": [],
+        "declarations": {
+          "justify-content": "flex-end",
+          "align-items": "center",
+          "gap": "8px",
+          "min-width": "0",
+          "margin-left": "auto",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".close",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "cursor": "pointer",
+          "width": "28px",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-primary)",
+          "background": "0 0",
+          "border": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".close:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".options",
+        "conditions": [],
+        "declarations": {
+          "flex": "1",
+          "min-height": "0",
+          "padding": "0 24px 24px",
+          "overflow-y": "auto"
+        }
+      },
+      {
+        "selector": ".hiddenLabel",
+        "conditions": [],
+        "declarations": {
+          "clip": "rect(0 0 0 0)",
+          "white-space": "nowrap",
+          "width": "1px",
+          "height": "1px",
+          "position": "absolute",
+          "overflow": "hidden"
+        }
+      }
+    ],
+    "AccountMenu.module.css": [
+      {
+        "selector": ".root",
+        "conditions": [],
+        "declarations": {
+          "flex": "1",
+          "min-width": "0"
+        }
+      },
+      {
+        "selector": ".anchor",
+        "conditions": [],
+        "declarations": {
+          "width": "100%"
+        }
+      },
+      {
+        "selector": ".trigger",
+        "conditions": [],
+        "declarations": {
+          "user-select": "none",
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "100%",
+          "height": "44px",
+          "color": "var(--dsw-alias-label-primary)",
+          "font": "inherit",
+          "cursor": "pointer",
+          "background": "0 0",
+          "border": "0",
+          "align-items": "center",
+          "gap": "8px",
+          "padding": "6px",
+          "font-size": "14px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".trigger[data-collapsed=true]",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "justify-content": "center",
+          "gap": "0",
+          "width": "36px",
+          "height": "36px",
+          "padding": "0"
+        }
+      },
+      {
+        "selector": ".trigger:hover",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".avatar",
+        "conditions": [],
+        "declarations": {
+          "corner-shape": "round",
+          "background": "var(--dsw-alias-bg-skeleton)",
+          "width": "24px",
+          "height": "24px",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "border-radius": "50%",
+          "flex": "none",
+          "justify-content": "center",
+          "align-items": "center",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".label",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".trigger[data-signed-out=true]:not([data-collapsed=true])",
+        "conditions": [],
+        "declarations": {
+          "height": "32px",
+          "padding": "6px 2px 6px 6px",
+          "line-height": "20px"
+        }
+      },
+      {
+        "selector": ".signedOutMenu[role=menu]",
+        "conditions": [],
+        "declarations": {
+          "min-width": "124px",
+          "max-width": "280px",
+          "padding": "4px"
+        }
+      },
+      {
+        "selector": ".signedOutMenu [role=menuitem]",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "gap": "8px",
+          "min-height": "40px",
+          "padding": "8px 10px",
+          "font-size": "14px",
+          "line-height": "22px"
+        }
+      },
+      {
+        "selector": ".signedOutMenu [role=menuitem]>span:first-child:not(:last-child)",
+        "conditions": [],
+        "declarations": {
+          "width": "16px",
+          "height": "16px",
+          "color": "var(--dsw-alias-menu-icon)"
+        }
+      },
+      {
+        "selector": ".signedOutMenu [role=menuitem]>span:first-child:not(:last-child) svg",
+        "conditions": [],
+        "declarations": {
+          "width": "16px",
+          "height": "16px"
+        }
+      }
+    ],
+    "ModelSelect.module.css": [
+      {
+        "selector": ".root",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".trigger",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-sm)",
+          "min-width": "0",
+          "max-width": "min(360px,45cqw)",
+          "height": "28px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "outline": "none",
+          "align-items": "center",
+          "gap": "4px",
+          "padding": "0 4px 0 8px",
+          "font-size": "13px",
+          "font-weight": "400",
+          "line-height": "20px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".trigger:hover:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".trigger:focus-visible:not([data-selection-focus])",
+        "conditions": [],
+        "declarations": {
+          "box-shadow": "0 0 0 2px var(--dsw-focus-ring-color,var(--dsw-alias-state-business-primary))"
+        }
+      },
+      {
+        "selector": ".trigger:disabled",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-dimmed)",
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".triggerLabel",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "min-width": "0",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".triggerEffort",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "min-width": "0",
+          "color": "var(--dsw-alias-label-caption)",
+          "flex-shrink": "1000",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".triggerIcon",
+        "conditions": [],
+        "declarations": {
+          "display": "var(--dsh-composer-model-icon-display,none)",
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".triggerLabel,.triggerEffort",
+        "conditions": [],
+        "declarations": {
+          "display": "var(--dsh-composer-model-text-display,block)"
+        }
+      },
+      {
+        "selector": ".chevron",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-caption)",
+          "flex": "none",
+          "transition": "transform .12s"
+        }
+      },
+      {
+        "selector": ".chevronOpen",
+        "conditions": [],
+        "declarations": {
+          "transform": "rotate(180deg)"
+        }
+      },
+      {
+        "selector": ".menu",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1100",
+          "--dsw-elevation-stroke-color": "var(--dsw-alias-border-l1)",
+          "width": "max-content",
+          "min-width": "min(240px,100vw - 32px)",
+          "max-width": "min(420px,100vw - 32px)",
+          "max-height": "min(360px,100vh - 96px)",
+          "box-shadow": "var(--dsw-elevation-prominent)",
+          "color": "var(--dsw-alias-label-primary)",
+          "--dsh-scrollbar-thumb": "var(--dsw-alias-scrollbar-bg-l2)",
+          "--dsh-scrollbar-thumb-hover": "var(--dsw-alias-scrollbar-hover-l2)",
+          "border": "0",
+          "flex-direction": "column",
+          "padding": "4px",
+          "display": "flex",
+          "position": "fixed",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".status,.empty",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "padding": "8px",
+          "font-size": "12px",
+          "line-height": "18px"
+        }
+      },
+      {
+        "selector": ".error,.warning",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "background": "var(--dsw-alias-interactive-bg-hover-danger)",
+          "color": "var(--dsw-alias-state-error-primary)",
+          "justify-content": "space-between",
+          "align-items": "flex-start",
+          "gap": "6px",
+          "margin-bottom": "3px",
+          "padding": "6px 7px",
+          "font-size": "11px",
+          "line-height": "16px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".warning",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-bg-module-platform)",
+          "color": "var(--dsw-alias-state-warn-label)"
+        }
+      },
+      {
+        "selector": ".retry",
+        "conditions": [],
+        "declarations": {
+          "color": "inherit",
+          "font": "inherit",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "flex": "none",
+          "padding": "0",
+          "font-weight": "600"
+        }
+      },
+      {
+        "selector": ".searchRow",
+        "conditions": [],
+        "declarations": {
+          "flex-shrink": "0",
+          "margin": "2px 0 3px",
+          "position": "relative"
+        }
+      },
+      {
+        "selector": ".searchRow .search",
+        "conditions": [],
+        "declarations": {
+          "border-radius": "var(--dsw-radius-md)",
+          "background": "transparent",
+          "border": "0 solid #0000",
+          "height": "auto",
+          "padding": "5px 7px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".searchRow .searchWithQuery",
+        "conditions": [],
+        "declarations": {
+          "padding-right": "34px"
+        }
+      },
+      {
+        "selector": ".searchClear",
+        "conditions": [],
+        "declarations": {
+          "corner-shape": "round",
+          "width": "24px",
+          "height": "24px",
+          "color": "var(--dsw-alias-label-secondary)",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "border-radius": "50%",
+          "justify-content": "center",
+          "align-items": "center",
+          "padding": "0",
+          "display": "inline-flex",
+          "position": "absolute",
+          "top": "50%",
+          "right": "4px",
+          "transform": "translateY(-50%)"
+        }
+      },
+      {
+        "selector": ".searchClear:hover,.searchClear:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)",
+          "outline": "none"
+        }
+      },
+      {
+        "selector": ".searchRow .search:focus-within",
+        "conditions": [],
+        "declarations": {
+          "border-color": "#0000"
+        }
+      },
+      {
+        "selector": ".searchRow .search input",
+        "conditions": [],
+        "declarations": {
+          "padding": "0",
+          "font-size": "12px",
+          "line-height": "normal"
+        }
+      },
+      {
+        "selector": ".searchRow .search input::placeholder",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-caption)"
+        }
+      },
+      {
+        "selector": ".groups",
+        "conditions": [],
+        "declarations": {
+          "min-height": "0",
+          "overflow-y": "auto"
+        }
+      },
+      {
+        "selector": ".option",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "auto",
+          "min-width": "100%",
+          "min-height": "34px",
+          "color": "inherit",
+          "text-align": "left",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "outline": "none",
+          "align-items": "center",
+          "gap": "6px",
+          "padding": "5px 7px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".option:not(.modelOption):hover:not(:disabled),.option:focus-visible,.optionActive:not(:disabled)",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".selected",
+        "conditions": [],
+        "declarations": {
+          "background": "transparent"
+        }
+      },
+      {
+        "selector": ".option:disabled",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-dimmed)",
+          "cursor": "default"
+        }
+      },
+      {
+        "selector": ".optionCopy",
+        "conditions": [],
+        "declarations": {
+          "flex-direction": "column",
+          "flex": "1",
+          "min-width": "0",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".modelName",
+        "conditions": [],
+        "declarations": {
+          "color": "inherit",
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "font-size": "13px",
+          "font-weight": "400",
+          "line-height": "18px",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".check",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "flex": "0 0 14px",
+          "place-items": "center",
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".check svg",
+        "conditions": [],
+        "declarations": {
+          "width": "14px",
+          "height": "14px"
+        }
+      },
+      {
+        "selector": ".cell",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-md)",
+          "width": "auto",
+          "min-width": "100%",
+          "height": "34px",
+          "color": "var(--dsw-alias-label-primary)",
+          "cursor": "pointer",
+          "text-align": "left",
+          "background": "transparent",
+          "border": "none",
+          "outline": "none",
+          "align-items": "center",
+          "gap": "6px",
+          "padding": "0 8px",
+          "font-size": "13px",
+          "line-height": "20px",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".cell:hover,.cell:focus-visible",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)"
+        }
+      },
+      {
+        "selector": ".cellLabel",
+        "conditions": [],
+        "declarations": {
+          "white-space": "nowrap",
+          "flex": "none"
+        }
+      },
+      {
+        "selector": ".cellValue",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "white-space": "nowrap",
+          "text-align": "right",
+          "min-width": "0",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "flex": "auto",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".cellChevron",
+        "conditions": [],
+        "declarations": {
+          "width": "12px",
+          "height": "12px",
+          "color": "var(--dsw-alias-menu-icon)",
+          "flex": "none"
+        }
+      }
+    ],
+    "ModelSelectBehavior": {
+      "bundleSha256": "18f6e74e203d50f66c8e30552d52e070d06941514cb0e72b149683c092a3ba2a",
+      "region": "//#region lib/types/client/ModelSelect.js\n\t\t/**\n\t\t* ModelSelect: the composer's named model seat (`conversation.input.model`).\n\t\t* Two-level selection per figma 496:26454's MenuDropdown: the root menu is\n\t\t* the Model / Effort row pair (label + current value + a right chevron),\n\t\t* each drilling into its own list \u2014 the provider-grouped model list over\n\t\t* the shared directory, and the effort levels. The trigger (313:14108's\n\t\t* ToggleButton) shows both: model name + effort in the caption tone.\n\t\t* Model catalogs above four entries show search, which retains focus while\n\t\t* \u2191/\u2193 cycle the highlighted result; Enter and Tab accept it. Smaller model\n\t\t* catalogs, root panes, and effort panes move focus between rows. Escape and Shift+Tab leave a drilled pane first and otherwise close\n\t\t* back to the trigger. A drilled pane focuses the current effort or model\n\t\t* search field. Provider headings paint their background only while pinned\n\t\t* by scrolling. Clearing a query restores the full list and search focus.\n\t\t* Selecting restores trigger focus without a ring until the trigger loses focus\n\t\t* or the menu reopens. Model names match a case-insensitive ordered subsequence\n\t\t* within each provider group, ranked by\n\t\t* prefix, alignment score, then catalog order. Returning to the root pane\n\t\t* hands focus back to the cell that opened it. Data and submission ride the\n\t\t* same per-session ModelDirectory as the /model popup; exact-model reasoning\n\t\t* metadata and the selected effort come from the Host rather than a\n\t\t* client-owned vocabulary. A rejected selection announces through the shared\n\t\t* transient Toast anchored to the composer card; the in-menu strip with\n\t\t* Retry remains the catalog-load surface. While the directory's pending\n\t\t* selection is unsettled, the trigger shows a spinner in place of its\n\t\t* chevron, and each row whose value that selection carries shows one in place\n\t\t* of its check mark.\n\t\t*/\n\t\t/** Unplaced portal card: hidden but laid out at a fixed origin so offsetWidth/offsetHeight are real (Menu primitive's measure pass). */\n\t\tconst MEASURE_STYLE = {\n\t\t\tvisibility: \"hidden\",\n\t\t\tleft: 0,\n\t\t\ttop: 0\n\t\t};\n\t\t/**\n\t\t* Render the composer model seat.\n\t\t* @param props - owner share (locked) + injected face (shared directory\n\t\t* store/verbs) + the standard locale seat.\n\t\t* @returns the trigger and, while open, the two-level menu.\n\t\t*/\n\t\tfunction ModelSelect({ locked, available, directory, load, select, t, renderSlot }) {\n\t\t\tconst state = (0, react.useSyncExternalStore)((fn) => directory.subscribe(fn), () => directory.getSnapshot());\n\t\t\tconst [open, setOpen] = (0, react.useState)(false);\n\t\t\tconst [pane, setPane] = (0, react.useState)(\"root\");\n\t\t\tconst [query, setQuery] = (0, react.useState)(\"\");\n\t\t\tconst [highlightedIndex, setHighlightedIndex] = (0, react.useState)(null);\n\t\t\tconst [selectionFocus, setSelectionFocus] = (0, react.useState)(false);\n\t\t\tconst lastActionRef = (0, react.useRef)(\"load\");\n\t\t\tconst [toast, setToast] = (0, react.useState)(null);\n\t\t\tconst toastSeq = (0, react.useRef)(0);\n\t\t\tconst rootRef = (0, react.useRef)(null);\n\t\t\tconst triggerRef = (0, react.useRef)(null);\n\t\t\tconst searchRef = (0, react.useRef)(null);\n\t\t\tconst menuRef = (0, react.useRef)(null);\n\t\t\tconst groupsRef = (0, react.useRef)(null);\n\t\t\tconst [menuPos, setMenuPos] = (0, react.useState)(null);\n\t\t\tconst itemRefs = (0, react.useRef)([]);\n\t\t\tconst id = (0, react.useId)();\n\t\t\tconst accountProviderName = t(\"provider.account\");\n\t\t\tconst groups = (0, react.useMemo)(() => orderModelProviders(state.groups).map((group) => ({\n\t\t\t\t...group,\n\t\t\t\tprovider: {\n\t\t\t\t\tid: group.id,\n\t\t\t\t\tname: group.id === \"deepseek-account\" ? accountProviderName : group.name\n\t\t\t\t}\n\t\t\t})), [state.groups, accountProviderName]);\n\t\t\tconst choices = (0, react.useMemo)(() => groups.flatMap((group) => group.models.map((model) => ({\n\t\t\t\tgroup,\n\t\t\t\tmodel,\n\t\t\t\tselection: {\n\t\t\t\t\tprovider: group.id,\n\t\t\t\t\tmodel: model.id,\n\t\t\t\t\t...model.reasoning?.defaultEffort === void 0 ? {} : { reasoningEffort: model.reasoning.defaultEffort }\n\t\t\t\t}\n\t\t\t}))), [groups]);\n\t\t\tconst showSearch = choices.length > 4;\n\t\t\tconst filteredGroups = (0, react.useMemo)(() => groups.map((group) => ({\n\t\t\t\t...group,\n\t\t\t\tmodels: (0, _deepseek_ai_dsh_client_ui_primitives.rankByName)(group.models, showSearch ? query.trim() : \"\")\n\t\t\t})).filter((group) => group.models.length > 0), [\n\t\t\t\tgroups,\n\t\t\t\tquery,\n\t\t\t\tshowSearch\n\t\t\t]);\n\t\t\tconst visibleModels = (0, react.useMemo)(() => filteredGroups.flatMap((group) => group.models.map((model) => ({\n\t\t\t\tprovider: group.id,\n\t\t\t\tmodel: model.id\n\t\t\t}))), [filteredGroups]);\n\t\t\tconst currentVisibleIndex = visibleModels.findIndex((model) => model.provider === state.current?.provider && model.model === state.current.model);\n\t\t\tconst activeModelIndex = Math.min(highlightedIndex ?? Math.max(0, currentVisibleIndex), visibleModels.length - 1);\n\t\t\tconst currentChoice = choices[state.current === null ? -1 : choices.findIndex((c) => c.selection.provider === state.current?.provider && c.selection.model === state.current.model)];\n\t\t\tconst reasoning = currentChoice?.model.reasoning;\n\t\t\tconst effectiveEffort = state.current?.reasoningEffort ?? reasoning?.defaultEffort;\n\t\t\tconst effortLabel = currentChoice === void 0 ? void 0 : reasoning === void 0 ? state.retainedEffort : effectiveEffort === void 0 ? t(\"effort.providerDefault\") : reasoning.efforts.find((level) => level.id === effectiveEffort)?.name ?? effectiveEffort;\n\t\t\tconst effortChoices = (0, react.useMemo)(() => reasoning === void 0 ? [] : [...reasoning.defaultEffort === void 0 ? [{\n\t\t\t\tkey: \"provider-default\",\n\t\t\t\teffort: void 0,\n\t\t\t\tlabel: t(\"effort.providerDefault\")\n\t\t\t}] : [], ...reasoning.efforts.map((effort) => ({\n\t\t\t\tkey: `effort:${effort.id}`,\n\t\t\t\teffort: effort.id,\n\t\t\t\tlabel: effort.name\n\t\t\t}))], [reasoning, t]);\n\t\t\tconst { pending } = state;\n\t\t\tconst busy = pending !== null;\n\t\t\tconst reload = () => {\n\t\t\t\tlastActionRef.current = \"load\";\n\t\t\t\tload();\n\t\t\t};\n\t\t\t(0, react.useEffect)(() => {\n\t\t\t\tif (!open) return;\n\t\t\t\tconst closeOutside = (event) => {\n\t\t\t\t\tif (rootRef.current?.contains(event.target) === true) return;\n\t\t\t\t\tif (menuRef.current?.contains(event.target) === true) return;\n\t\t\t\t\tsetOpen(false);\n\t\t\t\t};\n\t\t\t\tdocument.addEventListener(\"mousedown\", closeOutside);\n\t\t\t\treturn () => {\n\t\t\t\t\tdocument.removeEventListener(\"mousedown\", closeOutside);\n\t\t\t\t};\n\t\t\t}, [open]);\n\t\t\t(0, react.useLayoutEffect)(() => {\n\t\t\t\tif (!showSearch) {\n\t\t\t\t\tsetQuery(\"\");\n\t\t\t\t\tsetHighlightedIndex(null);\n\t\t\t\t}\n\t\t\t}, [showSearch]);\n\t\t\tconst paneFocus = (0, react.useRef)(null);\n\t\t\tconst previousShowSearch = (0, react.useRef)(showSearch);\n\t\t\t(0, react.useEffect)(() => {\n\t\t\t\tconst changedSearchMode = previousShowSearch.current !== showSearch;\n\t\t\t\tpreviousShowSearch.current = showSearch;\n\t\t\t\tconst intent = paneFocus.current ?? (changedSearchMode && pane === \"model\" ? \"drill\" : null);\n\t\t\t\tpaneFocus.current = null;\n\t\t\t\tif (!open || intent === null) return;\n\t\t\t\tif (intent === \"drill\") {\n\t\t\t\t\tif (pane === \"model\" && showSearch) {\n\t\t\t\t\t\tsearchRef.current?.focus();\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\t(menuRef.current?.querySelector(\"[role=\\\"menuitemradio\\\"][aria-checked=\\\"true\\\"]:not([disabled])\") ?? itemRefs.current.find((item) => item !== null && !item.disabled) ?? triggerRef.current)?.focus();\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tconst cell = itemRefs.current[intent === \"effort\" ? 1 : 0];\n\t\t\t\t(cell !== null && cell !== void 0 && !cell.disabled ? cell : triggerRef.current)?.focus();\n\t\t\t}, [\n\t\t\t\topen,\n\t\t\t\tpane,\n\t\t\t\tshowSearch\n\t\t\t]);\n\t\t\t(0, react.useEffect)(() => {\n\t\t\t\tconst viewport = groupsRef.current;\n\t\t\t\tif (viewport === null) return;\n\t\t\t\treturn (0, _deepseek_ai_dsh_client_ui_primitives.observeStickyMenuGroups)(viewport);\n\t\t\t}, [\n\t\t\t\tavailable,\n\t\t\t\topen,\n\t\t\t\tpane,\n\t\t\t\tfilteredGroups\n\t\t\t]);\n\t\t\t(0, react.useLayoutEffect)(() => {\n\t\t\t\tif (open && pane === \"model\" && activeModelIndex >= 0) itemRefs.current[activeModelIndex]?.scrollIntoView({ block: \"nearest\" });\n\t\t\t}, [\n\t\t\t\topen,\n\t\t\t\tpane,\n\t\t\t\tactiveModelIndex,\n\t\t\t\tvisibleModels\n\t\t\t]);\n\t\t\t(0, react.useLayoutEffect)(() => {\n\t\t\t\tif (!available || !open) {\n\t\t\t\t\tsetMenuPos(null);\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tconst place = () => {\n\t\t\t\t\t/* v8 ignore next 2 -- the trigger ref is attached whenever the menu is open. */\n\t\t\t\t\tconst rect = triggerRef.current?.getBoundingClientRect();\n\t\t\t\t\tif (rect === void 0) return;\n\t\t\t\t\tconst MARGIN = 12;\n\t\t\t\t\tconst lw = menuRef.current?.offsetWidth ?? 0;\n\t\t\t\t\tconst lh = menuRef.current?.offsetHeight ?? 0;\n\t\t\t\t\tlet x = rect.right - lw;\n\t\t\t\t\tlet y = rect.top - 8 - lh;\n\t\t\t\t\tif (lw > 0) x = Math.min(Math.max(x, MARGIN), window.innerWidth - lw - MARGIN);\n\t\t\t\t\tif (lh > 0) y = Math.min(Math.max(y, MARGIN), window.innerHeight - lh - MARGIN);\n\t\t\t\t\tsetMenuPos({\n\t\t\t\t\t\tleft: x,\n\t\t\t\t\t\ttop: y\n\t\t\t\t\t});\n\t\t\t\t};\n\t\t\t\tplace();\n\t\t\t\twindow.addEventListener(\"scroll\", place, true);\n\t\t\t\twindow.addEventListener(\"resize\", place);\n\t\t\t\tconst menu = menuRef.current;\n\t\t\t\tconst observer = typeof ResizeObserver !== \"undefined\" && menu !== null ? new ResizeObserver(place) : null;\n\t\t\t\tif (menu !== null) observer?.observe(menu);\n\t\t\t\treturn () => {\n\t\t\t\t\tobserver?.disconnect();\n\t\t\t\t\twindow.removeEventListener(\"scroll\", place, true);\n\t\t\t\t\twindow.removeEventListener(\"resize\", place);\n\t\t\t\t};\n\t\t\t}, [\n\t\t\t\tavailable,\n\t\t\t\topen,\n\t\t\t\tpane,\n\t\t\t\tstate,\n\t\t\t\tquery\n\t\t\t]);\n\t\t\tif (!available) return null;\n\t\t\tconst show = () => {\n\t\t\t\tsetSelectionFocus(false);\n\t\t\t\ttriggerRef.current?.focus();\n\t\t\t\tsetQuery(\"\");\n\t\t\t\tsetHighlightedIndex(null);\n\t\t\t\tif (currentChoice === void 0) paneFocus.current = \"drill\";\n\t\t\t\tsetPane(currentChoice === void 0 ? \"model\" : \"root\");\n\t\t\t\tsetOpen(true);\n\t\t\t\treload();\n\t\t\t};\n\t\t\tconst changeQuery = (next) => {\n\t\t\t\tsetQuery(next);\n\t\t\t\tsetHighlightedIndex(0);\n\t\t\t};\n\t\t\tconst close = (restoreFocus = false) => {\n\t\t\t\tsetOpen(false);\n\t\t\t\tsetPane(\"root\");\n\t\t\t\tif (restoreFocus) queueMicrotask(() => {\n\t\t\t\t\ttriggerRef.current?.focus();\n\t\t\t\t});\n\t\t\t};\n\t\t\tconst closeAfterSelection = () => {\n\t\t\t\tsetSelectionFocus(true);\n\t\t\t\tclose(true);\n\t\t\t};\n\t\t\tconst drill = (next) => {\n\t\t\t\tsetQuery(\"\");\n\t\t\t\tsetHighlightedIndex(null);\n\t\t\t\tpaneFocus.current = \"drill\";\n\t\t\t\tsetPane(next);\n\t\t\t};\n\t\t\t/** Leave a drilled pane for the root one, handing the keyboard back to its cell. */\n\t\t\tconst back = (from) => {\n\t\t\t\tpaneFocus.current = from;\n\t\t\t\tsetPane(\"root\");\n\t\t\t};\n\t\t\tconst moveFocus = (offset) => {\n\t\t\t\tconst items = itemRefs.current.filter((item) => item !== null);\n\t\t\t\tif (items.length === 0) return;\n\t\t\t\tconst active = items.findIndex((item) => item === document.activeElement);\n\t\t\t\titems[active === -1 ? offset > 0 ? 0 : items.length - 1 : (active + offset + items.length) % items.length]?.focus();\n\t\t\t};\n\t\t\tconst onRootKeyDown = (event) => {\n\t\t\t\tif (event.nativeEvent.isComposing) return;\n\t\t\t\tif (event.key === \"Escape\" && open) {\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tif (pane !== \"root\" && currentChoice !== void 0) back(pane);\n\t\t\t\t\telse close(true);\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tif (!open) return;\n\t\t\t\tif (pane === \"model\" && showSearch && (event.key === \"ArrowDown\" || event.key === \"ArrowUp\")) {\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tif (!busy && visibleModels.length > 0) {\n\t\t\t\t\t\tsetHighlightedIndex((activeModelIndex + (event.key === \"ArrowDown\" ? 1 : -1) + visibleModels.length) % visibleModels.length);\n\t\t\t\t\t\tsearchRef.current?.focus();\n\t\t\t\t\t}\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tif (pane === \"model\" && showSearch && event.target instanceof HTMLInputElement && (event.key === \"Enter\" || event.key === \"Tab\" && !event.shiftKey)) {\n\t\t\t\t\tif (event.key === \"Tab\" && visibleModels.length === 0) return;\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tconst highlighted = visibleModels[activeModelIndex];\n\t\t\t\t\tif (!busy && highlighted !== void 0) choose(highlighted);\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tif (event.key === \"Tab\") {\n\t\t\t\t\tif (event.shiftKey) {\n\t\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\t\tif (pane !== \"root\" && currentChoice !== void 0) back(pane);\n\t\t\t\t\t\telse close(true);\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tconst focused = document.activeElement;\n\t\t\t\t\tconst rows = itemRefs.current.filter((item) => item !== null);\n\t\t\t\t\tif (focused instanceof HTMLButtonElement && rows.includes(focused)) {\n\t\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\t\tfocused.click();\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\tif (focused !== triggerRef.current) return;\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tif (pane === \"model\" && showSearch) {\n\t\t\t\t\t\tsetHighlightedIndex(null);\n\t\t\t\t\t\tsearchRef.current?.focus();\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\t\t\t\t\t(menuRef.current?.querySelector(\"[role=\\\"menuitemradio\\\"][aria-checked=\\\"true\\\"]:not([disabled])\") ?? rows.find((item) => !item.disabled))?.focus();\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tif (event.key === \"ArrowDown\" || event.key === \"ArrowUp\") {\n\t\t\t\t\tevent.preventDefault();\n\t\t\t\t\tmoveFocus(event.key === \"ArrowDown\" ? 1 : -1);\n\t\t\t\t}\n\t\t\t};\n\t\t\tconst onBlur = (event) => {\n\t\t\t\tif (event.relatedTarget instanceof Node && (rootRef.current?.contains(event.relatedTarget) === true || menuRef.current?.contains(event.relatedTarget) === true)) return;\n\t\t\t\tclose();\n\t\t\t};\n\t\t\tconst settleSelection = (result) => {\n\t\t\t\tif (result === void 0) return;\n\t\t\t\tif (result.ok) {\n\t\t\t\t\tif (rootRef.current !== null) closeAfterSelection();\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tconst { error } = result;\n\t\t\t\ttoastSeq.current += 1;\n\t\t\t\tsetToast({\n\t\t\t\t\tseq: toastSeq.current,\n\t\t\t\t\ttext: error.code === \"session/writer-held\" ? t(\"error.sessionInUse\") : t(\"error.action\", { message: `${error.code}: ${error.message}` })\n\t\t\t\t});\n\t\t\t};\n\t\t\tconst submit = (selection) => {\n\t\t\t\tlastActionRef.current = \"select\";\n\t\t\t\tsetSelectionFocus(true);\n\t\t\t\ttriggerRef.current?.focus();\n\t\t\t\tselect(selection).then(settleSelection);\n\t\t\t};\n\t\t\tconst choose = (selection) => {\n\t\t\t\tif (state.current?.provider === selection.provider && state.current.model === selection.model) {\n\t\t\t\t\tcloseAfterSelection();\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tsubmit(selection);\n\t\t\t};\n\t\t\tconst chooseEffort = (effort) => {\n\t\t\t\tif (state.current === null) return;\n\t\t\t\tif (effectiveEffort === effort) {\n\t\t\t\t\tcloseAfterSelection();\n\t\t\t\t\treturn;\n\t\t\t\t}\n\t\t\t\tsubmit({\n\t\t\t\t\tprovider: state.current.provider,\n\t\t\t\t\tmodel: state.current.model,\n\t\t\t\t\t...effort === void 0 ? {} : { reasoningEffort: effort }\n\t\t\t\t});\n\t\t\t};\n\t\t\tconst waiting = currentChoice === void 0 && state.status === \"loading\";\n\t\t\tconst modelLabel = waiting ? t(\"trigger.loading\") : currentChoice?.model.name ?? t(\"trigger.fallback\");\n\t\t\tconst triggerLabel = effortLabel === void 0 ? modelLabel : `${modelLabel} \u00b7 ${effortLabel}`;\n\t\t\tconst triggerAria = waiting ? t(\"trigger.loading\") : currentChoice === void 0 ? t(\"trigger.selectAria\") : effortLabel === void 0 ? t(\"trigger.aria\", { model: modelLabel }) : t(\"trigger.ariaEffort\", {\n\t\t\t\tmodel: modelLabel,\n\t\t\t\teffort: effortLabel\n\t\t\t});\n\t\t\tconst renderModelLabel = (provider, model, placement, selected) => (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\"data-provider-id\": provider.id,\n\t\t\t\t\"data-model-id\": model.id,\n\t\t\t\tchildren: renderSlot(\"conversation.input.model.label\", {\n\t\t\t\t\tprovider,\n\t\t\t\t\tmodel,\n\t\t\t\t\tplacement,\n\t\t\t\t\tselected\n\t\t\t\t}, { fallback: model.name })\n\t\t\t});\n\t\t\tlet itemIndex = 0;\n\t\t\tlet modelIndex = 0;\n\t\t\tconst itemRef = () => {\n\t\t\t\tconst at = itemIndex++;\n\t\t\t\treturn (node) => {\n\t\t\t\t\titemRefs.current[at] = node;\n\t\t\t\t};\n\t\t\t};\n\t\t\treturn (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\tref: rootRef,\n\t\t\t\tclassName: ModelSelect_module_css_default.root,\n\t\t\t\tonKeyDown: onRootKeyDown,\n\t\t\t\tonBlur,\n\t\t\t\tonMouseDown: (event) => {\n\t\t\t\t\tif (event.target instanceof Element && event.target.closest(\"button\") !== null) event.preventDefault();\n\t\t\t\t},\n\t\t\t\tchildren: [\n\t\t\t\t\t(0, react_jsx_runtime.jsxs)(\"button\", {\n\t\t\t\t\t\tref: triggerRef,\n\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\tclassName: ModelSelect_module_css_default.trigger,\n\t\t\t\t\t\t\"aria-label\": triggerAria,\n\t\t\t\t\t\t\"aria-haspopup\": \"menu\",\n\t\t\t\t\t\t\"aria-expanded\": open,\n\t\t\t\t\t\t\"aria-controls\": open ? `${id}-menu` : void 0,\n\t\t\t\t\t\ttitle: triggerLabel,\n\t\t\t\t\t\t\"aria-busy\": busy,\n\t\t\t\t\t\t\"data-selection-focus\": selectionFocus ? \"\" : void 0,\n\t\t\t\t\t\tonBlur: () => {\n\t\t\t\t\t\t\tsetSelectionFocus(false);\n\t\t\t\t\t\t},\n\t\t\t\t\t\tdisabled: locked,\n\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\tif (open) close(true);\n\t\t\t\t\t\t\telse show();\n\t\t\t\t\t\t},\n\t\t\t\t\t\tchildren: [\n\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconDataOutlineRegular, {\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.triggerIcon,\n\t\t\t\t\t\t\t\tsize: 16\n\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.triggerLabel,\n\t\t\t\t\t\t\t\tchildren: currentChoice === void 0 ? modelLabel : renderModelLabel(currentChoice.group.provider, currentChoice.model, \"trigger\", true)\n\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\teffortLabel !== void 0 && (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.triggerEffort,\n\t\t\t\t\t\t\t\tchildren: effortLabel\n\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\tbusy ? (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.StateDot, { state: \"ongoing\" }) : (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconChevronDownOutlineRegular, { className: clsx(ModelSelect_module_css_default.chevron, open && ModelSelect_module_css_default.chevronOpen) })\n\t\t\t\t\t\t]\n\t\t\t\t\t}),\n\t\t\t\t\topen && (0, react_dom.createPortal)((0, react_jsx_runtime.jsxs)(_deepseek_ai_dsh_client_ui_primitives.MenuSurface, {\n\t\t\t\t\t\tref: menuRef,\n\t\t\t\t\t\tid: `${id}-menu`,\n\t\t\t\t\t\tclassName: ModelSelect_module_css_default.menu,\n\t\t\t\t\t\tstyle: menuPos ?? MEASURE_STYLE,\n\t\t\t\t\t\trole: pane === \"model\" ? \"group\" : \"menu\",\n\t\t\t\t\t\t\"aria-label\": t(\"menu.aria\"),\n\t\t\t\t\t\t\"aria-busy\": state.status === \"loading\" || busy,\n\t\t\t\t\t\tchildren: [\n\t\t\t\t\t\t\tpane === \"root\" && (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [(0, react_jsx_runtime.jsxs)(\"button\", {\n\t\t\t\t\t\t\t\tref: itemRef(),\n\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\trole: \"menuitem\",\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cell,\n\t\t\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\t\t\tdrill(\"model\");\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\tchildren: [\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cellLabel,\n\t\t\t\t\t\t\t\t\t\tchildren: t(\"menu.model\")\n\t\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cellValue,\n\t\t\t\t\t\t\t\t\t\tchildren: currentChoice === void 0 ? modelLabel : renderModelLabel(currentChoice.group.provider, currentChoice.model, \"menu\", true)\n\t\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconChevronRightOutlineRegular, { className: ModelSelect_module_css_default.cellChevron })\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t}), reasoning !== void 0 && (0, react_jsx_runtime.jsxs)(\"button\", {\n\t\t\t\t\t\t\t\tref: itemRef(),\n\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\trole: \"menuitem\",\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cell,\n\t\t\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\t\t\tdrill(\"effort\");\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\tchildren: [\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cellLabel,\n\t\t\t\t\t\t\t\t\t\tchildren: t(\"menu.effort\")\n\t\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.cellValue,\n\t\t\t\t\t\t\t\t\t\tchildren: effortLabel\n\t\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconChevronRightOutlineRegular, { className: ModelSelect_module_css_default.cellChevron })\n\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t})] }),\n\t\t\t\t\t\t\tpane === \"model\" && (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [\n\t\t\t\t\t\t\t\tshowSearch && (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.searchRow,\n\t\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Input, {\n\t\t\t\t\t\t\t\t\t\tref: searchRef,\n\t\t\t\t\t\t\t\t\t\tclassName: clsx(ModelSelect_module_css_default.search, query !== \"\" && ModelSelect_module_css_default.searchWithQuery),\n\t\t\t\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\t\t\t\trole: \"searchbox\",\n\t\t\t\t\t\t\t\t\t\t\"aria-label\": t(\"search.placeholder\"),\n\t\t\t\t\t\t\t\t\t\t\"aria-controls\": `${id}-models`,\n\t\t\t\t\t\t\t\t\t\t\"aria-activedescendant\": activeModelIndex < 0 ? void 0 : `${id}-model-${activeModelIndex}`,\n\t\t\t\t\t\t\t\t\t\tplaceholder: t(\"search.placeholder\"),\n\t\t\t\t\t\t\t\t\t\tvalue: query,\n\t\t\t\t\t\t\t\t\t\treadOnly: busy,\n\t\t\t\t\t\t\t\t\t\tonChange: (event) => {\n\t\t\t\t\t\t\t\t\t\t\tchangeQuery(event.target.value);\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t}), query !== \"\" && (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.searchClear,\n\t\t\t\t\t\t\t\t\t\t\"aria-label\": t(\"search.clear\"),\n\t\t\t\t\t\t\t\t\t\tdisabled: busy,\n\t\t\t\t\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\t\t\t\t\tchangeQuery(\"\");\n\t\t\t\t\t\t\t\t\t\t\tsearchRef.current?.focus();\n\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCloseFillRegular, {})\n\t\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\tstate.status === \"loading\" && (0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.status,\n\t\t\t\t\t\t\t\t\tchildren: t(\"status.loading\")\n\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\tstate.error !== null && lastActionRef.current === \"load\" && (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.error,\n\t\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"span\", { children: t(\"error.action\", { message: state.error }) }), (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.retry,\n\t\t\t\t\t\t\t\t\t\tonClick: reload,\n\t\t\t\t\t\t\t\t\t\tchildren: t(\"retry\")\n\t\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\tstate.failures.map((failure) => (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.warning,\n\t\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"span\", { children: t(\"warning.groupLoad\", {\n\t\t\t\t\t\t\t\t\t\tname: failure.id === \"deepseek-account\" ? t(\"provider.account\") : failure.name,\n\t\t\t\t\t\t\t\t\t\tmessage: failure.message\n\t\t\t\t\t\t\t\t\t}) }), (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.retry,\n\t\t\t\t\t\t\t\t\t\tonClick: reload,\n\t\t\t\t\t\t\t\t\t\tchildren: t(\"retry\")\n\t\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t\t}, failure.id)),\n\t\t\t\t\t\t\t\t(0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\t\t\tref: groupsRef,\n\t\t\t\t\t\t\t\t\tid: `${id}-models`,\n\t\t\t\t\t\t\t\t\tclassName: clsx(ModelSelect_module_css_default.groups, \"scrollable\"),\n\t\t\t\t\t\t\t\t\trole: \"menu\",\n\t\t\t\t\t\t\t\t\t\"aria-label\": t(\"menu.model\"),\n\t\t\t\t\t\t\t\t\thidden: filteredGroups.length === 0,\n\t\t\t\t\t\t\t\t\tchildren: filteredGroups.map((group) => {\n\t\t\t\t\t\t\t\t\t\treturn (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.MenuGroup, {\n\t\t\t\t\t\t\t\t\t\t\tlabel: group.provider.name,\n\t\t\t\t\t\t\t\t\t\t\tchildren: group.models.map((model) => {\n\t\t\t\t\t\t\t\t\t\t\t\tconst index = modelIndex++;\n\t\t\t\t\t\t\t\t\t\t\t\tconst selected = state.current?.provider === group.id && state.current.model === model.id;\n\t\t\t\t\t\t\t\t\t\t\t\treturn (0, react_jsx_runtime.jsxs)(\"button\", {\n\t\t\t\t\t\t\t\t\t\t\t\t\tref: itemRef(),\n\t\t\t\t\t\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\t\t\t\t\t\trole: \"menuitemradio\",\n\t\t\t\t\t\t\t\t\t\t\t\t\t\"aria-checked\": selected,\n\t\t\t\t\t\t\t\t\t\t\t\t\tid: `${id}-model-${index}`,\n\t\t\t\t\t\t\t\t\t\t\t\t\ttabIndex: showSearch ? -1 : 0,\n\t\t\t\t\t\t\t\t\t\t\t\t\tonFocus: () => {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tsetHighlightedIndex(index);\n\t\t\t\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t\t\t\t\"data-highlighted\": index === activeModelIndex ? \"\" : void 0,\n\t\t\t\t\t\t\t\t\t\t\t\t\tclassName: clsx(ModelSelect_module_css_default.option, ModelSelect_module_css_default.modelOption, selected && ModelSelect_module_css_default.selected, index === activeModelIndex && ModelSelect_module_css_default.optionActive),\n\t\t\t\t\t\t\t\t\t\t\t\t\tonMouseMove: busy || index === activeModelIndex ? void 0 : () => {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tif (showSearch) setHighlightedIndex(index);\n\t\t\t\t\t\t\t\t\t\t\t\t\t\telse itemRefs.current[index]?.focus();\n\t\t\t\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t\t\t\ttitle: model.name,\n\t\t\t\t\t\t\t\t\t\t\t\t\tdisabled: busy,\n\t\t\t\t\t\t\t\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tchoose({\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tprovider: group.id,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tmodel: model.id\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t});\n\t\t\t\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.optionCopy,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.modelName,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tchildren: renderModelLabel(group.provider, model, \"option\", selected)\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.check,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tchildren: pending?.provider === group.id && pending.model === model.id ? (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.StateDot, { state: \"ongoing\" }) : selected ? (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCheckOutlineRegular, {}) : null\n\t\t\t\t\t\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t\t\t\t\t\t}, model.id);\n\t\t\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t\t\t}, group.id);\n\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t}),\n\t\t\t\t\t\t\t\tstate.status === \"ready\" && filteredGroups.length === 0 && (0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.empty,\n\t\t\t\t\t\t\t\t\trole: \"status\",\n\t\t\t\t\t\t\t\t\tchildren: t(choices.length === 0 ? \"empty.models\" : \"search.empty\")\n\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t] }),\n\t\t\t\t\t\t\tpane === \"effort\" && (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [state.error !== null && lastActionRef.current === \"load\" && (0, react_jsx_runtime.jsxs)(\"div\", {\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.error,\n\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"span\", { children: t(\"error.action\", { message: state.error }) }), (0, react_jsx_runtime.jsx)(\"button\", {\n\t\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.retry,\n\t\t\t\t\t\t\t\t\tonClick: reload,\n\t\t\t\t\t\t\t\t\tchildren: t(\"action.reload\")\n\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t}), effortChoices.length === 0 ? (0, react_jsx_runtime.jsx)(\"div\", {\n\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.empty,\n\t\t\t\t\t\t\t\tchildren: t(\"empty.efforts\")\n\t\t\t\t\t\t\t}) : effortChoices.map((level) => (0, react_jsx_runtime.jsxs)(\"button\", {\n\t\t\t\t\t\t\t\tref: itemRef(),\n\t\t\t\t\t\t\t\ttype: \"button\",\n\t\t\t\t\t\t\t\trole: \"menuitemradio\",\n\t\t\t\t\t\t\t\t\"aria-checked\": effectiveEffort === level.effort,\n\t\t\t\t\t\t\t\tclassName: clsx(ModelSelect_module_css_default.option, effectiveEffort === level.effort && ModelSelect_module_css_default.selected),\n\t\t\t\t\t\t\t\tdisabled: busy,\n\t\t\t\t\t\t\t\tonClick: () => {\n\t\t\t\t\t\t\t\t\tchooseEffort(level.effort);\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\tchildren: [(0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.optionCopy,\n\t\t\t\t\t\t\t\t\tchildren: (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.modelName,\n\t\t\t\t\t\t\t\t\t\tchildren: level.label\n\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t}), (0, react_jsx_runtime.jsx)(\"span\", {\n\t\t\t\t\t\t\t\t\tclassName: ModelSelect_module_css_default.check,\n\t\t\t\t\t\t\t\t\tchildren: pending !== null && pending.provider === state.current?.provider && pending.model === state.current.model && pending.reasoningEffort === level.effort ? (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.StateDot, { state: \"ongoing\" }) : effectiveEffort === level.effort ? (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconCheckOutlineRegular, {}) : null\n\t\t\t\t\t\t\t\t})]\n\t\t\t\t\t\t\t}, level.key))] })\n\t\t\t\t\t\t]\n\t\t\t\t\t}), document.body),\n\t\t\t\t\ttoast !== null && (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.Toast, {\n\t\t\t\t\t\ttext: toast.text,\n\t\t\t\t\t\ticon: (0, react_jsx_runtime.jsx)(_deepseek_ai_dsh_client_ui_primitives.IconWarningOutlineRegular, {}),\n\t\t\t\t\t\tanchor: rootRef.current?.closest(\"[data-composer-card]\") ?? null,\n\t\t\t\t\t\tonDone: () => {\n\t\t\t\t\t\t\tsetToast(null);\n\t\t\t\t\t\t}\n\t\t\t\t\t}, toast.seq)\n\t\t\t\t]\n\t\t\t});\n\t\t}\n\t\t"
+    },
+    "StatsPills.module.css": [
+      {
+        "selector": ".anchor",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "font-size": "calc(var(--dsh-content-font-size-secondary,13px) - 1px)",
+          "line-height": "calc(20px + var(--dsh-content-font-delta-secondary,0px))",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".pill",
+        "conditions": [],
+        "declarations": {
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-sm)",
+          "max-width": "100%",
+          "color": "var(--dsw-alias-label-tertiary)",
+          "font": "inherit",
+          "font-variant-numeric": "tabular-nums",
+          "line-height": "inherit",
+          "white-space": "nowrap",
+          "background": "transparent",
+          "border": "none",
+          "align-items": "center",
+          "gap": "6px",
+          "padding": "1px 8px",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".pill svg",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "width": "14px",
+          "height": "14px"
+        }
+      },
+      {
+        "selector": "button.pill",
+        "conditions": [],
+        "declarations": {
+          "cursor": "pointer"
+        }
+      },
+      {
+        "selector": "button.pill:hover,button.pill[aria-expanded=true]",
+        "conditions": [],
+        "declarations": {
+          "background": "var(--dsw-alias-interactive-bg-hover)",
+          "color": "var(--dsw-alias-label-secondary)"
+        }
+      },
+      {
+        "selector": ".label",
+        "conditions": [],
+        "declarations": {
+          "text-overflow": "ellipsis",
+          "min-width": "0",
+          "overflow": "hidden"
+        }
+      },
+      {
+        "selector": ".sep",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-separator-primary)",
+          "margin": "0 6px"
+        }
+      }
+    ],
+    "stat-dialog.module.css": [
+      {
+        "selector": ".panel",
+        "conditions": [],
+        "declarations": {
+          "z-index": "1100",
+          "box-sizing": "border-box",
+          "border-radius": "var(--dsw-radius-lg)",
+          "background": "var(--dsw-specific-menu)",
+          "width": "max-content",
+          "min-width": "min(300px,100vw - 24px)",
+          "max-width": "min(440px,100vw - 24px)",
+          "backdrop-filter": "var(--dsw-menu-backdrop-filter)",
+          "--dsw-elevation-stroke-color": "var(--dsw-alias-border-l1)",
+          "box-shadow": "var(--dsw-elevation-prominent)",
+          "color": "var(--dsw-alias-label-secondary)",
+          "cursor": "default",
+          "border": "0",
+          "padding": "16px",
+          "font-size": "12px",
+          "line-height": "18px",
+          "position": "fixed"
+        }
+      },
+      {
+        "selector": ".title",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-primary)",
+          "justify-content": "space-between",
+          "gap": "16px",
+          "margin-bottom": "8px",
+          "font-weight": "500",
+          "display": "flex"
+        }
+      },
+      {
+        "selector": ".titleRule",
+        "conditions": [],
+        "declarations": {
+          "border-top": ".5px solid var(--dsw-alias-border-l2)",
+          "margin-bottom": "10px"
+        }
+      },
+      {
+        "selector": ".titleValue",
+        "conditions": [],
+        "declarations": {
+          "font-variant-numeric": "tabular-nums"
+        }
+      },
+      {
+        "selector": ".titleLabel",
+        "conditions": [],
+        "declarations": {
+          "align-items": "center",
+          "gap": "6px",
+          "min-width": "0",
+          "display": "inline-flex"
+        }
+      },
+      {
+        "selector": ".titleLabel svg",
+        "conditions": [],
+        "declarations": {
+          "flex": "none",
+          "width": "14px",
+          "height": "14px"
+        }
+      },
+      {
+        "selector": ".details",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "grid-template-columns": "minmax(76px,auto) minmax(0,1fr)",
+          "gap": "6px 16px",
+          "margin": "0",
+          "display": "grid"
+        }
+      },
+      {
+        "selector": ".details dt,.details dd",
+        "conditions": [],
+        "declarations": {
+          "min-width": "0",
+          "margin": "0"
+        }
+      },
+      {
+        "selector": ".details dd",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-secondary)",
+          "font-variant-numeric": "tabular-nums",
+          "text-align": "right"
+        }
+      },
+      {
+        "selector": ".details .route",
+        "conditions": [],
+        "declarations": {
+          "overflow-wrap": "anywhere"
+        }
+      },
+      {
+        "selector": ".reasoning",
+        "conditions": [],
+        "declarations": {
+          "color": "var(--dsw-alias-label-tertiary)",
+          "white-space": "nowrap"
+        }
+      }
+    ],
+    "StatDialogBehavior": {
+      "bundleSha256": "a00e5176d1257d51604cefbe9a15d326d4283439df31f76ba20ff690c76e10a1",
+      "region": "//#region lib/types/client/chat/stat-dialog.js\n\t\t/** Viewport margin the placement clamp keeps (the Menu portal margin). */\n\t\tconst PANEL_MARGIN = 12;\n\t\t/** Distance between the trigger's top edge and the panel's bottom. */\n\t\tconst PANEL_GAP = 8;\n\t\t/**\n\t\t* Unplaced portal panel: hidden but laid out so the clamp measures real\n\t\t* dimensions (the `useAnchoredPosition` measure pass).\n\t\t*/\n\t\tconst MEASURE_STYLE = {\n\t\t\tvisibility: \"hidden\",\n\t\t\tleft: 0,\n\t\t\ttop: 0\n\t\t};\n\t\t/**\n\t\t* One trigger-anchored dialog seat: open state, viewport-clamped placement, outside-close.\n\t\t* @returns the seat; spread `pos ?? MEASURE_STYLE` onto the portaled panel.\n\t\t*/\n\t\tfunction useStatDialog() {\n\t\t\tconst [open, setOpen] = (0, react.useState)(false);\n\t\t\tconst rootRef = (0, react.useRef)(null);\n\t\t\tconst panelRef = (0, react.useRef)(null);\n\t\t\tconst pos = (0, _deepseek_ai_dsh_client_ui_primitives.useAnchoredPosition)({\n\t\t\t\topen,\n\t\t\t\tanchorRef: rootRef,\n\t\t\t\tpanelRef,\n\t\t\t\tside: \"top\",\n\t\t\t\tgap: PANEL_GAP,\n\t\t\t\tmargin: PANEL_MARGIN\n\t\t\t});\n\t\t\t(0, _deepseek_ai_dsh_client_ui_primitives.useDismissOnOutsidePointer)(rootRef, open, setOpen, panelRef);\n\t\t\t(0, react.useEffect)(() => {\n\t\t\t\tif (!open) return;\n\t\t\t\tconst onKeyDown = (e) => {\n\t\t\t\t\tif (e.key === \"Escape\") setOpen(false);\n\t\t\t\t};\n\t\t\t\tconst onClick = (e) => {\n\t\t\t\t\tif (e.target instanceof Node && rootRef.current?.contains(e.target) !== true && panelRef.current?.contains(e.target) !== true) setOpen(false);\n\t\t\t\t};\n\t\t\t\tdocument.addEventListener(\"keydown\", onKeyDown);\n\t\t\t\tdocument.addEventListener(\"click\", onClick, true);\n\t\t\t\treturn () => {\n\t\t\t\t\tdocument.removeEventListener(\"keydown\", onKeyDown);\n\t\t\t\t\tdocument.removeEventListener(\"click\", onClick, true);\n\t\t\t\t};\n\t\t\t}, [open, setOpen]);\n\t\t\treturn {\n\t\t\t\topen,\n\t\t\t\tsetOpen,\n\t\t\t\trootRef,\n\t\t\t\tpanelRef,\n\t\t\t\tpos\n\t\t\t};\n\t\t}\n\t\t"
     }
   },
   "metrics": {
@@ -6731,6 +10053,228 @@
       "errorIconToken": "--dsw-alias-state-error-primary",
       "actionMinWidth": 72.0,
       "confirmMinWidth": 136.0
+    },
+    "DshPlatformMaterialRecipe": {
+      "darwinLightMenuFill": "#f8f9faf0",
+      "darwinDarkMenuFill": "#303136f0"
+    },
+    "DshSidebarRecipe": {
+      "inlinePadding": 12.0,
+      "verticalPadding": 6.0,
+      "railTopPadding": 18.0,
+      "railInlinePadding": 10.0,
+      "railBottomPadding": 6.0,
+      "topStripHeight": 52.0,
+      "topStripFootPadding": 2.0,
+      "logoTopTuck": 12.0,
+      "logoHeight": 60.0,
+      "logoBottomMargin": 4.0,
+      "logoTopPadding": 8.0,
+      "logoLeftPadding": 4.0,
+      "railLogoHeight": 36.0,
+      "railLogoBottomMargin": 12.0,
+      "windowsLogoHeight": 40.0,
+      "brandGap": 8.0,
+      "brandHeight": 24.0,
+      "brandFontSize": 18.0,
+      "brandLineHeight": 24.0,
+      "brandFontWeight": 600.0,
+      "brandLetterSpacing": 0.72,
+      "iconBox": 28.0,
+      "railIconBox": 36.0,
+      "newHeight": 38.0,
+      "newHorizontalPadding": 12.0,
+      "newVerticalPadding": 8.0,
+      "newInlineMargin": 2.0,
+      "newBottomMargin": 12.0,
+      "newBorderWidth": 0.5,
+      "newBorderToken": "--dsw-alias-border-l3",
+      "darwinNewAlpha": 0.5490196078431373,
+      "darwinNewHoverAlpha": 0.30196078431372547,
+      "darwinNewDarkAlpha": 0.14901960784313725,
+      "darwinNewDarkHoverAlpha": 0.2,
+      "newFillToken": "--dsw-alias-button-elevated-fill",
+      "newHoverToken": "--dsw-alias-button-floating-hover",
+      "newGap": 6.0,
+      "newFontSize": 14.0,
+      "newLineHeight": 22.0,
+      "panelHeight": 36.0,
+      "panelGap": 8.0,
+      "panelHorizontalPadding": 8.0,
+      "panelVerticalPadding": 7.0,
+      "panelListGap": 4.0,
+      "panelListBottomMargin": 8.0,
+      "railPanelGap": 12.0,
+      "regionScrollbarExpansion": 12.0,
+      "scrollbarThumbToken": "--dsw-alias-scrollbar-bg-l2",
+      "scrollbarHoverToken": "--dsw-alias-scrollbar-hover-l2"
+    },
+    "DshWorkspaceBrowserRecipe": {
+      "headerHeight": 36.0,
+      "headerLeftPadding": 4.0,
+      "headerTopMargin": 2.0,
+      "headerRightExpansion": 4.0,
+      "headerBottomMargin": 4.0,
+      "headerGap": 4.0,
+      "iconBox": 28.0,
+      "scrollbarWidth": 5.0,
+      "scrollbarOffset": 2.0,
+      "listBottomPadding": 16.0,
+      "fadeHeight": 24.0,
+      "groupHeight": 34.0,
+      "sessionHeight": 32.0,
+      "rowHorizontalPadding": 8.0,
+      "rowGap": 6.0,
+      "groupGap": 4.0,
+      "rowStackGap": 2.0,
+      "rowFontSize": 14.0,
+      "rowLineHeight": 20.0,
+      "timeFontSize": 10.0,
+      "timeLineHeight": 16.0
+    },
+    "DshSidebarLauncherRecipe": {
+      "height": 32.0,
+      "lineHeight": 20.0,
+      "topPadding": 6.0,
+      "rightPadding": 2.0,
+      "bottomPadding": 6.0,
+      "leftPadding": 6.0,
+      "gap": 8.0,
+      "fontSize": 14.0,
+      "railBox": 36.0,
+      "verticalMargin": 4.0,
+      "inlineExpansion": 2.0,
+      "railTopMargin": 8.0,
+      "railBottomMargin": 10.0,
+      "menuMinWidth": 124.0,
+      "menuMaxWidth": 280.0,
+      "menuPadding": 4.0,
+      "menuRowHeight": 40.0,
+      "menuRowGap": 8.0,
+      "menuRowVerticalPadding": 8.0,
+      "menuRowHorizontalPadding": 10.0,
+      "menuIconSize": 16.0,
+      "menuIconToken": "--dsw-alias-menu-icon",
+      "menuFontSize": 14.0,
+      "menuLineHeight": 22.0
+    },
+    "DshModelMenuRecipe": {
+      "minWidth": 240.0,
+      "viewportWidthInset": 32.0,
+      "maxWidth": 420.0,
+      "maxHeight": 360.0,
+      "viewportHeightInset": 96.0,
+      "portalMargin": 12.0,
+      "anchorGap": 8.0,
+      "padding": 4.0,
+      "rowHeight": 34.0,
+      "rowGap": 6.0,
+      "rowHorizontalPadding": 7.0,
+      "rowVerticalPadding": 5.0,
+      "rowFontSize": 13.0,
+      "rowLineHeight": 18.0,
+      "rowFontToken": "--dsw-font-xs-13",
+      "rowFontWeight": 400.0,
+      "radiusToken": "--dsw-radius-md",
+      "labelToken": "--dsw-alias-label-primary",
+      "disabledToken": "--dsw-alias-label-dimmed",
+      "hoverToken": "--dsw-alias-interactive-bg-hover",
+      "checkSize": 14.0,
+      "checkToken": "--dsw-alias-label-primary",
+      "cellHeight": 34.0,
+      "cellGap": 6.0,
+      "cellHorizontalPadding": 8.0,
+      "cellVerticalPadding": 0.0,
+      "cellFontSize": 13.0,
+      "cellLineHeight": 20.0,
+      "cellFontToken": "--dsw-font-xs-13",
+      "valueToken": "--dsw-alias-label-tertiary",
+      "chevronSize": 12.0,
+      "chevronToken": "--dsw-alias-menu-icon",
+      "triggerHeight": 28.0,
+      "triggerGap": 4.0,
+      "triggerMaxWidth": 360.0,
+      "triggerWidthFactor": 0.45,
+      "triggerRadiusToken": "--dsw-radius-sm",
+      "triggerLeftPadding": 8.0,
+      "triggerRightPadding": 4.0,
+      "triggerFontToken": "--dsw-font-xs-13",
+      "triggerFontSize": 13.0,
+      "triggerLineHeight": 20.0,
+      "triggerFontWeight": 400.0,
+      "triggerLabelToken": "--dsw-alias-label-secondary",
+      "triggerEffortToken": "--dsw-alias-label-caption",
+      "statusPadding": 8.0,
+      "statusFontSize": 12.0,
+      "statusLineHeight": 18.0,
+      "statusFontToken": "--dsw-font-xxs-12",
+      "statusToken": "--dsw-alias-label-tertiary",
+      "errorHorizontalPadding": 7.0,
+      "errorVerticalPadding": 6.0,
+      "errorGap": 6.0,
+      "errorBottomMargin": 3.0,
+      "errorFontSize": 11.0,
+      "errorLineHeight": 16.0,
+      "errorFontToken": "--dsw-font-xxxs-11",
+      "retryFontWeight": 600.0,
+      "errorFillToken": "--dsw-alias-interactive-bg-hover-danger",
+      "errorLabelToken": "--dsw-alias-state-error-primary",
+      "warningFillToken": "--dsw-alias-bg-module-platform",
+      "warningLabelToken": "--dsw-alias-state-warn-label",
+      "searchHorizontalPadding": 7.0,
+      "searchVerticalPadding": 5.0,
+      "searchTopMargin": 2.0,
+      "searchBottomMargin": 3.0,
+      "searchClearSize": 24.0,
+      "searchClearRight": 4.0,
+      "searchQueryRightPadding": 34.0,
+      "searchFontSize": 12.0,
+      "scrollbarToken": "--dsw-alias-scrollbar-bg-l2",
+      "scrollbarHoverToken": "--dsw-alias-scrollbar-hover-l2"
+    },
+    "DshStatPanelRecipe": {
+      "minWidth": 300.0,
+      "maxWidth": 440.0,
+      "viewportMargin": 12.0,
+      "anchorGap": 8.0,
+      "padding": 16.0,
+      "radiusToken": "--dsw-radius-lg",
+      "fillToken": "--dsw-specific-menu",
+      "shadowToken": "--dsw-elevation-prominent",
+      "strokeToken": "--dsw-alias-border-l1",
+      "fontSize": 12.0,
+      "lineHeight": 18.0,
+      "fontToken": "--dsw-font-xxs-12",
+      "labelToken": "--dsw-alias-label-secondary",
+      "titleToken": "--dsw-alias-label-primary",
+      "titleWeight": 500.0,
+      "titleGap": 16.0,
+      "titleBottomMargin": 8.0,
+      "ruleBottomMargin": 10.0,
+      "ruleWidth": 0.5,
+      "ruleToken": "--dsw-alias-border-l2",
+      "iconSize": 14.0,
+      "iconGap": 6.0,
+      "labelMinWidth": 76.0,
+      "rowGap": 6.0,
+      "columnGap": 16.0,
+      "detailLabelToken": "--dsw-alias-label-tertiary",
+      "detailValueToken": "--dsw-alias-label-secondary"
+    },
+    "DshStatsPillRecipe": {
+      "fontBase": 12.0,
+      "lineBase": 20.0,
+      "fontScale": "secondary",
+      "paddingVertical": 1.0,
+      "paddingHorizontal": 8.0,
+      "gap": 6.0,
+      "iconSize": 14.0,
+      "radiusToken": "--dsw-radius-sm",
+      "labelToken": "--dsw-alias-label-tertiary",
+      "activeLabelToken": "--dsw-alias-label-secondary",
+      "activeFillToken": "--dsw-alias-interactive-bg-hover",
+      "separatorToken": "--dsw-alias-separator-primary",
+      "separatorMargin": 6.0
     }
   }
 }

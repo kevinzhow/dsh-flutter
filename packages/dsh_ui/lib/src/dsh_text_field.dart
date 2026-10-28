@@ -119,6 +119,8 @@ class DshTextField extends StatelessWidget {
 /// editable control; [onCommit] is useful for settings which persist on blur.
 /// Supply [controller] for a controlled input, or [value] for an internally
 /// owned controller which resets when the persisted value changes.
+enum DshInputProfile { standard, modelSearch }
+
 class DshInput extends StatefulWidget {
   const DshInput({
     super.key,
@@ -135,6 +137,8 @@ class DshInput extends StatefulWidget {
     this.keyboardType,
     this.enabled = true,
     this.autofocus = false,
+    this.profile = DshInputProfile.standard,
+    this.reserveSearchClear = false,
   }) : assert(maxLength == null || maxLength >= 0);
 
   final TextEditingController? controller;
@@ -146,6 +150,8 @@ class DshInput extends StatefulWidget {
   final int? maxLength;
   final TextInputType? keyboardType;
   final bool enabled, autofocus;
+  final DshInputProfile profile;
+  final bool reserveSearchClear;
 
   @override
   State<DshInput> createState() => _DshInputState();
@@ -205,14 +211,26 @@ class _DshInputState extends State<DshInput> {
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
-    final style = theme
-        .textStyle(DshInputRecipe.fontToken)
-        .copyWith(
-          color: theme.color(DshInputRecipe.labelToken),
-          height: DshInputRecipe.lineHeight / DshInputRecipe.fontSize,
-        );
-    final border = dshBorderWidthOf(context, DshInputRecipe.borderWidth);
-    final fill = theme.color(DshInputRecipe.fillToken);
+    final modelSearch = widget.profile == DshInputProfile.modelSearch;
+    final style =
+        (modelSearch
+                ? theme.fixedTextStyle(
+                    size: DshModelMenuRecipe.searchFontSize,
+                    line: DshModelMenuRecipe.searchFontSize,
+                  )
+                : theme.textStyle(DshInputRecipe.fontToken))
+            .copyWith(
+              color: theme.color(DshInputRecipe.labelToken),
+              height: modelSearch
+                  ? kTextHeightNone
+                  : DshInputRecipe.lineHeight / DshInputRecipe.fontSize,
+            );
+    final border = modelSearch
+        ? 0.0
+        : dshBorderWidthOf(context, DshInputRecipe.borderWidth);
+    final fill = modelSearch
+        ? const Color(0)
+        : theme.color(DshInputRecipe.fillToken);
     // The reference leaves Chromium's input `padding: 1px 2px` intact. Its
     // block axis is centered by the wrapper; these are its inline insets.
     const browserInputInlineInset = 2.0;
@@ -225,14 +243,29 @@ class _DshInputState extends State<DshInput> {
         child: IgnorePointer(
           ignoring: !widget.enabled,
           child: Container(
-            height: DshInputRecipe.height + 2 * border,
-            padding: const EdgeInsets.symmetric(
-              horizontal: DshInputRecipe.padding,
-            ),
+            height: modelSearch ? null : DshInputRecipe.height + 2 * border,
+            padding: modelSearch
+                ? EdgeInsets.fromLTRB(
+                    DshModelMenuRecipe.searchHorizontalPadding,
+                    DshModelMenuRecipe.searchVerticalPadding,
+                    widget.reserveSearchClear
+                        ? DshModelMenuRecipe.searchQueryRightPadding
+                        : DshModelMenuRecipe.searchHorizontalPadding,
+                    DshModelMenuRecipe.searchVerticalPadding,
+                  )
+                : const EdgeInsets.symmetric(
+                    horizontal: DshInputRecipe.padding,
+                  ),
             decoration: theme.cornerDecoration(
-              theme.number(DshInputRecipe.radiusToken),
+              theme.number(
+                modelSearch
+                    ? DshModelMenuRecipe.radiusToken
+                    : DshInputRecipe.radiusToken,
+              ),
               color: fill,
-              borderColor: _focused
+              borderColor: modelSearch
+                  ? null
+                  : _focused
                   ? theme.color(DshInputRecipe.focusBorderToken)
                   : DshSurface.paint(
                       context,
@@ -259,8 +292,8 @@ class _DshInputState extends State<DshInput> {
                 ],
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: browserInputInlineInset,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: modelSearch ? 0 : browserInputInlineInset,
                     ),
                     child: Material(
                       type: MaterialType.transparency,
@@ -271,14 +304,22 @@ class _DshInputState extends State<DshInput> {
                             valueListenable: _controller,
                             builder: (context, value, _) =>
                                 value.text.isEmpty && widget.placeholder != null
-                                ? IgnorePointer(
-                                    child: DshChromeText(
-                                      widget.placeholder!,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style: style.copyWith(
-                                        color: theme.color(
-                                          DshInputRecipe.placeholderToken,
+                                ? Positioned.fill(
+                                    // An input's placeholder paints inside its
+                                    // native line box; fallback glyph metrics
+                                    // must not enlarge the editable control.
+                                    child: IgnorePointer(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: DshChromeText(
+                                          widget.placeholder!,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.clip,
+                                          style: style.copyWith(
+                                            color: theme.color(
+                                              DshInputRecipe.placeholderToken,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

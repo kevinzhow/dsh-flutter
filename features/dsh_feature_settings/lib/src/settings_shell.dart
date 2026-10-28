@@ -222,8 +222,7 @@ class SettingsLauncherRow extends StatefulWidget {
 }
 
 class _SettingsLauncherRowState extends State<SettingsLauncherRow> {
-  final OverlayPortalController _menu = OverlayPortalController();
-  final LayerLink _link = LayerLink();
+  final DshPanelController _menu = DshPanelController();
   bool _hover = false;
   void Function()? _keys;
 
@@ -238,6 +237,7 @@ class _SettingsLauncherRowState extends State<SettingsLauncherRow> {
   @override
   void dispose() {
     _keys?.call();
+    _menu.dispose();
     super.dispose();
   }
 
@@ -260,230 +260,159 @@ class _SettingsLauncherRowState extends State<SettingsLauncherRow> {
     final more = shell.services.i18n.t('common', 'more');
     final entry = shell.services.shortcuts?.registry.entry('settings.open');
     final keys = entry == null || entry.keys.isEmpty ? null : entry.keys;
-    final box = wide ? null : 36.0;
-    return OverlayPortal(
-      controller: _menu,
-      overlayChildBuilder: (context) => _MoreMenu(
-        link: _link,
-        settingsLabel: _t('trigger'),
-        keys: keys,
-        onSettings: () {
-          _menu.hide();
-          unawaited(shell.open());
-        },
-        onDismiss: _menu.hide,
-        header: shell.services.moreMenuHeader(context),
+    final box = wide ? null : DshSidebarLauncherRecipe.railBox;
+    return Padding(
+      padding: EdgeInsets.only(
+        top: wide
+            ? DshSidebarLauncherRecipe.verticalMargin
+            : DshSidebarLauncherRecipe.railTopMargin,
+        bottom: wide
+            ? DshSidebarLauncherRecipe.verticalMargin
+            : DshSidebarLauncherRecipe.railBottomMargin,
       ),
-      child: CompositedTransformTarget(
-        link: _link,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(wide ? 0 : 0, 4, 0, wide ? 4 : 10),
-          child: DshTooltip(
-            label: more,
-            disabled: wide || _menu.isShowing,
-            delay: const Duration(milliseconds: 500),
-            child: MouseRegion(
-              onEnter: (_) => setState(() => _hover = true),
-              onExit: (_) => setState(() => _hover = false),
-              cursor: SystemMouseCursors.click,
-              child: Semantics(
-                button: true,
-                label: more,
-                child: GestureDetector(
-                  key: const ValueKey('settings-trigger'),
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () => _menu.isShowing ? _menu.hide() : _menu.show(),
-                  child: DshContainer(
-                    height: wide ? 42 : box,
-                    width: box,
-                    padding: wide
-                        ? const EdgeInsets.fromLTRB(8, 0, 10, 0)
-                        : null,
-                    alignment: wide ? null : Alignment.center,
-                    decoration: BoxDecoration(
-                      color: _hover || _menu.isShowing
-                          ? theme.interactiveBgHover
-                          : null,
-                      borderRadius: BorderRadius.circular(theme.radiusMd),
-                    ),
-                    child: Row(
-                      mainAxisSize: wide ? MainAxisSize.max : MainAxisSize.min,
-                      mainAxisAlignment: wide
-                          ? MainAxisAlignment.start
-                          : MainAxisAlignment.center,
-                      children: [
-                        DshIcon(
-                          DshShellIcons.ellipsisMedium,
-                          size: 14,
-                          color: theme.labelPrimary,
-                        ),
-                        if (wide) ...[
-                          const SizedBox(width: 8),
-                          DshChromeText(
-                            more,
-                            style: theme
-                                .textStyle('--dsw-font-s-14')
-                                .copyWith(color: theme.labelPrimary),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+      child: DshAnchoredPanel(
+        controller: _menu,
+        side: DshPanelSide.top,
+        menuViewport: true,
+        frameOverlayTop: shell.services.overlayTop,
+        gap: DshMenuRecipe.anchorGap,
+        panelBuilder: (context, panel) => DshMenuSurface(
+          key: const ValueKey('settings-more-menu'),
+          padding: const EdgeInsets.all(DshSidebarLauncherRecipe.menuPadding),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              minWidth:
+                  DshSidebarLauncherRecipe.menuMinWidth -
+                  DshSidebarLauncherRecipe.menuPadding * 2,
+              maxWidth:
+                  DshSidebarLauncherRecipe.menuMaxWidth -
+                  DshSidebarLauncherRecipe.menuPadding * 2,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _MoreMenu extends StatelessWidget {
-  const _MoreMenu({
-    required this.link,
-    required this.settingsLabel,
-    required this.keys,
-    required this.onSettings,
-    required this.onDismiss,
-    this.header,
-  });
-
-  final Widget? header;
-
-  final LayerLink link;
-  final String settingsLabel;
-  final List<String>? keys;
-  final VoidCallback onSettings;
-  final VoidCallback onDismiss;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: onDismiss,
-          ),
-        ),
-        CompositedTransformFollower(
-          link: link,
-          showWhenUnlinked: false,
-          targetAnchor: Alignment.topLeft,
-          followerAnchor: Alignment.bottomLeft,
-          offset: const Offset(2, -4),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: DshContainer(
-              key: const ValueKey('settings-more-menu'),
-              constraints: const BoxConstraints(minWidth: 124),
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: theme.color('--dsw-alias-bg-layer-2'),
-                borderRadius: BorderRadius.circular(theme.radiusMd + 4),
-                border: Border.all(
-                  color: theme.color('--dsw-alias-border-l2'),
-                  width: dshHairlineOf(context),
-                ),
-                boxShadow: theme.boxShadow('--dsw-elevation-prominent'),
-              ),
-              child: IntrinsicWidth(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (header != null) ...[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
-                        child: header,
+            child: IntrinsicWidth(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (shell.services.moreMenuHeader(context)
+                      case final header?) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal:
+                            DshSidebarLauncherRecipe.menuRowHorizontalPadding,
+                        vertical: DshSidebarLauncherRecipe.topPadding,
                       ),
-                      DshContainer(
-                        height: dshHairlineOf(context),
-                        margin: const EdgeInsets.symmetric(vertical: 3),
-                        decoration: BoxDecoration(
-                          color: theme.color('--dsw-alias-border-l2'),
-                        ),
-                      ),
-                    ],
-                    _MenuRow(
-                      key: const ValueKey('settings-more-settings'),
-                      icon: DshIcons.settingsMedium,
-                      label: settingsLabel,
-                      keys: keys,
-                      onTap: onSettings,
+                      child: header,
                     ),
+                    DshMenuSeparatorLine(),
                   ],
-                ),
+                  DshMenuItemButton(
+                    key: const ValueKey('settings-more-settings'),
+                    profile: DshMenuItemProfile.sidebarLauncher,
+                    icon: DshIcons.settingsMedium,
+                    label: _t('trigger'),
+                    shortcut: keys == null ? null : DshMenuShortcut(keys: keys),
+                    autofocus: true,
+                    onDismiss: panel.close,
+                    onPressed: () {
+                      panel.close();
+                      unawaited(shell.open());
+                    },
+                  ),
+                ],
               ),
             ),
           ),
         ),
-      ],
-    );
-  }
-}
-
-class _MenuRow extends StatefulWidget {
-  const _MenuRow({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.keys,
-    required this.onTap,
-  });
-
-  final DshIconData icon;
-  final String label;
-  final List<String>? keys;
-  final VoidCallback onTap;
-
-  @override
-  State<_MenuRow> createState() => _MenuRowState();
-}
-
-class _MenuRowState extends State<_MenuRow> {
-  bool _hover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      cursor: SystemMouseCursors.click,
-      child: Semantics(
-        button: true,
-        label: widget.label,
-        excludeSemantics: true,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: widget.onTap,
-          child: DshContainer(
-            height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: _hover ? theme.interactiveBgHover : null,
-              borderRadius: BorderRadius.circular(theme.radiusMd),
-            ),
-            child: Row(
-              children: [
-                DshIcon(widget.icon, size: 14, color: theme.labelPrimary),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: DshChromeText(
-                    widget.label,
-                    style: theme
-                        .textStyle('--dsw-font-s-14')
-                        .copyWith(color: theme.labelPrimary),
+        builder: (context, panel) => SizedBox(
+          height: wide
+              ? DshSidebarLauncherRecipe.height
+              : DshSidebarLauncherRecipe.railBox,
+          child: LayoutBuilder(
+            builder: (context, constraints) => OverflowBox(
+              alignment: Alignment.center,
+              minWidth: wide
+                  ? constraints.maxWidth +
+                        DshSidebarLauncherRecipe.inlineExpansion * 2
+                  : box,
+              maxWidth: wide
+                  ? constraints.maxWidth +
+                        DshSidebarLauncherRecipe.inlineExpansion * 2
+                  : box,
+              child: DshTooltip(
+                label: more,
+                disabled: wide || panel.isOpen,
+                delay: const Duration(milliseconds: 500),
+                child: MouseRegion(
+                  onEnter: (_) => setState(() => _hover = true),
+                  onExit: (_) => setState(() => _hover = false),
+                  cursor: SystemMouseCursors.click,
+                  child: Semantics(
+                    button: true,
+                    label: more,
+                    expanded: panel.isOpen,
+                    child: GestureDetector(
+                      key: const ValueKey('settings-trigger'),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: panel.toggle,
+                      child: DshContainer(
+                        height: wide ? DshSidebarLauncherRecipe.height : box,
+                        width: box,
+                        padding: wide
+                            ? const EdgeInsets.fromLTRB(
+                                DshSidebarLauncherRecipe.leftPadding,
+                                DshSidebarLauncherRecipe.topPadding,
+                                DshSidebarLauncherRecipe.rightPadding,
+                                DshSidebarLauncherRecipe.bottomPadding,
+                              )
+                            : null,
+                        alignment: wide ? null : Alignment.center,
+                        decoration: context.dsh.cornerDecoration(
+                          theme.radiusMd,
+                          color: _hover || panel.isOpen
+                              ? theme.interactiveBgHover
+                              : null,
+                        ),
+                        child: Row(
+                          mainAxisSize: wide
+                              ? MainAxisSize.max
+                              : MainAxisSize.min,
+                          mainAxisAlignment: wide
+                              ? MainAxisAlignment.start
+                              : MainAxisAlignment.center,
+                          children: [
+                            DshIcon(
+                              DshShellIcons.ellipsisMedium,
+                              size: 14,
+                              color: theme.labelPrimary,
+                            ),
+                            if (wide) ...[
+                              const SizedBox(
+                                width: DshSidebarLauncherRecipe.gap,
+                              ),
+                              Flexible(
+                                child: DshChromeText(
+                                  more,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: theme
+                                      .textStyle('--dsw-font-s-14')
+                                      .copyWith(
+                                        color: theme.labelPrimary,
+                                        height:
+                                            DshSidebarLauncherRecipe
+                                                .lineHeight /
+                                            DshSidebarLauncherRecipe.fontSize,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                if (widget.keys != null) ...[
-                  const SizedBox(width: 12),
-                  DshShortcutKeys(keys: widget.keys!),
-                ],
-              ],
+              ),
             ),
           ),
         ),
