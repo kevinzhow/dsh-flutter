@@ -5,7 +5,7 @@
     "path": "pnpm-workspace.yaml",
     "sha256": "3c624c26e58ab02ffc8d653bb8a9e8767a63fe0576bc0dbfaa3a5e43f88d973b"
   },
-  "snapshotLockSha256": "133545002c7eddb1ba9fed0e10d94d932d252f9abd03cfe5ab51486256b72c8a",
+  "snapshotLockSha256": "9abb49916af9c9fedfd2a6183d2586c72b5b08d2718a9534ae624cd68fc064d6",
   "meaning": "Source-input retention only. Recipe implementation, inline/SVG coverage and state acceptance are not assessed.",
   "dependencyScope": {
     "roots": [
@@ -2530,6 +2530,10 @@
           {
             "path": "tool/design-system/upstream/ui-plugin-manager/classes.json",
             "sha256": "fdbb0d7cc8dea100112a9c70e152d6992f81a0cda38fa8f1c56ed6d7356432d2"
+          },
+          {
+            "path": "tool/design-system/upstream/ui-plugin-manager/loaded-card-behavior.json",
+            "sha256": "3b6cfeaef749c9f919217bae9d5d36ba0759ef44fee9d7d6c850d866227a16a9"
           },
           {
             "path": "tool/design-system/upstream/ui-plugin-manager/package.json",

@@ -328,89 +328,87 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
     return LayoutBuilder(
       builder: (context, constraints) => SingleChildScrollView(
         key: const ValueKey('plugin-manager-page'),
-        padding: EdgeInsets.fromLTRB(
-          (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
-          28,
-          (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
-          48,
+        padding: DshPluginCardCanvas.bleedPadding(
+          EdgeInsets.fromLTRB(
+            (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
+            28,
+            (MediaQuery.sizeOf(context).width * .04).clamp(24, 48),
+            48,
+          ),
         ),
         child: Align(
           alignment: Alignment.topCenter,
-          child: ConstrainedBox(
+          child: DshPluginCardCanvas(
             constraints: const BoxConstraints(maxWidth: 960),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Wrap(
-                  alignment: WrapAlignment.spaceBetween,
-                  crossAxisAlignment: WrapCrossAlignment.start,
-                  spacing: 16,
-                  runSpacing: 16,
-                  children: [
-                    _heading(context),
-                    if (!discover) _toolbar(context),
-                  ],
+            children: [
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                spacing: 16,
+                runSpacing: 16,
+                children: [_heading(context), if (!discover) _toolbar(context)],
+              ),
+              SizedBox(
+                height: selected == null && config == null && !more ? 16 : 32,
+              ),
+              if (selected != null || config != null || more) ...[
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: DshButton(
+                    onPressed: () => setState(() {
+                      selected = null;
+                      config = null;
+                      more = false;
+                    }),
+                    child: Text(t('backToList')),
+                  ),
                 ),
-                SizedBox(
-                  height: selected == null && config == null && !more ? 16 : 32,
+                const SizedBox(height: 16),
+              ] else ...[
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: DshSegmentedTabs(
+                    key: const ValueKey('plugin-manager-tabs'),
+                    items: [
+                      DshSegmentedTab(
+                        'installed',
+                        t('installedTab'),
+                        key: const ValueKey('plugin-manager-tab-installed'),
+                        id: 'plugin-manager-tab-installed',
+                        panelId: 'plugin-manager-panel-installed',
+                      ),
+                      DshSegmentedTab(
+                        'discover',
+                        widget.i18n.t('pluginMarket', 'title'),
+                        key: const ValueKey('plugin-manager-tab-discover'),
+                        id: 'plugin-manager-tab-discover',
+                        panelId: 'plugin-manager-panel-discover',
+                      ),
+                    ],
+                    value: discover ? 'discover' : 'installed',
+                    label: t('tabsLabel'),
+                    onChanged: (value) =>
+                        setState(() => discover = value == 'discover'),
+                  ),
                 ),
-                if (selected != null || config != null || more) ...[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: DshButton(
-                      onPressed: () => setState(() {
-                        selected = null;
-                        config = null;
-                        more = false;
-                      }),
-                      child: Text(t('backToList')),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ] else ...[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: DshSegmentedTabs(
-                      key: const ValueKey('plugin-manager-tabs'),
-                      items: [
-                        DshSegmentedTab(
-                          'installed',
-                          t('installedTab'),
-                          key: const ValueKey('plugin-manager-tab-installed'),
-                          id: 'plugin-manager-tab-installed',
-                          panelId: 'plugin-manager-panel-installed',
-                        ),
-                        DshSegmentedTab(
-                          'discover',
-                          widget.i18n.t('pluginMarket', 'title'),
-                          key: const ValueKey('plugin-manager-tab-discover'),
-                          id: 'plugin-manager-tab-discover',
-                          panelId: 'plugin-manager-panel-discover',
-                        ),
-                      ],
-                      value: discover ? 'discover' : 'installed',
-                      label: t('tabsLabel'),
-                      onChanged: (value) =>
-                          setState(() => discover = value == 'discover'),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                ],
-                if (model.notice case final notice?) ...[
-                  _notice(context, notice),
-                  const SizedBox(height: 12),
-                ],
-                if (!model.installer.open && model.installer.requestId != null)
-                  DshButton(
-                    onPressed: () => unawaited(_install(newDialog: false)),
-                    child: Text(t('installViewTask')),
-                  ),
-                if (configuration != null)
-                  configuration
-                else if (package != null)
-                  _detail(context, package)
-                else
-                  Semantics(
+                const SizedBox(height: 32),
+              ],
+              if (model.notice case final notice?) ...[
+                _notice(context, notice),
+                const SizedBox(height: 12),
+              ],
+              if (!model.installer.open && model.installer.requestId != null)
+                DshButton(
+                  onPressed: () => unawaited(_install(newDialog: false)),
+                  child: Text(t('installViewTask')),
+                ),
+              if (configuration != null)
+                configuration
+              else if (package != null)
+                _detail(context, package)
+              else
+                DshPluginCardBleed(
+                  child: Semantics(
                     container: true,
                     explicitChildNodes: true,
                     role: more ? null : SemanticsRole.tabPanel,
@@ -423,35 +421,43 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                         ? widget.i18n.t('pluginMarket', 'title')
                         : t('installedTab'),
                     child: discover && !more && selected == null
-                        ? PluginMarketPage(
-                            model: widget.market,
-                            manager: model,
-                            i18n: widget.i18n,
-                            onInstall: () =>
-                                unawaited(_install(newDialog: false)),
+                        ? DshPluginCardInset(
+                            child: PluginMarketPage(
+                              model: widget.market,
+                              manager: model,
+                              i18n: widget.i18n,
+                              onInstall: () =>
+                                  unawaited(_install(newDialog: false)),
+                            ),
                           )
                         : model.status == PluginManagerStatus.loading ||
                               model.status == PluginManagerStatus.idle
-                        ? _pageStatus(context, t('loading'))
+                        ? DshPluginCardInset(
+                            child: _pageStatus(context, t('loading')),
+                          )
                         : model.status == PluginManagerStatus.unavailable
-                        ? Row(
-                            children: [
-                              const DshStateDot(DshStateDotState.idle),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: _pageStatus(context, t('unavailable')),
-                              ),
-                            ],
+                        ? DshPluginCardInset(
+                            child: Row(
+                              children: [
+                                const DshStateDot(DshStateDotState.idle),
+                                const SizedBox(width: 6),
+                                Expanded(
+                                  child: _pageStatus(context, t('unavailable')),
+                                ),
+                              ],
+                            ),
                           )
                         : model.status == PluginManagerStatus.error
-                        ? Column(
-                            children: [
-                              pluginStatus(context, t('error')),
-                              DshButton(
-                                onPressed: () => unawaited(model.load()),
-                                child: Text(t('retry')),
-                              ),
-                            ],
+                        ? DshPluginCardInset(
+                            child: Column(
+                              children: [
+                                pluginStatus(context, t('error')),
+                                DshButton(
+                                  onPressed: () => unawaited(model.load()),
+                                  child: Text(t('retry')),
+                                ),
+                              ],
+                            ),
                           )
                         : _list(
                             context,
@@ -459,8 +465,8 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
                             widget.slots.entries(pluginSlot),
                           ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),
@@ -537,40 +543,44 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (!all && configurations.isNotEmpty) ...[
-          _groupHeading(context, t('basicTitle')),
+          DshPluginCardInset(child: _groupHeading(context, t('basicTitle'))),
           const SizedBox(height: 8),
           _grid([
             for (final entry in configurations)
-              pluginCard(
-                context,
-                child: DshButton(
-                  onPressed: () => setState(() => config = entry.id),
-                  child: Text(entry.label ?? pluginShortName(entry.id)),
+              DshPluginCardInset(
+                child: pluginCard(
+                  context,
+                  child: DshButton(
+                    onPressed: () => setState(() => config = entry.id),
+                    child: Text(entry.label ?? pluginShortName(entry.id)),
+                  ),
                 ),
               ),
           ]),
           const SizedBox(height: 32),
         ],
         if (official.isNotEmpty) ...[
-          Row(
-            children: [
-              Expanded(child: _groupHeading(context, t('extensionsTitle'))),
-              if (!all)
-                DshButton(
-                  onPressed: () => setState(() => more = true),
-                  child: Text(t('moreAction')),
-                ),
-            ],
+          DshPluginCardInset(
+            child: Row(
+              children: [
+                Expanded(child: _groupHeading(context, t('extensionsTitle'))),
+                if (!all)
+                  DshButton(
+                    onPressed: () => setState(() => more = true),
+                    child: Text(t('moreAction')),
+                  ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           _grid([for (final p in official) _card(context, p)]),
           const SizedBox(height: 32),
         ],
         if (!all) ...[
-          _groupHeading(context, t('bundlesTitle')),
+          DshPluginCardInset(child: _groupHeading(context, t('bundlesTitle'))),
           const SizedBox(height: 8),
           if (installed.isEmpty)
-            _pageStatus(context, t('empty'))
+            DshPluginCardInset(child: _pageStatus(context, t('empty')))
           else
             _grid([for (final p in installed) _card(context, p)]),
         ],
@@ -578,115 +588,71 @@ class _PluginManagerPageState extends State<PluginManagerPage> {
     );
   }
 
-  Widget _grid(List<Widget> cards) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      for (var i = 0; i < cards.length; i++) ...[
-        if (i > 0) const SizedBox(height: 2),
-        cards[i],
-      ],
-    ],
-  );
+  Widget _grid(List<Widget> cards) => DshPluginCardList(children: cards);
   String _title(BundleInfo bundle) =>
       pluginText(bundle.meta?.title, widget.i18n, bundle.name);
   Widget _card(BuildContext context, ManagedPluginPackage package) {
     final b = package.bundle, title = _title(package.bundle);
-    final theme = context.dsh;
-    final description = pluginText(
-      b.meta?.description,
-      widget.i18n,
-      b.description ?? '',
-    );
-    Widget artwork = const DshPluginDefaultArtwork();
-    if (b.meta?.icon case final icon?) {
-      artwork = Image.network(
-        icon,
-        width: 36,
-        height: 36,
-        fit: BoxFit.contain,
-        errorBuilder: (_, _, _) => const DshPluginDefaultArtwork(),
-      );
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        DshButton(
-          height: 64 + 2 * dshHairlineOf(context),
-          horizontalPadding: 0,
-          radius: theme.radiusXl,
-          onPressed: () => setState(() => selected = b.name),
-          semanticLabel: t('openDetail', {'name': title}),
-          child: Row(
-            children: [
-              DshContainer(
-                width: 48 + 2 * dshHairlineOf(context),
-                height: 48 + 2 * dshHairlineOf(context),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: theme.borderL3,
-                    width: dshHairlineOf(context),
-                  ),
-                  borderRadius: BorderRadius.circular(theme.radiusLg),
-                ),
-                child: artwork,
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme
-                          .textStyle('--dsw-font-s-14')
-                          .copyWith(
-                            height: 20 / 14,
-                            fontWeight: FontWeight.w500,
-                            color: theme.labelPrimary,
-                          ),
-                    ),
-                    if (description.isNotEmpty) ...[
-                      const SizedBox(height: 4),
-                      DshSingleLineClamp(
-                        description,
-                        style: theme
-                            .textStyle('--dsw-font-xs-13')
-                            .copyWith(
-                              height: 18 / 13,
-                              color: theme.color('--dsw-alias-label-tertiary'),
-                            ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              const SizedBox(width: 14),
-              DshSwitch(
-                key: ValueKey('plugin-switch-${b.name}'),
-                value: b.enabled,
-                label: t('enableToggle', {'name': title}),
-                onChanged:
-                    model.busy.contains(b.name) || b.readOnlyReason != null
-                    ? null
-                    : (value) => unawaited(_toggle(b, value)),
-              ),
-            ],
+    final description = pluginText(b.meta?.description, widget.i18n);
+    final error = b.error != null;
+    final missing = b.availability == BundleInfoAvailability.missing;
+    final target = b.installTarget;
+    final update =
+        b.installed &&
+        b.removable &&
+        b.availability != BundleInfoAvailability.installation &&
+        target != null &&
+        (b.version != target.version ||
+            ((target.spec.startsWith('link:') ||
+                    (b.source?.startsWith('link:') ?? false)) &&
+                b.source != target.spec));
+    final locked =
+        model.busy.contains(b.name) ||
+        b.readOnlyReason != null ||
+        (!b.enabled && error && !(missing && target != null));
+    return DshPluginCard(
+      key: ValueKey('plugin-card-${b.name}'),
+      title: title,
+      semanticLabel: t('openDetail', {'name': title}),
+      onOpen: () => setState(() => selected = b.name),
+      description: description.isEmpty ? null : description,
+      image: b.meta?.icon == null ? null : NetworkImage(b.meta!.icon!),
+      tags: [
+        if (b.name.startsWith(DshPluginCardRecipe.experimentalPrefix))
+          DshTag.text(
+            t('statusBeta'),
+            tone: DshTagTone.info,
+            profile: DshTagProfile.pluginStatus,
           ),
-        ),
-        if (b.error != null)
-          pluginStatus(
-            context,
-            managementErrorText(
-              b.error!.code.value,
-              b.error!.diagnostic,
-              widget.i18n,
-            ),
+        if (error)
+          DshTag.text(
+            t('statusProblem'),
+            tone: DshTagTone.danger,
+            profile: DshTagProfile.pluginStatus,
+          ),
+        if (missing)
+          DshTag.text(
+            t(b.installed ? 'statusMissingFiles' : 'statusNotInstalled'),
+            profile: DshTagProfile.pluginStatus,
+          ),
+        if (update)
+          DshTag.text(
+            t('statusUpdateAvailable'),
+            tone: DshTagTone.info,
+            profile: DshTagProfile.pluginStatus,
           ),
       ],
+      actions: [
+        DshSwitch(
+          key: ValueKey('plugin-switch-${b.name}'),
+          value: b.enabled,
+          label: t('enableToggle', {'name': title}),
+          onChanged: locked ? null : (value) => unawaited(_toggle(b, value)),
+        ),
+      ],
+      metadataError: b.meta?.error == null
+          ? null
+          : t('metadataError', {'error': b.meta!.error!}),
     );
   }
 

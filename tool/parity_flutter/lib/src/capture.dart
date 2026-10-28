@@ -205,6 +205,11 @@ Future<Map<String, dynamic>> captureParityCase(
     expected: theme,
     framePixel: framed ? framePixel : null,
   );
+  // A held release may navigate. Read every probe from the painted screenshot
+  // state before sending that release; none of these callbacks may pump/input.
+  final componentGeometry = mapping.geometryProbe?.call(t, ctx, rootBox);
+  final typography = typographyProbes(targetContext ?? rootKey.currentContext);
+  final styleTokens = styleTokenProbes(targetContext ?? rootKey.currentContext);
   await interactions.release();
 
   final roundedRect = {
@@ -259,8 +264,9 @@ Future<Map<String, dynamic>> captureParityCase(
       'registration':
           'FontLoader per family; flutter_test has no OS font fallback',
     },
-    'typography': typographyProbes(targetContext ?? rootKey.currentContext),
-    'styleTokens': styleTokenProbes(targetContext ?? rootKey.currentContext),
+    'typography': typography,
+    'styleTokens': styleTokens,
+    if (componentGeometry != null) 'componentGeometry': componentGeometry,
     'capturedAt': DateTime.now().toUtc().toIso8601String(),
   };
   await t.runAsync(() async {

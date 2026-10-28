@@ -16,8 +16,10 @@ No package JavaScript is executed by this generator.
 
 ## Translated fields and frozen context
 
-`generate.py` declares 29 dynamic CSS property slots. They are the existing
+The icon/add/menu subset declares 29 dynamic CSS property slots. They are the existing
 inputs to three recipe maps; no new product style is introduced here.
+The [loaded-card contract](plugin-card-source-contract.md) separately adds34
+consumed card/status slots. All remaining context stays frozen.
 
 | Selectors | Supported translated values |
 | --- | --- |

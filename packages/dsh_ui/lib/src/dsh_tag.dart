@@ -7,6 +7,8 @@ import 'dsh_snapped_box.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 
+enum DshTagProfile { primitive, pluginStatus }
+
 /// The eight palettes of the published, read-only DSH Tag.
 enum DshTagTone {
   outline,
@@ -25,19 +27,25 @@ class DshTag extends StatelessWidget {
     super.key,
     required this.child,
     this.tone = DshTagTone.outline,
+    this.profile = DshTagProfile.primitive,
   });
 
   /// A single unwrapped label using the reference text baseline.
-  DshTag.text(String text, {super.key, this.tone = DshTagTone.outline})
-    : child = DshChromeText(
-        text,
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.visible,
-      );
+  DshTag.text(
+    String text, {
+    super.key,
+    this.tone = DshTagTone.outline,
+    this.profile = DshTagProfile.primitive,
+  }) : child = DshChromeText(
+         text,
+         maxLines: 1,
+         softWrap: false,
+         overflow: TextOverflow.visible,
+       );
 
   final Widget child;
   final DshTagTone tone;
+  final DshTagProfile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +99,23 @@ class DshTag extends StatelessWidget {
             width: dshBorderWidthOf(context, DshTagRecipe.outlineWidth),
           )
         : null;
+    final status = profile == DshTagProfile.pluginStatus;
+    final edge = border?.dimensions.vertical ?? 0;
     return IntrinsicWidth(
       child: DshContainer(
-        padding: const EdgeInsets.symmetric(
-          horizontal: DshTagRecipe.horizontalPadding,
-          vertical: DshTagRecipe.verticalPadding,
+        height: status
+            ? DshPluginStatusTagRecipe.contentHeight +
+                  DshPluginStatusTagRecipe.verticalPadding * 2 +
+                  edge
+            : null,
+        alignment: status ? Alignment.center : null,
+        padding: EdgeInsets.symmetric(
+          horizontal: status
+              ? DshPluginStatusTagRecipe.horizontalPadding
+              : DshTagRecipe.horizontalPadding,
+          vertical: status
+              ? DshPluginStatusTagRecipe.verticalPadding
+              : DshTagRecipe.verticalPadding,
         ),
         decoration: BoxDecoration(
           color: fill,
@@ -105,8 +125,13 @@ class DshTag extends StatelessWidget {
         child: DefaultTextStyle.merge(
           style: theme
               .fixedTextStyle(
-                size: DshTagRecipe.fontSize,
-                line: DshTagRecipe.lineHeight,
+                size: status
+                    ? DshPluginStatusTagRecipe.fontSize
+                    : DshTagRecipe.fontSize,
+                line: status
+                    ? DshPluginStatusTagRecipe.fontSize *
+                          DshPluginStatusTagRecipe.lineHeightFactor
+                    : DshTagRecipe.lineHeight,
                 weight: DshTagRecipe.fontWeight.round(),
               )
               .copyWith(color: theme.color(labelToken)),

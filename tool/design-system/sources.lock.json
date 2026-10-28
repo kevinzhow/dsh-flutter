@@ -66,18 +66,24 @@
       "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-plugin-manager/-/dsh-client-ui-plugin-manager-0.2.1-rc.2.tgz",
       "integrity": "sha512-T/FfDjKRwjFIdBQTtN9BHSVquuMJ970ICzE//oKqaa5ZU0bRG0RVllwVatL6FIKu7F1M1wzgt3tW+b6vstd2eg==",
       "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9",
-      "extraction": "JSON CSS string and static JSON class export from PluginManagerPage.module.css.mjs; no JavaScript execution",
+      "extraction": "Static CSS/class literals and complete PluginManagerPage/presentation behavior regions from lib/client.js; no JavaScript execution",
       "sourcePackage": "packages/client/ui-plugin-manager/package.json",
       "files": {
         "package.json": "b18af71d36fa3614fa2e358a08d2afd635c82928d00cd8ae613184ec18098f51",
         "PluginManagerPage.module.css": "45966a0e6822bbbb4beb617862815ddd4478b62fa4563ae6cfc45925caff982d",
         "classes.json": "fdbb0d7cc8dea100112a9c70e152d6992f81a0cda38fa8f1c56ed6d7356432d2",
-        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be"
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "loaded-card-behavior.json": "3b6cfeaef749c9f919217bae9d5d36ba0759ef44fee9d7d6c850d866227a16a9"
       },
       "snapshotFolder": "ui-plugin-manager",
       "referenceConsumer": "packages/bundle/web-app/package.json",
       "dependencyField": "dependencies",
-      "dependencySpecifier": "workspace:*"
+      "dependencySpecifier": "workspace:*",
+      "referenceSourceSha256": {
+        "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx": "ca6c1fa1deb96eec24fe68c858c1ca91f542c0d196317f91f823dbd342e1f2c8",
+        "packages/client/ui-plugin-manager/src/client/PluginManagerPage.module.css": "348e68d454da869671ae5c9137b488e5d4125c963fdacd72f6c3c437e6c20757",
+        "packages/client/ui-plugin-manager/src/client/presentation.ts": "c9d0a8bbb61ed1a34c0992d3b408d3fc6ce9106319541aea17964e2d54117da7"
+      }
     },
     {
       "name": "@deepseek-ai/dsh-client-ui-theme",

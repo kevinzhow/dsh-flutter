@@ -224,25 +224,39 @@ class ReleaseInputTests(unittest.TestCase):
         css, classes = '.fixture { color: red; }\n', {'fixture': 'released_fixture'}
         bundle = ('//#region PluginManagerPage.module.css.mjs\nconst css = '
                   + json.dumps(css) + ';\nvar PluginManagerPage_module_css_default = '
-                  + json.dumps(classes) + ';\n//#endregion\n').encode()
+                  + json.dumps(classes) + ';\n//#endregion\n'
+                  + '//#region lib/types/client/PluginManagerPage.js\nfunction PackageCard() {}\n//#endregion\n'
+                  + '//#region lib/types/client/presentation.js\nfunction packageText() {}\n//#endregion\n').encode()
         self.write_archive(self.archive, {**self.members, 'package/lib/client.js': bundle})
         (self.folder / 'PluginManagerPage.module.css').write_text(css)
         (self.folder / 'classes.json').write_text(json.dumps(classes))
+        (self.folder / 'loaded-card-behavior.json').write_text(json.dumps(
+            release.published.plugin_style_snapshot(self.archive)['behavior']))
         package = {**self.package, 'extractionKind': 'plugin-css',
                    'integrity': self.integrity(self.archive),
                    'publishedBundleSha256': hashlib.sha256(bundle).hexdigest(),
                    'files': {name: release.inventory.sha(self.folder / name) for name in (
-                       'package.json', 'LICENSE', 'PluginManagerPage.module.css', 'classes.json')}}
-        self.assertEqual(release.verify_archive(self.archive, package, self.record, self.folder)['snapshotFiles'], 4)
-        for mode in ['extra', 'omitted']:
+                       'package.json', 'LICENSE', 'PluginManagerPage.module.css', 'classes.json', 'loaded-card-behavior.json')}}
+        self.assertEqual(release.verify_archive(self.archive, package, self.record, self.folder)['snapshotFiles'], 5)
+        for mode in ['extra', 'omitted', 'omitted-behavior']:
             changed = copy.deepcopy(package)
             if mode == 'extra':
                 (self.folder / 'unverified.json').write_text('{"unreleased":true}')
                 changed['files']['unverified.json'] = release.inventory.sha(self.folder / 'unverified.json')
-            else:
+            elif mode == 'omitted':
                 del changed['files']['classes.json']
+            else:
+                del changed['files']['loaded-card-behavior.json']
             with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'decoder output coverage mismatch'):
                 release.verify_archive(self.archive, changed, self.record, self.folder)
+        behavior_path = self.folder / 'loaded-card-behavior.json'
+        behavior = json.loads(behavior_path.read_text())
+        behavior['region'] += '\nfunction unverifiedBranch() {}\n'
+        behavior_path.write_text(json.dumps(behavior))
+        changed = copy.deepcopy(package)
+        changed['files']['loaded-card-behavior.json'] = release.inventory.sha(behavior_path)
+        with self.assertRaisesRegex(ValueError, 'loaded card published behavior snapshot mismatch'):
+            release.verify_archive(self.archive, changed, self.record, self.folder)
 
     def test_integrity_verified_archive_with_wrong_manifest_identity_fails(self):
         members = {**self.members, 'package/package.json': b'{"name":"wrong-package","version":"0.2.1-rc.2"}\n'}

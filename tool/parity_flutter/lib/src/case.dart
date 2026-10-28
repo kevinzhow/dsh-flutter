@@ -14,6 +14,15 @@ typedef ParityInteraction = Future<void> Function(
   ParityContext ctx,
 );
 
+/// Optional read-only measurement of the tree represented by the PNG. Bounds
+/// may be expressed relative to [captureRoot]; do not pump, send input or mutate
+/// the widget tree from this synchronous callback.
+typedef ParityGeometryProbe = Map<String, Object?> Function(
+  WidgetTester tester,
+  ParityContext ctx,
+  RenderBox captureRoot,
+);
+
 /// One mapped renderer: the real widget path the app uses for what the React host shows for the
 /// same `kind` (or exact case id; an id wins over a kind).
 class ParityCase {
@@ -22,6 +31,7 @@ class ParityCase {
     required this.widgets,
     required this.build,
     this.interact,
+    this.geometryProbe,
     this.notes = '',
     this.settle = const Duration(milliseconds: 400),
     this.framed = true,
@@ -35,6 +45,10 @@ class ParityCase {
 
   /// Optional extra interaction.
   final ParityInteraction? interact;
+
+  /// Optional JSON-compatible component measurements, captured before releasing
+  /// held input. Absent callbacks add no field to the provider metadata.
+  final ParityGeometryProbe? geometryProbe;
 
   /// Free text recorded in the metadata.
   final String notes;
