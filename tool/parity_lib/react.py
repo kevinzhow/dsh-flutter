@@ -114,6 +114,19 @@ def base_inputs(host_dirs):
 
 
 def capture(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference=DEFAULT_REFERENCE):
+    """Route the published loaded-card kind; preserve all other provider inputs."""
+    from . import published_plugin_cards
+    published = [e for e in entries if e['case']['kind'] == published_plugin_cards.KIND]
+    if not published:
+        return _capture_generic(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference)
+    ordinary = [e for e in entries if e['case']['kind'] != published_plugin_cards.KIND]
+    status = (_capture_generic(ordinary, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference)
+              if ordinary else {})
+    status.update(published_plugin_cards.capture(published, out, results, reference))
+    return {entry['key']: status[entry['key']] for entry in entries}
+
+
+def _capture_generic(entries, out, results, host_dirs, fixtures_hash, refresh, cache_dir, reference=DEFAULT_REFERENCE):
     """Make sure results/react/<key>.png exists for every entry; returns {key: 'cache'|'captured'|'failed'}."""
     react_dir = results / 'react'
     react_dir.mkdir(parents=True, exist_ok=True)

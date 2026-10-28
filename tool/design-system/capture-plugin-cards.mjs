@@ -16,6 +16,7 @@ const argv = Object.fromEntries(process.argv.slice(2).reduce((all, a, i, args) =
   return all
 }, []))
 for (const key of ['archives', 'out', 'repo', 'plan']) if (!argv[key]) throw Error(`Missing --${key}`)
+const referenceMode=argv.reference??'native';assert(['native','emulated'].includes(referenceMode))
 const repo = resolve(argv.repo)
 const out = resolve(argv.out), archives = resolve(argv.archives)
 try {await access(out); throw Error('Refusing to overwrite a source trace')}
@@ -25,16 +26,17 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex')
 const json = async path => JSON.parse(await readFile(path, 'utf8'))
 const lock = await json(join(repo, 'tool/design-system/sources.lock.json'))
 const source = resolve(process.env.DSH_SRC)
-assert.equal(execFileSync('git', ['-C', source, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(), lock.referenceCommit)
-assert.equal(execFileSync('git', ['-C', source, 'status', '--porcelain', '--untracked-files=all'], {encoding:'utf8'}).trim(), '')
+const gitReadEnv={...process.env,GIT_OPTIONAL_LOCKS:'0'}
+assert.equal(execFileSync('git', ['-C', source, 'rev-parse', 'HEAD'], {encoding: 'utf8',env:gitReadEnv}).trim(), lock.referenceCommit)
+assert.equal(execFileSync('git', ['-C', source, 'status', '--porcelain', '--untracked-files=all'], {encoding:'utf8',env:gitReadEnv}).trim(), '')
 const modules = join(process.env.PARITY_WEB_DEPS, 'node_modules')
 const {build} = await import(pathToFileURL(join(modules, 'vite/dist/node/index.js')))
 const {chromium} = await import(pathToFileURL(join(modules, 'playwright-core/index.mjs')))
 const host = join(out, 'host'), dist = join(out, 'dist')
 await mkdir(host)
 const provenance = {referenceCommit: lock.referenceCommit, packages: {}, sourceFiles: {}}
-provenance.preparationRepository={head:execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),
- tree:execFileSync('git',['-C',repo,'rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),sourceOnly:true}
+provenance.preparationRepository={head:execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8',env:gitReadEnv}).trim(),
+ tree:execFileSync('git',['-C',repo,'rev-parse','HEAD^{tree}'],{encoding:'utf8',env:gitReadEnv}).trim(),sourceOnly:true}
 for (const file of [
   'packages/client/ui-primitives/src/Tooltip.tsx',
   'packages/client/ui-primitives/src/input-modality.ts',
@@ -94,7 +96,7 @@ const literals=[...fixtureText.matchAll(/const pluginCardScenarioJson = r'''\n([
 assert.equal(literals.length,1,'single compiled fixture data source required')
 const fixture=JSON.parse(literals[0][1]);assert.equal(fixture.schema,'dsh-plugin-card-scenarios/1')
 const scenarios=Object.fromEntries(fixture.scenarios.map(s=>[s.id,{...s,package:{...fixture.basePackage,...s.package}}]))
-const entries=plan.cases.flatMap(c=>c.variants.map(v=>({key:v.id==='default'?c.id:c.id+'__'+v.id,case:c,variant:v})))
+const entries=plan.cases.flatMap(c=>c.variants.map(v=>({key:v.id==='default'?c.id:c.id+'~'+v.id,case:c,variant:v})))
 assert(entries.length>0);assert.equal(new Set(entries.map(e=>e.key)).size,entries.length)
 for(const e of entries){
  assert.equal(e.case.kind,'plugin-cards.manager');assert(e.case.reactPathHint.startsWith('published @deepseek-ai/dsh-client-ui-plugin-manager@0.2.1-rc.2/'))
@@ -180,7 +182,7 @@ await new Promise(done=>server.listen(0,'127.0.0.1',done))
 const url=`http://127.0.0.1:${server.address().port}/`,traces=[]
 const results=join(out,'visual-testing-results'),reference=join(results,'react')
 await mkdir(reference,{recursive:true})
-const capturePlan={reference:'native',resultsDir:results,fontsManifest:join(repo,'tool/parity-fonts/manifest.json'),
+const capturePlan={reference:referenceMode,resultsDir:results,fontsManifest:join(repo,'tool/parity-fonts/manifest.json'),
  fixturesDirs:[],runInfo:{source:'actual published 0.2.1-rc.2',sourcePlanSha256:provenance.planSha256},
  entries,coverage:plan.cases.map(c=>({id:c.id,kind:c.kind}))}
 await writeFile(join(out,'flutter-plan.json'),JSON.stringify(capturePlan,null,2)+'\n')
@@ -188,7 +190,7 @@ const sourceInputs={};for(const [file,info] of Object.entries(provenance.sourceF
 const expectedHashes={plan:sha(planBytes),helper:sha(fixtureBytes),lock:provenance.sourceLockSha256}
 try{
  for(const density of [...new Set(entries.map(e=>e.case.viewport.density))]){
-  const browser=await chromium.launch({args:['--disable-lcd-text','--font-render-hinting=none',`--force-device-scale-factor=${density}`]})
+  const browser=await chromium.launch({args:['--disable-lcd-text','--font-render-hinting=none',...(referenceMode==='native'?[`--force-device-scale-factor=${density}`]:[])]})
   try{
    const selected=entries.filter(e=>e.case.viewport.density===density)
    const groups=new Map()
@@ -238,7 +240,7 @@ try{
      const metadata={provider:'react',source:'actual published DSH 0.2.1-rc.2 PluginManagerPage',caseId:entry.case.id,
       variantId:entry.variant.id,captureKey:entry.key,theme:entry.case.theme,locale:entry.case.locale,viewport:entry.case.viewport,
       react:{dshCommit:lock.referenceCommit,publishedBundleSha256:provenance.packages['plugin-manager'].publishedBundleSha256},
-      chromium:browser.version(),pixelModel:'native',actual,provenanceSha256:sha(JSON.stringify(provenance))}
+      chromium:browser.version(),pixelModel:referenceMode,actual,provenanceSha256:sha(JSON.stringify(provenance))}
      await writeFile(join(reference,entry.key+'.metadata.json'),JSON.stringify(metadata,null,2)+'\n')
      const checks=[{check:'actual source state, localized tags and errors',passed:true}],postCaptureProbes=[]
      if(scenario.expected.locked||scenario.refuseToggle){

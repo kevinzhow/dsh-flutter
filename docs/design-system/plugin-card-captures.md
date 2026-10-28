@@ -9,7 +9,8 @@ The reference is `@deepseek-ai/dsh-client-ui-plugin-manager@0.2.1-rc.2`, pinned
 DSH commit `687f282e8625c6b8d11ff58211a90524be2e4317`. The source runner verifies
 the actual archive SHA-512 and published `client.js` SHA-256, then exposes only
 the existing Manager binding and CSS class map at the factory's final return.
-The factory/component bodies and published styles are not rewritten. Supporting
+The original component bodies and published styles are preserved; the exposure
+hook is the sole factory change and has its own instrumented hash. Supporting
 primitives, locale text, theme sheets and Web mount CSS come from the same pinned
 source/locked outputs, with the unchanged parity font manifest. The source
 contract's 13-archive/86-output reconstruction remains the integrator's separate
@@ -53,12 +54,32 @@ Chinese, desktop800/phone390 and native DPR1/2.625. Every viewport is900CSSpx ta
 The manifest contains data, capture dimensions and actual input steps; no card
 style values are supplied by it. Ordinary Tab traversal reaches the actual card.
 
-The generic Web renderer intentionally refuses this new kind. It must not
-silently substitute source TypeScript or a reconstructed card for the published
-reference. The dedicated source runner writes standard `react` PNGs and metadata
-plus a `flutter-plan.json`. The new Flutter kind is discovered through the
-existing parity case-map glob and runs only the actual app package. Example,
-after sourcing the absolute workspace `scripts/pr16-env.sh`:
+The normal React provider automatically routes this kind to the dedicated
+published source runner. Mixed runs split only the new kind and retain the
+existing generic provider's cache, plans, results, selection and comparison
+paths. The generic host's direct-render guard still refuses an accidental
+source-TypeScript substitution; it is not on the normal routed capture path.
+The runner writes standard `react` PNGs and metadata. Its fresh source workspaces
+remain under the ordinary output directory, including failed attempts. Only
+the selected new-family image/metadata files are copied to the shared results
+after every selected output validates. Native and emulated reference modes are
+forwarded explicitly, rather than silently substituting one for the other.
+
+The provider uses the existing integrity-verifying public archive cache/helper.
+`PARITY_SOURCE_ARCHIVES` optionally selects a retained archive directory and
+`PARITY_SOURCE_ARCHIVES_OFFLINE=1` refuses downloads when an archive is absent.
+No npm credentials or package code is used to acquire the archive. The new
+Flutter kind is discovered through the existing parity case-map glob. A normal
+full-cohort command, after sourcing the absolute workspace `scripts/pr16-env.sh`,
+is:
+
+```bash
+PARITY_EXT_ALL_THEMES=1 tool/parity-ext/run run \
+  --cases 'components.plugin-card.*' --refresh-react
+```
+
+For source-only preparation, or for an explicitly app-only Flutter batch, the
+standalone source runner also writes a `flutter-plan.json`:
 
 ```bash
 python3 tool/parity-ext/build-plugin-cards.py --out build/card-plan/cases.json
@@ -97,7 +118,14 @@ One intermediate focused-test compilation failure used a nonexistent enum
 getter; its log is retained and the corrected matrix passed. No product code was
 changed for that fixture error. An actual manifest-schema RED also rejected an
 unsupported extra case key; the builder was corrected and all five focused plan
-tests passed without changing the shared manifest schema.
+tests passed without changing the shared manifest schema. Seven additional
+provider tests verify selected-key routing, unchanged generic arguments,
+reference-mode forwarding and preservation of existing results/cache. Their
+small generated images are transport-unit fixtures, not visual acceptance.
+Two real source-only provider smokes also exercise native and emulated DPR2.625.
+The ordinary `parity-ext/run run` entrypoint was exercised for one selected new
+key with Flutter explicitly skipped: it captured the published reference and
+honestly reported one missing Flutter result, with no pixel-comparison claim.
 
 Highlight lifecycle, Chromium post-touch sticky hover, metadata SVG/native image
 formats, browser-native tooltip paint and whole-page differences outside the
