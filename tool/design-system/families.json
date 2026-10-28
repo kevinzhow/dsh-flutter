@@ -143,6 +143,7 @@
     {
       "name": "banners",
       "canonical": [],
+      "status": "pending",
       "migrationStatus": "inventory only; recipe migration pending",
       "pendingDuplicates": []
     }
@@ -268,7 +269,7 @@
       "manual-metric": 8
     },
     "features/dsh_feature_commands/lib/src/popup_view.dart": {
-      "manual-metric": 11
+      "manual-metric": 10
     },
     "features/dsh_feature_conversation/lib/src/breadcrumbs.dart": {
       "manual-metric": 1
@@ -575,7 +576,7 @@
       "manual-metric": 2
     },
     "packages/dsh_ui/lib/src/dsh_settings.dart": {
-      "manual-metric": 20
+      "manual-metric": 15
     },
     "packages/dsh_ui/lib/src/dsh_settings_form.dart": {
       "manual-metric": 8

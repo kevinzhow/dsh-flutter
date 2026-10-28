@@ -117,7 +117,11 @@ def build(sheets, behavior, *, value, number, token, font_token):
             'labelToken': token(s('.pill', 'color')),
             'activeLabelToken': token(s('button.pill:hover,button.pill[aria-expanded=true]', 'color')),
             'activeFillToken': token(s('button.pill:hover,button.pill[aria-expanded=true]', 'background')),
-            'separatorToken': token(s('.sep', 'color')), 'separatorMargin': sep_h,
+            # The released CSS references an undefined custom property here.
+            # CSS inherits the text color; this consumer already uses an
+            # optional colors lookup followed by its inherited text color.
+            'separatorToken': token(s('.sep', 'color'), inherits_if_unset=True),
+            'separatorMargin': sep_h,
         },
     }
     if (minimum <= 0 or maximum < minimum

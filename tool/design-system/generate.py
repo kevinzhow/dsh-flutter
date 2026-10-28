@@ -6,7 +6,7 @@ Unknown syntax fails; --check also verifies the reference consumer's dependency
 and source package version, not only the checkout commit label.
 """
 from pathlib import Path
-import argparse, hashlib, json, os, re, subprocess, sys
+import argparse, functools, hashlib, json, os, re, subprocess, sys
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 OUT = ROOT / 'packages/dsh_ui/lib/src/dsh_recipes.g.dart'
@@ -35,11 +35,58 @@ def number(raw, unit='px'):
     return float(match[1])
 
 
-def token(raw):
+@functools.lru_cache(maxsize=1)
+def theme_token_kinds():
+    pack = json.loads((ROOT / 'packages/dsh_theme/assets/themes/official.theme.json').read_text())
+    kinds = {}
+    for scope in (pack['common'], *pack['modes'].values()):
+        for kind, values in scope.items():
+            for name in values:
+                kinds.setdefault(name, set()).add(kind)
+    return kinds
+
+
+def token(raw, *, inherits_if_unset=False):
     match = re.fullmatch(r'var\((--[\w-]+)\)', raw)
     if not match:
         raise ValueError('unsupported token expression: ' + raw)
-    return match[1]
+    name = match[1]
+    if name not in theme_token_kinds() and not inherits_if_unset:
+        raise ValueError('unknown source theme token: ' + name)
+    return name
+
+
+def validate_metric_tokens(metrics):
+    """Recipe lookup roles must agree with the resolved theme value kinds."""
+    kinds = theme_token_kinds()
+    for recipe, fields in metrics.items():
+        for field, name in fields.items():
+            role = field.lower()
+            if not role.endswith('token'):
+                continue
+            if role.endswith('fonttoken'):
+                expected = 'typography'
+            elif role in ('easingtoken', 'easetoken', 'maskblurtoken'):
+                expected = 'strings'
+            elif 'radius' in role or 'width' in role or role == 'animationdurationtoken':
+                expected = 'numbers'
+            elif role in ('shadowtoken', 'elevationtoken'):
+                expected = 'shadows'
+            else:
+                expected = 'colors'
+            actual = kinds.get(name, set())
+            if not actual:
+                # The source's scoped focus variable has an explicit fallback;
+                # StatsPills' undefined separator property inherits text color.
+                fallback = {'focusToken': 'focusFallbackToken',
+                            'panelFocusToken': 'panelFocusFallbackToken'}.get(field)
+                if expected == 'colors' and ((fallback and fallback in fields)
+                        or (recipe, field) == ('DshStatsPillRecipe', 'separatorToken')):
+                    continue
+                raise ValueError('unknown source recipe token: ' + recipe + '.' + field)
+            if actual != {expected}:
+                raise ValueError('source recipe token kind mismatch: ' + recipe + '.' + field
+                                 + ' requires ' + expected + ', got ' + ','.join(sorted(actual)))
 
 
 BUTTON_CLASSES = ('addGroup', 'addButton', 'addPrimary', 'addMore', 'iconButton', 'infoButton')
@@ -278,19 +325,25 @@ PLUGIN_BUTTON_SCHEMA = {
 
 def validate_supported(sheets):
     for name, schema in SUPPORTED.items():
-        seen = set()
+        seen, conditional_count = set(), 0
         for rule in sheets[name]:
             selector, props = rule['selector'], rule['declarations']
             if rule['conditions']:
-                if (rule['conditions'] != ['@media (prefers-reduced-motion: reduce)']
+                if (name != 'SegmentedTabs.module.css'
+                        or rule['conditions'] != ['@media (prefers-reduced-motion: reduce)']
                         or selector != '.indicator, .tab' or props != {'transition': 'none'}):
                     raise ValueError('untranslated conditional recipe: ' + name + ' ' + selector)
+                conditional_count += 1
             else:
                 if selector not in schema or set(props) != set(schema[selector].split()):
                     raise ValueError('untranslated recipe state/property: ' + name + ' ' + selector)
+                if selector in seen:
+                    raise ValueError('duplicate recipe state: ' + name + ' ' + selector)
                 seen.add(selector)
         if seen != set(schema):
             raise ValueError('missing recipe state: ' + name)
+        if conditional_count != (1 if name == 'SegmentedTabs.module.css' else 0):
+            raise ValueError('missing/duplicate required conditional recipe: ' + name)
     rules = button_rules(sheets['PluginManagerPage.module.css'])
     seen = set()
     for rule in rules:
@@ -325,6 +378,29 @@ def validate_supported(sheets):
                 raise ValueError('untranslated shortcut value: ' + selector + '/' + prop)
     if value(sheets['Button.module.css'], '.icon', 'width') != value(sheets['Button.module.css'], '.icon', 'height'):
         raise ValueError('untranslated nonsquare button icon')
+    # These declarations map to fixed widget structure rather than a numeric
+    # recipe field. Source changes must fail until that structure is translated.
+    tab_fixed = {
+        '.tabs': {'position': 'relative', 'display': 'grid'},
+        '.indicator': {'position': 'absolute', 'box-sizing': 'border-box', 'pointer-events': 'none'},
+        '.tab': {'position': 'relative', 'justify-content': 'center', 'background': 'transparent'},
+        ".tab:hover, .tab[aria-selected='true']": {'background': 'transparent'},
+        '.tab:focus-visible': {'outline': 'none', 'text-decoration': 'underline'},
+    }
+    tabs = sheets['SegmentedTabs.module.css']
+    for selector, props in tab_fixed.items():
+        for prop, expected in props.items():
+            if value(tabs, selector, prop) != expected:
+                raise ValueError('untranslated segmented tab value: ' + selector + '/' + prop)
+    # The current renderer positions the indicator inside the source padding
+    # and shares its corner radius with the transparent tab hit region.
+    inset = value(tabs, '.indicator', 'inset').split()
+    padding = number(value(tabs, '.tabs', 'padding'))
+    if (len(inset) != 4 or inset[1] != 'auto'
+            or any(number(part) != padding for part in (inset[0], inset[2], inset[3]))):
+        raise ValueError('untranslated segmented tab indicator inset')
+    if value(tabs, '.tab', 'border-radius') != value(tabs, '.indicator', 'border-radius'):
+        raise ValueError('untranslated segmented tab label radius')
     # Structural rules not represented by dynamic Dart fields cannot change
     # silently. New values need an intentional renderer implementation.
     fixed = {
@@ -550,6 +626,7 @@ def render(lock, sheets):
     metrics.update(stats.build(sheets, sheets['StatDialogBehavior'],
                                value=value, number=number, token=token, font_token=profile_font_token))
     package = lock['packages'][0]
+    validate_metric_tokens(metrics)
     lines = ['// Generated by tool/design-system/generate.py; do not edit.', *['// From ' + p['name'] + ' ' + p['version'] + '.' for p in lock['packages']], '']
     for name, fields in metrics.items():
         lines.append('abstract final class ' + name + ' {')

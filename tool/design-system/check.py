@@ -4,10 +4,92 @@
 Baselines are per file and rule: moving a bypass or adding one in a new file
 fails even when the repository-wide total falls. Reductions are allowed.
 """
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import json, os, re, subprocess, sys
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
+
+
+def read_contract(text):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError('invalid design-system contract: duplicate key ' + key)
+            result[key] = value
+        return result
+    return json.loads(text, object_pairs_hook=unique)
+
+
+def validate_contract(contract):
+    """Validate the policy itself before its patterns can exempt any source."""
+    def require(condition, reason):
+        if not condition:
+            raise ValueError('invalid design-system contract: ' + reason)
+
+    def text(value):
+        return isinstance(value, str) and bool(value.strip())
+
+    def production_path(value):
+        if not text(value) or '\\' in value:
+            return False
+        path = PurePosixPath(value)
+        return (not path.is_absolute() and '..' not in path.parts
+                and str(path) == value and len(path.parts) >= 4
+                and path.parts[0] in ('apps', 'features', 'packages')
+                and path.parts[2] == 'lib' and path.suffix == '.dart')
+
+    require(isinstance(contract, dict), 'expected an object')
+    require(set(contract) == {'schema', 'families', 'patterns', 'remediation',
+                              'wrapperAllowlist', 'baseline'}, 'unknown or missing policy fields')
+    require(contract['schema'] == 'dsh-design-families/1', 'unknown schema')
+    patterns = contract['patterns']
+    require(isinstance(patterns, dict) and bool(patterns), 'patterns must be a nonempty object')
+    for name, pattern in patterns.items():
+        require(text(name) and re.fullmatch(r'[a-z][a-z0-9-]*', name), 'invalid pattern name')
+        require(text(pattern), 'empty pattern ' + name)
+        try:
+            compiled = re.compile(pattern)
+        except re.error as error:
+            require(False, 'invalid pattern ' + name + ': ' + str(error))
+        require(compiled.search('') is None, 'pattern matches empty text: ' + name)
+    remediation = contract['remediation']
+    require(isinstance(remediation, dict) and set(remediation) == set(patterns)
+            and all(text(value) for value in remediation.values()), 'remediation must cover every rule')
+    families = contract['families']
+    require(isinstance(families, list) and bool(families), 'families must be a nonempty list')
+    names = set()
+    for family in families:
+        required = {'name', 'canonical', 'migrationStatus', 'pendingDuplicates'}
+        require(isinstance(family, dict) and required <= set(family)
+                and set(family) <= required | {'status'}, 'unknown or missing family fields')
+        name = family['name']
+        require(text(name) and re.fullmatch(r'[a-z][a-z0-9-]*', name)
+                and name not in names, 'invalid or duplicate family name')
+        names.add(name)
+        canonical = family['canonical']
+        require(isinstance(canonical, list) and all(production_path(p) for p in canonical)
+                and len(set(canonical)) == len(canonical), 'malformed canonical paths: ' + name)
+        require('status' not in family or family['status'] in ('active', 'pending'),
+                'unknown family status: ' + name)
+        require(bool(canonical) or family.get('status') == 'pending',
+                'empty canonical requires pending status: ' + name)
+        require(text(family['migrationStatus']), 'missing migration status: ' + name)
+        require(isinstance(family['pendingDuplicates'], list)
+                and all(text(p) for p in family['pendingDuplicates']), 'malformed pending duplicates: ' + name)
+    allowances = contract['wrapperAllowlist']
+    require(isinstance(allowances, dict) and set(allowances) <= set(patterns), 'unknown wrapper rule')
+    for rule, files in allowances.items():
+        require(isinstance(files, dict) and all(production_path(p) and text(reason)
+                                               for p, reason in files.items()),
+                'malformed wrapper allowance: ' + rule)
+    baseline = contract['baseline']
+    require(isinstance(baseline, dict), 'baseline must be an object')
+    for path, rules in baseline.items():
+        require(production_path(path) and isinstance(rules, dict) and bool(rules)
+                and set(rules) <= set(patterns)
+                and all(type(count) is int and count >= 0 for count in rules.values()),
+                'malformed baseline entry: ' + str(path))
 
 
 def code_only(text):
@@ -64,6 +146,37 @@ def baseline_growth(contract, previous, previous_source):
     return failures
 
 
+def policy_changes(contract, previous, previous_source, current_source):
+    """New rules may tighten coverage; existing rules and coverage cannot shrink."""
+    failures = []
+    if previous is not None:
+        for rule, pattern in previous['patterns'].items():
+            if rule not in contract['patterns']:
+                failures.append(f'pattern {rule} removed; retain existing coverage and add stricter rules')
+            elif contract['patterns'][rule] != pattern:
+                failures.append(f'pattern {rule} changed; retain it and add a stricter rule instead')
+        families = {family['name']: family for family in contract['families']}
+        for family in previous['families']:
+            name = family['name']
+            if name not in families:
+                failures.append(f'family {name} removed; migrate its registered coverage instead')
+            elif not set(family['canonical']) <= set(families[name]['canonical']):
+                failures.append(f'{name}: canonical coverage removed; retain the registered source owners')
+    for rule, files in contract['wrapperAllowlist'].items():
+        old_files = previous.get('wrapperAllowlist', {}).get(rule, {}) if previous else {}
+        for name in files:
+            if previous is not None and name not in old_files:
+                failures.append(f'{name}: {rule} wrapper allowance added; register source-backed coverage instead')
+                continue
+            pattern = previous['patterns'][rule] if previous is not None else contract['patterns'][rule]
+            before = scan(previous_source(name), {rule: pattern}).get(rule, 0)
+            after = scan(current_source(name), {rule: pattern}).get(rule, 0)
+            if after > before:
+                failures.append(f'{name}: {rule} wrapper occurrences grew {before} -> {after}; '
+                                'the existing wrapper exemption is bounded to its base occurrences')
+    return failures
+
+
 def check_baseline_history(contract):
     event_path = os.environ.get('GITHUB_EVENT_PATH')
     event = json.loads(Path(event_path).read_text()) if event_path else {}
@@ -78,14 +191,23 @@ def check_baseline_history(contract):
     # only when the reference commit itself can actually be resolved.
     subprocess.run(['git', 'cat-file', '-e', reference + '^{commit}'], cwd=ROOT, check=True, capture_output=True)
     raw = contents('tool/design-system/families.json')
-    previous = json.loads(raw) if raw else None
-    return baseline_growth(contract, previous, contents)
+    previous = read_contract(raw) if raw else None
+    def current(name):
+        path = ROOT / name
+        return path.read_text() if path.is_file() else ''
+    return (baseline_growth(contract, previous, contents)
+            + policy_changes(contract, previous, contents, current))
 
 
 def main():
-    contract = json.loads((HERE / 'families.json').read_text())
-    _, failures = inspect(ROOT, contract)
-    failures.extend(check_baseline_history(contract))
+    try:
+        contract = read_contract((HERE / 'families.json').read_text())
+        validate_contract(contract)
+        _, failures = inspect(ROOT, contract)
+        failures.extend(check_baseline_history(contract))
+    except (ValueError, OSError, subprocess.CalledProcessError) as error:
+        print('design-system: ' + str(error), file=sys.stderr)
+        return 1
     if failures:
         print('\n'.join(failures), file=sys.stderr)
         return 1
