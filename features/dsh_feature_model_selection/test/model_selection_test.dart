@@ -9,6 +9,8 @@ import 'package:dsh_models/testing.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -387,7 +389,7 @@ void main() {
     });
     tearDown(() => feature.dispose());
 
-    Widget seat() => dshTestApp(
+    Widget seat({Size size = const Size(390, 800)}) => dshTestApp(
       Align(
         alignment: Alignment.centerLeft,
         child: slots.renderSingle(
@@ -395,7 +397,7 @@ void main() {
           owner,
         )!,
       ),
-      size: const Size(390, 800),
+      size: size,
     );
 
     void project(Map<String, Object?>? next, [int seq = 1]) => owner
@@ -403,11 +405,14 @@ void main() {
         .projections
         .apply('modelSelection', {'lastUsed': null, 'next': next}, seq);
 
-    Future<void> ready(WidgetTester t) async {
+    Future<void> ready(
+      WidgetTester t, {
+      Size size = const Size(390, 800),
+    }) async {
       // The feature read the catalog when it registered; a test that changed
       // the handler since announces the change like the host would.
       host.emit('llm/adapters-updated');
-      await t.pumpWidget(seat());
+      await t.pumpWidget(seat(size: size));
       await t.runAsync(() => flush(10));
       project(null);
       await t.pump();
@@ -432,16 +437,36 @@ void main() {
       expect(find.text('Select model'), findsOneWidget);
     });
 
-    testWidgets('the sheet opens on the root with the Model and Effort rows', (
-      t,
-    ) async {
-      await ready(t);
-      await t.tap(find.byKey(const ValueKey('model-chip')));
-      await t.pumpAndSettle();
-      expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
-      expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
-      expect(find.text('Model and reasoning effort'), findsOneWidget);
-    });
+    testWidgets(
+      'the source menu root has two compact rows and no sheet title',
+      (t) async {
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                model('flash', 'Flash', efforts: ['low', 'high']),
+              ],
+            },
+          ],
+        );
+        await ready(t);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
+        expect(find.byKey(const ValueKey('model-root-effort')), findsOneWidget);
+        expect(find.text('Model and reasoning effort'), findsNothing);
+        expect(
+          t.getSize(find.byKey(const ValueKey('model-sheet'))),
+          const Size(240, 76),
+        );
+        expect(
+          t.getSize(find.byKey(const ValueKey('model-root-model'))).height,
+          34,
+        );
+      },
+    );
 
     testWidgets('choosing a model submits it with its default effort', (
       t,
@@ -666,9 +691,98 @@ void main() {
       await ready(t);
       await t.tap(find.byKey(const ValueKey('model-chip')));
       await t.pumpAndSettle();
-      expect(find.text('模型与推理等级'), findsOneWidget);
+      expect(find.text('模型与推理等级'), findsNothing);
+      expect(find.text('模型'), findsOneWidget);
       expect(find.text('推理等级'), findsOneWidget);
     });
+
+    testWidgets('desktop root stays above its trigger and dismisses outside', (
+      t,
+    ) async {
+      host.handlers['session/modelCatalog'] = (_) => catalog(
+        groups: [
+          {
+            'id': 'deepseek-official',
+            'name': 'DeepSeek',
+            'models': [
+              model('flash', 'Flash', efforts: ['low', 'high']),
+            ],
+          },
+        ],
+      );
+      t.view.physicalSize = const Size(1100, 800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.resetPhysicalSize);
+      addTearDown(t.view.resetDevicePixelRatio);
+      await ready(t, size: const Size(1100, 800));
+      final barrierCount = find.byType(ModalBarrier).evaluate().length;
+      final trigger = find.byKey(const ValueKey('model-chip'));
+      await t.tap(trigger);
+      await t.pumpAndSettle();
+      final menu = find.byKey(const ValueKey('model-sheet'));
+      expect(t.getSize(menu), const Size(240, 76));
+      expect(t.getBottomLeft(menu).dy, t.getTopLeft(trigger).dy - 8);
+      expect(find.byType(ModalBarrier).evaluate().length, barrierCount);
+      await t.tapAt(const Offset(1000, 760));
+      await t.pumpAndSettle();
+      expect(menu, findsNothing);
+    });
+
+    testWidgets('keyboard drills then Escape returns to root before closing', (
+      t,
+    ) async {
+      await ready(t);
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      await t.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-list')), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-root-model')), findsOneWidget);
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+    });
+
+    testWidgets(
+      'pending effort choice keeps the row and blocks a second request',
+      (t) async {
+        final gate = Completer<void>();
+        host.handlers['session/selectModel'] = (_) async {
+          await gate.future;
+          return {
+            'selected': {
+              'provider': 'deepseek-official',
+              'model': 'flash',
+              'reasoningEffort': 'low',
+            },
+          };
+        };
+        await ready(t);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('model-root-effort')));
+        await t.pumpAndSettle();
+        await t.tap(find.byKey(const ValueKey('effort-option-effort:low')));
+        await t.pump();
+        expect(find.byKey(const ValueKey('model-sheet')), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byKey(const ValueKey('effort-option-effort:low')),
+            matching: find.byType(DshStatusDot),
+          ),
+          findsOneWidget,
+        );
+        await t.tap(find.byKey(const ValueKey('effort-option-effort:high')));
+        expect(host.callsTo('session/selectModel'), hasLength(1));
+        gate.complete();
+        await t.runAsync(() => flush(8));
+        await t.pumpAndSettle();
+        expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+      },
+    );
   });
 }
 

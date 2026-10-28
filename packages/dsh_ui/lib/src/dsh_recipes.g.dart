@@ -10,6 +10,7 @@
 // From @deepseek-ai/dsh-client-ui-workspace 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-settings-general 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-settings-account 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-model-selection 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -646,4 +647,80 @@ abstract final class DshSidebarLauncherRecipe {
   static const String menuIconToken = '--dsw-alias-menu-icon';
   static const double menuFontSize = 14.0;
   static const double menuLineHeight = 22.0;
+}
+
+abstract final class DshModelMenuRecipe {
+  static const double minWidth = 240.0;
+  static const double viewportWidthInset = 32.0;
+  static const double maxWidth = 420.0;
+  static const double maxHeight = 360.0;
+  static const double viewportHeightInset = 96.0;
+  static const double portalMargin = 12.0;
+  static const double anchorGap = 8.0;
+  static const double padding = 4.0;
+  static const double rowHeight = 34.0;
+  static const double rowGap = 6.0;
+  static const double rowHorizontalPadding = 7.0;
+  static const double rowVerticalPadding = 5.0;
+  static const double rowFontSize = 13.0;
+  static const double rowLineHeight = 18.0;
+  static const String rowFontToken = '--dsw-font-xs-13';
+  static const double rowFontWeight = 400.0;
+  static const String radiusToken = '--dsw-radius-md';
+  static const String labelToken = '--dsw-alias-label-primary';
+  static const String disabledToken = '--dsw-alias-label-dimmed';
+  static const String hoverToken = '--dsw-alias-interactive-bg-hover';
+  static const double checkSize = 14.0;
+  static const String checkToken = '--dsw-alias-label-primary';
+  static const double cellHeight = 34.0;
+  static const double cellGap = 6.0;
+  static const double cellHorizontalPadding = 8.0;
+  static const double cellVerticalPadding = 0.0;
+  static const double cellFontSize = 13.0;
+  static const double cellLineHeight = 20.0;
+  static const String cellFontToken = '--dsw-font-xs-13';
+  static const String valueToken = '--dsw-alias-label-tertiary';
+  static const double chevronSize = 12.0;
+  static const String chevronToken = '--dsw-alias-menu-icon';
+  static const double triggerHeight = 28.0;
+  static const double triggerGap = 4.0;
+  static const double triggerMaxWidth = 360.0;
+  static const double triggerWidthFactor = 0.45;
+  static const String triggerRadiusToken = '--dsw-radius-sm';
+  static const double triggerLeftPadding = 8.0;
+  static const double triggerRightPadding = 4.0;
+  static const String triggerFontToken = '--dsw-font-xs-13';
+  static const double triggerFontSize = 13.0;
+  static const double triggerLineHeight = 20.0;
+  static const double triggerFontWeight = 400.0;
+  static const String triggerLabelToken = '--dsw-alias-label-secondary';
+  static const String triggerEffortToken = '--dsw-alias-label-caption';
+  static const double statusPadding = 8.0;
+  static const double statusFontSize = 12.0;
+  static const double statusLineHeight = 18.0;
+  static const String statusFontToken = '--dsw-font-xxs-12';
+  static const String statusToken = '--dsw-alias-label-tertiary';
+  static const double errorHorizontalPadding = 7.0;
+  static const double errorVerticalPadding = 6.0;
+  static const double errorGap = 6.0;
+  static const double errorBottomMargin = 3.0;
+  static const double errorFontSize = 11.0;
+  static const double errorLineHeight = 16.0;
+  static const String errorFontToken = '--dsw-font-xxxs-11';
+  static const double retryFontWeight = 600.0;
+  static const String errorFillToken =
+      '--dsw-alias-interactive-bg-hover-danger';
+  static const String errorLabelToken = '--dsw-alias-state-error-primary';
+  static const String warningFillToken = '--dsw-alias-bg-module-platform';
+  static const String warningLabelToken = '--dsw-alias-state-warn-label';
+  static const double searchHorizontalPadding = 7.0;
+  static const double searchVerticalPadding = 5.0;
+  static const double searchTopMargin = 2.0;
+  static const double searchBottomMargin = 3.0;
+  static const double searchClearSize = 24.0;
+  static const double searchClearRight = 4.0;
+  static const double searchQueryRightPadding = 34.0;
+  static const double searchFontSize = 12.0;
+  static const String scrollbarToken = '--dsw-alias-scrollbar-bg-l2';
+  static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
 }

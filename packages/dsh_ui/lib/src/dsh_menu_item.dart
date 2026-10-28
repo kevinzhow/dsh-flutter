@@ -10,11 +10,19 @@ import 'dsh_icon_data.dart';
 import 'dsh_icons.g.dart';
 import 'dsh_recipes.g.dart';
 import 'dsh_snapped_box.dart';
+import 'dsh_status_dot.dart';
 import 'dsh_text_baseline.dart';
 import 'dsh_tooltip.dart';
 import 'theme_access.dart';
 
-enum DshMenuItemProfile { standard, addPlugin, dock, sidebarLauncher }
+enum DshMenuItemProfile {
+  standard,
+  addPlugin,
+  dock,
+  sidebarLauncher,
+  modelCell,
+  modelOption,
+}
 
 /// An effective shortcut supplied by the action owner, not a default binding.
 class DshMenuShortcut {
@@ -43,6 +51,12 @@ class DshMenuItemButton extends StatefulWidget {
     this.shortcut,
     this.autofocus = false,
     this.onDismiss,
+    this.value,
+    this.trailing,
+    this.active = false,
+    this.onHover,
+    this.onFocusChange,
+    this.pending = false,
   }) : assert(description == null || profile == DshMenuItemProfile.addPlugin);
   final String label;
   final String? description;
@@ -54,6 +68,12 @@ class DshMenuItemButton extends StatefulWidget {
   final DshMenuShortcut? shortcut;
   final bool autofocus;
   final VoidCallback? onDismiss;
+  final String? value;
+  final Widget? trailing;
+  final bool active;
+  final VoidCallback? onHover;
+  final ValueChanged<bool>? onFocusChange;
+  final bool pending;
   @override
   State<DshMenuItemButton> createState() => _DshMenuItemButtonState();
 }
@@ -82,8 +102,11 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
     final add = widget.profile == DshMenuItemProfile.addPlugin;
     final dock = widget.profile == DshMenuItemProfile.dock;
     final sidebar = widget.profile == DshMenuItemProfile.sidebarLauncher;
-    final compact = widget.compact && !add && !dock && !sidebar;
-    final hover = _enabled && (_hover || (_focusVisible && !dock));
+    final cell = widget.profile == DshMenuItemProfile.modelCell;
+    final model = cell || widget.profile == DshMenuItemProfile.modelOption;
+    final compact = widget.compact && !add && !dock && !sidebar && !model;
+    final hover =
+        _enabled && (_hover || widget.active || (_focusVisible && !dock));
     final iconSize = sidebar
         ? DshSidebarLauncherRecipe.menuIconSize
         : compact
@@ -91,13 +114,17 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
         : DshMenuRecipe.iconSize;
     final gap = sidebar
         ? DshSidebarLauncherRecipe.menuRowGap
+        : model
+        ? DshModelMenuRecipe.rowGap
         : add
         ? DshPluginAddMenuRecipe.gap
         : compact
         ? DshMenuRecipe.compactGap
         : DshMenuRecipe.gap;
     final ink = theme.color(
-      dock
+      model && !_enabled
+          ? DshModelMenuRecipe.disabledToken
+          : dock
           ? DshDockMenuRecipe.labelToken
           : widget.danger
           ? DshMenuRecipe.dangerToken
@@ -105,11 +132,26 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
     );
     var style = theme
         .textStyle(
-          compact ? DshMenuRecipe.compactFontToken : DshMenuRecipe.fontToken,
+          model
+              ? (cell
+                    ? DshModelMenuRecipe.cellFontToken
+                    : DshModelMenuRecipe.rowFontToken)
+              : compact
+              ? DshMenuRecipe.compactFontToken
+              : DshMenuRecipe.fontToken,
         )
         .copyWith(
           color: ink,
-          height: compact
+          fontWeight: model
+              ? FontWeight.values[(DshModelMenuRecipe.rowFontWeight ~/ 100) - 1]
+              : null,
+          height: model
+              ? cell
+                    ? DshModelMenuRecipe.cellLineHeight /
+                          DshModelMenuRecipe.cellFontSize
+                    : DshModelMenuRecipe.rowLineHeight /
+                          DshModelMenuRecipe.rowFontSize
+              : compact
               ? DshMenuRecipe.compactLineHeight / DshMenuRecipe.compactFontSize
               : DshMenuRecipe.lineHeight / DshMenuRecipe.fontSize,
         );
@@ -123,7 +165,9 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
           .copyWith(color: ink, height: kTextHeightNone);
     }
     final radius = theme.number(
-      dock
+      model
+          ? DshModelMenuRecipe.radiusToken
+          : dock
           ? DshDockMenuRecipe.radiusToken
           : compact
           ? DshMenuRecipe.compactRadiusToken
@@ -132,7 +176,9 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
     final selectedFill = widget.selected && widget.selectionFill;
     final fill = hover
         ? theme.color(
-            dock
+            model
+                ? DshModelMenuRecipe.hoverToken
+                : dock
                 ? DshDockMenuRecipe.hoverToken
                 : widget.danger
                 ? (_focusVisible
@@ -152,6 +198,8 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
           : BoxConstraints(
               minHeight: sidebar
                   ? DshSidebarLauncherRecipe.menuRowHeight
+                  : model
+                  ? DshModelMenuRecipe.rowHeight
                   : add
                   ? DshPluginAddMenuRecipe.height
                   : compact
@@ -163,6 +211,10 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
       padding: EdgeInsets.symmetric(
         horizontal: sidebar
             ? DshSidebarLauncherRecipe.menuRowHorizontalPadding
+            : model
+            ? cell
+                  ? DshModelMenuRecipe.cellHorizontalPadding
+                  : DshModelMenuRecipe.rowHorizontalPadding
             : dock
             ? DshDockMenuRecipe.horizontalPadding
             : add
@@ -172,6 +224,10 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
             : DshMenuRecipe.horizontalPadding,
         vertical: sidebar
             ? DshSidebarLauncherRecipe.menuRowVerticalPadding
+            : model
+            ? cell
+                  ? DshModelMenuRecipe.cellVerticalPadding
+                  : DshModelMenuRecipe.rowVerticalPadding
             : dock
             ? DshDockMenuRecipe.verticalPadding
             : add
@@ -199,50 +255,93 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
             ),
             SizedBox(width: gap),
           ],
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DshChromeText(
-                  widget.label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: style,
-                ),
-                if (widget.description != null) ...[
-                  SizedBox(height: DshPluginAddMenuRecipe.descriptionGap),
+          if (cell)
+            DshChromeText(widget.label, maxLines: 1, style: style)
+          else
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   DshChromeText(
-                    widget.description!,
-                    maxLines:
-                        (DshPluginAddMenuRecipe.descriptionMaxHeight /
-                                DshPluginAddMenuRecipe.descriptionLineHeight)
-                            .toInt(),
+                    widget.label,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: theme
-                        .textStyle(DshPluginAddMenuRecipe.descriptionFontToken)
-                        .copyWith(
-                          color: theme.color(
-                            DshPluginAddMenuRecipe.descriptionToken,
-                          ),
-                          height:
-                              DshPluginAddMenuRecipe.descriptionLineHeight /
-                              DshPluginAddMenuRecipe.descriptionFontSize,
-                        ),
+                    style: style,
                   ),
+                  if (widget.description != null) ...[
+                    SizedBox(height: DshPluginAddMenuRecipe.descriptionGap),
+                    DshChromeText(
+                      widget.description!,
+                      maxLines:
+                          (DshPluginAddMenuRecipe.descriptionMaxHeight /
+                                  DshPluginAddMenuRecipe.descriptionLineHeight)
+                              .toInt(),
+                      overflow: TextOverflow.ellipsis,
+                      style: theme
+                          .textStyle(
+                            DshPluginAddMenuRecipe.descriptionFontToken,
+                          )
+                          .copyWith(
+                            color: theme.color(
+                              DshPluginAddMenuRecipe.descriptionToken,
+                            ),
+                            height:
+                                DshPluginAddMenuRecipe.descriptionLineHeight /
+                                DshPluginAddMenuRecipe.descriptionFontSize,
+                          ),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
+          if (widget.value case final value?) ...[
+            SizedBox(width: gap),
+            Expanded(
+              child: DshChromeText(
+                value,
+                textAlign: TextAlign.end,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: style.copyWith(
+                  color: theme.color(DshModelMenuRecipe.valueToken),
+                ),
+              ),
+            ),
+          ],
           if (widget.shortcut case final shortcut?) ...[
             SizedBox(width: gap),
             DshShortcutKeys(keys: shortcut.keys, menu: true),
           ],
-          if (widget.selected && !widget.selectionFill) ...[
+          if (model) ...[
+            SizedBox(width: gap),
+            if (cell)
+              DshIcon(
+                DshIcons.chevronRight,
+                size: DshModelMenuRecipe.chevronSize,
+                color: theme.color(DshModelMenuRecipe.chevronToken),
+              )
+            else
+              SizedBox.square(
+                dimension: DshModelMenuRecipe.checkSize,
+                child: widget.pending
+                    ? const DshStatusDot(DshStatus.running)
+                    : widget.selected
+                    ? DshIcon(
+                        DshIcons.check,
+                        size: DshModelMenuRecipe.checkSize,
+                        color: theme.color(DshModelMenuRecipe.checkToken),
+                      )
+                    : null,
+              ),
+          ] else if (widget.trailing case final trailing?) ...[
+            SizedBox(width: gap),
+            trailing,
+          ] else if (widget.selected && !widget.selectionFill) ...[
             SizedBox(width: gap),
             DshIcon(
               DshIcons.check,
-              size: iconSize,
+              size: model ? DshModelMenuRecipe.checkSize : iconSize,
               color: theme.color(DshMenuRecipe.checkToken),
             ),
           ],
@@ -262,6 +361,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
       hint: widget.shortcut?.aria,
       label: [
         widget.label,
+        if (widget.value != null) widget.value!,
         if (widget.description != null) widget.description!,
       ].join('\n'),
       excludeSemantics: true,
@@ -270,7 +370,10 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
         cursor: _enabled
             ? SystemMouseCursors.click
             : SystemMouseCursors.forbidden,
-        onEnter: (_) => setState(() => _hover = true),
+        onEnter: (_) {
+          setState(() => _hover = true);
+          widget.onHover?.call();
+        },
         onExit: (_) => setState(() => _hover = false),
         child: FocusableActionDetector(
           focusNode: _focusNode,
@@ -308,6 +411,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
           },
           onFocusChange: (value) {
             if (mounted && _focused != value) setState(() => _focused = value);
+            widget.onFocusChange?.call(value);
           },
           onShowFocusHighlight: (value) {
             if (mounted) setState(() => _focusVisible = value);
@@ -316,7 +420,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
             behavior: HitTestBehavior.opaque,
             onTap: _enabled ? widget.onPressed : null,
             child: Opacity(
-              opacity: _enabled ? 1 : DshMenuRecipe.disabledOpacity,
+              opacity: _enabled || model ? 1 : DshMenuRecipe.disabledOpacity,
               child: (dock && _focusVisible && _enabled)
                   ? Stack(
                       clipBehavior: Clip.none,

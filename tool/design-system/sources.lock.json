@@ -334,6 +334,31 @@
         "packages/client/ui-settings-account/src/client/AccountMenu.tsx": "c2da502b8ce38e15b03a1e445d586b47e00d13cb36d522f3bd4e7cf2b59ac1ab"
       },
       "extraction": "Decode named CSS JSON literals and static class maps from published release without JavaScript execution"
+    },
+    {
+      "name": "@deepseek-ai/dsh-client-ui-model-selection",
+      "version": "0.2.1-rc.2",
+      "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-model-selection/-/dsh-client-ui-model-selection-0.2.1-rc.2.tgz",
+      "integrity": "sha512-vQ/MfeWbhR8kEjKDxWnJ9Wf5RgltngVnq+8TAnfx5cA/4PDlUD/Fm4K3/KWAgUMz7pS+x4yno4ri3SHSsksb5g==",
+      "publishedBundleSha256": "18f6e74e203d50f66c8e30552d52e070d06941514cb0e72b149683c092a3ba2a",
+      "extractionKind": "model-menu-css",
+      "extraction": "Decode static published model CSS/class map and ModelSelect region without JavaScript execution",
+      "sourcePackage": "packages/client/ui-model-selection/package.json",
+      "referenceConsumer": "packages/bundle/web-app/package.json",
+      "dependencyField": "dependencies",
+      "dependencySpecifier": "workspace:*",
+      "snapshotFolder": "ui-model-selection",
+      "files": {
+        "package.json": "658fcd344cf6ca8b08c8fb149ef7578dcd02201d95fc55f817ddc2fe742a6923",
+        "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+        "ModelSelect.module.css": "1fd9ef13401cb2cdf8a154ee8cf5dcbf16c9e2f90dac348e2beb2f90c309cb6e",
+        "classes.json": "50e37a1ea4c0cd87ade7fe6b17d26e3afa7e4b1c13233af6d7a4e17cbd45ec34",
+        "model-behavior.json": "b8657b618691f847d71af5475d37444f6be99359b5c1304b0e050b1f128edb42"
+      },
+      "referenceSourceSha256": {
+        "packages/client/ui-model-selection/src/client/ModelSelect.tsx": "081a79904b09e45c3226e39baa711ed1c72138f00f3d29ba1f0c1aa5c3b768cb",
+        "packages/client/ui-model-selection/src/client/ModelSelect.module.css": "7754687bfd5b18693e326f29367bf96a5ecf2906f0a00da82290406c9f12f80b"
+      }
     }
   ],
   "rendererSnapshots": {

@@ -108,6 +108,24 @@ def modal_layer_snapshot(archive):
             'modal': bundle_region(text, 'Modal.js'),
             'risk': bundle_region(text, 'RiskConfirmation.js')}
 
+def model_menu_snapshot(archive):
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        text = bundle.decode()
+        region = bundle_region(text, 'ModelSelect.module.css.mjs')
+        literals = re.findall(r'\bconst css(?:\$\d+)? = ("(?:\\.|[^"\\])*");', region)
+        if len(literals) != 1:
+            raise ValueError('published model menu CSS literal missing/ambiguous')
+        classes, _ = json.JSONDecoder().raw_decode(region.split('var ModelSelect_module_css_default = ', 1)[1])
+        if not isinstance(classes, dict) or not classes or not all(isinstance(k, str) and isinstance(v, str) for k, v in classes.items()):
+            raise ValueError('published model menu class map is not static')
+        return {'css': json.loads(literals[0]), 'classes': classes,
+                'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                'behavior': {'bundleSha256': hashlib.sha256(bundle).hexdigest(),
+                             'region': bundle_region(text, 'ModelSelect.js')},
+                'manifest': tar.extractfile('package/package.json').read(),
+                'license': tar.extractfile('package/LICENSE').read()}
+
 def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
@@ -242,12 +260,17 @@ def verify_snapshot(archive, package, folder):
         return
     extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot,
                'agent-preset-css': agent_preset_style_snapshot,
-               'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot}
+               'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot,
+               'model-menu-css': model_menu_snapshot}
     result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
         if (folder / 'PluginManagerPage.module.css').read_text() != result['css']: raise ValueError('decoded CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('class export snapshot mismatch')
+    elif kind == 'model-menu-css':
+        if (folder / 'ModelSelect.module.css').read_text() != result['css']: raise ValueError('decoded model menu CSS snapshot mismatch')
+        if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('model menu class map snapshot mismatch')
+        if json.loads((folder / 'model-behavior.json').read_text()) != result['behavior']: raise ValueError('model menu behavior snapshot mismatch')
     elif kind == 'market-css':
         if (folder / 'DiscoverSection.module.css').read_text() != result['css']: raise ValueError('decoded market CSS snapshot mismatch')
         if json.loads((folder / 'classes.json').read_text()) != result['classes']: raise ValueError('market class export snapshot mismatch')

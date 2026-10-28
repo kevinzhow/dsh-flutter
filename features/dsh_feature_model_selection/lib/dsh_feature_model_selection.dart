@@ -1,5 +1,5 @@
 /// The model selection feature (dsh `ui-model-selection`): the composer model
-/// seat and its sheet over one per-session directory that joins the Host's
+/// seat and its anchored menu over one per-session directory that joins the Host's
 /// provider-grouped catalog with the session's durable model selection.
 library;
 

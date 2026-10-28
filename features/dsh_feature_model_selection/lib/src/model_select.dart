@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:dsh_client/generated.dart' as session_ns;
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_theme/dsh_theme.dart';
 import 'package:dsh_ui/dsh_ui.dart';
-import 'package:flutter/material.dart' show showModalBottomSheet;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'model_directory.dart';
@@ -12,12 +13,8 @@ import 'provider_order.dart';
 
 const String _ns = 'model';
 
-/// The composer's model seat (dsh `ModelSelect`, slot
-/// `conversation.input.model`): a chip with the current model's name and
-/// reasoning effort that opens a sheet. The sheet is the phone form of dsh's
-/// two-level menu: a root with the Model and Effort rows, each drilling into
-/// its list; the model list is provider-grouped, searchable above four
-/// models, and shows provider-local failures with a retry.
+/// The actual two-level ModelSelect menu, anchored above the composer's chip
+/// at every viewport size like the published source.
 class ModelSeat extends StatefulWidget {
   const ModelSeat({
     super.key,
@@ -25,124 +22,187 @@ class ModelSeat extends StatefulWidget {
     required this.i18n,
     this.locked = false,
   });
-
   final ModelDirectory directory;
   final DshI18n i18n;
-
-  /// Whether the session takes no changes (a running turn is not a reason:
-  /// the new model applies to the next request).
   final bool locked;
-
   @override
   State<ModelSeat> createState() => _ModelSeatState();
 }
 
 class _ModelSeatState extends State<ModelSeat> {
+  final _triggerFocus = FocusNode();
+  bool _hover = false, _focusVisible = false;
   String _t(String key, [Map<String, Object?> params = const {}]) =>
       widget.i18n.t(_ns, key, params: params);
+  @override
+  void dispose() {
+    _triggerFocus.dispose();
+    super.dispose();
+  }
 
-  Future<void> _open() async {
-    unawaited(
-      widget.directory.load().then<void>((_) {}, onError: (Object _) {}),
-    );
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: context.dsh.color('--dsw-alias-bg-layer-2'),
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.sizeOf(context).height * 0.85,
-      ),
-      builder: (_) =>
-          ModelSheet(directory: widget.directory, i18n: widget.i18n),
-    );
+  void _toggle(DshPanelController panel) {
+    _triggerFocus.requestFocus();
+    if (!panel.isOpen) {
+      unawaited(
+        widget.directory.load().then<void>((_) {}, onError: (Object _) {}),
+      );
+    }
+    panel.toggle();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return DshWatch(
-      changes: widget.directory.state.changes,
-      builder: (context) {
-        final theme = context.dsh;
-        final state = widget.directory.state.value;
-        final view = _View.of(state, _t);
-        final waiting =
-            view.choice == null && state.status == ModelDirectoryStatus.loading;
-        final modelLabel = waiting
-            ? _t('trigger.loading')
-            : (view.choice?.model.name ?? _t('trigger.fallback'));
-        final effort = view.effortLabel;
-        final aria = waiting
-            ? _t('trigger.loading')
-            : view.choice == null
-            ? _t('trigger.selectAria')
-            : effort == null
-            ? _t('trigger.aria', {'model': modelLabel})
-            : _t('trigger.ariaEffort', {'model': modelLabel, 'effort': effort});
-        final busy = state.pending != null;
-        final style = theme
-            .textStyle('--dsw-font-xs-13')
-            .copyWith(
-              color: widget.locked
-                  ? theme.color('--dsw-alias-label-dimmed')
-                  : theme.labelSecondary,
-              height: 20 / 13,
-              fontWeight: FontWeight.w400,
-            );
-        return Semantics(
+  Widget build(BuildContext context) => DshWatch(
+    changes: widget.directory.state.changes,
+    builder: (context) {
+      final theme = context.dsh;
+      final state = widget.directory.state.value;
+      final view = _View.of(state, _t);
+      final waiting =
+          view.choice == null && state.status == ModelDirectoryStatus.loading;
+      final label = waiting
+          ? _t('trigger.loading')
+          : (view.choice?.model.name ?? _t('trigger.fallback'));
+      final effort = view.effortLabel;
+      final aria = waiting
+          ? _t('trigger.loading')
+          : view.choice == null
+          ? _t('trigger.selectAria')
+          : effort == null
+          ? _t('trigger.aria', {'model': label})
+          : _t('trigger.ariaEffort', {'model': label, 'effort': effort});
+      final style = theme
+          .textStyle(DshModelMenuRecipe.triggerFontToken)
+          .copyWith(
+            color: theme.color(
+              widget.locked
+                  ? DshModelMenuRecipe.disabledToken
+                  : DshModelMenuRecipe.triggerLabelToken,
+            ),
+            height:
+                DshModelMenuRecipe.triggerLineHeight /
+                DshModelMenuRecipe.triggerFontSize,
+            fontWeight: FontWeight
+                .values[(DshModelMenuRecipe.triggerFontWeight ~/ 100) - 1],
+          );
+      return DshAnchoredPanel(
+        side: DshPanelSide.top,
+        align: DshPanelAlign.end,
+        menuViewport: true,
+        gap: DshModelMenuRecipe.anchorGap,
+        viewportMargin: DshModelMenuRecipe.portalMargin,
+        frameOverlayTop: DshModelMenuRecipe.portalMargin,
+        panelBuilder: (context, panel) => ModelSheet(
+          directory: widget.directory,
+          i18n: widget.i18n,
+          onClose: panel.close,
+        ),
+        builder: (context, panel) => Semantics(
           button: true,
           enabled: !widget.locked,
           label: aria,
           excludeSemantics: true,
-          child: GestureDetector(
-            key: const ValueKey('model-chip'),
-            behavior: HitTestBehavior.opaque,
-            onTap: widget.locked ? null : _open,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 260, minHeight: 28),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 4),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: DshChromeText(
-                        modelLabel,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: style,
-                      ),
+          child: MouseRegion(
+            cursor: widget.locked
+                ? SystemMouseCursors.basic
+                : SystemMouseCursors.click,
+            onEnter: (_) => setState(() => _hover = true),
+            onExit: (_) => setState(() => _hover = false),
+            child: FocusableActionDetector(
+              focusNode: _triggerFocus,
+              enabled: !widget.locked,
+              onShowFocusHighlight: (value) =>
+                  setState(() => _focusVisible = value),
+              shortcuts: const {
+                SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+                SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+              },
+              actions: {
+                ActivateIntent: CallbackAction<ActivateIntent>(
+                  onInvoke: (_) {
+                    _toggle(panel);
+                    return null;
+                  },
+                ),
+              },
+              child: GestureDetector(
+                key: const ValueKey('model-chip'),
+                behavior: HitTestBehavior.opaque,
+                onTap: widget.locked ? null : () => _toggle(panel),
+                child: DshContainer(
+                  constraints: BoxConstraints(
+                    maxWidth: math.min(
+                      DshModelMenuRecipe.triggerMaxWidth,
+                      MediaQuery.sizeOf(context).width *
+                          DshModelMenuRecipe.triggerWidthFactor,
                     ),
-                    if (effort != null) ...[
-                      const SizedBox(width: 4),
+                  ),
+                  height: DshModelMenuRecipe.triggerHeight,
+                  padding: const EdgeInsets.only(
+                    left: DshModelMenuRecipe.triggerLeftPadding,
+                    right: DshModelMenuRecipe.triggerRightPadding,
+                  ),
+                  decoration: theme.cornerDecoration(
+                    theme.number(DshModelMenuRecipe.triggerRadiusToken),
+                    color: _hover && !widget.locked
+                        ? theme.color(DshModelMenuRecipe.hoverToken)
+                        : null,
+                    borderColor: _focusVisible && !widget.locked
+                        ? theme.focusRingColor
+                        : null,
+                    borderWidth: _focusVisible && !widget.locked
+                        ? theme.focusRingWidth
+                        : 0,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                       Flexible(
-                        flex: 0,
                         child: DshChromeText(
-                          effort,
+                          label,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: style.copyWith(
-                            color: theme.color('--dsw-alias-label-caption'),
-                          ),
+                          style: style,
                         ),
                       ),
+                      if (effort != null) ...[
+                        const SizedBox(width: DshModelMenuRecipe.triggerGap),
+                        Flexible(
+                          child: DshChromeText(
+                            effort,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: style.copyWith(
+                              color: theme.color(
+                                DshModelMenuRecipe.triggerEffortToken,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(width: DshModelMenuRecipe.triggerGap),
+                      if (state.pending != null)
+                        const DshStatusDot(DshStatus.running)
+                      else
+                        Transform.rotate(
+                          angle: panel.isOpen ? math.pi : 0,
+                          child: DshIcon(
+                            DshIcons.chevronDown,
+                            size: DshModelMenuRecipe.chevronSize,
+                            color: theme.color(
+                              DshModelMenuRecipe.triggerEffortToken,
+                            ),
+                          ),
+                        ),
                     ],
-                    const SizedBox(width: 4),
-                    if (busy)
-                      const DshStatusDot(DshStatus.running)
-                    else
-                      DshIcon(
-                        DshIcons.chevronDown,
-                        color: theme.color('--dsw-alias-label-caption'),
-                      ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
 }
 
 /// One effort row: [effort] null means the provider default.
@@ -223,33 +283,69 @@ class _View {
 
 enum _Pane { root, model, effort }
 
-/// The content of the model sheet.
+/// Compatibility name for the published bounded ModelSelect menu content.
+/// This is a MenuSurface, with no dialog title, dimming mask or sheet route.
 class ModelSheet extends StatefulWidget {
-  const ModelSheet({super.key, required this.directory, required this.i18n});
-
+  const ModelSheet({
+    super.key,
+    required this.directory,
+    required this.i18n,
+    this.onClose,
+  });
   final ModelDirectory directory;
   final DshI18n i18n;
-
+  final VoidCallback? onClose;
   @override
   State<ModelSheet> createState() => _ModelSheetState();
 }
 
 class _ModelSheetState extends State<ModelSheet> {
   _Pane _pane = _Pane.root;
-  bool _paneChosen = false;
+  bool _paneChosen = false, _lastWasLoad = true;
   String _query = '';
   String? _toast;
-  bool _lastWasLoad = true;
+  String? _lastRevealed;
+  int? _highlight;
   Timer? _toastTimer;
-
-  @override
-  void dispose() {
-    _toastTimer?.cancel();
-    super.dispose();
+  final _searchFocus = FocusNode();
+  final _rowFocus = <String, FocusNode>{};
+  final _searchController = TextEditingController();
+  FocusNode _node(String id) => _rowFocus.putIfAbsent(id, () {
+    final node = FocusNode();
+    node.addListener(() {
+      if (node.hasFocus) _reveal(id);
+    });
+    return node;
+  });
+  void _reveal(String id) {
+    final rowContext = _rowFocus[id]?.context;
+    final object = rowContext?.findRenderObject();
+    if (rowContext == null || object == null) return;
+    final position = Scrollable.maybeOf(rowContext)?.position;
+    position?.ensureVisible(
+      object,
+      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+    );
+    position?.ensureVisible(
+      object,
+      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+    );
   }
 
   String _t(String key, [Map<String, Object?> params = const {}]) =>
       widget.i18n.t(_ns, key, params: params);
+  void _close() =>
+      widget.onClose != null ? widget.onClose!() : Navigator.of(context).pop();
+  @override
+  void dispose() {
+    _toastTimer?.cancel();
+    _searchFocus.dispose();
+    _searchController.dispose();
+    for (final node in _rowFocus.values) {
+      node.dispose();
+    }
+    super.dispose();
+  }
 
   void _reload() {
     _lastWasLoad = true;
@@ -264,7 +360,7 @@ class _ModelSheetState extends State<ModelSheet> {
     final outcome = await widget.directory.select(selection);
     if (!mounted) return;
     if (outcome.ok) {
-      Navigator.of(context).pop();
+      _close();
       return;
     }
     final error = outcome.error!;
@@ -279,19 +375,19 @@ class _ModelSheetState extends State<ModelSheet> {
     });
   }
 
-  void _chooseModel(_View view, _Choice c) {
+  void _chooseModel(_View view, _Choice choice) {
     final current = view.state.current;
-    if (current?.provider == c.group.id && current?.model == c.model.id) {
-      Navigator.of(context).pop();
+    if (current?.provider == choice.group.id &&
+        current?.model == choice.model.id) {
+      _close();
       return;
     }
-    final defaultEffort = c.model.reasoning?.defaultEffort;
     unawaited(
       _submit(
         session_ns.ModelSelection(
-          provider: c.group.id,
-          model: c.model.id,
-          reasoningEffort: defaultEffort,
+          provider: choice.group.id,
+          model: choice.model.id,
+          reasoningEffort: choice.model.reasoning?.defaultEffort,
         ),
       ),
     );
@@ -301,7 +397,7 @@ class _ModelSheetState extends State<ModelSheet> {
     final current = view.state.current;
     if (current == null) return;
     if (view.effective == level.effort) {
-      Navigator.of(context).pop();
+      _close();
       return;
     }
     unawaited(
@@ -315,350 +411,520 @@ class _ModelSheetState extends State<ModelSheet> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return SafeArea(
-      child: DshWatch(
-        changes: widget.directory.state.changes,
-        builder: (context) {
-          final view = _View.of(widget.directory.state.value, _t);
-          // With nothing selected the sheet opens on the model list.
-          final pane = !_paneChosen && view.choice == null
-              ? _Pane.model
-              : _pane;
-          return Column(
-            key: const ValueKey('model-sheet'),
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _header(theme, view, pane),
-              Flexible(
-                child: switch (pane) {
-                  _Pane.root => _root(theme, view),
-                  _Pane.model => _models(theme, view),
-                  _Pane.effort => _effortList(theme, view),
-                },
-              ),
-              if (_toast != null) _banner(theme, _toast!, null),
-            ],
+  _Pane _shown(_View view) =>
+      !_paneChosen && view.choice == null ? _Pane.model : _pane;
+  List<_Choice> _visible(_View view) => [
+    for (final group in view.groups)
+      for (final model in rankByName(
+        group.models,
+        view.showSearch ? _query.trim() : '',
+        name: (m) => m.name,
+      ))
+        _Choice(group, model),
+  ];
+  int _active(_View view, List<_Choice> choices) {
+    final index = choices.indexWhere(
+      (c) =>
+          c.group.id == view.state.current?.provider &&
+          c.model.id == view.state.current?.model,
+    );
+    return (_highlight ?? math.max(0, index)).clamp(
+      0,
+      math.max(0, choices.length - 1),
+    );
+  }
+
+  void _drill(_Pane pane, _View view) {
+    setState(() {
+      _pane = pane;
+      _paneChosen = true;
+      _query = '';
+      _highlight = null;
+      _lastRevealed = null;
+      _searchController.clear();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (pane == _Pane.model && view.showSearch) {
+        _searchFocus.requestFocus();
+        return;
+      }
+      final id = pane == _Pane.effort
+          ? 'effort-option-${view.efforts.where((e) => e.effort == view.effective).firstOrNull?.key ?? view.efforts.firstOrNull?.key}'
+          : 'model-option-${view.choice?.group.id}/${view.choice?.model.id}';
+      (_rowFocus[id] ?? _rowFocus.values.firstOrNull)?.requestFocus();
+    });
+  }
+
+  void _back(_View view) {
+    final from = _shown(view);
+    if (from == _Pane.root || view.choice == null) {
+      _close();
+      return;
+    }
+    setState(() {
+      _pane = _Pane.root;
+      _paneChosen = true;
+      _query = '';
+      _highlight = null;
+      _searchController.clear();
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _node(from == _Pane.effort ? 'model-root-effort' : 'model-root-model')
+            .requestFocus();
+      }
+    });
+  }
+
+  KeyEventResult _key(KeyEvent event, _View view) {
+    if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
+      return KeyEventResult.ignored;
+    }
+    final key = event.logicalKey;
+    if (key == LogicalKeyboardKey.escape ||
+        (key == LogicalKeyboardKey.tab &&
+            HardwareKeyboard.instance.isShiftPressed)) {
+      _back(view);
+      return KeyEventResult.handled;
+    }
+    final pane = _shown(view),
+        models = _visible(view),
+        busy = view.state.pending != null;
+    if (pane == _Pane.model && view.showSearch) {
+      if (key == LogicalKeyboardKey.arrowDown ||
+          key == LogicalKeyboardKey.arrowUp) {
+        if (!busy && models.isNotEmpty) {
+          setState(
+            () => _highlight =
+                (_active(view, models) +
+                    (key == LogicalKeyboardKey.arrowDown
+                        ? 1
+                        : models.length - 1)) %
+                models.length,
           );
-        },
-      ),
-    );
+        }
+        _searchFocus.requestFocus();
+        return KeyEventResult.handled;
+      }
+      if ((key == LogicalKeyboardKey.enter || key == LogicalKeyboardKey.tab) &&
+          _searchFocus.hasFocus) {
+        if (!busy && models.isNotEmpty) {
+          _chooseModel(view, models[_active(view, models)]);
+        }
+        return KeyEventResult.handled;
+      }
+    }
+    if (key == LogicalKeyboardKey.arrowDown ||
+        key == LogicalKeyboardKey.arrowUp ||
+        key == LogicalKeyboardKey.tab) {
+      final ids = switch (pane) {
+        _Pane.root => [
+          'model-root-model',
+          if (view.reasoning != null) 'model-root-effort',
+        ],
+        _Pane.model => [
+          for (final c in models) 'model-option-${c.group.id}/${c.model.id}',
+        ],
+        _Pane.effort => [
+          for (final e in view.efforts) 'effort-option-${e.key}',
+        ],
+      };
+      if (!busy && ids.isNotEmpty) {
+        final index = ids.indexWhere((id) => _node(id).hasFocus);
+        final next = key == LogicalKeyboardKey.arrowUp
+            ? (index < 0
+                  ? ids.length - 1
+                  : (index + ids.length - 1) % ids.length)
+            : (index + 1) % ids.length;
+        _node(ids[next]).requestFocus();
+      }
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
   }
 
-  Widget _header(DshThemeData theme, _View view, _Pane pane) {
-    final title = switch (pane) {
-      _Pane.root => _t('menu.aria'),
-      _Pane.model => _t('menu.model'),
-      _Pane.effort => _t('menu.effort'),
-    };
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        DshSpace.sm,
-        DshSpace.sm,
-        DshSpace.lg,
-        0,
-      ),
-      child: Row(
-        children: [
-          if (pane != _Pane.root && view.choice != null)
-            GestureDetector(
-              key: const ValueKey('model-back'),
-              behavior: HitTestBehavior.opaque,
-              onTap: () => setState(() {
-                _pane = _Pane.root;
-                _paneChosen = true;
-                _query = '';
-              }),
-              child: SizedBox(
-                width: 36,
-                height: 36,
-                child: Center(
-                  child: Transform.rotate(
-                    angle: 3.14159265,
-                    child: DshIcon(
-                      DshIcons.chevronRight,
-                      color: theme.labelSecondary,
+  @override
+  Widget build(BuildContext context) => DshWatch(
+    changes: widget.directory.state.changes,
+    builder: (context) {
+      final theme = context.dsh,
+          view = _View.of(widget.directory.state.value, _t);
+      final size = MediaQuery.sizeOf(context);
+      final maxWidth = math.min(
+        DshModelMenuRecipe.maxWidth,
+        math.max(0.0, size.width - DshModelMenuRecipe.viewportWidthInset),
+      );
+      final width = _contentWidth(
+        theme,
+        view,
+      ).clamp(math.min(DshModelMenuRecipe.minWidth, maxWidth), maxWidth);
+      return Focus(
+        autofocus: true,
+        onKeyEvent: (_, event) => _key(event, view),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: math.min(DshModelMenuRecipe.minWidth, maxWidth),
+            maxWidth: maxWidth,
+            maxHeight: math.max(
+              0.0,
+              math.min(
+                DshModelMenuRecipe.maxHeight,
+                size.height - DshModelMenuRecipe.viewportHeightInset,
+              ),
+            ),
+          ),
+          child: SizedBox(
+            width: width.toDouble(),
+            child: DshMenuSurface(
+              key: const ValueKey('model-sheet'),
+              padding: const EdgeInsets.all(DshModelMenuRecipe.padding),
+              child: Semantics(
+                label: _t('menu.aria'),
+                container: true,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(
+                      child: switch (_shown(view)) {
+                        _Pane.root => _root(view),
+                        _Pane.model => _models(theme, view),
+                        _Pane.effort => _efforts(theme, view),
+                      },
                     ),
-                  ),
+                    if (_toast != null) _banner(theme, _toast!, null),
+                  ],
                 ),
               ),
-            )
-          else
-            const SizedBox(width: DshSpace.sm),
-          Expanded(
-            child: DshChromeText(
-              title,
-              style: theme
-                  .textStyle('--dsw-font-s-strong-14')
-                  .copyWith(color: theme.labelSecondary),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _cell(
-    DshThemeData theme,
-    Key key,
-    String label,
-    String value,
-    VoidCallback onTap,
-  ) {
-    return GestureDetector(
-      key: key,
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: DshSpace.touch + 8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: DshSpace.lg),
-          child: Row(
-            children: [
-              DshChromeText(
-                label,
-                style: theme
-                    .textStyle('--dsw-font-base-16')
-                    .copyWith(color: theme.labelPrimary),
-              ),
-              const SizedBox(width: DshSpace.md),
-              Expanded(
-                child: DshChromeText(
-                  value,
-                  textAlign: TextAlign.end,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme
-                      .textStyle('--dsw-font-base-16')
-                      .copyWith(color: theme.labelSecondary),
-                ),
-              ),
-              const SizedBox(width: 4),
-              DshIcon(
-                DshIcons.chevronRight,
-                color: theme.color('--dsw-alias-label-caption'),
-              ),
-            ],
-          ),
         ),
-      ),
-    );
+      );
+    },
+  );
+
+  double _contentWidth(DshThemeData theme, _View view) {
+    double measure(String text, String token) {
+      final painter = TextPainter(
+        text: TextSpan(text: text, style: theme.textStyle(token)),
+        textDirection: Directionality.of(context),
+        textScaler: MediaQuery.textScalerOf(context),
+      )..layout();
+      final width = painter.width;
+      painter.dispose();
+      return width;
+    }
+
+    final pane = _shown(view);
+    final inner = pane == _Pane.root
+        ? [
+                measure(_t('menu.model'), DshModelMenuRecipe.cellFontToken) +
+                    measure(
+                      view.choice?.model.name ?? _t('trigger.fallback'),
+                      DshModelMenuRecipe.cellFontToken,
+                    ),
+                if (view.reasoning != null)
+                  measure(_t('menu.effort'), DshModelMenuRecipe.cellFontToken) +
+                      measure(
+                        view.effortLabel ?? '',
+                        DshModelMenuRecipe.cellFontToken,
+                      ),
+              ].fold(0.0, math.max) +
+              DshModelMenuRecipe.cellHorizontalPadding * 2 +
+              DshModelMenuRecipe.cellGap * 2 +
+              DshModelMenuRecipe.chevronSize
+        : (pane == _Pane.model
+                      ? _visible(view).map((c) => c.model.name)
+                      : view.efforts.map((e) => e.label))
+                  .map(
+                    (label) => measure(label, DshModelMenuRecipe.rowFontToken),
+                  )
+                  .fold(0.0, math.max) +
+              DshModelMenuRecipe.rowHorizontalPadding * 2 +
+              DshModelMenuRecipe.rowGap +
+              DshModelMenuRecipe.checkSize;
+    return inner + DshModelMenuRecipe.padding * 2;
   }
 
-  Widget _root(DshThemeData theme, _View view) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
+  Widget _root(_View view) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      _cell(
+        'model-root-model',
+        _t('menu.model'),
+        view.choice?.model.name ?? _t('trigger.fallback'),
+        () => _drill(_Pane.model, view),
+      ),
+      if (view.reasoning != null)
         _cell(
-          theme,
-          const ValueKey('model-root-model'),
-          _t('menu.model'),
-          view.choice?.model.name ?? _t('trigger.fallback'),
-          () => setState(() {
-            _pane = _Pane.model;
-            _paneChosen = true;
-          }),
+          'model-root-effort',
+          _t('menu.effort'),
+          view.effortLabel ?? '',
+          () => _drill(_Pane.effort, view),
         ),
-        if (view.reasoning != null)
-          _cell(
-            theme,
-            const ValueKey('model-root-effort'),
-            _t('menu.effort'),
-            view.effortLabel ?? '',
-            () => setState(() {
-              _pane = _Pane.effort;
-              _paneChosen = true;
-            }),
-          ),
-      ],
-    );
-  }
-
-  Widget _banner(DshThemeData theme, String text, VoidCallback? retry) {
-    return DshContainer(
-      key: const ValueKey('model-banner'),
-      margin: const EdgeInsets.fromLTRB(
-        DshSpace.md,
-        DshSpace.xs,
-        DshSpace.md,
-        DshSpace.xs,
+    ],
+  );
+  Widget _cell(String id, String label, String value, VoidCallback action) =>
+      DshMenuItemButton(
+        key: ValueKey(id),
+        profile: DshMenuItemProfile.modelCell,
+        label: label,
+        value: value,
+        focusNode: _node(id),
+        onPressed: action,
+        onDismiss: () => _back(_View.of(widget.directory.state.value, _t)),
+      );
+  Widget _banner(
+    DshThemeData theme,
+    String text,
+    VoidCallback? retry, {
+    bool warning = false,
+  }) => DshContainer(
+    key: const ValueKey('model-banner'),
+    margin: const EdgeInsets.only(bottom: DshModelMenuRecipe.errorBottomMargin),
+    padding: const EdgeInsets.symmetric(
+      horizontal: DshModelMenuRecipe.errorHorizontalPadding,
+      vertical: DshModelMenuRecipe.errorVerticalPadding,
+    ),
+    decoration: theme.cornerDecoration(
+      theme.number(DshModelMenuRecipe.radiusToken),
+      color: theme.color(
+        warning
+            ? DshModelMenuRecipe.warningFillToken
+            : DshModelMenuRecipe.errorFillToken,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: DshSpace.md,
-        vertical: DshSpace.sm,
-      ),
-      decoration: theme.cornerDecoration(
-        theme.radiusSm,
-        color: theme.color('--dsw-alias-state-warn-tertiary'),
-      ),
-      child: Row(
-        children: [
-          DshIcon(
-            DshIcons.warning,
-            size: 16,
-            color: theme.color('--dsw-alias-state-warn-primary'),
-          ),
-          const SizedBox(width: DshSpace.sm),
-          Expanded(
-            child: DshChromeText(
-              text,
-              style: theme
-                  .textStyle('--dsw-font-xxs-12')
-                  .copyWith(color: theme.labelPrimary),
-            ),
-          ),
-          if (retry != null)
-            GestureDetector(
-              key: const ValueKey('model-retry'),
-              behavior: HitTestBehavior.opaque,
-              onTap: retry,
-              child: Padding(
-                padding: const EdgeInsets.only(left: DshSpace.sm),
-                child: DshChromeText(
-                  widget.i18n.t('common', 'retry'),
-                  style: theme
-                      .textStyle('--dsw-font-xxs-strong-12')
-                      .copyWith(color: theme.focusRingColor),
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: DshChromeText(
+            text,
+            style: theme
+                .textStyle(DshModelMenuRecipe.errorFontToken)
+                .copyWith(
+                  color: theme.color(
+                    warning
+                        ? DshModelMenuRecipe.warningLabelToken
+                        : DshModelMenuRecipe.errorLabelToken,
+                  ),
+                  height:
+                      DshModelMenuRecipe.errorLineHeight /
+                      DshModelMenuRecipe.errorFontSize,
                 ),
-              ),
+          ),
+        ),
+        if (retry != null) ...[
+          const SizedBox(width: DshModelMenuRecipe.errorGap),
+          GestureDetector(
+            key: const ValueKey('model-retry'),
+            onTap: retry,
+            child: DshChromeText(
+              _t('retry'),
+              style: theme
+                  .textStyle(DshModelMenuRecipe.errorFontToken)
+                  .copyWith(
+                    fontWeight:
+                        FontWeight.values[(DshModelMenuRecipe.retryFontWeight ~/
+                                100) -
+                            1],
+                    color: theme.color(
+                      warning
+                          ? DshModelMenuRecipe.warningLabelToken
+                          : DshModelMenuRecipe.errorLabelToken,
+                    ),
+                    height:
+                        DshModelMenuRecipe.errorLineHeight /
+                        DshModelMenuRecipe.errorFontSize,
+                  ),
             ),
+          ),
         ],
-      ),
-    );
-  }
-
+      ],
+    ),
+  );
+  Widget _note(DshThemeData theme, String text) => Padding(
+    padding: const EdgeInsets.all(DshModelMenuRecipe.statusPadding),
+    child: DshChromeText(
+      text,
+      style: theme
+          .textStyle(DshModelMenuRecipe.statusFontToken)
+          .copyWith(
+            color: theme.color(DshModelMenuRecipe.statusToken),
+            height:
+                DshModelMenuRecipe.statusLineHeight /
+                DshModelMenuRecipe.statusFontSize,
+          ),
+    ),
+  );
   Widget _row(
-    DshThemeData theme, {
-    required Key key,
+    _View view, {
+    required String id,
     required String label,
     required bool selected,
     required bool pending,
-    required bool enabled,
     required VoidCallback onTap,
-  }) {
-    return Semantics(
-      button: true,
-      selected: selected,
-      enabled: enabled,
-      label: label,
-      excludeSemantics: true,
-      child: GestureDetector(
-        key: key,
-        behavior: HitTestBehavior.opaque,
-        onTap: enabled ? onTap : null,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: DshSpace.touch),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: DshSpace.lg),
-            child: Row(
-              children: [
-                Expanded(
-                  child: DshChromeText(
-                    label,
-                    style: theme
-                        .textStyle('--dsw-font-base-16')
-                        .copyWith(color: theme.labelPrimary),
-                  ),
-                ),
-                SizedBox(
-                  width: 24,
-                  child: Center(
-                    child: pending
-                        ? const DshStatusDot(DshStatus.running)
-                        : (selected
-                              ? DshIcon(
-                                  DshIcons.check,
-                                  size: 16,
-                                  color: theme.labelPrimary,
-                                )
-                              : null),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
+    bool active = false,
+    VoidCallback? onHover,
+  }) => DshMenuItemButton(
+    key: ValueKey(id),
+    profile: DshMenuItemProfile.modelOption,
+    label: label,
+    selected: selected,
+    active: active,
+    disabled: view.state.pending != null,
+    focusNode: _node(id),
+    onPressed: onTap,
+    onHover: onHover,
+    onDismiss: () => _back(view),
+    pending: pending,
+    onFocusChange: (focused) {
+      if (focused) onHover?.call();
+    },
+  );
   Widget _models(DshThemeData theme, _View view) {
     final state = view.state;
-    final busy = state.pending != null;
-    final showSearch = view.showSearch;
-    final query = showSearch ? _query.trim() : '';
+    final query = view.showSearch ? _query.trim() : '';
     final groups = [
-      for (final g in view.groups)
-        (group: g, models: rankByName(g.models, query, name: (m) => m.name)),
-    ].where((e) => e.models.isNotEmpty).toList();
-    final current = state.current;
-    final accountName = _t('provider.account');
+      for (final group in view.groups)
+        (
+          group: group,
+          models: rankByName(group.models, query, name: (m) => m.name),
+        ),
+    ].where((g) => g.models.isNotEmpty).toList();
+    final visible = _visible(view), activeIndex = _active(view, _visible(view));
+    if (visible.isNotEmpty) {
+      final active = visible[activeIndex];
+      final id = 'model-option-${active.group.id}/${active.model.id}';
+      if (_lastRevealed != id) {
+        _lastRevealed = id;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _reveal(id);
+        });
+      }
+    }
+    var index = 0;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (showSearch)
+        if (view.showSearch)
           Padding(
-            padding: const EdgeInsets.fromLTRB(
-              DshSpace.md,
-              DshSpace.sm,
-              DshSpace.md,
-              DshSpace.xs,
+            padding: const EdgeInsets.only(
+              top: DshModelMenuRecipe.searchTopMargin,
+              bottom: DshModelMenuRecipe.searchBottomMargin,
             ),
-            child: _Search(
-              key: const ValueKey('model-search'),
-              value: _query,
-              placeholder: _t('search.placeholder'),
-              clearLabel: _t('search.clear'),
-              enabled: !busy,
-              onChanged: (v) => setState(() => _query = v),
+            child: Stack(
+              alignment: Alignment.centerRight,
+              children: [
+                DshInput(
+                  key: const ValueKey('model-search'),
+                  profile: DshInputProfile.modelSearch,
+                  reserveSearchClear: _query.isNotEmpty,
+                  controller: _searchController,
+                  focusNode: _searchFocus,
+                  placeholder: _t('search.placeholder'),
+                  semanticLabel: _t('search.placeholder'),
+                  enabled: state.pending == null,
+                  onChanged: (q) => setState(() {
+                    _query = q;
+                    _highlight = 0;
+                  }),
+                ),
+                if (_query.isNotEmpty)
+                  Positioned(
+                    right: DshModelMenuRecipe.searchClearRight,
+                    child: GestureDetector(
+                      key: const ValueKey('model-search-clear'),
+                      behavior: HitTestBehavior.opaque,
+                      onTap: state.pending != null
+                          ? null
+                          : () {
+                              setState(() {
+                                _query = '';
+                                _highlight = 0;
+                                _searchController.clear();
+                              });
+                              _searchFocus.requestFocus();
+                            },
+                      child: Semantics(
+                        button: true,
+                        label: _t('search.clear'),
+                        child: SizedBox.square(
+                          dimension: DshModelMenuRecipe.searchClearSize,
+                          child: Center(
+                            child: DshIcon(
+                              DshIcons.closeFill,
+                              size: DshModelMenuRecipe.chevronSize,
+                              color: theme.labelSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
         if (state.status == ModelDirectoryStatus.loading)
           _note(theme, _t('status.loading')),
         if (state.error != null && _lastWasLoad)
           _banner(theme, _t('error.action', {'message': state.error}), _reload),
-        for (final f in state.failures)
+        for (final failure in state.failures)
           _banner(
             theme,
             _t('warning.groupLoad', {
-              'name': f.id == 'deepseek-account' ? accountName : f.name,
-              'message': f.message,
+              'name': failure.id == 'deepseek-account'
+                  ? _t('provider.account')
+                  : failure.name,
+              'message': failure.message,
             }),
             _reload,
+            warning: true,
           ),
         Flexible(
           child: CustomScrollView(
             key: const ValueKey('model-list'),
             shrinkWrap: true,
             slivers: [
-              for (var i = 0; i < groups.length; i++)
+              for (var groupIndex = 0; groupIndex < groups.length; groupIndex++)
                 DshMenuGroup(
-                  label: groups[i].group.id == 'deepseek-account'
-                      ? accountName
-                      : groups[i].group.name,
-                  headingKey: ValueKey('model-group-${groups[i].group.id}'),
-                  separated: i > 0,
+                  label: groups[groupIndex].group.id == 'deepseek-account'
+                      ? _t('provider.account')
+                      : groups[groupIndex].group.name,
+                  headingKey: ValueKey(
+                    'model-group-${groups[groupIndex].group.id}',
+                  ),
+                  separated: groupIndex > 0,
                   children: [
-                    for (final m in groups[i].models)
+                    for (final model in groups[groupIndex].models)
                       _row(
-                        theme,
-                        key: ValueKey(
-                          'model-option-${groups[i].group.id}/${m.id}',
-                        ),
-                        label: m.name,
+                        view,
+                        id: 'model-option-${groups[groupIndex].group.id}/${model.id}',
+                        label: model.name,
                         selected:
-                            current?.provider == groups[i].group.id &&
-                            current?.model == m.id,
+                            state.current?.provider ==
+                                groups[groupIndex].group.id &&
+                            state.current?.model == model.id,
                         pending:
-                            state.pending?.provider == groups[i].group.id &&
-                            state.pending?.model == m.id,
-                        enabled: !busy,
-                        onTap: () =>
-                            _chooseModel(view, _Choice(groups[i].group, m)),
+                            state.pending?.provider ==
+                                groups[groupIndex].group.id &&
+                            state.pending?.model == model.id,
+                        active: index++ == activeIndex && visible.isNotEmpty,
+                        onHover: () {
+                          final at = visible.indexWhere(
+                            (c) =>
+                                c.group.id == groups[groupIndex].group.id &&
+                                c.model.id == model.id,
+                          );
+                          setState(() => _highlight = at);
+                        },
+                        onTap: () => _chooseModel(
+                          view,
+                          _Choice(groups[groupIndex].group, model),
+                        ),
                       ),
                   ],
                 ),
@@ -674,117 +940,32 @@ class _ModelSheetState extends State<ModelSheet> {
     );
   }
 
-  Widget _note(DshThemeData theme, String text) => Padding(
-    padding: const EdgeInsets.symmetric(
-      horizontal: DshSpace.lg,
-      vertical: DshSpace.md,
-    ),
-    child: DshChromeText(
-      text,
-      style: theme
-          .textStyle('--dsw-font-s-14')
-          .copyWith(color: theme.color('--dsw-alias-label-tertiary')),
-    ),
-  );
-
-  Widget _effortList(DshThemeData theme, _View view) {
-    final state = view.state;
-    final pending = state.pending;
-    final current = state.current;
+  Widget _efforts(DshThemeData theme, _View view) {
     if (view.efforts.isEmpty) return _note(theme, _t('empty.efforts'));
-    return ListView(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      children: [
-        if (state.error != null && _lastWasLoad)
-          _banner(theme, _t('error.action', {'message': state.error}), _reload),
-        for (final level in view.efforts)
-          _row(
-            theme,
-            key: ValueKey('effort-option-${level.key}'),
-            label: level.label,
-            selected: view.effective == level.effort,
-            pending:
-                pending != null &&
-                pending.provider == current?.provider &&
-                pending.model == current?.model &&
-                pending.reasoningEffort == level.effort,
-            enabled: pending == null,
-            onTap: () => _chooseEffort(view, level),
-          ),
-      ],
-    );
-  }
-}
-
-class _Search extends StatefulWidget {
-  const _Search({
-    super.key,
-    required this.value,
-    required this.placeholder,
-    required this.clearLabel,
-    required this.enabled,
-    required this.onChanged,
-  });
-
-  final String value;
-  final String placeholder;
-  final String clearLabel;
-  final bool enabled;
-  final ValueChanged<String> onChanged;
-
-  @override
-  State<_Search> createState() => _SearchState();
-}
-
-class _SearchState extends State<_Search> {
-  late final TextEditingController _controller = TextEditingController(
-    text: widget.value,
-  );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    return Stack(
-      alignment: Alignment.centerRight,
-      children: [
-        DshTextField(
-          controller: _controller,
-          placeholder: widget.placeholder,
-          enabled: widget.enabled,
-          onChanged: widget.onChanged,
-        ),
-        if (widget.value.isNotEmpty)
-          Semantics(
-            button: true,
-            label: widget.clearLabel,
-            excludeSemantics: true,
-            child: GestureDetector(
-              key: const ValueKey('model-search-clear'),
-              behavior: HitTestBehavior.opaque,
-              onTap: widget.enabled
-                  ? () {
-                      _controller.clear();
-                      widget.onChanged('');
-                    }
-                  : null,
-              child: Padding(
-                padding: const EdgeInsets.all(DshSpace.md),
-                child: DshIcon(
-                  DshIcons.closeFill,
-                  size: 14,
-                  color: theme.color('--dsw-alias-label-caption'),
-                ),
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (view.state.error != null && _lastWasLoad)
+            _banner(
+              theme,
+              _t('error.action', {'message': view.state.error}),
+              _reload,
             ),
-          ),
-      ],
+          for (final level in view.efforts)
+            _row(
+              view,
+              id: 'effort-option-${level.key}',
+              label: level.label,
+              selected: view.effective == level.effort,
+              pending:
+                  view.state.pending != null &&
+                  view.state.pending?.reasoningEffort == level.effort,
+              onTap: () => _chooseEffort(view, level),
+            ),
+        ],
+      ),
     );
   }
 }
