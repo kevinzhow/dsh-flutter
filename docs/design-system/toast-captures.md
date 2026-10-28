@@ -108,9 +108,14 @@ batch, application build, native input, push, PR or release runs in this lane.
 CSS ASCII whitespace/empty spans and sole unbreakable-run overflow now have
 actual-source controls and canonical corrections. The authored-opaque shadow
 exclusion branch is explicit, with previous callers preserved. Mixed paragraphs
-containing oversized runs, broader Unicode/bidi, pre-transform shadow coordinates,
-Chromium retained-origin inner contours, animation rasterization and native
+containing oversized runs, broader Unicode/bidi, Chromium retained-origin inner
+contours, animation rasterization and native
 announcement/contour delivery remain pending.
+Toast now retains source pre-transform border snapping and the authored-opaque
+exclusion inset of one internal paint pixel. The unchanged software cohort still
+exposes renderer differences in shadow coverage colorization and final integer
+blending against the actual backdrop; these source-correct geometry rules do not
+certify exact raster parity.
 The three real feature owners are covered by the separate native preparation
 lane; these primitive screenshots do not pretend to be complete browser owner
 or production Host/network flows. Actions/anchor and fourteen other source
