@@ -48,7 +48,7 @@ class ToastCapturePlanTest(unittest.TestCase):
         self.assertIn('pending',by_id['unbroken-word'])
 
     def test_previous_generic_capture_body_is_identical(self):
-        before=ast.parse(subprocess.check_output(['git','-C',str(ROOT),'show','af532b17:tool/parity_lib/react.py'],text=True))
+        before=ast.parse(subprocess.check_output(['git','-C',str(ROOT),'show','ed869654fbe2ec5b1c96e59d0dd39a0b6f4c4936:tool/parity_lib/react.py'],text=True))
         after=ast.parse((ROOT/'tool/parity_lib/react.py').read_text())
         original=next(n for n in before.body if isinstance(n,ast.FunctionDef) and n.name=='_capture_generic')
         current=next(n for n in after.body if isinstance(n,ast.FunctionDef) and n.name=='_capture_generic')
