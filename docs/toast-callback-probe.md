@@ -43,3 +43,20 @@ Preparation data, fixture/test hashes and the pinned geometry-log hash are refre
 Eight focused tests fail on the original fixture because the dedicated observation does not exist. With the fixture correction, all 23 native fixture tests pass, including eight exact-RGBA callback probes and eight measured geometry/semantics/input cases. Focused analysis is clean. Logs remain in `.local/toast-callback-probe-red.log`, `.local/toast-callback-probe-green-final.log` and `.local/toast-callback-probe-analyze.log`.
 
 This is preparation evidence. The integrating owner must rebuild and rerun the native proof on the new exact clean head before accepting it. The previous failed native run does not become accepted through this correction.
+
+## Ordinary preflight font correction
+
+The full13 run at825 retained twelve passing checks and eight failed callback
+raster controls. The actual done state and `0` to `1` text update passed, but the
+ordinary test environment used Ahem, which gives both digits the same painted
+glyph. The earlier focused receipt had the explicit native parity font variable
+and therefore did not reveal this test dependency.
+
+The test now loads the same retained manifest through the existing shared
+`loadParityFonts(findParityFontsManifest())` helper, as the Card geometry tests
+do. It fails if those files are missing and keeps every state and exact-RGBA
+assertion. Production font loading, font bytes, fixtures, waits, images and
+comparison thresholds are unchanged. Both runs with and without the old
+optional variable pass all23 controls, with all8 measured geometry objects
+identical to the previously committed source-bound manifest. Preparation test
+and log hashes are refreshed; the native contract literals remain unchanged.

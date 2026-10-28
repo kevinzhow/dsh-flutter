@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 import 'dart:ui' show ImageByteFormat;
 
-import 'package:dsh_flutter/src/platform/pinned_fonts.dart';
+import 'package:dsh_parity/dsh_parity.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,7 +25,9 @@ Finder alert() => find.byWidgetPredicate(
 );
 
 void main() {
-  setUpAll(loadPinnedFontsFromEnvironment);
+  // Raster assertions must use the same retained fonts in an ordinary full
+  // preflight as in native parity. Ahem gives equal-width digits one glyph.
+  setUpAll(() => loadParityFonts(findParityFontsManifest()));
   final viewports = [
     (size: const Size(1280, 720), dpr: 1.0),
     (size: const Size(1280, 720), dpr: 2.625),
@@ -191,7 +193,7 @@ void main() {
               'viewport': [viewport.size.width, viewport.size.height],
               'dpr': viewport.dpr,
               'theme': brightness.name,
-              'pinnedFonts': Platform.environment['WHALEE_PIN_FONTS']?.isNotEmpty == true,
+              'pinnedFonts': true,
               'callbackProbe': {
                 'semanticsLabel': 'Lifecycle callback count: 0',
                 'sourceLongShadowBandBottom': shadowBottom,
