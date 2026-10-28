@@ -145,7 +145,7 @@ def build(rules, behavior, *, bundle_sha, value, number, token, css_number):
     gap = px('.cards', 'gap')
     if (any(card[k] <= 0 for k in positive) or any(card[k] < 0 for k in nonnegative)
             or card['titleWeight'] not in range(100, 1000, 100)
-            or lines <= 0 or not lines.is_integer() or gap < 0
+            or lines != 1 or gap < 0
             or any(status[k] <= 0 for k in ('contentHeight', 'fontSize', 'lineHeightFactor'))
             or min(status['verticalPadding'], status['horizontalPadding']) < 0):
         raise ValueError('unsupported loaded card/status dimensions or typography')

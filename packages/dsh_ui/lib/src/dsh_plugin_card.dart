@@ -6,6 +6,7 @@ import 'dsh_corners.dart';
 import 'dsh_guide.dart' show DshPluginDefaultArtwork;
 import 'dsh_pixel_snap.dart';
 import 'dsh_snapped_box.dart';
+import 'dsh_single_line_clamp.dart';
 import 'dsh_text_baseline.dart';
 import 'theme_access.dart';
 import 'dsh_recipes.g.dart';
@@ -216,12 +217,9 @@ class _DshPluginCardState extends State<DshPluginCard> {
                       if (description != null && description.isNotEmpty) ...[
                         const SizedBox(height: DshPluginCardRecipe.mainGap),
                         ExcludeSemantics(
-                          child: DshChromeText(
+                          child: DshSingleLineClamp(
                             description,
                             style: descriptionStyle,
-                            maxLines: DshPluginCardRecipe.descriptionMaxLines
-                                .round(),
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],

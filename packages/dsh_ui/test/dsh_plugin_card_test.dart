@@ -36,6 +36,46 @@ Widget card({
 );
 
 void main() {
+  testWidgets('whitespace description retains the source gap without a line', (
+    t,
+  ) async {
+    final theme = official(Brightness.light);
+    await t.pumpWidget(host(theme, card(open: () {}, description: null)));
+    final without = t.getTopLeft(find.text('Synthetic title'));
+    final height = t.getSize(find.byType(DshPluginCard)).height;
+    await t.pumpWidget(host(theme, card(open: () {}, description: ' \t\n ')));
+    expect(
+      t.getTopLeft(find.text('Synthetic title')).dy,
+      closeTo(without.dy - DshPluginCardRecipe.mainGap / 2, .001),
+    );
+    expect(t.getSize(find.byType(DshPluginCard)).height, height);
+  });
+
+  for (final brightness in Brightness.values) {
+    testWidgets(
+      'description keeps complete words when clamped ${brightness.name}',
+      (t) async {
+        const description = 'Alpha beta gamma delta';
+        Widget fixture(double width) => SizedBox(
+          width: width,
+          child: DshPluginCard(
+            title: 'Title',
+            semanticLabel: 'Open synthetic',
+            description: description,
+            onOpen: () {},
+          ),
+        );
+        await t.pumpWidget(host(official(brightness), fixture(280)));
+        expect(find.text('Alpha beta\u2026'), findsOneWidget);
+        final descriptionText = t.widget<Text>(find.text('Alpha beta\u2026'));
+        expect(descriptionText.semanticsLabel, description);
+        await t.pumpWidget(host(official(brightness), fixture(600)));
+        expect(find.text(description), findsOneWidget);
+        expect(t.takeException(), isNull);
+      },
+    );
+  }
+
   for (final density in [1.0, 2.625]) {
     for (final brightness in Brightness.values) {
       testWidgets('source content boxes at $density ${brightness.name}', (
@@ -266,7 +306,11 @@ void main() {
       ),
     );
     expect(t.getSize(find.byType(DshPluginCard)).height, greaterThan(66));
-    final description = t.widget<Text>(find.text('Synthetic description'));
+    final description = t.widget<Text>(
+      find.byWidgetPredicate(
+        (w) => w is Text && w.semanticsLabel == 'Synthetic description',
+      ),
+    );
     expect(description.maxLines, 1);
     expect(t.takeException(), isNull);
   });

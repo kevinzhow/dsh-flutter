@@ -85,7 +85,9 @@ Map<String, Object?> pluginCardGeometryProbe(
       : one(
           under(
             find.byWidgetPredicate(
-              (widget) => widget is DshChromeText && widget.data == value,
+              (widget) =>
+                  widget is DshChromeText &&
+                  (widget.data == value || widget.semanticsLabel == value),
             ),
           ),
         );

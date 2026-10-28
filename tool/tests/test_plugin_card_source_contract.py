@@ -80,6 +80,7 @@ class PluginCardSourceContractTests(unittest.TestCase):
         for selector, prop, raw in [('.cardIcon', 'width', '0px'), ('.cardIcon', 'height', '-1px'),
             ('.cardHead', 'gap', '-1px'), ('.statusTag', 'height', '0px'),
             ('.statusTag', 'line-height', '０.５'), ('.cardDesc', '-webkit-line-clamp', '1.5'),
+            ('.cardDesc', '-webkit-line-clamp', '2'),
             ('.card', 'border-radius', 'var(--dsw-alias-label-primary)'),
             ('.cardIcon', 'border', '.5px solid var(--dsw-radius-sm)')]:
             with self.subTest(selector=selector, prop=prop), self.assertRaises(ValueError): self.render(self.change(selector, prop, raw))
