@@ -12,6 +12,9 @@ The data is synthetic and shared with Flutter. The 108 cases cover both themes,
 English/Chinese, desktop/phone geometry, and macOS sidebar/material profiles.
 `build/parity-reported-final/summary.json` records the actual comparison;
 passing checks or matching dimensions does not establish the 99.5% target.
+Model snapshots settle the pointer over the shared synthetic result label after
+navigation. This gives both providers the same hover state instead of leaving
+the browser pointer over a newly exposed effort row after a touch-style tap.
 
 | Family | Generated profile | Canonical implementation |
 |---|---|---|

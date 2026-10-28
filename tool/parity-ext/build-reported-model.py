@@ -9,6 +9,7 @@ for device, width, density in [('desktop', 1100, 1), ('phone', 390, 2.625)]:
             steps = [{'type': 'click', 'target': 'model-chip'}]
             if pane != 'root':
                 steps.append({'type': 'click', 'target': 'model-root-' + pane})
+            steps.append({'type': 'hover', 'target': 'reported-model-result'})
             for capture in ['card', 'viewport']:
                 case = base_case(
                     f'components.reported-model.{pane}-{capture}-{device}-{locale.split("-")[0]}',
