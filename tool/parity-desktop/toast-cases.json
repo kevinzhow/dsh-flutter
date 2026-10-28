@@ -3844,25 +3844,31 @@
         "tap": "Toast then preview"
       },
       {
-        "expect": [
-          "Synthetic lightbox",
-          "Synthetic notice"
-        ]
+        "capture": "toast-then-preview"
       },
       {
-        "capture": "toast-then-preview"
+        "lightboxProof": {
+          "scene": "toast-then-preview",
+          "baseline": "warning",
+          "closeLabel": "Close preview",
+          "failureLabel": "Synthetic preview has no image",
+          "toastLabel": "Synthetic notice"
+        }
       },
       {
         "key": 140
       },
       {
-        "expect": [
-          "Synthetic lightbox",
-          "Synthetic notice"
-        ]
+        "capture": "preview-then-toast"
       },
       {
-        "capture": "preview-then-toast"
+        "lightboxProof": {
+          "scene": "preview-then-toast",
+          "baseline": "warning",
+          "closeLabel": "Close preview",
+          "failureLabel": "Synthetic preview has no image",
+          "toastLabel": "Synthetic notice"
+        }
       },
       {
         "key": 131
