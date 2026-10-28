@@ -126,6 +126,31 @@ def model_menu_snapshot(archive):
                 'manifest': tar.extractfile('package/package.json').read(),
                 'license': tar.extractfile('package/LICENSE').read()}
 
+def stat_dialog_style_snapshot(archive):
+    """The real shared session/turn statistics panel, not a recreated menu."""
+    with tarfile.open(archive) as tar:
+        bundle = tar.extractfile('package/lib/client.js').read()
+        text = bundle.decode()
+        styles, classes = {}, {}
+        for name in ('stat-dialog', 'StatsPills'):
+            region = bundle_region(text, name + '.module.css.mjs')
+            literals = re.findall(r'\bconst css(?:\$\d+)? = ("(?:\\.|[^"\\])*");', region)
+            if len(literals) != 1:
+                raise ValueError('published stat CSS literal missing/ambiguous: ' + name)
+            styles[name + '.module.css'] = json.loads(literals[0])
+            prefix = 'var ' + name.replace('-', '_') + '_module_css_default = '
+            if region.count(prefix) != 1:
+                raise ValueError('published stat class export missing/ambiguous: ' + name)
+            mapping, _ = json.JSONDecoder().raw_decode(region.split(prefix, 1)[1])
+            if not isinstance(mapping, dict) or not mapping or not all(isinstance(k, str) and isinstance(v, str) for k, v in mapping.items()):
+                raise ValueError('published stat class export is not a static string map')
+            classes[name] = mapping
+        sha = hashlib.sha256(bundle).hexdigest()
+        return {'css': styles, 'classes': classes, 'bundleSha256': sha,
+                'behavior': {'bundleSha256': sha, 'region': bundle_region(text, 'stat-dialog.js')},
+                'manifest': tar.extractfile('package/package.json').read(),
+                'license': tar.extractfile('package/LICENSE').read()}
+
 def unhash_selectors(text,classes):
     inverse={value:key for key,value in classes.items()}
     return re.sub(r'\.([A-Za-z_][\w-]*)',lambda m:'.'+inverse.get(m[1],m[1]),text)
@@ -261,7 +286,8 @@ def verify_snapshot(archive, package, folder):
     extract = {'plugin-css': plugin_style_snapshot, 'market-css': market_style_snapshot,
                'agent-preset-css': agent_preset_style_snapshot,
                'theme-css': theme_style_snapshot, 'terminal-font': terminal_font_snapshot,
-               'model-menu-css': model_menu_snapshot}
+               'model-menu-css': model_menu_snapshot,
+               'stat-dialog-css': stat_dialog_style_snapshot}
     result = extract[kind](archive)
     if result['bundleSha256'] != package['publishedBundleSha256']: raise ValueError('published bundle hash mismatch')
     if kind == 'plugin-css':
@@ -288,6 +314,15 @@ def verify_snapshot(archive, package, folder):
                 raise ValueError('preset class export snapshot mismatch: ' + component)
         if json.loads((folder / 'reader-behavior.json').read_text()) != result['readerBehavior']:
             raise ValueError('published guide behavior snapshot mismatch')
+    elif kind == 'stat-dialog-css':
+        for name, css in result['css'].items():
+            if (folder / name).read_text() != css:
+                raise ValueError('decoded stat CSS snapshot mismatch: ' + name)
+        for name, mapping in result['classes'].items():
+            if json.loads((folder / (name + '-classes.json')).read_text()) != mapping:
+                raise ValueError('stat class export snapshot mismatch: ' + name)
+        if json.loads((folder / 'stat-dialog-behavior.json').read_text()) != result['behavior']:
+            raise ValueError('published stat behavior snapshot mismatch')
     else:
         if json.loads((folder / 'terminal-font.json').read_text()) != {'terminalFontStack': result['font']}:
             raise ValueError('decoded terminal font snapshot mismatch')

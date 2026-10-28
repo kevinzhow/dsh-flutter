@@ -11,6 +11,7 @@
 // From @deepseek-ai/dsh-client-ui-settings-general 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-settings-account 0.2.1-rc.2.
 // From @deepseek-ai/dsh-client-ui-model-selection 0.2.1-rc.2.
+// From @deepseek-ai/dsh-client-ui-chat 0.2.1-rc.2.
 
 abstract final class DshButtonRecipe {
   static const double height = 36.0;
@@ -723,4 +724,50 @@ abstract final class DshModelMenuRecipe {
   static const double searchFontSize = 12.0;
   static const String scrollbarToken = '--dsw-alias-scrollbar-bg-l2';
   static const String scrollbarHoverToken = '--dsw-alias-scrollbar-hover-l2';
+}
+
+abstract final class DshStatPanelRecipe {
+  static const double minWidth = 300.0;
+  static const double maxWidth = 440.0;
+  static const double viewportMargin = 12.0;
+  static const double anchorGap = 8.0;
+  static const double padding = 16.0;
+  static const String radiusToken = '--dsw-radius-lg';
+  static const String fillToken = '--dsw-specific-menu';
+  static const String shadowToken = '--dsw-elevation-prominent';
+  static const String strokeToken = '--dsw-alias-border-l1';
+  static const double fontSize = 12.0;
+  static const double lineHeight = 18.0;
+  static const String fontToken = '--dsw-font-xxs-12';
+  static const String labelToken = '--dsw-alias-label-secondary';
+  static const String titleToken = '--dsw-alias-label-primary';
+  static const double titleWeight = 500.0;
+  static const double titleGap = 16.0;
+  static const double titleBottomMargin = 8.0;
+  static const double ruleBottomMargin = 10.0;
+  static const double ruleWidth = 0.5;
+  static const String ruleToken = '--dsw-alias-border-l2';
+  static const double iconSize = 14.0;
+  static const double iconGap = 6.0;
+  static const double labelMinWidth = 76.0;
+  static const double rowGap = 6.0;
+  static const double columnGap = 16.0;
+  static const String detailLabelToken = '--dsw-alias-label-tertiary';
+  static const String detailValueToken = '--dsw-alias-label-secondary';
+}
+
+abstract final class DshStatsPillRecipe {
+  static const double fontBase = 12.0;
+  static const double lineBase = 20.0;
+  static const String fontScale = 'secondary';
+  static const double paddingVertical = 1.0;
+  static const double paddingHorizontal = 8.0;
+  static const double gap = 6.0;
+  static const double iconSize = 14.0;
+  static const String radiusToken = '--dsw-radius-sm';
+  static const String labelToken = '--dsw-alias-label-tertiary';
+  static const String activeLabelToken = '--dsw-alias-label-secondary';
+  static const String activeFillToken = '--dsw-alias-interactive-bg-hover';
+  static const String separatorToken = '--dsw-alias-separator-primary';
+  static const double separatorMargin = 6.0;
 }

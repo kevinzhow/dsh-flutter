@@ -3,7 +3,9 @@ import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
 import 'package:dsh_slots/testing.dart';
 import 'package:dsh_theme/testing.dart';
+import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -93,10 +95,16 @@ void main() {
 
     testWidgets('counts with speed, and tokens with the cache hit', (t) async {
       await pump(t, values: {'sessionStats': stats, 'tokenUsage': usage});
-      expect(find.text('5 turns 9 steps'), findsOneWidget);
-      expect(find.text('42 tok/s'), findsOneWidget);
-      expect(find.text('13K tok'), findsOneWidget);
-      expect(find.text('Cache hit 0%'), findsOneWidget);
+      expect(
+        find.textContaining('5 turns 9 steps', findRichText: true),
+        findsWidgets,
+      );
+      expect(find.textContaining('42 tok/s', findRichText: true), findsWidgets);
+      expect(find.textContaining('13K tok', findRichText: true), findsWidgets);
+      expect(
+        find.textContaining('Cache hit 0%', findRichText: true),
+        findsWidgets,
+      );
     });
 
     testWidgets('the activity pill opens its time and speed dialog', (t) async {
@@ -125,5 +133,93 @@ void main() {
       expect(find.text('Cache write'), findsNothing, reason: 'none written');
       expect(find.text('Output'), findsOneWidget);
     });
+
+    testWidgets('one click switches the open statistics panel', (t) async {
+      await pump(t, values: {'sessionStats': stats, 'tokenUsage': usage});
+      await t.tap(find.byKey(const ValueKey('stat-activity')));
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsOneWidget);
+      await t.tap(find.byKey(const ValueKey('stat-usage')));
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsNothing);
+      expect(find.text('Token usage'), findsOneWidget);
+      expect(find.byType(DshStatPanel), findsOneWidget);
+    });
+
+    testWidgets('keyboard opens the trigger and Escape retains its focus', (
+      t,
+    ) async {
+      await pump(t, values: {'sessionStats': stats});
+      await t.sendKeyEvent(LogicalKeyboardKey.tab);
+      await t.pump();
+      final triggerFocus = FocusManager.instance.primaryFocus;
+      await t.sendKeyEvent(LogicalKeyboardKey.enter);
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsOneWidget);
+      expect(FocusManager.instance.primaryFocus, same(triggerFocus));
+      await t.sendKeyEvent(LogicalKeyboardKey.escape);
+      await t.pumpAndSettle();
+      expect(find.text('Session statistics'), findsNothing);
+      expect(FocusManager.instance.primaryFocus, same(triggerFocus));
+    });
+
+    testWidgets('an open panel follows the durable projection update', (
+      t,
+    ) async {
+      await pump(t, values: {'sessionStats': stats});
+      await t.tap(find.byKey(const ValueKey('stat-activity')));
+      await t.pumpAndSettle();
+      expect(find.text('12s'), findsOneWidget);
+      owner.session.projections.apply('sessionStats', {
+        ...stats,
+        'llmMs': 18000,
+      }, 2);
+      await t.pumpAndSettle();
+      expect(find.text('12s'), findsNothing);
+      expect(find.text('18s'), findsOneWidget);
+    });
+
+    testWidgets(
+      'published panel fits a narrow viewport and filters its backdrop',
+      (t) async {
+        t.view.physicalSize = const Size(280, 360);
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.reset);
+        final pill = activityPill(
+          const SessionStats(
+            turns: 231,
+            steps: 2901,
+            llmMs: 37673000,
+            toolMs: 9394000,
+            ttftMs: 95000,
+            ttftSteps: 10,
+            decodeMs: 10000,
+            decodeTokens: 1460,
+          ),
+          i18n,
+        )!;
+        await t.pumpWidget(
+          dshTestApp(
+            Align(
+              alignment: Alignment.bottomRight,
+              child: StatPillView(pill: pill),
+            ),
+            size: const Size(280, 360),
+          ),
+        );
+        await t.tap(find.byType(StatPillView));
+        await t.pumpAndSettle();
+        final rect = t.getRect(find.byKey(const ValueKey('stats-panel')));
+        expect(rect.left, greaterThanOrEqualTo(12));
+        expect(rect.right, lessThanOrEqualTo(268));
+        expect(
+          rect.width,
+          256,
+          reason: '300px floor yields to viewport minus 24px',
+        );
+        expect(find.byType(BackdropFilter), findsOneWidget);
+        expect(t.takeException(), isNull);
+      },
+    );
   });
 }

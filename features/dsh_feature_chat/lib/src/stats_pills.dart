@@ -1,12 +1,14 @@
 /// The session statistics pills under the composer (dsh `ui-chat`
 /// `StatsPills`): turn and step counts with the decode speed, and the token
-/// total with the cache hit. Each opens a dialog of its figures.
+/// total with the cache hit. Each opens the shared anchored statistics panel.
 library;
 
 import 'dart:async';
 
 import 'package:dsh_i18n/dsh_i18n.dart';
 import 'package:dsh_slots/dsh_slots.dart';
+import 'package:dsh_theme/dsh_theme.dart' show SizeScale;
+import 'package:flutter/services.dart';
 import 'package:dsh_ui/dsh_ui.dart';
 import 'package:flutter/widgets.dart';
 
@@ -310,38 +312,54 @@ class StatPillView extends StatefulWidget {
 
 class StatPillViewState extends State<StatPillView> {
   bool _hover = false;
+  final _focusNode = FocusNode(debugLabel: 'statistics pill');
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.dsh;
     final pill = widget.pill;
     final interactive = pill.title != null;
+    final delta = SizeScale.tryParse(DshStatsPillRecipe.fontScale)!
+        .delta(theme.settings.fontSizes);
     final style = theme
-        .textStyle('--dsw-font-xxs-12')
-        .copyWith(
-          height: 20 / 12,
-          fontFeatures: const [FontFeature.tabularFigures()],
-        );
+        .fixedTextStyle(
+          size: DshStatsPillRecipe.fontBase + delta,
+          line: DshStatsPillRecipe.lineBase + delta,
+        )
+        .copyWith(fontFeatures: const [FontFeature.tabularFigures()]);
     Widget content(bool open) {
       final ink = (_hover || open) && interactive
-          ? theme.color('--dsw-alias-label-secondary')
-          : theme.color('--dsw-alias-label-tertiary');
+          ? theme.color(DshStatsPillRecipe.activeLabelToken)
+          : theme.color(DshStatsPillRecipe.labelToken);
       return DshContainer(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+        padding: const EdgeInsets.symmetric(
+          horizontal: DshStatsPillRecipe.paddingHorizontal,
+          vertical: DshStatsPillRecipe.paddingVertical,
+        ),
         decoration: BoxDecoration(
           color: (_hover || open) && interactive
-              ? theme.interactiveBgHover
+              ? theme.color(DshStatsPillRecipe.activeFillToken)
               : null,
-          borderRadius: BorderRadius.circular(theme.radiusSm),
+          borderRadius: BorderRadius.circular(
+            theme.number(DshStatsPillRecipe.radiusToken),
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DshIcon(pill.icon, size: 14, color: ink),
-            const SizedBox(width: 6),
-            _Label(
-              text: pill.label,
-              style: style.copyWith(color: ink),
+            DshIcon(pill.icon, size: DshStatsPillRecipe.iconSize, color: ink),
+            const SizedBox(width: DshStatsPillRecipe.gap),
+            Flexible(
+              child: _Label(
+                text: pill.label,
+                style: style.copyWith(color: ink),
+              ),
             ),
           ],
         ),
@@ -351,7 +369,11 @@ class StatPillViewState extends State<StatPillView> {
     if (!interactive) return content(false);
     return DshAnchoredPanel(
       side: DshPanelSide.top,
-      gap: 8,
+      gap: DshStatPanelRecipe.anchorGap,
+      viewportMargin: DshStatPanelRecipe.viewportMargin,
+      menuViewport: true,
+      focusPanel: false,
+      exclusiveGroup: StatPillView,
       builder: (context, panel) => ListenableBuilder(
         listenable: panel,
         builder: (context, _) => MouseRegion(
@@ -361,16 +383,37 @@ class StatPillViewState extends State<StatPillView> {
           child: Semantics(
             button: true,
             label: pill.aria,
+            expanded: panel.isOpen,
             excludeSemantics: true,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: panel.toggle,
-              child: content(panel.isOpen),
+              child: FocusableActionDetector(
+                focusNode: _focusNode,
+                shortcuts: const {
+                  SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+                  SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+                },
+                actions: {
+                  ActivateIntent: CallbackAction<ActivateIntent>(
+                    onInvoke: (_) {
+                      panel.toggle();
+                      return null;
+                    },
+                  ),
+                },
+                child: content(panel.isOpen),
+              ),
             ),
           ),
         ),
       ),
-      panelBuilder: (context, panel) => _StatDialog(pill: pill),
+      panelBuilder: (context, panel) => DshStatPanel(
+        icon: pill.icon,
+        title: pill.title!,
+        titleValue: pill.titleValue,
+        rows: pill.rows,
+      ),
     );
   }
 }
@@ -385,126 +428,43 @@ class _Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final parts = text.split('·');
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (var i = 0; i < parts.length; i++) ...[
-          if (i > 0)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: DshChromeText('·', style: style),
-            ),
-          DshChromeText(parts[i], maxLines: 1, style: style),
-        ],
-      ],
-    );
-  }
-}
-
-class _StatDialog extends StatelessWidget {
-  const _StatDialog({required this.pill});
-
-  final StatPill pill;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.dsh;
-    final radius = BorderRadius.circular(theme.radiusLg);
-    final base = theme.textStyle('--dsw-font-xxs-12').copyWith(height: 18 / 12);
-    return DshContainer(
-      constraints: const BoxConstraints(minWidth: 300, maxWidth: 440),
-      decoration: BoxDecoration(
-        borderRadius: radius,
-        boxShadow: theme.boxShadow('--dsw-elevation-prominent'),
-      ),
-      child: ClipRRect(
-        borderRadius: radius,
-        child: DshContainer(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: theme.color('--dsw-specific-menu'),
-            borderRadius: radius,
-          ),
-          child: IntrinsicWidth(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: [
-                      DshIcon(pill.icon, size: 14, color: theme.labelPrimary),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: DshChromeText(
-                          pill.title!,
-                          style: theme
-                              .textStyle('--dsw-font-xxs-strong-12')
-                              .copyWith(
-                                color: theme.labelPrimary,
-                                height: 18 / 12,
-                              ),
-                        ),
+    return DshChromeBaseline(
+      style: style,
+      child: Text.rich(
+        TextSpan(
+          children: [
+            for (var i = 0; i < parts.length; i++) ...[
+              if (i > 0)
+                WidgetSpan(
+                  alignment: PlaceholderAlignment.baseline,
+                  baseline: TextBaseline.alphabetic,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: DshStatsPillRecipe.separatorMargin,
+                    ),
+                    child: Text(
+                      '·',
+                      strutStyle: dshStrut(style),
+                      style: style.copyWith(
+                        // The pinned source references an undefined separator
+                        // custom property. CSS then inherits the pill's ink.
+                        color:
+                            context.dsh.colors[DshStatsPillRecipe
+                                .separatorToken] ??
+                            style.color,
                       ),
-                      if (pill.titleValue != null) ...[
-                        const SizedBox(width: 16),
-                        DshChromeText(
-                          pill.titleValue!,
-                          style: theme
-                              .textStyle('--dsw-font-xxs-strong-12')
-                              .copyWith(
-                                color: theme.labelPrimary,
-                                height: 18 / 12,
-                                fontFeatures: const [
-                                  FontFeature.tabularFigures(),
-                                ],
-                              ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: DshContainer(
-                    height: dshHairlineOf(context),
-                    decoration: BoxDecoration(
-                      color: theme.color('--dsw-alias-border-l2'),
                     ),
                   ),
                 ),
-                for (var i = 0; i < pill.rows.length; i++)
-                  Padding(
-                    padding: EdgeInsets.only(top: i == 0 ? 0 : 6),
-                    child: Row(
-                      children: [
-                        DshChromeText(
-                          pill.rows[i].$1,
-                          style: base.copyWith(
-                            color: theme.color('--dsw-alias-label-tertiary'),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: DshChromeText(
-                            pill.rows[i].$2,
-                            textAlign: TextAlign.right,
-                            style: base.copyWith(
-                              color: theme.color('--dsw-alias-label-secondary'),
-                              fontFeatures: const [
-                                FontFeature.tabularFigures(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ),
+              TextSpan(text: parts[i]),
+            ],
+          ],
         ),
+        style: style,
+        strutStyle: dshStrut(style),
+        maxLines: 1,
+        softWrap: false,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

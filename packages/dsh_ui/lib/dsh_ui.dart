@@ -92,3 +92,5 @@ export 'src/dsh_headed_dialog.dart';
 export 'src/dsh_risk_dialog.dart';
 
 export 'src/dsh_focus_presentation.dart';
+export 'src/dsh_popover_surface.dart';
+export 'src/dsh_stat_panel.dart';

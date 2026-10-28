@@ -360,6 +360,35 @@
           "packages/client/ui-model-selection/src/client/ModelSelect.tsx": "081a79904b09e45c3226e39baa711ed1c72138f00f3d29ba1f0c1aa5c3b768cb",
           "packages/client/ui-model-selection/src/client/ModelSelect.module.css": "7754687bfd5b18693e326f29367bf96a5ecf2906f0a00da82290406c9f12f80b"
         }
+      },
+      {
+        "name": "@deepseek-ai/dsh-client-ui-chat",
+        "version": "0.2.1-rc.2",
+        "tarball": "https://registry.npmjs.org/@deepseek-ai/dsh-client-ui-chat/-/dsh-client-ui-chat-0.2.1-rc.2.tgz",
+        "integrity": "sha512-ZDT17V3+LoavO3CJZ5alZf6edoh3+Qnllb3Y2DKOSmJYfpbPvR45uWl2DYxcnU4EAW2XvT8/k6KkbklFR1ZV8Q==",
+        "publishedBundleSha256": "a00e5176d1257d51604cefbe9a15d326d4283439df31f76ba20ff690c76e10a1",
+        "extractionKind": "stat-dialog-css",
+        "extraction": "Decode named StatsPills and stat-dialog CSS regions, static class maps, and shared stat placement behavior without executing JavaScript",
+        "sourcePackage": "packages/client/ui-chat/package.json",
+        "referenceConsumer": "packages/bundle/web-app/package.json",
+        "dependencyField": "dependencies",
+        "dependencySpecifier": "workspace:*",
+        "snapshotFolder": "ui-chat",
+        "files": {
+          "LICENSE": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "StatsPills-classes.json": "e67825fd17cc2f0bd750a55b5625d91e4bcf265e8aa57b22a472fba299df3a92",
+          "StatsPills.module.css": "75d2c43103b0ee4466bbb1674df08b4ef0959719ad820deb246ecf171ce8756d",
+          "package.json": "d012125c7c2e8260de2166222f2d78509da95eec93c89db00af3260addae9d48",
+          "stat-dialog-behavior.json": "87b0dc19f2d31df1edc2231f052c49242eaab5c710b69a97fb109f3b9f881857",
+          "stat-dialog-classes.json": "5c8c0cb28292112965f887776e4241e19455c3d8d15c72f112de68a610b72674",
+          "stat-dialog.module.css": "9e88b9f02983d4f4fc7dd39eaee041df61abff5cd5416a7a4d36f75b360d177c"
+        },
+        "referenceSourceSha256": {
+          "packages/client/ui-chat/src/client/chat/StatsPills.tsx": "d901d8069b7f7263576478608cce2b27d0312b5863a6fcb19df76c1489b7d76c",
+          "packages/client/ui-chat/src/client/chat/StatsPills.module.css": "3d962cc52d5a535175459c72713980299270377af60f4c756509b1abfa6b2f10",
+          "packages/client/ui-chat/src/client/chat/stat-dialog.ts": "c58e74382631d7ee42f2a36f24300bf747a75d08924d9e756f477e4d07ffc14f",
+          "packages/client/ui-chat/src/client/chat/stat-dialog.module.css": "14228b7f038c2be37a01c08fe8b86cc4391e0016453a1f760e71621e527e3224"
+        }
       }
     ],
     "rendererSnapshots": {

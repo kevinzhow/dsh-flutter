@@ -27,9 +27,11 @@
     {
       "name": "popovers",
       "canonical": [
-        "packages/dsh_ui/lib/src/dsh_anchored_panel.dart"
+        "packages/dsh_ui/lib/src/dsh_anchored_panel.dart",
+        "packages/dsh_ui/lib/src/dsh_popover_surface.dart",
+        "packages/dsh_ui/lib/src/dsh_stat_panel.dart"
       ],
-      "migrationStatus": "inventory only; recipe migration pending",
+      "migrationStatus": "published StatsPills trigger and shared stat-dialog geometry/material migrated; source-clamped anchored session activity/usage panels with live projection updates and keyboard/outside dismissal; remaining context/turn/custom popover profiles still pending",
       "pendingDuplicates": []
     },
     {
@@ -240,9 +242,6 @@
     },
     "features/dsh_feature_chat/lib/src/model_retry_view.dart": {
       "manual-metric": 6
-    },
-    "features/dsh_feature_chat/lib/src/stats_pills.dart": {
-      "manual-metric": 11
     },
     "features/dsh_feature_chat/lib/src/stream/jump_button.dart": {
       "manual-metric": 3
