@@ -127,10 +127,7 @@ void main() {
             .first,
       );
       expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
-      t.binding.pipelineOwner.semanticsOwner!.performAction(
-        node.id,
-        SemanticsAction.tap,
-      );
+      node.owner!.performAction(node.id, SemanticsAction.tap);
       expect(services.started, 1);
     } finally {
       semantics.dispose();
@@ -156,10 +153,7 @@ void main() {
             .first,
       );
       expect(node.getSemanticsData().hasAction(SemanticsAction.tap), isTrue);
-      t.binding.pipelineOwner.semanticsOwner!.performAction(
-        node.id,
-        SemanticsAction.tap,
-      );
+      node.owner!.performAction(node.id, SemanticsAction.tap);
       expect(services.started, 1);
     } finally {
       semantics.dispose();
