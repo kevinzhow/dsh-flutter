@@ -82,6 +82,44 @@ void main() {
     }
   }
 
+  for (final brightness in Brightness.values) {
+    testWidgets(
+      'card outline follows source pointer modality ${brightness.name}',
+      (t) async {
+        final focus = FocusNode();
+        addTearDown(focus.dispose);
+        var opens = 0;
+        await t.pumpWidget(
+          host(official(brightness), card(open: () => opens++, focus: focus)),
+        );
+        await t.sendKeyEvent(LogicalKeyboardKey.tab);
+        await t.pump();
+        expect(focus.hasPrimaryFocus, isTrue);
+        expect(find.byKey(DshButton.focusRingKey), findsOneWidget);
+        final mouse = await t.createGesture(kind: PointerDeviceKind.mouse);
+        await mouse.addPointer(
+          location: t.getCenter(find.text('Synthetic title')),
+        );
+        try {
+          await mouse.down(t.getCenter(find.text('Synthetic title')));
+          await t.pump(const Duration(milliseconds: 200));
+          expect(focus.hasPrimaryFocus, isTrue);
+          expect(opens, 0);
+          expect(find.byKey(DshButton.focusRingKey), findsNothing);
+          await mouse.up();
+          await t.pump();
+          expect(opens, 1);
+          await t.sendKeyEvent(LogicalKeyboardKey.home);
+          await t.pump();
+          expect(focus.hasPrimaryFocus, isTrue);
+          expect(find.byKey(DshButton.focusRingKey), findsOneWidget);
+        } finally {
+          await mouse.removePointer();
+        }
+      },
+    );
+  }
+
   testWidgets('the contour rejects a corner but title, tag and metadata open', (
     t,
   ) async {

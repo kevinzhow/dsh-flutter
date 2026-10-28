@@ -277,6 +277,7 @@ class _DshButtonState extends State<DshButton> {
     final info = widget.profile == DshButtonProfile.infoAction;
     final header = widget.profile == DshButtonProfile.headerAction;
     final card = widget.profile == DshButtonProfile.pluginCard;
+    final sourceFocus = header || card;
     final compactAction = iconAction || info || header;
     final radiusToken = card
         ? DshPluginCardRecipe.radiusToken
@@ -515,10 +516,11 @@ class _DshButtonState extends State<DshButton> {
       clipBehavior: Clip.none,
       children: [
         surface,
-        if ((header ? dshHasVisibleFocus(_focusNode) : _focusVisible) &&
+        if ((sourceFocus ? dshHasVisibleFocus(_focusNode) : _focusVisible) &&
             _enabled &&
             _primaryFocus &&
-            (!header || !DshFocusPresentation.instance.pointerOwnsOutline) &&
+            (!sourceFocus ||
+                !DshFocusPresentation.instance.pointerOwnsOutline) &&
             !DshFocusPresentation.instance.suppressed(_focusNode))
           Positioned(
             left: -ringReach,

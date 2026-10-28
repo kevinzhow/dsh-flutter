@@ -48,6 +48,11 @@ outline. Title and switch keep independent native semantics, tap actions and
 keyboard focus. The description is the action's accessible hint; tags and the
 metadata live region remain separate content.
 
+Card focus also follows the source global input modality. A pointer-down on
+an already keyboard-focused title retains focus and hides the outline paint;
+keyboard navigation restores its visible outline. The card opts into the
+existing source focus tracker without changing unrelated button profiles.
+
 Card hover belongs to the containing card, including when the pointer is over
 its switch. The external hover input is restricted to the source card profile;
 unrelated primitive/add/info/icon/Header profiles retain their predicates and
