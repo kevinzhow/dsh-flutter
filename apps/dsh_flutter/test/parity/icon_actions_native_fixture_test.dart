@@ -83,7 +83,15 @@ void main() {
         route('settings');
         await t.sendKeyEvent(LogicalKeyboardKey.f8);
         await t.pumpAndSettle();
-        await _shiftTab(t);
+        expect(
+          find.descendant(
+            of: settings,
+            matching: find.byKey(DshButton.focusRingKey),
+          ),
+          findsNothing,
+        );
+        await t.sendKeyEvent(LogicalKeyboardKey.tab);
+        await t.pumpAndSettle();
         expect(
           find.descendant(
             of: settings,

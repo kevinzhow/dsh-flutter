@@ -164,6 +164,16 @@ class _IconActionsNativeAppState extends State<IconActionsNativeApp> {
     _trace.setup = false;
   }
 
+  void _resetPairingFocus() {
+    _pairing();
+    // Route setup must start traversal without the native window's remembered
+    // pointer focus from the previous route. The tested keys still traverse
+    // to, and activate, the real production controls.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) FocusManager.instance.primaryFocus?.unfocus();
+    });
+  }
+
   void _push(bool scanner) {
     _pairing();
     unawaited(
@@ -202,7 +212,7 @@ class _IconActionsNativeAppState extends State<IconActionsNativeApp> {
       bindings: {
         const SingleActivator(LogicalKeyboardKey.f6): () => _push(false),
         const SingleActivator(LogicalKeyboardKey.f7): () => _push(true),
-        const SingleActivator(LogicalKeyboardKey.f8): _pairing,
+        const SingleActivator(LogicalKeyboardKey.f8): _resetPairingFocus,
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
