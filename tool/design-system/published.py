@@ -1,6 +1,6 @@
 """Read published bundle CSS without executing JavaScript."""
 from pathlib import Path
-import argparse,base64,hashlib,json,re,tarfile
+import argparse,base64,hashlib,json,re,subprocess,tarfile
 
 def menu_portal_snapshot(archive):
     with tarfile.open(archive) as tar:
@@ -238,6 +238,11 @@ def verify_packages(source=None):
             for name, sha in package.get('referenceSourceSha256', {}).items():
                 if hashlib.sha256((source / name).read_bytes()).hexdigest() != sha:
                     raise ValueError('reference source drift: review the corresponding published package: ' + name)
+    if source is not None:
+        commit = subprocess.run(['git', '-C', str(source), 'rev-parse', 'HEAD'],
+                                capture_output=True, text=True)
+        if commit.returncode or commit.stdout.strip() != lock.get('referenceCommit'):
+            raise ValueError('reference checkout differs from locked commit')
     return lock
 
 def verify_snapshot(archive, package, folder):

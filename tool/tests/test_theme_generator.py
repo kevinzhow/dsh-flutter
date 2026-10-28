@@ -2,6 +2,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 import unittest
 import tempfile
 from unittest import mock
@@ -30,15 +31,28 @@ class ThemeGeneratorTests(unittest.TestCase):
             (source / 'package.json').write_text(json.dumps(manifest))
             (source / 'consumer.json').write_text(json.dumps({'dependencies': {'@test/theme': 'workspace:*'}}))
             (source / 'style.css').write_text('body{--x:1}')
+            def git(*args):
+                return subprocess.check_output(
+                    ['git', '-C', str(source), '-c', 'user.name=Test',
+                     '-c', 'user.email=test@example.invalid', *args],
+                    text=True, stderr=subprocess.DEVNULL).strip()
+            git('init', '-q')
+            git('add', '.')
+            git('commit', '-qm', 'Pinned reference')
+            reference = git('rev-parse', 'HEAD')
             digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
             package = {'name': '@test/theme', 'version': '1', 'snapshotFolder': 'theme',
                        'sourcePackage': 'package.json', 'referenceConsumer': 'consumer.json',
                        'dependencyField': 'dependencies', 'dependencySpecifier': 'workspace:*',
                        'files': {p.name: digest(p) for p in folder.iterdir()},
                        'referenceSourceSha256': {'style.css': digest(source / 'style.css')}}
-            (here / 'sources.lock.json').write_text(json.dumps({'packages': [package]}))
+            (here / 'sources.lock.json').write_text(json.dumps({'referenceCommit': reference, 'packages': [package]}))
             with mock.patch.object(theme.PUBLISHED, '__file__', str(here / 'published.py')):
                 theme.PUBLISHED.verify_packages(source)
+                git('commit', '--allow-empty', '-qm', 'Same package bytes, different source revision')
+                with self.assertRaisesRegex(ValueError, 'reference checkout differs'):
+                    theme.PUBLISHED.verify_packages(source)
+                git('checkout', '--detach', reference)
                 (source / 'style.css').write_text('body{--x:2}')
                 with self.assertRaisesRegex(ValueError, 'reference source drift'):
                     theme.PUBLISHED.verify_packages(source)
