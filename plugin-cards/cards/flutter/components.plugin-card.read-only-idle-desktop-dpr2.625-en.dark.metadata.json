@@ -1,0 +1,390 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.plugin-card.read-only-idle-desktop-dpr2.625-en.dark",
+  "variantId": "default",
+  "captureKey": "components.plugin-card.read-only-idle-desktop-dpr2.625-en.dark",
+  "theme": "dark",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "dark"
+  },
+  "locale": "en",
+  "image": "visual-testing-results/flutter/components.plugin-card.read-only-idle-desktop-dpr2.625-en.dark.png",
+  "viewport": {
+    "width": 800,
+    "height": 900,
+    "density": 2.625
+  },
+  "selector": "[data-plugin-cards-capture]",
+  "crop": {
+    "mode": "viewport",
+    "rect": {
+      "x": 0.0,
+      "y": 0.0,
+      "width": 800.0,
+      "height": 900.0
+    },
+    "pixelRect": {
+      "x": 0.0,
+      "y": 0.0,
+      "width": 2100.0,
+      "height": 2363.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_plugins:PluginManagerPage loaded cards",
+      "dsh_ui:DshPluginCard",
+      "dsh_ui:DshPluginCardList"
+    ],
+    "layoutViewport": {
+      "width": 800.0,
+      "height": 900.1904761904761
+    },
+    "notes": "Actual manager with shared offline data. Published-bundle source runner required; no source-TS substitution. SVG image formats, highlight and sticky touch hover remain pending.",
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "Plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 20.0,
+      "fontWeight": 500,
+      "lineHeight": 28.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[1]",
+      "text": "Install, enable, and configure plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[2]",
+      "text": "Add plugin",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[3]",
+      "text": "Installed",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 600,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[4]",
+      "text": "Discover",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[5]",
+      "text": "Installed plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 500,
+      "lineHeight": 22.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[6]",
+      "text": "Synthetic plugin",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 500,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[7]",
+      "text": "A synthetic package for loaded-card checks.",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    }
+  ],
+  "styleTokens": [],
+  "componentGeometry": {
+    "schema": "dsh-plugin-card-geometry/1",
+    "coordinateBasis": {
+      "space": "capture-root logical pixels; viewport aligned",
+      "origin": [
+        0.0,
+        0.0
+      ],
+      "layoutViewport": [
+        800.0,
+        900.1904761904761
+      ],
+      "devicePixelRatio": 2.625,
+      "measurement": "RenderBox.localToGlobal(Offset.zero, ancestor: captureRoot) plus raw RenderBox.size",
+      "rounding": "none"
+    },
+    "status": "measured",
+    "geometrySemantics": {
+      "title": "visible DshChromeText outer line box; compare separately with the source text-sized title DOM button",
+      "action": "canonical stretched DshButton action/semantic hit box; source counterpart is the whole-card pseudo-element hit area, not the text-sized DOM button",
+      "innerCard": "canonical card outer Stack including metadata; not a viewport or heading-row inference",
+      "rawRenderParagraph": "not sampled",
+      "glyphInkBounds": "not sampled"
+    },
+    "cardCount": 1,
+    "card": {
+      "bounds": [
+        24.0,
+        200.0,
+        752.0,
+        64.76190476190476
+      ],
+      "rawFlutterRect": {
+        "left": 24.0,
+        "top": 200.0,
+        "right": 776.0,
+        "bottom": 264.76190476190476
+      },
+      "widgetType": "DshPluginCard",
+      "renderType": "_RenderContourHitTarget",
+      "measurement": "public widget outer RenderBox"
+    },
+    "innerCard": {
+      "bounds": [
+        24.0,
+        200.0,
+        752.0,
+        64.76190476190476
+      ],
+      "rawFlutterRect": {
+        "left": 24.0,
+        "top": 200.0,
+        "right": 776.0,
+        "bottom": 264.76190476190476
+      },
+      "widgetType": "Stack",
+      "renderType": "RenderStack",
+      "measurement": "public widget outer RenderBox"
+    },
+    "action": {
+      "bounds": [
+        24.0,
+        200.0,
+        752.0,
+        64.76190476190476
+      ],
+      "rawFlutterRect": {
+        "left": 24.0,
+        "top": 200.0,
+        "right": 776.0,
+        "bottom": 264.76190476190476
+      },
+      "widgetType": "DshButton",
+      "renderType": "RenderSemanticsAnnotations",
+      "measurement": "public widget outer RenderBox"
+    },
+    "title": {
+      "bounds": [
+        94.76190476190476,
+        211.38095238095238,
+        105.85357666015625,
+        20.0
+      ],
+      "rawFlutterRect": {
+        "left": 94.76190476190476,
+        "top": 211.38095238095238,
+        "right": 200.615481422061,
+        "bottom": 231.38095238095238
+      },
+      "widgetType": "DshChromeText",
+      "renderType": "_RenderChromeBaseline",
+      "measurement": "DshChromeText outer render/line box; not glyph ink or a stretched action",
+      "text": "Synthetic plugin"
+    },
+    "description": {
+      "bounds": [
+        94.76190476190476,
+        235.38095238095238,
+        623.2380952380952,
+        18.0
+      ],
+      "rawFlutterRect": {
+        "left": 94.76190476190476,
+        "top": 235.38095238095238,
+        "right": 718.0,
+        "bottom": 253.38095238095238
+      },
+      "widgetType": "DshChromeText",
+      "renderType": "_RenderChromeBaseline",
+      "measurement": "DshChromeText outer render/line box; not glyph ink or a stretched action",
+      "text": "A synthetic package for loaded-card checks."
+    },
+    "artworkFrame": {
+      "bounds": [
+        32.0,
+        208.0,
+        48.76190476190476,
+        48.76190476190476
+      ],
+      "rawFlutterRect": {
+        "left": 32.0,
+        "top": 208.0,
+        "right": 80.76190476190476,
+        "bottom": 256.76190476190476
+      },
+      "widgetType": "DshContainer",
+      "renderType": "RenderConstrainedBox",
+      "measurement": "public widget outer RenderBox"
+    },
+    "artwork": {
+      "bounds": [
+        38.38095238095238,
+        214.38095238095238,
+        36.0,
+        36.0
+      ],
+      "rawFlutterRect": {
+        "left": 38.38095238095238,
+        "top": 214.38095238095238,
+        "right": 74.38095238095238,
+        "bottom": 250.38095238095238
+      },
+      "widgetType": "DshPluginDefaultArtwork",
+      "renderType": "RenderExcludeSemantics",
+      "measurement": "public widget outer RenderBox"
+    },
+    "artworkKind": "native default/fallback artwork widget",
+    "imageConfigured": false,
+    "tags": [],
+    "metadataError": null,
+    "switch": {
+      "bounds": [
+        732.0,
+        222.38095238095238,
+        36.0,
+        20.0
+      ],
+      "rawFlutterRect": {
+        "left": 732.0,
+        "top": 222.38095238095238,
+        "right": 768.0,
+        "bottom": 242.38095238095238
+      },
+      "widgetType": "DshSwitch",
+      "renderType": "RenderSemanticsAnnotations",
+      "measurement": "public widget outer RenderBox",
+      "checked": "true",
+      "value": true,
+      "disabled": true
+    },
+    "hover": false,
+    "focusedTitle": false,
+    "titleFocusVisible": false,
+    "titleOutline": {
+      "focusRingPresent": false,
+      "bounds": null,
+      "measurement": "actual canonical native focus-ring widget presence/bounds; not a CSS pseudo-element assertion"
+    },
+    "focusMeasurement": "actual card action FocusableActionDetector.focusNode.hasPrimaryFocus; visible native title text is measured separately from its stretched action",
+    "optionalParts": {
+      "descriptionPresent": true,
+      "metadataErrorPresent": false,
+      "tagCount": 0
+    }
+  },
+  "capturedAt": "2026-10-28T17:57:57.008879Z"
+}

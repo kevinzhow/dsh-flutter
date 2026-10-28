@@ -1,0 +1,4974 @@
+{
+  "schema": "dsh-parity-summary/2",
+  "suite": "parity-ext",
+  "notes": "Unmodified subset of the parent capture; see capture-identity.json.",
+  "counts": {
+    "entries": 48,
+    "compared": 48,
+    "same": 0,
+    "strict": 3,
+    "pass": 22,
+    "geometryPass": 22,
+    "fail": 26,
+    "uncovered": 0,
+    "missing": 0
+  },
+  "meanPixelPerfectPct": 89.153,
+  "meanRgbPct": 99.893,
+  "meanNonTextPct": 91.718,
+  "thresholds": {
+    "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
+    "geometry": 99.5
+  },
+  "cases": [
+    {
+      "key": "components.switch-family.plugin-desktop-en-on.light",
+      "caseId": "components.switch-family.plugin-desktop-en-on.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.0,
+      "rgbPct": 99.914,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.0,
+      "closePct": 98.611,
+      "nonTextPct": 91.25,
+      "mismatched": 108,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 63,
+        "corner": 0,
+        "offset": 0,
+        "text": 45,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 79,
+          "exactPct": 87.656,
+          "closePct": 98.906,
+          "nonTextPct": 92.969,
+          "buckets": {
+            "fill": 0,
+            "hairline": 45,
+            "corner": 0,
+            "offset": 0,
+            "text": 34,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 29,
+          "exactPct": 63.75,
+          "closePct": 96.25,
+          "nonTextPct": 77.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 18,
+            "corner": 0,
+            "offset": 0,
+            "text": 11,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-on.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-on.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 87.083,
+      "rgbPct": 99.919,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 87.083,
+      "closePct": 98.75,
+      "nonTextPct": 92.639,
+      "mismatched": 93,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 53,
+        "corner": 0,
+        "offset": 0,
+        "text": 40,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 71,
+          "exactPct": 88.906,
+          "closePct": 99.062,
+          "nonTextPct": 93.906,
+          "buckets": {
+            "fill": 0,
+            "hairline": 39,
+            "corner": 0,
+            "offset": 0,
+            "text": 32,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 22,
+          "exactPct": 72.5,
+          "closePct": 96.25,
+          "nonTextPct": 82.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 0,
+            "text": 8,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off.light",
+      "caseId": "components.switch-family.plugin-desktop-en-off.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.778,
+      "rgbPct": 99.971,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 92.778,
+      "closePct": 100.0,
+      "nonTextPct": 92.778,
+      "mismatched": 52,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 29,
+        "corner": 1,
+        "offset": 5,
+        "text": 0,
+        "other": 17
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 42,
+          "exactPct": 93.438,
+          "closePct": 100.0,
+          "nonTextPct": 93.438,
+          "buckets": {
+            "fill": 0,
+            "hairline": 24,
+            "corner": 1,
+            "offset": 2,
+            "text": 0,
+            "other": 15
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 10,
+          "exactPct": 87.5,
+          "closePct": 100.0,
+          "nonTextPct": 87.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 5,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 2
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-off.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 33.611,
+      "rgbPct": 99.809,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 33.611,
+      "closePct": 99.861,
+      "nonTextPct": 46.389,
+      "mismatched": 478,
+      "pixels": 720,
+      "buckets": {
+        "fill": 240,
+        "hairline": 58,
+        "corner": 0,
+        "offset": 35,
+        "text": 92,
+        "other": 53
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 430,
+          "exactPct": 32.812,
+          "closePct": 99.844,
+          "nonTextPct": 47.188,
+          "buckets": {
+            "fill": 226,
+            "hairline": 58,
+            "corner": 0,
+            "offset": 29,
+            "text": 92,
+            "other": 25
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 48,
+          "exactPct": 40.0,
+          "closePct": 100.0,
+          "nonTextPct": 40.0,
+          "buckets": {
+            "fill": 14,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 6,
+            "text": 0,
+            "other": 28
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-on-disabled.light",
+      "caseId": "components.switch-family.plugin-desktop-en-on-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 89.444,
+      "rgbPct": 99.96,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 89.444,
+      "closePct": 99.167,
+      "nonTextPct": 94.028,
+      "mismatched": 76,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 43,
+        "corner": 0,
+        "offset": 0,
+        "text": 33,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 54,
+          "exactPct": 91.562,
+          "closePct": 99.375,
+          "nonTextPct": 95.469,
+          "buckets": {
+            "fill": 0,
+            "hairline": 29,
+            "corner": 0,
+            "offset": 0,
+            "text": 25,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 22,
+          "exactPct": 72.5,
+          "closePct": 97.5,
+          "nonTextPct": 82.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 0,
+            "text": 8,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-on-disabled.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-on-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.639,
+      "rgbPct": 99.969,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 92.639,
+      "closePct": 99.444,
+      "nonTextPct": 96.111,
+      "mismatched": 53,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 28,
+        "corner": 0,
+        "offset": 0,
+        "text": 25,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 42,
+          "exactPct": 93.438,
+          "closePct": 99.688,
+          "nonTextPct": 96.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 22,
+            "corner": 0,
+            "offset": 0,
+            "text": 20,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 11,
+          "exactPct": 86.25,
+          "closePct": 97.5,
+          "nonTextPct": 92.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 6,
+            "corner": 0,
+            "offset": 0,
+            "text": 5,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off-disabled.light",
+      "caseId": "components.switch-family.plugin-desktop-en-off-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.417,
+      "rgbPct": 99.982,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 95.417,
+      "closePct": 100.0,
+      "nonTextPct": 95.417,
+      "mismatched": 33,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 16,
+        "corner": 0,
+        "offset": 17,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 28,
+          "exactPct": 95.625,
+          "closePct": 100.0,
+          "nonTextPct": 95.625,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 14,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 5,
+          "exactPct": 93.75,
+          "closePct": 100.0,
+          "nonTextPct": 93.75,
+          "buckets": {
+            "fill": 0,
+            "hairline": 2,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off-disabled.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-off-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.306,
+      "rgbPct": 99.986,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.306,
+      "closePct": 100.0,
+      "nonTextPct": 96.25,
+      "mismatched": 41,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 22,
+        "corner": 0,
+        "offset": 4,
+        "text": 14,
+        "other": 1
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 36,
+          "exactPct": 94.375,
+          "closePct": 100.0,
+          "nonTextPct": 96.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 20,
+            "corner": 0,
+            "offset": 1,
+            "text": 14,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 5,
+          "exactPct": 93.75,
+          "closePct": 100.0,
+          "nonTextPct": 93.75,
+          "buckets": {
+            "fill": 0,
+            "hairline": 2,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-on-focused.light",
+      "caseId": "components.switch-family.plugin-desktop-en-on-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.991,
+      "rgbPct": 99.908,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.991,
+      "closePct": 99.304,
+      "nonTextPct": 99.689,
+      "mismatched": 6536,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1522,
+        "corner": 168,
+        "offset": 177,
+        "text": 4519,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 77.539,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 104,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 214,
+          "exactPct": 79.102,
+          "closePct": 79.785,
+          "nonTextPct": 87.793,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 198,
+          "exactPct": 80.664,
+          "closePct": 81.445,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 87,
+            "corner": 0,
+            "offset": 0,
+            "text": 111,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 166,
+          "exactPct": 83.789,
+          "closePct": 85.254,
+          "nonTextPct": 91.699,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 31,
+            "offset": 0,
+            "text": 81,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-on-focused.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-on-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.973,
+      "rgbPct": 99.882,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-on-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.973,
+      "closePct": 99.14,
+      "nonTextPct": 99.68,
+      "mismatched": 6657,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1576,
+        "corner": 177,
+        "offset": 183,
+        "text": 4586,
+        "other": 135
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 235,
+          "exactPct": 77.051,
+          "closePct": 77.734,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 103,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 215,
+          "exactPct": 79.004,
+          "closePct": 79.492,
+          "nonTextPct": 87.695,
+          "buckets": {
+            "fill": 0,
+            "hairline": 98,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 164,
+          "exactPct": 83.984,
+          "closePct": 85.449,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 57,
+            "corner": 31,
+            "offset": 0,
+            "text": 76,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 196,
+          "exactPct": 80.859,
+          "closePct": 83.105,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 88,
+            "corner": 0,
+            "offset": 0,
+            "text": 108,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off-focused.light",
+      "caseId": "components.switch-family.plugin-desktop-en-off-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 99.0,
+      "rgbPct": 99.908,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.0,
+      "closePct": 99.305,
+      "nonTextPct": 99.692,
+      "mismatched": 6480,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1495,
+        "corner": 169,
+        "offset": 179,
+        "text": 4484,
+        "other": 153
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 77.539,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 104,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 214,
+          "exactPct": 79.102,
+          "closePct": 79.785,
+          "nonTextPct": 87.793,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 198,
+          "exactPct": 80.664,
+          "closePct": 81.445,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 87,
+            "corner": 0,
+            "offset": 0,
+            "text": 111,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 166,
+          "exactPct": 83.789,
+          "closePct": 85.254,
+          "nonTextPct": 91.699,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 31,
+            "offset": 0,
+            "text": 81,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-en-off-focused.dark",
+      "caseId": "components.switch-family.plugin-desktop-en-off-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.913,
+      "rgbPct": 99.882,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-en-off-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.913,
+      "closePct": 99.142,
+      "nonTextPct": 99.635,
+      "mismatched": 7042,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 240,
+        "hairline": 1577,
+        "corner": 177,
+        "offset": 222,
+        "text": 4674,
+        "other": 152
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            672,
+            224,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 333,
+          "exactPct": 67.48,
+          "closePct": 98.926,
+          "nonTextPct": 72.559,
+          "buckets": {
+            "fill": 206,
+            "hairline": 36,
+            "corner": 0,
+            "offset": 23,
+            "text": 52,
+            "other": 16
+          }
+        },
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 235,
+          "exactPct": 77.051,
+          "closePct": 77.734,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 103,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 215,
+          "exactPct": 79.004,
+          "closePct": 79.492,
+          "nonTextPct": 87.695,
+          "buckets": {
+            "fill": 0,
+            "hairline": 98,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            640,
+            224,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 240,
+          "exactPct": 76.562,
+          "closePct": 98.633,
+          "nonTextPct": 88.086,
+          "buckets": {
+            "fill": 34,
+            "hairline": 83,
+            "corner": 0,
+            "offset": 5,
+            "text": 118,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-on.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.0,
+      "rgbPct": 99.914,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.0,
+      "closePct": 98.611,
+      "nonTextPct": 91.25,
+      "mismatched": 108,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 63,
+        "corner": 0,
+        "offset": 0,
+        "text": 45,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 79,
+          "exactPct": 87.656,
+          "closePct": 98.906,
+          "nonTextPct": 92.969,
+          "buckets": {
+            "fill": 0,
+            "hairline": 45,
+            "corner": 0,
+            "offset": 0,
+            "text": 34,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 29,
+          "exactPct": 63.75,
+          "closePct": 96.25,
+          "nonTextPct": 77.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 18,
+            "corner": 0,
+            "offset": 0,
+            "text": 11,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-on.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 87.083,
+      "rgbPct": 99.919,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 87.083,
+      "closePct": 98.75,
+      "nonTextPct": 92.639,
+      "mismatched": 93,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 53,
+        "corner": 0,
+        "offset": 0,
+        "text": 40,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 71,
+          "exactPct": 88.906,
+          "closePct": 99.062,
+          "nonTextPct": 93.906,
+          "buckets": {
+            "fill": 0,
+            "hairline": 39,
+            "corner": 0,
+            "offset": 0,
+            "text": 32,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 22,
+          "exactPct": 72.5,
+          "closePct": 96.25,
+          "nonTextPct": 82.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 0,
+            "text": 8,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-off.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.778,
+      "rgbPct": 99.971,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 92.778,
+      "closePct": 100.0,
+      "nonTextPct": 92.778,
+      "mismatched": 52,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 29,
+        "corner": 1,
+        "offset": 5,
+        "text": 0,
+        "other": 17
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 42,
+          "exactPct": 93.438,
+          "closePct": 100.0,
+          "nonTextPct": 93.438,
+          "buckets": {
+            "fill": 0,
+            "hairline": 24,
+            "corner": 1,
+            "offset": 2,
+            "text": 0,
+            "other": 15
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 10,
+          "exactPct": 87.5,
+          "closePct": 100.0,
+          "nonTextPct": 87.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 5,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 2
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-off.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 33.611,
+      "rgbPct": 99.809,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 33.611,
+      "closePct": 99.861,
+      "nonTextPct": 46.389,
+      "mismatched": 478,
+      "pixels": 720,
+      "buckets": {
+        "fill": 240,
+        "hairline": 58,
+        "corner": 0,
+        "offset": 35,
+        "text": 92,
+        "other": 53
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 430,
+          "exactPct": 32.812,
+          "closePct": 99.844,
+          "nonTextPct": 47.188,
+          "buckets": {
+            "fill": 226,
+            "hairline": 58,
+            "corner": 0,
+            "offset": 29,
+            "text": 92,
+            "other": 25
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 48,
+          "exactPct": 40.0,
+          "closePct": 100.0,
+          "nonTextPct": 40.0,
+          "buckets": {
+            "fill": 14,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 6,
+            "text": 0,
+            "other": 28
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on-disabled.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-on-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 89.444,
+      "rgbPct": 99.96,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 89.444,
+      "closePct": 99.167,
+      "nonTextPct": 94.028,
+      "mismatched": 76,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 43,
+        "corner": 0,
+        "offset": 0,
+        "text": 33,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 54,
+          "exactPct": 91.562,
+          "closePct": 99.375,
+          "nonTextPct": 95.469,
+          "buckets": {
+            "fill": 0,
+            "hairline": 29,
+            "corner": 0,
+            "offset": 0,
+            "text": 25,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 22,
+          "exactPct": 72.5,
+          "closePct": 97.5,
+          "nonTextPct": 82.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 0,
+            "text": 8,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on-disabled.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-on-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 92.639,
+      "rgbPct": 99.969,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 92.639,
+      "closePct": 99.444,
+      "nonTextPct": 96.111,
+      "mismatched": 53,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 28,
+        "corner": 0,
+        "offset": 0,
+        "text": 25,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 42,
+          "exactPct": 93.438,
+          "closePct": 99.688,
+          "nonTextPct": 96.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 22,
+            "corner": 0,
+            "offset": 0,
+            "text": 20,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 11,
+          "exactPct": 86.25,
+          "closePct": 97.5,
+          "nonTextPct": 92.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 6,
+            "corner": 0,
+            "offset": 0,
+            "text": 5,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off-disabled.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-off-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 95.417,
+      "rgbPct": 99.982,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 95.417,
+      "closePct": 100.0,
+      "nonTextPct": 95.417,
+      "mismatched": 33,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 16,
+        "corner": 0,
+        "offset": 17,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 28,
+          "exactPct": 95.625,
+          "closePct": 100.0,
+          "nonTextPct": 95.625,
+          "buckets": {
+            "fill": 0,
+            "hairline": 14,
+            "corner": 0,
+            "offset": 14,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 5,
+          "exactPct": 93.75,
+          "closePct": 100.0,
+          "nonTextPct": 93.75,
+          "buckets": {
+            "fill": 0,
+            "hairline": 2,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off-disabled.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-off-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.306,
+      "rgbPct": 99.986,
+      "sizeReact": [
+        36,
+        20
+      ],
+      "sizeFlutter": [
+        36,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.306,
+      "closePct": 100.0,
+      "nonTextPct": 96.25,
+      "mismatched": 41,
+      "pixels": 720,
+      "buckets": {
+        "fill": 0,
+        "hairline": 22,
+        "corner": 0,
+        "offset": 4,
+        "text": 14,
+        "other": 1
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 36,
+          "exactPct": 94.375,
+          "closePct": 100.0,
+          "nonTextPct": 96.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 20,
+            "corner": 0,
+            "offset": 1,
+            "text": 14,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            4,
+            20
+          ],
+          "pixels": 80,
+          "mismatched": 5,
+          "exactPct": 93.75,
+          "closePct": 100.0,
+          "nonTextPct": 93.75,
+          "buckets": {
+            "fill": 0,
+            "hairline": 2,
+            "corner": 0,
+            "offset": 3,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on-focused.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-on-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.949,
+      "rgbPct": 99.834,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.949,
+      "closePct": 99.2,
+      "nonTextPct": 99.734,
+      "mismatched": 6808,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1078,
+        "corner": 241,
+        "offset": 253,
+        "text": 5086,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 430,
+          "exactPct": 58.008,
+          "closePct": 58.887,
+          "nonTextPct": 88.867,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 231,
+          "exactPct": 77.441,
+          "closePct": 79.98,
+          "nonTextPct": 89.746,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 49,
+            "offset": 20,
+            "text": 126,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 304,
+          "exactPct": 70.312,
+          "closePct": 71.582,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 210,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 315,
+          "exactPct": 69.238,
+          "closePct": 72.461,
+          "nonTextPct": 91.211,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 41,
+            "offset": 18,
+            "text": 225,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-on-focused.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-on-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.928,
+      "rgbPct": 99.802,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-on-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.928,
+      "closePct": 99.091,
+      "nonTextPct": 99.739,
+      "mismatched": 6945,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1119,
+        "corner": 249,
+        "offset": 189,
+        "text": 5253,
+        "other": 135
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 429,
+          "exactPct": 58.105,
+          "closePct": 59.473,
+          "nonTextPct": 88.965,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 91.016,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 305,
+          "exactPct": 70.215,
+          "closePct": 70.703,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 211,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 145,
+          "exactPct": 85.84,
+          "closePct": 86.719,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 33,
+            "offset": 0,
+            "text": 58,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 78.613,
+          "nonTextPct": 92.188,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 49,
+            "offset": 0,
+            "text": 156,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off-focused.light",
+      "caseId": "components.switch-family.plugin-desktop-zh-off-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.958,
+      "rgbPct": 99.834,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.958,
+      "closePct": 99.202,
+      "nonTextPct": 99.737,
+      "mismatched": 6752,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1051,
+        "corner": 242,
+        "offset": 254,
+        "text": 5051,
+        "other": 154
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 430,
+          "exactPct": 58.008,
+          "closePct": 58.887,
+          "nonTextPct": 88.867,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 231,
+          "exactPct": 77.441,
+          "closePct": 79.98,
+          "nonTextPct": 89.746,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 49,
+            "offset": 20,
+            "text": 126,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 304,
+          "exactPct": 70.312,
+          "closePct": 71.582,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 210,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 315,
+          "exactPct": 69.238,
+          "closePct": 72.461,
+          "nonTextPct": 91.211,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 41,
+            "offset": 18,
+            "text": 225,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-desktop-zh-off-focused.dark",
+      "caseId": "components.switch-family.plugin-desktop-zh-off-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.863,
+      "rgbPct": 99.802,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-desktop-zh-off-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.863,
+      "closePct": 99.087,
+      "nonTextPct": 99.688,
+      "mismatched": 7366,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 240,
+        "hairline": 1156,
+        "corner": 249,
+        "offset": 228,
+        "text": 5341,
+        "other": 152
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            672,
+            224,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 333,
+          "exactPct": 67.48,
+          "closePct": 98.926,
+          "nonTextPct": 72.559,
+          "buckets": {
+            "fill": 206,
+            "hairline": 36,
+            "corner": 0,
+            "offset": 23,
+            "text": 52,
+            "other": 16
+          }
+        },
+        {
+          "rect": [
+            640,
+            224,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 240,
+          "exactPct": 76.562,
+          "closePct": 98.633,
+          "nonTextPct": 88.086,
+          "buckets": {
+            "fill": 34,
+            "hairline": 83,
+            "corner": 0,
+            "offset": 5,
+            "text": 118,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 429,
+          "exactPct": 58.105,
+          "closePct": 59.473,
+          "nonTextPct": 88.965,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 305,
+          "exactPct": 70.215,
+          "closePct": 70.703,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 211,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on.light",
+      "caseId": "components.switch-family.plugin-phone-en-on.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.094,
+      "rgbPct": 99.94,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.094,
+      "closePct": 99.201,
+      "nonTextPct": 97.661,
+      "mismatched": 303,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 120,
+        "corner": 0,
+        "offset": 0,
+        "text": 183,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 216,
+          "exactPct": 95.238,
+          "closePct": 99.339,
+          "nonTextPct": 98.148,
+          "buckets": {
+            "fill": 0,
+            "hairline": 84,
+            "corner": 0,
+            "offset": 0,
+            "text": 132,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 87,
+          "exactPct": 85.354,
+          "closePct": 98.148,
+          "nonTextPct": 93.939,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 0,
+            "offset": 0,
+            "text": 51,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on.dark",
+      "caseId": "components.switch-family.plugin-phone-en-on.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.971,
+      "rgbPct": 99.945,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.971,
+      "closePct": 99.279,
+      "nonTextPct": 98.09,
+      "mismatched": 258,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 98,
+        "corner": 0,
+        "offset": 0,
+        "text": 160,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 185,
+          "exactPct": 95.922,
+          "closePct": 99.427,
+          "nonTextPct": 98.501,
+          "buckets": {
+            "fill": 0,
+            "hairline": 68,
+            "corner": 0,
+            "offset": 0,
+            "text": 117,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 73,
+          "exactPct": 87.71,
+          "closePct": 98.148,
+          "nonTextPct": 94.949,
+          "buckets": {
+            "fill": 0,
+            "hairline": 30,
+            "corner": 0,
+            "offset": 0,
+            "text": 43,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off.light",
+      "caseId": "components.switch-family.plugin-phone-en-off.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.628,
+      "rgbPct": 99.983,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 96.628,
+      "closePct": 99.922,
+      "nonTextPct": 96.628,
+      "mismatched": 173,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 77,
+        "corner": 0,
+        "offset": 96,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 142,
+          "exactPct": 96.869,
+          "closePct": 99.912,
+          "nonTextPct": 96.869,
+          "buckets": {
+            "fill": 0,
+            "hairline": 67,
+            "corner": 0,
+            "offset": 75,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 31,
+          "exactPct": 94.781,
+          "closePct": 100.0,
+          "nonTextPct": 94.781,
+          "buckets": {
+            "fill": 0,
+            "hairline": 10,
+            "corner": 0,
+            "offset": 21,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off.dark",
+      "caseId": "components.switch-family.plugin-phone-en-off.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 39.22,
+      "rgbPct": 99.823,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 39.22,
+      "closePct": 99.708,
+      "nonTextPct": 44.893,
+      "mismatched": 3118,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 2346,
+        "hairline": 0,
+        "corner": 0,
+        "offset": 285,
+        "text": 291,
+        "other": 196
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 2774,
+          "exactPct": 38.845,
+          "closePct": 99.669,
+          "nonTextPct": 45.26,
+          "buckets": {
+            "fill": 2111,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 222,
+            "text": 291,
+            "other": 150
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 344,
+          "exactPct": 42.088,
+          "closePct": 100.0,
+          "nonTextPct": 42.088,
+          "buckets": {
+            "fill": 235,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 63,
+            "text": 0,
+            "other": 46
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on-disabled.light",
+      "caseId": "components.switch-family.plugin-phone-en-on-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.123,
+      "rgbPct": 99.903,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.123,
+      "closePct": 99.454,
+      "nonTextPct": 83.431,
+      "mismatched": 1071,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 715,
+        "hairline": 61,
+        "corner": 19,
+        "offset": 47,
+        "text": 221,
+        "other": 8
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 1008,
+          "exactPct": 77.778,
+          "closePct": 99.559,
+          "nonTextPct": 81.79,
+          "buckets": {
+            "fill": 715,
+            "hairline": 37,
+            "corner": 19,
+            "offset": 47,
+            "text": 182,
+            "other": 8
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 63,
+          "exactPct": 89.394,
+          "closePct": 98.653,
+          "nonTextPct": 95.96,
+          "buckets": {
+            "fill": 0,
+            "hairline": 24,
+            "corner": 0,
+            "offset": 0,
+            "text": 39,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on-disabled.dark",
+      "caseId": "components.switch-family.plugin-phone-en-on-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.435,
+      "rgbPct": 99.95,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.435,
+      "closePct": 99.474,
+      "nonTextPct": 83.801,
+      "mismatched": 1055,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 715,
+        "hairline": 40,
+        "corner": 19,
+        "offset": 47,
+        "text": 224,
+        "other": 10
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 1015,
+          "exactPct": 77.623,
+          "closePct": 99.581,
+          "nonTextPct": 82.011,
+          "buckets": {
+            "fill": 715,
+            "hairline": 25,
+            "corner": 19,
+            "offset": 47,
+            "text": 199,
+            "other": 10
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 40,
+          "exactPct": 93.266,
+          "closePct": 98.653,
+          "nonTextPct": 97.475,
+          "buckets": {
+            "fill": 0,
+            "hairline": 15,
+            "corner": 0,
+            "offset": 0,
+            "text": 25,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off-disabled.light",
+      "caseId": "components.switch-family.plugin-phone-en-off-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-disabled",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 97.758,
+      "rgbPct": 99.991,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 97.758,
+      "closePct": 100.0,
+      "nonTextPct": 97.758,
+      "mismatched": 115,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 40,
+        "corner": 0,
+        "offset": 75,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 98,
+          "exactPct": 97.84,
+          "closePct": 100.0,
+          "nonTextPct": 97.84,
+          "buckets": {
+            "fill": 0,
+            "hairline": 37,
+            "corner": 0,
+            "offset": 61,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 17,
+          "exactPct": 97.138,
+          "closePct": 100.0,
+          "nonTextPct": 97.138,
+          "buckets": {
+            "fill": 0,
+            "hairline": 3,
+            "corner": 0,
+            "offset": 14,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off-disabled.dark",
+      "caseId": "components.switch-family.plugin-phone-en-off-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-disabled",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.94,
+      "rgbPct": 99.987,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 96.94,
+      "closePct": 99.864,
+      "nonTextPct": 97.505,
+      "mismatched": 157,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 57,
+        "corner": 0,
+        "offset": 71,
+        "text": 29,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 138,
+          "exactPct": 96.958,
+          "closePct": 99.846,
+          "nonTextPct": 97.597,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 0,
+            "offset": 59,
+            "text": 29,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 19,
+          "exactPct": 96.801,
+          "closePct": 100.0,
+          "nonTextPct": 96.801,
+          "buckets": {
+            "fill": 0,
+            "hairline": 7,
+            "corner": 0,
+            "offset": 12,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on-focused.light",
+      "caseId": "components.switch-family.plugin-phone-en-on-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-focused",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.05,
+      "rgbPct": 99.896,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.05,
+      "closePct": 99.227,
+      "nonTextPct": 99.479,
+      "mismatched": 19224,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8649,
+        "corner": 194,
+        "offset": 1546,
+        "text": 8678,
+        "other": 157
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 676,
+          "exactPct": 90.42,
+          "closePct": 90.93,
+          "nonTextPct": 93.722,
+          "buckets": {
+            "fill": 0,
+            "hairline": 437,
+            "corner": 6,
+            "offset": 0,
+            "text": 233,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 571,
+          "exactPct": 91.908,
+          "closePct": 93.141,
+          "nonTextPct": 95.281,
+          "buckets": {
+            "fill": 0,
+            "hairline": 333,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 600,
+          "exactPct": 91.497,
+          "closePct": 92.871,
+          "nonTextPct": 95.791,
+          "buckets": {
+            "fill": 0,
+            "hairline": 281,
+            "corner": 16,
+            "offset": 0,
+            "text": 303,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.452,
+          "nonTextPct": 95.989,
+          "buckets": {
+            "fill": 0,
+            "hairline": 282,
+            "corner": 1,
+            "offset": 0,
+            "text": 216,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-on-focused.dark",
+      "caseId": "components.switch-family.plugin-phone-en-on-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-focused",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.052,
+      "rgbPct": 99.875,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-on-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.052,
+      "closePct": 99.188,
+      "nonTextPct": 99.483,
+      "mismatched": 19183,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8669,
+        "corner": 197,
+        "offset": 1369,
+        "text": 8716,
+        "other": 232
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 679,
+          "exactPct": 90.377,
+          "closePct": 90.859,
+          "nonTextPct": 93.707,
+          "buckets": {
+            "fill": 0,
+            "hairline": 438,
+            "corner": 6,
+            "offset": 0,
+            "text": 235,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 572,
+          "exactPct": 91.893,
+          "closePct": 92.602,
+          "nonTextPct": 95.266,
+          "buckets": {
+            "fill": 0,
+            "hairline": 334,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 597,
+          "exactPct": 91.539,
+          "closePct": 96.117,
+          "nonTextPct": 95.635,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 58,
+            "text": 289,
+            "other": 124
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 616,
+          "exactPct": 91.27,
+          "closePct": 92.432,
+          "nonTextPct": 95.947,
+          "buckets": {
+            "fill": 0,
+            "hairline": 270,
+            "corner": 16,
+            "offset": 0,
+            "text": 330,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.438,
+          "nonTextPct": 96.018,
+          "buckets": {
+            "fill": 0,
+            "hairline": 280,
+            "corner": 1,
+            "offset": 0,
+            "text": 218,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off-focused.light",
+      "caseId": "components.switch-family.plugin-phone-en-off-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-focused",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.056,
+      "rgbPct": 99.896,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.056,
+      "closePct": 99.228,
+      "nonTextPct": 99.476,
+      "mismatched": 19094,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8607,
+        "corner": 194,
+        "offset": 1611,
+        "text": 8486,
+        "other": 196
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 676,
+          "exactPct": 90.42,
+          "closePct": 90.93,
+          "nonTextPct": 93.722,
+          "buckets": {
+            "fill": 0,
+            "hairline": 437,
+            "corner": 6,
+            "offset": 0,
+            "text": 233,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 571,
+          "exactPct": 91.908,
+          "closePct": 93.141,
+          "nonTextPct": 95.281,
+          "buckets": {
+            "fill": 0,
+            "hairline": 333,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 600,
+          "exactPct": 91.497,
+          "closePct": 92.871,
+          "nonTextPct": 95.791,
+          "buckets": {
+            "fill": 0,
+            "hairline": 281,
+            "corner": 16,
+            "offset": 0,
+            "text": 303,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.452,
+          "nonTextPct": 95.989,
+          "buckets": {
+            "fill": 0,
+            "hairline": 282,
+            "corner": 1,
+            "offset": 0,
+            "text": 216,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-en-off-focused.dark",
+      "caseId": "components.switch-family.plugin-phone-en-off-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.91,
+      "rgbPct": 99.875,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-en-off-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.91,
+      "closePct": 99.189,
+      "nonTextPct": 99.347,
+      "mismatched": 22043,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 2346,
+        "hairline": 8579,
+        "corner": 197,
+        "offset": 1569,
+        "text": 8839,
+        "other": 513
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            756,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1747,
+          "exactPct": 75.241,
+          "closePct": 97.279,
+          "nonTextPct": 77.126,
+          "buckets": {
+            "fill": 1363,
+            "hairline": 95,
+            "corner": 0,
+            "offset": 83,
+            "text": 133,
+            "other": 73
+          }
+        },
+        {
+          "rect": [
+            672,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1466,
+          "exactPct": 79.223,
+          "closePct": 96.556,
+          "nonTextPct": 84.836,
+          "buckets": {
+            "fill": 728,
+            "hairline": 137,
+            "corner": 0,
+            "offset": 62,
+            "text": 396,
+            "other": 143
+          }
+        },
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 679,
+          "exactPct": 90.377,
+          "closePct": 90.859,
+          "nonTextPct": 93.707,
+          "buckets": {
+            "fill": 0,
+            "hairline": 438,
+            "corner": 6,
+            "offset": 0,
+            "text": 235,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 572,
+          "exactPct": 91.893,
+          "closePct": 92.602,
+          "nonTextPct": 95.266,
+          "buckets": {
+            "fill": 0,
+            "hairline": 334,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            672,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 424,
+          "exactPct": 93.991,
+          "closePct": 97.732,
+          "nonTextPct": 95.366,
+          "buckets": {
+            "fill": 163,
+            "hairline": 91,
+            "corner": 0,
+            "offset": 34,
+            "text": 97,
+            "other": 39
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on.light",
+      "caseId": "components.switch-family.plugin-phone-zh-on.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.094,
+      "rgbPct": 99.94,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.094,
+      "closePct": 99.201,
+      "nonTextPct": 97.661,
+      "mismatched": 303,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 120,
+        "corner": 0,
+        "offset": 0,
+        "text": 183,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 216,
+          "exactPct": 95.238,
+          "closePct": 99.339,
+          "nonTextPct": 98.148,
+          "buckets": {
+            "fill": 0,
+            "hairline": 84,
+            "corner": 0,
+            "offset": 0,
+            "text": 132,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 87,
+          "exactPct": 85.354,
+          "closePct": 98.148,
+          "nonTextPct": 93.939,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 0,
+            "offset": 0,
+            "text": 51,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-on.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on",
+      "officialStatus": "different",
+      "pixelPerfectPct": 94.971,
+      "rgbPct": 99.945,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 94.971,
+      "closePct": 99.279,
+      "nonTextPct": 98.09,
+      "mismatched": 258,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 98,
+        "corner": 0,
+        "offset": 0,
+        "text": 160,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 185,
+          "exactPct": 95.922,
+          "closePct": 99.427,
+          "nonTextPct": 98.501,
+          "buckets": {
+            "fill": 0,
+            "hairline": 68,
+            "corner": 0,
+            "offset": 0,
+            "text": 117,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 73,
+          "exactPct": 87.71,
+          "closePct": 98.148,
+          "nonTextPct": 94.949,
+          "buckets": {
+            "fill": 0,
+            "hairline": 30,
+            "corner": 0,
+            "offset": 0,
+            "text": 43,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off.light",
+      "caseId": "components.switch-family.plugin-phone-zh-off.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.628,
+      "rgbPct": 99.983,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 96.628,
+      "closePct": 99.922,
+      "nonTextPct": 96.628,
+      "mismatched": 173,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 77,
+        "corner": 0,
+        "offset": 96,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 142,
+          "exactPct": 96.869,
+          "closePct": 99.912,
+          "nonTextPct": 96.869,
+          "buckets": {
+            "fill": 0,
+            "hairline": 67,
+            "corner": 0,
+            "offset": 75,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 31,
+          "exactPct": 94.781,
+          "closePct": 100.0,
+          "nonTextPct": 94.781,
+          "buckets": {
+            "fill": 0,
+            "hairline": 10,
+            "corner": 0,
+            "offset": 21,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-off.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off",
+      "officialStatus": "different",
+      "pixelPerfectPct": 39.22,
+      "rgbPct": 99.823,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 39.22,
+      "closePct": 99.708,
+      "nonTextPct": 44.893,
+      "mismatched": 3118,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 2346,
+        "hairline": 0,
+        "corner": 0,
+        "offset": 285,
+        "text": 291,
+        "other": 196
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 2774,
+          "exactPct": 38.845,
+          "closePct": 99.669,
+          "nonTextPct": 45.26,
+          "buckets": {
+            "fill": 2111,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 222,
+            "text": 291,
+            "other": 150
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 344,
+          "exactPct": 42.088,
+          "closePct": 100.0,
+          "nonTextPct": 42.088,
+          "buckets": {
+            "fill": 235,
+            "hairline": 0,
+            "corner": 0,
+            "offset": 63,
+            "text": 0,
+            "other": 46
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on-disabled.light",
+      "caseId": "components.switch-family.plugin-phone-zh-on-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.123,
+      "rgbPct": 99.903,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.123,
+      "closePct": 99.454,
+      "nonTextPct": 83.431,
+      "mismatched": 1071,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 715,
+        "hairline": 61,
+        "corner": 19,
+        "offset": 47,
+        "text": 221,
+        "other": 8
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 1008,
+          "exactPct": 77.778,
+          "closePct": 99.559,
+          "nonTextPct": 81.79,
+          "buckets": {
+            "fill": 715,
+            "hairline": 37,
+            "corner": 19,
+            "offset": 47,
+            "text": 182,
+            "other": 8
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 63,
+          "exactPct": 89.394,
+          "closePct": 98.653,
+          "nonTextPct": 95.96,
+          "buckets": {
+            "fill": 0,
+            "hairline": 24,
+            "corner": 0,
+            "offset": 0,
+            "text": 39,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on-disabled.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-on-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.435,
+      "rgbPct": 99.95,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.435,
+      "closePct": 99.474,
+      "nonTextPct": 83.801,
+      "mismatched": 1055,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 715,
+        "hairline": 40,
+        "corner": 19,
+        "offset": 47,
+        "text": 224,
+        "other": 10
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 1015,
+          "exactPct": 77.623,
+          "closePct": 99.581,
+          "nonTextPct": 82.011,
+          "buckets": {
+            "fill": 715,
+            "hairline": 25,
+            "corner": 19,
+            "offset": 47,
+            "text": 199,
+            "other": 10
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 40,
+          "exactPct": 93.266,
+          "closePct": 98.653,
+          "nonTextPct": 97.475,
+          "buckets": {
+            "fill": 0,
+            "hairline": 15,
+            "corner": 0,
+            "offset": 0,
+            "text": 25,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off-disabled.light",
+      "caseId": "components.switch-family.plugin-phone-zh-off-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-disabled",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 97.758,
+      "rgbPct": 99.991,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off-disabled.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 97.758,
+      "closePct": 100.0,
+      "nonTextPct": 97.758,
+      "mismatched": 115,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 40,
+        "corner": 0,
+        "offset": 75,
+        "text": 0,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 98,
+          "exactPct": 97.84,
+          "closePct": 100.0,
+          "nonTextPct": 97.84,
+          "buckets": {
+            "fill": 0,
+            "hairline": 37,
+            "corner": 0,
+            "offset": 61,
+            "text": 0,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 17,
+          "exactPct": 97.138,
+          "closePct": 100.0,
+          "nonTextPct": 97.138,
+          "buckets": {
+            "fill": 0,
+            "hairline": 3,
+            "corner": 0,
+            "offset": 14,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off-disabled.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-off-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-disabled",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 96.94,
+      "rgbPct": 99.987,
+      "sizeReact": [
+        95,
+        54
+      ],
+      "sizeFlutter": [
+        95,
+        54
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off-disabled.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 96.94,
+      "closePct": 99.864,
+      "nonTextPct": 97.505,
+      "mismatched": 157,
+      "pixels": 5130,
+      "buckets": {
+        "fill": 0,
+        "hairline": 57,
+        "corner": 0,
+        "offset": 71,
+        "text": 29,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            54
+          ],
+          "pixels": 4536,
+          "mismatched": 138,
+          "exactPct": 96.958,
+          "closePct": 99.846,
+          "nonTextPct": 97.597,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 0,
+            "offset": 59,
+            "text": 29,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            11,
+            54
+          ],
+          "pixels": 594,
+          "mismatched": 19,
+          "exactPct": 96.801,
+          "closePct": 100.0,
+          "nonTextPct": 96.801,
+          "buckets": {
+            "fill": 0,
+            "hairline": 7,
+            "corner": 0,
+            "offset": 12,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on-focused.light",
+      "caseId": "components.switch-family.plugin-phone-zh-on-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.736,
+      "rgbPct": 99.617,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.736,
+      "closePct": 98.877,
+      "nonTextPct": 99.469,
+      "mismatched": 25572,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 5936,
+        "corner": 2191,
+        "offset": 2465,
+        "text": 14823,
+        "other": 157
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1690,
+          "exactPct": 76.049,
+          "closePct": 77.041,
+          "nonTextPct": 87.798,
+          "buckets": {
+            "fill": 0,
+            "hairline": 173,
+            "corner": 497,
+            "offset": 191,
+            "text": 829,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1631,
+          "exactPct": 76.885,
+          "closePct": 77.707,
+          "nonTextPct": 88.903,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 276,
+            "text": 848,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1646,
+          "exactPct": 76.672,
+          "closePct": 76.772,
+          "nonTextPct": 92.701,
+          "buckets": {
+            "fill": 0,
+            "hairline": 188,
+            "corner": 285,
+            "offset": 42,
+            "text": 1131,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1304,
+          "exactPct": 81.519,
+          "closePct": 81.746,
+          "nonTextPct": 93.849,
+          "buckets": {
+            "fill": 0,
+            "hairline": 147,
+            "corner": 255,
+            "offset": 32,
+            "text": 870,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-on-focused.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-on-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "on-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.737,
+      "rgbPct": 99.575,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-on-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.737,
+      "closePct": 98.85,
+      "nonTextPct": 99.501,
+      "mismatched": 25545,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 5969,
+        "corner": 2192,
+        "offset": 1701,
+        "text": 15451,
+        "other": 232
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1689,
+          "exactPct": 76.063,
+          "closePct": 76.701,
+          "nonTextPct": 90.363,
+          "buckets": {
+            "fill": 0,
+            "hairline": 174,
+            "corner": 498,
+            "offset": 8,
+            "text": 1009,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1645,
+          "exactPct": 76.687,
+          "closePct": 76.899,
+          "nonTextPct": 92.205,
+          "buckets": {
+            "fill": 0,
+            "hairline": 187,
+            "corner": 285,
+            "offset": 78,
+            "text": 1095,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1628,
+          "exactPct": 76.927,
+          "closePct": 77.14,
+          "nonTextPct": 92.389,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 30,
+            "text": 1091,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1301,
+          "exactPct": 81.562,
+          "closePct": 81.916,
+          "nonTextPct": 94.246,
+          "buckets": {
+            "fill": 0,
+            "hairline": 149,
+            "corner": 255,
+            "offset": 2,
+            "text": 895,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1142,
+          "exactPct": 83.815,
+          "closePct": 84.028,
+          "nonTextPct": 95.323,
+          "buckets": {
+            "fill": 0,
+            "hairline": 136,
+            "corner": 162,
+            "offset": 32,
+            "text": 812,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off-focused.light",
+      "caseId": "components.switch-family.plugin-phone-zh-off-focused.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (light)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.742,
+      "rgbPct": 99.617,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off-focused.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.742,
+      "closePct": 98.879,
+      "nonTextPct": 99.466,
+      "mismatched": 25442,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 5894,
+        "corner": 2191,
+        "offset": 2530,
+        "text": 14631,
+        "other": 196
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1690,
+          "exactPct": 76.049,
+          "closePct": 77.041,
+          "nonTextPct": 87.798,
+          "buckets": {
+            "fill": 0,
+            "hairline": 173,
+            "corner": 497,
+            "offset": 191,
+            "text": 829,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1631,
+          "exactPct": 76.885,
+          "closePct": 77.707,
+          "nonTextPct": 88.903,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 276,
+            "text": 848,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1646,
+          "exactPct": 76.672,
+          "closePct": 76.772,
+          "nonTextPct": 92.701,
+          "buckets": {
+            "fill": 0,
+            "hairline": 188,
+            "corner": 285,
+            "offset": 42,
+            "text": 1131,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1304,
+          "exactPct": 81.519,
+          "closePct": 81.746,
+          "nonTextPct": 93.849,
+          "buckets": {
+            "fill": 0,
+            "hairline": 147,
+            "corner": 255,
+            "offset": 32,
+            "text": 870,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.switch-family.plugin-phone-zh-off-focused.dark",
+      "caseId": "components.switch-family.plugin-phone-zh-off-focused.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Plugin bundle switch (dark)",
+      "variantName": "off-focused",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.598,
+      "rgbPct": 99.575,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.switch-family.plugin-phone-zh-off-focused.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.598,
+      "closePct": 98.851,
+      "nonTextPct": 99.368,
+      "mismatched": 28367,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 2346,
+        "hairline": 5841,
+        "corner": 2192,
+        "offset": 1901,
+        "text": 15574,
+        "other": 513
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            756,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1747,
+          "exactPct": 75.241,
+          "closePct": 97.279,
+          "nonTextPct": 77.126,
+          "buckets": {
+            "fill": 1363,
+            "hairline": 95,
+            "corner": 0,
+            "offset": 83,
+            "text": 133,
+            "other": 73
+          }
+        },
+        {
+          "rect": [
+            672,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1466,
+          "exactPct": 79.223,
+          "closePct": 96.556,
+          "nonTextPct": 84.836,
+          "buckets": {
+            "fill": 728,
+            "hairline": 137,
+            "corner": 0,
+            "offset": 62,
+            "text": 396,
+            "other": 143
+          }
+        },
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1689,
+          "exactPct": 76.063,
+          "closePct": 76.701,
+          "nonTextPct": 90.363,
+          "buckets": {
+            "fill": 0,
+            "hairline": 174,
+            "corner": 498,
+            "offset": 8,
+            "text": 1009,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1645,
+          "exactPct": 76.687,
+          "closePct": 76.899,
+          "nonTextPct": 92.205,
+          "buckets": {
+            "fill": 0,
+            "hairline": 187,
+            "corner": 285,
+            "offset": 78,
+            "text": 1095,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1628,
+          "exactPct": 76.927,
+          "closePct": 77.14,
+          "nonTextPct": 92.389,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 30,
+            "text": 1091,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    }
+  ],
+  "reference": "native",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "flutterVersion": "3.47.6",
+  "visualTesting": "0.1.0",
+  "generatedAt": "2026-10-28T18:06:09+00:00"
+}

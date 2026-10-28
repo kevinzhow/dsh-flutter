@@ -1,0 +1,32 @@
+{
+  "schema": "plugin-card-clamp-review/1",
+  "reviewedHead": "6d986e98f26304b20c7c7593154382704ac18429",
+  "reviewedTree": "50f715ee3e21ee3fc320d5af4c8781d9a2dceeb4",
+  "previousNotoBlocker": "resolved by latest min-to-min WJ repair; final2 min/max failure is historical",
+  "shapingCases": 17,
+  "rasterPairsIdentical": 17,
+  "allRasterInkNonempty": true,
+  "allClassifierExpectationsMatch": true,
+  "allFullSemanticsPreserved": true,
+  "pinnedFontInputs": {
+    "files/NotoSans-Regular.ttf": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d",
+    "files/NotoSansCJKsc-Regular.subset.otf": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+  },
+  "sourceFilesAtReviewMatchGit": {
+    "packages/dsh_ui/lib/src/dsh_single_line_clamp.dart": "2830bb8c9d2be4d8a3bd870164af9badf63a6c40b3609a32155892848b11c42b",
+    "packages/dsh_ui/lib/src/dsh_plugin_card.dart": "f086c0697ac57301ffdda6d8e1ced329681e6cc674a29cbfe1bee4d07706a157"
+  },
+  "rawShapingReceiptSha256": "a50993dd1b1fa6b930ca748feb2a5bec492cc9b43348693c7bbcec8430efac33",
+  "sourceWhitespaceReceiptSha256": "c1d681835b3e02e2fb5f974323d91c6b02e61af446c7ee5fcee1a0bea2b8e706",
+  "flutterWhitespaceBeforeSha256": "630ed1809172740c62b4b4cb71194cbe57a2cb79aec887b4eff23e7ce1faed2f",
+  "flutterWhitespaceAfterSha256": "dfe6f1804422d8d65402993800821d49bc40bfb3d51d403f7c004aeb5476f1c5",
+  "shapingTestSha256": "9d53e0b91fc421f594da51732572381b3b92323f076b94182e2c1d7ec53fb192",
+  "shapingLogSha256": "09c983d8a288f8ec697b6114eeca5f8612eebca00052a05843fe88bfd5cc59a3",
+  "whitespaceGreenLogSha256": "cc2083a6283366550267883de2c44b611ecbc308e4fc2f7c548e4da40af1d0a2",
+  "limits": [
+    "headless paragraph comparison, not app/native/source224 acceptance",
+    "emoji fallback identity is not certified",
+    "selection sub-boxes may differ with WJs; only intrinsic classification and full raster are used",
+    "bidi/mandatory separators/discretionary hyphens/general Unicode remain unproven"
+  ]
+}

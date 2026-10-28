@@ -1,0 +1,361 @@
+{
+  "weston": "weston 14.0.2",
+  "renderer": "Mesa Intel(R) Graphics (LNL)",
+  "appRenderDevices": [
+    "/dev/dri/renderD128"
+  ],
+  "glVersion": [
+    "OpenGL ES 3.2 Mesa 26.0.8-1ubuntu0.3"
+  ],
+  "appRenderer": [
+    "OpenGLESSDF"
+  ],
+  "backend": "native-wayland",
+  "kernel": "7.0.0-38-generic",
+  "cursorIncluded": false,
+  "captureAssertions": [
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        1084,
+        327,
+        1120,
+        347
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        152,
+        304,
+        1076,
+        370
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        148,
+        324,
+        150,
+        350
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        148,
+        324,
+        150,
+        350
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        1080,
+        335,
+        1082,
+        339
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "switch-keyboard",
+      "rect": [
+        1084,
+        327,
+        1120,
+        347
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "key-base",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "locked",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "locked",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "refused-base",
+      "rect": [
+        0,
+        64,
+        1280,
+        84
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "refused-base",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        160,
+        312,
+        210,
+        362
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        160,
+        312,
+        210,
+        362
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        160,
+        312,
+        210,
+        362
+      ],
+      "changed": false,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "default",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    },
+    {
+      "reference": "metadata",
+      "rect": [
+        0,
+        104,
+        1280,
+        720
+      ],
+      "changed": true,
+      "passed": true,
+      "attempts": 1
+    }
+  ],
+  "pairedHost": false,
+  "size": [
+    1280,
+    720
+  ],
+  "theme": "dark",
+  "locale": "en"
+}

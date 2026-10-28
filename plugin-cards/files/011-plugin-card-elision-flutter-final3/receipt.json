@@ -1,0 +1,357 @@
+{
+  "pinnedFonts": "[workspace]/scratch/whalee-plugin-cards/tool/parity-fonts/manifest.json",
+  "source": "[workspace]/scratch/plugin-card-elision-audit/source-browser-extended.json",
+  "rows": [
+    {
+      "widths": {
+        "newlineMin": 393.6142272949219,
+        "newlineMax": 415.6883850097656,
+        "originalMax": 415.6883850097656,
+        "endMin": 393.6142272949219,
+        "endMax": 419.0683898925781,
+        "joinedMin": 415.6882629394531,
+        "selection": [
+          [
+            0.0,
+            415.6883850097656,
+            415.6883850097656
+          ]
+        ]
+      },
+      "id": "oversized-first-plus-tail",
+      "text": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ tail",
+      "visible": "abcdefghijklm…",
+      "semanticsLabel": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ tail",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "oversized-first-plus-tail.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 46.89103698730469,
+        "newlineMax": 149.99412536621094,
+        "originalMax": 149.99412536621094,
+        "endMin": 46.89103698730469,
+        "endMax": 153.37413024902344,
+        "joinedMin": 149.99412536621094,
+        "selection": [
+          [
+            0.0,
+            149.99412536621094,
+            149.99412536621094
+          ]
+        ]
+      },
+      "id": "first-word-fits-ellipsis-does-not",
+      "text": "Alpha beta gamma delta",
+      "visible": "Alpha be…",
+      "semanticsLabel": "Alpha beta gamma delta",
+      "width": 66.0,
+      "size": [
+        66.0,
+        18.0
+      ],
+      "png": "first-word-fits-ellipsis-does-not.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 46.18904113769531,
+        "newlineMax": 156.87112426757812,
+        "originalMax": 156.87112426757812,
+        "endMin": 46.18904113769531,
+        "endMax": 160.25112915039062,
+        "joinedMin": 156.87112426757812,
+        "selection": [
+          [
+            0.0,
+            156.87112426757812,
+            156.87112426757812
+          ]
+        ]
+      },
+      "id": "accent-first-word-fits",
+      "text": "Alpha éclair résumé naïve",
+      "visible": "Alpha écla…",
+      "semanticsLabel": "Alpha éclair résumé naïve",
+      "width": 76.0,
+      "size": [
+        76.0,
+        18.0
+      ],
+      "png": "accent-first-word-fits.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 13.000015258789062,
+        "newlineMax": 104.0001220703125,
+        "originalMax": 104.0001220703125,
+        "endMin": 13.000015258789062,
+        "endMax": 107.380126953125,
+        "joinedMin": 104.0001220703125,
+        "selection": [
+          [
+            0.0,
+            104.0001220703125,
+            104.0001220703125
+          ]
+        ]
+      },
+      "id": "cjk-cutoff",
+      "text": "你好世界你好世界",
+      "visible": "你好世…",
+      "semanticsLabel": "你好世界你好世界",
+      "width": 52.0,
+      "size": [
+        52.0,
+        18.0
+      ],
+      "png": "cjk-cutoff.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 110.40910339355469,
+        "newlineMax": 132.48312377929688,
+        "originalMax": 132.48312377929688,
+        "endMin": 110.40910339355469,
+        "endMax": 135.86312866210938,
+        "joinedMin": 132.48312377929688,
+        "selection": [
+          [
+            0.0,
+            132.48312377929688,
+            132.48312377929688
+          ]
+        ]
+      },
+      "id": "unbroken-plus-word-small",
+      "text": "abcdefghijklmnop tail",
+      "visible": "abcdefghijklm…",
+      "semanticsLabel": "abcdefghijklmnop tail",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "unbroken-plus-word-small.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 71.77305603027344,
+        "newlineMax": 756.6395263671875,
+        "originalMax": 756.6395263671875,
+        "endMin": 71.77305603027344,
+        "endMax": 760.01953125,
+        "joinedMin": 756.6392822265625,
+        "selection": [
+          [
+            0.0,
+            756.6395263671875,
+            756.6395263671875
+          ]
+        ]
+      },
+      "id": "actual-long-description",
+      "text": "A deliberately long synthetic description that must retain the source single-line clamp while the title and tags wrap naturally.",
+      "visible": "A deliberately long synthetic…",
+      "semanticsLabel": "A deliberately long synthetic description that must retain the source single-line clamp while the title and tags wrap naturally.",
+      "width": 228.0,
+      "size": [
+        228.0,
+        18.0
+      ],
+      "png": "actual-long-description.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 46.89103698730469,
+        "newlineMax": 197.53517150878906,
+        "originalMax": 197.53517150878906,
+        "endMin": 46.89103698730469,
+        "endMax": 200.91517639160156,
+        "joinedMin": 197.53517150878906,
+        "selection": [
+          [
+            0.0,
+            197.53517150878906,
+            197.53517150878906
+          ]
+        ]
+      },
+      "id": "latin-words",
+      "text": "Alpha beta gamma delta epsilon",
+      "visible": "Alpha beta…",
+      "semanticsLabel": "Alpha beta gamma delta epsilon",
+      "width": 115.0,
+      "size": [
+        115.0,
+        18.0
+      ],
+      "png": "latin-words.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 46.89103698730469,
+        "newlineMax": 197.53517150878906,
+        "originalMax": 197.53517150878906,
+        "endMin": 46.89103698730469,
+        "endMax": 200.91517639160156,
+        "joinedMin": 197.53517150878906,
+        "selection": [
+          [
+            0.0,
+            197.53517150878906,
+            197.53517150878906
+          ]
+        ]
+      },
+      "id": "latin-short-word",
+      "text": "Alpha beta gamma delta epsilon",
+      "visible": "Alpha beta…",
+      "semanticsLabel": "Alpha beta gamma delta epsilon",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "latin-short-word.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 393.6142272949219,
+        "newlineMax": 393.6143493652344,
+        "originalMax": 393.6143493652344,
+        "endMin": 393.6142272949219,
+        "endMax": 396.9943542480469,
+        "joinedMin": 393.6142272949219,
+        "selection": [
+          [
+            0.0,
+            393.6143493652344,
+            393.6143493652344
+          ]
+        ]
+      },
+      "id": "unbroken",
+      "text": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "visible": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "semanticsLabel": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "unbroken.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 13.000015258789062,
+        "newlineMax": 208.000244140625,
+        "originalMax": 208.000244140625,
+        "endMin": 13.000015258789062,
+        "endMax": 211.3802490234375,
+        "joinedMin": 208.000244140625,
+        "selection": [
+          [
+            0.0,
+            208.000244140625,
+            208.000244140625
+          ]
+        ]
+      },
+      "id": "cjk",
+      "text": "你好世界你好世界你好世界你好世界",
+      "visible": "你好世界你好…",
+      "semanticsLabel": "你好世界你好世界你好世界你好世界",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "cjk.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 46.89103698730469,
+        "newlineMax": 197.53517150878906,
+        "originalMax": 197.53517150878906,
+        "endMin": 46.89103698730469,
+        "endMax": 200.91517639160156,
+        "joinedMin": 197.53517150878906,
+        "selection": [
+          [
+            0.0,
+            197.53517150878906,
+            197.53517150878906
+          ]
+        ]
+      },
+      "id": "whitespace",
+      "text": "Alpha  beta\tgamma\ndelta epsilon",
+      "visible": "Alpha beta…",
+      "semanticsLabel": "Alpha  beta\tgamma\ndelta epsilon",
+      "width": 100.0,
+      "size": [
+        100.0,
+        18.0
+      ],
+      "png": "whitespace.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 54.067047119140625,
+        "newlineMax": 214.31817626953125,
+        "originalMax": 214.31817626953125,
+        "endMin": 54.067047119140625,
+        "endMax": 217.69818115234375,
+        "joinedMin": 214.31817626953125,
+        "selection": [
+          [
+            0.0,
+            214.31817626953125,
+            214.31817626953125
+          ]
+        ]
+      },
+      "id": "latin-accent",
+      "text": "Alpha éclair résumé naïve éléphant",
+      "visible": "Alpha éclair…",
+      "semanticsLabel": "Alpha éclair résumé naïve éléphant",
+      "width": 115.0,
+      "size": [
+        115.0,
+        18.0
+      ],
+      "png": "latin-accent.png"
+    },
+    {
+      "widths": {
+        "newlineMin": 33.09803771972656,
+        "newlineMax": 33.09803771972656,
+        "originalMax": 33.09803771972656,
+        "endMin": 33.09803771972656,
+        "endMax": 36.47804260253906,
+        "joinedMin": 33.09803771972656,
+        "selection": [
+          [
+            0.0,
+            33.09803771972656,
+            33.09803771972656
+          ]
+        ]
+      },
+      "id": "fits",
+      "text": "Short",
+      "visible": "Short",
+      "semanticsLabel": "Short",
+      "width": 228.0,
+      "size": [
+        228.0,
+        18.0
+      ],
+      "png": "fits.png"
+    }
+  ]
+}

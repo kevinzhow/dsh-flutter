@@ -1,0 +1,284 @@
+{
+  "provider": "react",
+  "providerType": "playwright-chromium",
+  "source": "dsh-react",
+  "caseId": "components.tag-family.inventory-desktop-zh-failed.dark",
+  "variantId": "default",
+  "captureKey": "components.tag-family.inventory-desktop-zh-failed.dark",
+  "theme": "dark",
+  "locale": "zh-CN",
+  "image": "visual-testing-results/react/components.tag-family.inventory-desktop-zh-failed.dark.png",
+  "viewport": {
+    "width": 800,
+    "height": 1600,
+    "density": 1
+  },
+  "selector": "[data-plugin-module=\"@synthetic/failed\"] [data-tone]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 216,
+      "y": 229.5,
+      "width": 60,
+      "height": 19
+    },
+    "pixelRect": {
+      "x": 216,
+      "y": 229,
+      "width": 60,
+      "height": 20
+    },
+    "policy": "viewport-intersection/enclosing-device-pixels"
+  },
+  "react": {
+    "browser": "chromium 145.0.7632.6",
+    "playwright": "1.58.2",
+    "chromiumArgs": [
+      "--disable-lcd-text",
+      "--font-render-hinting=none"
+    ],
+    "densityMode": {
+      "reference": "emulated",
+      "devicePixelRatio": 1,
+      "border0.5px": 1,
+      "border1px": 1
+    },
+    "animationPolicy": "playwright animations: disabled; prefers-reduced-motion: reduce",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "renderer": "static vite bundle of the real dsh components, no network"
+  },
+  "fonts": {
+    "manifest": "../parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "documentFonts": [
+      {
+        "family": "-apple-system",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "-apple-system",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "SF Mono",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "SF Mono",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_AMS",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Script",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size1",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size2",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size3",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size4",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Typewriter",
+        "weight": "400",
+        "status": "unloaded"
+      }
+    ],
+    "platformFonts": {
+      "Noto Sans CJK SC": 4
+    }
+  },
+  "typography": [
+    {
+      "selector": "span",
+      "text": "启动失败",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 11,
+      "fontWeight": 500,
+      "lineHeight": 17,
+      "letterSpacing": 0,
+      "color": "rgb(242, 90, 90)"
+    }
+  ],
+  "styleTokens": [],
+  "capturedAt": "2026-10-28T18:04:13.468Z"
+}

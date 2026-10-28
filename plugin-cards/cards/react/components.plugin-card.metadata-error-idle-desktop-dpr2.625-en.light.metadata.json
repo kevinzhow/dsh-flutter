@@ -1,0 +1,151 @@
+{
+  "provider": "react",
+  "source": "actual published DSH 0.2.1-rc.2 PluginManagerPage",
+  "caseId": "components.plugin-card.metadata-error-idle-desktop-dpr2.625-en.light",
+  "variantId": "default",
+  "captureKey": "components.plugin-card.metadata-error-idle-desktop-dpr2.625-en.light",
+  "theme": "light",
+  "locale": "en",
+  "viewport": {
+    "width": 800,
+    "height": 900,
+    "density": 2.625
+  },
+  "react": {
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9"
+  },
+  "chromium": "145.0.7632.6",
+  "pixelModel": "native",
+  "actual": {
+    "card": {
+      "bounds": [
+        24,
+        200,
+        752,
+        100.76190948486328
+      ],
+      "tag": "LI",
+      "text": "Metadata errorThe metadata diagnostic owns its own line.Package metadata error: Synthetic metadata diagnostic\nwith a second line",
+      "color": "rgb(15, 17, 21)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "title": {
+      "bounds": [
+        94.76190948486328,
+        211.38095092773438,
+        99.9464340209961,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "Metadata error",
+      "color": "rgb(15, 17, 21)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "500 14px / 20px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "nowrap",
+      "overflow": "hidden",
+      "boxSizing": "border-box"
+    },
+    "description": {
+      "bounds": [
+        94.76190948486328,
+        235.38095092773438,
+        623.2380981445312,
+        18
+      ],
+      "tag": "SPAN",
+      "text": "The metadata diagnostic owns its own line.",
+      "color": "rgb(129, 133, 140)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "13px / 18px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "artworkFrame": {
+      "bounds": [
+        32,
+        208,
+        48.761905670166016,
+        48.761905670166016
+      ],
+      "tag": "SPAN",
+      "text": "",
+      "color": "rgb(97, 102, 107)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "artwork": {
+      "bounds": [
+        38.38095474243164,
+        214.38095092773438,
+        36,
+        36
+      ],
+      "tag": "svg",
+      "text": "",
+      "color": "rgb(97, 102, 107)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "tags": [],
+    "metadataError": {
+      "bounds": [
+        24,
+        264.76190185546875,
+        752,
+        36
+      ],
+      "tag": "P",
+      "text": "Package metadata error: Synthetic metadata diagnostic\nwith a second line",
+      "color": "rgb(236, 19, 19)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "12px / 18px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "pre-wrap",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "switch": {
+      "bounds": [
+        732,
+        222.38095092773438,
+        36,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "",
+      "color": "rgb(0, 0, 0)",
+      "background": "rgb(15, 17, 21)",
+      "font": "13.3333px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "border-box",
+      "disabled": false,
+      "checked": "true"
+    },
+    "hover": false,
+    "focusedTitle": false,
+    "titleFocusVisible": false,
+    "titleOutline": {
+      "width": "0px",
+      "style": "none"
+    },
+    "calls": {
+      "attempts": 0,
+      "refusals": 0,
+      "opens": 0,
+      "requestedValues": []
+    }
+  },
+  "provenanceSha256": "f304e9016133c3007a51a69511ffb6cfa7aeed2e96bd4960cf1e4385ec1e922b"
+}

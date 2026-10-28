@@ -1,0 +1,20 @@
+Captured failed-0
+Traceback (most recent call last):
+  File "[workspace]/scripts/plugin-cards-android.py", line 466, in <module>
+    main()
+    ~~~~^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 447, in main
+    replay.run(steps)
+    ~~~~~~~~~~^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 246, in run
+    self.source_card(value)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 187, in source_card
+    bounds, node = self.target(value['label'])
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 164, in target
+    self.wait(lambda: len(self.targets(label)) == 1, 'Unique real action: ' + label)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 146, in wait
+    raise RuntimeError(description)
+RuntimeError: Unique real action: View Synthetic plugin

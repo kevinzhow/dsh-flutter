@@ -1,0 +1,279 @@
+{
+  "schema": "whalee-plugin-cards-gpu-runtime/1",
+  "status": "passed",
+  "startedAt": "2026-10-28T17:52:01.127509+00:00",
+  "finishedAt": "2026-10-28T17:54:20.921862+00:00",
+  "exitCode": 0,
+  "runtimeHead": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+  "runtimeTree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+  "executableSha256": "c379210cecad8a5ce89773e3c41355320419dd156a2378377636dcefeaae5d4c",
+  "applicationLibrarySha256": "f6bde14f97e4672b5017ead891bbd82a861b13737b93e578fb902c57a44f32c3",
+  "manifestSha256": "8b69f9b59afd7fc324ca5f2fc80a312f2fb73db223950f3df0dc372279e17c51",
+  "binaryBefore": {
+    "runtimeHead": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+    "runtimeTree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+    "executableSha256": "c379210cecad8a5ce89773e3c41355320419dd156a2378377636dcefeaae5d4c",
+    "applicationLibrarySha256": "f6bde14f97e4672b5017ead891bbd82a861b13737b93e578fb902c57a44f32c3",
+    "manifestSha256": "8b69f9b59afd7fc324ca5f2fc80a312f2fb73db223950f3df0dc372279e17c51"
+  },
+  "binaryAfter": {
+    "runtimeHead": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+    "runtimeTree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+    "executableSha256": "c379210cecad8a5ce89773e3c41355320419dd156a2378377636dcefeaae5d4c",
+    "applicationLibrarySha256": "f6bde14f97e4672b5017ead891bbd82a861b13737b93e578fb902c57a44f32c3",
+    "manifestSha256": "8b69f9b59afd7fc324ca5f2fc80a312f2fb73db223950f3df0dc372279e17c51"
+  },
+  "binaryUnchanged": true,
+  "cases": [
+    {
+      "id": "plugin-cards.desktop-dark",
+      "size": [
+        1280,
+        720
+      ],
+      "theme": "dark",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "keys": 24,
+        "move": 17,
+        "click": 7
+      },
+      "inputCount": 48,
+      "activationKeyInputCount": 31,
+      "assertionCount": 28,
+      "passedAssertions": 28,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 19,
+      "screenshotCount": 20,
+      "screenshots": [
+        "plugin-cards.desktop-dark/default.png",
+        "plugin-cards.desktop-dark/corner.png",
+        "plugin-cards.desktop-dark/edge-open.png",
+        "plugin-cards.desktop-dark/back-list.png",
+        "plugin-cards.desktop-dark/switch-only.png",
+        "plugin-cards.desktop-dark/key-base.png",
+        "plugin-cards.desktop-dark/title-keyboard.png",
+        "plugin-cards.desktop-dark/title-enter.png",
+        "plugin-cards.desktop-dark/switch-keyboard.png",
+        "plugin-cards.desktop-dark/switch-space.png",
+        "plugin-cards.desktop-dark/locked.png",
+        "plugin-cards.desktop-dark/locked-switch.png",
+        "plugin-cards.desktop-dark/refused-base.png",
+        "plugin-cards.desktop-dark/refused.png",
+        "plugin-cards.desktop-dark/wrap.png",
+        "plugin-cards.desktop-dark/image-fallback.png",
+        "plugin-cards.desktop-dark/no-description.png",
+        "plugin-cards.desktop-dark/metadata.png",
+        "plugin-cards.desktop-dark/metadata-open.png",
+        "plugin-cards.desktop-dark.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 2218226,
+        "app": 2218238
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    },
+    {
+      "id": "plugin-cards.desktop-light",
+      "size": [
+        1280,
+        720
+      ],
+      "theme": "light",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "keys": 24,
+        "move": 17,
+        "click": 7
+      },
+      "inputCount": 48,
+      "activationKeyInputCount": 31,
+      "assertionCount": 28,
+      "passedAssertions": 28,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 19,
+      "screenshotCount": 20,
+      "screenshots": [
+        "plugin-cards.desktop-light/default.png",
+        "plugin-cards.desktop-light/corner.png",
+        "plugin-cards.desktop-light/edge-open.png",
+        "plugin-cards.desktop-light/back-list.png",
+        "plugin-cards.desktop-light/switch-only.png",
+        "plugin-cards.desktop-light/key-base.png",
+        "plugin-cards.desktop-light/title-keyboard.png",
+        "plugin-cards.desktop-light/title-enter.png",
+        "plugin-cards.desktop-light/switch-keyboard.png",
+        "plugin-cards.desktop-light/switch-space.png",
+        "plugin-cards.desktop-light/locked.png",
+        "plugin-cards.desktop-light/locked-switch.png",
+        "plugin-cards.desktop-light/refused-base.png",
+        "plugin-cards.desktop-light/refused.png",
+        "plugin-cards.desktop-light/wrap.png",
+        "plugin-cards.desktop-light/image-fallback.png",
+        "plugin-cards.desktop-light/no-description.png",
+        "plugin-cards.desktop-light/metadata.png",
+        "plugin-cards.desktop-light/metadata-open.png",
+        "plugin-cards.desktop-light.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 2219819,
+        "app": 2219832
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    },
+    {
+      "id": "plugin-cards.phone-dark",
+      "size": [
+        390,
+        844
+      ],
+      "theme": "dark",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "keys": 24,
+        "move": 17,
+        "click": 7
+      },
+      "inputCount": 48,
+      "activationKeyInputCount": 31,
+      "assertionCount": 28,
+      "passedAssertions": 28,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 19,
+      "screenshotCount": 20,
+      "screenshots": [
+        "plugin-cards.phone-dark/default.png",
+        "plugin-cards.phone-dark/corner.png",
+        "plugin-cards.phone-dark/edge-open.png",
+        "plugin-cards.phone-dark/back-list.png",
+        "plugin-cards.phone-dark/switch-only.png",
+        "plugin-cards.phone-dark/key-base.png",
+        "plugin-cards.phone-dark/title-keyboard.png",
+        "plugin-cards.phone-dark/title-enter.png",
+        "plugin-cards.phone-dark/switch-keyboard.png",
+        "plugin-cards.phone-dark/switch-space.png",
+        "plugin-cards.phone-dark/locked.png",
+        "plugin-cards.phone-dark/locked-switch.png",
+        "plugin-cards.phone-dark/refused-base.png",
+        "plugin-cards.phone-dark/refused.png",
+        "plugin-cards.phone-dark/wrap.png",
+        "plugin-cards.phone-dark/image-fallback.png",
+        "plugin-cards.phone-dark/no-description.png",
+        "plugin-cards.phone-dark/metadata.png",
+        "plugin-cards.phone-dark/metadata-open.png",
+        "plugin-cards.phone-dark.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 2221096,
+        "app": 2221107
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    },
+    {
+      "id": "plugin-cards.phone-light",
+      "size": [
+        390,
+        844
+      ],
+      "theme": "light",
+      "locale": "en",
+      "backend": "native-wayland",
+      "renderer": "Mesa Intel(R) Graphics (LNL)",
+      "appRenderDevices": [
+        "/dev/dri/renderD128"
+      ],
+      "appRenderer": [
+        "OpenGLESSDF"
+      ],
+      "inputCounts": {
+        "keys": 24,
+        "move": 17,
+        "click": 7
+      },
+      "inputCount": 48,
+      "activationKeyInputCount": 31,
+      "assertionCount": 28,
+      "passedAssertions": 28,
+      "assertionsMatchManifest": true,
+      "namedCaptureCount": 19,
+      "screenshotCount": 20,
+      "screenshots": [
+        "plugin-cards.phone-light/default.png",
+        "plugin-cards.phone-light/corner.png",
+        "plugin-cards.phone-light/edge-open.png",
+        "plugin-cards.phone-light/back-list.png",
+        "plugin-cards.phone-light/switch-only.png",
+        "plugin-cards.phone-light/key-base.png",
+        "plugin-cards.phone-light/title-keyboard.png",
+        "plugin-cards.phone-light/title-enter.png",
+        "plugin-cards.phone-light/switch-keyboard.png",
+        "plugin-cards.phone-light/switch-space.png",
+        "plugin-cards.phone-light/locked.png",
+        "plugin-cards.phone-light/locked-switch.png",
+        "plugin-cards.phone-light/refused-base.png",
+        "plugin-cards.phone-light/refused.png",
+        "plugin-cards.phone-light/wrap.png",
+        "plugin-cards.phone-light/image-fallback.png",
+        "plugin-cards.phone-light/no-description.png",
+        "plugin-cards.phone-light/metadata.png",
+        "plugin-cards.phone-light/metadata-open.png",
+        "plugin-cards.phone-light.png"
+      ],
+      "allScreenshotsExist": true,
+      "recordedPids": {
+        "weston": 2222810,
+        "app": 2222832
+      },
+      "recordedPidAbsence": {
+        "weston": true,
+        "app": true
+      },
+      "ownedPidsAbsent": true
+    }
+  ],
+  "proofWrapperSha256": "acf262995ef4fe8046d14eae19a69e0feabaac932ccf9e2f17448cbbd3723e1a",
+  "totalAssertions": 112,
+  "totalPassedAssertions": 112,
+  "totalScreenshots": 80,
+  "ownedFixturePidsRemaining": [],
+  "ownedPidsAbsent": true
+}

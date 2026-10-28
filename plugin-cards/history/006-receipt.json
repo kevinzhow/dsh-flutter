@@ -1,0 +1,222 @@
+{
+  "schema": "whalee-plugin-cards-evidence/1",
+  "head": "0581b8450cf12ed958b9f51f5ab357f7fb45e1a6",
+  "tree": "7146bcb95f2ef9f88a6ea1e937d283f276ed4f8a",
+  "runtimeHead": "0581b8450cf12ed958b9f51f5ab357f7fb45e1a6",
+  "runtimeTree": "7146bcb95f2ef9f88a6ea1e937d283f276ed4f8a",
+  "identityBefore": {
+    "head": "0581b8450cf12ed958b9f51f5ab357f7fb45e1a6",
+    "tree": "7146bcb95f2ef9f88a6ea1e937d283f276ed4f8a"
+  },
+  "identityAfter": {
+    "head": "0581b8450cf12ed958b9f51f5ab357f7fb45e1a6",
+    "tree": "7146bcb95f2ef9f88a6ea1e937d283f276ed4f8a"
+  },
+  "allowedPostRuntimeChanges": [],
+  "sourcePin": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "packageVersion": "0.2.1-rc.2",
+  "manifestSha256": "8b69f9b59afd7fc324ca5f2fc80a312f2fb73db223950f3df0dc372279e17c51",
+  "productTrees": {
+    "apps": "e9130ab0d2c9f8e45db9106a70057b85645fe1e4",
+    "features": "67b26a382d8345e072aa2e80b06d06a27a835381",
+    "packages": "b24fd305b7baaa739cbf01f6a8dcd6a1ae6ccb3d"
+  },
+  "builds": [
+    {
+      "name": "android-fixture.apk",
+      "sha256": "0e28df8919728d1af96191b04f0c29ec9a41e5ea88f821d5cfacd0faf9d8aa03",
+      "successLine": "✓ Built build/app/outputs/flutter-apk/app-debug.apk"
+    },
+    {
+      "name": "android-normal.apk",
+      "sha256": "6658547dd8066d7ad5d8db12023a2abd30e14fb75dd8504299cebb655c4f0a09",
+      "successLine": "✓ Built build/app/outputs/flutter-apk/app-debug.apk"
+    },
+    {
+      "name": "linux-fixture/dsh_flutter",
+      "sha256": "c379210cecad8a5ce89773e3c41355320419dd156a2378377636dcefeaae5d4c",
+      "successLine": "✓ Built build/linux/x64/release/bundle/dsh_flutter",
+      "applicationLibrarySha256": "d38146edcb4dabd984d0d769ec52112b6a3cc691ba1980e550012051dab0c2e3"
+    },
+    {
+      "name": "linux-normal/dsh_flutter",
+      "sha256": "c379210cecad8a5ce89773e3c41355320419dd156a2378377636dcefeaae5d4c",
+      "successLine": "✓ Built build/linux/x64/release/bundle/dsh_flutter",
+      "applicationLibrarySha256": "52de93572ae6b0b6f025ead1c2845a87eaa38ff81d41903e447e4d6dcc2b31e6"
+    }
+  ],
+  "fullChecks": 13,
+  "releasePackages": 13,
+  "releaseFiles": 86,
+  "recipes": 33,
+  "gpu": {
+    "cases": 4,
+    "assertions": 112,
+    "pngs": 80,
+    "inputs": 192,
+    "hardware": true
+  },
+  "android": {
+    "scenes": 17,
+    "checks": 57,
+    "inputs": 30,
+    "geometryProofs": 14,
+    "cleanupPassed": true
+  },
+  "visual": {
+    "compared": 224,
+    "dimensionsEqual": 224,
+    "nonTextAtLeast99_5": 166,
+    "meanNonTextPct": 99.59072767857143,
+    "meanRgbPct": 99.82724107142857,
+    "meanPixelPerfectPct": 98.90574553571427
+  },
+  "preservation": {
+    "old108": {
+      "before": {
+        "compared": 108,
+        "dimensionsEqual": 100,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 68.14376851851851,
+        "meanRgbPct": 99.37758333333333,
+        "meanPixelPerfectPct": 62.976740740740745
+      },
+      "after": {
+        "compared": 108,
+        "dimensionsEqual": 100,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 68.14376851851851,
+        "meanRgbPct": 99.37758333333333,
+        "meanPixelPerfectPct": 62.976740740740745
+      },
+      "providerImages": 216,
+      "rgbaEqual": 216,
+      "changed": 0,
+      "nonTextMeanDelta": 0.0
+    },
+    "old96": {
+      "before": {
+        "compared": 96,
+        "dimensionsEqual": 72,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 93.36189583333334,
+        "meanRgbPct": 97.9260625,
+        "meanPixelPerfectPct": 87.86285416666668
+      },
+      "after": {
+        "compared": 96,
+        "dimensionsEqual": 72,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 93.36189583333334,
+        "meanRgbPct": 97.9260625,
+        "meanPixelPerfectPct": 87.86285416666668
+      },
+      "providerImages": 192,
+      "rgbaEqual": 192,
+      "changed": 0,
+      "nonTextMeanDelta": 0.0
+    },
+    "manager16": {
+      "before": {
+        "compared": 16,
+        "dimensionsEqual": 16,
+        "nonTextAtLeast99_5": 8,
+        "meanNonTextPct": 99.575875,
+        "meanRgbPct": 99.7744375,
+        "meanPixelPerfectPct": 98.884375
+      },
+      "after": {
+        "compared": 16,
+        "dimensionsEqual": 16,
+        "nonTextAtLeast99_5": 9,
+        "meanNonTextPct": 99.5949375,
+        "meanRgbPct": 99.7950625,
+        "meanPixelPerfectPct": 98.9280625
+      },
+      "providerImages": 32,
+      "rgbaEqual": 16,
+      "changed": 16,
+      "nonTextMeanDelta": 0.01906250000000398
+    },
+    "tag": {
+      "before": {
+        "compared": 56,
+        "dimensionsEqual": 34,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 85.86187500000001,
+        "meanRgbPct": 96.1964642857143,
+        "meanPixelPerfectPct": 73.36219642857144
+      },
+      "after": {
+        "compared": 56,
+        "dimensionsEqual": 34,
+        "nonTextAtLeast99_5": 0,
+        "meanNonTextPct": 85.86187500000001,
+        "meanRgbPct": 96.1964642857143,
+        "meanPixelPerfectPct": 73.36219642857144
+      },
+      "providerImages": 112,
+      "rgbaEqual": 112,
+      "changed": 0,
+      "nonTextMeanDelta": 0.0
+    },
+    "switch": {
+      "before": {
+        "compared": 48,
+        "dimensionsEqual": 48,
+        "nonTextAtLeast99_5": 8,
+        "meanNonTextPct": 91.708125,
+        "meanRgbPct": 99.8845,
+        "meanPixelPerfectPct": 89.13558333333333
+      },
+      "after": {
+        "compared": 48,
+        "dimensionsEqual": 48,
+        "nonTextAtLeast99_5": 8,
+        "meanNonTextPct": 91.71466666666667,
+        "meanRgbPct": 99.891375,
+        "meanPixelPerfectPct": 89.15029166666666
+      },
+      "providerImages": 96,
+      "rgbaEqual": 72,
+      "changed": 24,
+      "nonTextMeanDelta": 0.00654166666667777
+    }
+  },
+  "sourceCoverage": {
+    "uiPackages": 57,
+    "uiPackagesWithCss": 48,
+    "uiPackagesWithoutCss": 9,
+    "uiCssInputs": 209,
+    "uiPackagesWithRetainedSnapshots": 13,
+    "uiCssRetainedInputs": 36,
+    "uiCssPendingInputs": 173,
+    "supportStylePackages": 9,
+    "supportCssInputs": 10
+  },
+  "legacyDebt": {
+    "manual-metric": 880,
+    "platform-control": 11,
+    "duplicate-button": 0
+  },
+  "remainingManagerMetrics": 31,
+  "limitations": [
+    "本轮仅迁移已加载的 PluginManager 网格／卡片；管理器余下 31 处数值匹配不在本轮范围内。",
+    "Highlight 高亮样式保持冻结／待修复；保留 CSS 和覆盖输入不代表已经实现。",
+    "Chromium 触摸释放后的粘滞悬停仍未匹配／待修复，未作为平台例外接受。",
+    "原生 SVG 等图像格式仍待核对；合成的无效 PNG 仅证明该输入下的回退／恢复。",
+    "原版 DOM 与 Flutter 原始组件矩形分别实测；截图尺寸相同不能证明内部几何相同。",
+    "224 组完整覆盖不代表视觉完成；原始差异和固定非文字 99.5% 目标与工具通用通过状态分开统计。",
+    "旧 Manager 页面可能因卡片迁移而改变；每个提供方的前后原始 RGBA 都重新比较，不假定相同。",
+    "脱敏后的源码／工具副本仅供阅读；可执行复现以原始输入哈希和已提交原件为准，脱敏可能改变本机模板 URL。",
+    "全部是离线合成数据；不含真实用户截图、请求日志、凭据，也不执行发布、部署或设备操作。"
+  ],
+  "published": false,
+  "metricClassifierSha256": "3d34d61e99767a1b05d7ae5b4aba2fab5c5109a924c0bcdb49e68f14d4027cc3",
+  "metricVerification": {
+    "aggregateScoresRecomputed": true,
+    "allRawRgbaRecomputed": true,
+    "classifierReplayed": false,
+    "vendorRgbAndNonTextRows": "completed capture pipeline, bound by raw summary and capture identity hashes"
+  }
+}

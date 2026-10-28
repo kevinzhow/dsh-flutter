@@ -1,0 +1,21 @@
+
+check        state    secs  last line
+check-deps   ok        0.1  check_deps: OK, 45 packages, layering respected
+tool-tests   ok        8.4  OK
+codegen      ok        0.9  gen --check: OK (offline+format) 23 files match dsh 687f282e8
+theme-pack   ok        0.1  official theme pack is up to date
+design-system ok       15.1  design-system: family inventory and per-file bypass/duplicate/metric ratchets passed
+i18n         ok        0.2  gen_catalog --check: OK 52 namespaces, 2416 keys, full zh coverage
+icons        ok        0.1  gen_icons: up to date
+vector       ok        9.8  deliverables: turn facts, paths and file mentions match upstream
+parity       ok        3.4  parity selftest: ok
+capability   ok        0.2  capability-parity: 319 rows (186 ported, 48 partial, 58 missing, 27 na); every upstream ui
+format       FAIL      2.9  Formatted 965 files (1 changed) in 2.75 seconds.
+analyze      ok        6.3  No issues found!
+tests        ok      337.2  00:05 +21 ~2: All other tests passed!
+
+--- format (full output: .local/preflight/format.txt) ---
+Changed apps/dsh_flutter/test/parity/plugin_cards_fixture_test.dart
+Formatted 965 files (1 changed) in 2.75 seconds.
+
+preflight: FAILED check-deps=ok tool-tests=ok codegen=ok theme-pack=ok design-system=ok i18n=ok icons=ok vector=ok parity=ok capability=ok format=FAIL analyze=ok tests=ok

@@ -1,0 +1,30 @@
+
+check        state    secs  last line
+check-deps   ok        0.6  check_deps: OK, 45 packages, layering respected
+tool-tests   ok       11.8  OK
+codegen      ok        1.6  gen --check: OK (offline+format) 23 files match dsh 687f282e8
+theme-pack   ok        0.1  official theme pack is up to date
+design-system FAIL      1.8  packages/dsh_ui/lib/src/dsh_single_line_clamp.dart: manual-metric grew 0 -> 1; generate a 
+i18n         ok        0.3  gen_catalog --check: OK 52 namespaces, 2416 keys, full zh coverage
+icons        ok        0.2  gen_icons: up to date
+vector       ok       15.2  deliverables: turn facts, paths and file mentions match upstream
+parity       ok        5.5  parity selftest: ok
+capability   ok        0.3  capability-parity: 319 rows (186 ported, 48 partial, 58 missing, 27 na); every upstream ui
+format       ok        2.9  Formatted 966 files (0 changed) in 2.81 seconds.
+analyze      FAIL      3.4  1 issue found.
+tests        ok      218.5  00:02 +21 ~2: All other tests passed!
+
+--- design-system (full output: .local/preflight/design-system.txt) ---
+release-inputs: PASS; reconstructed 13 locked releases / 86 retained snapshots; cached archives revalidated; no JS execution
+design-system: published version, consumer dependency, CSS and recipes agree
+source-inventory: pinned-source package/CSS/dependency/retention check PASS; implementation acceptance not assessed
+packages/dsh_ui/lib/src/dsh_single_line_clamp.dart: manual-metric grew 0 -> 1; generate a source recipe or use its theme token; avoid page overrides
+
+--- analyze (full output: .local/preflight/analyze.txt) ---
+Analyzing ....
+
+   info - packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart:2:8 - The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/services.dart'. Try removing the import directive. - unnecessary_import
+
+1 issue found.
+
+preflight: FAILED check-deps=ok tool-tests=ok codegen=ok theme-pack=ok design-system=FAIL i18n=ok icons=ok vector=ok parity=ok capability=ok format=ok analyze=FAIL tests=ok

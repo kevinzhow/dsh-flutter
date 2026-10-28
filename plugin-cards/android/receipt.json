@@ -1,0 +1,810 @@
+{
+  "schema": "whalee-plugin-cards-android-runtime/1",
+  "runtimeHead": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+  "runtimeTree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+  "manifestSha256": "8b69f9b59afd7fc324ca5f2fc80a312f2fb73db223950f3df0dc372279e17c51",
+  "driverSha256": "536bb02ae3abd5a78090996ca7751e0517340cfca685cf7e9227eb053d1323c4",
+  "contract": {
+    "sceneCount": 17,
+    "scenes": [
+      "default",
+      "corner",
+      "edge-open",
+      "back-list",
+      "switch-only",
+      "key-base",
+      "title-keyboard",
+      "title-enter",
+      "switch-keyboard",
+      "switch-space",
+      "locked-switch",
+      "refused",
+      "wrap",
+      "image-fallback",
+      "no-description",
+      "metadata",
+      "metadata-open"
+    ],
+    "inputCount": 30,
+    "checkCount": 57
+  },
+  "avd": "whalee-api36",
+  "serial": "emulator-5560",
+  "displaySize": "Physical size: 1080x2400",
+  "displayDensity": "Physical density: 420",
+  "androidApi": "36",
+  "adbdShellUid": "2000",
+  "displayOverrideApplied": false,
+  "adbRootUsed": false,
+  "apkSha256": "81eb0eb0b3297e06eecb280e3386f367889e7d236787718cd74bf030ea5075d8",
+  "sharedAdbPids": [
+    42291
+  ],
+  "installedFixtureSha256": "81eb0eb0b3297e06eecb280e3386f367889e7d236787718cd74bf030ea5075d8",
+  "passed": true,
+  "inputs": [
+    {
+      "tap": [
+        47,
+        1149
+      ],
+      "label": "View Synthetic plugin",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "purpose": "outside source contour",
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Button"
+    },
+    {
+      "tap": [
+        47,
+        1229
+      ],
+      "label": "View Synthetic plugin",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "purpose": "extended side margin",
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Button"
+    },
+    {
+      "tap": [
+        225,
+        960
+      ],
+      "label": "Back to plugins",
+      "bounds": [
+        63,
+        913,
+        387,
+        1008
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        969,
+        1229
+      ],
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Switch"
+    },
+    {
+      "tap": [
+        97,
+        194
+      ],
+      "label": "Default",
+      "bounds": [
+        21,
+        157,
+        174,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 66
+    },
+    {
+      "tap": [
+        97,
+        194
+      ],
+      "label": "Default",
+      "bounds": [
+        21,
+        157,
+        174,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 61
+    },
+    {
+      "keycode": 62
+    },
+    {
+      "tap": [
+        262,
+        194
+      ],
+      "label": "Locked",
+      "bounds": [
+        185,
+        157,
+        339,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        969,
+        1229
+      ],
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "purpose": "disabled switch must absorb without opening",
+      "semanticClickable": "false",
+      "semanticClass": "android.widget.Switch"
+    },
+    {
+      "tap": [
+        433,
+        194
+      ],
+      "label": "Refused",
+      "bounds": [
+        349,
+        157,
+        517,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        969,
+        1229
+      ],
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.widget.Switch"
+    },
+    {
+      "tap": [
+        589,
+        194
+      ],
+      "label": "Wrap",
+      "bounds": [
+        527,
+        157,
+        652,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        733,
+        194
+      ],
+      "label": "Image",
+      "bounds": [
+        663,
+        157,
+        803,
+        231
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        149,
+        278
+      ],
+      "label": "No description",
+      "bounds": [
+        21,
+        241,
+        278,
+        315
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        382,
+        278
+      ],
+      "label": "Metadata",
+      "bounds": [
+        289,
+        241,
+        475,
+        315
+      ],
+      "purpose": "tap",
+      "semanticClickable": "true",
+      "semanticClass": "android.view.View"
+    },
+    {
+      "tap": [
+        540,
+        1361
+      ],
+      "label": "Package metadata error: Synthetic metadata diagnostic\nwith a second line",
+      "bounds": [
+        42,
+        1314,
+        1038,
+        1409
+      ],
+      "purpose": "actual metadata region opens the owning card",
+      "semanticClickable": "false",
+      "semanticClass": "android.view.View"
+    }
+  ],
+  "scenes": [
+    "default",
+    "corner",
+    "edge-open",
+    "back-list",
+    "switch-only",
+    "key-base",
+    "title-keyboard",
+    "title-enter",
+    "switch-keyboard",
+    "switch-space",
+    "locked-switch",
+    "refused",
+    "wrap",
+    "image-fallback",
+    "no-description",
+    "metadata",
+    "metadata-open"
+  ],
+  "checks": [
+    {
+      "assertion": "expect: Card scenario: default",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Services: synthetic offline",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "Independent source switch: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "expect: View Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 1 refused: 0 enabled: off",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "Independent source switch: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: default",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "Keyboard focuses independent action: View Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: default",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "Keyboard focuses independent action: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 1 refused: 0 enabled: off",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "Independent source switch: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: error-disabled",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: off",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Problem",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "Independent source switch: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: off",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: refused-toggle",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 1 refused: 1 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "absent: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "Independent source switch: Enable Synthetic plugin",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: long-tags",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Experimental",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Problem",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Package unavailable",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Update available",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View A deliberately long localized synthetic plugin title with adjacent status tags",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: image-failed",
+      "passed": true
+    },
+    {
+      "assertion": "expect: View Failed artwork",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View Failed artwork",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: no-description",
+      "passed": true
+    },
+    {
+      "assertion": "expect: View No description",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View No description",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Card scenario: metadata-error",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Package metadata error: Synthetic metadata diagnostic",
+      "passed": true
+    },
+    {
+      "assertion": "expect: with a second line",
+      "passed": true
+    },
+    {
+      "assertion": "Source card layout: View Metadata error",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Back to plugins",
+      "passed": true
+    },
+    {
+      "assertion": "expect: Requests: 0 refused: 0 enabled: on",
+      "passed": true
+    }
+  ],
+  "geometryProofs": [
+    {
+      "type": "card",
+      "label": "View Synthetic plugin",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "nativeContentDescription": "View Synthetic plugin, A synthetic package for loaded-card checks.",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "base",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "switch",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "enabled": "true",
+      "checked": "true",
+      "class": "android.widget.Switch",
+      "passed": true
+    },
+    {
+      "type": "switch",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "enabled": "true",
+      "checked": "false",
+      "class": "android.widget.Switch",
+      "passed": true
+    },
+    {
+      "type": "focus",
+      "label": "View Synthetic plugin",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "focusedBounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "class": "android.view.View",
+      "sameBoundsAsLabeledAction": true,
+      "passed": true
+    },
+    {
+      "type": "focus",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "focusedBounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "class": "android.widget.Switch",
+      "sameBoundsAsLabeledAction": true,
+      "passed": true
+    },
+    {
+      "type": "switch",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "enabled": "true",
+      "checked": "false",
+      "class": "android.widget.Switch",
+      "passed": true
+    },
+    {
+      "type": "card",
+      "label": "View Synthetic plugin",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "nativeContentDescription": "View Synthetic plugin, A synthetic package for loaded-card checks.",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "base",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "switch",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1203,
+        1017,
+        1255
+      ],
+      "enabled": "false",
+      "checked": "false",
+      "class": "android.widget.Switch",
+      "passed": true
+    },
+    {
+      "type": "switch",
+      "label": "Enable Synthetic plugin",
+      "bounds": [
+        922,
+        1308,
+        1017,
+        1360
+      ],
+      "enabled": "true",
+      "checked": "true",
+      "class": "android.widget.Switch",
+      "passed": true
+    },
+    {
+      "type": "card",
+      "label": "View A deliberately long localized synthetic plugin title with adjacent status tags",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1435
+      ],
+      "nativeContentDescription": "View A deliberately long localized synthetic plugin title with adjacent status tags, A deliberately long synthetic description that must retain the source single-line clamp while the title and tags wrap naturally.",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "tall",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "card",
+      "label": "View Failed artwork",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "nativeContentDescription": "View Failed artwork, Invalid data PNG falls back without a network request.",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "base",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "card",
+      "label": "View No description",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1314
+      ],
+      "nativeContentDescription": "View No description",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "base",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "card",
+      "label": "View Metadata error",
+      "bounds": [
+        42,
+        1144,
+        1038,
+        1409
+      ],
+      "nativeContentDescription": "View Metadata error, The metadata diagnostic owns its own line.",
+      "density": 2.625,
+      "sourceBaseHeight": 64.76190476190476,
+      "expectedLogicalLeft": 16.0,
+      "heightMode": "tall",
+      "clickable": "true",
+      "passed": true
+    },
+    {
+      "type": "metadata",
+      "bounds": [
+        42,
+        1314,
+        1038,
+        1409
+      ],
+      "card": [
+        42,
+        1144,
+        1038,
+        1409
+      ],
+      "passed": true
+    }
+  ],
+  "dumpDiagnostics": []
+}

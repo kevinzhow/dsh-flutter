@@ -1,0 +1,132 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.tag-family.inventory-phone-zh-conditional.light",
+  "variantId": "default",
+  "captureKey": "components.tag-family.inventory-phone-zh-conditional.light",
+  "theme": "light",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "light"
+  },
+  "locale": "zh-CN",
+  "image": "visual-testing-results/flutter/components.tag-family.inventory-phone-zh-conditional.light.png",
+  "viewport": {
+    "width": 390,
+    "height": 1600,
+    "density": 2.625
+  },
+  "selector": "[data-plugin-module=\"@synthetic/conditional\"] [data-tone]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 56.5,
+      "y": 289.5,
+      "width": 59.99969482421875,
+      "height": 19.0
+    },
+    "pixelRect": {
+      "x": 148.0,
+      "y": 759.0,
+      "width": 158.0,
+      "height": 51.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_plugins:inventory"
+    ],
+    "layoutViewport": {
+      "width": 390.0952380952381,
+      "height": 1600.0
+    },
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "条件启用",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 11.0,
+      "fontWeight": 500,
+      "lineHeight": 17.0,
+      "letterSpacing": 0.0,
+      "color": "#F59E0B"
+    }
+  ],
+  "styleTokens": [],
+  "capturedAt": "2026-10-28T18:04:37.356290Z"
+}

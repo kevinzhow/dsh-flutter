@@ -1,0 +1,81 @@
+{
+  "referenceCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "packages": {
+    "plugin-manager": {
+      "version": "0.2.1-rc.2",
+      "archiveSha256": "a1f1f1f2c40b68fb67b1c7263e25c631b443487905d72cd61fa95e33750e9095",
+      "integrity": "sha512-T/FfDjKRwjFIdBQTtN9BHSVquuMJ970ICzE//oKqaa5ZU0bRG0RVllwVatL6FIKu7F1M1wzgt3tW+b6vstd2eg==",
+      "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9",
+      "instrumentedSha256": "aef3cde87abbf361ddd33965891403d0580ebcf59ccfe388a6ad69dd56229707",
+      "instrumentation": "Expose PluginManagerPage and its static CSS class map before factory return only"
+    }
+  },
+  "sourceFiles": {
+    "packages/client/ui-primitives/src/Tooltip.tsx": {
+      "sha256": "ec5405eb9ea1f7d47ff720c4b3e6d7a1863269da2c89161461fffcf08aa77695",
+      "explicitHashLock": true
+    },
+    "packages/client/ui-primitives/src/input-modality.ts": {
+      "sha256": "91268be3f5ddb7b9a1defb13628d96082477e8771cdaa5df37d6d8b16bbbf2ba",
+      "explicitHashLock": true
+    },
+    "packages/client/ui-primitives/src/Button.tsx": {
+      "sha256": "514c31404c5c8fb21ad906e92631b9c554c08d23c77437009e3443cef3a94e9c",
+      "explicitHashLock": false
+    },
+    "packages/client/ui-plugin-manager/src/client/PluginManagerPage.tsx": {
+      "sha256": "ca6c1fa1deb96eec24fe68c858c1ca91f542c0d196317f91f823dbd342e1f2c8",
+      "explicitHashLock": true
+    },
+    "packages/client/ui-plugin-market/src/client/locales.ts": {
+      "sha256": "d28857dddb6448ad703353c6bb5886e94fcac1c36f3f67ced93dd31c22022346",
+      "explicitHashLock": false
+    },
+    "packages/client/ui-sidebar/src/client/HeaderLeadingControls.tsx": {
+      "sha256": "2a232e3bdd2f2892a6752cb9d83c1084e90228558271c525cd68db831d3331ce",
+      "explicitHashLock": true
+    },
+    "packages/client/web/src/base.css": {
+      "sha256": "dfaaf04e7498017ef406269ec28b5981566cb07b48eadc0ab92dac48ecbf7a6e",
+      "explicitHashLock": true
+    }
+  },
+  "preparationRepository": {
+    "head": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+    "tree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+    "sourceOnly": true
+  },
+  "fonts": [
+    {
+      "file": "files/NotoSans-Regular.ttf",
+      "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+    },
+    {
+      "file": "files/NotoSans-Bold.ttf",
+      "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+    },
+    {
+      "file": "files/NotoSansMono-Regular.ttf",
+      "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+    },
+    {
+      "file": "files/NotoSansMono-Bold.ttf",
+      "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+    },
+    {
+      "file": "files/NotoSansCJKsc-Regular.subset.otf",
+      "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+    },
+    {
+      "file": "files/NotoSansCJKsc-Bold.subset.otf",
+      "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+    }
+  ],
+  "scenarioJsonSha256": "e760ca5101ec4df93afd5e8cd63f33dadf5c19d72771015225da7688bd7a3cac",
+  "fixtureHelperSha256": "66fd43b63f945b5efbce1b57f1d8202497f57198963aeb26539aeba94a36728f",
+  "planSha256": "ed2e3e0dbacc884fcae259f82fbd88bfee904a986f7827800c16302b5cf339b7",
+  "sourceLockSha256": "9abb49916af9c9fedfd2a6183d2586c72b5b08d2718a9534ae624cd68fc064d6",
+  "loadedRegionsSha256": "3b6cfeaef749c9f919217bae9d5d36ba0759ef44fee9d7d6c850d866227a16a9",
+  "captureToolSha256": "7432785e48ea9d2dd961cace25a99eae5380f003959175f8078e53d16442aeb2",
+  "scope": "Actual published PluginManagerPage with shared offline scenario data; no source component body or stylesheet rewrite"
+}

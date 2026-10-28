@@ -1,0 +1,2350 @@
+{
+  "schema": "dsh-parity-summary/2",
+  "suite": "parity-ext",
+  "notes": "Suite parity-ext: 2494 cases in the manifest. all themes, every case (PARITY_EXT_ALL_THEMES=1)",
+  "counts": {
+    "entries": 16,
+    "compared": 16,
+    "same": 0,
+    "strict": 5,
+    "pass": 16,
+    "geometryPass": 16,
+    "fail": 0,
+    "uncovered": 0,
+    "missing": 0
+  },
+  "meanPixelPerfectPct": 98.937,
+  "meanRgbPct": 99.799,
+  "meanNonTextPct": 99.603,
+  "thresholds": {
+    "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
+    "geometry": 99.5
+  },
+  "cases": [
+    {
+      "key": "components.icon-actions.manager-refresh-idle-desktop-en.light",
+      "caseId": "components.icon-actions.manager-refresh-idle-desktop-en.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (light)",
+      "variantName": "idle",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.013,
+      "rgbPct": 99.908,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-desktop-en.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.013,
+      "closePct": 99.307,
+      "nonTextPct": 99.699,
+      "mismatched": 6394,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1453,
+        "corner": 168,
+        "offset": 177,
+        "text": 4446,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 77.539,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 104,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 214,
+          "exactPct": 79.102,
+          "closePct": 79.785,
+          "nonTextPct": 87.793,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 198,
+          "exactPct": 80.664,
+          "closePct": 81.445,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 87,
+            "corner": 0,
+            "offset": 0,
+            "text": 111,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 166,
+          "exactPct": 83.789,
+          "closePct": 85.254,
+          "nonTextPct": 91.699,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 31,
+            "offset": 0,
+            "text": 81,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-desktop-en.dark",
+      "caseId": "components.icon-actions.manager-refresh-idle-desktop-en.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (dark)",
+      "variantName": "idle",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.997,
+      "rgbPct": 99.882,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-desktop-en.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.997,
+      "closePct": 99.144,
+      "nonTextPct": 99.693,
+      "mismatched": 6500,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1492,
+        "corner": 177,
+        "offset": 183,
+        "text": 4513,
+        "other": 135
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 235,
+          "exactPct": 77.051,
+          "closePct": 77.734,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 103,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 215,
+          "exactPct": 79.004,
+          "closePct": 79.492,
+          "nonTextPct": 87.695,
+          "buckets": {
+            "fill": 0,
+            "hairline": 98,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 164,
+          "exactPct": 83.984,
+          "closePct": 85.449,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 57,
+            "corner": 31,
+            "offset": 0,
+            "text": 76,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 196,
+          "exactPct": 80.859,
+          "closePct": 83.105,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 88,
+            "corner": 0,
+            "offset": 0,
+            "text": 108,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-desktop-zh.light",
+      "caseId": "components.icon-actions.manager-refresh-idle-desktop-zh.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (light)",
+      "variantName": "idle",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.971,
+      "rgbPct": 99.834,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-desktop-zh.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.971,
+      "closePct": 99.204,
+      "nonTextPct": 99.745,
+      "mismatched": 6666,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1009,
+        "corner": 241,
+        "offset": 253,
+        "text": 5013,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 430,
+          "exactPct": 58.008,
+          "closePct": 58.887,
+          "nonTextPct": 88.867,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 231,
+          "exactPct": 77.441,
+          "closePct": 79.98,
+          "nonTextPct": 89.746,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 49,
+            "offset": 20,
+            "text": 126,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 304,
+          "exactPct": 70.312,
+          "closePct": 71.582,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 210,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 315,
+          "exactPct": 69.238,
+          "closePct": 72.461,
+          "nonTextPct": 91.211,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 41,
+            "offset": 18,
+            "text": 225,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-desktop-zh.dark",
+      "caseId": "components.icon-actions.manager-refresh-idle-desktop-zh.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (dark)",
+      "variantName": "idle",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.952,
+      "rgbPct": 99.803,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-desktop-zh.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.952,
+      "closePct": 99.094,
+      "nonTextPct": 99.752,
+      "mismatched": 6788,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1035,
+        "corner": 249,
+        "offset": 189,
+        "text": 5180,
+        "other": 135
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 429,
+          "exactPct": 58.105,
+          "closePct": 59.473,
+          "nonTextPct": 88.965,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 305,
+          "exactPct": 70.215,
+          "closePct": 70.703,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 211,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 145,
+          "exactPct": 85.84,
+          "closePct": 86.719,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 33,
+            "offset": 0,
+            "text": 58,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 78.613,
+          "nonTextPct": 92.188,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 49,
+            "offset": 0,
+            "text": 156,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-phone-en.light",
+      "caseId": "components.icon-actions.manager-refresh-idle-phone-en.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (light)",
+      "variantName": "idle",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.088,
+      "rgbPct": 99.901,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-phone-en.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.088,
+      "closePct": 99.261,
+      "nonTextPct": 99.498,
+      "mismatched": 18444,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8271,
+        "corner": 194,
+        "offset": 1541,
+        "text": 8281,
+        "other": 157
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 676,
+          "exactPct": 90.42,
+          "closePct": 90.93,
+          "nonTextPct": 93.722,
+          "buckets": {
+            "fill": 0,
+            "hairline": 437,
+            "corner": 6,
+            "offset": 0,
+            "text": 233,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 571,
+          "exactPct": 91.908,
+          "closePct": 93.141,
+          "nonTextPct": 95.281,
+          "buckets": {
+            "fill": 0,
+            "hairline": 333,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 600,
+          "exactPct": 91.497,
+          "closePct": 92.871,
+          "nonTextPct": 95.791,
+          "buckets": {
+            "fill": 0,
+            "hairline": 281,
+            "corner": 16,
+            "offset": 0,
+            "text": 303,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.452,
+          "nonTextPct": 95.989,
+          "buckets": {
+            "fill": 0,
+            "hairline": 282,
+            "corner": 1,
+            "offset": 0,
+            "text": 216,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-phone-en.dark",
+      "caseId": "components.icon-actions.manager-refresh-idle-phone-en.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (dark)",
+      "variantName": "idle",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.09,
+      "rgbPct": 99.883,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-phone-en.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.09,
+      "closePct": 99.223,
+      "nonTextPct": 99.501,
+      "mismatched": 18401,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8293,
+        "corner": 197,
+        "offset": 1369,
+        "text": 8310,
+        "other": 232
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 679,
+          "exactPct": 90.377,
+          "closePct": 90.859,
+          "nonTextPct": 93.707,
+          "buckets": {
+            "fill": 0,
+            "hairline": 438,
+            "corner": 6,
+            "offset": 0,
+            "text": 235,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 572,
+          "exactPct": 91.893,
+          "closePct": 92.602,
+          "nonTextPct": 95.266,
+          "buckets": {
+            "fill": 0,
+            "hairline": 334,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 597,
+          "exactPct": 91.539,
+          "closePct": 96.117,
+          "nonTextPct": 95.635,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 58,
+            "text": 289,
+            "other": 124
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 616,
+          "exactPct": 91.27,
+          "closePct": 92.432,
+          "nonTextPct": 95.947,
+          "buckets": {
+            "fill": 0,
+            "hairline": 270,
+            "corner": 16,
+            "offset": 0,
+            "text": 330,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.438,
+          "nonTextPct": 96.018,
+          "buckets": {
+            "fill": 0,
+            "hairline": 280,
+            "corner": 1,
+            "offset": 0,
+            "text": 218,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-phone-zh.light",
+      "caseId": "components.icon-actions.manager-refresh-idle-phone-zh.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (light)",
+      "variantName": "idle",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.776,
+      "rgbPct": 99.622,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-phone-zh.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.776,
+      "closePct": 98.911,
+      "nonTextPct": 99.49,
+      "mismatched": 24751,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 5517,
+        "corner": 2191,
+        "offset": 2460,
+        "text": 14426,
+        "other": 157
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1690,
+          "exactPct": 76.049,
+          "closePct": 77.041,
+          "nonTextPct": 87.798,
+          "buckets": {
+            "fill": 0,
+            "hairline": 173,
+            "corner": 497,
+            "offset": 191,
+            "text": 829,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1631,
+          "exactPct": 76.885,
+          "closePct": 77.707,
+          "nonTextPct": 88.903,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 276,
+            "text": 848,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1646,
+          "exactPct": 76.672,
+          "closePct": 76.772,
+          "nonTextPct": 92.701,
+          "buckets": {
+            "fill": 0,
+            "hairline": 188,
+            "corner": 285,
+            "offset": 42,
+            "text": 1131,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1304,
+          "exactPct": 81.519,
+          "closePct": 81.746,
+          "nonTextPct": 93.849,
+          "buckets": {
+            "fill": 0,
+            "hairline": 147,
+            "corner": 255,
+            "offset": 32,
+            "text": 870,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-idle-phone-zh.dark",
+      "caseId": "components.icon-actions.manager-refresh-idle-phone-zh.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (idle) (dark)",
+      "variantName": "idle",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.778,
+      "rgbPct": 99.582,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-idle-phone-zh.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.778,
+      "closePct": 98.884,
+      "nonTextPct": 99.521,
+      "mismatched": 24725,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 5555,
+        "corner": 2192,
+        "offset": 1701,
+        "text": 15045,
+        "other": 232
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1689,
+          "exactPct": 76.063,
+          "closePct": 76.701,
+          "nonTextPct": 90.363,
+          "buckets": {
+            "fill": 0,
+            "hairline": 174,
+            "corner": 498,
+            "offset": 8,
+            "text": 1009,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1645,
+          "exactPct": 76.687,
+          "closePct": 76.899,
+          "nonTextPct": 92.205,
+          "buckets": {
+            "fill": 0,
+            "hairline": 187,
+            "corner": 285,
+            "offset": 78,
+            "text": 1095,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1628,
+          "exactPct": 76.927,
+          "closePct": 77.14,
+          "nonTextPct": 92.389,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 30,
+            "text": 1091,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1301,
+          "exactPct": 81.562,
+          "closePct": 81.916,
+          "nonTextPct": 94.246,
+          "buckets": {
+            "fill": 0,
+            "hairline": 149,
+            "corner": 255,
+            "offset": 2,
+            "text": 895,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1142,
+          "exactPct": 83.815,
+          "closePct": 84.028,
+          "nonTextPct": 95.323,
+          "buckets": {
+            "fill": 0,
+            "hairline": 136,
+            "corner": 162,
+            "offset": 32,
+            "text": 812,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-desktop-en.light",
+      "caseId": "components.icon-actions.manager-refresh-hover-desktop-en.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (light)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.959,
+      "rgbPct": 99.899,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-desktop-en.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.959,
+      "closePct": 99.258,
+      "nonTextPct": 99.678,
+      "mismatched": 6744,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1575,
+        "corner": 178,
+        "offset": 182,
+        "text": 4659,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 77.539,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 104,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 214,
+          "exactPct": 79.102,
+          "closePct": 79.785,
+          "nonTextPct": 87.793,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 198,
+          "exactPct": 80.664,
+          "closePct": 81.445,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 87,
+            "corner": 0,
+            "offset": 0,
+            "text": 111,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 166,
+          "exactPct": 83.789,
+          "closePct": 85.254,
+          "nonTextPct": 91.699,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 31,
+            "offset": 0,
+            "text": 81,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-desktop-en.dark",
+      "caseId": "components.icon-actions.manager-refresh-hover-desktop-en.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (dark)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.942,
+      "rgbPct": 99.877,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-desktop-en.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.942,
+      "closePct": 99.096,
+      "nonTextPct": 99.669,
+      "mismatched": 6859,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1623,
+        "corner": 187,
+        "offset": 195,
+        "text": 4717,
+        "other": 137
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 235,
+          "exactPct": 77.051,
+          "closePct": 77.734,
+          "nonTextPct": 87.109,
+          "buckets": {
+            "fill": 0,
+            "hairline": 91,
+            "corner": 41,
+            "offset": 0,
+            "text": 103,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 215,
+          "exactPct": 79.004,
+          "closePct": 79.492,
+          "nonTextPct": 87.695,
+          "buckets": {
+            "fill": 0,
+            "hairline": 98,
+            "corner": 28,
+            "offset": 0,
+            "text": 89,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 164,
+          "exactPct": 83.984,
+          "closePct": 85.449,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 57,
+            "corner": 31,
+            "offset": 0,
+            "text": 76,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 196,
+          "exactPct": 80.859,
+          "closePct": 83.105,
+          "nonTextPct": 91.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 88,
+            "corner": 0,
+            "offset": 0,
+            "text": 108,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-desktop-zh.light",
+      "caseId": "components.icon-actions.manager-refresh-hover-desktop-zh.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (light)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.924,
+      "rgbPct": 99.83,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-desktop-zh.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.924,
+      "closePct": 99.164,
+      "nonTextPct": 99.731,
+      "mismatched": 6971,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1089,
+        "corner": 249,
+        "offset": 258,
+        "text": 5225,
+        "other": 150
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 430,
+          "exactPct": 58.008,
+          "closePct": 58.887,
+          "nonTextPct": 88.867,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 108,
+          "exactPct": 89.453,
+          "closePct": 92.578,
+          "nonTextPct": 89.453,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 0,
+            "offset": 41,
+            "text": 0,
+            "other": 18
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 231,
+          "exactPct": 77.441,
+          "closePct": 79.98,
+          "nonTextPct": 89.746,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 49,
+            "offset": 20,
+            "text": 126,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 304,
+          "exactPct": 70.312,
+          "closePct": 71.582,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 210,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 315,
+          "exactPct": 69.238,
+          "closePct": 72.461,
+          "nonTextPct": 91.211,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 41,
+            "offset": 18,
+            "text": 225,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-desktop-zh.dark",
+      "caseId": "components.icon-actions.manager-refresh-hover-desktop-zh.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (dark)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.902,
+      "rgbPct": 99.799,
+      "sizeReact": [
+        720,
+        900
+      ],
+      "sizeFlutter": [
+        720,
+        900
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-desktop-zh.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.902,
+      "closePct": 99.058,
+      "nonTextPct": 99.732,
+      "mismatched": 7117,
+      "pixels": 648000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1143,
+        "corner": 259,
+        "offset": 197,
+        "text": 5379,
+        "other": 139
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 429,
+          "exactPct": 58.105,
+          "closePct": 59.473,
+          "nonTextPct": 88.965,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 63,
+            "offset": 1,
+            "text": 316,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 114,
+          "exactPct": 88.867,
+          "closePct": 90.918,
+          "nonTextPct": 89.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 51,
+            "corner": 0,
+            "offset": 48,
+            "text": 3,
+            "other": 12
+          }
+        },
+        {
+          "rect": [
+            32,
+            160,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 305,
+          "exactPct": 70.215,
+          "closePct": 70.703,
+          "nonTextPct": 90.82,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 29,
+            "offset": 0,
+            "text": 211,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 145,
+          "exactPct": 85.84,
+          "closePct": 86.719,
+          "nonTextPct": 91.504,
+          "buckets": {
+            "fill": 0,
+            "hairline": 54,
+            "corner": 33,
+            "offset": 0,
+            "text": 58,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "pixels": 1024,
+          "mismatched": 236,
+          "exactPct": 76.953,
+          "closePct": 78.613,
+          "nonTextPct": 92.188,
+          "buckets": {
+            "fill": 0,
+            "hairline": 31,
+            "corner": 49,
+            "offset": 0,
+            "text": 156,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-phone-en.light",
+      "caseId": "components.icon-actions.manager-refresh-hover-phone-en.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (light)",
+      "variantName": "hover",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.051,
+      "rgbPct": 99.89,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-phone-en.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.051,
+      "closePct": 99.224,
+      "nonTextPct": 99.486,
+      "mismatched": 19191,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8745,
+        "corner": 238,
+        "offset": 1263,
+        "text": 8790,
+        "other": 155
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 676,
+          "exactPct": 90.42,
+          "closePct": 90.93,
+          "nonTextPct": 93.722,
+          "buckets": {
+            "fill": 0,
+            "hairline": 437,
+            "corner": 6,
+            "offset": 0,
+            "text": 233,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 571,
+          "exactPct": 91.908,
+          "closePct": 93.141,
+          "nonTextPct": 95.281,
+          "buckets": {
+            "fill": 0,
+            "hairline": 333,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 595,
+          "exactPct": 91.567,
+          "closePct": 96.131,
+          "nonTextPct": 95.394,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 81,
+            "text": 270,
+            "other": 118
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 600,
+          "exactPct": 91.497,
+          "closePct": 92.871,
+          "nonTextPct": 95.791,
+          "buckets": {
+            "fill": 0,
+            "hairline": 281,
+            "corner": 16,
+            "offset": 0,
+            "text": 303,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            588,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 499,
+          "exactPct": 92.928,
+          "closePct": 93.452,
+          "nonTextPct": 95.989,
+          "buckets": {
+            "fill": 0,
+            "hairline": 282,
+            "corner": 1,
+            "offset": 0,
+            "text": 216,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-phone-en.dark",
+      "caseId": "components.icon-actions.manager-refresh-hover-phone-en.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (dark)",
+      "variantName": "hover",
+      "officialStatus": "pass",
+      "pixelPerfectPct": 99.052,
+      "rgbPct": 99.876,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-phone-en.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 99.052,
+      "closePct": 99.192,
+      "nonTextPct": 99.483,
+      "mismatched": 19175,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 8776,
+        "corner": 241,
+        "offset": 1204,
+        "text": 8725,
+        "other": 229
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            336,
+            252,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 679,
+          "exactPct": 90.377,
+          "closePct": 90.859,
+          "nonTextPct": 93.707,
+          "buckets": {
+            "fill": 0,
+            "hairline": 438,
+            "corner": 6,
+            "offset": 0,
+            "text": 235,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            420,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 572,
+          "exactPct": 91.893,
+          "closePct": 92.602,
+          "nonTextPct": 95.266,
+          "buckets": {
+            "fill": 0,
+            "hairline": 334,
+            "corner": 0,
+            "offset": 0,
+            "text": 238,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            336,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 480,
+          "exactPct": 93.197,
+          "closePct": 93.863,
+          "nonTextPct": 95.55,
+          "buckets": {
+            "fill": 0,
+            "hairline": 237,
+            "corner": 31,
+            "offset": 46,
+            "text": 166,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            672,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 597,
+          "exactPct": 91.539,
+          "closePct": 96.117,
+          "nonTextPct": 95.635,
+          "buckets": {
+            "fill": 0,
+            "hairline": 125,
+            "corner": 1,
+            "offset": 58,
+            "text": 289,
+            "other": 124
+          }
+        },
+        {
+          "rect": [
+            420,
+            756,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 616,
+          "exactPct": 91.27,
+          "closePct": 92.432,
+          "nonTextPct": 95.947,
+          "buckets": {
+            "fill": 0,
+            "hairline": 270,
+            "corner": 16,
+            "offset": 0,
+            "text": 330,
+            "other": 0
+          }
+        }
+      ],
+      "status": "pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-phone-zh.light",
+      "caseId": "components.icon-actions.manager-refresh-hover-phone-zh.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (light)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.745,
+      "rgbPct": 99.614,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-phone-zh.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.745,
+      "closePct": 98.88,
+      "nonTextPct": 99.476,
+      "mismatched": 25384,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 6005,
+        "corner": 2261,
+        "offset": 2181,
+        "text": 14782,
+        "other": 155
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1690,
+          "exactPct": 76.049,
+          "closePct": 77.041,
+          "nonTextPct": 87.798,
+          "buckets": {
+            "fill": 0,
+            "hairline": 173,
+            "corner": 497,
+            "offset": 191,
+            "text": 829,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1631,
+          "exactPct": 76.885,
+          "closePct": 77.707,
+          "nonTextPct": 88.903,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 276,
+            "text": 848,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1646,
+          "exactPct": 76.672,
+          "closePct": 76.772,
+          "nonTextPct": 92.701,
+          "buckets": {
+            "fill": 0,
+            "hairline": 188,
+            "corner": 285,
+            "offset": 42,
+            "text": 1131,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1304,
+          "exactPct": 81.519,
+          "closePct": 81.746,
+          "nonTextPct": 93.849,
+          "buckets": {
+            "fill": 0,
+            "hairline": 147,
+            "corner": 255,
+            "offset": 32,
+            "text": 870,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            336,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 651,
+          "exactPct": 90.774,
+          "closePct": 91.355,
+          "nonTextPct": 94.175,
+          "buckets": {
+            "fill": 0,
+            "hairline": 366,
+            "corner": 45,
+            "offset": 0,
+            "text": 240,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.icon-actions.manager-refresh-hover-phone-zh.dark",
+      "caseId": "components.icon-actions.manager-refresh-hover-phone-zh.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.manager",
+      "title": "Actual PluginManager refresh action (hover) (dark)",
+      "variantName": "hover",
+      "officialStatus": "basic-pass",
+      "pixelPerfectPct": 98.745,
+      "rgbPct": 99.578,
+      "sizeReact": [
+        856,
+        2363
+      ],
+      "sizeFlutter": [
+        856,
+        2363
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.icon-actions.manager-refresh-hover-phone-zh.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 98.745,
+      "closePct": 98.859,
+      "nonTextPct": 99.502,
+      "mismatched": 25386,
+      "pixels": 2022728,
+      "buckets": {
+        "fill": 0,
+        "hairline": 6052,
+        "corner": 2262,
+        "offset": 1538,
+        "text": 15308,
+        "other": 226
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            252,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1689,
+          "exactPct": 76.063,
+          "closePct": 76.701,
+          "nonTextPct": 90.363,
+          "buckets": {
+            "fill": 0,
+            "hairline": 174,
+            "corner": 498,
+            "offset": 8,
+            "text": 1009,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            84,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1645,
+          "exactPct": 76.687,
+          "closePct": 76.899,
+          "nonTextPct": 92.205,
+          "buckets": {
+            "fill": 0,
+            "hairline": 187,
+            "corner": 285,
+            "offset": 78,
+            "text": 1095,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            168,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1628,
+          "exactPct": 76.927,
+          "closePct": 77.14,
+          "nonTextPct": 92.389,
+          "buckets": {
+            "fill": 0,
+            "hairline": 163,
+            "corner": 344,
+            "offset": 30,
+            "text": 1091,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            336,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 647,
+          "exactPct": 90.83,
+          "closePct": 92.234,
+          "nonTextPct": 93.622,
+          "buckets": {
+            "fill": 0,
+            "hairline": 365,
+            "corner": 45,
+            "offset": 40,
+            "text": 197,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            588,
+            84,
+            84
+          ],
+          "pixels": 7056,
+          "mismatched": 1301,
+          "exactPct": 81.562,
+          "closePct": 81.916,
+          "nonTextPct": 94.246,
+          "buckets": {
+            "fill": 0,
+            "hairline": 149,
+            "corner": 255,
+            "offset": 2,
+            "text": 895,
+            "other": 0
+          }
+        }
+      ],
+      "status": "basic-pass",
+      "coverage": "mapped"
+    }
+  ],
+  "reference": "native",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "flutterVersion": "3.47.6",
+  "visualTesting": "0.1.0",
+  "generatedAt": "2026-10-28T18:03:34+00:00"
+}

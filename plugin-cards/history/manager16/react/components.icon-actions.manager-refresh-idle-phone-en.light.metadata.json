@@ -1,0 +1,409 @@
+{
+  "provider": "react",
+  "providerType": "playwright-chromium",
+  "source": "dsh-react",
+  "caseId": "components.icon-actions.manager-refresh-idle-phone-en.light",
+  "variantId": "default",
+  "captureKey": "components.icon-actions.manager-refresh-idle-phone-en.light",
+  "theme": "light",
+  "locale": "en",
+  "image": "visual-testing-results/react/components.icon-actions.manager-refresh-idle-phone-en.light.png",
+  "viewport": {
+    "width": 390,
+    "height": 1100,
+    "density": 2.625
+  },
+  "selector": "[data-parity-id=\"plugins-preview-surface\"]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 16,
+      "y": 16,
+      "width": 326,
+      "height": 900
+    },
+    "pixelRect": {
+      "x": 42,
+      "y": 42,
+      "width": 856,
+      "height": 2363
+    },
+    "policy": "viewport-intersection/enclosing-device-pixels"
+  },
+  "react": {
+    "browser": "chromium 145.0.7632.6",
+    "playwright": "1.58.2",
+    "chromiumArgs": [
+      "--disable-lcd-text",
+      "--font-render-hinting=none",
+      "--force-device-scale-factor=2.625"
+    ],
+    "densityMode": {
+      "reference": "native",
+      "devicePixelRatio": 2.625,
+      "border0.5px": 0.380952,
+      "border1px": 0.761905
+    },
+    "animationPolicy": "playwright animations: disabled; prefers-reduced-motion: reduce",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "renderer": "static vite bundle of the real dsh components, no network"
+  },
+  "fonts": {
+    "manifest": "../parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "documentFonts": [
+      {
+        "family": "-apple-system",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": "400",
+        "status": "loaded"
+      },
+      {
+        "family": "-apple-system",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": "700",
+        "status": "loaded"
+      },
+      {
+        "family": "SF Mono",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "SF Mono",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_AMS",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "700",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Script",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size1",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size2",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size3",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Size4",
+        "weight": "400",
+        "status": "unloaded"
+      },
+      {
+        "family": "KaTeX_Typewriter",
+        "weight": "400",
+        "status": "unloaded"
+      }
+    ],
+    "platformFonts": {
+      "Noto Sans": 293
+    }
+  },
+  "typography": [
+    {
+      "selector": "h1",
+      "text": "Plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 20,
+      "fontWeight": 500,
+      "lineHeight": 28,
+      "letterSpacing": 0,
+      "color": "rgb(15, 17, 21)"
+    },
+    {
+      "selector": "span",
+      "text": "Install, enable, and configure plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 13,
+      "fontWeight": 400,
+      "lineHeight": 20,
+      "letterSpacing": 0,
+      "color": "rgb(97, 102, 107)"
+    },
+    {
+      "selector": "[data-parity-id=\"market-category-all\"]",
+      "text": "Add plugin",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 13,
+      "fontWeight": 400,
+      "lineHeight": 20,
+      "letterSpacing": 0,
+      "color": "rgb(255, 255, 255)"
+    },
+    {
+      "selector": "[data-parity-id=\"plugin-manager-tab-installed\"]",
+      "text": "Installed",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "lineHeight": 20,
+      "letterSpacing": 0,
+      "color": "rgb(15, 17, 21)"
+    },
+    {
+      "selector": "[data-parity-id=\"plugin-manager-tab-discover\"]",
+      "text": "Discover",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 400,
+      "lineHeight": 20,
+      "letterSpacing": 0,
+      "color": "rgb(97, 102, 107)"
+    },
+    {
+      "selector": "h3",
+      "text": "Installed plugins",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 500,
+      "lineHeight": 22,
+      "letterSpacing": 0,
+      "color": "rgb(15, 17, 21)"
+    },
+    {
+      "selector": "button",
+      "text": "Synthetic preview bundle",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 14,
+      "fontWeight": 500,
+      "lineHeight": 20,
+      "letterSpacing": 0,
+      "color": "rgb(15, 17, 21)"
+    },
+    {
+      "selector": "span",
+      "text": "Synthetic package for native interaction checks.",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": 13,
+      "fontWeight": 400,
+      "lineHeight": 18,
+      "letterSpacing": 0,
+      "color": "rgb(129, 133, 140)"
+    }
+  ],
+  "styleTokens": [
+    {
+      "selector": "[data-parity-id=\"market-category-all\"]",
+      "size": "110.4x32.0",
+      "backgroundColor": "rgb(15, 17, 21)",
+      "borderRadius": "12px",
+      "opacity": "1"
+    },
+    {
+      "selector": "[data-parity-id=\"market-category-tools\"]",
+      "size": "32.0x32.0",
+      "backgroundColor": "rgb(15, 17, 21)",
+      "borderRadius": "0px",
+      "opacity": "1"
+    },
+    {
+      "selector": "[data-parity-id=\"plugin-manager-tabs\"]",
+      "size": "248.0x42.0",
+      "backgroundColor": "rgb(245, 246, 247)",
+      "borderRadius": "16px",
+      "opacity": "1"
+    },
+    {
+      "selector": "span",
+      "size": "120.0x34.0",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderColor": "rgba(0, 0, 0, 0.12)",
+      "borderWidth": 0.380952,
+      "borderRadius": "12px",
+      "opacity": "1"
+    },
+    {
+      "selector": "span",
+      "size": "48.8x48.8",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderColor": "rgba(0, 0, 0, 0.12)",
+      "borderWidth": 0.380952,
+      "borderRadius": "16px",
+      "opacity": "1"
+    },
+    {
+      "selector": "[data-parity-id=\"plugin-switch-@synthetic/preview-bundle\"]",
+      "size": "36.0x20.0",
+      "backgroundColor": "rgb(15, 17, 21)",
+      "borderRadius": "999px",
+      "opacity": "1"
+    },
+    {
+      "selector": "span",
+      "size": "16.0x16.0",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "50%",
+      "opacity": "1"
+    }
+  ],
+  "capturedAt": "2026-10-28T14:28:49.974Z"
+}

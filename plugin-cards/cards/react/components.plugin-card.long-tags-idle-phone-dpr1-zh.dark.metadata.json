@@ -1,0 +1,201 @@
+{
+  "provider": "react",
+  "source": "actual published DSH 0.2.1-rc.2 PluginManagerPage",
+  "caseId": "components.plugin-card.long-tags-idle-phone-dpr1-zh.dark",
+  "variantId": "default",
+  "captureKey": "components.plugin-card.long-tags-idle-phone-dpr1-zh.dark",
+  "theme": "dark",
+  "locale": "zh-CN",
+  "viewport": {
+    "width": 390,
+    "height": 900,
+    "density": 1
+  },
+  "react": {
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9"
+  },
+  "chromium": "145.0.7632.6",
+  "pixelModel": "native",
+  "actual": {
+    "card": {
+      "bounds": [
+        16,
+        248,
+        358,
+        86
+      ],
+      "tag": "LI",
+      "text": "带有相邻状态标签的故意加长本地化合成插件标题用于核对自然换行实验性异常包不可用可更新这是一段故意加长的合成说明，应当保留原版单行截断，同时允许标题和状态标签自然换行。",
+      "color": "rgb(249, 250, 251)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "title": {
+      "bounds": [
+        88,
+        256,
+        228,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "带有相邻状态标签的故意加长本地化合成插件标题用于核对自然换行",
+      "color": "rgb(249, 250, 251)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "500 14px / 20px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "nowrap",
+      "overflow": "hidden",
+      "boxSizing": "border-box"
+    },
+    "description": {
+      "bounds": [
+        88,
+        308,
+        228,
+        18
+      ],
+      "tag": "SPAN",
+      "text": "这是一段故意加长的合成说明，应当保留原版单行截断，同时允许标题和状态标签自然换行。",
+      "color": "rgb(173, 178, 184)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "13px / 18px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "artworkFrame": {
+      "bounds": [
+        24,
+        266,
+        50,
+        50
+      ],
+      "tag": "SPAN",
+      "text": "",
+      "color": "rgb(207, 211, 214)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "artwork": {
+      "bounds": [
+        31,
+        273,
+        36,
+        36
+      ],
+      "tag": "svg",
+      "text": "",
+      "color": "rgb(207, 211, 214)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "tags": [
+      {
+        "bounds": [
+          88,
+          285,
+          44,
+          18
+        ],
+        "tag": "SPAN",
+        "text": "实验性",
+        "color": "rgb(122, 170, 255)",
+        "background": "color(srgb 0.478431 0.666667 1 / 0.1)",
+        "font": "500 10px / 10px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "whiteSpace": "nowrap",
+        "overflow": "visible",
+        "boxSizing": "content-box"
+      },
+      {
+        "bounds": [
+          140,
+          285,
+          34,
+          18
+        ],
+        "tag": "SPAN",
+        "text": "异常",
+        "color": "rgb(242, 90, 90)",
+        "background": "color(srgb 0.94902 0.352941 0.352941 / 0.1)",
+        "font": "500 10px / 10px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "whiteSpace": "nowrap",
+        "overflow": "visible",
+        "boxSizing": "content-box"
+      },
+      {
+        "bounds": [
+          182,
+          284,
+          56,
+          20
+        ],
+        "tag": "SPAN",
+        "text": "包不可用",
+        "color": "rgb(173, 178, 184)",
+        "background": "rgba(0, 0, 0, 0)",
+        "font": "500 10px / 10px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "whiteSpace": "nowrap",
+        "overflow": "visible",
+        "boxSizing": "content-box"
+      },
+      {
+        "bounds": [
+          246,
+          285,
+          44,
+          18
+        ],
+        "tag": "SPAN",
+        "text": "可更新",
+        "color": "rgb(122, 170, 255)",
+        "background": "color(srgb 0.478431 0.666667 1 / 0.1)",
+        "font": "500 10px / 10px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "whiteSpace": "nowrap",
+        "overflow": "visible",
+        "boxSizing": "content-box"
+      }
+    ],
+    "metadataError": null,
+    "switch": {
+      "bounds": [
+        330,
+        281,
+        36,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "",
+      "color": "rgb(255, 255, 255)",
+      "background": "rgba(255, 255, 255, 0.16)",
+      "font": "13.3333px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "border-box",
+      "disabled": false,
+      "checked": "false"
+    },
+    "hover": false,
+    "focusedTitle": false,
+    "titleFocusVisible": false,
+    "titleOutline": {
+      "width": "0px",
+      "style": "none"
+    },
+    "calls": {
+      "attempts": 0,
+      "refusals": 0,
+      "opens": 0,
+      "requestedValues": []
+    }
+  },
+  "provenanceSha256": "f304e9016133c3007a51a69511ffb6cfa7aeed2e96bd4960cf1e4385ec1e922b"
+}

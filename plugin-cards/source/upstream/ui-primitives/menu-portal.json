@@ -1,0 +1,4 @@
+{
+  "bundleSha256": "333ea89e7518ec1f1d33111bb9c65d382454bcc3638ebac7116253c92fe5d566",
+  "placement": "const MARGIN = 12;\n\t\t\tconst vw = window.innerWidth;\n\t\t\tconst vh = window.innerHeight;\n\t\t\tconst listEl = listRef.current;\n\t\t\tconst lw = listEl?.offsetWidth ?? 0;\n\t\t\tconst lh = listEl?.offsetHeight ?? 0;\n\t\t\tlet x;\n\t\t\tlet y;\n\t\t\tif (side === \"right\") {\n\t\t\t\tx = r.right + 4;\n\t\t\t\ty = r.top;\n\t\t\t} else if (align === \"start\") {\n\t\t\t\tx = r.left;\n\t\t\t\ty = side === \"bottom\" ? r.bottom + 4 : r.top - lh - 4;\n\t\t\t} else {\n\t\t\t\tx = r.right - lw;\n\t\t\t\ty = side === \"bottom\" ? r.bottom + 4 : r.top - lh - 4;\n\t\t\t}\n\t\t\tif (lw > 0) x = Math.min(Math.max(x, MARGIN), vw - lw - MARGIN);\n\t\t\tif (lh > 0) y = Math.min(Math.max(y, overlayTopMargin(MARGIN)), vh - lh - MARGIN);"
+}

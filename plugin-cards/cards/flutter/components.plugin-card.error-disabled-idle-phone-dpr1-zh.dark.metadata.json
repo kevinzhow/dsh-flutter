@@ -1,0 +1,421 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.plugin-card.error-disabled-idle-phone-dpr1-zh.dark",
+  "variantId": "default",
+  "captureKey": "components.plugin-card.error-disabled-idle-phone-dpr1-zh.dark",
+  "theme": "dark",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "dark"
+  },
+  "locale": "zh-CN",
+  "image": "visual-testing-results/flutter/components.plugin-card.error-disabled-idle-phone-dpr1-zh.dark.png",
+  "viewport": {
+    "width": 390,
+    "height": 900,
+    "density": 1
+  },
+  "selector": "[data-plugin-cards-capture]",
+  "crop": {
+    "mode": "viewport",
+    "rect": {
+      "x": 0.0,
+      "y": 0.0,
+      "width": 390.0,
+      "height": 900.0
+    },
+    "pixelRect": {
+      "x": 0.0,
+      "y": 0.0,
+      "width": 390.0,
+      "height": 900.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_plugins:PluginManagerPage loaded cards",
+      "dsh_ui:DshPluginCard",
+      "dsh_ui:DshPluginCardList"
+    ],
+    "layoutViewport": {
+      "width": 390.0,
+      "height": 900.0
+    },
+    "notes": "Actual manager with shared offline data. Published-bundle source runner required; no source-TS substitution. SVG image formats, highlight and sticky touch hover remain pending.",
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "插件",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 20.0,
+      "fontWeight": 500,
+      "lineHeight": 28.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[1]",
+      "text": "安装、启用和配置插件",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[2]",
+      "text": "添加插件",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#0F1115"
+    },
+    {
+      "selector": "RenderParagraph[3]",
+      "text": "已安装",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 600,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[4]",
+      "text": "发现",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 400,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[5]",
+      "text": "已安装插件",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 500,
+      "lineHeight": 22.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[6]",
+      "text": "合成插件",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 14.0,
+      "fontWeight": 500,
+      "lineHeight": 20.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[7]",
+      "text": "异常",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 10.0,
+      "fontWeight": 500,
+      "lineHeight": 10.0,
+      "letterSpacing": 0.0,
+      "color": "#F25A5A"
+    },
+    {
+      "selector": "RenderParagraph[8]",
+      "text": "用于已加载卡片核对的合成扩展包。",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 13.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    }
+  ],
+  "styleTokens": [],
+  "componentGeometry": {
+    "schema": "dsh-plugin-card-geometry/1",
+    "coordinateBasis": {
+      "space": "capture-root logical pixels; viewport aligned",
+      "origin": [
+        0.0,
+        0.0
+      ],
+      "layoutViewport": [
+        390.0,
+        900.0
+      ],
+      "devicePixelRatio": 1.0,
+      "measurement": "RenderBox.localToGlobal(Offset.zero, ancestor: captureRoot) plus raw RenderBox.size",
+      "rounding": "none"
+    },
+    "status": "measured",
+    "geometrySemantics": {
+      "title": "visible DshChromeText outer line box; compare separately with the source text-sized title DOM button",
+      "action": "canonical stretched DshButton action/semantic hit box; source counterpart is the whole-card pseudo-element hit area, not the text-sized DOM button",
+      "innerCard": "canonical card outer Stack including metadata; not a viewport or heading-row inference",
+      "rawRenderParagraph": "not sampled",
+      "glyphInkBounds": "not sampled"
+    },
+    "cardCount": 1,
+    "card": {
+      "bounds": [
+        16.0,
+        248.0,
+        358.0,
+        66.0
+      ],
+      "rawFlutterRect": {
+        "left": 16.0,
+        "top": 248.0,
+        "right": 374.0,
+        "bottom": 314.0
+      },
+      "widgetType": "DshPluginCard",
+      "renderType": "_RenderContourHitTarget",
+      "measurement": "public widget outer RenderBox"
+    },
+    "innerCard": {
+      "bounds": [
+        16.0,
+        248.0,
+        358.0,
+        66.0
+      ],
+      "rawFlutterRect": {
+        "left": 16.0,
+        "top": 248.0,
+        "right": 374.0,
+        "bottom": 314.0
+      },
+      "widgetType": "Stack",
+      "renderType": "RenderStack",
+      "measurement": "public widget outer RenderBox"
+    },
+    "action": {
+      "bounds": [
+        16.0,
+        248.0,
+        358.0,
+        66.0
+      ],
+      "rawFlutterRect": {
+        "left": 16.0,
+        "top": 248.0,
+        "right": 374.0,
+        "bottom": 314.0
+      },
+      "widgetType": "DshButton",
+      "renderType": "RenderSemanticsAnnotations",
+      "measurement": "public widget outer RenderBox"
+    },
+    "title": {
+      "bounds": [
+        88.0,
+        260.0,
+        55.999755859375,
+        20.0
+      ],
+      "rawFlutterRect": {
+        "left": 88.0,
+        "top": 260.0,
+        "right": 143.999755859375,
+        "bottom": 280.0
+      },
+      "widgetType": "DshChromeText",
+      "renderType": "_RenderChromeBaseline",
+      "measurement": "DshChromeText outer render/line box; not glyph ink or a stretched action",
+      "text": "合成插件"
+    },
+    "description": {
+      "bounds": [
+        88.0,
+        284.0,
+        228.0,
+        18.0
+      ],
+      "rawFlutterRect": {
+        "left": 88.0,
+        "top": 284.0,
+        "right": 316.0,
+        "bottom": 302.0
+      },
+      "widgetType": "DshChromeText",
+      "renderType": "_RenderChromeBaseline",
+      "measurement": "DshChromeText outer render/line box; not glyph ink or a stretched action",
+      "text": "用于已加载卡片核对的合成扩展包。"
+    },
+    "artworkFrame": {
+      "bounds": [
+        24.0,
+        256.0,
+        50.0,
+        50.0
+      ],
+      "rawFlutterRect": {
+        "left": 24.0,
+        "top": 256.0,
+        "right": 74.0,
+        "bottom": 306.0
+      },
+      "widgetType": "DshContainer",
+      "renderType": "RenderConstrainedBox",
+      "measurement": "public widget outer RenderBox"
+    },
+    "artwork": {
+      "bounds": [
+        31.0,
+        263.0,
+        36.0,
+        36.0
+      ],
+      "rawFlutterRect": {
+        "left": 31.0,
+        "top": 263.0,
+        "right": 67.0,
+        "bottom": 299.0
+      },
+      "widgetType": "DshPluginDefaultArtwork",
+      "renderType": "RenderExcludeSemantics",
+      "measurement": "public widget outer RenderBox"
+    },
+    "artworkKind": "native default/fallback artwork widget",
+    "imageConfigured": false,
+    "tags": [
+      {
+        "bounds": [
+          151.999755859375,
+          261.0,
+          33.999969482421875,
+          18.0
+        ],
+        "rawFlutterRect": {
+          "left": 151.999755859375,
+          "top": 261.0,
+          "right": 185.99972534179688,
+          "bottom": 279.0
+        },
+        "widgetType": "DshTag",
+        "renderType": "RenderIntrinsicWidth",
+        "measurement": "public widget outer RenderBox",
+        "text": "异常",
+        "tone": "danger",
+        "profile": "pluginStatus"
+      }
+    ],
+    "metadataError": null,
+    "switch": {
+      "bounds": [
+        330.0,
+        271.0,
+        36.0,
+        20.0
+      ],
+      "rawFlutterRect": {
+        "left": 330.0,
+        "top": 271.0,
+        "right": 366.0,
+        "bottom": 291.0
+      },
+      "widgetType": "DshSwitch",
+      "renderType": "RenderSemanticsAnnotations",
+      "measurement": "public widget outer RenderBox",
+      "checked": "false",
+      "value": false,
+      "disabled": true
+    },
+    "hover": false,
+    "focusedTitle": false,
+    "titleFocusVisible": false,
+    "titleOutline": {
+      "focusRingPresent": false,
+      "bounds": null,
+      "measurement": "actual canonical native focus-ring widget presence/bounds; not a CSS pseudo-element assertion"
+    },
+    "focusMeasurement": "actual card action FocusableActionDetector.focusNode.hasPrimaryFocus; visible native title text is measured separately from its stretched action",
+    "optionalParts": {
+      "descriptionPresent": true,
+      "metadataErrorPresent": false,
+      "tagCount": 1
+    }
+  },
+  "capturedAt": "2026-10-28T17:57:58.761880Z"
+}

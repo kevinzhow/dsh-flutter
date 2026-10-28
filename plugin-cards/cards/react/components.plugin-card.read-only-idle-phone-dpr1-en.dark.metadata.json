@@ -1,0 +1,136 @@
+{
+  "provider": "react",
+  "source": "actual published DSH 0.2.1-rc.2 PluginManagerPage",
+  "caseId": "components.plugin-card.read-only-idle-phone-dpr1-en.dark",
+  "variantId": "default",
+  "captureKey": "components.plugin-card.read-only-idle-phone-dpr1-en.dark",
+  "theme": "dark",
+  "locale": "en",
+  "viewport": {
+    "width": 390,
+    "height": 900,
+    "density": 1
+  },
+  "react": {
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "publishedBundleSha256": "b4efaa441258a547a0d7b3cab559fe073c69e69fe2bbb617c710ded134e7c4f9"
+  },
+  "chromium": "145.0.7632.6",
+  "pixelModel": "native",
+  "actual": {
+    "card": {
+      "bounds": [
+        16,
+        248,
+        358,
+        66
+      ],
+      "tag": "LI",
+      "text": "Synthetic pluginA synthetic package for loaded-card checks.",
+      "color": "rgb(249, 250, 251)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "title": {
+      "bounds": [
+        88,
+        260,
+        105.859375,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "Synthetic plugin",
+      "color": "rgb(249, 250, 251)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "500 14px / 20px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "nowrap",
+      "overflow": "hidden",
+      "boxSizing": "border-box"
+    },
+    "description": {
+      "bounds": [
+        88,
+        284,
+        228,
+        18
+      ],
+      "tag": "SPAN",
+      "text": "A synthetic package for loaded-card checks.",
+      "color": "rgb(173, 178, 184)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "13px / 18px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "artworkFrame": {
+      "bounds": [
+        24,
+        256,
+        50,
+        50
+      ],
+      "tag": "SPAN",
+      "text": "",
+      "color": "rgb(207, 211, 214)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "content-box"
+    },
+    "artwork": {
+      "bounds": [
+        31,
+        263,
+        36,
+        36
+      ],
+      "tag": "svg",
+      "text": "",
+      "color": "rgb(207, 211, 214)",
+      "background": "rgba(0, 0, 0, 0)",
+      "font": "16px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "hidden",
+      "boxSizing": "content-box"
+    },
+    "tags": [],
+    "metadataError": null,
+    "switch": {
+      "bounds": [
+        330,
+        271,
+        36,
+        20
+      ],
+      "tag": "BUTTON",
+      "text": "",
+      "color": "rgba(255, 255, 255, 0.3)",
+      "background": "rgb(249, 250, 251)",
+      "font": "13.3333px -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "boxSizing": "border-box",
+      "disabled": true,
+      "checked": "true"
+    },
+    "hover": false,
+    "focusedTitle": false,
+    "titleFocusVisible": false,
+    "titleOutline": {
+      "width": "0px",
+      "style": "none"
+    },
+    "calls": {
+      "attempts": 0,
+      "refusals": 0,
+      "opens": 0,
+      "requestedValues": []
+    }
+  },
+  "provenanceSha256": "f304e9016133c3007a51a69511ffb6cfa7aeed2e96bd4960cf1e4385ec1e922b"
+}

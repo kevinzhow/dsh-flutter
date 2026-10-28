@@ -1,0 +1,220 @@
+{
+  "provider": "flutter",
+  "providerType": "flutter-widget-test",
+  "source": "dsh-flutter",
+  "caseId": "components.reported-stats.desktop-zh-activity.dark",
+  "variantId": "default",
+  "captureKey": "components.reported-stats.desktop-zh-activity.dark",
+  "theme": "dark",
+  "themeResolved": {
+    "pack": "official",
+    "brightness": "dark"
+  },
+  "locale": "zh-CN",
+  "image": "visual-testing-results/flutter/components.reported-stats.desktop-zh-activity.dark.png",
+  "viewport": {
+    "width": 800,
+    "height": 400,
+    "density": 1
+  },
+  "selector": "[data-parity-id=\"stats-panel\"]",
+  "crop": {
+    "mode": "element",
+    "rect": {
+      "x": 16.0,
+      "y": 195.0,
+      "width": 300.0,
+      "height": 159.0
+    },
+    "pixelRect": {
+      "x": 16.0,
+      "y": 195.0,
+      "width": 300.0,
+      "height": 159.0
+    }
+  },
+  "flutter": {
+    "widgets": [
+      "dsh_feature_chat:StatPillView",
+      "dsh_ui:DshStatPanel",
+      "dsh_ui:DshPopoverSurface"
+    ],
+    "layoutViewport": {
+      "width": 800.0,
+      "height": 400.0
+    },
+    "targetPlatform": "linux",
+    "density": "pointer",
+    "renderer": "flutter_test host raster (Skia/Impeller software), not a device screenshot",
+    "animationPolicy": "reduced-motion at rest; matches Playwright animations: disabled",
+    "suite": "parity-ext",
+    "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+    "pixelModel": "native"
+  },
+  "fonts": {
+    "manifest": "tool/parity-fonts/manifest.json",
+    "faces": [
+      {
+        "family": "-apple-system",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "89c3c497f618fdaa0b2d1e98fef93582f28c71debd2c4a8cdf41f190ced2909d"
+      },
+      {
+        "family": "-apple-system",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "BlinkMacSystemFont",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "Segoe UI",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "e83493c945848ecd4a9ad0f6d19164541a0d3e23a9c952304a00a46e00272ac5"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "6b692c4b6d15ccf59f1c1fe8d11cb8a92f51960f3e9f1f523781755a3af7e29f"
+      },
+      {
+        "family": "SF Mono",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "b22563d5f03b345a62115e78d8789c9ed99c2cfa8059fad6e7a5c4ced288e21e"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 400,
+        "style": "normal",
+        "sha256": "1007e807974399f50ce8c654e2434fa1283dbeb20a160a931c4c6a742467775d"
+      },
+      {
+        "family": "PingFang SC",
+        "weight": 700,
+        "style": "normal",
+        "sha256": "eecae2ae1779eebf28066b936e2efabeff6b35b75db85bc0884db61bf63153fb"
+      }
+    ],
+    "registration": "FontLoader per family; flutter_test has no OS font fallback"
+  },
+  "typography": [
+    {
+      "selector": "RenderParagraph[0]",
+      "text": "会话统计",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 500,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#F9FAFB"
+    },
+    {
+      "selector": "RenderParagraph[1]",
+      "text": "模型用时",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    },
+    {
+      "selector": "RenderParagraph[2]",
+      "text": "627分53秒",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[3]",
+      "text": "工具调用用时",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    },
+    {
+      "selector": "RenderParagraph[4]",
+      "text": "156分34秒",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[5]",
+      "text": "首 token 平均（TTFT）",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    },
+    {
+      "selector": "RenderParagraph[6]",
+      "text": "9.5秒",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    },
+    {
+      "selector": "RenderParagraph[7]",
+      "text": "输出速度（TPS）",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#ADB2B8"
+    },
+    {
+      "selector": "RenderParagraph[8]",
+      "text": "146 tok/s",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif",
+      "fontSize": 12.0,
+      "fontWeight": 400,
+      "lineHeight": 18.0,
+      "letterSpacing": 0.0,
+      "color": "#CFD3D6"
+    }
+  ],
+  "styleTokens": [
+    {
+      "selector": "RenderDecoratedBox[0]",
+      "size": "300.0x159.0",
+      "backgroundColor": "#43454A73"
+    }
+  ],
+  "capturedAt": "2026-10-28T17:55:49.781377Z"
+}

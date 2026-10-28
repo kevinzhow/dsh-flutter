@@ -1,0 +1,32 @@
+00:00 +0: loading [workspace]/scratch/plugin-card-integration-review-probe/clamp_whitespace_test.dart
+00:00 +0: source whitespace line boxes remain zero height
+WHITESPACE [{"id":"spaces","raw":"   ","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":11.333333333333314},{"id":"tab","raw":"\t","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":11.333333333333314},{"id":"newlines","raw":"\n\r\n","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":11.333333333333314},{"id":"mixed","raw":" \t\r\n\f ","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":11.333333333333314},{"id":"empty","raw":"","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":22.333333333333314},{"id":"nbsp","raw":" ","helperSize":[358.0,18.0],"cardSize":[358.0,64.66666666666669],"titleOffsetY":11.333333333333314}]
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: <0>
+  Actual: <18.0>
+spaces source CSS normal has no line box
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file://[workspace]/scratch/plugin-card-integration-review-probe/clamp_whitespace_test.dart:39:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/plugin-card-integration-review-probe/clamp_whitespace_test.dart line 39
+The test description was:
+  source whitespace line boxes remain zero height
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: source whitespace line boxes remain zero height [E]
+  Test failed. See exception logs above.
+  The test description was: source whitespace line boxes remain zero height
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  [workspace]/scratch/plugin-card-integration-review-probe/clamp_whitespace_test.dart: source whitespace line boxes remain zero height

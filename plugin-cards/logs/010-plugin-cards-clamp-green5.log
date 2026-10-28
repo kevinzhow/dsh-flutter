@@ -1,0 +1,122 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 103.0.0 (110.0.0 available)
+  analyzer 13.3.0 (14.6.0 available)
+  android_file_picker 2.1.1 (2.1.2 available)
+  cross_file 0.3.5+5 (0.4.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dbus 0.7.15 (0.8.0 available)
+  desktop_drop 0.8.4 (0.9.2 available)
+  equatable 2.1.0 (3.0.0 available)
+  file_picker 13.1.0 (13.3.0 available)
+  file_picker_darwin 2.3.3 (2.4.0 available)
+  file_picker_linux 2.0.0 (2.0.2 available)
+! flutter_inappwebview_android 1.1.3 from path third_party/flutter_inappwebview_android (overridden)
+  flutter_local_notifications 22.3.2 (22.3.3 available)
+  flutter_secure_storage 10.3.4 (11.2.0 available)
+  flutter_secure_storage_darwin 0.3.2 (0.4.3 available)
+  jni 1.1.0 (1.1.1 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  package_config 2.2.0 (3.0.0 available)
+  screen_retriever 0.2.2 (0.3.0 available)
+  shared_preferences_android 2.5.3 (2.5.4 available)
+  shared_preferences_foundation 2.6.0 (2.6.1 available)
+  test 1.31.1 (1.33.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  test_core 0.6.18 (0.6.21 available)
+  vector_math 2.4.3 (2.4.4 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies!
+25 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_test.dart
+00:00 +0: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_test.dart: wraps Latin words and retains full accessible description
+00:00 +1: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +2: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +3: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +4: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +5: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +6: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_single_line_clamp_pinned_test.dart: source Noto single run clips; adding a later word clamps
+00:00 +7: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: whitespace description retains the source gap without a line
+00:00 +8: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: whitespace description retains the source gap without a line
+00:00 +9: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: whitespace description retains the source gap without a line
+00:00 +10: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: whitespace description retains the source gap without a line
+00:00 +11: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: description keeps complete words when clamped dark
+00:00 +12: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: description keeps complete words when clamped light
+00:00 +13: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 1.0 dark
+00:00 +14: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 1.0 light
+00:00 +15: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 2.625 dark
+00:00 +16: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 2.625 light
+00:00 +17: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality dark
+00:00 +18: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality light
+00:00 +19: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: the contour rejects a corner but title, tag and metadata open
+
+Warning: A call to tap() with finder "Found 1 widget with text "Synthetic title": [
+  Text("Synthetic title", inherit: true, color: Color(alpha: 1.0000, red: 0.0588, green: 0.0667, blue: 0.0824, colorSpace: ColorSpace.sRGB), family: -apple-system, familyFallback: [BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif], size: 14.0, weight: 500, style: normal, letterSpacing: 0.0, wordSpacing: 0.0, height: 1.4x, leadingDistribution: even, decoration: TextDecoration.none, softWrap: no wrapping except at line break characters, overflow: ellipsis, maxLines: 1, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(396.7, 266.7)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#5976e relayoutBoundary=up14
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#e2c90@Offset(175.7, 18.0), RenderStack#a6758@Offset(175.7, 18.0), RenderOpacity#dc669@Offset(175.7, 18.0), RenderPointerListener#faa40@Offset(175.7, 18.0), RenderSemanticsGestureHandler#3e23a@Offset(175.7, 18.0), RenderSemanticsAnnotations#b9871@Offset(175.7, 18.0), RenderMouseRegion#c4382@Offset(175.7, 18.0), RenderSemanticsAnnotations#db7db@Offset(175.7, 18.0), RenderMouseRegion#c0e4f@Offset(175.7, 18.0), RenderSemanticsAnnotations#bd324@Offset(175.7, 18.0), RenderStack#0d6d0@Offset(175.7, 18.0), RenderMouseRegion#98d66@Offset(175.7, 18.0), _RenderContourHitTarget#59a1c@Offset(175.7, 18.0), RenderConstrainedBox#a6737@Offset(175.7, 18.0), RenderPositionedBox#aaab3@Offset(396.7, 266.7), RenderCustomMultiChildLayoutBox#30497@Offset(396.7, 266.7), _RenderInkFeatures#9ee4b@Offset(396.7, 266.7), RenderPhysicalModel#31c23@Offset(396.7, 266.7), RenderSemanticsAnnotations#3a3fa@Offset(396.7, 266.7), RenderRepaintBoundary#39cd6@Offset(396.7, 266.7), RenderIgnorePointer#6034e@Offset(396.7, 266.7), RenderAnimatedOpacity#adea0@Offset(396.7, 266.7), RenderAnimatedOpacity#532ff@Offset(396.7, 266.7), _RenderColoredBox#0ba59@Offset(396.7, 266.7), RenderAnimatedOpacity#0e86e@Offset(396.7, 266.7), RenderIgnorePointer#1fe3a@Offset(396.7, 266.7), RenderAnimatedOpacity#e1f7a@Offset(396.7, 266.7), RenderRepaintBoundary#9ff37@Offset(396.7, 266.7), RenderSemanticsAnnotations#6f380@Offset(396.7, 266.7), RenderOffstage#99b6f@Offset(396.7, 266.7), RenderSemanticsAnnotations#78563@Offset(396.7, 266.7), _RenderTheater#bc19e@Offset(396.7, 266.7), RenderAbsorbPointer#b1624@Offset(396.7, 266.7), RenderPointerListener#2193d@Offset(396.7, 266.7), RenderSemanticsAnnotations#4c254@Offset(396.7, 266.7), RenderCustomPaint#bc934@Offset(396.7, 266.7), RenderSemanticsAnnotations#aeaeb@Offset(396.7, 266.7), RenderSemanticsAnnotations#41afe@Offset(396.7, 266.7), RenderSemanticsAnnotations#11adc@Offset(396.7, 266.7), RenderTapRegionSurface#30286@Offset(396.7, 266.7), RenderSemanticsAnnotations#469aa@Offset(396.7, 266.7), RenderSemanticsAnnotations#762ad@Offset(396.7, 266.7), HitTestEntry<HitTestTarget>#84148(_ReusableRenderView#5bb42), HitTestEntry<HitTestTarget>#6215c(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:182:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+
+Warning: A call to tap() with finder "Found 1 widget with text "Problem": [
+  Text("Problem", softWrap: no wrapping except at line break characters, overflow: visible, maxLines: 1, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(334.0, 294.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#282de relayoutBoundary=up2
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#e2c90@Offset(113.0, 45.3), RenderStack#a6758@Offset(113.0, 45.3), RenderOpacity#dc669@Offset(113.0, 45.3), RenderPointerListener#faa40@Offset(113.0, 45.3), RenderSemanticsGestureHandler#3e23a@Offset(113.0, 45.3), RenderSemanticsAnnotations#b9871@Offset(113.0, 45.3), RenderMouseRegion#c4382@Offset(113.0, 45.3), RenderSemanticsAnnotations#db7db@Offset(113.0, 45.3), RenderMouseRegion#c0e4f@Offset(113.0, 45.3), RenderSemanticsAnnotations#bd324@Offset(113.0, 45.3), RenderStack#0d6d0@Offset(113.0, 45.3), RenderMouseRegion#98d66@Offset(113.0, 45.3), _RenderContourHitTarget#59a1c@Offset(113.0, 45.3), RenderConstrainedBox#a6737@Offset(113.0, 45.3), RenderPositionedBox#aaab3@Offset(334.0, 294.0), RenderCustomMultiChildLayoutBox#30497@Offset(334.0, 294.0), _RenderInkFeatures#9ee4b@Offset(334.0, 294.0), RenderPhysicalModel#31c23@Offset(334.0, 294.0), RenderSemanticsAnnotations#3a3fa@Offset(334.0, 294.0), RenderRepaintBoundary#39cd6@Offset(334.0, 294.0), RenderIgnorePointer#6034e@Offset(334.0, 294.0), RenderAnimatedOpacity#adea0@Offset(334.0, 294.0), RenderAnimatedOpacity#532ff@Offset(334.0, 294.0), _RenderColoredBox#0ba59@Offset(334.0, 294.0), RenderAnimatedOpacity#0e86e@Offset(334.0, 294.0), RenderIgnorePointer#1fe3a@Offset(334.0, 294.0), RenderAnimatedOpacity#e1f7a@Offset(334.0, 294.0), RenderRepaintBoundary#9ff37@Offset(334.0, 294.0), RenderSemanticsAnnotations#6f380@Offset(334.0, 294.0), RenderOffstage#99b6f@Offset(334.0, 294.0), RenderSemanticsAnnotations#78563@Offset(334.0, 294.0), _RenderTheater#bc19e@Offset(334.0, 294.0), RenderAbsorbPointer#b1624@Offset(334.0, 294.0), RenderPointerListener#2193d@Offset(334.0, 294.0), RenderSemanticsAnnotations#4c254@Offset(334.0, 294.0), RenderCustomPaint#bc934@Offset(334.0, 294.0), RenderSemanticsAnnotations#aeaeb@Offset(334.0, 294.0), RenderSemanticsAnnotations#41afe@Offset(334.0, 294.0), RenderSemanticsAnnotations#11adc@Offset(334.0, 294.0), RenderTapRegionSurface#30286@Offset(334.0, 294.0), RenderSemanticsAnnotations#469aa@Offset(334.0, 294.0), RenderSemanticsAnnotations#762ad@Offset(334.0, 294.0), HitTestEntry<HitTestTarget>#a2734(_ReusableRenderView#5bb42), HitTestEntry<HitTestTarget>#9f5c6(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:183:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+
+Warning: A call to tap() with finder "Found 1 widget with text "Metadata diagnostic": [
+  Text("Metadata diagnostic", inherit: true, color: Color(alpha: 1.0000, red: 0.9255, green: 0.0745, blue: 0.0745, colorSpace: ColorSpace.sRGB), family: -apple-system, familyFallback: [BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif], size: 12.0, weight: 400, style: normal, letterSpacing: 0.0, wordSpacing: 0.0, height: 1.5x, leadingDistribution: even, decoration: TextDecoration.none, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(400.0, 342.3)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#25c3d relayoutBoundary=up10
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#e2c90@Offset(179.0, 93.7), RenderStack#a6758@Offset(179.0, 93.7), RenderOpacity#dc669@Offset(179.0, 93.7), RenderPointerListener#faa40@Offset(179.0, 93.7), RenderSemanticsGestureHandler#3e23a@Offset(179.0, 93.7), RenderSemanticsAnnotations#b9871@Offset(179.0, 93.7), RenderMouseRegion#c4382@Offset(179.0, 93.7), RenderSemanticsAnnotations#db7db@Offset(179.0, 93.7), RenderMouseRegion#c0e4f@Offset(179.0, 93.7), RenderSemanticsAnnotations#bd324@Offset(179.0, 93.7), RenderStack#0d6d0@Offset(179.0, 93.7), RenderMouseRegion#98d66@Offset(179.0, 93.7), _RenderContourHitTarget#59a1c@Offset(179.0, 93.7), RenderConstrainedBox#a6737@Offset(179.0, 93.7), RenderPositionedBox#aaab3@Offset(400.0, 342.3), RenderCustomMultiChildLayoutBox#30497@Offset(400.0, 342.3), _RenderInkFeatures#9ee4b@Offset(400.0, 342.3), RenderPhysicalModel#31c23@Offset(400.0, 342.3), RenderSemanticsAnnotations#3a3fa@Offset(400.0, 342.3), RenderRepaintBoundary#39cd6@Offset(400.0, 342.3), RenderIgnorePointer#6034e@Offset(400.0, 342.3), RenderAnimatedOpacity#adea0@Offset(400.0, 342.3), RenderAnimatedOpacity#532ff@Offset(400.0, 342.3), _RenderColoredBox#0ba59@Offset(400.0, 342.3), RenderAnimatedOpacity#0e86e@Offset(400.0, 342.3), RenderIgnorePointer#1fe3a@Offset(400.0, 342.3), RenderAnimatedOpacity#e1f7a@Offset(400.0, 342.3), RenderRepaintBoundary#9ff37@Offset(400.0, 342.3), RenderSemanticsAnnotations#6f380@Offset(400.0, 342.3), RenderOffstage#99b6f@Offset(400.0, 342.3), RenderSemanticsAnnotations#78563@Offset(400.0, 342.3), _RenderTheater#bc19e@Offset(400.0, 342.3), RenderAbsorbPointer#b1624@Offset(400.0, 342.3), RenderPointerListener#2193d@Offset(400.0, 342.3), RenderSemanticsAnnotations#4c254@Offset(400.0, 342.3), RenderCustomPaint#bc934@Offset(400.0, 342.3), RenderSemanticsAnnotations#aeaeb@Offset(400.0, 342.3), RenderSemanticsAnnotations#41afe@Offset(400.0, 342.3), RenderSemanticsAnnotations#11adc@Offset(400.0, 342.3), RenderTapRegionSurface#30286@Offset(400.0, 342.3), RenderSemanticsAnnotations#469aa@Offset(400.0, 342.3), RenderSemanticsAnnotations#762ad@Offset(400.0, 342.3), HitTestEntry<HitTestTarget>#76337(_ReusableRenderView#5bb42), HitTestEntry<HitTestTarget>#635ce(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:184:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+00:00 +20: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: disabled trailing control absorbs input above the card target
+00:00 +21: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: title and switch keep independent keyboard and native actions
+00:00 +22: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: hover over a trailing switch paints the card; touch-down does not
+00:00 +23: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: long title and status tags increase natural height
+00:00 +24: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: hover never declares a translucent unknown backdrop opaque
+00:00 +25: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: image decode failure keeps artwork size and a new image recovers
+00:01 +26: All tests passed!

@@ -1,0 +1,14 @@
+......F...
+======================================================================
+FAIL: test_invalid_card_numeric_and_token_roles_fail_before_dart (test_plugin_card_source_contract.PluginCardSourceContractTests.test_invalid_card_numeric_and_token_roles_fail_before_dart) (selector='.cardDesc', prop='-webkit-line-clamp')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 86, in test_invalid_card_numeric_and_token_roles_fail_before_dart
+    with self.subTest(selector=selector, prop=prop), self.assertRaises(ValueError): self.render(self.change(selector, prop, raw))
+                                                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.842s
+
+FAILED (failures=1)

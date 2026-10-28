@@ -1,0 +1,5042 @@
+{
+  "schema": "dsh-parity-summary/2",
+  "suite": "parity-ext",
+  "notes": "Unmodified subset of the parent capture; see capture-identity.json.",
+  "counts": {
+    "entries": 56,
+    "compared": 56,
+    "same": 0,
+    "strict": 0,
+    "pass": 0,
+    "geometryPass": 0,
+    "fail": 56,
+    "uncovered": 0,
+    "missing": 0
+  },
+  "meanPixelPerfectPct": 73.362,
+  "meanRgbPct": 96.196,
+  "meanNonTextPct": 85.862,
+  "thresholds": {
+    "official": "vendored CLI: pass > 99% pixel-perfect, basic-pass > 96%",
+    "geometry": 99.5
+  },
+  "cases": [
+    {
+      "key": "components.tag-family.preset-desktop-en-selected.light",
+      "caseId": "components.tag-family.preset-desktop-en-selected.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 60.529,
+      "rgbPct": 87.556,
+      "sizeReact": [
+        104,
+        19
+      ],
+      "sizeFlutter": [
+        103,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-selected.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 60.529,
+      "closePct": 61.25,
+      "nonTextPct": 83.462,
+      "mismatched": 821,
+      "pixels": 2080,
+      "buckets": {
+        "fill": 0,
+        "hairline": 277,
+        "corner": 14,
+        "offset": 53,
+        "text": 477,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 239,
+          "exactPct": 62.656,
+          "closePct": 62.969,
+          "nonTextPct": 82.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 83,
+            "corner": 0,
+            "offset": 32,
+            "text": 124,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 242,
+          "exactPct": 62.188,
+          "closePct": 62.812,
+          "nonTextPct": 86.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 80,
+            "corner": 7,
+            "offset": 0,
+            "text": 155,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 275,
+          "exactPct": 57.031,
+          "closePct": 58.281,
+          "nonTextPct": 87.812,
+          "buckets": {
+            "fill": 0,
+            "hairline": 78,
+            "corner": 0,
+            "offset": 0,
+            "text": 197,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            0,
+            8,
+            20
+          ],
+          "pixels": 160,
+          "mismatched": 65,
+          "exactPct": 59.375,
+          "closePct": 60.0,
+          "nonTextPct": 60.0,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 7,
+            "offset": 21,
+            "text": 1,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-en-selected.dark",
+      "caseId": "components.tag-family.preset-desktop-en-selected.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 60.625,
+      "rgbPct": 90.126,
+      "sizeReact": [
+        104,
+        19
+      ],
+      "sizeFlutter": [
+        103,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-selected.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 60.625,
+      "closePct": 61.49,
+      "nonTextPct": 83.702,
+      "mismatched": 819,
+      "pixels": 2080,
+      "buckets": {
+        "fill": 0,
+        "hairline": 277,
+        "corner": 14,
+        "offset": 48,
+        "text": 480,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 237,
+          "exactPct": 62.969,
+          "closePct": 64.219,
+          "nonTextPct": 82.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 83,
+            "corner": 0,
+            "offset": 32,
+            "text": 122,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 242,
+          "exactPct": 62.188,
+          "closePct": 62.969,
+          "nonTextPct": 86.406,
+          "buckets": {
+            "fill": 0,
+            "hairline": 80,
+            "corner": 7,
+            "offset": 0,
+            "text": 155,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 275,
+          "exactPct": 57.031,
+          "closePct": 57.656,
+          "nonTextPct": 87.812,
+          "buckets": {
+            "fill": 0,
+            "hairline": 78,
+            "corner": 0,
+            "offset": 0,
+            "text": 197,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            96,
+            0,
+            8,
+            20
+          ],
+          "pixels": 160,
+          "mismatched": 65,
+          "exactPct": 59.375,
+          "closePct": 60.0,
+          "nonTextPct": 63.125,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 7,
+            "offset": 16,
+            "text": 6,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-en-built-in.light",
+      "caseId": "components.tag-family.preset-desktop-en-built-in.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 57.224,
+      "rgbPct": 96.633,
+      "sizeReact": [
+        56,
+        21
+      ],
+      "sizeFlutter": [
+        55,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-built-in.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 57.224,
+      "closePct": 59.01,
+      "nonTextPct": 71.753,
+      "mismatched": 527,
+      "pixels": 1232,
+      "buckets": {
+        "fill": 0,
+        "hairline": 224,
+        "corner": 34,
+        "offset": 90,
+        "text": 179,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 327,
+          "exactPct": 53.551,
+          "closePct": 55.682,
+          "nonTextPct": 71.307,
+          "buckets": {
+            "fill": 0,
+            "hairline": 140,
+            "corner": 16,
+            "offset": 46,
+            "text": 125,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            24,
+            22
+          ],
+          "pixels": 528,
+          "mismatched": 200,
+          "exactPct": 62.121,
+          "closePct": 63.447,
+          "nonTextPct": 72.348,
+          "buckets": {
+            "fill": 0,
+            "hairline": 84,
+            "corner": 18,
+            "offset": 44,
+            "text": 54,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-en-built-in.dark",
+      "caseId": "components.tag-family.preset-desktop-en-built-in.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 54.545,
+      "rgbPct": 96.033,
+      "sizeReact": [
+        56,
+        21
+      ],
+      "sizeFlutter": [
+        55,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-built-in.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 54.545,
+      "closePct": 56.25,
+      "nonTextPct": 70.292,
+      "mismatched": 560,
+      "pixels": 1232,
+      "buckets": {
+        "fill": 0,
+        "hairline": 240,
+        "corner": 45,
+        "offset": 66,
+        "text": 194,
+        "other": 15
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 333,
+          "exactPct": 52.699,
+          "closePct": 54.688,
+          "nonTextPct": 70.455,
+          "buckets": {
+            "fill": 0,
+            "hairline": 142,
+            "corner": 20,
+            "offset": 31,
+            "text": 125,
+            "other": 15
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            24,
+            22
+          ],
+          "pixels": 528,
+          "mismatched": 227,
+          "exactPct": 57.008,
+          "closePct": 58.333,
+          "nonTextPct": 70.076,
+          "buckets": {
+            "fill": 0,
+            "hairline": 98,
+            "corner": 25,
+            "offset": 35,
+            "text": 69,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-en-custom.light",
+      "caseId": "components.tag-family.preset-desktop-en-custom.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 59.553,
+      "rgbPct": 93.966,
+      "sizeReact": [
+        59,
+        22
+      ],
+      "sizeFlutter": [
+        59,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-custom.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 59.553,
+      "closePct": 60.863,
+      "nonTextPct": 75.809,
+      "mismatched": 525,
+      "pixels": 1298,
+      "buckets": {
+        "fill": 0,
+        "hairline": 217,
+        "corner": 0,
+        "offset": 97,
+        "text": 211,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 296,
+          "exactPct": 57.955,
+          "closePct": 59.091,
+          "nonTextPct": 76.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 112,
+            "corner": 0,
+            "offset": 53,
+            "text": 131,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            27,
+            22
+          ],
+          "pixels": 594,
+          "mismatched": 229,
+          "exactPct": 61.448,
+          "closePct": 62.963,
+          "nonTextPct": 74.916,
+          "buckets": {
+            "fill": 0,
+            "hairline": 105,
+            "corner": 0,
+            "offset": 44,
+            "text": 80,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-en-custom.dark",
+      "caseId": "components.tag-family.preset-desktop-en-custom.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 59.322,
+      "rgbPct": 93.467,
+      "sizeReact": [
+        59,
+        22
+      ],
+      "sizeFlutter": [
+        59,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-en-custom.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 59.322,
+      "closePct": 61.017,
+      "nonTextPct": 75.655,
+      "mismatched": 528,
+      "pixels": 1298,
+      "buckets": {
+        "fill": 0,
+        "hairline": 219,
+        "corner": 0,
+        "offset": 87,
+        "text": 212,
+        "other": 10
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 301,
+          "exactPct": 57.244,
+          "closePct": 58.949,
+          "nonTextPct": 76.42,
+          "buckets": {
+            "fill": 0,
+            "hairline": 113,
+            "corner": 0,
+            "offset": 48,
+            "text": 135,
+            "other": 5
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            27,
+            22
+          ],
+          "pixels": 594,
+          "mismatched": 227,
+          "exactPct": 61.785,
+          "closePct": 63.468,
+          "nonTextPct": 74.747,
+          "buckets": {
+            "fill": 0,
+            "hairline": 106,
+            "corner": 0,
+            "offset": 39,
+            "text": 77,
+            "other": 5
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-desktop-en-override.light",
+      "caseId": "components.tag-family.shell-desktop-en-override.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (light)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 65.132,
+      "rgbPct": 95.578,
+      "sizeReact": [
+        76,
+        20
+      ],
+      "sizeFlutter": [
+        76,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-desktop-en-override.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 65.132,
+      "closePct": 72.368,
+      "nonTextPct": 78.487,
+      "mismatched": 530,
+      "pixels": 1520,
+      "buckets": {
+        "fill": 0,
+        "hairline": 191,
+        "corner": 13,
+        "offset": 123,
+        "text": 203,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 244,
+          "exactPct": 61.875,
+          "closePct": 67.812,
+          "nonTextPct": 75.312,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 13,
+            "offset": 48,
+            "text": 86,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 223,
+          "exactPct": 65.156,
+          "closePct": 71.719,
+          "nonTextPct": 83.125,
+          "buckets": {
+            "fill": 0,
+            "hairline": 64,
+            "corner": 0,
+            "offset": 44,
+            "text": 115,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            12,
+            20
+          ],
+          "pixels": 240,
+          "mismatched": 63,
+          "exactPct": 73.75,
+          "closePct": 86.25,
+          "nonTextPct": 74.583,
+          "buckets": {
+            "fill": 0,
+            "hairline": 30,
+            "corner": 0,
+            "offset": 31,
+            "text": 2,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-desktop-en-override.dark",
+      "caseId": "components.tag-family.shell-desktop-en-override.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (dark)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 64.211,
+      "rgbPct": 93.713,
+      "sizeReact": [
+        76,
+        20
+      ],
+      "sizeFlutter": [
+        76,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-desktop-en-override.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 64.211,
+      "closePct": 66.842,
+      "nonTextPct": 82.829,
+      "mismatched": 544,
+      "pixels": 1520,
+      "buckets": {
+        "fill": 0,
+        "hairline": 198,
+        "corner": 13,
+        "offset": 43,
+        "text": 283,
+        "other": 7
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 245,
+          "exactPct": 61.719,
+          "closePct": 62.344,
+          "nonTextPct": 82.812,
+          "buckets": {
+            "fill": 0,
+            "hairline": 97,
+            "corner": 13,
+            "offset": 0,
+            "text": 135,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 228,
+          "exactPct": 64.375,
+          "closePct": 67.5,
+          "nonTextPct": 84.844,
+          "buckets": {
+            "fill": 0,
+            "hairline": 67,
+            "corner": 0,
+            "offset": 26,
+            "text": 131,
+            "other": 4
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            12,
+            20
+          ],
+          "pixels": 240,
+          "mismatched": 71,
+          "exactPct": 70.417,
+          "closePct": 77.083,
+          "nonTextPct": 77.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 34,
+            "corner": 0,
+            "offset": 17,
+            "text": 17,
+            "other": 3
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-conditional.light",
+      "caseId": "components.tag-family.inventory-desktop-en-conditional.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 77.697,
+      "rgbPct": 98.833,
+      "sizeReact": [
+        76,
+        20
+      ],
+      "sizeFlutter": [
+        76,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-conditional.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 77.697,
+      "closePct": 80.789,
+      "nonTextPct": 95.132,
+      "mismatched": 339,
+      "pixels": 1520,
+      "buckets": {
+        "fill": 0,
+        "hairline": 48,
+        "corner": 12,
+        "offset": 14,
+        "text": 265,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 170,
+          "exactPct": 73.438,
+          "closePct": 75.469,
+          "nonTextPct": 94.844,
+          "buckets": {
+            "fill": 0,
+            "hairline": 29,
+            "corner": 4,
+            "offset": 0,
+            "text": 137,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            12,
+            20
+          ],
+          "pixels": 240,
+          "mismatched": 42,
+          "exactPct": 82.5,
+          "closePct": 87.083,
+          "nonTextPct": 89.167,
+          "buckets": {
+            "fill": 0,
+            "hairline": 11,
+            "corner": 8,
+            "offset": 7,
+            "text": 16,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 127,
+          "exactPct": 80.156,
+          "closePct": 83.75,
+          "nonTextPct": 97.656,
+          "buckets": {
+            "fill": 0,
+            "hairline": 8,
+            "corner": 0,
+            "offset": 7,
+            "text": 112,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-conditional.dark",
+      "caseId": "components.tag-family.inventory-desktop-en-conditional.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.789,
+      "rgbPct": 98.818,
+      "sizeReact": [
+        76,
+        20
+      ],
+      "sizeFlutter": [
+        76,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-conditional.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 75.789,
+      "closePct": 80.855,
+      "nonTextPct": 93.224,
+      "mismatched": 368,
+      "pixels": 1520,
+      "buckets": {
+        "fill": 0,
+        "hairline": 54,
+        "corner": 12,
+        "offset": 36,
+        "text": 265,
+        "other": 1
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            64,
+            0,
+            12,
+            20
+          ],
+          "pixels": 240,
+          "mismatched": 59,
+          "exactPct": 75.417,
+          "closePct": 87.083,
+          "nonTextPct": 82.083,
+          "buckets": {
+            "fill": 0,
+            "hairline": 12,
+            "corner": 8,
+            "offset": 22,
+            "text": 16,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 170,
+          "exactPct": 73.438,
+          "closePct": 75.469,
+          "nonTextPct": 94.844,
+          "buckets": {
+            "fill": 0,
+            "hairline": 29,
+            "corner": 4,
+            "offset": 0,
+            "text": 137,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 139,
+          "exactPct": 78.281,
+          "closePct": 83.906,
+          "nonTextPct": 95.781,
+          "buckets": {
+            "fill": 0,
+            "hairline": 13,
+            "corner": 0,
+            "offset": 14,
+            "text": 112,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-disabled.light",
+      "caseId": "components.tag-family.inventory-desktop-en-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.403,
+      "rgbPct": 95.019,
+      "sizeReact": [
+        61,
+        20
+      ],
+      "sizeFlutter": [
+        62,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-disabled.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 75.403,
+      "closePct": 80.242,
+      "nonTextPct": 89.274,
+      "mismatched": 305,
+      "pixels": 1240,
+      "buckets": {
+        "fill": 0,
+        "hairline": 84,
+        "corner": 23,
+        "offset": 26,
+        "text": 172,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 174,
+          "exactPct": 72.812,
+          "closePct": 78.125,
+          "nonTextPct": 87.188,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 13,
+            "offset": 19,
+            "text": 92,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            30,
+            20
+          ],
+          "pixels": 600,
+          "mismatched": 131,
+          "exactPct": 78.167,
+          "closePct": 82.5,
+          "nonTextPct": 91.5,
+          "buckets": {
+            "fill": 0,
+            "hairline": 34,
+            "corner": 10,
+            "offset": 7,
+            "text": 80,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-disabled.dark",
+      "caseId": "components.tag-family.inventory-desktop-en-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 72.339,
+      "rgbPct": 94.003,
+      "sizeReact": [
+        61,
+        20
+      ],
+      "sizeFlutter": [
+        62,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-disabled.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 72.339,
+      "closePct": 78.226,
+      "nonTextPct": 86.129,
+      "mismatched": 343,
+      "pixels": 1240,
+      "buckets": {
+        "fill": 0,
+        "hairline": 110,
+        "corner": 26,
+        "offset": 36,
+        "text": 171,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            30,
+            20
+          ],
+          "pixels": 600,
+          "mismatched": 168,
+          "exactPct": 72.0,
+          "closePct": 78.333,
+          "nonTextPct": 85.167,
+          "buckets": {
+            "fill": 0,
+            "hairline": 61,
+            "corner": 13,
+            "offset": 15,
+            "text": 79,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 175,
+          "exactPct": 72.656,
+          "closePct": 78.125,
+          "nonTextPct": 87.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 13,
+            "offset": 21,
+            "text": 92,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-failed.light",
+      "caseId": "components.tag-family.inventory-desktop-en-failed.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 76.667,
+      "rgbPct": 94.422,
+      "sizeReact": [
+        47,
+        20
+      ],
+      "sizeFlutter": [
+        48,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-failed.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 76.667,
+      "closePct": 81.667,
+      "nonTextPct": 87.812,
+      "mismatched": 224,
+      "pixels": 960,
+      "buckets": {
+        "fill": 0,
+        "hairline": 87,
+        "corner": 0,
+        "offset": 30,
+        "text": 107,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 174,
+          "exactPct": 72.812,
+          "closePct": 77.344,
+          "nonTextPct": 86.094,
+          "buckets": {
+            "fill": 0,
+            "hairline": 66,
+            "corner": 0,
+            "offset": 23,
+            "text": 85,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            16,
+            20
+          ],
+          "pixels": 320,
+          "mismatched": 50,
+          "exactPct": 84.375,
+          "closePct": 90.312,
+          "nonTextPct": 91.25,
+          "buckets": {
+            "fill": 0,
+            "hairline": 21,
+            "corner": 0,
+            "offset": 7,
+            "text": 22,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-en-failed.dark",
+      "caseId": "components.tag-family.inventory-desktop-en-failed.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 73.021,
+      "rgbPct": 96.53,
+      "sizeReact": [
+        47,
+        20
+      ],
+      "sizeFlutter": [
+        48,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-en-failed.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 73.021,
+      "closePct": 85.729,
+      "nonTextPct": 84.062,
+      "mismatched": 259,
+      "pixels": 960,
+      "buckets": {
+        "fill": 0,
+        "hairline": 108,
+        "corner": 3,
+        "offset": 42,
+        "text": 106,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 173,
+          "exactPct": 72.969,
+          "closePct": 83.125,
+          "nonTextPct": 86.094,
+          "buckets": {
+            "fill": 0,
+            "hairline": 65,
+            "corner": 0,
+            "offset": 24,
+            "text": 84,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            16,
+            20
+          ],
+          "pixels": 320,
+          "mismatched": 86,
+          "exactPct": 73.125,
+          "closePct": 90.938,
+          "nonTextPct": 80.0,
+          "buckets": {
+            "fill": 0,
+            "hairline": 43,
+            "corner": 3,
+            "offset": 18,
+            "text": 22,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-selected.light",
+      "caseId": "components.tag-family.preset-desktop-zh-selected.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 50.347,
+      "rgbPct": 84.324,
+      "sizeReact": [
+        72,
+        19
+      ],
+      "sizeFlutter": [
+        71,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-selected.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 50.347,
+      "closePct": 51.667,
+      "nonTextPct": 82.639,
+      "mismatched": 715,
+      "pixels": 1440,
+      "buckets": {
+        "fill": 0,
+        "hairline": 190,
+        "corner": 7,
+        "offset": 53,
+        "text": 465,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 312,
+          "exactPct": 51.25,
+          "closePct": 51.562,
+          "nonTextPct": 81.719,
+          "buckets": {
+            "fill": 0,
+            "hairline": 85,
+            "corner": 0,
+            "offset": 32,
+            "text": 195,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 338,
+          "exactPct": 47.188,
+          "closePct": 49.688,
+          "nonTextPct": 89.219,
+          "buckets": {
+            "fill": 0,
+            "hairline": 69,
+            "corner": 0,
+            "offset": 0,
+            "text": 269,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            8,
+            20
+          ],
+          "pixels": 160,
+          "mismatched": 65,
+          "exactPct": 59.375,
+          "closePct": 60.0,
+          "nonTextPct": 60.0,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 7,
+            "offset": 21,
+            "text": 1,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-selected.dark",
+      "caseId": "components.tag-family.preset-desktop-zh-selected.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 50.486,
+      "rgbPct": 88.781,
+      "sizeReact": [
+        72,
+        19
+      ],
+      "sizeFlutter": [
+        71,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-selected.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 50.486,
+      "closePct": 53.194,
+      "nonTextPct": 82.917,
+      "mismatched": 713,
+      "pixels": 1440,
+      "buckets": {
+        "fill": 0,
+        "hairline": 190,
+        "corner": 7,
+        "offset": 49,
+        "text": 467,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 311,
+          "exactPct": 51.406,
+          "closePct": 53.594,
+          "nonTextPct": 81.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 85,
+            "corner": 0,
+            "offset": 33,
+            "text": 193,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 337,
+          "exactPct": 47.344,
+          "closePct": 51.094,
+          "nonTextPct": 89.219,
+          "buckets": {
+            "fill": 0,
+            "hairline": 69,
+            "corner": 0,
+            "offset": 0,
+            "text": 268,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            64,
+            0,
+            8,
+            20
+          ],
+          "pixels": 160,
+          "mismatched": 65,
+          "exactPct": 59.375,
+          "closePct": 60.0,
+          "nonTextPct": 63.125,
+          "buckets": {
+            "fill": 0,
+            "hairline": 36,
+            "corner": 7,
+            "offset": 16,
+            "text": 6,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-built-in.light",
+      "caseId": "components.tag-family.preset-desktop-zh-built-in.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 63.066,
+      "rgbPct": 97.51,
+      "sizeReact": [
+        41,
+        21
+      ],
+      "sizeFlutter": [
+        41,
+        21
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-built-in.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 63.066,
+      "closePct": 66.086,
+      "nonTextPct": 76.19,
+      "mismatched": 318,
+      "pixels": 861,
+      "buckets": {
+        "fill": 0,
+        "hairline": 80,
+        "corner": 29,
+        "offset": 95,
+        "text": 113,
+        "other": 1
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            21
+          ],
+          "pixels": 672,
+          "mismatched": 250,
+          "exactPct": 62.798,
+          "closePct": 65.774,
+          "nonTextPct": 79.613,
+          "buckets": {
+            "fill": 0,
+            "hairline": 60,
+            "corner": 29,
+            "offset": 47,
+            "text": 113,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            9,
+            21
+          ],
+          "pixels": 189,
+          "mismatched": 68,
+          "exactPct": 64.021,
+          "closePct": 67.196,
+          "nonTextPct": 64.021,
+          "buckets": {
+            "fill": 0,
+            "hairline": 20,
+            "corner": 0,
+            "offset": 48,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-built-in.dark",
+      "caseId": "components.tag-family.preset-desktop-zh-built-in.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 58.769,
+      "rgbPct": 97.155,
+      "sizeReact": [
+        41,
+        21
+      ],
+      "sizeFlutter": [
+        41,
+        21
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-built-in.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 58.769,
+      "closePct": 66.434,
+      "nonTextPct": 72.242,
+      "mismatched": 355,
+      "pixels": 861,
+      "buckets": {
+        "fill": 0,
+        "hairline": 113,
+        "corner": 30,
+        "offset": 83,
+        "text": 116,
+        "other": 13
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            21
+          ],
+          "pixels": 672,
+          "mismatched": 287,
+          "exactPct": 57.292,
+          "closePct": 66.22,
+          "nonTextPct": 74.554,
+          "buckets": {
+            "fill": 0,
+            "hairline": 93,
+            "corner": 30,
+            "offset": 47,
+            "text": 116,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            9,
+            21
+          ],
+          "pixels": 189,
+          "mismatched": 68,
+          "exactPct": 64.021,
+          "closePct": 67.196,
+          "nonTextPct": 64.021,
+          "buckets": {
+            "fill": 0,
+            "hairline": 20,
+            "corner": 0,
+            "offset": 36,
+            "text": 0,
+            "other": 12
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-custom.light",
+      "caseId": "components.tag-family.preset-desktop-zh-custom.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 76.573,
+      "rgbPct": 98.177,
+      "sizeReact": [
+        52,
+        22
+      ],
+      "sizeFlutter": [
+        52,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-custom.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 76.573,
+      "closePct": 83.129,
+      "nonTextPct": 93.094,
+      "mismatched": 268,
+      "pixels": 1144,
+      "buckets": {
+        "fill": 0,
+        "hairline": 27,
+        "corner": 12,
+        "offset": 0,
+        "text": 189,
+        "other": 40
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 183,
+          "exactPct": 74.006,
+          "closePct": 80.682,
+          "nonTextPct": 92.33,
+          "buckets": {
+            "fill": 0,
+            "hairline": 21,
+            "corner": 12,
+            "offset": 0,
+            "text": 129,
+            "other": 21
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            20,
+            22
+          ],
+          "pixels": 440,
+          "mismatched": 85,
+          "exactPct": 80.682,
+          "closePct": 87.045,
+          "nonTextPct": 94.318,
+          "buckets": {
+            "fill": 0,
+            "hairline": 6,
+            "corner": 0,
+            "offset": 0,
+            "text": 60,
+            "other": 19
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-desktop-zh-custom.dark",
+      "caseId": "components.tag-family.preset-desktop-zh-custom.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 70.629,
+      "rgbPct": 97.819,
+      "sizeReact": [
+        52,
+        22
+      ],
+      "sizeFlutter": [
+        52,
+        22
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-desktop-zh-custom.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 70.629,
+      "closePct": 82.168,
+      "nonTextPct": 87.15,
+      "mismatched": 336,
+      "pixels": 1144,
+      "buckets": {
+        "fill": 0,
+        "hairline": 92,
+        "corner": 12,
+        "offset": 1,
+        "text": 189,
+        "other": 42
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            22
+          ],
+          "pixels": 704,
+          "mismatched": 228,
+          "exactPct": 67.614,
+          "closePct": 79.119,
+          "nonTextPct": 85.938,
+          "buckets": {
+            "fill": 0,
+            "hairline": 64,
+            "corner": 12,
+            "offset": 0,
+            "text": 129,
+            "other": 23
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            20,
+            22
+          ],
+          "pixels": 440,
+          "mismatched": 108,
+          "exactPct": 75.455,
+          "closePct": 87.045,
+          "nonTextPct": 89.091,
+          "buckets": {
+            "fill": 0,
+            "hairline": 28,
+            "corner": 0,
+            "offset": 1,
+            "text": 60,
+            "other": 19
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-desktop-zh-override.light",
+      "caseId": "components.tag-family.shell-desktop-zh-override.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (light)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 54.3,
+      "rgbPct": 94.722,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        50,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-desktop-zh-override.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 54.3,
+      "closePct": 62.6,
+      "nonTextPct": 74.2,
+      "mismatched": 457,
+      "pixels": 1000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 140,
+        "corner": 46,
+        "offset": 72,
+        "text": 199,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 291,
+          "exactPct": 54.531,
+          "closePct": 62.5,
+          "nonTextPct": 71.562,
+          "buckets": {
+            "fill": 0,
+            "hairline": 100,
+            "corner": 36,
+            "offset": 46,
+            "text": 109,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            18,
+            20
+          ],
+          "pixels": 360,
+          "mismatched": 166,
+          "exactPct": 53.889,
+          "closePct": 62.778,
+          "nonTextPct": 78.889,
+          "buckets": {
+            "fill": 0,
+            "hairline": 40,
+            "corner": 10,
+            "offset": 26,
+            "text": 90,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-desktop-zh-override.dark",
+      "caseId": "components.tag-family.shell-desktop-zh-override.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (dark)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 53.0,
+      "rgbPct": 92.573,
+      "sizeReact": [
+        50,
+        20
+      ],
+      "sizeFlutter": [
+        50,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-desktop-zh-override.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 53.0,
+      "closePct": 57.7,
+      "nonTextPct": 75.8,
+      "mismatched": 470,
+      "pixels": 1000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 145,
+        "corner": 47,
+        "offset": 43,
+        "text": 228,
+        "other": 7
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 298,
+          "exactPct": 53.438,
+          "closePct": 56.875,
+          "nonTextPct": 75.156,
+          "buckets": {
+            "fill": 0,
+            "hairline": 102,
+            "corner": 37,
+            "offset": 17,
+            "text": 139,
+            "other": 3
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            18,
+            20
+          ],
+          "pixels": 360,
+          "mismatched": 172,
+          "exactPct": 52.222,
+          "closePct": 59.167,
+          "nonTextPct": 76.944,
+          "buckets": {
+            "fill": 0,
+            "hairline": 43,
+            "corner": 10,
+            "offset": 26,
+            "text": 89,
+            "other": 4
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-conditional.light",
+      "caseId": "components.tag-family.inventory-desktop-zh-conditional.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 66.721,
+      "rgbPct": 96.005,
+      "sizeReact": [
+        60,
+        20
+      ],
+      "sizeFlutter": [
+        61,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-conditional.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 66.721,
+      "closePct": 71.148,
+      "nonTextPct": 91.557,
+      "mismatched": 406,
+      "pixels": 1220,
+      "buckets": {
+        "fill": 0,
+        "hairline": 53,
+        "corner": 22,
+        "offset": 27,
+        "text": 303,
+        "other": 1
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            29,
+            20
+          ],
+          "pixels": 580,
+          "mismatched": 181,
+          "exactPct": 68.793,
+          "closePct": 73.103,
+          "nonTextPct": 91.034,
+          "buckets": {
+            "fill": 0,
+            "hairline": 25,
+            "corner": 22,
+            "offset": 4,
+            "text": 129,
+            "other": 1
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 225,
+          "exactPct": 64.844,
+          "closePct": 69.375,
+          "nonTextPct": 92.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 28,
+            "corner": 0,
+            "offset": 23,
+            "text": 174,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-conditional.dark",
+      "caseId": "components.tag-family.inventory-desktop-zh-conditional.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 63.689,
+      "rgbPct": 96.0,
+      "sizeReact": [
+        60,
+        20
+      ],
+      "sizeFlutter": [
+        61,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-conditional.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 63.689,
+      "closePct": 69.918,
+      "nonTextPct": 88.607,
+      "mismatched": 443,
+      "pixels": 1220,
+      "buckets": {
+        "fill": 0,
+        "hairline": 76,
+        "corner": 25,
+        "offset": 38,
+        "text": 304,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            32,
+            0,
+            29,
+            20
+          ],
+          "pixels": 580,
+          "mismatched": 218,
+          "exactPct": 62.414,
+          "closePct": 69.655,
+          "nonTextPct": 84.828,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 25,
+            "offset": 14,
+            "text": 130,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 225,
+          "exactPct": 64.844,
+          "closePct": 70.156,
+          "nonTextPct": 92.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 27,
+            "corner": 0,
+            "offset": 24,
+            "text": 174,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-disabled.light",
+      "caseId": "components.tag-family.inventory-desktop-zh-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 70.6,
+      "rgbPct": 95.344,
+      "sizeReact": [
+        49,
+        20
+      ],
+      "sizeFlutter": [
+        50,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-disabled.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 70.6,
+      "closePct": 77.9,
+      "nonTextPct": 88.6,
+      "mismatched": 294,
+      "pixels": 1000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 66,
+        "corner": 22,
+        "offset": 26,
+        "text": 180,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 207,
+          "exactPct": 67.656,
+          "closePct": 75.781,
+          "nonTextPct": 87.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 50,
+            "corner": 14,
+            "offset": 19,
+            "text": 124,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            18,
+            20
+          ],
+          "pixels": 360,
+          "mismatched": 87,
+          "exactPct": 75.833,
+          "closePct": 81.667,
+          "nonTextPct": 91.389,
+          "buckets": {
+            "fill": 0,
+            "hairline": 16,
+            "corner": 8,
+            "offset": 7,
+            "text": 56,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-disabled.dark",
+      "caseId": "components.tag-family.inventory-desktop-zh-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 66.2,
+      "rgbPct": 94.289,
+      "sizeReact": [
+        49,
+        20
+      ],
+      "sizeFlutter": [
+        50,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-disabled.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 66.2,
+      "closePct": 73.5,
+      "nonTextPct": 84.6,
+      "mismatched": 338,
+      "pixels": 1000,
+      "buckets": {
+        "fill": 0,
+        "hairline": 92,
+        "corner": 26,
+        "offset": 36,
+        "text": 184,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 213,
+          "exactPct": 66.719,
+          "closePct": 73.281,
+          "nonTextPct": 86.719,
+          "buckets": {
+            "fill": 0,
+            "hairline": 49,
+            "corner": 15,
+            "offset": 21,
+            "text": 128,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            18,
+            20
+          ],
+          "pixels": 360,
+          "mismatched": 125,
+          "exactPct": 65.278,
+          "closePct": 73.889,
+          "nonTextPct": 80.833,
+          "buckets": {
+            "fill": 0,
+            "hairline": 43,
+            "corner": 11,
+            "offset": 15,
+            "text": 56,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-failed.light",
+      "caseId": "components.tag-family.inventory-desktop-zh-failed.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 64.426,
+      "rgbPct": 94.992,
+      "sizeReact": [
+        60,
+        20
+      ],
+      "sizeFlutter": [
+        61,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-failed.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 64.426,
+      "closePct": 70.656,
+      "nonTextPct": 93.525,
+      "mismatched": 434,
+      "pixels": 1220,
+      "buckets": {
+        "fill": 0,
+        "hairline": 41,
+        "corner": 8,
+        "offset": 30,
+        "text": 355,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 247,
+          "exactPct": 61.406,
+          "closePct": 68.281,
+          "nonTextPct": 90.0,
+          "buckets": {
+            "fill": 0,
+            "hairline": 33,
+            "corner": 8,
+            "offset": 23,
+            "text": 183,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            29,
+            20
+          ],
+          "pixels": 580,
+          "mismatched": 187,
+          "exactPct": 67.759,
+          "closePct": 73.276,
+          "nonTextPct": 97.414,
+          "buckets": {
+            "fill": 0,
+            "hairline": 8,
+            "corner": 0,
+            "offset": 7,
+            "text": 172,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-desktop-zh-failed.dark",
+      "caseId": "components.tag-family.inventory-desktop-zh-failed.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 61.475,
+      "rgbPct": 96.888,
+      "sizeReact": [
+        60,
+        20
+      ],
+      "sizeFlutter": [
+        61,
+        20
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-desktop-zh-failed.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 61.475,
+      "closePct": 70.0,
+      "nonTextPct": 89.836,
+      "mismatched": 470,
+      "pixels": 1220,
+      "buckets": {
+        "fill": 0,
+        "hairline": 62,
+        "corner": 11,
+        "offset": 43,
+        "text": 346,
+        "other": 8
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            32,
+            20
+          ],
+          "pixels": 640,
+          "mismatched": 247,
+          "exactPct": 61.406,
+          "closePct": 67.344,
+          "nonTextPct": 89.219,
+          "buckets": {
+            "fill": 0,
+            "hairline": 32,
+            "corner": 8,
+            "offset": 24,
+            "text": 178,
+            "other": 5
+          }
+        },
+        {
+          "rect": [
+            32,
+            0,
+            29,
+            20
+          ],
+          "pixels": 580,
+          "mismatched": 223,
+          "exactPct": 61.552,
+          "closePct": 72.931,
+          "nonTextPct": 90.517,
+          "buckets": {
+            "fill": 0,
+            "hairline": 30,
+            "corner": 3,
+            "offset": 19,
+            "text": 168,
+            "other": 3
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-selected.light",
+      "caseId": "components.tag-family.preset-phone-en-selected.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.585,
+      "rgbPct": 93.578,
+      "sizeReact": [
+        270,
+        51
+      ],
+      "sizeFlutter": [
+        270,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-selected.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 82.585,
+      "closePct": 83.537,
+      "nonTextPct": 89.586,
+      "mismatched": 2398,
+      "pixels": 13770,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1275,
+        "corner": 12,
+        "offset": 147,
+        "text": 964,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            168,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 815,
+          "exactPct": 80.976,
+          "closePct": 82.073,
+          "nonTextPct": 87.908,
+          "buckets": {
+            "fill": 0,
+            "hairline": 511,
+            "corner": 6,
+            "offset": 1,
+            "text": 297,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 712,
+          "exactPct": 83.38,
+          "closePct": 84.15,
+          "nonTextPct": 89.893,
+          "buckets": {
+            "fill": 0,
+            "hairline": 342,
+            "corner": 6,
+            "offset": 85,
+            "text": 279,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 739,
+          "exactPct": 82.75,
+          "closePct": 83.847,
+          "nonTextPct": 91.13,
+          "buckets": {
+            "fill": 0,
+            "hairline": 380,
+            "corner": 0,
+            "offset": 0,
+            "text": 359,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            252,
+            0,
+            18,
+            51
+          ],
+          "pixels": 918,
+          "mismatched": 132,
+          "exactPct": 85.621,
+          "closePct": 86.057,
+          "nonTextPct": 88.78,
+          "buckets": {
+            "fill": 0,
+            "hairline": 42,
+            "corner": 0,
+            "offset": 61,
+            "text": 29,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-selected.dark",
+      "caseId": "components.tag-family.preset-phone-en-selected.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.578,
+      "rgbPct": 94.646,
+      "sizeReact": [
+        270,
+        51
+      ],
+      "sizeFlutter": [
+        270,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-selected.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 82.578,
+      "closePct": 83.362,
+      "nonTextPct": 89.978,
+      "mismatched": 2399,
+      "pixels": 13770,
+      "buckets": {
+        "fill": 0,
+        "hairline": 1251,
+        "corner": 12,
+        "offset": 117,
+        "text": 1019,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            168,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 815,
+          "exactPct": 80.976,
+          "closePct": 81.676,
+          "nonTextPct": 87.908,
+          "buckets": {
+            "fill": 0,
+            "hairline": 511,
+            "corner": 6,
+            "offset": 1,
+            "text": 297,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 714,
+          "exactPct": 83.333,
+          "closePct": 84.104,
+          "nonTextPct": 90.009,
+          "buckets": {
+            "fill": 0,
+            "hairline": 342,
+            "corner": 6,
+            "offset": 80,
+            "text": 286,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 738,
+          "exactPct": 82.773,
+          "closePct": 83.73,
+          "nonTextPct": 91.69,
+          "buckets": {
+            "fill": 0,
+            "hairline": 356,
+            "corner": 0,
+            "offset": 0,
+            "text": 382,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            252,
+            0,
+            18,
+            51
+          ],
+          "pixels": 918,
+          "mismatched": 132,
+          "exactPct": 85.621,
+          "closePct": 86.057,
+          "nonTextPct": 91.503,
+          "buckets": {
+            "fill": 0,
+            "hairline": 42,
+            "corner": 0,
+            "offset": 36,
+            "text": 54,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-built-in.light",
+      "caseId": "components.tag-family.preset-phone-en-built-in.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 83.617,
+      "rgbPct": 98.352,
+      "sizeReact": [
+        142,
+        53
+      ],
+      "sizeFlutter": [
+        142,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-built-in.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 83.617,
+      "closePct": 87.045,
+      "nonTextPct": 86.832,
+      "mismatched": 1233,
+      "pixels": 7526,
+      "buckets": {
+        "fill": 0,
+        "hairline": 758,
+        "corner": 19,
+        "offset": 204,
+        "text": 242,
+        "other": 10
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 797,
+          "exactPct": 82.098,
+          "closePct": 85.759,
+          "nonTextPct": 86.029,
+          "buckets": {
+            "fill": 0,
+            "hairline": 496,
+            "corner": 19,
+            "offset": 102,
+            "text": 175,
+            "other": 5
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            58,
+            53
+          ],
+          "pixels": 3074,
+          "mismatched": 436,
+          "exactPct": 85.817,
+          "closePct": 88.907,
+          "nonTextPct": 87.996,
+          "buckets": {
+            "fill": 0,
+            "hairline": 262,
+            "corner": 0,
+            "offset": 102,
+            "text": 67,
+            "other": 5
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-built-in.dark",
+      "caseId": "components.tag-family.preset-phone-en-built-in.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 83.564,
+      "rgbPct": 98.211,
+      "sizeReact": [
+        142,
+        53
+      ],
+      "sizeFlutter": [
+        142,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-built-in.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 83.564,
+      "closePct": 86.713,
+      "nonTextPct": 86.753,
+      "mismatched": 1237,
+      "pixels": 7526,
+      "buckets": {
+        "fill": 0,
+        "hairline": 764,
+        "corner": 19,
+        "offset": 173,
+        "text": 240,
+        "other": 41
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 801,
+          "exactPct": 82.008,
+          "closePct": 85.332,
+          "nonTextPct": 85.894,
+          "buckets": {
+            "fill": 0,
+            "hairline": 502,
+            "corner": 19,
+            "offset": 87,
+            "text": 173,
+            "other": 20
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            58,
+            53
+          ],
+          "pixels": 3074,
+          "mismatched": 436,
+          "exactPct": 85.817,
+          "closePct": 88.712,
+          "nonTextPct": 87.996,
+          "buckets": {
+            "fill": 0,
+            "hairline": 262,
+            "corner": 0,
+            "offset": 86,
+            "text": 67,
+            "other": 21
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-custom.light",
+      "caseId": "components.tag-family.preset-phone-en-custom.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 87.057,
+      "rgbPct": 99.348,
+      "sizeReact": [
+        150,
+        53
+      ],
+      "sizeFlutter": [
+        150,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-custom.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 87.057,
+      "closePct": 92.629,
+      "nonTextPct": 90.893,
+      "mismatched": 1029,
+      "pixels": 7950,
+      "buckets": {
+        "fill": 0,
+        "hairline": 574,
+        "corner": 1,
+        "offset": 134,
+        "text": 305,
+        "other": 15
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            66,
+            53
+          ],
+          "pixels": 3498,
+          "mismatched": 502,
+          "exactPct": 85.649,
+          "closePct": 90.795,
+          "nonTextPct": 88.822,
+          "buckets": {
+            "fill": 0,
+            "hairline": 270,
+            "corner": 0,
+            "offset": 121,
+            "text": 111,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 527,
+          "exactPct": 88.163,
+          "closePct": 94.07,
+          "nonTextPct": 92.52,
+          "buckets": {
+            "fill": 0,
+            "hairline": 304,
+            "corner": 1,
+            "offset": 13,
+            "text": 194,
+            "other": 15
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-en-custom.dark",
+      "caseId": "components.tag-family.preset-phone-en-custom.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 87.044,
+      "rgbPct": 99.234,
+      "sizeReact": [
+        150,
+        53
+      ],
+      "sizeFlutter": [
+        150,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-en-custom.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 87.044,
+      "closePct": 91.484,
+      "nonTextPct": 90.981,
+      "mismatched": 1030,
+      "pixels": 7950,
+      "buckets": {
+        "fill": 0,
+        "hairline": 571,
+        "corner": 1,
+        "offset": 91,
+        "text": 313,
+        "other": 54
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            66,
+            53
+          ],
+          "pixels": 3498,
+          "mismatched": 504,
+          "exactPct": 85.592,
+          "closePct": 89.594,
+          "nonTextPct": 88.822,
+          "buckets": {
+            "fill": 0,
+            "hairline": 270,
+            "corner": 0,
+            "offset": 87,
+            "text": 113,
+            "other": 34
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 526,
+          "exactPct": 88.185,
+          "closePct": 92.969,
+          "nonTextPct": 92.677,
+          "buckets": {
+            "fill": 0,
+            "hairline": 301,
+            "corner": 1,
+            "offset": 4,
+            "text": 200,
+            "other": 20
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-phone-en-override.light",
+      "caseId": "components.tag-family.shell-phone-en-override.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (light)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.936,
+      "rgbPct": 98.58,
+      "sizeReact": [
+        197,
+        51
+      ],
+      "sizeFlutter": [
+        197,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-phone-en-override.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.936,
+      "closePct": 88.315,
+      "nonTextPct": 91.331,
+      "mismatched": 1413,
+      "pixels": 10047,
+      "buckets": {
+        "fill": 0,
+        "hairline": 729,
+        "corner": 8,
+        "offset": 134,
+        "text": 542,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 671,
+          "exactPct": 84.337,
+          "closePct": 85.551,
+          "nonTextPct": 90.896,
+          "buckets": {
+            "fill": 0,
+            "hairline": 386,
+            "corner": 4,
+            "offset": 0,
+            "text": 281,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 571,
+          "exactPct": 86.671,
+          "closePct": 89.449,
+          "nonTextPct": 92.624,
+          "buckets": {
+            "fill": 0,
+            "hairline": 254,
+            "corner": 4,
+            "offset": 58,
+            "text": 255,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            29,
+            51
+          ],
+          "pixels": 1479,
+          "mismatched": 171,
+          "exactPct": 88.438,
+          "closePct": 93.036,
+          "nonTextPct": 88.844,
+          "buckets": {
+            "fill": 0,
+            "hairline": 89,
+            "corner": 0,
+            "offset": 76,
+            "text": 6,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-phone-en-override.dark",
+      "caseId": "components.tag-family.shell-phone-en-override.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (dark)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.558,
+      "rgbPct": 98.216,
+      "sizeReact": [
+        197,
+        51
+      ],
+      "sizeFlutter": [
+        197,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-phone-en-override.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.558,
+      "closePct": 87.369,
+      "nonTextPct": 90.972,
+      "mismatched": 1451,
+      "pixels": 10047,
+      "buckets": {
+        "fill": 0,
+        "hairline": 748,
+        "corner": 8,
+        "offset": 151,
+        "text": 544,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 673,
+          "exactPct": 84.29,
+          "closePct": 85.528,
+          "nonTextPct": 90.826,
+          "buckets": {
+            "fill": 0,
+            "hairline": 389,
+            "corner": 4,
+            "offset": 0,
+            "text": 280,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 594,
+          "exactPct": 86.134,
+          "closePct": 88.165,
+          "nonTextPct": 92.157,
+          "buckets": {
+            "fill": 0,
+            "hairline": 265,
+            "corner": 4,
+            "offset": 67,
+            "text": 258,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            29,
+            51
+          ],
+          "pixels": 1479,
+          "mismatched": 184,
+          "exactPct": 87.559,
+          "closePct": 90.399,
+          "nonTextPct": 87.965,
+          "buckets": {
+            "fill": 0,
+            "hairline": 94,
+            "corner": 0,
+            "offset": 84,
+            "text": 6,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-conditional.light",
+      "caseId": "components.tag-family.inventory-phone-en-conditional.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.979,
+      "rgbPct": 98.514,
+      "sizeReact": [
+        199,
+        51
+      ],
+      "sizeFlutter": [
+        198,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-conditional.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 85.979,
+      "closePct": 87.398,
+      "nonTextPct": 90.945,
+      "mismatched": 1423,
+      "pixels": 10149,
+      "buckets": {
+        "fill": 0,
+        "hairline": 727,
+        "corner": 2,
+        "offset": 190,
+        "text": 504,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 567,
+          "exactPct": 86.765,
+          "closePct": 88.352,
+          "nonTextPct": 91.246,
+          "buckets": {
+            "fill": 0,
+            "hairline": 266,
+            "corner": 2,
+            "offset": 107,
+            "text": 192,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 653,
+          "exactPct": 84.757,
+          "closePct": 85.528,
+          "nonTextPct": 92.04,
+          "buckets": {
+            "fill": 0,
+            "hairline": 341,
+            "corner": 0,
+            "offset": 0,
+            "text": 312,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            31,
+            51
+          ],
+          "pixels": 1581,
+          "mismatched": 203,
+          "exactPct": 87.16,
+          "closePct": 89.88,
+          "nonTextPct": 87.16,
+          "buckets": {
+            "fill": 0,
+            "hairline": 120,
+            "corner": 0,
+            "offset": 83,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-conditional.dark",
+      "caseId": "components.tag-family.inventory-phone-en-conditional.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.467,
+      "rgbPct": 98.504,
+      "sizeReact": [
+        199,
+        51
+      ],
+      "sizeFlutter": [
+        198,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-conditional.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 85.467,
+      "closePct": 87.102,
+      "nonTextPct": 90.492,
+      "mismatched": 1475,
+      "pixels": 10149,
+      "buckets": {
+        "fill": 0,
+        "hairline": 766,
+        "corner": 8,
+        "offset": 191,
+        "text": 510,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 579,
+          "exactPct": 86.485,
+          "closePct": 88.399,
+          "nonTextPct": 91.036,
+          "buckets": {
+            "fill": 0,
+            "hairline": 266,
+            "corner": 2,
+            "offset": 116,
+            "text": 195,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 655,
+          "exactPct": 84.711,
+          "closePct": 85.574,
+          "nonTextPct": 92.063,
+          "buckets": {
+            "fill": 0,
+            "hairline": 340,
+            "corner": 0,
+            "offset": 0,
+            "text": 315,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            31,
+            51
+          ],
+          "pixels": 1581,
+          "mismatched": 241,
+          "exactPct": 84.756,
+          "closePct": 87.729,
+          "nonTextPct": 84.756,
+          "buckets": {
+            "fill": 0,
+            "hairline": 160,
+            "corner": 6,
+            "offset": 75,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-disabled.light",
+      "caseId": "components.tag-family.inventory-phone-en-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 84.594,
+      "rgbPct": 97.625,
+      "sizeReact": [
+        161,
+        51
+      ],
+      "sizeFlutter": [
+        161,
+        50
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-disabled.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 84.594,
+      "closePct": 87.273,
+      "nonTextPct": 90.72,
+      "mismatched": 1265,
+      "pixels": 8211,
+      "buckets": {
+        "fill": 0,
+        "hairline": 610,
+        "corner": 11,
+        "offset": 141,
+        "text": 503,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 646,
+          "exactPct": 84.921,
+          "closePct": 87.698,
+          "nonTextPct": 90.85,
+          "buckets": {
+            "fill": 0,
+            "hairline": 306,
+            "corner": 8,
+            "offset": 78,
+            "text": 254,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            77,
+            51
+          ],
+          "pixels": 3927,
+          "mismatched": 619,
+          "exactPct": 84.237,
+          "closePct": 86.809,
+          "nonTextPct": 90.578,
+          "buckets": {
+            "fill": 0,
+            "hairline": 304,
+            "corner": 3,
+            "offset": 63,
+            "text": 249,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-disabled.dark",
+      "caseId": "components.tag-family.inventory-phone-en-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.511,
+      "rgbPct": 97.346,
+      "sizeReact": [
+        161,
+        51
+      ],
+      "sizeFlutter": [
+        161,
+        50
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-disabled.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 82.511,
+      "closePct": 85.093,
+      "nonTextPct": 88.588,
+      "mismatched": 1436,
+      "pixels": 8211,
+      "buckets": {
+        "fill": 0,
+        "hairline": 780,
+        "corner": 17,
+        "offset": 140,
+        "text": 499,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 735,
+          "exactPct": 82.843,
+          "closePct": 85.364,
+          "nonTextPct": 88.725,
+          "buckets": {
+            "fill": 0,
+            "hairline": 394,
+            "corner": 11,
+            "offset": 78,
+            "text": 252,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            77,
+            51
+          ],
+          "pixels": 3927,
+          "mismatched": 701,
+          "exactPct": 82.149,
+          "closePct": 84.798,
+          "nonTextPct": 88.439,
+          "buckets": {
+            "fill": 0,
+            "hairline": 386,
+            "corner": 6,
+            "offset": 62,
+            "text": 247,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-failed.light",
+      "caseId": "components.tag-family.inventory-phone-en-failed.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.159,
+      "rgbPct": 98.753,
+      "sizeReact": [
+        123,
+        51
+      ],
+      "sizeFlutter": [
+        123,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-failed.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.159,
+      "closePct": 87.709,
+      "nonTextPct": 89.845,
+      "mismatched": 931,
+      "pixels": 6273,
+      "buckets": {
+        "fill": 0,
+        "hairline": 457,
+        "corner": 15,
+        "offset": 165,
+        "text": 294,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 627,
+          "exactPct": 85.364,
+          "closePct": 87.278,
+          "nonTextPct": 89.939,
+          "buckets": {
+            "fill": 0,
+            "hairline": 339,
+            "corner": 15,
+            "offset": 77,
+            "text": 196,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            39,
+            51
+          ],
+          "pixels": 1989,
+          "mismatched": 304,
+          "exactPct": 84.716,
+          "closePct": 88.638,
+          "nonTextPct": 89.643,
+          "buckets": {
+            "fill": 0,
+            "hairline": 118,
+            "corner": 0,
+            "offset": 88,
+            "text": 98,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-en-failed.dark",
+      "caseId": "components.tag-family.inventory-phone-en-failed.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 85.127,
+      "rgbPct": 99.312,
+      "sizeReact": [
+        123,
+        51
+      ],
+      "sizeFlutter": [
+        123,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-en-failed.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 85.127,
+      "closePct": 88.156,
+      "nonTextPct": 89.75,
+      "mismatched": 933,
+      "pixels": 6273,
+      "buckets": {
+        "fill": 0,
+        "hairline": 456,
+        "corner": 15,
+        "offset": 172,
+        "text": 290,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 632,
+          "exactPct": 85.247,
+          "closePct": 87.722,
+          "nonTextPct": 89.729,
+          "buckets": {
+            "fill": 0,
+            "hairline": 340,
+            "corner": 15,
+            "offset": 85,
+            "text": 192,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            39,
+            51
+          ],
+          "pixels": 1989,
+          "mismatched": 301,
+          "exactPct": 84.867,
+          "closePct": 89.09,
+          "nonTextPct": 89.794,
+          "buckets": {
+            "fill": 0,
+            "hairline": 116,
+            "corner": 0,
+            "offset": 87,
+            "text": 98,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-selected.light",
+      "caseId": "components.tag-family.preset-phone-zh-selected.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.05,
+      "rgbPct": 94.291,
+      "sizeReact": [
+        187,
+        51
+      ],
+      "sizeFlutter": [
+        187,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-selected.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.05,
+      "closePct": 80.466,
+      "nonTextPct": 89.389,
+      "mismatched": 1998,
+      "pixels": 9537,
+      "buckets": {
+        "fill": 0,
+        "hairline": 736,
+        "corner": 124,
+        "offset": 152,
+        "text": 986,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 853,
+          "exactPct": 80.089,
+          "closePct": 81.186,
+          "nonTextPct": 88.212,
+          "buckets": {
+            "fill": 0,
+            "hairline": 363,
+            "corner": 69,
+            "offset": 73,
+            "text": 348,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 1032,
+          "exactPct": 75.91,
+          "closePct": 77.848,
+          "nonTextPct": 90.57,
+          "buckets": {
+            "fill": 0,
+            "hairline": 348,
+            "corner": 55,
+            "offset": 1,
+            "text": 628,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            19,
+            51
+          ],
+          "pixels": 969,
+          "mismatched": 113,
+          "exactPct": 88.338,
+          "closePct": 88.854,
+          "nonTextPct": 89.37,
+          "buckets": {
+            "fill": 0,
+            "hairline": 25,
+            "corner": 0,
+            "offset": 78,
+            "text": 10,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-selected.dark",
+      "caseId": "components.tag-family.preset-phone-zh-selected.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "selected",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.04,
+      "rgbPct": 95.389,
+      "sizeReact": [
+        187,
+        51
+      ],
+      "sizeFlutter": [
+        187,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-selected.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 79.04,
+      "closePct": 80.696,
+      "nonTextPct": 89.525,
+      "mismatched": 1999,
+      "pixels": 9537,
+      "buckets": {
+        "fill": 0,
+        "hairline": 738,
+        "corner": 124,
+        "offset": 137,
+        "text": 1000,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 854,
+          "exactPct": 80.065,
+          "closePct": 81.513,
+          "nonTextPct": 88.352,
+          "buckets": {
+            "fill": 0,
+            "hairline": 363,
+            "corner": 70,
+            "offset": 66,
+            "text": 355,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 1033,
+          "exactPct": 75.887,
+          "closePct": 78.035,
+          "nonTextPct": 90.546,
+          "buckets": {
+            "fill": 0,
+            "hairline": 350,
+            "corner": 54,
+            "offset": 1,
+            "text": 628,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            168,
+            0,
+            19,
+            51
+          ],
+          "pixels": 969,
+          "mismatched": 112,
+          "exactPct": 88.442,
+          "closePct": 88.854,
+          "nonTextPct": 90.196,
+          "buckets": {
+            "fill": 0,
+            "hairline": 25,
+            "corner": 0,
+            "offset": 70,
+            "text": 17,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-built-in.light",
+      "caseId": "components.tag-family.preset-phone-zh-built-in.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 78.824,
+      "rgbPct": 98.69,
+      "sizeReact": [
+        103,
+        53
+      ],
+      "sizeFlutter": [
+        103,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-built-in.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 78.824,
+      "closePct": 84.649,
+      "nonTextPct": 80.986,
+      "mismatched": 1156,
+      "pixels": 5459,
+      "buckets": {
+        "fill": 0,
+        "hairline": 684,
+        "corner": 112,
+        "offset": 242,
+        "text": 118,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 1013,
+          "exactPct": 77.246,
+          "closePct": 83.693,
+          "nonTextPct": 79.897,
+          "buckets": {
+            "fill": 0,
+            "hairline": 645,
+            "corner": 112,
+            "offset": 138,
+            "text": 118,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            19,
+            53
+          ],
+          "pixels": 1007,
+          "mismatched": 143,
+          "exactPct": 85.799,
+          "closePct": 88.878,
+          "nonTextPct": 85.799,
+          "buckets": {
+            "fill": 0,
+            "hairline": 39,
+            "corner": 0,
+            "offset": 104,
+            "text": 0,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-built-in.dark",
+      "caseId": "components.tag-family.preset-phone-zh-built-in.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "built-in",
+      "officialStatus": "different",
+      "pixelPerfectPct": 78.677,
+      "rgbPct": 98.48,
+      "sizeReact": [
+        103,
+        53
+      ],
+      "sizeFlutter": [
+        103,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-built-in.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 78.677,
+      "closePct": 82.011,
+      "nonTextPct": 81.095,
+      "mismatched": 1164,
+      "pixels": 5459,
+      "buckets": {
+        "fill": 0,
+        "hairline": 676,
+        "corner": 114,
+        "offset": 159,
+        "text": 132,
+        "other": 83
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 1021,
+          "exactPct": 77.066,
+          "closePct": 80.571,
+          "nonTextPct": 80.031,
+          "buckets": {
+            "fill": 0,
+            "hairline": 637,
+            "corner": 114,
+            "offset": 72,
+            "text": 132,
+            "other": 66
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            19,
+            53
+          ],
+          "pixels": 1007,
+          "mismatched": 143,
+          "exactPct": 85.799,
+          "closePct": 88.381,
+          "nonTextPct": 85.799,
+          "buckets": {
+            "fill": 0,
+            "hairline": 39,
+            "corner": 0,
+            "offset": 87,
+            "text": 0,
+            "other": 17
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-custom.light",
+      "caseId": "components.tag-family.preset-phone-zh-custom.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (light)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 81.361,
+      "rgbPct": 98.728,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-custom.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 81.361,
+      "closePct": 85.82,
+      "nonTextPct": 85.263,
+      "mismatched": 1304,
+      "pixels": 6996,
+      "buckets": {
+        "fill": 0,
+        "hairline": 675,
+        "corner": 114,
+        "offset": 242,
+        "text": 273,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 859,
+          "exactPct": 80.705,
+          "closePct": 84.906,
+          "nonTextPct": 83.064,
+          "buckets": {
+            "fill": 0,
+            "hairline": 520,
+            "corner": 114,
+            "offset": 120,
+            "text": 105,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            48,
+            53
+          ],
+          "pixels": 2544,
+          "mismatched": 445,
+          "exactPct": 82.508,
+          "closePct": 87.421,
+          "nonTextPct": 89.112,
+          "buckets": {
+            "fill": 0,
+            "hairline": 155,
+            "corner": 0,
+            "offset": 122,
+            "text": 168,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.preset-phone-zh-custom.dark",
+      "caseId": "components.tag-family.preset-phone-zh-custom.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "agents-tasks.preset",
+      "title": "Agent preset tag (dark)",
+      "variantName": "custom",
+      "officialStatus": "different",
+      "pixelPerfectPct": 81.061,
+      "rgbPct": 98.523,
+      "sizeReact": [
+        132,
+        53
+      ],
+      "sizeFlutter": [
+        132,
+        53
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.preset-phone-zh-custom.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 81.061,
+      "closePct": 84.148,
+      "nonTextPct": 85.192,
+      "mismatched": 1325,
+      "pixels": 6996,
+      "buckets": {
+        "fill": 0,
+        "hairline": 676,
+        "corner": 120,
+        "offset": 190,
+        "text": 289,
+        "other": 50
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            53
+          ],
+          "pixels": 4452,
+          "mismatched": 877,
+          "exactPct": 80.301,
+          "closePct": 83.019,
+          "nonTextPct": 82.907,
+          "buckets": {
+            "fill": 0,
+            "hairline": 521,
+            "corner": 120,
+            "offset": 95,
+            "text": 116,
+            "other": 25
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            48,
+            53
+          ],
+          "pixels": 2544,
+          "mismatched": 448,
+          "exactPct": 82.39,
+          "closePct": 86.124,
+          "nonTextPct": 89.19,
+          "buckets": {
+            "fill": 0,
+            "hairline": 155,
+            "corner": 0,
+            "offset": 95,
+            "text": 173,
+            "other": 25
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-phone-zh-override.light",
+      "caseId": "components.tag-family.shell-phone-zh-override.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (light)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.307,
+      "rgbPct": 99.039,
+      "sizeReact": [
+        129,
+        51
+      ],
+      "sizeFlutter": [
+        129,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-phone-zh-override.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 82.307,
+      "closePct": 86.548,
+      "nonTextPct": 87.551,
+      "mismatched": 1164,
+      "pixels": 6579,
+      "buckets": {
+        "fill": 0,
+        "hairline": 618,
+        "corner": 81,
+        "offset": 120,
+        "text": 345,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 804,
+          "exactPct": 81.232,
+          "closePct": 85.107,
+          "nonTextPct": 86.975,
+          "buckets": {
+            "fill": 0,
+            "hairline": 417,
+            "corner": 81,
+            "offset": 60,
+            "text": 246,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            45,
+            51
+          ],
+          "pixels": 2295,
+          "mismatched": 360,
+          "exactPct": 84.314,
+          "closePct": 89.237,
+          "nonTextPct": 88.627,
+          "buckets": {
+            "fill": 0,
+            "hairline": 201,
+            "corner": 0,
+            "offset": 60,
+            "text": 99,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.shell-phone-zh-override.dark",
+      "caseId": "components.tag-family.shell-phone-zh-override.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "model-settings.shell",
+      "title": "Shell setting override tag (dark)",
+      "variantName": "override",
+      "officialStatus": "different",
+      "pixelPerfectPct": 81.578,
+      "rgbPct": 98.586,
+      "sizeReact": [
+        129,
+        51
+      ],
+      "sizeFlutter": [
+        129,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.shell-phone-zh-override.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 81.578,
+      "closePct": 84.116,
+      "nonTextPct": 87.354,
+      "mismatched": 1212,
+      "pixels": 6579,
+      "buckets": {
+        "fill": 0,
+        "hairline": 617,
+        "corner": 82,
+        "offset": 133,
+        "text": 380,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 832,
+          "exactPct": 80.579,
+          "closePct": 83.193,
+          "nonTextPct": 87.138,
+          "buckets": {
+            "fill": 0,
+            "hairline": 402,
+            "corner": 82,
+            "offset": 67,
+            "text": 281,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            45,
+            51
+          ],
+          "pixels": 2295,
+          "mismatched": 380,
+          "exactPct": 83.442,
+          "closePct": 85.839,
+          "nonTextPct": 87.756,
+          "buckets": {
+            "fill": 0,
+            "hairline": 215,
+            "corner": 0,
+            "offset": 66,
+            "text": 99,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-conditional.light",
+      "caseId": "components.tag-family.inventory-phone-zh-conditional.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.9,
+      "rgbPct": 96.891,
+      "sizeReact": [
+        158,
+        51
+      ],
+      "sizeFlutter": [
+        158,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-conditional.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 75.9,
+      "closePct": 77.587,
+      "nonTextPct": 86.945,
+      "mismatched": 1942,
+      "pixels": 8058,
+      "buckets": {
+        "fill": 0,
+        "hairline": 703,
+        "corner": 159,
+        "offset": 190,
+        "text": 890,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            74,
+            51
+          ],
+          "pixels": 3774,
+          "mismatched": 891,
+          "exactPct": 76.391,
+          "closePct": 78.007,
+          "nonTextPct": 83.095,
+          "buckets": {
+            "fill": 0,
+            "hairline": 410,
+            "corner": 149,
+            "offset": 79,
+            "text": 253,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 1051,
+          "exactPct": 75.467,
+          "closePct": 77.218,
+          "nonTextPct": 90.336,
+          "buckets": {
+            "fill": 0,
+            "hairline": 293,
+            "corner": 10,
+            "offset": 111,
+            "text": 637,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-conditional.dark",
+      "caseId": "components.tag-family.inventory-phone-zh-conditional.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "conditional",
+      "officialStatus": "different",
+      "pixelPerfectPct": 75.763,
+      "rgbPct": 96.896,
+      "sizeReact": [
+        158,
+        51
+      ],
+      "sizeFlutter": [
+        158,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-conditional.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 75.763,
+      "closePct": 77.923,
+      "nonTextPct": 86.87,
+      "mismatched": 1953,
+      "pixels": 8058,
+      "buckets": {
+        "fill": 0,
+        "hairline": 703,
+        "corner": 160,
+        "offset": 195,
+        "text": 895,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            84,
+            0,
+            74,
+            51
+          ],
+          "pixels": 3774,
+          "mismatched": 896,
+          "exactPct": 76.259,
+          "closePct": 78.564,
+          "nonTextPct": 82.962,
+          "buckets": {
+            "fill": 0,
+            "hairline": 411,
+            "corner": 150,
+            "offset": 82,
+            "text": 253,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 1057,
+          "exactPct": 75.327,
+          "closePct": 77.358,
+          "nonTextPct": 90.313,
+          "buckets": {
+            "fill": 0,
+            "hairline": 292,
+            "corner": 10,
+            "offset": 113,
+            "text": 642,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-disabled.light",
+      "caseId": "components.tag-family.inventory-phone-zh-disabled.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 80.679,
+      "rgbPct": 97.145,
+      "sizeReact": [
+        130,
+        51
+      ],
+      "sizeFlutter": [
+        129,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-disabled.light.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 80.679,
+      "closePct": 83.469,
+      "nonTextPct": 86.094,
+      "mismatched": 1281,
+      "pixels": 6630,
+      "buckets": {
+        "fill": 0,
+        "hairline": 629,
+        "corner": 152,
+        "offset": 141,
+        "text": 359,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 830,
+          "exactPct": 80.626,
+          "closePct": 83.053,
+          "nonTextPct": 85.177,
+          "buckets": {
+            "fill": 0,
+            "hairline": 445,
+            "corner": 112,
+            "offset": 78,
+            "text": 195,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            46,
+            51
+          ],
+          "pixels": 2346,
+          "mismatched": 451,
+          "exactPct": 80.776,
+          "closePct": 84.228,
+          "nonTextPct": 87.766,
+          "buckets": {
+            "fill": 0,
+            "hairline": 184,
+            "corner": 40,
+            "offset": 63,
+            "text": 164,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-disabled.dark",
+      "caseId": "components.tag-family.inventory-phone-zh-disabled.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "disabled",
+      "officialStatus": "different",
+      "pixelPerfectPct": 79.925,
+      "rgbPct": 96.837,
+      "sizeReact": [
+        130,
+        51
+      ],
+      "sizeFlutter": [
+        129,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-disabled.dark.side-by-side.png",
+      "sizeMismatch": true,
+      "exactPct": 79.925,
+      "closePct": 82.76,
+      "nonTextPct": 85.339,
+      "mismatched": 1331,
+      "pixels": 6630,
+      "buckets": {
+        "fill": 0,
+        "hairline": 675,
+        "corner": 158,
+        "offset": 139,
+        "text": 359,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 836,
+          "exactPct": 80.486,
+          "closePct": 83.123,
+          "nonTextPct": 85.037,
+          "buckets": {
+            "fill": 0,
+            "hairline": 449,
+            "corner": 112,
+            "offset": 80,
+            "text": 195,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            46,
+            51
+          ],
+          "pixels": 2346,
+          "mismatched": 495,
+          "exactPct": 78.9,
+          "closePct": 82.097,
+          "nonTextPct": 85.891,
+          "buckets": {
+            "fill": 0,
+            "hairline": 226,
+            "corner": 46,
+            "offset": 59,
+            "text": 164,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-failed.light",
+      "caseId": "components.tag-family.inventory-phone-zh-failed.light",
+      "variantId": "default",
+      "theme": "light",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (light)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.589,
+      "rgbPct": 98.73,
+      "sizeReact": [
+        158,
+        51
+      ],
+      "sizeFlutter": [
+        158,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-failed.light.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 82.589,
+      "closePct": 85.269,
+      "nonTextPct": 90.295,
+      "mismatched": 1403,
+      "pixels": 8058,
+      "buckets": {
+        "fill": 0,
+        "hairline": 557,
+        "corner": 102,
+        "offset": 123,
+        "text": 621,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 730,
+          "exactPct": 82.96,
+          "closePct": 85.341,
+          "nonTextPct": 89.216,
+          "buckets": {
+            "fill": 0,
+            "hairline": 311,
+            "corner": 89,
+            "offset": 62,
+            "text": 268,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            74,
+            51
+          ],
+          "pixels": 3774,
+          "mismatched": 673,
+          "exactPct": 82.167,
+          "closePct": 85.188,
+          "nonTextPct": 91.521,
+          "buckets": {
+            "fill": 0,
+            "hairline": 246,
+            "corner": 13,
+            "offset": 61,
+            "text": 353,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    },
+    {
+      "key": "components.tag-family.inventory-phone-zh-failed.dark",
+      "caseId": "components.tag-family.inventory-phone-zh-failed.dark",
+      "variantId": "default",
+      "theme": "dark",
+      "kind": "plugins-preview.inventory",
+      "title": "Plugin inventory status tag (dark)",
+      "variantName": "failed",
+      "officialStatus": "different",
+      "pixelPerfectPct": 82.415,
+      "rgbPct": 99.282,
+      "sizeReact": [
+        158,
+        51
+      ],
+      "sizeFlutter": [
+        158,
+        51
+      ],
+      "sideBySide": "visual-testing-results/diff/react__flutter/components.tag-family.inventory-phone-zh-failed.dark.side-by-side.png",
+      "sizeMismatch": false,
+      "exactPct": 82.415,
+      "closePct": 85.418,
+      "nonTextPct": 90.122,
+      "mismatched": 1417,
+      "pixels": 8058,
+      "buckets": {
+        "fill": 0,
+        "hairline": 561,
+        "corner": 102,
+        "offset": 133,
+        "text": 621,
+        "other": 0
+      },
+      "regions": [],
+      "worstCells": [
+        {
+          "rect": [
+            0,
+            0,
+            84,
+            51
+          ],
+          "pixels": 4284,
+          "mismatched": 737,
+          "exactPct": 82.796,
+          "closePct": 85.551,
+          "nonTextPct": 89.122,
+          "buckets": {
+            "fill": 0,
+            "hairline": 313,
+            "corner": 89,
+            "offset": 64,
+            "text": 271,
+            "other": 0
+          }
+        },
+        {
+          "rect": [
+            84,
+            0,
+            74,
+            51
+          ],
+          "pixels": 3774,
+          "mismatched": 680,
+          "exactPct": 81.982,
+          "closePct": 85.268,
+          "nonTextPct": 91.256,
+          "buckets": {
+            "fill": 0,
+            "hairline": 248,
+            "corner": 13,
+            "offset": 69,
+            "text": 350,
+            "other": 0
+          }
+        }
+      ],
+      "status": "fail",
+      "coverage": "mapped"
+    }
+  ],
+  "reference": "native",
+  "dshCommit": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "flutterVersion": "3.47.6",
+  "visualTesting": "0.1.0",
+  "generatedAt": "2026-10-28T18:06:09+00:00"
+}

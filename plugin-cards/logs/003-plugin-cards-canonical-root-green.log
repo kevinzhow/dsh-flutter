@@ -1,0 +1,120 @@
+Resolving dependencies in `[workspace]/scratch/whalee-plugin-cards`...
+Downloading packages...
+  _fe_analyzer_shared 103.0.0 (110.0.0 available)
+  analyzer 13.3.0 (14.6.0 available)
+  android_file_picker 2.1.1 (2.1.2 available)
+  cross_file 0.3.5+5 (0.4.0 available)
+  crypto 3.0.7 (3.0.8 available)
+  dbus 0.7.15 (0.8.0 available)
+  desktop_drop 0.8.4 (0.9.2 available)
+  equatable 2.1.0 (3.0.0 available)
+  file_picker 13.1.0 (13.3.0 available)
+  file_picker_darwin 2.3.3 (2.4.0 available)
+  file_picker_linux 2.0.0 (2.0.2 available)
+! flutter_inappwebview_android 1.1.3 from path ../../third_party/flutter_inappwebview_android (overridden)
+  flutter_local_notifications 22.3.2 (22.3.3 available)
+  flutter_secure_storage 10.3.4 (11.2.0 available)
+  flutter_secure_storage_darwin 0.3.2 (0.4.3 available)
+  jni 1.1.0 (1.1.1 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  package_config 2.2.0 (3.0.0 available)
+  screen_retriever 0.2.2 (0.3.0 available)
+  shared_preferences_android 2.5.3 (2.5.4 available)
+  shared_preferences_foundation 2.6.0 (2.6.1 available)
+  test 1.31.1 (1.33.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  test_core 0.6.18 (0.6.21 available)
+  vector_math 2.4.3 (2.4.4 available)
+  xml 6.6.1 (7.1.0 available)
+Got dependencies in `[workspace]/scratch/whalee-plugin-cards`!
+25 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart
+00:00 +0: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 1.0 dark
+00:00 +1: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_button_profiles_test.dart: published add profile owns each half and each disabled group
+00:00 +2: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: source content boxes at 1.0 light
+00:00 +3: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_button_profiles_test.dart: split actions stay independent and a single action has all corners
+00:00 +4: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_button_profiles_test.dart: split actions stay independent and a single action has all corners
+00:00 +5: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_button_profiles_test.dart: split actions stay independent and a single action has all corners
+00:00 +6: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality dark
+00:00 +7: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality dark
+00:00 +8: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality dark
+00:00 +9: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: card outline follows source pointer modality light
+00:00 +10: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: the contour rejects a corner but title, tag and metadata open
+
+Warning: A call to tap() with finder "Found 1 widget with text "Synthetic title": [
+  Text("Synthetic title", inherit: true, color: Color(alpha: 1.0000, red: 0.0588, green: 0.0667, blue: 0.0824, colorSpace: ColorSpace.sRGB), family: -apple-system, familyFallback: [BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif], size: 14.0, weight: 500, style: normal, letterSpacing: 0.0, wordSpacing: 0.0, height: 1.4x, leadingDistribution: even, decoration: TextDecoration.none, softWrap: no wrapping except at line break characters, overflow: ellipsis, maxLines: 1, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(396.7, 266.7)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#5433d relayoutBoundary=up14
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#f6ca6@Offset(175.7, 18.0), RenderStack#b5215@Offset(175.7, 18.0), RenderOpacity#07f1f@Offset(175.7, 18.0), RenderPointerListener#30dbc@Offset(175.7, 18.0), RenderSemanticsGestureHandler#24c42@Offset(175.7, 18.0), RenderSemanticsAnnotations#60b8e@Offset(175.7, 18.0), RenderMouseRegion#b7961@Offset(175.7, 18.0), RenderSemanticsAnnotations#9222c@Offset(175.7, 18.0), RenderMouseRegion#38764@Offset(175.7, 18.0), RenderSemanticsAnnotations#f3557@Offset(175.7, 18.0), RenderStack#15c5d@Offset(175.7, 18.0), RenderMouseRegion#4f28a@Offset(175.7, 18.0), _RenderContourHitTarget#74ef5@Offset(175.7, 18.0), RenderConstrainedBox#888d3@Offset(175.7, 18.0), RenderPositionedBox#4f838@Offset(396.7, 266.7), RenderCustomMultiChildLayoutBox#d58fd@Offset(396.7, 266.7), _RenderInkFeatures#d5397@Offset(396.7, 266.7), RenderPhysicalModel#9ed62@Offset(396.7, 266.7), RenderSemanticsAnnotations#08104@Offset(396.7, 266.7), RenderRepaintBoundary#69a2d@Offset(396.7, 266.7), RenderIgnorePointer#313fd@Offset(396.7, 266.7), RenderAnimatedOpacity#fe8db@Offset(396.7, 266.7), RenderAnimatedOpacity#2f172@Offset(396.7, 266.7), _RenderColoredBox#907b3@Offset(396.7, 266.7), RenderAnimatedOpacity#3f063@Offset(396.7, 266.7), RenderIgnorePointer#e4a02@Offset(396.7, 266.7), RenderAnimatedOpacity#7314a@Offset(396.7, 266.7), RenderRepaintBoundary#7610e@Offset(396.7, 266.7), RenderSemanticsAnnotations#43c44@Offset(396.7, 266.7), RenderOffstage#ed293@Offset(396.7, 266.7), RenderSemanticsAnnotations#e066d@Offset(396.7, 266.7), _RenderTheater#c2011@Offset(396.7, 266.7), RenderAbsorbPointer#905f6@Offset(396.7, 266.7), RenderPointerListener#92556@Offset(396.7, 266.7), RenderSemanticsAnnotations#a550e@Offset(396.7, 266.7), RenderCustomPaint#b556f@Offset(396.7, 266.7), RenderSemanticsAnnotations#9d965@Offset(396.7, 266.7), RenderSemanticsAnnotations#bc30b@Offset(396.7, 266.7), RenderSemanticsAnnotations#0f781@Offset(396.7, 266.7), RenderTapRegionSurface#fb35f@Offset(396.7, 266.7), RenderSemanticsAnnotations#7cfa6@Offset(396.7, 266.7), RenderSemanticsAnnotations#9ec5e@Offset(396.7, 266.7), HitTestEntry<HitTestTarget>#84833(_ReusableRenderView#27ad7), HitTestEntry<HitTestTarget>#2df63(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:142:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+
+Warning: A call to tap() with finder "Found 1 widget with text "Problem": [
+  Text("Problem", softWrap: no wrapping except at line break characters, overflow: visible, maxLines: 1, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(334.0, 294.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#6c0f1 relayoutBoundary=up2
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#f6ca6@Offset(113.0, 45.3), RenderStack#b5215@Offset(113.0, 45.3), RenderOpacity#07f1f@Offset(113.0, 45.3), RenderPointerListener#30dbc@Offset(113.0, 45.3), RenderSemanticsGestureHandler#24c42@Offset(113.0, 45.3), RenderSemanticsAnnotations#60b8e@Offset(113.0, 45.3), RenderMouseRegion#b7961@Offset(113.0, 45.3), RenderSemanticsAnnotations#9222c@Offset(113.0, 45.3), RenderMouseRegion#38764@Offset(113.0, 45.3), RenderSemanticsAnnotations#f3557@Offset(113.0, 45.3), RenderStack#15c5d@Offset(113.0, 45.3), RenderMouseRegion#4f28a@Offset(113.0, 45.3), _RenderContourHitTarget#74ef5@Offset(113.0, 45.3), RenderConstrainedBox#888d3@Offset(113.0, 45.3), RenderPositionedBox#4f838@Offset(334.0, 294.0), RenderCustomMultiChildLayoutBox#d58fd@Offset(334.0, 294.0), _RenderInkFeatures#d5397@Offset(334.0, 294.0), RenderPhysicalModel#9ed62@Offset(334.0, 294.0), RenderSemanticsAnnotations#08104@Offset(334.0, 294.0), RenderRepaintBoundary#69a2d@Offset(334.0, 294.0), RenderIgnorePointer#313fd@Offset(334.0, 294.0), RenderAnimatedOpacity#fe8db@Offset(334.0, 294.0), RenderAnimatedOpacity#2f172@Offset(334.0, 294.0), _RenderColoredBox#907b3@Offset(334.0, 294.0), RenderAnimatedOpacity#3f063@Offset(334.0, 294.0), RenderIgnorePointer#e4a02@Offset(334.0, 294.0), RenderAnimatedOpacity#7314a@Offset(334.0, 294.0), RenderRepaintBoundary#7610e@Offset(334.0, 294.0), RenderSemanticsAnnotations#43c44@Offset(334.0, 294.0), RenderOffstage#ed293@Offset(334.0, 294.0), RenderSemanticsAnnotations#e066d@Offset(334.0, 294.0), _RenderTheater#c2011@Offset(334.0, 294.0), RenderAbsorbPointer#905f6@Offset(334.0, 294.0), RenderPointerListener#92556@Offset(334.0, 294.0), RenderSemanticsAnnotations#a550e@Offset(334.0, 294.0), RenderCustomPaint#b556f@Offset(334.0, 294.0), RenderSemanticsAnnotations#9d965@Offset(334.0, 294.0), RenderSemanticsAnnotations#bc30b@Offset(334.0, 294.0), RenderSemanticsAnnotations#0f781@Offset(334.0, 294.0), RenderTapRegionSurface#fb35f@Offset(334.0, 294.0), RenderSemanticsAnnotations#7cfa6@Offset(334.0, 294.0), RenderSemanticsAnnotations#9ec5e@Offset(334.0, 294.0), HitTestEntry<HitTestTarget>#92431(_ReusableRenderView#27ad7), HitTestEntry<HitTestTarget>#2712c(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:143:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+
+Warning: A call to tap() with finder "Found 1 widget with text "Metadata diagnostic": [
+  Text("Metadata diagnostic", inherit: true, color: Color(alpha: 1.0000, red: 0.9255, green: 0.0745, blue: 0.0745, colorSpace: ColorSpace.sRGB), family: -apple-system, familyFallback: [BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif], size: 12.0, weight: 400, style: normal, letterSpacing: 0.0, wordSpacing: 0.0, height: 1.5x, leadingDistribution: even, decoration: TextDecoration.none, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(400.0, 342.3)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+The finder corresponds to this RenderBox: RenderParagraph#23641 relayoutBoundary=up10
+The hit test result at that offset is: HitTestResult(_RenderDshDecoratedBox#f6ca6@Offset(179.0, 93.7), RenderStack#b5215@Offset(179.0, 93.7), RenderOpacity#07f1f@Offset(179.0, 93.7), RenderPointerListener#30dbc@Offset(179.0, 93.7), RenderSemanticsGestureHandler#24c42@Offset(179.0, 93.7), RenderSemanticsAnnotations#60b8e@Offset(179.0, 93.7), RenderMouseRegion#b7961@Offset(179.0, 93.7), RenderSemanticsAnnotations#9222c@Offset(179.0, 93.7), RenderMouseRegion#38764@Offset(179.0, 93.7), RenderSemanticsAnnotations#f3557@Offset(179.0, 93.7), RenderStack#15c5d@Offset(179.0, 93.7), RenderMouseRegion#4f28a@Offset(179.0, 93.7), _RenderContourHitTarget#74ef5@Offset(179.0, 93.7), RenderConstrainedBox#888d3@Offset(179.0, 93.7), RenderPositionedBox#4f838@Offset(400.0, 342.3), RenderCustomMultiChildLayoutBox#d58fd@Offset(400.0, 342.3), _RenderInkFeatures#d5397@Offset(400.0, 342.3), RenderPhysicalModel#9ed62@Offset(400.0, 342.3), RenderSemanticsAnnotations#08104@Offset(400.0, 342.3), RenderRepaintBoundary#69a2d@Offset(400.0, 342.3), RenderIgnorePointer#313fd@Offset(400.0, 342.3), RenderAnimatedOpacity#fe8db@Offset(400.0, 342.3), RenderAnimatedOpacity#2f172@Offset(400.0, 342.3), _RenderColoredBox#907b3@Offset(400.0, 342.3), RenderAnimatedOpacity#3f063@Offset(400.0, 342.3), RenderIgnorePointer#e4a02@Offset(400.0, 342.3), RenderAnimatedOpacity#7314a@Offset(400.0, 342.3), RenderRepaintBoundary#7610e@Offset(400.0, 342.3), RenderSemanticsAnnotations#43c44@Offset(400.0, 342.3), RenderOffstage#ed293@Offset(400.0, 342.3), RenderSemanticsAnnotations#e066d@Offset(400.0, 342.3), _RenderTheater#c2011@Offset(400.0, 342.3), RenderAbsorbPointer#905f6@Offset(400.0, 342.3), RenderPointerListener#92556@Offset(400.0, 342.3), RenderSemanticsAnnotations#a550e@Offset(400.0, 342.3), RenderCustomPaint#b556f@Offset(400.0, 342.3), RenderSemanticsAnnotations#9d965@Offset(400.0, 342.3), RenderSemanticsAnnotations#bc30b@Offset(400.0, 342.3), RenderSemanticsAnnotations#0f781@Offset(400.0, 342.3), RenderTapRegionSurface#fb35f@Offset(400.0, 342.3), RenderSemanticsAnnotations#7cfa6@Offset(400.0, 342.3), RenderSemanticsAnnotations#9ec5e@Offset(400.0, 342.3), HitTestEntry<HitTestTarget>#8509f(_ReusableRenderView#27ad7), HitTestEntry<HitTestTarget>#14663(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2165:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1947:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1080:7)
+#3      main.<anonymous closure> (file://[workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart:144:13)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+00:00 +11: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: disabled trailing control absorbs input above the card target
+00:00 +12: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: title and switch keep independent keyboard and native actions
+00:00 +13: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: hover over a trailing switch paints the card; touch-down does not
+00:00 +14: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: long title and status tags increase natural height
+00:00 +15: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: hover never declares a translucent unknown backdrop opaque
+00:00 +16: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_plugin_card_test.dart: image decode failure keeps artwork size and a new image recovers
+00:00 +17: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_icon_action_input_test.dart: iconAction dark: touch-down is source idle
+00:01 +18: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: source outline and neutral tags use their content-box geometry
+00:01 +19: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: source outline and neutral tags use their content-box geometry
+00:01 +20: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: source outline and neutral tags use their content-box geometry
+00:01 +21: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: source outline and neutral tags use their content-box geometry
+00:01 +22: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: source outline and neutral tags use their content-box geometry
+00:01 +23: [workspace]/scratch/whalee-plugin-cards/packages/dsh_ui/test/dsh_tag_test.dart: status tones use the published tint and keep their text visible
+00:01 +24: All tests passed!

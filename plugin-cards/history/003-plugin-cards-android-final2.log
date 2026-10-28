@@ -1,0 +1,17 @@
+Captured default
+Captured corner
+Captured edge-open
+Captured failed-3
+Traceback (most recent call last):
+  File "[workspace]/scripts/plugin-cards-android.py", line 475, in <module>
+    main()
+    ~~~~^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 456, in main
+    replay.run(steps)
+    ~~~~~~~~~~^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 252, in run
+    self.wait(lambda: bool(self.named(label, exact_line=True)) == (op == 'expect'), op + ': ' + label)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[workspace]/scripts/plugin-cards-android.py", line 146, in wait
+    raise RuntimeError(description)
+RuntimeError: expect: View Synthetic plugin

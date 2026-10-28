@@ -1,0 +1,50 @@
+..FFFFF.......
+======================================================================
+FAIL: test_card_margins_fit_the_source_page_inset_before_flutter_padding (test_plugin_card_source_contract.PluginCardSourceContractTests.test_card_margins_fit_the_source_page_inset_before_flutter_padding) (raw='1px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 107, in test_card_margins_fit_the_source_page_inset_before_flutter_padding
+    with self.subTest(raw=raw), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_card_margins_fit_the_source_page_inset_before_flutter_padding (test_plugin_card_source_contract.PluginCardSourceContractTests.test_card_margins_fit_the_source_page_inset_before_flutter_padding) (raw='+.5px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 107, in test_card_margins_fit_the_source_page_inset_before_flutter_padding
+    with self.subTest(raw=raw), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_card_margins_fit_the_source_page_inset_before_flutter_padding (test_plugin_card_source_contract.PluginCardSourceContractTests.test_card_margins_fit_the_source_page_inset_before_flutter_padding) (raw='1e-3px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 107, in test_card_margins_fit_the_source_page_inset_before_flutter_padding
+    with self.subTest(raw=raw), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_card_margins_fit_the_source_page_inset_before_flutter_padding (test_plugin_card_source_contract.PluginCardSourceContractTests.test_card_margins_fit_the_source_page_inset_before_flutter_padding) (raw='-24.0001px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 107, in test_card_margins_fit_the_source_page_inset_before_flutter_padding
+    with self.subTest(raw=raw), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_card_margins_fit_the_source_page_inset_before_flutter_padding (test_plugin_card_source_contract.PluginCardSourceContractTests.test_card_margins_fit_the_source_page_inset_before_flutter_padding) (raw='-25px')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[workspace]/scratch/whalee-plugin-cards/tool/tests/test_plugin_card_source_contract.py", line 107, in test_card_margins_fit_the_source_page_inset_before_flutter_padding
+    with self.subTest(raw=raw), self.assertRaises(ValueError):
+                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.332s
+
+FAILED (failures=5)
