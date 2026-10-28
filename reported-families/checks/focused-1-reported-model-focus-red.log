@@ -1,0 +1,31 @@
+00:00 +0: loading [workspace]/scratch/whalee-reported-families/features/dsh_feature_model_selection/test/model_selection_test.dart
+00:00 +0: seat pointer drilling retains the source effort focus cue until blur
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: Color:<Color(alpha: 0.0588, red: 0.1490, green: 0.1922, blue: 0.2824, colorSpace:
+ColorSpace.sRGB)>
+  Actual: <null>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file://[workspace]/scratch/whalee-reported-families/features/dsh_feature_model_selection/test/model_selection_test.dart:966:9)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1953:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file://[workspace]/scratch/whalee-reported-families/features/dsh_feature_model_selection/test/model_selection_test.dart line 966
+The test description was:
+  pointer drilling retains the source effort focus cue until blur
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: seat pointer drilling retains the source effort focus cue until blur [E]
+  Test failed. See exception logs above.
+  The test description was: pointer drilling retains the source effort focus cue until blur
+  
+00:00 +0 -1: Some tests failed.
+
+Failing tests:
+  [workspace]/scratch/whalee-reported-families/features/dsh_feature_model_selection/test/model_selection_test.dart: seat pointer drilling retains the source effort focus cue until blur
