@@ -56,7 +56,7 @@ class DshMenuSurface extends StatelessWidget {
           borderColor: theme.color(DshDockMenuRecipe.borderToken),
           borderWidth: dshBorderWidthOf(context, DshDockMenuRecipe.borderWidth),
         ),
-        child: child,
+        child: DshSurface(color: fill, child: child),
       );
     }
     return DshShadowBox(
@@ -87,7 +87,7 @@ class DshMenuSurface extends StatelessWidget {
           EdgeInsets.all(
             compact ? DshMenuRecipe.compactPadding : DshMenuRecipe.padding,
           ),
-      child: child,
+      child: DshSurface(color: fill, child: child),
     );
   }
 }

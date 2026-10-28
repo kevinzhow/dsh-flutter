@@ -199,6 +199,12 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
         : selectedFill
         ? theme.color(DshMenuRecipe.selectedFillToken)
         : null;
+    final under = DshSurface.maybeOf(context);
+    // Only a declared opaque menu/card ground can be precomposited. Keep the
+    // existing translucent paint when the caller's backdrop is unknown.
+    final paintedFill = fill == null || under == null || under.a < 1
+        ? fill
+        : DshSurface.paint(context, fill, over: under);
     final surface = DshContainer(
       height: add ? DshPluginAddMenuRecipe.height : null,
       constraints: dock
@@ -246,7 +252,7 @@ class _DshMenuItemButtonState extends State<DshMenuItemButton> {
             ? DshMenuRecipe.denseVerticalPadding
             : DshMenuRecipe.verticalPadding,
       ),
-      decoration: theme.cornerDecoration(radius, color: fill),
+      decoration: theme.cornerDecoration(radius, color: paintedFill),
       child: Row(
         children: [
           if (widget.icon != null) ...[
