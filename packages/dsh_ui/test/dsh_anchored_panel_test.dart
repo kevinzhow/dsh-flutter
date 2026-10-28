@@ -6,6 +6,64 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  for (final domOffsetGeometry in [false, true]) {
+    testWidgets(
+      'fractional card uses source DOM placement only when opted in: $domOffsetGeometry',
+      (t) async {
+        const density = 2.625;
+        t.view.physicalSize = const Size(1024, 1050);
+        t.view.devicePixelRatio = density;
+        addTearDown(t.view.reset);
+        await t.pumpWidget(
+          dshTestApp(
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: DshAnchoredPanel(
+                  menuViewport: true,
+                  domOffsetGeometry: domOffsetGeometry,
+                  side: DshPanelSide.top,
+                  gap: 8,
+                  builder: (_, panel) => GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: panel.toggle,
+                    child: const SizedBox(
+                      key: ValueKey('fractional-anchor'),
+                      width: 50,
+                      height: 22,
+                    ),
+                  ),
+                  panelBuilder: (_, _) => const SizedBox(
+                    key: ValueKey('fractional-card'),
+                    width: 300,
+                    height: 158 + 1 / density,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await t.tap(find.byKey(const ValueKey('fractional-anchor')));
+        await t.pumpAndSettle();
+        final card = t.getRect(find.byKey(const ValueKey('fractional-card')));
+        expect(card.width, 300);
+        expect(card.height, closeTo(158 + 1 / density, .0001));
+        expect(
+          card.left,
+          closeTo(domOffsetGeometry ? 78 : 78 + .25 / density, .0001),
+        );
+        expect(
+          card.top,
+          closeTo(domOffsetGeometry ? 196 : 196 - 1 / density, .0001),
+        );
+        final firstPixel = (card.left * density + .0001).floor();
+        final lastPixel = (card.right * density - .0001).ceil();
+        expect(lastPixel - firstPixel, domOffsetGeometry ? 789 : 788);
+      },
+    );
+  }
+
   testWidgets('static panels retain focus and pass a single outside action', (
     t,
   ) async {

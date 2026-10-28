@@ -209,6 +209,51 @@ void main() {
     });
 
     testWidgets(
+      'native statistics keeps source integer DOM placement at the right edge',
+      (t) async {
+        const density = 2.625;
+        t.view.physicalSize = const Size(1024, 1050);
+        t.view.devicePixelRatio = density;
+        addTearDown(t.view.reset);
+        const pill = StatPill(
+          icon: DshShellIcons.gauge,
+          label: '231 turns',
+          aria: 'Statistics',
+          title: 'Session statistics',
+          rows: [
+            ('LLM', '12s'),
+            ('Tool', '2.5s'),
+            ('TTFT', '9.5s'),
+            ('Speed', '146 tok/s'),
+          ],
+        );
+        await t.pumpWidget(
+          dshTestApp(
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: StatPillView(pill: pill),
+              ),
+            ),
+          ),
+        );
+        await t.tap(find.byType(StatPillView));
+        await t.pumpAndSettle();
+        final card = t.getRect(find.byKey(const ValueKey('stats-panel')));
+        expect(card.width, 300);
+        expect(card.height, closeTo(158 + 1 / density, .0001));
+        expect(card.left, closeTo(78, .0001));
+        expect(card.top, closeTo(196, .0001));
+        expect(
+          (card.right * density - .0001).ceil() -
+              (card.left * density + .0001).floor(),
+          789,
+        );
+      },
+    );
+
+    testWidgets(
       'published panel fits a narrow viewport and filters its backdrop',
       (t) async {
         t.view.physicalSize = const Size(280, 360);

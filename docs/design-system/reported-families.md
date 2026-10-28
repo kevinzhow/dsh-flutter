@@ -37,6 +37,19 @@ More opens above its bottom launcher. New Session, the interactive brand,
 statistics and model triggers expose their activation callbacks to assistive
 technology; a locked model trigger exposes no activation action.
 
+ModelSelect's published CSS uses a content box: its minimum/maximum widths and
+height cap apply before the generated padding. The outer minimum is therefore
+248px, while the short root/effort cards retain their natural heights. Model
+and statistics placement use the source DOM measurement contract: integer
+`offsetWidth`/`offsetHeight` and JavaScript viewport dimensions determine the
+coordinates; the actual card and CSS viewport constraints retain fractional
+layout dimensions. Other followers keep their existing geometry behavior.
+The model search placeholder paints over the editable line instead of sizing
+it. This preserves the native input box when a fallback glyph is taller.
+MenuSurface reads its own generated `--dsw-menu-surface-fill` token; statistics
+retain the separate scoped `--dsw-specific-menu` material. They intentionally
+resolve different fills on macOS, as the released stylesheets require.
+
 Native replay uses these production entries with synthetic services. Its scene
 toolbar is painted after the sidebar's nested route so Android can expose its
 semantics; a hidden measured placeholder preserves the same visual layout.
@@ -50,6 +63,8 @@ Remaining differences are explicit:
   Skia readback path. The source values are blur40/saturate150; adding the source
   mirror tile mode produced identical Flutter images in all three smoke cases.
   Those probes are retained and no improvement is attributed to that change.
+- Text rasterization can still differ between Chromium and Flutter. No font or
+  glyph-metric override is used to hide those measured differences.
 - Actual macOS window vibrancy requires macOS acceptance. Linux rendering with
   macOS geometry cannot establish it.
 - The sidebar has unported account operations and remaining pointer-scrollbar,

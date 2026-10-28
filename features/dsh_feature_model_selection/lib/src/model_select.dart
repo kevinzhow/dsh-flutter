@@ -88,6 +88,7 @@ class _ModelSeatState extends State<ModelSeat> {
         side: DshPanelSide.top,
         align: DshPanelAlign.end,
         menuViewport: true,
+        domOffsetGeometry: true,
         gap: DshModelMenuRecipe.anchorGap,
         viewportMargin: DshModelMenuRecipe.portalMargin,
         frameOverlayTop: DshModelMenuRecipe.portalMargin,
@@ -552,28 +553,38 @@ class _ModelSheetState extends State<ModelSheet> {
       final theme = context.dsh,
           view = _View.of(widget.directory.state.value, _t);
       final size = MediaQuery.sizeOf(context);
-      final maxWidth = math.min(
+      // ModelSelect's published .menu retains CSS content-box sizing. Its
+      // min/max width and max-height bound the content; MenuSurface padding
+      // sits outside those bounds. CSS vw/vh remain fractional here, while
+      // domOffsetGeometry handles JS's integer offset/viewport placement.
+      final surfaceInset = DshModelMenuRecipe.padding * 2;
+      final maxContentWidth = math.min(
         DshModelMenuRecipe.maxWidth,
         math.max(0.0, size.width - DshModelMenuRecipe.viewportWidthInset),
       );
-      final width = _contentWidth(
-        theme,
-        view,
-      ).clamp(math.min(DshModelMenuRecipe.minWidth, maxWidth), maxWidth);
+      final minContentWidth = math.min(
+        DshModelMenuRecipe.minWidth,
+        maxContentWidth,
+      );
+      final width =
+          _contentWidth(theme, view).clamp(minContentWidth, maxContentWidth) +
+          surfaceInset;
       return Focus(
         autofocus: true,
         onKeyEvent: (_, event) => _key(event, view),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minWidth: math.min(DshModelMenuRecipe.minWidth, maxWidth),
-            maxWidth: maxWidth,
-            maxHeight: math.max(
-              0.0,
-              math.min(
-                DshModelMenuRecipe.maxHeight,
-                size.height - DshModelMenuRecipe.viewportHeightInset,
-              ),
-            ),
+            minWidth: minContentWidth + surfaceInset,
+            maxWidth: maxContentWidth + surfaceInset,
+            maxHeight:
+                math.max(
+                  0.0,
+                  math.min(
+                    DshModelMenuRecipe.maxHeight,
+                    size.height - DshModelMenuRecipe.viewportHeightInset,
+                  ),
+                ) +
+                surfaceInset,
           ),
           child: SizedBox(
             width: width.toDouble(),
@@ -645,7 +656,7 @@ class _ModelSheetState extends State<ModelSheet> {
               DshModelMenuRecipe.rowHorizontalPadding * 2 +
               DshModelMenuRecipe.rowGap +
               DshModelMenuRecipe.checkSize;
-    return inner + DshModelMenuRecipe.padding * 2;
+    return inner;
   }
 
   Widget _root(_View view) => Column(

@@ -48,6 +48,7 @@ class DshAnchoredPanel extends StatefulWidget {
     this.panelWidth,
     this.viewportMargin = DshMenuRecipe.portalMargin,
     this.menuViewport = false,
+    this.domOffsetGeometry = false,
     this.frameOverlayTop,
     this.focusPanel = true,
     this.exclusiveGroup,
@@ -69,6 +70,10 @@ class DshAnchoredPanel extends StatefulWidget {
 
   /// Use source menu portal fitting rather than unconstrained popover placement.
   final bool menuViewport;
+
+  /// Match source portals that place with integer DOM offset dimensions and
+  /// window inner dimensions. This affects placement, never the card's layout.
+  final bool domOffsetGeometry;
   final double? frameOverlayTop;
 
   /// Static source stat dialogs retain focus on their trigger. Interactive
@@ -252,6 +257,7 @@ class _DshAnchoredPanelState extends State<DshAnchoredPanel> {
                               FrameInsetsScope.of(this.context).overlayTop,
                           gap: widget.gap,
                           viewportMargin: widget.viewportMargin,
+                          domOffsetGeometry: widget.domOffsetGeometry,
                           child: TapRegion(
                             groupId: this,
                             child: widget.panelBuilder(context, _controller),

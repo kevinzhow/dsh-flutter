@@ -304,14 +304,22 @@ class _DshInputState extends State<DshInput> {
                             valueListenable: _controller,
                             builder: (context, value, _) =>
                                 value.text.isEmpty && widget.placeholder != null
-                                ? IgnorePointer(
-                                    child: DshChromeText(
-                                      widget.placeholder!,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style: style.copyWith(
-                                        color: theme.color(
-                                          DshInputRecipe.placeholderToken,
+                                ? Positioned.fill(
+                                    // An input's placeholder paints inside its
+                                    // native line box; fallback glyph metrics
+                                    // must not enlarge the editable control.
+                                    child: IgnorePointer(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: DshChromeText(
+                                          widget.placeholder!,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.clip,
+                                          style: style.copyWith(
+                                            color: theme.color(
+                                              DshInputRecipe.placeholderToken,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

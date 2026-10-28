@@ -372,6 +372,7 @@ class StatPillViewState extends State<StatPillView> {
       gap: DshStatPanelRecipe.anchorGap,
       viewportMargin: DshStatPanelRecipe.viewportMargin,
       menuViewport: true,
+      domOffsetGeometry: true,
       focusPanel: false,
       exclusiveGroup: StatPillView,
       builder: (context, panel) => ListenableBuilder(

@@ -518,7 +518,7 @@ void main() {
     });
 
     testWidgets(
-      'the source menu root has two compact rows and no sheet title',
+      'the source content-box menu root has two compact rows and no sheet title',
       (t) async {
         host.handlers['session/modelCatalog'] = (_) => catalog(
           groups: [
@@ -539,7 +539,7 @@ void main() {
         expect(find.text('Model and reasoning effort'), findsNothing);
         expect(
           t.getSize(find.byKey(const ValueKey('model-sheet'))),
-          const Size(240, 76),
+          const Size(248, 76),
         );
         expect(
           t.getSize(find.byKey(const ValueKey('model-root-model'))).height,
@@ -800,7 +800,7 @@ void main() {
       await t.tap(trigger);
       await t.pumpAndSettle();
       final menu = find.byKey(const ValueKey('model-sheet'));
-      expect(t.getSize(menu), const Size(240, 76));
+      expect(t.getSize(menu), const Size(248, 76));
       expect(t.getBottomLeft(menu).dy, t.getTopLeft(trigger).dy - 8);
       expect(find.byType(ModalBarrier).evaluate().length, barrierCount);
       await t.tapAt(const Offset(1000, 760));
@@ -824,6 +824,83 @@ void main() {
       await t.sendKeyEvent(LogicalKeyboardKey.escape);
       await t.pumpAndSettle();
       expect(find.byKey(const ValueKey('model-sheet')), findsNothing);
+    });
+
+    for (final spec in [
+      (size: const Size(1100, 800), width: 428.0, height: 368.0),
+      (size: const Size(390, 320), width: 366.0, height: 232.0),
+    ]) {
+      testWidgets('source content-box overflow bounds at ${spec.size}', (
+        t,
+      ) async {
+        t.view.physicalSize = spec.size;
+        t.view.devicePixelRatio = 1;
+        addTearDown(t.view.resetPhysicalSize);
+        addTearDown(t.view.resetDevicePixelRatio);
+        host.handlers['session/modelCatalog'] = (_) => catalog(
+          groups: [
+            {
+              'id': 'deepseek-official',
+              'name': 'DeepSeek',
+              'models': [
+                for (var i = 0; i < 24; i++)
+                  model(
+                    i == 0 ? 'flash' : 'model-$i',
+                    '${List.filled(60, 'M').join()} $i',
+                  ),
+              ],
+            },
+          ],
+        );
+        await ready(t, size: spec.size);
+        await t.tap(find.byKey(const ValueKey('model-chip')));
+        await t.pumpAndSettle();
+        final menu = find.byKey(const ValueKey('model-sheet'));
+        // Published max-width420 and viewport−32 are CONTENT bounds. The
+        // source's4px padding on each side sits outside those bounds.
+        expect(t.getSize(menu).width, spec.width);
+        expect(t.getSize(menu).height, 42);
+        await t.tap(find.byKey(const ValueKey('model-root-model')));
+        await t.pumpAndSettle();
+        // Likewise max-height360 / viewport−96 cap the scrolling content,
+        // while the card retains both4px outer padding strips.
+        expect(t.getSize(menu), Size(spec.width, spec.height));
+        final list = find.byKey(const ValueKey('model-list'));
+        final scroll = t.state<ScrollableState>(
+          find.descendant(of: list, matching: find.byType(Scrollable)).first,
+        );
+        expect(scroll.position.maxScrollExtent, greaterThan(0));
+        expect(t.takeException(), isNull);
+      });
+    }
+
+    testWidgets('content-box change preserves the three-row effort height', (
+      t,
+    ) async {
+      host.handlers['session/modelCatalog'] = (_) => catalog(
+        groups: [
+          {
+            'id': 'deepseek-official',
+            'name': 'DeepSeek',
+            'models': [
+              model(
+                'flash',
+                'Flash',
+                efforts: ['low', 'high', 'max'],
+                defaultEffort: 'max',
+              ),
+            ],
+          },
+        ],
+      );
+      await ready(t);
+      await t.tap(find.byKey(const ValueKey('model-chip')));
+      await t.pumpAndSettle();
+      final menu = find.byKey(const ValueKey('model-sheet'));
+      expect(t.getSize(menu), const Size(248, 76));
+      await t.tap(find.byKey(const ValueKey('model-root-effort')));
+      await t.pumpAndSettle();
+      expect(t.getSize(menu), const Size(248, 110));
     });
 
     testWidgets(
