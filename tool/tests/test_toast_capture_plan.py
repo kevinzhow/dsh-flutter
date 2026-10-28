@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tool'))
@@ -18,6 +19,13 @@ builder=importlib.util.module_from_spec(spec);spec.loader.exec_module(builder)
 
 
 class ToastCapturePlanTest(unittest.TestCase):
+    def test_actual_native_manifest_runs_without_a_pairing_host(self):
+        spec=importlib.util.spec_from_file_location('toast_gpu_transport',ROOT/'tool/parity-desktop/gpu_capture.py')
+        gpu=importlib.util.module_from_spec(spec);spec.loader.exec_module(gpu)
+        native=json.loads((ROOT/'tool/parity-desktop/toast-cases.json').read_text())
+        with mock.patch.dict(os.environ,{},clear=True):
+            self.assertIsNone(gpu.host_link(native['cases']))
+
     def test_schema_and_full_normal_reduced_matrix(self):
         rows=builder.cases()
         self.assertEqual(len(rows),224)
