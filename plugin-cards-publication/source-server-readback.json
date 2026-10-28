@@ -1,0 +1,31 @@
+{
+  "schema": "whalee-card-source-server-readback/1",
+  "artifact": "pt_7e85a381-0b4e-49af-aac9-afe4b78a1f1f",
+  "version": "1d1430e2-f44b-4420-bb5c-23926c5d39ba",
+  "versionNumber": 4,
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "7ef6235864f84e350ca584531b11862c7b05b694dfd8f5d483a92bfffc065854",
+      "size": 184417,
+      "downloadedSha256": "7ef6235864f84e350ca584531b11862c7b05b694dfd8f5d483a92bfffc065854",
+      "exactBytes": true
+    },
+    {
+      "path": "coverage.json",
+      "sha256": "b514aed919c0afe42aaef3f27f1552e0b5f8a95ec28bd29b6e4d40a8dab6bef6",
+      "size": 335930,
+      "downloadedSha256": "b514aed919c0afe42aaef3f27f1552e0b5f8a95ec28bd29b6e4d40a8dab6bef6",
+      "exactBytes": true
+    },
+    {
+      "path": "input-hashes.json",
+      "sha256": "86ed59be5a2a43b50e6193eee7c1c02c14eed9e1bf7dc7a7cb4a7e2d1e35ee74",
+      "size": 2115489,
+      "downloadedSha256": "86ed59be5a2a43b50e6193eee7c1c02c14eed9e1bf7dc7a7cb4a7e2d1e35ee74",
+      "exactBytes": true
+    }
+  ],
+  "allFilesDownloadedThroughRaftCLI": true,
+  "exactBytes": true
+}

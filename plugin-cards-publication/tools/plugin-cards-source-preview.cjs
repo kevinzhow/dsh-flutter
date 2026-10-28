@@ -1,0 +1,30 @@
+
+const fs=require('node:fs'),http=require('node:http'),path=require('node:path');
+const out=process.argv[2],workspace=process.argv[3];
+const {chromium}=require(path.join(workspace,'dsh-flutter/.local/parity-web/node_modules/playwright-core'));
+const document=fs.readFileSync(path.join(out,'index.html'));
+const server=http.createServer((req,res)=>{if(req.url==='/favicon.ico'){res.writeHead(204);res.end();return;}res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(document);});
+(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));let browser;const results=[];
+try{browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+for(const width of [300,1280]){const page=await browser.newPage({viewport:{width,height:960}});const errors=[],unexpectedRequests=[];
+page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:'+server.address().port+'/'))unexpectedRequests.push(r.url());});
+await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
+const visible=()=>page.locator('article.package:not([hidden])').count();
+if(await visible()!==66||await page.locator('#ui-section article.package').count()!==57||await page.locator('#support-section article.package').count()!==9)throw Error('Package cohort differs');
+if(await page.locator('#ui-section .css-row').count()!==209||await page.locator('#support-section .css-row').count()!==10)throw Error('CSS cohort differs');
+await page.screenshot({path:path.join(out,`preview-${width}-overview.png`)});
+await page.locator('[name=scope]').selectOption('ui');if(await visible()!==57)throw Error('UI filter failed');
+await page.locator('[name=package]').selectOption('@deepseek-ai/dsh-client-ui-primitives');if(await visible()!==1)throw Error('Package filter failed');
+await page.locator('[name=retention]').selectOption('pending');if(await visible()!==1)throw Error('Combined retention filter failed');
+await page.locator('#reset').click();await page.locator('[name=scope]').selectOption('support');if(await visible()!==9)throw Error('Support filter failed');
+await page.locator('#reset').click();await page.locator('[name=search]').fill('STATSPILLS.MODULE.CSS');if(await visible()!==1)throw Error('Case-insensitive path search failed');
+const first=page.locator('article.package:not([hidden])');if(await first.getAttribute('data-name')!=='@deepseek-ai/dsh-client-ui-chat')throw Error('Search owner differs');
+await first.locator('.css-row').filter({hasText:'StatsPills.module.css'}).scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,`preview-${width}-filtered.png`)});
+const geometry=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,controls:[...document.querySelectorAll('select,input,button,summary')].filter(c=>c.getClientRects().length).map(c=>({tag:c.tagName,height:c.getBoundingClientRect().height,width:c.getBoundingClientRect().width}))}));
+if(geometry.scrollWidth>width||geometry.controls.some(c=>c.height<44||c.width<44))throw Error('Overflow or undersized touch control');
+await page.locator('[name=search]').fill('no-such-package-coverage-probe');if(await visible()!==0||!await page.locator('#empty').isVisible())throw Error('Empty search failed');
+await page.locator('#reset').click();if(await visible()!==66)throw Error('Reset failed');
+if(errors.length||unexpectedRequests.length)throw Error(JSON.stringify({errors,unexpectedRequests}));
+results.push({width,initial:66,uiPackages:57,supportPackages:9,uiCssInputs:209,supportCssInputs:10,uiFilter:57,packageFilter:1,supportFilter:9,pathSearch:1,emptySearch:0,reset:66,geometry,errors,unexpectedRequests});await page.close();}
+fs.writeFileSync(path.join(out,'preview.json'),JSON.stringify(results,null,2)+'\n');process.stdout.write(JSON.stringify(results)+'\n');
+}finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));}})().catch(e=>{process.stderr.write(e.stack+'\n');process.exitCode=1;});

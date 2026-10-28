@@ -1,0 +1,57 @@
+{
+  "schema": "whalee-plugin-cards-publication/1",
+  "head": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+  "tree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+  "pr": "https://github.com/kevinzhow/dsh-flutter/pull/62",
+  "evidenceCommit": "534ccd8c385def70dcc44d9560737eb7cbb788cb",
+  "evidenceFiles": 4013,
+  "evidenceManifestSha256": "a8dcfbd5fc9d64145329c1f28eddc2d57de9ea7efe1b6b5e8fd2a0bc2725a6ab",
+  "visual": {
+    "artifact": "pt_922e1521-0495-44b3-82f5-7ad057430f2c",
+    "version": "5c22eb2a-4cf8-4597-88e9-db82a1af55b8",
+    "number": 6,
+    "url": "https://raft-artifacts.com/p/myoland/whalee-reported-families-20261028/v/6",
+    "files": 225,
+    "bytes": 22255738,
+    "allServerBytesDownloadedAndMatched": true,
+    "htmlSha256": "5d6da464d18811418c12f87714f3a2c35d042e8572e7fccdc2e7e44b25ca7f7e"
+  },
+  "source": {
+    "artifact": "pt_7e85a381-0b4e-49af-aac9-afe4b78a1f1f",
+    "version": "1d1430e2-f44b-4420-bb5c-23926c5d39ba",
+    "number": 4,
+    "url": "https://raft-artifacts.com/p/myoland/whalee-design-system-source-coverage/v/4",
+    "files": 3,
+    "allServerBytesDownloadedAndMatched": true,
+    "htmlSha256": "7ef6235864f84e350ca584531b11862c7b05b694dfd8f5d483a92bfffc065854",
+    "warnings": []
+  },
+  "transport": {
+    "supported": "incremental publish_artifact file updates; previous index preserved during asset preload",
+    "firstRequestBytes": 14934609,
+    "secondRequestBytes": 14553169,
+    "firstVersion": "1fc0732e-ed29-475b-976c-fd1323316ea5",
+    "previousIndexDownloadedAndUnchanged": true
+  },
+  "preservationProviderSplit": {
+    "manager16": {
+      "flutterChanged": 16,
+      "reactChanged": 0
+    },
+    "switch": {
+      "flutterChanged": 16,
+      "reactChanged": 7
+    },
+    "old108": {
+      "all216RgbaEqual": true
+    },
+    "old96": {
+      "all192RgbaEqual": true
+    },
+    "tag": {
+      "all112RgbaEqual": true
+    }
+  },
+  "overallVisualTargetComplete": false,
+  "releaseOrDeployment": false
+}

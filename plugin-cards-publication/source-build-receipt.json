@@ -1,0 +1,77 @@
+{
+  "schema": "whalee-plugin-cards-source-report/1",
+  "head": "4e4b656612bdf02f1925c672ea0e49265d5e9567",
+  "tree": "453e3cfca2a95d7ee8b3c2c5872621d172c27b49",
+  "sourcePin": "687f282e8625c6b8d11ff58211a90524be2e4317",
+  "stageManifestSha256": "a8dcfbd5fc9d64145329c1f28eddc2d57de9ea7efe1b6b5e8fd2a0bc2725a6ab",
+  "evidenceFilesVerified": 4013,
+  "sourceCoverage": {
+    "uiPackages": 57,
+    "uiPackagesWithCss": 48,
+    "uiPackagesWithoutCss": 9,
+    "uiCssInputs": 209,
+    "uiPackagesWithRetainedSnapshots": 13,
+    "uiCssRetainedInputs": 36,
+    "uiCssPendingInputs": 173,
+    "supportStylePackages": 9,
+    "supportCssInputs": 10
+  },
+  "legacyDebt": {
+    "manual-metric": 880,
+    "platform-control": 11,
+    "duplicate-button": 0
+  },
+  "remainingManagerMetrics": 31,
+  "releasePackages": 13,
+  "releaseFiles": 86,
+  "recipes": 33,
+  "loadedCardRecipes": [
+    "DshPluginCardListRecipe",
+    "DshPluginCardRecipe",
+    "DshPluginStatusTagRecipe"
+  ],
+  "fullChecks": 13,
+  "sourceRetentionIsImplementationCompletion": false,
+  "archiveReconstruction": "completed strict-stage receipt and retained output bindings verified; archives not rerun by report",
+  "visualArtifact": {
+    "url": "https://raft-artifacts.com/p/myoland/whalee-reported-families-20261028/v/6",
+    "publicationVerified": false
+  },
+  "artifact": {
+    "id": "pt_7e85a381-0b4e-49af-aac9-afe4b78a1f1f",
+    "base": "32e96b5a-270f-4ee0-b31a-48a41cd49d73",
+    "seen": 3
+  },
+  "reportTools": {
+    "plugin-cards-source-report.py": "dc90c5608ea42b5a6d93ea581314766c7559a64f28c133cb17884f9a711390ec",
+    "plugin-cards-report.py": "0d47c4ab216ea23a0e9b431df5b2fa0008c693299772d897cf72ee150f4d0ea5",
+    "plugin-cards-evidence.py": "d63f7c5a1e45b57bab6c254639ac33d6c832748534a4f7b48e07cf8bad70191b",
+    "icon-actions-evidence.py": "ea45439068764316361b03b55a72594337f4bf3244eadf48b57d210fe18cb6cf",
+    "reported-families-publish.py": "de8e98ad21aa58039221620b035acd1e6e621999b2f46bd7b2f87ba8529ff163",
+    "design-system-source-report.py": "be8092b986e0239824154c1683e3a152fd574eef0059a5e26e26969c1e179e56"
+  },
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "7ef6235864f84e350ca584531b11862c7b05b694dfd8f5d483a92bfffc065854",
+      "bytes": 184417
+    },
+    {
+      "path": "coverage.json",
+      "sha256": "b514aed919c0afe42aaef3f27f1552e0b5f8a95ec28bd29b6e4d40a8dab6bef6",
+      "bytes": 335930
+    },
+    {
+      "path": "input-hashes.json",
+      "sha256": "86ed59be5a2a43b50e6193eee7c1c02c14eed9e1bf7dc7a7cb4a7e2d1e35ee74",
+      "bytes": 2115489
+    },
+    {
+      "path": "publish.json",
+      "sha256": "0bac422a3450f6ef7936b94f48326428930de8034fdb4a6d30a5521a9f3907ff",
+      "bytes": 2781477
+    }
+  ],
+  "payloadWritten": true,
+  "published": false
+}
