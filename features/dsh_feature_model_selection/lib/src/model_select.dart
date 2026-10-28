@@ -98,6 +98,7 @@ class _ModelSeatState extends State<ModelSeat> {
           onClose: panel.close,
         ),
         builder: (context, panel) => Semantics(
+          container: true,
           button: true,
           enabled: !widget.locked,
           label: aria,
